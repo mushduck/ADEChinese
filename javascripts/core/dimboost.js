@@ -261,3 +261,14 @@ document.getElementById("softReset").onclick = function () {
     if (mult > 1) floatText(name + "D", "x" + shortenDimensions(mult))
   }
 };
+
+function setInitialDimensionPower () {
+    player.firstPow = getDimensionBoostPower().pow(player.resets)
+    player.secondPow = getDimensionBoostPower().pow(player.resets - 1).max(1)
+    player.thirdPow = getDimensionBoostPower().pow(player.resets - 2).max(1)
+    player.fourthPow = getDimensionBoostPower().pow(player.resets - 3).max(1)
+    player.fifthPow = getDimensionBoostPower().pow(player.resets - 4).max(1)
+    player.sixthPow = getDimensionBoostPower().pow(player.resets - 5).max(1)
+    player.seventhPow = getDimensionBoostPower().pow(player.resets - 6).max(1)
+    player.eightPow = getDimensionBoostPower().pow(player.resets - 7).max(1)
+  }
