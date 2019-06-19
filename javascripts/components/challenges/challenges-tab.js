@@ -81,38 +81,5 @@ Vue.component('challenges-tab', {
       :tabs="tabs"
       class="l-challenges-tab"
     >
-      <div v-if="isInChallenge || isShowAllVisible" slot="before-content" class="l-challenges-tab__header">
-        <primary-button
-          v-if="isInChallenge"
-          class="o-primary-btn--exit-challenge l-challenges-tab__exit-btn"
-          @click="exitChallenge"
-        >Exit Challenge</primary-button>
-        <template v-if="isShowAllVisible">
-          <b>Show all:</b>
-          <input
-            v-model="showAllChallenges"
-            type="checkbox"
-            class="o-big-checkbox"
-          />
-        </template>
-        <template v-if="isAutoECVisible">
-          <b>Auto EC completion:</b>
-          <input
-            v-model="autoEC"
-            type="checkbox"
-            class="o-big-checkbox"
-          >
-        </template>
-        <div
-          v-if="autoEC && isAutoECVisible && remainingECTiers > 0"
-          class="c-challenges-tab__auto-ec-info l-challenges-tab__auto-ec-info"
-        >
-          <span>Until</span>
-          <div class="l-challenges-tab__auto-ec-timers">
-            <span v-if="remainingECTiers > 1">next auto EC completion: {{untilNextEC.toString()}}</span>
-            <span>all auto EC completions: {{untilAllEC.toString()}}</span>
-          </div>
-        </div>
-      </div>
     </game-tab-with-subtabs>`
 });
