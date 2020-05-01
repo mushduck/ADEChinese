@@ -74,7 +74,7 @@ Vue.component("options-saving-tab", {
         },
         template: `
         <div class="l-options-grid">
-        <div class="l=options-grid__row">
+        <div class="l-options-grid__row">
         <options-button-saving-tab
           class="o-primary-btn--option_font-x-large"
           onclick="GameStorage.export()"
@@ -99,6 +99,19 @@ Vue.component("options-saving-tab", {
           class="o-primary-btn--option_font-x-large"
           @click="hardReset"
         >RESET THE GAME</options-button-saving-tab>
+        </div>
+        <div class="l-options-grid__row">
+        <options-button-saving-tab
+          onclick="GameOptions.cloudSave()"
+        >Cloud save</options-button-saving-tab>
+        <options-button-saving-tab
+          onclick="GameOptions.cloudLoad()"
+        >Cloud load</options-button-saving-tab>
+        <primary-button-on-off
+          class="o-primary-btn--option l-options-grid__button"
+          v-model="cloud"
+          text="Automatic cloud saving/loading:"
+        />
         </div>
         </div>
         `
