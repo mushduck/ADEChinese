@@ -12,13 +12,13 @@ Vue.component("modal-start-infinity-challenge", {
         "You do not start with any Dimensions or Galaxies, regardless of other upgrades.";
     },
     enteringWhatIC() {
-      return `You are about to enter Infinity Challenge ${InfinityChallenges.starting}`;
+      return `You are about to enter Infinity Challenge ${this.modal.id}`;
     }
   },
   methods: {
     handleYesClick() {
+        InfinityChallenge(this.modal.id).start();
         this.emitClose();
-        InfinityChallenge(InfinityChallenges.starting).start();
     },
     handleNoClick() {
       this.emitClose();
