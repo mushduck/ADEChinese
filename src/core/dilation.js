@@ -169,7 +169,7 @@ export function getBaseTP(antimatter, requireEternity) {
   const am = (isInCelestialReality() || Pelle.isDoomed)
     ? antimatter
     : Ra.unlocks.unlockDilationStartingTP.effectOrDefault(antimatter);
-  let baseTP = Decimal.pow(Decimal.log10(am) / 400, 1.5);
+  let baseTP = Decimal.pow(Decimal.log10(am) / 160, 1.8);
   if (Enslaved.isRunning) baseTP = baseTP.pow(Enslaved.tachyonNerf);
   return baseTP;
 }
