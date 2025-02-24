@@ -21,7 +21,10 @@ export default {
     </div>
     <div class="c-info-body">
       Antimatter Dimensions is an Idle Incremental game created by Finnish developer Hevipelle. Originating as a solo
-      project in 2016, it was expanded upon by a large team of developers and testers from then on.
+      project in 2016, it was expanded upon by a large team of developers and testers from then on. In 2024, American
+      developer Supersonic Seven beat the vanilla game and decided to mod it for additional content and improved lore.
+      The first public release of Antimatter Dimensions: Endgame was issued by Supersonic Seven in 2025, and since
+      then has been updating the game whenever possible.
       <br>
       <br>
       The game has unfolding gameplay and multiple prestige layers. The "How to Play" button contains useful
