@@ -116,6 +116,7 @@ export const AD = {
     name: "Achievement Rewards",
     multValue: dim => {
       const allMult = DC.D1.timesEffectsOf(
+        Achievement(18),
         Achievement(48),
         Achievement(56),
         Achievement(65),
