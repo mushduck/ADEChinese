@@ -27,7 +27,7 @@ export const eternityChallenges = [
     goalIncrease: DC.E175,
     reward: {
       description: "1st Infinity Dimension multiplier based on Infinity Power",
-      effect: completions => Currency.infinityPower.value.pow(0.45 / (700 - completions * 100)).clampMin(1),
+      effect: completions => Currency.infinityPower.value.pow(5 / (700 - completions * 100)).clampMin(1),
       cap: DC.E1000,
       formatEffect: value => formatX(value, 2, 1)
     }
@@ -84,7 +84,7 @@ export const eternityChallenges = [
       return "you cannot gain Antimatter Galaxies normally. The cost of upgrading your max Replicanti" +
               " Galaxies is massively reduced.";
     },
-    goal: DC.E800,
+    goal: DC.E750,
     pelleGoal: DC.E1500,
     goalIncrease: DC.E200,
     reward: {

@@ -933,8 +933,8 @@ export const normalAchievements = [
   {
     id: 131,
     name: "No ethical consumption",
-    get description() { return `Get ${format(DC.D2E9)} Banked Infinities.`; },
-    checkRequirement: () => Currency.infinitiesBanked.gt(DC.D2E9),
+    get description() { return `Get ${formatInt(1e9)} Banked Infinities.`; },
+    checkRequirement: () => Currency.infinitiesBanked >= 1e9,
     checkEvent: [GAME_EVENT.ETERNITY_RESET_AFTER, GAME_EVENT.SAVE_CONVERTED_FROM_PREVIOUS_VERSION],
     get reward() {
       return `You gain ${formatX(2)} times more Infinities and
