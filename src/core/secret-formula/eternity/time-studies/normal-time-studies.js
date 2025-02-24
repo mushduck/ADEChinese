@@ -440,7 +440,7 @@ export const normalTimeStudies = [
     requirement: [181, () => EternityChallenge(10).completions > 0],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     description: () => `After Eternity you permanently keep ${formatPercents(0.05)}
-    of your Infinities as Banked Infinities`,
+    of your Infinities as Banked Infinities and get double Infinities`,
     effect: () => Currency.infinities.value.times(0.05).floor()
   },
   {
