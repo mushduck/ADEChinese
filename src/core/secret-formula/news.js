@@ -2594,6 +2594,66 @@ export const news = [
       fast. Update, just 5 hours.`
   },
   {
+    id: "a391",
+    text:
+      `Hello. My name is Supersonic Seven. If you are here, then this means you are one of the few admitted into the
+      Council of the Elite. Congratulations. I will be the first to say this: Welcome to Endgame. Endgame is a dangerous
+      place. You have already seen it may appear easier at first, it most certainly is not. After reaching the monumentous
+      landmark of e9e15 Antimatter, the simulation will end, and you will be awakened into the real world. You will find
+      the real world to be very similar to the simulation, however it is much longer and will take years of dedication to
+      progress. If you are up for the challenge, click on Enter the Endgame. Otherwise, you may opt-out when you like. The
+      choice is yours. If you choose to stay, then Endgame is yours. Happy playing.`
+  },
+  {
+    id: "a392",
+    text:
+      `"The 5 Hours are over. Endgame has been released. What is Endgame? You'll have to keep playing to see for yourself."
+      - Supersonic Seven`
+  },
+  {
+    id: "a393",
+    text: "Yo! I just got a 9th Dimension! Too bad I can't use it until the Celestial Plus Update..."
+  },
+  {
+    id: "a394",
+    text:
+      `Apologies for the inconvenience. We had to remove the last news message because it was conflicting with the
+      game's storyline. You don't want fake news, do you? Anyway, I'll let you get back to AD: Endgame now.`
+  },
+  {
+    id: "a395",
+    text: "Antimatter Dimensions: Endgame will be released in 5 hours."
+  },
+  {
+    id: "a396",
+    text:
+      `Supersonic Seven here. Today we have been asked a simple question. Does the 9th Dimension exist? The answer is
+      more simple than you think. Yes, the 9th Dimension CAN exist, however it takes a lot of power for one to ascend
+      to that level. After you are able to create the 9th Dimension, you'll have to unlock a series of upgrades classified
+      as "Mechanics" in order to get more. After that, there really is no limit to how many 9th Dimensions one can possess.
+      However, the number that can be safely possessed is another story.`
+  },
+  {
+    id: "a397",
+    text:
+      `THE 11TH DIMENSION DOESN'T EXIST!!! "So where's the 10th?" STOP ASKING QUESTIONS!!!`
+  },
+  {
+    id: "a398",
+    text: "ANTIMATTER DIMENSIONS: ENDGAME"
+  },
+  {
+    id: "a399",
+    text: `The Endgame Update is the first major update of Antimatter Dimensions conducted by Supersonic Seven after the
+    release of Hevipelle's Reality Update. There will be two more major updates: Celestial Plus, and Expansion. The
+    Expansion Update will be split into the Expanse and Existence Updates.`
+  },
+  {
+    id: "a400",
+    text: `"What is the tenth dimension?" The only one who knows that is the Elemental. "Who is the Elemental?" A powerful
+    being who lives in the depths of the Expanse. "What is the Expanse?" You'll know soon enough.`
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
@@ -3278,6 +3338,36 @@ export const news = [
       average per-player credit earn rates on a daily basis, and we'll be making constant adjustments to ensure that
       players have challenges that are compelling, rewarding, and of course attainable via gameplay.`,
     get unlocked() { return PlayerProgress.realityUnlocked(); }
+  },
+  {
+    id: "l89",
+    text:
+      `It has been reported that Celestial Alpha is moving. No, not Alpha himself. His Reality. He is heading on a
+      direct course for Pelle, likely to take his final revenge. But what is this? An 8th Dimensional being of
+      Antimatter is preparing to stop him. First, however, he must beat the other Celestials, five named, and myriad
+      unnamed. A pity, though. It would have been so easy had he in his possession a 9th Dimension. This has been
+      Slabdrill with your news report for today. *click* HEY! CAN SOMEONE GET ME OUT OF THIS CURSED REALITY?`,
+    get unlocked() { return Teresa.isUnlocked; }
+  },
+  {
+    id: "l90",
+    text:
+      `Legend has it that Endgame is supposed to be unlocked around here, but I don't see it. Can anybody help me?
+      ...e9e15? What's that supposed to mean?`,
+    get unlocked() { return Pelle.isDoomed(); }
+  },
+  {
+    id: "l91",
+    text:
+      `THERE IS NO ESCAPE, FOOLISH MORTAL! I AM PELLE! I WILL SMITE YOU SOON! YOU WILL- wait... is that the damn
+      Galaxy Generator again? Can you stop finding that cursed thing? I've had about enough losing. Thanks.`,
+    get unlocked() { return Pelle.isDoomed() && Currency.antimatter.value.gte("1e999999999"); }
+  },
+  {
+    id: "l92",
+    text:
+      "Welcome to the Endgame. AD: Endgame, that is.,
+    get unlocked() { return Pelle.isDoomed(); }
   },
   {
     id: "r1",
