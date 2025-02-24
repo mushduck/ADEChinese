@@ -3365,8 +3365,7 @@ export const news = [
   },
   {
     id: "l92",
-    text:
-      "Welcome to the Endgame. AD: Endgame, that is.,
+    text: "Welcome to the Endgame. AD: Endgame, that is.",
     get unlocked() { return Pelle.isDoomed(); }
   },
   {
