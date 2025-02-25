@@ -976,8 +976,8 @@ export const normalAchievements = [
   {
     id: 134,
     name: "When will it be enough?",
-    get description() { return `Reach ${formatPostBreak(DC.E16200)} Replicanti.`; },
-    checkRequirement: () => Replicanti.amount.exponent >= 16200,
+    get description() { return `Reach ${formatPostBreak("1e16000")} Replicanti.`; },
+    checkRequirement: () => Replicanti.amount.exponent >= 16000,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `You gain Replicanti ${formatInt(2)} times faster under ${format(replicantiCap(), 1)} Replicanti.`;
