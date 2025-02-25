@@ -2622,7 +2622,7 @@ export const news = [
   },
   {
     id: "a395",
-    text: "Antimatter Dimensions: Endgame will be released in 5 hours."
+    text: "Antimatter Dimensions: Endgame™ will be released in 5 hours."
   },
   {
     id: "a396",
