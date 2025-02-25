@@ -608,7 +608,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [232],
     description: "Dimension Boosts are stronger based on their amount",
-    effect: () => Decimal.pow(DimBoost.totalBoosts, 0.3).clampMin(1),
+    effect: () => Decimal.pow(DimBoost.totalBoosts, 0.75).clampMin(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
