@@ -41,11 +41,11 @@ export const normalTimeStudies = [
     description: "Tickspeed affects 1st Time Dimension with reduced effect",
     effect: () => {
       const tickspeed = Tickspeed.current.dividedBy(1000);
-      const firstPart = tickspeed.pow(0.005).times(0.95);
-      const secondPart = tickspeed.pow(0.0003).times(0.05);
+      const firstPart = tickspeed.pow(0.008).times(0.95);
+      const secondPart = tickspeed.pow(0.00048).times(0.05);
       return firstPart.plus(secondPart).reciprocate();
     },
-    cap: DC.E2500,
+    cap: DC.E4000,
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -78,8 +78,8 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [21],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Powers up multipliers that are based on your Infinities (Bonuses${formatPow(4)})`,
-    effect: 4
+    description: () => `Powers up multipliers that are based on your Infinities (Bonuses${formatPow(100)})`,
+    effect: 100
   },
   {
     id: 32,
@@ -128,8 +128,8 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [51],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `You gain ${formatX(15)} more Eternity Points`,
-    effect: 15
+    description: () => `You gain ${formatX(25)} more Eternity Points`,
+    effect: 25
   },
   {
     id: 62,
@@ -484,7 +484,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "All Galaxies are stronger based on your Time Shards",
     effect: () => Math.pow(Currency.timeShards.value.clampMin(2).log2(), 0.005),
-    cap: 1.1,
+    cap: 1.2,
     formatEffect: value => `+${formatPercents(value - 1, 3)}`
   },
   {
@@ -585,7 +585,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [228],
     description: "Dimensional Sacrifice affects 4th Time Dimension with reduced effect",
-    effect: () => Math.max(Math.pow(Sacrifice.totalBoost.pLog10(), 10), 1),
+    effect: () => Math.max(Math.pow(Sacrifice.totalBoost.pLog10(), 50), 1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -630,7 +630,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [234],
     description: "Max Replicanti Galaxy upgrade is cheaper based on current Replicanti",
-    effect: () => Replicanti.amount.pow(0.3),
+    effect: () => Replicanti.amount.pow(0.45),
     formatEffect: value => `/ ${format(value, 1, 2)}`
   },
   {
