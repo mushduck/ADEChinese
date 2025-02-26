@@ -585,7 +585,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [228],
     description: "Dimensional Sacrifice affects 4th Time Dimension with reduced effect",
-    effect: () => Math.max(Math.pow(Sacrifice.totalBoost.pLog10(), 50), 1),
+    effect: () => Math.max(Math.pow(Sacrifice.totalBoost.pLog10(), 20), 1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
