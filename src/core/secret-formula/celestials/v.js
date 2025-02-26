@@ -17,9 +17,9 @@ export const v = {
       id: 1,
       name: "Realities",
       resource: () => Currency.realities.value,
-      requirement: 10000,
+      requirement: 2000,
       format: x => formatInt(x),
-      progress: () => Currency.realities.value / 10000,
+      progress: () => Currency.realities.value / 2000,
     },
     eternities: {
       id: 2,
@@ -209,7 +209,7 @@ export const v = {
       id: 2,
       reward: "Antimatter Dimension power based on total Space Theorems.",
       description: () => `Have ${formatInt(5)} V-Achievements`,
-      effect: () => 1 + Math.sqrt(V.spaceTheorems) / 100,
+      effect: () => 1 + Math.sqrt(V.spaceTheorems) / 80,
       format: x => formatPow(x, 3, 3),
       requirement: () => V.spaceTheorems >= 5
     },
