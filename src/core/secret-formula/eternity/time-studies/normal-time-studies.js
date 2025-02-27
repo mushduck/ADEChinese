@@ -652,7 +652,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [221, 222, 231],
     description: "Time Study 231 improves the effect of Time Study 221",
-    effect: () => pow(TimeStudy(221).effectValue.pow(TimeStudy(231).effectValue.minus(1)).clampMin(1)), 0.1),
+    effect: () => Math.pow(TimeStudy(221).effectValue.pow(TimeStudy(231).effectValue.minus(1)).clampMin(1)), 0.1),
     formatEffect: value => formatX(value, 2, 1),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 1
   },
