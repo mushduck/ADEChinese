@@ -608,7 +608,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [232],
     description: "Dimension Boosts are stronger based on their amount",
-    effect: () => Decimal.pow(DimBoost.totalBoosts, 0.75).clampMin(1),
+    effect: () => Decimal.pow(DimBoost.totalBoosts, 0.375).clampMin(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -652,7 +652,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [221, 222, 231],
     description: "Time Study 231 improves the effect of Time Study 221",
-    effect: () => Math.pow(TimeStudy(221).effectValue.pow(TimeStudy(231).effectValue.minus(1)).clampMin(1), 0.1),
+    effect: () => TimeStudy(221).effectValue.pow(TimeStudy(231).effectValue.minus(1)).clampMin(1),
     formatEffect: value => formatX(value, 2, 1),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 1
   },
