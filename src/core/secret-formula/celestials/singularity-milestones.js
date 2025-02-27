@@ -280,7 +280,7 @@ export const singularityMilestones = {
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_MAIN,
   },
   tesseractMultFromSingularities: {
-    start: 2.5e45,
+    start: 1e45,
     repeat: 0,
     limit: 1,
     description: "Singularities increase effective Tesseract count",
