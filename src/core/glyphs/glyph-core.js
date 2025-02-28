@@ -647,10 +647,6 @@ export const Glyphs = {
         throw new Error("Unrecognized auto-sort mode");
     }
   },
-  if (glyph.level > 1000000) {
-    glyph.level = 1;
-    return;
-  },
   get levelCap() {
     return 1000000;
   },
@@ -857,4 +853,8 @@ export function respecGlyphs() {
       { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
   }
   player.reality.respec = false;
+}
+if (glyph.level > 1000000) {
+  glyph.level = 1;
+  return;
 }
