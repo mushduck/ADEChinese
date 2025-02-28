@@ -854,6 +854,3 @@ export function respecGlyphs() {
   }
   player.reality.respec = false;
 }
-if (glyph.level > 1000000) {
-  glyph.level = 1;
-}
