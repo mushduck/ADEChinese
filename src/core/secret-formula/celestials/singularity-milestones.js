@@ -29,7 +29,7 @@ export const singularityMilestones = {
   },
   darkEnergyMult: {
     start: 3,
-    repeat: 120,
+    repeat: 90,
     increaseThreshold: 10,
     limit: Infinity,
     description: "Dark Energy production multiplier",
@@ -280,7 +280,7 @@ export const singularityMilestones = {
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_MAIN,
   },
   tesseractMultFromSingularities: {
-    start: 1e45,
+    start: 4e44,
     repeat: 0,
     limit: 1,
     description: "Singularities increase effective Tesseract count",
