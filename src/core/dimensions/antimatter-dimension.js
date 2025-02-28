@@ -114,6 +114,7 @@ function applyNDMultipliers(mult, tier) {
       .timesEffectsOf(
         InfinityUpgrade.unspentIPMult,
         InfinityUpgrade.unspentIPMult.chargedEffect,
+        Achievement(11),
         Achievement(28),
         Achievement(31),
         Achievement(68),
@@ -126,6 +127,12 @@ function applyNDMultipliers(mult, tier) {
   }
 
   multiplier = multiplier.timesEffectsOf(
+    tier === 2 ? Achievement(12) : null,
+    tier <= 3 ? Achievement(13) : null,
+    tier === 4 ? Achievement(14) : null,
+    tier >= 5 && tier <= 8 ? Achievement(15) : null,
+    tier === 3 || tier === 6 ? Achievement(16) : null,
+    tier === 7 ? Achievement(17) : null,
     tier === 8 ? Achievement(23) : null,
     tier < 8 ? Achievement(34) : null,
     tier <= 4 ? Achievement(64) : null,
