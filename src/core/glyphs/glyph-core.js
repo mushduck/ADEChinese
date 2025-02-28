@@ -647,6 +647,9 @@ export const Glyphs = {
         throw new Error("Unrecognized auto-sort mode");
     }
   },
+  if glyph.level > 1000000 {
+    glyph.level = 1
+  }
   get levelCap() {
     return 1000000;
   },
