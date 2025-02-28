@@ -649,7 +649,8 @@ export const Glyphs = {
   },
   if (glyph.level > 1000000) {
     glyph.level = 1;
-  }
+    return;
+  },
   get levelCap() {
     return 1000000;
   },
