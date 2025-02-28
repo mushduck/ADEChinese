@@ -59,7 +59,7 @@ export const normalAchievements = [
     description: "Buy a 7th Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
     get reward() { return `Multiply the 7th Antimatter Dimension by ${formatInt(77)}.`; },
-    effect: 1.57
+    effect: 77
   },
   {
     id: 18,
