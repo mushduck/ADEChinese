@@ -6,30 +6,40 @@ export const normalAchievements = [
     name: "You gotta start somewhere",
     description: "Buy a 1st Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
+    reward: "Your Achievement multiplier to the 1st Antimatter Dimension is squared.",
+    effect: () => Achievements.power
   },
   {
     id: 12,
     name: "100 antimatter is a lot",
     description: "Buy a 2nd Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
+    get reward() { return `Multiply the 2nd Antimatter Dimension by ${formatInt(100)}.`; },
+    effect: 100
   },
   {
     id: 13,
     name: "Half life 3 CONFIRMED",
     description: "Buy a 3rd Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
+    get reward() { return `The first three Antimatter Dimension multipliers are tripled.`; },
+    effect: 3
   },
   {
     id: 14,
     name: "L4D: Left 4 Dimensions",
     description: "Buy a 4th Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
+    get reward() { return `The 4th Antimatter Dimension is multiplied by ${formatInt(40)}.`; },
+    effect: 40
   },
   {
     id: 15,
     name: "5 Dimension Antimatter Punch",
     description: "Buy a 5th Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
+    get reward() { return `The 5th and higher Antimatter Dimensions are multiplied by ${formatInt(5)}.`; },
+    effect: 5
   },
   {
     id: 16,
@@ -40,12 +50,16 @@ export const normalAchievements = [
         : "Buy a 6th Antimatter Dimension.";
     },
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
+    get reward() { return `Multiply the 3rd and 6th Antimatter Dimension by ${formatInt(9)}.`; },
+    effect: 9
   },
   {
     id: 17,
     name: "Not a luck related achievement",
     description: "Buy a 7th Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
+    get reward() { return `Multiply the 7th Antimatter Dimension by ${formatInt(77)}.`; },
+    effect: 1.57
   },
   {
     id: 18,
