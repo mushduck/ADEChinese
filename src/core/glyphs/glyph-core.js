@@ -856,5 +856,4 @@ export function respecGlyphs() {
 }
 if (glyph.level > 1000000) {
   glyph.level = 1;
-  return;
 }
