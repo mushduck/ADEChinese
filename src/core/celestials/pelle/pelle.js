@@ -352,7 +352,7 @@ export const Pelle = {
     return zalgo(str, Math.floor(stage ** 2 * 7));
   },
 
-  endTabNames: "It's Not Over We Will Return We Soon Will Meet Again".split(" "),
+  endTabNames: "It's Not Over We Will Return We'll Soon Meet Again".split(" "),
 
   quotes: Quotes.pelle,
 };
