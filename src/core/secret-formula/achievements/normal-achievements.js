@@ -1407,5 +1407,7 @@ export const normalAchievements = [
     id: 191,
     name: "...for now.",
     description: "Purchase a 1st Dimension in Run 2. (NYI)",
+    checkRequirement: () => beta = 1,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
   },
 ];
