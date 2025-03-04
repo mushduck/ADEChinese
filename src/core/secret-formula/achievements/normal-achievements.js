@@ -1398,9 +1398,14 @@ export const normalAchievements = [
   },
   {
     id: 188,
-    name: "The End",
+    name: "The End...",
     description: "Beat the game.",
     checkRequirement: () => GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 191,
+    name: "...for now.",
+    description: "Purchase a 1st Dimension in Run 2. (NYI)",
   },
 ];
