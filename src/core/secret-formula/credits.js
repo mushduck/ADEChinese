@@ -1,7 +1,8 @@
 export const credits = {
   // Must be placed in the order it is desired they appear in the credits
   roles: {
-    1: "Creator",
+    0: "Creator",
+    1: "Creator (Endgame)",
     2: "Technical Architect",
     3: "Lead Developer",
     4: "Android Developer",
@@ -16,7 +17,6 @@ export const credits = {
     13: "Lurker Tester",
     14: "Web Tester",
     15: "Android Tester",
-    16: "Creator (Endgame)",
   },
 
   // Each person must have a name and at least one role (the index of the desired role in roles). They can also have a
@@ -25,11 +25,11 @@ export const credits = {
     {
       name: "Hevipelle",
       name2: "Ivar Kerajärvi",
-      roles: 1
+      roles: 0
     }, {
       name: "Supersonic Seven",
       name2: "Benjamin Rockholz",
-      roles: 16
+      roles: 1
     }, {
       name: "Razenpok",
       name2: "Andrei Andreev",
