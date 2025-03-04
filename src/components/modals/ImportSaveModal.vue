@@ -48,8 +48,11 @@ export default {
     hasInput() {
       return this.input !== "";
     },
+    inputIsEnd() {
+      return this.input === "END";
+    },
     inputIsValid() {
-      return this.inputIsValidSave || this.inputIsSecret;
+      return this.inputIsValidSave || this.inputIsSecret || this.inputIsEnd;
     },
     inputIsValidSave() {
       return this.player !== undefined;
