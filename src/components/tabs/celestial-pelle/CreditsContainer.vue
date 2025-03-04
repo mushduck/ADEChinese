@@ -56,7 +56,7 @@ export default {
     // at a much slower rate, this causes the credits to have a jumpy-looking scroll. Since this is a setting
     // which persists across new games, we want to make sure we still preserve the old value too
     const oldRate = player.options.updateRate;
-    player.options.updateRate = 3;
+    player.options.updateRate = 33;
     GameOptions.refreshUpdateRate();
     player.options.updateRate = oldRate;
   },
