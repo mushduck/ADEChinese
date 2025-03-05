@@ -1399,8 +1399,48 @@ export const normalAchievements = [
   {
     id: 188,
     name: "The End...",
-    description: "Beat the game.",
+    description: "Escape the Doomed Reality.",
     checkRequirement: () => GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
+  },
+  {
+    id: 191,
+    name: "...for now",
+    description: "Purchase a 1st Dimension in Run 2. (NYI)",
+  },
+  {
+    id: 192,
+    name: "Destiny",
+    description: "Doom Your Reality in Run 2. (NYI)",
+  },
+  {
+    id: 193,
+    name: "Unstoppable",
+    description: "Beat Doom in Run 2. (NYI)",
+  },
+  {
+    id: 194,
+    name: "At Long Last",
+    description: "Regain all Achievements in Pelle. (NYI)",
+  },
+  {
+    id: 195,
+    name: "Hard Reset",
+    description: "Disable all Pelle Nerfs. (NYI)",
+  },
+  {
+    id: 196,
+    name: "Full Control of the Dark",
+    description: "Purchase the 8th Dark Matter Dimension. (NYI)",
+  },
+  {
+    id: 197,
+    name: "Gone...",
+    description: "Destroy Pelle. (NYI)",
+  },
+  {
+    id: 198,
+    name: "...but nor forgotten",
+    description: "Reach 1.8e308 Imaginary Machines. (NYI)",
   },
 ];
