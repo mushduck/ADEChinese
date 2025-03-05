@@ -145,7 +145,7 @@ export const AD = {
           tier <= 3 ? Achievement(13) : null,
           tier === 4 ? Achievement(14) : null,
           tier >= 5 && tier <= 8 ? Achievement(15) : null,
-          tier === 3 || tier === 6 ? Achievement(16) : null,
+          tier === 6 ? Achievement(16) : null,
           tier === 7 ? Achievement(17) : null,
           tier === 8 ? Achievement(23) : null,
           tier < 8 ? Achievement(34) : null,
