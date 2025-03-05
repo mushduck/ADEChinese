@@ -22,8 +22,8 @@ export const normalAchievements = [
     name: "Half life 3 CONFIRMED",
     description: "Buy a 3rd Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `The first three Antimatter Dimension multipliers are tripled.`; },
-    effect: 3
+    get reward() { return `The 3rd and higher Antimatter Dimensions are ${formatPercents(0.3)} stronger.`; },
+    effect: 1.3
   },
   {
     id: 14,
