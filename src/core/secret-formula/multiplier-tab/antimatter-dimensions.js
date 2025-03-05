@@ -142,7 +142,7 @@ export const AD = {
         }
         dimMults[tier] = dimMults[tier].timesEffectsOf(
           tier === 2 ? Achievement(12) : null,
-          tier <= 3 ? Achievement(13) : null,
+          tier >= 3 && tier <= 8 ? Achievement(13) : null,
           tier === 4 ? Achievement(14) : null,
           tier >= 5 && tier <= 8 ? Achievement(15) : null,
           tier === 6 ? Achievement(16) : null,
