@@ -30,16 +30,16 @@ export const normalAchievements = [
     name: "L4D: Left 4 Dimensions",
     description: "Buy a 4th Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `The 4th Antimatter Dimension is multiplied by ${formatInt(40)}.`; },
-    effect: 40
+    get reward() { return `The 4th Antimatter Dimension is multiplied by ${formatInt(16)}.`; },
+    effect: 16
   },
   {
     id: 15,
     name: "5 Dimension Antimatter Punch",
     description: "Buy a 5th Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `The 5th and higher Antimatter Dimensions are multiplied by ${formatInt(5)}.`; },
-    effect: 5
+    get reward() { return `The 5th and higher Antimatter Dimensions are multiplied by ${formatInt(2.5)}.`; },
+    effect: 2.5
   },
   {
     id: 16,
@@ -50,7 +50,7 @@ export const normalAchievements = [
         : "Buy a 6th Antimatter Dimension.";
     },
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `Multiply the 3rd and 6th Antimatter Dimension by ${formatInt(9)}.`; },
+    get reward() { return `Multiply the 6th Antimatter Dimension by ${formatInt(9)}.`; },
     effect: 9
   },
   {
@@ -58,8 +58,8 @@ export const normalAchievements = [
     name: "Not a luck related achievement",
     description: "Buy a 7th Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `Multiply the 7th Antimatter Dimension by ${formatInt(77)}.`; },
-    effect: 77
+    get reward() { return `Multiply the 7th Antimatter Dimension by ${formatInt(14)}.`; },
+    effect: 14
   },
   {
     id: 18,
