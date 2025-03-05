@@ -1,4 +1,4 @@
 beta = 0
-if (this.InputIsEnd) {
+if (InputIsEnd) {
   beta = 1;
 }
