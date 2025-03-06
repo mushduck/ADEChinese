@@ -411,7 +411,9 @@ export const normalAchievements = [
     name: "A new beginning",
     description: "Begin generation of Infinity Power.",
     checkRequirement: () => Currency.infinityPower.gt(1),
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() { return `All Infinity Dimension multipliers are doubled.`; },
+    effect: 2
   },
   {
     id: 64,
@@ -533,7 +535,11 @@ export const normalAchievements = [
     name: "1 Million is a lot",
     get description() { return `Reach ${format(1e6)} Infinity Power.`; },
     checkRequirement: () => Currency.infinityPower.exponent >= 6,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `All Infinity DImensions are stronger based on Infinity Points`;
+    },
+    effect: () => Currency.infinityPoints.exponent
   },
   {
     id: 78,
