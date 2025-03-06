@@ -191,8 +191,8 @@ export function getTachyonReq() {
   if (Enslaved.isRunning) effectiveTP = effectiveTP.pow(1 / Enslaved.tachyonNerf);
   return Decimal.pow10(
     effectiveTP
-      .times(Math.pow(400, 1.5))
-      .pow(2 / 3)
+      .times(Math.pow(160, 1.8))
+      .pow(5 / 9)
       .toNumber()
   );
 }

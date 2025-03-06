@@ -9,9 +9,9 @@ export const END_STATE_MARKERS = {
   CREDITS_START: 4.5,
   SHOW_NEW_GAME: 13.5,
   SPECTATE_GAME: 13.9,
-  // The song is 3:04 and the credits increment by 1 every 20 seconds. Needs changing if the song is changed.
-  SONG_END: 13.7,
-  CREDITS_END: 14.5,
+  // The song is 4:27 and the credits increment by 1 every 20 seconds. Needs changing if the song is changed.
+  SONG_END: 17.9,
+  CREDITS_END: 200,
 };
 
 export const GameEnd = {

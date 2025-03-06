@@ -2622,7 +2622,7 @@ export const news = [
   },
   {
     id: "a395",
-    text: "Antimatter Dimensions: Endgame will be released in 5 hours."
+    text: "Antimatter Dimensions: Endgame™ will be released in 5 hours."
   },
   {
     id: "a396",
@@ -3354,19 +3354,19 @@ export const news = [
     text:
       `Legend has it that Endgame is supposed to be unlocked around here, but I don't see it. Can anybody help me?
       ...e9e15? What's that supposed to mean?`,
-    get unlocked() { return Pelle.isDoomed(); }
+    get unlocked() { return Pelle.isDoomed; }
   },
   {
     id: "l91",
     text:
       `THERE IS NO ESCAPE, FOOLISH MORTAL! I AM PELLE! I WILL SMITE YOU SOON! YOU WILL- wait... is that the damn
       Galaxy Generator again? Can you stop finding that cursed thing? I've had about enough losing. Thanks.`,
-    get unlocked() { return Pelle.isDoomed() && Currency.antimatter.value.gte("1e999999999"); }
+    get unlocked() { return Pelle.isDoomed && Currency.antimatter.value.gte("1e999999999"); }
   },
   {
     id: "l92",
     text: "Welcome to the Endgame. AD: Endgame, that is.",
-    get unlocked() { return Pelle.isDoomed(); }
+    get unlocked() { return Pelle.isDoomed; }
   },
   {
     id: "r1",
