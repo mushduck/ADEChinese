@@ -9,15 +9,79 @@ export const changelog = [
    * }
    */
   {
+    date: [2025, 3, 6],
+    name: "v0.1 Beta 3: Breaking Down the Timewalls",
+    info: `
+I promised everyone detailed changelogs, so here you are.
+<br>
+<br>
+<b><i>Thank you everyone for playing Antimatter Dimensions: Endgame!</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>Rewards to Achievements r11 thorugh r18</li>
+<li>Rewards to Achievements r63 and r77</li>
+<li>Gave TS191 double Infinities as an additional effect (this is NYI though)</li>
+<li>Fourteen new news ticker messages</li>
+<li>Some information about myself in the Infobox</li>
+<li>THE LOAD SCREEN!!!</li>
+<li>The Imaginary Machine Formula Improvement</li>
+<li>My name in the credits (if you help dev/test the game, yours will be there too in later updates)</li>
+<li>The 19th row of achievements (still NYI and old pictures)</li>
+</ul>
+<br>
+<b>Things removed:</b><br>
+<ul>
+<li>Achievement r81's reward while inside Pelle</li>
+<li>The 18 row achievement hardcap</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>The requirement of Achievement r131 (2e9 -> 1e9)</li>
+<li>The requirement of Achievement r134 (e18000 -> e15000)</li>
+<li>Buffed the Tachyon Particle Formula severely</li>
+<li>Buffed TS211 slightly (the buff was originally severe but was mostly removed on account of TS301)</li>
+<li>Buffed TS227 (this buff was also reduced later on)</li>
+<li>Reduced the requirements of several Break Infinity Upgrades, as well as buffing a few</li>
+<li>Buffed TS11 and raised its cap from e2500 to e4000</li>
+<li>Buffed several Reality Upgrades</li>
+<li>Reduced V's Realities requirement from 10000 to 1250</li>
+<li>Buffed the 5 V-achievement milestone reward</li>
+<li>The Galaxy Generator animations are 2.5x faster</li>
+<li>Improved the Memory Chunk gain of all Celestials</li>
+<li>Buffed DE gain slightly and reduced the requirement of the final non-repeatable SM (2.5e45 -> 4e44)</li>
+<li>Buffed every Alchemy resource</li>
+<li>The credits music and credits display</li>
+<li>Raised the cap of BIU6 from 30000 to 200000</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Achievement r81's reward works now</li>
+<li>EC2's reward works properly again</li>
+<li>After buffing the TP formula fixed the pending TP requirement as it was displaying the wrong value</li>
+<li>Severely nerfed Temporal Transendence as the buff to it caused immediate inflation</li>
+<li>Nerfed the buff given to TS227 as it was causing the value to display "Infinite"</li>
+<li>Gave the Imaginary Machine Formula Improvement severe instability as it broke the game severly</li>
+<li>END tabs displayed the wrong message</li>
+<li>Fixed a tpyo or two</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2025, 2, 23],
     name: "v0.1 Beta 2: Exterminator",
     info: `
 <b>Bugs Fixed:</b><br>
 <ul>
-<li>Fixed Remnant Formula so it stops displaying negative Remnant gain (most if the time)</li>
-<li>Nerfed Rebuyable Pelle Upgrade 1 (no more inflation)</li>
-<li>Fixed ECs 6 and 8 (they should work properly again</li>
-<li>Stomped Numerous other bugs (killed so many it almost would've made Hevipelle quit eating ass)</li>
+<li>Fixed Remnant Formula so it stops displaying negative Remnant gain (most of the time)</li>
+<li>Nerfed Rebuyable Pelle Upgrade 1 (no more immediate inflation)</li>
+<li>Fixed EC6 and EC8 (they should work properly again)</li>
+<li>Decreased the cap of Repeatable Pelle Upgrade 1</li>
+<li>Tried to make Hevipelle quit eating ass but failed</li>
 </ul>
 `
   },
@@ -27,13 +91,15 @@ export const changelog = [
     info: `
 <b>Things Changed:</b><br>
 <ul>
-<li>Achievement Multiplier Buff</li>
-<liBuffed Break Upgrades 1 and 2</li>
-<li>Buffed IC1's Reward</li>
+<li>Achievement Multiplier Buff (1.03 -> 1.05 per achievement, 1.25 -> 1.35 per row)</li>
+<li>Cubed the multipliers of Break Upgrades 1 and 2</li>
+<li>Buffed IC1's Reward from 1.3x to 2.3x</li>
 <li>Gave Achievement r81 3x Rep Speed</li>
-<li>Reduced EC goals</li>
+<li>Reduced EC goals of EC6, EC8, EC11 and EC12</li>
 <li>Buffed TS213 from 20x to 50x</li>
-<li>Changed the Pelle Upgrade Formula</li>
+<li>Changed the formula of Repeatable Pelle Upgrade 1</li>
+<li>Achievement r113 gives triple infinities instead of double</li>
+<li>Achievement r126 persists in Pelle</li>
 </ul>
 `
   },
@@ -43,10 +109,10 @@ export const changelog = [
     info: `
 <b>Things Changed:</b><br>
 <ul>
-<li>Various Pelle attributes changed</li>
+<li>Raised the cap of Repeatable Pelle Upgrade 1</li>
 <li>Enabled Continuum in Pelle (may be buggy let me know if it is)</li>
-<li>Remnant formula changed</li>
-<li>Reality Shard formula changed</li>
+<li>Changed the Remnant Formula</li>
+<li>Changed the Reality Shard Formula to compensate for the above</li>
 </ul>
 `
   },
