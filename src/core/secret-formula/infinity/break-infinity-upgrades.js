@@ -68,7 +68,7 @@ export const breakInfinityUpgrades = {
     effect: () => Decimal.clampMin(300 / Time.worstChallenge.totalMinutes, 1),
     formatEffect: value => formatX(value, 2, 2),
     hasCap: true,
-    cap: DC.D3E4
+    cap: DC.D2E5
   },
   infinitiedGen: {
     id: "infinitiedGeneration",
