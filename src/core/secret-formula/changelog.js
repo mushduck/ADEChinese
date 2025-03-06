@@ -98,7 +98,7 @@ I promised everyone detailed changelogs, so here you are.
 <li>Reduced EC goals of EC6, EC8, EC11 and EC12</li>
 <li>Buffed TS213 from 20x to 50x</li>
 <li>Changed the formula of Repeatable Pelle Upgrade 1</li>
-<li>Achievement r113 gives triple infinities instead of double</li>
+<li>Achievement r113 gives triple eternities instead of double</li>
 <li>Achievement r126 persists in Pelle</li>
 </ul>
 `
