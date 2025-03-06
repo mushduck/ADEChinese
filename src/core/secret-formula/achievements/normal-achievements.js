@@ -537,7 +537,7 @@ export const normalAchievements = [
     checkRequirement: () => Currency.infinityPower.exponent >= 6,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `All Infinity DImensions are stronger based on Infinity Points`;
+      return `All Infinity Dimensions are stronger based on Infinity Points`;
     },
     effect: () => Currency.infinityPoints.exponent
   },
