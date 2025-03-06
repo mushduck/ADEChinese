@@ -42,7 +42,7 @@ I promised everyone detailed changelogs, so here you are.
 <li>The requirement of Achievement r131 (2e9 -> 1e9)</li>
 <li>The requirement of Achievement r134 (e18000 -> e15000)</li>
 <li>Buffed the Tachyon Particle Formula severely</li>
-<li>Buffed TS211 slightly (the buff was originally severe but was mostly removed on account of TS301)</li>
+<li>Buffed TS231 slightly (the buff was originally severe but was mostly removed on account of TS301)</li>
 <li>Buffed TS227 (this buff was also reduced later on)</li>
 <li>Reduced the requirements of several Break Infinity Upgrades, as well as buffing a few</li>
 <li>Buffed TS11 and raised its cap from e2500 to e4000</li>
