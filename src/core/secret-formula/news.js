@@ -2654,6 +2654,16 @@ export const news = [
     being who lives in the depths of the Expanse. "What is the Expanse?" You'll know soon enough.`
   },
   {
+    id: "a401",
+    text: `And Hevipelle asked, "Wait, explain it to me again, there are 7 resets now?" "Yeah of course, and then you have
+    to add a 9th dimension by that point y-" said Supersonic Seven. Hevipelle interrupted him and said "Wait WHAT!?!?" And
+    that's the story of how Hevipelle almost touched antimatter.`
+  },
+  {
+    id: "a402",
+    text: `"Can you get Infinite STDs?" - Didgoty "Yes you can." - Brittany Aloe`
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
