@@ -904,7 +904,7 @@ export const news = [
   },
   {
     id: "a171",
-    text: "<a href='https://www.youtube.com/watch?v=P945A5Tndp8' target='_blank'>This link is not a rick roll.</a>"
+    text: "<a href='https://www.youtube.com/watch?v=UUbVZusDaXA' target='_blank'>This link is not a rick roll.</a>"
   },
   {
     id: "a172",
