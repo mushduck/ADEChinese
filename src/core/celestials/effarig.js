@@ -76,7 +76,7 @@ export const Effarig = {
       AlchemyResource.effarig.effectValue;
   },
   get maxRarityBoost() {
-    return 5 * Math.log10(Math.log10(Currency.relicShards.value + 10));
+    return 15 * (Math.pow(Math.log10(Math.log10(Currency.relicShards.value + 10)) + 1, 1.5) - 1);
   },
   nerfFactor(power) {
     let c;

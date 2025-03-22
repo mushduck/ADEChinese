@@ -10,13 +10,13 @@ export const replicanti = {
     isActive: () => PlayerProgress.eternityUnlocked(),
     overlay: ["Ξ"],
   },
-  achievement: {
+  achievement1: {
     name: "Achievement 81",
     multValue: 3,
     isActive: () => Achievement(81).canBeApplied && !Pelle.isDoomed,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
-  achievement: {
+  achievement2: {
     name: "Achievement 134",
     // This is explicitly 2 in the replicanti code as well, inside of a replicanti amount check
     multValue: 2,

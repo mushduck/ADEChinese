@@ -904,7 +904,7 @@ export const news = [
   },
   {
     id: "a171",
-    text: "<a href='https://www.youtube.com/watch?v=P945A5Tndp8' target='_blank'>This link is not a rick roll.</a>"
+    text: "<a href='https://www.youtube.com/watch?v=UUbVZusDaXA' target='_blank'>This link is not a rick roll.</a>"
   },
   {
     id: "a172",
@@ -2652,6 +2652,16 @@ export const news = [
     id: "a400",
     text: `"What is the tenth dimension?" The only one who knows that is the Elemental. "Who is the Elemental?" A powerful
     being who lives in the depths of the Expanse. "What is the Expanse?" You'll know soon enough.`
+  },
+  {
+    id: "a401",
+    text: `And Hevipelle asked, "Wait, explain it to me again, there are 7 resets now?" "Yeah of course, and then you have
+    to add a 9th dimension by that point y-" said Supersonic Seven. Hevipelle interrupted him and said "Wait WHAT!?!?" And
+    that's the story of how Hevipelle almost touched antimatter.`
+  },
+  {
+    id: "a402",
+    text: `"Can you get Infinite STDs?" - Didgoty "Yes you can." - Brittany Aloe`
   },
   {
     id: "l1",
