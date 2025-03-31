@@ -2664,6 +2664,33 @@ export const news = [
     text: `"Can you get Infinite STDs?" - Didgoty "Yes you can." - Brittany Aloe`
   },
   {
+    id: "a403",
+    text: `After the arrival of ENDGAME, 7 new types of weather were discovered. They are: Existence, Nobody, Death,
+    GigaChad, Apples, Mathematician and Electricity.`
+  },
+  {
+    id: "a404",
+    text: "Welcome to Endgame - where the END is only the beginning."
+  },
+  {
+    id: "a405",
+    text: `Endgame used to have five other brothers and sisters... we have Endgame, Expanse, and Existence. No longer
+    are Eclipse, Echelon, Exodus, Ephmeral, and John; they will not be missed.`
+  },
+  {
+    id: "a406",
+    text:
+      `<span style='color: blue'>Hey Supersonic, when will AD: Endgame release?</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style='color: gold'>We are working on it, expect it to be released in 6.9 Eternities.</span>&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;<span style='color: blue'>Gee Whiz! Seems like I will be right on time after my 5 hour sleep.
+      Remember to watch "Why Hevi and Super decided to collaborate on a banana peel art" tommorow at 5 AM!</span>`
+  },
+  {
+    id: "a407",
+    text: `The update will be released at approximately
+    ${TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()}.`
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
