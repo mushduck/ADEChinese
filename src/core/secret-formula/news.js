@@ -2687,8 +2687,12 @@ export const news = [
   },
   {
     id: "a407",
-    text: `The update will be released at approximately
-    ${TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()}.`
+    get text() {
+      return `The update will be released at
+        ${TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()}
+        .`;
+    },
+    dynamic: true
   },
   {
     id: "l1",
