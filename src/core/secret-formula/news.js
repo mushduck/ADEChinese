@@ -2681,7 +2681,7 @@ export const news = [
     id: "a406",
     text:
       `<span style='color: blue'>Hey Supersonic, when will AD: Endgame release?</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <span style='color: gold'>We are working on it, expect it to be released in 6.9 Eternities.</span>&nbsp;&nbsp;
+      <span style='color: yellow'>We are working on it, expect it to be released in 6.9 Eternities.</span>&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;<span style='color: blue'>Gee Whiz! Seems like I will be right on time after my 5 hour sleep.
       Remember to watch "Why Hevi and Super decided to collaborate on a banana peel art" tommorow at 5 AM!</span>`
   },
