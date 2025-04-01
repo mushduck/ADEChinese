@@ -11,7 +11,7 @@ export const END_STATE_MARKERS = {
   SPECTATE_GAME: 13.9,
   // The song is 4:27 and the credits increment by 1 every 20 seconds. Needs changing if the song is changed.
   SONG_END: 17.9,
-  CREDITS_END: 200,
+  CREDITS_END: 100,
 };
 
 export const GameEnd = {
