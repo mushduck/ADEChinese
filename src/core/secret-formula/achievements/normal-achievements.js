@@ -729,7 +729,9 @@ export const normalAchievements = [
     name: "This mile took an eternity",
     description: "Get all Eternity milestones.",
     checkRequirement: () => EternityMilestone.all.every(m => m.isReached),
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() { return `Double Eternities Gain`; },
+    effect: 2
   },
   {
     id: 103,
