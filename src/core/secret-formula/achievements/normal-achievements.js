@@ -730,7 +730,7 @@ export const normalAchievements = [
     description: "Get all Eternity milestones.",
     checkRequirement: () => EternityMilestone.all.every(m => m.isReached),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    get reward() { return `Double Eternities Gain`; },
+    get reward() { return `Gain ${formatX(2)} more Eternities.`; },
     effect: 2
   },
   {
