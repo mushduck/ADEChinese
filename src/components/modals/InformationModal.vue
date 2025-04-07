@@ -37,6 +37,11 @@ export default {
         link="https://github.com/IvarK/AntimatterDimensionsSourceCode"
       />
       <InformationModalButton
+        name="Endgame repository"
+        icon="fa-brands fa-github"
+        link="https://github.com/Supersonic-Seven/AntimatterDimensionsEndgameUpdate"
+      />
+      <InformationModalButton
         name="r/AntimatterDimensions"
         icon="fa-brands fa-reddit-alien"
         link="https://www.reddit.com/r/AntimatterDimensions/"
