@@ -42,9 +42,19 @@ export default {
         link="https://www.reddit.com/r/AntimatterDimensions/"
       />
       <InformationModalButton
+        name="r/EndgameAntimatterDims"
+        icon="fa-brands fa-reddit-alien"
+        link="https://www.reddit.com/r/EndgameAntimatterDims/"
+      />
+      <InformationModalButton
         name="Antimatter Dimensions Discord Server"
         icon="fa-brands fa-discord"
         link="https://discord.gg/ST9NaXa"
+      />
+      <InformationModalButton
+        name="Antimatter Dimensions: Endgame Discord Server"
+        icon="fa-brands fa-discord"
+        link="https://discord.gg/yuxrGFcJXc"
       />
       <InformationModalButton
         name="Antimatter Dimensions on Google Play"
