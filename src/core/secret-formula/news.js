@@ -2689,10 +2689,14 @@ export const news = [
     id: "a407",
     get text() {
       return `The update will be released at
-        ${TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()}
+        ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62168428800).toString()}
         .`;
     },
     dynamic: true
+  },
+  {
+    id: "a408",
+    text: "The Discovery of the 9th Dimension was announced on July 1st, 2026."
   },
   {
     id: "l1",
