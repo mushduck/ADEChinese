@@ -442,7 +442,7 @@ export const pelleQuotes = {
       "...",
       {
         text: "Was it worth it, $1?",
-        1: destroyer
+        1: destroyer,
       },
       "There is nothing left in this universe.",
       "You won, but at what cost?",
