@@ -433,28 +433,19 @@ export const pelleQuotes = {
       }, {
         text: "You have doomed us all.",
         background: flashCelestial,
-      },
+      }
     ],
   },
   endgame: {
     id: 12,
     lines: [
       "...",
-      {
-        text: "Was it worth it, $1?",
-        1: destroyer,
-      },
+      { text: "Was it worth it, $1?", 1: destroyer },
       "There is nothing left in this universe.",
       "You won, but at what cost?",
-      {
-        text: "$1",
-        1: confusing,
-      },
+      { text: "$1.", 1: confusing },
       "My Reality is gone, but I am still here.",
-      {
-        text: "And I will always $1 you.",
-        1: watch,
-      },
+      { text: "And I will always $1 you.", 1: watch }
     ],
   },
 };
