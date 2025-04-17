@@ -433,13 +433,7 @@ export const pelleQuotes = {
       }, {
         text: "You have doomed us all.",
         background: flashCelestial,
-      }
-    ],
-  },
-  end2: {
-    id: 12,
-    requirement: () => player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 9e15,
-    lines: [
+      },
       "...",
       { text: "Was it worth it, $1?", 1: destroyer },
       "There is nothing left in this universe.",
