@@ -2699,6 +2699,13 @@ export const news = [
     text: "The Discovery of the 9th Dimension was announced on July 1st, 2026."
   },
   {
+    id: "a409",
+    text: 
+      `""""""""""""""""Whoever copies me is gay" -Barack Obama" -Archimedes" -Sun Tzu" -Elon Musk" -Helen Keller"
+      -Queen Elizabeth II" -Dwyane “The Rock” Johnson" -Supersonic Seven" -King Midas" -John Wick"
+      -Spongebob Squarepants" -YOU" -LOST" -THE" -GAME" -Mr. Bean`
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
