@@ -436,7 +436,7 @@ export const pelleQuotes = {
       }
     ],
   },
-  endgame: {
+  end2: {
     id: 12,
     requirement: () => player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 9e15,
     lines: [
