@@ -80,6 +80,9 @@ export const GalaxyGenerator = {
         if (!this.capObj) {
           Pelle.quotes.end.show();
         }
+        if (player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 9e15) {
+          Pelle.quotes.endgame.show();
+        }
       }
       PelleRifts.all.forEach(x => x.checkMilestoneStates());
 
