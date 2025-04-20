@@ -2706,6 +2706,10 @@ export const news = [
       -Spongebob Squarepants" -YOU" -LOST" -THE" -GAME" -Mr. Bean`
   },
   {
+    id: "a410",
+    text: "This doesn't actually exist, right?"
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
