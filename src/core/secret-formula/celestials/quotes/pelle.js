@@ -438,7 +438,6 @@ export const pelleQuotes = {
   },
   endgame: {
     id: 12,
-    requirement: () => endState >= 1,
     lines: [
       "...",
       { text: "Was it worth it, $1?", 1: destroyer },
