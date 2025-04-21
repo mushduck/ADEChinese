@@ -46,7 +46,7 @@ export const GameEnd = {
       player.isGameEnd = true;
       this.additionalEnd += Math.min(diff / 1000 / 20, 0.1);
     }
-  }
+  },
   if (this.endState >= END_STATE_MARKERS.GAME_END) {
     Pelle.quotes.endgame.show();
   }
