@@ -49,6 +49,6 @@ export const GameEnd = {
     }
   }
 };
-if (endState >= 1) {
+if (this.endState >= 1) {
   Pelle.quotes.endgame.show();
 }
