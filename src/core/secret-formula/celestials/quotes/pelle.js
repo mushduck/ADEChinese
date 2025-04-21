@@ -438,7 +438,7 @@ export const pelleQuotes = {
   },
   endgame: {
     id: 12,
-    requirement: () => player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 8.999e15,
+    requirement: () => endState >= 1,
     lines: [
       "...",
       { text: "Was it worth it, $1?", 1: destroyer },
