@@ -48,6 +48,3 @@ export const GameEnd = {
     }
   }
 };
-if (this.endState >= END_STATE_MARKERS.GAME_END) {
-  Pelle.quotes.endgame.show();
-}
