@@ -5,6 +5,7 @@ import { DC } from "../constants";
 // R = random chance condition
 // P = patreon
 // AI = created with gpt2
+// F = fun facts
 
 function newsAnimSpd(seconds) {
   return seconds / player.options.news.speed;
@@ -7456,5 +7457,33 @@ export const news = [
   {
     id: "ai997",
     get text() { return `The intergalactic antimatter trade has been severely disrupted, trading entire galaxies for the occasional paperclip. Cargo stands are no longer used. Oddly enough, the entire dimension has become a dumping ground for discarded plastic and other useless garbage. It's almost as if the rest of the multiverse isn't producing enough good  antiparticles to feed the growing population. Unfortunately, the situation is forcing the entire multiverse to scramble to find ways to meet the growing needs of the antimatter-eating  dev, who claims to have over ${format(Number.MAX_VALUE, 2)} specimens left to collect.`; }
-  }
+  },
+  {
+    id: "f1",
+    text: "Fun Fact: Planning for Antimatter Dimensions: Endgame began in December of 2023."
+  },
+  {
+    id: "f2",
+    text: "Fun Fact: The idea for the two additional Celestials in Endgame originated from a fan-made discussion board where someone suggested an extension to the main game where there would be an eighth Celestial that the player must defeat, and after fully defeating him there would be a ninth Celestial. Beating the ninth Celestial would earn you the Ninth Dimension. Thus, the two Celestials known as Alpha and Slabdrill were born."
+  },
+  {
+    id: "f3",
+    text: "Fun Fact: Hevipelle eats enough ass every day to collapse 1.79e308 universes! The only reason we haven't all died yet is because we're made of matter."
+  },
+  {
+    id: "f4",
+    text: "Fun Fact: The lore for AD: Endgame originally began as an extension of the vanilla lore, but as you can see it took a turn quickly!"
+  },
+  {
+    id: "f5",
+    text: "Fun Fact: If you were born during or after the year 2025, you probably will never see this message. And if you do, your AI companion is probably the one reading it to you."
+  },
+  {
+    id: "f6",
+    text: "Fun Fact: Supersonic Seven has been working on the game since September of 2024."
+  },
+  {
+    id: "f7",
+    text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()</span>"
+  },
 ];
