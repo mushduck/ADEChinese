@@ -9,6 +9,46 @@ export const changelog = [
    * }
    */
   {
+    date: [2025, 4, 22],
+    name: "v0.2 Beta 1: Preparing for break_eternity.js",
+    info: `
+We have reformatted the update tags. Incomplete versions are now displayed as beta (v0.2-beta-1 for example)
+and alpha versions have normal tag displays (like v0.2.0).
+<br>
+<br>
+<b><i>Thanks again for playing!</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>16 new news ticker messages</li>
+<li>The Endgame confirmation modal</li>
+<li>A reward to Achievement r102 (double Eternity gain)</li>
+<li>A ton of links in the infobox</li>
+<li>The final set of Pelle quotes before Endgame</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>The requirement for Achievement r76 has been reduced from 8 days to 8 hours</li>
+<li>The second link to the news message "this link is not a rickroll" (the old video no longer existed)</li>
+<li>Buffed the Glyph Rarity boost from Relic Shards significantly</li>
+<li>Buffed Time Studies 21, 32, 111, 151, 193, 212, 214, 226, 232 and 233</li>
+<li>Cropped the logo screen so you can see the whole thing now</li>
+<li>Scour to Empower only needs 10 Glyphs now instead of 30</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Achievement r183 displayed the old value for its reward</li>
+<li>Infinity/Break Upgrades displayed the wrong multiplier when TS31 was purchased (still had ^4 values
+instead of ^100)</li>
+<li>The multiplier tab shows r81 finally</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2025, 3, 6],
     name: "v0.1 Beta 3: Breaking Down the Timewalls",
     info: `

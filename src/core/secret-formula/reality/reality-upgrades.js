@@ -278,10 +278,10 @@ export const realityUpgrades = [
     name: "Scour to Empower",
     id: 19,
     cost: 1500,
-    requirement: () => `Have a total of ${formatInt(30)} or more Glyphs at once
+    requirement: () => `Have a total of ${formatInt(10)} or more Glyphs at once
       (You have ${formatInt(Glyphs.allGlyphs.countWhere(g => g.type !== "companion"))})`,
-    hasFailed: () => Glyphs.allGlyphs.countWhere(g => g.type !== "companion") < 30,
-    checkRequirement: () => Glyphs.allGlyphs.countWhere(g => g.type !== "companion") >= 30,
+    hasFailed: () => Glyphs.allGlyphs.countWhere(g => g.type !== "companion") < 10,
+    checkRequirement: () => Glyphs.allGlyphs.countWhere(g => g.type !== "companion") >= 10,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "You can sacrifice Glyphs for permanent bonuses (Shift + click)",
     formatCost: value => format(value, 1, 0)

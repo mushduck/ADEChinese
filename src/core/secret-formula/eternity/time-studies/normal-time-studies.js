@@ -87,7 +87,7 @@ export const normalTimeStudies = [
     requirement: [22],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: `You gain more Infinities based on Dimension Boosts`,
-    effect: () => Math.max(DimBoost.totalBoosts, 1),
+    effect: () => Math.max(DimBoost.totalBoosts * 10, 1),
     formatEffect: value => formatX(value, 2)
   },
   {
