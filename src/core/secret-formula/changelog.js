@@ -33,7 +33,6 @@ and alpha versions have normal tag displays (like v0.2.0).
 <li>The requirement for Achievement r76 has been reduced from 8 days to 8 hours</li>
 <li>The second link to the news message "this link is not a rickroll" (the old video no longer existed)</li>
 <li>Buffed the Glyph Rarity boost from Relic Shards significantly</li>
-<li>Buffed Time Studies 21, 32, 111, 151, 193, 212, 214, 226, 232 and 233</li>
 <li>Cropped the logo screen so you can see the whole thing now</li>
 <li>Scour to Empower only needs 10 Glyphs now instead of 30</li>
 </ul>
@@ -44,6 +43,20 @@ and alpha versions have normal tag displays (like v0.2.0).
 <li>Infinity/Break Upgrades displayed the wrong multiplier when TS31 was purchased (still had ^4 values
 instead of ^100)</li>
 <li>The multiplier tab shows r81 finally</li>
+</ul>
+<br>
+<b>Time Studies buffed:</b><br>
+<ul>
+<li>TS21: Formula improved (exponent 0.032 -> 0.04)</li>
+<li>TS32: Effect multiplied by 10</li>
+<li>TS111: IP formula log(x)/285 -> log(x)/280</li>
+<li>TS151: Effect multiplied by 100</li>
+<li>TS193: Cap changed (1e13000 -> 1e30000) and overall effectiveness multiplied by 1.5</li>
+<li>TS212: Effect multiplied by 1.6</li>
+<li>TS214: Cap changed (e164000 -> e1e6) and formula changed to compensate</li>
+<li>TS226: Effect multiplied by 1.25</li>
+<li>TS232: Formula improved (base doubled, exponent multiplied by 1.25)</li>
+<li>TS233: Effect multiplied by about 1.39</li>
 </ul>
 <br>
 `
