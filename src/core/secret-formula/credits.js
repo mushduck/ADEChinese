@@ -9,7 +9,7 @@ export const credits = {
     6: "Steam Developer",
     7: "Library Developer",
     8: "Developer",
-    9: "Developer (Endgame)",
+    9: "Endgame Developer",
     10: "Lead Design Consultant",
     11: "Design Consultant",
     12: "Writer",
@@ -18,9 +18,9 @@ export const credits = {
     15: "Modal Maker, Lady Taker, Pie Baker",
     16: "Lurker Tester",
     17: "Web Tester",
-    18: "Web Tester (Endgame)",
+    18: "Endgame Web Tester",
     19: "Android Tester",
-    20: "Mobile Tester (Endgame)",
+    20: "Endgame Mobile Tester",
   },
 
   // Each person must have a name and at least one role (the index of the desired role in roles). They can also have a
