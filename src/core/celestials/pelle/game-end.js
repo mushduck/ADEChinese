@@ -7,8 +7,8 @@ export const END_STATE_MARKERS = {
   SAVE_DISABLED: 4,
   END_NUMBERS: 4.2,
   CREDITS_START: 4.5,
-  SHOW_NEW_GAME: 14.5,
-  SPECTATE_GAME: 14.9,
+  SHOW_NEW_GAME: 15.5,
+  SPECTATE_GAME: 15.9,
   // The song is 4:27 and the credits increment by 1 every 20 seconds. Needs changing if the song is changed.
   SONG_END: 17.9,
   CREDITS_END: 160,
