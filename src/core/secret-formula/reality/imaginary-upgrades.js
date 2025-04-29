@@ -320,4 +320,59 @@ export const imaginaryUpgrades = [
     lockEvent: "equip another non-Companion Glyph",
     description: "Unlock Pelle, Celestial of Antimatter",
   },
+  {
+    name: "Singularity Stockpile",
+    id: 26,
+    cost: 1e50,
+    requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} Singularities`,
+    hasFailed: () => false,
+    checkRequirement: () => Currency.singularities.gte(Decimal.NUMBER_MAX_VALUE),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
+  },
+  {
+    name: "Exigent Extinction",
+    id: 27,
+    cost: 1e100,
+    requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
+    hasFailed: () => !player.celestials.pelle.doomed || Glyphs.activeWithoutCompanion.length > 1,
+    // We have to put this as 9.001e15 for now because Glyphs can still be swtiched out via Armageddon
+    // Hopefully we can fix this later
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15 &&
+      Glyphs.activeWithoutCompanion.length <= 1,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
+  },
+  {
+    name: "Alchemical Annihilation",
+    id: 28,
+    cost: 1e150,
+    requirement: () => `Unlock Pelle without any Glyph Alchemy resources`,
+    hasFailed: () => Ra.alchemyResourceCap > 0,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15 &&
+      Ra.alchemyResourceCap > 0,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
+  },
+  {
+    name: "Galactic Genocide",
+    id: 29,
+    cost: 1e200,
+    requirement: () => `Have a total of 1e100 Galaxies`,
+    hasFailed: () => false,
+    checkRequirement: () => Replicanti.galaxies.total + player.galaxies +
+      player.dilation.totalTachyonGalaxies >= 80000,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to 1e100000",
+  },
+  {
+    name: "Inception Initiation",
+    id: 30,
+    cost: Decimal.NUMBER_MAX_VALUE,
+    requirement: () => `Disable all Nerfs and Strikes in Pelle`,
+    hasFailed: () => false,
+    checkRequirement: () => player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 9e115,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: scrambleText: ["Unlock å¬π˙å, Celestial of ∂å®˚˜´ßß", "Unlock ÅÒ∏ÓÅ, Celestial of ÎÅ‰˜´ÍÍ"],
+  },
 ];
