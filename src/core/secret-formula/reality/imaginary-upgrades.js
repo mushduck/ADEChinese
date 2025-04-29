@@ -373,6 +373,8 @@ export const imaginaryUpgrades = [
     hasFailed: () => false,
     checkRequirement: () => player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 9e115,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => scrambleText: ["Unlock å¬π˙å, Celestial of ∂å®˚˜´ßß", "Unlock ÅÒ∏ÓÅ, Celestial of ÎÅ‰˜´ÍÍ"],
+    description: () => {
+      scrambleText: ["Unlock å¬π˙å, Celestial of ∂å®˚˜´ßß", "Unlock ÅÒ∏ÓÅ, Celestial of ÎÅ‰˜´ÍÍ"]
+    },
   },
 ];
