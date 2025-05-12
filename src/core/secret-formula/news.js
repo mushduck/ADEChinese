@@ -2707,6 +2707,128 @@ export const news = [
       -Spongebob Squarepants" -YOU" -LOST" -THE" -GAME" -Mr. Bean`
   },
   {
+    id: "a410",
+    text: "TECHNOBLADE NEVER DIES!!!"
+  },
+  {
+    id: "a411",
+    get text() {
+      const username = this.saveData.saveName;
+      return `I've come to make an announcement ${username} is a bitch-ass motherfucker he pissed on my fucking wife.
+      That's right he took his antimatter dick out and pissed on my fucking wife and he said it was "THIS BIG" and
+      I said "that's disgusting" so im making a callout post on my twitter.com. ${username} you've got a small dick
+      it's the size of a proton and it's way smaller and guess what here's what my dong looks like. That's right baby
+      all matter no antimatter no reality machines look at that it looks like two balls and a bong. He fucked my wife
+      so guess what imma piss on the earth that's what you get my super laser piss. Except I'm not gonna piss on the
+      earth I'm gonna go higher I'm pissing on the moon. How do you like that Pelle I pissed on the moon you idiot.
+      You have twenty-three hours before the piss D R O P L E T S hit the fucking Earth, now get outta my fucking
+      sight, before I piss on you too!`;
+    },
+  },
+  {
+    id: "a412",
+    text: "I guess this truly is the Endgame."
+  },
+  {
+    id: "a413",
+    text: "Where are the crossovers I was promised? Oh wait wrong Endgame."
+  },
+  {
+    id: "a414",
+    text: "Why do they call it antimatter when you anti matter the cold atom of anti hot make the matter?"
+  },
+  {
+    id: "a415",
+    text:
+      `Is this truly the Endgame? Or just the ending of another parallel universe? Well, there has to
+      be someone to save the world again, escaping entropy!`
+  },
+  {
+    id: "a416",
+    text: "Why do they call it antimatter when you anti matter the cold atom of anti hot make the matter?"
+  },
+  {
+    id: "a417",
+    text: `Take the "Which Celestial Are You?" test to see if you're a Teresa or a Lai'tela!`
+  },
+  {
+    id: "a418",
+    text: "When life makes you cry, know that you antimatter."
+  },
+  {
+    id: "a419",
+    text:
+      `<span style='color: blue'>This mod is my life!</span>&nbsp;&nbsp;&nbsp;<span style='color: green'>Get a new life!</span>`
+  },
+  {
+    id: "a420",
+    text:
+      `INCOMING NEWS : S7 BROKE THE GAME AND LEFT! CURRENT WHEREABOUTS UNKNOWN, WITNESS SAID HE SAW LIFE NEXT TO
+      HIS HOUSE A FEW HOURS BEFORE HE DISAPPEARED. WATCH "COUNTING TO 5" ON THE EVENING CHANNEL IN 5 HOURS.`
+  },
+  {
+    id: "a421",
+    text: "Antimatter Dimensions this, Antimatter Dimensioms that, How about you go touch real grass?"
+  },
+  {
+    id: "a422",
+    text:
+      `Why is my screen white? Have I gone into anti-heaven? Wait, isn't that hell? Oh I just changed
+      my theme to Metro. Still hell though.`
+  },
+  {
+    id: "a423",
+    text: "Antimatter Dimensions this, Antimatter Dimensioms that, How about you go touch real grass?"
+  },
+  {
+    id: "a424",
+    text: "According to the Bosonic String Theory, Spacetime is 26-dimensional... where the hell are my other 16 Dimensions?!"
+  },
+  {
+    id: "a425",
+    text: "The Antimatter Dimensions Endgame: Easter Egg Edition (ADE:EEE) will come out in 5 Meggahours."
+  },
+  {
+    id: "a426",
+    text: "I don't want to be addicted to this Gen Z stuff."
+  },
+  {
+    id: "a427",
+    text: "You just lost 3 seconds of your life reading this newsticker."
+  },
+  {
+    id: "a428",
+    text: "You've wasted a large chunk of your time here. Go on, Dilate your life."
+  },
+  {
+    id: "a429",
+    text: "Produce the 9th"
+  },
+  {
+    id: "a430",
+    text: "We want the 9th NOW!"
+  },
+  {
+    id: "a431",
+    text: "It was a big mistake making me wait to make my debut."
+  },
+  {
+    id: "a432",
+    text: "Behind every 8 there's a 9."
+  },
+  {
+    id: "a433",
+    text: "If we have Realities, where are the Fakeities?"
+  },
+  {
+    id: "a434",
+    text: "TOM YOU JUST WON A GIANT ANTITUNGSTEN CUBE!"
+  },
+  {
+    id: "a435",
+    text: "Today's lunch: Antimatter chicken burger made out of 100% antimatter pigs!"
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
