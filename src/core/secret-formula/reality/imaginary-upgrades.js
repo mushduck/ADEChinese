@@ -386,6 +386,6 @@ export const imaginaryUpgrades = [
     description: () => {
       return "*";
     },
-    scrambleText: ["Unlock å¬π˙å, Celestial of ∂å®˚˜´ßß", "Unlock ÅÒ∏ÓÅ, Celestial of ÎÅ‰˜´ÍÍ"]
+    scrambleText: ["Unlock å¬π˙å, Celestial of ∂å®˚˜´ßß", "Unlock ÅÒ∏ÓÅ, Celestial of ÎÅ‰˜´ÍÍ"],
   },
 ];
