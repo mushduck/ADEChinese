@@ -161,6 +161,6 @@ export const ImaginaryUpgrades = {
     return this.all.countWhere(u => u.isBought);
   },
   get allBought() {
-    return (player.reality.imaginaryUpgradeBits >> 6) + 1 === 1 << (GameDatabase.reality.imaginaryUpgrades.length - 5);
+    return (player.reality.imaginaryUpgradeBits >> 7) + 1 === 1 << (GameDatabase.reality.imaginaryUpgrades.length - 5);
   }
 };
