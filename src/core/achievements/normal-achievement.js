@@ -32,6 +32,10 @@ class AchievementState extends GameMechanicState {
     return this.row < 18;
   }
 
+  get isPreEndgame() {
+    return this.row < 19;
+  }
+
   get isUnlocked() {
     return (player.achievementBits[this.row - 1] & this._bitmask) !== 0;
   }
