@@ -335,16 +335,16 @@ export const imaginaryUpgrades = [
     id: 27,
     cost: 1e100,
     requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
-    hasFailed: () => false,//!player.celestials.pelle.doomed || Glyphs.activeWithoutCompanion.length > 0,
+    hasFailed: () => !player.celestials.pelle.doomed || Glyphs.activeWithoutCompanion.length > 0,
     // We have to put this as 9.001e15 for now because Glyphs can still be swtiched out via Armageddon
     // Hopefully we can fix this later
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,// &&
-      //Glyphs.activeWithoutCompanion.length <= 0,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15 &&
+      Glyphs.activeWithoutCompanion.length <= 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
   },
   {
-    name: "Alchemical Annihilation",
+    name: "E",//"Alchemical Annihilation",
     id: 28,
     cost: 1e150,
     requirement: () => `Unlock Pelle without completing any Hard V-Achievements`,
@@ -354,7 +354,7 @@ export const imaginaryUpgrades = [
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
   },
   {
-    name: "Galactic Genocide",
+    name: "E",//"Galactic Genocide",
     id: 29,
     cost: 1e200,
     requirement: () => `Have a total of 1e100 Galaxies`,
@@ -365,7 +365,7 @@ export const imaginaryUpgrades = [
     description: "Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to 1e100000",
   },
   {
-    name: "Inception Initiation",
+    name: "E",//"Inception Initiation",
     id: 30,
     cost: 1.8e308,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
