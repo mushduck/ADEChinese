@@ -348,19 +348,19 @@ export const imaginaryUpgrades = [
     id: 28,
     cost: 1e150,
     requirement: () => `Unlock Pelle without any Glyph Alchemy resources`,
-    hasFailed: () => player.celestials.ra.alchemy[ALCHEMY_RESOURCE.POWER] > 0 ||
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.INFINITY] > 0 ||
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.TIME] > 0 ||
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.REPLICATION] > 0 ||
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.DILATION] > 0 ||
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.EFFARIG] > 0,
+    hasFailed: () => player.celestials.ra.highestRefinementValue[alchemy_resource.power] > 0 ||
+      player.celestials.ra.highestRefinementValue[alchemy_resource.infinity] > 0 ||
+      player.celestials.ra.highestRefinementValue[alchemy_resource.time] > 0 ||
+      player.celestials.ra.highestRefinementValue[alchemy_resource.replication] > 0 ||
+      player.celestials.ra.highestRefinementValue[alchemy_resource.dilation] > 0 ||
+      player.celestials.ra.highestRefinementValue[alchemy_resource.effarig] > 0,
     checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15 &&
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.POWER] <= 0 &&
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.INFINITY] <= 0 &&
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.TIME] <= 0 &&
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.REPLICATION] <= 0 &&
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.DILATION] >= 0 &&
-      player.celestials.ra.alchemy[ALCHEMY_RESOURCE.EFFARIG] <= 0,
+      player.celestials.ra.highestRefinementValue[alchemy_resource.power] > 0 &&
+      player.celestials.ra.highestRefinementValue[alchemy_resource.infinity] > 0 &&
+      player.celestials.ra.highestRefinementValue[alchemy_resource.time] > 0 &&
+      player.celestials.ra.highestRefinementValue[alchemy_resource.replication] > 0 &&
+      player.celestials.ra.highestRefinementValue[alchemy_resource.dilation] > 0 &&
+      player.celestials.ra.highestRefinementValue[alchemy_resource.effarig] > 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
   },
