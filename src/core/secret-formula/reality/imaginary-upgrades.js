@@ -373,8 +373,8 @@ export const imaginaryUpgrades = [
     checkRequirement: () => player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 9e115,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => {
-      return "*";
+      if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
+      return "Unlock ???, Celestial of ???";
     },
-    scrambleText: ["Unlock å¬π˙å, Celestial of ∂å®˜˚˜´ßß", "Unlock ÅÒ∏ÓÅ, Celestial of ÎÅ‰˜´ÍÍ"],
   },
 ];
