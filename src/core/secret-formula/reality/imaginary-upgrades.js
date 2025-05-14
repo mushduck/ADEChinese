@@ -354,7 +354,7 @@ export const imaginaryUpgrades = [
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
   },
   {
-    name: "E",//"Galactic Genocide",
+    name: "F",//"Galactic Genocide",
     id: 29,
     cost: 1e200,
     requirement: () => `Have a total of 1e100 Galaxies`,
@@ -365,7 +365,7 @@ export const imaginaryUpgrades = [
     description: "Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to 1e100000",
   },
   {
-    name: "E",//"Inception Initiation",
+    name: "G",//"Inception Initiation",
     id: 30,
     cost: 1.8e308,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
