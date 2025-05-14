@@ -335,7 +335,7 @@ export const imaginaryUpgrades = [
     id: 27,
     cost: 1e100,
     requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
-    hasFailed: () => !player.celestials.pelle.doomed || Glyphs.activeWithoutCompanion.length > 0,
+    hasFailed: () => !Pelle.isDoomed || Glyphs.activeWithoutCompanion.length > 0,
     // We have to put this as 9.001e15 for now because Glyphs can still be swtiched out via Armageddon
     // Hopefully we can fix this later
     checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15 &&
@@ -369,8 +369,8 @@ export const imaginaryUpgrades = [
     id: 30,
     cost: 1.8e308,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
-    hasFailed: () => false,//!player.celestials.pelle.doomed,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//Currency.antimatter.value.exponent >= 9e115 && player.celestials.pelle.doomed,
+    hasFailed: () => false,//!Pelle.isDoomed,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock ???, Celestial of ???",//() => {
       //if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
