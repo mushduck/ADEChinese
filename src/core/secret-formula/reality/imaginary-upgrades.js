@@ -324,7 +324,7 @@ export const imaginaryUpgrades = [
     name: "Singularity Stockpile",
     id: 26,
     cost: 1e50,
-    requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} Singularities`,
+    requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 2)} Singularities`,
     hasFailed: () => false,
     checkRequirement: () => Currency.singularities.gte(Decimal.NUMBER_MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -348,7 +348,7 @@ export const imaginaryUpgrades = [
     id: 28,
     cost: 1e150,
     requirement: () => `Unlock Pelle without completing any Hard V-Achievements`,
-    hasFailed: () => V.spaceTheorems > 36,
+    hasFailed: () => V.spaceTheorems >= 37,
     checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15 && V.spaceTheorems <= 36,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
@@ -367,10 +367,10 @@ export const imaginaryUpgrades = [
   {
     name: "Inception Initiation",
     id: 30,
-    cost: Decimal.NUMBER_MAX_VALUE,
+    cost: 1.8e308,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
-    hasFailed: () => false,
-    checkRequirement: () => player.celestials.pelle.records.totalAntimatter.plus(1).log10() >= 9e115,
+    hasFailed: () => !player.celestials.pelle.doomed,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9e115 && player.celestials.pelle.doomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => {
       if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
