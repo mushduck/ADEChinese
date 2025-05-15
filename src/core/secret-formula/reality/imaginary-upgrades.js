@@ -331,7 +331,7 @@ export const imaginaryUpgrades = [
     description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
   },
   {
-    name: "Exigent Extinction",
+    name: "D",//"Exigent Extinction",
     id: 27,
     cost: 1e100,
     requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
