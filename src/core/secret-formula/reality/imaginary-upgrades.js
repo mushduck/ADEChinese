@@ -338,7 +338,7 @@ export const imaginaryUpgrades = [
     hasFailed: () => false,//!Pelle.isDoomed || Glyphs.activeWithoutCompanion.length > 0,
     // We have to put this as 9.001e15 for now because Glyphs can still be swtiched out via Armageddon
     // Hopefully we can fix this later
-    checkRequirement: () => false,//Pelle.isDoomed && Currency.antimatter.value.exponent >= 9.001e15 &&
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//&& Pelle.isDoomed && 
       //Glyphs.activeWithoutCompanion.length <= 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
