@@ -6,6 +6,7 @@ import { DC } from "../constants";
 // P = patreon
 // AI = created with gpt2
 // F = fun facts
+// (e) = Endgame Exclusive
 
 function newsAnimSpd(seconds) {
   return seconds / player.options.news.speed;
@@ -2595,7 +2596,7 @@ export const news = [
       fast. Update, just 5 hours.`
   },
   {
-    id: "a391",
+    id: "ae391",
     text:
       `Hello. My name is Supersonic Seven. If you are here, then this means you are one of the few admitted into the
       Council of the Elite. Congratulations. I will be the first to say this: Welcome to Endgame. Endgame is a dangerous
@@ -2606,27 +2607,27 @@ export const news = [
       choice is yours. If you choose to stay, then Endgame is yours. Happy playing.`
   },
   {
-    id: "a392",
+    id: "ae392",
     text:
       `"The 5 Hours are over. Endgame has been released. What is Endgame? You'll have to keep playing to see for yourself."
       - Supersonic Seven`
   },
   {
-    id: "a393",
+    id: "ae393",
     text: "Yo! I just got a 9th Dimension! Too bad I can't use it until the Celestial Plus Update..."
   },
   {
-    id: "a394",
+    id: "ae394",
     text:
       `Apologies for the inconvenience. We had to remove the last news message because it was conflicting with the
       game's storyline. You don't want fake news, do you? Anyway, I'll let you get back to AD: Endgame now.`
   },
   {
-    id: "a395",
+    id: "ae395",
     text: "Antimatter Dimensions: Endgame™ will be released in 5 hours."
   },
   {
-    id: "a396",
+    id: "ae396",
     text:
       `Supersonic Seven here. Today we have been asked a simple question. Does the 9th Dimension exist? The answer is
       more simple than you think. Yes, the 9th Dimension CAN exist, however it takes a lot of power for one to ascend
@@ -2635,51 +2636,51 @@ export const news = [
       However, the number that can be safely possessed is another story.`
   },
   {
-    id: "a397",
+    id: "ae397",
     text:
       `THE 11TH DIMENSION DOESN'T EXIST!!! "So where's the 10th?" STOP ASKING QUESTIONS!!!`
   },
   {
-    id: "a398",
+    id: "ae398",
     text: "ANTIMATTER DIMENSIONS: ENDGAME"
   },
   {
-    id: "a399",
+    id: "ae399",
     text: `The Endgame Update is the first major update of Antimatter Dimensions conducted by Supersonic Seven after the
     release of Hevipelle's Reality Update. There will be two more major updates: Celestial Plus, and Expansion. The
     Expansion Update will be split into the Expanse and Existence Updates.`
   },
   {
-    id: "a400",
+    id: "ae400",
     text: `"What is the tenth dimension?" The only one who knows that is the Elemental. "Who is the Elemental?" A powerful
     being who lives in the depths of the Expanse. "What is the Expanse?" You'll know soon enough.`
   },
   {
-    id: "a401",
+    id: "ae401",
     text: `And Hevipelle asked, "Wait, explain it to me again, there are 7 resets now?" "Yeah of course, and then you have
     to add a 9th dimension by that point y-" said Supersonic Seven. Hevipelle interrupted him and said "Wait WHAT!?!?" And
     that's the story of how Hevipelle almost touched antimatter.`
   },
   {
-    id: "a402",
+    id: "ae402",
     text: `"Can you get Infinite STDs?" - Didgoty "Yes you can." - Brittany Aloe`
   },
   {
-    id: "a403",
+    id: "ae403",
     text: `After the arrival of ENDGAME, 7 new types of weather were discovered. They are: Existence, Nobody, Death,
     GigaChad, Apples, Mathematician and Electricity.`
   },
   {
-    id: "a404",
+    id: "ae404",
     text: "Welcome to Endgame - where the END is only the beginning."
   },
   {
-    id: "a405",
+    id: "ae405",
     text: `Endgame used to have five other brothers and sisters... we have Endgame, Expanse, and Existence. No longer
     are Eclipse, Echelon, Exodus, Ephmeral, and John; they will not be missed.`
   },
   {
-    id: "a406",
+    id: "ae406",
     text:
       `<span style='color: blue'>Hey Supersonic, when will AD: Endgame release?</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <span style='color: yellow'>We are working on it, expect it to be released in 6.9 Eternities.</span>&nbsp;&nbsp;
@@ -2687,7 +2688,7 @@ export const news = [
       Remember to watch "Why Hevi and Super decided to collaborate on a banana peel art" tommorow at 5 AM!</span>`
   },
   {
-    id: "a407",
+    id: "ae407",
     get text() {
       return `The update will be released at
         ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62168428800000).toString()}
@@ -2696,22 +2697,22 @@ export const news = [
     dynamic: true
   },
   {
-    id: "a408",
+    id: "ae408",
     text: "The Discovery of the 9th Dimension was announced on July 1st, 2026."
   },
   {
-    id: "a409",
+    id: "ae409",
     text: 
       `""""""""""""""""Whoever copies me is gay" -Barack Obama" -Archimedes" -Sun Tzu" -Elon Musk" -Helen Keller"
       -Queen Elizabeth II" -Dwyane “The Rock” Johnson" -Supersonic Seven" -King Midas" -John Wick"
       -Spongebob Squarepants" -YOU" -LOST" -THE" -GAME" -Mr. Bean`
   },
   {
-    id: "a410",
+    id: "ae410",
     text: "TECHNOBLADE NEVER DIES!!!"
   },
   {
-    id: "a411",
+    id: "ae411",
     get text() {
       const username = this.saveData.saveName;
       return `I've come to make an announcement ${username} is a bitch-ass motherfucker he pissed on my fucking wife.
@@ -2726,107 +2727,137 @@ export const news = [
     },
   },
   {
-    id: "a412",
+    id: "ae412",
     text: "I guess this truly is the Endgame."
   },
   {
-    id: "a413",
+    id: "ae413",
     text: "Where are the crossovers I was promised? Oh wait wrong Endgame."
   },
   {
-    id: "a414",
+    id: "ae414",
     text: "Why do they call it antimatter when you anti matter the cold atom of anti hot make the matter?"
   },
   {
-    id: "a415",
+    id: "ae415",
     text:
       `Is this truly the Endgame? Or just the ending of another parallel universe? Well, there has to
       be someone to save the world again, escaping entropy!`
   },
   {
-    id: "a416",
-    text: "Why do they call it antimatter when you anti matter the cold atom of anti hot make the matter?"
-  },
-  {
-    id: "a417",
+    id: "ae416",
     text: `Take the "Which Celestial Are You?" test to see if you're a Teresa or a Lai'tela!`
   },
   {
-    id: "a418",
+    id: "ae417",
     text: "When life makes you cry, know that you antimatter."
   },
   {
-    id: "a419",
+    id: "ae418",
     text:
       `<span style='color: blue'>This mod is my life!</span>&nbsp;&nbsp;&nbsp;<span style='color: green'>Get a new life!</span>`
   },
   {
-    id: "a420",
+    id: "ae419",
     text:
       `INCOMING NEWS : S7 BROKE THE GAME AND LEFT! CURRENT WHEREABOUTS UNKNOWN, WITNESS SAID HE SAW LIFE NEXT TO
       HIS HOUSE A FEW HOURS BEFORE HE DISAPPEARED. WATCH "COUNTING TO 5" ON THE EVENING CHANNEL IN 5 HOURS.`
   },
   {
-    id: "a421",
+    id: "ae420",
     text: "Antimatter Dimensions this, Antimatter Dimensioms that, How about you go touch real grass?"
   },
   {
-    id: "a422",
+    id: "ae421",
     text:
       `Why is my screen white? Have I gone into anti-heaven? Wait, isn't that hell? Oh I just changed
       my theme to Metro. Still hell though.`
   },
   {
-    id: "a423",
-    text: "Antimatter Dimensions this, Antimatter Dimensioms that, How about you go touch real grass?"
-  },
-  {
-    id: "a424",
+    id: "ae422",
     text: "According to the Bosonic String Theory, Spacetime is 26-dimensional... where the hell are my other 16 Dimensions?!"
   },
   {
-    id: "a425",
+    id: "ae423",
     text: "The Antimatter Dimensions Endgame: Easter Egg Edition (ADE:EEE) will come out in 5 Meggahours."
   },
   {
-    id: "a426",
+    id: "ae424",
     text: "I don't want to be addicted to this Gen Z stuff."
   },
   {
-    id: "a427",
+    id: "ae425",
     text: "You just lost 3 seconds of your life reading this newsticker."
   },
   {
-    id: "a428",
+    id: "ae426",
     text: "You've wasted a large chunk of your time here. Go on, Dilate your life."
   },
   {
-    id: "a429",
+    id: "ae427",
     text: "Produce the 9th"
   },
   {
-    id: "a430",
+    id: "ae428",
     text: "We want the 9th NOW!"
   },
   {
-    id: "a431",
+    id: "ae429",
     text: "It was a big mistake making me wait to make my debut."
   },
   {
-    id: "a432",
+    id: "ae430",
     text: "Behind every 8 there's a 9."
   },
   {
-    id: "a433",
+    id: "ae431",
     text: "If we have Realities, where are the Fakeities?"
   },
   {
-    id: "a434",
+    id: "ae432",
     text: "TOM YOU JUST WON A GIANT ANTITUNGSTEN CUBE!"
   },
   {
-    id: "a435",
+    id: "ae433",
     text: "Today's lunch: Antimatter chicken burger made out of 100% antimatter pigs!"
+  },
+  {
+    id: "ae434",
+    text: 
+      `"I just added like 26 news messages from this one Discord channel into the game let me know if it shits itself lmao."
+      -Supersonic Seven`
+  },
+  {
+    id: "ae435",
+    text: 
+      `The 45 current stages of AD:Endgame are Dimensions, Boosts, Automators, Galaxies, Infinity, Challenges,
+      Break Infinity, Infinity Dimensions, Infinity Challenges, Replicanti, Eternity, Time Dimensions,
+      Eternity Challenges, Time Dilation, Reality, Black Hole, Teresa's Canister, Teresa's Reality, Effarig's Shop,
+      Effarig's Infinity, Effarig's Eternity, Effarig's Reality, The Nameless One's Reality, V's Achievements,
+      Continuum, Dark Matter Dimensions, Lai'tela's Reality, Pelle (Doomed Reality), Remnants,
+      The first 14 stages again (+Rifts), And of course, the beginning of endgame.`
+  },
+  {
+    id: "ae436",
+    text: "If the 8th celestial is Alpha, shouldn't the 9th be Beta?"
+  },
+  {
+    id: "ae437",
+    text: 
+      `Here's your daily AD:E fact that does nothing: Did you know that Slabdrill, the 9th celestial, also unlocks
+      the 9th dimension? How crazy is that?`
+  },
+  {
+    id: "ae438",
+    text: "Why is 6 afraid of 7? Because 7 8 9, but now why is 10 afraid? Because it is in the middle of 9/11!"
+  },
+  {
+    id: "ae439",
+    text: "Here's your daily AD:E fact that does nothing: Lai'tela and Pelle had... you know."
+  },
+  {
+    id: "ae440",
+    text: "Welcome to the server! Here, we talk about [69]."
   },
   {
     id: "l1",
@@ -3515,7 +3546,7 @@ export const news = [
     get unlocked() { return PlayerProgress.realityUnlocked(); }
   },
   {
-    id: "l89",
+    id: "le89",
     text:
       `It has been reported that Celestial Alpha is moving. No, not Alpha himself. His Reality. He is heading on a
       direct course for Pelle, likely to take his final revenge. But what is this? An 8th Dimensional being of
@@ -3525,23 +3556,41 @@ export const news = [
     get unlocked() { return Teresa.isUnlocked; }
   },
   {
-    id: "l90",
+    id: "le90",
     text:
       `Legend has it that Endgame is supposed to be unlocked around here, but I don't see it. Can anybody help me?
       ...e9e15? What's that supposed to mean?`,
     get unlocked() { return Pelle.isDoomed; }
   },
   {
-    id: "l91",
+    id: "le91",
     text:
       `THERE IS NO ESCAPE, FOOLISH MORTAL! I AM PELLE! I WILL SMITE YOU SOON! YOU WILL- wait... is that the damn
       Galaxy Generator again? Can you stop finding that cursed thing? I've had about enough losing. Thanks.`,
     get unlocked() { return Pelle.isDoomed && Currency.antimatter.value.gte("1e999999999"); }
   },
   {
-    id: "l92",
+    id: "le92",
     text: "Welcome to the Endgame. AD: Endgame, that is.",
     get unlocked() { return Pelle.isDoomed; }
+  },
+  {
+    id: "le93",
+    get text() {
+      const chapters = [
+        `Effarig made the other 8 Celestials jealous, because they didn't have a Glyph exclusive to them too.
+        Next 9e15 Game Time Eons, Effarig's Shop was destroyed by the other Celestials, his Companion Glyph taken
+        away, his Glyph now doing nothing, he was all alone. Now, Effarig is pissed and is now training to become
+        an Elemental, and has created 3 new Domains: Effarig's Endgame, Effarig's Expanse and Effarig's Existence.
+        He has obtained the power of the Endgame, Expanse, Existence, The 8 other Celestials' power, and the 9th
+        Dimension. He is on the race to the 10th Dimension. If he gets it, there is no stopping him from Rebirth (Omega).`,
+        `Small update: Effarig has managed to Shatter his Reality, and now he is chasing for the 10th Dimension.`
+      ];
+      const chapter = chapters[player.news.specialTickerData.effarigChapter];
+      player.news.specialTickerData.effarigChapter = (player.news.specialTickerData.effatigChapter + 1) % 2;
+      return chapter;
+    },
+    get unlocked() { return Teresa.isUnlocked; }
   },
   {
     id: "r1",
@@ -7585,31 +7634,31 @@ export const news = [
     get text() { return `The intergalactic antimatter trade has been severely disrupted, trading entire galaxies for the occasional paperclip. Cargo stands are no longer used. Oddly enough, the entire dimension has become a dumping ground for discarded plastic and other useless garbage. It's almost as if the rest of the multiverse isn't producing enough good  antiparticles to feed the growing population. Unfortunately, the situation is forcing the entire multiverse to scramble to find ways to meet the growing needs of the antimatter-eating  dev, who claims to have over ${format(Number.MAX_VALUE, 2)} specimens left to collect.`; }
   },
   {
-    id: "f1",
+    id: "fe1",
     text: "Fun Fact: Planning for Antimatter Dimensions: Endgame began in December of 2023."
   },
   {
-    id: "f2",
+    id: "fe2",
     text: "Fun Fact: The idea for the two additional Celestials in Endgame originated from a fan-made discussion board where someone suggested an extension to the main game where there would be an eighth Celestial that the player must defeat, and after fully defeating him there would be a ninth Celestial. Beating the ninth Celestial would earn you the Ninth Dimension. Thus, the two Celestials known as Alpha and Slabdrill were born."
   },
   {
-    id: "f3",
+    id: "fe3",
     text: "Fun Fact: Hevipelle eats enough ass every day to collapse 1.79e308 universes! The only reason we haven't all died yet is because we're made of matter."
   },
   {
-    id: "f4",
+    id: "fe4",
     text: "Fun Fact: The lore for AD: Endgame originally began as an extension of the vanilla lore, but as you can see it took a turn quickly!"
   },
   {
-    id: "f5",
+    id: "fe5",
     text: "Fun Fact: If you were born during or after the year 2025, you probably will never see this message. And if you do, your AI companion is probably the one reading it to you."
   },
   {
-    id: "f6",
+    id: "fe6",
     text: "Fun Fact: Supersonic Seven has been working on the game since September of 2024."
   },
   {
-    id: "f7",
+    id: "fe7",
     text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()</span>"
   },
 ];
