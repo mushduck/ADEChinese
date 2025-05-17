@@ -16,8 +16,8 @@ export default {
     return {
       enabled: false,
       repeatBuffer: 40,
-      ENDChance: 0.1,
       AIChance: 0,
+      ENDChance: 0,
       speed: 1,
       includeAnimated: false,
     };
