@@ -2713,18 +2713,16 @@ export const news = [
   },
   {
     id: "ae411",
-    get text() {
-      const username = this.saveData.saveName;
-      return `I've come to make an announcement ${username} is a bitch-ass motherfucker he pissed on my fucking wife.
+    text:
+      `I've come to make an announcement [username] is a bitch-ass motherfucker he pissed on my fucking wife.
       That's right he took his antimatter dick out and pissed on my fucking wife and he said it was "THIS BIG" and
-      I said "that's disgusting" so im making a callout post on my twitter.com. ${username} you've got a small dick
+      I said "that's disgusting" so im making a callout post on my twitter.com. [username] you've got a small dick
       it's the size of a proton and it's way smaller and guess what here's what my dong looks like. That's right baby
       all matter no antimatter no reality machines look at that it looks like two balls and a bong. He fucked my wife
       so guess what imma piss on the earth that's what you get my super laser piss. Except I'm not gonna piss on the
       earth I'm gonna go higher I'm pissing on the moon. How do you like that Pelle I pissed on the moon you idiot.
       You have twenty-three hours before the piss D R O P L E T S hit the fucking Earth, now get outta my fucking
-      sight, before I piss on you too!`;
-    },
+      sight, before I piss on you too!`
   },
   {
     id: "ae412",
