@@ -16,6 +16,7 @@ export default {
     return {
       enabled: false,
       repeatBuffer: 40,
+      ENDChance: 0.1,
       AIChance: 0,
       speed: 1,
       includeAnimated: false,
@@ -35,6 +36,15 @@ export default {
       };
     },
     sliderPropsAIChance() {
+      return {
+        min: 0,
+        max: 1,
+        interval: 0.01,
+        width: "98%",
+        tooltip: false
+      };
+    },
+    sliderPropsENDChance() {
       return {
         min: 0,
         max: 1,
@@ -63,6 +73,9 @@ export default {
     AIChance(newValue) {
       player.options.news.AIChance = parseFloat(newValue, 10);
     },
+    ENDChance(newValue) {
+      player.options.news.ENDChance = parseFloat(newValue, 10);
+    },
     speed(newValue) {
       player.options.news.speed = parseFloat(newValue, 10);
     },
@@ -76,6 +89,7 @@ export default {
       this.enabled = options.enabled;
       this.repeatBuffer = options.repeatBuffer;
       this.AIChance = options.AIChance;
+      this.ENDChance = options.ENDChance;
       this.speed = options.speed;
       this.includeAnimated = options.includeAnimated;
     },
@@ -86,6 +100,10 @@ export default {
     adjustSliderValueAIChance(value) {
       this.AIChance = value;
       player.options.AIChance = this.AIChance;
+    },
+    adjustSliderValueENDChance(value) {
+      this.ENDChance = value;
+      player.options.ENDChance = this.ENDChance;
     },
     adjustSliderValueSpeed(value) {
       this.speed = value;
@@ -122,6 +140,15 @@ export default {
         v-bind="sliderPropsAIChance"
         :value="AIChance"
         @input="adjustSliderValueAIChance($event)"
+      />
+    </div>
+    <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
+      <b>{{ formatPercents(parseFloat(ENDChance)) }} Endgame messages</b>
+      <SliderComponent
+        class="o-primary-btn--slider__slider"
+        v-bind="sliderPropsENDChance"
+        :value="ENDChance"
+        @input="adjustSliderValueENDChance($event)"
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
