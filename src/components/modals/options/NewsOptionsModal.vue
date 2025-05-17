@@ -16,8 +16,9 @@ export default {
     return {
       enabled: false,
       repeatBuffer: 40,
-      AIChance: 0,
-      ENDChance: 0,
+      AIChance: 0.2,
+      ENDChance: 0.2,
+      StoryChance: 0.2,
       speed: 1,
       includeAnimated: false,
     };
@@ -53,6 +54,15 @@ export default {
         tooltip: false
       };
     },
+    sliderPropsStoryChance() {
+      return {
+        min: 0,
+        max: 1,
+        interval: 0.01,
+        width: "98%",
+        tooltip: false
+      };
+    },
     sliderPropsSpeed() {
       return {
         min: 0.5,
@@ -76,6 +86,9 @@ export default {
     ENDChance(newValue) {
       player.options.news.ENDChance = parseFloat(newValue, 10);
     },
+    StoryChance(newValue) {
+      player.options.news.StoryChance = parseFloat(newValue, 10);
+    },
     speed(newValue) {
       player.options.news.speed = parseFloat(newValue, 10);
     },
@@ -90,6 +103,7 @@ export default {
       this.repeatBuffer = options.repeatBuffer;
       this.AIChance = options.AIChance;
       this.ENDChance = options.ENDChance;
+      this.StoryChance = options.StoryChance;
       this.speed = options.speed;
       this.includeAnimated = options.includeAnimated;
     },
@@ -104,6 +118,10 @@ export default {
     adjustSliderValueENDChance(value) {
       this.ENDChance = value;
       player.options.ENDChance = this.ENDChance;
+    },
+    adjustSliderValueStoryChance(value) {
+      this.StoryChance = value;
+      player.options.StoryChance = this.StoryChance;
     },
     adjustSliderValueSpeed(value) {
       this.speed = value;
@@ -149,6 +167,15 @@ export default {
         v-bind="sliderPropsENDChance"
         :value="ENDChance"
         @input="adjustSliderValueENDChance($event)"
+      />
+    </div>
+    <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
+      <b>{{ formatPercents(parseFloat(StoryChance)) }} Life's and Midnight's Story </b>
+      <SliderComponent
+        class="o-primary-btn--slider__slider"
+        v-bind="sliderPropsStoryChance"
+        :value="StoryChance"
+        @input="adjustSliderValueStoryChance($event)"
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
