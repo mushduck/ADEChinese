@@ -7864,8 +7864,8 @@ export const news = [
         `(End of the story for now)`,
       ];
       const chapter = chapters[player.news.specialTickerData.storyChapter];
-      player.news.specialTickerData.storyChapter = (player.news.specialTickerData.storyChapter + 1) % 5;
+      player.news.specialTickerData.storyChapter = (player.news.specialTickerData.storyChapter + 1) % 42;
       return chapter;
-    }
+    },
   },
 ];
