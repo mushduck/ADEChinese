@@ -63,9 +63,11 @@ export default {
       } else {
         const isAI = Math.random() < player.options.news.AIChance;
         const isEND = Math.random() < player.options.news.ENDChance;
+        const isStory = Math.random() < player.options.news.StoryChance;
         this.currentNews = GameDatabase.news
           .filter(message => message.id.includes("ai") === isAI)
           .filter(message => message.id.includes("e") === isEND)
+          .filter(message => message.id.includes("SM") === isStory)
           .filter(message => canShow(message))
           .randomElement();
       }
