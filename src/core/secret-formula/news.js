@@ -2692,7 +2692,7 @@ export const news = [
     id: "ae407",
     get text() {
       return `The update will be released at
-        ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62168428800000).toString()}
+        ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62124292800000).toString()}
         .`;
     },
     dynamic: true
