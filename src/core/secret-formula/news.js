@@ -7,6 +7,7 @@ import { DC } from "../constants";
 // AI = created with gpt2
 // F = fun facts
 // (e) = Endgame Exclusive
+// SMe = Fan-made Endgame Stories
 
 function newsAnimSpd(seconds) {
   return seconds / player.options.news.speed;
@@ -7658,5 +7659,213 @@ export const news = [
   {
     id: "fe7",
     text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()</span>"
+  },
+  {
+    id: "sme",
+    get text() {
+      const chapters = [
+        `<span style='color: cyan'>Hello, I am Living_Person eight, also known as Life.</span><span style='color: red'>
+        Hey, I'm SupersonicSeven, also known as Overlord.</span><span style='color: blue'>Hi, I am MidnightLight, also
+        known as Midnight.</span>`,
+        `Hello [username], viewer discretion advised for dark jokes, nerd jokes, random emoji stream, and spontaneous
+        matter-antimatter annihilation. These may cause symptoms of happiness, actual knowledge gain, depression, no
+        knowledge gain, brainrot, dark humor addiction/mastery, and a slight habit of passing time watching these
+        during speedruns and timewalls.`,
+        `The fight between Life and Midnight continues, Life brings forth the power of technology. Through Redstone,
+        he quickly builds his forces via automation and sugarcane farms and launches a suprise attack against Midnight.
+        Midnight was awoken by his followers during the battle, and seeing the destruction Life caused, gave the magic
+        of light to his followers. They casted powerful lasers, quickly melting and burning the robotic army of Life. The
+        plot thickens, when SupersonicSeven, God of all there is and Overlord, comes forth from the 6969 dimension and says....`,
+        `He says: "The fight between you two have to stop, or else the entropy will rise exponentially and eventually kill us all!"`,
+        `<span>But then, the Earth crunched, and [username] came. "Don't get me into this, I don't have enough dopamine or
+        brainrot for this," and then used the Galaxy Generator to Endgame-exit.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
+        "....so..." SupersonicSeven said. "Command us Overlord" Midnight said.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
+        "Go forth, and cease all fighting, merge your forces and buy as many STDs as possible!" "As you wish Overlord."
+        Life said. The rivalry came to an end, or did it?</span>`,
+        `But what 7 and [username] didn't expect is that as soon as they left, Life pulled out a "Gravitational Singularity"
+        that was being trapped inside a multi-dimensional gravitation force field and throw it at the largest black hole
+        in the universe.`,
+        `The Blackhole, having stayed dormant for so long, suddenly starts to weaken, and then in a flash, the Blackhole
+        explodes. From it's remnants, Slabdrill, the ruler of the 9th dimension comes forth and says, "Life, you have freed
+        me from my prison, you are granted a choice: The 9th dimension, or the power of Gravity?" Life says, "I choose the
+        power of gravity." And it was so, Life obtained the power of gravity and began to grow stronger. Technology, already
+        powerful, became even stronger with proper gravity and soon, Life began reaching the level of Overlord. Overlord came
+        down, and said, "Life, you have dealt with the devil! Cease this blasphemy and forgo your gravitic powers at once!"`,
+        `But it was too late, Life has already used technology and the gravitational force he obtained from Slabdrill to
+        weaker the walls between all the parallel universe. Life says, "You can't change anything now." Laughing loudly,
+        "All the parellel universe will collapse into a 'Time and Space singularity'." As life speaks, a giant machine came
+        out of nowhere, and fired a shot at where the Blackhole was, onto the double singularity that already existed.
+        (Time and space shattered) Life laughed so hard that he almost choked himself, "I have done it, no one....".
+        As he was speaking, didn't realize that a light that passes through all of time and dimensions, shined on him...`,
+        `...Midnight had took out his secret weapon, the Multidimensional-light-matter-controller. He directed it onto Life.
+        Life and his creation melted and burned and wailed in agony, but under the pure light, were obliviated from existence.
+        Midnight looked at the mess that was made and vowed that such catastrophic destruction should never take place again.
+        He rebuild space and time with the help of Overlord and [username], and then sealed the controller in a place with
+        no light. Such that it may be buried forever.`,
+        `After the battle, Midnight, Seven and [username] together, using their power to gather Life particle. Those three
+        spread Life all around the universe causing the mortals able to come to life and was later called "The Great Three".
+        But what they didn't know is that, by spreading life around the universe has caused the revival of him. Because, Life
+        and Life particle, are just the same thing...`,
+        `One thing the Great Three did was to hide their existence, observing mortals throughout eternity. The started small,
+        as cells in the ocean, but very quickly, intelligent beings in the cosmos had sprung forth, making the universe
+        bloom and fill with life. It was a golden age for the universe, even better than before the Big Bang, when the Great
+        Three had rebuild Space and Time. And then, the cataclysm happened. In a blink, all mortals died, and their matter
+        and antimatter alike was gathered into a egg, the egg hatched as soon as it was made, sending a bang throughout the
+        universe. Life came back and said, "Midnight, [username] and Overlord, you will pay." Seeing his rebirth, the
+        Great Three were stunned, they went after him, but were quickly sealed by him using the power of gravity, creating
+        Blackholes around them. "Now" Life said, "The time has come, the secrets of the dimensions, beyond Existence,
+        above the Expanse, even through the Shattered Reality, all are my realm now!" He cackled and brought forth his
+        might and seized and plundered the cosmos, not even letting the Celestials live. He went farther and farther,
+        but soon forgot his origins. In the heart of his reality, the Blackhole he had created to imprison the Great Three
+        slowly shrank, and shrank, and after an eternity, it exploded, what came were not the Three, but one that had been
+        the result when the Three merged into one. Seeing that life had forgotten his roots, this "One", started rapidly
+        sabotaging and stealing Life's powers. Soon, Life started noticing his powers were growing slower, but he attributed
+        them to a timewall. Soon, One found himself on the first layer Life still saw, at this point, Life knew something was
+        going on, he started going back to his origins, by the time the reached the layer One was, he saw the power that had
+        been drained of him. He went back to the original dimensions page and saw that the Blackhole had been collapsed.
+        He burned and raged, "You....stole my power!" He tried to get stronger by using late-game buffs like Meta-Matter
+        dimensions but One used the simplest, the fundamentals. He disabled automation, instantly stopping Life's growth.
+        Next, he enabled Dilation and Pelle Strikes, then entered every Celestial, even the dead ones' broken Realities
+        to add innumerable debuffs. Finally, he initiated the Ultimate Existential removal button "Delete game, mod and
+        all savefiles". With that, Life ceased to exist, every last one of his cells, essence and power dissolved into
+        normal matter and started the cosmos anew. One watched from above.`,
+        `Life opened his eyes in real life. "Damn it, why do I keep losing, there is just no way I can beat this stage!"`,
+        `Life went to his bed and tried to sleep, but his anger kept him awake, soon, he thought of a plan. He went to
+        his computer, took all the recent social media posts from SupersonicSeven and Midnight and [username] and used VPN
+        and IP tracking to find thier DNS, after that he cracked their SSL tokens to find their IP addresses, going further,
+        he then used this data to collect all information about them and then, sent this data back with a threat - "let me
+        back, delete your accounts, handover all power." The 3 were stunned at this and communicated together to try and
+        find a plan, soon, they know what to do.`,
+        `The 3 decided to fake like they have done it, but actually tracking AP address and try to use things to threaten
+        Life. They fake like Life was able to control all the power, and fake like they weren't on the game, but that's
+        because 7 used his ultimate power of coding to hack the game.`,
+        `Life realised what happened, he decided that the three are better when they are dead, so he concocted a plan to
+        kill them, first, he tapped into their messages and learned that they were meeting up. Then using the the same
+        channel, he impersonated them all and took their savings from the banks and took that money to hire a assassin
+        sent to kill the three... But then, when he saw the assassin, he couldn't believe his eyes; it was Midnight. He
+        and the others had hacked him prior to this and the communication channel he had hacked was a dummy, now, in front
+        of him, Midnight took out a gun, and oofed life, as he turned away, life said one last sentence, "I'll always come
+        back!" Life was going to die soon, but then, he felt himself being lifted and sent into a car, he soon passed out
+        and when he regained consciousness, he realised who saved him - Slabdrill. Slabdrill tended to his wounds,
+        explaining in the meantime that he was once a duo with the trio but was kicked out when he gained too much power,
+        and was trapped for so long because the other 3 had used thier power to subdue him and threaten him in the real world.
+        After Life recovered, he and Slabdrill, who's real name was Slab, decided to take revenge....`,
+        `Life and Slab, traveled all around the world to find all the Celestials that died in the game, and asking them to
+        join the revolution. Even though they had some problems previously, but since now the 3 are getting way too powerful,
+        they have to work together.`,
+        `Soon, they amassed a army of over 3000 Celestials. Their might grew to be frightening, even more than some nations.
+        They decided the best way of elimination was to Mass-surround and kill them using guns. In a week, they all came
+        to the Three's house and poured in like water in a flood, the Three oofed as many as 350 of the Celestials, but were
+        then cornered, at the critical moment, Midnight said to [username], "NOW!", user pressed a button, and a Magnetic
+        wall surrounded them, and then, a rumble came, and then,the city was vaporized due to a matter-antimatter annihilation.
+        Seeing over the wreckage, they saw one spot of movement. It was Slabdrill, he had gravitic technology and managed to
+        use it to create a anti-gravity zone. The three chased after him and soon caught up with this last survivor.`,
+        `Slabdrill know it wasn't the right time to fight the 3 right now just by himself, decided to vanish for sometime
+        and revive as many Celestials as he could and even arranging some of the Ancient Celestials together to together
+        protest against the 3. Slabdrill pulled out the Quantum Teleportation portal Life left him, and teleported away.
+        "Damn it" said 7, "We should have realized all the technology Life have, Slabdrill escaped again!" "It's too late
+        now, we can only try to get as strong as possible before they come back."`,
+        `The three decided to first go to McDonalds, after they were filled up, they went ahead and robbed America using
+        the Antimatter they had as a hostage. This soon also caused into them asking other countries for tribute. Then they
+        started a military organization focusing on space and in just 5 years, 5 months and 5 days, they had a Space station
+        capable of holding one hundred thousand. Then they decided Earth was better off dead with Slabdrill in it so they
+        detonated the antimatter and killed all life on Earth. They never noticed a small ball of 10km in radius taking
+        off among the debris as the planet exploded....`,
+        `The 3, along with the 100 thousand they had left for the stars, in just a 5000 years, they had colonized over
+        500 star systems and came into contact with 5 other species. They had also met a 6th species, called the Llirdbals.
+        They mainly used gravitic technology to create structures to live in and collect resources. One day, the three were
+        on the Human empire's capital world when they discovered an alarm saying that a 9th dimensional Rift came from the
+        Llirdbals's territory, from the Rift, extradimensional beings were entering our universe and quickly stealing all
+        energy and matter(and antimatter). The attack had come, Slabdrill was at the front, cackling "Now this universe
+        will be destroyed! The beings and I have entered a pact, I will ascend to their realm for your life!"`,
+        `But even though Slabdrill thought he had surely got them, something unexpected has happened... What he didn't know
+        was that, this was all just a plan the 3 and Life had made. Slabdrill was able to revive Life from the dead but it
+        was all planned out. Life was able to gain all of Slabdrill's trust and knowing exactly what he was doing. Life
+        secretly send all the informations to the three once a month.`,
+        `Life was actually reanimated from the dead by Slabdrill, but during the process, the three had hacked the reanimator,
+        now Life was like a robot that answered to the three while playing the rope of a spy, always monitoring Slabdrill's
+        movements. Slabdrill soon realised some changes in Life's personality but attributed them to some very slight
+        defects in the reanimator. In any case the attack continued....`,
+        `(The main story pauses, flashback begins)`,
+        `Long time back, long long before this big fight. When SupersonicSeven, Life and Midnightlight are still children.
+        They play with each other everyday,until this happened...`,
+        `One day they were playing at the playground when another kid came up to them, his name was [username]. He instantly
+        won over the heart of SupersonicSeven and Midnight, but life was feeling jealous because he never got attention after
+        [username] came. So he devised a plan to regain his popularity and status, and an end to [username]....`,
+        `Life kidnapped [username], and put [username] in the basement of Midnight's house, I mean, who would think of that?
+        In the end, the mot dangerous place is the safest place Afterall. He made sure that [username] would be alive, and is
+        in a place where no one will find.`,
+        `This went one for a week, the other 2 were getting worked for [username] by now, so they tried searching for him,
+        but to no avail, in the end, they had to stop. Then time went on and after 5 years, Midnight went to the basement
+        to find something when he heard a voice.... Midnight saw [username] and was horrified,he quickly untied and ungaged
+        him as [username] told him the truth. Midnight was terrified at learning on what happened over these 5 years. They
+        were about to go meet up with Seven and confront Life when from a corner a door Midnight never knew about, Life
+        appeared. Life froze up seeing Midnight and [username], then ran back in the tunnel, the two followed him but soon
+        they reached a fork. They decided to go right but soon found another fork. They realized that Life had a maze of
+        tunnels underground and as probably spying on their every move, soon they found and exit and opened it, and they
+        arrived in a basement, they went out of the basement and realized this was the home of Seven!`,
+        `But they soon realize that the house is empty and 7 was gone! They looked over everywhere but still can't find any
+        hint of where 7 is. What they didn't know is that, 7 is actually a doctor and had already kidnapped Life who got
+        into his house on accident when he was doing illegal experiments.`,
+        `Life was on a straight jacket and tossed into a guest room where [username] and Midnight found him being opened up
+        by Seven. They convinced Seven to close him back up (after one kidney) and then took him to prison. There Life was
+        imprisoned for kidnapping for 6.9 years. After almost 7 years, Life was released. He tried to find the three but
+        they had long moved out and were unfindable. So he decided to try another route, the favorite game of the group
+        when [username] had not came yet - Antimatter Dimensions.....`,
+        `Life got into the game and realized the game had a huge update! The update that came in 5 hours. It enabled
+        multiplayer mode and leaderboard. Realizing this update will help him on finding the three super easily, Life
+        started his searching journey. during the time when he was trying to find the three in the game, he met many friends,
+        Teresa, Effarig, The Nameless Ones, V, Ra and Lai'tela. They thought it was fun to go on this journey so they
+        went with Life.`,
+        `Life soon encountered the three. Midnight was still 3 layers smaller than the other two so he first targeted him.
+        He used various methods like technology and robots to destroy and bring war to Midnight's followers, who were
+        practicing the mystic arts of light: Klidggd un' Kharrha. This happened for many years until one day, Life found
+        a red looking dust called Redstone......`,
+        `(Flashback ends, story resumes)`,
+        `The commands between the 3 and Slabdrill is fighting inside Life's brain and each trying to make Life permanently
+        be on their side. But what they didn't realize was that when their commands are fighting, Life was able to gain
+        consciousness. Life though, "What happened? Why can't I control my own body? I have to do something!" Life realizes
+        that the situation isn't right and he has to do something. He used his mind to reach his secret weapon... The exit
+        button for the game!`,
+        `<span>Life wakes up on a hospital bed, soon, a doctor comes rushing to him.</span>&nbsp;&nbsp;&nbsp;
+        <span style='color: yellow'>You woke up! You were in a coma after 7 yeeted you 5 times on the head.</span>&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Yeeted me on the head? What for?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style='color: yellow'>Cuz u ate the 69th dimension and 7 got mad so he made a yeet stick with Midnight's
+        leg which he had amputated cuz he was asking for XP too much.|]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;<span>Gee whiz! That makes total sense, all my questions are answered now!</span>`,
+        `(End of main story, second story begins)`,
+        `Once upon a time, Midnight slipped on a banana peel.The banana was made of matter, which caused his leg to suffer
+        a serious injury and the surrounding 100 mile radius to turn into a crater. He was rushed to the ER, and need
+        1.79e308 antimatter particles. To do this, his friend Seven created a way for virtual particle to become real,
+        and in doing so, created a program that did this, he was thinking of a name when....`,
+        `Life walks in with a spoon of neutron star that is being kept inside a magnetic field device(MFD). Life said,
+        "Hey 7, see if the neutron star could help, since it's not easy to turn imaginary stuff into real life." 7 grabbed
+        the MFD with the neutron star in it, and thought of an idea...`,
+        `<span>He turned off the MFD. Instantly, They both died due to being vaporized and ionized by the heat of 10000000°C
+        and the weight of the Himalayas. After they respawned, Life said, "OK I got an idea, Hevi". After that, Life
+        brought a Nona Vector Foil. It compressed 9-dimensional spacetime into 3D space via gravity. Seven manipulated
+        the Nona Vector Foil into a pellet. "Pellet....pelle...." an idea occurred to him. He announced to his world
+        of just his 2 friends "Now, I am rechristerned as Hevipelle, creator of all - Overlord".</span>&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color: blue'>Woooo!</span>&nbsp;<span style='color: cyan'>
+        Noice.</span>`,
+        `Hevipelle has taken control over everything, including 7 who was sharing the same body as him. "I...have now taken
+        control over the entire universe..." Overlord said. Life realized what a mistake he has made, Hevi, now Hevipelle,
+        is becoming way too powerful, so powerful that no one can compete with his power in this entire universe... "Hevi,
+        you have stay sane! You can't be controlled by this power!" Life shouts. But before he could do anything, the
+        Overlord is gone.`,
+        `<span style='color: blue'>We must do something. I have an idea! Let's create a third person within him, cuz
+        democracy babyyyy! |]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>And it was so. They jumped Hevi when he was creating
+        some Urine dimensions and added a third personality called Hyperhasty Hepta inside him. Now "Hevi" was Hevipelle,
+        SupersonicSeven and HyperHasty hepta in an all in one combo!</span>&nbsp;&nbsp;<span>Seven and hepta via the
+        power of democracy removed Hevi from his mind, who ran away using tesseract. They then merged into one person
+        now called Supersonic Hepta, but then MidnightLight said nah just be 7 so he went back to SupersonicSeven.`,
+        `While all of these are happening, nobody noticed, but outside of the universe, ㊙️ has casted ㊙️'s vision upon
+        this universe. ㊙️'s power is slowly eating it's way through the shields of the universe...`,
+        `(End of the story for now)`,
+      ];
+      const chapter = chapters[player.news.specialTickerData.storyChapter];
+      player.news.specialTickerData.storyChapter = (player.news.specialTickerData.storyChapter + 1) % 5;
+      return chapter;
+    }
   },
 ];
