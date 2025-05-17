@@ -1,7 +1,7 @@
 // This actually deals with both sacrifice and refining, but I wasn't 100% sure what to call it
 export const GlyphSacrificeHandler = {
   // Anything scaling on sacrifice caps at this value, even though the actual sacrifice values can go higher
-  maxSacrificeForEffects: 1e100,
+  maxSacrificeForEffects: 1e10000,
   // This is used for glyph UI-related things in a few places, but is handled here as a getter which is only called
   // sparingly - that is, whenever the cache is invalidated after a glyph is sacrificed. Thus it only gets recalculated
   // when glyphs are actually sacrificed, rather than every render cycle.
