@@ -16,9 +16,9 @@ export default {
     return {
       enabled: false,
       repeatBuffer: 40,
-      AIChance: 0.2,
-      ENDChance: 0.2,
-      StoryChance: 0.2,
+      AIChance: 0,
+      ENDChance: 0,
+      StoryChance: 0,
       speed: 1,
       includeAnimated: false,
     };
