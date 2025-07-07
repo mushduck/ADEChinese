@@ -500,10 +500,10 @@ export const tabs = [
   {
     key: "endgame",
     name: "Endgame",
-    newUIClass: "endgame",
-    hideAt: 2.8,
-    condition: () => player.records.fullGameCompletions > 0,
+    hideAt: 2.5,
+    UIClass: "o-tab-btn--endgame",
     id: 11,
+    condition: () => player.records.fullGameCompletions > 0,
     hidable: true,
     subtabs: [
       {
@@ -512,8 +512,8 @@ export const tabs = [
         symbol: "∮",
         component: "EndgameTab",
         id: 0,
-        hidable: true
-      }
-    ]
+        hidable: true,
+      },
+    ],
   }
 ];
