@@ -496,5 +496,24 @@ export const tabs = [
         hidable: true
       }
     ]
+  },
+  {
+    key: "endgame",
+    name: "Endgame",
+    newUIClass: "endgame",
+    hideAt: 2.8,
+    condition: () => Cloud.isAvailable,
+    id: 11,
+    hidable: true,
+    subtabs: [
+      {
+        key: "endgame",
+        name: "Endgame",
+        symbol: "∮",
+        component: "EndgameTab",
+        id: 0,
+        hidable: true
+      }
+    ]
   }
 ];
