@@ -759,6 +759,16 @@ button:focus {
   background: var(--color-celestials);
 }
 
+.o-tab-btn--endgame {
+  color: var(--color-endgame);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-endgame);
+}
+
+.o-tab-btn--endgame:hover {
+  background: var(--color-endgame);
+}
+
 /* #endregion tab buttons */
 
 #loading {
