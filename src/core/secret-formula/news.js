@@ -2859,6 +2859,22 @@ export const news = [
     text: "Welcome to the server! Here, we talk about [69]."
   },
   {
+    id: "ae441",
+    text: "Antimatter market sees infinite gains, but investors are struggling to count them all."
+  },
+  {
+    id: "ae442",
+    text:
+      `Galactic council issues public safety announcement: "Please, for the love of all that is finite, stop trying
+      to count the dimensions. You'll never make it to the 9th."`
+  },
+  {
+    id: "ae443",
+    text:
+      `Experts report that the only thing more boundless than our current profits is the number of alternate realities
+      where we've already spent them.`
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
