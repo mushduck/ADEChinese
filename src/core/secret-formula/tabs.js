@@ -502,7 +502,7 @@ export const tabs = [
     name: "Endgame",
     newUIClass: "endgame",
     hideAt: 2.8,
-    condition: () => Cloud.isAvailable,
+    condition: () => player.records.fullGameCompletions > 0,
     id: 11,
     hidable: true,
     subtabs: [
