@@ -180,6 +180,10 @@ body.t-s12 {
   border-left-color: var(--color-celestials);
 }
 
+.o-tab-btn--endgame::after {
+  border-left-color: var(--color-endgame);
+}
+
 .tab-button.shop {
   background-color: #d9bb26;
 }
@@ -332,6 +336,16 @@ body.t-s12 {
 
 .o-tab-btn--celestial .o-subtab__tooltip::after {
   border-top-color: var(--color-celestials);
+}
+
+.o-tab-btn--endgame .o-subtab__tooltip {
+  color: var(--color-endgame);
+  background: var(--color-prestige--accent);
+  border-color: var(--color-endgame);
+}
+
+.o-tab-btn--endgame .o-subtab__tooltip::after {
+  border-top-color: var(--color-endgame);
 }
 
 .active {
