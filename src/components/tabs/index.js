@@ -8,6 +8,7 @@ import BreakInfinityTab from "./break-infinity/BreakInfinityTab";
 import CelestialNavigationTab from "./celestial-navigation/CelestialNavigationTab";
 import ChallengeRecordsTab from "./challenge-records/ChallengeRecordsTab";
 import EffarigTab from "./celestial-effarig/EffarigTab";
+import EndgameTab from "./endgame/EndgameTab";
 import EnslavedTab from "./celestial-enslaved/EnslavedTab";
 import EternityChallengesTab from "./eternity-challenges/EternityChallengesTab";
 import EternityMilestonesTab from "./eternity-milestones/EternityMilestonesTab";
@@ -83,6 +84,7 @@ const TabComponents = {
   BlackHoleTab,
   AlchemyTab,
   CelestialNavigationTab,
+  EndgameTab,
   ShopTab,
   MultiplierBreakdownTab
 };
