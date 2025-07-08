@@ -4,11 +4,15 @@
 
 <template>
   <div class="endgame-nyi">
-    You aren't supposed to be here...
-    <br>
-    UPDATE IN 5 HOURS
-    <br>
-    You have reached Endgame {{ quantifyInt("time", this.endgames) }}.
+    <div>
+      You aren't supposed to be here...
+    </div>
+    <div>
+      UPDATE IN 5 HOURS
+    </div>
+    <div>
+      You have reached Endgame {{ quantifyInt("time", this.endgames) }}.
+    </div>
   </div>
 </template>
 
