@@ -28,7 +28,8 @@ export default {
 
 <style scoped>
 .endgame-nyi {
-  height: 150rem;
+  height: 2rem;
+  font-weight: bold;
   color: var(--color-endgame);
 }
 </style>
