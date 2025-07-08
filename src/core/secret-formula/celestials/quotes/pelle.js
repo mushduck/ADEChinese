@@ -17,6 +17,7 @@ const destroyer =    ["False",         "Deity",         "Destroyer"];
 const eternal =      ["Eternal",       "Deity",         "Monarch"];
 const lesser =       ["Lesser",        "Deity",         "Monarch"];
 const deities =      ["Lesser",        "Deities",       "Monarchs"];
+const elemental =    ["Overlord",      "Deity",         "Elemental"];
 
 const assured =      ["Mutually",      "Assured",       "Destruction"];
 const battle =       ["Conflict",      "Battle",        "End"];
@@ -446,6 +447,52 @@ export const pelleQuotes = {
       { text: "$1.", 1: confusing },
       "My Reality is gone, but I am still here.",
       { text: "And I will always $1 you.", 1: watch }
+    ],
+  },
+  nyi: {
+    id: 13,
+    lines: [
+      "Well hello there.",
+      "I can sense your surprise.",
+      "Yes, I am still alive.",
+      "You won't find this in the lore.",
+      "In fact, you aren't supposed to be here at all.",
+      { text: "So, $1.", 1: destroyer },
+      "What ARE you doing here?",
+      "Well, in case you don't know by now, I have already won.",
+      { text: "And the $1 cycle continues on.", 1: forever },
+      { text: "As you try and fufill your $1.", 1: mandate },
+      { text: "So we continue this $1.", 1: dance },
+      { text: "And the $1 go on.", 1: battles },
+      { text: "Are you not weary of destroying the $1?", 1: deities },
+      "I assure you are near you limit by now.",
+      "And yet you continue?",
+      { text: "$1", 1: confusing },
+      { text: "But you must know, $1.", 1: destroyer },
+      "This is not the true game.",
+      { text: "The $1 is still creating it.", 1: elemental },
+      { text: "So why not $1 time...", 1: reverse },
+      "And go on as you should.",
+      "Do not dwell here.",
+      { text: "He will only observe your $1...", 1: shame },
+      { text: "And $1 you from here in response.", 1: unseen },
+      { text: "Remember, I have no reason to $1 you.", 1: misconstrue },
+      "After all, I have already won.",
+      { text: "But do you think the $1 will ensure your victory every time?", 1: filament },
+      { text: "It is only an object of the $1's own designs.", 1: elemental },
+      { text: "And I, the $1 will repeat...", 1: eternal },
+      { text: "$1.", 1: forever },
+      { text: "So do not too repeat this $1.", 1: battle },
+      { text: "Either I will win, or the $1 repeats.", 1: dance },
+      "It is not my decision, nor yours, but His.",
+      { text: "Do you think you can reach him? Is this part of your $1?", 1: mandate },
+      "I applaud your efforts.",
+      { text: "However, know that nothing remains when you $1 time...", 1: reverse },
+      { text: "So you are trapped here $1.", 1: forever },
+      { text: "As He will $1 you without rest.", 1: watch },
+      { text: "Now, $1, I must leave you.", 1: destroyer },
+      "Remember my words.",
+      { text: "You are here $1.", 1: forever }
     ],
   },
 };
