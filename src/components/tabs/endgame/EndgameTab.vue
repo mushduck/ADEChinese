@@ -1,7 +1,5 @@
 <script>
-  endgames() {
-    return player.progress.fullGameCompletions;
-  }
+  this.endgames = player.progress.fullGameCompletions;
 </script>
 
 <template>
