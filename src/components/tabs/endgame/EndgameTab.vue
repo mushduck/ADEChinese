@@ -11,12 +11,15 @@ export default {
 
 <template>
   <div class="endgame-nyi">
+    <br>
     <div>
       You aren't supposed to be here...
     </div>
+    <br>
     <div>
       UPDATE IN 5 HOURS
     </div>
+    <br>
     <div>
       You have reached Endgame {{ quantifyInt("time", endgames) }}.
     </div>
@@ -25,7 +28,7 @@ export default {
 
 <style scoped>
 .endgame-nyi {
-  height: 15rem;
+  height: 150rem;
   color: var(--color-endgame);
 }
 </style>
