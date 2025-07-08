@@ -2,8 +2,8 @@ export const END_STATE_MARKERS = {
   // Tab zalgoification starts as soon as endState > 0
   GAME_END: 1,
   TAB_START_HIDE: 1.5,
-  INTERACTIVITY_DISABLED: 2.5,
   FADE_AWAY: 2.5,
+  INTERACTIVITY_DISABLED: 2.6,
   SAVE_DISABLED: 4,
   END_NUMBERS: 4.2,
   CREDITS_START: 4.5,
