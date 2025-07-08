@@ -1,5 +1,12 @@
 <script>
-  this.endgames = player.records.fullGameCompletions;
+export default {
+  name: "EndgameTab",
+  methods: {
+    update() {
+      this.endgames = player.records.fullGameCompletions;
+    }
+  },
+};
 </script>
 
 <template>
@@ -11,7 +18,7 @@
       UPDATE IN 5 HOURS
     </div>
     <div>
-      You have reached Endgame {{ quantifyInt("time", this.endgames) }}.
+      You have reached Endgame {{ quantifyInt("time", endgames) }}.
     </div>
   </div>
 </template>
