@@ -18,10 +18,7 @@
 
 <style scoped>
 .endgame-nyi {
-  width: 50rem;
-  padding: 0.5rem;
-  font-size: 2.4rem;
+  height: 15rem;
   color: var(--color-endgame);
-  background: black;
 }
 </style>
