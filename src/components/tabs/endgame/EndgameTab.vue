@@ -1,5 +1,5 @@
 <script>
-  this.endgames = player.progress.fullGameCompletions;
+  this.endgames = player.records.fullGameCompletions;
 </script>
 
 <template>
