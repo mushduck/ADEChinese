@@ -8,7 +8,7 @@
     <br>
     UPDATE IN 5 HOURS
     <br>
-    You have reached Endgame {{ formatInt(endgames) }} times.
+    You have reached Endgame {{ quantifyInt("time", this.endgames) }}.
   </div>
 </template>
 
@@ -19,7 +19,5 @@
   font-size: 2.4rem;
   color: var(--color-endgame);
   background: black;
-  order: var(--var-border-width, 0.2rem) solid var(--color-endgame);
-  border-radius: var(--var-border-radius, 0.5rem);
 }
 </style>
