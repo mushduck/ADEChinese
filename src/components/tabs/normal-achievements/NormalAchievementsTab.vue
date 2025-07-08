@@ -120,7 +120,15 @@ export default {
       return this.renderedRowIndices.includes(row);
     },
     isObscured(row) {
-      return this.isDoomed ? row >= 18 : row >= 17;
+      if (PlayerProgress.endgameUnlocked()) {
+        return row >= 19;
+      }
+      if (this.isDoomed && !PlayerProgress.endgameUnlocked()) {
+        return row >= 18;
+      }
+      else {
+        return row >= 17;
+      }
     },
     timeDisplay,
     timeDisplayNoDecimals,
