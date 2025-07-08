@@ -379,6 +379,9 @@ EventHub.logic.on(GAME_EVENT.PELLE_STRIKE_UNLOCKED, () => {
     Pelle.quotes.strike5.show();
   }
 });
+EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
+  if (Tab.endgame.isOpen && player.records.fullGameCompletions === 1) Pelle.quotes.nyi.show();
+});
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {
   get currency() {
