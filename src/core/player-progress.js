@@ -20,6 +20,10 @@ export class PlayerProgress {
     return this._player.realities > 0;
   }
 
+  get isEndgameUnlocked() {
+    return this._player.records?.fullGameCompletions > 0;
+  }
+
   get hasFullCompletion() {
     return this._player.records?.fullGameCompletions > 0;
   }
