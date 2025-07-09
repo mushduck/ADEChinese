@@ -1,11 +1,17 @@
 <script>
 export default {
   name: "EndgameTab",
+  data() {
+    return {
+      realTimePlayed: TimeSpan.zero,
+    }
+  },
   methods: {
     update() {
+      const records = player.records;
       this.endgames = player.records.fullGameCompletions;
-      this.updateTime = Date.now() - player.records.gameCreatedTime;
-      this.updateTimer = TimeSpan.fromMilliseconds(18000000/(1+(this.updateTime/18000000)));
+      this.realTimePlayed.setFrom(records.realTimePlayed);
+      this.updateTimer = TimeSpan.fromMilliseconds(18000000/(1+(this.realTimePlayed/18000000)));
     }
   },
 };
