@@ -399,7 +399,7 @@ export const tabs = [
         name: "Glyph Alchemy",
         symbol: "<i class='fas fa-vial'></i>",
         component: "AlchemyTab",
-        condition: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
+        condition: () => PlayerProgress.endgameUnlocked() || Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
         id: 5,
         hidable: true,
       },
