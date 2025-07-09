@@ -509,7 +509,7 @@ export const tabs = [
   {
     key: "endgame",
     name: "Endgame",
-    hideAt: 2.5,
+    hideAt: 2.4,
     UIClass: "o-tab-btn--endgame",
     id: 11,
     condition: () => PlayerProgress.endgameUnlocked(),
