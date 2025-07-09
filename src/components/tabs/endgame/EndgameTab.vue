@@ -5,7 +5,7 @@ export default {
     update() {
       this.endgames = player.records.fullGameCompletions;
       this.updateTime = Date.now() - player.records.gameCreatedTime;
-      this.updateTimer = TimeSpan.fromMilliseconds(18000000/(1+(this.updateTimer/18000000)));
+      this.updateTimer = TimeSpan.fromMilliseconds(18000000/(1+(this.updateTime/18000000)));
     }
   },
 };
