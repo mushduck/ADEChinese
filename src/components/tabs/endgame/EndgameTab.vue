@@ -11,7 +11,7 @@ export default {
       const records = player.records;
       this.endgames = player.records.fullGameCompletions;
       this.realTimePlayed.setFrom(records.realTimePlayed);
-      this.updateTimer = TimeSpan.fromMilliseconds(18000000/(1+(this.realTimePlayed/18000000)));
+      this.updateTimer = TimeSpan.fromMilliseconds(18000000/(1+(records.realTimePlayed/18000000)));
     }
   },
 };
