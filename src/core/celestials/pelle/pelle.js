@@ -352,8 +352,14 @@ export const Pelle = {
     return zalgo(str, Math.floor(stage ** 2 * 7));
   },
   
-  endTabNames: () => Achievement(191).isUnlocked ? "Destruction Has Come A New Beginning Has Arrived We'll Meet Again".split(" ") : "It's Not Over We Will Return We'll Ω Soon Meet Again".split(" "),
-
+  get endTabNames() {
+    if (Achievement(191).isUnlocked) {
+      return "Destruction Has Come A New Beginning Has Arrived We'll Meet Again".split(" ");
+    } else {
+      return "It's Not Over We Will Return We'll Ω Soon Meet Again".split(" ");
+    }
+  },
+  
   quotes: Quotes.pelle,
 };
 
