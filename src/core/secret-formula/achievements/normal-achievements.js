@@ -1415,7 +1415,7 @@ export const normalAchievements = [
     id: 191,
     name: "...for now",
     description: "Purchase a 1st Dimension in Run 2.",
-    checkRequirement: () => PlayerProgress.endgameUnlocked() && AntimatterDimension(1).amount >= 1,
+    checkRequirement: () => PlayerProgress.endgameUnlocked() && AntimatterDimension(1).amount.exponent >= 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
