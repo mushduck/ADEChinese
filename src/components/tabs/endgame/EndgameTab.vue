@@ -1,12 +1,5 @@
 <script>
-export default {
-  name: "EndgameTab",
-  methods: {
-    update() {
-      this.endgames = player.records.fullGameCompletions;
-    }
-  },
-};
+  this.endgames = player.records.fullGameCompletions;
 </script>
 
 <template>
