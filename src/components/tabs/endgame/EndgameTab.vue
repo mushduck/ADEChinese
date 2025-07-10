@@ -4,8 +4,6 @@ export default {
   methods: {
     update() {
       this.endgames = player.records.fullGameCompletions;
-      this.updateTime = Date.now() - player.records.gameCreatedTime;
-      this.updateTimer = TimeSpan.fromMilliseconds(18000000/(1+(this.updateTimer/18000000)));
     }
   },
 };
@@ -19,7 +17,7 @@ export default {
     </div>
     <br>
     <div>
-      UPDATE IN {{ updateTimer }}.
+      UPDATE IN 05:00:00.
     </div>
     <br>
     <div>
