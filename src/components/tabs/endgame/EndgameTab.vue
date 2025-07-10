@@ -1,7 +1,3 @@
-<script>
-  this.endgames = player.records.fullGameCompletions;
-</script>
-
 <template>
   <div class="endgame-nyi">
     <br>
@@ -14,7 +10,7 @@
     </div>
     <br>
     <div>
-      You have reached Endgame {{ quantifyInt("time", endgames) }}.
+      Please wait for further updates...
     </div>
   </div>
 </template>
