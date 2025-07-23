@@ -441,10 +441,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.ALL,
     description: () => `After Eternity you permanently keep ${formatPercents(0.05)}
     of your Infinities as Banked Infinities and get double Infinities`,
-    effects: {
-      infinitiesGain: 2,
-      bankedInfinitiesGain: () => Currency.infinities.value.times(0.05).floor()
-    }
+    effect: () => Currency.infinities.value.times(0.05).floor()
   },
   {
     id: 192,
