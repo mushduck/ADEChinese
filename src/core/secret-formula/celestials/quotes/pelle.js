@@ -497,7 +497,6 @@ export const pelleQuotes = {
   },
   joke: {
     id: 14,
-    requirement: () => Currency.antimatter.exponent >= 25 && player.records.fullGameCompletions >= 1,
     lines: [
       "You can't.",
     ]
