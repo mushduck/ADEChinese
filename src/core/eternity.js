@@ -45,7 +45,7 @@ function giveEternityRewards(auto) {
 
   Currency.infinitiesBanked.value = Currency.infinitiesBanked.value.plusEffectsOf(
     Achievement(131).effects.bankedInfinitiesGain,
-    TimeStudy(191).effects.bankedInfinitiesGain,
+    TimeStudy(191)
   );
 
   if (Effarig.isRunning && !EffarigUnlock.eternity.isUnlocked) {
