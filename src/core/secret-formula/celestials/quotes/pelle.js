@@ -498,7 +498,7 @@ export const pelleQuotes = {
   joke: {
     id: 14,
     lines: [
-      "You can't.",
+      "[Placeholder]",
     ]
   },
 };
