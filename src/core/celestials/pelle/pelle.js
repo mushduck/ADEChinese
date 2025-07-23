@@ -352,13 +352,7 @@ export const Pelle = {
     return zalgo(str, Math.floor(stage ** 2 * 7));
   },
   
-  get endTabNames() {
-    if (Achievement(191).isUnlocked) {
-      return "Destruction Has Come A New Beginning Has Arrived We'll Meet Again".split(" ");
-    } else {
-      return "It's Not Over We Will Return We'll Ω Soon Meet Again".split(" ");
-    }
-  },
+  endTabNames: "It's Not Over We Will Return We'll Ω Soon Meet Again".split(" "),
   
   quotes: Quotes.pelle,
 };
@@ -387,6 +381,9 @@ EventHub.logic.on(GAME_EVENT.PELLE_STRIKE_UNLOCKED, () => {
 });
 EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
   if (Tab.endgame.isOpen && player.records.fullGameCompletions === 1) Pelle.quotes.nyi.show();
+});
+EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
+  if (Tab.statistics.isOpen && player.records.fullGameCompletions === 1) Pelle.quotes.joke.show();
 });
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {
