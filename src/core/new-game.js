@@ -55,7 +55,6 @@ export const NG = {
     // We don't backup the whole player.reality.automator object because it contains "state",
     // which could lead to some edge cases where it starts when it shouldn't (ie before it's unlocked)
     // It's easier to do something like this to avoid it entirely.
-    const achievements = JSON.stringify(player.achievementBits);
     const automatorConstants = JSON.stringify(player.reality.automator.constants);
     const automatorConstantSort = JSON.stringify(player.reality.automator.constantSortOrder);
     const automatorScripts = JSON.stringify(player.reality.automator.scripts);
@@ -65,6 +64,7 @@ export const NG = {
     const speedrunRecords = JSON.stringify(player.speedrun.previousRuns);
     const hasSpeedrun = player.speedrun.isUnlocked;
     const presets = JSON.stringify(player.timestudy.presets);
+    const recordAntimatter = player.records.totalAntimatter;
     const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
     Modal.hideAll();
     Quote.clearAll();
@@ -75,7 +75,6 @@ export const NG = {
     player.options.confirmations.glyphSelection = true;
     player.secretUnlocks = secretUnlocks;
     player.secretAchievementBits = JSON.parse(secretAchievements);
-    player.achievementBits = JSON.parse(achievements);
     player.reality.automator.constants = JSON.parse(automatorConstants);
     player.reality.automator.constantSortOrder = JSON.parse(automatorConstantSort);
     player.reality.automator.scripts = JSON.parse(automatorScripts);
@@ -87,6 +86,7 @@ export const NG = {
     player.speedrun.previousRuns = JSON.parse(speedrunRecords);
     player.speedrun.isUnlocked = hasSpeedrun;
     player.timestudy.presets = JSON.parse(presets);
+    player.records.totalAntimatter = recordAntimatter;
     JSON.parse(companions).forEach(g => {
       Glyphs.addToInventory(g);
     });
