@@ -1421,12 +1421,16 @@ export const normalAchievements = [
   {
     id: 192,
     name: "Destiny",
-    description: "Doom Your Reality in Run 2. (NYI)",
+    description: "Doom Your Reality in Run 2.",
+    checkRequirement: () => PlayerProgress.endgameUnlocked() && Pelle.isDoomed,
+    checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
   },
   {
     id: 193,
     name: "Unstoppable",
-    description: "Beat Doom in Run 2. (NYI)",
+    description: "Beat Doom in Run 2.",
+    checkRequirement: () => PlayerProgress.endgameUnlocked() && GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
     id: 194,
