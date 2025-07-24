@@ -65,7 +65,6 @@ export const NG = {
     const speedrunRecords = JSON.stringify(player.speedrun.previousRuns);
     const hasSpeedrun = player.speedrun.isUnlocked;
     const presets = JSON.stringify(player.timestudy.presets);
-    const recordAntimatter = player.records.totalAntimatter;
     const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
     Modal.hideAll();
     Quote.clearAll();
@@ -88,7 +87,6 @@ export const NG = {
     player.speedrun.previousRuns = JSON.parse(speedrunRecords);
     player.speedrun.isUnlocked = hasSpeedrun;
     player.timestudy.presets = JSON.parse(presets);
-    player.records.totalAntimatter = recordAntimatter;
     JSON.parse(companions).forEach(g => {
       Glyphs.addToInventory(g);
     });
