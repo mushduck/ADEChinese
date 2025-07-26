@@ -97,6 +97,7 @@ export const NG = {
     ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
     ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
     player.lastUpdate = Date.now();
+    lockAchievementsOnEndgame();
   }
 };
 function lockAchievementsOnEndgame() {
