@@ -52,13 +52,13 @@ export const NG = {
     // This can't be JSONed as it contains sets
     const secretUnlocks = player.secretUnlocks;
     const secretAchievements = JSON.stringify(player.secretAchievementBits);
+    const achievements = JSON.stringify(player.achievementBits);
     // We don't backup the whole player.reality.automator object because it contains "state",
     // which could lead to some edge cases where it starts when it shouldn't (ie before it's unlocked)
     // It's easier to do something like this to avoid it entirely.
     const automatorConstants = JSON.stringify(player.reality.automator.constants);
     const automatorConstantSort = JSON.stringify(player.reality.automator.constantSortOrder);
     const automatorScripts = JSON.stringify(player.reality.automator.scripts);
-    const endgameAchievements = JSON.stringify(player.endgameAchievementBits);
     const fullCompletions = player.records.fullGameCompletions;
     const fullTimePlayed = player.records.previousRunRealTime + player.records.realTimePlayed;
     const glyphCosmetics = JSON.stringify(player.reality.glyphs.cosmetics);
@@ -76,10 +76,10 @@ export const NG = {
     player.options.confirmations.glyphSelection = true;
     player.secretUnlocks = secretUnlocks;
     player.secretAchievementBits = JSON.parse(secretAchievements);
+    player.achievementBits = JSON.parse(achievements);
     player.reality.automator.constants = JSON.parse(automatorConstants);
     player.reality.automator.constantSortOrder = JSON.parse(automatorConstantSort);
     player.reality.automator.scripts = JSON.parse(automatorScripts);
-    player.endgameAchievementBits = JSON.parse(endgameAchievements);
     player.records.fullGameCompletions = fullCompletions;
     player.records.previousRunRealTime = fullTimePlayed;
     ui.view.newUI = player.options.newUI;
@@ -99,3 +99,8 @@ export const NG = {
     player.lastUpdate = Date.now();
   }
 };
+function lockAchievementsOnEndgame() {
+  for (const achievement of Achievements.preEndgame) {
+    achievement.lock();
+  }
+}
