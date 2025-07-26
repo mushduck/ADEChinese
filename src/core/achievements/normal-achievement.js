@@ -149,7 +149,7 @@ export const Achievements = {
   get postEndgameRows() {
     const count = Achievements.postEndgame.map(a => a.row).max();
     return Achievements.rows(1, count);
-  }
+  },
 
   rows: (start, count) => Array.range(start, count).map(Achievements.row),
 
