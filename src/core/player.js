@@ -771,6 +771,7 @@ window.player = {
       AIChance: 0,
       ENDChance: 0,
       StoryChance: 0,
+      MatureChance: 0,
       speed: 1,
       includeAnimated: true,
     },
