@@ -1423,34 +1423,50 @@ export const normalAchievements = [
     name: "Destiny",
     description: "Doom Your Reality in Run 2.",
     checkRequirement: () => PlayerProgress.endgameUnlocked() && Pelle.isDoomed,
-    checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
+    checkEvent: GAME_EVENT.REALITY_RESET_AFTER
   },
   {
     id: 193,
     name: "Unstoppable",
     description: "Beat Doom in Run 2.",
     checkRequirement: () => PlayerProgress.endgameUnlocked() && GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd,
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Galaxies are ${formatPercents(0.1)} stronger.`;
+    }
+    effect: 1.1
   },
   {
     id: 194,
     name: "At Long Last",
     description: "Regain all Achievements in Pelle. (NYI)",
+    get reward() {
+      return `You can equip up to ${formatInt(2)} Effarig and Reality Glyphs each.`;
+    }
   },
   {
     id: 195,
     name: "Hard Reset",
     description: "Disable all Pelle Nerfs. (NYI)",
+    get reward() {
+      return `Unlock Strike Disabling.`;
+    }
   },
   {
     id: 196,
     name: "Full Control of the Dark",
     description: "Purchase the 8th Dark Matter Dimension. (NYI)",
+    get reward() {
+      return `Decrease Galaxy Generator Instability by ${formatInt(2)}.`;
+    }
   },
   {
     id: 197,
     name: "Gone...",
     description: "Destroy Pelle. (NYI)",
+    get reward() {
+      return `Boost Celestial Point Gain.`;
+    }
   },
   {
     id: 198,
