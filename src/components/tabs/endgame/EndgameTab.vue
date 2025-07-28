@@ -1,11 +1,12 @@
 <template>
-  <div class="endgame-header">
+  <div class="endgame-text">
     <br>
     <div>
     <b>
       Endgame Checklist:
     </b>
     </div>
+    <br>
     <div>
       New Achievement Row: 83%
     </div>
@@ -49,6 +50,7 @@
     <div>
       Start Animations: 0%
     </div>
+    <br>
     <div>
     <b>
       Total Progress: 38%
