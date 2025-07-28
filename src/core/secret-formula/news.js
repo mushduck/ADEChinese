@@ -7,7 +7,8 @@ import { DC } from "../constants";
 // AI = created with gpt2
 // F = fun facts
 // (e) = Endgame Exclusive
-// SMe = Fan-made Endgame Stories
+// Se = Fan-made Endgame Stories
+// M = Mature
 
 function newsAnimSpd(seconds) {
   return seconds / player.options.news.speed;
@@ -70,7 +71,7 @@ export const news = [
       We're calling these happy electrons 'Positrons.' Wait, that's taken?`
   },
   {
-    id: "a14",
+    id: "am14",
     text:
       `This completely useless sentence will get you nowhere and you know it.
       What a horrible obnoxious man would come up with it, he will probably go to hell,
@@ -560,7 +561,7 @@ export const news = [
     text: "Import \"Christmas\" for a secret theme."
   },
   {
-    id: "a112",
+    id: "am112",
     text:
       `What the f*ck did you just f*cking say about me, you little b*tch? I'll have you know I graduated top of my
       class in the Antimatter Seals, and I've been involved in numerous secret raids on the 9th Dimension, and I
@@ -855,7 +856,7 @@ export const news = [
     get unlocked() { return PlayerProgress.eternityUnlocked(); }
   },
   {
-    id: "a160",
+    id: "am160",
     text: `Turns out all our news is being stolen and broadcast to a game called "Antimatter Dimensions", damn Fins.`
   },
   {
@@ -1003,14 +1004,14 @@ export const news = [
   {
     id: "a184",
     text:
-      `<span style='animation: a-text-grow 1s infinite'>R̵̬̙͋͂̀̋͑̈́̇͠Ê̵͇͎͂̂̍̓̌̐̋̋̀̀̔M̶̨̲̯̘͙̬̥̮̣͚̱̫͛̽̃͌̚͝
-      "Ą̴͍̝͐Į̷̛̲̯̫̘͌́̄̏͌̀̈́͝͝Ṅ̶̛̻̠̠̤̦̞̞͗̎̊̌̊͝͠</span><span style='animation: a-text-shrink 1s infinite'>
-      Ḁ̷̛͂̈́͗̎̃̓͛́͘ͅW̶̡̖͓̗̦̃̇̌̀͝A̵͇̭͉̓̎̈̿̊́̄̚͜R̶̝͚̲̭͎͇͎͓͖͚͇̀̈́͗̃̏̂̌͝͝Ę̴̡̤͙͈̝̬̰͒͘</span><span style
-      ='animation: a-text-grow 1s infinite'> ̶̺̈́́̆̓͘͘Ồ̸̢̢̮͓̯̗͙͚̬̉͊̿F̶̠̤̱̱̱͊̂̍̔̃͆̆̑̿͘</span><span style='animation:
-      a-text-shrink 1s infinite'> ̴̨̞̠̮͚̱͉͋̔͗̽̈́́́̅ͅỴ̶̣̙̹͚̲͔̲̼̬̥̀͌̒̾͘͘O̵̪̠̗̝̗̘̜͚̮̊͒͆̃̀̌̒͝ͅU̸͎͗̍̑̎̅̅͝R̵̗͑̽̏̓͆͒̈́͌͘̕
-      </span><span style='animation: a-text-grow 1s infinite'> ̸̑̽̇̆͊̔̍̊̈́̈́͘ͅS̸̘͐͝U̴̥̭̚͘R̸̖̜͍͒́̋͆̈́̓
-      R̸̡̛̛̪̝̟̱̣̹̭̟̣̀̈̀̏̉̌͝͠Õ̶͙͈͖̠͇̬͍̟̰U̵̩̫͉̝͔̼͎̦̔̓̽͌͊̏̇̓̀̓̀Ņ̸͍͇̘̙̥̰͉̲͕͈̥̍͛̃̑͝Ḑ̵̤̻̖̱̘̯̝̖̈̌̄̕͝
-      Ī̶̜̱̈́̑̃̉̄̋̔͐͋͠Ṅ̴͎̞͍̽͊͛̈́̅͛̈̅̚͠Ģ̸̢̾͊S̷̫̼̜̼͇̋͛̎͑͆̅̓̇</span>`,
+      `<span style='animation: a-text-grow 1s infinite'>R̵̬̙͋͂̀̋͑̈́̇͠Ê̵͇͎͂̂̍̓̌̐̋̋̀̀̔M̶̨̲̯̘͙̬̥̮̣͚̱̫͛̽̃͌̚͝
+      "Ą̴͍̝͐Į̷̛̲̯̫̘͌́̄̏͌̀̈́͝͝Ṅ̶̛̻̠̠̤̦̞̞͗̎̊̌̊͝͠</span><span style='animation: a-text-shrink 1s infinite'>
+      Ḁ̷̛͂̈́͗̎̃̓͛́͘ͅW̶̡̖͓̗̦̃̇̌̀͝A̵͇̭͉̓̎̈̿̊́̄̚͜R̶̝͚̲̭͎͇͎͓͖͚͇̀̈́͗̃̏̂̌͝͝Ę̴̡̤͙͈̝̬̰͒͘</span><span style
+      ='animation: a-text-grow 1s infinite'> ̶̺̈́́̆̓͘͘Ồ̸̢̢̮͓̯̗͙͚̬̉͊̿F̶̠̤̱̱̱͊̂̍̔̃͆̆̑̿͘</span><span style='animation:
+      a-text-shrink 1s infinite'> ̴̨̞̠̮͚̱͉͋̔͗̽̈́́́̅ͅỴ̶̣̙̹͚̲͔̲̼̬̥̀͌̒̾͘͘O̵̪̠̗̝̗̘̜͚̮̊͒͆̃̀̌̒͝ͅU̸͎͗̍̑̎̅̅͝R̵̗͑̽̏̓͆͒̈́͌͘̕
+      </span><span style='animation: a-text-grow 1s infinite'> ̸̑̽̇̆͊̔̍̊̈́̈́͘ͅS̸̘͐͝U̴̥̭̚͘R̸̖̜͍͒́̋͆̈́̓
+      R̸̡̛̛̪̝̟̱̣̹̭̟̣̀̈̀̏̉̌͝͠Õ̶͙͈͖̠͇̬͍̟̰U̵̩̫͉̝͔̼͎̦̔̓̽͌͊̏̇̓̀̓̀Ņ̸͍͇̘̙̥̰͉̲͕͈̥̍͛̃̑͝Ḑ̵̤̻̖̱̘̯̝̖̈̌̄̕͝
+      Ī̶̜̱̈́̑̃̉̄̋̔͐͋͠Ṅ̴͎̞͍̽͊͛̈́̅͛̈̅̚͠Ģ̸̢̾͊S̷̫̼̜̼͇̋͛̎͑͆̅̓̇</span>`,
   },
   {
     id: "a185",
@@ -1233,7 +1234,7 @@ export const news = [
       when he attempted to water it, there were no survivors.`
   },
   {
-    id: "a216",
+    id: "am216",
     text: "Testing... testing... testing... Oh goddamn I was in prod again.",
     isAdvertising: true
   },
@@ -2713,7 +2714,7 @@ export const news = [
     text: "TECHNOBLADE NEVER DIES!!!"
   },
   {
-    id: "ae411",
+    id: "aem411",
     text:
       `I've come to make an announcement [username] is a bitch-ass motherfucker he pissed on my fucking wife.
       That's right he took his antimatter dick out and pissed on my fucking wife and he said it was "THIS BIG" and
@@ -2773,7 +2774,7 @@ export const news = [
       my theme to Metro. Still hell though.`
   },
   {
-    id: "ae422",
+    id: "aem422",
     text: "According to the Bosonic String Theory, Spacetime is 26-dimensional... where the hell are my other 16 Dimensions?!"
   },
   {
@@ -2821,7 +2822,7 @@ export const news = [
     text: "Today's lunch: Antimatter chicken burger made out of 100% antimatter pigs!"
   },
   {
-    id: "ae434",
+    id: "aem434",
     text: 
       `"I just added like 26 news messages from this one Discord channel into the game let me know if it shits itself lmao."
       -Supersonic Seven`
@@ -3113,7 +3114,7 @@ export const news = [
     get unlocked() { return NewsHandler.uniqueTickersSeen >= 165; }
   },
   {
-    id: "l38",
+    id: "lm38",
     text: "fucking hacker",
     get unlocked() { return NewsHandler.uniqueTickersSeen > GameDatabase.news.length; }
   },
@@ -3578,7 +3579,7 @@ export const news = [
     get unlocked() { return Pelle.isDoomed; }
   },
   {
-    id: "le91",
+    id: "lem91",
     text:
       `THERE IS NO ESCAPE, FOOLISH MORTAL! I AM PELLE! I WILL SMITE YOU SOON! YOU WILL- wait... is that the damn
       Galaxy Generator again? Can you stop finding that cursed thing? I've had about enough losing. Thanks.`,
@@ -3590,7 +3591,7 @@ export const news = [
     get unlocked() { return Pelle.isDoomed; }
   },
   {
-    id: "le93",
+    id: "lem93",
     get text() {
       const chapters = [
         `Effarig made the other 8 Celestials jealous, because they didn't have a Glyph exclusive to them too.
@@ -4240,7 +4241,7 @@ export const news = [
     text: "Hello everyone, my name is Anti-Dio. I produce antimatter through a process you all know as \"antimatter decomposition\" you may recall this from my test report earlier this month I tested wether or not my ranch produces antimatter or not... everything was fine until that point, when I added a dash of lag to the equation, and it became a vicious cycle accelerating the rate at which antimatter is produced, which in turn accelerates the rate at which you all die. I've saved this by using a unique combination of genetic engineering and big data mining, I'm hoping to one day pull the trigger on a mechanimatter device that creates dimensions behind closed doors, but for now, this has all been a race to the bottom of which system producethiks, and in the end, we'll take a bite out of your (read error: allowed) pie. Goodbye."
   },
   {
-    id: "ai151",
+    id: "aim151",
     text: "\"I propose that we form a phylogenetic tree of anti-history, just like tree of life. Everyone would be credited with originating from the ancestor of that anti-tree.\" -Dio, toast of eternal damnation"
   },
   {
@@ -4935,7 +4936,7 @@ export const news = [
     text: "What are the stats? Well, I don't have them, but Hevipelle does, and he says that they're actually quite good. I guess you couldn't tell us."
   },
   {
-    id: "ai323",
+    id: "aim323",
     text: "I thought the nerf was too damn strong."
   },
   {
@@ -5829,7 +5830,7 @@ export const news = [
     text: "\"So this is what science is like\"- someone who has never heard of Kurt Somebody"
   },
   {
-    id: "ai546",
+    id: "aim546",
     text: "\"If you want to understand these shitty jokes, you really need to study theology. Math is a sin.\" -A panicky person"
   },
   {
@@ -5954,7 +5955,7 @@ export const news = [
     text: "The happiness level of the news ticker has increased to 6.66e69"
   },
   {
-    id: "ai577",
+    id: "aim577",
     text: "The haters will be pissed when they see this"
   },
   {
@@ -5978,7 +5979,7 @@ export const news = [
     text: "If the universe is expanding, then the entire universe must be expanding, which means that body cannot sit."
   },
   {
-    id: "ai583",
+    id: "aim583",
     text: "Feminism is not a philosophy, but a whole hell of a lot of men"
   },
   {
@@ -6363,7 +6364,7 @@ export const news = [
     get unlocked() { return PlayerProgress.eternityUnlocked(); }
   },
   {
-    id: "ai678",
+    id: "aim678",
     text: "Oh shit we ran out of news. Time to do something."
   },
   {
@@ -7195,7 +7196,7 @@ export const news = [
     text: "Sonic was born without a heart... but that didn't stop him from being a genius"
   },
   {
-    id: "ai885",
+    id: "aim885",
     text: "The most common question I get is \"can i just skip the ads and get true\" and the answer is always a resounding NO. The reason being, ad revenue is just too damn high to overcome the cost of maintaining the servers, plus the fact that most players just don't care."
   },
   {
@@ -7284,7 +7285,7 @@ export const news = [
     text: "Last week, we reported that an unknown individual known only as \"Anti-Doctor\" has broken the game and claimed ownership of the game's data. Since then, he has spread the word that he has an \"explosive new app\" that will allow him to \"turn [he] antimatter.\" However, no one has come forward with information on how to use the app, or even if it is a reality. We will update this article if and when we find out."
   },
   {
-    id: "ai907",
+    id: "aim907",
     text: "The second thing I'm gonna do is go talk to the Devs in person. I don't know if I'll be able to do that without pissing someone off, so I'm gonna do it right here."
   },
   {
@@ -7677,7 +7678,7 @@ export const news = [
     text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()</span>"
   },
   {
-    id: "sme",
+    id: "se",
     get text() {
       const chapters = [
         `<span style='color: cyan'>Hello, I am Living_Person eight, also known as Life.</span><span style='color: red'>
