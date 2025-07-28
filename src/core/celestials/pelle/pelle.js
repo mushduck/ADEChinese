@@ -385,6 +385,9 @@ EventHub.logic.on(GAME_EVENT.PELLE_STRIKE_UNLOCKED, () => {
     Pelle.quotes.strike5.show();
   }
 });
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd) Pelle.quotes.endgame.show();
+});
 EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
   if (Tab.endgame.isOpen && player.records.fullGameCompletions === 1) Pelle.quotes.nyi.show();
 });
