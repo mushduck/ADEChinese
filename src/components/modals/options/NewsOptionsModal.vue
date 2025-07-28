@@ -19,6 +19,7 @@ export default {
       AIChance: 0,
       ENDChance: 0,
       StoryChance: 0,
+      MatureChance: 0,
       speed: 1,
       includeAnimated: false,
     };
@@ -89,6 +90,9 @@ export default {
     StoryChance(newValue) {
       player.options.news.StoryChance = parseFloat(newValue, 10);
     },
+    MatureChance(newValue) {
+      player.options.news.MatureChance = parseFloat(newValue, 10);
+    },
     speed(newValue) {
       player.options.news.speed = parseFloat(newValue, 10);
     },
@@ -104,6 +108,7 @@ export default {
       this.AIChance = options.AIChance;
       this.ENDChance = options.ENDChance;
       this.StoryChance = options.StoryChance;
+      this.MatureChance = options.MatureChance;
       this.speed = options.speed;
       this.includeAnimated = options.includeAnimated;
     },
@@ -122,6 +127,10 @@ export default {
     adjustSliderValueStoryChance(value) {
       this.StoryChance = value;
       player.options.StoryChance = this.StoryChance;
+    },
+    adjustSliderValueStoryChance(value) {
+      this.MatureChance = value;
+      player.options.MatureChance = this.MatureChance;
     },
     adjustSliderValueSpeed(value) {
       this.speed = value;
@@ -176,6 +185,15 @@ export default {
         v-bind="sliderPropsStoryChance"
         :value="StoryChance"
         @input="adjustSliderValueStoryChance($event)"
+      />
+    </div>
+    <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
+      <b>{{ formatPercents(parseFloat(MatureChance)) }} Mature Messages </b>
+      <SliderComponent
+        class="o-primary-btn--slider__slider"
+        v-bind="sliderPropsMatureChance"
+        :value="MatureChance"
+        @input="adjustSliderValueMatureChance($event)"
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
