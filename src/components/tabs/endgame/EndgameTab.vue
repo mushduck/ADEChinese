@@ -2,10 +2,10 @@
   <div class="endgame-header">
     <br>
     <div>
+    <b>
       Endgame Checklist:
+    </b>
     </div>
-  </div>
-  <div class="endgame-text">
     <div>
       New Achievement Row: 83%
     </div>
@@ -49,25 +49,17 @@
     <div>
       Start Animations: 0%
     </div>
-  </div>
-  <div class="endgame-header">
-    <br>
     <div>
+    <b>
       Total Progress: 38%
-    </div>
-    <br>
-    <div>
+      <br>
       Estimated Completion: 16 August 2025
+    </b>
     </div>
   </div>
 </template>
 
 <style scoped>
-.endgame-header {
-  font-size: 2rem;
-  font-weight: bold;
-  color: var(--color-endgame);
-}
 .endgame-text {
   font-size: 2rem;
   color: var(--color-endgame);
