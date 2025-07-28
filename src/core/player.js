@@ -769,6 +769,8 @@ window.player = {
       enabled: true,
       repeatBuffer: 40,
       AIChance: 0,
+      ENDChance: 0,
+      StoryChance: 0,
       speed: 1,
       includeAnimated: true,
     },
