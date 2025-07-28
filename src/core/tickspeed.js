@@ -31,6 +31,7 @@ export function getTickSpeedMultiplier() {
     TimeStudy(232),
     Achievement(86),
     Achievement(178),
+    Achievement(193),
     InfinityChallenge(5).reward,
     PelleUpgrade.galaxyPower,
     PelleRifts.decay.milestones[1]
