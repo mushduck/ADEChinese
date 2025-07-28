@@ -79,7 +79,6 @@ export const GalaxyGenerator = {
 
         if (!this.capObj) {
           Pelle.quotes.end.show();
-          Pelle.quotes.endgame.show();
         }
       }
       PelleRifts.all.forEach(x => x.checkMilestoneStates());
