@@ -64,6 +64,7 @@ export const NG = {
     const glyphCosmetics = JSON.stringify(player.reality.glyphs.cosmetics);
     const speedrunRecords = JSON.stringify(player.speedrun.previousRuns);
     const hasSpeedrun = player.speedrun.isUnlocked;
+    const pelleQuotes = player.celestials.pelle.quoteBits;
     const presets = JSON.stringify(player.timestudy.presets);
     const recordAntimatter = player.records.totalAntimatter;
     const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
@@ -87,6 +88,7 @@ export const NG = {
     player.reality.glyphs.cosmetics = JSON.parse(glyphCosmetics);
     player.speedrun.previousRuns = JSON.parse(speedrunRecords);
     player.speedrun.isUnlocked = hasSpeedrun;
+    player.celestials.pelle.quoteBits = pelleQuotes;
     player.timestudy.presets = JSON.parse(presets);
     player.records.totalAntimatter = recordAntimatter;
     JSON.parse(companions).forEach(g => {
