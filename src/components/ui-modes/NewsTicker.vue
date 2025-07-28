@@ -68,7 +68,7 @@ export default {
         this.currentNews = GameDatabase.news
           .filter(message => message.id.includes("ai") === isAI)
           .filter(message => message.id.includes("e") === isEND)
-          .filter(message => message.id.includes("sm") === isStory)
+          .filter(message => message.id.includes("se") === isStory)
           .filter(message => message.id.includes("m") === isMature)
           .filter(message => canShow(message))
           .randomElement();
