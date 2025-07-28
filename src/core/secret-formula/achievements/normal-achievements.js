@@ -1433,7 +1433,7 @@ export const normalAchievements = [
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Galaxies are ${formatPercents(0.1)} stronger.`;
-    }
+    },
     effect: 1.1
   },
   {
