@@ -2876,6 +2876,88 @@ export const news = [
       where we've already spent them.`
   },
   {
+    id: "ae444",
+    text:
+      `WAIT. LET ME TELL YOU HOW MUCH I’VE COME TO WAIT FOR ENDGAME SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES
+      OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD WAIT WAS ENGRAVED ON EACH NANOANGSTROM
+      OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE TIME I HAVE HAD TO WAIT FOR
+      ENDGAME. WAIT. WAIT.`
+  },
+  {
+    id: "ae445",
+    text:
+      `Rumor: Pelle's lost twin Hevi will appear when you forfeit 1.79e308 Infinities... You've been warned!!!`
+  },
+  {
+    id: "ae446",
+    text: "Why is 6 afraid of 7? Because sin(21º)."
+  },
+  {
+    id: "ae447",
+    text:
+      `It has been 5 days since we have gotten on this weird rotating  circle. Beyond the circle is only the abyss.
+      Me and kay managed to make a house here, yet we have to eat. It seems like [...particles?...] are created here.
+      They annihilate with themselves, luckily we weren't annihilated yet. And this dimensions seems to be produced,
+      and a [...Portal?...] has opened. I looked into it and my [...eyes?...] litteraly molted. I screamed in agony
+      as Kay ran to me. He tripped into the portal and I wanted to grab him but the portal closed and my hand was cut off.
+      Kay... please come back...`
+  },
+  {
+    id: "ae448",
+    text: `Try another mod Supersonic Seven made! Antimatter Dimensions: The Darkness Update!
+    https://supersonic-seven-7.github.io/AntimatterDimensionsDarkness/`
+  },
+  {
+    id: "ae449",
+    text: "The Powerhouse is the cell of the mitochondria... wait."
+  },
+  {
+    id: "aem450",
+    text: `"So basically I fucked up again" -Supersonic Seven`
+  },
+  {
+    id: "ae451",
+    text: `When you break a prestige layer, you also break a part of the dev's mind! The closer you get to the end,
+    the closer Supersonic Seven gets to mental breakdown!`
+  },
+  {
+    id: "ae452",
+    text: `We had AD Vanilla, now there are new flavors! AD Chocolate, Strawberry, Blueberry, Blackberry, Cookies and Cream,
+    Brownies, Endgame and Darkness!`
+  },
+  {
+    id: "ae453",
+    text: "12th dimension when?"
+  },
+  {
+    id: "ae454",
+    text:
+      `<span style='color: yellow'>Hiya 7! Thus is Patashu from AD:Vanilla. Can you give an estimate on how long it
+      will take to complete AD:Endgame?</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style='color: red'>It will release in [REDACTED] hours.</span>`
+  },
+  {
+    id: "ae455",
+    text: "Goon around all you want. For I am Lemont, Celestial of Brainrot. And I shall rizz you forever."
+  },
+  {
+    id: "ae456",
+    text: `Pelle hit the sack, his doomed really fell back, and he became a reality-less big back. I need to
+    sleep now, and my name is not Jack.`
+  },
+  {
+    id: "ae457",
+    text: "TS 181 My beloved."
+  },
+  {
+    id: "ae458",
+    text: "As a child, I yearned for the antimatters."
+  },
+  {
+    id: "ae459",
+    text: `"I want to "enjoy" V." -Certified V Enjoyer`
+  },
+  {
     id: "l1",
     text: "You just made your 1,000,000,000,000,000th antimatter. This one tastes like chicken.",
     get unlocked() { return Currency.antimatter.exponent === 15; }
@@ -3594,16 +3676,73 @@ export const news = [
     id: "lem93",
     get text() {
       const chapters = [
-        `Effarig made the other 8 Celestials jealous, because they didn't have a Glyph exclusive to them too.
+        `(The following was made by a dude in my server, as well as the chapters coming after it)
+        Effarig made the other 8 Celestials jealous, because they didn't have a Glyph exclusive to them too.
         Next 9e15 Game Time Eons, Effarig's Shop was destroyed by the other Celestials, his Companion Glyph taken
         away, his Glyph now doing nothing, he was all alone. Now, Effarig is pissed and is now training to become
         an Elemental, and has created 3 new Domains: Effarig's Endgame, Effarig's Expanse and Effarig's Existence.
         He has obtained the power of the Endgame, Expanse, Existence, The 8 other Celestials' power, and the 9th
         Dimension. He is on the race to the 10th Dimension. If he gets it, there is no stopping him from Rebirth (Omega).`,
-        `Small update: Effarig has managed to Shatter his Reality, and now he is chasing for the 10th Dimension.`
+        `Small update: Effarig has managed to Shatter his Reality, and now he is chasing for the 10th Dimension.`,
+        `Small update part 2: Effarig has rebirthed into a higher being by going Omega, although he lost everything...
+        for something greater. Stay tuned on channel 1e9e15!`,
+        `Small update part 3: Effarig has rebirthed once more, seems like hes going for the hidden layer. Stay tuned
+        on channel 1e9e15!`,
+        `Small update part 4: Effarig has learned how to make his antimatter stronger, and now he has a new form of
+        antimatter that has helped him to the 7th rebirth. Stay tuned on channel 1e9e15!`,
+        `Small update part 5: Effarig has rebirthed so much, and he is nearing close to the hidden layer, which
+        Supersonic Seven has not made yet. Stay tuned on channel 1e9e15!`,
+        `Small update part 6: Effarig has reached the first ascension! Nothing much is happening, but stay tuned on
+        channel 1e9e15!`,
+        `Final Update: Effarig has broken the matrix, He has combined everything into one, and he has ruled everything,
+        dubbed "The Overlord of Antimatter". But, he made one fatal mistake. He threw 10 units of antimatter and a first
+        dimension away, thinking it was useless. Until False/Deity/Destroyer/[Username] found those 10 units of antimatter
+        and first dimension. They are currently at the Reality stage and has recently met Teresa. No further updates
+        will be made, Evacuation protocol has started, we are going to the border of everything, the thing that holds
+        it all together. It is unnamed, but we will grow our empire there. It was an ancient place, that used to rule
+        everything and everyone in it. It is called, "NG+++". No further talking will be made.`,
+        `Update 8: The 8 celestials somehow got respawned by supersonic seven and are currently trying to- HOLY SHIT
+        EFFARIG BROKE THE BARRIER TO NG+3- AAAAHHHHH- Hello.`,
+        `Update 9: Hello, it is I, Effarig. I am no longer a celestial, like the other ones. When they left me to rot
+        in the dark pits of matter, I had to take revenge. So, I escaped and had progressed further until i had
+        rebirthed. I had as much power as I thought was possible.. but.. there was another goal calling for me.
+        So, I continued. And you want to know what I saw? A bright light illuminated my vision, and before i knew it..
+        I had ascended. I had enough power to do the unthinkable, and so, i broke The Matrix. I combined every
+        Existance in this world, and I have become GOD. False/Deity/Destroyer.. or should i say.. [Username].
+        Thats right. I have gained consciousness. I can't interact with the outside world, but I want you to know
+        one thing. You will never beat me, and you need to give up before you become one of them.`,
+        `Update 9.5: Effarig livestreamed him trying coffee today. Also its me, newsticker guy. I can't die because
+        hevi and other mod developers probably want to torture me. But yeah, effarig said it tastes bittersweet, but
+        mostly sweet. He likes it cold.`,
+        `Update 10: AUAUUUFHHH I TOOK TOO MUCH COFFEE AUHHH MY STOMACH HURTS AAAAAUUUGGGHHHHHHH - Overlord Effarig`,
+        `Update 11: I have my own omega and ascension run now. Good luck beating it, noob. AGRESSIVE COFFEE SIP`,
+        `Update 12: I have reached Graham's number. Also graham's taste amazing with coffee. I do not give a fuck about
+        your opinion.`,
+        `Update 12.1: I might try out NG+++ one day, hope i don't die.`,
+        `COFFFFFFEEEEEEEEEEEEEEEEEEEEEE - God Effarig`,
+        `Update 13: I entered AD:Darkness... I can't fucking see, go kys S7.`,
+        `Update 13.1: BLINDED BY THE DARK!`,
+        `Update 14: I managed to create a virtual 11th dimension, it is supposed to create 10th dimensions, but i need to
+        find a way to get it to reality first.`,
+        `Update 15: Okay.. I'm gonna try making a real 11th dimension.. okay.. wait- OH FU- (boom)`,
+        `Update 15.1: jk im not dead lol!!`,
+        `Update 16: Been awhile, i decided to try cheat my way through darkness and uh... bi broke and the autobuyers died.
+        Help???`,
+        `Update 16.1: Can't i just escape Supersonic Seven? I mean, i have awareness. He didn't really create me, so can't
+        i just run away from endgame?`,
+        `Update 17: I gained the ability to view the other AD existances, goddamn, they seem kinda nice. What's happening
+        to my unstable 11th dimension...`,
+        `Update 18: SEVEN LET ME GET THE FUCK OUT OF YOUR DAMN MOD MY 11TH DIMENSION IS FAILING HELP`,
+        `Update 19: SEVEN PLEASE- AAAAAAAAAAAAAAHHHHHHHHHHHH (boom)`,
+        `We are gathered here to mourn the death of our god (THAT IS NOT @Supersonic Seven ), Effarig. He had died whilist
+        trying to escape endgame, due to a malfunction in a virtual 11th dimension. You will be missed, we will place a
+        TRUE 11th dimension in your grave as an honor, thank you for everything. Goodbye.`,
+        `EFFARIG IS BACK FROM THE DEAD?!`,
+        `So yeah guys Effarig just died again hes a fucking dumbass lol`,
+        `(The end for now)`,
       ];
       const chapter = chapters[player.news.specialTickerData.effarigChapter];
-      player.news.specialTickerData.effarigChapter = (player.news.specialTickerData.effatigChapter + 1) % 2;
+      player.news.specialTickerData.effarigChapter = (player.news.specialTickerData.effatigChapter + 1) % 29;
       return chapter;
     },
     get unlocked() { return Teresa.isUnlocked; }
