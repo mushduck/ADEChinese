@@ -64,6 +64,15 @@ export default {
         tooltip: false
       };
     },
+    sliderPropsMatureChance() {
+      return {
+        min: 0,
+        max: 1,
+        interval: 0.01,
+        width: "98%",
+        tooltip: false
+      };
+    },
     sliderPropsSpeed() {
       return {
         min: 0.5,
