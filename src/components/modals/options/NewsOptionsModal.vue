@@ -137,7 +137,7 @@ export default {
       this.StoryChance = value;
       player.options.StoryChance = this.StoryChance;
     },
-    adjustSliderValueStoryChance(value) {
+    adjustSliderValueMatureChance(value) {
       this.MatureChance = value;
       player.options.MatureChance = this.MatureChance;
     },
