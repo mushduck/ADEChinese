@@ -115,6 +115,12 @@ export const Pelle = {
       player.options.hiddenSubtabBits[tabIndex] &= ignoredIDs.includes(tabIndex) ? -1 : 0;
     }
     Pelle.quotes.initial.show();
+    if (player.records.fullGameCompletions >= 1) {
+      Pelle.quotes.doom2.show();
+    }
+    if (player.records.fullGameCompletions >= 2) {
+      Pelle.quotes.doom3.show();
+    }
     GameStorage.save(true);
   },
 
@@ -387,6 +393,9 @@ EventHub.logic.on(GAME_EVENT.PELLE_STRIKE_UNLOCKED, () => {
 });
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
   if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd) Pelle.quotes.endgame.show();
+});
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd && player.records.fullGameCompletions >= 1) Pelle.quotes.end2.show();
 });
 EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
   if (Tab.endgame.isOpen && player.records.fullGameCompletions === 1) Pelle.quotes.nyi.show();
