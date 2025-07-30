@@ -179,10 +179,10 @@ export const normalAchievements = [
     name: "Don't you dare sleep",
     get description() {
       return PlayerProgress.realityUnlocked()
-        ? `Be offline for a period of over ${formatInt(6)} hours (real time).`
-        : `Be offline for a period of over ${formatInt(6)} hours.`;
+        ? `Be offline for a period of over ${formatInt(2)} hours (real time).`
+        : `Be offline for a period of over ${formatInt(2)} hours.`;
     },
-    checkRequirement: () => Date.now() - player.lastUpdate >= 21600000,
+    checkRequirement: () => Date.now() - player.lastUpdate >= 7200000,
     checkEvent: GAME_EVENT.GAME_TICK_BEFORE
   },
   {
