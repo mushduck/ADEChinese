@@ -68,6 +68,7 @@ export default {
     unlock() {
       player.celestials.pelle.galaxyGenerator.unlocked = true;
       Pelle.quotes.galaxyGeneratorUnlock.show();
+      if (player.records.fullGameCompletions >= 1) Pelle.quotes.galgen2.show();
     }
   },
 };
