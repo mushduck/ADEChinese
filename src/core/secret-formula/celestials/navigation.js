@@ -121,6 +121,8 @@ const Positions = Object.freeze({
   pelleRecursion: pelleStarPosition(3, 150),
   pelleParadox: pelleStarPosition(4, 150),
 
+  alphaUnlock: new Vector(600, 400),
+
   pelleGalaxyGen: pelleStarPosition(0, 0),
 });
 
@@ -1942,9 +1944,9 @@ export const celestialNavigation = {
             pelleString
           ];
         },
-        angle: 180,
+        angle: 90,
         diagonal: 50,
-        horizontal: 30,
+        horizontal: 16,
       },
     },
     connector: {
