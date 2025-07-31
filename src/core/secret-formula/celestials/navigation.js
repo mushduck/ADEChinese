@@ -1989,4 +1989,59 @@ export const celestialNavigation = {
       };
     }()),
   },
+
+  //Just Endgame stuff over here
+  "alpha-unlock": {
+    visible: () => PlayerProgress.endgameUnlocked(),
+    complete: () => {
+      if (Currency.imaginaryMachines.value >= Number.MAX_VALUE) return 1;
+      const imCost = Math.clampMax(emphasizeEnd(Math.log10(Currency.imaginaryMachines.value) / Math.log10(Number.MAX_VALUE)), 1);
+      return imCost;
+    },
+    node: {
+      clickAction: () => Tab.endgame.show(true),
+      incompleteClass: "c-celestial-nav__test-incomplete",
+      symbol: "α",
+      symbolOffset: "1.6",
+      fill: "#00ff00",
+      position: Positions.alphaUnlock,
+      ring: {
+        rMajor: 20,
+      },
+      forceLegend: () => ImaginaryUpgrade(30).isAvailableForPurchase,
+      legend: {
+        text: complete => {
+          if (complete === 1) {
+            return [
+              "Unlock Alpha",
+              "The Celestial of Darkness"
+            ];
+          }
+          let pelleString = `${format(Currency.imaginaryMachines.value)} / ${format(Number.MAX_VALUE)} iM`;
+          if (!Pelle.isRunning || Currency.antimatter.value.log10() < 9e115) {
+            pelleString = "Pelle's Doomed Reality is still intact";
+          } else if (ImaginaryUpgrade(30).isAvailableForPurchase) {
+            pelleString = "Pelle's Doomed Reality has been destroyed";
+          }
+          return [
+            "Unlock Alpha",
+            "The Celestial of Darkness",
+            `${format(Currency.imaginaryMachines.value, 2)} / ${format(Number.MAX_VALUE, 2)} iM`,
+            pelleString
+          ];
+        },
+        angle: 180,
+        diagonal: 50,
+        horizontal: 30,
+      },
+    },
+    connector: {
+      pathStart: 0,
+      pathEnd: 1,
+      path: new LinearPath(Positions.pelleUnlock, Positions.alphaUnlock),
+      fill: "url(#gradLaitelaPelle)",
+      completeWidth: 6,
+      incompleteWidth: 4,
+    },
+  },
 };
