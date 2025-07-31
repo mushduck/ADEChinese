@@ -537,7 +537,7 @@ export const normalAchievements = [
     checkRequirement: () => Currency.infinityPower.exponent >= 6,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `All Infinity Dimensions are stronger based on Infinity Points`;
+      return `All Infinity Dimensions are stronger based on Infinity Points.`;
     },
     effect: () => Currency.infinityPoints.exponent
   },
@@ -1470,7 +1470,7 @@ export const normalAchievements = [
   },
   {
     id: 198,
-    name: "...but nor forgotten",
+    name: "...but not forgotten",
     description: "Reach 1.8e308 Imaginary Machines. (NYI)",
   },
 ];
