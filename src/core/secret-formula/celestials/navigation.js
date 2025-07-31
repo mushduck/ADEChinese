@@ -121,7 +121,7 @@ const Positions = Object.freeze({
   pelleRecursion: pelleStarPosition(3, 150),
   pelleParadox: pelleStarPosition(4, 150),
 
-  alphaUnlock: new Vector(600, 400),
+  alphaUnlock: new Vector(1100, 350),
 
   pelleGalaxyGen: pelleStarPosition(0, 0),
 });
@@ -1908,9 +1908,12 @@ export const celestialNavigation = {
   "alpha-unlock": {
     visible: () => PlayerProgress.endgameUnlocked(),
     complete: () => {
-      if (Currency.imaginaryMachines.value >= Number.MAX_VALUE) return 1;
+      if (ImaginaryUpgrade(30).isAvailableForPurchase) return 1;
       const imCost = Math.clampMax(emphasizeEnd(Math.log10(Currency.imaginaryMachines.value) / Math.log10(Number.MAX_VALUE)), 1);
-      return imCost;
+      if (MachineHandler.isIMUnlocked) {
+        return 0.5 + 0.5 * Math.clampMax(0.999, imCost);
+      }
+      return Math.clampMax(0.5, Currency.realityMachines.value.pLog10() / MachineHandler.baseRMCap.exponent);
     },
     node: {
       clickAction: () => Tab.endgame.show(true),
@@ -1932,7 +1935,7 @@ export const celestialNavigation = {
             ];
           }
           let pelleString = `${format(Currency.imaginaryMachines.value)} / ${format(Number.MAX_VALUE)} iM`;
-          if (!Pelle.isRunning || Currency.antimatter.value.log10() < 9e115) {
+          if (!Pelle.isDoomed || Currency.antimatter.value.log10() < 9e115) {
             pelleString = "Pelle's Doomed Reality is still intact";
           } else if (ImaginaryUpgrade(30).isAvailableForPurchase) {
             pelleString = "Pelle's Doomed Reality has been destroyed";
@@ -1944,8 +1947,8 @@ export const celestialNavigation = {
             pelleString
           ];
         },
-        angle: 90,
-        diagonal: 50,
+        angle: 165,
+        diagonal: 60,
         horizontal: 16,
       },
     },
