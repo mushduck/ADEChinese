@@ -1952,7 +1952,7 @@ export const celestialNavigation = {
     connector: {
       pathStart: 0,
       pathEnd: 1,
-      path: new LinearPath(Positions.pelleUnlock, Positions.alphaUnlock),
+      path: new LinearPath(Positions.pelleAchievementRequirement, Positions.alphaUnlock),
       fill: "url(#gradPelleAlpha)",
       completeWidth: 6,
       incompleteWidth: 4,
