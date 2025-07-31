@@ -365,16 +365,16 @@ export const imaginaryUpgrades = [
     description: "Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to 1e100000",
   },
   {
-    name: "G",//"Inception Initiation",
+    name: "Inception Initiation",
     id: 30,
     cost: 1.8e308,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
-    hasFailed: () => false,//!Pelle.isDoomed,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16,//Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
+    hasFailed: () => !Pelle.isDoomed,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Unlock ???, Celestial of ???",//() => {
-      //if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
-      //return "Unlock ???, Celestial of ???";
-    //},
+    description: () => {
+      if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
+      return "Unlock ???, Celestial of ???";
+    },
   },
 ];
