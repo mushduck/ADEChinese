@@ -1940,6 +1940,15 @@ export const celestialNavigation = {
           } else if (ImaginaryUpgrade(30).isAvailableForPurchase) {
             pelleString = "Pelle's Doomed Reality has been destroyed";
           }
+          if (!MachineHandler.isIMUnlocked) {
+            const realityMachines = Currency.realityMachines.value;
+            const realityMachineCap = MachineHandler.baseRMCap;
+            return [
+              "Imaginary Machines",
+              "The limits of Reality Machines bind you",
+              `${format(realityMachines)} / ${format(realityMachineCap)}`
+            ];
+          }
           return [
             "Unlock Alpha",
             "The Celestial of Darkness",
