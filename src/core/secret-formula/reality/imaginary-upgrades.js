@@ -354,13 +354,13 @@ export const imaginaryUpgrades = [
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
   },
   {
-    name: "F",//"Galactic Genocide",
+    name: "Galactic Genocide",
     id: 29,
     cost: 1e200,
     requirement: () => `Have a total of 1e100 Galaxies`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16,//Replicanti.galaxies.total + player.galaxies +
-      //player.dilation.totalTachyonGalaxies >= 1e100,
+    checkRequirement: () => Replicanti.galaxies.total + player.galaxies + 
+      player.dilation.totalTachyonGalaxies >= 1e100,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to 1e100000",
   },
