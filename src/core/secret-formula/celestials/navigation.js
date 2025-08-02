@@ -1950,8 +1950,8 @@ export const celestialNavigation = {
             ];
           }
           return [
-            "Unlock Alpha",
-            "The Celestial of Darkness",
+            "Unlock ???",
+            "The Celestial of ???",
             `${format(Currency.imaginaryMachines.value, 2)} / ${format(Number.MAX_VALUE, 2)} iM`,
             pelleString
           ];
