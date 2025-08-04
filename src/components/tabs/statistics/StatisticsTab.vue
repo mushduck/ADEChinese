@@ -12,7 +12,6 @@ export default {
       isDoomed: false,
       realTimeDoomed: TimeSpan.zero,
       totalAntimatter: new Decimal(0),
-      totalEndgameAntimatter: new Decimal(0),
       realTimePlayed: TimeSpan.zero,
       timeSinceCreation: 0,
       uniqueNews: 0,
@@ -50,6 +49,11 @@ export default {
         bestRate: new Decimal(0),
         bestRarity: 0,
       },
+      endgame: {
+        isUnlocked: false,
+        count: 0,
+        totalEndgameAntimatter: new Decimal(0),
+      },
       matterScale: [],
       lastMatterTime: 0,
       paperclips: 0,
@@ -85,7 +89,6 @@ export default {
     update() {
       const records = player.records;
       this.totalAntimatter.copyFrom(records.totalAntimatter);
-      this.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
       this.realTimePlayed.setFrom(records.realTimePlayed);
       this.fullTimePlayed = TimeSpan.fromMilliseconds(records.previousRunRealTime + records.realTimePlayed);
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
@@ -143,6 +146,13 @@ export default {
         reality.bestRate.copyFrom(bestReality.RMmin);
         reality.bestRarity = Math.max(strengthToRarity(bestReality.glyphStrength), 0);
       }
+
+      const isEndgameUnlocked = progress.isEndgameUnlocked;
+      const endgame = this.endgame;
+      if (isEndgameUnlocked) {
+        endgame.count = Math.floor(player.records.fullGameCompletions);
+        endgame.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
+      }
       this.updateMatterScale();
 
       this.isDoomed = Pelle.isDoomed;
@@ -182,7 +192,7 @@ export default {
       <div class="c-stats-tab-general">
         <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter.</div>
         <div v-if="endgame.isUnlocked">
-          You have made a total of {{ format(totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
+          You have made a total of {{ format(endgame.totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
         </div>
         <div>You have played for {{ realTimePlayed }}. (real time)</div>
         <div v-if="reality.isUnlocked">
@@ -325,6 +335,17 @@ export default {
       <div>Your best Glyph rarity is {{ formatRarity(reality.bestRarity) }}.</div>
       <br>
     </div>
+    <div
+      v-if="endgame.isUnlocked"
+      class="c-stats-tab-subheader c-stats-tab-general"
+    >
+      <div class="c-stats-tab-title c-stats-tab-endgame">
+        Endgame
+      </div>
+      <div>You have {{ quantifyInt("Endgame", endgame.count) }}.</div>
+      <div>More stats coming soon.</div>
+      <br>
+    </div>
   </div>
 </template>
 
@@ -360,5 +381,9 @@ export default {
 
 .c-stats-tab-doomed {
   color: var(--color-pelle--base);
+}
+
+.c-stats-tab-endgame {
+  color: var(--color-endgame);
 }
 </style>
