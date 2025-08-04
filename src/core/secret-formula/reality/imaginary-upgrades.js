@@ -326,7 +326,7 @@ export const imaginaryUpgrades = [
     cost: 1e50,
     requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 2)} Singularities`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.singularities.value >= Decimal.NUMBER_MAX_VALUE,
+    checkRequirement: () => Currency.singularities.value >= 1.8e308,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
   },
