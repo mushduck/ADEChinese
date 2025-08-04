@@ -52,7 +52,7 @@ export default {
           } else {
             setProgress(Currency.infinityPoints.value, Player.eternityGoal, "Percentage to Eternity Challenge goal");
           }
-        } else if (player.dilation.active) {
+        } else if (player.dilation.active && !Pelle.isDoomed) {
           if (player.dilation.lastEP.gt(0)) {
             setProgress(Currency.antimatter.value, getTachyonReq(), "Percentage to gain more TP in Dilation");
           } else {
