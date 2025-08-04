@@ -149,6 +149,8 @@ export default {
 
       const isEndgameUnlocked = progress.isEndgameUnlocked;
       const endgame = this.endgame;
+      endgame.isUnlocked = isEndgameUnlocked;
+      
       if (isEndgameUnlocked) {
         endgame.count = Math.floor(player.records.fullGameCompletions);
         endgame.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
