@@ -12,6 +12,7 @@ export default {
       isDoomed: false,
       realTimeDoomed: TimeSpan.zero,
       totalAntimatter: new Decimal(0),
+      totalEndgameAntimatter: new Decimal(0),
       realTimePlayed: TimeSpan.zero,
       timeSinceCreation: 0,
       uniqueNews: 0,
@@ -84,6 +85,7 @@ export default {
     update() {
       const records = player.records;
       this.totalAntimatter.copyFrom(records.totalAntimatter);
+      this.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
       this.realTimePlayed.setFrom(records.realTimePlayed);
       this.fullTimePlayed = TimeSpan.fromMilliseconds(records.previousRunRealTime + records.realTimePlayed);
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
@@ -179,6 +181,9 @@ export default {
       </div>
       <div class="c-stats-tab-general">
         <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter.</div>
+        <div v-if="endgame.isUnlocked">
+          You have made a total of {{ format(totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
+        </div>
         <div>You have played for {{ realTimePlayed }}. (real time)</div>
         <div v-if="reality.isUnlocked">
           Your existence has spanned {{ reality.totalTimePlayed }} of time. (game time)
