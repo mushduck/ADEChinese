@@ -40,7 +40,7 @@ export default {
       },
       reality: {
         isUnlocked: false,
-        count: 0,
+        count: new Decimal(0),
         best: TimeSpan.zero,
         bestReal: TimeSpan.zero,
         this: TimeSpan.zero,
