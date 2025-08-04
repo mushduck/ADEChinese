@@ -16,11 +16,11 @@
     </div>
     <br>
     <div>
-      New Quotes: 25%
+      New Quotes: 100%
     </div>
     <br>
     <div>
-      New Imaginary Upgrades: 67%
+      New Imaginary Upgrades: 100%
     </div>
     <br>
     <div>
@@ -28,15 +28,15 @@
     </div>
     <br>
     <div>
-      New Currency: 17%
+      New Currency: 25%
     </div>
     <br>
     <div>
-      Break Eternity: 0%
+      Break Eternity: 10%
     </div>
     <br>
     <div>
-      Break Eternity Repo: ~80% (varies on refactor branch)
+      Break Eternity Repo: ~83% (varies on refactor branch)
     </div>
     <br>
     <div>
@@ -44,7 +44,7 @@
     </div>
     <br>
     <div>
-      Endgame Animations: 50%
+      Endgame Animations: 80%
     </div>
     <br>
     <div>
@@ -53,9 +53,9 @@
     <br>
     <div>
     <b>
-      Total Progress: 38%
+      Total Progress: 53%
       <br>
-      Estimated Completion: 16 August 2025
+      Estimated Completion: 23 August 2025
     </b>
     </div>
   </div>
