@@ -326,7 +326,7 @@ export const imaginaryUpgrades = [
     cost: 1e50,
     requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 2)} Singularities`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.singularities.gte(Decimal.MAX_VALUE),
+    checkRequirement: () => Currency.singularities.value >= Decimal.NUMBER_MAX_VALUE,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
   },
@@ -367,7 +367,7 @@ export const imaginaryUpgrades = [
   {
     name: "Inception Initiation",
     id: 30,
-    cost: Decimal.MAX_VALUE,
+    cost: Decimal.NUMBER_MAX_VALUE,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
     hasFailed: () => !Pelle.isDoomed,
     checkRequirement: () => Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
