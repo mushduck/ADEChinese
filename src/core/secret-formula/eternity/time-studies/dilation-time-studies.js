@@ -47,7 +47,7 @@ export const dilationTimeStudies = [
       if (Pelle.isDoomed) {
         if (player.celestials.pelle.galaxyGenerator.unlocked) return "*";
         return "You cannot escape a Doomed Reality";
-      },
+      }
       return "Unlock Reality";
     },
     cost: 1,
