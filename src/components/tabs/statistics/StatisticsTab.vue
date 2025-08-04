@@ -78,8 +78,8 @@ export default {
     },
     realityCountString() {
       const num = this.reality.count;
-      return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Reality", num.floor())}`
+      return num > 0
+        ? `${num} ${pluralize("Reality", num)}`
         : "no Realities";
     },
     fullGameCompletions() {
