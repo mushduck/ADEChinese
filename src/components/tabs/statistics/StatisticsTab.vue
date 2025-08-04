@@ -75,6 +75,12 @@ export default {
         ? `${this.formatDecimalAmount(num)} ${pluralize("Eternity", num.floor())}`
         : "no Eternities";
     },
+    realityCountString() {
+      const num = this.reality.count;
+      return num.gt(0)
+        ? `${this.formatDecimalAmount(num)} ${pluralize("Reality", num.floor())}`
+        : "no Realities";
+    },
     fullGameCompletions() {
       return player.records.fullGameCompletions;
     },
@@ -134,6 +140,7 @@ export default {
 
       if (isRealityUnlocked) {
         reality.count = Math.floor(Currency.realities.value);
+        reality.hasBest = bestReality.time < 999999999999;
         reality.best.setFrom(bestReality.time);
         reality.bestReal.setFrom(bestReality.realTime);
         reality.this.setFrom(records.thisReality.time);
@@ -317,9 +324,16 @@ export default {
       <div :class="realityClassObject()">
         {{ isDoomed ? "Doomed Reality" : "Reality" }}
       </div>
-      <div>You have {{ quantifyInt("Reality", reality.count) }}.</div>
-      <div>Your fastest game-time Reality was {{ reality.best.toStringShort() }}.</div>
-      <div>Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.</div>
+      <div>
+        You have {{ realityCountString }}<span v-if="endgame.isUnlocked"> this Endgame</span>.
+      </div>
+      <div v-if="reality.hasBest">
+        Your fastest game-time Reality was {{ reality.best.toStringShort() }}.
+        Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.
+      </div>
+      <div v-else>
+        You have no fastest Reality<span v-if="endgame.isUnlocked"> this Endgame</span>.
+      </div>
       <div :class="{ 'c-stats-tab-doomed' : isDoomed }">
         You have spent {{ reality.this.toStringShort() }}
         in this {{ isDoomed ? "Armageddon" : "Reality" }}.
@@ -332,9 +346,14 @@ export default {
         You have been Doomed for {{ realTimeDoomed.toStringShort() }}, real time.
       </div>
       <div>
-        Your best Reality Machines per minute is {{ format(reality.bestRate, 2, 2) }}.
+        Your best Reality Machines per minute 
+        <span v-if="endgame.isUnlocked">this Endgame </span>
+        is {{ format(reality.bestRate, 2, 2) }}.
       </div>
-      <div>Your best Glyph rarity is {{ formatRarity(reality.bestRarity) }}.</div>
+      <div>
+        Your best Glyph rarity
+        <span v-if="endgame.isUnlocked">this Endgame </span>
+        is {{ formatRarity(reality.bestRarity) }}.</div>
       <br>
     </div>
     <div
