@@ -276,6 +276,7 @@ window.player = {
     fullGameCompletions: 0,
     previousRunRealTime: 0,
     totalAntimatter: DC.E1,
+    totalEndgameAntimatter: this.totalAntimatter,
     recentInfinities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
     recentEternities: Array.range(0, 10).map(() =>
@@ -699,6 +700,7 @@ window.player = {
       realityShards: DC.D0,
       records: {
         totalAntimatter: DC.D0,
+        totalEndgameAntimatter: this.totalAntimatter,
         totalInfinityPoints: DC.D0,
         totalEternityPoints: DC.D0,
       },
