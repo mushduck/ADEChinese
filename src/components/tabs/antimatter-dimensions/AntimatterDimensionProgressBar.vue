@@ -64,7 +64,7 @@ export default {
         }
       } else if (Pelle.isDoomed) {
         if (PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies > 0) {
-          setProgress(Currency.infinityPoints.value, Tesseracts.nextCost, "Percentage to next Tesseract");
+          setProgress(Currency.antimatter.value, Number.MAX_VALUE, "Percentage to Endgame");
         } else if (PelleStrikes.dilation.hasStrike) {
           setProgress(Currency.eternityPoints.value, DC.E4000, "Percentage to Galaxy Generator");
         } else if (PelleStrikes.ECs.hasStrike) {
