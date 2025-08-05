@@ -23,6 +23,7 @@ export default {
         banked: new Decimal(0),
         projectedBanked: new Decimal(0),
         bankRate: new Decimal(0),
+        totalInfinityAntimatter: new Decimal(0),
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
@@ -32,6 +33,7 @@ export default {
       eternity: {
         isUnlocked: false,
         count: new Decimal(0),
+        totalEternityAntimatter: new Decimal(0),
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
@@ -41,6 +43,7 @@ export default {
       reality: {
         isUnlocked: false,
         count: 0,
+        totalRealityAntimatter: new Decimal(0),
         hasBest: false,
         best: TimeSpan.zero,
         bestReal: TimeSpan.zero,
@@ -116,6 +119,7 @@ export default {
           TimeStudy(191).effects.bankedInfinitiesGain,
         );
         infinity.bankRate = infinity.projectedBanked.div(Math.clampMin(33, records.thisEternity.time)).times(60000);
+        infinity.totalInfinityAntimatter.copyFrom(records.totalInfinityAntimatter);
         infinity.hasBest = bestInfinity.time < 999999999999;
         infinity.best.setFrom(bestInfinity.time);
         infinity.this.setFrom(records.thisInfinity.time);
@@ -128,6 +132,7 @@ export default {
       eternity.isUnlocked = isEternityUnlocked;
       if (isEternityUnlocked) {
         eternity.count.copyFrom(Currency.eternities);
+        eternity.totalEternityAntimatter.copyFrom(records.totalEternityAntimatter);
         eternity.hasBest = bestEternity.time < 999999999999;
         eternity.best.setFrom(bestEternity.time);
         eternity.this.setFrom(records.thisEternity.time);
@@ -141,6 +146,7 @@ export default {
 
       if (isRealityUnlocked) {
         reality.count = Math.floor(Currency.realities.value);
+        reality.totalRealityAntimatter.copyFrom(records.totalRealityAntimatter);
         reality.hasBest = bestReality.time < 999999999999;
         reality.best.setFrom(bestReality.time);
         reality.bestReal.setFrom(bestReality.realTime);
@@ -203,6 +209,15 @@ export default {
         <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter.</div>
         <div v-if="endgame.isUnlocked">
           You have made a total of {{ format(endgame.totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
+        </div>
+        <div v-if="reality.isUnlocked">
+          You have made a total of {{ format(reality.totalRealityAntimatter, 2, 1) }} antimatter this Reality.
+        </div>
+        <div v-if="eternity.isUnlocked">
+          You have made a total of {{ format(eternity.totalEternityAntimatter, 2, 1) }} antimatter this Eternity.
+        </div>
+        <div v-if="infinity.isUnlocked">
+          You have made a total of {{ format(infinity.totalInfinityAntimatter, 2, 1) }} antimatter this Infinity.
         </div>
         <div>You have played for {{ realTimePlayed }}. (real time)</div>
         <div v-if="reality.isUnlocked">
