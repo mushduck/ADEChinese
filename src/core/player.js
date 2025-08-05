@@ -277,6 +277,9 @@ window.player = {
     previousRunRealTime: 0,
     totalAntimatter: DC.E1,
     totalEndgameAntimatter: DC.E1,
+    totalRealityAntimatter: DC.E1,
+    totalEternityAntimatter: DC.E1,
+    totalInfinityAntimatter: DC.E1,
     recentInfinities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
     recentEternities: Array.range(0, 10).map(() =>
@@ -701,6 +704,9 @@ window.player = {
       records: {
         totalAntimatter: DC.D0,
         totalEndgameAntimatter: DC.D0,
+        totalRealityAntimatter: DC.D0,
+        totalEternityAntimatter: DC.D0,
+        totalInfinityAntimatter: DC.D0,
         totalInfinityPoints: DC.D0,
         totalEternityPoints: DC.D0,
       },
