@@ -222,6 +222,9 @@ Currency.antimatter = new class extends DecimalCurrency {
     if (amount.gt(0)) {
       player.records.totalAntimatter = player.records.totalAntimatter.add(amount);
       player.records.totalEndgameAntimatter = player.records.totalEndgameAntimatter.add(amount);
+      player.records.totalRealityAntimatter = player.records.totalRealityAntimatter.add(amount);
+      player.records.totalEternityAntimatter = player.records.totalEternityAntimatter.add(amount);
+      player.records.totalInfinityAntimatter = player.records.totalInfinityAntimatter.add(amount);
       player.requirementChecks.reality.noAM = false;
     }
   }
