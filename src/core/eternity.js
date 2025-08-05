@@ -199,6 +199,8 @@ export function initializeResourcesAfterEternity() {
   Currency.timeShards.reset();
   player.records.thisEternity.time = 0;
   player.records.thisEternity.realTime = 0;
+  player.records.totalInfinityAntimatter = DC.E1;
+  player.records.totalEternityAntimatter = DC.E1;
   player.totalTickGained = 0;
   player.eterc8ids = 50;
   player.eterc8repl = 40;
