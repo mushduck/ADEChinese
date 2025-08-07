@@ -36,7 +36,7 @@ export const GalaxyGenerator = {
   },
 
   get galGenInstability() {
-    return DC.E1;
+    return 10;
   },
 
   get gainPerSecondPostCap() {
