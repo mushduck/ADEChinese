@@ -40,11 +40,13 @@ export const GalaxyGenerator = {
   },
 
   get gainPerSecondPostCap() {
+    if (!Pelle.hasGalaxyGenerator) return 0;
     return new Decimal(this.gainPerSecondPreCap / Math.max(1, Math.pow(this.galGenInstability, Math.log(this.gainPerSecondPreCap / 1e12)))
     ).toNumber();
   },
 
   get gainPerSecond() {
+    if (!Pelle.hasGalaxyGenerator) return 0;
     return new Decimal(this.gainPerSecondPreCap / this.gainPerSecondPostCap).toNumber();
   },
 
