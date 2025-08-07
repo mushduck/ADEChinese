@@ -41,7 +41,7 @@ export const GalaxyGenerator = {
 
   get gainPerSecondPostCap() {
     if (!Pelle.hasGalaxyGenerator) return 0;
-    return new Decimal(Math.max(this.gainPerSecondPreCap, 1) / Math.max(1, Math.pow(this.galGenInstability, Math.log(Math.max(this.gainPerSecondPreCap / 1e12, 1))))
+    return new Decimal(Math.max(1, Math.pow(this.galGenInstability, Math.log(Math.max(this.gainPerSecondPreCap / 1e12, 1))))
     ).toNumber();
   },
 
