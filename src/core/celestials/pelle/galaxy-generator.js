@@ -25,7 +25,7 @@ export const GalaxyGenerator = {
     return this.generatedGalaxies - this.spentGalaxies;
   },
 
-  get gainPerSecond() {
+  get gainPerSecondPreCap() {
     if (!Pelle.hasGalaxyGenerator) return 0;
     return new Decimal(GalaxyGeneratorUpgrades.additive.effectValue).timesEffectsOf(
       GalaxyGeneratorUpgrades.multiplicative,
@@ -33,6 +33,18 @@ export const GalaxyGenerator = {
       GalaxyGeneratorUpgrades.IPMult,
       GalaxyGeneratorUpgrades.EPMult,
     ).toNumber();
+  },
+
+  get galGenInstability() {
+    return DC.E1;
+  },
+
+  get gainPerSecondPostCap() {
+    return this.gainPerSecondPreCap / Math.max(1, Math.pow(this.galGenInstability, Math.log(this.gainPerSecondPreCap / 1e12)));
+  },
+
+  get gainPerSecond() {
+    return this.gainPerSecondPreCap / this.gainPerSecondPostCap;
   },
 
   get capObj() {
