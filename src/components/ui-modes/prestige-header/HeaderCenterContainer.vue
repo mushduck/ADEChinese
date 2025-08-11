@@ -25,6 +25,9 @@ export default {
       isDoomed: false,
       antimatter: new Decimal(0),
       antimatterPerSec: new Decimal(0),
+      celestialPoints: new Decimal(0),
+      doomedParticles: new Decimal(0),
+      showEndgame: false,
     };
   },
   methods: {
@@ -37,6 +40,9 @@ export default {
       this.antimatter.copyFrom(Currency.antimatter);
       this.hasRealityButton = PlayerProgress.realityUnlocked() || TimeStudy.reality.isBought;
       if (!this.hasRealityButton) this.antimatterPerSec.copyFrom(Currency.antimatter.productionPerSecond);
+      this.celestialPoints.copyFrom(Currency.celestialPoints);
+      this.doomedParticles.copyFrom(Currency.doomedParticles);
+      this.showEndgame = PlayerProgress.endgameUnlocked();
     },
   },
 };
@@ -47,6 +53,9 @@ export default {
     v-if="shouldDisplay"
     class="c-prestige-button-container"
   >
+    <span v-if="showEndgame">You have {{ format(celestialPoints, 2) }} Celestial Points.</span>
+    <span v-if="showEndgame">You have {{ format(doomedParticles, 2) }} Doomed Particles.</span>
+    <br>
     <span>You have <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> antimatter.</span>
     <div
       v-if="hasRealityButton"
