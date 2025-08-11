@@ -35,6 +35,8 @@ export const NG = {
     // Modify beaten-game quantities before doing a carryover reset
     player.records.fullGameCompletions++;
     GlyphAppearanceHandler.unlockSet();
+    Currency.celestialPoints.add(gainedCelestialPoints());
+    Currency.doomedParticles.add(gainedDoomedParticles());
     this.restartWithCarryover();
 
     // The ending animation ends at 12.5, although the value continues to increase after that. We set it to a bit above
@@ -59,6 +61,8 @@ export const NG = {
     const automatorConstants = JSON.stringify(player.reality.automator.constants);
     const automatorConstantSort = JSON.stringify(player.reality.automator.constantSortOrder);
     const automatorScripts = JSON.stringify(player.reality.automator.scripts);
+    const celestialPoints = Currency.celestialPoints;
+    const doomedParticles = Currency.doomedParticles;
     const fullCompletions = player.records.fullGameCompletions;
     const fullTimePlayed = player.records.previousRunRealTime + player.records.realTimePlayed;
     const glyphCosmetics = JSON.stringify(player.reality.glyphs.cosmetics);
@@ -81,6 +85,8 @@ export const NG = {
     player.reality.automator.constants = JSON.parse(automatorConstants);
     player.reality.automator.constantSortOrder = JSON.parse(automatorConstantSort);
     player.reality.automator.scripts = JSON.parse(automatorScripts);
+    Currency.celestialPoints = celestialPoints;
+    Currency.doomedParticles = doomedParticles;
     player.records.fullGameCompletions = fullCompletions;
     player.records.previousRunRealTime = fullTimePlayed;
     ui.view.newUI = player.options.newUI;
