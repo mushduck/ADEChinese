@@ -232,6 +232,7 @@ window.player = {
   partInfinityPoint: 0,
   partInfinitied: 0,
   break: false,
+  break2: false,
   secretUnlocks: {
     themes: new Set(),
     viewSecretTS: false,
