@@ -885,6 +885,7 @@ export function getTTPerSecond() {
 }
 
 export function gainedCelestialPoints() {
+  if (!player.break2) return DC.D1;
   let cp = new Decimal(player.records.totalEndgameAntimatter.log10() / 9e15);
   if (Achievement(197).isUnlocked) {
     cp = cp.times(Decimal.max(9e115, player.records.totalEndgameAntimatter.log10() / 9e115));
@@ -893,6 +894,7 @@ export function gainedCelestialPoints() {
 }
 
 export function gainedDoomedParticles() {
+  if (!player.break2) return DC.D1;
   let dp = Decimal.min(player.records.totalEndgameAntimatter.log10() / 9e15, 1e100);
   return dp.floor();
 }
