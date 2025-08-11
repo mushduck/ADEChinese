@@ -299,7 +299,8 @@ export const GAME_SPEED_EFFECT = {
   BLACK_HOLE: 3,
   TIME_STORAGE: 4,
   SINGULARITY_MILESTONE: 5,
-  NERFS: 6
+  NERFS: 6,
+  CELESTIAL_MATTER: 7
 };
 
 /**
@@ -312,7 +313,8 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   let effects;
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
-      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS];
+      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS,
+      GAME_SPEED_EFFECT.CELESTIAL_MATTER];
   } else {
     effects = effectsToConsider;
   }
@@ -365,6 +367,11 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
     }
   }
 
+  if (effects.includes(GAME_SPEED_EFFECT.CELESTIAL_MATTER)) {
+    if (player.endgame.celestialMatter.gt(0)) {
+      factor *= player.endgame.celestialMatter.pow(2);
+    }
+  }
 
   factor *= PelleUpgrade.timeSpeedMult.effectValue.toNumber();
 
