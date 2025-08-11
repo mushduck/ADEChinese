@@ -56,8 +56,8 @@ export default {
     <div
       v-if="showEndgame"
     >
-      You have {{ format(celestialPoints, 2) }} Celestial Points.
-      You have {{ format(doomedParticles, 2) }} Doomed Particles.
+      You have <span class="cp-text">{{ format(celestialPoints, 2) }}</span> Celestial Points.
+      You have <span class="dp-text">{{ format(doomedParticles, 2) }}</span> Doomed Particles.
     <br>
     </div>
     <span>You have <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> antimatter.</span>
@@ -86,5 +86,11 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+.cp-text {
+  color: var(--color-endgame);
+}
+.dp-text {
+  color: var(--color-pelle--base);
 }
 </style>
