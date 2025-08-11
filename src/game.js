@@ -877,6 +877,19 @@ export function getTTPerSecond() {
   return finalTT;
 }
 
+export function celestialPointGain() {
+  let cp = player.records.totalEndgameAntimatter.log10() / 9e15;
+  if (Achievement(197).isUnlocked) {
+    cp = cp.times(Decimal.max(9e115, player.records.totalEndgameAntimatter.log10() / 9e115));
+  }
+  return cp.floor();
+}
+
+export function doomedParticleGain() {
+  let dp = Decimal.min(player.records.totalEndgameAntimatter.log10() / 9e15, 1e100);
+  return dp.floor();
+}
+
 // eslint-disable-next-line no-unused-vars
 function recursiveTimeOut(fn, iterations, endFn) {
   fn(iterations);
