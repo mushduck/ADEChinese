@@ -490,6 +490,13 @@ Currency.celestialPoints = new class extends DecimalCurrency {
   }
 }();
 
+Currency.celestialMatter = new class extends DecimalCurrency {
+  get value() { return player.endgame.celestialMatter; }
+  set value(value) {
+    player.endgame.celestialMatter = value;
+  }
+}();
+
 Currency.doomedParticles = new class extends DecimalCurrency {
   get value() { return player.endgame.doomedParticles; }
   set value(value) {
