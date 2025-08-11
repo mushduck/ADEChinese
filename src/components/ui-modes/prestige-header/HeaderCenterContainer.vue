@@ -53,9 +53,13 @@ export default {
     v-if="shouldDisplay"
     class="c-prestige-button-container"
   >
-    <span v-if="showEndgame">You have {{ format(celestialPoints, 2) }} Celestial Points.</span>
-    <span v-if="showEndgame">You have {{ format(doomedParticles, 2) }} Doomed Particles.</span>
+    <div
+      v-if="showEndgame"
+    >
+      You have {{ format(celestialPoints, 2) }} Celestial Points.
+      You have {{ format(doomedParticles, 2) }} Doomed Particles.
     <br>
+    </div>
     <span>You have <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> antimatter.</span>
     <div
       v-if="hasRealityButton"
