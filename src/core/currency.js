@@ -481,3 +481,19 @@ Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
     player.celestials.pelle.galaxyGenerator.spentGalaxies += spent;
   }
 }();
+
+Currency.celestialPoints = new class extends DecimalCurrency {
+  get value() { return player.endgame.celestialPoints; }
+  set value(value) {
+    const newValue = value;
+    player.endgame.celestialPoints = newValue;
+  }
+}();
+
+Currency.doomedParticles = new class extends DecimalCurrency {
+  get value() { return player.endgame.doomedParticles; }
+  set value(value) {
+    const newValue = Decimal.min(value, DC.E100);
+    player.endgame.doomedParticles = newValue;
+  }
+}();
