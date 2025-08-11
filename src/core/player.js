@@ -27,6 +27,11 @@ window.player = {
       cost: [DC.D1, DC.D5, DC.E2, DC.E3, DC.E2350, DC.E2650, DC.E3000, DC.E3350][tier],
       amount: DC.D0,
       bought: 0
+    })),
+    celestial: Array.range(0, 8).map(tier => ({
+      cost: [DC.D1, DC.E1, DC.E2, DC.E4, DC.E10, DC.E30, DC.E100, DC.E300][tier],
+      amount: DC.D0,
+      bought: 0
     }))
   },
   buyUntil10: true,
@@ -770,7 +775,8 @@ window.player = {
   endgames: 0,
   endgame: {
     celestialPoints: DC.D0,
-    doomedParticles: DC.D0
+    doomedParticles: DC.D0,
+    celestialMatter: DC.D0
   },
   isGameEnd: false,
   tabNotifications: new Set(),
