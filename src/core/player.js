@@ -767,6 +767,11 @@ window.player = {
       showBought: false,
     }
   },
+  endgames: 0,
+  endgame: {
+    celestialPoints: DC.D0,
+    doomedParticles: DC.D0
+  },
   isGameEnd: false,
   tabNotifications: new Set(),
   triggeredTabNotificationBits: 0,
