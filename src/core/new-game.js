@@ -35,8 +35,8 @@ export const NG = {
     // Modify beaten-game quantities before doing a carryover reset
     player.records.fullGameCompletions++;
     GlyphAppearanceHandler.unlockSet();
-    player.endgame.celestialPoints += gainedCelestialPoints();
-    player.endgame.doomedParticles += gainedDoomedParticles();
+    player.endgame.celestialPoints.add(gainedCelestialPoints());
+    player.endgame.doomedParticles.add(gainedDoomedParticles());
     this.restartWithCarryover();
 
     // The ending animation ends at 12.5, although the value continues to increase after that. We set it to a bit above
