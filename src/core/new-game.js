@@ -46,7 +46,7 @@ export const NG = {
     // Without the delay, this causes the saving (and its notification) to occur during the credits rollback
     setTimeout(() => GameStorage.save(), 10000);
   },
-  get gainedCelestialPoints() {
+  get gainCelestialPoints() {
     if (!player.break2) return DC.D1;
     let cp = new Decimal(player.records.totalEndgameAntimatter.log10() / 9e15);
     if (Achievement(197).isUnlocked) {
@@ -54,14 +54,14 @@ export const NG = {
     }
     return cp.floor();
   },
-  get gainedDoomedParticles() {
+  get gainDoomedParticles() {
     if (!player.break2) return DC.D1;
     let dp = Decimal.min(player.records.totalEndgameAntimatter.log10() / 9e15, 1e100);
     return dp.floor();
   },
   gainEndgameStuff() {
-    player.endgame.celestialPoints.add(gainedCelestialPoints());
-    player.endgame.doomedParticles.add(gainedDoomedParticles());
+    player.endgame.celestialPoints.add(gainCelestialPoints());
+    player.endgame.doomedParticles.add(gainDoomedParticles());
   },
   // Reset the game, but carry over some post-completion stats. We also call this when starting a speedrun, so make sure
   // any stats which are updated due to completion happen in startNewGame() instead of in here
