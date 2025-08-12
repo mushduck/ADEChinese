@@ -166,7 +166,7 @@ export default {
       endgame.isUnlocked = isEndgameUnlocked;
       
       if (isEndgameUnlocked) {
-        endgame.count = Math.floor(player.records.fullGameCompletions);
+        endgame.count = Math.floor(player.endgames);
         endgame.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
       }
       this.updateMatterScale();
