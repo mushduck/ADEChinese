@@ -35,9 +35,8 @@ export const NG = {
     // Modify beaten-game quantities before doing a carryover reset
     player.records.fullGameCompletions++;
     player.endgames++;
+    this.gainEndgameStuff();
     GlyphAppearanceHandler.unlockSet();
-    player.endgame.celestialPoints.add(gainedCelestialPoints());
-    player.endgame.doomedParticles.add(gainedDoomedParticles());
     this.restartWithCarryover();
 
     // The ending animation ends at 12.5, although the value continues to increase after that. We set it to a bit above
@@ -48,6 +47,10 @@ export const NG = {
     setTimeout(() => GameStorage.save(), 10000);
   },
 
+  gainEndgameStuff() {
+    player.endgame.celestialPoints.add(gainedCelestialPoints());
+    player.endgame.doomedParticles.add(gainedDoomedParticles());
+  },
   // Reset the game, but carry over some post-completion stats. We also call this when starting a speedrun, so make sure
   // any stats which are updated due to completion happen in startNewGame() instead of in here
   restartWithCarryover() {
