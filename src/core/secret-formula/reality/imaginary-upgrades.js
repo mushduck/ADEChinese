@@ -367,7 +367,7 @@ export const imaginaryUpgrades = [
   {
     name: "Inception Initiation",
     id: 30,
-    cost: Decimal.NUMBER_MAX_VALUE,
+    cost: Math.pow(2, 1024),
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
     hasFailed: () => !Pelle.isDoomed,
     checkRequirement: () => Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
