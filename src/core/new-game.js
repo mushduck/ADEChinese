@@ -34,6 +34,7 @@ export const NG = {
 
     // Modify beaten-game quantities before doing a carryover reset
     player.records.fullGameCompletions++;
+    player.endgames++;
     GlyphAppearanceHandler.unlockSet();
     player.endgame.celestialPoints.add(gainedCelestialPoints());
     player.endgame.doomedParticles.add(gainedDoomedParticles());
@@ -63,6 +64,7 @@ export const NG = {
     const automatorScripts = JSON.stringify(player.reality.automator.scripts);
     const celestialPoints = player.endgame.celestialPoints;
     const doomedParticles = player.endgame.doomedParticles;
+    const endgames = player.endgames;
     const fullCompletions = player.records.fullGameCompletions;
     const fullTimePlayed = player.records.previousRunRealTime + player.records.realTimePlayed;
     const glyphCosmetics = JSON.stringify(player.reality.glyphs.cosmetics);
@@ -87,6 +89,7 @@ export const NG = {
     player.reality.automator.scripts = JSON.parse(automatorScripts);
     player.endgame.celestialPoints = celestialPoints;
     player.endgame.doomedParticles = doomedParticles;
+    player.endgames = endgames;
     player.records.fullGameCompletions = fullCompletions;
     player.records.previousRunRealTime = fullTimePlayed;
     ui.view.newUI = player.options.newUI;
