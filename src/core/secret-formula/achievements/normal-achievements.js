@@ -70,7 +70,7 @@ export const normalAchievements = [
         : "Buy an 8th Antimatter Dimension.";
     },
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `Multiply all Antimatter Dimensions by Ninty Degrees.`; },
+    get reward() { return `Multiply all Antimatter Dimensions by Ninety Degrees.`; },
     effect: 1.57
   },
   {
@@ -179,10 +179,10 @@ export const normalAchievements = [
     name: "Don't you dare sleep",
     get description() {
       return PlayerProgress.realityUnlocked()
-        ? `Be offline for a period of over ${formatInt(6)} hours (real time).`
-        : `Be offline for a period of over ${formatInt(6)} hours.`;
+        ? `Be offline for a period of over ${formatInt(2)} hours (real time).`
+        : `Be offline for a period of over ${formatInt(2)} hours.`;
     },
-    checkRequirement: () => Date.now() - player.lastUpdate >= 21600000,
+    checkRequirement: () => Date.now() - player.lastUpdate >= 7200000,
     checkEvent: GAME_EVENT.GAME_TICK_BEFORE
   },
   {
@@ -527,7 +527,7 @@ export const normalAchievements = [
     checkRequirement: () => Time.totalTimePlayed.totalDays >= 0.33333333333333333333333333,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Extremely small multiplier to Antimatter Dimensions based on time played.",
-    effect: () => Math.max(Math.pow(Time.totalTimePlayed.totalDays / 2, 0.05), 1),
+    effect: () => Math.max(Math.pow(Time.totalTimePlayed.totalDays * 12, 0.05), 1),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
   {
@@ -537,7 +537,7 @@ export const normalAchievements = [
     checkRequirement: () => Currency.infinityPower.exponent >= 6,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `All Infinity Dimensions are stronger based on Infinity Points`;
+      return `All Infinity Dimensions are stronger based on Infinity Points.`;
     },
     effect: () => Currency.infinityPoints.exponent
   },
@@ -1448,7 +1448,7 @@ export const normalAchievements = [
   },
   {
     id: 198,
-    name: "...but nor forgotten",
+    name: "...but not forgotten",
     description: "Reach 1.8e308 Imaginary Machines. (NYI)",
   },
 ];

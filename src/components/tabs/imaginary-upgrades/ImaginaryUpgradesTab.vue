@@ -60,7 +60,7 @@ export default {
       </span>
     </div>
     <div
-      v-for="row in 5"
+      v-for="row in 6"
       :key="row"
       class="l-reality-upgrade-grid__row"
     >

@@ -66,7 +66,7 @@ export default {
       this.rolling = GameEnd.endState > END_STATE_MARKERS.CREDITS_START;
       this.scroll = (
         Math.clampMax(GameEnd.endState, END_STATE_MARKERS.CREDITS_END) - END_STATE_MARKERS.CREDITS_START
-      ) / (END_STATE_MARKERS.SONG_END - END_STATE_MARKERS.CREDITS_START) * height;
+      ) / (END_STATE_MARKERS.SONG_END - END_STATE_MARKERS.CREDITS_START) * height * 10;
       if (this.audio) this.audio.volume = this.isMuted
         ? 0
         : Math.clamp((GameEnd.endState - END_STATE_MARKERS.CREDITS_START), 0, 0.3);

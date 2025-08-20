@@ -32,6 +32,10 @@ class AchievementState extends GameMechanicState {
     return this.row < 18;
   }
 
+  get isPreEndgame() {
+    return this.row < 19;
+  }
+
   get isUnlocked() {
     return (player.achievementBits[this.row - 1] & this._bitmask) !== 0;
   }
@@ -110,6 +114,10 @@ export const Achievements = {
     return Achievements.all.filter(ach => ach.isPrePelle);
   },
 
+  get preEndgame() {
+    return Achievements.all.filter(ach => ach.isPreEndgame);
+  },
+
   get allRows() {
     const count = Achievements.all.map(a => a.row).max();
     return Achievements.rows(1, count);
@@ -122,6 +130,11 @@ export const Achievements = {
 
   get prePelleRows() {
     const count = Achievements.prePelle.map(a => a.row).max();
+    return Achievements.rows(1, count);
+  },
+
+  get preEndgameRows() {
+    const count = Achievements.preEndgame.map(a => a.row).max();
     return Achievements.rows(1, count);
   },
 

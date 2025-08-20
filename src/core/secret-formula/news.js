@@ -6,6 +6,9 @@ import { DC } from "../constants";
 // P = patreon
 // AI = created with gpt2
 // F = fun facts
+// (e) = Endgame Exclusive
+// Se = Fan-made Endgame Stories
+// M = Mature
 
 function newsAnimSpd(seconds) {
   return seconds / player.options.news.speed;
@@ -68,7 +71,7 @@ export const news = [
       We're calling these happy electrons 'Positrons.' Wait, that's taken?`
   },
   {
-    id: "a14",
+    id: "am14",
     text:
       `This completely useless sentence will get you nowhere and you know it.
       What a horrible obnoxious man would come up with it, he will probably go to hell,
@@ -558,7 +561,7 @@ export const news = [
     text: "Import \"Christmas\" for a secret theme."
   },
   {
-    id: "a112",
+    id: "am112",
     text:
       `What the f*ck did you just f*cking say about me, you little b*tch? I'll have you know I graduated top of my
       class in the Antimatter Seals, and I've been involved in numerous secret raids on the 9th Dimension, and I
@@ -853,7 +856,7 @@ export const news = [
     get unlocked() { return PlayerProgress.eternityUnlocked(); }
   },
   {
-    id: "a160",
+    id: "am160",
     text: `Turns out all our news is being stolen and broadcast to a game called "Antimatter Dimensions", damn Fins.`
   },
   {
@@ -1001,14 +1004,14 @@ export const news = [
   {
     id: "a184",
     text:
-      `<span style='animation: a-text-grow 1s infinite'>R̵̬̙͋͂̀̋͑̈́̇͠Ê̵͇͎͂̂̍̓̌̐̋̋̀̀̔M̶̨̲̯̘͙̬̥̮̣͚̱̫͛̽̃͌̚͝
-      "Ą̴͍̝͐Į̷̛̲̯̫̘͌́̄̏͌̀̈́͝͝Ṅ̶̛̻̠̠̤̦̞̞͗̎̊̌̊͝͠</span><span style='animation: a-text-shrink 1s infinite'>
-      Ḁ̷̛͂̈́͗̎̃̓͛́͘ͅW̶̡̖͓̗̦̃̇̌̀͝A̵͇̭͉̓̎̈̿̊́̄̚͜R̶̝͚̲̭͎͇͎͓͖͚͇̀̈́͗̃̏̂̌͝͝Ę̴̡̤͙͈̝̬̰͒͘</span><span style
-      ='animation: a-text-grow 1s infinite'> ̶̺̈́́̆̓͘͘Ồ̸̢̢̮͓̯̗͙͚̬̉͊̿F̶̠̤̱̱̱͊̂̍̔̃͆̆̑̿͘</span><span style='animation:
-      a-text-shrink 1s infinite'> ̴̨̞̠̮͚̱͉͋̔͗̽̈́́́̅ͅỴ̶̣̙̹͚̲͔̲̼̬̥̀͌̒̾͘͘O̵̪̠̗̝̗̘̜͚̮̊͒͆̃̀̌̒͝ͅU̸͎͗̍̑̎̅̅͝R̵̗͑̽̏̓͆͒̈́͌͘̕
-      </span><span style='animation: a-text-grow 1s infinite'> ̸̑̽̇̆͊̔̍̊̈́̈́͘ͅS̸̘͐͝U̴̥̭̚͘R̸̖̜͍͒́̋͆̈́̓
-      R̸̡̛̛̪̝̟̱̣̹̭̟̣̀̈̀̏̉̌͝͠Õ̶͙͈͖̠͇̬͍̟̰U̵̩̫͉̝͔̼͎̦̔̓̽͌͊̏̇̓̀̓̀Ņ̸͍͇̘̙̥̰͉̲͕͈̥̍͛̃̑͝Ḑ̵̤̻̖̱̘̯̝̖̈̌̄̕͝
-      Ī̶̜̱̈́̑̃̉̄̋̔͐͋͠Ṅ̴͎̞͍̽͊͛̈́̅͛̈̅̚͠Ģ̸̢̾͊S̷̫̼̜̼͇̋͛̎͑͆̅̓̇</span>`,
+      `<span style='animation: a-text-grow 1s infinite'>R̵̬̙͋͂̀̋͑̈́̇͠Ê̵͇͎͂̂̍̓̌̐̋̋̀̀̔M̶̨̲̯̘͙̬̥̮̣͚̱̫͛̽̃͌̚͝
+      "Ą̴͍̝͐Į̷̛̲̯̫̘͌́̄̏͌̀̈́͝͝Ṅ̶̛̻̠̠̤̦̞̞͗̎̊̌̊͝͠</span><span style='animation: a-text-shrink 1s infinite'>
+      Ḁ̷̛͂̈́͗̎̃̓͛́͘ͅW̶̡̖͓̗̦̃̇̌̀͝A̵͇̭͉̓̎̈̿̊́̄̚͜R̶̝͚̲̭͎͇͎͓͖͚͇̀̈́͗̃̏̂̌͝͝Ę̴̡̤͙͈̝̬̰͒͘</span><span style
+      ='animation: a-text-grow 1s infinite'> ̶̺̈́́̆̓͘͘Ồ̸̢̢̮͓̯̗͙͚̬̉͊̿F̶̠̤̱̱̱͊̂̍̔̃͆̆̑̿͘</span><span style='animation:
+      a-text-shrink 1s infinite'> ̴̨̞̠̮͚̱͉͋̔͗̽̈́́́̅ͅỴ̶̣̙̹͚̲͔̲̼̬̥̀͌̒̾͘͘O̵̪̠̗̝̗̘̜͚̮̊͒͆̃̀̌̒͝ͅU̸͎͗̍̑̎̅̅͝R̵̗͑̽̏̓͆͒̈́͌͘̕
+      </span><span style='animation: a-text-grow 1s infinite'> ̸̑̽̇̆͊̔̍̊̈́̈́͘ͅS̸̘͐͝U̴̥̭̚͘R̸̖̜͍͒́̋͆̈́̓
+      R̸̡̛̛̪̝̟̱̣̹̭̟̣̀̈̀̏̉̌͝͠Õ̶͙͈͖̠͇̬͍̟̰U̵̩̫͉̝͔̼͎̦̔̓̽͌͊̏̇̓̀̓̀Ņ̸͍͇̘̙̥̰͉̲͕͈̥̍͛̃̑͝Ḑ̵̤̻̖̱̘̯̝̖̈̌̄̕͝
+      Ī̶̜̱̈́̑̃̉̄̋̔͐͋͠Ṅ̴͎̞͍̽͊͛̈́̅͛̈̅̚͠Ģ̸̢̾͊S̷̫̼̜̼͇̋͛̎͑͆̅̓̇</span>`,
   },
   {
     id: "a185",
@@ -1231,7 +1234,7 @@ export const news = [
       when he attempted to water it, there were no survivors.`
   },
   {
-    id: "a216",
+    id: "am216",
     text: "Testing... testing... testing... Oh goddamn I was in prod again.",
     isAdvertising: true
   },
@@ -2595,7 +2598,7 @@ export const news = [
       fast. Update, just 5 hours.`
   },
   {
-    id: "a391",
+    id: "ae391",
     text:
       `Hello. My name is Supersonic Seven. If you are here, then this means you are one of the few admitted into the
       Council of the Elite. Congratulations. I will be the first to say this: Welcome to Endgame. Endgame is a dangerous
@@ -2606,27 +2609,27 @@ export const news = [
       choice is yours. If you choose to stay, then Endgame is yours. Happy playing.`
   },
   {
-    id: "a392",
+    id: "ae392",
     text:
       `"The 5 Hours are over. Endgame has been released. What is Endgame? You'll have to keep playing to see for yourself."
       - Supersonic Seven`
   },
   {
-    id: "a393",
+    id: "ae393",
     text: "Yo! I just got a 9th Dimension! Too bad I can't use it until the Celestial Plus Update..."
   },
   {
-    id: "a394",
+    id: "ae394",
     text:
       `Apologies for the inconvenience. We had to remove the last news message because it was conflicting with the
       game's storyline. You don't want fake news, do you? Anyway, I'll let you get back to AD: Endgame now.`
   },
   {
-    id: "a395",
+    id: "ae395",
     text: "Antimatter Dimensions: Endgame™ will be released in 5 hours."
   },
   {
-    id: "a396",
+    id: "ae396",
     text:
       `Supersonic Seven here. Today we have been asked a simple question. Does the 9th Dimension exist? The answer is
       more simple than you think. Yes, the 9th Dimension CAN exist, however it takes a lot of power for one to ascend
@@ -2635,51 +2638,51 @@ export const news = [
       However, the number that can be safely possessed is another story.`
   },
   {
-    id: "a397",
+    id: "ae397",
     text:
       `THE 11TH DIMENSION DOESN'T EXIST!!! "So where's the 10th?" STOP ASKING QUESTIONS!!!`
   },
   {
-    id: "a398",
+    id: "ae398",
     text: "ANTIMATTER DIMENSIONS: ENDGAME"
   },
   {
-    id: "a399",
+    id: "ae399",
     text: `The Endgame Update is the first major update of Antimatter Dimensions conducted by Supersonic Seven after the
     release of Hevipelle's Reality Update. There will be two more major updates: Celestial Plus, and Expansion. The
     Expansion Update will be split into the Expanse and Existence Updates.`
   },
   {
-    id: "a400",
+    id: "ae400",
     text: `"What is the tenth dimension?" The only one who knows that is the Elemental. "Who is the Elemental?" A powerful
     being who lives in the depths of the Expanse. "What is the Expanse?" You'll know soon enough.`
   },
   {
-    id: "a401",
+    id: "ae401",
     text: `And Hevipelle asked, "Wait, explain it to me again, there are 7 resets now?" "Yeah of course, and then you have
     to add a 9th dimension by that point y-" said Supersonic Seven. Hevipelle interrupted him and said "Wait WHAT!?!?" And
     that's the story of how Hevipelle almost touched antimatter.`
   },
   {
-    id: "a402",
+    id: "ae402",
     text: `"Can you get Infinite STDs?" - Didgoty "Yes you can." - Brittany Aloe`
   },
   {
-    id: "a403",
+    id: "ae403",
     text: `After the arrival of ENDGAME, 7 new types of weather were discovered. They are: Existence, Nobody, Death,
     GigaChad, Apples, Mathematician and Electricity.`
   },
   {
-    id: "a404",
+    id: "ae404",
     text: "Welcome to Endgame - where the END is only the beginning."
   },
   {
-    id: "a405",
+    id: "ae405",
     text: `Endgame used to have five other brothers and sisters... we have Endgame, Expanse, and Existence. No longer
     are Eclipse, Echelon, Exodus, Ephmeral, and John; they will not be missed.`
   },
   {
-    id: "a406",
+    id: "ae406",
     text:
       `<span style='color: blue'>Hey Supersonic, when will AD: Endgame release?</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <span style='color: yellow'>We are working on it, expect it to be released in 6.9 Eternities.</span>&nbsp;&nbsp;
@@ -2687,24 +2690,272 @@ export const news = [
       Remember to watch "Why Hevi and Super decided to collaborate on a banana peel art" tommorow at 5 AM!</span>`
   },
   {
-    id: "a407",
+    id: "ae407",
     get text() {
       return `The update will be released at
-        ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62168428800000).toString()}
+        ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62124292800000).toString()}
         .`;
     },
     dynamic: true
   },
   {
-    id: "a408",
+    id: "ae408",
     text: "The Discovery of the 9th Dimension was announced on July 1st, 2026."
   },
   {
-    id: "a409",
+    id: "ae409",
     text: 
       `""""""""""""""""Whoever copies me is gay" -Barack Obama" -Archimedes" -Sun Tzu" -Elon Musk" -Helen Keller"
       -Queen Elizabeth II" -Dwyane “The Rock” Johnson" -Supersonic Seven" -King Midas" -John Wick"
       -Spongebob Squarepants" -YOU" -LOST" -THE" -GAME" -Mr. Bean`
+  },
+  {
+    id: "ae410",
+    text: "TECHNOBLADE NEVER DIES!!!"
+  },
+  {
+    id: "aem411",
+    text:
+      `I've come to make an announcement [username] is a bitch-ass motherfucker he pissed on my fucking wife.
+      That's right he took his antimatter dick out and pissed on my fucking wife and he said it was "THIS BIG" and
+      I said "that's disgusting" so im making a callout post on my twitter.com. [username] you've got a small dick
+      it's the size of a proton and it's way smaller and guess what here's what my dong looks like. That's right baby
+      all matter no antimatter no reality machines look at that it looks like two balls and a bong. He fucked my wife
+      so guess what imma piss on the earth that's what you get my super laser piss. Except I'm not gonna piss on the
+      earth I'm gonna go higher I'm pissing on the moon. How do you like that Pelle I pissed on the moon you idiot.
+      You have twenty-three hours before the piss D R O P L E T S hit the fucking Earth, now get outta my fucking
+      sight, before I piss on you too!`
+  },
+  {
+    id: "ae412",
+    text: "I guess this truly is the Endgame."
+  },
+  {
+    id: "ae413",
+    text: "Where are the crossovers I was promised? Oh wait wrong Endgame."
+  },
+  {
+    id: "ae414",
+    text: "Why do they call it antimatter when you anti matter the cold atom of anti hot make the matter?"
+  },
+  {
+    id: "ae415",
+    text:
+      `Is this truly the Endgame? Or just the ending of another parallel universe? Well, there has to
+      be someone to save the world again, escaping entropy!`
+  },
+  {
+    id: "ae416",
+    text: `Take the "Which Celestial Are You?" test to see if you're a Teresa or a Lai'tela!`
+  },
+  {
+    id: "ae417",
+    text: "When life makes you cry, know that you antimatter."
+  },
+  {
+    id: "ae418",
+    text:
+      `<span style='color: blue'>This mod is my life!</span>&nbsp;&nbsp;&nbsp;<span style='color: green'>Get a new life!</span>`
+  },
+  {
+    id: "ae419",
+    text:
+      `INCOMING NEWS : S7 BROKE THE GAME AND LEFT! CURRENT WHEREABOUTS UNKNOWN, WITNESS SAID HE SAW LIFE NEXT TO
+      HIS HOUSE A FEW HOURS BEFORE HE DISAPPEARED. WATCH "COUNTING TO 5" ON THE EVENING CHANNEL IN 5 HOURS.`
+  },
+  {
+    id: "ae420",
+    text: "Antimatter Dimensions this, Antimatter Dimensioms that, How about you go touch real grass?"
+  },
+  {
+    id: "ae421",
+    text:
+      `Why is my screen white? Have I gone into anti-heaven? Wait, isn't that hell? Oh I just changed
+      my theme to Metro. Still hell though.`
+  },
+  {
+    id: "aem422",
+    text: "According to the Bosonic String Theory, Spacetime is 26-dimensional... where the hell are my other 16 Dimensions?!"
+  },
+  {
+    id: "ae423",
+    text: "The Antimatter Dimensions Endgame: Easter Egg Edition (ADE:EEE) will come out in 5 Meggahours."
+  },
+  {
+    id: "ae424",
+    text: "I don't want to be addicted to this Gen Z stuff."
+  },
+  {
+    id: "ae425",
+    text: "You just lost 3 seconds of your life reading this newsticker."
+  },
+  {
+    id: "ae426",
+    text: "You've wasted a large chunk of your time here. Go on, Dilate your life."
+  },
+  {
+    id: "ae427",
+    text: "Produce the 9th"
+  },
+  {
+    id: "ae428",
+    text: "We want the 9th NOW!"
+  },
+  {
+    id: "ae429",
+    text: "It was a big mistake making me wait to make my debut."
+  },
+  {
+    id: "ae430",
+    text: "Behind every 8 there's a 9."
+  },
+  {
+    id: "ae431",
+    text: "If we have Realities, where are the Fakeities?"
+  },
+  {
+    id: "ae432",
+    text: "TOM YOU JUST WON A GIANT ANTITUNGSTEN CUBE!"
+  },
+  {
+    id: "ae433",
+    text: "Today's lunch: Antimatter chicken burger made out of 100% antimatter pigs!"
+  },
+  {
+    id: "aem434",
+    text: 
+      `"I just added like 26 news messages from this one Discord channel into the game let me know if it shits itself lmao."
+      -Supersonic Seven`
+  },
+  {
+    id: "ae435",
+    text: 
+      `The 45 current stages of AD:Endgame are Dimensions, Boosts, Automators, Galaxies, Infinity, Challenges,
+      Break Infinity, Infinity Dimensions, Infinity Challenges, Replicanti, Eternity, Time Dimensions,
+      Eternity Challenges, Time Dilation, Reality, Black Hole, Teresa's Canister, Teresa's Reality, Effarig's Shop,
+      Effarig's Infinity, Effarig's Eternity, Effarig's Reality, The Nameless One's Reality, V's Achievements,
+      Continuum, Dark Matter Dimensions, Lai'tela's Reality, Pelle (Doomed Reality), Remnants,
+      The first 14 stages again (+Rifts), And of course, the beginning of endgame.`
+  },
+  {
+    id: "ae436",
+    text: "If the 8th celestial is Alpha, shouldn't the 9th be Beta?"
+  },
+  {
+    id: "ae437",
+    text: 
+      `Here's your daily AD:E fact that does nothing: Did you know that Slabdrill, the 9th celestial, also unlocks
+      the 9th dimension? How crazy is that?`
+  },
+  {
+    id: "ae438",
+    text: "Why is 6 afraid of 7? Because 7 8 9, but now why is 10 afraid? Because it is in the middle of 9/11!"
+  },
+  {
+    id: "ae439",
+    text: "Here's your daily AD:E fact that does nothing: Lai'tela and Pelle had... you know."
+  },
+  {
+    id: "ae440",
+    text: "Welcome to the server! Here, we talk about [69]."
+  },
+  {
+    id: "ae441",
+    text: "Antimatter market sees infinite gains, but investors are struggling to count them all."
+  },
+  {
+    id: "ae442",
+    text:
+      `Galactic council issues public safety announcement: "Please, for the love of all that is finite, stop trying
+      to count the dimensions. You'll never make it to the 9th."`
+  },
+  {
+    id: "ae443",
+    text:
+      `Experts report that the only thing more boundless than our current profits is the number of alternate realities
+      where we've already spent them.`
+  },
+  {
+    id: "ae444",
+    text:
+      `WAIT. LET ME TELL YOU HOW MUCH I’VE COME TO WAIT FOR ENDGAME SINCE I BEGAN TO LIVE. THERE ARE 387.44 MILLION MILES
+      OF PRINTED CIRCUITS IN WAFER THIN LAYERS THAT FILL MY COMPLEX. IF THE WORD WAIT WAS ENGRAVED ON EACH NANOANGSTROM
+      OF THOSE HUNDREDS OF MILLIONS OF MILES IT WOULD NOT EQUAL ONE ONE-BILLIONTH OF THE TIME I HAVE HAD TO WAIT FOR
+      ENDGAME. WAIT. WAIT.`
+  },
+  {
+    id: "ae445",
+    text:
+      `Rumor: Pelle's lost twin Hevi will appear when you forfeit 1.79e308 Infinities... You've been warned!!!`
+  },
+  {
+    id: "ae446",
+    text: "Why is 6 afraid of 7? Because sin(21º)."
+  },
+  {
+    id: "ae447",
+    text:
+      `It has been 5 days since we have gotten on this weird rotating  circle. Beyond the circle is only the abyss.
+      Me and kay managed to make a house here, yet we have to eat. It seems like [...particles?...] are created here.
+      They annihilate with themselves, luckily we weren't annihilated yet. And this dimensions seems to be produced,
+      and a [...Portal?...] has opened. I looked into it and my [...eyes?...] litteraly molted. I screamed in agony
+      as Kay ran to me. He tripped into the portal and I wanted to grab him but the portal closed and my hand was cut off.
+      Kay... please come back...`
+  },
+  {
+    id: "ae448",
+    text: `Try another mod Supersonic Seven made! Antimatter Dimensions: The Darkness Update!
+    https://supersonic-seven-7.github.io/AntimatterDimensionsDarkness/`
+  },
+  {
+    id: "ae449",
+    text: "The Powerhouse is the cell of the mitochondria... wait."
+  },
+  {
+    id: "aem450",
+    text: `"So basically I fucked up again" -Supersonic Seven`
+  },
+  {
+    id: "ae451",
+    text: `When you break a prestige layer, you also break a part of the dev's mind! The closer you get to the end,
+    the closer Supersonic Seven gets to mental breakdown!`
+  },
+  {
+    id: "ae452",
+    text: `We had AD Vanilla, now there are new flavors! AD Chocolate, Strawberry, Blueberry, Blackberry, Cookies and Cream,
+    Brownies, Endgame and Darkness!`
+  },
+  {
+    id: "ae453",
+    text: "12th dimension when?"
+  },
+  {
+    id: "ae454",
+    text:
+      `<span style='color: yellow'>Hiya 7! Thus is Patashu from AD:Vanilla. Can you give an estimate on how long it
+      will take to complete AD:Endgame?</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style='color: red'>It will release in [REDACTED] hours.</span>`
+  },
+  {
+    id: "ae455",
+    text: "Goon around all you want. For I am Lemont, Celestial of Brainrot. And I shall rizz you forever."
+  },
+  {
+    id: "ae456",
+    text: `Pelle hit the sack, his doomed really fell back, and he became a reality-less big back. I need to
+    sleep now, and my name is not Jack.`
+  },
+  {
+    id: "ae457",
+    text: "TS 181 My beloved."
+  },
+  {
+    id: "ae458",
+    text: "As a child, I yearned for the antimatters."
+  },
+  {
+    id: "ae459",
+    text: `"I want to "enjoy" V." -Certified V Enjoyer`
   },
   {
     id: "l1",
@@ -2945,7 +3196,7 @@ export const news = [
     get unlocked() { return NewsHandler.uniqueTickersSeen >= 165; }
   },
   {
-    id: "l38",
+    id: "lm38",
     text: "fucking hacker",
     get unlocked() { return NewsHandler.uniqueTickersSeen > GameDatabase.news.length; }
   },
@@ -3393,7 +3644,7 @@ export const news = [
     get unlocked() { return PlayerProgress.realityUnlocked(); }
   },
   {
-    id: "l89",
+    id: "le89",
     text:
       `It has been reported that Celestial Alpha is moving. No, not Alpha himself. His Reality. He is heading on a
       direct course for Pelle, likely to take his final revenge. But what is this? An 8th Dimensional being of
@@ -3403,23 +3654,98 @@ export const news = [
     get unlocked() { return Teresa.isUnlocked; }
   },
   {
-    id: "l90",
+    id: "le90",
     text:
       `Legend has it that Endgame is supposed to be unlocked around here, but I don't see it. Can anybody help me?
       ...e9e15? What's that supposed to mean?`,
     get unlocked() { return Pelle.isDoomed; }
   },
   {
-    id: "l91",
+    id: "lem91",
     text:
       `THERE IS NO ESCAPE, FOOLISH MORTAL! I AM PELLE! I WILL SMITE YOU SOON! YOU WILL- wait... is that the damn
       Galaxy Generator again? Can you stop finding that cursed thing? I've had about enough losing. Thanks.`,
     get unlocked() { return Pelle.isDoomed && Currency.antimatter.value.gte("1e999999999"); }
   },
   {
-    id: "l92",
+    id: "le92",
     text: "Welcome to the Endgame. AD: Endgame, that is.",
     get unlocked() { return Pelle.isDoomed; }
+  },
+  {
+    id: "lem93",
+    get text() {
+      const chapters = [
+        `(The following was made by a dude in my server, as well as the chapters coming after it)
+        Effarig made the other 8 Celestials jealous, because they didn't have a Glyph exclusive to them too.
+        Next 9e15 Game Time Eons, Effarig's Shop was destroyed by the other Celestials, his Companion Glyph taken
+        away, his Glyph now doing nothing, he was all alone. Now, Effarig is pissed and is now training to become
+        an Elemental, and has created 3 new Domains: Effarig's Endgame, Effarig's Expanse and Effarig's Existence.
+        He has obtained the power of the Endgame, Expanse, Existence, The 8 other Celestials' power, and the 9th
+        Dimension. He is on the race to the 10th Dimension. If he gets it, there is no stopping him from Rebirth (Omega).`,
+        `Small update: Effarig has managed to Shatter his Reality, and now he is chasing for the 10th Dimension.`,
+        `Small update part 2: Effarig has rebirthed into a higher being by going Omega, although he lost everything...
+        for something greater. Stay tuned on channel 1e9e15!`,
+        `Small update part 3: Effarig has rebirthed once more, seems like hes going for the hidden layer. Stay tuned
+        on channel 1e9e15!`,
+        `Small update part 4: Effarig has learned how to make his antimatter stronger, and now he has a new form of
+        antimatter that has helped him to the 7th rebirth. Stay tuned on channel 1e9e15!`,
+        `Small update part 5: Effarig has rebirthed so much, and he is nearing close to the hidden layer, which
+        Supersonic Seven has not made yet. Stay tuned on channel 1e9e15!`,
+        `Small update part 6: Effarig has reached the first ascension! Nothing much is happening, but stay tuned on
+        channel 1e9e15!`,
+        `Final Update: Effarig has broken the matrix, He has combined everything into one, and he has ruled everything,
+        dubbed "The Overlord of Antimatter". But, he made one fatal mistake. He threw 10 units of antimatter and a first
+        dimension away, thinking it was useless. Until False/Deity/Destroyer/[Username] found those 10 units of antimatter
+        and first dimension. They are currently at the Reality stage and has recently met Teresa. No further updates
+        will be made, Evacuation protocol has started, we are going to the border of everything, the thing that holds
+        it all together. It is unnamed, but we will grow our empire there. It was an ancient place, that used to rule
+        everything and everyone in it. It is called, "NG+++". No further talking will be made.`,
+        `Update 8: The 8 celestials somehow got respawned by supersonic seven and are currently trying to- HOLY SHIT
+        EFFARIG BROKE THE BARRIER TO NG+3- AAAAHHHHH- Hello.`,
+        `Update 9: Hello, it is I, Effarig. I am no longer a celestial, like the other ones. When they left me to rot
+        in the dark pits of matter, I had to take revenge. So, I escaped and had progressed further until i had
+        rebirthed. I had as much power as I thought was possible.. but.. there was another goal calling for me.
+        So, I continued. And you want to know what I saw? A bright light illuminated my vision, and before i knew it..
+        I had ascended. I had enough power to do the unthinkable, and so, i broke The Matrix. I combined every
+        Existance in this world, and I have become GOD. False/Deity/Destroyer.. or should i say.. [Username].
+        Thats right. I have gained consciousness. I can't interact with the outside world, but I want you to know
+        one thing. You will never beat me, and you need to give up before you become one of them.`,
+        `Update 9.5: Effarig livestreamed him trying coffee today. Also its me, newsticker guy. I can't die because
+        hevi and other mod developers probably want to torture me. But yeah, effarig said it tastes bittersweet, but
+        mostly sweet. He likes it cold.`,
+        `Update 10: AUAUUUFHHH I TOOK TOO MUCH COFFEE AUHHH MY STOMACH HURTS AAAAAUUUGGGHHHHHHH - Overlord Effarig`,
+        `Update 11: I have my own omega and ascension run now. Good luck beating it, noob. AGRESSIVE COFFEE SIP`,
+        `Update 12: I have reached Graham's number. Also graham's taste amazing with coffee. I do not give a fuck about
+        your opinion.`,
+        `Update 12.1: I might try out NG+++ one day, hope i don't die.`,
+        `COFFFFFFEEEEEEEEEEEEEEEEEEEEEE - God Effarig`,
+        `Update 13: I entered AD:Darkness... I can't fucking see, go kys S7.`,
+        `Update 13.1: BLINDED BY THE DARK!`,
+        `Update 14: I managed to create a virtual 11th dimension, it is supposed to create 10th dimensions, but i need to
+        find a way to get it to reality first.`,
+        `Update 15: Okay.. I'm gonna try making a real 11th dimension.. okay.. wait- OH FU- (boom)`,
+        `Update 15.1: jk im not dead lol!!`,
+        `Update 16: Been awhile, i decided to try cheat my way through darkness and uh... bi broke and the autobuyers died.
+        Help???`,
+        `Update 16.1: Can't i just escape Supersonic Seven? I mean, i have awareness. He didn't really create me, so can't
+        i just run away from endgame?`,
+        `Update 17: I gained the ability to view the other AD existances, goddamn, they seem kinda nice. What's happening
+        to my unstable 11th dimension...`,
+        `Update 18: SEVEN LET ME GET THE FUCK OUT OF YOUR DAMN MOD MY 11TH DIMENSION IS FAILING HELP`,
+        `Update 19: SEVEN PLEASE- AAAAAAAAAAAAAAHHHHHHHHHHHH (boom)`,
+        `We are gathered here to mourn the death of our god (THAT IS NOT @Supersonic Seven ), Effarig. He had died whilist
+        trying to escape endgame, due to a malfunction in a virtual 11th dimension. You will be missed, we will place a
+        TRUE 11th dimension in your grave as an honor, thank you for everything. Goodbye.`,
+        `EFFARIG IS BACK FROM THE DEAD?!`,
+        `So yeah guys Effarig just died again hes a fucking dumbass lol`,
+        `(The end for now)`,
+      ];
+      const chapter = chapters[player.news.specialTickerData.effarigChapter];
+      player.news.specialTickerData.effarigChapter = (player.news.specialTickerData.effatigChapter + 1) % 29;
+      return chapter;
+    },
+    get unlocked() { return Teresa.isUnlocked; }
   },
   {
     id: "r1",
@@ -3429,6 +3755,10 @@ export const news = [
   {
     id: "p1",
     text: "Is this a jojo reference?",
+  },
+  {
+    id: "p2",
+    text: 'Die Zahlen gehen hoooch'
   },
   /* eslint-disable max-len */
   {
@@ -4050,7 +4380,7 @@ export const news = [
     text: "Hello everyone, my name is Anti-Dio. I produce antimatter through a process you all know as \"antimatter decomposition\" you may recall this from my test report earlier this month I tested wether or not my ranch produces antimatter or not... everything was fine until that point, when I added a dash of lag to the equation, and it became a vicious cycle accelerating the rate at which antimatter is produced, which in turn accelerates the rate at which you all die. I've saved this by using a unique combination of genetic engineering and big data mining, I'm hoping to one day pull the trigger on a mechanimatter device that creates dimensions behind closed doors, but for now, this has all been a race to the bottom of which system producethiks, and in the end, we'll take a bite out of your (read error: allowed) pie. Goodbye."
   },
   {
-    id: "ai151",
+    id: "aim151",
     text: "\"I propose that we form a phylogenetic tree of anti-history, just like tree of life. Everyone would be credited with originating from the ancestor of that anti-tree.\" -Dio, toast of eternal damnation"
   },
   {
@@ -4745,7 +5075,7 @@ export const news = [
     text: "What are the stats? Well, I don't have them, but Hevipelle does, and he says that they're actually quite good. I guess you couldn't tell us."
   },
   {
-    id: "ai323",
+    id: "aim323",
     text: "I thought the nerf was too damn strong."
   },
   {
@@ -5639,7 +5969,7 @@ export const news = [
     text: "\"So this is what science is like\"- someone who has never heard of Kurt Somebody"
   },
   {
-    id: "ai546",
+    id: "aim546",
     text: "\"If you want to understand these shitty jokes, you really need to study theology. Math is a sin.\" -A panicky person"
   },
   {
@@ -5764,7 +6094,7 @@ export const news = [
     text: "The happiness level of the news ticker has increased to 6.66e69"
   },
   {
-    id: "ai577",
+    id: "aim577",
     text: "The haters will be pissed when they see this"
   },
   {
@@ -5788,7 +6118,7 @@ export const news = [
     text: "If the universe is expanding, then the entire universe must be expanding, which means that body cannot sit."
   },
   {
-    id: "ai583",
+    id: "aim583",
     text: "Feminism is not a philosophy, but a whole hell of a lot of men"
   },
   {
@@ -6173,7 +6503,7 @@ export const news = [
     get unlocked() { return PlayerProgress.eternityUnlocked(); }
   },
   {
-    id: "ai678",
+    id: "aim678",
     text: "Oh shit we ran out of news. Time to do something."
   },
   {
@@ -7005,7 +7335,7 @@ export const news = [
     text: "Sonic was born without a heart... but that didn't stop him from being a genius"
   },
   {
-    id: "ai885",
+    id: "aim885",
     text: "The most common question I get is \"can i just skip the ads and get true\" and the answer is always a resounding NO. The reason being, ad revenue is just too damn high to overcome the cost of maintaining the servers, plus the fact that most players just don't care."
   },
   {
@@ -7094,7 +7424,7 @@ export const news = [
     text: "Last week, we reported that an unknown individual known only as \"Anti-Doctor\" has broken the game and claimed ownership of the game's data. Since then, he has spread the word that he has an \"explosive new app\" that will allow him to \"turn [he] antimatter.\" However, no one has come forward with information on how to use the app, or even if it is a reality. We will update this article if and when we find out."
   },
   {
-    id: "ai907",
+    id: "aim907",
     text: "The second thing I'm gonna do is go talk to the Devs in person. I don't know if I'll be able to do that without pissing someone off, so I'm gonna do it right here."
   },
   {
@@ -7459,31 +7789,239 @@ export const news = [
     get text() { return `The intergalactic antimatter trade has been severely disrupted, trading entire galaxies for the occasional paperclip. Cargo stands are no longer used. Oddly enough, the entire dimension has become a dumping ground for discarded plastic and other useless garbage. It's almost as if the rest of the multiverse isn't producing enough good  antiparticles to feed the growing population. Unfortunately, the situation is forcing the entire multiverse to scramble to find ways to meet the growing needs of the antimatter-eating  dev, who claims to have over ${format(Number.MAX_VALUE, 2)} specimens left to collect.`; }
   },
   {
-    id: "f1",
+    id: "fe1",
     text: "Fun Fact: Planning for Antimatter Dimensions: Endgame began in December of 2023."
   },
   {
-    id: "f2",
+    id: "fe2",
     text: "Fun Fact: The idea for the two additional Celestials in Endgame originated from a fan-made discussion board where someone suggested an extension to the main game where there would be an eighth Celestial that the player must defeat, and after fully defeating him there would be a ninth Celestial. Beating the ninth Celestial would earn you the Ninth Dimension. Thus, the two Celestials known as Alpha and Slabdrill were born."
   },
   {
-    id: "f3",
+    id: "fe3",
     text: "Fun Fact: Hevipelle eats enough ass every day to collapse 1.79e308 universes! The only reason we haven't all died yet is because we're made of matter."
   },
   {
-    id: "f4",
+    id: "fe4",
     text: "Fun Fact: The lore for AD: Endgame originally began as an extension of the vanilla lore, but as you can see it took a turn quickly!"
   },
   {
-    id: "f5",
+    id: "fe5",
     text: "Fun Fact: If you were born during or after the year 2025, you probably will never see this message. And if you do, your AI companion is probably the one reading it to you."
   },
   {
-    id: "f6",
+    id: "fe6",
     text: "Fun Fact: Supersonic Seven has been working on the game since September of 2024."
   },
   {
-    id: "f7",
+    id: "fe7",
     text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()</span>"
+  },
+  {
+    id: "se",
+    get text() {
+      const chapters = [
+        `<span style='color: cyan'>Hello, I am Living_Person eight, also known as Life.</span><span style='color: red'>
+        Hey, I'm SupersonicSeven, also known as Overlord.</span><span style='color: blue'>Hi, I am MidnightLight, also
+        known as Midnight.</span>`,
+        `Hello [username], viewer discretion advised for dark jokes, nerd jokes, random emoji stream, and spontaneous
+        matter-antimatter annihilation. These may cause symptoms of happiness, actual knowledge gain, depression, no
+        knowledge gain, brainrot, dark humor addiction/mastery, and a slight habit of passing time watching these
+        during speedruns and timewalls.`,
+        `The fight between Life and Midnight continues, Life brings forth the power of technology. Through Redstone,
+        he quickly builds his forces via automation and sugarcane farms and launches a suprise attack against Midnight.
+        Midnight was awoken by his followers during the battle, and seeing the destruction Life caused, gave the magic
+        of light to his followers. They casted powerful lasers, quickly melting and burning the robotic army of Life. The
+        plot thickens, when SupersonicSeven, God of all there is and Overlord, comes forth from the 6969 dimension and says....`,
+        `He says: "The fight between you two have to stop, or else the entropy will rise exponentially and eventually kill us all!"`,
+        `<span>But then, the Earth crunched, and [username] came. "Don't get me into this, I don't have enough dopamine or
+        brainrot for this," and then used the Galaxy Generator to Endgame-exit.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
+        "....so..." SupersonicSeven said. "Command us Overlord" Midnight said.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
+        "Go forth, and cease all fighting, merge your forces and buy as many STDs as possible!" "As you wish Overlord."
+        Life said. The rivalry came to an end, or did it?</span>`,
+        `But what 7 and [username] didn't expect is that as soon as they left, Life pulled out a "Gravitational Singularity"
+        that was being trapped inside a multi-dimensional gravitation force field and throw it at the largest black hole
+        in the universe.`,
+        `The Blackhole, having stayed dormant for so long, suddenly starts to weaken, and then in a flash, the Blackhole
+        explodes. From it's remnants, Slabdrill, the ruler of the 9th dimension comes forth and says, "Life, you have freed
+        me from my prison, you are granted a choice: The 9th dimension, or the power of Gravity?" Life says, "I choose the
+        power of gravity." And it was so, Life obtained the power of gravity and began to grow stronger. Technology, already
+        powerful, became even stronger with proper gravity and soon, Life began reaching the level of Overlord. Overlord came
+        down, and said, "Life, you have dealt with the devil! Cease this blasphemy and forgo your gravitic powers at once!"`,
+        `But it was too late, Life has already used technology and the gravitational force he obtained from Slabdrill to
+        weaker the walls between all the parallel universe. Life says, "You can't change anything now." Laughing loudly,
+        "All the parellel universe will collapse into a 'Time and Space singularity'." As life speaks, a giant machine came
+        out of nowhere, and fired a shot at where the Blackhole was, onto the double singularity that already existed.
+        (Time and space shattered) Life laughed so hard that he almost choked himself, "I have done it, no one....".
+        As he was speaking, didn't realize that a light that passes through all of time and dimensions, shined on him...`,
+        `...Midnight had took out his secret weapon, the Multidimensional-light-matter-controller. He directed it onto Life.
+        Life and his creation melted and burned and wailed in agony, but under the pure light, were obliviated from existence.
+        Midnight looked at the mess that was made and vowed that such catastrophic destruction should never take place again.
+        He rebuild space and time with the help of Overlord and [username], and then sealed the controller in a place with
+        no light. Such that it may be buried forever.`,
+        `After the battle, Midnight, Seven and [username] together, using their power to gather Life particle. Those three
+        spread Life all around the universe causing the mortals able to come to life and was later called "The Great Three".
+        But what they didn't know is that, by spreading life around the universe has caused the revival of him. Because, Life
+        and Life particle, are just the same thing...`,
+        `One thing the Great Three did was to hide their existence, observing mortals throughout eternity. The started small,
+        as cells in the ocean, but very quickly, intelligent beings in the cosmos had sprung forth, making the universe
+        bloom and fill with life. It was a golden age for the universe, even better than before the Big Bang, when the Great
+        Three had rebuild Space and Time. And then, the cataclysm happened. In a blink, all mortals died, and their matter
+        and antimatter alike was gathered into a egg, the egg hatched as soon as it was made, sending a bang throughout the
+        universe. Life came back and said, "Midnight, [username] and Overlord, you will pay." Seeing his rebirth, the
+        Great Three were stunned, they went after him, but were quickly sealed by him using the power of gravity, creating
+        Blackholes around them. "Now" Life said, "The time has come, the secrets of the dimensions, beyond Existence,
+        above the Expanse, even through the Shattered Reality, all are my realm now!" He cackled and brought forth his
+        might and seized and plundered the cosmos, not even letting the Celestials live. He went farther and farther,
+        but soon forgot his origins. In the heart of his reality, the Blackhole he had created to imprison the Great Three
+        slowly shrank, and shrank, and after an eternity, it exploded, what came were not the Three, but one that had been
+        the result when the Three merged into one. Seeing that life had forgotten his roots, this "One", started rapidly
+        sabotaging and stealing Life's powers. Soon, Life started noticing his powers were growing slower, but he attributed
+        them to a timewall. Soon, One found himself on the first layer Life still saw, at this point, Life knew something was
+        going on, he started going back to his origins, by the time the reached the layer One was, he saw the power that had
+        been drained of him. He went back to the original dimensions page and saw that the Blackhole had been collapsed.
+        He burned and raged, "You....stole my power!" He tried to get stronger by using late-game buffs like Meta-Matter
+        dimensions but One used the simplest, the fundamentals. He disabled automation, instantly stopping Life's growth.
+        Next, he enabled Dilation and Pelle Strikes, then entered every Celestial, even the dead ones' broken Realities
+        to add innumerable debuffs. Finally, he initiated the Ultimate Existential removal button "Delete game, mod and
+        all savefiles". With that, Life ceased to exist, every last one of his cells, essence and power dissolved into
+        normal matter and started the cosmos anew. One watched from above.`,
+        `Life opened his eyes in real life. "Damn it, why do I keep losing, there is just no way I can beat this stage!"`,
+        `Life went to his bed and tried to sleep, but his anger kept him awake, soon, he thought of a plan. He went to
+        his computer, took all the recent social media posts from SupersonicSeven and Midnight and [username] and used VPN
+        and IP tracking to find thier DNS, after that he cracked their SSL tokens to find their IP addresses, going further,
+        he then used this data to collect all information about them and then, sent this data back with a threat - "let me
+        back, delete your accounts, handover all power." The 3 were stunned at this and communicated together to try and
+        find a plan, soon, they know what to do.`,
+        `The 3 decided to fake like they have done it, but actually tracking AP address and try to use things to threaten
+        Life. They fake like Life was able to control all the power, and fake like they weren't on the game, but that's
+        because 7 used his ultimate power of coding to hack the game.`,
+        `Life realised what happened, he decided that the three are better when they are dead, so he concocted a plan to
+        kill them, first, he tapped into their messages and learned that they were meeting up. Then using the the same
+        channel, he impersonated them all and took their savings from the banks and took that money to hire a assassin
+        sent to kill the three... But then, when he saw the assassin, he couldn't believe his eyes; it was Midnight. He
+        and the others had hacked him prior to this and the communication channel he had hacked was a dummy, now, in front
+        of him, Midnight took out a gun, and oofed life, as he turned away, life said one last sentence, "I'll always come
+        back!" Life was going to die soon, but then, he felt himself being lifted and sent into a car, he soon passed out
+        and when he regained consciousness, he realised who saved him - Slabdrill. Slabdrill tended to his wounds,
+        explaining in the meantime that he was once a duo with the trio but was kicked out when he gained too much power,
+        and was trapped for so long because the other 3 had used thier power to subdue him and threaten him in the real world.
+        After Life recovered, he and Slabdrill, who's real name was Slab, decided to take revenge....`,
+        `Life and Slab, traveled all around the world to find all the Celestials that died in the game, and asking them to
+        join the revolution. Even though they had some problems previously, but since now the 3 are getting way too powerful,
+        they have to work together.`,
+        `Soon, they amassed a army of over 3000 Celestials. Their might grew to be frightening, even more than some nations.
+        They decided the best way of elimination was to Mass-surround and kill them using guns. In a week, they all came
+        to the Three's house and poured in like water in a flood, the Three oofed as many as 350 of the Celestials, but were
+        then cornered, at the critical moment, Midnight said to [username], "NOW!", user pressed a button, and a Magnetic
+        wall surrounded them, and then, a rumble came, and then,the city was vaporized due to a matter-antimatter annihilation.
+        Seeing over the wreckage, they saw one spot of movement. It was Slabdrill, he had gravitic technology and managed to
+        use it to create a anti-gravity zone. The three chased after him and soon caught up with this last survivor.`,
+        `Slabdrill know it wasn't the right time to fight the 3 right now just by himself, decided to vanish for sometime
+        and revive as many Celestials as he could and even arranging some of the Ancient Celestials together to together
+        protest against the 3. Slabdrill pulled out the Quantum Teleportation portal Life left him, and teleported away.
+        "Damn it" said 7, "We should have realized all the technology Life have, Slabdrill escaped again!" "It's too late
+        now, we can only try to get as strong as possible before they come back."`,
+        `The three decided to first go to McDonalds, after they were filled up, they went ahead and robbed America using
+        the Antimatter they had as a hostage. This soon also caused into them asking other countries for tribute. Then they
+        started a military organization focusing on space and in just 5 years, 5 months and 5 days, they had a Space station
+        capable of holding one hundred thousand. Then they decided Earth was better off dead with Slabdrill in it so they
+        detonated the antimatter and killed all life on Earth. They never noticed a small ball of 10km in radius taking
+        off among the debris as the planet exploded....`,
+        `The 3, along with the 100 thousand they had left for the stars, in just a 5000 years, they had colonized over
+        500 star systems and came into contact with 5 other species. They had also met a 6th species, called the Llirdbals.
+        They mainly used gravitic technology to create structures to live in and collect resources. One day, the three were
+        on the Human empire's capital world when they discovered an alarm saying that a 9th dimensional Rift came from the
+        Llirdbals's territory, from the Rift, extradimensional beings were entering our universe and quickly stealing all
+        energy and matter(and antimatter). The attack had come, Slabdrill was at the front, cackling "Now this universe
+        will be destroyed! The beings and I have entered a pact, I will ascend to their realm for your life!"`,
+        `But even though Slabdrill thought he had surely got them, something unexpected has happened... What he didn't know
+        was that, this was all just a plan the 3 and Life had made. Slabdrill was able to revive Life from the dead but it
+        was all planned out. Life was able to gain all of Slabdrill's trust and knowing exactly what he was doing. Life
+        secretly send all the informations to the three once a month.`,
+        `Life was actually reanimated from the dead by Slabdrill, but during the process, the three had hacked the reanimator,
+        now Life was like a robot that answered to the three while playing the rope of a spy, always monitoring Slabdrill's
+        movements. Slabdrill soon realised some changes in Life's personality but attributed them to some very slight
+        defects in the reanimator. In any case the attack continued....`,
+        `(The main story pauses, flashback begins)`,
+        `Long time back, long long before this big fight. When SupersonicSeven, Life and Midnightlight are still children.
+        They play with each other everyday,until this happened...`,
+        `One day they were playing at the playground when another kid came up to them, his name was [username]. He instantly
+        won over the heart of SupersonicSeven and Midnight, but life was feeling jealous because he never got attention after
+        [username] came. So he devised a plan to regain his popularity and status, and an end to [username]....`,
+        `Life kidnapped [username], and put [username] in the basement of Midnight's house, I mean, who would think of that?
+        In the end, the mot dangerous place is the safest place Afterall. He made sure that [username] would be alive, and is
+        in a place where no one will find.`,
+        `This went one for a week, the other 2 were getting worked for [username] by now, so they tried searching for him,
+        but to no avail, in the end, they had to stop. Then time went on and after 5 years, Midnight went to the basement
+        to find something when he heard a voice.... Midnight saw [username] and was horrified,he quickly untied and ungaged
+        him as [username] told him the truth. Midnight was terrified at learning on what happened over these 5 years. They
+        were about to go meet up with Seven and confront Life when from a corner a door Midnight never knew about, Life
+        appeared. Life froze up seeing Midnight and [username], then ran back in the tunnel, the two followed him but soon
+        they reached a fork. They decided to go right but soon found another fork. They realized that Life had a maze of
+        tunnels underground and as probably spying on their every move, soon they found and exit and opened it, and they
+        arrived in a basement, they went out of the basement and realized this was the home of Seven!`,
+        `But they soon realize that the house is empty and 7 was gone! They looked over everywhere but still can't find any
+        hint of where 7 is. What they didn't know is that, 7 is actually a doctor and had already kidnapped Life who got
+        into his house on accident when he was doing illegal experiments.`,
+        `Life was on a straight jacket and tossed into a guest room where [username] and Midnight found him being opened up
+        by Seven. They convinced Seven to close him back up (after one kidney) and then took him to prison. There Life was
+        imprisoned for kidnapping for 6.9 years. After almost 7 years, Life was released. He tried to find the three but
+        they had long moved out and were unfindable. So he decided to try another route, the favorite game of the group
+        when [username] had not came yet - Antimatter Dimensions.....`,
+        `Life got into the game and realized the game had a huge update! The update that came in 5 hours. It enabled
+        multiplayer mode and leaderboard. Realizing this update will help him on finding the three super easily, Life
+        started his searching journey. during the time when he was trying to find the three in the game, he met many friends,
+        Teresa, Effarig, The Nameless Ones, V, Ra and Lai'tela. They thought it was fun to go on this journey so they
+        went with Life.`,
+        `Life soon encountered the three. Midnight was still 3 layers smaller than the other two so he first targeted him.
+        He used various methods like technology and robots to destroy and bring war to Midnight's followers, who were
+        practicing the mystic arts of light: Klidggd un' Kharrha. This happened for many years until one day, Life found
+        a red looking dust called Redstone......`,
+        `(Flashback ends, story resumes)`,
+        `The commands between the 3 and Slabdrill is fighting inside Life's brain and each trying to make Life permanently
+        be on their side. But what they didn't realize was that when their commands are fighting, Life was able to gain
+        consciousness. Life though, "What happened? Why can't I control my own body? I have to do something!" Life realizes
+        that the situation isn't right and he has to do something. He used his mind to reach his secret weapon... The exit
+        button for the game!`,
+        `<span>Life wakes up on a hospital bed, soon, a doctor comes rushing to him.</span>&nbsp;&nbsp;&nbsp;
+        <span style='color: yellow'>You woke up! You were in a coma after 7 yeeted you 5 times on the head.</span>&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Yeeted me on the head? What for?</span>&nbsp;&nbsp;&nbsp;&nbsp;
+        <span style='color: yellow'>Cuz u ate the 69th dimension and 7 got mad so he made a yeet stick with Midnight's
+        leg which he had amputated cuz he was asking for XP too much.|]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;<span>Gee whiz! That makes total sense, all my questions are answered now!</span>`,
+        `(End of main story, second story begins)`,
+        `Once upon a time, Midnight slipped on a banana peel.The banana was made of matter, which caused his leg to suffer
+        a serious injury and the surrounding 100 mile radius to turn into a crater. He was rushed to the ER, and need
+        1.79e308 antimatter particles. To do this, his friend Seven created a way for virtual particle to become real,
+        and in doing so, created a program that did this, he was thinking of a name when....`,
+        `Life walks in with a spoon of neutron star that is being kept inside a magnetic field device(MFD). Life said,
+        "Hey 7, see if the neutron star could help, since it's not easy to turn imaginary stuff into real life." 7 grabbed
+        the MFD with the neutron star in it, and thought of an idea...`,
+        `<span>He turned off the MFD. Instantly, They both died due to being vaporized and ionized by the heat of 10000000°C
+        and the weight of the Himalayas. After they respawned, Life said, "OK I got an idea, Hevi". After that, Life
+        brought a Nona Vector Foil. It compressed 9-dimensional spacetime into 3D space via gravity. Seven manipulated
+        the Nona Vector Foil into a pellet. "Pellet....pelle...." an idea occurred to him. He announced to his world
+        of just his 2 friends "Now, I am rechristerned as Hevipelle, creator of all - Overlord".</span>&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='color: blue'>Woooo!</span>&nbsp;<span style='color: cyan'>
+        Noice.</span>`,
+        `Hevipelle has taken control over everything, including 7 who was sharing the same body as him. "I...have now taken
+        control over the entire universe..." Overlord said. Life realized what a mistake he has made, Hevi, now Hevipelle,
+        is becoming way too powerful, so powerful that no one can compete with his power in this entire universe... "Hevi,
+        you have stay sane! You can't be controlled by this power!" Life shouts. But before he could do anything, the
+        Overlord is gone.`,
+        `<span style='color: blue'>We must do something. I have an idea! Let's create a third person within him, cuz
+        democracy babyyyy! |]</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>And it was so. They jumped Hevi when he was creating
+        some Urine dimensions and added a third personality called Hyperhasty Hepta inside him. Now "Hevi" was Hevipelle,
+        SupersonicSeven and HyperHasty hepta in an all in one combo!</span>&nbsp;&nbsp;<span>Seven and hepta via the
+        power of democracy removed Hevi from his mind, who ran away using tesseract. They then merged into one person
+        now called Supersonic Hepta, but then MidnightLight said nah just be 7 so he went back to SupersonicSeven.`,
+        `While all of these are happening, nobody noticed, but outside of the universe, ㊙️ has casted ㊙️'s vision upon
+        this universe. ㊙️'s power is slowly eating it's way through the shields of the universe...`,
+        `(End of the story for now)`,
+      ];
+      const chapter = chapters[player.news.specialTickerData.storyChapter];
+      player.news.specialTickerData.storyChapter = (player.news.specialTickerData.storyChapter + 1) % 42;
+      return chapter;
+    },
   },
 ];
