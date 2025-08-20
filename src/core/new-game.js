@@ -35,7 +35,8 @@ export const NG = {
     // Modify beaten-game quantities before doing a carryover reset
     player.records.fullGameCompletions++;
     player.endgames++;
-    this.gainEndgameStuff();
+    player.endgame.celestialPoints.add(gainedCelestialPoints());
+    player.endgame.doomedParticles.add(gainedDoomedParticles());
     GlyphAppearanceHandler.unlockSet();
     this.restartWithCarryover();
 
@@ -45,23 +46,6 @@ export const NG = {
     GameEnd.additionalEnd = 15;
     // Without the delay, this causes the saving (and its notification) to occur during the credits rollback
     setTimeout(() => GameStorage.save(), 10000);
-  },
-  get gainCelestialPoints() {
-    if (!player.break2) return DC.D1;
-    let cp = new Decimal(player.records.totalEndgameAntimatter.log10() / 9e15);
-    if (Achievement(197).isUnlocked) {
-      cp = cp.times(Decimal.max(9e115, player.records.totalEndgameAntimatter.log10() / 9e115));
-    }
-    return cp.floor();
-  },
-  get gainDoomedParticles() {
-    if (!player.break2) return DC.D1;
-    let dp = Decimal.min(player.records.totalEndgameAntimatter.log10() / 9e15, 1e100);
-    return dp.floor();
-  },
-  gainEndgameStuff() {
-    player.endgame.celestialPoints.add(gainCelestialPoints());
-    player.endgame.doomedParticles.add(gainDoomedParticles());
   },
   // Reset the game, but carry over some post-completion stats. We also call this when starting a speedrun, so make sure
   // any stats which are updated due to completion happen in startNewGame() instead of in here
