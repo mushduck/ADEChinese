@@ -17,7 +17,7 @@ export * from "./storage";
 export * from "./notations";
 export * from "./tutorial";
 
-export * from "./new-game";
+export * from "./endgame";
 
 export * from "./celestials/quotes";
 export * from "./celestials/teresa";
