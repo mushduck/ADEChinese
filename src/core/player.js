@@ -349,6 +349,18 @@ window.player = {
       iMCapSet: [],
       laitelaSet: [],
     },
+    thisEndgame: {
+      time: 0,
+      realTime: 0,
+      bestCPmin: DC.D0,
+      bestDPmin: DC.D0,
+    },
+    bestEndgame: {
+      time: Number.MAX_VALUE,
+      realTime: Number.MAX_VALUE,
+      bestCPmin: DC.D0,
+      bestDPmin: DC.D0,
+    },
   },
   speedrun: {
     isUnlocked: false,
