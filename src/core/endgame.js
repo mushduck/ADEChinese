@@ -30,7 +30,7 @@ function giveEndgameRewards() {
   );
 }
 
-export const endgame = {
+export const Endgame = {
   newEndgame() {
     GameEnd.creditsClosed = false;
     GameEnd.creditsEverClosed = false;
