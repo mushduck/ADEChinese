@@ -20,7 +20,7 @@ function giveEndgameRewards() {
   Currency.celestialPoints.add(gainedCelestialPoints());
   Currency.doomedParticles.add(gainedDoomedParticles());
   updateEndgameRecords();
-  Currency.endgames.add(endgameMultiplier);
+  Currency.endgames += endgameMultiplier;
   addEndgameTime(
     player.records.thisEndgame.time,
     player.records.thisEndgame.realTime,
