@@ -482,6 +482,11 @@ Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
   }
 }();
 
+Currency.endgames = new class extends NumberCurrency {
+  get value() { return player.endgames; }
+  set value(value) { player.endgames = value; }
+}();
+
 Currency.celestialPoints = new class extends DecimalCurrency {
   get value() { return player.endgame.celestialPoints; }
   set value(value) {
