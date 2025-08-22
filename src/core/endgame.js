@@ -1,5 +1,13 @@
 import * as ADNotations from "@antimatter-dimensions/notations";
 
+import { AutomatorPanels } from "@/components/tabs/automator/AutomatorDocs";
+import { GlyphInfo } from "@/components/modals/options/SelectGlyphInfoDropdown";
+
+import { AUTOMATOR_MODE, AUTOMATOR_TYPE } from "./automator/automator-backend";
+import { DC } from "./constants";
+import { deepmergeAll } from "@/utility/deepmerge";
+import { GlyphTypes } from "./glyph-effects";
+
 export function isEndgameAvailable() {
   return player.records.totalEndgameAntimatter >= DC.E9E15;
 }
