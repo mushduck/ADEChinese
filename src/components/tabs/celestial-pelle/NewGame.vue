@@ -25,7 +25,7 @@ export default {
       this.selectedSetName = GlyphAppearanceHandler.chosenFromModal?.name ?? "None (will choose randomly)";
     },
     startNewGame() {
-      Endgame.startNewGame();
+      Endgame.newEndgame();
     },
     openSelectionModal() {
       Modal.cosmeticSetChoice.show();
