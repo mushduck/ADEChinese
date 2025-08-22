@@ -64,7 +64,7 @@ export const Speedrun = {
   // Hard-resets the current save and puts it in a state ready to be "unpaused" once resources start being generated
   prepareSave(name) {
     // Carry all relevant post-completion variables over too
-    Endgame.restartWithCarryover();
+    Endgame.resetStuff();
 
     player.speedrun.isUnlocked = true;
     player.speedrun.isActive = true;
