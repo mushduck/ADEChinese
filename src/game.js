@@ -265,6 +265,11 @@ export function addRealityTime(time, realTime, rm, level, realities, ampFactor, 
     realities, reality, level, shards * ampFactor, projIM]);
 }
 
+export function addEndgameTime(time, realTime, cp, dp, endgames) {
+  player.records.recentEndgames.pop();
+  player.records.recentEndgames.unshift([time, realTime, cp, dp, endgames]);
+}
+
 export function gainedInfinities() {
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults")) {
     return DC.D1;
