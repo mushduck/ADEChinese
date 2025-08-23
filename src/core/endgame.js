@@ -270,8 +270,8 @@ export const Endgame = {
     player.reality.maxRM = DC.D0;
     player.reality.imaginaryMachines = 0;
     player.reality.iMCap = 0;
-    player.reality.glyphs.active = [];
-    player.reality.glyphs.inventory = [];
+    const allGlyphs = player.reality.glyphs.active.concat(player.reality.glyphs.inventory);
+    Glyphs.removeFromInventory(allGlyphs);
     player.reality.glyphs.sac.power = 0;
     player.reality.glyphs.sac.infinity = 0;
     player.reality.glyphs.sac.time = 0;
