@@ -91,246 +91,22 @@ export const Endgame = {
     Tab.dimensions.antimatter.show();
     AchievementTimers.marathon2.reset();
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
-    Currency.antimatter.reset();
-    AntimatterDimensions.reset();
-    InfinityDimensions.fullReset();
-    InfinityDimensions.resetAmount();
-    fullResetTimeDimensions();
-    resetTimeDimensions();
-    resetTickspeed();
-    player.buyUntil10 = true;
-    player.sacrificed = DC.D0;
-    playerInfinityUpgradesOnReset();
-    resetChallengeStuff();
-    player.eternityChalls = {};
-    player.reality.unlockedEC = 0;
-    player.reality.lastAutoEC = 0;
-    player.challenge.eternity.current = 0;
-    player.challenge.eternity.unlocked = 0;
-    player.challenge.eternity.requirementBits = 0;
-    Lazy.invalidateAll();
-    ECTimeStudyState.invalidateCachedRequirements();
-    Autobuyers.reset()
-    Currency.infinityPoints.reset();
-    resetInfinityRuns();
-    Currency.infinities.reset();
-    Currency.infinitiesBanked.reset();
-    player.dimensionBoosts = 0;
-    player.galaxies = 0;
-    player.partInfinityPoint = 0;
-    player.partInfinitied = 0;
-    player.break = false;
-    player.shownRuns.Reality = true;
-    player.shownRuns.Eternity = true;
-    player.shownRuns.Infinity = true;
-    player.requirementChecks.infinity.maxAll = false;
-    player.requirementChecks.infinity.noSacrifice = true;
-    player.requirementChecks.infinity.noAD8 = true;
-    player.requirementChecks.eternity.onlyAD1 = true;
-    player.requirementChecks.eternity.onlyAD8 = true;
-    player.requirementChecks.eternity.noAD1 = true;
-    player.requirementChecks.eternity.noRG = true;
-    player.requirementChecks.reality.noAM = true;
-    player.requirementChecks.reality.noTriads = true;
-    player.requirementChecks.reality.noPurchasedTT = true;
-    player.requirementChecks.reality.noInfinities = true;
-    player.requirementChecks.reality.noEternities = true;
-    player.requirementChecks.reality.noContinuum = true;
-    player.requirementChecks.reality.maxID1 = DC.D0;
-    player.requirementChecks.reality.maxStudies = 0;
-    player.requirementChecks.reality.maxGlyphs = 0;
-    player.requirementChecks.reality.slowestBH = 1;
-    player.records.timePlayedAtBHUnlock = Number.MAX_VALUE;
-    player.records.realTimeDoomed = 0;
-    player.records.totalEndgameAntimatter = DC.E1;
-    player.records.totalRealityAntimatter = DC.E1;
-    player.records.totalEternityAntimatter = DC.E1;
-    player.records.totalInfinityAntimatter = DC.E1;
-    player.records.recentInfinities = Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]);
-    player.records.recentEternities = Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]);
-    player.records.recentRealities = Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]);
-    player.records.thisInfinity.time = 0;
-    player.records.thisInfinity.realTime = 0;
-    player.records.thisInfinity.lastBuyTime = 0;
-    player.records.thisInfinity.maxAM = DC.D0;
-    player.records.thisInfinity.bestIPmin = DC.D0;
-    player.records.thisInfinity.bestIPminVal = DC.D0;
-    player.records.bestInfinity.time = Number.MAX_VALUE;
-    player.records.bestInfinity.realTime = Number.MAX_VALUE;
-    player.records.bestInfinity.bestIPminEternity = DC.D0;
-    player.records.bestInfinity.bestIPminReality = DC.D0;
-    player.records.thisEternity.time = 0;
-    player.records.thisEternity.realTime = 0;
-    player.records.thisEternity.maxAM = DC.D0;
-    player.records.thisEternity.maxIP = DC.D0;
-    player.records.thisEternity.bestIPMsWithoutMaxAll = DC.D0;
-    player.records.thisEternity.bestEPmin = DC.D0;
-    player.records.thisEternity.bestEPminVal = DC.D0;
-    player.records.thisEternity.bestInfinitiesPerMs = DC.D0;
-    player.records.bestEternity.time = Number.MAX_VALUE;
-    player.records.bestEternity.realTime = Number.MAX_VALUE;
-    player.records.bestEternity.bestEPminReality = DC.D0;
-    player.records.thisReality.time = 0;
-    player.records.thisReality.realTime = 0;
-    player.records.thisReality.maxAM = DC.D0;
-    player.records.thisReality.maxIP = DC.D0;
-    player.records.thisReality.maxEP = DC.D0;
-    player.records.thisReality.bestEternitiesPerMs = DC.D0;
-    player.records.thisReality.maxReplicanti = DC.D0;
-    player.records.thisReality.maxDT = DC.D0;
-    player.records.thisReality.bestRSmin = 0;
-    player.records.thisReality.bestRSminVal = 0;
-    player.records.bestReality.time = Number.MAX_VALUE;
-    player.records.bestReality.realTime = Number.MAX_VALUE;
-    player.records.bestReality.glyphStrength = 0;
-    player.records.bestReality.RM = DC.D0;
-    player.records.bestReality.RMSet = [];
-    player.records.bestReality.RMmin = DC.D0;
-    player.records.bestReality.RMminSet = [];
-    player.records.bestReality.glyphLevel = 0;
-    player.records.bestReality.glyphLevelSet = [];
-    player.records.bestReality.bestEP = DC.D0;
-    player.records.bestReality.bestEPSet = [];
-    player.records.bestReality.speedSet = [];
-    player.records.bestReality.iMCapSet = [];
-    player.records.bestReality.laitelaSet = [];
-    player.IPMultPurchases = 0;
-    Currency.infinityPower.reset();
-    player.postC4Tier = 0;
-    Currency.timeShards.reset();
-    Replicanti.reset(true);
-    Currency.eternityPoints.reset();
-    EternityUpgrade.epMult.reset();
-    Currency.eternities.reset();
-    player.eternityUpgrades.clear();
-    player.totalTickGained = 0;
-    player.totalTickBought = 0;
-    Currency.timeTheorems.reset();
-    resetEternityRuns();
-    secondSoftReset(false);
-    player.respec = false;
-    player.eterc8ids = 50;
-    player.eterc8repl = 40;
-    player.dilation.studies = [];
-    player.dilation.active = false;
-    player.dilation.upgrades.clear();
-    player.dilation.rebuyables = {
-      1: 0,
-      2: 0,
-      3: 0,
-      11: 0,
-      12: 0,
-      13: 0
-    };
-    Currency.tachyonParticles.reset();
-    player.dilation.nextThreshold = DC.E3;
-    player.dilation.baseTachyonGalaxies = 0;
-    player.dilation.totalTachyonGalaxies = 0;
-    Currency.dilatedTime.reset();
-    player.dilation.lastEP = DC.DM1;
-    player.realities = 0;
-    player.partSimulatedReality = 0;
-    player.reality.realityMachines = DC.D0;
-    player.reality.maxRM = DC.D0;
-    player.reality.imaginaryMachines = 0;
-    player.reality.iMCap = 0;
-    player.reality.glyphs.active = [];
-    player.reality.glyphs.inventory = [];
-    player.reality.glyphs.sac.power = 0;
-    player.reality.glyphs.sac.infinity = 0;
-    player.reality.glyphs.sac.time = 0;
-    player.reality.glyphs.sac.replication = 0;
-    player.reality.glyphs.sac.dilation = 0;
-    player.reality.glyphs.sac.effarig = 0;
-    player.reality.glyphs.sac.reality = 0;
-    player.reality.glyphs.undo = [];
-    player.reality.glyphs.sets = new Array(7).fill({
-      name: "",
-      glyphs: []
+    player.isGameEnd = false;
+    player.tabNotifications = new Set();
+    player.triggeredTabNotificationBits = 0;
+    player.tutorialState = 0;
+    player.tutorialActive = true;
+    player.options.confirmations.glyphSelection = true;
+    const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
+    ui.view.newUI = player.options.newUI;
+    ui.view.news = player.options.news.enabled;
+    JSON.parse(companions).forEach(g => {
+      Glyphs.addToInventory(g);
     });
-    player.reality.glyphs.protectedRows = 2;
-    player.reality.glyphs.filter = {
-      select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
-      trash: AUTO_GLYPH_REJECT.SACRIFICE,
-      simple: 0,
-      types: GlyphTypes.list
-        .filter(t => ALCHEMY_BASIC_GLYPH_TYPES.includes(t.id))
-        .mapToObject(t => t.id, t => ({
-          rarity: 0,
-          score: 0,
-          effectCount: 0,
-          specifiedMask: 0,
-          effectScores: Array.repeat(0, t.effects.length),
-        })),
-    };
-    player.reality.glyphs.createdRealityGlyph = false;
-    player.reality.initialSeed = Math.floor(Date.now() * Math.random() + 1);
-    player.reality.seed = 1;
-    player.reality.secondGaussian = 1e6;
-    player.reality.musicSeed = Math.floor(Date.now() * Math.random() + 0xBCDDECCB);
-    player.reality.musicSecondGaussian = 1e6;
-    player.reality.rebuyables = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-    };
-    player.reality.upgradeBits = 0;
-    player.reality.upgReqs = 0;
-    player.reality.imaginaryUpgradeBits = 0;
-    player.reality.imaginaryUpgReqs = 0;
-    player.reality.imaginaryRebuyables = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      7: 0,
-      8: 0,
-      9: 0,
-      10: 0,
-    };
-    player.reality.reqLock = {
-      reality: 0,
-      imaginary: 0,
-    };
-    player.reality.perks = new Set();
-    player.reality.respec = false;
-    player.reality.showGlyphSacrifice = false;
-    player.reality.showSidebarPanel = GLYPH_SIDEBAR_MODE.INVENTORY_MANAGEMENT;
-    player.reality.autoSort = 0;
-    player.reality.autoCollapse = false;
-    player.reality.autoAutoClean = false;
-    player.reality.applyFilterToPurge = false;
-    player.reality.moveGlyphsOnProtection = false;
-    player.reality.perkPoints = 0;
-    player.reality.unlockedEC = 0;
-    player.reality.autoEC = true;
-    player.reality.lastAutoEC = 0;
-    player.reality.partEternitied = DC.D0;
-    player.reality.autoAchieve = true;
-    player.reality.gainedAutoAchievements = true;
-    player.reality.achTimer = 0;
-    player.reality.hasCheckedFilter = false;
-    player.blackHole = Array.range(0, 2).map(id => ({
-      id,
-      intervalUpgrades: 0,
-      powerUpgrades: 0,
-      durationUpgrades: 0,
-      phase: 0,
-      active: false,
-      unlocked: false,
-      activations: 0,
-    }));
-    player.blackHolePause = false;
-    player.blackHoleAutoPauseMode = 0;
-    player.blackHolePauseTime = 0;
-    player.blackHoleNegative = 1;
+    Themes.find(Theme.currentName()).set();
+    Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
+    ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
+    ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
     player.celestials.teresa.pouredAmount = 0;
     player.celestials.teresa.quoteBits = 0;
     player.celestials.teresa.unlockBits = 0;
@@ -489,22 +265,246 @@ export const Endgame = {
     player.celestials.pelle.collapsed.rifts = false;
     player.celestials.pelle.collapsed.galaxies = false;
     player.celestials.pelle.showBought = false;
-    player.isGameEnd = false;
-    player.tabNotifications = new Set();
-    player.triggeredTabNotificationBits = 0;
-    player.tutorialState = 0;
-    player.tutorialActive = true;
-    player.options.confirmations.glyphSelection = true;
-    const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
-    ui.view.newUI = player.options.newUI;
-    ui.view.news = player.options.news.enabled;
-    JSON.parse(companions).forEach(g => {
-      Glyphs.addToInventory(g);
+    player.realities = 0;
+    player.partSimulatedReality = 0;
+    player.reality.realityMachines = DC.D0;
+    player.reality.maxRM = DC.D0;
+    player.reality.imaginaryMachines = 0;
+    player.reality.iMCap = 0;
+    player.reality.glyphs.active = [];
+    player.reality.glyphs.inventory = [];
+    player.reality.glyphs.sac.power = 0;
+    player.reality.glyphs.sac.infinity = 0;
+    player.reality.glyphs.sac.time = 0;
+    player.reality.glyphs.sac.replication = 0;
+    player.reality.glyphs.sac.dilation = 0;
+    player.reality.glyphs.sac.effarig = 0;
+    player.reality.glyphs.sac.reality = 0;
+    player.reality.glyphs.undo = [];
+    player.reality.glyphs.sets = new Array(7).fill({
+      name: "",
+      glyphs: []
     });
-    Themes.find(Theme.currentName()).set();
-    Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
-    ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
-    ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
+    player.reality.glyphs.protectedRows = 2;
+    player.reality.glyphs.filter = {
+      select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
+      trash: AUTO_GLYPH_REJECT.SACRIFICE,
+      simple: 0,
+      types: GlyphTypes.list
+        .filter(t => ALCHEMY_BASIC_GLYPH_TYPES.includes(t.id))
+        .mapToObject(t => t.id, t => ({
+          rarity: 0,
+          score: 0,
+          effectCount: 0,
+          specifiedMask: 0,
+          effectScores: Array.repeat(0, t.effects.length),
+        })),
+    };
+    player.reality.glyphs.createdRealityGlyph = false;
+    player.reality.initialSeed = Math.floor(Date.now() * Math.random() + 1);
+    player.reality.seed = 1;
+    player.reality.secondGaussian = 1e6;
+    player.reality.musicSeed = Math.floor(Date.now() * Math.random() + 0xBCDDECCB);
+    player.reality.musicSecondGaussian = 1e6;
+    player.reality.rebuyables = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+    };
+    player.reality.upgradeBits = 0;
+    player.reality.upgReqs = 0;
+    player.reality.imaginaryUpgradeBits = 0;
+    player.reality.imaginaryUpgReqs = 0;
+    player.reality.imaginaryRebuyables = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0,
+      10: 0,
+    };
+    player.reality.reqLock = {
+      reality: 0,
+      imaginary: 0,
+    };
+    player.reality.perks = new Set();
+    player.reality.respec = false;
+    player.reality.showGlyphSacrifice = false;
+    player.reality.showSidebarPanel = GLYPH_SIDEBAR_MODE.INVENTORY_MANAGEMENT;
+    player.reality.autoSort = 0;
+    player.reality.autoCollapse = false;
+    player.reality.autoAutoClean = false;
+    player.reality.applyFilterToPurge = false;
+    player.reality.moveGlyphsOnProtection = false;
+    player.reality.perkPoints = 0;
+    player.reality.unlockedEC = 0;
+    player.reality.autoEC = true;
+    player.reality.lastAutoEC = 0;
+    player.reality.partEternitied = DC.D0;
+    player.reality.autoAchieve = true;
+    player.reality.gainedAutoAchievements = true;
+    player.reality.achTimer = 0;
+    player.reality.hasCheckedFilter = false;
+    player.blackHole = Array.range(0, 2).map(id => ({
+      id,
+      intervalUpgrades: 0,
+      powerUpgrades: 0,
+      durationUpgrades: 0,
+      phase: 0,
+      active: false,
+      unlocked: false,
+      activations: 0,
+    }));
+    player.blackHolePause = false;
+    player.blackHoleAutoPauseMode = 0;
+    player.blackHolePauseTime = 0;
+    player.blackHoleNegative = 1;
+    player.dilation.studies = [];
+    player.dilation.active = false;
+    player.dilation.upgrades.clear();
+    player.dilation.rebuyables = {
+      1: 0,
+      2: 0,
+      3: 0,
+      11: 0,
+      12: 0,
+      13: 0
+    };
+    Currency.tachyonParticles.reset();
+    player.dilation.nextThreshold = DC.E3;
+    player.dilation.baseTachyonGalaxies = 0;
+    player.dilation.totalTachyonGalaxies = 0;
+    Currency.dilatedTime.reset();
+    player.dilation.lastEP = DC.DM1;
+    player.IPMultPurchases = 0;
+    Currency.infinityPower.reset();
+    player.postC4Tier = 0;
+    Currency.timeShards.reset();
+    Replicanti.reset(true);
+    Currency.eternityPoints.reset();
+    EternityUpgrade.epMult.reset();
+    Currency.eternities.reset();
+    player.eternityUpgrades.clear();
+    player.totalTickGained = 0;
+    player.totalTickBought = 0;
+    Currency.timeTheorems.reset();
+    resetEternityRuns();
+    secondSoftReset(false);
+    player.respec = false;
+    player.eterc8ids = 50;
+    player.eterc8repl = 40;
+    player.shownRuns.Reality = true;
+    player.shownRuns.Eternity = true;
+    player.shownRuns.Infinity = true;
+    player.requirementChecks.infinity.maxAll = false;
+    player.requirementChecks.infinity.noSacrifice = true;
+    player.requirementChecks.infinity.noAD8 = true;
+    player.requirementChecks.eternity.onlyAD1 = true;
+    player.requirementChecks.eternity.onlyAD8 = true;
+    player.requirementChecks.eternity.noAD1 = true;
+    player.requirementChecks.eternity.noRG = true;
+    player.requirementChecks.reality.noAM = true;
+    player.requirementChecks.reality.noTriads = true;
+    player.requirementChecks.reality.noPurchasedTT = true;
+    player.requirementChecks.reality.noInfinities = true;
+    player.requirementChecks.reality.noEternities = true;
+    player.requirementChecks.reality.noContinuum = true;
+    player.requirementChecks.reality.maxID1 = DC.D0;
+    player.requirementChecks.reality.maxStudies = 0;
+    player.requirementChecks.reality.maxGlyphs = 0;
+    player.requirementChecks.reality.slowestBH = 1;
+    player.records.timePlayedAtBHUnlock = Number.MAX_VALUE;
+    player.records.realTimeDoomed = 0;
+    player.records.totalEndgameAntimatter = DC.E1;
+    player.records.totalRealityAntimatter = DC.E1;
+    player.records.totalEternityAntimatter = DC.E1;
+    player.records.totalInfinityAntimatter = DC.E1;
+    player.records.recentInfinities = Array.range(0, 10).map(() =>
+      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]);
+    player.records.recentEternities = Array.range(0, 10).map(() =>
+      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]);
+    player.records.recentRealities = Array.range(0, 10).map(() =>
+      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]);
+    player.records.thisInfinity.time = 0;
+    player.records.thisInfinity.realTime = 0;
+    player.records.thisInfinity.lastBuyTime = 0;
+    player.records.thisInfinity.maxAM = DC.D0;
+    player.records.thisInfinity.bestIPmin = DC.D0;
+    player.records.thisInfinity.bestIPminVal = DC.D0;
+    player.records.bestInfinity.time = Number.MAX_VALUE;
+    player.records.bestInfinity.realTime = Number.MAX_VALUE;
+    player.records.bestInfinity.bestIPminEternity = DC.D0;
+    player.records.bestInfinity.bestIPminReality = DC.D0;
+    player.records.thisEternity.time = 0;
+    player.records.thisEternity.realTime = 0;
+    player.records.thisEternity.maxAM = DC.D0;
+    player.records.thisEternity.maxIP = DC.D0;
+    player.records.thisEternity.bestIPMsWithoutMaxAll = DC.D0;
+    player.records.thisEternity.bestEPmin = DC.D0;
+    player.records.thisEternity.bestEPminVal = DC.D0;
+    player.records.thisEternity.bestInfinitiesPerMs = DC.D0;
+    player.records.bestEternity.time = Number.MAX_VALUE;
+    player.records.bestEternity.realTime = Number.MAX_VALUE;
+    player.records.bestEternity.bestEPminReality = DC.D0;
+    player.records.thisReality.time = 0;
+    player.records.thisReality.realTime = 0;
+    player.records.thisReality.maxAM = DC.D0;
+    player.records.thisReality.maxIP = DC.D0;
+    player.records.thisReality.maxEP = DC.D0;
+    player.records.thisReality.bestEternitiesPerMs = DC.D0;
+    player.records.thisReality.maxReplicanti = DC.D0;
+    player.records.thisReality.maxDT = DC.D0;
+    player.records.thisReality.bestRSmin = 0;
+    player.records.thisReality.bestRSminVal = 0;
+    player.records.bestReality.time = Number.MAX_VALUE;
+    player.records.bestReality.realTime = Number.MAX_VALUE;
+    player.records.bestReality.glyphStrength = 0;
+    player.records.bestReality.RM = DC.D0;
+    player.records.bestReality.RMSet = [];
+    player.records.bestReality.RMmin = DC.D0;
+    player.records.bestReality.RMminSet = [];
+    player.records.bestReality.glyphLevel = 0;
+    player.records.bestReality.glyphLevelSet = [];
+    player.records.bestReality.bestEP = DC.D0;
+    player.records.bestReality.bestEPSet = [];
+    player.records.bestReality.speedSet = [];
+    player.records.bestReality.iMCapSet = [];
+    player.records.bestReality.laitelaSet = [];
+    Currency.antimatter.reset();
+    AntimatterDimensions.reset();
+    InfinityDimensions.fullReset();
+    InfinityDimensions.resetAmount();
+    fullResetTimeDimensions();
+    resetTimeDimensions();
+    resetTickspeed();
+    player.buyUntil10 = true;
+    player.sacrificed = DC.D0;
+    playerInfinityUpgradesOnReset();
+    resetChallengeStuff();
+    player.eternityChalls = {};
+    player.reality.unlockedEC = 0;
+    player.reality.lastAutoEC = 0;
+    player.challenge.eternity.current = 0;
+    player.challenge.eternity.unlocked = 0;
+    player.challenge.eternity.requirementBits = 0;
+    Lazy.invalidateAll();
+    ECTimeStudyState.invalidateCachedRequirements();
+    Autobuyers.reset()
+    Currency.infinityPoints.reset();
+    resetInfinityRuns();
+    Currency.infinities.reset();
+    Currency.infinitiesBanked.reset();
+    player.dimensionBoosts = 0;
+    player.galaxies = 0;
+    player.partInfinityPoint = 0;
+    player.partInfinitied = 0;
+    player.break = false;
   }
 };
 function lockAchievementsOnEndgame() {
