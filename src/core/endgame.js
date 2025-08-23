@@ -86,11 +86,6 @@ export const Endgame = {
   // Reset the game, but carry over some post-completion stats. We also call this when starting a speedrun, so make sure
   // any stats which are updated due to completion happen in startNewGame() instead of in here
   resetStuff() {
-    lockAchievementsOnEndgame();
-    initializeChallengeCompletions(true);
-    Tab.dimensions.antimatter.show();
-    AchievementTimers.marathon2.reset();
-    EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
     player.isGameEnd = false;
     player.tabNotifications = new Set();
     player.triggeredTabNotificationBits = 0;
@@ -382,23 +377,6 @@ export const Endgame = {
     player.dilation.totalTachyonGalaxies = 0;
     Currency.dilatedTime.reset();
     player.dilation.lastEP = DC.DM1;
-    player.IPMultPurchases = 0;
-    Currency.infinityPower.reset();
-    player.postC4Tier = 0;
-    Currency.timeShards.reset();
-    Replicanti.reset(true);
-    Currency.eternityPoints.reset();
-    EternityUpgrade.epMult.reset();
-    Currency.eternities.reset();
-    player.eternityUpgrades.clear();
-    player.totalTickGained = 0;
-    player.totalTickBought = 0;
-    Currency.timeTheorems.reset();
-    resetEternityRuns();
-    secondSoftReset(false);
-    player.respec = false;
-    player.eterc8ids = 50;
-    player.eterc8repl = 40;
     player.shownRuns.Reality = true;
     player.shownRuns.Eternity = true;
     player.shownRuns.Infinity = true;
@@ -476,16 +454,6 @@ export const Endgame = {
     player.records.bestReality.speedSet = [];
     player.records.bestReality.iMCapSet = [];
     player.records.bestReality.laitelaSet = [];
-    Currency.antimatter.reset();
-    AntimatterDimensions.reset();
-    InfinityDimensions.fullReset();
-    InfinityDimensions.resetAmount();
-    fullResetTimeDimensions();
-    resetTimeDimensions();
-    resetTickspeed();
-    player.buyUntil10 = true;
-    player.sacrificed = DC.D0;
-    playerInfinityUpgradesOnReset();
     resetChallengeStuff();
     player.eternityChalls = {};
     player.reality.unlockedEC = 0;
@@ -495,16 +463,48 @@ export const Endgame = {
     player.challenge.eternity.requirementBits = 0;
     Lazy.invalidateAll();
     ECTimeStudyState.invalidateCachedRequirements();
+    player.IPMultPurchases = 0;
+    Currency.infinityPower.reset();
+    player.postC4Tier = 0;
+    Currency.timeShards.reset();
+    Replicanti.reset(true);
+    Currency.eternityPoints.reset();
+    EternityUpgrade.epMult.reset();
+    Currency.eternities.reset();
+    player.eternityUpgrades.clear();
+    player.totalTickGained = 0;
+    player.totalTickBought = 0;
+    Currency.timeTheorems.reset();
+    resetEternityRuns();
+    secondSoftReset(false);
+    player.respec = false;
+    player.eterc8ids = 50;
+    player.eterc8repl = 40;
     Autobuyers.reset()
+    InfinityDimensions.fullReset();
+    InfinityDimensions.resetAmount();
+    fullResetTimeDimensions();
+    resetTimeDimensions();
+    player.buyUntil10 = true;
+    player.sacrificed = DC.D0;
+    playerInfinityUpgradesOnReset();
     Currency.infinityPoints.reset();
     resetInfinityRuns();
     Currency.infinities.reset();
     Currency.infinitiesBanked.reset();
-    player.dimensionBoosts = 0;
-    player.galaxies = 0;
     player.partInfinityPoint = 0;
     player.partInfinitied = 0;
+    player.dimensionBoosts = 0;
+    player.galaxies = 0;
     player.break = false;
+    resetTickspeed();
+    AntimatterDimensions.reset();
+    Currency.antimatter.reset();
+    initializeChallengeCompletions(true);
+    Tab.dimensions.antimatter.show();
+    AchievementTimers.marathon2.reset();
+    lockAchievementsOnEndgame();
+    EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
   }
 };
 function lockAchievementsOnEndgame() {
