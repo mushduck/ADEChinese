@@ -87,6 +87,9 @@ export const Endgame = {
   // any stats which are updated due to completion happen in startNewGame() instead of in here
   resetStuff() {
     player.isGameEnd = false;
+    Tab.dimensions.antimatter.show();
+    AchievementTimers.marathon2.reset();
+    lockAchievementsOnEndgame();
     player.tabNotifications = new Set();
     player.triggeredTabNotificationBits = 0;
     player.tutorialState = 0;
@@ -147,6 +150,7 @@ export const Endgame = {
     player.celestials.v.runGlyphs = [[], [], [], [], [], [], [], [], []];
     player.celestials.v.runRecords = [-10, 0, 0, 0, 0, 0, 0, 0, 0];
     player.celestials.v.wantsFlipped = true;
+    V.spaceTheorems = 0;
     player.celestials.ra.pets.teresa.level = 1;
     player.celestials.ra.pets.teresa.memories = 0;
     player.celestials.ra.pets.teresa.memoryChunks = 0;
@@ -501,9 +505,6 @@ export const Endgame = {
     AntimatterDimensions.reset();
     Currency.antimatter.reset();
     initializeChallengeCompletions(true);
-    Tab.dimensions.antimatter.show();
-    AchievementTimers.marathon2.reset();
-    lockAchievementsOnEndgame();
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
   }
 };
