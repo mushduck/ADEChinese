@@ -105,6 +105,106 @@ export const Endgame = {
     Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
     ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
     ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
+    player.realities = 0;
+    player.partSimulatedReality = 0;
+    player.reality.realityMachines = DC.D0;
+    player.reality.maxRM = DC.D0;
+    player.reality.imaginaryMachines = 0;
+    player.reality.iMCap = 0;
+    const allGlyphs = player.reality.glyphs.active.concat(player.reality.glyphs.inventory);
+    Glyphs.removeFromInventory(allGlyphs);
+    player.reality.glyphs.sac.power = 0;
+    player.reality.glyphs.sac.infinity = 0;
+    player.reality.glyphs.sac.time = 0;
+    player.reality.glyphs.sac.replication = 0;
+    player.reality.glyphs.sac.dilation = 0;
+    player.reality.glyphs.sac.effarig = 0;
+    player.reality.glyphs.sac.reality = 0;
+    player.reality.glyphs.undo = [];
+    player.reality.glyphs.sets = new Array(7).fill({
+      name: "",
+      glyphs: []
+    });
+    player.reality.glyphs.protectedRows = 2;
+    player.reality.glyphs.filter = {
+      select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
+      trash: AUTO_GLYPH_REJECT.SACRIFICE,
+      simple: 0,
+      types: GlyphTypes.list
+        .filter(t => ALCHEMY_BASIC_GLYPH_TYPES.includes(t.id))
+        .mapToObject(t => t.id, t => ({
+          rarity: 0,
+          score: 0,
+          effectCount: 0,
+          specifiedMask: 0,
+          effectScores: Array.repeat(0, t.effects.length),
+        })),
+    };
+    player.reality.glyphs.createdRealityGlyph = false;
+    player.reality.initialSeed = Math.floor(Date.now() * Math.random() + 1);
+    player.reality.seed = 1;
+    player.reality.secondGaussian = 1e6;
+    player.reality.musicSeed = Math.floor(Date.now() * Math.random() + 0xBCDDECCB);
+    player.reality.musicSecondGaussian = 1e6;
+    player.reality.rebuyables = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+    };
+    player.reality.upgradeBits = 0;
+    player.reality.upgReqs = 0;
+    player.reality.imaginaryUpgradeBits = 0;
+    player.reality.imaginaryUpgReqs = 0;
+    player.reality.imaginaryRebuyables = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+      7: 0,
+      8: 0,
+      9: 0,
+      10: 0,
+    };
+    player.reality.reqLock = {
+      reality: 0,
+      imaginary: 0,
+    };
+    player.reality.perks = new Set();
+    player.reality.respec = false;
+    player.reality.showGlyphSacrifice = false;
+    player.reality.showSidebarPanel = GLYPH_SIDEBAR_MODE.INVENTORY_MANAGEMENT;
+    player.reality.autoSort = 0;
+    player.reality.autoCollapse = false;
+    player.reality.autoAutoClean = false;
+    player.reality.applyFilterToPurge = false;
+    player.reality.moveGlyphsOnProtection = false;
+    player.reality.perkPoints = 0;
+    player.reality.unlockedEC = 0;
+    player.reality.autoEC = true;
+    player.reality.lastAutoEC = 0;
+    player.reality.partEternitied = DC.D0;
+    player.reality.autoAchieve = true;
+    player.reality.gainedAutoAchievements = true;
+    player.reality.achTimer = 0;
+    player.reality.hasCheckedFilter = false;
+    player.blackHole = Array.range(0, 2).map(id => ({
+      id,
+      intervalUpgrades: 0,
+      powerUpgrades: 0,
+      durationUpgrades: 0,
+      phase: 0,
+      active: false,
+      unlocked: false,
+      activations: 0,
+    }));
+    player.blackHolePause = false;
+    player.blackHoleAutoPauseMode = 0;
+    player.blackHolePauseTime = 0;
+    player.blackHoleNegative = 1;
     player.celestials.teresa.pouredAmount = 0;
     player.celestials.teresa.quoteBits = 0;
     player.celestials.teresa.unlockBits = 0;
@@ -264,106 +364,6 @@ export const Endgame = {
     player.celestials.pelle.collapsed.rifts = false;
     player.celestials.pelle.collapsed.galaxies = false;
     player.celestials.pelle.showBought = false;
-    player.realities = 0;
-    player.partSimulatedReality = 0;
-    player.reality.realityMachines = DC.D0;
-    player.reality.maxRM = DC.D0;
-    player.reality.imaginaryMachines = 0;
-    player.reality.iMCap = 0;
-    const allGlyphs = player.reality.glyphs.active.concat(player.reality.glyphs.inventory);
-    Glyphs.removeFromInventory(allGlyphs);
-    player.reality.glyphs.sac.power = 0;
-    player.reality.glyphs.sac.infinity = 0;
-    player.reality.glyphs.sac.time = 0;
-    player.reality.glyphs.sac.replication = 0;
-    player.reality.glyphs.sac.dilation = 0;
-    player.reality.glyphs.sac.effarig = 0;
-    player.reality.glyphs.sac.reality = 0;
-    player.reality.glyphs.undo = [];
-    player.reality.glyphs.sets = new Array(7).fill({
-      name: "",
-      glyphs: []
-    });
-    player.reality.glyphs.protectedRows = 2;
-    player.reality.glyphs.filter = {
-      select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
-      trash: AUTO_GLYPH_REJECT.SACRIFICE,
-      simple: 0,
-      types: GlyphTypes.list
-        .filter(t => ALCHEMY_BASIC_GLYPH_TYPES.includes(t.id))
-        .mapToObject(t => t.id, t => ({
-          rarity: 0,
-          score: 0,
-          effectCount: 0,
-          specifiedMask: 0,
-          effectScores: Array.repeat(0, t.effects.length),
-        })),
-    };
-    player.reality.glyphs.createdRealityGlyph = false;
-    player.reality.initialSeed = Math.floor(Date.now() * Math.random() + 1);
-    player.reality.seed = 1;
-    player.reality.secondGaussian = 1e6;
-    player.reality.musicSeed = Math.floor(Date.now() * Math.random() + 0xBCDDECCB);
-    player.reality.musicSecondGaussian = 1e6;
-    player.reality.rebuyables = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-    };
-    player.reality.upgradeBits = 0;
-    player.reality.upgReqs = 0;
-    player.reality.imaginaryUpgradeBits = 0;
-    player.reality.imaginaryUpgReqs = 0;
-    player.reality.imaginaryRebuyables = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-      7: 0,
-      8: 0,
-      9: 0,
-      10: 0,
-    };
-    player.reality.reqLock = {
-      reality: 0,
-      imaginary: 0,
-    };
-    player.reality.perks = new Set();
-    player.reality.respec = false;
-    player.reality.showGlyphSacrifice = false;
-    player.reality.showSidebarPanel = GLYPH_SIDEBAR_MODE.INVENTORY_MANAGEMENT;
-    player.reality.autoSort = 0;
-    player.reality.autoCollapse = false;
-    player.reality.autoAutoClean = false;
-    player.reality.applyFilterToPurge = false;
-    player.reality.moveGlyphsOnProtection = false;
-    player.reality.perkPoints = 0;
-    player.reality.unlockedEC = 0;
-    player.reality.autoEC = true;
-    player.reality.lastAutoEC = 0;
-    player.reality.partEternitied = DC.D0;
-    player.reality.autoAchieve = true;
-    player.reality.gainedAutoAchievements = true;
-    player.reality.achTimer = 0;
-    player.reality.hasCheckedFilter = false;
-    player.blackHole = Array.range(0, 2).map(id => ({
-      id,
-      intervalUpgrades: 0,
-      powerUpgrades: 0,
-      durationUpgrades: 0,
-      phase: 0,
-      active: false,
-      unlocked: false,
-      activations: 0,
-    }));
-    player.blackHolePause = false;
-    player.blackHoleAutoPauseMode = 0;
-    player.blackHolePauseTime = 0;
-    player.blackHoleNegative = 1;
     player.dilation.studies = [];
     player.dilation.active = false;
     player.dilation.upgrades.clear();
@@ -505,6 +505,7 @@ export const Endgame = {
     AntimatterDimensions.reset();
     Currency.antimatter.reset();
     initializeChallengeCompletions(true);
+    lockAchievementsOnEndgame();
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
   }
 };
