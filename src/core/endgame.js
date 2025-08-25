@@ -401,6 +401,7 @@ export const Endgame = {
     player.requirementChecks.reality.maxStudies = 0;
     player.requirementChecks.reality.maxGlyphs = 0;
     player.requirementChecks.reality.slowestBH = 1;
+    player.records.totalTimePlayed = player.records.realTimePlayed;
     player.records.timePlayedAtBHUnlock = Number.MAX_VALUE;
     player.records.realTimeDoomed = 0;
     player.records.totalEndgameAntimatter = DC.E1;
