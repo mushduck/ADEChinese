@@ -203,7 +203,9 @@ export const CelestialDimensions = {
    * @type {CelestialDimensionState[]}
    */
   all: CelestialDimension.index.compact(),
-  HARDCAP_PURCHASES: Number.MAX_VALUE,
+  get HARDCAP_PURCHASES() {
+    return dimension.purchaseCap();
+  },
 
   unlockNext() {
     if (CelestialDimension(8).isUnlocked) return;
