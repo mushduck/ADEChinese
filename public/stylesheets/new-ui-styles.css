@@ -690,6 +690,10 @@ body.t-s12 {
   background-color: var(--color-eternity--bg);
 }
 
+.l-dimension-row-celestial-dim:nth-child(even) {
+  background-color: var(--color-celestials);
+}
+
 .c-infinity-dim-description__accent {
   color: var(--color-infinity);
 }
