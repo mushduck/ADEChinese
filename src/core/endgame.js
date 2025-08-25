@@ -98,9 +98,6 @@ export const Endgame = {
     const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
     ui.view.newUI = player.options.newUI;
     ui.view.news = player.options.news.enabled;
-    JSON.parse(companions).forEach(g => {
-      Glyphs.addToInventory(g);
-    });
     Themes.find(Theme.currentName()).set();
     Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
     ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
@@ -111,8 +108,6 @@ export const Endgame = {
     player.reality.maxRM = DC.D0;
     player.reality.imaginaryMachines = 0;
     player.reality.iMCap = 0;
-    const allGlyphs = player.reality.glyphs.active.concat(player.reality.glyphs.inventory);
-    Glyphs.removeFromInventory(allGlyphs);
     player.reality.glyphs.sac.power = 0;
     player.reality.glyphs.sac.infinity = 0;
     player.reality.glyphs.sac.time = 0;
@@ -125,7 +120,16 @@ export const Endgame = {
       name: "",
       glyphs: []
     });
+    player.reality.glyphs.protectedRows = 0;
+    Glyphs.autoClean(0);
     player.reality.glyphs.protectedRows = 2;
+    Glyphs.unequipAll();
+    player.reality.glyphs.protectedRows = 0;
+    Glyphs.autoClean(0);
+    player.reality.glyphs.protectedRows = 2;
+    JSON.parse(companions).forEach(g => {
+      Glyphs.addToInventory(g);
+    });
     player.reality.glyphs.filter = {
       select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
       trash: AUTO_GLYPH_REJECT.SACRIFICE,
