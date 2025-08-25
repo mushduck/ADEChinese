@@ -95,7 +95,6 @@ export const Endgame = {
     player.tutorialState = 0;
     player.tutorialActive = true;
     player.options.confirmations.glyphSelection = true;
-    const companions = JSON.stringify(Glyphs.allGlyphs.filter(g => g.type === "companion"));
     ui.view.newUI = player.options.newUI;
     ui.view.news = player.options.news.enabled;
     Themes.find(Theme.currentName()).set();
@@ -127,9 +126,6 @@ export const Endgame = {
     player.reality.glyphs.protectedRows = 0;
     Glyphs.autoClean(0);
     player.reality.glyphs.protectedRows = 2;
-    JSON.parse(companions).forEach(g => {
-      Glyphs.addToInventory(g);
-    });
     player.reality.glyphs.filter = {
       select: AUTO_GLYPH_SCORE.LOWEST_SACRIFICE,
       trash: AUTO_GLYPH_REJECT.SACRIFICE,
