@@ -47,6 +47,7 @@ export const tabs = [
         condition: () => PlayerProgress.endgameUnlocked(),
         id: 3,
         hidable: true,
+      },
     ]
   },
   {
