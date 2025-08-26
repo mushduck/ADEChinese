@@ -117,22 +117,15 @@ class CelestialDimensionState extends DimensionState {
   }
 
   get purchaseCap() {
-    if (this.tier === 1) return 103;
-    if (this.tier === 2) return 77;
-    if (this.tier === 3) return 62;
-    if (this.tier === 4) return 51;
-    if (this.tier === 5) return 38;
-    if (this.tier === 6) return 28;
-    if (this.tier === 7) return 18;
-    if (this.tier === 8) return 1;
+    return Decimal.NUMBER_MAX_VALUE;
   }
 
   get isCapped() {
-    return this.purchases >= this.purchaseCap;
+    return this.cost.gte(this.purchaseCap);
   }
 
   get hardcapCPAmount() {
-    return this._baseCost.times(Decimal.pow(this.costMultiplier, this.purchaseCap));
+    return this.purchaseCap;
   }
 
   resetAmount() {
@@ -204,11 +197,7 @@ export const CelestialDimensions = {
    * @type {CelestialDimensionState[]}
    */
   all: CelestialDimension.index.compact(),
-  get HARDCAP_PURCHASES() {
-    for (const dimension of CelestialDimensions.all) {
-      this.all.purchaseCap();
-    }
-  },
+  HARDCAP_PURCHASES: Decimal.NUMBER_MAX_VALUE,
 
   unlockNext() {
     if (CelestialDimension(8).isUnlocked) return;
