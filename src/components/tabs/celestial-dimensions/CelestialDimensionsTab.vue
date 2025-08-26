@@ -1,6 +1,6 @@
 <script>
-import ClassicCelestialDimensionsTab from "./ClassicCelestialDimensionTab";
-import ModernCelestialDimensionsTab from "./ModernCelestialDimensionTab";
+import ClassicCelestialDimensionTab from "./ClassicCelestialDimensionTab";
+import ModernCelestialDimensionTab from "./ModernCelestialDimensionTab";
 
 export default {
   name: "CelestialDimensionsTab",
