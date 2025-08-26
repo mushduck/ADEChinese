@@ -164,7 +164,7 @@ class CelestialDimensionState extends DimensionState {
     return true;
   }
 
-  buyMax(auto) {
+  buyMax() {
     if (!this.isAvailableForPurchase) return false;
 
     const costScaling = new LinearCostScaling(
@@ -238,6 +238,7 @@ export const CelestialDimensions = {
   tick(diff) {
     for (let tier = 8; tier > 1; tier--) {
       CelestialDimension(tier).produceDimensions(CelestialDimension(tier - 1), diff / 10);
+      CelestialDimension(1).produceCurrency(Currency.celestialMatter, diff);
     }
   },
 
