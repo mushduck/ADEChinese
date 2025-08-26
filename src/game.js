@@ -373,9 +373,9 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.CELESTIAL_MATTER)) {
-    const celestialMatterExponent = Pelle.isDoomed ? 0.2 : 2;
+    const celestialMatterExponent = CelestialDimensions.conversionExponent;
     if (player.endgame.celestialMatter.gt(0)) {
-      factor *= player.endgame.celestialMatter.pow(celestialMatterExponent);
+      factor *= Math.pow(player.endgame.celestialMatter, celestialMatterExponent);
     }
   }
 
