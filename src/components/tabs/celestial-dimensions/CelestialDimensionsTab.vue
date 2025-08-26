@@ -1,18 +1,18 @@
 <script>
-import ClassicCelestialDimensionsTab from "./ClassicCelestialDimensionsTab";
-import ModernCelestialDimensionsTab from "./ModernCelestialDimensionsTab";
+import ClassicCelestialDimensionsTab from "./ClassicCelestialDimensionTab";
+import ModernCelestialDimensionsTab from "./ModernCelestialDimensionTab";
 
 export default {
   name: "CelestialDimensionsTab",
   components: {
-    ClassicCelestialDimensionsTab,
-    ModernCelestialDimensionsTab
+    ClassicCelestialDimensionTab,
+    ModernCelestialDimensionTab
   },
   computed: {
     activeComponent() {
       return this.$viewModel.newUI
-        ? "ModernCelestialDimensionsTab"
-        : "ClassicCelestialDimensionsTab";
+        ? "ModernCelestialDimensionTab"
+        : "ClassicCelestialDimensionTab";
     }
   }
 };
