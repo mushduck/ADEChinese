@@ -61,8 +61,8 @@ export default {
         </span>
         to a
         <span class="c-celestial-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
-        multiplier on all
-        <span>Antimatter Dimensions.</span>
+        multiplier to
+        <span>Game Speed.</span>
       </p>
     </div>
     <div>
