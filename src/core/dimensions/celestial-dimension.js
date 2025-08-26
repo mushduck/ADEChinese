@@ -3,7 +3,7 @@ import { DC } from "../constants";
 import { DimensionState } from "./dimension";
 
 export function celestialDimensionCommonMultiplier() {
-  let mult = new Decimal(1);
+  let mult = DC.D1;
 
   return mult;
 }
@@ -89,7 +89,7 @@ class CelestialDimensionState extends DimensionState {
 
   get multiplier() {
     const tier = this.tier;
-    const mult = GameCache.celestialDimensionCommonMultiplier.value;
+    let mult = GameCache.celestialDimensionCommonMultiplier.value;
     mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount / 10)));
     return mult;
   }
