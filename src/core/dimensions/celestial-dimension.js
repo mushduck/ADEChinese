@@ -90,7 +90,7 @@ class CelestialDimensionState extends DimensionState {
   get multiplier() {
     const tier = this.tier;
     let mult = GameCache.celestialDimensionCommonMultiplier.value;
-    mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount / 10)));
+    mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount)));
     return mult;
   }
 
