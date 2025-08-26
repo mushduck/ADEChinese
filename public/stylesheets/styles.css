@@ -2763,8 +2763,8 @@ br {
 .t-s6 .c-celestial-dim-description__accent,
 .t-s10 .c-celestial-dim-description__accent,
 .t-s11 .c-celestial-dim-description__accent {
-  color: #ff0000;
-  text-shadow: 0 0 0.7rem #ff0000;
+  color: #ffff00;
+  text-shadow: 0 0 0.7rem #ffff00;
 }
 
 .t-metro .c-celestial-dim-description__accent,
