@@ -29,9 +29,11 @@ window.player = {
       bought: 0
     })),
     celestial: Array.range(0, 8).map(tier => ({
-      cost: [DC.D1, DC.E1, DC.E2, DC.E4, DC.E10, DC.E30, DC.E100, DC.E300][tier],
+      isUnlocked: false,
+      bought: 0,
       amount: DC.D0,
-      bought: 0
+      cost: [DC.D1, DC.E1, DC.E2, DC.E4, DC.E10, DC.E30, DC.E100, DC.E300][tier],
+      baseAmount: 0,
     }))
   },
   buyUntil10: true,
