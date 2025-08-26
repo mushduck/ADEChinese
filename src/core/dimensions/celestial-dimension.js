@@ -21,7 +21,7 @@ class CelestialDimensionState extends DimensionState {
       DC.E30,
       DC.E100,
       DC.E300
-    ],
+    ];
     this._unlockRequirement = UNLOCK_REQUIREMENTS[tier];
     const COST_MULTS = [null, 1e3, 1e4, 1e5, 1e6, 1e8, 1e10, 1e12, 1e15];
     this._costMultiplier = COST_MULTS[tier];
