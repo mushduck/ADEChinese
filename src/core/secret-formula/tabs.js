@@ -38,6 +38,15 @@ export const tabs = [
         id: 2,
         hidable: true,
       },
+      {
+        key: "celestial",
+        name: "Celestial Dimensions",
+        hideAt: 2.5,
+        symbol: "✯",
+        component: "CelestialDimensionsTab",
+        condition: () => PlayerProgress.endgameUnlocked(),
+        id: 3,
+        hidable: true,
     ]
   },
   {
