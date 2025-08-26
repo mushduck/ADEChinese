@@ -83,6 +83,7 @@ class CelestialDimensionState extends DimensionState {
   }
 
   get productionPerSecond() {
+    let production = this.amount;
     return production.times(this.multiplier);
   }
 
