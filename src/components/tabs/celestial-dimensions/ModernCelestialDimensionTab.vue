@@ -19,6 +19,7 @@ export default {
       totalDimCap: 0,
       creditsClosed: false,
       showLockedDimCostNote: true,
+      dimCapAt: new Decimal(0),
     };
   },
   methods: {
@@ -31,6 +32,7 @@ export default {
       this.incomeType = "Celestial Matter";
       this.totalDimCap = CelestialDimensions.totalDimCap;
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.dimCapAt = Decimal.NUMBER_MAX_VALUE;
     },
     maxAll() {
       CelestialDimensions.buyMax();
@@ -66,7 +68,7 @@ export default {
       </p>
     </div>
     <div>
-      All Celestial Dimensions can be purchased until {{ format(Decimal.NUMBER_MAX_VALUE, 2, 0) }} Celestial Points.
+      All Celestial Dimensions can be purchased until {{ format(dimCapAt, 2, 2) }} Celestial Points.
     </div>
     <div>You are getting {{ format(matterPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
     <div class="l-dimensions-container">
