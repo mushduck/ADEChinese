@@ -3,7 +3,7 @@ import CelestialDimensionRow from "./ModernCelestialDimensionRow";
 import PrimaryButton from "@/components/PrimaryButton";
 
 export default {
-  name: "ModernCelestialDimensionsTab",
+  name: "ModernCelestialDimensionTab",
   components: {
     PrimaryButton,
     CelestialDimensionRow
