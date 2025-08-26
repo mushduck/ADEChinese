@@ -205,7 +205,9 @@ export const CelestialDimensions = {
    */
   all: CelestialDimension.index.compact(),
   get HARDCAP_PURCHASES() {
-    return dimension.purchaseCap();
+    for (const dimension of CelestialDimensions.all) {
+      dimension.purchaseCap();
+    }
   },
 
   unlockNext() {
