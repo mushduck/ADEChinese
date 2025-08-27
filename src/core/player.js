@@ -793,7 +793,10 @@ window.player = {
   endgame: {
     celestialPoints: DC.D0,
     doomedParticles: DC.D0,
-    celestialMatter: DC.D0
+    celestialMatter: DC.D0,
+    celestialMatterMultiplier: {
+      isActive: true
+    }
   },
   isGameEnd: false,
   tabNotifications: new Set(),
