@@ -116,7 +116,7 @@ export default {
       </div>
       <PrimaryButton
         :enabled="isAvailableForPurchase || (!isUnlocked && canUnlock)"
-        class="o-primary-btn--buy-id o-primary-btn o-primary-btn--new o-primary-btn--buy-dim"
+        class="o-primary-btn--buy-cd o-primary-btn o-primary-btn--new o-primary-btn--buy-dim"
         :class="{ 'l-dim-row-small-text': hasLongText }"
         @click="buySingleCelestialDimension"
       >
@@ -124,7 +124,7 @@ export default {
       </PrimaryButton>
       <PrimaryButton
         :enabled="isAvailableForPurchase"
-        class="o-primary-btn--id-auto"
+        class="o-primary-btn--cd-auto"
         @click="buyMaxCelestialDimension"
       >
         Buy Max
