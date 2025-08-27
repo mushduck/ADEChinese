@@ -235,10 +235,10 @@ export const CelestialDimensions = {
     return this.canBuy();
   },
 
-  tick(diff) {
+  tick(realDiff) {
     for (let tier = 8; tier > 1; tier--) {
-      CelestialDimension(tier).produceDimensions(CelestialDimension(tier - 1), diff / 10);
-      CelestialDimension(1).produceCurrency(Currency.celestialMatter, diff);
+      CelestialDimension(tier).produceDimensions(CelestialDimension(tier - 1), realDiff / 10);
+      CelestialDimension(1).produceCurrency(Currency.celestialMatter, realDiff);
     }
   },
 
