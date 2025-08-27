@@ -56,8 +56,8 @@ export default {
     <div
       v-if="showEndgame"
     >
-      You have <span class="cp-text">{{ format(celestialPoints, 2) }}</span> Celestial Points.
-      You have <span class="dp-text">{{ format(doomedParticles, 2) }}</span> Doomed Particles.
+      You have <span class="cp-text">{{ format(celestialPoints, 2) }}</span> {{ pluralize("Celestial Point", celestialPoints) }}.
+      You have <span class="dp-text">{{ format(doomedParticles, 2) }}</span> {{ pluralize("Doomed Particle", doomedParticles) }}.
     <br>
     </div>
     <span>You have <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> antimatter.</span>
