@@ -752,6 +752,33 @@ body.t-s12 {
   height: 4.4rem;
 }
 
+.c-celestial-dim-description__accent {
+  color: var(--color-celestials);
+}
+
+.c-celestial-dim-row:nth-child(even) {
+  background: rgba(81, 81, 236, 30%);
+}
+
+.s-base--metro .c-celestial-dim-row:nth-child(even) {
+  background: rgba(0, 188, 212, 30%);
+}
+
+.c-celestial-dim-row__multiplier {
+  font-size: 1.4rem;
+}
+
+.o-primary-btn--buy-cd {
+  width: 30rem;
+  height: 4.4rem;
+  margin: 0 0.5rem;
+}
+
+.o-primary-btn--buy-cd-auto {
+  width: 9rem;
+  height: 4.4rem;
+}
+
 .c-modern-dim-tooltip-container {
   position: relative;
 }
