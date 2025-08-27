@@ -411,6 +411,9 @@ export function realTimeMechanics(realDiff) {
     player.celestials.ra.momentumTime += realDiff * Achievement(175).effectOrDefault(1);
   }
 
+  GameCache.celestialDimensionCommonMultiplier.invalidate();
+
+  CelestialDimensions.tick(realDiff);
   DarkMatterDimensions.tick(realDiff);
 
   // When storing real time, skip everything else having to do with production once stats are updated
@@ -498,7 +501,6 @@ export function gameLoop(passDiff, options = {}) {
   GameCache.antimatterDimensionFinalMultipliers.invalidate();
   GameCache.infinityDimensionCommonMultiplier.invalidate();
   GameCache.timeDimensionCommonMultiplier.invalidate();
-  GameCache.celestialDimensionCommonMultiplier.invalidate();
   GameCache.totalIPMult.invalidate();
 
   const blackHoleDiff = realDiff;
@@ -577,7 +579,6 @@ export function gameLoop(passDiff, options = {}) {
   EternityChallenge(12).tryFail();
   Achievements._power.invalidate();
 
-  CelestialDimensions.tick(diff);
   TimeDimensions.tick(diff);
   InfinityDimensions.tick(diff);
   AntimatterDimensions.tick(diff);
