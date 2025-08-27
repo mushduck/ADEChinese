@@ -8,6 +8,11 @@ export function celestialDimensionCommonMultiplier() {
   return mult;
 }
 
+export function toggleCelestialMatter() {
+  const isEnabled = player.endgame.celestialMatterMultiplier.isActive;
+  player.endgame.celestialMatterMultiplier.isActive = !isEnabled;
+}
+
 class CelestialDimensionState extends DimensionState {
   constructor(tier) {
     super(() => player.dimensions.celestial, tier);
