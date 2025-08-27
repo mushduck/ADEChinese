@@ -249,6 +249,13 @@ export const Endgame = {
     player.reality.gainedAutoAchievements = true;
     player.reality.achTimer = 0;
     player.reality.hasCheckedFilter = false;
+    player.reality.glyphs.sac.power = 0;
+    player.reality.glyphs.sac.infinity = 0;
+    player.reality.glyphs.sac.time = 0;
+    player.reality.glyphs.sac.replication = 0;
+    player.reality.glyphs.sac.dilation = 0;
+    player.reality.glyphs.sac.effarig = 0;
+    player.reality.glyphs.sac.reality = 0;
     player.blackHole = Array.range(0, 2).map(id => ({
       id,
       intervalUpgrades: 0,
