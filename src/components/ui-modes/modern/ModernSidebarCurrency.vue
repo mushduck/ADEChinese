@@ -181,4 +181,8 @@ export default {
 .o-sidebar-currency--endgame {
   color: var(--color-endgame);
 }
+
+.o-sidebar-currency--celestials {
+  color: var(--color-celestials);
+}
 </style>
