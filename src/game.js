@@ -356,6 +356,13 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
     factor = Math.pow(factor, getAdjustedGlyphEffect("effarigblackhole"));
   }
 
+  if (effects.includes(GAME_SPEED_EFFECT.CELESTIAL_MATTER)) {
+    const celestialMatterExponent = CelestialDimensions.conversionExponent;
+    if (player.endgame.celestialMatter.gt(0)) {
+      factor *= Math.pow(player.endgame.celestialMatter.toNumber(), celestialMatterExponent);
+    }
+  }
+
   if (Enslaved.isStoringGameTime && effects.includes(GAME_SPEED_EFFECT.TIME_STORAGE)) {
     const storedTimeWeight = Ra.unlocks.autoPulseTime.canBeApplied ? 0.99 : 1;
     factor = factor * (1 - storedTimeWeight) + storedTimeWeight;
@@ -369,13 +376,6 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
     } else if (Laitela.isRunning) {
       const nerfModifier = Math.clampMax(Time.thisRealityRealTime.totalMinutes / 10, 1);
       factor = Math.pow(factor, nerfModifier);
-    }
-  }
-
-  if (effects.includes(GAME_SPEED_EFFECT.CELESTIAL_MATTER)) {
-    const celestialMatterExponent = CelestialDimensions.conversionExponent;
-    if (player.endgame.celestialMatter.gt(0)) {
-      factor *= Math.pow(player.endgame.celestialMatter.toNumber(), celestialMatterExponent);
     }
   }
 
