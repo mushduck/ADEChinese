@@ -177,4 +177,8 @@ export default {
 .o-sidebar-currency--pelle {
   color: var(--color-pelle--base);
 }
+
+.o-sidebar-currency--endgame {
+  color: var(--color-endgame);
+}
 </style>
