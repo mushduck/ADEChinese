@@ -358,7 +358,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   if (effects.includes(GAME_SPEED_EFFECT.CELESTIAL_MATTER)) {
     const celestialMatterExponent = CelestialDimensions.conversionExponent;
-    if (player.endgame.celestialMatter.gt(0)) {
+    if (player.endgame.celestialMatter.gt(0) && player.endgame.celestialMatterMultiplier.isActive) {
       factor *= Math.pow(player.endgame.celestialMatter.toNumber(), celestialMatterExponent);
     }
   }
