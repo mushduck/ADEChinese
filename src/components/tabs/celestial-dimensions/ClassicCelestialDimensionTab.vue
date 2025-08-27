@@ -34,6 +34,9 @@ export default {
     },
     maxAll() {
       CelestialDimensions.buyMax();
+    },
+    toggleCelestialMatterMultiplier() {
+      toggleCelestialMatter();
     }
   }
 };
@@ -47,6 +50,12 @@ export default {
         @click="maxAll"
       >
         Max all
+      </PrimaryButton>
+      <PrimaryButton
+        class="o-primary-btn--subtab-option"
+        @click="toggleCelestialMatterMultiplier"
+      >
+        Toggle Celestial Matter
       </PrimaryButton>
     </div>
     <div>
