@@ -509,6 +509,12 @@ export const Endgame = {
     player.dimensionBoosts = 0;
     player.galaxies = 0;
     player.break = false;
+    resetTickspeed();
+    AntimatterDimensions.reset();
+    Currency.antimatter.reset();
+    initializeChallengeCompletions(true);
+    lockAchievementsOnEndgame();
+    EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
     player.records.totalTimePlayed = player.records.realTimePlayed;
     player.records.timePlayedAtBHUnlock = Number.MAX_VALUE;
     player.records.realTimeDoomed = 0;
@@ -567,12 +573,6 @@ export const Endgame = {
     player.records.bestReality.speedSet = [];
     player.records.bestReality.iMCapSet = [];
     player.records.bestReality.laitelaSet = [];
-    resetTickspeed();
-    AntimatterDimensions.reset();
-    Currency.antimatter.reset();
-    initializeChallengeCompletions(true);
-    lockAchievementsOnEndgame();
-    EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
   }
 };
 function lockAchievementsOnEndgame() {
