@@ -6,141 +6,156 @@ function rebuyable(config) {
   return {
     rebuyable: true,
     id,
-    cost: () => config.initialCost * Math.pow(config.costIncrease, player.infinityRebuyables[config.id]),
+    cost: () => config.initialCost * Math.pow(config.costIncrease, player.breakEternityRebuyables[config.id]),
     maxUpgrades,
     description,
-    effect: () => effectFunction(player.infinityRebuyables[config.id]),
+    effect: () => effectFunction(player.breakEternityRebuyables[config.id]),
     isDisabled,
     // There isn't enough room in the button to fit the EC reduction and "Next:" at the same time while still
     // presenting all the information in an understandable way, so we only show it if the upgrade is maxed
-    formatEffect: config.formatEffect ||
-      (value => {
-        const afterECText = config.afterEC ? config.afterEC() : "";
-        return value === config.maxUpgrades
-          ? `Currently: ${formatX(10 - value)} ${afterECText}`
-          : `Currently: ${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`;
-      }),
+    formatEffect: config.formatEffect,
     formatCost: value => format(value, 2, 0),
     noLabel,
     onPurchased
   };
 }
 
-export const breakInfinityUpgrades = {
-  totalAMMult: {
-    id: "totalMult",
-    cost: 1e4,
-    description: "Antimatter Dimensions gain a multiplier based on total antimatter produced",
-    effect: () => Math.pow(player.records.totalAntimatter.exponent + 1, 1.5),
-    formatEffect: value => formatX(value, 2, 2)
-  },
-  currentAMMult: {
-    id: "currentMult",
-    cost: 5e4,
-    description: "Antimatter Dimensions gain a multiplier based on current antimatter",
-    effect: () => Math.pow(Currency.antimatter.exponent + 1, 1.5),
-    formatEffect: value => formatX(value, 2, 2)
-  },
-  galaxyBoost: {
-    id: "postGalaxy",
-    cost: 5e11,
-    description: () => `All Galaxies are ${formatPercents(0.5)} stronger`,
-    effect: 1.5
-  },
-  infinitiedMult: {
-    id: "infinitiedMult",
-    cost: 1e5,
-    description: "Antimatter Dimensions gain a multiplier based on Infinities",
-    effect: () => 1 + Currency.infinitiesTotal.value.pLog10() * 25,
-    formatEffect: value => formatX(value, 2, 2)
-  },
-  achievementMult: {
-    id: "achievementMult",
-    cost: 1e6,
-    description: "Antimatter Dimensions gain a multiplier based on Achievements completed",
-    effect: () => Math.max(Math.pow((Achievements.effectiveCount - 30), 4) / 20, 1),
-    formatEffect: value => formatX(value, 2, 2)
-  },
-  slowestChallengeMult: {
-    id: "challengeMult",
-    cost: 5e6,
-    description: "Antimatter Dimensions gain a multiplier based on how fast your slowest challenge run is",
-    effect: () => Decimal.clampMin(300 / Time.worstChallenge.totalMinutes, 1),
-    formatEffect: value => formatX(value, 2, 2),
-    hasCap: true,
-    cap: DC.D2E5
-  },
-  infinitiedGen: {
-    id: "infinitiedGeneration",
-    cost: 1e7,
-    description: "Passively generate Infinities based on your fastest Infinity",
-    effect: () => player.records.bestInfinity.time,
-    formatEffect: value => {
-      if (value === Number.MAX_VALUE && !Pelle.isDoomed) return "No Infinity generation";
-      let infinities = DC.D1;
-      infinities = infinities.timesEffectsOf(
-        RealityUpgrade(5),
-        RealityUpgrade(7),
-        Ra.unlocks.continuousTTBoost.effects.infinity
-      );
-      infinities = infinities.times(getAdjustedGlyphEffect("infinityinfmult"));
-      const timeStr = Time.bestInfinity.totalMilliseconds <= 50
-        ? `${TimeSpan.fromMilliseconds(100).toStringShort()} (capped)`
-        : `${Time.bestInfinity.times(2).toStringShort()}`;
-      return `${quantify("Infinity", infinities)} every ${timeStr}`;
-    }
-  },
-  autobuyMaxDimboosts: {
-    id: "autobuyMaxDimboosts",
-    cost: 2e7,
-    description: "Unlock the buy max Dimension Boost Autobuyer mode"
-  },
-  autobuyerSpeed: {
-    id: "autoBuyerUpgrade",
-    cost: 1e15,
-    description: "Autobuyers unlocked or improved by Normal Challenges work twice as fast"
-  },
-  tickspeedCostMult: rebuyable({
+export const breakEternityUpgrades = {
+  antimatterDimensionPow: rebuyable({
     id: 0,
-    initialCost: 1e6,
-    costIncrease: 5,
-    maxUpgrades: 8,
-    description: "Reduce post-infinity Tickspeed Upgrade cost multiplier scaling",
-    afterEC: () => (EternityChallenge(11).completions > 0
-      ? `After EC11: ${formatX(Player.tickSpeedMultDecrease, 2, 2)}`
-      : ""
-    ),
-    noLabel: true,
-    onPurchased: () => GameCache.tickSpeedMultDecrease.invalidate()
-  }),
-  dimCostMult: rebuyable({
-    id: 1,
-    initialCost: 1e7,
-    costIncrease: 5e3,
-    maxUpgrades: 7,
-    description: "Reduce post-infinity Antimatter Dimension cost multiplier scaling",
-    afterEC: () => (EternityChallenge(6).completions > 0
-      ? `After EC6: ${formatX(Player.dimensionMultDecrease, 2, 2)}`
-      : ""
-    ),
-    noLabel: true,
-    onPurchased: () => GameCache.dimensionMultDecrease.invalidate()
-  }),
-  ipGen: rebuyable({
-    id: 2,
-    initialCost: 1e7,
-    costIncrease: 10,
+    initialCost: 1e15,
+    costIncrease: 1e10,
     maxUpgrades: 10,
-    effect: value => Player.bestRunIPPM.times(value / 10),
-    description: () => {
-      let generation = `Generate ${formatInt(10 * player.infinityRebuyables[2])}%`;
-      if (!BreakInfinityUpgrade.ipGen.isCapped) {
-        generation += ` ➜ ${formatInt(10 * (1 + player.infinityRebuyables[2]))}%`;
-      }
-      return `${generation} of your best IP/min from your last 10 Infinities`;
-    },
+    effect: value => Math.pow(2, value),
+    description: () => "Square All Antimatter Dimension Multipliers' Exponents",
     isDisabled: effect => effect.eq(0),
-    formatEffect: value => `${format(value, 2, 1)} IP/min`,
+    formatEffect: value => `^${formatInt(value)}`,
     noLabel: false
-  })
+  }),
+  infinityDimensionPow: rebuyable({
+    id: 1,
+    initialCost: 1e16,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(2, value),
+    description: () => "Square All Infinity Dimension Multipliers' Exponents",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `^${formatInt(value)}`,
+    noLabel: false
+  }),
+  timeDimensionPow: rebuyable({
+    id: 2,
+    initialCost: 1e17,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(2, value),
+    description: () => "Square All Time Dimension Multipliers' Exponents",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `^${formatInt(value)}`,
+    noLabel: false
+  }),
+  replicantiIntervalPow: rebuyable({
+    id: 3,
+    initialCost: 1e18,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(0.5, value),
+    description: () => "Square-root the Replicanti Interval",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `^${format(value, 2, 2)}`,
+    noLabel: false
+  }),
+  tachyonParticlePow: rebuyable({
+    id: 4,
+    initialCost: 1e19,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(2, value),
+    description: () => "Square Tachyon Particle Gain",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `^${formatInt(value)}`,
+    noLabel: false
+  }),
+  galaxyScaleDelay: rebuyable({
+    id: 5,
+    initialCost: 1e20,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => value * 10000,
+    description: () => "Delay Distant/Remote Galaxy Scaling",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `${formatInt(value)} Galaxies`,
+    noLabel: false
+  }),
+  infinityPowerConversion: rebuyable({
+    id: 6,
+    initialCost: 1e21,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(2, value),
+    description: () => "Double the Infinity Power Conversion Rate",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `${formatX(value, 2)}`,
+    noLabel: false
+  }),
+  epMultiplierDelay: rebuyable({
+    id: 7,
+    initialCost: 1e22,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(2, value),
+    description: () => "Square the start of the 5x EP Multiplier Cost Scalings",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `^${formatInt(value)}`,
+    noLabel: false
+  }),
+  replicantiGalaxyPower: rebuyable({
+    id: 8,
+    initialCost: 1e23,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(2, value),
+    description: () => "Double the start of the Replicanti Galaxy Cost Scalings",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `${formatX(value, 2)}`,
+    noLabel: false
+  }),
+  dilatedTimeMultiplier: rebuyable({
+    id: 9,
+    initialCost: 1e24,
+    costIncrease: 1e10,
+    maxUpgrades: 10,
+    effect: value => Math.pow(2, value),
+    description: () => "Double the Per-Purchase Multiplier of the 2x Dilated Time Upgrade",
+    isDisabled: effect => effect.eq(0),
+    formatEffect: value => `${formatX(value, 2)}`,
+    noLabel: false
+  }),
+  doubleIPUncap: {
+    id: "doubleIPUncap",
+    cost: 1e30,
+    description: "Uncap the 2x IP Multiplier Upgrade"
+  },
+  tgThresholdUncap: {
+    id: "tgThresholdUncap",
+    cost: 1e40,
+    description: "Uncap the TG Threshold Upgrade and improve the formula"
+  },
+  tesseractMultiplier: {
+    id: "tesseractMultiplier",
+    cost: 1e50,
+    description: "Double all Effective Tesseracts",
+    effect: 2
+  },
+  glyphSacrificeUncap: {
+    id: "glyphSacrificeUncap",
+    cost: 1e70,
+    description: "Uncap Glyph Sacrifice Values for all Glyphs"
+  },
+  glyphSlotImprovement: {
+    id: "glyphSlotImprovement",
+    cost: 1e100,
+    description: "Add 3 more Glyph Slots",
+    effect: 3
+  },
 };
