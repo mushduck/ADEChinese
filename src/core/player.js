@@ -42,6 +42,7 @@ window.player = {
   secretAchievementBits: Array.repeat(0, 4),
   infinityUpgrades: new Set(),
   infinityRebuyables: [0, 0, 0],
+  breakEternityRebuyables: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   challenge: {
     normal: {
       current: 0,
