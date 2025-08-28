@@ -456,6 +456,7 @@ export const Endgame = {
     resetTickspeed();
     AntimatterDimensions.reset();
     Currency.antimatter.reset();
+    CelestialDimensions.resetAmount();
     initializeChallengeCompletions(true);
     lockAchievementsOnEndgame();
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
