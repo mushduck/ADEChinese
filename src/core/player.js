@@ -1014,8 +1014,9 @@ export const Player = {
   },
 
   get infinityLimit() {
+    const trueHardcap = player.break2 ? DC.E9E115 : DC.E9E15;
     const challenge = NormalChallenge.current || InfinityChallenge.current;
-    return challenge === undefined ? Decimal.MAX_VALUE : challenge.goal;
+    return challenge === undefined ? trueHardcap : challenge.goal;
   },
 
   get eternityGoal() {
