@@ -36,7 +36,7 @@ export default {
     update() {
       const upgrade = this.upgrade;
       this.isBought = upgrade.isBought;
-      this.isAffordable = upgrade.isAffordable;
+      this.isAffordable = upgrade.isAffordableNumerically;
     }
   }
 };
