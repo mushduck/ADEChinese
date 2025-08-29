@@ -2,7 +2,7 @@ import { RebuyableMechanicState, SetPurchasableMechanicState } from "./game-mech
 
 export class BreakEternityUpgradeState extends SetPurchasableMechanicState {
   get currency() {
-    return Currency.antimatter.exponent;
+    return Currency.antimatter;
   }
 
   get set() {
@@ -12,7 +12,7 @@ export class BreakEternityUpgradeState extends SetPurchasableMechanicState {
 
 class RebuyableBreakEternityUpgradeState extends RebuyableMechanicState {
   get currency() {
-    return Currency.antimatter.exponent;
+    return Currency.antimatter;
   }
 
   get boughtAmount() {
