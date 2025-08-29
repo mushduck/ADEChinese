@@ -35,7 +35,6 @@ export default {
 
 <template>
   <button
-    v-tooltip="tooltip"
     :class="classObject"
     @click="clicked"
   >
