@@ -1,7 +1,16 @@
 import { DC } from "../../constants";
 
 const rebuyable = props => {
-  props.cost = () => props.initialCost * Math.pow(props.costMult, player.reality.imaginaryRebuyables[props.id]);
+  props.cost = () => getHybridCostScaling(
+    player.reality.imaginaryRebuyables[props.id],
+    1e15,
+    props.initialCost,
+    props.costMult,
+    props.costMult / 2,
+    DC.E309,
+    1e6,
+    props.initialCost * props.costMult
+  );
   const { effect } = props;
   if (props.isDecimal) props.effect = () => Decimal.pow(effect, player.reality.imaginaryRebuyables[props.id]);
   else props.effect = () => effect * player.reality.imaginaryRebuyables[props.id];
