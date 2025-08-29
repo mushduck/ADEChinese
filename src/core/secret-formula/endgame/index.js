@@ -1,5 +1,5 @@
 import { breakEternityUpgrades } from "./break-eternity-upgrades";
 
-export const breakEternity = {
+export const endgame = {
   upgrades: breakEternityUpgrades
 };
