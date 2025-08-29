@@ -8,9 +8,8 @@ export default {
   },
   computed: {
     message() {
-      const END = formatPostBreak(Decimal.MAX_VALUE, 2);
-      return `Breaking Eternity will allow you to gain antimatter past ${END}.
-        You will gain additional Celestial Points and Doomed Particles on Endgame based on antimatter produced over ${END}
+      return `Breaking Eternity will allow you to gain antimatter past 1e9e15.
+        You will gain additional Celestial Points and Doomed Particles on Endgame based on antimatter produced over 1e9e15
         while inside the Doomed Reality. It will also unlock Break Eternity Upgrades and other features.`
     },
   },
