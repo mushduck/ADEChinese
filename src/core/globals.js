@@ -83,6 +83,7 @@ export * from "./perks";
 export * from "./dilation";
 export * from "./black-hole";
 export * from "./machines";
+export * from "./break-eternity-upgrades";
 export * from "./devtools";
 export * from "./news-ticker";
 export * from "./shop";
