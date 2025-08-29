@@ -55,7 +55,7 @@ export default {
     <CostDisplay
       br
       :config="upgrade.config"
-      name="Antimatter Exponent"
+      name="Antimatter"
     />
   </button>
 </template>
