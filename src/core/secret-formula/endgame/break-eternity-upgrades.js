@@ -6,7 +6,7 @@ function rebuyable(config) {
   return {
     rebuyable: true,
     id,
-    cost: () => Math.pow(10, config.initialCost * Math.pow(config.costIncrease, player.breakEternityRebuyables[config.id])),
+    cost: () => Decimal.pow(10, config.initialCost * Math.pow(config.costIncrease, player.breakEternityRebuyables[config.id])),
     maxUpgrades,
     description,
     effect: () => effectFunction(player.breakEternityRebuyables[config.id]),
@@ -14,7 +14,7 @@ function rebuyable(config) {
     // There isn't enough room in the button to fit the EC reduction and "Next:" at the same time while still
     // presenting all the information in an understandable way, so we only show it if the upgrade is maxed
     formatEffect: config.formatEffect,
-    formatCost: value => format(value, 2, 0),
+    formatCost: value => formatPostBreak(value, 2, 0),
     noLabel,
     onPurchased
   };
@@ -133,28 +133,28 @@ export const breakEternityUpgrades = {
   }),
   doubleIPUncap: {
     id: "doubleIPUncap",
-    cost: 1e30,
+    cost: Math.pow(10, 1e30),
     description: "Uncap the 2x IP Multiplier Upgrade"
   },
   tgThresholdUncap: {
     id: "tgThresholdUncap",
-    cost: 1e40,
+    cost: Math.pow(10, 1e40),
     description: "Uncap the TG Threshold Upgrade and improve the formula"
   },
   tesseractMultiplier: {
     id: "tesseractMultiplier",
-    cost: 1e50,
+    cost: Math.pow(10, 1e50),
     description: "Double all Effective Tesseracts",
     effect: 2
   },
   glyphSacrificeUncap: {
     id: "glyphSacrificeUncap",
-    cost: 1e70,
+    cost: Math.pow(10, 1e70),
     description: "Uncap Glyph Sacrifice Values for all Glyphs"
   },
   glyphSlotImprovement: {
     id: "glyphSlotImprovement",
-    cost: 1e100,
+    cost: Math.pow(10, 1e100),
     description: "Add 3 more Glyph Slots",
     effect: 3
   },
