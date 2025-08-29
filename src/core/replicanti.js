@@ -140,7 +140,7 @@ export function totalReplicantiSpeedMult(overCap) {
     Achievement(81),
     TimeStudy(62),
     TimeStudy(213),
-    RealityUpgrade(2),
+    RealityUpgrade(2).toNumber(),
     RealityUpgrade(6),
     RealityUpgrade(23),
   );
