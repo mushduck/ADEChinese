@@ -86,6 +86,12 @@ export function breakInfinity() {
   GameUI.update();
 }
 
+export function breakEternity() {
+  player.break2 = !player.break2;
+  EventHub.dispatch(GAME_EVENT.BREAK_ETERNITY);
+  GameUI.update();
+}
+
 export function gainedInfinityPoints() {
   const div = Effects.min(
     308,
