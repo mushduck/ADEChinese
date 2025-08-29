@@ -5239,6 +5239,127 @@ properly on certain themes. */
 /* #endregion Break Eternity */
 
 /* #region Break Eternity Upgrades */
+
+/* #region o-break-eternity-upgrade-btn */
+
+.o-break-eternity-upgrade-btn {
+  width: 19rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #1f1f1f;
+  border: 0.1rem solid black;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.t-s6 .o-break-eternity-upgrade-btn,
+.t-s10 .o-break-eternity-upgrade-btn {
+  box-shadow: 0 0 0.7rem 0.2rem #111111;
+}
+
+.o-break-eternity-upgrade-btn:hover {
+  color: var(--color-text-inverted);
+}
+
+/* #region o-infinity-upgrade-btn--available */
+
+.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #ff3300;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--available:hover,
+.t-s6 .o-break-eternity-upgrade-btn--available:hover,
+.t-s10 .o-break-eternity-upgrade-btn--available:hover {
+  background-color: #d50000;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--available:hover {
+  background-color: #f44336;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--available */
+
+/* #region o-break-eternity-upgrade-btn--color-2 */
+
+.o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
+  background-color: var(--color-eternity);
+}
+
+.t-dark .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover,
+.t-s6 .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover,
+.t-s10 .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
+  background-color: var(--color-eternity);
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
+  background-color: var(--color-eternity);
+}
+
+/* #endregion o-break-eternity-upgrade-btn--color-2 */
+
+/* #region o-break-eternity-upgrade-btn--unavailable */
+
+.o-break-eternity-upgrade-btn--unavailable {
+  color: black;
+  background-color: #f7f7f7;
+}
+
+.o-break-eternity-upgrade-btn--unclickable {
+  cursor: auto;
+}
+
+.o-break-eternity-upgrade-btn--unavailable:hover {
+  color: var(--color-text);
+  background-color: var(--color-text-inverted);
+  cursor: default;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--unavailable {
+  background-color: #263238;
+  border-color: black;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--unavailable:hover {
+  background-color: #37474f;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--unavailable {
+  background-color: #9e9e9e;
+  border-color: #616161;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--unavailable:hover {
+  color: var(--color-text-inverted);
+  background-color: #bdbdbd;
+}
+
+.t-s1 .o-break-eternity-upgrade-btn--unavailable {
+  background-color: #9a921d;
+  border-color: black;
+}
+
+.t-s1 .o-break-eternity-upgrade-btn--unavailable:hover {
+  background-color: #c5ba26;
+}
+
+.t-s6 .o-break-eternity-upgrade-btn--unavailable,
+.t-s10 .o-break-eternity-upgrade-btn--unavailable {
+  color: grey;
+  background-color: black;
+  border-color: grey;
+}
+
+.t-s6 .o-break-eternity-upgrade-btn--unavailable:hover,
+.t-s10 .o-break-eternity-upgrade-btn--unavailable:hover {
+  background-color: #222222;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--unavailable */
+
 .o-break-eternity-upgrade {
   width: 20rem;
   height: 9rem;
