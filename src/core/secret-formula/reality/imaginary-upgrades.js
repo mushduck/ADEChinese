@@ -18,7 +18,7 @@ export const imaginaryUpgrades = [
     costMult: 60,
     description: () => `Increase Temporal Amplifier multiplier by +${format(0.15, 2, 2)}`,
     effect: 0.15,
-    scaleStart: 10
+    scaleStart: 9
   }),
   rebuyable({
     name: "Replicative Intensifier",
@@ -27,7 +27,7 @@ export const imaginaryUpgrades = [
     costMult: 60,
     description: () => `Increase Replicative Amplifier multiplier by +${format(0.15, 2, 2)}`,
     effect: 0.15,
-    scaleStart: 10
+    scaleStart: 9
   }),
   rebuyable({
     name: "Eternal Intensifier",
@@ -36,7 +36,7 @@ export const imaginaryUpgrades = [
     costMult: 40,
     description: () => `Increase Eternal Amplifier multiplier by +${format(0.4, 2, 2)}`,
     effect: 0.4,
-    scaleStart: 11
+    scaleStart: 10
   }),
   rebuyable({
     name: "Superluminal Intensifier",
@@ -45,7 +45,7 @@ export const imaginaryUpgrades = [
     costMult: 80,
     description: () => `Increase Superluminal Amplifier multiplier by +${format(0.15, 2, 2)}`,
     effect: 0.15,
-    scaleStart: 9
+    scaleStart: 8
   }),
   rebuyable({
     name: "Boundless Intensifier",
@@ -54,7 +54,7 @@ export const imaginaryUpgrades = [
     costMult: 30,
     description: () => `Increase Boundless Amplifier multiplier by +${format(0.6, 2, 2)}`,
     effect: 0.6,
-    scaleStart: 12
+    scaleStart: 11
   }),
   rebuyable({
     name: "Elliptic Materiality",
@@ -63,7 +63,7 @@ export const imaginaryUpgrades = [
     costMult: 500,
     description: () => `Increase the Reality Machine cap by ${formatX(1e100)}`,
     effect: 1e100,
-    scaleStart: 6,
+    scaleStart: 5,
     formatEffect: value => `${formatX(value)}`,
     isDecimal: true
   }),
@@ -74,7 +74,7 @@ export const imaginaryUpgrades = [
     costMult: 500,
     description: () => `Delay Glyph Instability starting level by ${formatInt(200)}`,
     effect: 200,
-    scaleStart: 5,
+    scaleStart: 4,
     formatEffect: value => `+${formatInt(value)} levels`
   }),
   rebuyable({
@@ -84,7 +84,7 @@ export const imaginaryUpgrades = [
     costMult: 800,
     description: () => `Multiply Infinity Dimensions by ${format("1e100000")}`,
     effect: DC.E100000,
-    scaleStart: 4,
+    scaleStart: 3,
     formatEffect: value => `${formatX(value)}`,
     isDecimal: true
   }),
@@ -95,7 +95,7 @@ export const imaginaryUpgrades = [
     costMult: 1000,
     description: () => `Increase Galaxy strength`,
     effect: 0.03,
-    scaleStart: 3,
+    scaleStart: 2,
     formatEffect: value => `+${formatPercents(value)}`,
   }),
   rebuyable({
@@ -105,7 +105,7 @@ export const imaginaryUpgrades = [
     costMult: 2000,
     description: () => `Increase Singularity gain`,
     effect: 1,
-    scaleStart: 3,
+    scaleStart: 2,
     formatEffect: value => `${formatX(1 + value, 2)}`
   }),
   {
