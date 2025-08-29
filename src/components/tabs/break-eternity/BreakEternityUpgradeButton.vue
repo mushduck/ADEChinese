@@ -53,7 +53,6 @@ export default {
       :config="upgrade.config"
     />
     <CostDisplay
-      v-else-if="!isBought"
       br
       :config="upgrade.config"
       name="Antimatter Exponent"
