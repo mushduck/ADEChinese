@@ -6,7 +6,7 @@ function rebuyable(config) {
   return {
     rebuyable: true,
     id,
-    cost: () => config.initialCost * Math.pow(config.costIncrease, player.breakEternityRebuyables[config.id]),
+    cost: () => Math.pow(10, config.initialCost * Math.pow(config.costIncrease, player.breakEternityRebuyables[config.id])),
     maxUpgrades,
     description,
     effect: () => effectFunction(player.breakEternityRebuyables[config.id]),
