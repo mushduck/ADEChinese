@@ -5198,6 +5198,281 @@ properly on certain themes. */
 
 /* #endregion Dilation */
 
+/* #region Break Eternity Upgrades */
+
+/* #region l-break-eternity-upgrades-tab */
+
+.l-break-eternity-upgrades-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.l-break-eternity-upgrades-tab__grid {
+  margin-top: 1.5rem;
+}
+
+.l-break-eternity-upgrades-tab__mult-btn {
+  margin: 0.5rem 0.8rem;
+}
+
+/* #endregion l-break-eternity-upgrades-tab */
+
+/* #region l-break-eternity-upgrade-grid */
+
+.l-break-eternity-upgrade-grid {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-break-eternity-upgrade-grid__cell {
+  margin: 0.5rem 0.8rem;
+}
+
+/* #endregion l-break-eternity-upgrade-grid */
+
+.l-break-eternity-upgrades-bottom-row {
+  display: flex;
+  margin-top: 1rem;
+}
+
+/* #region o-break-eternity-upgrade-btn */
+
+.o-break-eternity-upgrade-btn {
+  width: 19rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #1f1f1f;
+  border: 0.1rem solid black;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.t-s6 .o-break-eternity-upgrade-btn,
+.t-s10 .o-break-eternity-upgrade-btn {
+  box-shadow: 0 0 0.7rem 0.2rem #111111;
+}
+
+.o-break-eternity-upgrade-btn:hover {
+  color: var(--color-text-inverted);
+}
+
+/* #region o-break-eternity-upgrade-btn--available */
+
+.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #58cd36;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--available:hover,
+.t-s6 .o-break-eternity-upgrade-btn--available:hover,
+.t-s10 .o-break-eternity-upgrade-btn--available:hover {
+  background-color: #34f000;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--available:hover {
+  background-color: #72e844;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--available */
+
+/* #region o-break-eternity-upgrade-btn--color-2 */
+
+.o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #3300ff;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover,
+.t-s6 .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover,
+.t-s10 .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #0000d5;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #4336f4;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--color-2 */
+
+/* #region o-break-eternity-upgrade-btn--color-3 */
+
+.o-break-eternity-upgrade-btn--color-3.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #d00fbb;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--color-3.o-break-eternity-upgrade-btn--available:hover,
+.t-s6 .o-break-eternity-upgrade-btn--color-3.o-break-eternity-upgrade-btn--available:hover,
+.t-s10 .o-break-eternity-upgrade-btn--color-3.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #ce00ff;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--color-3.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #f142ff;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--color-3 */
+
+/* #region o-break-eternity-upgrade-btn--color-4 */
+
+.o-break-eternity-upgrade-btn--color-4.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #febf0a;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--color-4.o-break-eternity-upgrade-btn--available:hover,
+.t-s6 .o-break-eternity-upgrade-btn--color-4.o-break-eternity-upgrade-btn--available:hover,
+.t-s10 .o-break-eternity-upgrade-btn--color-4.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #ffd800;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--color-4.o-break-eternity-upgrade-btn--available:hover {
+  background-color: #eea900;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--color-4 */
+
+/* #region o-break-eternity-upgrade-btn--multiplier */
+
+.o-break-eternity-upgrade-btn--multiplier.c-pelle-useless--available {
+  filter: grayscale(25%);
+}
+
+.o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available {
+  color: #c93a3a;
+  border-color: #17b3b5;
+}
+
+.o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available:hover {
+  color: black;
+  background-color: #e0d8e0;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available,
+.t-s6 .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available,
+.t-s10 .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available {
+  background-color: #1f1f1f;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available:hover,
+.t-s6 .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available:hover,
+.t-s10 .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available:hover {
+  color: white;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available {
+  color: #f4303c;
+  border-color: #34d600;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available:hover {
+  color: black;
+  background-color: #30d900;
+  border-color: black;
+}
+
+.t-s1 .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available {
+  color: #2025e9;
+  background-color: black;
+  border-color: #2388e7;
+}
+
+.t-s1 .o-break-eternity-upgrade-btn--multiplier.o-break-eternity-upgrade-btn--available:hover {
+  color: black;
+  background-color: white;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--multiplier */
+
+/* #region o-break-eternity-upgrade-btn--unavailable */
+
+.o-break-eternity-upgrade-btn--unavailable {
+  color: black;
+  background-color: #f7f7f7;
+}
+
+.o-break-eternity-upgrade-btn--unclickable {
+  cursor: auto;
+}
+
+.o-break-eternity-upgrade-btn--unavailable:hover {
+  color: var(--color-text);
+  background-color: var(--color-text-inverted);
+  cursor: default;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--unavailable {
+  background-color: #263238;
+  border-color: black;
+}
+
+.t-dark .o-break-eternity-upgrade-btn--unavailable:hover {
+  background-color: #37474f;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--unavailable {
+  background-color: #9e9e9e;
+  border-color: #616161;
+}
+
+.s-base--metro .o-break-eternity-upgrade-btn--unavailable:hover {
+  color: var(--color-text-inverted);
+  background-color: #bdbdbd;
+}
+
+.t-s1 .o-break-eternity-upgrade-btn--unavailable {
+  background-color: #9a921d;
+  border-color: black;
+}
+
+.t-s1 .o-break-eternity-upgrade-btn--unavailable:hover {
+  background-color: #c5ba26;
+}
+
+.t-s6 .o-break-eternity-upgrade-btn--unavailable,
+.t-s10 .o-break-eternity-upgrade-btn--unavailable {
+  color: grey;
+  background-color: black;
+  border-color: grey;
+}
+
+.t-s6 .o-break-eternity-upgrade-btn--unavailable:hover,
+.t-s10 .o-break-eternity-upgrade-btn--unavailable:hover {
+  background-color: #222222;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--unavailable */
+
+/* #region o-infinity-upgrade-btn--bought */
+
+.o-break-eternity-upgrade-btn--bought {
+  color: black;
+  background-color: var(--color-eternity);
+  cursor: default;
+}
+
+.o-break-eternity-upgrade-btn--bought:hover {
+  color: black;
+}
+
+.o-break-eternity-upgrade-btn--useless {
+  color: black;
+  background-color: var(--color-pelle--base);
+  filter: grayscale(50%);
+  cursor: default;
+}
+
+.o-break-eternity-upgrade-btn--useless:hover {
+  color: black;
+}
+
+/* #endregion o-break-eternity-upgrade-btn--bought */
+
+/* #endregion o-break-eternity-upgrade-btn */
+
+/* #endregion Break Eternity Upgrades */
+
 /* #region Modals */
 
 @keyframes a-modal-overlay-fadein {
