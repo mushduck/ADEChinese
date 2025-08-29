@@ -5322,17 +5322,17 @@ properly on certain themes. */
 /* #region o-break-eternity-upgrade-btn--color-2 */
 
 .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
-  background-color: #ff0099;
+  background-color: var(--color-eternity);
 }
 
 .t-dark .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover,
 .t-s6 .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover,
 .t-s10 .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
-  background-color: #d5004a;
+  background-color: var(--color-eternity);
 }
 
 .s-base--metro .o-break-eternity-upgrade-btn--color-2.o-break-eternity-upgrade-btn--available:hover {
-  background-color: #f03671;
+  background-color: var(--color-eternity);
 }
 
 /* #endregion o-break-eternity-upgrade-btn--color-2 */
