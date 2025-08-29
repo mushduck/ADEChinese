@@ -133,28 +133,28 @@ export const breakEternityUpgrades = {
   }),
   doubleIPUncap: {
     id: "doubleIPUncap",
-    cost: Math.pow(10, 1e30),
+    cost: Decimal.pow(10, 1e30),
     description: "Uncap the 2x IP Multiplier Upgrade"
   },
   tgThresholdUncap: {
     id: "tgThresholdUncap",
-    cost: Math.pow(10, 1e40),
+    cost: Decimal.pow(10, 1e40),
     description: "Uncap the TG Threshold Upgrade and improve the formula"
   },
   tesseractMultiplier: {
     id: "tesseractMultiplier",
-    cost: Math.pow(10, 1e50),
+    cost: Decimal.pow(10, 1e50),
     description: "Double all Effective Tesseracts",
     effect: 2
   },
   glyphSacrificeUncap: {
     id: "glyphSacrificeUncap",
-    cost: Math.pow(10, 1e70),
+    cost: Decimal.pow(10, 1e70),
     description: "Uncap Glyph Sacrifice Values for all Glyphs"
   },
   glyphSlotImprovement: {
     id: "glyphSlotImprovement",
-    cost: Math.pow(10, 1e100),
+    cost: Decimal.pow(10, 1e100),
     description: "Add 3 more Glyph Slots",
     effect: 3
   },
