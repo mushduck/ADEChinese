@@ -269,7 +269,7 @@ Modal.studyString = new Modal(StudyStringModal);
 Modal.singularityMilestones = new Modal(SingularityMilestonesModal);
 Modal.pelleEffects = new Modal(PelleEffectsModal);
 Modal.sacrifice = new Modal(SacrificeModal, 1, GAME_EVENT.DIMBOOST_AFTER);
-Modal.breakEternity = new Modal(BreakEternityModal);
+Modal.breakEternity = new Modal(BreakEternityModal, 1);
 Modal.breakInfinity = new Modal(BreakInfinityModal, 1, GAME_EVENT.ETERNITY_RESET_AFTER);
 Modal.respecIAP = new Modal(RespecIAPModal);
 
