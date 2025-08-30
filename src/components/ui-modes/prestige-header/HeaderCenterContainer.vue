@@ -23,6 +23,7 @@ export default {
       isModern: false,
       hasRealityButton: false,
       isDoomed: false,
+      hasGalaxyGenerator: false,
       antimatter: new Decimal(0),
       antimatterPerSec: new Decimal(0),
       celestialPoints: new Decimal(0),
@@ -37,6 +38,7 @@ export default {
 
       this.isModern = player.options.newUI;
       this.isDoomed = Pelle.isDoomed;
+      this.hasGalaxyGenerator = PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies > 0;
       this.antimatter.copyFrom(Currency.antimatter);
       this.hasRealityButton = PlayerProgress.realityUnlocked() || TimeStudy.reality.isBought;
       if (!this.hasRealityButton) this.antimatterPerSec.copyFrom(Currency.antimatter.productionPerSecond);
@@ -68,6 +70,10 @@ export default {
       <RealityCurrencyHeader />
       <ArmageddonButton
         v-if="isDoomed"
+        :is-header="true"
+      />
+      <EndgameButton
+        v-if="hasGalaxyGenerator"
         :is-header="true"
       />
       <RealityButton v-else />
