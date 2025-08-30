@@ -1,17 +1,17 @@
 export const END_STATE_MARKERS = {
   // Tab zalgoification starts as soon as endState > 0
-  GAME_END: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 1,
-  TAB_START_HIDE: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 1.5,
-  INTERACTIVITY_DISABLED: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 2.5,
-  FADE_AWAY: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 2.5,
-  SAVE_DISABLED: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 4,
-  END_NUMBERS: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 4.2,
-  CREDITS_START: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 4.5,
-  SHOW_NEW_GAME: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 15.5,
-  SPECTATE_GAME: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 15.9,
+  GAME_END: player.endgames >= 1 ? Number.MAX_VALUE : 1,
+  TAB_START_HIDE: player.endgames >= 1 ? Number.MAX_VALUE : 1.5,
+  INTERACTIVITY_DISABLED: player.endgames >= 1 ? Number.MAX_VALUE : 2.5,
+  FADE_AWAY: player.endgames >= 1 ? Number.MAX_VALUE : 2.5,
+  SAVE_DISABLED: player.endgames >= 1 ? Number.MAX_VALUE : 4,
+  END_NUMBERS: player.endgames >= 1 ? Number.MAX_VALUE : 4.2,
+  CREDITS_START: player.endgames >= 1 ? Number.MAX_VALUE : 4.5,
+  SHOW_NEW_GAME: player.endgames >= 1 ? Number.MAX_VALUE : 15.5,
+  SPECTATE_GAME: player.endgames >= 1 ? Number.MAX_VALUE : 15.9,
   // The song is 4:27 and the credits increment by 1 every 20 seconds. Needs changing if the song is changed.
-  SONG_END: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 17.9,
-  CREDITS_END: PlayerProgress.endgameUnlocked() ? Number.MAX_VALUE : 160,
+  SONG_END: player.endgames >= 1 ? Number.MAX_VALUE : 17.9,
+  CREDITS_END: player.endgames >= 1 ? Number.MAX_VALUE : 160,
 };
 
 export const GameEnd = {
