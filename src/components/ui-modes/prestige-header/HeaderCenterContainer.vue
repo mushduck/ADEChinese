@@ -6,6 +6,8 @@ import HeaderTickspeedInfo from "../HeaderTickspeedInfo";
 
 import RealityButton from "./RealityButton";
 
+import EndgameButton from "./EndgameButton";
+
 // This component contains antimatter and antimatter rate at the start of the game, as well as some additional
 // information depending on the UI (tickspeed for Classic, game speed for Modern). Everything but antimatter is
 // removed once Reality is unlocked, to make room for the reality button
@@ -16,6 +18,7 @@ export default {
     RealityCurrencyHeader,
     RealityButton,
     ArmageddonButton,
+    EndgameButton,
   },
   data() {
     return {
