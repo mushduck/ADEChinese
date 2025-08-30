@@ -27,7 +27,7 @@ export default {
   methods: {
     update() {
       this.canEndgame = isEndgameAvailable();
-      this.showPelleGlow = this.canEndgame();
+      this.showPelleGlow = true;
       if (!this.canEndgame) {
         this.gainedCP = 0;
         this.gainedDP = 0;
