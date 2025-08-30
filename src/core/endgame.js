@@ -9,7 +9,7 @@ import { deepmergeAll } from "@/utility/deepmerge";
 import { GlyphTypes } from "./glyph-effects";
 
 export function isEndgameAvailable() {
-  return player.celestials.pelle.records.totalEndgameAntimatter >= 1e9000000000000000;
+  return player.celestials.pelle.records.totalEndgameAntimatter.log10() >= 9e15;
 }
 
 function updateEndgameRecords() {
