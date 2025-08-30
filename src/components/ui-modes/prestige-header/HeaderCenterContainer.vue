@@ -69,7 +69,7 @@ export default {
     >
       <RealityCurrencyHeader />
       <ArmageddonButton
-        v-if="isDoomed"
+        v-if="isDoomed && !hasGalaxyGenerator"
         :is-header="true"
       />
       <EndgameButton
