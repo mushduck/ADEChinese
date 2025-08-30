@@ -9,7 +9,7 @@ import { deepmergeAll } from "@/utility/deepmerge";
 import { GlyphTypes } from "./glyph-effects";
 
 export function isEndgameAvailable() {
-  return player.records.totalEndgameAntimatter >= DC.E9E15;
+  return player.celestials.pelle.records.totalEndgameAntimatter >= DC.E9E15;
 }
 
 function updateEndgameRecords() {
