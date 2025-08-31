@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       isBought: false,
-      isAffordable: false
+      isAffordable: false,
+      isAvailable: false
     };
   },
   computed: {
@@ -36,7 +37,8 @@ export default {
     update() {
       const upgrade = this.upgrade;
       this.isBought = upgrade.isBought;
-      this.isAffordable = upgrade.isAffordable;
+      this.isAffordable = upgrade.isAffordable && upgrade.isAvailable;
+      this.isAvailable = upgrade.isAvailable;
     }
   }
 };
