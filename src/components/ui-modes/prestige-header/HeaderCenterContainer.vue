@@ -79,7 +79,10 @@ export default {
         v-if="hasGalaxyGenerator"
         :is-header="true"
       />
-      <RealityButton v-else />
+      <RealityButton
+        v-if="!isDoomed"
+        :is-header="true"
+      />
     </div>
     <div v-else>
       You are getting {{ format(antimatterPerSec, 2) }} antimatter per second.
