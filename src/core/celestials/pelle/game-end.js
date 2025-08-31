@@ -1,17 +1,50 @@
 export const END_STATE_MARKERS = {
   // Tab zalgoification starts as soon as endState > 0
-  GAME_END: player.endgames >= 1 ? 1e300 : 1,
-  TAB_START_HIDE: player.endgames >= 1 ? 1e300 : 1.5,
-  INTERACTIVITY_DISABLED: player.endgames >= 1 ? 1e300 : 2.5,
-  FADE_AWAY: player.endgames >= 1 ? 1e300 : 2.5,
-  SAVE_DISABLED: player.endgames >= 1 ? 1e300 : 4,
-  END_NUMBERS: player.endgames >= 1 ? 1e300 : 4.2,
-  CREDITS_START: player.endgames >= 1 ? 1e300 : 4.5,
-  SHOW_NEW_GAME: player.endgames >= 1 ? 1e300 : 15.5,
-  SPECTATE_GAME: player.endgames >= 1 ? 1e300 : 15.9,
+  get GAME_END() {
+    if (player.endgames >= 1) return 1e300;
+    return 1;
+  },
+  get TAB_START_HIDE() {
+    if (player.endgames >= 1) return 1e300;
+    return 1.5;
+  },
+  get INTERACTIVITY_DISABLED() {
+    if (player.endgames >= 1) return 1e300;
+    return 2.5;
+  },
+  get FADE_AWAY() {
+    if (player.endgames >= 1) return 1e300;
+    return 2.5;
+  },
+  get SAVE_DISABLED() {
+    if (player.endgames >= 1) return 1e300;
+    return 4;
+  },
+  get END_NUMBERS() {
+    if (player.endgames >= 1) return 1e300;
+    return 4.2;
+  },
+  get CREDITS_START() {
+    if (player.endgames >= 1) return 1e300;
+    return 4.5;
+  },
+  get SHOW_NEW_GAME() {
+    if (player.endgames >= 1) return 1e300;
+    return 15.5;
+  },
+  get SPECTATE_GAME() {
+    if (player.endgames >= 1) return 1e300;
+    return 15.9;
+  },
   // The song is 4:27 and the credits increment by 1 every 20 seconds. Needs changing if the song is changed.
-  SONG_END: player.endgames >= 1 ? 1e300 : 17.9,
-  CREDITS_END: player.endgames >= 1 ? 1e300 : 160,
+  get SONG_END() {
+    if (player.endgames >= 1) return 1e300;
+    return 17.9;
+  },
+  get CREDITS_END() {
+    if (player.endgames >= 1) return 1e300;
+    return 160;
+  },
 };
 
 export const GameEnd = {
