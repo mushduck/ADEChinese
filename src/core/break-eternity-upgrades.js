@@ -30,6 +30,10 @@ class RebuyableBreakEternityUpgradeState extends RebuyableMechanicState {
   onPurchased() {
     this.config.onPurchased?.();
   }
+
+  get isAvailable() {
+    return !Pelle.isDoomed;
+  }
 }
 
 export const BreakEternityUpgrade = mapGameDataToObject(
