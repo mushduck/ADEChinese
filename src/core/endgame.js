@@ -436,7 +436,7 @@ export const Endgame = {
     player.eterc8repl = 40;
     player.auto.bigCrunch.mode = 0;
     player.auto.eternity.mode = 0;
-    Autobuyers.reset()
+    Autobuyers.reset();
     InfinityDimensions.fullReset();
     InfinityDimensions.resetAmount();
     fullResetTimeDimensions();
