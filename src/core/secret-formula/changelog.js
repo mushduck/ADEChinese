@@ -9,43 +9,6 @@ export const changelog = [
    * }
    */
   {
-    date: [2025, 8, 20],
-    name: "v0.2.0: Final Update before Endgame",
-    info: `
-The End(game) is near. Prepare yourselves.
-<br>
-<br>
-<b><i>I expect Endgame to be out by the end of the month. If not, definitely by early September.</i></b>
-<br>
-<br>
-<b>Things added:</b><br>
-<ul>
-<li>A 6th Row of Imaginary Upgrades (albeit NYI until next update)</li>
-<li>NEWS DUMP (40+ new messages plus a story or two)</li>
-<li>The official 19th Achievement Row</li>
-<li>Obscuration to the 19th Row until 1st Endgame (will take effect next update)</li>
-<li>A crapton of new News Ticker settings so you can customize your messages just how you like!</li>
-</ul>
-<br>
-<b>Things changed:</b><br>
-<ul>
-<li>A few headers in the Credits screen (they look smoother now)</li>
-<li>Buffed Achievement r76 to compensate for the prior change</li>
-<li>Changed the game's display name and logo (your page title should now display AD: Endgame!)</li>
-<li>Looped Achievement bits to allow for further expansion</li>
-<li>Achievement r35 now only needs 2 hours of offline progress instead of 6</li>
-</ul>
-<br>
-<b>Bugs fixed:</b><br>
-<ul>
-<li>Fixed several tpyos (mostly with Achivements)</li>
-<li>Fixed the credits screen on multiple browsers (others may be a bit fast)</li>
-<li>Finally fixed the bug with TS191's second effect not working</li>
-</ul>
-<br>
-`
-  },
-  {
     date: [2025, 4, 22],
     name: "v0.2 Beta 1: Preparing for break_eternity.js",
     info: `

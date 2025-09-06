@@ -92,7 +92,6 @@ export const Pelle = {
     Autobuyer.bigCrunch.mode = AUTO_CRUNCH_MODE.AMOUNT;
     disChargeAll();
     clearCelestialRuns();
-    CelestialDimensions.resetAmount();
 
     // Force-enable the group toggle for AD autobuyers to be active; whether or not they can actually tick
     // is still handled through if the autobuyers are unlocked at all. This fixes an odd edge case where the player
@@ -116,10 +115,10 @@ export const Pelle = {
       player.options.hiddenSubtabBits[tabIndex] &= ignoredIDs.includes(tabIndex) ? -1 : 0;
     }
     Pelle.quotes.initial.show();
-    if (player.endgames >= 1) {
+    if (player.records.fullGameCompletions >= 1) {
       Pelle.quotes.doom2.show();
     }
-    if (player.endgames >= 2) {
+    if (player.records.fullGameCompletions >= 2) {
       Pelle.quotes.doom3.show();
     }
     GameStorage.save(true);
@@ -396,13 +395,13 @@ EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
   if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd) Pelle.quotes.endgame.show();
 });
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
-  if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd && player.endgames >= 1) Pelle.quotes.end2.show();
+  if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd && player.records.fullGameCompletions >= 1) Pelle.quotes.end2.show();
 });
 EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
-  if (Tab.endgame.isOpen && player.endgames === 1) Pelle.quotes.nyi.show();
+  if (Tab.endgame.isOpen && player.records.fullGameCompletions === 1) Pelle.quotes.nyi.show();
 });
 EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
-  if (Tab.statistics.isOpen && player.endgames === 1) Pelle.quotes.joke.show();
+  if (Tab.statistics.isOpen && player.records.fullGameCompletions === 1) Pelle.quotes.joke.show();
 });
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {

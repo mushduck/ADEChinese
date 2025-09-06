@@ -38,16 +38,6 @@ export const tabs = [
         id: 2,
         hidable: true,
       },
-      {
-        key: "celestial",
-        name: "Celestial Dimensions",
-        hideAt: 2.5,
-        symbol: "✯",
-        component: "CelestialDimensionsTab",
-        condition: () => PlayerProgress.endgameUnlocked(),
-        id: 3,
-        hidable: true,
-      },
     ]
   },
   {
@@ -533,14 +523,6 @@ export const tabs = [
         id: 0,
         hidable: true,
       },
-      {
-        key: "break-eternity",
-        name: "Break Eternity",
-        symbol: "∇",
-        component: "BreakEternityTab",
-        id: 1,
-        hidable: true,
-      }
     ],
   }
 ];

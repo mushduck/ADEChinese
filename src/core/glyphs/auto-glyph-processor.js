@@ -338,7 +338,6 @@ export function getGlyphLevelInputs() {
   };
   scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.instability, 500);
   scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.hyperInstability, 400);
-  scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.extremeInstability, 1);
 
   const scalePenalty = scaledLevel > 0 ? baseLevel / scaledLevel : 1;
   const incAfterInstability = staticFactors.realityUpgrades + staticFactors.achievements;
@@ -366,7 +365,6 @@ export function staticGlyphWeights() {
   const perkShop = Effects.max(1, PerkShopUpgrade.glyphLevel);
   const instability = Glyphs.instabilityThreshold;
   const hyperInstability = Glyphs.hyperInstabilityThreshold;
-  const extremeInstability = Glyphs.extremeInstabilityThreshold;
   const realityUpgrades = [Array.range(1, 5).every(x => RealityUpgrade(x).boughtAmount > 0)]
     .concat(Array.range(1, 4).map(x => Array.range(1, 5).every(y => RealityUpgrade(5 * x + y).isBought)))
     .filter(x => x)
@@ -376,7 +374,6 @@ export function staticGlyphWeights() {
     perkShop,
     instability,
     hyperInstability,
-    extremeInstability,
     realityUpgrades,
     achievements
   };

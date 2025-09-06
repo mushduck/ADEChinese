@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     update() {
-      this.best.am.copyFrom(player.celestials.pelle.records.totalEndgameAntimatter);
+      this.best.am.copyFrom(player.celestials.pelle.records.totalAntimatter);
       this.best.ip.copyFrom(player.celestials.pelle.records.totalInfinityPoints);
       this.best.ep.copyFrom(player.celestials.pelle.records.totalEternityPoints);
       this.dilationMult = PelleStrikes.dilation.hasStrike ? [500, 10, 5] : [1, 1, 1];

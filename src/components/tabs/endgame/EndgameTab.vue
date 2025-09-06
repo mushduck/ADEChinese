@@ -8,7 +8,7 @@
     </div>
     <br>
     <div>
-      New Achievement Row: 90%
+      New Achievement Row: 83%
     </div>
     <br>
     <div>
@@ -24,38 +24,38 @@
     </div>
     <br>
     <div>
-      Celestial Dimensions: 50%
+      Celestial Dimensions: 0%
     </div>
     <br>
     <div>
-      New Currency: 80%
+      New Currency: 25%
     </div>
     <br>
     <div>
-      Break Eternity: 40%
+      Break Eternity: 10%
     </div>
     <br>
     <div>
-      Break Eternity Repo: ~90% (varies on refactor branch)
+      Break Eternity Repo: ~83% (varies on refactor branch)
     </div>
     <br>
     <div>
-      Pelle Destruction: 10%
+      Pelle Destruction: 0%
     </div>
     <br>
     <div>
-      Endgame Animations: 90%
+      Endgame Animations: 80%
     </div>
     <br>
     <div>
-      Start Animations: 20%
+      Start Animations: 0%
     </div>
     <br>
     <div>
     <b>
-      Total Progress: 70%
+      Total Progress: 53%
       <br>
-      Estimated Completion: 7 September 2025
+      Estimated Completion: 23 August 2025
     </b>
     </div>
   </div>

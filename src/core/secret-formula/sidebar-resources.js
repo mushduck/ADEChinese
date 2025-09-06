@@ -76,7 +76,7 @@ export const sidebarResources = [
   {
     id: 10,
     optionName: "Relic Shards",
-    isAvailable: () => TeresaUnlocks.effarig.isUnlocked || PlayerProgress.endgameUnlocked(),
+    isAvailable: () => TeresaUnlocks.effarig.isUnlocked,
     value: () => new Decimal(Currency.relicShards.value),
     formatValue: x => format(x, 2),
     formatClass: "o-sidebar-currency--effarig",
@@ -84,7 +84,7 @@ export const sidebarResources = [
   {
     id: 11,
     optionName: "Imaginary Machines",
-    isAvailable: () => MachineHandler.isIMUnlocked || PlayerProgress.endgameUnlocked(),
+    isAvailable: () => MachineHandler.isIMUnlocked,
     value: () => new Decimal(Currency.imaginaryMachines.value),
     formatValue: x => format(x, 2),
     formatClass: "o-sidebar-currency--reality",
@@ -93,7 +93,7 @@ export const sidebarResources = [
     id: 12,
     optionName: "All Machines",
     resourceName: "Machines",
-    isAvailable: () => MachineHandler.isIMUnlocked || PlayerProgress.endgameUnlocked(),
+    isAvailable: () => MachineHandler.isIMUnlocked,
     // This is a dummy value to prevent vue errors
     value: () => Currency.realityMachines.value,
     formatValue: () => formatMachines(Currency.realityMachines.value, Currency.imaginaryMachines.value),
@@ -102,7 +102,7 @@ export const sidebarResources = [
   {
     id: 13,
     optionName: "Dark Matter",
-    isAvailable: () => Laitela.isUnlocked || PlayerProgress.endgameUnlocked(),
+    isAvailable: () => Laitela.isUnlocked,
     value: () => Currency.darkMatter,
     formatValue: x => format(x, 2),
     formatClass: "o-sidebar-currency--laitela",
@@ -110,7 +110,7 @@ export const sidebarResources = [
   {
     id: 14,
     optionName: "Dark Energy",
-    isAvailable: () => Laitela.isUnlocked || PlayerProgress.endgameUnlocked(),
+    isAvailable: () => Laitela.isUnlocked,
     value: () => new Decimal(Currency.darkEnergy.value),
     formatValue: x => format(x, 2, 2),
     formatClass: "o-sidebar-currency--laitela",
@@ -118,7 +118,7 @@ export const sidebarResources = [
   {
     id: 15,
     optionName: "Singularities",
-    isAvailable: () => Laitela.isUnlocked || PlayerProgress.endgameUnlocked(),
+    isAvailable: () => Laitela.isUnlocked,
     value: () => new Decimal(Currency.singularities.value),
     formatValue: x => format(x, 2),
     formatClass: "o-sidebar-currency--laitela",
@@ -126,33 +126,9 @@ export const sidebarResources = [
   {
     id: 16,
     optionName: "Reality Shards",
-    isAvailable: () => Pelle.isDoomed || PlayerProgress.endgameUnlocked(),
+    isAvailable: () => Pelle.isDoomed,
     value: () => Currency.realityShards,
     formatValue: x => format(x, 2),
     formatClass: "o-sidebar-currency--pelle",
-  },
-  {
-    id: 17,
-    optionName: "Celestial Points",
-    isAvailable: () => PlayerProgress.endgameUnlocked(),
-    value: () => Currency.celestialPoints,
-    formatValue: x => format(x, 2),
-    formatClass: "o-sidebar-currency--endgame",
-  },
-  {
-    id: 18,
-    optionName: "Doomed Particles",
-    isAvailable: () => PlayerProgress.endgameUnlocked(),
-    value: () => Currency.doomedParticles,
-    formatValue: x => format(x, 2),
-    formatClass: "o-sidebar-currency--pelle",
-  },
-  {
-    id: 19,
-    optionName: "Celestial Matter",
-    isAvailable: () => Currency.celestialMatter.gt(0),
-    value: () => Currency.celestialMatter,
-    formatValue: x => format(x, 2, 2),
-    formatClass: "o-sidebar-currency--celestials",
   },
 ];
