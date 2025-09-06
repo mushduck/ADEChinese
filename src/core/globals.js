@@ -17,7 +17,7 @@ export * from "./storage";
 export * from "./notations";
 export * from "./tutorial";
 
-export * from "./new-game";
+export * from "./endgame";
 
 export * from "./celestials/quotes";
 export * from "./celestials/teresa";
@@ -61,6 +61,7 @@ export * from "./tickspeed";
 export * from "./dimensions/antimatter-dimension";
 export * from "./dimensions/infinity-dimension";
 export * from "./dimensions/time-dimension";
+export * from "./dimensions/celestial-dimension";
 
 export * from "./time-studies";
 
@@ -82,6 +83,7 @@ export * from "./perks";
 export * from "./dilation";
 export * from "./black-hole";
 export * from "./machines";
+export * from "./break-eternity-upgrades";
 export * from "./devtools";
 export * from "./news-ticker";
 export * from "./shop";

@@ -214,6 +214,7 @@ Currency.antimatter = new class extends DecimalCurrency {
 
     if (Pelle.isDoomed) {
       player.celestials.pelle.records.totalAntimatter = player.celestials.pelle.records.totalAntimatter.max(value);
+      player.celestials.pelle.records.totalEndgameAntimatter = player.celestials.pelle.records.totalEndgameAntimatter.max(value);
     }
   }
 
@@ -482,10 +483,15 @@ Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
   }
 }();
 
+Currency.endgames = new class extends NumberCurrency {
+  get value() { return player.endgames; }
+  set value(value) { player.endgames = value; }
+}();
+
 Currency.celestialPoints = new class extends DecimalCurrency {
   get value() { return player.endgame.celestialPoints; }
   set value(value) {
-    const newValue = value;
+    const newValue = new Decimal(value);
     player.endgame.celestialPoints = newValue;
   }
 }();

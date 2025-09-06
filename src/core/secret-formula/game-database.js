@@ -9,6 +9,7 @@ import { changelog } from "./changelog";
 import { confirmationTypes } from "./confirmation-types";
 import { credits } from "./credits";
 import { discordRichPresence } from "./discord-rich-presence";
+import { endgame } from "./endgame";
 import { eternity } from "./eternity";
 import { h2p } from "./h2p";
 import { infinity } from "./infinity";
@@ -31,6 +32,7 @@ export const GameDatabase = {
   confirmationTypes,
   credits,
   discordRichPresence,
+  endgame,
   eternity,
   h2p,
   infinity,

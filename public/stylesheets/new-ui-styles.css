@@ -690,6 +690,10 @@ body.t-s12 {
   background-color: var(--color-eternity--bg);
 }
 
+.l-dimension-row-celestial-dim:nth-child(even) {
+  background-color: var(--color-celestials);
+}
+
 .c-infinity-dim-description__accent {
   color: var(--color-infinity);
 }
@@ -744,6 +748,33 @@ body.t-s12 {
 }
 
 .o-primary-btn--buy-td-auto {
+  width: 9rem;
+  height: 4.4rem;
+}
+
+.c-celestial-dim-description__accent {
+  color: var(--color-celestials);
+}
+
+.c-celestial-dim-row:nth-child(even) {
+  background: rgba(81, 81, 236, 30%);
+}
+
+.s-base--metro .c-celestial-dim-row:nth-child(even) {
+  background: rgba(0, 188, 212, 30%);
+}
+
+.c-celestial-dim-row__multiplier {
+  font-size: 1.4rem;
+}
+
+.o-primary-btn--buy-cd {
+  width: 30rem;
+  height: 4.4rem;
+  margin: 0 0.5rem;
+}
+
+.o-primary-btn--cd-auto {
   width: 9rem;
   height: 4.4rem;
 }

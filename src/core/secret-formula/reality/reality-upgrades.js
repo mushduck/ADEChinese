@@ -12,9 +12,9 @@ const rebuyable = props => {
     props.initialCost * props.costMult
   );
   const { effect } = props;
-  props.effect = () => Math.pow(
+  props.effect = () => Decimal.pow(
     effect + ImaginaryUpgrade(props.id).effectOrDefault(0),
-    player.reality.rebuyables[props.id] * getAdjustedGlyphEffect("realityrow1pow"));
+    player.reality.rebuyables[props.id] * getAdjustedGlyphEffect("realityrow1pow")).toNumber();
   props.description = () => props.textTemplate.replace("{value}",
     ImaginaryUpgrade(props.id).effectValue === 0
       ? formatInt(effect)

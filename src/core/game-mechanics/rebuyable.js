@@ -13,6 +13,10 @@ export class RebuyableMechanicState extends GameMechanicState {
     return this.currency.gte(this.cost);
   }
 
+  get isAffordableNumerically() {
+    return this.currency >= this.cost;
+  }
+
   get cost() {
     return this.config.cost();
   }
