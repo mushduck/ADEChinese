@@ -21,7 +21,7 @@ export class PlayerProgress {
   }
 
   get isEndgameUnlocked() {
-    return this._player.records?.fullGameCompletions > 0;
+    return this._player.endgames > 0;
   }
 
   get hasFullCompletion() {

@@ -72,6 +72,7 @@ export const DC = deepFreeze({
   E1:                   new Decimal("1e1"),
   E2:                   new Decimal("1e2"),
   E3:                   new Decimal("1e3"),
+  E4:                   new Decimal("1e4"),
   E5:                   new Decimal("1e5"),
   E6:                   new Decimal("1e6"),
   E8:                   new Decimal("1e8"),
@@ -192,6 +193,9 @@ export const DC = deepFreeze({
   E1_5E12:              new Decimal("1e1500000000000"),
   E1E15:                new Decimal("1e1000000000000000"),
   E9E15:                new Decimal("1e9000000000000000"),
+
+  //Hardcoded post-e9e15 values to be reformatted later
+  E9E115:               new Decimal("1e90000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
 });
 
 window.AUTOBUYER_MODE = {

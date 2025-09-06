@@ -1918,7 +1918,7 @@ export const celestialNavigation = {
     node: {
       clickAction: () => Tab.endgame.show(true),
       incompleteClass: "c-celestial-nav__test-incomplete",
-      symbol: "ℵ₀",
+      symbol: "α",
       symbolOffset: "1.6",
       fill: "#00ff00",
       position: Positions.alphaUnlock,

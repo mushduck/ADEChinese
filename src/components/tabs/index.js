@@ -5,6 +5,8 @@ import AutobuyersTab from "./autobuyers/AutobuyersTab";
 import AutomatorTab from "./automator/AutomatorTab";
 import BlackHoleTab from "./black-hole/BlackHoleTab";
 import BreakInfinityTab from "./break-infinity/BreakInfinityTab";
+import BreakEternityTab from "./break-eternity/BreakEternityTab";
+import CelestialDimensionsTab from "./celestial-dimensions/CelestialDimensionsTab";
 import CelestialNavigationTab from "./celestial-navigation/CelestialNavigationTab";
 import ChallengeRecordsTab from "./challenge-records/ChallengeRecordsTab";
 import EffarigTab from "./celestial-effarig/EffarigTab";
@@ -47,6 +49,7 @@ const TabComponents = {
   AntimatterDimensionsTab,
   InfinityDimensionsTab,
   TimeDimensionsTab,
+  CelestialDimensionsTab,
   OptionsSavingTab,
   OptionsVisualTab,
   OptionsGameplayTab,
@@ -85,6 +88,7 @@ const TabComponents = {
   AlchemyTab,
   CelestialNavigationTab,
   EndgameTab,
+  BreakEternityTab,
   ShopTab,
   MultiplierBreakdownTab
 };

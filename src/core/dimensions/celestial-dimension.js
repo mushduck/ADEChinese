@@ -1,62 +1,268 @@
-import { DC } from "../constants"; 
+import { DC } from "../constants";
 
-import { player } from "./player"; 
+import { DimensionState } from "./dimension";
 
-export const CelestialDimensions = { 
-    baseCosts: [DC.D1, DC.E1, DC.E2, DC.E4, DC.E10, DC.E30, DC.E100, DC.E300], 
-    costMult: [DC.E3, DC.E4, DC.E5, DC.E6, DC.E8, DC.E10, DC.E12, DC.E15],
+export function celestialDimensionCommonMultiplier() {
+  let mult = DC.D1;
 
-    getAmount(tier) { 
-        return player.dimensions.celestial[tier].amount; 
-    }, 
+  return mult;
+}
 
-    getBought(tier) { 
-        return player.dimensions.celestial[tier].bought; 
-    }, 
+export function toggleCelestialMatter() {
+  const isEnabled = player.endgame.celestialMatterMultiplier.isActive;
+  player.endgame.celestialMatterMultiplier.isActive = !isEnabled;
+}
 
-    getCost(tier) { 
-        return player.dimensions.celestial[tier].cost; 
-    }, 
+class CelestialDimensionState extends DimensionState {
+  constructor(tier) {
+    super(() => player.dimensions.celestial, tier);
+    const UNLOCK_REQUIREMENTS = [
+      undefined,
+      DC.D1,
+      DC.E1,
+      DC.E2,
+      DC.E4,
+      DC.E10,
+      DC.E30,
+      DC.E100,
+      DC.E300
+    ];
+    this._unlockRequirement = UNLOCK_REQUIREMENTS[tier];
+    const COST_MULTS = [null, 1e3, 1e4, 1e5, 1e6, 1e8, 1e10, 1e12, 1e15];
+    this._costMultiplier = COST_MULTS[tier];
+    const POWER_MULTS = [null, 2, 2, 2, 2, 2, 2, 2, 2];
+    this._powerMultiplier = POWER_MULTS[tier];
+    const BASE_COSTS = [null, 1, 10, 100, 1e4, 1e10, 1e30, 1e100, 1e300];
+    this._baseCost = new Decimal(BASE_COSTS[tier]);
+  }
 
-    canBuy(tier) { 
-        return player.endgame.celestialPoints.gte(this.getCost(tier)); 
-    }, 
+  /** @returns {Decimal} */
+  get cost() { return this.data.cost; }
+  /** @param {Decimal} value */
+  set cost(value) { this.data.cost = value; }
 
-    buy(tier) { 
-        if (this.canBuy(tier)) { 
-            player.endgame.celestialPoints = player.endgame.celestialPoints.sub(this.getCost(tier)); 
-            player.dimensions.celestial[tier].bought++; 
-            player.dimensions.celestial[tier].cost = player.dimensions.celestial[tier].cost.times(this.costMult); 
-            return true; 
-        } 
-        return false; 
-    }, 
+  get baseAmount() {
+    return this.data.baseAmount;
+  }
 
-    produce(tier) { 
-        if (tier === 0) { 
-            player.endgame.celestialMatter = player.endgame.celestialMatter.add( 
-            this.getAmount(tier) 
-        ); 
-        } else { 
-            player.dimensions.celestial[tier - 1].amount = 
-            player.dimensions.celestial[tier - 1].amount.add( 
-            this.getAmount(tier) 
-        ); 
-        } 
-    }, 
+  set baseAmount(value) {
+    this.data.baseAmount = value;
+  }
 
-    tick() { 
-        for (let tier = 7; tier >= 0; tier--) { 
-        this.produce(tier); 
-        } 
-    }, 
+  get isUnlocked() {
+    return this.data.isUnlocked;
+  }
 
-    reset() { 
-        player.celestialDimensions.forEach(dim => { 
-        dim.amount = DC.D0; 
-        dim.bought = 0;
-        dim.cost = this.baseCosts; 
-        }); 
-        player.endgame.celestialMatter = DC.D0; 
-    } 
+  set isUnlocked(value) {
+    this.data.isUnlocked = value;
+  }
+
+  get cpRequirement() {
+    return this._unlockRequirement;
+  }
+
+  get celestialPointRequirementReached() {
+    return player.endgame.celestialPoints.gte(this.cpRequirement);
+  }
+
+  get canUnlock() {
+    return this.celestialPointRequirementReached;
+  }
+
+  get isAvailableForPurchase() {
+    return CelestialDimensions.canBuy() && this.isUnlocked && this.isAffordable && !this.isCapped;
+  }
+
+  get isAffordable() {
+    return Currency.celestialPoints.gte(this.cost);
+  }
+
+  get rateOfChange() {
+    const tier = this.tier;
+    if (tier === 8) {
+      return DC.D0;
+    }
+    const toGain = CelestialDimension(tier + 1).productionPerSecond;
+    const current = Decimal.max(this.amount, 1);
+    return toGain.times(10).dividedBy(current);
+  }
+
+  get productionPerSecond() {
+    let production = this.amount;
+    return production.times(this.multiplier);
+  }
+
+  get multiplier() {
+    const tier = this.tier;
+    let mult = GameCache.celestialDimensionCommonMultiplier.value;
+    mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount)));
+    return mult;
+  }
+
+  get isProducing() {
+    const tier = this.tier;
+    return this.amount.gt(0);
+  }
+
+  get baseCost() {
+    return this._baseCost;
+  }
+
+  get costMultiplier() {
+    const costMult = this._costMultiplier;
+    return costMult;
+  }
+
+  get powerMultiplier() {
+    return new Decimal(this._powerMultiplier);
+  }
+
+  get purchases() {
+    return this.data.baseAmount;
+  }
+
+  get purchaseCap() {
+    return Decimal.NUMBER_MAX_VALUE;
+  }
+
+  get isCapped() {
+    return this.cost.gte(this.purchaseCap);
+  }
+
+  get hardcapCPAmount() {
+    return this.purchaseCap;
+  }
+
+  resetAmount() {
+    this.amount = new Decimal(this.baseAmount);
+  }
+
+  fullReset() {
+    this.cost = new Decimal(this.baseCost);
+    this.amount = DC.D0;
+    this.bought = 0;
+    this.baseAmount = 0;
+    this.isUnlocked = false;
+  }
+
+  unlock() {
+    if (this.isUnlocked) return true;
+    if (!this.canUnlock) return false;
+    this.isUnlocked = true;
+    EventHub.dispatch(GAME_EVENT.CELESTIAL_DIMENSION_UNLOCKED, this.tier);
+    if (this.tier === 1) {
+      Tab.dimensions.celestial.show();
+    }
+    return true;
+  }
+
+  // Only ever called from manual actions
+  buySingle() {
+    if (!this.isUnlocked) return this.unlock();
+    if (!this.isAvailableForPurchase) return false;
+
+    Currency.celestialPoints.purchase(this.cost);
+    this.cost = Decimal.round(this.cost.times(this.costMultiplier));
+    this.amount = this.amount.plus(1);
+    this.baseAmount += 1;
+
+    return true;
+  }
+
+  buyMax() {
+    if (!this.isAvailableForPurchase) return false;
+
+    const costScaling = new LinearCostScaling(
+      Currency.celestialPoints.value,
+      this.cost,
+      this.costMultiplier,
+      purchasesUntilHardcap
+    );
+
+    if (costScaling.purchases <= 0) return false;
+
+    Currency.celestialPoints.purchase(costScaling.totalCost);
+    this.cost = this.cost.times(costScaling.totalCostMultiplier);
+    this.amount = this.amount.plus(costScaling.purchases);
+    this.baseAmount += costScaling.purchases;
+
+    return true;
+  }
+}
+
+/**
+ * @function
+ * @param {number} tier
+ * @return {CelestialDimensionState}
+ */
+export const CelestialDimension = CelestialDimensionState.createAccessor();
+
+export const CelestialDimensions = {
+  /**
+   * @type {CelestialDimensionState[]}
+   */
+  all: CelestialDimension.index.compact(),
+  HARDCAP_PURCHASES: Decimal.NUMBER_MAX_VALUE,
+
+  unlockNext() {
+    if (CelestialDimension(8).isUnlocked) return;
+    this.next().unlock();
+  },
+
+  next() {
+    if (CelestialDimension(8).isUnlocked)
+      throw "All Celestial Dimensions are unlocked";
+    return this.all.first(dim => !dim.isUnlocked);
+  },
+
+  resetAmount() {
+    Currency.celestialMatter.reset();
+    for (const dimension of CelestialDimensions.all) {
+      dimension.resetAmount();
+    }
+  },
+
+  fullReset() {
+    for (const dimension of CelestialDimensions.all) {
+      dimension.fullReset();
+    }
+  },
+
+  get totalDimCap() {
+    return this.HARDCAP_PURCHASES;
+  },
+
+  canBuy() {
+    return true;
+  },
+
+  canAutobuy() {
+    return this.canBuy();
+  },
+
+  tick(realDiff) {
+    for (let tier = 8; tier > 1; tier--) {
+      CelestialDimension(tier).produceDimensions(CelestialDimension(tier - 1), realDiff / 10);
+      CelestialDimension(1).produceCurrency(Currency.celestialMatter, realDiff);
+    }
+  },
+
+  // Called from "Max All" UI buttons and nowhere else
+  buyMax() {
+    // Try to unlock dimensions
+    const unlockedDimensions = this.all.filter(dimension => dimension.unlock());
+
+    // Try to buy single from the highest affordable new dimensions
+    unlockedDimensions.slice().reverse().forEach(dimension => {
+      if (dimension.purchases === 0) dimension.buySingle();
+    });
+
+    // Try to buy max from the lowest dimension (since lower dimensions have bigger multiplier per purchase)
+    unlockedDimensions.forEach(dimension => dimension.buyMax(false));
+  },
+
+  get conversionExponent() {
+    if (Pelle.isDoomed) return 0.2;
+    return 2;
+  }
 };
