@@ -40,7 +40,7 @@ export function replicantiGalaxy(auto) {
   const galaxyGain = Replicanti.galaxies.gain;
   if (galaxyGain < 1) return;
   player.replicanti.timer = 0;
-  Replicanti.amount = Achievement(126).isUnlocked && !Pelle.isDoomed
+  Replicanti.amount = Achievement(126).isUnlocked
     ? Decimal.pow10(Replicanti.amount.log10() - LOG10_MAX_VALUE * galaxyGain)
     : DC.D1;
   addReplicantiGalaxies(galaxyGain);
