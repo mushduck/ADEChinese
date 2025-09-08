@@ -798,6 +798,9 @@ window.player = {
     celestialMatter: DC.D0,
     celestialMatterMultiplier: {
       isActive: true
+    },
+    pelleDestruction: {
+      upgrades: new Set()
     }
   },
   isGameEnd: false,
