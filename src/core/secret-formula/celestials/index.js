@@ -6,6 +6,7 @@ import { enslaved } from "./enslaved";
 import { pelleGalaxyGeneratorUpgrades } from "./galaxy-generator";
 import { celestialNavigation } from "./navigation";
 import { pelleUpgrades } from "./pelle-upgrades";
+import { pelleDestructionUpgrades } from "./pelle-destruction-upgrades";
 import { perkShop } from "./perk-shop";
 import { ra } from "./ra";
 import { pelleRifts } from "./rifts";
@@ -27,6 +28,9 @@ export const celestials = {
     strikes: pelleStrikes,
     upgrades: pelleUpgrades,
     rifts: pelleRifts
+  },
+  pelleDestruction: {
+    upgrades: pelleDestructionUpgrades
   },
   descriptions: {},
   enslaved,
