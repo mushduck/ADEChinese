@@ -1,106 +1,1198 @@
 import { DC } from "../constants";
+import wordShift from "../../word-shift";
 
-export const REPEATABLE_UPGRADES = [
-  {
-    id: "achievements-reenable",
-    name: "Reenable Achievements",
-    type: "repeatable",
-    maxPurchases: 17,
-    nextCost(currentPurchases = 0) {
-      const nextRow = Math.min(currentPurchases + 1, 17);
-      if (currentPurchases >= 17) return null;     
-      return Decimal.pow(10, nextRow);                
-    },
-  }
-];
+const formatCost = c => format(c, 2);
 
+export const pelleAchievementEnabling = {
+  achievement37: {
+    id: 0,
+    description: "Reenable Achievement 37",
+    cost: 1e3,
+    formatCost,
+  },
+  achievement54: {
+    id: 1,
+    description: "Reenable Achievement 54",
+    cost: 1e5,
+    formatCost,
+  },
+  achievement55: {
+    id: 2,
+    description: "Reenable Achievement 55",
+    cost: 1e5,
+    formatCost,
+  },
+  achievement65: {
+    id: 3,
+    description: "Reenable Achievement 65",
+    cost: 1e6,
+    formatCost,
+  },
+  achievement74: {
+    id: 4,
+    description: "Reenable Achievement 74",
+    cost: 1e7,
+    formatCost,
+  },
+  achievement76: {
+    id: 5,
+    description: "Reenable Achievement 76",
+    cost: 1e7,
+    formatCost,
+  },
+  achievement78: {
+    id: 6,
+    description: "Reenable Achievement 78",
+    cost: 1e7,
+    formatCost,
+  },
+  achievement81: {
+    id: 7,
+    description: "Reenable Achievement 81",
+    cost: 1e8,
+    formatCost,
+  },
+  achievement85: {
+    id: 8,
+    description: "Reenable Achievement 85",
+    cost: 1e8,
+    formatCost,
+  },
+  achievement87: {
+    id: 9,
+    description: "Reenable Achievement 87",
+    cost: 1e8,
+    formatCost,
+  },
+  achievement91: {
+    id: 10,
+    description: "Reenable Achievement 91",
+    cost: 1e9,
+    formatCost,
+  },
+  achievement92: {
+    id: 11,
+    description: "Reenable Achievement 92",
+    cost: 1e9,
+    formatCost,
+  },
+  achievement93: {
+    id: 12,
+    description: "Reenable Achievement 93",
+    cost: 1e9,
+    formatCost,
+  },
+  achievement95: {
+    id: 13,
+    description: "Reenable Achievement 95",
+    cost: 1e9,
+    formatCost,
+  },
+  achievement103: {
+    id: 14,
+    description: "Reenable Achievement 103",
+    cost: 1e10,
+    formatCost,
+  },
+  achievement104: {
+    id: 15,
+    description: "Reenable Achievement 104",
+    cost: 1e10,
+    formatCost,
+  },
+  achievement111: {
+    id: 16,
+    description: "Reenable Achievement 111",
+    cost: 1e11,
+    formatCost,
+  },
+  achievement113: {
+    id: 17,
+    description: "Reenable Achievement 113",
+    cost: 1e11,
+    formatCost,
+  },
+  achievement116: {
+    id: 18,
+    description: "Reenable Achievement 116",
+    cost: 1e11,
+    formatCost,
+  },
+  achievement117: {
+    id: 19,
+    description: "Reenable Achievement 117",
+    cost: 1e11,
+    formatCost,
+  },
+  achievement118: {
+    id: 20,
+    description: "Reenable Achievement 118",
+    cost: 1e11,
+    formatCost,
+  },
+  achievement125: {
+    id: 21,
+    description: "Reenable Achievement 125",
+    cost: 1e12,
+    formatCost,
+  },
+  achievement131: {
+    id: 22,
+    description: "Reenable Achievement 131",
+    cost: 1e13,
+    formatCost,
+  },
+  achievement132: {
+    id: 23,
+    description: "Reenable Achievement 132",
+    cost: 1e13,
+    formatCost,
+  },
+  achievement133: {
+    id: 24,
+    description: "Reenable Achievement 133",
+    cost: 1e13,
+    formatCost,
+  },
+  achievement134: {
+    id: 25,
+    description: "Reenable Achievement 134",
+    cost: 1e13,
+    formatCost,
+  },
+  achievement137: {
+    id: 26,
+    description: "Reenable Achievement 137",
+    cost: 1e13,
+    formatCost,
+  },
+  achievement141: {
+    id: 27,
+    description: "Reenable Achievement 141",
+    cost: 1e14,
+    formatCost,
+  },
+  achievement142: {
+    id: 28,
+    description: "Reenable Achievement 142",
+    cost: 1e14,
+    formatCost,
+  },
+  achievement143: {
+    id: 29,
+    description: "Reenable Achievement 143",
+    cost: 1e14,
+    formatCost,
+  },
+  achievement156: {
+    id: 30,
+    description: "Reenable Achievement 156",
+    cost: 1e15,
+    formatCost,
+  },
+  achievement164: {
+    id: 31,
+    description: "Reenable Achievement 164",
+    cost: 1e16,
+    formatCost,
+  },
+};
 
-export const PELLE_DESTRUCTION_UPGRADES = [
-  // Free
-  { id: "ts192", name: "Reenable TS192", cost: new Decimal(0) },
+export const pelleDestructionUpgrades = {
+  timestudy192: {
+    id: 0,
+    description: "Reenable Time Study 192 (Free)",
+    cost: 0,
+    formatCost,
+  },
+  passiveIPGen: {
+    id: 1,
+    description: "Reenable the Passive IP Gen Infinity Upgrade",
+    cost: 1,
+    formatCost,
+  },
+  disableADNerf: {
+    id: 2,
+    description: "Disable the AD Divisor Nerf",
+    cost: 10,
+    formatCost,
+  },
+  passiveInfGen: {
+    id: 3,
+    description: "Reenable the Passive Infinity Gen Break Upgrade",
+    cost: 1e3,
+    formatCost,
+  },
+  timestudy32: {
+    id: 4,
+    description: "Reenable Time Study 32",
+    cost: 1e4,
+    formatCost,
+  },
+  timestudy41: {
+    id: 5,
+    description: "Reenable Time Study 41",
+    cost: 1e6,
+    formatCost,
+  },
+  timestudy51: {
+    id: 6,
+    description: "Reenable Time Study 51",
+    cost: 1e8,
+    formatCost,
+  },
+  timestudy62: {
+    id: 7,
+    description: "Reenable Time Study 62",
+    cost: 1e9,
+    formatCost,
+  },
+  autoICComp: {
+    id: 8,
+    description: "Reenable Automatic Infinity Challenge Completions",
+    cost: 1e9,
+    formatCost,
+  },
+  timestudy61: {
+    id: 9,
+    description: "Reenable Time Study 61",
+    cost: 1e10,
+    formatCost,
+  },
+  achievementMultiplier: {
+    id: 10,
+    description: "Reenable Achievement Multiplier",
+    cost: 1e10,
+    formatCost,
+  },
+  disableDTNerf: {
+    id: 11,
+    description: "Disable the DT Divisor Nerf",
+    cost: 1e12,
+    formatCost,
+  },
+  glyphSlot1: {
+    id: 12,
+    description: "Regain a Glyph Slot in Pelle",
+    cost: 1e12,
+    formatCost
+  },
+  timestudy141: {
+    id: 13,
+    description: "Reenable Time Study 141",
+    cost: 1e15,
+    formatCost,
+  },
+  timestudy142: {
+    id: 14,
+    description: "Reenable Time Study 142",
+    cost: 1e15,
+    formatCost,
+  },
+  timestudy143: {
+    id: 15,
+    description: "Reenable Time Study 143",
+    cost: 1e15,
+    formatCost,
+  },
+  disableEC2Nerf: {
+    id: 16,
+    description: "Disable the Eternity Challenge 2 Nerf",
+    cost: 1e15,
+    formatCost,
+  },
+  timestudy121: {
+    id: 17,
+    description: "Reenable Time Study 121",
+    cost: 1e18,
+    formatCost,
+  },
+  timestudy122: {
+    id: 18,
+    description: "Reenable Time Study 122",
+    cost: 1e18,
+    formatCost,
+  },
+  timestudy123: {
+    id: 19,
+    description: "Reenable Time Study 123",
+    cost: 1e18,
+    formatCost,
+  },
+  timestudy213: {
+    id: 20,
+    description: "Reenable Time Study 213",
+    cost: 1e18,
+    formatCost,
+  },
+  disableEC3Nerf: {
+    id: 21,
+    description: "Disable the Eternity Challenge 3 Nerf",
+    cost: 1e18,
+    formatCost,
+  },
+  x2IPUpgrade: {
+    id: 22,
+    description: "Reenable the x2 Infinity Point Multiplier Upgrade",
+    cost: 1e20,
+    formatCost,
+  },
+  disableEC5Nerf: {
+    id: 23,
+    description: "Disable the Eternity Challenge 5 Nerf",
+    cost: 1e20,
+    formatCost,
+  },
+  glyphSlot2: {
+    id: 24,
+    description: "Regain a Glyph Slot in Pelle",
+    cost: 1e24,
+    formatCost,
+  },
+  disableEC6Nerf: {
+    id: 25,
+    description: "Disable the Eternity Challenge 6 Nerf",
+    cost: 1e25,
+    formatCost,
+  },
+  disableEC7Nerf: {
+    id: 26,
+    description: "Disable the Eternity Challenge 7 Nerf",
+    cost: 1e27,
+    formatCost,
+  },
+  disableGalaxyNerf: {
+    id: 27,
+    description: "Disable the Galaxy Effectiveness Nerf",
+    cost: 1e30,
+    formatCost,
+  },
+  x5EPUpgrade: {
+    id: 28,
+    description: "Reenable the x5 Eternity Point Multiplier Upgrade",
+    cost: 1e30,
+    formatCost,
+  },
+  disableEC8Nerf: {
+    id: 19,
+    description: "Disable the Eternity Challenge 8 Nerf",
+    cost: 1e30,
+    formatCost,
+  },
+  reenableIPDilationUpgrade: {
+    id: 30,
+    description: "Reenable the 2e12 DT Dilation Upgrade",
+    cost: 1e33,
+    formatCost,
+  },
+  glyphSlot3: {
+    id: 31,
+    description: "Regain a Glyph Slot in Pelle",
+    cost: 1e36,
+    formatCost,
+  },
+  disableEC9Nerf: {
+    id: 32,
+    description: "Disable the Eternity Challenge 9 Nerf",
+    cost: 1e36,
+    formatCost,
+  },
+  disableEC10Nerf: {
+    id: 33,
+    description: "Disable the Eternity Challenge 10 Nerf",
+    cost: 1e40,
+    formatCost,
+  },
+  x3TPUpgrade: {
+    id: 34,
+    description: "Reenable the x3 Tachyon Particle Multiplier Upgrade",
+    cost: 1e40,
+    formatCost,
+  },
+  pelleGlyphEffects: {
+    id: 35,
+    description: "Enable the Pelle Infinity Glyph Special Effect in EC9-12",
+    cost: 1e42,
+    formatCost,
+  },
+  destroyedGlyphEffects: {
+    id: 36,
+    description: "Reenable Destroyed Glyph Effects for normal Glyphs",
+    cost: 1e42,
+    formatCost,
+  },
+  blackHole: {
+    id: 37,
+    description: "Reenable the Black Hole (but reset upgrades and change costs to Reality Shards)",
+    cost: 1e44,
+    formatCost,
+  },
+  disableEC12Nerf: {
+    id: 38,
+    description: "Disable the Eternity Challenge 12 Nerf",
+    cost: 1e45,
+    formatCost,
+  },
+  glyphSlot4: {
+    id: 39,
+    description: "Regain a Glyph Slot in Pelle",
+    cost: 1e48,
+    formatCost,
+  },
+  disableEC11Nerf: {
+    id: 40,
+    description: "Disable the Eternity Challenge 11 Nerf",
+    cost: 1e50,
+    formatCost,
+  },
+  glyphRarity: {
+    id: 41,
+    description: "Reenable Glyph Rarity",
+    cost: 1e50,
+    formatCost,
+  },
+  teresaShop: {
+    id: 42,
+    description: "Reenable Teresa's Perk Point Shop",
+    cost: 1e50,
+    formatCost,
+  },
+  relicShards: {
+    id: 43,
+    description: "Reenable Relic Shards",
+    cost: 1e52,
+    formatCost,
+  },
+  spaceTheorems: {
+    id: 44,
+    description: "Reenable Space Theorems",
+    cost: 1e54,
+    formatCost,
+  },
+  continuumBuff: {
+    id: 45,
+    description: "Reenable Continuum Buff",
+    cost: 1e56,
+    formatCost,
+  },
+  specialGlyphEffects: {
+    id: 46,
+    description: "Reenable Glyph Effects for Effarig Glyphs",
+    cost: 1e60,
+    formatCost,
+  },
+  singularityMilestones: {
+    id: 47,
+    description: "Reenable Singularities and Singularity Milestones",
+    cost: 1e60,
+    formatCost,
+  },
+};
 
-  // 1 – 1e4
-  { id: "passive-ip-gen",       name: "Reenable Passive IP Gen Upgrade",         cost: new Decimal(1) },
-  { id: "ad-div10-nerf-off",    name: "Disable AD/10 nerf",                      cost: new Decimal(10) },
-  { id: "passive-infinity-gen", name: "Reenable Passive Infinity Gen Upgrade",   cost: new Decimal(1000) },
-  { id: "ts32",                 name: "Reenable TS32",                           cost: new Decimal(10000) },
+export const pelleRealityUpgradeEnabling = {
+  temporalAmplifier: {
+    id: 0,
+    description: "Reenable Temporal Amplifier",
+    cost: 1e25,
+    formatCost,
+  },
+  replicativeAmplifier: {
+    id: 1,
+    description: "Reenable Replicative Amplifier",
+    cost: 1e25,
+    formatCost,
+  },
+  eternalAmplifier: {
+    id: 2,
+    description: "Reenable Eternal Amplifier",
+    cost: 1e25,
+    formatCost,
+  },
+  superluminalAmplifier: {
+    id: 3,
+    description: "Reenable Superluminal Amplifier",
+    cost: 1e25,
+    formatCost,
+  },
+  boundlessAmplifier: {
+    id: 4,
+    description: "Reenable Boundless Amplifier",
+    cost: 1e25,
+    formatCost,
+  },
+  cosmicallyDuplicate: {
+    id: 5,
+    description: "Reenable Cosmically Duplicate",
+    cost: 1e35,
+    formatCost,
+  },
+  innumerablyConstruct: {
+    id: 6,
+    description: "Reenable Innumerably Construct",
+    cost: 1e35,
+    formatCost,
+  },
+  paradoxicallyAttain: {
+    id: 7,
+    description: "Reenable Paradoxically Attain",
+    cost: 1e35,
+    formatCost,
+  },
+  linguisticallyExpand: {
+    id: 8,
+    description: "Reenable Linguistically Expand",
+    cost: 1e35,
+    formatCost,
+  },
+  existentiallyProlong: {
+    id: 9,
+    description: "Reenable Existentially Prolong",
+    cost: 1e35,
+    formatCost,
+  },
+  boundlessFlow: {
+    id: 10,
+    description: "Reenable The Boundless Flow",
+    cost: 1e40,
+    formatCost,
+  },
+  knowingExistence: {
+    id: 11,
+    description: "Reenable The Knowing Existence",
+    cost: 1e40,
+    formatCost,
+  },
+  telemechanicalProcess: {
+    id: 12,
+    description: "Reenable The Telemechanical Process",
+    cost: 1e40,
+    formatCost,
+  },
+  eternalFlow: {
+    id: 13,
+    description: "Reenable The Eternal Flow",
+    cost: 1e40,
+    formatCost,
+  },
+  paradoxicalForever: {
+    id: 14,
+    description: "Reenable The Paradoxical Forever",
+    cost: 1e40,
+    formatCost,
+  },
+  scourToEmpower: {
+    id: 15,
+    description: "Reenable Scour To Empower (Glyph Sacrifice and Rewards)",
+    cost: 1e45,
+    formatCost,
+  },
+  parityOfSingularity: {
+    id: 16,
+    description: "Reenable Parity of Singularity (must have Black Hole 1)",
+    cost: 1e45,
+    formatCost,
+  },
+  temporalTranscendence: {
+    id: 17,
+    description: "Reenable Temporal Transcendence",
+    cost: 1e50,
+    formatCost,
+  },
+  replicativeRapidity: {
+    id: 18,
+    description: "Reenable Replicative Rapidity",
+    cost: 1e50,
+    formatCost,
+  },
+  syntheticSymbolism: {
+    id: 19,
+    description: "Reenable Synthetic Symbolism",
+    cost: 1e50,
+    formatCost,
+  },
+};
 
-  // 1e6 – 1e10
-  { id: "ts41",               name: "Reenable TS41",                           cost: Decimal.pow(10, 6) },
-  { id: "ts51",               name: "Reenable TS51",                           cost: Decimal.pow(10, 8) },
-  { id: "ts62",               name: "Reenable TS62",                           cost: Decimal.pow(10, 9) },
-  { id: "auto-ic-completion", name: "Reenable Auto IC completion",             cost: Decimal.pow(10, 9) },
-  { id: "ts61",               name: "Reenable TS61",                           cost: Decimal.pow(10, 10) },
+export const pelleImaginaryUpgradeEnabling = {
+  temporalIntensifier: {
+    id: 0,
+    description: "Reenable Temporal Intensifier",
+    cost: 1e48,
+    formatCost,
+  },
+  replicativeIntensifier: {
+    id: 1,
+    description: "Reenable Replicative Intensifier",
+    cost: 1e48,
+    formatCost,
+  },
+  eternalIntensifier: {
+    id: 2,
+    description: "Reenable Eternal Intensifier",
+    cost: 1e48,
+    formatCost,
+  },
+  superluminalIntensifier: {
+    id: 3,
+    description: "Reenable Superluminal Intensifier",
+    cost: 1e48,
+    formatCost,
+  },
+  boundlessIntensifier: {
+    id: 4,
+    description: "Reenable Boundless Intensifier",
+    cost: 1e48,
+    formatCost,
+  },
+  ellipticMateriality: {
+    id: 5,
+    description: "Reenable Elliptic Materiality",
+    cost: 1e51,
+    formatCost,
+  },
+  runicAssurance: {
+    id: 6,
+    description: "Reenable Runic Assurance",
+    cost: 1e51,
+    formatCost,
+  },
+  hyperbolicApeirogon: {
+    id: 7,
+    description: "Reenable Hyperbolic Apeirogon",
+    cost: 1e51,
+    formatCost,
+  },
+  cosmicFilament: {
+    id: 8,
+    description: "Reenable Cosmic Filament",
+    cost: 1e51,
+    formatCost,
+  },
+  entropicCondensing: {
+    id: 9,
+    description: "Reenable Entropic Condensing",
+    cost: 1e51,
+    formatCost,
+  },
+  suspicionOfInterference: {
+    id: 10,
+    description: "Reenable Suspicion of Interference",
+    cost: 1e54,
+    formatCost,
+  },
+  consequencesOfIllusions: {
+    id: 11,
+    description: "Reenable Consequences of Illusions",
+    cost: 1e54,
+    formatCost,
+  },
+  transienceOfInformation: {
+    id: 12,
+    description: "Reenable Transience of Information",
+    cost: 1e54,
+    formatCost,
+  },
+  recollectionOfIntrusion: {
+    id: 13,
+    description: "Reenable Recollection of Intrusion",
+    cost: 1e54,
+    formatCost,
+  },
+  vacuumAcceleration: {
+    id: 14,
+    description: "Reenable Vacuum Acceleration",
+    cost: 1e57,
+    formatCost,
+  },
+  existentialElimination: {
+    id: 15,
+    description: "Reenable Existential Elimination",
+    cost: 1e60,
+    formatCost,
+  },
+  totalTermination: {
+    id: 16,
+    description: "Reenable Total Termination",
+    cost: 1e60,
+    formatCost,
+  },
+  planarPurification: {
+    id: 17,
+    description: "Reenable Planar Purification",
+    cost: 1e60,
+    formatCost,
+  },
+  absoluteAnnulment: {
+    id: 18,
+    description: "Reenable Absolute Annulment",
+    cost: 1e60,
+    formatCost,
+  },
+};
 
-  // 1e12
-  { id: "dt-div100k-nerf-off", name: "Disable the /100000 Dilated Time nerf",  cost: Decimal.pow(10, 12) },
-  { id: "glyph-slots-t1",      name: "Reenable Glyph Slots (Tier 1)",          cost: Decimal.pow(10, 12) },
+export const pelleCelestialRewardEnabling = {
+  allEternityUpgrades: {
+    id: 0,
+    description: "Reenable Teresa's Canister Milestone 1",
+    cost: 1e48,
+    formatCost,
+  },
+  undoGlyph: {
+    id: 1,
+    description: "Reenable Teresa's Canister Milestone 2",
+    cost: 1e48,
+    formatCost,
+  },
+  passiveEPGen: {
+    id: 2,
+    description: "Reenable Teresa's Canister Milestone 3",
+    cost: 1e48,
+    formatCost,
+  },
+  replicantiCapIncrease: {
+    id: 3,
+    description: "Reenable Effarig's Infinity Reward 1",
+    cost: 1e52,
+    formatCost,
+  },
+  maxRGIncrease: {
+    id: 4,
+    description: "Reenable Effarig's Infinity Reward 2",
+    cost: 1e52,
+    formatCost,
+  },
+  effarigRewards: {
+    id: 5,
+    description: "Reenable All Other Effarig Rewards",
+    cost: 1e52,
+    formatCost,
+  },
+  vMilestones1: {
+    id: 6,
+    description: "Reenable the first two V Milestone Rewards",
+    cost: 1e55,
+    formatCost,
+  },
+  vMilestones2: {
+    id: 7,
+    description: "Reenable the next two V Milestone Rewards",
+    cost: 1e55,
+    formatCost,
+  },
+  vMilestones3: {
+    id: 8,
+    description: "Reenable the last two V Milestone Rewards",
+    cost: 1e55,
+    formatCost,
+  },
+  raTeresa1: {
+    id: 9,
+    description: "Reenable the Teresa Level 1 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raTeresa2: {
+    id: 10,
+    description: "Reenable the Teresa Level 2 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raTeresa3: {
+    id: 11,
+    description: "Reenable the Teresa Level 10 Reward (Altered Glyphs)",
+    cost: 1e57,
+    formatCost,
+  },
+  raNameless1: {
+    id: 12,
+    description: "Reenable the Nameless Level 1 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raNameless2: {
+    id: 13,
+    description: "Reenable the Nameless Level 2 Reward (also reenables BH storing)",
+    cost: 1e57,
+    formatCost,
+  },
+  raNameless3: {
+    id: 14,
+    description: "Reenable the Nameless Level 10 Reward (BH Pulse)",
+    cost: 1e57,
+    formatCost,
+  },
+  raNameless4: {
+    id: 15,
+    description: "Reenable the Nameless Level 15 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raV1: {
+    id: 16,
+    description: "Reenable the V Level 1 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raV2: {
+    id: 17,
+    description: "Reenable the V Level 6 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raV3: {
+    id: 18,
+    description: "Reenable the V Level 10 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raV4: {
+    id: 19,
+    description: "Reenable the V Level 15 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+  raV5: {
+    id: 20,
+    description: "Reenable the V Level 25 Reward",
+    cost: 1e57,
+    formatCost,
+  },
+};
 
-  // 1e15
-  { id: "ts141",            name: "Reenable TS141",                          cost: Decimal.pow(10, 15) },
-  { id: "ts142",            name: "Reenable TS142",                          cost: Decimal.pow(10, 15) },
-  { id: "ts143",            name: "Reenable TS143",                          cost: Decimal.pow(10, 15) },
-  { id: "ec2-req-nerf-off", name: "Disable EC2 requirement nerf",            cost: Decimal.pow(10, 15) },
+export const pellePerkEnabling = {
+  perkEU1: {
+    id: 0,
+    description: "Reenable the EU1 Perk",
+    cost: 1e36,
+    formatCost,
+  },
+  perkSAM: {
+    id: 1,
+    description: "Reenable the SAM Perk",
+    cost: 1e36,
+    formatCost,
+  },
+  perkEU2: {
+    id: 2,
+    description: "Reenable the EU2 Perk",
+    cost: 1e38,
+    formatCost,
+  },
+  perkANR: {
+    id: 3,
+    description: "Reenable the ANR Perk",
+    cost: 1e38,
+    formatCost,
+  },
+  perkSIP1: {
+    id: 4,
+    description: "Reenable the SIP1 Perk",
+    cost: 1e38,
+    formatCost,
+  },
+  perkTTS: {
+    id: 5,
+    description: "Reenable the TTS Perk",
+    cost: 1e40,
+    formatCost,
+  },
+  perkPEC1: {
+    id: 6,
+    description: "Reenable the PEC1 Perk",
+    cost: 1e40,
+    formatCost,
+  },
+  perkDAU: {
+    id: 7,
+    description: "Reenable the DAU Perk",
+    cost: 1e40,
+    formatCost,
+  },
+  perkSEP1: {
+    id: 8,
+    description: "Reenable the SEP1 Perk",
+    cost: 1e40,
+    formatCost,
+  },
+  perkSIP2: {
+    id: 9,
+    description: "Reenable the SIP2 Perk",
+    cost: 1e40,
+    formatCost,
+  },
+  perkTTF: {
+    id: 10,
+    description: "Reenable the TTF Perk",
+    cost: 1e42,
+    formatCost,
+  },
+  perkPEC2: {
+    id: 11,
+    description: "Reenable the PEC2 Perk",
+    cost: 1e42,
+    formatCost,
+  },
+  perkDU1: {
+    id: 12,
+    description: "Reenable the DU1 Perk",
+    cost: 1e42,
+    formatCost,
+  },
+  perkDILR: {
+    id: 13,
+    description: "Reenable the DILR Perk and all ACH Perks",
+    cost: 1e42,
+    formatCost,
+  },
+  perkTGR: {
+    id: 14,
+    description: "Reenable the TGR Perk",
+    cost: 1e42,
+    formatCost,
+  },
+  perkSTP: {
+    id: 15,
+    description: "Reenable the STP Perk",
+    cost: 1e42,
+    formatCost,
+  },
+  perkSEP2: {
+    id: 16,
+    description: "Reenable the SEP2 Perk",
+    cost: 1e42,
+    formatCost,
+  },
+  perkIDR: {
+    id: 17,
+    description: "Reenable the IDR Perk",
+    cost: 1e42,
+    formatCost,
+  },
+  perkTTM: {
+    id: 18,
+    description: "Reenable the TTM Perk",
+    cost: 1e44,
+    formatCost,
+  },
+  perkPEC3: {
+    id: 19,
+    description: "Reenable the PEC3 Perk",
+    cost: 1e44,
+    formatCost,
+  },
+  perkDU2: {
+    id: 20,
+    description: "Reenable the DU2 Perk",
+    cost: 1e44,
+    formatCost,
+  },
+  perkTP1: {
+    id: 21,
+    description: "Reenable the TP1 Perk",
+    cost: 1e44,
+    formatCost,
+  },
+  perkSEP3: {
+    id: 22,
+    description: "Reenable the SEP3 Perk",
+    cost: 1e44,
+    formatCost,
+  },
+  perkATT: {
+    id: 23,
+    description: "Reenable the ATT Perk",
+    cost: 1e46,
+    formatCost,
+  },
+  perkTP2: {
+    id: 24,
+    description: "Reenable the TP2 Perk",
+    cost: 1e46,
+    formatCost,
+  },
+  perkATD: {
+    id: 25,
+    description: "Reenable the ATD and REAL Perk",
+    cost: 1e48,
+    formatCost,
+  },
+  perkDAS: {
+    id: 26,
+    description: "Reenable the DAS Perk",
+    cost: 1e48,
+    formatCost,
+  },
+  perkTP3: {
+    id: 27,
+    description: "Reenable the TP3 Perk",
+    cost: 1e48,
+    formatCost,
+  },
+  perkTP4: {
+    id: 28,
+    description: "Reenable the TP4 Perk",
+    cost: 1e50,
+    formatCost,
+  },
+};
 
-  // 1e18
-  { id: "ts121",            name: "Reenable TS121",                          cost: Decimal.pow(10, 18) },
-  { id: "ts122",            name: "Reenable TS122",                          cost: Decimal.pow(10, 18) },
-  { id: "ts123",            name: "Reenable TS123",                          cost: Decimal.pow(10, 18) },
-  { id: "ts213",            name: "Reenable TS213",                          cost: Decimal.pow(10, 18) },
-  { id: "ec3-req-nerf-off", name: "Disable EC3 requirement nerf",            cost: Decimal.pow(10, 18) },
+export const pelleAlchemyEnabling = {
+  alchemyPower: {
+    id: 0,
+    description: "Reenable Power in Alchemy",
+    cost: 1e52,
+    formatCost,
+  },
+  alchemyInfinity: {
+    id: 1,
+    description: "Reenable Infinity in Alchemy",
+    cost: 1e52,
+    formatCost,
+  },
+  alchemyTime: {
+    id: 2,
+    description: "Reenable Time in Alchemy",
+    cost: 1e52,
+    formatCost,
+  },
+  alchemyReplication: {
+    id: 3,
+    description: "Reenable Replication in Alchemy",
+    cost: 1e52,
+    formatCost,
+  },
+  alchemyDilation: {
+    id: 4,
+    description: "Reenable Dilation in Alchemy",
+    cost: 1e52,
+    formatCost,
+  },
+  alchemyEffarig: {
+    id: 5,
+    description: "Reenable Effarig in Alchemy",
+    cost: 1e52,
+    formatCost,
+  },
+  alchemyCardinality: {
+    id: 6,
+    description: "Reenable Cardinality in Alchemy",
+    cost: 1e54,
+    formatCost,
+  },
+  alchemyEternity: {
+    id: 7,
+    description: "Reenable Eternity in Alchemy",
+    cost: 1e54,
+    formatCost,
+  },
+  alchemyDimensionality: {
+    id: 8,
+    description: "Reenable Dimensionality in Alchemy",
+    cost: 1e54,
+    formatCost,
+  },
+  alchemyInflation: {
+    id: 9,
+    description: "Reenable Inflation in Alchemy",
+    cost: 1e54,
+    formatCost,
+  },
+  alchemyAlternation: {
+    id: 10,
+    description: "Reenable Alternation in Alchemy",
+    cost: 1e54,
+    formatCost,
+  },
+  alchemySynergism: {
+    id: 11,
+    description: "Reenable Synergism in Alchemy",
+    cost: 1e56,
+    formatCost,
+  },
+  alchemyDecoherence: {
+    id: 12,
+    description: "Reenable Decoherence in Alchemy",
+    cost: 1e56,
+    formatCost,
+  },
+  alchemyMomentum: {
+    id: 13,
+    description: "Reenable Momentum in Alchemy",
+    cost: 1e56,
+    formatCost,
+  },
+  alchemyMultiversal: {
+    id: 14,
+    description: "Reenable Multiversal in Alchemy",
+    cost: 1e58,
+    formatCost,
+  },
+  alchemyForce: {
+    id: 15,
+    description: "Reenable Force in Alchemy",
+    cost: 1e58,
+    formatCost,
+  },
+  alchemyExponential: {
+    id: 16,
+    description: "Reenable Exponential in Alchemy",
+    cost: 1e58,
+    formatCost,
+  },
+  alchemyUncountability: {
+    id: 17,
+    description: "Reenable Uncountability in Alchemy",
+    cost: 1e58,
+    formatCost,
+  },
+  alchemyBoundless: {
+    id: 18,
+    description: "Reenable Boundless in Alchemy",
+    cost: 1e58,
+    formatCost,
+  },
+  alchemyUnpredictability: {
+    id: 19,
+    description: "Reenable Unpredictability in Alchemy",
+    cost: 1e58,
+    formatCost,
+  },
+  alchemyReality: {
+    id: 20,
+    description: "Reenable Reality in Alchemy (Reenables Reality Glyphs)",
+    cost: 1e60,
+    formatCost,
+  },
+};
 
-  // 1e20 – 1e21
-  { id: "ipx2",                    name: "Reenable 2x IP multiplier",               cost: Decimal.pow(10, 20) },
-  { id: "ec5-req-nerf-off",        name: "Disable EC5 requirement nerf",            cost: Decimal.pow(10, 20) },
-  { id: "dilation-upg-autobuyers", name: "Reenable Dilation Upgrade autobuyers",    cost: Decimal.pow(10, 21) },
-
-  // 1e24 – 1e27
-  { id: "tt-autobuyers",     name: "Reenable TT Autobuyers",                        cost: Decimal.pow(10, 24) },
-  { id: "glyph-slots-t2",    name: "Reenable Glyph Slots (Tier 2)",                 cost: Decimal.pow(10, 24) },
-  { id: "reality-row1-each", name: "Reenable Row 1 Reality Upgrades (each)",        cost: Decimal.pow(10, 25) },
-  { id: "ec6-req-nerf-off",  name: "Disable EC6 requirement nerf",                  cost: Decimal.pow(10, 25) },
-  { id: "ec7-req-nerf-off",  name: "Disable EC7 requirement nerf",                  cost: Decimal.pow(10, 27) },
-
-  // 1e30 – 1e33
-  { id: "galaxy-50pct-nerf-off", name: "Disable 50% Galaxy Effectiveness nerf",     cost: Decimal.pow(10, 30) },
-  { id: "epx5",                  name: "Reenable 5x EP multiplier",                 cost: Decimal.pow(10, 30) },
-  { id: "ec8-req-nerf-off",      name: "Disable EC8 requirement nerf",              cost: Decimal.pow(10, 30) },
-  { id: "dt-2e12-upgrade",       name: "Reenable the 2e12 DT upgrade",              cost: Decimal.pow(10, 33) },
-
-  // 1e35 – 1e36
-  { id: "reality-row2-each", name: "Reenable Row 2 Reality Upgrades (each)",        cost: Decimal.pow(10, 35) },
-  { id: "glyph-slots-t3",    name: "Reenable Glyph Slots (Tier 3)",                 cost: Decimal.pow(10, 36) },
-  { id: "ec9-req-nerf-off",  name: "Disable EC9 requirement nerf",                  cost: Decimal.pow(10, 36) },
-
-  // 1e40 – 1e42
-  { id: "ec10-req-nerf-off",       name: "Disable EC10 requirement nerf",           cost: Decimal.pow(10, 40) },
-  { id: "tp3x",                    name: "Reenable the 3x TP upgrade",              cost: Decimal.pow(10, 40) },
-  { id: "glyph-sacrifice-rewards", name: "Reenable Glyph Sacrifice rewards",        cost: Decimal.pow(10, 40) },
-  { id: "pelle-inf-glyph-ec9-12",  name: "Reenable the Pelle Infinity Glyph effect in EC9–12", cost: Decimal.pow(10, 42) },
-  { id: "destroyed-glyph-effects", name: "Reenable the Destroyed Glyph Effects for normal Glyphs", cost: Decimal.pow(10, 42) },
-
-  // 1e45 – 1e50
-  { id: "ec12-req-nerf-off", name: "Disable EC12 requirement nerf",                 cost: Decimal.pow(10, 45) },
-  { id: "glyph-slots-t4",    name: "Reenable Glyph Slots (Tier 4)",                 cost: Decimal.pow(10, 48) },
-  { id: "ec11-req-nerf-off", name: "Disable EC11 requirement nerf",                 cost: Decimal.pow(10, 50) },
-  { id: "glyph-rarity-100",  name: "Set Glyph Rarity back to 100%",                 cost: Decimal.pow(10, 50) },
-
-  // 1e54 – 1e57
-  { id: "imag-row3-each",    name: "Reenable Row 3 Imaginary Upgrades (each)",      cost: Decimal.pow(10, 54) },
-  { id: "altered-glyph-effects", name: "Reenable Altered Glyph Effects",            cost: Decimal.pow(10, 55) },
-  { id: "continuum-buff",    name: "Reenable Continuum Buff",                       cost: Decimal.pow(10, 56) },
-  { id: "imag-row4-each",    name: "Reenable Row 4 Imaginary Upgrades (each)",      cost: Decimal.pow(10, 57) },
-
-  // 1e60
-  { id: "imag-row5-each",    name: "Reenable Row 5 Imaginary Upgrades (each)",      cost: Decimal.pow(10, 60) },
-  { id: "singularities",     name: "Reenable Singularities and Singularity Milestones", cost: Decimal.pow(10, 60) },
-
-  // strikes
-  { id: "pelle-strike-1",    name: "Disable the 1st Pelle Strike",                  cost: Decimal.pow(10, 60) },
-  { id: "pelle-strike-2",    name: "Disable the 2nd Pelle Strike",                  cost: Decimal.pow(10, 70) },
-  { id: "pelle-strike-3",    name: "Disable the 3rd Pelle Strike",                  cost: Decimal.pow(10, 80) },
-  { id: "pelle-strike-4",    name: "Disable the 4th Pelle Strike",                  cost: Decimal.pow(10, 90) },
-  { id: "pelle-strike-5",    name: "Disable the 5th Pelle Strike",                  cost: Decimal.pow(10, 100) }
-];
-
-
+export const pelleStrikeDisabling = {
+  pelleStrike1: {
+    id: 0,
+    description: `Disable ${wordShift.wordCycle(PelleRifts.vacuum.name)}`,
+    cost: 1e60,
+    formatCost,
+  },
+  pelleStrike2: {
+    id: 1,
+    description: `Disable ${wordShift.wordCycle(PelleRifts.decay.name)}`,
+    cost: 1e70,
+    formatCost,
+  },
+  pelleStrike3: {
+    id: 2,
+    description: `Disable ${wordShift.wordCycle(PelleRifts.chaos.name)}`,
+    cost: 1e80,
+    formatCost,
+  },
+  pelleStrike4: {
+    id: 3,
+    description: `Disable ${wordShift.wordCycle(PelleRifts.recursion.name)}`,
+    cost: 1e90,
+    formatCost,
+  },
+  pelleStrike5: {
+    id: 4,
+    description: `Disable ${wordShift.wordCycle(PelleRifts.paradox.name)}`,
+    cost: 1e100,
+    formatCost,
+  },
+};
