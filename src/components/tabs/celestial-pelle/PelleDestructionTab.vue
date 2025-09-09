@@ -8,24 +8,21 @@ export default {
   },
   data() {
     return {
-      doomedParticles: new Decimal(0),
       upgrades: [],
       boughtUpgrades: []
     };
   },
   computed: {
-    upgrades() {
+    allUpgrades() {
       let upgrades = [];
-      if (this.showBought) upgrades = this.boughtUpgrades;
-      upgrades = upgrades.concat(this.visibleUpgrades);
+      upgrades = this.boughtUpgrades;
       return upgrades;
     },
   },
   methods: {
     update() {
-      this.doomedParticles.copyFrom(Currency.doomedParticles);
-      this.upgrades = PelleDestructionUpgrade.filter(u => !u.isBought);
-      this.boughtUpgrades = PelleDestructionUpgrade.filter(u => u.isBought);
+      this.upgrades = PelleDestructionUpgrade.all.filter(u => !u.isBought);
+      this.boughtUpgrades = PelleDestructionUpgrade.all.filter(u => u.isBought);
     }
   }
 };
