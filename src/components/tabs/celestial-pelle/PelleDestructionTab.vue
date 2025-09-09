@@ -14,8 +14,8 @@ export default {
   },
   methods: {
     update() {
-      this.upgrades = PelleDestructionUpgrade.all.filter(u => !u.isBought);
-      this.boughtUpgrades = PelleDestructionUpgrade.all.filter(u => u.isBought);
+      this.upgrades = PelleDestructionUpgrade.filter(u => !u.isBought);
+      this.boughtUpgrades = PelleDestructionUpgrade.filter(u => u.isBought);
     }
   }
 };
