@@ -19,6 +19,6 @@ export class PelleDestructionUpgradeState extends SetPurchasableMechanicState {
 }
 
 export const PelleDestructionUpgrade = mapGameDataToObject(
-  GameDatabase.endgame.pelleDestruction.upgrades,
+  GameDatabase.celestials.pelleDestruction.upgrades,
   config => new PelleDestructionUpgradeState(config)
 );
