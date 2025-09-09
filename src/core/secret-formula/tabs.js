@@ -540,6 +540,14 @@ export const tabs = [
         component: "BreakEternityTab",
         id: 1,
         hidable: true,
+      },
+      {
+        key: "pelle-destruction",
+        name: "Pelle Destruction",
+        symbol: "♆",
+        component: "PelleDestructionTab",
+        id: 2,
+        hidable: true,
       }
     ],
   }
