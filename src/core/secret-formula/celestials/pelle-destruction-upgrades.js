@@ -1,6 +1,6 @@
 import wordShift from "../../word-shift";
 
-import PelleRifts from "src/core/celestials/pelle/rifts";
+import PelleRifts from "../../celestials/pelle/rifts";
 
 const formatCost = c => format(c, 2);
 
