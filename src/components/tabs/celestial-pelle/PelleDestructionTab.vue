@@ -2,7 +2,7 @@
 import PelleDestructionUpgradeVue from "./PelleDestructionUpgrade";
 
 export default {
-  name: "PelleDestructionTab",
+  name: "PelleDestructionPanel",
   components: {
     PelleDestructionUpgradeVue,
   },
@@ -11,6 +11,15 @@ export default {
       upgrades: [],
       boughtUpgrades: []
     };
+  },
+  computed:
+    unboughtUpgrades() { return this.upgrades; },
+    allUpgrades() {
+      let upgrades = [];
+      upgrades = this.boughtUpgrades;
+      upgrades = upgrades.concat(this.unboughtUpgrades);
+      return upgrades;
+    },
   },
   methods: {
     update() {
@@ -29,6 +38,7 @@ export default {
     <div class="l-pelle-content-container">
       <div class="c-pelle-upgrade-container">
         <PelleDestructionUpgradeVue
+          v-for="upgrade in allUpgrades"
           :key="upgrade.config.id"
           :upgrade="upgrade"
         />
