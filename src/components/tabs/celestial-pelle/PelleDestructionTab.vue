@@ -12,7 +12,7 @@ export default {
       boughtUpgrades: []
     };
   },
-  computed:
+  computed: {
     unboughtUpgrades() { return this.upgrades; },
     allUpgrades() {
       let upgrades = [];
