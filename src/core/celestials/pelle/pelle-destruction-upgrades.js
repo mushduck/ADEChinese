@@ -1,3 +1,5 @@
+import { SetPurchasableMechanicState } from "./game-mechanics";
+
 export class PelleAchievementUpgradeState extends SetPurchasableMechanicState {
 
   get set() {
