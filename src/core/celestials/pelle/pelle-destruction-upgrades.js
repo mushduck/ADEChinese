@@ -1,4 +1,4 @@
-import { SetPurchasableMechanicState } from "./game-mechanics";
+import { SetPurchasableMechanicState } from "../../utils";
 
 export class PelleAchievementUpgradeState extends SetPurchasableMechanicState {
 
