@@ -1,4 +1,4 @@
-export class PelleAchievementState extends SetPurchasableMechanicState {
+export class PelleAchievementUpgradeState extends SetPurchasableMechanicState {
 
   get set() {
     return player.endgame.pelleDestruction.achievements;
@@ -18,9 +18,9 @@ export class PelleAchievementState extends SetPurchasableMechanicState {
 
 }
 
-export const PelleAchievement = mapGameDataToObject(
+export const PelleAchievementUpgrade = mapGameDataToObject(
   GameDatabase.celestials.pelleDestruction.achievements,
-  config => new PelleAchievementState(config)
+  config => new PelleAchievementUpgradeState(config)
 );
 
 export class PelleDestructionUpgradeState extends SetPurchasableMechanicState {
