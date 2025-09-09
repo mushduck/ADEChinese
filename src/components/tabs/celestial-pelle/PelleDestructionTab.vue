@@ -4,7 +4,7 @@ import PelleDestructionUpgradeVue from "./PelleDestructionUpgrade";
 export default {
   name: "PelleDestructionTab",
   components: {
-    PelleDestructionUpgrade,
+    PelleDestructionUpgradeVue,
   },
   data() {
     return {
