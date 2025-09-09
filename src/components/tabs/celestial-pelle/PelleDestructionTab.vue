@@ -12,13 +12,6 @@ export default {
       boughtUpgrades: []
     };
   },
-  computed: {
-    allUpgrades() {
-      let upgrades = [];
-      upgrades = this.upgrades;
-      return upgrades;
-    },
-  },
   methods: {
     update() {
       this.upgrades = PelleDestructionUpgrade.all.filter(u => !u.isBought);
@@ -34,10 +27,7 @@ export default {
       Pelle Destruction Upgrades
     </div>
     <div class="l-pelle-content-container">
-      <div
-        v-if="allUpgrades.length"
-        class="c-pelle-upgrade-container"
-      >
+      <div class="c-pelle-upgrade-container">
         <PelleDestructionUpgradeVue
           :key="upgrade.config.id"
           :upgrade="upgrade"
