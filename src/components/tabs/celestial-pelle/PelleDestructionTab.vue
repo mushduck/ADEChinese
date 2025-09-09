@@ -12,9 +12,6 @@ export default {
       boughtUpgrades: []
     };
   },
-  computed: {
-    upgrades() { return this.upgrades; }
-  },
   methods: {
     update() {
       this.upgrades = PelleDestructionUpgrade.all.filter(u => !u.isBought);
