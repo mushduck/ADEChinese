@@ -29,6 +29,7 @@ import OptionsGameplayTab from "./options-gameplay/OptionsGameplayTab";
 import OptionsSavingTab from "./options-saving/OptionsSavingTab";
 import OptionsVisualTab from "./options-visual/OptionsVisualTab";
 import PastPrestigeRunsTab from "./past-prestige-runs/PastPrestigeRunsTab";
+import PelleDestructionTab from "./celestial-pelle/PelleDestructionTab";
 import PelleTab from "./celestial-pelle/PelleTab";
 import PerksTab from "./perks/PerksTab";
 import PreviousSpeedrunTab from "./speedrun-milestones/PreviousSpeedrunTab";
@@ -89,6 +90,7 @@ const TabComponents = {
   CelestialNavigationTab,
   EndgameTab,
   BreakEternityTab,
+  PelleDestructionTab,
   ShopTab,
   MultiplierBreakdownTab
 };
