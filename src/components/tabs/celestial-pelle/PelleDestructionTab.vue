@@ -15,7 +15,7 @@ export default {
   computed: {
     allUpgrades() {
       let upgrades = [];
-      upgrades = this.boughtUpgrades;
+      upgrades = this.upgrades;
       return upgrades;
     },
   },
