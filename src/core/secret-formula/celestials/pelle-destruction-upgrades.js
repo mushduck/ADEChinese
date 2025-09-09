@@ -1,7 +1,5 @@
 import wordShift from "../../word-shift";
 
-import PelleRifts from "../../celestials/pelle/rifts";
-
 const formatCost = c => format(c, 2);
 
 export const pelleAchievementEnabling = {
@@ -1168,31 +1166,31 @@ export const pelleAlchemyEnabling = {
 export const pelleStrikeDisabling = {
   pelleStrike1: {
     id: 0,
-    description: `Disable ${wordShift.wordCycle(PelleRifts.vacuum.name)}`,
+    description: () => `Disable ${wordShift.wordCycle(PelleRifts.vacuum.name)}`,
     cost: 1e60,
     formatCost,
   },
   pelleStrike2: {
     id: 1,
-    description: `Disable ${wordShift.wordCycle(PelleRifts.decay.name)}`,
+    description: () => `Disable ${wordShift.wordCycle(PelleRifts.decay.name)}`,
     cost: 1e70,
     formatCost,
   },
   pelleStrike3: {
     id: 2,
-    description: `Disable ${wordShift.wordCycle(PelleRifts.chaos.name)}`,
+    description: () => `Disable ${wordShift.wordCycle(PelleRifts.chaos.name)}`,
     cost: 1e80,
     formatCost,
   },
   pelleStrike4: {
     id: 3,
-    description: `Disable ${wordShift.wordCycle(PelleRifts.recursion.name)}`,
+    description: () => `Disable ${wordShift.wordCycle(PelleRifts.recursion.name)}`,
     cost: 1e90,
     formatCost,
   },
   pelleStrike5: {
     id: 4,
-    description: `Disable ${wordShift.wordCycle(PelleRifts.paradox.name)}`,
+    description: () => `Disable ${wordShift.wordCycle(PelleRifts.paradox.name)}`,
     cost: 1e100,
     formatCost,
   },
