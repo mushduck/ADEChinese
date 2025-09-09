@@ -800,7 +800,14 @@ window.player = {
       isActive: true
     },
     pelleDestruction: {
-      upgrades: new Set()
+      achievements: new Set(),
+      upgrades: new Set(),
+      realityUpgrades: new Set(),
+      imaginaryUpgrades: new Set(),
+      celestials: new Set(),
+      perks: new Set(),
+      alchemy: new Set(),
+      strikes: new Set()
     }
   },
   isGameEnd: false,
