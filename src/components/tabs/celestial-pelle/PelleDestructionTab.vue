@@ -2,7 +2,7 @@
 import PelleDestructionUpgradeVue from "./PelleDestructionUpgrade";
 
 export default {
-  name: "PelleDestructionUpgradeTab",
+  name: "PelleDestructionTab",
   components: {
     PelleDestructionUpgradeVue,
   },
