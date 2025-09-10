@@ -183,7 +183,7 @@ class InfinityDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
-    if (mult.gte(DC.E1E15)) mult = Decimal.pow(10, Decimal.pow(Decimal.log10(mult).dividedBy(1e15), 0.1).times(1e15));
+    if (mult.gte(DC.E1E15)) mult = Decimal.pow(10, Decimal.pow(Decimal.log10(mult).times(1e-15), 0.1).times(1e15));
 
     return mult;
   }
