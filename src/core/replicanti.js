@@ -120,6 +120,11 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
     // and handling it would make the replicanti code a lot more complicated.
     interval = interval.pow(2);
   }
+
+  interval = interval.powEffectsOf(
+    BreakEternityUpgrade.replicantiIntervalPow
+  );
+  
   return interval;
 }
 
