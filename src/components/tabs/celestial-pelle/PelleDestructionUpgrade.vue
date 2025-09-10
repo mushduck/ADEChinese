@@ -73,7 +73,7 @@ export default {
   background: var(--color-text-inverted);
   border: 0.1rem solid var(--color-pelle--secondary);
   border-radius: var(--var-border-radius, 0.5rem);
-  box-shadow: inset 0 0 1rem 0.1rem var(--color-pelle--secondary);
+  box-shadow: inset 0 0 1rem 0.1rem var(--color-pelle--base);
   margin: 0.6rem 0.55rem;
   padding: 1rem;
   cursor: pointer;
