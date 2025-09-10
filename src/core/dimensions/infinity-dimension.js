@@ -416,7 +416,7 @@ export const InfinityDimensions = {
 
   get powerConversionRate() {
     const multiplier = PelleRifts.paradox.milestones[2].effectOrDefault(1);
-    const multiplier2 = new Decimal(1).timesEffectsOf(
+    const multiplier2 = Effects.product(
       BreakEternityUpgrade.infinityPowerConversion
     );
     return (7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2;
