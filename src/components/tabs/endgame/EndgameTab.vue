@@ -3,60 +3,24 @@
     <br>
     <div>
     <b>
-      Endgame Checklist:
+      Welcome to Endgame
     </b>
     </div>
     <br>
     <div>
-      New Achievement Row: 90%
+      Feel free to look around! You've just unlocked a new Prestige Layer!
     </div>
     <br>
     <div>
-      Reset Layer: 100%
+      And don't worry about Pelle. I'm sure he's dead... right?
     </div>
     <br>
     <div>
-      New Quotes: 100%
+      Eh, whatever. We've got more important things to worry about.
     </div>
     <br>
     <div>
-      New Imaginary Upgrades: 100%
-    </div>
-    <br>
-    <div>
-      Celestial Dimensions: 50%
-    </div>
-    <br>
-    <div>
-      New Currency: 80%
-    </div>
-    <br>
-    <div>
-      Break Eternity: 40%
-    </div>
-    <br>
-    <div>
-      Break Eternity Repo: ~90% (varies on refactor branch)
-    </div>
-    <br>
-    <div>
-      Pelle Destruction: 10%
-    </div>
-    <br>
-    <div>
-      Endgame Animations: 90%
-    </div>
-    <br>
-    <div>
-      Start Animations: 20%
-    </div>
-    <br>
-    <div>
-    <b>
-      Total Progress: 70%
-      <br>
-      Estimated Completion: 7 September 2025
-    </b>
+      Why don't you go ahead and get started?
     </div>
   </div>
 </template>
