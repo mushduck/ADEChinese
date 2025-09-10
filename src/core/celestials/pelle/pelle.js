@@ -398,12 +398,6 @@ EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
   if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd && player.endgames >= 1) Pelle.quotes.end2.show();
 });
-EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
-  if (Tab.endgame.isOpen && player.endgames === 1) Pelle.quotes.nyi.show();
-});
-EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
-  if (Tab.statistics.isOpen && player.endgames === 1) Pelle.quotes.joke.show();
-});
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {
   get currency() {
