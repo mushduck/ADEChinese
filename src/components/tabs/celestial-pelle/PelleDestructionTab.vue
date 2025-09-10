@@ -36,7 +36,7 @@ export default {
       Pelle Destruction Upgrades
     </div>
     <div class="l-pelle-content-container">
-      <div class="c-pelle-upgrade-container">
+      <div class="c-pelle-destruction-upgrade-container">
         <PelleDestructionUpgradeVue
           v-for="upgrade in allUpgrades"
           :key="upgrade.config.id"
