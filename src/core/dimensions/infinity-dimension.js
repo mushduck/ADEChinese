@@ -179,7 +179,9 @@ class InfinityDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
-    mult = exponentPowerID(mult);
+    mult = mult.powEffectsOf(
+      BreakEternityUpgrade.infinityDimensionPow
+    );
 
     return mult;
   }
@@ -315,12 +317,6 @@ class InfinityDimensionState extends DimensionState {
     }
     return true;
   }
-}
-
-function exponentPowerID(value) {
-  const log10 = value.log10();
-  const exponentPow = Effects.product(BreakEternityUpgrade.infinityDimensionPow);
-  return Decimal.pow10(Math.sign(log10) * Math.pow(Math.abs(log10), exponentPow));
 }
 
 /**
