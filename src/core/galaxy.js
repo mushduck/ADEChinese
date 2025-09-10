@@ -18,7 +18,11 @@ class GalaxyRequirement {
 
 export class Galaxy {
   static get remoteStart() {
-    return RealityUpgrade(21).effectOrDefault(800);
+    let start = Effects.max(800, RealityUpgrade(21));
+    start = start.plusEffectsOf(
+      BreakEternityUpgrade.galaxyScaleDelay
+    );
+    return start;
   }
 
   static get requirement() {
@@ -100,7 +104,8 @@ export class Galaxy {
       TimeStudy(223),
       TimeStudy(224),
       EternityChallenge(5).reward,
-      GlyphSacrifice.power
+      GlyphSacrifice.power,
+      BreakEternityUpgrade.galaxyScaleDelay
     );
   }
 
