@@ -230,6 +230,10 @@ class TimeDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
+    mult = mult.powEffectsOf(
+      BreakEternityUpgrade.infinityDimensionPow
+    );
+
     return mult;
   }
 

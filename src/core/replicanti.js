@@ -40,7 +40,7 @@ export function replicantiGalaxy(auto) {
   const galaxyGain = Replicanti.galaxies.gain;
   if (galaxyGain < 1) return;
   player.replicanti.timer = 0;
-  Replicanti.amount = Achievement(126).isUnlocked && !Pelle.isDoomed
+  Replicanti.amount = Achievement(126).isUnlocked
     ? Decimal.pow10(Replicanti.amount.log10() - LOG10_MAX_VALUE * galaxyGain)
     : DC.D1;
   addReplicantiGalaxies(galaxyGain);
@@ -120,6 +120,11 @@ export function getReplicantiInterval(overCapOverride, intervalIn) {
     // and handling it would make the replicanti code a lot more complicated.
     interval = interval.pow(2);
   }
+
+  interval = interval.powEffectsOf(
+    BreakEternityUpgrade.replicantiIntervalPow
+  );
+  
   return interval;
 }
 
@@ -428,11 +433,11 @@ export const ReplicantiUpgrade = {
     set baseCost(value) { player.replicanti.galCost = value; }
 
     get distantRGStart() {
-      return 100 + Effects.sum(GlyphSacrifice.replication);
+      return (100 + Effects.sum(GlyphSacrifice.replication)) * Effects.product(BreakEternityUpgrade.replicantiGalaxyPower);
     }
 
     get remoteRGStart() {
-      return 1000 + Effects.sum(GlyphSacrifice.replication);
+      return (1000 + Effects.sum(GlyphSacrifice.replication)) * Effects.product(BreakEternityUpgrade.replicantiGalaxyPower);
     }
 
     get costIncrease() {

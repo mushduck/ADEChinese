@@ -291,7 +291,7 @@ export const Tesseracts = {
   // Note that costs go a bit past e9e15 because while AM is capped at e9e15, most other resources (including IP)
   // aren't and can go a tiny bit past it.
   // The formula is a hardcoded 2, 4, 6 followed by successive multiplication by 2x, 4x, 6x, and so on.
-  BASE_COSTS: [2, 4, 6, 12, 48, 288, 2304, 23040, 276480, 3870720, 61931520, 1114767360],
+  BASE_COSTS: [2, 4, 6, 12, 48, 288, 2304, 23040, 276480, 3870720, 61931520, 1114767360, 22295347200, 490497638400, 11771943321600, 306070526361600, 8569974738124800],
   costs(index) {
     // In practice this should never happen, but have it just to be safe
     if (index >= this.BASE_COSTS.length) return Decimal.pow10(Number.MAX_VALUE);

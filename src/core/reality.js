@@ -719,6 +719,9 @@ export function finishProcessReality(realityProps) {
   player.records.thisReality.bestEternitiesPerMs = DC.D0;
   player.records.thisReality.bestRSmin = 0;
   player.records.thisReality.bestRSminVal = 0;
+  player.records.totalInfinityAntimatter = DC.E1;
+  player.records.totalEternityAntimatter = DC.E1;
+  player.records.totalRealityAntimatter = DC.E1;
   resetTimeDimensions();
   resetTickspeed();
   AchievementTimers.marathon2.reset();

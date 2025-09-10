@@ -25,7 +25,7 @@ export default {
       this.selectedSetName = GlyphAppearanceHandler.chosenFromModal?.name ?? "None (will choose randomly)";
     },
     startNewGame() {
-      NG.startNewGame();
+      Endgame.newEndgame();
     },
     openSelectionModal() {
       Modal.cosmeticSetChoice.show();
@@ -41,7 +41,7 @@ export default {
   >
     <h2>
       Are you sure you want to Endgame? Endgame will reset the entire game, but keep Record Antimatter, Automator Scripts, Study Presets, Secret Themes,
-      Normal/Secret Achievements, Options, and Companion Glyphs.
+      Normal/Secret Achievements (only Rows 19+ for Normal Achievements), Options, and Companion Glyphs.
     </h2>
     <h3>You can use the button in the top-right to view the game as it is right now.</h3>
     <div class="c-new-game-button-container">

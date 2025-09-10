@@ -92,6 +92,7 @@ export const Pelle = {
     Autobuyer.bigCrunch.mode = AUTO_CRUNCH_MODE.AMOUNT;
     disChargeAll();
     clearCelestialRuns();
+    CelestialDimensions.resetAmount();
 
     // Force-enable the group toggle for AD autobuyers to be active; whether or not they can actually tick
     // is still handled through if the autobuyers are unlocked at all. This fixes an odd edge case where the player
@@ -115,6 +116,12 @@ export const Pelle = {
       player.options.hiddenSubtabBits[tabIndex] &= ignoredIDs.includes(tabIndex) ? -1 : 0;
     }
     Pelle.quotes.initial.show();
+    if (player.endgames >= 1) {
+      Pelle.quotes.doom2.show();
+    }
+    if (player.endgames >= 2) {
+      Pelle.quotes.doom3.show();
+    }
     GameStorage.save(true);
   },
 
@@ -321,7 +328,7 @@ export const Pelle = {
   },
 
   antimatterDimensionMult(x) {
-    return Decimal.pow(10, Math.log10(x + 1) + x ** 5.4 / 1e3 + 4.2 ** x / 1e18);
+    return Decimal.pow(10, Math.log10(x + 1) + x ** 5 / 1e3 + 4 ** x / 1e18);
   },
 
   get activeGlyphType() {
@@ -351,9 +358,15 @@ export const Pelle = {
     }
     return zalgo(str, Math.floor(stage ** 2 * 7));
   },
-
-  endTabNames: "It's Not Over We Will Return We'll Soon Meet Again".split(" "),
-
+  
+  get endTabNames() {
+    if (Achievement(191).isUnlocked) {
+      return "Destruction Has Come A New Beginning Has Arrived We'll Meet Again".split(" ");
+    } else {
+      return "It's Not Over We Will Return We'll Ω Soon Meet Again".split(" ");
+    }
+  },
+  
   quotes: Quotes.pelle,
 };
 
@@ -378,6 +391,18 @@ EventHub.logic.on(GAME_EVENT.PELLE_STRIKE_UNLOCKED, () => {
   if (PelleStrikes.dilation.hasStrike) {
     Pelle.quotes.strike5.show();
   }
+});
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd) Pelle.quotes.endgame.show();
+});
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd && player.endgames >= 1) Pelle.quotes.end2.show();
+});
+EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
+  if (Tab.endgame.isOpen && player.endgames === 1) Pelle.quotes.nyi.show();
+});
+EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
+  if (Tab.statistics.isOpen && player.endgames === 1) Pelle.quotes.joke.show();
 });
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {

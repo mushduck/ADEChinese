@@ -1,7 +1,7 @@
 import { DC } from "../../constants";
 
 const rebuyable = props => {
-  props.cost = () => props.initialCost * Math.pow(props.costMult, player.reality.imaginaryRebuyables[props.id]);
+  props.cost = () => props.initialCost * Math.pow(props.costMult + (Math.max(player.reality.imaginaryRebuyables[props.id] - props.scaleStart, 0) * props.costMult / 2), player.reality.imaginaryRebuyables[props.id]);
   const { effect } = props;
   if (props.isDecimal) props.effect = () => Decimal.pow(effect, player.reality.imaginaryRebuyables[props.id]);
   else props.effect = () => effect * player.reality.imaginaryRebuyables[props.id];
@@ -17,7 +17,8 @@ export const imaginaryUpgrades = [
     initialCost: 3,
     costMult: 60,
     description: () => `Increase Temporal Amplifier multiplier by +${format(0.15, 2, 2)}`,
-    effect: 0.15
+    effect: 0.15,
+    scaleStart: 9
   }),
   rebuyable({
     name: "Replicative Intensifier",
@@ -25,7 +26,8 @@ export const imaginaryUpgrades = [
     initialCost: 4,
     costMult: 60,
     description: () => `Increase Replicative Amplifier multiplier by +${format(0.15, 2, 2)}`,
-    effect: 0.15
+    effect: 0.15,
+    scaleStart: 9
   }),
   rebuyable({
     name: "Eternal Intensifier",
@@ -33,7 +35,8 @@ export const imaginaryUpgrades = [
     initialCost: 1,
     costMult: 40,
     description: () => `Increase Eternal Amplifier multiplier by +${format(0.4, 2, 2)}`,
-    effect: 0.4
+    effect: 0.4,
+    scaleStart: 10
   }),
   rebuyable({
     name: "Superluminal Intensifier",
@@ -41,7 +44,8 @@ export const imaginaryUpgrades = [
     initialCost: 5,
     costMult: 80,
     description: () => `Increase Superluminal Amplifier multiplier by +${format(0.15, 2, 2)}`,
-    effect: 0.15
+    effect: 0.15,
+    scaleStart: 8
   }),
   rebuyable({
     name: "Boundless Intensifier",
@@ -49,7 +53,8 @@ export const imaginaryUpgrades = [
     initialCost: 1,
     costMult: 30,
     description: () => `Increase Boundless Amplifier multiplier by +${format(0.6, 2, 2)}`,
-    effect: 0.6
+    effect: 0.6,
+    scaleStart: 11
   }),
   rebuyable({
     name: "Elliptic Materiality",
@@ -58,6 +63,7 @@ export const imaginaryUpgrades = [
     costMult: 500,
     description: () => `Increase the Reality Machine cap by ${formatX(1e100)}`,
     effect: 1e100,
+    scaleStart: 5,
     formatEffect: value => `${formatX(value)}`,
     isDecimal: true
   }),
@@ -68,6 +74,7 @@ export const imaginaryUpgrades = [
     costMult: 500,
     description: () => `Delay Glyph Instability starting level by ${formatInt(200)}`,
     effect: 200,
+    scaleStart: 4,
     formatEffect: value => `+${formatInt(value)} levels`
   }),
   rebuyable({
@@ -77,6 +84,7 @@ export const imaginaryUpgrades = [
     costMult: 800,
     description: () => `Multiply Infinity Dimensions by ${format("1e100000")}`,
     effect: DC.E100000,
+    scaleStart: 3,
     formatEffect: value => `${formatX(value)}`,
     isDecimal: true
   }),
@@ -87,6 +95,7 @@ export const imaginaryUpgrades = [
     costMult: 1000,
     description: () => `Increase Galaxy strength`,
     effect: 0.03,
+    scaleStart: 2,
     formatEffect: value => `+${formatPercents(value)}`,
   }),
   rebuyable({
@@ -96,6 +105,7 @@ export const imaginaryUpgrades = [
     costMult: 2000,
     description: () => `Increase Singularity gain`,
     effect: 1,
+    scaleStart: 2,
     formatEffect: value => `${formatX(1 + value, 2)}`
   }),
   {
@@ -321,60 +331,60 @@ export const imaginaryUpgrades = [
     description: "Unlock Pelle, Celestial of Antimatter",
   },
   {
-    name: "C",//"Singularity Stockpile",
+    name: "Singularity Stockpile",
     id: 26,
     cost: 1e50,
     requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 2)} Singularities`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//Currency.singularities.gte(Decimal.NUMBER_MAX_VALUE),
+    checkRequirement: () => Currency.singularities.value >= 1.8e308,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
   },
   {
-    name: "D",//"Exigent Extinction",
+    name: "Exigent Extinction",
     id: 27,
     cost: 1e100,
     requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
-    hasFailed: () => false,//!Pelle.isDoomed || Glyphs.activeWithoutCompanion.length > 0,
-    // We have to put this as 9.001e15 for now because Glyphs can still be swtiched out via Armageddon
+    hasFailed: () => !Pelle.isDoomed || Glyphs.activeWithoutCompanion.length > 0,
+    // We have to put this as 1e16 for now because Glyphs can still be switched out via Armageddon
     // Hopefully we can fix this later
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//&& Pelle.isDoomed && 
-      //Glyphs.activeWithoutCompanion.length <= 0,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16 && Pelle.isDoomed &&
+      Glyphs.activeWithoutCompanion.length <= 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
   },
   {
-    name: "E",//"Alchemical Annihilation",
+    name: "Achievement Annihilation",
     id: 28,
     cost: 1e150,
     requirement: () => `Unlock Pelle without completing any Hard V-Achievements`,
-    hasFailed: () => false,//V.spaceTheorems >= 37,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//&& V.spaceTheorems <= 36,
+    hasFailed: () => V.spaceTheorems >= 37,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16 && V.spaceTheorems <= 36,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
   },
   {
-    name: "F",//"Galactic Genocide",
+    name: "Galactic Genocide",
     id: 29,
     cost: 1e200,
     requirement: () => `Have a total of 1e100 Galaxies`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//Replicanti.galaxies.total + player.galaxies +
-      //player.dilation.totalTachyonGalaxies >= 1e100,
+    checkRequirement: () => Replicanti.galaxies.total + player.galaxies + 
+      player.dilation.totalTachyonGalaxies >= 1e100,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to 1e100000",
   },
   {
-    name: "G",//"Inception Initiation",
+    name: "Inception Initiation",
     id: 30,
-    cost: 1.8e308,
+    cost: Math.pow(2, 1024),
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
-    hasFailed: () => false,//!Pelle.isDoomed,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9.001e15,//Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
+    hasFailed: () => !Pelle.isDoomed,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Unlock ???, Celestial of ???",//() => {
-      //if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
-      //return "Unlock ???, Celestial of ???";
-    //},
+    description: () => {
+      if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
+      return "Unlock ???, Celestial of ???";
+    },
   },
 ];

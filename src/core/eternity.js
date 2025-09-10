@@ -199,6 +199,8 @@ export function initializeResourcesAfterEternity() {
   Currency.timeShards.reset();
   player.records.thisEternity.time = 0;
   player.records.thisEternity.realTime = 0;
+  player.records.totalInfinityAntimatter = DC.E1;
+  player.records.totalEternityAntimatter = DC.E1;
   player.totalTickGained = 0;
   player.eterc8ids = 50;
   player.eterc8repl = 40;
@@ -335,7 +337,12 @@ class EPMultiplierState extends GameMechanicState {
   }
 
   get costIncreaseThresholds() {
-    return [DC.E100, Decimal.NUMBER_MAX_VALUE, DC.E1300, DC.E4000];
+    return [
+      DC.E100.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay),
+      Decimal.NUMBER_MAX_VALUE.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay),
+      DC.E1300.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay),
+      DC.E4000.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay)
+    ];
   }
 
   costAfterCount(count) {

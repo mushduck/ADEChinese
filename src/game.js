@@ -86,6 +86,12 @@ export function breakInfinity() {
   GameUI.update();
 }
 
+export function breakEternity() {
+  player.break2 = !player.break2;
+  EventHub.dispatch(GAME_EVENT.BREAK_ETERNITY);
+  GameUI.update();
+}
+
 export function gainedInfinityPoints() {
   const div = Effects.min(
     308,
@@ -265,6 +271,11 @@ export function addRealityTime(time, realTime, rm, level, realities, ampFactor, 
     realities, reality, level, shards * ampFactor, projIM]);
 }
 
+export function addEndgameTime(time, realTime, cp, dp, endgames) {
+  player.records.recentEndgames.pop();
+  player.records.recentEndgames.unshift([time, realTime, cp, dp, endgames]);
+}
+
 export function gainedInfinities() {
   if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults")) {
     return DC.D1;
@@ -299,7 +310,8 @@ export const GAME_SPEED_EFFECT = {
   BLACK_HOLE: 3,
   TIME_STORAGE: 4,
   SINGULARITY_MILESTONE: 5,
-  NERFS: 6
+  NERFS: 6,
+  CELESTIAL_MATTER: 7
 };
 
 /**
@@ -312,7 +324,8 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
   let effects;
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
-      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS];
+      GAME_SPEED_EFFECT.TIME_STORAGE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS,
+      GAME_SPEED_EFFECT.CELESTIAL_MATTER];
   } else {
     effects = effectsToConsider;
   }
@@ -349,6 +362,13 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
     factor = Math.pow(factor, getAdjustedGlyphEffect("effarigblackhole"));
   }
 
+  if (effects.includes(GAME_SPEED_EFFECT.CELESTIAL_MATTER)) {
+    const celestialMatterExponent = CelestialDimensions.conversionExponent;
+    if (player.endgame.celestialMatter.gt(0) && player.endgame.celestialMatterMultiplier.isActive) {
+      factor *= Math.pow(player.endgame.celestialMatter.toNumber(), celestialMatterExponent);
+    }
+  }
+
   if (Enslaved.isStoringGameTime && effects.includes(GAME_SPEED_EFFECT.TIME_STORAGE)) {
     const storedTimeWeight = Ra.unlocks.autoPulseTime.canBeApplied ? 0.99 : 1;
     factor = factor * (1 - storedTimeWeight) + storedTimeWeight;
@@ -364,7 +384,6 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
       factor = Math.pow(factor, nerfModifier);
     }
   }
-
 
   factor *= PelleUpgrade.timeSpeedMult.effectValue.toNumber();
 
@@ -398,6 +417,9 @@ export function realTimeMechanics(realDiff) {
     player.celestials.ra.momentumTime += realDiff * Achievement(175).effectOrDefault(1);
   }
 
+  GameCache.celestialDimensionCommonMultiplier.invalidate();
+
+  CelestialDimensions.tick(realDiff);
   DarkMatterDimensions.tick(realDiff);
 
   // When storing real time, skip everything else having to do with production once stats are updated
@@ -503,7 +525,7 @@ export function gameLoop(passDiff, options = {}) {
       // These variables are the actual game speed used and the game speed unaffected by time storage, respectively
       const reducedTimeFactor = getGameSpeedupFactor();
       const totalTimeFactor = getGameSpeedupFactor([GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH,
-        GAME_SPEED_EFFECT.BLACK_HOLE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE]);
+        GAME_SPEED_EFFECT.BLACK_HOLE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.CELESTIAL_MATTER]);
       const amplification = Ra.unlocks.improvedStoredTime.effects.gameTimeAmplification.effectOrDefault(1);
       const beforeStore = player.celestials.enslaved.stored;
       player.celestials.enslaved.stored = Math.clampMax(player.celestials.enslaved.stored +
@@ -875,6 +897,21 @@ export function getTTPerSecond() {
   }
 
   return finalTT;
+}
+
+export function gainedCelestialPoints() {
+  if (!player.break2) return DC.D1;
+  let cp = new Decimal(player.records.totalEndgameAntimatter.log10() / 9e15);
+  if (Achievement(197).isUnlocked) {
+    cp = cp.times(Decimal.max(9e115, player.celestials.pelle.records.totalEndgameAntimatter.log10() / 9e115));
+  }
+  return cp.floor();
+}
+
+export function gainedDoomedParticles() {
+  if (!player.break2) return DC.D1;
+  let dp = Decimal.min(player.celestials.pelle.records.totalEndgameAntimatter.log10() / 9e15, 1e100);
+  return dp.floor();
 }
 
 // eslint-disable-next-line no-unused-vars

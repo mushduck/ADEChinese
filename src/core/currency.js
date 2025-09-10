@@ -214,6 +214,7 @@ Currency.antimatter = new class extends DecimalCurrency {
 
     if (Pelle.isDoomed) {
       player.celestials.pelle.records.totalAntimatter = player.celestials.pelle.records.totalAntimatter.max(value);
+      player.celestials.pelle.records.totalEndgameAntimatter = player.celestials.pelle.records.totalEndgameAntimatter.max(value);
     }
   }
 
@@ -221,6 +222,10 @@ Currency.antimatter = new class extends DecimalCurrency {
     super.add(amount);
     if (amount.gt(0)) {
       player.records.totalAntimatter = player.records.totalAntimatter.add(amount);
+      player.records.totalEndgameAntimatter = player.records.totalEndgameAntimatter.add(amount);
+      player.records.totalRealityAntimatter = player.records.totalRealityAntimatter.add(amount);
+      player.records.totalEternityAntimatter = player.records.totalEternityAntimatter.add(amount);
+      player.records.totalInfinityAntimatter = player.records.totalInfinityAntimatter.add(amount);
       player.requirementChecks.reality.noAM = false;
     }
   }
@@ -475,5 +480,33 @@ Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
   set value(value) {
     const spent = player.galaxies + GalaxyGenerator.galaxies - value;
     player.celestials.pelle.galaxyGenerator.spentGalaxies += spent;
+  }
+}();
+
+Currency.endgames = new class extends NumberCurrency {
+  get value() { return player.endgames; }
+  set value(value) { player.endgames = value; }
+}();
+
+Currency.celestialPoints = new class extends DecimalCurrency {
+  get value() { return player.endgame.celestialPoints; }
+  set value(value) {
+    const newValue = new Decimal(value);
+    player.endgame.celestialPoints = newValue;
+  }
+}();
+
+Currency.celestialMatter = new class extends DecimalCurrency {
+  get value() { return player.endgame.celestialMatter; }
+  set value(value) {
+    player.endgame.celestialMatter = value;
+  }
+}();
+
+Currency.doomedParticles = new class extends DecimalCurrency {
+  get value() { return player.endgame.doomedParticles; }
+  set value(value) {
+    const newValue = Decimal.min(value, DC.E100);
+    player.endgame.doomedParticles = newValue;
   }
 }();

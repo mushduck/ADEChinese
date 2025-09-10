@@ -27,6 +27,13 @@ window.player = {
       cost: [DC.D1, DC.D5, DC.E2, DC.E3, DC.E2350, DC.E2650, DC.E3000, DC.E3350][tier],
       amount: DC.D0,
       bought: 0
+    })),
+    celestial: Array.range(0, 8).map(tier => ({
+      isUnlocked: false,
+      bought: 0,
+      amount: DC.D0,
+      cost: [DC.D1, DC.E1, DC.E2, DC.E4, DC.E10, DC.E30, DC.E100, DC.E300][tier],
+      baseAmount: 0,
     }))
   },
   buyUntil10: true,
@@ -35,6 +42,8 @@ window.player = {
   secretAchievementBits: Array.repeat(0, 4),
   infinityUpgrades: new Set(),
   infinityRebuyables: [0, 0, 0],
+  breakEternityUpgrades: new Set(),
+  breakEternityRebuyables: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   challenge: {
     normal: {
       current: 0,
@@ -227,6 +236,7 @@ window.player = {
   partInfinityPoint: 0,
   partInfinitied: 0,
   break: false,
+  break2: false,
   secretUnlocks: {
     themes: new Set(),
     viewSecretTS: false,
@@ -276,12 +286,18 @@ window.player = {
     fullGameCompletions: 0,
     previousRunRealTime: 0,
     totalAntimatter: DC.E1,
+    totalEndgameAntimatter: DC.E1,
+    totalRealityAntimatter: DC.E1,
+    totalEternityAntimatter: DC.E1,
+    totalInfinityAntimatter: DC.E1,
     recentInfinities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
     recentEternities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]),
     recentRealities: Array.range(0, 10).map(() =>
       [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]),
+    recentEndgames: Array.range(0, 10).map(() =>
+      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, 1]),
     thisInfinity: {
       time: 0,
       realTime: 0,
@@ -338,6 +354,18 @@ window.player = {
       speedSet: [],
       iMCapSet: [],
       laitelaSet: [],
+    },
+    thisEndgame: {
+      time: 0,
+      realTime: 0,
+      bestCPmin: DC.D0,
+      bestDPmin: DC.D0,
+    },
+    bestEndgame: {
+      time: Number.MAX_VALUE,
+      realTime: Number.MAX_VALUE,
+      bestCPmin: DC.D0,
+      bestDPmin: DC.D0,
     },
   },
   speedrun: {
@@ -699,6 +727,10 @@ window.player = {
       realityShards: DC.D0,
       records: {
         totalAntimatter: DC.D0,
+        totalEndgameAntimatter: DC.D0,
+        totalRealityAntimatter: DC.D0,
+        totalEternityAntimatter: DC.D0,
+        totalInfinityAntimatter: DC.D0,
         totalInfinityPoints: DC.D0,
         totalEternityPoints: DC.D0,
       },
@@ -757,6 +789,25 @@ window.player = {
         galaxies: false
       },
       showBought: false,
+    }
+  },
+  endgames: 0,
+  endgame: {
+    celestialPoints: DC.D0,
+    doomedParticles: DC.D0,
+    celestialMatter: DC.D0,
+    celestialMatterMultiplier: {
+      isActive: true
+    },
+    pelleDestruction: {
+      achievements: new Set(),
+      upgrades: new Set(),
+      realityUpgrades: new Set(),
+      imaginaryUpgrades: new Set(),
+      celestials: new Set(),
+      perks: new Set(),
+      alchemy: new Set(),
+      strikes: new Set()
     }
   },
   isGameEnd: false,
@@ -975,8 +1026,9 @@ export const Player = {
   },
 
   get infinityLimit() {
+    const trueHardcap = player.break2 ? DC.E9E115 : DC.E9E15;
     const challenge = NormalChallenge.current || InfinityChallenge.current;
-    return challenge === undefined ? Decimal.MAX_VALUE : challenge.goal;
+    return challenge === undefined ? trueHardcap : challenge.goal;
   },
 
   get eternityGoal() {

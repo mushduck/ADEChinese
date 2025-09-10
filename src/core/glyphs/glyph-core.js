@@ -647,14 +647,14 @@ export const Glyphs = {
         throw new Error("Unrecognized auto-sort mode");
     }
   },
-  get levelCap() {
-    return 1000000;
-  },
   get instabilityThreshold() {
     return 1000 + getAdjustedGlyphEffect("effarigglyph") + ImaginaryUpgrade(7).effectOrDefault(0);
   },
   get hyperInstabilityThreshold() {
     return 3000 + this.instabilityThreshold;
+  },
+  get extremeInstabilityThreshold() {
+    return 75000;
   },
   clearUndo() {
     player.reality.glyphs.undo = [];

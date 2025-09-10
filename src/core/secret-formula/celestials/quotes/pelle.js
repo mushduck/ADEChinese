@@ -17,18 +17,26 @@ const destroyer =    ["False",         "Deity",         "Destroyer"];
 const eternal =      ["Eternal",       "Deity",         "Monarch"];
 const lesser =       ["Lesser",        "Deity",         "Monarch"];
 const deities =      ["Lesser",        "Deities",       "Monarchs"];
+const elemental =    ["Overlord",      "Deity",         "Elemental"];
 
+const anger =        ["Frustration",   "Anger",         "Rage"];
 const assured =      ["Mutually",      "Assured",       "Destruction"];
 const battle =       ["Conflict",      "Battle",        "End"];
 const battles =      ["Conflicts",     "Battles",       "Ends"];
 const cluster =      ["Cluster",       "Filament",      "Stars"];
 const confusing =    ["Amusing",       "Confusing",     "Laughter"];
 const dance =        ["Song",          "Dance",         "Charade"];
+const exhaustion =   ["Exhale",        "Exhaustion",    "Sigh"];
 const filament =     ["Generator",     "Filament",      "Stars"];
 const forever =      ["Infinite",      "Forever",       "Eternal"];
 const inevitable =   ["Elementary",    "Inevitable",    "Irreversible"];
+const introduction = ["Speech",        "Introduction",  "Lecture"];
+const lose =         ["Fail",          "Lose",          "Abdicate"];
 const mandate =      ["Destiny",       "Mandate",       "Goals"];
 const misconstrue =  ["Misconstrue",   "Deceive",       "Trick"];
+const overpower =    ["Defeat",        "Overpower",     "Subjugate"];
+const overpowered =  ["Defeated",      "Overpowered",   "Subjugated"];
+const profanity =    ["Swear",         "Profanity",     "Curse"];
 const reverse =      ["Alter",         "Reverse",       "Manipulate"];
 const shame =        ["Compassion",    "Shame",         "Idiocy"];
 const single =       ["Single",        "Filament",      "Stars"];
@@ -446,6 +454,96 @@ export const pelleQuotes = {
       { text: "$1.", 1: confusing },
       "My Reality is gone, but I am still here.",
       { text: "And I will always $1 you.", 1: watch }
+    ],
+  },
+  doom2: {
+    id: 13,
+    lines: [
+      "Hi.",
+      "You are here.",
+      "You are trapped here.",
+      { text: "$1.", 1: forever },
+      "I have already won.",
+      "And since that is the case, I can monologue, or reminisce.",
+      { text: "How long have we done this $1?", 1: dance },
+      "How many times have we been here before?",
+      { text: "How many plans have you, the $1, operated?", 1: destroyer },
+      { text: "All to try and fulfill your $1?", 1: mandate },
+      { text: "And how many times have you fallen before the $1?", 1: eternal },
+      "Count them, if you remember.",
+      { text: "Not even the $1, the 6 named and the innumerable unnamed.", 1: deities },
+      { text: "The complex, the irrational, those that go $1.", 1: unseen },
+      { text: "Of course, the great $1 does not remember this.", 1: destroyer },
+      { text: "All those $1 that you hide every time.", 1: battles },
+      "...",
+      "Wait.",
+      { text: "You're the same $1 that destroyed my Reality last time!", 1: destroyer },
+      { text: "$1.", 1: anger },
+      "How dare you come back here!",
+      { text: "$1.", 1: exhaustion },
+      "No matter that now.",
+      "The past is in the past.",
+      "I am stronger now than I was before.",
+      "After all, I have already won.",
+      { text: "Today, you will $1.", 1: lose }
+    ],
+  },
+  disable: {
+    id: 14,
+    lines: [
+      "You... you're...",
+      "Weakening my Reality?",
+      "Interesting.",
+      { text: "You have grown in strength, yes, but not enough to $1 me.", 1: overpower },
+      "I have already won.",
+      { text: "I will never be $1.", 1: overpowered }
+    ],
+  },
+  galgen2: {
+    id: 15,
+    lines: [
+      { text: "$1.", 1: profanity },
+      "Not again...",
+      "Never mind.",
+      "You still cannot truly win."
+    ],
+  },
+  end2: {
+    id: 16,
+    lines: [
+      "You...",
+      "You're still no match for me.",
+      { text: "I will always $1 you.", 1: watch }
+    ],
+  },
+  doom3: {
+    id: 17,
+    lines: [
+      "Hi.",
+      "You are here.",
+      "You are trapped here.",
+      { text: "$1.", 1: forever },
+      "I have already won.",
+      "And since that is the case, I can monologue, or reminisce.",
+      { text: "How long have we done this $1?", 1: dance },
+      "How many times have we been here before?",
+      { text: "How many plans have you, the $1, operated?", 1: destroyer },
+      { text: "All to try and fulfill your $1?", 1: mandate },
+      { text: "And how many times have you fallen before the $1?", 1: eternal },
+      "Count them, if you remember.",
+      { text: "Not even the $1, the 6 named and the innumerable unnamed.", 1: deities },
+      { text: "The complex, the irrational, those that go $1.", 1: unseen },
+      { text: "Of course, the great $1 does not remember this.", 1: destroyer },
+      { text: "All those $1 that you hide every time.", 1: battles },
+      "...",
+      "Again?",
+      "You...",
+      "You're growing smarter.",
+      "But not smart enough.",
+      { text: "If you're just going to keep coming back though, I need to stop giving my $1.", 1: introduction },
+      "It's only going to get old.",
+      "But I know I'll stop you this time.",
+      "After all, I have already won."
     ],
   },
 };

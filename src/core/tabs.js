@@ -13,7 +13,7 @@ class SubtabState {
   }
 
   get isPermanentlyHidden() {
-    return this.config.hideAt < GameEnd.endState && !GameEnd.creditsClosed;
+    return this.config.hideAt < GameEnd.endState && !GameEnd.creditsClosed && !PlayerProgress.endgameUnlocked();
   }
 
   get hidable() {
@@ -108,7 +108,7 @@ class TabState {
   }
 
   get isPermanentlyHidden() {
-    return this.config.hideAt < GameEnd.endState && !GameEnd.creditsClosed;
+    return this.config.hideAt < GameEnd.endState && !GameEnd.creditsClosed && !PlayerProgress.endgameUnlocked();
   }
 
   get hidable() {
@@ -206,6 +206,7 @@ export const Tabs = (function() {
       Tab.eternity,
       Tab.reality,
       Tab.celestials,
+      Tab.endgame,
       Tab.shop
     ],
     newUI: [
@@ -216,6 +217,7 @@ export const Tabs = (function() {
       Tab.eternity,
       Tab.reality,
       Tab.celestials,
+      Tab.endgame,
       Tab.achievements,
       Tab.statistics,
       Tab.options,

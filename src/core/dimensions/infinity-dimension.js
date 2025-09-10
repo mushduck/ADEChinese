@@ -179,6 +179,10 @@ class InfinityDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
+    mult = mult.powEffectsOf(
+      BreakEternityUpgrade.infinityDimensionPow
+    );
+
     return mult;
   }
 
@@ -412,6 +416,9 @@ export const InfinityDimensions = {
 
   get powerConversionRate() {
     const multiplier = PelleRifts.paradox.milestones[2].effectOrDefault(1);
-    return (7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier;
+    const multiplier2 = Effects.product(
+      BreakEternityUpgrade.infinityPowerConversion
+    );
+    return (7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2;
   }
 };

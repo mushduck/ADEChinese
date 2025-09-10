@@ -25,7 +25,7 @@ export const GalaxyGenerator = {
     return this.generatedGalaxies - this.spentGalaxies;
   },
 
-  get gainPerSecond() {
+  get gainPerSecondPreCap() {
     if (!Pelle.hasGalaxyGenerator) return 0;
     return new Decimal(GalaxyGeneratorUpgrades.additive.effectValue).timesEffectsOf(
       GalaxyGeneratorUpgrades.multiplicative,
@@ -33,6 +33,21 @@ export const GalaxyGenerator = {
       GalaxyGeneratorUpgrades.IPMult,
       GalaxyGeneratorUpgrades.EPMult,
     ).toNumber();
+  },
+
+  get galGenInstability() {
+    return 10;
+  },
+
+  get gainPerSecondPostCap() {
+    if (!Pelle.hasGalaxyGenerator) return 0;
+    return new Decimal(Math.max(1, Math.pow(this.galGenInstability, Math.log10(Math.max(Math.pow(player.celestials.pelle.galaxyGenerator.generatedGalaxies / 1e10, 0.9), 1))))
+    ).toNumber();
+  },
+
+  get gainPerSecond() {
+    if (!Pelle.hasGalaxyGenerator) return 0;
+    return new Decimal(this.gainPerSecondPreCap / this.gainPerSecondPostCap).toNumber();
   },
 
   get capObj() {
@@ -79,7 +94,6 @@ export const GalaxyGenerator = {
 
         if (!this.capObj) {
           Pelle.quotes.end.show();
-          Pelle.quotes.endgame.show();
         }
       }
       PelleRifts.all.forEach(x => x.checkMilestoneStates());

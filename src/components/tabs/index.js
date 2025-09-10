@@ -5,9 +5,12 @@ import AutobuyersTab from "./autobuyers/AutobuyersTab";
 import AutomatorTab from "./automator/AutomatorTab";
 import BlackHoleTab from "./black-hole/BlackHoleTab";
 import BreakInfinityTab from "./break-infinity/BreakInfinityTab";
+import BreakEternityTab from "./break-eternity/BreakEternityTab";
+import CelestialDimensionsTab from "./celestial-dimensions/CelestialDimensionsTab";
 import CelestialNavigationTab from "./celestial-navigation/CelestialNavigationTab";
 import ChallengeRecordsTab from "./challenge-records/ChallengeRecordsTab";
 import EffarigTab from "./celestial-effarig/EffarigTab";
+import EndgameTab from "./endgame/EndgameTab";
 import EnslavedTab from "./celestial-enslaved/EnslavedTab";
 import EternityChallengesTab from "./eternity-challenges/EternityChallengesTab";
 import EternityMilestonesTab from "./eternity-milestones/EternityMilestonesTab";
@@ -26,6 +29,7 @@ import OptionsGameplayTab from "./options-gameplay/OptionsGameplayTab";
 import OptionsSavingTab from "./options-saving/OptionsSavingTab";
 import OptionsVisualTab from "./options-visual/OptionsVisualTab";
 import PastPrestigeRunsTab from "./past-prestige-runs/PastPrestigeRunsTab";
+import PelleDestructionTab from "./celestial-pelle/PelleDestructionTab";
 import PelleTab from "./celestial-pelle/PelleTab";
 import PerksTab from "./perks/PerksTab";
 import PreviousSpeedrunTab from "./speedrun-milestones/PreviousSpeedrunTab";
@@ -46,6 +50,7 @@ const TabComponents = {
   AntimatterDimensionsTab,
   InfinityDimensionsTab,
   TimeDimensionsTab,
+  CelestialDimensionsTab,
   OptionsSavingTab,
   OptionsVisualTab,
   OptionsGameplayTab,
@@ -83,6 +88,9 @@ const TabComponents = {
   BlackHoleTab,
   AlchemyTab,
   CelestialNavigationTab,
+  EndgameTab,
+  BreakEternityTab,
+  PelleDestructionTab,
   ShopTab,
   MultiplierBreakdownTab
 };

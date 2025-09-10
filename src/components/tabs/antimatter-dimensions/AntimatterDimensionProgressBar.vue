@@ -34,8 +34,8 @@ export default {
       // than normal and therefore default filling won't be meaningful. Since challenges get completed or abandoned from
       // the inside outwards, we show the goals in that priority as well. It only makes sense to check cel6 and not the
       // others because pre-cel3 completion it'll default to e4000 and cel4/5 don't have meaningful single goals
-      const inSpecialRun = Player.isInAntimatterChallenge || EternityChallenge.isRunning || player.dilation.active ||
-        Laitela.isRunning;
+      const inSpecialRun = (Player.isInAntimatterChallenge || EternityChallenge.isRunning || player.dilation.active ||
+        Laitela.isRunning) && !Pelle.isDoomed;
       if (inSpecialRun) {
         if (Player.isInAntimatterChallenge) {
           setProgress(Currency.antimatter.value, Player.antimatterChallenge.goal, "Percentage to Challenge goal");
@@ -52,7 +52,7 @@ export default {
           } else {
             setProgress(Currency.infinityPoints.value, Player.eternityGoal, "Percentage to Eternity Challenge goal");
           }
-        } else if (player.dilation.active) {
+        } else if (player.dilation.active && !Pelle.isDoomed) {
           if (player.dilation.lastEP.gt(0)) {
             setProgress(Currency.antimatter.value, getTachyonReq(), "Percentage to gain more TP in Dilation");
           } else {
@@ -64,7 +64,7 @@ export default {
         }
       } else if (Pelle.isDoomed) {
         if (PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies > 0) {
-          setProgress(Currency.infinityPoints.value, Tesseracts.nextCost, "Percentage to next Tesseract");
+          setProgress(Currency.antimatter.value, DC.E9E15, "Percentage to Endgame");
         } else if (PelleStrikes.dilation.hasStrike) {
           setProgress(Currency.eternityPoints.value, DC.E4000, "Percentage to Galaxy Generator");
         } else if (PelleStrikes.ECs.hasStrike) {

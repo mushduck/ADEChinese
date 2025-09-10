@@ -25,7 +25,7 @@ export class EternityAutobuyerState extends AutobuyerState {
     return this.data.amount;
   }
 
-  get increaseWithMult() {
+get increaseWithMult() {
     return this.data.increaseWithMult;
   }
 

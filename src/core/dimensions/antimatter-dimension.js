@@ -86,6 +86,10 @@ export function getDimensionFinalMultiplierUncached(tier) {
     multiplier = multiplier.pow(1.05);
   }
 
+  multiplier = multiplier.powEffectsOf(
+    BreakEternityUpgrade.antimatterDimensionPow
+  );
+
   return multiplier;
 }
 
@@ -581,7 +585,8 @@ class AntimatterDimensionState extends DimensionState {
     const postBreak = (player.break && !NormalChallenge.isRunning) ||
       InfinityChallenge.isRunning ||
       Enslaved.isRunning;
-    return postBreak ? Decimal.MAX_VALUE : DC.E315;
+    const trueHardcap = player.break2 ? DC.E9E115 : DC.E9E15;
+    return postBreak ? trueHardcap : DC.E315;
   }
 
   get productionPerSecond() {

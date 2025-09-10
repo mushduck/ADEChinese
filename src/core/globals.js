@@ -17,7 +17,7 @@ export * from "./storage";
 export * from "./notations";
 export * from "./tutorial";
 
-export * from "./new-game";
+export * from "./endgame";
 
 export * from "./celestials/quotes";
 export * from "./celestials/teresa";
@@ -34,6 +34,7 @@ export * from "./celestials/pelle/strikes";
 export * from "./celestials/pelle/rifts";
 export * from "./celestials/pelle/galaxy-generator";
 export * from "./celestials/pelle/game-end";
+export * from "./celestials/pelle/pelle-destruction-upgrades";
 export * from "./celestials/celestials";
 
 export * from "./automator";
@@ -61,6 +62,7 @@ export * from "./tickspeed";
 export * from "./dimensions/antimatter-dimension";
 export * from "./dimensions/infinity-dimension";
 export * from "./dimensions/time-dimension";
+export * from "./dimensions/celestial-dimension";
 
 export * from "./time-studies";
 
@@ -82,6 +84,7 @@ export * from "./perks";
 export * from "./dilation";
 export * from "./black-hole";
 export * from "./machines";
+export * from "./break-eternity-upgrades";
 export * from "./devtools";
 export * from "./news-ticker";
 export * from "./shop";

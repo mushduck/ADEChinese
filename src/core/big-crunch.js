@@ -163,6 +163,7 @@ export function secondSoftReset(enteringAntimatterChallenge) {
   player.records.thisInfinity.time = 0;
   player.records.thisInfinity.lastBuyTime = 0;
   player.records.thisInfinity.realTime = 0;
+  player.records.totalInfinityAntimatter = DC.E1;
   Player.resetRequirements("infinity");
   AchievementTimers.marathon2.reset();
 }

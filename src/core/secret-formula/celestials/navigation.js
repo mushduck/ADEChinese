@@ -121,6 +121,8 @@ const Positions = Object.freeze({
   pelleRecursion: pelleStarPosition(3, 150),
   pelleParadox: pelleStarPosition(4, 150),
 
+  alphaUnlock: new Vector(1100, 350),
+
   pelleGalaxyGen: pelleStarPosition(0, 0),
 });
 
@@ -1902,6 +1904,72 @@ export const celestialNavigation = {
     },
   },
 
+  //Just Endgame stuff over here
+  "alpha-unlock": {
+    visible: () => PlayerProgress.endgameUnlocked(),
+    complete: () => {
+      if (ImaginaryUpgrade(30).isAvailableForPurchase) return 1;
+      const imCost = Math.clampMax(emphasizeEnd(Math.log10(Currency.imaginaryMachines.value) / Math.log10(Number.MAX_VALUE)), 1);
+      if (MachineHandler.isIMUnlocked) {
+        return 0.5 + 0.5 * Math.clampMax(0.999, imCost);
+      }
+      return Math.clampMax(0.5, Currency.realityMachines.value.pLog10() / MachineHandler.baseRMCap.exponent);
+    },
+    node: {
+      clickAction: () => Tab.endgame.show(true),
+      incompleteClass: "c-celestial-nav__test-incomplete",
+      symbol: "α",
+      symbolOffset: "1.6",
+      fill: "#00ff00",
+      position: Positions.alphaUnlock,
+      ring: {
+        rMajor: 20,
+      },
+      forceLegend: () => ImaginaryUpgrade(30).isAvailableForPurchase,
+      legend: {
+        text: complete => {
+          if (complete === 1) {
+            return [
+              "Unlock Alpha",
+              "The Celestial of Darkness"
+            ];
+          }
+          let pelleString = `${format(Currency.imaginaryMachines.value)} / ${format(Number.MAX_VALUE)} iM`;
+          if (!Pelle.isDoomed || Currency.antimatter.value.log10() < 9e115) {
+            pelleString = "Pelle's Doomed Reality is still intact";
+          } else if (ImaginaryUpgrade(30).isAvailableForPurchase) {
+            pelleString = "Pelle's Doomed Reality has been destroyed";
+          }
+          if (!MachineHandler.isIMUnlocked) {
+            const realityMachines = Currency.realityMachines.value;
+            const realityMachineCap = MachineHandler.baseRMCap;
+            return [
+              "Imaginary Machines",
+              "The limits of Reality Machines bind you",
+              `${format(realityMachines)} / ${format(realityMachineCap)}`
+            ];
+          }
+          return [
+            "Unlock ???",
+            "The Celestial of ???",
+            `${format(Currency.imaginaryMachines.value, 2)} / ${format(Number.MAX_VALUE, 2)} iM`,
+            pelleString
+          ];
+        },
+        angle: 165,
+        diagonal: 60,
+        horizontal: 16,
+      },
+    },
+    connector: {
+      pathStart: 0,
+      pathEnd: 1,
+      path: new LinearPath(Positions.pelleAchievementRequirement, Positions.alphaUnlock),
+      fill: "url(#gradPelleAlpha)",
+      completeWidth: 6,
+      incompleteWidth: 4,
+    },
+  },
   // All the fill elements are generated outside of here as a loop, and then unpacked here with the spread operator
   ...riftFillElements,
 

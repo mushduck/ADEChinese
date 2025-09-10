@@ -23,6 +23,7 @@ export default {
         banked: new Decimal(0),
         projectedBanked: new Decimal(0),
         bankRate: new Decimal(0),
+        totalInfinityAntimatter: new Decimal(0),
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
@@ -32,6 +33,7 @@ export default {
       eternity: {
         isUnlocked: false,
         count: new Decimal(0),
+        totalEternityAntimatter: new Decimal(0),
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
@@ -41,6 +43,8 @@ export default {
       reality: {
         isUnlocked: false,
         count: 0,
+        totalRealityAntimatter: new Decimal(0),
+        hasBest: false,
         best: TimeSpan.zero,
         bestReal: TimeSpan.zero,
         this: TimeSpan.zero,
@@ -48,6 +52,11 @@ export default {
         totalTimePlayed: TimeSpan.zero,
         bestRate: new Decimal(0),
         bestRarity: 0,
+      },
+      endgame: {
+        isUnlocked: false,
+        count: 0,
+        totalEndgameAntimatter: new Decimal(0),
       },
       matterScale: [],
       lastMatterTime: 0,
@@ -69,6 +78,12 @@ export default {
       return num.gt(0)
         ? `${this.formatDecimalAmount(num)} ${pluralize("Eternity", num.floor())}`
         : "no Eternities";
+    },
+    realityCountString() {
+      const num = this.reality.count;
+      return num > 0
+        ? `${num} ${pluralize("Reality", num)}`
+        : "no Realities";
     },
     fullGameCompletions() {
       return player.records.fullGameCompletions;
@@ -104,6 +119,7 @@ export default {
           TimeStudy(191).effects.bankedInfinitiesGain,
         );
         infinity.bankRate = infinity.projectedBanked.div(Math.clampMin(33, records.thisEternity.time)).times(60000);
+        infinity.totalInfinityAntimatter.copyFrom(records.totalInfinityAntimatter);
         infinity.hasBest = bestInfinity.time < 999999999999;
         infinity.best.setFrom(bestInfinity.time);
         infinity.this.setFrom(records.thisInfinity.time);
@@ -116,6 +132,7 @@ export default {
       eternity.isUnlocked = isEternityUnlocked;
       if (isEternityUnlocked) {
         eternity.count.copyFrom(Currency.eternities);
+        eternity.totalEternityAntimatter.copyFrom(records.totalEternityAntimatter);
         eternity.hasBest = bestEternity.time < 999999999999;
         eternity.best.setFrom(bestEternity.time);
         eternity.this.setFrom(records.thisEternity.time);
@@ -129,6 +146,8 @@ export default {
 
       if (isRealityUnlocked) {
         reality.count = Math.floor(Currency.realities.value);
+        reality.totalRealityAntimatter.copyFrom(records.totalRealityAntimatter);
+        reality.hasBest = bestReality.time < 999999999999;
         reality.best.setFrom(bestReality.time);
         reality.bestReal.setFrom(bestReality.realTime);
         reality.this.setFrom(records.thisReality.time);
@@ -140,6 +159,15 @@ export default {
         reality.thisReal.setFrom(records.thisReality.realTime);
         reality.bestRate.copyFrom(bestReality.RMmin);
         reality.bestRarity = Math.max(strengthToRarity(bestReality.glyphStrength), 0);
+      }
+
+      const isEndgameUnlocked = progress.isEndgameUnlocked;
+      const endgame = this.endgame;
+      endgame.isUnlocked = isEndgameUnlocked;
+      
+      if (isEndgameUnlocked) {
+        endgame.count = Math.floor(player.endgames);
+        endgame.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
       }
       this.updateMatterScale();
 
@@ -179,6 +207,18 @@ export default {
       </div>
       <div class="c-stats-tab-general">
         <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter.</div>
+        <div v-if="endgame.isUnlocked">
+          You have made a total of {{ format(endgame.totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
+        </div>
+        <div v-if="reality.isUnlocked">
+          You have made a total of {{ format(reality.totalRealityAntimatter, 2, 1) }} antimatter this Reality.
+        </div>
+        <div v-if="eternity.isUnlocked">
+          You have made a total of {{ format(eternity.totalEternityAntimatter, 2, 1) }} antimatter this Eternity.
+        </div>
+        <div v-if="infinity.isUnlocked">
+          You have made a total of {{ format(infinity.totalInfinityAntimatter, 2, 1) }} antimatter this Infinity.
+        </div>
         <div>You have played for {{ realTimePlayed }}. (real time)</div>
         <div v-if="reality.isUnlocked">
           Your existence has spanned {{ reality.totalTimePlayed }} of time. (game time)
@@ -300,9 +340,16 @@ export default {
       <div :class="realityClassObject()">
         {{ isDoomed ? "Doomed Reality" : "Reality" }}
       </div>
-      <div>You have {{ quantifyInt("Reality", reality.count) }}.</div>
-      <div>Your fastest game-time Reality was {{ reality.best.toStringShort() }}.</div>
-      <div>Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.</div>
+      <div>
+        You have {{ realityCountString }}<span v-if="endgame.isUnlocked"> this Endgame</span>.
+      </div>
+      <div v-if="reality.hasBest">
+        Your fastest game-time Reality was {{ reality.best.toStringShort() }}.
+        Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.
+      </div>
+      <div v-else>
+        You have no fastest Reality<span v-if="endgame.isUnlocked"> this Endgame</span>.
+      </div>
       <div :class="{ 'c-stats-tab-doomed' : isDoomed }">
         You have spent {{ reality.this.toStringShort() }}
         in this {{ isDoomed ? "Armageddon" : "Reality" }}.
@@ -315,9 +362,25 @@ export default {
         You have been Doomed for {{ realTimeDoomed.toStringShort() }}, real time.
       </div>
       <div>
-        Your best Reality Machines per minute is {{ format(reality.bestRate, 2, 2) }}.
+        Your best Reality Machines per minute 
+        <span v-if="endgame.isUnlocked">this Endgame </span>
+        is {{ format(reality.bestRate, 2, 2) }}.
       </div>
-      <div>Your best Glyph rarity is {{ formatRarity(reality.bestRarity) }}.</div>
+      <div>
+        Your best Glyph rarity
+        <span v-if="endgame.isUnlocked">this Endgame </span>
+        is {{ formatRarity(reality.bestRarity) }}.</div>
+      <br>
+    </div>
+    <div
+      v-if="endgame.isUnlocked"
+      class="c-stats-tab-subheader c-stats-tab-general"
+    >
+      <div class="c-stats-tab-title c-stats-tab-endgame">
+        Endgame
+      </div>
+      <div>You have {{ quantifyInt("Endgame", endgame.count) }}.</div>
+      <div>More stats coming soon.</div>
       <br>
     </div>
   </div>
@@ -355,5 +418,9 @@ export default {
 
 .c-stats-tab-doomed {
   color: var(--color-pelle--base);
+}
+
+.c-stats-tab-endgame {
+  color: var(--color-endgame);
 }
 </style>
