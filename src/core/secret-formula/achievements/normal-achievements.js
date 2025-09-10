@@ -1429,7 +1429,7 @@ export const normalAchievements = [
     id: 193,
     name: "Unstoppable",
     description: "Beat Doom in Run 2.",
-    checkRequirement: () => PlayerProgress.endgameUnlocked() && Currency.antimatter.exponent >= 9e15,
+    checkRequirement: () => PlayerProgress.endgameUnlocked() && Currency.antimatter.exponent >= 9e15 && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Galaxies are ${formatPercents(0.1)} stronger.`;
