@@ -230,6 +230,8 @@ class TimeDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
+    mult = exponentPowerTD(mult);
+
     return mult;
   }
 
@@ -302,6 +304,12 @@ class TimeDimensionState extends DimensionState {
     if (this.isUnlocked) return;
     TimeStudy.timeDimension(this._tier).purchase();
   }
+}
+
+function exponentPowerTD(value) {
+  const log10 = value.log10();
+  const exponentPow = Effects.product(BreakEternityUpgrade.timeDimensionPow);
+  return Decimal.pow10(Math.sign(log10) * Math.pow(Math.abs(log10), exponentPow));
 }
 
 /**
