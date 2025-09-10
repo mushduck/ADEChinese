@@ -18,11 +18,7 @@ class GalaxyRequirement {
 
 export class Galaxy {
   static get remoteStart() {
-    let start = Effects.max(800, RealityUpgrade(21));
-    start = start.plusEffectsOf(
-      BreakEternityUpgrade.galaxyScaleDelay
-    );
-    return start;
+    return Effects.max(800, RealityUpgrade(21)).plusEffectsOf(BreakEternityUpgrade.galaxyScaleDelay);
   }
 
   static get requirement() {
