@@ -94,7 +94,7 @@ export function getDimensionFinalMultiplierUncached(tier) {
 function exponentPowerAD(value) {
   const log10 = value.log10();
   const exponentPow = Effects.product(BreakEternityUpgrade.antimatterDimensionPow);
-  return Decimal.pow10(Math.sign(log10) * Math.pow(Math.abs(log10), dilationPenalty));
+  return Decimal.pow10(Math.sign(log10) * Math.pow(Math.abs(log10), exponentPow));
 }
 
 function applyNDMultipliers(mult, tier) {
