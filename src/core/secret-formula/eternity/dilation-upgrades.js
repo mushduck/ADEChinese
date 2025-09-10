@@ -35,7 +35,8 @@ export const dilationUpgrades = {
     effect: bought => {
       const base = 2 * Effects.product(
         SingularityMilestone.dilatedTimeFromSingularities,
-        Achievement(187)
+        Achievement(187),
+        BreakEternityUpgrade.dilatedTimeMultiplier
       );
       return Decimal.pow(base, bought);
     },
