@@ -373,7 +373,7 @@ export const pelleDestructionUpgrades = {
     formatCost,
   },
   disableEC8Nerf: {
-    id: 19,
+    id: 29,
     description: "Disable the Eternity Challenge 8 Nerf",
     cost: 1e30,
     formatCost,
