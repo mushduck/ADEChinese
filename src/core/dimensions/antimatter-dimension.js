@@ -86,7 +86,15 @@ export function getDimensionFinalMultiplierUncached(tier) {
     multiplier = multiplier.pow(1.05);
   }
 
+  multiplier = exponentPowerAD(multiplier);
+
   return multiplier;
+}
+
+function exponentPowerAD(value) {
+  const log10 = value.log10();
+  const exponentPow = Effects.product(BreakEternityUpgrade.antimatterDimensionPow);
+  return Decimal.pow10(Math.sign(log10) * Math.pow(Math.abs(log10), dilationPenalty));
 }
 
 function applyNDMultipliers(mult, tier) {
