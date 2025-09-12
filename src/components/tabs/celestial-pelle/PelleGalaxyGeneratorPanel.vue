@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       isUnlocked: false,
+      isDilated: false,
       galaxies: 0,
       generatedGalaxies: 0,
       galaxiesPerSecond: 0,
@@ -47,6 +48,7 @@ export default {
   methods: {
     update() {
       this.isUnlocked = Pelle.hasGalaxyGenerator;
+      this.isDilated = player.dilation.active;
       this.isCapped = GalaxyGenerator.isCapped;
       this.isCollapsed = player.celestials.pelle.collapsed.galaxies && !this.isCapped;
       if (this.isCollapsed || !this.isUnlocked) return;
@@ -145,11 +147,17 @@ export default {
         </div>
       </div>
       <button
-        v-else
+        v-if="isDilated"
         class="c-generator-unlock-button"
         @click="unlock"
       >
         Unlock the Galaxy Generator
+      </button>
+      <button
+        v-else
+        class="c-generator-locked-button"
+      >
+        You must be inside Dilation to unlock the Galaxy Generator
       </button>
     </div>
   </div>
@@ -174,6 +182,19 @@ export default {
   font-weight: bold;
   color: black;
   background: linear-gradient(var(--color-pelle--secondary), var(--color-pelle--base));
+  border-radius: var(--var-border-radius, 0.5rem);
+  padding: 2rem;
+  cursor: pointer;
+}
+
+.c-generator-locked-button {
+  width: 25rem;
+  height: 10rem;
+  font-family: Typewriter;
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  background: #5f5f5f;
   border-radius: var(--var-border-radius, 0.5rem);
   padding: 2rem;
   cursor: pointer;
