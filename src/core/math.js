@@ -55,7 +55,7 @@ window.bulkBuyBinarySearch = function bulkBuyBinarySearch(money, costInfo, alrea
   do {
     cantBuy *= 2;
     nextCost = costFunction(alreadyBought + cantBuy - 1);
-  } while (money.gte(nextCost));
+  } while (money.gte(nextCost) && cantbuy < Number.MAX_SAFE_INTEGER / 2);
   // Deal with the simple case of buying just one
   if (cantBuy === 2) {
     return { quantity: 1, purchasePrice: firstCost };
