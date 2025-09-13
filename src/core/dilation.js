@@ -156,10 +156,6 @@ export function tachyonGainMultiplier() {
     );
 
   mult = mult.pow(pow);
-
-  mult = mult.powEffectsOf(
-    BreakEternityUpgrade.tachyonParticlePow
-  );
   
   return mult;
 }
@@ -180,6 +176,9 @@ export function getBaseTP(antimatter, requireEternity) {
     : Ra.unlocks.unlockDilationStartingTP.effectOrDefault(antimatter);
   let baseTP = Decimal.pow(Decimal.log10(am) / 160, 1.8);
   if (Enslaved.isRunning) baseTP = baseTP.pow(Enslaved.tachyonNerf);
+  baseTP = baseTP.powEffectsOf(
+    BreakEternityUpgrade.tachyonParticlePow
+  );
   return baseTP;
 }
 
