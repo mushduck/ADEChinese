@@ -147,7 +147,7 @@ export default {
         </div>
       </div>
       <button
-        v-if="isDilated"
+        v-if="isDilated && !isUnlocked"
         class="c-generator-unlock-button"
         @click="unlock"
       >
