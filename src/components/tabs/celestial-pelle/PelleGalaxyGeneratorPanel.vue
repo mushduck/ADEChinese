@@ -154,7 +154,7 @@ export default {
         Unlock the Galaxy Generator
       </button>
       <button
-        v-else
+        v-if="!isDilated"
         class="c-generator-locked-button"
       >
         You must be inside Dilation to unlock the Galaxy Generator
