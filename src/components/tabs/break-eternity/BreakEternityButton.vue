@@ -5,7 +5,7 @@ export default {
     return {
       isBroken: false,
       isUnlocked: false,
-      antimatterReq: 0
+      antimatterReq: new Decimal(0)
     };
   },
   computed: {
