@@ -808,6 +808,9 @@ window.player = {
       perks: new Set(),
       alchemy: new Set(),
       strikes: new Set()
+    },
+    compressionMagnitude: {
+      infinity: 10
     }
   },
   isGameEnd: false,
