@@ -60,7 +60,7 @@ export default {
 <template>
   <div class="l-break-eternity-tab">
     <div v-if="!isUnlocked">
-      Perform an Endgame to unlock Break Eternity
+      Reach {{ format(DC.E9E15, 2, 1) }} with at least one Endgame to unlock Break Eternity
     </div>
     <BreakEternityButton class="l-break-eternity-tab__break-btn" />
     <div
