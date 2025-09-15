@@ -130,7 +130,7 @@ export default {
         <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude, 2, 3) }}</span>,
         which raises all Infinity Dimension Multipliers to the power of
         <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow, 2, 3) }}</span>
-        while above {{ format(infinityDimStart, 2) }}.
+        while above {{ format(infinityDimStart, 2, 1) }}.
       </p>
     </div>
     <div
