@@ -2775,6 +2775,7 @@ br {
 /* #region c-infinity-dim-compression-description__accent */
 
 .c-infinity-dim-compression-description__accent {
+  font-size: 2rem;
   color: #ff0000;
   text-shadow: 0 0 0.7rem #ff0000;
 }
