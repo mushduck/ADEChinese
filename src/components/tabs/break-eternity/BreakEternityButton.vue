@@ -24,10 +24,10 @@ export default {
   methods: {
     update() {
       this.isBroken = player.break2;
-      this.isUnlocked = PlayerProgress.endgameUnlocked();
+      this.isUnlocked = PlayerProgress.endgameUnlocked() && player.antimatter >= DC.E9E15;
     },
     clicked() {
-      Modal.breakEternity.show();
+      if (!this.isBroken && this.isUnlocked) Modal.breakEternity.show();
     }
   }
 };
