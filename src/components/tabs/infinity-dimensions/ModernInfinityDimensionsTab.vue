@@ -29,6 +29,10 @@ export default {
       extraTesseracts: 0,
       creditsClosed: false,
       showLockedDimCostNote: true,
+      isEndgameUnlocked: false,
+      infinityDimCompressionMagnitude: 0,
+      infinityDimOverflow: 0,
+      infinityDimStart: new Decimal(0)
     };
   },
   computed: {
@@ -64,6 +68,10 @@ export default {
       this.boughtTesseracts = Tesseracts.bought;
       this.extraTesseracts = Tesseracts.extra;
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.isEndgameUnlocked = PlayerProgress.endgameUnlocked;
+      this.infinityDimCompressionMagnitude = player.endgame.compressionMagnitude.infinity;
+      this.infinityDimOverflow = 1 / this.infinityDimCompressionMagnitude;
+      this.infinityDimStart = player.endgame.compressionStart.infinity;
     },
     maxAll() {
       InfinityDimensions.buyMax();
@@ -114,6 +122,15 @@ export default {
         multiplier on all
         <span v-if="!isEC9Running">Antimatter Dimensions.</span>
         <span v-else>Time Dimensions due to Eternity Challenge 9.</span>
+      </p>
+    </div>
+    <div v-if="isEndgameUnlocked">
+      <p>
+        Your Infinity Dimension Compression Magnitude is
+        <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude, 2, 3) }}</span>,
+        which raises all Infinity Dimension Multipliers to the power of
+        <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow, 2, 3) }}</span>
+        while above {{ format(infinityDimStart, 2) }}.
       </p>
     </div>
     <div
