@@ -811,6 +811,9 @@ window.player = {
     },
     compressionMagnitude: {
       infinity: 10
+    },
+    compressionStart: {
+      infinity: DC.E1E15
     }
   },
   isGameEnd: false,
