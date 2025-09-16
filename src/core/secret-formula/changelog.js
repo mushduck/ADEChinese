@@ -9,6 +9,38 @@ export const changelog = [
    * }
    */
   {
+    date: [2025, 9, 10],
+    name: "v0.2.1: THE GRAND ENDGAME RELEASE",
+    info: `
+It's finally over.
+<br>
+<br>
+<b><i>I hope you enjoy playing Antimatter Dimensions: Endgame!</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>THE ENDGAME PRESTIGE LAYER</li>
+<li>Row 19 Achievement Effects</li>
+<li>A ton of quotes</li>
+<li>A new set of Dimensions</li>
+<li>Pelle Destruction Upgrades</li>
+<li>Break Eternity and its respective upgrades</li>
+<li>A new Celestial icon in Celestial Navigation...?</li>
+<li>A bunch of unnecessary statistics</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>Nerfed the first repeatable Pelle Upgrade slightly to prevent inflation</li>
+<li>Adjusting the progress bar for effect</li>
+<li>The Reality study now displays a special message when you unlock the Galaxy Generator!</li>
+<li>Nerfed the Galaxy Generator to High Heaven because it was too OP</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2025, 8, 20],
     name: "v0.2.0: Final Update before Endgame",
     info: `
