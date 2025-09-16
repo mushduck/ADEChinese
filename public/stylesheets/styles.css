@@ -2772,6 +2772,16 @@ br {
 
 /* #endregion c-infinity-dim-description__accent */
 
+/* #region c-infinity-dim-compression-description__accent */
+
+.c-infinity-dim-compression-description__accent {
+  font-size: 2rem;
+  color: #ff0000;
+  text-shadow: 0 0 0.7rem #ff0000;
+}
+
+/* #endregion c-infinity-dim-compression-description__accent */
+
 /* #endregion Infinity Dimensions */
 
 /* #region Time Dimensions */

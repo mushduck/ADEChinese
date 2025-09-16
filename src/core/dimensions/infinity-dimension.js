@@ -183,6 +183,8 @@ class InfinityDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
+    if (mult.gte(player.endgame.compressionStart.infinity)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / player.endgame.compressionMagnitude.infinity).times(1e15));
+
     return mult;
   }
 

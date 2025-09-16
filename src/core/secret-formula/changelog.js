@@ -9,6 +9,33 @@ export const changelog = [
    * }
    */
   {
+    date: [2025, 9, 16],
+    name: "v0.2.2: The Great Insect Purge",
+    info: `
+We don't fix bugs, we purge them.
+<br>
+<br>
+<b><i>This should cover most of the broken stuff.</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>A compression magnitude function that can be weakened eventually</li>
+<li>A cap onto an Eternity Upgrade</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Fixing overflow in Time Dimension and related cost sets with autobuyers</li>
+<li>Fixing Tachyon Particle overflow</li>
+<li>Locking off Galaxy Generator until you Dilate in Pelle</li>
+<li>Fixing Celestial Point formula after Achievement r197</li>
+<li>Break Eternity now requires 1e9e15 Antimatter as well finally</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2025, 9, 10],
     name: "v0.2.1: THE GRAND ENDGAME RELEASE",
     info: `

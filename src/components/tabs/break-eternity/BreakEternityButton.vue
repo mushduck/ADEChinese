@@ -5,6 +5,7 @@ export default {
     return {
       isBroken: false,
       isUnlocked: false,
+      antimatterReq: new Decimal(0)
     };
   },
   computed: {
@@ -24,10 +25,11 @@ export default {
   methods: {
     update() {
       this.isBroken = player.break2;
-      this.isUnlocked = PlayerProgress.endgameUnlocked();
+      this.isUnlocked = PlayerProgress.endgameUnlocked() && player.antimatter.gte(this.antimatterReq);
+      this.antimatterReq = new Decimal(1e9000000000000000);
     },
     clicked() {
-      Modal.breakEternity.show();
+      if (!this.isBroken && this.isUnlocked) Modal.breakEternity.show();
     }
   }
 };
