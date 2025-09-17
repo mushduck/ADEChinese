@@ -1408,7 +1408,7 @@ export const normalAchievements = [
     id: 188,
     name: "The End...",
     description: "Escape the Doomed Reality.",
-    checkRequirement: () => GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd,
+    checkRequirement: () => Currency.antimatter.exponent >= 9e15 && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
