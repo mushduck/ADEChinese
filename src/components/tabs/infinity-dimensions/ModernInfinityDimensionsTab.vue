@@ -71,7 +71,7 @@ export default {
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked;
       this.infinityDimCompressionMagnitude = player.endgame.compressionMagnitude.infinity;
       this.infinityDimOverflow = 1 / this.infinityDimCompressionMagnitude;
-      this.infinityDimStart = player.endgame.compressionStart.infinity;
+      this.infinityDimStart.copyFrom(player.endgame.compressionStart.infinity);
     },
     maxAll() {
       InfinityDimensions.buyMax();
