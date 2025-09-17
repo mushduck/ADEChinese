@@ -191,7 +191,7 @@ export default {
   width: 25rem;
   height: 10rem;
   font-family: Typewriter;
-  font-size: 2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: black;
   background: #5f5f5f;
