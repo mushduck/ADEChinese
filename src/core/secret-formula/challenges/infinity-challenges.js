@@ -127,6 +127,7 @@ export const infinityChallenges = [
       description:
         "You get a multiplier to AD 2-7 based on 1st and 8th AD multipliers.",
       effect: () => AntimatterDimension(1).multiplier.times(AntimatterDimension(8).multiplier).pow(0.02),
+      cap: DC.E1E15,
       formatEffect: value => formatX(value, 2, 2)
     },
     unlockAM: DC.E28000,
