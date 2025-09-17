@@ -222,7 +222,7 @@ export const Pelle = {
         ? Currency.eternityPoints.value.plus(1).pow(0.3)
         : DC.D1,
       replication: isActive("replication")
-        ? 10 ** 60 ** (PelleRifts.vacuum.percentage)
+        ? Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300)
         : 1,
       dilation: isActive("dilation")
         ? Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1)
