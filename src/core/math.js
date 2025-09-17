@@ -64,7 +64,8 @@ window.bulkBuyBinarySearch = function bulkBuyBinarySearch(money, costInfo, alrea
   // to find the exact value:
   let canBuy = cantBuy / 2;
   if (cantBuy > Number.MAX_SAFE_INTEGER) {
-    cantBuy = 9e15; //throw new Error("Overflow in binary search");
+    cantBuy = 9e15;
+    throw new Error("Overflow in binary search");
   }
   while (cantBuy - canBuy > 1) {
     const middle = Math.floor((canBuy + cantBuy) / 2);
