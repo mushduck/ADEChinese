@@ -183,7 +183,7 @@ class InfinityDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
-    if (mult.gte(player.endgame.compressionStart.infinity)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / player.endgame.compressionMagnitude.infinity).times(1e15));
+    if (mult.gte(InfinityDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / player.endgame.compressionMagnitude.infinity).times(1e15));
 
     return mult;
   }
@@ -334,6 +334,7 @@ export const InfinityDimensions = {
    */
   all: InfinityDimension.index.compact(),
   HARDCAP_PURCHASES: 2000000,
+  OVERFLOW: DC.E1E15,
 
   unlockNext() {
     if (InfinityDimension(8).isUnlocked) return;
