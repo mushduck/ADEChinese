@@ -124,14 +124,16 @@ export default {
         <span v-else>Time Dimensions due to Eternity Challenge 9.</span>
       </p>
     </div>
-    <div v-if="isEndgameUnlocked">
+    <div>
       <p>
-        Your Infinity Dimension Compression Magnitude is
-        <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude, 2, 3) }}</span>,
-        which raises all Infinity Dimension Multipliers to the power of
-        <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow, 2, 3) }}</span>
-        while above
-        <span>{{ format(infinityDimStart, 2, 1) }}</span>.
+        <span v-if="isEndgameUnlocked">
+          Your Infinity Dimension Compression Magnitude is
+          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude, 2, 3) }}</span>,
+          which raises all Infinity Dimension Multipliers to the power of
+          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow, 2, 3) }}</span>
+          while above
+          <span>{{ format(infinityDimStart, 2, 1) }}</span>.
+        </span>
       </p>
     </div>
     <div
