@@ -26,7 +26,7 @@ export const dilationUpgrades = {
     id: 1,
     initialCost: 1e4,
     increment: 10,
-    costIncreaseAt: 4997,
+    capIncreaseAt: 4997,
     description: () =>
       ((SingularityMilestone.dilatedTimeFromSingularities.canBeApplied || Achievement(187).canBeApplied)
         ? `${formatX(2 * Effects.product(
