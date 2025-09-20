@@ -1,14 +1,15 @@
 import { DC } from "../../constants";
 
-function rebuyableCost(initialCost, increment, id) {
-  return Decimal.multiply(initialCost, Decimal.pow(increment, player.dilation.rebuyables[id]));
+function rebuyableCost(initialCost, increment, id, capIncreaseAt) {
+  return Decimal.multiply(initialCost, Decimal.pow(increment, player.dilation.rebuyables[id] + Math.max(player.dilation.rebuyables[id] - capIncreaseAt, 0) + Math.max(player.dilation.rebuyables[id] - (capIncreaseAt + 1), 0)));
 }
 function rebuyable(config) {
   return {
     id: config.id,
-    cost: () => rebuyableCost(config.initialCost, config.increment, config.id),
+    cost: () => rebuyableCost(config.initialCost, config.increment, config.id, config.capIncreaseAt),
     initialCost: config.initialCost,
     increment: config.increment,
+    capIncreaseAt: config.capIncreaseAt,
     description: config.description,
     effect: () => config.effect(player.dilation.rebuyables[config.id]),
     formatEffect: config.formatEffect,
@@ -25,6 +26,7 @@ export const dilationUpgrades = {
     id: 1,
     initialCost: 1e4,
     increment: 10,
+    costIncreaseAt: 4997,
     description: () =>
       ((SingularityMilestone.dilatedTimeFromSingularities.canBeApplied || Achievement(187).canBeApplied)
         ? `${formatX(2 * Effects.product(
@@ -52,6 +54,7 @@ export const dilationUpgrades = {
     id: 2,
     initialCost: 1e6,
     increment: 100,
+    capIncreaseAt: 2498,
     description: () =>
       (Perk.bypassTGReset.isBought && !Pelle.isDoomed
         ? "Reset Tachyon Galaxies, but lower their threshold"
@@ -71,6 +74,7 @@ export const dilationUpgrades = {
     id: 3,
     initialCost: 1e7,
     increment: 20,
+    capIncreaseAt: 3838,
     description: () => {
       if (Pelle.isDoomed) return `Multiply the amount of Tachyon Particles gained by ${formatInt(1)}`;
       if (Enslaved.isRunning) return `Multiply the amount of Tachyon Particles gained
