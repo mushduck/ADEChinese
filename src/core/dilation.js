@@ -279,3 +279,7 @@ export const DilationUpgrades = {
   ],
   fromId: id => DilationUpgrade.all.find(x => x.id === Number(id))
 };
+
+export const DilationUpgradeScaling = {
+  PRIMARY_SCALING: DC.E5000
+};
