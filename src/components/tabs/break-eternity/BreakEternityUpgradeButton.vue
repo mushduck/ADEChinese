@@ -28,8 +28,8 @@ export default {
       return {
         "o-break-eternity-upgrade": true,
         "o-break-eternity-upgrade--bought": this.isBought,
-        "o-break-eternity-upgrade--available": !this.isBought && this.isAffordable,
-        "o-break-eternity-upgrade--unavailable": !this.isBought && !this.isAffordable
+        "o-break-eternity-upgrade--available": !this.isBought && this.isAffordable && this.isAvailable,
+        "o-break-eternity-upgrade--unavailable": !this.isBought && !this.isAffordable || !this.isBought && !this.isAvailable
       };
     }
   },
