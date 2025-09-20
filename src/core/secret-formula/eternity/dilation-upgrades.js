@@ -31,7 +31,8 @@ export const dilationUpgrades = {
       ((SingularityMilestone.dilatedTimeFromSingularities.canBeApplied || Achievement(187).canBeApplied)
         ? `${formatX(2 * Effects.product(
           SingularityMilestone.dilatedTimeFromSingularities,
-          Achievement(187)
+          Achievement(187),
+          BreakEternityUpgrade.dilatedTimeMultiplier
         ), 2, 2)} Dilated Time gain`
         : "Double Dilated Time gain"),
     effect: bought => {
@@ -44,7 +45,8 @@ export const dilationUpgrades = {
     },
     formatEffect: value => {
       const nonInteger = SingularityMilestone.dilatedTimeFromSingularities.canBeApplied ||
-        Achievement(187).canBeApplied;
+        Achievement(187).canBeApplied ||
+        BreakEternityUpgrade.dilatedTimeMultiplier;
       return formatX(value, 2, nonInteger ? 2 : 0);
     },
     formatCost: value => format(value, 2),
