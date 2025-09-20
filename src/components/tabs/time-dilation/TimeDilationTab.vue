@@ -22,6 +22,8 @@ export default {
       maxDT: new Decimal(),
       toMaxTooltip: "",
       isHovering: false,
+      isEndgameUnlocked: false,
+      scaleStart: new Decimal()
     };
   },
   computed: {
@@ -118,6 +120,9 @@ export default {
       const estimateText = getDilationTimeEstimate(this.maxDT);
       if (this.dilatedTimeIncome.lte(0)) this.toMaxTooltip = "No DT gain";
       else this.toMaxTooltip = estimateText.startsWith("<") ? "Currently Increasing" : estimateText;
+
+      this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
+      this.scaleStart = DilationUpgradeScaling.PRIMARY_SCALING;
     }
   }
 };
@@ -163,6 +168,9 @@ export default {
         v-tooltip="toMaxTooltip"
         class="max-accent"
       >{{ format(maxDT, 2, 1) }}</span>.
+    </span>
+    <span v-if="isEndgameUnlocked">
+      Past {{ format(scaleStart, 2, 1) }} Dilated Time, all rebuyable Dilation Upgrades will scale faster.
     </span>
     <div class="l-dilation-upgrades-grid">
       <div
