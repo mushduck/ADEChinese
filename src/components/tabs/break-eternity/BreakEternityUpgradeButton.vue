@@ -46,8 +46,24 @@ export default {
 
 <template>
   <button
+    v-if="isAvailable"
     :class="classObject"
     @click="upgrade.purchase()"
+  >
+    <DescriptionDisplay :config="upgrade.config" />
+    <EffectDisplay
+      br
+      :config="upgrade.config"
+    />
+    <CostDisplay
+      br
+      :config="upgrade.config"
+      name="Antimatter"
+    />
+  </button>
+  <button
+    v-if="!isAvailable"
+    :class="classObject"
   >
     <DescriptionDisplay :config="upgrade.config" />
     <EffectDisplay
