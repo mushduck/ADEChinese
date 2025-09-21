@@ -196,7 +196,7 @@ export function getTachyonGain(requireEternity) {
 // Returns the minimum antimatter needed in order to gain more TP; used only for display purposes
 export function getTachyonReq() {
   let effectiveTP = Currency.tachyonParticles.value.dividedBy(tachyonGainMultiplier());
-  effectiveTP = effectiveTP.pow(1 / BreakEternityUpgrade.tachyonParticlePow);
+  effectiveTP = effectiveTP.powEffectsOf(BreakEternityUpgrade.tachyonParticlePow.reciprocal());
   if (Enslaved.isRunning) effectiveTP = effectiveTP.pow(1 / Enslaved.tachyonNerf);
   return Decimal.pow10(
     effectiveTP
