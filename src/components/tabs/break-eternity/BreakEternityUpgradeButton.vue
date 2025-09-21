@@ -62,7 +62,7 @@ export default {
     />
   </button>
   <button
-    v-if="!isAvailable"
+    v-else
     :class="classObject"
   >
     <DescriptionDisplay :config="upgrade.config" />
