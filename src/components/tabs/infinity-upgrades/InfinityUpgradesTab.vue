@@ -21,7 +21,8 @@ export default {
       ipMultHardCap: 0,
       eternityUnlocked: false,
       bottomRowUnlocked: false,
-      styleOfColumnBg: undefined
+      styleOfColumnBg: undefined,
+      isUncapped: false
     };
   },
   computed: {
@@ -84,9 +85,10 @@ export default {
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
       this.disCharge = player.celestials.ra.disCharge;
       this.ipMultSoftCap = GameDatabase.infinity.upgrades.ipMult.costIncreaseThreshold;
-      this.ipMultHardCap = GameDatabase.infinity.upgrades.ipMult.costCap;
+      this.ipMultHardCap = this.isUncapped ? Decimal.MAX_VALUE : GameDatabase.infinity.upgrades.ipMult.costCap;
       this.eternityUnlocked = PlayerProgress.current.isEternityUnlocked;
       this.bottomRowUnlocked = Achievement(41).isUnlocked;
+      this.isUncapped = BreakEternityUpgrade.doubleIPUncap.isBought;
     },
     btnClassObject(column) {
       const classObject = {
@@ -173,8 +175,9 @@ export default {
     <div v-if="eternityUnlocked && bottomRowUnlocked">
       The Infinity Point multiplier becomes more expensive
       <br>
-      above {{ formatPostBreak(ipMultSoftCap) }} Infinity Points, and cannot be purchased past
-      {{ formatPostBreak(ipMultHardCap) }} Infinity Points.
+      above {{ formatPostBreak(ipMultSoftCap) }} Infinity Points
+      <span v-if="!isUncapped">, and cannot be purchased past
+      {{ formatPostBreak(ipMultHardCap) }} Infinity Points</span>.
     </div>
   </div>
 </template>
