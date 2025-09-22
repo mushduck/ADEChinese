@@ -139,7 +139,8 @@ export const breakEternityUpgrades = {
   tgThresholdUncap: {
     id: "tgThresholdUncap",
     cost: Decimal.pow(10, 1e40),
-    description: "Uncap the TG Threshold Upgrade and improve the formula"
+    description: "Uncap the TG Threshold Upgrade and improve the formula",
+    effect: Number.MAX_VALUE
   },
   tesseractMultiplier: {
     id: "tesseractMultiplier",
