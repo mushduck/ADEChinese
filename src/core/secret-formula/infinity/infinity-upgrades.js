@@ -227,7 +227,7 @@ export const infinityUpgrades = {
     // an extra e7k to make the multiplier look nice
     effect: () => (player.IPMultPurchases >= 3300000 && !BreakEternityUpgrade.doubleIPUncap.isBought ? DC.E1E6 : DC.D2.pow(player.IPMultPurchases)),
     cap: () => {
-      const normcap = BreakEternityUpgrade.doubleIPUncap.isBought ? DC.E1E300 : DC.E1E6;
+      const normcap = BreakEternityUpgrade.doubleIPUncap.isBought ? Decimal.pow(10, 1e100) : DC.E1E6;
       return Effarig.eternityCap ?? normcap;
     },
     formatEffect: value => formatX(value, 2, 2),
