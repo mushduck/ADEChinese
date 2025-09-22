@@ -396,7 +396,7 @@ EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
   if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd) Pelle.quotes.endgame.show();
 });
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
-  if (GameEnd.endState > END_STATE_MARKERS.GAME_END && !GameEnd.removeAdditionalEnd && player.endgames >= 1) Pelle.quotes.end2.show();
+  if (player.celestials.pelle.records.totalEndgameAntimatter.gte(DC.E9E15) && player.endgames >= 1) Pelle.quotes.end2.show();
 });
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {
