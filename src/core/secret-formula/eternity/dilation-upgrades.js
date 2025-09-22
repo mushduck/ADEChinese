@@ -70,7 +70,7 @@ export const dilationUpgrades = {
         Next: ${formatX(getTachyonGalaxyMult(nextEffect), 4, 4)}`;
     },
     formatCost: value => format(value, 2),
-    purchaseCap: () => {
+    get purchaseCap() {
       if (BreakEternityUpgrade.tgThresholdUncap.isBought) return Number.MAX_VALUE;
       return 38;
     }
