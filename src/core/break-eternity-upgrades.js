@@ -8,6 +8,14 @@ export class BreakEternityUpgradeState extends SetPurchasableMechanicState {
   get set() {
     return player.breakEternityUpgrades;
   }
+
+  onPurchased() {
+    this.config.onPurchased?.();
+  }
+
+  get isAvailable() {
+    return !Pelle.isDoomed;
+  }
 }
 
 class RebuyableBreakEternityUpgradeState extends RebuyableMechanicState {
