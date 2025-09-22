@@ -14,7 +14,7 @@ function rebuyable(config) {
     effect: () => config.effect(player.dilation.rebuyables[config.id]),
     formatEffect: config.formatEffect,
     formatCost: config.formatCost,
-    purchaseCap: config.purchaseCap,
+    purchaseCap: () => config.purchaseCap,
     reachedCap: () => player.dilation.rebuyables[config.id] >= config.purchaseCap,
     pelleOnly: Boolean(config.pelleOnly),
     rebuyable: true
@@ -70,9 +70,7 @@ export const dilationUpgrades = {
         Next: ${formatX(getTachyonGalaxyMult(nextEffect), 4, 4)}`;
     },
     formatCost: value => format(value, 2),
-    get purchaseCap() {
-      if (BreakEternityUpgrade.tgThresholdUncap.isBought) return Number.MAX_VALUE;
-      return 38;
+    purchaseCap: () => BreakEternityUpgrade.tgThresholdUncap.isBought ? Number.MAX_VALUE : 38
     }
   }),
   tachyonGain: rebuyable({
