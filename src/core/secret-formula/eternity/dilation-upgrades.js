@@ -14,7 +14,7 @@ function rebuyable(config) {
     effect: () => config.effect(player.dilation.rebuyables[config.id]),
     formatEffect: config.formatEffect,
     formatCost: config.formatCost,
-    purchaseCap: config.purchaseCap,
+    purchaseCap: () => config.purchaseCap(player.dilation.rebuyables[config.id]),
     reachedCap: () => player.dilation.rebuyables[config.id] >= config.purchaseCap,
     pelleOnly: Boolean(config.pelleOnly),
     rebuyable: true
@@ -50,7 +50,7 @@ export const dilationUpgrades = {
       return formatX(value, 2, nonInteger ? 2 : 0);
     },
     formatCost: value => format(value, 2),
-    purchaseCap: Number.MAX_VALUE
+    purchaseCap: () => Number.MAX_VALUE
   }),
   galaxyThreshold: rebuyable({
     id: 2,
@@ -70,8 +70,7 @@ export const dilationUpgrades = {
         Next: ${formatX(getTachyonGalaxyMult(nextEffect), 4, 4)}`;
     },
     formatCost: value => format(value, 2),
-    hasImprovedCap: () => BreakEternityUpgrade.tgThresholdUncap.isBought,
-    purchaseCap: hasImprovedCap ? Number.MAX_VALUE : 38
+    purchaseCap: () => BreakEternityUpgrade.tgThresholdUncap.isBought ? Number.MAX_VALUE : 38
   }),
   tachyonGain: rebuyable({
     id: 3,
@@ -90,7 +89,7 @@ export const dilationUpgrades = {
     },
     formatEffect: value => formatX(value, 2),
     formatCost: value => format(value, 2),
-    purchaseCap: Number.MAX_VALUE
+    purchaseCap: () => Number.MAX_VALUE
   }),
   doubleGalaxies: {
     id: 4,
@@ -163,7 +162,7 @@ export const dilationUpgrades = {
     effect: bought => Decimal.pow(5, bought),
     formatEffect: value => formatX(value, 2),
     formatCost: value => format(value, 2),
-    purchaseCap: Number.MAX_VALUE
+    purchaseCap: () => Number.MAX_VALUE
   }),
   galaxyMultiplier: rebuyable({
     id: 12,
@@ -175,7 +174,7 @@ export const dilationUpgrades = {
     effect: bought => bought + 1,
     formatEffect: value => `${formatX(value, 2)} ➜ ${formatX(value + 1, 2)}`,
     formatCost: value => format(value, 2),
-    purchaseCap: Number.MAX_VALUE
+    purchaseCap: () => Number.MAX_VALUE
   }),
   tickspeedPower: rebuyable({
     id: 13,
@@ -187,7 +186,7 @@ export const dilationUpgrades = {
     effect: bought => 1 + bought * 0.03,
     formatEffect: value => `${formatPow(value, 2, 2)} ➜ ${formatPow(value + 0.03, 2, 2)}`,
     formatCost: value => format(value, 2),
-    purchaseCap: Number.MAX_VALUE
+    purchaseCap: () => Number.MAX_VALUE
   }),
   galaxyThresholdPelle: {
     id: 14,
