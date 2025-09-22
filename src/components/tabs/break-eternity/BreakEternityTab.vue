@@ -82,6 +82,9 @@ export default {
         />
       </div>
     </div>
+    <div>
+      All Break Eternity Upgrades can only be purchased with Antimatter gained outside Pelle.
+    </div>
   </div>
 </template>
 
