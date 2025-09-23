@@ -85,7 +85,7 @@ export default {
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
       this.disCharge = player.celestials.ra.disCharge;
       this.ipMultSoftCap = GameDatabase.infinity.upgrades.ipMult.costIncreaseThreshold;
-      this.ipMultHardCap = this.isUncapped ? Decimal.MAX_VALUE : GameDatabase.infinity.upgrades.ipMult.costCap;
+      this.ipMultHardCap = InfinityUpgrade.ipMult.costCap;
       this.eternityUnlocked = PlayerProgress.current.isEternityUnlocked;
       this.bottomRowUnlocked = Achievement(41).isUnlocked;
       this.isUncapped = BreakEternityUpgrade.doubleIPUncap.isBought;
