@@ -159,7 +159,7 @@ class InfinityIPMultUpgrade extends GameMechanicState {
   }
 
   get costCap() {
-    return this.config.costCap(player.infinityUpgrades[this.id]);
+    return this.config.costCap;
   }
 
   get isCapped() {
