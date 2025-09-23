@@ -158,8 +158,12 @@ class InfinityIPMultUpgrade extends GameMechanicState {
     return this.hasIncreasedCost ? 1e10 : 10;
   }
 
+  get costCap() {
+    return BreakEternityUpgrade.doubleIPUncap.isBought ? DC.E1E300 : DC.E6E6;
+  }
+
   get isCapped() {
-    return this.cost.gte(this.config.costCap);
+    return this.cost.gte(this.costCap);
   }
 
   get isBought() {
@@ -199,7 +203,7 @@ class InfinityIPMultUpgrade extends GameMechanicState {
     // (for example, we have 1e4000000 IP and no mult - first it will go to (but not including) 1e3000000 and then
     // it will go in this part)
     if (this.hasIncreasedCost) {
-      const availableIP = Currency.infinityPoints.value.clampMax(this.config.costCap);
+      const availableIP = Currency.infinityPoints.value.clampMax(this.costCap);
       const purchases = Decimal.affordGeometricSeries(availableIP, this.cost, this.costIncrease, 0).toNumber();
       if (purchases <= 0) return;
       this.purchase(purchases);
