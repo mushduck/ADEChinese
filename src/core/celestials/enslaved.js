@@ -275,8 +275,12 @@ export const Tesseracts = {
     return this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1);
   },
 
+  get totalMult() {
+    return DC.D1.timesEffectsOf(BreakEternityUpgrade.tesseractMultiplier);
+  },
+
   get effectiveCount() {
-    return this.bought + this.extra;
+    return (this.bought + this.extra) * this.totalMult;
   },
 
   buyTesseract() {
