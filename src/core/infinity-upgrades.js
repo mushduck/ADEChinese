@@ -159,7 +159,7 @@ class InfinityIPMultUpgrade extends GameMechanicState {
   }
 
   get costCap() {
-    return BreakEternityUpgrade.doubleIPUncap.isBought ? DC.E1E300 : DC.E6E6;
+    return this.config.costCap();
   }
 
   get isCapped() {
