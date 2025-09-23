@@ -220,17 +220,14 @@ export const infinityUpgrades = {
     id: "ipMult",
     cost: () => InfinityUpgrade.ipMult.cost,
     checkRequirement: () => Achievement(41).isUnlocked,
-    costCap: () => {
-      if (BreakEternityUpgrade.doubleIPUncap.isBought) return DC.E1E300;
-      return DC.E6E6;
-    },
+    costCap: () => BreakEternityUpgrade.doubleIPUncap.isBought ? DC.E1E300 : DC.E6E6,
     costIncreaseThreshold: DC.E3E6,
     description: () => `Multiply Infinity Points from all sources by ${formatX(2)}`,
     // Normally the multiplier caps at e993k or so with 3300000 purchases, but if the cost is capped then we just give
     // an extra e7k to make the multiplier look nice
     effect: () => (player.IPMultPurchases >= 3300000 && !BreakEternityUpgrade.doubleIPUncap.isBought ? DC.E1E6 : DC.D2.pow(player.IPMultPurchases)),
     cap: () => {
-      const normcap = BreakEternityUpgrade.doubleIPUncap.isBought ? Decimal.pow(10, 1e100) : DC.E1E6;
+      const normcap = BreakEternityUpgrade.doubleIPUncap.isBought ? DC.E1E300 : DC.E1E6;
       return Effarig.eternityCap ?? normcap;
     },
     formatEffect: value => formatX(value, 2, 2),
