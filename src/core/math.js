@@ -87,6 +87,7 @@ window.bulkBuyBinarySearch = function bulkBuyBinarySearch(money, costInfo, alrea
     const newCost = otherCost.plus(costFunction(alreadyBought + i - 1));
     if (newCost.eq(otherCost)) break;
     otherCost = newCost;
+    if (++count > 1000) break;
     if (++count > 1000) throw new Error("unexpected long loop (buggy cost function?)");
   }
   let totalCost = baseCost.plus(otherCost);
