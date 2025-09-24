@@ -65,8 +65,8 @@ export default {
       this.totalDimCap = InfinityDimensions.totalDimCap;
       this.canBuyTesseract = Tesseracts.canBuyTesseract;
       this.enslavedCompleted = Enslaved.isCompleted;
-      this.boughtTesseracts = Tesseracts.bought;
-      this.extraTesseracts = Tesseracts.extra;
+      this.boughtTesseracts = Tesseracts.bought * Tesseracts.totalMult;
+      this.extraTesseracts = Tesseracts.extra * Tesseracts.totalMult;
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
       this.infinityDimCompressionMagnitude = player.endgame.compressionMagnitude.infinity;
