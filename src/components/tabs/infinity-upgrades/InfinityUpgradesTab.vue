@@ -175,8 +175,7 @@ export default {
     <div v-if="eternityUnlocked && bottomRowUnlocked">
       The Infinity Point multiplier becomes more expensive
       <br>
-      above {{ format(ipMultSoftCap, 2, 1) }} Infinity Points
-      <span v-if="!isUncapped">, and cannot be purchased past
+      above {{ format(ipMultSoftCap, 2, 1) }} Infinity Points<span v-if="!isUncapped">, and cannot be purchased past
       {{ format(ipMultHardCap, 2, 1) }} Infinity Points</span>.
     </div>
   </div>
