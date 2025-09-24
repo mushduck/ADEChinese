@@ -276,7 +276,7 @@ export const Tesseracts = {
   },
 
   get totalMult() {
-    return DC.D1.timesEffectsOf(BreakEternityUpgrade.tesseractMultiplier);
+    return 1 * Effects.mult(BreakEternityUpgrade.tesseractMultiplier);
   },
 
   get effectiveCount() {
