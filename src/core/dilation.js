@@ -107,7 +107,7 @@ export function buyDilationUpgrade(id, bulk = 1) {
 export function getTachyonGalaxyMult(thresholdUpgrade) {
   // This specifically needs to be an undefined check because sometimes thresholdUpgrade is zero
   const upgrade = thresholdUpgrade === undefined ? DilationUpgrade.galaxyThreshold.effectValue : thresholdUpgrade;
-  const thresholdMult = BreakEternityUpgrade.tgThresholdUncap.isBought ? 3.65 * upgrade + (0.35 * (upgrade ** 0.01)) : 3.65 * upgrade + 0.35;
+  const thresholdMult = BreakEternityUpgrade.tgThresholdUncap.isBought ? 3.65 * upgrade + (0.35 * (upgrade ** 0.001)) : 3.65 * upgrade + 0.35;
   const glyphEffect = getAdjustedGlyphEffect("dilationgalaxyThreshold");
   const glyphReduction = glyphEffect === 0 ? 1 : glyphEffect;
   const power = DilationUpgrade.galaxyThresholdPelle.canBeApplied
