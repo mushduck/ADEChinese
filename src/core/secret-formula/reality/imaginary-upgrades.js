@@ -348,18 +348,29 @@ export const imaginaryUpgrades = [
     hasFailed: () => !Pelle.isDoomed || Glyphs.activeWithoutCompanion.length > 0,
     // We have to put this as 1e16 for now because Glyphs can still be switched out via Armageddon
     // Hopefully we can fix this later
-    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16 && Pelle.isDoomed &&
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9e15 && Pelle.isDoomed &&
       Glyphs.activeWithoutCompanion.length <= 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
   },
   {
-    name: "Achievement Annihilation",
+    name: "Alchemical Annihilation",
     id: 28,
     cost: 1e150,
-    requirement: () => `Unlock Pelle without completing any Hard V-Achievements`,
-    hasFailed: () => V.spaceTheorems >= 37,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16 && V.spaceTheorems <= 36,
+    requirement: () => `Unlock Pelle without having any Alchemy Resources`,
+    hasFailed: () => player.celestials.ra.alchemy[0].amount > 0 ||
+      player.celestials.ra.alchemy[1].amount > 0 ||
+      player.celestials.ra.alchemy[2].amount > 0 ||
+      player.celestials.ra.alchemy[3].amount > 0 ||
+      player.celestials.ra.alchemy[4].amount > 0 ||
+      player.celestials.ra.alchemy[5].amount > 0,
+    checkRequirement: () => Pelle.isUnlocked &&
+      player.celestials.ra.alchemy[0].amount === 0 &&
+      player.celestials.ra.alchemy[1].amount === 0 &&
+      player.celestials.ra.alchemy[2].amount === 0 &&
+      player.celestials.ra.alchemy[3].amount === 0 &&
+      player.celestials.ra.alchemy[4].amount === 0 &&
+      player.celestials.ra.alchemy[5].amount === 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
   },
