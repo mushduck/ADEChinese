@@ -2827,6 +2827,16 @@ br {
 
 /* #endregion c-time-dim-description__accent */
 
+/* #region c-time-dim-compression-description__accent */
+
+.c-time-dim-compression-description__accent {
+  font-size: 2rem;
+  color: #ff0000;
+  text-shadow: 0 0 0.7rem #ff0000;
+}
+
+/* #endregion c-time-dim-compression-description__accent */
+
 /* #endregion Time Dimensions */
 
 /* #region Celestial Dimensions */
