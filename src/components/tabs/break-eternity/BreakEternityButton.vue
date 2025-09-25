@@ -13,7 +13,7 @@ export default {
       return {
         "o-break-eternity-upgrade-btn": true,
         "o-break-eternity-upgrade-btn--color-2": true,
-        "o-break-eternity-upgrade-btn--available": this.isUnlocked,
+        "o-break-eternity-upgrade-btn--available": this.isUnlocked || this.isBroken,
         "o-break-eternity-upgrade-btn--unavailable": !this.isUnlocked,
         "o-break-eternity-upgrade-btn--unclickable": this.isBroken,
       };
