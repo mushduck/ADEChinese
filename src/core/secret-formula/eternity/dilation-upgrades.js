@@ -6,7 +6,7 @@ function rebuyableCost(initialCost, increment, id, capIncreaseAt) {
 function rebuyable(config) {
   return {
     id: config.id,
-    cost: () => rebuyableCost(config.initialCost, config.increment, config.id, config.capIncreaseAt),
+    cost: () => rebuyableCost(config.initialCost, config.increment, config.id, config.capIncreaseAt(player.dilation.rebuyables[config.id])),
     initialCost: config.initialCost,
     increment: config.increment,
     capIncreaseAt: () => config.capIncreaseAt(player.dilation.rebuyables[config.id]),
