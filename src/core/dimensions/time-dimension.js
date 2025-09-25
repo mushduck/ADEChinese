@@ -128,6 +128,7 @@ export function timeDimensionCommonMultiplier() {
         4)
         .clampMin(1));
   }
+  
   return mult;
 }
 
@@ -234,6 +235,8 @@ class TimeDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
+    if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / player.endgame.compressionMagnitude.time).times(1e15));
+
     return mult;
   }
 
@@ -320,6 +323,7 @@ export const TimeDimensions = {
    * @type {TimeDimensionState[]}
    */
   all: TimeDimension.index.compact(),
+  OVERFLOW: DC.E1E15,
 
   get scalingPast1e6000() {
     return 4;
