@@ -813,7 +813,8 @@ window.player = {
       strikes: new Set()
     },
     compressionMagnitude: {
-      infinity: 10
+      infinity: 10,
+      time: 10
     }
   },
   isGameEnd: false,
