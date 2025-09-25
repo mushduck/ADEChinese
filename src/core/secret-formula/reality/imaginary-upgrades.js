@@ -364,7 +364,7 @@ export const imaginaryUpgrades = [
       player.celestials.ra.alchemy[3].amount > 0 ||
       player.celestials.ra.alchemy[4].amount > 0 ||
       player.celestials.ra.alchemy[5].amount > 0,
-    checkRequirement: () => Pelle.isUnlocked &&
+    checkRequirement: () => Pelle.isUnlocked && !Pelle.isDoomed &&
       player.celestials.ra.alchemy[0].amount === 0 &&
       player.celestials.ra.alchemy[1].amount === 0 &&
       player.celestials.ra.alchemy[2].amount === 0 &&
