@@ -13,7 +13,7 @@ export default {
       return {
         "o-break-eternity-upgrade-btn": true,
         "o-break-eternity-upgrade-btn--color-2": true,
-        "o-break-eternity-upgrade-btn--available": this.isUnlocked || this.isBroken,
+        "o-break-eternity-upgrade-btn--available": this.isUnlocked,
         "o-break-eternity-upgrade-btn--unavailable": !this.isUnlocked,
         "o-break-eternity-upgrade-btn--unclickable": this.isBroken,
       };
@@ -25,7 +25,7 @@ export default {
   methods: {
     update() {
       this.isBroken = player.break2;
-      this.isUnlocked = PlayerProgress.endgameUnlocked() && player.antimatter.gte(this.antimatterReq);
+      this.isUnlocked = PlayerProgress.endgameUnlocked() && player.antimatter.gte(this.antimatterReq) || this.isBroken;
       this.antimatterReq = new Decimal(1e9000000000000000);
     },
     clicked() {
