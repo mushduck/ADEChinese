@@ -210,8 +210,9 @@ export default {
         <div v-if="endgame.isUnlocked">
           You have made a total of {{ format(endgame.totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
         </div>
-        <div v-if="reality.isUnlocked">
-          You have made a total of {{ format(reality.totalRealityAntimatter, 2, 1) }} antimatter this Reality.
+        <div v-if="reality.isUnlocked" :class="{ 'c-stats-tab-doomed' : isDoomed }">
+          You have made a total of {{ format(reality.totalRealityAntimatter, 2, 1) }} antimatter
+          this {{ isDoomed ? "Armageddon" : "Reality" }}.
         </div>
         <div v-if="eternity.isUnlocked">
           You have made a total of {{ format(eternity.totalEternityAntimatter, 2, 1) }} antimatter this Eternity.
