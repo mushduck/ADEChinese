@@ -271,6 +271,9 @@ window.player = {
       maxGlyphs: 0,
       slowestBH: 1,
     },
+    endgame: {
+      noGlyphsDoomed: true,
+    },
     permanent: {
       emojiGalaxies: 0,
       singleTickspeed: 0,
