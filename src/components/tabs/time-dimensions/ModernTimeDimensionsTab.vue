@@ -19,6 +19,10 @@ export default {
       incomeType: "",
       areAutobuyersUnlocked: false,
       showLockedDimCostNote: true,
+      isEndgameUnlocked: false,
+      timeDimCompressionMagnitude: 0,
+      timeDimOverflow: 0,
+      timeDimStart: new Decimal(0)
     };
   },
   computed: {
@@ -35,6 +39,10 @@ export default {
       this.shardsPerSecond.copyFrom(TimeDimension(1).productionPerSecond);
       this.incomeType = EternityChallenge(7).isRunning ? "Eighth Infinity Dimensions" : "Time Shards";
       this.areAutobuyersUnlocked = Autobuyer.timeDimension(1).isUnlocked;
+      this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
+      this.timeDimCompressionMagnitude = player.endgame.compressionMagnitude.time;
+      this.timeDimOverflow = 1 / this.timeDimCompressionMagnitude;
+      this.timeDimStart = TimeDimensions.OVERFLOW;
     },
     maxAll() {
       tryUnlockTimeDimensions();
@@ -75,6 +83,18 @@ export default {
         <span class="c-time-dim-description__accent">{{ format(upgradeThreshold, 2, 1) }}</span>, increasing by
         <span class="c-time-dim-description__accent">{{ formatX(multPerTickspeed, 2, 2) }}</span> per
         Tickspeed upgrade gained.
+      </p>
+    </div>
+    <div>
+      <p>
+        <span v-if="isEndgameUnlocked">
+          Your Time Dimension Compression Magnitude is
+          <span class="c-time-dim-compression-description__accent">{{ format(timeDimCompressionMagnitude, 2, 3) }}</span>,
+          which raises all Time Dimension Multipliers to the power of
+          <span class="c-time-dim-compression-description__accent">{{ format(timeDimOverflow, 2, 3) }}</span>
+          while above
+          <span>{{ format(timeDimStart, 2, 1) }}</span>.
+        </span>
       </p>
     </div>
     <div>
