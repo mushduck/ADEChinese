@@ -26,7 +26,7 @@ export const dilationUpgrades = {
     id: 1,
     initialCost: 1e4,
     increment: 10,
-    capIncreaseAt: () => 4997,
+    capIncreaseAt: () => Math.floor(Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) - 3),
     description: () =>
       ((SingularityMilestone.dilatedTimeFromSingularities.canBeApplied || Achievement(187).canBeApplied)
         ? `${formatX(2 * Effects.product(
@@ -56,7 +56,7 @@ export const dilationUpgrades = {
     id: 2,
     initialCost: 1e6,
     increment: 100,
-    capIncreaseAt: () => 2498,
+    capIncreaseAt: () => Math.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) / 2) - 2),
     description: () =>
       (Perk.bypassTGReset.isBought && !Pelle.isDoomed
         ? "Reset Tachyon Galaxies, but lower their threshold"
@@ -76,7 +76,7 @@ export const dilationUpgrades = {
     id: 3,
     initialCost: 1e7,
     increment: 20,
-    capIncreaseAt: () => 3838,
+    capIncreaseAt: () => Math.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) / Math.log(20)) - (Math.log(5e5) / Math.log(20))),
     description: () => {
       if (Pelle.isDoomed) return `Multiply the amount of Tachyon Particles gained by ${formatInt(1)}`;
       if (Enslaved.isRunning) return `Multiply the amount of Tachyon Particles gained
@@ -156,7 +156,7 @@ export const dilationUpgrades = {
     id: 11,
     initialCost: 1e14,
     increment: 100,
-    capIncreaseAt: () => 2494,
+    capIncreaseAt: () => Math.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) / 2) - 6),
     pelleOnly: true,
     description: () => `${formatX(5)} Dilated Time gain`,
     effect: bought => Decimal.pow(5, bought),
@@ -168,7 +168,7 @@ export const dilationUpgrades = {
     id: 12,
     initialCost: 1e15,
     increment: 1000,
-    capIncreaseAt: () => 1663,
+    capIncreaseAt: () => Math.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) / 3) - 4),
     pelleOnly: true,
     description: "Multiply Tachyon Galaxies gained, applies after TG doubling upgrade",
     effect: bought => bought + 1,
@@ -180,7 +180,7 @@ export const dilationUpgrades = {
     id: 13,
     initialCost: 1e16,
     increment: 1e4,
-    capIncreaseAt: () => 1247,
+    capIncreaseAt: () => Math.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) / 4) - 3),
     pelleOnly: true,
     description: "Gain a power to Tickspeed",
     effect: bought => 1 + bought * 0.03,
