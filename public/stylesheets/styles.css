@@ -5603,6 +5603,23 @@ properly on certain themes. */
 
 /* #endregion Break Eternity Upgrades */
 
+/* #region Expansion Packs */
+
+.l-expansion-packs-tab {
+  display: flex;
+  flex-direction: column;
+  color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
+  width: 100%;
+  align-items: center;
+}
+
+.o-primary-btn--expansion-packs-unlock {
+  width: 20rem;
+  height: 8rem;
+}
+
+/* #endregion Expansion Packs */
+
 /* #region Modals */
 
 @keyframes a-modal-overlay-fadein {
