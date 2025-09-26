@@ -345,11 +345,11 @@ export const imaginaryUpgrades = [
     id: 27,
     cost: 1e100,
     requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
-    hasFailed: () => !Pelle.isDoomed || Glyphs.activeWithoutCompanion.length > 0,
+    hasFailed: () => !Pelle.isDoomed || player.requirementChecks.endgame.noGlyphsDoomed = false,
     // We have to put this as 1e16 for now because Glyphs can still be switched out via Armageddon
     // Hopefully we can fix this later
     checkRequirement: () => Currency.antimatter.value.exponent >= 9e15 && Pelle.isDoomed &&
-      Glyphs.activeWithoutCompanion.length <= 0,
+      player.requirementChecks.endgame.noGlyphsDoomed = true,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
   },
