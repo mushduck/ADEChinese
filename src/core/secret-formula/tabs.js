@@ -548,6 +548,14 @@ export const tabs = [
         component: "PelleDestructionTab",
         id: 2,
         hidable: true,
+      },
+      {
+        key: "expanion-packs",
+        name: "Expansion Packs",
+        symbol: "<i class='fas fa-expand-arrows-alt'></i>",
+        component: "ExpansionPacksTab",
+        id: 3,
+        hidable: true,
       }
     ],
   }
