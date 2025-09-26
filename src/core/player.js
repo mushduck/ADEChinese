@@ -369,6 +369,7 @@ window.player = {
       realTime: Number.MAX_VALUE,
       bestCPmin: DC.D0,
       bestDPmin: DC.D0,
+      glyphLevel: 0,
     },
   },
   speedrun: {
