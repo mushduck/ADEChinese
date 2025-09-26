@@ -267,6 +267,10 @@ class RebuyableDilationUpgradeState extends RebuyableMechanicState {
     return this.config.purchaseCap(player.dilation.rebuyables[this.id]);
   }
 
+  get capIncreaseAt() {
+    return this.config.capIncreaseAt(player.dilation.rebuyables[this.id]);
+  }
+
   purchase(bulk) {
     buyDilationUpgrade(this.config.id, bulk);
   }
