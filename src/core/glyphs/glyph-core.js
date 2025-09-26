@@ -656,6 +656,9 @@ export const Glyphs = {
   get extremeInstabilityThreshold() {
     return 75000;
   },
+  get levelCap() {
+    return Number.MAX_VALUE;
+  },
   clearUndo() {
     player.reality.glyphs.undo = [];
   },
