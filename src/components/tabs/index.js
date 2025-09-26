@@ -15,6 +15,7 @@ import EnslavedTab from "./celestial-enslaved/EnslavedTab";
 import EternityChallengesTab from "./eternity-challenges/EternityChallengesTab";
 import EternityMilestonesTab from "./eternity-milestones/EternityMilestonesTab";
 import EternityUpgradesTab from "./eternity-upgrades/EternityUpgradesTab";
+import ExpansionPacksTab from "./endgame/ExpansionPacksTab";
 import GlyphSetRecordsTab from "./glyph-set-records/GlyphSetRecordsTab";
 import GlyphsTab from "./glyphs/GlyphsTab";
 import ImaginaryUpgradesTab from "./imaginary-upgrades/ImaginaryUpgradesTab";
@@ -91,6 +92,7 @@ const TabComponents = {
   EndgameTab,
   BreakEternityTab,
   PelleDestructionTab,
+  ExpansionPacksTab,
   ShopTab,
   MultiplierBreakdownTab
 };
