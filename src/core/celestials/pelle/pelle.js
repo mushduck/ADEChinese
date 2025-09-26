@@ -93,6 +93,7 @@ export const Pelle = {
     disChargeAll();
     clearCelestialRuns();
     CelestialDimensions.resetAmount();
+    player.requirementChecks.endgame.noGlyphsDoomed = true;
 
     // Force-enable the group toggle for AD autobuyers to be active; whether or not they can actually tick
     // is still handled through if the autobuyers are unlocked at all. This fixes an odd edge case where the player
@@ -397,6 +398,9 @@ EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
 });
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
   if (player.celestials.pelle.records.totalEndgameAntimatter.gte(DC.E9E15) && player.endgames >= 1) Pelle.quotes.end2.show();
+});
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (Glyphs.activeWithoutCompanion.length > 0) player.requirementChecks.endgame.noGlyphsDoomed = false;
 });
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {
