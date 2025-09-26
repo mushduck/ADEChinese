@@ -76,7 +76,7 @@ export const dilationUpgrades = {
     id: 3,
     initialCost: 1e7,
     increment: 20,
-    capIncreaseAt: () => Math.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) / Math.log(20)) - (Math.log(5e5) / Math.log(20))),
+    capIncreaseAt: () => Math.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING) / Math.log10(20)) - (Math.log10(5e5) / Math.log10(20))),
     description: () => {
       if (Pelle.isDoomed) return `Multiply the amount of Tachyon Particles gained by ${formatInt(1)}`;
       if (Enslaved.isRunning) return `Multiply the amount of Tachyon Particles gained
