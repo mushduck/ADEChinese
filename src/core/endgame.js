@@ -101,11 +101,6 @@ export const Endgame = {
     Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
     ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
     ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
-    //PelleStrikes.infinity.hasStrike = false;
-    //PelleStrikes.powerGalaxies.hasStrike = false;
-    //PelleStrikes.eternity.hasStrike = false;
-    //PelleStrikes.ECs.hasStrike = false;
-    //PelleStrikes.dilation.hasStrike = false;
     player.realities = 0;
     player.partSimulatedReality = 0;
     player.reality.realityMachines = DC.D0;
