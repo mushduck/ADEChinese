@@ -274,7 +274,7 @@ export const Pelle = {
   },
 
   resetResourcesForDilation() {
-    this.cel.records.totalAntimatter = new Decimal("1e180000");
+    this.cel.records.totalEndgameAntimatter = new Decimal("1e180000");
     this.cel.records.totalInfinityPoints = new Decimal("1e60000");
     Currency.eternityPoints.reset();
     // Oddly specific number? Yes, it's roughly the amount of EP you have
@@ -286,7 +286,7 @@ export const Pelle = {
   },
 
   get remnantsGain() {
-    let am = this.cel.records.totalAntimatter.plus(1).log10();
+    let am = this.cel.records.totalEndgameAntimatter.plus(1).log10();
     let ip = this.cel.records.totalInfinityPoints.plus(1).log10();
     let ep = this.cel.records.totalEternityPoints.plus(1).log10();
 
