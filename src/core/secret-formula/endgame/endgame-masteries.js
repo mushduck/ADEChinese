@@ -238,7 +238,7 @@ export const endgameMasteries = [
     id: 141,
     cost: 4,
     requirement: [131],
-    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `IP Gain is raised to the power of ${format(1.2, 2, 1)}`,
     effect: 1.2
   },
@@ -246,7 +246,7 @@ export const endgameMasteries = [
     id: 142,
     cost: 4,
     requirement: [131],
-    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `EP Gain is raised to the power of ${format(1.3, 2, 1)}`,
     effect: 1.3
   },
@@ -254,7 +254,7 @@ export const endgameMasteries = [
     id: 143,
     cost: 4,
     requirement: [131],
-    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `RM Gain is raised to the power of ${format(1.4, 2, 1)}`,
     effect: 1.4
   },
@@ -262,7 +262,7 @@ export const endgameMasteries = [
     id: 144,
     cost: 4,
     requirement: [131],
-    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `iM Gain is raised to the power of ${format(1.1, 2, 1)}`,
     effect: 1.1
   },
