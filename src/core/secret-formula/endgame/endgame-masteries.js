@@ -125,7 +125,7 @@ export const endgameMasteries = [
     id: 84,
     cost: 4,
     requirement: [71],
-    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
     description: `Reduce the Celestial Matter Softcap by ${formatPercents(0.1)}`,
     effect: 0.9
   },
