@@ -110,7 +110,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: `Reduce the Infinity Dimension Compression Magnitude by ${formatPercents(0.05)}`,
+    description: () => `Reduce the Infinity Dimension Compression Magnitude by ${formatPercents(0.05)}`,
     effect: 0.95
   },
   {
