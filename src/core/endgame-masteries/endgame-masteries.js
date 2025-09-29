@@ -89,7 +89,7 @@ export function respecEndgameMasteries() {
   GameCache.currentMasteryTree.invalidate();
 }
 
-export class EndgameMasteryState extends GameMechanicState {
+export class EndgameMasteriesState extends GameMechanicState {
   constructor(config, type) {
     super(config);
     this.type = type;
