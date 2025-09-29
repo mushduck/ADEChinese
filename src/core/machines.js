@@ -38,6 +38,7 @@ export const MachineHandler = {
   },
 
   get baseIMCap() {
+    if (Pelle.isDoomed) return 1.6e15;
     return (Math.pow(Math.clampMin(this.uncappedRM.log10() - 1000, 0), 2)) *
       (Math.pow(Math.clampMin(this.uncappedRM.log10() - 100000, 1), 0.2)) *
       (Math.pow(Math.clampMin(this.uncappedRM.log10() / 1000000000, 1), Math.log10(this.uncappedRM.log10()) / 7.5));
