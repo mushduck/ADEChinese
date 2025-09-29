@@ -818,6 +818,20 @@ window.player = {
       time: 10
     }
   },
+  endgameMasteries: {
+    skills: DC.D0,
+    maxSkills: DC.D0,
+    amBought: 0,
+    cpBought: 0,
+    dpBought: 0,
+    masteries: [],
+    shopMinimized: false,
+    preferredPaths: [[], 0],
+    presets: new Array(6).fill({
+      name: "",
+      masteries: "",
+    }),
+  },
   isGameEnd: false,
   tabNotifications: new Set(),
   triggeredTabNotificationBits: 0,
