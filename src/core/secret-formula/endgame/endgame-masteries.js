@@ -39,7 +39,7 @@ export const endgameMasteries = [
     cost: 2,
     requirement: [22],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `Start Endgames with ${formatInt(1000000)} Reality Machines`,
+    description: () => `Start Endgames with ${formatInt(1000000)} Reality Machines`,
     effect: 1000000
   },
   {
@@ -93,7 +93,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [61],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and your highest-ever Glyph Level`,
+    description: () => `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and your highest-ever Glyph Level`,
     effect: () => (1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)) * player.records.bestEndgame.glyphLevel,
     formatEffect: value => format(value, 2)
   },
@@ -118,7 +118,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: `Reduce the Time Dimension Compression Magnitude by ${formatPercents(0.05)}`,
+    description: () => `Reduce the Time Dimension Compression Magnitude by ${formatPercents(0.05)}`,
     effect: 0.95
   },
   {
@@ -126,7 +126,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: `Reduce the Celestial Matter Softcap by ${formatPercents(0.1)}`,
+    description: () => `Reduce the Celestial Matter Softcap by ${formatPercents(0.1)}`,
     effect: 0.9
   },
   {
@@ -134,7 +134,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [81],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `Delay the Infinity Challenge ${formatInt(8)} Reward based on Endgames`,
+    description: () => `Delay the Infinity Challenge ${formatInt(8)} Reward based on Endgames`,
     effect: () => player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
@@ -170,7 +170,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [91],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `Raise the Antimatter Exponent to the power of ${format(1.01, 2, 2)}`,
+    description: () => `Raise the Antimatter Exponent to the power of ${format(1.01, 2, 2)}`,
     effect: 1.01
   },
   {
@@ -178,7 +178,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [92],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `Raise the Infinity Power Conversion Rate to the power of ${format(1.01, 2, 2)}`,
+    description: () => `Raise the Infinity Power Conversion Rate to the power of ${format(1.01, 2, 2)}`,
     effect: 1.01
   },
   {
@@ -194,7 +194,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [94],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `Increase the CM conversion exponent by ${formatPercents(0.1)}`,
+    description: () => `Increase the CM conversion exponent by ${formatPercents(0.1)}`,
     effect: 1.1
   },
   {
