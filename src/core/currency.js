@@ -510,3 +510,27 @@ Currency.doomedParticles = new class extends DecimalCurrency {
     player.endgame.doomedParticles = newValue;
   }
 }();
+
+Currency.endgameSkills = new class extends DecimalCurrency {
+  get value() { return player.endgameMasteries.skills; }
+  set value(value) {
+    player.endgameMasteries.skills = value;
+    player.endgameMasteries.maxSkills = value.plus(EndgameSkills.calculateEndgameMasteriesCost());
+  }
+
+  get max() { return player.endgameMasteries.maxSkills; }
+
+  add(amount) {
+    super.add(amount);
+    player.endgameMasteries.maxSkills = player.endgameMasteries.maxSkills.plus(amount);
+  }
+
+  reset() {
+    respecEndgameMasteries(true);
+    super.reset();
+    EndgameSkillPurchaseType.am.reset();
+    EndgameSkillPurchaseType.cp.reset();
+    EndgameSkillPurchaseType.dp.reset();
+    player.endgameMastery.maxSkills = this.startingValue;
+  }
+}();
