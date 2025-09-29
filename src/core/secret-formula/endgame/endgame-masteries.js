@@ -314,8 +314,8 @@ export const endgameMasteries = [
   {
     id: 181,
     cost: 20,
-    requirement: [171],
-      //() => Currency.endgameSkills.max >= 100],
+    requirement: [171,
+      () => Currency.endgameSkills.max.gte(100)],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Unlock Endgame Upgrades"
   }
