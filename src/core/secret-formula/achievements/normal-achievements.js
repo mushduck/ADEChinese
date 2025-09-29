@@ -1439,7 +1439,9 @@ export const normalAchievements = [
   {
     id: 194,
     name: "At Long Last",
-    description: "Regain all Achievements in Pelle. (NYI)",
+    description: "Regain all Achievements in Pelle.",
+    checkRequirement: PelleAchievementUpgrade.all.filter(u => u.isBought).length >= 32,
+    checkEvent: GAME.EVENT.GAME_TICK_AFTER,
     get reward() {
       return `You can equip up to ${formatInt(2)} Effarig and Reality Glyphs each.`;
     }
