@@ -1,4 +1,4 @@
-import { DC } from "../../../constants";
+import { DC } from "../../constants";
 
 export const endgameMasteries = [
   {
