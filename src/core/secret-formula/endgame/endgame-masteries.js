@@ -78,7 +78,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [42],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start Endgames with all Ra Level ${formatInt(1) Rewards`
+    description: () => `Start Endgames with all Ra Level ${formatInt(1)} Rewards`
   },
   {
     id: 61,
@@ -93,7 +93,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [61],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `Start with ${formatInt(5) of each basic Glyph on Endgame at ${formatInt(4) effects, ${formatPercents(1)} rarity, and level based on Endgames and your highest-ever Glyph Level`,
+    description: `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and your highest-ever Glyph Level`,
     effect: () => (1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)) * player.records.bestEndgame.glyphLevel,
     formatEffect: value => format(value, 2)
   },
