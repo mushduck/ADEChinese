@@ -831,6 +831,7 @@ window.player = {
       name: "",
       masteries: "",
     }),
+    permanentMasteries: [],
   },
   isGameEnd: false,
   tabNotifications: new Set(),
