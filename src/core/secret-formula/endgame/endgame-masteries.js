@@ -310,13 +310,5 @@ export const endgameMasteries = [
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Momentum increases ${formatInt(10)} times faster`,
     effect: 10
-  },
-  {
-    id: 181,
-    cost: 20,
-    requirement: [171,
-      () => Currency.endgameSkills.max.gte(100)],
-    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Unlock Endgame Upgrades"
   }
 ];
