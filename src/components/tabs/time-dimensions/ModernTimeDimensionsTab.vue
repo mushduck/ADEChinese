@@ -93,7 +93,7 @@ export default {
           which raises all Time Dimension Multipliers to the power of
           <span class="c-time-dim-compression-description__accent">{{ format(timeDimOverflow, 2, 3) }}</span>
           while above
-          <span>{{ format(timeDimStart, 2, 1) }}</span>.
+          <span>{{ formatPostBreak(timeDimStart, 2, 1) }}</span>.
         </span>
       </p>
     </div>
