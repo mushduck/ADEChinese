@@ -93,7 +93,7 @@ EndgameMastery.allConnections = (function() {
 
     [EM(161), EM(171)],
 
-    [EM(171), EM(181)]
+    [EM(171), EndgameMastery.endgameUpgrades]
   ].map(props => new EndgameMasteryConnection(props[0], props[1], props[2]));
 
   return connections;
