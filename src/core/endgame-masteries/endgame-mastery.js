@@ -1,4 +1,4 @@
-import { EndgameMasteryState } from "./endgame-masteries";
+import { EndgameMasteriesState } from "./endgame-masteries";
 
 export const EndgameMasteries = {};
 
