@@ -84,7 +84,7 @@ export class EndgameMasteryState extends EndgameMasteriesState {
 }
 
 EndgameMasteryState.masteries = mapGameData(
-  GameDatabase.endgame.endgameMasteries,
+  GameDatabase.endgame.masteries,
   config => new EndgameMasteryState(config)
 );
 
