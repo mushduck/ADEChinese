@@ -50,7 +50,7 @@ PermanentEndgameMasteryState.masteries = mapGameData(
 /**
  * @type {PermanentEndgameMasteryState}
  */
-EndgameMastery.permanent = PermanentEndgameMasteryState.masteries[1];
+EndgameMastery.endgameUpgrades = PermanentEndgameMasteryState.masteries[1];
 
 EndgameMastery.boughtEndgameUpgradesEM = function() {
   return player.endgame.permanentMasteries.map(id => PermanentEndgameMasteryState.masteries[id]);
