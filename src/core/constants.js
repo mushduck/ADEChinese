@@ -441,6 +441,10 @@ window.TS_REQUIREMENT_TYPE = {
   DIMENSION_PATH: 2,
 };
 
+window.ENDGAME_MASTERY_TYPE = {
+  NORMAL: 0,
+};
+
 window.EM_REQUIREMENT_TYPE = {
   AT_LEAST_ONE: 0,
   ALL: 1,
