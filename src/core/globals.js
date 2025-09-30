@@ -65,6 +65,7 @@ export * from "./dimensions/time-dimension";
 export * from "./dimensions/celestial-dimension";
 
 export * from "./time-studies";
+export * from "./endgame-masteries";
 
 export * from "./dimboost";
 export * from "./sacrifice";
