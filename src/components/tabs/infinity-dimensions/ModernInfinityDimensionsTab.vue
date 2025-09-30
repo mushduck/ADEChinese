@@ -132,7 +132,7 @@ export default {
           which raises all Infinity Dimension Multipliers to the power of
           <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow, 2, 3) }}</span>
           while above
-          <span>{{ format(infinityDimStart, 2, 1) }}</span>.
+          <span>{{ formatPostBreak(infinityDimStart, 2, 1) }}</span>.
         </span>
       </p>
     </div>
