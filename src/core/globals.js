@@ -79,6 +79,7 @@ export * from "./eternity-challenge";
 export * from "./reality";
 export * from "./replicanti";
 export * from "./time-theorems";
+export * from "./endgame-skills";
 export * from "./reality-upgrades";
 export * from "./imaginary-upgrades";
 export * from "./perks";
