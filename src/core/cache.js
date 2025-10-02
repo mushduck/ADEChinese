@@ -72,6 +72,11 @@ export const GameCache = {
 
   currentStudyTree: new Lazy(() => new TimeStudyTree(TimeStudyTree.currentStudies)),
 
+  endgameMasteries: new Lazy(() => EndgameMasteryState.masteries
+    .map(s => player.endgameMasteries.masteries.includes(s.id))),
+
+  currentMasteryTree: new Lazy(() => new EndgameMasteryTree(EndgameMasteryTree.currentMasteries)),
+
   achievementPeriod: new Lazy(() => TimeSpan.fromMinutes(30 - Effects.sum(
     Perk.achievementGroup1,
     Perk.achievementGroup2,
