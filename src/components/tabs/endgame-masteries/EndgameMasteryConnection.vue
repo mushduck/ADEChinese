@@ -41,7 +41,7 @@ export default {
           pathClass = pathClassOf(to) || pathClassOf(from);
           break;
         case ENDGAME_MASTERY_TYPE.PERMANENT:
-          pathClass = "o-time-study-connection--permanent";
+          pathClass = "o-endgame-mastery-connection--permanent";
           break;
       }
 
