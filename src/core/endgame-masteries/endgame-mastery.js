@@ -113,7 +113,7 @@ EndgameMastery.preferredPaths = {
       const options = [1, 2, 3, 4];
       player.endgameMasteries.preferredPaths[0] = value.filter(id => options.includes(id));
     },
-    get studies() {
+    get masteries() {
       return player.endgameMasteries.preferredPaths[0].flatMap(path => EndgameMasteries.paths[path]);
     },
     get usePriority() {
@@ -128,7 +128,7 @@ EndgameMastery.preferredPaths = {
       const options = [5, 6, 7, 8];
       player.endgameMasteries.preferredPaths[1] = value.filter(id => options.includes(id));
     },
-    get studies() {
+    get masteries() {
       return player.endgameMasteries.preferredPaths[1].flatMap(path => EndgameMasteries.paths[path]);
     },
     get usePriority() {
