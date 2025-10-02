@@ -22,7 +22,7 @@ export function buyMasteriesUntil(id) {
   if (id < 81) return masteryArray;
 
   // Priority for behavior when buying in the Compression split; we follow only the first applicable entry below:
-  // - If we're buying a mastery within the split, we first buy just the requested path up to the requested study.
+  // - If we're buying a mastery within the split, we first buy just the requested path up to the requested mastery.
   //   (stops buying)
   // - If we can't buy any additional paths or have 4 paths available, we attempt to buy everything here, prioritizing
   //   preferred paths. With less than 4 paths available, this only purchases the rest of any unfinished paths
@@ -49,7 +49,7 @@ export function buyMasteriesUntil(id) {
   if (id < 141) return masteryArray;
 
   // Priority for behavior when buying in the Compression split; we follow only the first applicable entry below:
-  // - If we're buying a mastery within the split, we first buy just the requested path up to the requested study.
+  // - If we're buying a mastery within the split, we first buy just the requested path up to the requested mastery.
   //   (stops buying)
   // - If we can't buy any additional paths or have 4 paths available, we attempt to buy everything here, prioritizing
   //   preferred paths. With less than 4 paths available, this only purchases the rest of any unfinished paths
