@@ -816,7 +816,8 @@ window.player = {
     compressionMagnitude: {
       infinity: 10,
       time: 10
-    }
+    },
+    respec: false
   },
   endgameMasteries: {
     skills: DC.D0,
