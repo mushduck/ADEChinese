@@ -561,7 +561,7 @@ export const tabs = [
         key: "endgame-masteries",
         name: "Endgame Masteries",
         symbol: "<i class='fas fa-trophy'></i>",
-        component: "ExpansionMasteriesTab",
+        component: "EndgameMasteriesTab",
         id: 4,
         hidable: true,
       }
