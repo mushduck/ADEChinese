@@ -1884,6 +1884,12 @@ br {
   font-size: 1rem;
 }
 
+.o-primary-btn--endgame-mastery-options {
+  width: 15rem;
+  height: 4rem;
+  font-size: 1rem;
+}
+
 .o-primary-btn--respec-active {
   background-color: var(--color-eternity) !important;
 }
@@ -2273,6 +2279,10 @@ br {
 }
 
 .l-hint-text--time-study {
+  top: -1.95rem;
+}
+
+.l-hint-text--endgame-mastery {
   top: -1.95rem;
 }
 
