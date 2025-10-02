@@ -29,7 +29,7 @@ export class PermanentEndgameMasteryState extends EndgameMasteriesState {
   purchase(quiet = false) {
     if (this.isBought || !this.canBeBought) return false;
     if (this.id === 1) {
-      // ID 1 is the endgame upgrades unlock study
+      // ID 1 is the endgame upgrades unlock mastery
       if (!quiet) {
         //Tab.endgame.upgrades.show();
       }
