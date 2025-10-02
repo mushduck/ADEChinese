@@ -556,6 +556,14 @@ export const tabs = [
         component: "ExpansionPacksTab",
         id: 3,
         hidable: true,
+      },
+      {
+        key: "endgame-masteries",
+        name: "Endgame Masteries",
+        symbol: "<i class='fas fa-trophy'></i>",
+        component: "ExpansionMasteriesTab",
+        id: 4,
+        hidable: true,
       }
     ],
   }
