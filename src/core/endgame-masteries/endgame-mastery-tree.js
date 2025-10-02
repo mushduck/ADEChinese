@@ -38,7 +38,7 @@ export class EndgameMasteryTree {
         }
         break;
       case "object":
-        // Input parameter is an array of time study objects
+        // Input parameter is an array of endgame mastery objects
         this.attemptBuyArray([...masteries], false);
         this.selectedMasteries = [...masteries];
         break;
