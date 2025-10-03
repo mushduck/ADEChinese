@@ -1,5 +1,5 @@
 <script>
-//import { ForceBoughtState } from "./StudyStringPreview";
+import { ForceBoughtState } from "./MasteryStringPreview";
 
 export default {
   name: "PseudoEndgameMasteryConnection",
@@ -60,7 +60,7 @@ export default {
   methods: {
     update() {
       this.isOverridden = this.setup.connection.isOverridden;
-      //this.isBought = ForceBoughtState.getState(this.forceIsBought, this.setup.isBought);
+      this.isBought = ForceBoughtState.getState(this.forceIsBought, this.setup.isBought);
     },
     percents(value) {
       return `${value * 100}%`;
