@@ -29,7 +29,7 @@ export default {
     PseudoEndgameMasteryConnection,
   },
   props: {
-    disregardCurrentStudies: {
+    disregardCurrentMasteries: {
       type: Boolean,
       default: false
     },
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
       layoutType: MASTERY_TREE_LAYOUT_TYPE.NORMAL,
-      renderedStudyCount: 0,
+      renderedMasteryCount: 0,
       delayTimer: 0,
     };
   },
