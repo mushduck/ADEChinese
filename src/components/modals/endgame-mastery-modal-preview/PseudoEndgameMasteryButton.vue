@@ -1,5 +1,5 @@
 <script>
-//import { ForceBoughtState } from "./MasteryStringPreview";
+import { ForceBoughtState } from "./MasteryStringPreview";
 
 export default {
   name: "PseudoEndgameMasteryButton",
@@ -74,7 +74,7 @@ export default {
   methods: {
     update() {
       const mastery = this.mastery;
-      //this.isBought = ForceBoughtState.getState(this.forceIsBought, mastery.isBought);
+      this.isBought = ForceBoughtState.getState(this.forceIsBought, mastery.isBought);
     },
   }
 };
