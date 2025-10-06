@@ -30,7 +30,7 @@ export default {
     },
     requirement() {
       if (this.id === 1) {
-        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.permanent.totalEndgameSkillRequirement)}
+        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.endgameUpgrades.totalEndgameSkillRequirement)}
           total Endgame Skills`;
       }
       return "";
