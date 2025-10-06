@@ -296,9 +296,17 @@ export const Glyphs = {
     if (["effarig", "reality"].includes(glyph.type)) {
       sameSpecialTypeIndex = this.active.findIndex(x => x && x.type === glyph.type);
     }
+    let maxSpecialGlyph = 1;
+    if (Achievement(194).isUnlocked) {
+      maxSpecialGlyph = 2;
+    }
+    let specialGlyphEquipped = 0;
+    if (["effarig", "reality"].includes(glyph.type)) {
+      specialGlyphEquipped = player.reality.glyphs.active.filter(g => g.type === glyph.type).length;
+    }
     if (this.active[targetSlot] === null) {
-      if (sameSpecialTypeIndex >= 0) {
-        Modal.message.show(`You may only have one ${glyph.type.capitalize()} Glyph equipped!`,
+      if (sameSpecialTypeIndex >= 0 && specialGlyphEquipped >= maxSpecialGlyph) {
+        Modal.message.show(`You may only have ${formatInt(maxSpecialGlyph)} ${glyph.type.capitalize()} Glyph equipped!`,
           { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
         return;
       }
@@ -314,8 +322,8 @@ export const Glyphs = {
       this.validate();
     } else {
       // We can only replace effarig/reality glyph
-      if (sameSpecialTypeIndex >= 0 && sameSpecialTypeIndex !== targetSlot) {
-        Modal.message.show(`You may only have one ${glyph.type.capitalize()} Glyph equipped!`,
+      if (sameSpecialTypeIndex >= 0 && sameSpecialTypeIndex !== targetSlot && specialGlyphEquipped >= maxSpecialGlyph) {
+        Modal.message.show(`You may only have ${formatInt(maxSpecialGlyph)} ${glyph.type.capitalize()} Glyph equipped!`,
           { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
         return;
       }
