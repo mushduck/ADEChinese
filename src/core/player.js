@@ -871,7 +871,7 @@ window.player = {
     newUI: true,
     offlineProgress: true,
     loadBackupWithoutOffline: false,
-    automaticTabSwitching: true,
+    automaticTabSwitching: false,
     respecIntoProtected: false,
     offlineTicks: 1e5,
     hibernationCatchup: true,
