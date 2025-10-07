@@ -37,7 +37,8 @@ window.GlobalErrorHandler = {
   },
   crash(message) {
     if (window.GameUI !== undefined && GameUI.initialized) {
-      Modal.message.show(`${message}<br>Check the console for more details`, {}, 3);
+      Modal.message.show(`Huh. Looks like whatever you just did crashed the game. All good, just send this message to me, Supersonic Seven, in the Discord, along with whatever you did to trigger it:
+      "${message}".<br>Thanks for playing AD: Endgame! We'll fix your issue as soon as we can!`, {}, 3);
     }
     // eslint-disable-next-line no-debugger
     debugger;
