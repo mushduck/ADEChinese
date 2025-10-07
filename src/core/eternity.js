@@ -235,9 +235,15 @@ function askEternityConfirmation() {
 }
 
 export function gainedEternities() {
-  return Pelle.isDisabled("eternityMults")
-    ? new Decimal(1)
-    : new Decimal(getAdjustedGlyphEffect("timeetermult"))
+  if (Pelle.isDoomed) {
+    let pelleEternities = new Decimal(1);
+    if (PelleAchievementUpgrade.achievement102.isBought) pelleEternities = pelleEternities.timesEffectsOf(Achievement(102));
+    if (PelleAchievementUpgrade.achievement113.isBought) pelleEternities = pelleEternities.timesEffectsOf(Achievement(113));
+    if (PelleRealityUpgrade.eternalIntensifier.isBought) pelleEternities = pelleEternities.timesEffectsOf(RealityUpgrade(3));
+    //Leave open for future Celestial reward enabling
+    return pelleEternities;
+  }
+  return new Decimal(getAdjustedGlyphEffect("timeetermult"))
       .timesEffectsOf(RealityUpgrade(3),Achievement(102),Achievement(113))
       .pow(AlchemyResource.eternity.effectValue);
 }
