@@ -139,7 +139,20 @@ export function totalReplicantiSpeedMult(overCap) {
   totalMult = totalMult.times(PelleRifts.decay.effectValue);
   totalMult = totalMult.times(Pelle.specialGlyphEffect.replication);
   totalMult = totalMult.times(ShopPurchase.replicantiPurchases.currentMult);
-  if (Pelle.isDisabled("replicantiIntervalMult")) return totalMult;
+  if (Pelle.isDisabled("replicantiIntervalMult")) {
+    let pelleRep = DC.D1;
+    if (PelleAchievementUpgrade.achievement81.isBought) pelleRep = pelleRep.times(Effects.product(Achievement(81)));
+    if (PelleDestructionUpgrade.timestudy62.isBought) pelleRep = pelleRep.times(Effects.product(TimeStudy(62)));
+    if (PelleDestructionUpgrade.timestudy213.isBought) pelleRep = pelleRep.times(Effects.product(TimeStudy(213)));
+    if (PelleRealityUpgrade.replicativeAmplifier.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(2)));
+    if (PelleRealityUpgrade.cosmicallyDuplicate.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(6)));
+    if (PelleRealityUpgrade.replicativeRapidity.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(23)));
+    if (PelleDestructionUpgrade.timestudy132.isBought) pelleRep = pelleRep.times(Perk.studyPassive.isBought ? 3 : 1.5);
+    if (PelleAchievementUpgrade.achievement134.isBought && !overCap) pelleRep = pelleRep.times(2);
+    //Leave space open for upcoming Celestial Reward Enabling
+    totalMult = totalMult.times(pelleRep);
+    return totalMult;
+  }
 
   const preCelestialEffects = Effects.product(
     Achievement(81),
