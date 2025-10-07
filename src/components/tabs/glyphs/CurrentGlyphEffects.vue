@@ -37,11 +37,13 @@ export default {
     uniqueGlyphText() {
       if (!this.hasEffarig && !this.hasReality) return "";
       const uniqueGlyphs = [];
+      const maxSpecialGlyphs = 1;
+      if (Achievement(194).isUnlocked) maxSpecialGlyphs = 2;
       if (this.hasEffarig) uniqueGlyphs.push(
         `<span style="color: ${GlyphAppearanceHandler.getBorderColor("effarig")};">Effarig</span>`);
       if (this.hasReality) uniqueGlyphs.push(
         `<span style="animation: a-reality-glyph-description-cycle 10s infinite;">Reality</span>`);
-      return `You cannot have more than one ${uniqueGlyphs.join(" or ")}
+      return `You cannot have more than ${formatInt(maxSpecialGlyphs)} ${uniqueGlyphs.join(" or ")}
         Glyph equipped${uniqueGlyphs.length > 1 ? " each." : "."}`;
     },
     noEffects() {
