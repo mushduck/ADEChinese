@@ -203,6 +203,7 @@ export const Pelle = {
     if (!PelleAchievementUpgrade.achievement92.isBought) remainingAchs.push(92);
     if (!PelleAchievementUpgrade.achievement93.isBought) remainingAchs.push(93);
     if (!PelleAchievementUpgrade.achievement95.isBought) remainingAchs.push(95);
+    if (!PelleAchievementUpgrade.achievement102.isBought) remainingAchs.push(102);
     if (!PelleAchievementUpgrade.achievement103.isBought) remainingAchs.push(103);
     if (!PelleAchievementUpgrade.achievement104.isBought) remainingAchs.push(104);
     if (!PelleAchievementUpgrade.achievement111.isBought) remainingAchs.push(111);
