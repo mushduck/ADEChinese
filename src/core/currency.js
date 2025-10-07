@@ -238,11 +238,11 @@ Currency.antimatter = new class extends DecimalCurrency {
 
   get startingValue() {
     if (Pelle.isDoomed) {
-      if (PelleAchievementUpgrade.achievement78.isBought) return Effects.max(Achievement(78)).toDecimal();
-      if (PelleAchievementUpgrade.achievement55.isBought) return Effects.max(Achievement(55)).toDecimal();
-      if (PelleAchievementUpgrade.achievement54.isBought) return Effects.max(Achievement(54)).toDecimal();
-      if (PelleAchievementUpgrade.achievement37.isBought) return Effects.max(Achievement(37)).toDecimal();
-      return Effects.max(Achievement(21)).toDecimal();
+      if (PelleAchievementUpgrade.achievement78.isBought) return Effects.max(10, Achievement(78)).toDecimal();
+      if (PelleAchievementUpgrade.achievement55.isBought) return Effects.max(10, Achievement(55)).toDecimal();
+      if (PelleAchievementUpgrade.achievement54.isBought) return Effects.max(10, Achievement(54)).toDecimal();
+      if (PelleAchievementUpgrade.achievement37.isBought) return Effects.max(10, Achievement(37)).toDecimal();
+      return Effects.max(10, Achievement(21)).toDecimal();
     }
     return Effects.max(
       10,
@@ -293,7 +293,7 @@ Currency.infinityPoints = new class extends DecimalCurrency {
 
   get startingValue() {
     if (Pelle.isDisabled()) {
-      if (PelleAchievementUpgrade.achievement104.isBought) return Effects.max(Achievement(104)).toDecimal();
+      if (PelleAchievementUpgrade.achievement104.isBought) return Effects.max(0, Achievement(104)).toDecimal();
       return new Decimal(0);
     }
     return Effects.max(
