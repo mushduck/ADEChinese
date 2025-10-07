@@ -188,8 +188,10 @@ export const Pelle = {
   },
 
   get disabledAchievements() {
-    return [164, 156, 143, 142, 141, 137, 134, 133, 132, 131, 125, 118, 117, 116, 113, 111, 104, 103, 95, 93, 92,
-      91, 87, 85, 81, 78, 76, 74, 65, 55, 54, 37];
+    let remainingAchs = [164, 156, 143, 142, 141, 137, 134, 133, 132, 131, 125, 118, 117, 116, 113, 111, 104, 103, 95, 93, 92,
+      91, 87, 85, 81, 78, 76, 74, 65, 55, 54];
+    if (!PelleAchievementUpgrade.achievement37.isBought) remainingAchs.push(37);
+    return remainingAchs;
   },
 
   get uselessInfinityUpgrades() {
