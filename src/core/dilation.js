@@ -119,11 +119,16 @@ export function getTachyonGalaxyMult(thresholdUpgrade) {
 
 export function getDilationGainPerSecond() {
   if (Pelle.isDoomed) {
+    let pelleExtraDT = new Decimal(1);
+    if (PelleAchievementUpgrade.achievement132.isBought) pelleExtraDT = pelleExtraDT.timesEffectsOf(Achievement(132));
+    if (PelleAchievementUpgrade.achievement137.isBought) pelleExtraDT = pelleExtraDT.timesEffectsOf(Achievement(137));
+    //Leave open for future Celestial reward reenabling
+    if (!PelleDestructionUpgrade.disableDTNerf.isBought) pelleExtraDT = pelleExtraDT.div(1e5);
     const tachyonEffect = Currency.tachyonParticles.value.pow(PelleRifts.paradox.milestones[1].effectOrDefault(1));
     return new Decimal(tachyonEffect)
       .timesEffectsOf(DilationUpgrade.dtGain, DilationUpgrade.dtGainPelle, DilationUpgrade.flatDilationMult)
       .times(ShopPurchase.dilatedTimePurchases.currentMult ** 0.5)
-      .times(Pelle.specialGlyphEffect.dilation).div(1e5);
+      .times(Pelle.specialGlyphEffect.dilation).times(pelleExtraDT);
   }
   let dtRate = new Decimal(Currency.tachyonParticles.value)
     .timesEffectsOf(
