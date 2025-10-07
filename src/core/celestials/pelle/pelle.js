@@ -225,7 +225,11 @@ export const Pelle = {
   },
 
   get uselessInfinityUpgrades() {
-    return ["passiveGen", "ipMult", "infinitiedGeneration"];
+    let remainingInfUpgs = [];
+    if (!PelleDestructionUpgrade.passiveIPGen.isBought) remainingInfUpgs.push("passiveGen");
+    if (!PelleDestructionUpgrade.passiveInfGen.isBought) remainingInfUpgs.push("infinitiedGeneration");
+    if (!PelleDestructionUpgrade.x2IPUpgrade.isBought) remainingInfUpgs.push("ipMult");
+    return remainingInfUpgs;
   },
 
   get uselessTimeStudies() {
