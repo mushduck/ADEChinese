@@ -190,7 +190,7 @@ export function softReset(tempBulk, forcedADReset = false, forcedAMReset = false
   }
   skipResetsIfPossible(enteringAntimatterChallenge);
   const canKeepAntimatter = Pelle.isDoomed
-    ? PelleUpgrade.dimBoostResetsNothing.canBeApplied
+    ? (PelleUpgrade.dimBoostResetsNothing.canBeApplied || PelleAchievementUpgrade.achievement111.isBought)
     : (Achievement(111).isUnlocked || Perk.antimatterNoReset.canBeApplied);
   if (!forcedAMReset && canKeepAntimatter) {
     Currency.antimatter.bumpTo(Currency.antimatter.startingValue);
