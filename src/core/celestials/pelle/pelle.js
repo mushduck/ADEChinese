@@ -233,7 +233,22 @@ export const Pelle = {
   },
 
   get uselessTimeStudies() {
-    return [32, 33, 41, 51, 61, 62, 121, 122, 123, 141, 142, 143, 192, 213];
+    let remainingTSs = [];
+    if (!PelleDestructionUpgrade.timestudy32.isBought) remainingTSs.push(32);
+    if (!PelleDestructionUpgrade.timestudy33.isBought) remainingTSs.push(33);
+    if (!PelleDestructionUpgrade.timestudy41.isBought) remainingTSs.push(41);
+    if (!PelleDestructionUpgrade.timestudy51.isBought) remainingTSs.push(51);
+    if (!PelleDestructionUpgrade.timestudy61.isBought) remainingTSs.push(61);
+    if (!PelleDestructionUpgrade.timestudy62.isBought) remainingTSs.push(62);
+    if (!PelleDestructionUpgrade.timestudy121.isBought) remainingTSs.push(121);
+    if (!PelleDestructionUpgrade.timestudy122.isBought) remainingTSs.push(122);
+    if (!PelleDestructionUpgrade.timestudy123.isBought) remainingTSs.push(123);
+    if (!PelleDestructionUpgrade.timestudy141.isBought) remainingTSs.push(141);
+    if (!PelleDestructionUpgrade.timestudy142.isBought) remainingTSs.push(142);
+    if (!PelleDestructionUpgrade.timestudy143.isBought) remainingTSs.push(143);
+    if (!PelleDestructionUpgrade.timestudy192.isBought) remainingTSs.push(192);
+    if (!PelleDestructionUpgrade.timestudy213.isBought) remainingTSs.push(213);
+    return remainingTSs;
   },
 
   get disabledRUPGs() {
