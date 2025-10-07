@@ -43,7 +43,7 @@ export default {
       if (this.hasReality) uniqueGlyphs.push(
         `<span style="animation: a-reality-glyph-description-cycle 10s infinite;">Reality</span>`);
       return `You cannot have more than ${formatInt(this.maxSpecialGlyphs)} ${uniqueGlyphs.join(" or ")}
-        Glyph equipped${uniqueGlyphs.length > 1 ? " each." : "."}`;
+        ${quantifyInt("Glyph", this.maxSpecialGlyphs)} equipped${uniqueGlyphs.length > 1 ? " each." : "."}`;
     },
     noEffects() {
       return !this.effects.length;
