@@ -277,8 +277,20 @@ export function addEndgameTime(time, realTime, cp, dp, endgames) {
 }
 
 export function gainedInfinities() {
-  if (EternityChallenge(4).isRunning || Pelle.isDisabled("InfinitiedMults")) {
+  if (EternityChallenge(4).isRunning) {
     return DC.D1;
+  }
+  if (Pelle.isDoomed) {
+    let pelleInfs = new Decimal(1);
+    if (PelleAchievementUpgrade.achievement87.isBought) pelleInfs = Effects.max(1, Achievement(87)).toDecimal();
+    if (PelleDestructionUpgrade.timestudy32.isBought) pelleInfs = pelleInfs.timesEffectsOf(TimeStudy(32));
+    if (PelleRealityUpgrade.boundlessAmplifier.isBought) pelleInfs = pelleInfs.timesEffectsOf(RealityUpgrade(5));
+    if (PelleRealityUpgrade.innumerablyConstruct.isBought) pelleInfs = pelleInfs.timesEffectsOf(RealityUpgrade(7));
+    if (PelleAchievementUpgrade.achievement131.isBought) pelleInfs = pelleInfs.timesEffectsOf(Achievement(131).effects.infinitiesGain);
+    if (PelleDestructionUpgrade.timestudy191.isBought) pelleInfs = pelleInfs.timesEffectsOf(TimeStudy(191).effects.infinitiesGain);
+    if (PelleAchievementUpgrade.achievement164.isBought) pelleInfs = pelleInfs.timesEffectsOf(Achievement(164));
+    //Leave this open for future Celestial effect applications
+    return pelleInfs;
   }
   let infGain = Effects.max(
     1,
