@@ -147,7 +147,7 @@ export function totalReplicantiSpeedMult(overCap) {
     if (PelleRealityUpgrade.replicativeAmplifier.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(2)));
     if (PelleRealityUpgrade.cosmicallyDuplicate.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(6)));
     if (PelleRealityUpgrade.replicativeRapidity.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(23)));
-    if (PelleDestructionUpgrade.timestudy132.isBought) pelleRep = pelleRep.times(Perk.studyPassive.isBought ? 3 : 1.5);
+    if (PelleDestructionUpgrade.timestudy132.isBought) pelleRep = pelleRep.times(3);
     if (PelleAchievementUpgrade.achievement134.isBought && !overCap) pelleRep = pelleRep.times(2);
     //Leave space open for upcoming Celestial Reward Enabling
     totalMult = totalMult.times(pelleRep);
