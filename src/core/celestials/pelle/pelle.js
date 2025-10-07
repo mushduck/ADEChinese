@@ -188,9 +188,39 @@ export const Pelle = {
   },
 
   get disabledAchievements() {
-    let remainingAchs = [164, 156, 143, 142, 141, 137, 134, 133, 132, 131, 125, 118, 117, 116, 113, 111, 104, 103, 95, 93, 92,
-      91, 87, 85, 81, 78, 76, 74, 65, 55, 54];
+    let remainingAchs = [];
     if (!PelleAchievementUpgrade.achievement37.isBought) remainingAchs.push(37);
+    if (!PelleAchievementUpgrade.achievement54.isBought) remainingAchs.push(54);
+    if (!PelleAchievementUpgrade.achievement55.isBought) remainingAchs.push(55);
+    if (!PelleAchievementUpgrade.achievement65.isBought) remainingAchs.push(65);
+    if (!PelleAchievementUpgrade.achievement74.isBought) remainingAchs.push(74);
+    if (!PelleAchievementUpgrade.achievement76.isBought) remainingAchs.push(76);
+    if (!PelleAchievementUpgrade.achievement78.isBought) remainingAchs.push(78);
+    if (!PelleAchievementUpgrade.achievement81.isBought) remainingAchs.push(81);
+    if (!PelleAchievementUpgrade.achievement85.isBought) remainingAchs.push(85);
+    if (!PelleAchievementUpgrade.achievement87.isBought) remainingAchs.push(87);
+    if (!PelleAchievementUpgrade.achievement91.isBought) remainingAchs.push(91);
+    if (!PelleAchievementUpgrade.achievement92.isBought) remainingAchs.push(92);
+    if (!PelleAchievementUpgrade.achievement93.isBought) remainingAchs.push(93);
+    if (!PelleAchievementUpgrade.achievement95.isBought) remainingAchs.push(95);
+    if (!PelleAchievementUpgrade.achievement103.isBought) remainingAchs.push(103);
+    if (!PelleAchievementUpgrade.achievement104.isBought) remainingAchs.push(104);
+    if (!PelleAchievementUpgrade.achievement111.isBought) remainingAchs.push(111);
+    if (!PelleAchievementUpgrade.achievement113.isBought) remainingAchs.push(113);
+    if (!PelleAchievementUpgrade.achievement116.isBought) remainingAchs.push(116);
+    if (!PelleAchievementUpgrade.achievement117.isBought) remainingAchs.push(117);
+    if (!PelleAchievementUpgrade.achievement118.isBought) remainingAchs.push(118);
+    if (!PelleAchievementUpgrade.achievement125.isBought) remainingAchs.push(125);
+    if (!PelleAchievementUpgrade.achievement131.isBought) remainingAchs.push(131);
+    if (!PelleAchievementUpgrade.achievement132.isBought) remainingAchs.push(132);
+    if (!PelleAchievementUpgrade.achievement133.isBought) remainingAchs.push(133);
+    if (!PelleAchievementUpgrade.achievement134.isBought) remainingAchs.push(134);
+    if (!PelleAchievementUpgrade.achievement137.isBought) remainingAchs.push(137);
+    if (!PelleAchievementUpgrade.achievement141.isBought) remainingAchs.push(141);
+    if (!PelleAchievementUpgrade.achievement142.isBought) remainingAchs.push(142);
+    if (!PelleAchievementUpgrade.achievement143.isBought) remainingAchs.push(143);
+    if (!PelleAchievementUpgrade.achievement156.isBought) remainingAchs.push(156);
+    if (!PelleAchievementUpgrade.achievement164.isBought) remainingAchs.push(164);
     return remainingAchs;
   },
 
