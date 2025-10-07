@@ -239,7 +239,7 @@ export function gainedEternities() {
     let pelleEternities = new Decimal(1);
     if (PelleAchievementUpgrade.achievement102.isBought) pelleEternities = pelleEternities.timesEffectsOf(Achievement(102));
     if (PelleAchievementUpgrade.achievement113.isBought) pelleEternities = pelleEternities.timesEffectsOf(Achievement(113));
-    if (PelleRealityUpgrade.eternalIntensifier.isBought) pelleEternities = pelleEternities.timesEffectsOf(RealityUpgrade(3));
+    if (PelleRealityUpgrade.eternalAmplifier.isBought) pelleEternities = pelleEternities.timesEffectsOf(RealityUpgrade(3));
     //Leave open for future Celestial reward enabling
     return pelleEternities;
   }
