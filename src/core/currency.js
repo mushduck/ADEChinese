@@ -292,7 +292,10 @@ Currency.infinityPoints = new class extends DecimalCurrency {
   }
 
   get startingValue() {
-    if (Pelle.isDisabled()) return new Decimal(0);
+    if (Pelle.isDisabled()) {
+      if (PelleAchievementUpgrade.achievement104.isBought) return Effects.max(Achievement(104)).toDecimal();
+      return new Decimal(0);
+    }
     return Effects.max(
       0,
       Perk.startIP1,
