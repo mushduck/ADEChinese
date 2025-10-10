@@ -2716,8 +2716,8 @@ export const news = [
   },
   {
     id: "aem411",
-    text:
-      `I've come to make an announcement ${player.username} is a bitch-ass motherfucker he pissed on my fucking wife.
+    get text() {
+      return `I've come to make an announcement ${player.username} is a bitch-ass motherfucker he pissed on my fucking wife.
       That's right he took his antimatter dick out and pissed on my fucking wife and he said it was "THIS BIG" and
       I said "that's disgusting" so im making a callout post on my twitter.com. ${player.username} you've got a small dick
       it's the size of a proton and it's way smaller and guess what here's what my dong looks like. That's right baby
@@ -2726,6 +2726,7 @@ export const news = [
       earth I'm gonna go higher I'm pissing on the moon. How do you like that Pelle I pissed on the moon you idiot.
       You have twenty-three hours before the piss D R O P L E T S hit the fucking Earth, now get outta my fucking
       sight, before I piss on you too!`
+    }
   },
   {
     id: "ae412",
@@ -3463,11 +3464,12 @@ export const news = [
   },
   {
     id: "aem544",
-    text:
-      `News: ”Average person generates 1e9e15 Antimatter every day” factoid actually just statistical error as ${player.username}
+    get text() {
+      return `News: ”Average person generates 1e9e15 Antimatter every day” factoid actually just statistical error as ${player.username}
       is responsable for all of- wait what did you say? There’s more of them? And they Broke Eternity? Oh shit we’re doomed.
       HEY JOHN CHANGE THE HEADLINE TO BREAKING NEWS AND RESTART. Hello everyone and welcome back to the matter news.
       Latest: We’re all going to die.`
+    }
   },
   {
     id: "ae545",
