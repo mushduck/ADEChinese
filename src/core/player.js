@@ -221,7 +221,12 @@ window.player = {
       uselessNewsClicks: 0,
       paperclips: 0,
       newsQueuePosition: 1000,
-      eiffelTowerChapter: 0
+      eiffelTowerChapter: 0,
+      storyChapter: 0,
+      effarigChapter: 0,
+      discordLevel: 1,
+      dayOfEndgame: 0,
+      celestialFuneralChapter: 0
     },
     totalSeen: 0,
   },
