@@ -846,6 +846,7 @@ window.player = {
   tutorialState: 0,
   tutorialActive: true,
   options: {
+    hasSeenUsernameModal: false,
     news: {
       enabled: true,
       repeatBuffer: 40,
