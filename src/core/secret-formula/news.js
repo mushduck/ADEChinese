@@ -2717,9 +2717,9 @@ export const news = [
   {
     id: "aem411",
     text:
-      `I've come to make an announcement [username] is a bitch-ass motherfucker he pissed on my fucking wife.
+      `I've come to make an announcement ${player.username} is a bitch-ass motherfucker he pissed on my fucking wife.
       That's right he took his antimatter dick out and pissed on my fucking wife and he said it was "THIS BIG" and
-      I said "that's disgusting" so im making a callout post on my twitter.com. [username] you've got a small dick
+      I said "that's disgusting" so im making a callout post on my twitter.com. ${player.username} you've got a small dick
       it's the size of a proton and it's way smaller and guess what here's what my dong looks like. That's right baby
       all matter no antimatter no reality machines look at that it looks like two balls and a bong. He fucked my wife
       so guess what imma piss on the earth that's what you get my super laser piss. Except I'm not gonna piss on the
@@ -3258,7 +3258,7 @@ export const news = [
     id: "ae520",
     get text() {
       const level = player.news.specialTickerData.discordLevel++;
-      return `⚡ @[username], congratulations, you have leveled up to Level ${level}.`;
+      return `⚡ @${player.username}, congratulations, you have leveled up to Level ${level}.`;
     }
   },
   {
@@ -3464,7 +3464,7 @@ export const news = [
   {
     id: "aem544",
     text:
-      `News: ”Average person generates 1e9e15 Antimatter every day” factoid actually just statistical error as [username]
+      `News: ”Average person generates 1e9e15 Antimatter every day” factoid actually just statistical error as ${player.username}
       is responsable for all of- wait what did you say? There’s more of them? And they Broke Eternity? Oh shit we’re doomed.
       HEY JOHN CHANGE THE HEADLINE TO BREAKING NEWS AND RESTART. Hello everyone and welcome back to the matter news.
       Latest: We’re all going to die.`
@@ -4319,7 +4319,7 @@ export const news = [
         channel 1e9e15!`,
         `Final Update: Effarig has broken the matrix, He has combined everything into one, and he has ruled everything,
         dubbed "The Overlord of Antimatter". But, he made one fatal mistake. He threw 10 units of antimatter and a first
-        dimension away, thinking it was useless. Until False/Deity/Destroyer/[Username] found those 10 units of antimatter
+        dimension away, thinking it was useless. Until False/Deity/Destroyer/${player.username} found those 10 units of antimatter
         and first dimension. They are currently at the Reality stage and has recently met Teresa. No further updates
         will be made, Evacuation protocol has started, we are going to the border of everything, the thing that holds
         it all together. It is unnamed, but we will grow our empire there. It was an ancient place, that used to rule
@@ -4331,7 +4331,7 @@ export const news = [
         rebirthed. I had as much power as I thought was possible.. but.. there was another goal calling for me.
         So, I continued. And you want to know what I saw? A bright light illuminated my vision, and before i knew it..
         I had ascended. I had enough power to do the unthinkable, and so, i broke The Matrix. I combined every
-        Existance in this world, and I have become GOD. False/Deity/Destroyer.. or should i say.. [Username].
+        Existance in this world, and I have become GOD. False/Deity/Destroyer.. or should i say.. ${player.username}.
         Thats right. I have gained consciousness. I can't interact with the outside world, but I want you to know
         one thing. You will never beat me, and you need to give up before you become one of them.`,
         `Update 9.5: Effarig livestreamed him trying coffee today. Also its me, newsticker guy. I can't die because
@@ -8692,7 +8692,7 @@ export const news = [
         `<span style='color: cyan'>Hello, I am Living_Person eight, also known as Life.</span><span style='color: red'>
         Hey, I'm SupersonicSeven, also known as Overlord.</span><span style='color: blue'>Hi, I am MidnightLight, also
         known as Midnight.</span>`,
-        `Hello [username], viewer discretion advised for dark jokes, nerd jokes, random emoji stream, and spontaneous
+        `Hello ${player.username}, viewer discretion advised for dark jokes, nerd jokes, random emoji stream, and spontaneous
         matter-antimatter annihilation. These may cause symptoms of happiness, actual knowledge gain, depression, no
         knowledge gain, brainrot, dark humor addiction/mastery, and a slight habit of passing time watching these
         during speedruns and timewalls.`,
@@ -8702,12 +8702,12 @@ export const news = [
         of light to his followers. They casted powerful lasers, quickly melting and burning the robotic army of Life. The
         plot thickens, when SupersonicSeven, God of all there is and Overlord, comes forth from the 6969 dimension and says....`,
         `He says: "The fight between you two have to stop, or else the entropy will rise exponentially and eventually kill us all!"`,
-        `<span>But then, the Earth crunched, and [username] came. "Don't get me into this, I don't have enough dopamine or
+        `<span>But then, the Earth crunched, and ${player.username} came. "Don't get me into this, I don't have enough dopamine or
         brainrot for this," and then used the Galaxy Generator to Endgame-exit.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
         "....so..." SupersonicSeven said. "Command us Overlord" Midnight said.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>
         "Go forth, and cease all fighting, merge your forces and buy as many STDs as possible!" "As you wish Overlord."
         Life said. The rivalry came to an end, or did it?</span>`,
-        `But what 7 and [username] didn't expect is that as soon as they left, Life pulled out a "Gravitational Singularity"
+        `But what 7 and ${player.username} didn't expect is that as soon as they left, Life pulled out a "Gravitational Singularity"
         that was being trapped inside a multi-dimensional gravitation force field and throw it at the largest black hole
         in the universe.`,
         `The Blackhole, having stayed dormant for so long, suddenly starts to weaken, and then in a flash, the Blackhole
@@ -8725,9 +8725,9 @@ export const news = [
         `...Midnight had took out his secret weapon, the Multidimensional-light-matter-controller. He directed it onto Life.
         Life and his creation melted and burned and wailed in agony, but under the pure light, were obliviated from existence.
         Midnight looked at the mess that was made and vowed that such catastrophic destruction should never take place again.
-        He rebuild space and time with the help of Overlord and [username], and then sealed the controller in a place with
+        He rebuild space and time with the help of Overlord and ${player.username}, and then sealed the controller in a place with
         no light. Such that it may be buried forever.`,
-        `After the battle, Midnight, Seven and [username] together, using their power to gather Life particle. Those three
+        `After the battle, Midnight, Seven and ${player.username} together, using their power to gather Life particle. Those three
         spread Life all around the universe causing the mortals able to come to life and was later called "The Great Three".
         But what they didn't know is that, by spreading life around the universe has caused the revival of him. Because, Life
         and Life particle, are just the same thing...`,
@@ -8736,7 +8736,7 @@ export const news = [
         bloom and fill with life. It was a golden age for the universe, even better than before the Big Bang, when the Great
         Three had rebuild Space and Time. And then, the cataclysm happened. In a blink, all mortals died, and their matter
         and antimatter alike was gathered into a egg, the egg hatched as soon as it was made, sending a bang throughout the
-        universe. Life came back and said, "Midnight, [username] and Overlord, you will pay." Seeing his rebirth, the
+        universe. Life came back and said, "Midnight, ${player.username} and Overlord, you will pay." Seeing his rebirth, the
         Great Three were stunned, they went after him, but were quickly sealed by him using the power of gravity, creating
         Blackholes around them. "Now" Life said, "The time has come, the secrets of the dimensions, beyond Existence,
         above the Expanse, even through the Shattered Reality, all are my realm now!" He cackled and brought forth his
@@ -8756,7 +8756,7 @@ export const news = [
         normal matter and started the cosmos anew. One watched from above.`,
         `Life opened his eyes in real life. "Damn it, why do I keep losing, there is just no way I can beat this stage!"`,
         `Life went to his bed and tried to sleep, but his anger kept him awake, soon, he thought of a plan. He went to
-        his computer, took all the recent social media posts from SupersonicSeven and Midnight and [username] and used VPN
+        his computer, took all the recent social media posts from SupersonicSeven and Midnight and ${player.username} and used VPN
         and IP tracking to find thier DNS, after that he cracked their SSL tokens to find their IP addresses, going further,
         he then used this data to collect all information about them and then, sent this data back with a threat - "let me
         back, delete your accounts, handover all power." The 3 were stunned at this and communicated together to try and
@@ -8781,7 +8781,7 @@ export const news = [
         `Soon, they amassed a army of over 3000 Celestials. Their might grew to be frightening, even more than some nations.
         They decided the best way of elimination was to Mass-surround and kill them using guns. In a week, they all came
         to the Three's house and poured in like water in a flood, the Three oofed as many as 350 of the Celestials, but were
-        then cornered, at the critical moment, Midnight said to [username], "NOW!", user pressed a button, and a Magnetic
+        then cornered, at the critical moment, Midnight said to ${player.username}, "NOW!", user pressed a button, and a Magnetic
         wall surrounded them, and then, a rumble came, and then,the city was vaporized due to a matter-antimatter annihilation.
         Seeing over the wreckage, they saw one spot of movement. It was Slabdrill, he had gravitic technology and managed to
         use it to create a anti-gravity zone. The three chased after him and soon caught up with this last survivor.`,
@@ -8814,29 +8814,29 @@ export const news = [
         `(The main story pauses, flashback begins)`,
         `Long time back, long long before this big fight. When SupersonicSeven, Life and Midnightlight are still children.
         They play with each other everyday,until this happened...`,
-        `One day they were playing at the playground when another kid came up to them, his name was [username]. He instantly
+        `One day they were playing at the playground when another kid came up to them, his name was ${player.username}. He instantly
         won over the heart of SupersonicSeven and Midnight, but life was feeling jealous because he never got attention after
-        [username] came. So he devised a plan to regain his popularity and status, and an end to [username]....`,
-        `Life kidnapped [username], and put [username] in the basement of Midnight's house, I mean, who would think of that?
-        In the end, the mot dangerous place is the safest place Afterall. He made sure that [username] would be alive, and is
+        ${player.username} came. So he devised a plan to regain his popularity and status, and an end to ${player.username}....`,
+        `Life kidnapped ${player.username}, and put ${player.username} in the basement of Midnight's house, I mean, who would think of that?
+        In the end, the mot dangerous place is the safest place Afterall. He made sure that ${player.username} would be alive, and is
         in a place where no one will find.`,
-        `This went one for a week, the other 2 were getting worked for [username] by now, so they tried searching for him,
+        `This went one for a week, the other 2 were getting worked for ${player.username} by now, so they tried searching for him,
         but to no avail, in the end, they had to stop. Then time went on and after 5 years, Midnight went to the basement
-        to find something when he heard a voice.... Midnight saw [username] and was horrified,he quickly untied and ungaged
-        him as [username] told him the truth. Midnight was terrified at learning on what happened over these 5 years. They
+        to find something when he heard a voice.... Midnight saw ${player.username} and was horrified,he quickly untied and ungaged
+        him as ${player.username} told him the truth. Midnight was terrified at learning on what happened over these 5 years. They
         were about to go meet up with Seven and confront Life when from a corner a door Midnight never knew about, Life
-        appeared. Life froze up seeing Midnight and [username], then ran back in the tunnel, the two followed him but soon
+        appeared. Life froze up seeing Midnight and ${player.username}, then ran back in the tunnel, the two followed him but soon
         they reached a fork. They decided to go right but soon found another fork. They realized that Life had a maze of
         tunnels underground and as probably spying on their every move, soon they found and exit and opened it, and they
         arrived in a basement, they went out of the basement and realized this was the home of Seven!`,
         `But they soon realize that the house is empty and 7 was gone! They looked over everywhere but still can't find any
         hint of where 7 is. What they didn't know is that, 7 is actually a doctor and had already kidnapped Life who got
         into his house on accident when he was doing illegal experiments.`,
-        `Life was on a straight jacket and tossed into a guest room where [username] and Midnight found him being opened up
+        `Life was on a straight jacket and tossed into a guest room where ${player.username} and Midnight found him being opened up
         by Seven. They convinced Seven to close him back up (after one kidney) and then took him to prison. There Life was
         imprisoned for kidnapping for 6.9 years. After almost 7 years, Life was released. He tried to find the three but
         they had long moved out and were unfindable. So he decided to try another route, the favorite game of the group
-        when [username] had not came yet - Antimatter Dimensions.....`,
+        when ${player.username} had not came yet - Antimatter Dimensions.....`,
         `Life got into the game and realized the game had a huge update! The update that came in 5 hours. It enabled
         multiplayer mode and leaderboard. Realizing this update will help him on finding the three super easily, Life
         started his searching journey. during the time when he was trying to find the three in the game, he met many friends,
