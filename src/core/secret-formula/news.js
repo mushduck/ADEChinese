@@ -1,5 +1,5 @@
 import { DC } from "../constants";
-import wordShift from "../../word-shift";
+import wordShift from "../word-shift";
 
 // A = always there
 // L = locked
