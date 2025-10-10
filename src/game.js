@@ -16,10 +16,6 @@ if (GlobalErrorHandler.handled) {
 }
 GlobalErrorHandler.cleanStart = true;
 
-if (!player.options.hasSeenUsernameModal) {
-  Modal.username.show();
-}
-
 export function playerInfinityUpgradesOnReset() {
 
   const infinityUpgrades = new Set(
@@ -944,6 +940,10 @@ function afterSimulation(seconds, playerBefore) {
   }
 
   GameUI.notify.showBlackHoles = true;
+
+  if (!player.options.hasSeenUsernameModal) {
+    Modal.username.show();
+  }
 }
 
 export function simulateTime(seconds, real, fast) {
