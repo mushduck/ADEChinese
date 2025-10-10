@@ -277,7 +277,7 @@ Modal.respecIAP = new Modal(RespecIAPModal);
 
 Modal.s12Games = new Modal(S12GamesModal);
 
-Modal.username = new Modal(UsernameModal);
+Modal.username = new Modal(UsernameModal, 1);
 
 function getSaveInfo(save) {
   const resources = {
