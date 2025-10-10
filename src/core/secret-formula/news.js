@@ -3021,13 +3021,16 @@ export const news = [
   },
   {
     id: "ae472",
-    text: `MY DAD IS HEVIPELLE AND HE CAN ${wordShift.wordCycle(["BAN", "DESTROY", "REMOVE"])} YOU!`
+    get text() {
+      return `MY DAD IS HEVIPELLE AND HE CAN ${wordShift.wordCycle(["BAN", "DESTROY", "REMOVE"])} YOU!`
+    }
   },
   {
     id: "ae473",
-    text:
-      `Only way to destroy Pelle’s sanity: just use the Darkness. Skill issue!!! HAHA! NO- WAIT- STOP- OW-
+    get text() {
+      return `Only way to destroy Pelle’s sanity: just use the Darkness. Skill issue!!! HAHA! NO- WAIT- STOP- OW-
       ${wordShift.wordCycle(["Error", "Warning", "Stop"])}.`
+    }
   },
   {
     id: "ae474",
@@ -3079,9 +3082,10 @@ export const news = [
   },
   {
     id: "ae486",
-    text:
-      `Hi I'm Egg Ok Cool Sigma News Ticker Suggestion Suggestion Suggestion Type this in console:
+    get text() {
+      return `Hi I'm Egg Ok Cool Sigma News Ticker Suggestion Suggestion Suggestion Type this in console:
       "dev.giveAllAchievements()" to get every achieve- ${wordShift.wordCycle(["Stop-", "Please-", "Don't-"])} ment!`
+    }
   },
   {
     id: "ae487",
