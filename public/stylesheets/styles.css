@@ -5916,6 +5916,27 @@ properly on certain themes. */
 
 /* #endregion c-modal-hard-reset */
 
+/* #region c-modal-username */
+
+.c-modal-username-danger {
+  font-weight: bold;
+  color: var(--color-bad);
+}
+
+.c-modal-username-btn {
+  margin-top: 0.3rem;
+}
+
+.c-modal-username-info > div {
+  margin-top: 0.2rem;
+}
+
+.c-modal-username__input {
+  width: 45rem;
+}
+
+/* #endregion c-modal-username */
+
 /* #region c-modal-away-progress */
 
 .c-modal-away-progress {
