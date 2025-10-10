@@ -4365,7 +4365,7 @@ export const news = [
         `(The end for now)`,
       ];
       const chapter = chapters[player.news.specialTickerData.effarigChapter];
-      player.news.specialTickerData.effarigChapter = (player.news.specialTickerData.effatigChapter + 1) % 29;
+      player.news.specialTickerData.effarigChapter = (player.news.specialTickerData.effarigChapter + 1) % 29;
       return chapter;
     },
     get unlocked() { return Teresa.isUnlocked; }
