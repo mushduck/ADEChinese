@@ -22,6 +22,8 @@ export default {
       isCollapsed: false,
       barWidth: 0,
       capRiftName: "",
+      galGenInstability: 0,
+      generationReduction: 0,
     };
   },
   computed: {
@@ -60,6 +62,8 @@ export default {
       this.sacrificeActive = GalaxyGenerator.sacrificeActive;
       this.barWidth = (this.isCapped ? this.capRift.reducedTo : this.emphasisedStart);
       if (this.capRift) this.capRiftName = wordShift.wordCycle(this.capRift.name);
+      this.galGenInstability = GalaxyGenerator.galGenInstability;
+      this.generationReduction = Math.max(1, Math.pow(this.galGenInstability, Math.log10(Math.max(Math.pow(this.generatedGalaxies / 1e10, 0.75), 1))));
     },
     increaseCap() {
       if (GalaxyGenerator.isCapped) GalaxyGenerator.startSacrifice();
@@ -97,6 +101,11 @@ export default {
           <span class="c-galaxies-amount">{{ galaxyText }}</span>
           Galaxies.
           <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/s</span>
+          <br>
+          Your Galaxy Generator Instability Magnitude is
+          <span class="c-galaxies-amount">{{ galGenInstability }}</span>,
+          which is dividing Galaxies above {{ format(1e10, 2, 1) }} by
+          <span class="c-galaxies-amount">{{ generationReduction }}</span>.
         </div>
         <div>
           <button
