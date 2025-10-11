@@ -103,9 +103,9 @@ export default {
           <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/s</span>
           <br>
           Your Galaxy Generator Instability Magnitude is
-          <span class="c-galaxies-amount">{{ galGenInstability }}</span>,
+          <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>,
           which is dividing Galaxies above {{ format(1e10, 2, 1) }} by
-          <span class="c-galaxies-amount">{{ generationReduction }}</span>.
+          <span class="c-galaxies-amount">{{ format(generationReduction, 2, 1) }}</span>.
         </div>
         <div>
           <button
