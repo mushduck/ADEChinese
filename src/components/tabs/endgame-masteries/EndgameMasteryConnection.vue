@@ -81,10 +81,10 @@ export class EndgameMasteryConnectionSetup {
   setPosition(masteries, width, height) {
     const from = masteries.find(mastery => mastery.mastery === this.from);
     const to = masteries.find(mastery => mastery.mastery === this.to);
-    this.x1 = (/*from.left + */from.width / 2) / width;
-    this.y1 = (/*from.top + */from.height / 2) / height;
-    this.x2 = (/*to.left + */to.width / 2) / width;
-    this.y2 = (/*to.top + */to.height / 2) / height;
+    this.x1 = (/*from.left + from.width / */2) / width;
+    this.y1 = (/*from.top + from.height / */2) / height;
+    this.x2 = (/*to.left + to.width / */2) / width;
+    this.y2 = (/*to.top + to.height / */2) / height;
   }
 
   get isBought() {
