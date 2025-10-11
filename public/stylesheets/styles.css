@@ -1908,6 +1908,14 @@ br {
   background-color: var(--color-teresa--base) !important;
 }
 
+.o-primary-btn--endgame-respec-active {
+  background-color: var(--color-endgame) !important;
+}
+
+.o-primary-btn--endgame-respec-active:hover {
+  color: var(--color-base);
+}
+
 .o-primary-btn--glyph-trash {
   width: 30rem;
   height: 4.5rem;
