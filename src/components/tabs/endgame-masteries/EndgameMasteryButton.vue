@@ -151,7 +151,7 @@ export class EndgameMasterySetup {
       :config="config"
       name="Endgame Skill"
     />
-    <div>
+    <div v-else>
       Cost: {{ customCostStr }}
     </div>
   </button>
