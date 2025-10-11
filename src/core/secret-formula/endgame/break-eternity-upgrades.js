@@ -27,7 +27,7 @@ export const breakEternityUpgrades = {
     costIncrease: 1e10,
     maxUpgrades: 10,
     effect: value => Math.pow(2, value),
-    description: () => "Square All Antimatter Dimension Multipliers' Exponents",
+    description: () => "Square All Antimatter Dimension Multipliers",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `^${formatInt(value)}`,
     noLabel: false
@@ -38,7 +38,7 @@ export const breakEternityUpgrades = {
     costIncrease: 1e10,
     maxUpgrades: 10,
     effect: value => Math.pow(2, value),
-    description: () => "Square All Infinity Dimension Multipliers' Exponents",
+    description: () => "Square All Infinity Dimension Multipliers",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `^${formatInt(value)}`,
     noLabel: false
@@ -49,7 +49,7 @@ export const breakEternityUpgrades = {
     costIncrease: 1e10,
     maxUpgrades: 10,
     effect: value => Math.pow(2, value),
-    description: () => "Square All Time Dimension Multipliers' Exponents",
+    description: () => "Square All Time Dimension Multipliers",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `^${formatInt(value)}`,
     noLabel: false
