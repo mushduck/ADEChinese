@@ -36,7 +36,7 @@ export class PermanentEndgameMasteryState extends EndgameMasteriesState {
       TabNotification.endgameUpgradesAfterUnlock.tryTrigger();
     }
 
-    player.endgame.permanentMasteries.push(this.id);
+    player.endgameMasteries.permanentMasteries.push(this.id);
     Currency.endgameSkills.subtract(this.cost);
     return true;
   }
