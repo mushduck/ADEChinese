@@ -111,9 +111,9 @@ export class EndgameMasteryTreeLayout {
       mastery.setPosition(this);
     }
 
-    for (const connection of this.connections) {
+    /*for (const connection of this.connections) {
       connection.setPosition(this.masteries, this.width, this.height);
-    }
+    }*/
   }
 
   itemPosition(row) {
