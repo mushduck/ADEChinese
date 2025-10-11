@@ -31,11 +31,6 @@ export default {
       const pathEntry = EndgameMasteries.pathList.find(p => p.path === this.setup.path);
       return `${id} ${pathEntry.name}`;
     },
-  },
-  methods: {
-    update() {
-      this.showCost = true;
-    },
   }
 };
 </script>
