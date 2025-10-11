@@ -7,7 +7,7 @@ export class PermanentEndgameMasteryState extends EndgameMasteriesState {
   }
 
   get isBought() {
-    return player.endgame.permanentMasteries.includes(this.id);
+    return player.endgameMasteries.permanentMasteries.includes(this.id);
   }
 
   get canBeBought() {
