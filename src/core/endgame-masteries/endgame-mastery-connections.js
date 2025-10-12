@@ -1,4 +1,5 @@
 import { EndgameMastery } from "./endgame-mastery";
+import { PermanentEndgameMastery } from "./permanent-endgame-mastery";
 
 export class EndgameMasteryConnection {
   constructor(from, to, override) {
@@ -29,6 +30,7 @@ export class EndgameMasteryConnection {
  */
 EndgameMastery.allConnections = (function() {
   const EM = id => EndgameMastery(id);
+  const PEM = id => PermanentEndgameMastery(id);
   const connections = [
     [EM(11), EM(21)],
     [EM(11), EM(22)],
@@ -92,7 +94,7 @@ EndgameMastery.allConnections = (function() {
     [EM(154), EM(161)],
 
     [EM(161), EM(171)],
-    [EM(171), EndgameMastery.endgameUpgrades]
+    [EM(171), PEM(1)]
   ].map(props => new EndgameMasteryConnection(props[0], props[1], props[2]));
 
   return connections;
