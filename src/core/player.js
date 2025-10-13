@@ -917,6 +917,7 @@ window.player = {
       alchemy: true,
       glyphInfoType: GlyphInfo.types.NONE,
       showGlyphInfoByDefault: false,
+      masteries: true,
     },
     animations: {
       bigCrunch: true,
