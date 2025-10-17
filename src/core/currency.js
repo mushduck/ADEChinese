@@ -540,6 +540,6 @@ Currency.endgameSkills = new class extends DecimalCurrency {
     EndgameSkillPurchaseType.am.reset();
     EndgameSkillPurchaseType.cp.reset();
     EndgameSkillPurchaseType.dp.reset();
-    player.endgameMastery.maxSkills = this.startingValue;
+    player.endgameMasteries.maxSkills = this.startingValue;
   }
 }();
