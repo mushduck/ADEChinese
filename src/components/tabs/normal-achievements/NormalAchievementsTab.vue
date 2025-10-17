@@ -31,6 +31,7 @@ export default {
   },
   computed: {
     isDoomed: () => Pelle.isDoomed,
+    isDestroyed: () => PelleDestructionUpgrade.achievementMultiplier.isBought,
     rows: () => Achievements.allRows,
     renderedRows() {
       return this.rows.filter((_, i) => this.renderedRowIndices.includes(i));
@@ -152,7 +153,7 @@ export default {
       />
     </div>
     <div class="c-achievements-tab__header c-achievements-tab__header--multipliers">
-      <span v-if="isDoomed">
+      <span v-if="isDoomed && !isDestroyed">
         All Achievement multipliers have been disabled<SwapAchievementImagesButton />
       </span>
       <span v-else>
