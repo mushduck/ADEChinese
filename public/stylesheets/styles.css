@@ -6225,6 +6225,11 @@ kbd {
   border-color: var(--color-reality);
 }
 
+.o-notification--endgame {
+  background-color: var(--color-endgame);
+  border-color: var(--color-endgame);
+}
+
 .o-notification--automator {
   background-color: var(--color-automator-active-line-background);
   border-color: var(--color-automator-active-line-outline);
