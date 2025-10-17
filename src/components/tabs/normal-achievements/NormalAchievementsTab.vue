@@ -84,7 +84,7 @@ export default {
       this.achMultBreak = BreakInfinityUpgrade.achievementMult.canBeApplied;
       this.achMultToIDS = Achievement(75).isUnlocked;
       this.achMultToTDS = EternityUpgrade.tdMultAchs.isBought;
-      this.achMultToTP = RealityUpgrade(8).isBought;
+      this.achMultToTP = RealityUpgrade(8).isBought && (!Pelle.isDoomed || PelleRealityUpgrade.paradoxicallyAttain.isBought);
       this.achMultToBH = VUnlocks.achievementBH.canBeApplied;
       this.achMultToTT = Ra.unlocks.achievementTTMult.canBeApplied;
     },
