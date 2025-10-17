@@ -65,8 +65,13 @@ export const Glyphs = {
   },
   get activeSlotCount() {
     if (Pelle.isDoomed) {
-      if (PelleRifts.vacuum.milestones[0].canBeApplied) return 1;
-      return 0;
+      let PelleGlyphs = 0;
+      if (PelleRifts.vacuum.milestones[0].canBeApplied) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot1.isBought) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot2.isBought) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot3.isBought) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot4.isBought) PelleGlyphs = PelleGlyphs + 1;
+      return PelleGlyphs;
     }
     return 3 + Effects.sum(RealityUpgrade(9), RealityUpgrade(24), BreakEternityUpgrade.glyphSlotImprovement);
   },
