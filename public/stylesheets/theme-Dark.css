@@ -35,6 +35,32 @@ input.t-dark {
   border: 0.1rem solid var(--color-bad);
 }
 
+.t-dark .c-es-amount {
+  color: var(--color-endgame);
+  text-shadow: 0 0 7px var(--color-endgame);
+}
+
+.t-dark .c-es-buy-button--unlocked {
+  color: var(--color-endgame);
+  background: #161616;
+  border: 0.1rem solid var(--color-endgame);
+}
+
+.t-dark .c-es-buy-button--unlocked:hover {
+  color: #161616;
+  background: var(--color-endgame);
+}
+
+.t-dark .c-es-buy-button--locked {
+  background: #263238;
+  border: 0.1rem solid var(--color-endgame);
+}
+
+.t-dark .c-es-buy-button--locked:hover {
+  background: var(--color-bad);
+  border: 0.1rem solid var(--color-bad);
+}
+
 .t-dark .c-rm-amount__desc {
   color: #757575;
 }
