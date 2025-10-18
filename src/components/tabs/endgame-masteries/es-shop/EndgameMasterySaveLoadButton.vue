@@ -276,7 +276,7 @@ export default {
   background: white;
 }
 
-.l-es-save-load-btn__menu-item:hover .c-tt-save-load-btn__menu-item__hover-options {
+.l-es-save-load-btn__menu-item:hover .c-es-save-load-btn__menu-item__hover-options {
   visibility: visible;
   opacity: 1;
   transition-delay: 0s;
