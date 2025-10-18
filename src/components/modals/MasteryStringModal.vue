@@ -5,7 +5,7 @@ import ModalWrapperChoice from "@/components/modals/ModalWrapperChoice";
 import PrimaryButton from "@/components/PrimaryButton";
 import MasteryStringLine from "@/components/modals/MasteryStringLine";
 
-import MsateryStringPreview from "./endgame-mastery-modal-preview/MasteryStringPreview";
+import MasteryStringPreview from "./endgame-mastery-modal-preview/MasteryStringPreview";
 import MasteryTreeInfo from "./MasteryTreeInfo";
 
 let savedImportString = "";
