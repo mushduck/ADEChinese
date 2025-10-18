@@ -37,7 +37,7 @@ export default {
       if (this.skillAmount.gte(1e6)) {
         return format;
       }
-      return formatFloat;
+      return formatInt;
     },
     totalEndgameSkillText() {
       return `${quantify("total Endgame Skill", this.totalEndgameSkills, 2, 2, this.formatEndgameSkillType)}`;
