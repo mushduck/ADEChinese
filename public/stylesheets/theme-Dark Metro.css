@@ -24,3 +24,24 @@ body.t-dark-metro {
 .t-dark-metro .c-tt-buy-button--locked:hover {
   background: #e53935;
 }
+
+.t-dark-metro .c-es-buy-button--unlocked {
+  color: var(--color-endgame);
+  background: #212121;
+  border: 0.1rem solid var(--color-endgame);
+}
+
+.t-dark-metro .c-es-buy-button--unlocked:hover {
+  color: #212121;
+  background: var(--color-endgame);
+}
+
+.t-dark-metro .c-es-buy-button--locked {
+  background: #9e9e9e;
+  border: none;
+  box-shadow: 1px 1px 1px 0 #000000;
+}
+
+.t-dark-metro .c-es-buy-button--locked:hover {
+  background: #e53935;
+}
