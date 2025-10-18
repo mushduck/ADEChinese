@@ -28,7 +28,7 @@ export default {
     update() {
       this.name = player.endgameMasteries.presets[this.saveslot - 1].name;
       this.displayName = this.name === "" ? this.saveslot : this.name;
-      this.canEndgame = Pelle.isDoomed && Currency.antimatter.gte(DC.E9E15);
+      this.canEndgame = Pelle.isDoomed && Currency.antimatter.gte(new Decimal(1e9000000000000000));
     },
     nicknameBlur(event) {
       const newName = event.target.value.slice(0, 4).trim();
