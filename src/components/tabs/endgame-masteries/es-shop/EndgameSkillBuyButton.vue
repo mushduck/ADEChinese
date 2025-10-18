@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     update() {
-      this.isLocked = player.endgames = 0;
+      this.isLocked = player.endgames <= 0;
     }
   }
 };
