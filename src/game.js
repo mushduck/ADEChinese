@@ -595,7 +595,7 @@ export function gameLoop(passDiff, options = {}) {
   const masteryGain = Effects.sum(EndgameMastery(11)) * Time.unscaledDeltaTime.totalSeconds / 60;
   Currency.perkPoints.add(masteryGain);
   
-  if (Perk.autocompleteEC1.canBeApplied) player.reality.lastAutoEC += realDiff;
+  if (Perk.autocompleteEC1.canBeApplied || EndgameMastery(22).isBought) player.reality.lastAutoEC += realDiff;
 
   EternityChallenge(12).tryFail();
   Achievements._power.invalidate();
