@@ -100,8 +100,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `Weaken the Infinity Upgrade ${formatInt(23)} Softcap by ${formatPercents(0.5)}`,
-    effect: 0.5
+    description: () => `Weaken the Infinity Upgrade ${formatInt(23)} Softcap by ${formatPercents(0.5)}`
   },
   {
     id: 82,
