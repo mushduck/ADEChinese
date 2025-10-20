@@ -237,6 +237,6 @@ EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
   if (Tab.celestials.v.isOpen) V.quotes.initial.show();
 });
 
-if (EndgameMastery(51).isBought) {
-  GameDatabase.celestials.v.mainUnlock.realities.requirement = 100;
-}
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (EndgameMastery(51).isBought) GameDatabase.celestials.v.mainUnlock.realities.requirement = 100;
+});
