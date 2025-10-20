@@ -146,15 +146,26 @@ export const Endgame = {
     player.reality.secondGaussian = 1e6;
     player.reality.musicSeed = Math.floor(Date.now() * Math.random() + 0xBCDDECCB);
     player.reality.musicSecondGaussian = 1e6;
-    player.reality.rebuyables = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-    };
-    player.reality.upgradeBits = 0;
-    player.reality.upgReqs = 0;
+    if (!EndgameMastery(42).isBought) {
+      player.reality.rebuyables = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+      };
+      player.reality.upgradeBits = 0;
+      player.reality.upgReqs = 0;
+    }
+    if (EndgameMastery(42).isBought) {
+      player.reality.rebuyables = {
+        1: 1,
+        2: 1,
+        3: 1,
+        4: 1,
+        5: 1,
+      };
+    }
     player.reality.imaginaryUpgradeBits = 0;
     player.reality.imaginaryUpgReqs = 0;
     player.reality.imaginaryRebuyables = {
