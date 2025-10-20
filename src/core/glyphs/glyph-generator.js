@@ -176,6 +176,23 @@ export const GlyphGenerator = {
     };
   },
 
+  endgameGlyph(type) {
+    const effectList = GlyphEffects.all.filter(e => e.id.startsWith(type));
+    effectList.push(GlyphEffects.timespeed);
+    let bitmask = 0;
+    for (const effect of effectList) bitmask |= 1 << effect.bitmaskIndex;
+    const glyphLevel = Effects.max(1, EndgameMastery(71));
+    return {
+      id: undefined,
+      idx: null,
+      type,
+      strength: 3.5,
+      level: glyphLevel,
+      rawLevel: glyphLevel,
+      effects: bitmask,
+    };
+  },
+
   companionGlyph(eternityPoints) {
     // Store the pre-Reality EP value in the glyph's rarity
     const str = rarityToStrength(eternityPoints.log10() / 1e6);
