@@ -272,7 +272,7 @@ export const Tesseracts = {
   },
 
   get extra() {
-    return this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1);
+    return (this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1)) + Effects.sum(EndgameMastery(61));
   },
 
   get totalMult() {
