@@ -49,7 +49,7 @@ export default {
       this.unlockedCount = EternityChallenges.all
         .filter(this.isChallengeVisible)
         .length;
-      this.isAutoECVisible = Perk.autocompleteEC1.canBeApplied;
+      this.isAutoECVisible = Perk.autocompleteEC1.canBeApplied || EndgameMastery(22).isBought;
       this.autoEC = player.reality.autoEC;
       const shouldPreventEC7 = TimeDimension(1).amount.gt(0);
       this.hasUpgradeLock = RealityUpgrade(12).isLockingMechanics ||
