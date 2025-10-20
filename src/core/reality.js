@@ -12,7 +12,9 @@ export const GlyphSelection = {
   },
 
   get choiceCount() {
-    return Effects.max(1, Perk.firstPerk) *
+    let mastery = 1;
+    if (EndgameMastery(53).isBought && !Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied) mastery *= 2;
+    return Effects.max(1, Perk.firstPerk) * mastery *
       Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.effectOrDefault(1);
   },
 
