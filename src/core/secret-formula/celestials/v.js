@@ -219,7 +219,7 @@ export const v = {
       description: () => `Have ${formatInt(10)} V-Achievements`,
       effect: () => Achievements.power,
       // Base rate is 60 ECs at 20 minutes each
-      format: x => (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied
+      format: x => (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought
         ? "Instant (Ra upgrade)"
         : `${TimeSpan.fromMinutes(60 * 20 / x).toStringShort()} for full completion`),
       requirement: () => V.spaceTheorems >= 10
