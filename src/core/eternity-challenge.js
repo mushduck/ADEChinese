@@ -361,13 +361,14 @@ export const EternityChallenges = {
     },
 
     get interval() {
-      if (!Perk.autocompleteEC1.canBeApplied) return Infinity;
+      if (!Perk.autocompleteEC1.canBeApplied && !EndgameMastery(22).isBought) return Infinity;
       let minutes = Effects.min(
         Number.MAX_VALUE,
         Perk.autocompleteEC1,
         Perk.autocompleteEC2,
         Perk.autocompleteEC3
       );
+      minutes /= Effects.sum(EndgameMastery(22));
       minutes /= VUnlocks.fastAutoEC.effectOrDefault(1);
       return TimeSpan.fromMinutes(minutes).totalMilliseconds;
     }
