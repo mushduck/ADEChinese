@@ -226,7 +226,8 @@ export const V = {
     return 1000 * Math.pow(1.15, currReductionSteps);
   },
   realityReq() {
-    return EndgameMastery(51).effectOrDefault(1250);
+    if (EndgameMastery(51).isBought) return 100;
+    return 1250;
   },
   quotes: Quotes.v,
   symbol: "⌬"
