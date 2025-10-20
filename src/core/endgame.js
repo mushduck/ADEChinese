@@ -101,9 +101,9 @@ export const Endgame = {
     Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
     ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
     ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
-    player.realities = 0;
+    Currency.realities.reset();
     player.partSimulatedReality = 0;
-    player.reality.realityMachines = DC.D0;
+    Currency.realityMachines.reset();
     player.reality.maxRM = DC.D0;
     player.reality.imaginaryMachines = 0;
     player.reality.iMCap = 0;
