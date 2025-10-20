@@ -17,7 +17,7 @@ export const v = {
       id: 1,
       name: "Realities",
       resource: () => Currency.realities.value,
-      requirement: () => 1250,
+      requirement: 1250,
       format: x => formatInt(x),
       progress: () => Currency.realities.value / V.realityReq,
     },
