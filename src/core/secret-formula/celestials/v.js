@@ -17,9 +17,9 @@ export const v = {
       id: 1,
       name: "Realities",
       resource: () => Currency.realities.value,
-      requirement: 1250,
+      requirement: () => EndgameMastery(51).effectOrDefault(1250),
       format: x => formatInt(x),
-      progress: () => Currency.realities.value / 1250,
+      progress: () => Currency.realities.value / EndgameMastery(51).effectOrDefault(1250),
     },
     eternities: {
       id: 2,
