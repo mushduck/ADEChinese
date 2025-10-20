@@ -405,6 +405,13 @@ Currency.dilatedTime = new class extends DecimalCurrency {
 Currency.realities = new class extends NumberCurrency {
   get value() { return player.realities; }
   set value(value) { player.realities = value; }
+
+  get startingValue() {
+    return Effects.max(
+      0,
+      EndgameMastery(31)
+    );
+  }
 }();
 
 Currency.realityMachines = new class extends DecimalCurrency {
@@ -418,6 +425,13 @@ Currency.realityMachines = new class extends DecimalCurrency {
       player.records.bestReality.RM = addedThisReality;
       player.records.bestReality.RMSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
     }
+  }
+
+  get startingValue() {
+    return Effects.max(
+      0,
+      EndgameMastery(32)
+    ).toDecimal();
   }
 }();
 
