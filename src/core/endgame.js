@@ -76,6 +76,15 @@ export const Endgame = {
     GlyphAppearanceHandler.unlockSet();
     this.resetStuff();
 
+    // Add Glyphs after other Glyphs are purged
+    if (EndgameMastery(71).isBought) {
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+    }
+
     // The ending animation ends at 12.5, although the value continues to increase after that. We set it to a bit above
     // 12.5 when we start the rollback animation to hide some of the unavoidable lag from all the reset functions
     GameEnd.removeAdditionalEnd = true;
