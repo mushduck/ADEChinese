@@ -225,6 +225,9 @@ export const V = {
   nextHardReductionCost(currReductionSteps) {
     return 1000 * Math.pow(1.15, currReductionSteps);
   },
+  realityReq() {
+    return EndgameMastery(51).effectOrDefault(1250);
+  },
   quotes: Quotes.v,
   symbol: "⌬"
 };
