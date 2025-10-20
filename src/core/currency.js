@@ -532,6 +532,7 @@ Currency.endgameSkills = new class extends DecimalCurrency {
   add(amount) {
     super.add(amount);
     player.endgameMasteries.maxSkills = player.endgameMasteries.maxSkills.plus(amount);
+    player.endgameMasteries.maxSkills = player.endgameMasteries.skills.plus(EndgameSkills.calculateEndgameMasteriesCost());
   }
 
   reset() {
