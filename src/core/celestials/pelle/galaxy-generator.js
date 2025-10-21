@@ -36,7 +36,8 @@ export const GalaxyGenerator = {
   },
 
   get galGenInstability() {
-    return 10;
+    const reduction = Effects.sum(EndgameMastery(122), Achievement(196));
+    return 10 - reduction;
   },
 
   get gainPerSecondPostCap() {
