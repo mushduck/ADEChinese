@@ -273,7 +273,10 @@ export const CelestialDimensions = {
   },
 
   get conversionExponent() {
-    if (Pelle.isDoomed) return 0.2;
-    return 2;
+    let base = 2;
+    if (Pelle.isDoomed) base /= 10;
+    let exponent = 1;
+    if (base > 1) exponent *= Effects.product(EndgameMastery(104));
+    return Math.pow(base, exponent);
   }
 };
