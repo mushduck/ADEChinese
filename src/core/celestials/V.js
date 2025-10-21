@@ -225,10 +225,6 @@ export const V = {
   nextHardReductionCost(currReductionSteps) {
     return 1000 * Math.pow(1.15, currReductionSteps);
   },
-  realityReq() {
-    if (EndgameMastery(51).isBought) return 100;
-    return 1250;
-  },
   quotes: Quotes.v,
   symbol: "⌬"
 };
