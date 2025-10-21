@@ -224,6 +224,7 @@ export const CelestialDimensions = {
   },
 
   resetAmount() {
+    Currency.unnerfedCelestialMatter.reset();
     Currency.celestialMatter.reset();
     for (const dimension of CelestialDimensions.all) {
       dimension.resetAmount();
@@ -251,7 +252,7 @@ export const CelestialDimensions = {
   tick(realDiff) {
     for (let tier = 8; tier > 1; tier--) {
       CelestialDimension(tier).produceDimensions(CelestialDimension(tier - 1), realDiff / 10);
-      CelestialDimension(1).produceCurrency(Currency.celestialMatter, realDiff);
+      CelestialDimension(1).produceCurrency(Currency.unnerfedCelestialMatter, realDiff);
     }
   },
 
