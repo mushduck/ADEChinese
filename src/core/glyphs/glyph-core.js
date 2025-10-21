@@ -71,6 +71,7 @@ export const Glyphs = {
       if (PelleDestructionUpgrade.glyphSlot2.isBought) PelleGlyphs = PelleGlyphs + 1;
       if (PelleDestructionUpgrade.glyphSlot3.isBought) PelleGlyphs = PelleGlyphs + 1;
       if (PelleDestructionUpgrade.glyphSlot4.isBought) PelleGlyphs = PelleGlyphs + 1;
+      PelleGlyphs += Effects.sum(EndgameMastery(121));
       return PelleGlyphs;
     }
     return 3 + Effects.sum(RealityUpgrade(9), RealityUpgrade(24), BreakEternityUpgrade.glyphSlotImprovement);
