@@ -522,7 +522,9 @@ Currency.celestialPoints = new class extends DecimalCurrency {
 Currency.celestialMatter = new class extends DecimalCurrency {
   get value() { return player.endgame.celestialMatter; }
   set value(value) {
-    player.endgame.celestialMatter = value;
+    const uncapped = Decimal.min(value, CelestialDimensions.OVERFLOW);
+    const instability = Decimal.pow(Decimal.max(player.endgame.celestialMatter.div(CelestialDimensions.OVERFLOW), 1), 1 / CelestialDimensions.softcapPow);
+    player.endgame.celestialMatter = uncapped.times(instability);
   }
 }();
 
