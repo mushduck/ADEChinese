@@ -323,7 +323,9 @@ export const TimeDimensions = {
    * @type {TimeDimensionState[]}
    */
   all: TimeDimension.index.compact(),
-  OVERFLOW: DC.E1E15,
+  get OVERFLOW() {
+    return DC.E1E15.powEffectsOf(EndgameMastery(93));
+  },
 
   get compressionMagnitude() {
     const reduction = Effects.product(EndgameMastery(83));
