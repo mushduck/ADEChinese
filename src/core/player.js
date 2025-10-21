@@ -806,6 +806,7 @@ window.player = {
     celestialPoints: DC.D0,
     doomedParticles: DC.D0,
     celestialMatter: DC.D0,
+    unnerfedCelestialMatter: DC.D0,
     celestialMatterMultiplier: {
       isActive: true
     },
