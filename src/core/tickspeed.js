@@ -260,7 +260,8 @@ export const FreeTickspeed = {
     // This undoes the function we're implicitly applying to costs (the "+ 1") is because we want
     // the cost of the next upgrade.
     const next = Decimal.exp(priceToCap + boughtToCost(purchases + 1) * logTickmult);
-    this.multToNext = Decimal.exp((boughtToCost(purchases + 1) - boughtToCost(purchases)) * logTickmult);
+    const reductions = Effects.product(EndgameMastery(103));
+    this.multToNext = Decimal.pow(Decimal.exp((boughtToCost(purchases + 1) - boughtToCost(purchases)) * logTickmult), reductions);
     return {
       newAmount: purchases + FreeTickspeed.softcap,
       nextShards: next,
