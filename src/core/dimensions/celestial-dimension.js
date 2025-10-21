@@ -208,7 +208,8 @@ export const CelestialDimensions = {
   SOFTCAP: DC.E100,
 
   get softcapPow() {
-    return 10;
+    const reduction = Effects.product(EndgameMastery(84));
+    return 10 * reduction;
   },
 
   unlockNext() {
