@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       celestialMatter: new Decimal(0),
+      unnerfedCelestialMatter: new Decimal(0),
       dimMultiplier: new Decimal(0),
       matterPerSecond: new Decimal(0),
       incomeType: "",
@@ -19,18 +20,33 @@ export default {
       totalDimCap: 0,
       creditsClosed: false,
       showLockedDimCostNote: true,
+      softcapPow: 0,
+      softcap: new Decimal(0),
+      unstable: false,
     };
+  },
+  computed: {
+    classObject() {
+      return {
+        "c-celestial-dim-description__accent": !this.unstable,
+        "c-celestial-dim-description__accent-unstable": this.unstable,
+      };
+    }
   },
   methods: {
     update() {
       this.showLockedDimCostNote = !CelestialDimension(8).isUnlocked;
       this.celestialMatter.copyFrom(Currency.celestialMatter);
+      this.unnerfedCelestialMatter.copyFrom(Currency.unnerfedCelestialMatter);
       this.conversionExponent = CelestialDimensions.conversionExponent;
       this.dimMultiplier.copyFrom(this.celestialMatter.pow(this.conversionExponent).max(1));
       this.matterPerSecond.copyFrom(CelestialDimension(1).productionPerSecond);
       this.incomeType = "Celestial Matter";
       this.totalDimCap = CelestialDimensions.totalDimCap;
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.softcapPow = CelestialDimensions.softcapPow;
+      this.softcap = CelestialDimensions.SOFTCAP;
+      this.unstable = this.celestialMatter.gte(this.softcap);
     },
     maxAll() {
       CelestialDimensions.buyMax();
@@ -61,17 +77,27 @@ export default {
     <div>
       <p>
         You have
-        <span class="c-celestial-dim-description__accent">{{ format(celestialMatter, 2, 1) }}</span>
-        Celestial Matter,
+        <span class="classObject">{{ format(celestialMatter, 2, 1) }}</span>
+        <span v-if="unstable">Unstable</span> Celestial Matter,
         <br>
         <span>
           increased by
-          <span class="c-celestial-dim-description__accent">{{ formatPow(conversionExponent, 2, 3) }}</span>
+          <span class="classObject">{{ formatPow(conversionExponent, 2, 3) }}</span>
         </span>
         to a
-        <span class="c-celestial-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
+        <span class="classObject">{{ formatX(dimMultiplier, 2, 1) }}</span>
         multiplier to
         <span>Game Speed.</span>
+        You <i>would</i> have <span class="classObject">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
+        Celestial Matter, but you don't.
+        <br>
+        This is because above <span class="classObject">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
+        Celestial Matter will softcap.
+        <br>
+        Currently it is being raised to the power of
+        <span class="classObject">{{ format(1 / softcapPow, 2, 3) }}</span>
+        The softcap to Celestial Matter is solely based on your Celestial Matter Softcap Magnitude, which is currently
+        <span class="classObject">{{ format(softcapPow, 2, 3) }}</span>.
       </p>
     </div>
     <div>
