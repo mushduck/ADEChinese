@@ -135,7 +135,7 @@ export const infinityUpgrades = {
     effect: () => {
       const divisor = EndgameMastery(81).isBought ? 5 : 10;
       const subtrahend = EndgameMastery(81).isBought ? 1.5 : 0;
-      return Decimal.min(Currency.infinityPoints.value.dividedBy(2), DC.E1E15).pow(Math.max(Math.log10((Currency.infinityPoints.value.log10()) / divisor) - subtrahend, 1.5)).plus(1);
+      return Decimal.min(Currency.infinityPoints.value.dividedBy(2), DC.E1E15).pow(Math.max((Math.log10(Currency.infinityPoints.value.log10()) / divisor) - subtrahend, 1.5)).plus(1);
     },
     formatEffect: value => formatX(value, 2, 2),
     charged: {
@@ -143,7 +143,7 @@ export const infinityUpgrades = {
       effect: () => {
         const divisor = EndgameMastery(81).isBought ? 5 : 10;
         const subtrahend = EndgameMastery(81).isBought ? 1.5 : 0;
-        return Decimal.min(Currency.infinityPoints.value.dividedBy(2), DC.E1E15).pow(Math.sqrt(Ra.pets.teresa.level) * Math.max(Math.log10((Currency.infinityPoints.value.log10()) / divisor) - subtrahend, 1.5)).plus(1);
+        return Decimal.min(Currency.infinityPoints.value.dividedBy(2), DC.E1E15).pow(Math.sqrt(Ra.pets.teresa.level) * Math.max((Math.log10(Currency.infinityPoints.value.log10()) / divisor) - subtrahend, 1.5)).plus(1);
       },
       formatEffect: value => formatX(value, 2, 2)
     }
