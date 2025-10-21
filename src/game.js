@@ -647,6 +647,9 @@ export function gameLoop(passDiff, options = {}) {
   const uncapped = Decimal.min(player.endgame.unnerfedCelestialMatter, CelestialDimensions.SOFTCAP);
   const instability = Decimal.pow(Decimal.max(player.endgame.unnerfedCelestialMatter.div(CelestialDimensions.SOFTCAP), 1), 1 / CelestialDimensions.softcapPow);
   player.endgame.celestialMatter = uncapped.times(instability);
+  if (EndgameMastery(111).isBought) {
+    player.reality.imaginaryMachines = MachineHandler.currentIMCap;
+  }
 
   if (Enslaved.canTickHintTimer) {
     player.celestials.enslaved.hintUnlockProgress += Enslaved.isRunning ? realDiff : (realDiff * 0.4);
