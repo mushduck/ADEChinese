@@ -819,10 +819,6 @@ window.player = {
       alchemy: new Set(),
       strikes: new Set()
     },
-    compressionMagnitude: {
-      infinity: 10,
-      time: 10
-    },
     respec: false
   },
   endgameMasteries: {
