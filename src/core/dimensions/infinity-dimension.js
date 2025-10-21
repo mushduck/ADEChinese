@@ -334,7 +334,9 @@ export const InfinityDimensions = {
    */
   all: InfinityDimension.index.compact(),
   HARDCAP_PURCHASES: 2000000,
-  OVERFLOW: DC.E1E15,
+  get OVERFLOW() {
+    return DC.E1E15.powEffectsOf(EndgameMastery(92));
+  },
 
   get compressionMagnitude() {
     const reduction = Effects.product(EndgameMastery(82));
