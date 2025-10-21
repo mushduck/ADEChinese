@@ -131,7 +131,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [81],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Delay the Infinity Challenge ${formatInt(8)} Reward based on Endgames`,
+    description: () => `Delay the Infinity Challenge ${formatInt(8)} Reward Hardcap based on Endgames`,
     effect: () => player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
