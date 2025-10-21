@@ -207,6 +207,10 @@ export const CelestialDimensions = {
   HARDCAP_PURCHASES: Decimal.NUMBER_MAX_VALUE,
   SOFTCAP: DC.E100,
 
+  get softcapPow() {
+    return 10;
+  },
+
   unlockNext() {
     if (CelestialDimension(8).isUnlocked) return;
     this.next().unlock();
