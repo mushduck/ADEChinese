@@ -519,11 +519,19 @@ Currency.celestialPoints = new class extends DecimalCurrency {
   }
 }();
 
+Currency.unnerfedCelestialMatter = new class extends DecimalCurrency {
+  get value() { return player.endgame.unnerfedCelestialMatter; }
+  set value(value) {
+    const newValue = new Decimal(value);
+    player.endgame.unnerfedCelestialMatter = newValue;
+  }
+}();
+
 Currency.celestialMatter = new class extends DecimalCurrency {
   get value() { return player.endgame.celestialMatter; }
   set value(value) {
     const uncapped = Decimal.min(value, CelestialDimensions.SOFTCAP);
-    const instability = Decimal.pow(Decimal.max(player.endgame.celestialMatter.div(CelestialDimensions.SOFTCAP), 1), 1 / CelestialDimensions.softcapPow);
+    const instability = Decimal.pow(Decimal.max(player.endgame.unnerfedCelestialMatter.div(CelestialDimensions.SOFTCAP), 1), 1 / CelestialDimensions.softcapPow);
     player.endgame.celestialMatter = uncapped.times(instability);
   }
 }();
