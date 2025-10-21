@@ -429,6 +429,7 @@ export const InfinityDimensions = {
     const multiplier2 = Effects.product(
       BreakEternityUpgrade.infinityPowerConversion
     );
-    return (7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2;
+    const exponent = Effects.product(EndgameMastery(102));
+    return Math.pow((7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2, exponent);
   }
 };
