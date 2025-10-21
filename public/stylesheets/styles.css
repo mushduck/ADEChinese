@@ -3130,6 +3130,36 @@ br {
 
 /* #endregion c-celestial-dim-description__accent */
 
+/* #region c-celestial-dim-description__accent-unstable */
+
+.c-celestial-dim-description__accent-unstable {
+  font-size: 3.5rem;
+  color: black;
+}
+
+.t-metro .c-celestial-dim-description__accent-unstable,
+.t-s8 .c-celestial-dim-description__accent-unstable {
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 50%), -0.1rem 0.1rem 0.1rem black;
+}
+
+.t-dark .c-celestial-dim-description__accent-unstable,
+.t-amoled .c-celestial-dim-description__accent-unstable,
+.t-amoled-metro .c-celestial-dim-description__accent-unstable,
+.t-s6 .c-celestial-dim-description__accent-unstable,
+.t-s10 .c-celestial-dim-description__accent-unstable,
+.t-s11 .c-celestial-dim-description__accent-unstable {
+  color: var(--color-pelle--base);
+  text-shadow: 0 0 0.7rem var(--color-pelle--base);
+}
+
+.t-metro .c-celestial-dim-description__accent-unstable,
+.t-dark-metro .c-celestial-dim-description__accent-unstable,
+.t-s8 .c-celestial-dim-description__accent-unstable {
+  color: var(--color-pelle--base);
+}
+
+/* #endregion c-celestial-dim-description__accent-unstable */
+
 /* #endregion Celestial Dimensions */
 
 /* #region Options */
