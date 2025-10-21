@@ -205,6 +205,7 @@ export const CelestialDimensions = {
    */
   all: CelestialDimension.index.compact(),
   HARDCAP_PURCHASES: Decimal.NUMBER_MAX_VALUE,
+  SOFTCAP: DC.E100,
 
   unlockNext() {
     if (CelestialDimension(8).isUnlocked) return;
