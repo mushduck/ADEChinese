@@ -224,9 +224,9 @@ export const Singularity = {
   },
 
   get singularitiesGained() {
+    const entropicCondensing = EndgameMastery(131).isBought ? Math.pow(ImaginaryUpgrade(10).effectOrDefault(1) + 1, Math.max(ImaginaryUpgrade(10).effectOrDefault(1), 1)) : ImaginaryUpgrade(10).effectOrDefault(1);
     return Math.floor(Math.pow(this.gainPerCapIncrease, player.celestials.laitela.singularityCapIncreases) *
-      SingularityMilestone.singularityMult.effectOrDefault(1) *
-      (1 + ImaginaryUpgrade(10).effectOrDefault(0)));
+      SingularityMilestone.singularityMult.effectOrDefault(1) * entropicCondensing);
   },
 
   // Time (in seconds) to go from 0 DE to the condensing requirement
