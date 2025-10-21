@@ -1462,7 +1462,8 @@ export const normalAchievements = [
     description: "Purchase the 8th Dark Matter Dimension. (NYI)",
     get reward() {
       return `Decrease Galaxy Generator Instability by ${formatInt(2)}.`;
-    }
+    },
+    effect: 2
   },
   {
     id: 197,
