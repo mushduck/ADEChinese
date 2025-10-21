@@ -193,7 +193,9 @@ export const Endgame = {
       reality: 0,
       imaginary: 0,
     };
-    player.reality.perks = new Set();
+    if (!EndgameMastery(112).isBought) {
+      player.reality.perks = new Set();
+    }
     player.reality.respec = false;
     player.reality.showGlyphSacrifice = false;
     player.reality.showSidebarPanel = GLYPH_SIDEBAR_MODE.INVENTORY_MANAGEMENT;
