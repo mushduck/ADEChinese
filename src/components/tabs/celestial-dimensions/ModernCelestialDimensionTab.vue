@@ -25,14 +25,6 @@ export default {
       unstable: false,
     };
   },
-  computed: {
-    classObject() {
-      return {
-        "c-celestial-dim-description__accent": !this.unstable,
-        "c-celestial-dim-description__accent-unstable": this.unstable,
-      };
-    }
-  },
   methods: {
     update() {
       this.showLockedDimCostNote = !CelestialDimension(8).isUnlocked;
@@ -53,6 +45,12 @@ export default {
     },
     toggleCelestialMatterMultiplier() {
       toggleCelestialMatter();
+    },
+    instabilityClassObject() {
+      return {
+        "c-celestial-dim-description__accent": !this.unstable,
+        "c-celestial-dim-description__accent-unstable": this.unstable,
+      };
     }
   }
 };
@@ -77,27 +75,29 @@ export default {
     <div>
       <p>
         You have
-        <span class="classObject">{{ format(celestialMatter, 2, 1) }}</span>
+        <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
         <span v-if="unstable">Unstable</span> Celestial Matter,
         <br>
         <span>
           increased by
-          <span class="classObject">{{ formatPow(conversionExponent, 2, 3) }}</span>
+          <span :class="instabilityClassObject()">{{ formatPow(conversionExponent, 2, 3) }}</span>
         </span>
         to a
-        <span class="classObject">{{ formatX(dimMultiplier, 2, 1) }}</span>
+        <span :class="instabilityClassObject()">{{ formatX(dimMultiplier, 2, 1) }}</span>
         multiplier to
         <span>Game Speed.</span>
-        You <i>would</i> have <span class="classObject">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
+        <br>
+        You <i>would</i> have <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
         Celestial Matter, but you don't.
         <br>
-        This is because above <span class="classObject">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
-        Celestial Matter will softcap.
+        This is because at <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
+        Celestial Matter was softcapped.
         <br>
-        Currently it is being raised to the power of
-        <span class="classObject">{{ format(1 / softcapPow, 2, 3) }}</span>
+        Currently, Celestial Matter above this amount is being raised to the power of
+        <span :class="instabilityClassObject()">{{ format(1 / softcapPow, 2, 3) }}</span>.
+        <br>
         The softcap to Celestial Matter is solely based on your Celestial Matter Softcap Magnitude, which is currently
-        <span class="classObject">{{ format(softcapPow, 2, 3) }}</span>.
+        <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>.
       </p>
     </div>
     <div>
