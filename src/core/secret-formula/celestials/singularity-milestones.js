@@ -287,5 +287,14 @@ export const singularityMilestones = {
     effect: () => 1 + Math.log10(Currency.singularities.value) / 80,
     effectFormat: x => formatX(Math.clampMin(x, 1), 2, 2),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_MAIN,
+  },
+  darkEnergyBoost: {
+    start: 1e50,
+    repeat: 0,
+    limit: 1,
+    description: "Imaginary Machines boost Dark Energy gain",
+    effect: () => Math.pow(10, Math.log10(Math.log10(Currency.imaginaryMachines.value + 1) + 1) * 20),
+    effectFormat: x => formatX(x, 2, 2),
+    upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_LAITELA,
   }
 };
