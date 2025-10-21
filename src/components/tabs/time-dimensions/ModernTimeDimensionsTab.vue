@@ -40,7 +40,7 @@ export default {
       this.incomeType = EternityChallenge(7).isRunning ? "Eighth Infinity Dimensions" : "Time Shards";
       this.areAutobuyersUnlocked = Autobuyer.timeDimension(1).isUnlocked;
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
-      this.timeDimCompressionMagnitude = player.endgame.compressionMagnitude.time;
+      this.timeDimCompressionMagnitude = TimeDimensions.compressionMagnitude;
       this.timeDimOverflow = 1 / this.timeDimCompressionMagnitude;
       this.timeDimStart = TimeDimensions.OVERFLOW;
     },
