@@ -106,7 +106,7 @@ export const imaginaryUpgrades = [
     description: () => `Increase Singularity gain`,
     effect: 1,
     scaleStart: 2,
-    formatEffect: value => `${formatX(1 + value, 2)}`
+    formatEffect: value => `${formatX(EndgameMastery(131).isBought ? Math.pow(1 + value, value) : 1 + value, 2)}`
   }),
   {
     name: "Suspicion of Interference",
