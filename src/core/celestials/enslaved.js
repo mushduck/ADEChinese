@@ -311,7 +311,7 @@ export const Tesseracts = {
   },
 
   capIncrease(count = this.bought) {
-    const totalCount = count * SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1);
+    const totalCount = ((count * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1)) + Effects.sum(EndgameMastery(61))) * Effects.product(BreakEternityUpgrade.tesseractMultiplier);
     const base = totalCount < 1 ? 0 : 250e3 * Math.pow(2, totalCount);
     return base * (AlchemyResource.boundless.effectValue + 1);
   },
