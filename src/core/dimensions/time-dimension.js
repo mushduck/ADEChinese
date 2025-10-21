@@ -235,7 +235,7 @@ class TimeDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
-    if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / player.endgame.compressionMagnitude.time).times(1e15));
+    if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / TimeDimensions.compressionMagnitude).times(1e15));
 
     return mult;
   }
@@ -324,6 +324,11 @@ export const TimeDimensions = {
    */
   all: TimeDimension.index.compact(),
   OVERFLOW: DC.E1E15,
+
+  get compressionMagnitude() {
+    const reduction = Effects.product(EndgameMastery(83));
+    return 10 * reduction;
+  },
 
   get scalingPast1e6000() {
     return 4;
