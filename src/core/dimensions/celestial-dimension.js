@@ -205,7 +205,9 @@ export const CelestialDimensions = {
    */
   all: CelestialDimension.index.compact(),
   HARDCAP_PURCHASES: Decimal.NUMBER_MAX_VALUE,
-  SOFTCAP: DC.E100,
+  get SOFTCAP() {
+    return DC.E100.timesEffectsOf(EndgameMastery(94));
+  },
 
   get softcapPow() {
     const reduction = Effects.product(EndgameMastery(84));
