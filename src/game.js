@@ -121,6 +121,9 @@ export function gainedInfinityPoints() {
   if (GlyphAlteration.isAdded("infinity")) {
     ip = ip.pow(getSecondaryGlyphEffect("infinityIP"));
   }
+  if (EndgameMastery(141).isBought) {
+    ip = ip.powEffectsOf(EndgameMastery(141));
+  }
 
   return ip.floor();
 }
@@ -154,6 +157,9 @@ export function gainedEternityPoints() {
   }
   if (GlyphAlteration.isAdded("time")) {
     ep = ep.pow(getSecondaryGlyphEffect("timeEP"));
+  }
+  if (EndgameMastery(142).isBought) {
+    ep = ep.powEffectsOf(EndgameMastery(142));
   }
 
   return ep.floor();
