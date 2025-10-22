@@ -263,7 +263,7 @@ export const normalTimeStudies = [
     description: () => (Achievement(103).canBeApplied
       ? `Make the Infinity Point formula better log(x)/${formatFloat(307.8, 1)} ➜ log(x)/${formatInt(280)}`
       : `Make the Infinity Point formula better log(x)/${formatInt(308)} ➜ log(x)/${formatInt(280)}`),
-    effect: 280
+    effect: () => (EndgameMastery(151).isBought ? Effects.min(280, EndgameMastery(151)) : 280)
   },
   {
     id: 121,
