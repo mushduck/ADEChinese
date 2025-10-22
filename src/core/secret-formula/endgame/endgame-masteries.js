@@ -30,7 +30,8 @@ export const endgameMasteries = [
     cost: 2,
     requirement: [21],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start Endgames with ${formatInt(100)} Realities`
+    description: () => `Start Endgames with ${formatInt(100)} Realities`,
+    effect: 100
   },
   {
     id: 32,
