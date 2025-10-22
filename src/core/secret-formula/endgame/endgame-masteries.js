@@ -84,7 +84,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [52],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Gain a free Tesseract",
+    description: "Keep Achievements on Endgame and gain a free Tesseract",
     effect: 1
   },
   {
