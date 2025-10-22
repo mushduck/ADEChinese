@@ -153,7 +153,7 @@ export default {
         </button>
         <button
           class="c-laitela-singularity__cap-control"
-          :class="{ 'c-laitela-singularity__cap-control--available' : singularityCapIncreases < 50 }"
+          :class="{ 'c-laitela-singularity__cap-control--available' : singularityCapIncreases < 100 }"
           :ach-tooltip="increaseTooltip"
           @click="increaseCap"
         >
