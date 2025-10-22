@@ -127,3 +127,7 @@ export const Laitela = {
 EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
   if (Tab.celestials.laitela.isOpen) Laitela.quotes.unlock.show();
 });
+
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (EndgameMastery(161).isBought) GameDatabase.celestials.singularityMilestones.improvedSingularityCap.limit = Infinity;
+});
