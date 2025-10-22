@@ -249,7 +249,7 @@ export const Singularity = {
   },
 
   increaseCap() {
-    if (player.celestials.laitela.singularityCapIncreases >= 50) return;
+    if (player.celestials.laitela.singularityCapIncreases >= 100) return;
     player.celestials.laitela.singularityCapIncreases++;
   },
 
