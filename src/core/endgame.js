@@ -98,7 +98,9 @@ export const Endgame = {
     player.isGameEnd = false;
     Tab.dimensions.antimatter.show();
     AchievementTimers.marathon2.reset();
-    lockAchievementsOnEndgame();
+    if (!EndgameMastery(61).isBought) {
+      lockAchievementsOnEndgame();
+    }
     player.tabNotifications = new Set();
     player.triggeredTabNotificationBits = 0;
     player.tutorialState = 0;
@@ -234,6 +236,10 @@ export const Endgame = {
     player.blackHoleAutoPauseMode = 0;
     player.blackHolePauseTime = 0;
     player.blackHoleNegative = 1;
+    if (EndgameMastery(42).isBought) {
+      player.blackHole[0].unlocked;
+      player.blackHole[1].unlocked;
+    }
     player.celestials.teresa.pouredAmount = 0;
     player.celestials.teresa.quoteBits = 0;
     player.celestials.teresa.unlockBits = 0;
@@ -480,7 +486,9 @@ export const Endgame = {
     Currency.antimatter.reset();
     CelestialDimensions.resetAmount();
     initializeChallengeCompletions(true);
-    lockAchievementsOnEndgame();
+    if (!EndgameMastery(61).isBought) {
+      lockAchievementsOnEndgame();
+    }
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
     player.records.totalTimePlayed = player.records.realTimePlayed;
     player.records.timePlayedAtBHUnlock = Number.MAX_VALUE;
@@ -540,6 +548,14 @@ export const Endgame = {
     player.records.bestReality.speedSet = [];
     player.records.bestReality.iMCapSet = [];
     player.records.bestReality.laitelaSet = [];
+    if (EndgameMastery(112).isBought) {
+      Achievement(146).unlock();
+    }
+    if (EndgameMastery(42).isBought) {
+      Achievement(142).unlock();
+      Achievement(144).unlock();
+      Achievement(147).unlock();
+    }
   }
 };
 function lockAchievementsOnEndgame() {
