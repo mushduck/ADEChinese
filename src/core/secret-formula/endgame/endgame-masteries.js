@@ -269,7 +269,7 @@ export const endgameMasteries = [
     requirement: [141],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Improve Time Study 111 based on Celestial Points`,
-    effect: () => Effects.max(1, TimeStudy(111)) / (1 + (Math.log10(Math.log10(Currency.celestialPoints + 1) + 1) / 20)),
+    effect: () => Effects.max(1, TimeStudy(111)) / (1 + (Math.log10(Decimal.log10(Currency.celestialPoints.value.plus(1)) + 1) / 20)),
     formatEffect: value => `log(x)/${format(Effects.max(1, TimeStudy(111)), 2)} ➜ log(x)/${format(value, 2, 2)}`
   },
   {
