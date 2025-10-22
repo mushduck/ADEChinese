@@ -129,5 +129,5 @@ EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
 });
 
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
-  if (EndgameMastery(161).isBought) SingularityMilestone.improvedSingularityCap.limit = Infinity;
+  if (EndgameMastery(161).isBought) SingularityMilestone.improvedSingularityCap.limit = 1e100;
 });
