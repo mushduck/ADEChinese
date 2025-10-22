@@ -26,6 +26,9 @@ export const MachineHandler = {
     // Increase base RM gain if <10 RM
     if (rmGain.gte(1) && rmGain.lt(10)) rmGain = new Decimal(27 / 4000 * log10FinalEP - 26);
     rmGain = rmGain.times(this.realityMachineMultiplier);
+    if (EndgameMastery(143).isBought) {
+      rmGain = rmGain.powEffectsOf(EndgameMastery(143));
+    }
     return rmGain.floor();
   },
 
@@ -39,9 +42,10 @@ export const MachineHandler = {
 
   get baseIMCap() {
     if (Pelle.isDoomed) return 1.6e15;
-    return (Math.pow(Math.clampMin(this.uncappedRM.log10() - 1000, 0), 2)) *
+    return ((Math.pow(Math.clampMin(this.uncappedRM.log10() - 1000, 0), 2)) *
       (Math.pow(Math.clampMin(this.uncappedRM.log10() - 100000, 1), 0.2)) *
-      (Math.pow(Math.clampMin(this.uncappedRM.log10() / 1000000000, 1), Math.log10(this.uncappedRM.log10()) / 7.5));
+      (Math.pow(Math.clampMin(this.uncappedRM.log10() / 1000000000, 1), Math.log10(this.uncappedRM.log10()) / 7.5))) **
+      Effects.product(EndgameMastery(144));
   },
 
   get currentIMCap() {
