@@ -300,7 +300,9 @@ export const endgameMasteries = [
     cost: 5,
     requirement: [151, 152, 153, 154],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Uncap the Singularity Milestone that increases Singularity Gain per bulk increase"
+    description: "Improve Singularity Gain per bulk increase based on Singularities owned",
+    effect: () => 1 + (Math.log10(Math.max(Currency.singularities.value / 1e50, 1)) / 5),
+    formatEffect: value => `+${format(value, 2)}`
   },
   {
     id: 171,
