@@ -64,7 +64,7 @@ export const imaginaryUpgrades = [
     description: () => `Increase the Reality Machine cap by ${formatX(1e100)}`,
     effect: 1e100,
     scaleStart: 5,
-    formatEffect: value => `${formatX(value)}`,
+    formatEffect: value => `${formatX(EndgameMastery(153).isBought ? value.powEffectsOf(EndgameMastery(153)) : value)}`,
     isDecimal: true
   }),
   rebuyable({
