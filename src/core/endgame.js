@@ -237,8 +237,8 @@ export const Endgame = {
     player.blackHolePauseTime = 0;
     player.blackHoleNegative = 1;
     if (EndgameMastery(42).isBought) {
-      player.blackHole[0].unlocked;
-      player.blackHole[1].unlocked;
+      player.blackHole[0].unlocked = true;
+      player.blackHole[1].unlocked = true;
     }
     player.celestials.teresa.pouredAmount = 0;
     player.celestials.teresa.quoteBits = 0;
