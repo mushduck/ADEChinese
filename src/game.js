@@ -432,7 +432,7 @@ export function realTimeMechanics(realDiff) {
   // This is in order to prevent players from using time inside of Ra's reality for amplification as well
   Ra.memoryTick(realDiff, !Enslaved.isStoringRealTime);
   if (AlchemyResource.momentum.isUnlocked) {
-    player.celestials.ra.momentumTime += realDiff * Achievement(175).effectOrDefault(1);
+    player.celestials.ra.momentumTime += realDiff * Achievement(175).effectOrDefault(1) * EndgameMastery(171).effectOrDefault(1);
   }
 
   GameCache.celestialDimensionCommonMultiplier.invalidate();
