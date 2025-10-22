@@ -149,7 +149,7 @@ export const imaginaryUpgrades = [
       MachineHandler.uncappedRM.times(simulatedRealityCount(false) + 1).gte(Number.MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Increase Imaginary Machine Cap based on Imaginary Upgrades purchased",
-    effect: () => 1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2,
+    effect: () => Math.pow(1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2, EndgameMastery(154).effectOrDefault(1)),
     formatEffect: value => `${formatX(value, 2, 1)}`,
     isDisabledInDoomed: true
   },
