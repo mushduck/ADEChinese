@@ -87,7 +87,7 @@ export function respecEndgameMasteries() {
   GameCache.endgameMasteries.invalidate();
   Tab.endgame.masteries.show();
   GameCache.currentMasteryTree.invalidate();
-  Currency.endgameSkills.max = Currency.endgameSkills.plus(EndgameSkills.calculateEndgameMasteriesCost());
+  player.endgameMasteries.maxSkills = player.endgameMasteries.skills.plus(EndgameSkills.calculateEndgameMasteriesCost());
 }
 
 export class EndgameMasteriesState extends GameMechanicState {
