@@ -80,12 +80,13 @@ export default {
 }
 
 .c-primary-btn--expansion-packs-unlock--unavailable {
-  color: #181818;
-  background: #5f5f5f;
+  color: var(--color-pelle--base);
+  background: black;
 }
 
 .c-primary-btn--expansion-packs-unlock--unavailable:hover {
-  background: #737373;
+  color: black;
+  background: var(--color-pelle--base);
 }
 
 .c-primary-btn--expansion-packs-unlock--available {
@@ -94,13 +95,13 @@ export default {
 }
 
 .c-primary-btn--expansion-packs-unlock--available:hover {
-  color: var(--color-text);
+  color: var(--color-pelle--secondary);
   background: linear-gradient(var(--color-endgame), var(--color-pelle--base));
 }
 
 .c-primary-btn--expansion-packs-unlock--bought {
   color: black;
   background: linear-gradient(var(--color-endgame), var(--color-pelle--base));
-  border: 0.1rem solid black;
+  border: 0.1rem solid var(--color-pelle--secondary);
 }
 </style>
