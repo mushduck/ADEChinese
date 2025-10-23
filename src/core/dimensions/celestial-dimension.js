@@ -96,6 +96,7 @@ class CelestialDimensionState extends DimensionState {
     const tier = this.tier;
     let mult = GameCache.celestialDimensionCommonMultiplier.value;
     mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount)));
+    mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
     return mult;
   }
 
