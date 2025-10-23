@@ -311,7 +311,7 @@ export const singularityMilestones = {
     repeat: 0,
     limit: 1,
     description: "Celestial Matter boosts Dark Matter and Dark Energy gain",
-    effect: () => Math.pow(Decimal.log10(Currency.celestialMatter.value + 1) + 1, 5),
+    effect: () => Math.pow(Math.log10(Currency.celestialMatter.value + 1) + 1, 5),
     effectFormat: x => formatX(x, 2, 2),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_LAITELA,
   },
