@@ -16,10 +16,10 @@ export default {
   computed: {
     classObject() {
       return {
-        "o-primary-btn--expansion-packs-unlock": true,
-        "o-primary-btn--expansion-packs-unlock--bought": this.isUnlocked,
-        "o-primary-btn--expansion-packs-unlock--available": !this.isUnlocked && this.isUnlockAffordable,
-        "o-primary-btn--expansion-packs-unlock--unavailable": !this.isUnlocked && !this.isUnlockAffordable,
+        "c-primary-btn--expansion-packs-unlock": true,
+        "c-primary-btn--expansion-packs-unlock--bought": this.isUnlocked,
+        "c-primary-btn--expansion-packs-unlock--available": !this.isUnlocked && this.isUnlockAffordable,
+        "c-primary-btn--expansion-packs-unlock--unavailable": !this.isUnlocked && !this.isUnlockAffordable,
       };
     }
   },
@@ -51,3 +51,42 @@ export default {
     </PrimaryButton>
   </div>
 </template>
+
+<style scoped>
+.c-primary-btn--expansion-packs-unlock {
+  width: 20rem;
+  height: 8rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid linear-gradient(var(--color-endgame), var(--color-pelle--base));
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.c-primary-btn--expansion-packs-unlock--unavailable {
+  color: #181818;
+  background-color: #5f5f5f;
+}
+
+.c-primary-btn--expansion-packs-unlock--unavailable:hover {
+  background-color: #737373;
+}
+
+.c-primary-btn--expansion-packs-unlock--available {
+  color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
+  background-color: black;
+}
+
+.c-primary-btn--expansion-packs-unlock--available:hover {
+  color: var(--color-text);
+  background-color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
+}
+
+.c-primary-btn--expansion-packs-unlock--bought {
+  color: black;
+  background-color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
+  border-color: black;
+}
+</style>
