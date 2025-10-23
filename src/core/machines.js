@@ -4,8 +4,9 @@ export const MachineHandler = {
   get baseRMCap() { return DC.E1000; },
 
   get hardcapRM() {
-    const boost = DC.D1.timesEffectsOf(EndgameMastery(153));
-    return this.baseRMCap.times(Decimal.pow(ImaginaryUpgrade(6).effectOrDefault(1), boost));
+    const smallBoost = DC.D1.timesEffectsOf(EndgameMastery(153));
+    const largeBoost = DC.D1.timesEffectsOf(SingularityMilestone.rmCap);
+    return Decimal.pow(this.baseRMCap.times(Decimal.pow(ImaginaryUpgrade(6).effectOrDefault(1), smallBoost)), largeBoost);
   },
 
   get distanceToRMCap() {
