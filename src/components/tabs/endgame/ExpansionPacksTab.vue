@@ -13,6 +13,16 @@ export default {
       unlockCost: new Decimal(),
     };
   },
+  computed: {
+    classObject() {
+      return {
+        "o-primary-btn--expansion-packs-unlock": true,
+        "o-primary-btn--expansion-packs-unlock--bought": this.isUnlocked,
+        "o-primary-btn--expansion-packs-unlock--available": !this.isUnlocked && this.isUnlockAffordable,
+        "o-primary-btn--expansion-packs-unlock--unavailable": !this.isUnlocked && !this.isUnlockAffordable,
+      };
+    }
+  };
   methods: {
     update() {
       //this.isUnlocked = ExpansionPacks.areUnlocked;
@@ -33,7 +43,7 @@ export default {
     <PrimaryButton
       v-if="!isUnlocked"
       :enabled="isUnlockAffordable"
-      class="o-primary-btn--expansion-packs-unlock"
+      :class="classObject"
     >
       Unlock Expansion Packs
       <br>
