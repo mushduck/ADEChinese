@@ -1173,7 +1173,7 @@ export const normalAchievements = [
     id: 155,
     name: "Achievement #15983",
     get description() { return `Play for ${formatFloat(13.7, 1)} billion years.`; },
-    checkRequirement: () => Time.totalTimePlayed.totalYears > 13.7e9,
+    checkRequirement: () => Time.totalTimePlayed.totalYears.gt(13.7e9),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `Black Hole durations are ${formatPercents(0.1)} longer.`; },
     effect: 1.1
