@@ -5889,43 +5889,6 @@ properly on certain themes. */
   align-items: center;
 }
 
-.o-primary-btn--expansion-packs-unlock {
-  width: 20rem;
-  height: 8rem;
-  font-family: Typewriter, serif;
-  font-size: 1rem;
-  font-weight: bold;
-  border: 0.1rem solid linear-gradient(var(--color-endgame), var(--color-pelle--base));
-  border-radius: var(--var-border-radius, 0.4rem);
-  transition-duration: 0.2s;
-  cursor: pointer;
-}
-
-.o-primary-btn--expansion-packs-unlock--unavailable {
-  color: #181818;
-  background-color: #5f5f5f;
-}
-
-.o-primary-btn--expansion-packs-unlock--unavailable:hover {
-  background-color: #737373;
-}
-
-.o-primary-btn--expansion-packs-unlock--available {
-  color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
-  background-color: black;
-}
-
-.o-primary-btn--expansion-packs-unlock--available:hover {
-  color: var(--color-text);
-  background-color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
-}
-
-.o-primary-btn--expansion-packs-unlock--bought {
-  color: black;
-  background-color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
-  border-color: black;
-}
-
 /* #endregion Expansion Packs */
 
 /* #region Modals */
