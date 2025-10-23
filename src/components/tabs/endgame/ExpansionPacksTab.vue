@@ -22,7 +22,7 @@ export default {
         "o-primary-btn--expansion-packs-unlock--unavailable": !this.isUnlocked && !this.isUnlockAffordable,
       };
     }
-  };
+  },
   methods: {
     update() {
       //this.isUnlocked = ExpansionPacks.areUnlocked;
