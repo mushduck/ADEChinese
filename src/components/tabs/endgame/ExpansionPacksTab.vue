@@ -29,7 +29,7 @@ export default {
       //PrimaryButton onclick="ExpansionPacks.unlock();"
       this.unlockCost = Math.pow(2, 64);
       if (!this.isUnlocked) {
-        this.isUnlockAffordable = player.galaxies >= this.unlockCost;
+        this.isUnlockAffordable = player.galaxies + GalaxyGenerator.galaxies >= this.unlockCost;
         return;
       }
     }
