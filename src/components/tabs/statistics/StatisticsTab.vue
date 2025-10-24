@@ -92,7 +92,7 @@ export default {
       return Time.toDateTimeString(player.records.gameCreatedTime);
     },
     saveAge() {
-      return TimeSpan.fromMilliseconds(this.timeSinceCreation);
+      return TimeSpan.fromMilliseconds(new Decimal(this.timeSinceCreation));
     },
   },
   methods: {
@@ -100,7 +100,8 @@ export default {
       const records = player.records;
       this.totalAntimatter.copyFrom(records.totalAntimatter);
       this.realTimePlayed.setFrom(records.realTimePlayed);
-      this.fullTimePlayed = TimeSpan.fromMilliseconds(records.previousRunRealTime + records.realTimePlayed);
+      this.fullTimePlayed = TimeSpan.fromMilliseconds(
+        new Decimal(records.previousRunRealTime.add(records.realTimePlayed)));
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
       this.totalNews = player.news.totalSeen;
       this.secretAchievementCount = SecretAchievements.all.filter(a => a.isUnlocked).length;
