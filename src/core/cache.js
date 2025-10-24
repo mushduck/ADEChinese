@@ -77,12 +77,12 @@ export const GameCache = {
 
   currentMasteryTree: new Lazy(() => new EndgameMasteryTree(EndgameMasteryTree.currentMasteries)),
 
-  achievementPeriod: new Lazy(() => TimeSpan.fromMinutes(30 - Effects.sum(
+  achievementPeriod: new Lazy(() => TimeSpan.fromMinutes(new Decimal(30).sub(Effects.sum(
     Perk.achievementGroup1,
     Perk.achievementGroup2,
     Perk.achievementGroup3,
     Perk.achievementGroup4
-  )).totalMilliseconds),
+  ))).totalMilliseconds),
 
   buyablePerks: new Lazy(() => Perks.all.filter(p => p.canBeBought)),
 
