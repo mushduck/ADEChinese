@@ -25,7 +25,7 @@ export default {
         [true, Glyphs.copyForRecords(bestReality.bestEPSet), "Highest Eternity Points",
           `${format(bestReality.bestEP, 2, 2)} EP`],
         [true, Glyphs.copyForRecords(bestReality.speedSet), "Fastest Reality (real time)",
-          `${TimeSpan.fromMilliseconds(bestReality.realTime).toStringShort()}`],
+          `${TimeSpan.fromMilliseconds(new Decimal(bestReality.realTime)).toStringShort()}`],
         [player.celestials.teresa.bestRunAM.gt(1), Glyphs.copyForRecords(player.celestials.teresa.bestAMSet),
           `Highest Antimatter in ${Teresa.possessiveName} Reality`,
           `${format(player.celestials.teresa.bestRunAM, 2, 2)} Antimatter`],
@@ -34,7 +34,7 @@ export default {
           `${format(MachineHandler.currentIMCap, 2, 2)} iM`],
         [Laitela.isUnlocked, Glyphs.copyForRecords(bestReality.laitelaSet),
           `Best ${Laitela.displayName} Destabilization`,
-          `${TimeSpan.fromSeconds(player.celestials.laitela.fastestCompletion).toStringShort()},
+          `${TimeSpan.fromSeconds(new Decimal(player.celestials.laitela.fastestCompletion)).toStringShort()},
           ${laitelaDim} ${pluralize("Dimension", laitelaDim)} (${formatX(Laitela.realityReward, 2, 2)} DM)`],
       ];
     },
