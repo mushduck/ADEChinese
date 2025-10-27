@@ -6,13 +6,13 @@ import { Quotes } from "./quotes";
 export const ENSLAVED_UNLOCKS = {
   FREE_TICKSPEED_SOFTCAP: {
     id: 0,
-    price: TimeSpan.fromYears(new Decimal(1e35)).totalMilliseconds,
+    price: TimeSpan.fromYears(new Decimal(1e35)).totalMilliseconds.toNumber(),
     secondaryRequirement: () => true,
     description: () => `Increase the softcap to Tickspeed upgrades from Time Dimensions by ${formatInt(1e5)}`,
   },
   RUN: {
     id: 1,
-    price: TimeSpan.fromYears(new Decimal(1e40)).totalMilliseconds,
+    price: TimeSpan.fromYears(new Decimal(1e40)).totalMilliseconds.toNumber(),
     secondaryRequirement() {
       const hasLevelRequirement = player.records.bestReality.glyphLevel >= 5000;
       const hasRarityRequirement = strengthToRarity(player.records.bestReality.glyphStrength) >= 100;
