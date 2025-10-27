@@ -121,7 +121,7 @@ export const Enslaved = {
     let release = player.celestials.enslaved.stored;
     if (Enslaved.isRunning) {
       release = Enslaved.storedTimeInsideEnslaved(release);
-      if (Time.thisReality.totalYears.add(TimeSpan.fromMilliseconds(release).totalYears.gt(1))) {
+      if (Time.thisReality.totalYears.add(TimeSpan.fromMilliseconds(new Decimal(release)).totalYears.gt(1))) {
         EnslavedProgress.storedTime.giveProgress();
       }
     }
@@ -220,9 +220,9 @@ export const Enslaved = {
     if (player.celestials.enslaved.stored < this.nextHintCost) return false;
     player.celestials.enslaved.stored -= this.nextHintCost;
     if (Enslaved.hintCostIncreases === 0) {
-      player.celestials.enslaved.zeroHintTime = Date.now() + TimeSpan.fromDays(1).totalMilliseconds.toNumber();
+      player.celestials.enslaved.zeroHintTime = Date.now() + TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber();
     } else {
-      player.celestials.enslaved.zeroHintTime += TimeSpan.fromDays(1).totalMilliseconds.toNumber();
+      player.celestials.enslaved.zeroHintTime += TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber();
     }
     return true;
   },
@@ -254,7 +254,7 @@ class EnslavedProgressState extends BitUpgradeState {
   giveProgress() {
     // Bump the last hint time appropriately if the player found the hint
     if (this.hasHint && !this.hasProgress) {
-      player.celestials.enslaved.zeroHintTime -= Math.log(2) / Math.log(3) * TimeSpan.fromDays(1).totalMilliseconds.toNumber();
+      player.celestials.enslaved.zeroHintTime -= Math.log(2) / Math.log(3) * TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber();
       GameUI.notify.success("You found a crack in The Nameless Ones' Reality!", 10000);
     }
     player.celestials.enslaved.progressBits |= (1 << this.id);
