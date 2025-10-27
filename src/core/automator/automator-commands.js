@@ -393,7 +393,7 @@ export const AutomatorCommands = [
           timeString = `${c.NumberLiteral[0].image} ${c.TimeUnit[0].image}`;
         } else {
           // This is the case for a defined constant; its value was parsed out during validation
-          timeString = TimeSpan.fromMilliseconds(duration);
+          timeString = TimeSpan.fromMilliseconds(new Decimal(duration));
         }
         if (S.commandState === null) {
           S.commandState = { timeMs: 0 };
@@ -946,7 +946,7 @@ export const AutomatorCommands = [
       const evalComparison = C.visit(ctx.comparison);
       const doneWaiting = evalComparison();
       if (doneWaiting) {
-        const timeWaited = TimeSpan.fromMilliseconds(Date.now() - AutomatorData.waitStart).toStringShort();
+        const timeWaited = TimeSpan.fromMilliseconds(new Decimal(Date.now() - AutomatorData.waitStart)).toStringShort();
         if (AutomatorData.isWaiting) {
           AutomatorData.logCommandEvent(`Continuing after WAIT
             (${parseConditionalIntoText(ctx)} is true, after ${timeWaited})`, ctx.startLine);
@@ -996,7 +996,7 @@ export const AutomatorCommands = [
         const prestigeOccurred = S.commandState.prestigeLevel >= prestigeLevel;
         const prestigeName = ctx.PrestigeEvent[0].image.toUpperCase();
         if (prestigeOccurred) {
-          const timeWaited = TimeSpan.fromMilliseconds(Date.now() - AutomatorData.waitStart).toStringShort();
+          const timeWaited = TimeSpan.fromMilliseconds(new Decimal(Date.now() - AutomatorData.waitStart)).toStringShort();
           AutomatorData.logCommandEvent(`Continuing after WAIT (${prestigeName} occurred for
             ${findLastPrestigeRecord(prestigeName)}, after ${timeWaited})`, ctx.startLine);
           AutomatorData.isWaiting = false;
@@ -1036,7 +1036,7 @@ export const AutomatorCommands = [
       const bhCond = off ? !BlackHole(1).isActive : BlackHole(holeID).isActive;
       const bhStr = off ? "inactive Black Holes" : `active Black Hole ${holeID}`;
       if (bhCond) {
-        const timeWaited = TimeSpan.fromMilliseconds(Date.now() - AutomatorData.waitStart).toStringShort();
+        const timeWaited = TimeSpan.fromMilliseconds(new Decimal(Date.now() - AutomatorData.waitStart)).toStringShort();
         AutomatorData.logCommandEvent(`Continuing after WAIT (waited ${timeWaited} for ${bhStr})`,
           ctx.startLine);
         AutomatorData.isWaiting = false;
