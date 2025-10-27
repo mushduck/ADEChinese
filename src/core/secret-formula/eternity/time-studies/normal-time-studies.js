@@ -303,7 +303,7 @@ export const normalTimeStudies = [
     requiresST: [121, 122],
     description: "You gain more Eternity Points based on time spent this Eternity",
     effect: () => {
-      const perkEffect = TimeSpan.fromMinutes(Perk.studyIdleEP.effectOrDefault(0));
+      const perkEffect = TimeSpan.fromMinutes(new Decimal(Perk.studyIdleEP.effectOrDefault(0)));
       const totalSeconds = Time.thisEternity.plus(perkEffect).totalSeconds;
       return Math.sqrt(1.39 * totalSeconds);
     },
@@ -382,7 +382,7 @@ export const normalTimeStudies = [
     requiresST: [141, 142],
     description: "Multiplier to Infinity Points, which increases over this Infinity",
     effect: () => {
-      const perkEffect = TimeSpan.fromMinutes(Perk.studyIdleEP.effectOrDefault(0));
+      const perkEffect = TimeSpan.fromMinutes(new Decimal(Perk.studyIdleEP.effectOrDefault(0)));
       const totalSeconds = Time.thisInfinity.plus(perkEffect).totalSeconds;
       return thisInfinityMult(totalSeconds);
     },
