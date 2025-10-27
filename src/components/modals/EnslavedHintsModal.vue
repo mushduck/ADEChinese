@@ -21,10 +21,10 @@ export default {
   },
   computed: {
     hintCost() {
-      return `${quantify("year", TimeSpan.fromMilliseconds(this.nextHintCost).totalYears, 2)}`;
+      return `${quantify("year", TimeSpan.fromMilliseconds(new Decimal(this.nextHintCost)).totalYears, 2)}`;
     },
     formattedStored() {
-      return `${quantify("year", TimeSpan.fromMilliseconds(this.currentStored).totalYears, 2)}`;
+      return `${quantify("year", TimeSpan.fromMilliseconds(new Decimal(this.currentStored)).totalYears, 2)}`;
     },
     hasProgress(id) {
       return this.progressEntries.some(entry => entry.id === id);
@@ -33,26 +33,25 @@ export default {
     // of cost bumps and I'm not entirely sure why. There's probably a numerical issue I can't quite figure out, but
     // considering that much cost raising can't happen in practice I think I'm just going to leave it be.
     timeEstimate() {
-      if (this.currentStored.gte(this.nextHintCost)) return "";
+      if (this.currentStored >= this.nextHintCost) return "";
 
       // Relevant values are stored as milliseconds, so multiply the rate by 1000 to get to seconds
-      const storeRate = (Enslaved.isStoringGameTime
+      const storeRate = 1000 * (Enslaved.isStoringGameTime
         ? Enslaved.currentBlackHoleStoreAmountPerMs
-        : getGameSpeedupFactor()).mul(1e3);
-      const alreadyWaited = this.currentStored.div(storeRate);
-      const decaylessTime = this.nextHintCost.div(storeRate);
+        : getGameSpeedupFactor());
+      const alreadyWaited = this.currentStored / storeRate;
+      const decaylessTime = this.nextHintCost / storeRate;
 
       // Check if decay is irrelevant and don't do the hard calculations if so
-      const minCostEstimate = (TimeSpan.fromYears(new Decimal(1e40)).totalMilliseconds.sub(this.currentStored))
-        .div(storeRate);
-      if (TimeSpan.fromSeconds(minCostEstimate).totalDays.gt(this.hints)) {
-        return `${TimeSpan.fromSeconds(minCostEstimate).toStringShort(true)}`;
+      const minCostEstimate = (TimeSpan.fromYears(new Decimal(1e40)).totalMilliseconds - this.currentStored) / storeRate;
+      if (TimeSpan.fromSeconds(new Decimal(minCostEstimate)).totalDays > this.hints) {
+        return `${TimeSpan.fromSeconds(new Decimal(minCostEstimate)).toStringShort(true)}`;
       }
 
       // Decay is 3x per day, but the math needs decay per second
-      const K = Decimal.pow(3, 1 / 86400);
-      const x = Decimal.ln(K).mul(Decimal.pow(K, alreadyWaited)).mul(decaylessTime);
-      const timeToGoal = decimalProductLog(x).div(Decimal.ln(K).sub(alreadyWaited));
+      const K = Math.pow(3, 1 / 86400);
+      const x = decaylessTime * Math.log(K) * Math.pow(K, alreadyWaited);
+      const timeToGoal = productLog(x) / Math.log(K) - alreadyWaited;
       return `${TimeSpan.fromSeconds(timeToGoal).toStringShort(true)}`;
     }
   },
@@ -60,7 +59,7 @@ export default {
     update() {
       this.currentStored = player.celestials.enslaved.stored;
       this.nextHintCost = Enslaved.nextHintCost;
-      this.canGetHint = this.currentStored.gte(this.nextHintCost);
+      this.canGetHint = this.currentStored >= this.nextHintCost;
       this.shownEntries = [];
 
       this.realityHintsLeft = EnslavedProgress.all.length;
