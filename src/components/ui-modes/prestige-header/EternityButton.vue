@@ -153,7 +153,7 @@ export default {
         ? EP_BUTTON_DISPLAY_TYPE.NORMAL_EXPLORE_NEW_CONTENT
         : EP_BUTTON_DISPLAY_TYPE.NORMAL;
       this.currentEPRate.copyFrom(gainedEP.dividedBy(
-        TimeSpan.fromMilliseconds(player.records.thisEternity.realTime).totalMinutes));
+        TimeSpan.fromMilliseconds(new Decimal(player.records.thisEternity.realTime)).totalMinutes));
       this.peakEPRateVal.copyFrom(player.records.thisEternity.bestEPminVal);
       this.peakEPRate.copyFrom(player.records.thisEternity.bestEPmin);
       this.showEPRate = this.peakEPRate.lte(this.rateThreshold);
