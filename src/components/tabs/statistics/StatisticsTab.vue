@@ -101,7 +101,7 @@ export default {
       this.totalAntimatter.copyFrom(records.totalAntimatter);
       this.realTimePlayed.setFrom(records.realTimePlayed);
       this.fullTimePlayed = TimeSpan.fromMilliseconds(
-        new Decimal(records.previousRunRealTime.add(records.realTimePlayed))).toNumber();
+        new Decimal(records.previousRunRealTime + records.realTimePlayed)).toNumber();
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
       this.totalNews = player.news.totalSeen;
       this.secretAchievementCount = SecretAchievements.all.filter(a => a.isUnlocked).length;
@@ -121,7 +121,7 @@ export default {
         );
         infinity.bankRate = infinity.projectedBanked.div(Math.clampMin(33, records.thisEternity.time)).times(60000);
         infinity.totalInfinityAntimatter.copyFrom(records.totalInfinityAntimatter);
-        infinity.hasBest = bestInfinity.time < 999999999999;
+        infinity.hasBest = bestInfinity.time.lt(999999999999);
         infinity.best.setFrom(bestInfinity.time);
         infinity.this.setFrom(records.thisInfinity.time);
         infinity.bestRate.copyFrom(bestInfinity.bestIPminEternity);
@@ -134,7 +134,7 @@ export default {
       if (isEternityUnlocked) {
         eternity.count.copyFrom(Currency.eternities);
         eternity.totalEternityAntimatter.copyFrom(records.totalEternityAntimatter);
-        eternity.hasBest = bestEternity.time < 999999999999;
+        eternity.hasBest = bestEternity.time.lt(999999999999);
         eternity.best.setFrom(bestEternity.time);
         eternity.this.setFrom(records.thisEternity.time);
         eternity.bestRate.copyFrom(bestEternity.bestEPminReality);
@@ -148,7 +148,7 @@ export default {
       if (isRealityUnlocked) {
         reality.count = Math.floor(Currency.realities.value);
         reality.totalRealityAntimatter.copyFrom(records.totalRealityAntimatter);
-        reality.hasBest = bestReality.time < 999999999999;
+        reality.hasBest = bestReality.time.lt(999999999999);
         reality.best.setFrom(bestReality.time);
         reality.bestReal.setFrom(bestReality.realTime);
         reality.this.setFrom(records.thisReality.time);
