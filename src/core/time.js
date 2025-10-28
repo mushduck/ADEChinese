@@ -80,7 +80,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get realTimeDoomed() {
-    return this.fromMilliseconds(() => new Decimal(player.records.realTimeDoomed).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.realTimeDoomed));
   },
   /**
    * @param {TimeSpan} timespan
@@ -93,7 +93,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get realTimePlayed() {
-    return this.fromMilliseconds(() => new Decimal(player.records.realTimePlayed).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.realTimePlayed));
   },
   /**
    * @param {TimeSpan} timespan
@@ -119,7 +119,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get thisInfinityRealTime() {
-    return this.fromMilliseconds(() => new Decimal(player.records.thisInfinity.realTime).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.thisInfinity.realTime));
   },
   /**
    * @param {TimeSpan} timespan
@@ -145,7 +145,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get bestInfinityRealTime() {
-    return this.fromMilliseconds(() => new Decimal(player.records.bestInfinity.realTime).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.bestInfinity.realTime));
   },
   /**
    * @param {TimeSpan} timespan
@@ -171,7 +171,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get thisEternityRealTime() {
-    return this.fromMilliseconds(() => new Decimal(player.records.thisEternity.realTime).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.thisEternity.realTime));
   },
   /**
    * @param {TimeSpan} timespan
@@ -197,7 +197,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get bestEternityRealTime() {
-    return this.fromMilliseconds(() => new Decimal(player.records.bestEternity.realTime).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.bestEternity.realTime));
   },
   /**
    * @param {TimeSpan} timespan
@@ -224,7 +224,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get thisRealityRealTime() {
-    return this.fromMilliseconds(() => new Decimal(player.records.thisReality.realTime).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.thisReality.realTime));
   },
   /**
    * @param {TimeSpan} timespan
@@ -250,7 +250,7 @@ export const Time = {
    * @returns {TimeSpan}
    */
   get bestRealityRealTime() {
-    return this.fromMilliseconds(() => new Decimal(player.records.bestReality.realTime).toNumber());
+    return this.fromMilliseconds(() => new Decimal(player.records.bestReality.realTime));
   },
   /**
    * @param {TimeSpan} timespan
