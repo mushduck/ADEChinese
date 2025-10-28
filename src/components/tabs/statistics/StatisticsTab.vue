@@ -10,9 +10,9 @@ export default {
   data() {
     return {
       isDoomed: false,
-      realTimeDoomed: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
+      realTimeDoomed: TimeSpan.zero,
       totalAntimatter: new Decimal(0),
-      realTimePlayed: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
+      realTimePlayed: TimeSpan.zero,
       timeSinceCreation: 0,
       uniqueNews: 0,
       totalNews: 0,
@@ -27,7 +27,7 @@ export default {
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
-        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
+        thisReal: TimeSpan.zero,
         bestRate: new Decimal(0),
       },
       eternity: {
@@ -37,7 +37,7 @@ export default {
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
-        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
+        thisReal: TimeSpan.zero,
         bestRate: new Decimal(0),
       },
       reality: {
@@ -46,9 +46,9 @@ export default {
         totalRealityAntimatter: new Decimal(0),
         hasBest: false,
         best: TimeSpan.zero,
-        bestReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
+        bestReal: TimeSpan.zero,
         this: TimeSpan.zero,
-        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
+        thisReal: TimeSpan.zero,
         totalTimePlayed: TimeSpan.zero,
         bestRate: new Decimal(0),
         bestRarity: 0,
