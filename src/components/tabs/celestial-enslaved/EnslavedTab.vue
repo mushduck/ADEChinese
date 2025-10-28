@@ -44,7 +44,7 @@ export default {
       return formatPercents(this.storedRealEffiency);
     },
     storedRealCapDesc() {
-      return timeDisplayShort(this.storedRealCap);
+      return timeDisplayShort(new Decimal(this.storedRealCap));
     },
     unlocksInfo() {
       return ENSLAVED_UNLOCKS;
@@ -273,7 +273,7 @@ export default {
                 class="o-enslaved-stored-time"
                 :class="doomedDisabledClass"
               >
-                {{ timeDisplayShort(storedBlackHole) }}
+                {{ timeDisplayShort(new Decimal(storedBlackHole)) }}
               </div>
               <div>
                 {{ isStoringBlackHole ? "Charging Black Hole": "Charge Black Hole" }}
@@ -285,7 +285,7 @@ export default {
             >
               <span>Discharge Black Hole</span>
               <p v-if="isRunning">
-                {{ timeDisplayShort(nerfedBlackHoleTime) }} in this Reality
+                {{ timeDisplayShort(new Decimal(nerfedBlackHoleTime)) }} in this Reality
               </p>
             </button>
           </div>
@@ -299,7 +299,7 @@ export default {
               @click="toggleStoreReal"
             >
               <div class="o-enslaved-stored-time">
-                {{ timeDisplayShort(storedReal) }}
+                {{ timeDisplayShort(new Decimal(storedReal)) }}
               </div>
               <div>
                 {{ isStoringReal ? "Storing real time": "Store real time" }}
@@ -334,10 +334,10 @@ export default {
           >
             {{ unlock.description() }}
             <div v-if="!hasUnlock(unlock)">
-              Costs: {{ timeDisplayShort(unlock.price) }}
+              Costs: {{ timeDisplayShort(new Decimal(unlock.price)) }}
             </div>
             <span v-if="isStoringBlackHole && !hasUnlock(unlock) && timeUntilBuy(unlock.price) > 0">
-              Time to obtain: {{ timeDisplayShort(timeUntilBuy(unlock.price)) }}
+              Time to obtain: {{ timeDisplayShort(new Decimal(timeUntilBuy(unlock.price))) }}
             </span>
           </button>
         </div>
