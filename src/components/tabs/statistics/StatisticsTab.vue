@@ -61,7 +61,7 @@ export default {
       matterScale: [],
       lastMatterTime: 0,
       paperclips: 0,
-      fullTimePlayed: 0,
+      fullTimePlayed: new Decimal(0),
     };
   },
   computed: {
