@@ -170,7 +170,7 @@ export default {
     >
       <div v-if="achCountdown > 0">
         Automatically gain the next missing Achievement in
-        {{ timeDisplayNoDecimals(achCountdown) }}<span v-if="!isAutoAchieveActive"> once Auto is turned on</span>.
+        {{ timeDisplayNoDecimals(new Decimal(achCountdown)) }}<span v-if="!isAutoAchieveActive"> once Auto is turned on</span>.
         (left-to-right, top-to-bottom)
       </div>
       <div v-else-if="missingAchievements !== 0">
@@ -178,7 +178,7 @@ export default {
         (left-to-right, top-to-bottom)
       </div>
       <div v-if="totalCountdown > 0">
-        You will regain all remaining achievements after {{ timeDisplayNoDecimals(totalCountdown) }} if Auto
+        You will regain all remaining achievements after {{ timeDisplayNoDecimals(new Decimal(totalCountdown)) }} if Auto
         Achievement <span v-if="isAutoAchieveActive">stays enabled</span><span v-else>is turned on</span>.
       </div>
       <br>
