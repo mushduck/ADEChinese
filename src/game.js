@@ -259,7 +259,7 @@ function isOfflineEPGainEnabled() {
 
 export function getOfflineEPGain(ms) {
   if (!EternityMilestone.autoEP.isReached || !isOfflineEPGainEnabled()) return DC.D0;
-  return player.records.bestEternity.bestEPminReality.times(TimeSpan.fromMilliseconds(ms).totalMinutes.div(4));
+  return player.records.bestEternity.bestEPminReality.times(TimeSpan.fromMilliseconds(new Decimal(ms)).totalMinutes.div(4));
 }
 
 // Note: realities and ampFactor must be distinct because there are a few things farther up which only multiply
@@ -659,7 +659,7 @@ export function gameLoop(passDiff, options = {}) {
 
   if (Enslaved.canTickHintTimer) {
     player.celestials.enslaved.hintUnlockProgress += Enslaved.isRunning ? realDiff : (realDiff * 0.4);
-    if (player.celestials.enslaved.hintUnlockProgress > (TimeSpan.fromHours(5).totalMilliseconds.toNumber())) {
+    if (player.celestials.enslaved.hintUnlockProgress > (TimeSpan.fromHours(new Decimal(5)).totalMilliseconds.toNumber())) {
       EnslavedProgress.hintsUnlocked.giveProgress();
       Enslaved.quotes.hintUnlock.show();
     }
