@@ -95,7 +95,7 @@ export default {
         player.challenge.normal.bestTimes.sum() < Number.MAX_VALUE;
       const worstChallengeTime = GameCache.worstChallengeTime.value;
       const worstChallengeIndex = 2 + player.challenge.normal.bestTimes.indexOf(worstChallengeTime);
-      this.worstChallengeString = `(Challenge ${worstChallengeIndex}: ${timeDisplayShort(worstChallengeTime)})`;
+      this.worstChallengeString = `(Challenge ${worstChallengeIndex}: ${timeDisplayShort(new Decimal(worstChallengeTime))})`;
     }
   }
 };
