@@ -60,8 +60,8 @@ export default {
       if (remainingCompletions !== 0) {
         const autoECInterval = EternityChallenges.autoComplete.interval;
         const untilNextEC = Math.max(autoECInterval - player.reality.lastAutoEC, 0);
-        this.untilNextEC.setFrom(untilNextEC);
-        this.untilAllEC.setFrom(untilNextEC + (autoECInterval * (remainingCompletions - 1)));
+        this.untilNextEC.setFrom(new Decimal(untilNextEC));
+        this.untilAllEC.setFrom(new Decimal(untilNextEC + (autoECInterval * (remainingCompletions - 1))));
       }
       this.hasECR = Perk.studyECRequirement.isBought;
     },
