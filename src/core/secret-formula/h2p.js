@@ -903,7 +903,7 @@ would otherwise be able to complete the Reality normally.</b>
 <br>
 <br>
 You need to redo the requirements for each Achievement in order to get their rewards again, but you will also passively
-unlock the next incomplete Achievement every ${timeDisplayNoDecimals(30 * 60000)} without any effort even if you
+unlock the next incomplete Achievement every ${timeDisplayNoDecimals(new Decimal(30 * 60000))} without any effort even if you
 otherwise do not have the requirements to do so. This automatic completion can be disabled, in which case the timer will
 count down to zero and pause, immediately completing another Achievement when unpaused. The timer still progresses
 at the same rate while offline.
