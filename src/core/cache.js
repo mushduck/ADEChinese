@@ -82,7 +82,7 @@ export const GameCache = {
     Perk.achievementGroup2,
     Perk.achievementGroup3,
     Perk.achievementGroup4
-  ))).totalMilliseconds),
+  ))).totalMilliseconds.toNumber()),
 
   buyablePerks: new Lazy(() => Perks.all.filter(p => p.canBeBought)),
 
