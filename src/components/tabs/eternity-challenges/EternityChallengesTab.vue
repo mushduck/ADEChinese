@@ -18,8 +18,8 @@ export default {
       isAutoECVisible: false,
       hasUpgradeLock: false,
       remainingECTiers: 0,
-      untilNextEC: TimeSpan.zero,
-      untilAllEC: TimeSpan.zero,
+      untilNextEC: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
+      untilAllEC: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
       hasECR: false,
     };
   },
