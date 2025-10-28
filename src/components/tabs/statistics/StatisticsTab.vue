@@ -10,9 +10,9 @@ export default {
   data() {
     return {
       isDoomed: false,
-      realTimeDoomed: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
+      realTimeDoomed: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
       totalAntimatter: new Decimal(0),
-      realTimePlayed: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
+      realTimePlayed: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
       timeSinceCreation: 0,
       uniqueNews: 0,
       totalNews: 0,
@@ -27,7 +27,7 @@ export default {
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
-        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
+        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
         bestRate: new Decimal(0),
       },
       eternity: {
@@ -37,7 +37,7 @@ export default {
         hasBest: false,
         best: TimeSpan.zero,
         this: TimeSpan.zero,
-        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
+        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
         bestRate: new Decimal(0),
       },
       reality: {
@@ -46,9 +46,9 @@ export default {
         totalRealityAntimatter: new Decimal(0),
         hasBest: false,
         best: TimeSpan.zero,
-        bestReal: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
+        bestReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
         this: TimeSpan.zero,
-        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).toNumber(),
+        thisReal: TimeSpan.fromMilliseconds(new Decimal(0)).totalMilliseconds.toNumber(),
         totalTimePlayed: TimeSpan.zero,
         bestRate: new Decimal(0),
         bestRarity: 0,
@@ -101,7 +101,7 @@ export default {
       this.totalAntimatter.copyFrom(records.totalAntimatter);
       this.realTimePlayed.setFrom(records.realTimePlayed);
       this.fullTimePlayed = TimeSpan.fromMilliseconds(
-        new Decimal(records.previousRunRealTime + records.realTimePlayed)).toNumber();
+        new Decimal(records.previousRunRealTime + records.realTimePlayed)).totalMilliseconds.toNumber();
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
       this.totalNews = player.news.totalSeen;
       this.secretAchievementCount = SecretAchievements.all.filter(a => a.isUnlocked).length;
