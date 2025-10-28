@@ -61,7 +61,7 @@ export default {
       matterScale: [],
       lastMatterTime: 0,
       paperclips: 0,
-      fullTimePlayed: new Decimal(0),
+      fullTimePlayed: 0,
     };
   },
   computed: {
@@ -101,7 +101,7 @@ export default {
       this.totalAntimatter.copyFrom(records.totalAntimatter);
       this.realTimePlayed.setFrom(records.realTimePlayed);
       this.fullTimePlayed = TimeSpan.fromMilliseconds(
-        new Decimal(records.previousRunRealTime.add(records.realTimePlayed)));
+        new Decimal(records.previousRunRealTime.add(records.realTimePlayed))).toNumber();
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
       this.totalNews = player.news.totalSeen;
       this.secretAchievementCount = SecretAchievements.all.filter(a => a.isUnlocked).length;
