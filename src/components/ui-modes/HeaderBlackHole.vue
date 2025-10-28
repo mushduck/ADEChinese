@@ -29,7 +29,7 @@ export default {
       return this.blackHole.id;
     },
     dischargeText() {
-      return `Discharge: ${timeDisplayShort(this.storedTime)}`;
+      return `Discharge: ${timeDisplayShort(new Decimal(this.storedTime))}`;
     },
     hasLongText() {
       return this.dischargeText.length > 15;
