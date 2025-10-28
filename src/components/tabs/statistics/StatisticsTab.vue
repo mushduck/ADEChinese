@@ -101,7 +101,7 @@ export default {
       this.totalAntimatter.copyFrom(records.totalAntimatter);
       this.realTimePlayed.setFrom(new Decimal(records.realTimePlayed));
       this.fullTimePlayed = TimeSpan.fromMilliseconds(
-        new Decimal(records.previousRunRealTime + records.realTimePlayed)).totalMilliseconds.toNumber();
+        new Decimal(records.previousRunRealTime + records.realTimePlayed));
       this.uniqueNews = NewsHandler.uniqueTickersSeen;
       this.totalNews = player.news.totalSeen;
       this.secretAchievementCount = SecretAchievements.all.filter(a => a.isUnlocked).length;
