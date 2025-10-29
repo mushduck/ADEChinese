@@ -398,7 +398,7 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
     if (Effarig.isRunning) {
       factor = Effarig.multiplier(factor).toNumber();
     } else if (Laitela.isRunning) {
-      const nerfModifier = Math.clampMax(Time.thisRealityRealTime.totalMinutes / 10, 1);
+      const nerfModifier = Math.clampMax(Time.thisRealityRealTime.totalMinutes.toNumber() / 10, 1);
       factor = Math.pow(factor, nerfModifier);
     }
   }
@@ -788,10 +788,10 @@ function laitelaRealityTick(realDiff) {
       difficultyTier: laitelaInfo.difficultyTier,
       realityReward: Laitela.realityReward
     };
-    laitelaInfo.thisCompletion = Time.thisRealityRealTime.totalSeconds;
+    laitelaInfo.thisCompletion = Time.thisRealityRealTime.totalSeconds.toNumber();
     laitelaInfo.fastestCompletion = Math.min(laitelaInfo.thisCompletion, laitelaInfo.fastestCompletion);
     clearCelestialRuns();
-    if (Time.thisRealityRealTime.totalSeconds < 30) {
+    if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
       laitelaInfo.difficultyTier++;
       laitelaInfo.fastestCompletion = 300;
       completionText += laitelaBeatText(Laitela.maxAllowedDimension + 1);
@@ -805,7 +805,7 @@ function laitelaRealityTick(realDiff) {
       completionText += `<br><br>Dark Matter Multiplier: ${formatX(oldInfo.realityReward, 2, 2)}
       ➜ ${formatX(Laitela.realityReward, 2, 2)}`;
       if (oldInfo.fastestCompletion === 3600 || oldInfo.fastestCompletion === 300 && oldInfo.difficultyTier > 0) {
-        if (Time.thisRealityRealTime.totalSeconds < 30) {
+        if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
           // First attempt - destabilising
           completionText += `<br>Best Completion Time: None ➜ Destabilized
           <br>Highest Active Dimension: ${formatInt(8 - oldInfo.difficultyTier)} ➜
@@ -816,7 +816,7 @@ function laitelaRealityTick(realDiff) {
             ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()}
             <br>Highest Active Dimension: ${formatInt(8 - laitelaInfo.difficultyTier)}`;
         }
-      } else if (Time.thisRealityRealTime.totalSeconds < 30) {
+      } else if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
         // Second+ attempt - destabilising
         completionText += `<br>Best Completion Time: ${TimeSpan.fromSeconds(new Decimal(oldInfo.fastestCompletion)).toStringShort()}
           ➜ Destabilized
