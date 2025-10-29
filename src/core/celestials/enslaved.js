@@ -138,12 +138,12 @@ export const Enslaved = {
     return player.celestials.enslaved.unlocks.includes(info.id);
   },
   canBuy(info) {
-    return player.celestials.enslaved.stored >= info.price && info.secondaryRequirement() && !this.has(info);
+    return player.celestials.enslaved.stored.gte(info.price) && info.secondaryRequirement() && !this.has(info);
   },
   buyUnlock(info) {
     if (!this.canBuy(info)) return false;
     if (info.id === ENSLAVED_UNLOCKS.RUN.id) this.quotes.unlockRun.show();
-    player.celestials.enslaved.stored -= info.price;
+    player.celestials.enslaved.stored.subtact(info.price);
     player.celestials.enslaved.unlocks.push(info.id);
     return true;
   },
