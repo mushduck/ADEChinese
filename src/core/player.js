@@ -695,7 +695,7 @@ window.player = {
       run: false,
       charged: new Set(),
       disCharge: false,
-      peakGamespeed: 1,
+      peakGamespeed: DC.D1,
       petWithRemembrance: ""
     },
     laitela: {
