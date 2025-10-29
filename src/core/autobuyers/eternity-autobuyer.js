@@ -76,7 +76,7 @@ get increaseWithMult() {
   }
 
   get timeToNextTick() {
-    return Math.clampMin(this.time - Time.thisEternityRealTime.totalSeconds, 0);
+    return Math.clampMin(this.time - Time.thisEternityRealTime.totalSeconds.toNumber(), 0);
   }
 
   get willEternity() {
@@ -91,7 +91,7 @@ get increaseWithMult() {
       case AUTO_ETERNITY_MODE.AMOUNT:
         return gainedEternityPoints().gte(this.amount);
       case AUTO_ETERNITY_MODE.TIME:
-        return Time.thisEternityRealTime.totalSeconds > this.time;
+        return Time.thisEternityRealTime.totalSeconds.toNumber() > this.time;
       case AUTO_ETERNITY_MODE.X_HIGHEST:
       default:
         return gainedEternityPoints().gte(this.highestPrevPrestige.times(this.xHighest));
