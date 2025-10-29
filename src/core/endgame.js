@@ -505,7 +505,7 @@ export const Endgame = {
       [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]);
     player.records.thisInfinity.time = DC.D0;
     player.records.thisInfinity.realTime = 0;
-    player.records.thisInfinity.lastBuyTime = 0;
+    player.records.thisInfinity.lastBuyTime = DC.D0;
     player.records.thisInfinity.maxAM = DC.D0;
     player.records.thisInfinity.bestIPmin = DC.D0;
     player.records.thisInfinity.bestIPminVal = DC.D0;
