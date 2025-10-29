@@ -874,7 +874,7 @@ function applyAutoprestige(diff) {
   }
 
   if (PelleRifts.chaos.milestones[2].canBeApplied) {
-    Currency.eternityPoints.add(gainedEternityPoints().times(DC.D0_1).times(diff.div(1000)));
+    Currency.eternityPoints.add(gainedEternityPoints().times(DC.D0_1).times(diff).div(1000));
   }
 }
 
