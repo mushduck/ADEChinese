@@ -284,7 +284,7 @@ export function autoReality() {
 }
 
 function updateRealityRecords(realityProps) {
-  const thisRunRMmin = realityProps.gainedRM.dividedBy(Math.clampMin(0.0005, Time.thisRealityRealTime.totalMinutes));
+  const thisRunRMmin = realityProps.gainedRM.dividedBy(Math.clampMin(0.0005, Time.thisRealityRealTime.totalMinutes.toNumber()));
   if (player.records.bestReality.RMmin.lt(thisRunRMmin)) {
     player.records.bestReality.RMmin = thisRunRMmin;
     player.records.bestReality.RMminSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
@@ -320,7 +320,7 @@ function giveRealityRewards(realityProps) {
     // Real time amplification is capped at 1 second of reality time; if it's faster then using all time at once would
     // be wasteful. Being faster than 1 second will only use as much time as needed to get the 1-second factor instead.
     if (Time.thisRealityRealTime.totalSeconds < 1) {
-      player.celestials.enslaved.storedReal *= 1 - Time.thisRealityRealTime.totalSeconds;
+      player.celestials.enslaved.storedReal *= 1 - Time.thisRealityRealTime.totalSeconds.toNumber();
     } else {
       player.celestials.enslaved.storedReal = 0;
     }
