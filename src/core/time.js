@@ -54,6 +54,13 @@ export const Time = {
     return this.deltaTimeFull.totalMilliseconds;
   },
   /**
+   * Frame delta time, but without game speed effects
+   * @returns {TimeSpan}
+   */
+  get unscaledDeltaTime() {
+    return DeltaTimeState.unscaledDeltaTime;
+  },
+  /**
    * @returns {TimeSpan}
    */
   get totalTimePlayed() {
