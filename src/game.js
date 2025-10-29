@@ -546,9 +546,9 @@ export function gameLoop(passDiff, options = {}) {
         GAME_SPEED_EFFECT.BLACK_HOLE, GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.CELESTIAL_MATTER]);
       const amplification = Ra.unlocks.improvedStoredTime.effects.gameTimeAmplification.effectOrDefault(1);
       const beforeStore = player.celestials.enslaved.stored;
-      player.celestials.enslaved.stored = Math.clampMax(player.celestials.enslaved.stored +
-        diff.times(totalTimeFactor - reducedTimeFactor).toNumber() * amplification, Enslaved.timeCap);
-      Enslaved.currentBlackHoleStoreAmountPerMs = (player.celestials.enslaved.stored - beforeStore).div(diff).toNumber();
+      player.celestials.enslaved.stored = Decimal.clampMax(player.celestials.enslaved.stored.plus(
+        diff.times(totalTimeFactor - reducedTimeFactor).times(amplification)), Enslaved.timeCap);
+      Enslaved.currentBlackHoleStoreAmountPerMs = (player.celestials.enslaved.stored.sub(beforeStore)).div(diff).toNumber();
       speedFactor = reducedTimeFactor;
     }
     diff = diff.times(speedFactor);
