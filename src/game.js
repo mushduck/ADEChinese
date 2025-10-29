@@ -988,11 +988,11 @@ export function simulateTime(seconds, real, fast) {
   if (BlackHoles.areUnlocked && !BlackHoles.arePaused) {
     totalGameTime = BlackHoles.calculateGameTimeFromRealTime(seconds, BlackHoles.calculateSpeedups());
   } else {
-    totalGameTime = getGameSpeedupFactor() * seconds;
+    totalGameTime = getGameSpeedupFactor().times(seconds);
   }
 
-  const infinitiedMilestone = getInfinitiedMilestoneReward(totalGameTime * 1000);
-  const eternitiedMilestone = getEternitiedMilestoneReward(totalGameTime * 1000);
+  const infinitiedMilestone = getInfinitiedMilestoneReward(totalGameTime.times(1000));
+  const eternitiedMilestone = getEternitiedMilestoneReward(totalGameTime.times(1000));
 
   if (eternitiedMilestone.gt(0)) {
     Currency.eternities.add(eternitiedMilestone);
