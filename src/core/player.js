@@ -615,7 +615,7 @@ window.player = {
     },
     enslaved: {
       isStoring: false,
-      stored: 0,
+      stored: DC.D0,
       isStoringReal: false,
       storedReal: 0,
       autoStoreReal: false,
