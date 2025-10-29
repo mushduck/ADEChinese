@@ -594,11 +594,11 @@ export function gameLoop(passDiff, options = {}) {
   applyAutoprestige(realDiff);
   updateImaginaryMachines(realDiff);
 
-  const uncountabilityGain = AlchemyResource.uncountability.effectValue * Time.unscaledDeltaTime.totalSeconds;
+  const uncountabilityGain = AlchemyResource.uncountability.effectValue * Time.unscaledDeltaTime.totalSeconds.toNumber();
   Currency.realities.add(uncountabilityGain);
   Currency.perkPoints.add(uncountabilityGain);
 
-  const masteryGain = Effects.sum(EndgameMastery(11)) * Time.unscaledDeltaTime.totalSeconds / 60;
+  const masteryGain = Effects.sum(EndgameMastery(11)) * Time.unscaledDeltaTime.totalSeconds.div(60).toNumber();
   Currency.perkPoints.add(masteryGain);
   
   if (Perk.autocompleteEC1.canBeApplied || EndgameMastery(22).isBought) player.reality.lastAutoEC += realDiff;
