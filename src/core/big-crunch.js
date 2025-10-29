@@ -172,7 +172,7 @@ export function preProductionGenerateIP(diff) {
   if (InfinityUpgrade.ipGen.isBought) {
     const genPeriod = Time.bestInfinity.totalMilliseconds.times(10);
     let genCount;
-    if (diff.gte(1e300.times(genPeriod))) {
+    if (diff.gte(DC.E300.times(genPeriod))) {
       genCount = Decimal.div(diff, genPeriod);
     } else {
       // Partial progress (fractions from 0 to 1) are stored in player.partInfinityPoint
