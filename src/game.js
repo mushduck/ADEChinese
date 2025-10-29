@@ -478,7 +478,7 @@ export function gameLoop(passDiff, options = {}) {
   const thisUpdate = Date.now();
   const realDiff = diff === undefined
     ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7)
-    : diff;
+    : diff.toNumber();
   if (!GameStorage.ignoreBackupTimer) player.backupTimer += realDiff;
 
   // For single ticks longer than a minute from the GameInterval loop, we assume that the device has gone to sleep or
