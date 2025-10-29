@@ -46,6 +46,15 @@ export default {
     storedRealCapDesc() {
       return timeDisplayShort(new Decimal(this.storedRealCap));
     },
+    storedBHDesc() {
+      timeDisplayShort(new Decimal(this.storedBlackHole));
+    },
+    nerfedBHTimeDesc() {
+      timeDisplayShort(new Decimal(this.nerfedBlackHoleTime));
+    },
+    storedRealDesc() {
+      timeDisplayShort(new Decimal(this.storedReal));
+    },
     unlocksInfo() {
       return ENSLAVED_UNLOCKS;
     },
@@ -273,7 +282,7 @@ export default {
                 class="o-enslaved-stored-time"
                 :class="doomedDisabledClass"
               >
-                {{ timeDisplayShort(new Decimal(storedBlackHole)) }}
+                {{ storedBHDesc }}
               </div>
               <div>
                 {{ isStoringBlackHole ? "Charging Black Hole": "Charge Black Hole" }}
@@ -285,7 +294,7 @@ export default {
             >
               <span>Discharge Black Hole</span>
               <p v-if="isRunning">
-                {{ timeDisplayShort(new Decimal(nerfedBlackHoleTime)) }} in this Reality
+                {{ nerfedBHTimeDesc }} in this Reality
               </p>
             </button>
           </div>
@@ -299,7 +308,7 @@ export default {
               @click="toggleStoreReal"
             >
               <div class="o-enslaved-stored-time">
-                {{ timeDisplayShort(new Decimal(storedReal)) }}
+                {{ storedRealDesc }}
               </div>
               <div>
                 {{ isStoringReal ? "Storing real time": "Store real time" }}
@@ -334,10 +343,10 @@ export default {
           >
             {{ unlock.description() }}
             <div v-if="!hasUnlock(unlock)">
-              Costs: {{ timeDisplayShort(new Decimal(unlock.price)) }}
+              Costs: {{ timeDisplayShort(unlock.price) }}
             </div>
             <span v-if="isStoringBlackHole && !hasUnlock(unlock) && timeUntilBuy(unlock.price) > 0">
-              Time to obtain: {{ timeDisplayShort(new Decimal(timeUntilBuy(unlock.price))) }}
+              Time to obtain: {{ timeDisplayShort(timeUntilBuy(unlock.price)) }}
             </span>
           </button>
         </div>
