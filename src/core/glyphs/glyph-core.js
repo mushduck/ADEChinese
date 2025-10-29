@@ -727,7 +727,7 @@ export const Glyphs = {
     player.records.thisEternity.realTime = undoData.thisEternityRealTime;
     player.records.thisReality.time = undoData.thisRealityTime;
     player.records.thisReality.realTime = undoData.thisRealityRealTime;
-    player.celestials.enslaved.stored = undoData.storedTime || DC.D0;
+    player.celestials.enslaved.stored = undoData.storedTime || new Decimal(0);
     if (undoData.dilationStudies) {
       player.dilation.studies = Array.fromBitmask(undoData.dilationStudies);
       player.dilation.upgrades = new Set(Array.fromBitmask(undoData.dilationUpgrades));
