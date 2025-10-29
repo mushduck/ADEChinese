@@ -214,7 +214,7 @@ export const AutomatorData = {
       // Messages often overflow the 120 col limit and extra spacing gets included in the message - remove it
       message: message.replaceAll(/\s?\n\s+/gu, " "),
       line: AutomatorBackend.translateLineNumber(line),
-      thisReality: Time.thisRealityRealTime.totalSeconds,
+      thisReality: Time.thisRealityRealTime.totalSeconds.toNumber(),
       timestamp: currTime,
       timegap: currTime - this.lastEvent
     });
