@@ -18,7 +18,7 @@ export default {
       pauseText: "",
       canCharge: false,
       isCharging: false,
-      storedTime: 0,
+      storedTime: new Decimal(0),
       canAutoRelease: false,
       isAutoReleasing: false,
     };
