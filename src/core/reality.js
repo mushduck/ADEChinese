@@ -710,7 +710,7 @@ export function finishProcessReality(realityProps) {
   resetChallengeStuff();
   AntimatterDimensions.reset();
   secondSoftReset(false);
-  player.celestials.ra.peakGamespeed = 1;
+  player.celestials.ra.peakGamespeed = DC.D1;
 
   InfinityDimensions.resetAmount();
   player.records.thisInfinity.bestIPmin = DC.D0;
