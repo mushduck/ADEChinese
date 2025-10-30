@@ -23,7 +23,7 @@ export default {
       rm: new Decimal(0),
       percentage: "",
       possibleFillPercentage: "",
-      rmMult: 0,
+      rmMult: new Decimal(0),
       bestAM: new Decimal(0),
       bestAMSet: [],
       lastMachines: new Decimal(0),
