@@ -845,5 +845,5 @@ function lockAchievementsOnReality() {
   for (const achievement of Achievements.preReality) {
     achievement.lock();
   }
-  player.reality.achTimer = 0;
+  player.reality.achTimer = DC.D0;
 }
