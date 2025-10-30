@@ -240,7 +240,7 @@ export const Endgame = {
       player.blackHole[0].unlocked = true;
       player.blackHole[1].unlocked = true;
     }
-    player.celestials.teresa.pouredAmount = 0;
+    player.celestials.teresa.pouredAmount = DC.D0;
     player.celestials.teresa.quoteBits = 0;
     player.celestials.teresa.unlockBits = 0;
     player.celestials.teresa.run = false;
