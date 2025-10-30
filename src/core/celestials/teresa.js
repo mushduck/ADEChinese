@@ -4,20 +4,20 @@ import { GameDatabase } from "../secret-formula/game-database";
 import { Quotes } from "./quotes";
 
 export const Teresa = {
-  timePoured: 0,
+  timePoured: new Decimal(0),
   lastUnlock: "effarig",
-  pouredAmountCap: 1e24,
+  pouredAmountCap: new Decimal(1e24),
   displayName: "Teresa",
   possessiveName: "Teresa's",
   get isUnlocked() {
     return Achievement(147).isUnlocked;
   },
   pourRM(diff) {
-    if (this.pouredAmount >= Teresa.pouredAmountCap) return;
-    this.timePoured += diff;
+    if (this.pouredAmount.gte(Teresa.pouredAmountCap)) return;
+    this.timePoured.add(diff);
     const rm = Currency.realityMachines.value;
-    const rmPoured = Math.min((this.pouredAmount + 1e6) * 0.01 * Math.pow(this.timePoured, 2), rm.toNumber());
-    this.pouredAmount += Math.min(rmPoured, Teresa.pouredAmountCap - this.pouredAmount);
+    const rmPoured = Decimal.min((this.pouredAmount.plus(1e6)).times(0.01).times(Decimal.pow(this.timePoured, 2)), rm);
+    this.pouredAmount.add(Decimal.min(rmPoured, Teresa.pouredAmountCap.sub(this.pouredAmount)));
     Currency.realityMachines.subtract(rmPoured);
     this.checkForUnlocks();
   },
@@ -40,13 +40,13 @@ export const Teresa = {
     player.celestials.teresa.pouredAmount = amount;
   },
   get fill() {
-    return Math.min(Math.log10(this.pouredAmount) / 24, 1);
+    return Math.min(Decimal.log10(this.pouredAmount) / 24, 1);
   },
   get possibleFill() {
     return Math.min(Currency.realityMachines.value.plus(this.pouredAmount).log10() / 24, 1);
   },
   get rmMultiplier() {
-    return Math.max(250 * Math.pow(this.pouredAmount / 1e24, 0.1), 1);
+    return Decimal.max(new Decimal(250).times(Decimal.pow(this.pouredAmount.div(1e24), 0.1)), 1);
   },
   get runRewardMultiplier() {
     return this.rewardMultiplier(player.celestials.teresa.bestRunAM);
@@ -132,7 +132,7 @@ class TeresaUnlockState extends BitUpgradeState {
   }
 
   get canBeUnlocked() {
-    return !this.isUnlocked && Teresa.pouredAmount >= this.price;
+    return !this.isUnlocked && Teresa.pouredAmount.gte(new Decimal(this.price));
   }
 
   get description() {
