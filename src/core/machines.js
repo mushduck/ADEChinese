@@ -14,7 +14,7 @@ export const MachineHandler = {
   },
 
   get realityMachineMultiplier() {
-    return ShopPurchase.RMPurchases.currentMult * Teresa.rmMultiplier * Effects.max(1, PerkShopUpgrade.rmMult) *
+    return ShopPurchase.RMPurchases.currentMult * Effects.max(1, PerkShopUpgrade.rmMult) *
       getAdjustedGlyphEffect("effarigrm") * Achievement(167).effectOrDefault(1);
   },
 
@@ -28,6 +28,7 @@ export const MachineHandler = {
     // Increase base RM gain if <10 RM
     if (rmGain.gte(1) && rmGain.lt(10)) rmGain = new Decimal(27 / 4000 * log10FinalEP - 26);
     rmGain = rmGain.times(this.realityMachineMultiplier);
+    rmGain = rmGain.times(Teresa.rmMultiplier);
     if (EndgameMastery(143).isBought) {
       rmGain = rmGain.powEffectsOf(EndgameMastery(143));
     }
