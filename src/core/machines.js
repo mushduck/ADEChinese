@@ -76,7 +76,7 @@ export const MachineHandler = {
 
   gainedImaginaryMachines(diff) {
     return (this.currentIMCap - Currency.imaginaryMachines.value) *
-      (1 - Math.pow(2, (-diff / 1000 / this.scaleTimeForIM)));
+      (1 - Math.pow(2, (-diff.div(1000).div(this.scaleTimeForIM)).toNumber()));
   },
 
   estimateIMTimer(cost) {
