@@ -66,7 +66,7 @@ export default {
       return [this.offlineAttr, this.segmentAttr, this.stdAttr, this.seedAttr];
     },
     startDate() {
-      return Time.toDateTimeString(new Decimal(this.prevRunInfo.startDate));
+      return Time.toDateTimeString(this.prevRunInfo.startDate);
     },
     finalTime() {
       return TimeSpan.fromMilliseconds(new Decimal(this.prevRunInfo.records.max())).toStringShort(true, true);
