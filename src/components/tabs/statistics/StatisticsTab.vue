@@ -89,7 +89,7 @@ export default {
       return player.records.fullGameCompletions;
     },
     startDate() {
-      return Time.toDateTimeString(new Decimal(player.records.gameCreatedTime));
+      return Time.toDateTimeString(player.records.gameCreatedTime);
     },
     saveAge() {
       return TimeSpan.fromMilliseconds(new Decimal(this.timeSinceCreation));
