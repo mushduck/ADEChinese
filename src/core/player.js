@@ -591,7 +591,7 @@ window.player = {
   blackHoleNegative: 1,
   celestials: {
     teresa: {
-      pouredAmount: 0,
+      pouredAmount: DC.D0,
       quoteBits: 0,
       unlockBits: 0,
       run: false,
