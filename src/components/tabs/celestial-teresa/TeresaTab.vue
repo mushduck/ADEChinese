@@ -101,7 +101,7 @@ export default {
       }
       this.time = now;
       this.pouredAmount = player.celestials.teresa.pouredAmount;
-      this.isPouredAmountCapped = this.pouredAmount === new Decimal(this.pouredAmountCap);
+      this.isPouredAmountCapped = this.pouredAmount.eq(new Decimal(this.pouredAmountCap));
       this.percentage = `${(Teresa.fill * 100).toFixed(2)}%`;
       this.possibleFillPercentage = `${(Teresa.possibleFill * 100).toFixed(2)}%`;
       this.rmMult = Teresa.rmMultiplier;
