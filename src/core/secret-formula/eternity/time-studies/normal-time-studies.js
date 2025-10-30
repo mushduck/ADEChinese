@@ -205,7 +205,7 @@ export const normalTimeStudies = [
     requirement: [81],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Antimatter Dimension multiplier based on time spent in this Eternity",
-    effect: () => Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15)),
+    effect: () => Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15).toNumber()),
     cap: DC.E300,
     formatEffect: value => formatX(value, 2, 1)
   },
