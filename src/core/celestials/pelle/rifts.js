@@ -157,7 +157,7 @@ class RiftState extends GameMechanicState {
       // Don't drain resources if you only have 1 of it.
       // This is in place due to the fix to replicanti below.
       if (this.fillCurrency.value.lte(1)) return;
-      const afterTickAmount = this.fillCurrency.value.times((1 - Pelle.riftDrainPercent) ** (diff.div(1000)).toNumber());
+      const afterTickAmount = this.fillCurrency.value.times(Decimal.pow(new Decimal(1 - Pelle.riftDrainPercent), diff.div(1000)).toNumber());
       const spent = this.fillCurrency.value.minus(afterTickAmount);
       // We limit this to 1 instead of 0 specifically for the case of replicanti; certain interactions with offline
       // time can cause it to drain to 0, where it gets stuck unless you reset it with some prestige
