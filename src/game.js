@@ -536,7 +536,7 @@ export function gameLoop(passDiff, options = {}) {
     } else {
       // This is only called from simulateTime() and is calculated externally in order to avoid weirdness when game
       // speed is directly nerfed
-      speedFactor = options.blackHoleSpeedup;
+      speedFactor = new Decimal(options.blackHoleSpeedup);
     }
 
     if (Enslaved.isStoringGameTime && !fixedSpeedActive) {
@@ -547,8 +547,8 @@ export function gameLoop(passDiff, options = {}) {
       const amplification = Ra.unlocks.improvedStoredTime.effects.gameTimeAmplification.effectOrDefault(1);
       const beforeStore = player.celestials.enslaved.stored;
       player.celestials.enslaved.stored = Decimal.clampMax(player.celestials.enslaved.stored.plus(
-        diff.times(totalTimeFactor - reducedTimeFactor).times(amplification)), Enslaved.timeCap);
-      Enslaved.currentBlackHoleStoreAmountPerMs = (player.celestials.enslaved.stored.sub(beforeStore)).div(diff).toNumber();
+        diff.times(totalTimeFactor.sub(reducedTimeFactor)).times(amplification)), Enslaved.timeCap);
+      Enslaved.currentBlackHoleStoreAmountPerMs = (player.celestials.enslaved.stored.sub(beforeStore)).div(diff);
       speedFactor = reducedTimeFactor;
     }
     diff = diff.times(speedFactor);
