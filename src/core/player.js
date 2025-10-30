@@ -572,7 +572,7 @@ window.player = {
       forceUnlock: false,
       currentInfoPane: AutomatorPanels.INTRO_PAGE,
     },
-    achTimer: 0,
+    achTimer: DC.D0,
     hasCheckedFilter: false,
   },
   blackHole: Array.range(0, 2).map(id => ({
