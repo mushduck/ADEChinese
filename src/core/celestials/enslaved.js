@@ -38,7 +38,7 @@ export const Enslaved = {
   autoReleaseSpeed: 0,
   timeCap: 1e300,
   glyphLevelMin: 5000,
-  currentBlackHoleStoreAmountPerMs: 0,
+  currentBlackHoleStoreAmountPerMs: new Decimal(0),
   tachyonNerf: 0.3,
   toggleStoreBlackHole() {
     if (!this.canModifyGameTimeStorage) return;
