@@ -18,7 +18,7 @@ export default {
     return {
       pour: false,
       time: new Date().getTime(),
-      pouredAmount: 0,
+      pouredAmount: new Decimal(0),
       isPouredAmountCapped: false,
       rm: new Decimal(0),
       percentage: "",
