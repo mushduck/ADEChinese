@@ -1020,7 +1020,7 @@ export function simulateTime(seconds, real, fast) {
   // by remaining ticks seems like the best thing to do.
   let loopFn = i => {
     const diff = remainingRealSeconds / i;
-    gameLoop(DC.E3.times(diff));
+    gameLoop(1000 * diff);
     remainingRealSeconds -= diff;
   };
 
