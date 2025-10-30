@@ -554,7 +554,7 @@ export function gameLoop(passDiff, options = {}) {
     diff = diff.times(speedFactor);
   } else if (fixedSpeedActive) {
     diff = diff.times(getGameSpeedupFactor());
-    Enslaved.currentBlackHoleStoreAmountPerMs = 0;
+    Enslaved.currentBlackHoleStoreAmountPerMs = DC.D0;
   }
   player.celestials.ra.peakGamespeed = Decimal.max(player.celestials.ra.peakGamespeed, getGameSpeedupFactor());
   Enslaved.isReleaseTick = false;
