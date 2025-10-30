@@ -19,11 +19,11 @@ export function updateNormalAndInfinityChallenges(diff) {
   }
 
   if (NormalChallenge(3).isRunning) {
-    player.chall3Pow = player.chall3Pow.times(DC.D1_00038.pow(diff.div(100))).clampMax(Decimal.NUMBER_MAX_VALUE);
+    player.chall3Pow = player.chall3Pow.times(DC.D1_00038.pow(diff / 100)).clampMax(Decimal.NUMBER_MAX_VALUE);
   }
 
   if (NormalChallenge(2).isRunning) {
-    player.chall2Pow = Decimal.min(player.chall2Pow.plus(diff.div(100).div(1800)), 1).toNumber();
+    player.chall2Pow = Decimal.min(player.chall2Pow.plus(diff / 100 / 1800), 1).toNumber();
   }
 
   if (InfinityChallenge(2).isRunning) {
