@@ -20,7 +20,7 @@ export default {
     hasAutoRelease: false,
     isRunning: false,
     completed: false,
-    storedBlackHole: 0,
+    storedBlackHole: new Decimal(0),
     storedReal: 0,
     storedRealEffiency: 0,
     storedRealCap: 0,
@@ -29,7 +29,7 @@ export default {
     unlocks: [],
     buyableUnlocks: [],
     quote: "",
-    currentSpeedUp: 0,
+    currentSpeedUp: new Decimal(0),
     hintsUnlocked: false,
     canModifyGameTimeStorage: false,
     canChangeStoreTime: false,
@@ -170,7 +170,7 @@ export default {
       return timeDisplayShort(ms);
     },
     timeUntilBuy(price) {
-      return Math.max((price - this.storedBlackHole) / this.currentSpeedUp, 0);
+      return Decimal.max((price.sub(this.storedBlackHole)).div(this.currentSpeedUp), 0);
     },
     buyUnlock(info) {
       Enslaved.buyUnlock(info);
@@ -345,7 +345,7 @@ export default {
             <div v-if="!hasUnlock(unlock)">
               Costs: {{ timeDisplayShort(unlock.price) }}
             </div>
-            <span v-if="isStoringBlackHole && !hasUnlock(unlock) && timeUntilBuy(unlock.price) > 0">
+            <span v-if="isStoringBlackHole && !hasUnlock(unlock) && timeUntilBuy(unlock.price).gt(0)">
               Time to obtain: {{ timeDisplayShort(timeUntilBuy(unlock.price)) }}
             </span>
           </button>
