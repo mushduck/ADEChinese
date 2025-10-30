@@ -108,7 +108,7 @@ export const GalaxyGenerator = {
       }
 
     }
-    player.celestials.pelle.galaxyGenerator.generatedGalaxies += Decimal.max(new Decimal(this.gainPerSecond).times(diff.div(1000)), 0).toNumber();
+    player.celestials.pelle.galaxyGenerator.generatedGalaxies += Decimal.max(new Decimal(this.gainPerSecond).times(diff).div(1000), 0).toNumber();
     player.celestials.pelle.galaxyGenerator.generatedGalaxies = Math.min(
       player.celestials.pelle.galaxyGenerator.generatedGalaxies,
       this.generationCap
