@@ -37,7 +37,7 @@ export const Teresa = {
     return player.celestials.teresa.pouredAmount;
   },
   set pouredAmount(amount) {
-    player.celestials.teresa.pouredAmount = amount;
+    player.celestials.teresa.pouredAmount = new Decimal(amount);
   },
   get fill() {
     return Math.min(Decimal.log10(this.pouredAmount) / 24, 1);
