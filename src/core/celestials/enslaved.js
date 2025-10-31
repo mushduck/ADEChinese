@@ -32,11 +32,11 @@ export const Enslaved = {
   possessiveName: "The Nameless Ones'",
   boostReality: false,
   BROKEN_CHALLENGES: [2, 3, 4, 5, 7, 8, 10, 11, 12],
-  nextTickDiff: 50,
+  nextTickDiff: new Decimal(50),
   isReleaseTick: false,
   autoReleaseTick: 0,
-  autoReleaseSpeed: 0,
-  timeCap: 1e300,
+  autoReleaseSpeed: new Decimal(0),
+  timeCap: new Decimal(1e300),
   glyphLevelMin: 5000,
   currentBlackHoleStoreAmountPerMs: new Decimal(0),
   tachyonNerf: 0.3,
@@ -189,7 +189,7 @@ export const Enslaved = {
   },
   storedTimeInsideEnslaved(stored) {
     if (stored.lte(1e3)) return stored;
-    return Decimal.pow(10, Math.pow(Decimal.log10(stored.div(1e3)), 0.55)).times(1e3);
+    return Decimal.pow(10, Decimal.pow(Decimal.log10(stored.div(1e3)), 0.55)).times(1e3);
   },
   feelEternity() {
     if (this.feltEternity) {
