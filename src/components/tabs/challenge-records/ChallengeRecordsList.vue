@@ -27,7 +27,7 @@ export default {
     timeDisplayShort,
     completionString(time) {
       return time.lt(Decimal.MAX_VALUE)
-        ? `record time: ${timeDisplayShort(new Decimal(time))}`
+        ? `record time: ${timeDisplayShort(time)}`
         : "has not yet been completed";
     }
   }
@@ -45,7 +45,7 @@ export default {
     </div>
     <br>
     <div v-if="completedAllChallenges">
-      Sum of {{ name }} record times: {{ timeDisplayShort(new Decimal(timeSum)) }}
+      Sum of {{ name }} record times: {{ timeDisplayShort(timeSum) }}
     </div>
     <div v-else>
       You have not completed all {{ name }}s yet.
