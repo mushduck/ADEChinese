@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     timeSum() {
-      return this.times.reduce(Decimal.sumReducer);
+      return this.times.sum();
     },
     completedAllChallenges() {
       return this.timeSum.lt(Decimal.MAX_VALUE);
