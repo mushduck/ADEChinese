@@ -277,7 +277,7 @@ class BlackHoleState {
    * BlackHole(2) is active during that time.
    */
   realTimeWhileActive(time) {
-    time = new Number(time);
+    time = new Decimal(time).toNumber();
     const nextDeactivation = this.timeUntilNextDeactivation;
     const cooldown = this.interval;
     const duration = this.duration;
