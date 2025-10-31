@@ -502,7 +502,7 @@ export const BlackHoles = {
   },
 
   calculateGameTimeFromRealTime(realTime, speedups) {
-    if (!isDecimal(realTime)) realTime = new Decimal(realTime);
+    realTime = new Decimal(realTime);
     // We could do this.autoPauseData(realTime)[1] here but that seems less clear.
     // Using _ as an unused variable should be reasonable.
     // eslint-disable-next-line no-unused-vars
