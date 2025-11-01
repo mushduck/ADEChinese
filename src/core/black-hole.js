@@ -536,7 +536,7 @@ export const BlackHoles = {
     const activePeriods = this.realTimePeriodsWithBlackHoleActive(realTime);
     const effectivePeriods = [];
     for (let i = 0; i < activePeriods.length - 1; i++) {
-      effectivePeriods.push(activePeriods[i] - activePeriods[i + 1]);
+      effectivePeriods.push(new Decimal(activePeriods[i]).sub(activePeriods[i + 1]));
     }
     effectivePeriods.push(activePeriods.last());
     return effectivePeriods;
