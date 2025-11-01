@@ -550,7 +550,7 @@ export const BlackHoles = {
     const activePeriods = [realTime];
     for (const blackHole of this.list) {
       if (!blackHole.isUnlocked) break;
-      const activeTime = blackHole.realTimeWhileActive(activePeriods.last());
+      const activeTime = new Decimal(blackHole.realTimeWhileActive(activePeriods.last()));
       activePeriods.push(activeTime);
     }
     return activePeriods;
