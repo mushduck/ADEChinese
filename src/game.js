@@ -868,7 +868,7 @@ function applyAutoprestige(diff) {
   if (InfinityUpgrade.ipGen.isCharged) {
     const addedRM = MachineHandler.gainedRealityMachines
       .timesEffectsOf(InfinityUpgrade.ipGen.chargedEffect)
-      .times(diff.div(1000));
+      .times(diff).div(1000);
     Currency.realityMachines.add(addedRM);
   }
 
