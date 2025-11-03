@@ -507,7 +507,7 @@ export const BlackHoles = {
     // We could do this.autoPauseData(realTime)[1] here but that seems less clear.
     // Using _ as an unused variable should be reasonable.
     // eslint-disable-next-line no-unused-vars
-    const [_, realerTime] = this.autoPauseData(realTime);
+    const [_, realerTime] = new Decimal(this.autoPauseData(realTime));
     const effectivePeriods = this.realTimePeriodsWithBlackHoleEffective(realerTime, speedups);
     // This adds in time with black holes paused at the end of the list.
     effectivePeriods[0] = effectivePeriods[0].add(realTime.sub(realerTime));
