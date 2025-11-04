@@ -181,6 +181,14 @@ Array.prototype.sum = function() {
 /**
  * @returns {number}
  */
+Array.prototype.decimalSum = function() {
+  if (this.length === 0) return new Decimal(0);
+  return this.reduce(Decimal.sumReducer);
+};
+
+/**
+ * @returns {number}
+ */
 Array.prototype.max = function() {
   if (this.length === 0) return 0;
   return this.reduce((a, b) => Math.max(a, b));
