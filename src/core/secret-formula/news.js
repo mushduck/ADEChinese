@@ -1317,7 +1317,7 @@ export const news = [
     id: "a230",
     get text() {
       return `You started playing this game nearly
-        ${TimeSpan.fromMilliseconds(Date.now() - player.records.gameCreatedTime).toString()}
+        ${TimeSpan.fromMilliseconds(new Decimal(Date.now() - player.records.gameCreatedTime)).toString()}
         ago. Thank you for playing!`;
     },
     dynamic: true
@@ -2694,7 +2694,7 @@ export const news = [
     id: "ae407",
     get text() {
       return `The update will be released at
-        ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62124292800000).toString()}
+        ${TimeSpan.fromMilliseconds(new Decimal(Date.now() + 432000000 + 62124292800000)).toString()}
         .`;
     },
     dynamic: true
@@ -4204,7 +4204,7 @@ export const news = [
       return `The Great Scribes of Antia have labored intensively for years. They were given a mammoth task from the
       gods; write out an incomprehensibly long number. These scribes took turns, each writing out a few numbers a
       second, writing day and night, for what seemed like an eternity. At last, after
-      ${TimeSpan.fromSeconds(Currency.antimatter.value.log10() / 3).toString()}, they finally accomplished
+      ${TimeSpan.fromSeconds(new Decimal(Currency.antimatter.value.log10() / 3)).toString()}, they finally accomplished
       the impossible. That week, when they went to worship their gods, they sent them a simple message: "What was
       the purpose? What made our years of labor significant?" The gods responded duly: "We wanted to know how long
       it would take to write out, for a statistic in our game."`;
@@ -8685,7 +8685,7 @@ export const news = [
   },
   {
     id: "fe7",
-    text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()</span>"
+    text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(new Decimal(Date.now() + 432000000)).toString()</span>"
   },
   {
     id: "se",
