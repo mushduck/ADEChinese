@@ -513,7 +513,7 @@ export const BlackHoles = {
     effectivePeriods[0] = effectivePeriods[0].add(realTime.sub(new Decimal(realerTime)));
     return effectivePeriods
       .map((period, i) => speedups[i].times(period))
-      .sum();
+      .decimalSum();
   },
 
   /**
