@@ -100,7 +100,7 @@ export default {
         Teresa.timePoured = 0;
       }
       this.time = now;
-      this.pouredAmount = player.celestials.teresa.pouredAmount;
+      this.pouredAmount.copyFrom(player.celestials.teresa.pouredAmount);
       this.isPouredAmountCapped = this.pouredAmount.eq(new Decimal(this.pouredAmountCap));
       this.percentage = `${(Teresa.fill * 100).toFixed(2)}%`;
       this.possibleFillPercentage = `${(Teresa.possibleFill * 100).toFixed(2)}%`;
