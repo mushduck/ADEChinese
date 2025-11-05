@@ -564,7 +564,15 @@ export const tabs = [
         component: "EndgameMasteriesTab",
         id: 4,
         hidable: true,
-      }
+      },
+      {
+        key: "milestones",
+        name: "Endgame Milestones",
+        symbol: "<i class='fas fa-star'></i>",
+        component: "EndgameMilestonesTab",
+        id: 5,
+        hidable: true,
+      },
     ],
   }
 ];
