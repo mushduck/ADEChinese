@@ -580,6 +580,8 @@ export function gameLoop(passedDiff, options = {}) {
     }
     player.records.thisReality.realTime += realDiff;
     player.records.thisReality.time = player.records.thisReality.time.add(diff);
+    player.records.thisEndgame.realTime += realDiff;
+    player.records.thisEndgame.time = player.records.thisEndgame.time.add(diff);
   }
 
   DeltaTimeState.update(realDiff, diff);
