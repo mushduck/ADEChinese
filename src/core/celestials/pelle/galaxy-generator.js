@@ -81,7 +81,9 @@ export const GalaxyGenerator = {
       Pelle.quotes.galaxyGeneratorRifts.show();
     }
     if (this.sacrificeActive) {
-      this.capRift.reducedTo = Decimal.max(new Decimal(this.capRift.reducedTo).sub(new Decimal(0.075).times(diff).div(1000)), 0).toNumber();
+      let reductionSpeed = 0.075;
+      if (EndgameMilestone.galGenAnimation.isReached) reductionSpeed = reductionSpeed * Math.pow(1.2, Math.floor(Currency.endgames.value / 5));
+      this.capRift.reducedTo = Decimal.max(new Decimal(this.capRift.reducedTo).sub(new Decimal(reductionSpeed).times(diff).div(1000)), 0).toNumber();
       if (this.capRift.reducedTo === 0) {
         player.celestials.pelle.galaxyGenerator.sacrificeActive = false;
         player.celestials.pelle.galaxyGenerator.phase++;
