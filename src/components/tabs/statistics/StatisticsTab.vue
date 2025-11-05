@@ -57,6 +57,13 @@ export default {
         isUnlocked: false,
         count: 0,
         totalEndgameAntimatter: new Decimal(0),
+        hasBest: false,
+        best: TimeSpan.zero,
+        bestReal: TimeSpan.zero,
+        this: TimeSpan.zero,
+        thisReal: TimeSpan.zero,
+        bestRateCP: new Decimal(0),
+        bestRateDP: new Decimal(0),
       },
       matterScale: [],
       lastMatterTime: 0,
@@ -84,6 +91,12 @@ export default {
       return num > 0
         ? `${num} ${pluralize("Reality", num)}`
         : "no Realities";
+    },
+    endgameCountString() {
+      const num = this.endgame.count;
+      return num > 0
+        ? `${num} ${pluralize("Endgame", num)}`
+        : "no Endgames";
     },
     fullGameCompletions() {
       return player.records.fullGameCompletions;
@@ -164,11 +177,19 @@ export default {
 
       const isEndgameUnlocked = progress.isEndgameUnlocked;
       const endgame = this.endgame;
+      const bestEndgame = records.bestEndgame;
       endgame.isUnlocked = isEndgameUnlocked;
       
       if (isEndgameUnlocked) {
         endgame.count = Math.floor(player.endgames);
         endgame.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
+        endgame.hasBest = bestEndgame.time.lt(999999999999);
+        endgame.best.setFrom(bestEndgame.time);
+        endgame.bestReal.setFrom(new Decimal(bestEndgame.realTime));
+        endgame.this.setFrom(records.thisEndgame.time);
+        endgame.thisReal.setFrom(new Decimal(records.thisEndgame.realTime));
+        endgame.bestRateCP.copyFrom(bestEndgame.CPmin);
+        endgame.bestRateDP.copyFrom(bestEndgame.DPmin);
       }
       this.updateMatterScale();
 
@@ -381,8 +402,29 @@ export default {
       <div class="c-stats-tab-title c-stats-tab-endgame">
         Endgame
       </div>
-      <div>You have {{ quantifyInt("Endgame", endgame.count) }}.</div>
-      <div>More stats coming soon.</div>
+      <div>
+        You have {{ endgameCountString }}.
+      </div>
+      <div v-if="endgame.hasBest">
+        Your fastest game-time Endgame was {{ endgame.best.toStringShort() }}.
+        Your fastest real-time Endgame was {{ endgame.bestReal.toStringShort() }}.
+      </div>
+      <div v-else>
+        You have no fastest Endgame.
+      </div>
+      <div>
+        You have spent {{ endgame.this.toStringShort() }}
+        in this Endgame.
+        ({{ endgame.thisReal.toStringShort() }} real time)
+      </div>
+      <div>
+        Your best Celestial Points per minute 
+        is {{ format(endgame.bestRateCP, 2, 2) }}.
+      </div>
+      <div>
+        Your best Doomed Particles per minute 
+        is {{ format(endgame.bestRateDP, 2, 2) }}.
+      </div>
       <br>
     </div>
   </div>
