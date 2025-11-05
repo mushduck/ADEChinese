@@ -469,9 +469,9 @@ export const BlackHoles = {
     let middle;
     for (let iter = 0; iter < 100; ++iter) {
       middle = (start + end) / 2;
-      const error = evaluationFunction(middle) - target;
-      if (Math.abs(error) < tolerance) break;
-      if (error < 0) {
+      const error = evaluationFunction(middle).sub(target);
+      if (error.abs().lt(tolerance)) break;
+      if (error.lt(0)) {
         // eslint-disable-next-line no-param-reassign
         start = middle;
       } else {
