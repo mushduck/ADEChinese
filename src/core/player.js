@@ -377,6 +377,10 @@ window.player = {
       bestDPmin: DC.D0,
       glyphLevel: 0,
     },
+    permanent: {
+      maxCP: DC.D0,
+      maxDP: DC.D0,
+    },
   },
   speedrun: {
     isUnlocked: false,
