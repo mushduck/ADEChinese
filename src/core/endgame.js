@@ -563,3 +563,18 @@ function lockAchievementsOnEndgame() {
     achievement.lock();
   }
 }
+export class EndgameMilestoneState {
+  constructor(config) {
+    this.config = config;
+  }
+
+  get isReached() {
+    return Currency.endgames.gte(this.config.endgames);
+  }
+}
+export const EndgameMilestone = mapGameDataToObject(
+  GameDatabase.endgame.milestones,
+  config => (config.isBaseResource
+    ? new EndgameMilestoneState(config)
+    : new EndgameMilestoneState(config))
+);
