@@ -348,10 +348,22 @@ export const Pelle = {
       ep *= 5;
     }
 
-    const gain = (
+    if (EndgameMilestone.remnantFormula.isReached) {
+      am *= 10000;
+      ip *= 500;
+      ep *= 25;
+    }
+
+    const gainOld = (
       (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.7
     ) ** 8;
 
+    const gainNew = (
+      (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.5
+    ) ** 12;
+
+    const gain = EndgameMilestone.remnantFormula.isReached ? gainNew : gainOld;
+    
     return gain < 1 ? gain : Math.floor(gain - this.cel.remnants);
   },
 
