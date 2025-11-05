@@ -1,7 +1,7 @@
 export const endgameMilestones = {
   riftFill: {
     endgames: 1,
-    reward: `Rift Fill is ${formatPercents(0.05)} faster per Endgame, capping at ${formatPercents(0.5)} at ${formatInt(9)} Endgames`
+    reward: () => `Rift Fill is ${formatPercents(0.05)} faster per Endgame, capping at ${formatPercents(0.5)} at ${formatInt(9)} Endgames`
   },
   remnantGalaxy: {
     endgames: 2,
@@ -9,11 +9,11 @@ export const endgameMilestones = {
   },
   galGenAntimation: {
     endgames: 5,
-    reward: `Galaxy Generator Antimations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames`
+    reward: () => `Galaxy Generator Antimations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames`
   },
   gameSpeedUncap: {
     endgames: 10,
-    reward: `Remove the ${format(1e300, 2, 2)} Game Speed Hardcap`
+    reward: () => `Remove the ${format(1e300, 2, 2)} Game Speed Hardcap`
   },
   fasterGalaxies: {
     endgames: 20,
@@ -25,7 +25,7 @@ export const endgameMilestones = {
   },
   celestialEarlyUnlock: {
     endgames: 100,
-    reward: `Start Endgames with the first ${formatInt(6)} Celestials unlocked`
+    reward: () => `Start Endgames with the first ${formatInt(6)} Celestials unlocked`
   },
   moreFasterGalaxies: {
     endgames: 200,
