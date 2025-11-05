@@ -373,6 +373,7 @@ export const Endgame = {
     player.celestials.pelle.rebuyables.galaxyGeneratorAntimatterMult = 0;
     player.celestials.pelle.rebuyables.galaxyGeneratorIPMult = 0;
     player.celestials.pelle.rebuyables.galaxyGeneratorEPMult = 0;
+    player.celestials.pelle.rebuyables.galaxyGeneratorRSMult = 0;
     player.celestials.pelle.rifts.vacuum.fill = DC.D0;
     player.celestials.pelle.rifts.vacuum.active = false;
     player.celestials.pelle.rifts.vacuum.reducedTo = 1;
