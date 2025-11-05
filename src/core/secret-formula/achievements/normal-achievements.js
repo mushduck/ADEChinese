@@ -357,7 +357,7 @@ export const normalAchievements = [
     get reward() {
       return `All Antimatter Dimensions are stronger in the first ${formatInt(3)} minutes of Infinities.`;
     },
-    effect: () => Decimal.max(new Decimal(6).div(Time.thisInfinity.totalMinutes.plus(3)), 1),
+    effect: () => Decimal.max(new Decimal(6).div(Time.thisInfinity.totalMinutes.plus(3)), 1).toNumber(),
     effectCondition: () => Time.thisInfinity.totalMinutes.lt(3),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
