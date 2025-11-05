@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     update() {
-      this.endgameCount = Currency.endgames.value.floor();
+      this.endgameCount = Math.floor(Currency.endgames.value);
     },
     getMilestone(row, column) {
       return () => this.milestones[(row - 1) * 3 + column - 1];
