@@ -267,6 +267,58 @@ export const Time = {
   },
 
   /**
+   * @returns {TimeSpan}
+   */
+  get thisEndgame() {
+    return this.fromMilliseconds(() => player.records.thisEndgame.time);
+  },
+  /**
+   * @param {TimeSpan} timespan
+   */
+  set thisEndgame(timespan) {
+    this.toMilliseconds(timespan, value => player.records.thisEndgame.time = value);
+  },
+
+  /**
+   * @returns {TimeSpan}
+   */
+  get thisEndgameRealTime() {
+    return this.fromMilliseconds(() => new Decimal(player.records.thisEndgame.realTime));
+  },
+  /**
+   * @param {TimeSpan} timespan
+   */
+  set thisEndgameRealTime(timespan) {
+    this.toMilliseconds(timespan, value => player.records.thisEndgame.realTime = value.toNumber());
+  },
+
+  /**
+   * @returns {TimeSpan}
+   */
+  get bestEndgame() {
+    return this.fromMilliseconds(() => player.records.bestEndgame.time);
+  },
+  /**
+   * @param {TimeSpan} timespan
+   */
+  set bestEndgame(timespan) {
+    this.toMilliseconds(timespan, value => player.records.bestEndgame.time = value);
+  },
+
+  /**
+   * @returns {TimeSpan}
+   */
+  get bestEndgameRealTime() {
+    return this.fromMilliseconds(() => new Decimal(player.records.bestEndgame.realTime));
+  },
+  /**
+   * @param {TimeSpan} timespan
+   */
+  set bestEndgameRealTime(timespan) {
+    this.toMilliseconds(timespan, value => player.records.bestEndgame.realTime = value.toNumber());
+  },
+
+  /**
    * @return {TimeSpan}
    */
   get worstChallenge() {
