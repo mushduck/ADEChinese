@@ -370,7 +370,7 @@ export const EternityChallenges = {
       );
       minutes /= Effects.sum(EndgameMastery(22));
       minutes /= VUnlocks.fastAutoEC.effectOrDefault(1);
-      return TimeSpan.fromMinutes(new Decimal(minutes)).totalMilliseconds;
+      return TimeSpan.fromMinutes(new Decimal(minutes)).totalMilliseconds.toNumber();
     }
   }
 };
