@@ -369,6 +369,8 @@ export const Pelle = {
 
   // Calculations assume this is in units of proportion per second (eg. 0.03 is 3% drain per second)
   get riftDrainPercent() {
+    const extraDrain = Math.max(0.45, player.endgames * 0.05);
+    if (EndgameMilestone.riftFill.isReached) return 0.05 + extraDrain;
     return 0.05;
   },
 
