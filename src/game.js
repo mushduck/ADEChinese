@@ -407,7 +407,9 @@ export function getGameSpeedupFactor(effectsToConsider, blackHolesActiveOverride
 
   // 1e-300 is now possible with max inverted BH, going below it would be possible with
   // an effarig glyph.
-  factor = Decimal.clamp(factor, new Decimal(1e-300), DC.E300);
+  let gameSpeedCap = DC.E300;
+  if (EndgameMilestone.gameSpeedUncap.isReached) gameSpeedCap = DC.E1E300;
+  factor = Decimal.clamp(factor, new Decimal(1e-300), gameSpeedCap);
 
   return factor;
 }
