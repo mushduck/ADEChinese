@@ -40,7 +40,9 @@ export const GalaxyGenerator = {
 
   get galGenInstability() {
     const reduction = Effects.sum(EndgameMastery(122), Achievement(196));
-    return 10 - reduction;
+    let powReduction = 1;
+    if (EndgameMilestone.instabilityReduction.isReached) powReduction = Math.pow(1 / Math.log10(Currency.endgames.value + 1), 0.1);
+    return Math.pow(10 - reduction, powReduction);
   },
 
   get gainPerSecondPostCap() {
