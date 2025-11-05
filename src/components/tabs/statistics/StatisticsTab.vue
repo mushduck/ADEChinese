@@ -188,8 +188,8 @@ export default {
         endgame.bestReal.setFrom(new Decimal(bestEndgame.realTime));
         endgame.this.setFrom(records.thisEndgame.time);
         endgame.thisReal.setFrom(new Decimal(records.thisEndgame.realTime));
-        endgame.bestRateCP.copyFrom(bestEndgame.CPmin);
-        endgame.bestRateDP.copyFrom(bestEndgame.DPmin);
+        endgame.bestRateCP.copyFrom(bestEndgame.bestCPmin);
+        endgame.bestRateDP.copyFrom(bestEndgame.bestDPmin);
       }
       this.updateMatterScale();
 
