@@ -567,17 +567,17 @@ export function gameLoop(passedDiff, options = {}) {
   if (!Achievement(188).isUnlocked || PlayerProgress.endgameUnlocked()) {
     player.records.realTimeDoomed += realDiff;
     player.records.realTimePlayed += realDiff;
-    player.records.totalTimePlayed.add(diff);
+    player.records.totalTimePlayed = player.records.totalTimePlayed.add(diff);
     player.records.thisInfinity.realTime += realDiff;
-    player.records.thisInfinity.time.add(diff);
+    player.records.thisInfinity.time = player.records.thisInfinity.time.add(diff);
     player.records.thisEternity.realTime += realDiff;
     if (Enslaved.isRunning && Enslaved.feltEternity && !EternityChallenge(12).isRunning) {
-      player.records.thisEternity.time.add(diff * (1 + Currency.eternities.value.clampMax(1e66).toNumber()));
+      player.records.thisEternity.time = player.records.thisEternity.time.add(diff * (1 + Currency.eternities.value.clampMax(1e66).toNumber()));
     } else {
-      player.records.thisEternity.time.add(diff);
+      player.records.thisEternity.time = player.records.thisEternity.time.add(diff);
     }
     player.records.thisReality.realTime += realDiff;
-    player.records.thisReality.time.add(diff);
+    player.records.thisReality.time = player.records.thisReality.time.add(diff);
   }
 
   DeltaTimeState.update(realDiff, diff);
