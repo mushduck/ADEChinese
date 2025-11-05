@@ -62,6 +62,7 @@ export function getTickSpeedMultiplier() {
   galaxies *= getAdjustedGlyphEffect("realitygalaxies");
   galaxies *= 1 + ImaginaryUpgrade(9).effectOrDefault(0);
   if (Pelle.isDoomed) galaxies *= 0.5;
+  if (Pelle.isDoomed && EndgameMilestone.remnantGalaxy.isReached) galaxies *= Math.pow(1 + Math.log10(Currency.remnants.value + 1), 0.5);
 
   galaxies *= Pelle.specialGlyphEffect.power;
   const perGalaxy = DC.D0_965;
