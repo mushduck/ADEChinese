@@ -478,7 +478,7 @@ export function gameLoop(passDiff, options = {}) {
   const thisUpdate = Date.now();
   const realDiff = diff === undefined
     ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7)
-    : diff.toNumber();
+    : new Decimal(diff).toNumber();
   if (!GameStorage.ignoreBackupTimer) player.backupTimer += realDiff;
 
   // For single ticks longer than a minute from the GameInterval loop, we assume that the device has gone to sleep or
@@ -547,13 +547,13 @@ export function gameLoop(passDiff, options = {}) {
       const amplification = Ra.unlocks.improvedStoredTime.effects.gameTimeAmplification.effectOrDefault(1);
       const beforeStore = player.celestials.enslaved.stored;
       player.celestials.enslaved.stored = Decimal.clampMax(player.celestials.enslaved.stored.plus(
-        diff.times(totalTimeFactor.sub(reducedTimeFactor)).times(amplification)), Enslaved.timeCap);
+        new Decimal(diff).times(totalTimeFactor.sub(reducedTimeFactor)).times(amplification)), Enslaved.timeCap);
       Enslaved.currentBlackHoleStoreAmountPerMs = (player.celestials.enslaved.stored.sub(beforeStore)).div(diff);
       speedFactor = reducedTimeFactor;
     }
-    diff = diff.times(speedFactor);
+    diff = new Decimal(diff).times(speedFactor);
   } else if (fixedSpeedActive) {
-    diff = diff.times(getGameSpeedupFactor());
+    diff = new Decimal(diff).times(getGameSpeedupFactor());
     Enslaved.currentBlackHoleStoreAmountPerMs = DC.D0;
   }
   player.celestials.ra.peakGamespeed = Decimal.max(player.celestials.ra.peakGamespeed, getGameSpeedupFactor());
@@ -621,11 +621,11 @@ export function gameLoop(passDiff, options = {}) {
   replicantiLoop(diff);
 
   if (PlayerProgress.dilationUnlocked()) {
-    Currency.dilatedTime.add(getDilationGainPerSecond().times(diff.div(1000)));
+    Currency.dilatedTime.add(getDilationGainPerSecond().times(diff).div(1000));
   }
 
   updateTachyonGalaxies();
-  Currency.timeTheorems.add(getTTPerSecond().times(diff.div(1000)));
+  Currency.timeTheorems.add(getTTPerSecond().times(diff).div(1000));
   InfinityDimensions.tryAutoUnlock();
 
   BlackHoles.updatePhases(blackHoleDiff);
