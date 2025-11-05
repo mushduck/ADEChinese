@@ -10,6 +10,7 @@ export const Teresa = {
   displayName: "Teresa",
   possessiveName: "Teresa's",
   get isUnlocked() {
+    if (EndgameMilestone.celestialEarlyUnlock.isReached) return true;
     return Achievement(147).isUnlocked;
   },
   pourRM(diff) {
