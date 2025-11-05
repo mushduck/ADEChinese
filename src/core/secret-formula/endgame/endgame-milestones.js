@@ -9,10 +9,10 @@ export const endgameMilestones = {
     endgames: 2,
     reward: "You gain a multiplier to Galaxy strength based on Remnants"
   },
-  galGenAntimation: {
+  galGenAnimation: {
     endgames: 5,
     reward: () => {
-      return `Galaxy Generator Antimations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames`;
+      return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames`;
     }
   },
   gameSpeedUncap: {
