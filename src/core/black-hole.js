@@ -652,6 +652,7 @@ export const BlackHoles = {
    * [will BH be paused in the given amount of real time, real time until pause if so].
    */
   autoPauseData(realTime) {
+    const realTime = new Decimal(realTime).toNumber();
     // This can be called when determining offline time if the black holes are already paused.
     // In that case we don't need to pause them (need to pause = false), but they're already paused (0 time).
     // This saves us some computation.
