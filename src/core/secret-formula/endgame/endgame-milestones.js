@@ -2,16 +2,16 @@ export const endgameMilestones = {
   riftFill: {
     endgames: 1,
     reward: () => {
-      return `Rift Fill is ${formatPercents(0.05)} faster per Endgame, capping at ${formatPercents(0.5)} at ${formatInt(9)} Endgames` + 
+      return `Rift Fill is ${formatPercents(0.05)} faster per Endgame, capping at ${formatPercents(0.5)} at ${formatInt(9)} Endgames ` + 
         (player.endgames >= 1
-         ? `(Currently: ${format(Math.min(0.45, player.endgames * 0.05), 2, 2)})`
+         ? `(Currently: ${formatPercents(Math.min(0.45, player.endgames * 0.05), 2, 2)})`
          : "(You have not yet reached this milestone)");
     }
   },
   remnantGalaxy: {
     endgames: 2,
     reward: () => {
-      return "You gain a multiplier to Galaxy strength based on Remnants" +
+      return "You gain a multiplier to Galaxy strength based on Remnants " +
         (player.endgames >= 2 && Pelle.isDoomed
          ? `(Currently: ${formatPercents(Math.pow(1 + Math.log10(Currency.remnants.value + 1), 0.5), 2, 2)})`
          : (player.endgames < 2 ? "(You have not yet reached this milestone)" : "(Currently has no effect)"));
@@ -20,7 +20,7 @@ export const endgameMilestones = {
   galGenAnimation: {
     endgames: 5,
     reward: () => {
-      return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames` + 
+      return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames ` + 
         (player.endgames >= 5
          ? `(Currently: ${format(Math.pow(1.2, Math.floor(Currency.endgames.value / 5)), 2, 2)})`
          : "(You have not yet reached this milestone)");
@@ -49,7 +49,7 @@ export const endgameMilestones = {
   moreFasterGalaxies: {
     endgames: 200,
     reward: () => {
-      return "Endgames boost Galaxy Production in Pelle" + 
+      return "Endgames boost Galaxy Production in Pelle " + 
         (player.endgames >= 200
          ? `(Currently: ${format(Math.pow(10, Math.min(Currency.endgames.value / 100, 100)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 100, 0)), 2, 2)})`
          : "(You have not yet reached this milestone)");
@@ -58,7 +58,7 @@ export const endgameMilestones = {
   realityShardDTBoost: {
     endgames: 500,
     reward: () => {
-      return "Dilated Time gain is multiplied by your Reality Shard count" + 
+      return "Dilated Time gain is multiplied by your Reality Shard count " + 
         (player.endgames >= 500
          ? `(Currently: ${format(Currency.realityShards.value.plus(1), 2, 2)})`
          : "(You have not yet reached this milestone)");
@@ -71,7 +71,7 @@ export const endgameMilestones = {
   endgameAntimatter: {
     endgames: 10000,
     reward: () => {
-      return "Gain a power to Antimatter Production based on Endgames, which is stronger in Pelle" + 
+      return "Gain a power to Antimatter Production based on Endgames, which is stronger in Pelle " + 
         (player.endgames >= 10000
          ? `(Currently: ${formatPow(Pelle.isDoomed ? 1 + (Math.log10(Currency.endgames.value + 1) / 80) : 1 + (Math.log10(Currency.endgames.value + 1) / 200), 2, 3)})`
          : "(You have not yet reached this milestone)");
@@ -80,7 +80,7 @@ export const endgameMilestones = {
   instabilityReduction: {
     endgames: 1000000,
     reward: () => {
-      return "Endgames decrease the Galaxy Generator Instability Magnitude" + 
+      return "Endgames decrease the Galaxy Generator Instability Magnitude " + 
         (player.endgames >= 1000000
          ? `(Currently: ${formatPow(Math.pow(1 / Math.log10(Currency.endgames.value + 1), 0.1), 2, 3)})`
          : "(You have not yet reached this milestone)");
