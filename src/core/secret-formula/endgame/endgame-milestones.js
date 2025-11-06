@@ -4,7 +4,7 @@ export const endgameMilestones = {
     reward: () => {
       return `Rift Fill is ${formatPercents(0.05)} faster per Endgame, capping at ${formatPercents(0.5)} at ${formatInt(9)} Endgames ` + 
         (player.endgames >= 1
-         ? `(Currently: ${formatPercents(Math.min(0.45, player.endgames * 0.05))})`
+         ? `(Currently: +${formatPercents(Math.min(0.45, player.endgames * 0.05))})`
          : "(You have not yet reached this milestone)");
     }
   },
@@ -13,7 +13,7 @@ export const endgameMilestones = {
     reward: () => {
       return "You gain a multiplier to Galaxy strength based on Remnants " +
         (player.endgames >= 2 && Pelle.isDoomed
-         ? `(Currently: ${formatPercents(Math.pow(1 + Math.log10(Currency.remnants.value + 1), 0.5), 2, 2)})`
+         ? `(Currently: +${formatPercents(Math.pow(1 + Math.log10(Currency.remnants.value + 1), 0.5) - 1, 2, 2)})`
          : (player.endgames < 2 ? "(You have not yet reached this milestone)" : "(Currently has no effect)"));
     }
   },
@@ -22,7 +22,7 @@ export const endgameMilestones = {
     reward: () => {
       return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames ` + 
         (player.endgames >= 5
-         ? `(Currently: ${format(Math.pow(1.2, Math.floor(Currency.endgames.value / 5)), 2, 2)})`
+         ? `(Currently: ${formatX(Math.pow(1.2, Math.floor(Currency.endgames.value / 5)), 2, 2)})`
          : "(You have not yet reached this milestone)");
     }
   },
@@ -51,7 +51,7 @@ export const endgameMilestones = {
     reward: () => {
       return "Endgames boost Galaxy Production in Pelle " + 
         (player.endgames >= 200
-         ? `(Currently: ${format(Math.pow(10, Math.min(Currency.endgames.value / 100, 100)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 100, 0)), 2, 2)})`
+         ? `(Currently: ${formatX(Math.pow(10, Math.min(Currency.endgames.value / 100, 100)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 100, 0)), 2, 2)})`
          : "(You have not yet reached this milestone)");
     }
   },
@@ -60,7 +60,7 @@ export const endgameMilestones = {
     reward: () => {
       return "Dilated Time gain is multiplied by your Reality Shard count " + 
         (player.endgames >= 500
-         ? `(Currently: ${format(Currency.realityShards.value.plus(1), 2, 2)})`
+         ? `(Currently: ${formatX(Currency.realityShards.value.plus(1), 2, 2)})`
          : "(You have not yet reached this milestone)");
     }
   },
