@@ -308,7 +308,7 @@
 
 .o-endgame-mastery-permanent--bought {
   color: black;
-  background-color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
+  background: linear-gradient(var(--color-endgame), var(--color-pelle--base));
   border-color: black;
 }
 
