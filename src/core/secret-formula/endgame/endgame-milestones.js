@@ -4,7 +4,7 @@ export const endgameMilestones = {
     reward: () => {
       return `Rift Fill is ${formatPercents(0.05)} faster per Endgame, capping at ${formatPercents(0.5)} at ${formatInt(9)} Endgames ` + 
         (player.endgames >= 1
-         ? `(Currently: ${formatPercents(Math.min(0.45, player.endgames * 0.05), 2, 2)})`
+         ? `(Currently: ${formatPercents(Math.min(0.45, player.endgames * 0.05))})`
          : "(You have not yet reached this milestone)");
     }
   },
