@@ -21,7 +21,6 @@ export const Teresa = {
     this.pouredAmount = this.pouredAmount.add(Decimal.min(rmPoured, Teresa.pouredAmountCap.sub(this.pouredAmount)));
     Currency.realityMachines = Currency.realityMachines.subtract(rmPoured);
     this.checkForUnlocks();
-    player.celestials.teresa.pouredAmount = this.pouredAmount;
   },
   checkForUnlocks() {
     for (const info of TeresaUnlocks.all) {
@@ -37,6 +36,9 @@ export const Teresa = {
   },
   get pouredAmount() {
     return player.celestials.teresa.pouredAmount;
+  },
+  set pouredAmount(amount) {
+    player.celestials.teresa.pouredAmount = amount;
   },
   get fill() {
     return Math.min(Decimal.log10(this.pouredAmount) / 24, 1);
