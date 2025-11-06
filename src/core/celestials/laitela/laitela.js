@@ -10,6 +10,7 @@ export const Laitela = {
     return player.celestials.laitela;
   },
   get isUnlocked() {
+    if (EndgameMilestone.celestialEarlyUnlock.isReached) return true;
     return ImaginaryUpgrade(15).isBought;
   },
   initializeRun() {

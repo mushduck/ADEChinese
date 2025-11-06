@@ -31,6 +31,9 @@ export default {
     },
     requirement() {
       if (this.id === 1) {
+        if (this.maxTT.gte(1e9)) return `Requirement: ${formatInt(5)} EC11 and EC12 completions
+          and ${format(this.maxTT, 2, 2)}/${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)}
+          total Time Theorems`;
         return `Requirement: ${formatInt(5)} EC11 and EC12 completions
           and ${formatInt(this.maxTT)}/${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)}
           total Time Theorems`;
@@ -44,7 +47,7 @@ export default {
     theoremTimeEstimate() {
       if (this.study.isBought || !this.study.cost || this.ttGen.eq(0)) return null;
       const time = Decimal.sub(this.study.cost, this.currTT).dividedBy(this.ttGen);
-      return time.gt(0) ? `Enough TT in ${TimeSpan.fromSeconds(time.toNumber()).toStringShort()}` : null;
+      return time.gt(0) ? `Enough TT in ${TimeSpan.fromSeconds(time).toStringShort()}` : null;
     }
   },
   methods: {

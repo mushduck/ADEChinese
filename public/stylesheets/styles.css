@@ -664,6 +664,210 @@ button:focus {
 
 /* #endregion TT shop */
 
+/* #region ES shop */
+
+.endgame-skill-buttons {
+  display: flex;
+  width: 55.5rem;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+  align-items: flex-end;
+  font-family: Typewriter, serif;
+  color: var(--color-text);
+  pointer-events: all;
+}
+
+.l-es-buy-button {
+  width: 17rem;
+  z-index: 1;
+  margin: 0.3rem;
+}
+
+.c-es-buy-button {
+  font-family: Typewriter, serif;
+  font-size: 1.35rem;
+  font-weight: bold;
+  border: 0.1rem solid var(--color-endgame);
+  border-radius: var(--var-border-radius, 4px);
+  transition-duration: 0.2s;
+}
+
+.c-es-buy-button--unlocked {
+  color: var(--color-endgame);
+  background: #232028;
+  cursor: pointer;
+}
+
+.c-es-buy-button--unlocked:hover {
+  color: #232028;
+  background: var(--color-endgame);
+}
+
+.c-es-buy-button--locked {
+  color: black;
+  background: #4a4a4a;
+}
+
+.c-es-buy-button--locked:hover {
+  background: #652f2f;
+}
+
+.endgameskills {
+  flex: 1 0 auto;
+  text-align: center;
+  font-size: 15px;
+}
+
+.esbuttons-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  transition: all 0.25s ease-out;
+}
+
+.esbuttons-top-row {
+  align-items: center;
+}
+
+.o-es-top-row-button {
+  flex-grow: 0;
+  flex-shrink: 0;
+  min-height: 3rem;
+  align-self: stretch;
+  font-size: 1.2rem;
+  margin: 0.3rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.o-es-autobuyer-button {
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 2.5rem;
+  min-width: 8rem;
+  align-self: stretch;
+  font-size: 1rem !important;
+  margin: 0.3rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.l-es-save-load-btn__wrapper {
+  position: relative;
+  margin: 0.3rem;
+}
+
+.l-es-save-load-btn {
+  min-width: 2rem;
+}
+
+.l-es-save-load-btn__menu {
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  padding: 0.5rem 0;
+  transform: translate(-50%, -100%);
+}
+
+.c-es-save-load-btn__menu {
+  text-align: left;
+  font-family: Typewriter;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: white;
+  background: black;
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.l-es-save-load-btn__menu::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border-color: black transparent transparent;
+  border-style: solid;
+  border-width: var(--var-border-width, 0.5rem);
+  margin-left: -0.5rem;
+}
+
+.l-es-save-load-btn__menu-rename {
+  margin: 0.3rem 0.5rem 0.5rem 0.7rem;
+}
+
+.c-es-save-load-btn__menu-rename {
+  text-align: left;
+  font-family: Typewriter;
+  font-size: 1.4rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--var-border-radius, 0.3rem);
+  padding: 0.2rem;
+}
+
+.c-es-autobuyer-toggle {
+  color: initial;
+}
+
+.l-es-buy-max-vbox {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.esshop-background {
+  z-index: 1;
+  background: var(--color-base);
+  border: var(--var-border-width, 0.2rem) solid black;
+  border-bottom: none;
+  border-top-left-radius: var(--var-border-radius, 7px);
+  border-top-right-radius: var(--var-border-radius, 7px);
+}
+
+.t-s6 .esshop-background,
+.t-s10 .esshop-background {
+  border: 0.1rem solid var(--color-endgame);
+}
+
+.esshop-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 60rem;
+  max-width: 80rem;
+  padding: 0 0.5rem;
+  transition: all 0.25s ease-out;
+}
+
+.esshop-minimize-btn {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.1rem;
+  color: var(--color-text);
+  margin-left: -0.2rem;
+  cursor: pointer;
+}
+
+.t-s6 .esshop-minimize-btn,
+.t-s10 .esshop-minimize-btn,
+.s-base--metro .esshop-minimize-btn {
+  margin-left: -0.1rem;
+}
+
+.t-s6 .esshop-minimize-btn,
+.t-s10 .esshop-minimize-btn {
+  color: var(--color-endgame);
+}
+
+.c-esshop__save-load-text {
+  font-size: 10px;
+}
+
+/* #endregion ES shop */
+
 .l-dim-path-priority {
   position: absolute;
   right: 0.5rem;
@@ -671,6 +875,32 @@ button:focus {
 }
 
 .o-time-study-selection-btn {
+  width: 20rem;
+  height: 6rem;
+  position: relative;
+  font-family: Typewriter, serif;
+  font-size: 1.65rem;
+  font-weight: bold;
+  background-color: black;
+  border: 0.1rem solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  margin: 1rem;
+  transition-duration: 0.2s;
+}
+
+.l-comp-path-priority {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
+.l-curr-path-priority {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
+.o-endgame-mastery-selection-btn {
   width: 20rem;
   height: 6rem;
   position: relative;
@@ -1908,6 +2138,14 @@ br {
   background-color: var(--color-teresa--base) !important;
 }
 
+.o-primary-btn--endgame-respec-active {
+  background-color: var(--color-endgame) !important;
+}
+
+.o-primary-btn--endgame-respec-active:hover {
+  color: var(--color-base);
+}
+
 .o-primary-btn--glyph-trash {
   width: 30rem;
   height: 4.5rem;
@@ -2891,6 +3129,36 @@ br {
 }
 
 /* #endregion c-celestial-dim-description__accent */
+
+/* #region c-celestial-dim-description__accent-unstable */
+
+.c-celestial-dim-description__accent-unstable {
+  font-size: 3.5rem;
+  color: black;
+}
+
+.t-metro .c-celestial-dim-description__accent-unstable,
+.t-s8 .c-celestial-dim-description__accent-unstable {
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 50%), -0.1rem 0.1rem 0.1rem black;
+}
+
+.t-dark .c-celestial-dim-description__accent-unstable,
+.t-amoled .c-celestial-dim-description__accent-unstable,
+.t-amoled-metro .c-celestial-dim-description__accent-unstable,
+.t-s6 .c-celestial-dim-description__accent-unstable,
+.t-s10 .c-celestial-dim-description__accent-unstable,
+.t-s11 .c-celestial-dim-description__accent-unstable {
+  color: var(--color-pelle--base);
+  text-shadow: 0 0 0.7rem var(--color-pelle--base);
+}
+
+.t-metro .c-celestial-dim-description__accent-unstable,
+.t-dark-metro .c-celestial-dim-description__accent-unstable,
+.t-s8 .c-celestial-dim-description__accent-unstable {
+  color: var(--color-pelle--base);
+}
+
+/* #endregion c-celestial-dim-description__accent-unstable */
 
 /* #endregion Celestial Dimensions */
 
@@ -5618,17 +5886,80 @@ properly on certain themes. */
 .l-expansion-packs-tab {
   display: flex;
   flex-direction: column;
-  color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
-  width: 100%;
   align-items: center;
 }
 
-.o-primary-btn--expansion-packs-unlock {
-  width: 20rem;
-  height: 8rem;
+/* #endregion Expansion Packs */
+
+/* #region Endgame Milestones */
+
+.l-endgame-milestone-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* #endregion Expansion Packs */
+.l-endgame-milestone-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-endgame-milestone-grid__cell {
+  margin: 0.5rem 0.8rem;
+}
+
+.o-endgame-milestone__goal {
+  text-align: left;
+  font-size: 2rem;
+}
+
+.o-endgame-milestone__reward {
+  width: 25rem;
+  height: 8rem;
+  font-family: Typewriter, serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+  border: 0.1rem solid var(--color-endgame);
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+}
+
+.o-endgame-milestone__reward--locked {
+  background-color: dimgrey;
+}
+
+.o-endgame-milestone__reward--reached {
+  background-color: var(--color-endgame);
+  border-color: black;
+}
+
+.o-endgame-milestone__reward--small-font {
+  font-size: 1.1rem;
+}
+
+.s-base--metro .o-endgame-milestone__reward--locked,
+.t-s1 .o-endgame-milestone__reward--locked {
+  background-color: #9e9e9e;
+  border: none;
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 black;
+}
+
+.t-dark .o-endgame-milestone__reward--locked,
+.t-s6 .o-endgame-milestone__reward--locked,
+.t-s10 .o-endgame-milestone__reward--locked {
+  color: var(--color-endgame);
+  background-color: black;
+  border-color: var(--color-endgame);
+  animation: a-time-study 7s infinite;
+}
+
+.l-endgame-milestone {
+  display: flex;
+  flex-direction: column;
+}
+
+/* #endregion Endgame Milestones */
 
 /* #region Modals */
 
@@ -6215,6 +6546,11 @@ kbd {
 .o-notification--reality {
   background-color: var(--color-reality);
   border-color: var(--color-reality);
+}
+
+.o-notification--endgame {
+  background-color: var(--color-endgame);
+  border-color: var(--color-endgame);
 }
 
 .o-notification--automator {

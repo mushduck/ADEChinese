@@ -53,6 +53,34 @@ body.t-s6 {
   border: 0.1rem solid var(--color-bad);
 }
 
+.t-s6 .c-es-amount {
+  color: var(--color-endgame);
+  text-shadow: 0 0 7px var(--color-endgame);
+}
+
+.t-s6 .c-es-buy-button--unlocked {
+  color: var(--color-endgame);
+  background: black;
+  border: 0.1rem solid var(--color-endgame);
+}
+
+.t-s6 .c-es-buy-button--unlocked:hover {
+  color: black;
+  background: var(--color-endgame);
+}
+
+.t-s6 .c-es-buy-button--locked {
+  color: grey;
+  background: black;
+  border: 0.1rem solid grey;
+}
+
+.t-s6 .c-es-buy-button--locked:hover {
+  color: black;
+  background: var(--color-bad);
+  border: 0.1rem solid var(--color-bad);
+}
+
 .t-s6 .c-rm-amount__desc {
   color: #999999;
 }

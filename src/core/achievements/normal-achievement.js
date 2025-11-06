@@ -161,24 +161,24 @@ export const Achievements = {
   },
 
   get period() {
-    return GameCache.achievementPeriod.value;
+    return new Decimal(GameCache.achievementPeriod.value);
   },
 
   autoAchieveUpdate(diff) {
     if (!PlayerProgress.realityUnlocked()) return;
     if (!player.reality.autoAchieve || RealityUpgrade(8).isLockingMechanics) {
-      player.reality.achTimer = Math.clampMax(player.reality.achTimer + diff, this.period);
+      player.reality.achTimer = Decimal.clampMax(player.reality.achTimer.plus(diff), this.period);
       return;
     }
     if (Achievements.preReality.every(a => a.isUnlocked)) return;
 
-    player.reality.achTimer += diff;
-    if (player.reality.achTimer < this.period) return;
+    player.reality.achTimer.add(diff);
+    if (player.reality.achTimer.lt(this.period)) return;
 
     for (const achievement of Achievements.preReality.filter(a => !a.isUnlocked)) {
       achievement.unlock(true);
-      player.reality.achTimer -= this.period;
-      if (player.reality.achTimer < this.period) break;
+      player.reality.achTimer.subtract(this.period);
+      if (player.reality.achTimer.lt(this.period)) break;
     }
     player.reality.gainedAutoAchievements = true;
   },
@@ -187,7 +187,7 @@ export const Achievements = {
     if (!PlayerProgress.realityUnlocked()) return 0;
     if (GameCache.achievementPeriod.value === 0) return 0;
     if (Achievements.preReality.countWhere(a => !a.isUnlocked) === 0) return 0;
-    return this.period - player.reality.achTimer;
+    return this.period.sub(player.reality.achTimer).toNumber();
   },
 
   _power: new Lazy(() => {
@@ -199,7 +199,7 @@ export const Achievements = {
   }),
 
   get power() {
-    if (Pelle.isDisabled("achievementMult")) return 1;
+    if (Pelle.isDisabled("achievementMult") && !PelleDestructionUpgrade.achievementMultiplier.isBought) return 1;
     return Achievements._power.value;
   },
 
@@ -211,5 +211,5 @@ export const Achievements = {
 };
 
 EventHub.logic.on(GAME_EVENT.PERK_BOUGHT, () => {
-  player.reality.achTimer = Math.clampMax(player.reality.achTimer, Achievements.period);
+  player.reality.achTimer = Decimal.clampMax(player.reality.achTimer, Achievements.period);
 });

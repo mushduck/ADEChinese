@@ -69,7 +69,7 @@ export default {
       this.extraTesseracts = Tesseracts.extra * Tesseracts.totalMult;
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
-      this.infinityDimCompressionMagnitude = player.endgame.compressionMagnitude.infinity;
+      this.infinityDimCompressionMagnitude = InfinityDimensions.compressionMagnitude;
       this.infinityDimOverflow = 1 / this.infinityDimCompressionMagnitude;
       this.infinityDimStart = InfinityDimensions.OVERFLOW;
     },

@@ -60,4 +60,13 @@ export const pelleGalaxyGeneratorUpgrades = {
     currency: () => Currency.eternityPoints,
     currencyLabel: "Eternity Point"
   }),
+  RSMult: rebuyable({
+    id: "galaxyGeneratorRSMult",
+    description: "Multiply Galaxy generation",
+    cost: x => Decimal.pow("1e100", 10000 ** x),
+    effect: x => Decimal.pow(2, x),
+    formatEffect: x => formatX(x, 2),
+    currency: () => Currency.realityShards,
+    currencyLabel: "Reality Shard"
+  }),
 };

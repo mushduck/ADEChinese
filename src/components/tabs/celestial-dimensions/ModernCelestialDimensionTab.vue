@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       celestialMatter: new Decimal(0),
+      unnerfedCelestialMatter: new Decimal(0),
       dimMultiplier: new Decimal(0),
       matterPerSecond: new Decimal(0),
       incomeType: "",
@@ -19,24 +20,37 @@ export default {
       totalDimCap: 0,
       creditsClosed: false,
       showLockedDimCostNote: true,
+      softcapPow: 0,
+      softcap: new Decimal(0),
+      unstable: false,
     };
   },
   methods: {
     update() {
       this.showLockedDimCostNote = !CelestialDimension(8).isUnlocked;
       this.celestialMatter.copyFrom(Currency.celestialMatter);
+      this.unnerfedCelestialMatter.copyFrom(Currency.unnerfedCelestialMatter);
       this.conversionExponent = CelestialDimensions.conversionExponent;
       this.dimMultiplier.copyFrom(this.celestialMatter.pow(this.conversionExponent).max(1));
       this.matterPerSecond.copyFrom(CelestialDimension(1).productionPerSecond);
       this.incomeType = "Celestial Matter";
       this.totalDimCap = CelestialDimensions.totalDimCap;
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.softcapPow = CelestialDimensions.softcapPow;
+      this.softcap = CelestialDimensions.SOFTCAP;
+      this.unstable = this.celestialMatter.gte(this.softcap);
     },
     maxAll() {
       CelestialDimensions.buyMax();
     },
     toggleCelestialMatterMultiplier() {
       toggleCelestialMatter();
+    },
+    instabilityClassObject() {
+      return {
+        "c-celestial-dim-description__accent": !this.unstable,
+        "c-celestial-dim-description__accent-unstable": this.unstable,
+      };
     }
   }
 };
@@ -61,17 +75,30 @@ export default {
     <div>
       <p>
         You have
-        <span class="c-celestial-dim-description__accent">{{ format(celestialMatter, 2, 1) }}</span>
-        Celestial Matter,
+        <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
+        <span v-if="unstable">Unstable</span> Celestial Matter,
         <br>
         <span>
           increased by
-          <span class="c-celestial-dim-description__accent">{{ formatPow(conversionExponent, 2, 3) }}</span>
+          <span :class="instabilityClassObject()">{{ formatPow(conversionExponent, 2, 3) }}</span>
         </span>
         to a
-        <span class="c-celestial-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
+        <span :class="instabilityClassObject()">{{ formatX(dimMultiplier, 2, 1) }}</span>
         multiplier to
         <span>Game Speed.</span>
+        <div v-if="unstable">
+          You <i>would</i> have <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
+          Celestial Matter, but you don't.
+          <br>
+          This is because at <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
+          Celestial Matter was softcapped.
+          <br>
+          Currently, Celestial Matter above this amount is being raised to the power of
+          <span :class="instabilityClassObject()">{{ format(1 / softcapPow, 2, 3) }}</span>.
+          <br>
+          The softcap to Celestial Matter is solely based on your Celestial Matter Softcap Magnitude, which is currently
+          <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>.
+        </div>
       </p>
     </div>
     <div>

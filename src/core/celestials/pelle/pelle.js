@@ -348,10 +348,22 @@ export const Pelle = {
       ep *= 5;
     }
 
-    const gain = (
+    if (EndgameMilestone.remnantFormula.isReached) {
+      am *= 10000;
+      ip *= 500;
+      ep *= 25;
+    }
+
+    const gainOld = (
       (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.7
     ) ** 8;
 
+    const gainNew = (
+      (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.5
+    ) ** 12;
+
+    const gain = EndgameMilestone.remnantFormula.isReached ? gainNew : gainOld;
+    
     return gain < 1 ? gain : Math.floor(gain - this.cel.remnants);
   },
 
@@ -369,6 +381,8 @@ export const Pelle = {
 
   // Calculations assume this is in units of proportion per second (eg. 0.03 is 3% drain per second)
   get riftDrainPercent() {
+    const extraDrain = Math.min(0.45, player.endgames * 0.05);
+    if (EndgameMilestone.riftFill.isReached) return 0.05 + extraDrain;
     return 0.05;
   },
 

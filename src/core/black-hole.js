@@ -206,7 +206,7 @@ class BlackHoleState {
     if (BlackHoles.arePaused) return `<i class="fas fa-pause"></i> Paused`;
     if (this.isPermanent) return `<i class="fas fa-infinity"></i> Permanent`;
 
-    const timeString = TimeSpan.fromSeconds(this.timeToNextStateChange).toStringShort(true);
+    const timeString = TimeSpan.fromSeconds(new Decimal(this.timeToNextStateChange)).toStringShort(true);
     if (this.isActive) return `<i class="fas fa-play"></i> Active (${timeString})`;
     return `<i class="fas fa-redo"></i> Inactive (${timeString})`;
   }
@@ -277,6 +277,7 @@ class BlackHoleState {
    * BlackHole(2) is active during that time.
    */
   realTimeWhileActive(time) {
+    time = new Decimal(time).toNumber();
     const nextDeactivation = this.timeUntilNextDeactivation;
     const cooldown = this.interval;
     const duration = this.duration;
@@ -438,7 +439,7 @@ export const BlackHoles = {
     // binarySearch from working in the numberOfTicks = 1 case.
     // I doubt that's possible but it seems worth handling just in case.
     if (numberOfTicks === 1) {
-      return [totalRealTime, totalGameTime / totalRealTime];
+      return [totalRealTime, totalGameTime.div(totalRealTime)];
     }
     // We want calculateGameTimeFromRealTime(realTickTime, speedups) * numberOfTicks / totalGameTime to be roughly 1
     // (that is, the tick taking realTickTime real time has roughly average length in terms of game time).
@@ -450,11 +451,11 @@ export const BlackHoles = {
     const realTickTime = this.binarySearch(
       0,
       totalRealTime,
-      x => this.calculateGameTimeFromRealTime(x, speedups) * numberOfTicks / totalGameTime,
+      x => this.calculateGameTimeFromRealTime(x, speedups).times(numberOfTicks).div(totalGameTime),
       1,
       tolerance
     );
-    const blackHoleSpeedup = this.calculateGameTimeFromRealTime(realTickTime, speedups) / realTickTime;
+    const blackHoleSpeedup = this.calculateGameTimeFromRealTime(realTickTime, speedups).div(realTickTime);
     return [realTickTime, blackHoleSpeedup];
   },
 
@@ -468,9 +469,9 @@ export const BlackHoles = {
     let middle;
     for (let iter = 0; iter < 100; ++iter) {
       middle = (start + end) / 2;
-      const error = evaluationFunction(middle) - target;
-      if (Math.abs(error) < tolerance) break;
-      if (error < 0) {
+      const error = evaluationFunction(middle).sub(target);
+      if (error.abs().lt(tolerance)) break;
+      if (error.lt(0)) {
         // eslint-disable-next-line no-param-reassign
         start = middle;
       } else {
@@ -489,29 +490,30 @@ export const BlackHoles = {
    */
   calculateSpeedups() {
     const effectsToConsider = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH,
-      GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS];
+      GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS, GAME_SPEED_EFFECT.CELESTIAL_MATTER];
     const speedupWithoutBlackHole = getGameSpeedupFactor(effectsToConsider);
     const speedups = [speedupWithoutBlackHole];
     effectsToConsider.push(GAME_SPEED_EFFECT.BLACK_HOLE);
     // Crucial thing: this works even if the black holes are paused, it's just that the speedups will be 1.
     for (const blackHole of this.list) {
       if (!blackHole.isUnlocked) break;
-      speedups.push(getGameSpeedupFactor(effectsToConsider, blackHole.id) / speedupWithoutBlackHole);
+      speedups.push(getGameSpeedupFactor(effectsToConsider, blackHole.id).div(speedupWithoutBlackHole));
     }
     return speedups;
   },
 
   calculateGameTimeFromRealTime(realTime, speedups) {
+    realTime = new Decimal(realTime);
     // We could do this.autoPauseData(realTime)[1] here but that seems less clear.
     // Using _ as an unused variable should be reasonable.
     // eslint-disable-next-line no-unused-vars
     const [_, realerTime] = this.autoPauseData(realTime);
-    const effectivePeriods = this.realTimePeriodsWithBlackHoleEffective(realerTime, speedups);
+    const effectivePeriods = this.realTimePeriodsWithBlackHoleEffective(new Decimal(realerTime), speedups);
     // This adds in time with black holes paused at the end of the list.
-    effectivePeriods[0] += realTime - realerTime;
+    effectivePeriods[0] = effectivePeriods[0].add(realTime.sub(new Decimal(realerTime)));
     return effectivePeriods
-      .map((period, i) => period * speedups[i])
-      .sum();
+      .map((period, i) => speedups[i].times(period))
+      .decimalSum();
   },
 
   /**
@@ -534,7 +536,7 @@ export const BlackHoles = {
     const activePeriods = this.realTimePeriodsWithBlackHoleActive(realTime);
     const effectivePeriods = [];
     for (let i = 0; i < activePeriods.length - 1; i++) {
-      effectivePeriods.push(activePeriods[i] - activePeriods[i + 1]);
+      effectivePeriods.push(new Decimal(activePeriods[i]).sub(activePeriods[i + 1]));
     }
     effectivePeriods.push(activePeriods.last());
     return effectivePeriods;
@@ -548,7 +550,7 @@ export const BlackHoles = {
     const activePeriods = [realTime];
     for (const blackHole of this.list) {
       if (!blackHole.isUnlocked) break;
-      const activeTime = blackHole.realTimeWhileActive(activePeriods.last());
+      const activeTime = new Decimal(blackHole.realTimeWhileActive(activePeriods.last()));
       activePeriods.push(activeTime);
     }
     return activePeriods;

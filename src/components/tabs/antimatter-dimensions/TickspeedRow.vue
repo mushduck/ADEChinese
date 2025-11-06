@@ -10,7 +10,7 @@ export default {
       cost: new Decimal(0),
       isAffordable: false,
       tickspeed: new Decimal(0),
-      gameSpeedMult: 1,
+      gameSpeedMult: new Decimal(1),
       galaxyCount: 0,
       isContinuumActive: false,
       continuumValue: 0,

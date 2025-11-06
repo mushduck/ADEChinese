@@ -18,12 +18,12 @@ export default {
     return {
       pour: false,
       time: new Date().getTime(),
-      pouredAmount: 0,
+      pouredAmount: new Decimal(0),
       isPouredAmountCapped: false,
       rm: new Decimal(0),
       percentage: "",
       possibleFillPercentage: "",
-      rmMult: 0,
+      rmMult: new Decimal(0),
       bestAM: new Decimal(0),
       bestAMSet: [],
       lastMachines: new Decimal(0),
@@ -100,8 +100,8 @@ export default {
         Teresa.timePoured = 0;
       }
       this.time = now;
-      this.pouredAmount = player.celestials.teresa.pouredAmount;
-      this.isPouredAmountCapped = this.pouredAmount === this.pouredAmountCap;
+      this.pouredAmount.copyFrom(player.celestials.teresa.pouredAmount);
+      this.isPouredAmountCapped = this.pouredAmount.eq(new Decimal(this.pouredAmountCap));
       this.percentage = `${(Teresa.fill * 100).toFixed(2)}%`;
       this.possibleFillPercentage = `${(Teresa.possibleFill * 100).toFixed(2)}%`;
       this.rmMult = Teresa.rmMultiplier;

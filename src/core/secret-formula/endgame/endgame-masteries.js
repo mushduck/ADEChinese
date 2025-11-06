@@ -8,15 +8,14 @@ export const endgameMasteries = [
     reqType: EM_REQUIREMENT_TYPE.ALL,
     description: () => `Generate ${formatInt(1)} Perk Point per minute per Endgame`,
     effect: () => player.endgames,
-    formatEffect: value => formatX(value, 2)
+    formatEffect: value => `${formatInt(value)}/min`
   },
   {
     id: 21,
     cost: 2,
     requirement: [11],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Automator Speed goes up by ${formatPercents(0.06)} rather than ${formatPercents(0.006)}`,
-    effect: 10
+    description: () => `Automator Speed goes up by ${formatPercents(0.06)} rather than ${formatPercents(0.006)}`
   },
   {
     id: 22,
@@ -85,7 +84,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [52],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Gain a free Tesseract",
+    description: "Keep Achievements on Endgame and gain a free Tesseract",
     effect: 1
   },
   {
@@ -93,17 +92,16 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [61],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and your highest-ever Glyph Level`,
+    description: () => `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and peak GL`,
     effect: () => (1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)) * player.records.bestEndgame.glyphLevel,
-    formatEffect: value => format(value, 2)
+    formatEffect: value => formatInt(value)
   },
   {
     id: 81,
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `Weaken the Infinity Upgrade ${formatInt(23)} Softcap by ${formatPercents(0.5)}`,
-    effect: 0.5
+    description: () => `Weaken the Infinity Upgrade ${formatInt(23)} Softcap by ${formatPercents(0.5)}`
   },
   {
     id: 82,
@@ -134,7 +132,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [81],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Delay the Infinity Challenge ${formatInt(8)} Reward based on Endgames`,
+    description: () => `Delay the Infinity Challenge ${formatInt(8)} Reward Hardcap based on Endgames`,
     effect: () => player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
@@ -271,7 +269,9 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [141],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Remove the ${formatX(2)} IP Multiplier Softcap`
+    description: () => `Improve the Infinity Point Conversion Rate based on Celestial Points`,
+    effect: () => 1 + (Math.log10(Decimal.log10(Currency.celestialPoints.value.plus(1)) + 1) / 20),
+    formatEffect: value => `/${format(value, 2, 2)}`
   },
   {
     id: 152,
@@ -301,7 +301,9 @@ export const endgameMasteries = [
     cost: 5,
     requirement: [151, 152, 153, 154],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Uncap the Singularity Milestone that increases Singularity Gain per bulk increase"
+    description: "Improve Singularity Gain per bulk increase based on Singularities owned",
+    effect: () => Math.floor(1 + (Math.log10(Math.max(Currency.singularities.value / 1e50, 1)) / 5)),
+    formatEffect: value => `+${format(value, 2)}`
   },
   {
     id: 171,

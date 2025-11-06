@@ -48,12 +48,12 @@ window.player = {
   challenge: {
     normal: {
       current: 0,
-      bestTimes: Array.repeat(Number.MAX_VALUE, 11),
+      bestTimes: Array.repeat(Decimal.MAX_VALUE, 11),
       completedBits: 0,
     },
     infinity: {
       current: 0,
-      bestTimes: Array.repeat(Number.MAX_VALUE, 8),
+      bestTimes: Array.repeat(Decimal.MAX_VALUE, 8),
       completedBits: 0,
     },
     eternity: {
@@ -288,8 +288,8 @@ window.player = {
   },
   records: {
     gameCreatedTime: Date.now(),
-    totalTimePlayed: 0,
-    timePlayedAtBHUnlock: Number.MAX_VALUE,
+    totalTimePlayed: DC.D0,
+    timePlayedAtBHUnlock: Decimal.MAX_VALUE,
     realTimePlayed: 0,
     realTimeDoomed: 0,
     fullGameCompletions: 0,
@@ -300,29 +300,29 @@ window.player = {
     totalEternityAntimatter: DC.E1,
     totalInfinityAntimatter: DC.E1,
     recentInfinities: Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
+      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
     recentEternities: Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]),
+      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]),
     recentRealities: Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]),
+      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]),
     recentEndgames: Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, 1]),
+      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, 1]),
     thisInfinity: {
-      time: 0,
+      time: DC.D0,
       realTime: 0,
-      lastBuyTime: 0,
+      lastBuyTime: DC.D0,
       maxAM: DC.D0,
       bestIPmin: DC.D0,
       bestIPminVal: DC.D0,
     },
     bestInfinity: {
-      time: Number.MAX_VALUE,
+      time: Decimal.MAX_VALUE,
       realTime: Number.MAX_VALUE,
       bestIPminEternity: DC.D0,
       bestIPminReality: DC.D0,
     },
     thisEternity: {
-      time: 0,
+      time: DC.D0,
       realTime: 0,
       maxAM: DC.D0,
       maxIP: DC.D0,
@@ -332,12 +332,12 @@ window.player = {
       bestInfinitiesPerMs: DC.D0,
     },
     bestEternity: {
-      time: Number.MAX_VALUE,
+      time: Decimal.MAX_VALUE,
       realTime: Number.MAX_VALUE,
       bestEPminReality: DC.D0,
     },
     thisReality: {
-      time: 0,
+      time: DC.D0,
       realTime: 0,
       maxAM: DC.D0,
       maxIP: DC.D0,
@@ -349,7 +349,7 @@ window.player = {
       bestRSminVal: 0,
     },
     bestReality: {
-      time: Number.MAX_VALUE,
+      time: Decimal.MAX_VALUE,
       realTime: Number.MAX_VALUE,
       glyphStrength: 0,
       RM: DC.D0,
@@ -365,17 +365,21 @@ window.player = {
       laitelaSet: [],
     },
     thisEndgame: {
-      time: 0,
+      time: DC.D0,
       realTime: 0,
       bestCPmin: DC.D0,
       bestDPmin: DC.D0,
     },
     bestEndgame: {
-      time: Number.MAX_VALUE,
+      time: Decimal.MAX_VALUE,
       realTime: Number.MAX_VALUE,
       bestCPmin: DC.D0,
       bestDPmin: DC.D0,
       glyphLevel: 0,
+    },
+    permanent: {
+      maxCP: DC.D0,
+      maxDP: DC.D0,
     },
   },
   speedrun: {
@@ -572,7 +576,7 @@ window.player = {
       forceUnlock: false,
       currentInfoPane: AutomatorPanels.INTRO_PAGE,
     },
-    achTimer: 0,
+    achTimer: DC.D0,
     hasCheckedFilter: false,
   },
   blackHole: Array.range(0, 2).map(id => ({
@@ -591,7 +595,7 @@ window.player = {
   blackHoleNegative: 1,
   celestials: {
     teresa: {
-      pouredAmount: 0,
+      pouredAmount: DC.D0,
       quoteBits: 0,
       unlockBits: 0,
       run: false,
@@ -615,7 +619,7 @@ window.player = {
     },
     enslaved: {
       isStoring: false,
-      stored: 0,
+      stored: DC.D0,
       isStoringReal: false,
       storedReal: 0,
       autoStoreReal: false,
@@ -695,7 +699,7 @@ window.player = {
       run: false,
       charged: new Set(),
       disCharge: false,
-      peakGamespeed: 1,
+      peakGamespeed: DC.D1,
       petWithRemembrance: ""
     },
     laitela: {
@@ -755,6 +759,7 @@ window.player = {
         galaxyGeneratorAntimatterMult: 0,
         galaxyGeneratorIPMult: 0,
         galaxyGeneratorEPMult: 0,
+        galaxyGeneratorRSMult: 0,
       },
       rifts: {
         vacuum: {
@@ -806,6 +811,7 @@ window.player = {
     celestialPoints: DC.D0,
     doomedParticles: DC.D0,
     celestialMatter: DC.D0,
+    unnerfedCelestialMatter: DC.D0,
     celestialMatterMultiplier: {
       isActive: true
     },
@@ -818,10 +824,6 @@ window.player = {
       perks: new Set(),
       alchemy: new Set(),
       strikes: new Set()
-    },
-    compressionMagnitude: {
-      infinity: 10,
-      time: 10
     },
     respec: false
   },
@@ -917,6 +919,7 @@ window.player = {
       alchemy: true,
       glyphInfoType: GlyphInfo.types.NONE,
       showGlyphInfoByDefault: false,
+      masteries: true,
     },
     animations: {
       bigCrunch: true,

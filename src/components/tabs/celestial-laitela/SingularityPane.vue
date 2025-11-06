@@ -38,16 +38,16 @@ export default {
         singularityTime += this.extraTimeAfterSingularity;
         if (!this.isAutoEnabled) return "";
         return singularityTime > 0
-          ? `(Auto-condensing in ${TimeSpan.fromSeconds(singularityTime).toStringShort()})`
+          ? `(Auto-condensing in ${TimeSpan.fromSeconds(new Decimal(singularityTime)).toStringShort()})`
           : "(Will immediately auto-condense)";
       }
-      return `(Enough Dark Energy in ${TimeSpan.fromSeconds(singularityTime).toStringShort()})`;
+      return `(Enough Dark Energy in ${TimeSpan.fromSeconds(new Decimal(singularityTime)).toStringShort()})`;
     },
     baseSingularityTime() {
-      return TimeSpan.fromSeconds(this.baseTimeToSingularity).toStringShort();
+      return TimeSpan.fromSeconds(new Decimal(this.baseTimeToSingularity)).toStringShort();
     },
     additionalSingularityTime() {
-      return TimeSpan.fromSeconds(this.extraTimeAfterSingularity).toStringShort();
+      return TimeSpan.fromSeconds(new Decimal(this.extraTimeAfterSingularity)).toStringShort();
     },
     manualSingularityRate() {
       const totalTime = this.baseTimeToSingularity;
@@ -67,7 +67,7 @@ export default {
         : null;
     },
     increaseTooltip() {
-      return this.singularityCapIncreases >= 50
+      return this.singularityCapIncreases >= 100
         ? "You cannot increase the cap any further!"
         : null;
     }
@@ -153,7 +153,7 @@ export default {
         </button>
         <button
           class="c-laitela-singularity__cap-control"
-          :class="{ 'c-laitela-singularity__cap-control--available' : singularityCapIncreases < 50 }"
+          :class="{ 'c-laitela-singularity__cap-control--available' : singularityCapIncreases < 100 }"
           :ach-tooltip="increaseTooltip"
           @click="increaseCap"
         >

@@ -42,3 +42,24 @@ body.t-s8 {
 .t-s8 .c-tt-buy-button--locked:hover {
   background: #ef5350;
 }
+
+.t-s8 .c-es-buy-button--unlocked {
+  color: var(--color-endgame);
+  background: #212121;
+  border: 0.1rem solid var(--color-endgame);
+}
+
+.t-s8 .c-es-buy-button--unlocked:hover {
+  color: #212121;
+  background: var(--color-endgame);
+}
+
+.t-s8 .c-es-buy-button--locked {
+  background: #9e9e9e;
+  border: none;
+  box-shadow: 1px 1px 1px 0 #000000;
+}
+
+.t-s8 .c-es-buy-button--locked:hover {
+  background: #ef5350;
+}

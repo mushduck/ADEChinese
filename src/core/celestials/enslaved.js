@@ -6,13 +6,13 @@ import { Quotes } from "./quotes";
 export const ENSLAVED_UNLOCKS = {
   FREE_TICKSPEED_SOFTCAP: {
     id: 0,
-    price: TimeSpan.fromYears(1e35).totalMilliseconds,
+    price: TimeSpan.fromYears(new Decimal(1e35)).totalMilliseconds,
     secondaryRequirement: () => true,
     description: () => `Increase the softcap to Tickspeed upgrades from Time Dimensions by ${formatInt(1e5)}`,
   },
   RUN: {
     id: 1,
-    price: TimeSpan.fromYears(1e40).totalMilliseconds,
+    price: TimeSpan.fromYears(new Decimal(1e40)).totalMilliseconds,
     secondaryRequirement() {
       const hasLevelRequirement = player.records.bestReality.glyphLevel >= 5000;
       const hasRarityRequirement = strengthToRarity(player.records.bestReality.glyphStrength) >= 100;
@@ -32,13 +32,13 @@ export const Enslaved = {
   possessiveName: "The Nameless Ones'",
   boostReality: false,
   BROKEN_CHALLENGES: [2, 3, 4, 5, 7, 8, 10, 11, 12],
-  nextTickDiff: 50,
+  nextTickDiff: new Decimal(50),
   isReleaseTick: false,
   autoReleaseTick: 0,
-  autoReleaseSpeed: 0,
-  timeCap: 1e300,
+  autoReleaseSpeed: new Decimal(0),
+  timeCap: new Decimal(1e300),
   glyphLevelMin: 5000,
-  currentBlackHoleStoreAmountPerMs: 0,
+  currentBlackHoleStoreAmountPerMs: new Decimal(0),
   tachyonNerf: 0.3,
   toggleStoreBlackHole() {
     if (!this.canModifyGameTimeStorage) return;
@@ -121,29 +121,29 @@ export const Enslaved = {
     let release = player.celestials.enslaved.stored;
     if (Enslaved.isRunning) {
       release = Enslaved.storedTimeInsideEnslaved(release);
-      if (Time.thisReality.totalYears + TimeSpan.fromMilliseconds(release).totalYears > 1) {
+      if (Time.thisReality.totalYears.add(TimeSpan.fromMilliseconds(new Decimal(release)).totalYears.gt(1))) {
         EnslavedProgress.storedTime.giveProgress();
       }
     }
-    if (autoRelease) release *= 0.01;
-    this.nextTickDiff = Math.clampMax(release, this.timeCap);
+    if (autoRelease) release = release.times(0.01);
+    this.nextTickDiff = Decimal.clampMax(release, this.timeCap);
     this.isReleaseTick = true;
     // Effective gamespeed from stored time assumes a "default" 50 ms update rate for consistency
-    const effectiveGamespeed = release / 50;
-    player.celestials.ra.peakGamespeed = Math.max(player.celestials.ra.peakGamespeed, effectiveGamespeed);
-    this.autoReleaseSpeed = release / player.options.updateRate / 5;
-    player.celestials.enslaved.stored *= autoRelease ? 0.99 : 0;
+    const effectiveGamespeed = release.div(50);
+    player.celestials.ra.peakGamespeed = Decimal.max(player.celestials.ra.peakGamespeed, effectiveGamespeed);
+    this.autoReleaseSpeed = (release.div(player.options.updateRate)).div(5);
+    player.celestials.enslaved.stored = player.celestials.enslaved.stored.times(autoRelease ? 0.99 : 0);
   },
   has(info) {
     return player.celestials.enslaved.unlocks.includes(info.id);
   },
   canBuy(info) {
-    return player.celestials.enslaved.stored >= info.price && info.secondaryRequirement() && !this.has(info);
+    return player.celestials.enslaved.stored.gte(info.price) && info.secondaryRequirement() && !this.has(info);
   },
   buyUnlock(info) {
     if (!this.canBuy(info)) return false;
     if (info.id === ENSLAVED_UNLOCKS.RUN.id) this.quotes.unlockRun.show();
-    player.celestials.enslaved.stored -= info.price;
+    player.celestials.enslaved.stored = player.celestials.enslaved.stored.sub(info.price);
     player.celestials.enslaved.unlocks.push(info.id);
     return true;
   },
@@ -182,14 +182,14 @@ export const Enslaved = {
   },
   get realityBoostRatio() {
     return Math.max(1, Math.floor(player.celestials.enslaved.storedReal /
-      Math.max(1000, Time.thisRealityRealTime.totalMilliseconds)));
+      Math.max(1000, Time.thisRealityRealTime.totalMilliseconds.toNumber())));
   },
   get canAmplify() {
     return this.realityBoostRatio > 1 && !Pelle.isDoomed && !isInCelestialReality();
   },
   storedTimeInsideEnslaved(stored) {
-    if (stored <= 1e3) return stored;
-    return Math.pow(10, Math.pow(Math.log10(stored / 1e3), 0.55)) * 1e3;
+    if (stored.lte(1e3)) return stored;
+    return Decimal.pow(10, Decimal.pow(Decimal.log10(stored.div(1e3)), 0.55)).times(1e3);
   },
   feelEternity() {
     if (this.feltEternity) {
@@ -210,19 +210,19 @@ export const Enslaved = {
     player.celestials.enslaved.feltEternity = value;
   },
   get nextHintCost() {
-    return TimeSpan.fromYears(1e40 * Math.pow(3, this.hintCostIncreases)).totalMilliseconds;
+    return TimeSpan.fromYears(new Decimal(1e40 * Math.pow(3, this.hintCostIncreases))).totalMilliseconds;
   },
   get hintCostIncreases() {
     const hintTime = player.celestials.enslaved.zeroHintTime - Date.now();
-    return Math.clampMin(hintTime / TimeSpan.fromDays(1).totalMilliseconds, 0);
+    return Math.clampMin(hintTime / TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber(), 0);
   },
   spendTimeForHint() {
-    if (player.celestials.enslaved.stored < this.nextHintCost) return false;
-    player.celestials.enslaved.stored -= this.nextHintCost;
+    if (player.celestials.enslaved.stored.lt(this.nextHintCost)) return false;
+    player.celestials.enslaved.stored.subtract(this.nextHintCost);
     if (Enslaved.hintCostIncreases === 0) {
-      player.celestials.enslaved.zeroHintTime = Date.now() + TimeSpan.fromDays(1).totalMilliseconds;
+      player.celestials.enslaved.zeroHintTime = Date.now() + TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber();
     } else {
-      player.celestials.enslaved.zeroHintTime += TimeSpan.fromDays(1).totalMilliseconds;
+      player.celestials.enslaved.zeroHintTime += TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber();
     }
     return true;
   },
@@ -254,7 +254,7 @@ class EnslavedProgressState extends BitUpgradeState {
   giveProgress() {
     // Bump the last hint time appropriately if the player found the hint
     if (this.hasHint && !this.hasProgress) {
-      player.celestials.enslaved.zeroHintTime -= Math.log(2) / Math.log(3) * TimeSpan.fromDays(1).totalMilliseconds;
+      player.celestials.enslaved.zeroHintTime -= Math.log(2) / Math.log(3) * TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber();
       GameUI.notify.success("You found a crack in The Nameless Ones' Reality!", 10000);
     }
     player.celestials.enslaved.progressBits |= (1 << this.id);
@@ -272,7 +272,7 @@ export const Tesseracts = {
   },
 
   get extra() {
-    return this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1);
+    return (this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1)) + Effects.sum(EndgameMastery(61));
   },
 
   get totalMult() {
@@ -289,17 +289,9 @@ export const Tesseracts = {
     player.celestials.enslaved.tesseracts++;
   },
 
-  // This used to be a somewhat complicated function which spaced costs out super-exponentially, but the decision to
-  // hardcap all resources (as feasible) to e9e15 meant that in practice only the first 10 or so could actually be
-  // obtained. Changing the function to a hardcoded array is better for understanding the code since it's small.
-  // Note that costs go a bit past e9e15 because while AM is capped at e9e15, most other resources (including IP)
-  // aren't and can go a tiny bit past it.
-  // The formula is a hardcoded 2, 4, 6 followed by successive multiplication by 2x, 4x, 6x, and so on.
-  BASE_COSTS: [2, 4, 6, 12, 48, 288, 2304, 23040, 276480, 3870720, 61931520, 1114767360, 22295347200, 490497638400, 11771943321600, 306070526361600, 8569974738124800, 257099242143744000, 8227175748599808000, 279723975452393472000, 10070063116286164992000, 382662398418874269696000, 15306495936754970787840000, 642872829343708773089280000, 28286404491123186015928320000],
   costs(index) {
-    // In practice this should never happen, but have it just to be safe
-    if (index >= this.BASE_COSTS.length) return Decimal.pow10(Number.MAX_VALUE);
-    return Decimal.pow10(1e7 * this.BASE_COSTS[Math.floor(index)]);
+    index = index + 1;
+    return Decimal.pow10(2e7 * Math.min(index, 3) * Decimal.max(index - 3, 1).factorial().toNumber() * Math.pow(2, Math.max(index - 3, 0)));
   },
 
   get nextCost() {
@@ -311,7 +303,7 @@ export const Tesseracts = {
   },
 
   capIncrease(count = this.bought) {
-    const totalCount = count * SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1);
+    const totalCount = (count + (count * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1)) + Effects.sum(EndgameMastery(61))) * Effects.product(BreakEternityUpgrade.tesseractMultiplier);
     const base = totalCount < 1 ? 0 : 250e3 * Math.pow(2, totalCount);
     return base * (AlchemyResource.boundless.effectValue + 1);
   },

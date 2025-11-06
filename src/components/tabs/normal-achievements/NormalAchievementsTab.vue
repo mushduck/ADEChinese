@@ -14,8 +14,8 @@ export default {
     return {
       achievementPower: 0,
       achTPEffect: 0,
-      achCountdown: 0,
-      totalCountdown: 0,
+      achCountdown: new Decimal(0),
+      totalCountdown: new Decimal(0),
       missingAchievements: 0,
       showAutoAchieve: false,
       isAutoAchieveActive: false,
@@ -31,6 +31,7 @@ export default {
   },
   computed: {
     isDoomed: () => Pelle.isDoomed,
+    isDestroyed: () => PelleDestructionUpgrade.achievementMultiplier.isBought,
     rows: () => Achievements.allRows,
     renderedRows() {
       return this.rows.filter((_, i) => this.renderedRowIndices.includes(i));
@@ -73,9 +74,9 @@ export default {
       const gameSpeedupFactor = getGameSpeedupFactor();
       this.achievementPower = Achievements.power;
       this.achTPEffect = RealityUpgrade(8).config.effect();
-      this.achCountdown = Achievements.timeToNextAutoAchieve / gameSpeedupFactor;
-      this.totalCountdown = ((Achievements.preReality.countWhere(a => !a.isUnlocked) - 1) * Achievements.period +
-        Achievements.timeToNextAutoAchieve) / gameSpeedupFactor;
+      this.achCountdown = new Decimal(Achievements.timeToNextAutoAchieve).div(gameSpeedupFactor);
+      this.totalCountdown = new Decimal(Achievements.preReality.countWhere(a => !a.isUnlocked) - 1).times(Achievements.period).plus(
+        Achievements.timeToNextAutoAchieve).div(gameSpeedupFactor);
       this.missingAchievements = Achievements.preReality.countWhere(a => !a.isUnlocked);
       this.showAutoAchieve = PlayerProgress.realityUnlocked() && !Perk.achievementGroup5.isBought;
       this.isAutoAchieveActive = player.reality.autoAchieve;
@@ -83,7 +84,7 @@ export default {
       this.achMultBreak = BreakInfinityUpgrade.achievementMult.canBeApplied;
       this.achMultToIDS = Achievement(75).isUnlocked;
       this.achMultToTDS = EternityUpgrade.tdMultAchs.isBought;
-      this.achMultToTP = RealityUpgrade(8).isBought;
+      this.achMultToTP = RealityUpgrade(8).isBought && (!Pelle.isDoomed || PelleRealityUpgrade.paradoxicallyAttain.isBought);
       this.achMultToBH = VUnlocks.achievementBH.canBeApplied;
       this.achMultToTT = Ra.unlocks.achievementTTMult.canBeApplied;
     },
@@ -152,7 +153,7 @@ export default {
       />
     </div>
     <div class="c-achievements-tab__header c-achievements-tab__header--multipliers">
-      <span v-if="isDoomed">
+      <span v-if="isDoomed && !isDestroyed">
         All Achievement multipliers have been disabled<SwapAchievementImagesButton />
       </span>
       <span v-else>
@@ -167,7 +168,7 @@ export default {
       v-if="showAutoAchieve"
       class="c-achievements-tab__header"
     >
-      <div v-if="achCountdown > 0">
+      <div v-if="achCountdown.gt(0)">
         Automatically gain the next missing Achievement in
         {{ timeDisplayNoDecimals(achCountdown) }}<span v-if="!isAutoAchieveActive"> once Auto is turned on</span>.
         (left-to-right, top-to-bottom)
@@ -176,7 +177,7 @@ export default {
         Automatically gain the next missing Achievement as soon as you enable Auto Achievements.
         (left-to-right, top-to-bottom)
       </div>
-      <div v-if="totalCountdown > 0">
+      <div v-if="totalCountdown.gt(0)">
         You will regain all remaining achievements after {{ timeDisplayNoDecimals(totalCountdown) }} if Auto
         Achievement <span v-if="isAutoAchieveActive">stays enabled</span><span v-else>is turned on</span>.
       </div>

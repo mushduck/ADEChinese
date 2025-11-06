@@ -17,7 +17,7 @@ function updateEndgameRecords() {
     player.records.bestEndgame.bestCPmin.max(player.records.thisEndgame.bestCPmin);
   player.records.bestEndgame.bestDPmin =
     player.records.bestEndgame.bestDPmin.max(player.records.thisEndgame.bestDPmin);
-  player.records.bestEndgame.time = Math.min(player.records.thisEndgame.time, player.records.bestEndgame.time);
+  player.records.bestEndgame.time = Decimal.min(player.records.thisEndgame.time, player.records.bestEndgame.time);
   if (player.records.thisEndgame.realTime < player.records.bestEndgame.realTime) {
     player.records.bestEndgame.realTime = player.records.thisEndgame.realTime;
   }
@@ -76,6 +76,15 @@ export const Endgame = {
     GlyphAppearanceHandler.unlockSet();
     this.resetStuff();
 
+    // Add Glyphs after other Glyphs are purged
+    if (EndgameMastery(71).isBought) {
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+    }
+
     // The ending animation ends at 12.5, although the value continues to increase after that. We set it to a bit above
     // 12.5 when we start the rollback animation to hide some of the unavoidable lag from all the reset functions
     GameEnd.removeAdditionalEnd = true;
@@ -89,7 +98,9 @@ export const Endgame = {
     player.isGameEnd = false;
     Tab.dimensions.antimatter.show();
     AchievementTimers.marathon2.reset();
-    lockAchievementsOnEndgame();
+    if (!EndgameMastery(61).isBought) {
+      lockAchievementsOnEndgame();
+    }
     player.tabNotifications = new Set();
     player.triggeredTabNotificationBits = 0;
     player.tutorialState = 0;
@@ -101,9 +112,9 @@ export const Endgame = {
     Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
     ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
     ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
-    player.realities = 0;
+    Currency.realities.reset();
     player.partSimulatedReality = 0;
-    player.reality.realityMachines = DC.D0;
+    Currency.realityMachines.reset();
     player.reality.maxRM = DC.D0;
     player.reality.imaginaryMachines = 0;
     player.reality.iMCap = 0;
@@ -146,15 +157,26 @@ export const Endgame = {
     player.reality.secondGaussian = 1e6;
     player.reality.musicSeed = Math.floor(Date.now() * Math.random() + 0xBCDDECCB);
     player.reality.musicSecondGaussian = 1e6;
-    player.reality.rebuyables = {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-    };
-    player.reality.upgradeBits = 0;
-    player.reality.upgReqs = 0;
+    if (!EndgameMastery(42).isBought) {
+      player.reality.rebuyables = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+      };
+      player.reality.upgradeBits = 0;
+      player.reality.upgReqs = 0;
+    }
+    if (EndgameMastery(42).isBought) {
+      player.reality.rebuyables = {
+        1: 1,
+        2: 1,
+        3: 1,
+        4: 1,
+        5: 1,
+      };
+    }
     player.reality.imaginaryUpgradeBits = 0;
     player.reality.imaginaryUpgReqs = 0;
     player.reality.imaginaryRebuyables = {
@@ -173,7 +195,9 @@ export const Endgame = {
       reality: 0,
       imaginary: 0,
     };
-    player.reality.perks = new Set();
+    if (!EndgameMastery(112).isBought) {
+      player.reality.perks = new Set();
+    }
     player.reality.respec = false;
     player.reality.showGlyphSacrifice = false;
     player.reality.showSidebarPanel = GLYPH_SIDEBAR_MODE.INVENTORY_MANAGEMENT;
@@ -189,7 +213,7 @@ export const Endgame = {
     player.reality.partEternitied = DC.D0;
     player.reality.autoAchieve = true;
     player.reality.gainedAutoAchievements = true;
-    player.reality.achTimer = 0;
+    player.reality.achTimer = DC.D0;
     player.reality.hasCheckedFilter = false;
     player.reality.glyphs.sac.power = 0;
     player.reality.glyphs.sac.infinity = 0;
@@ -212,7 +236,11 @@ export const Endgame = {
     player.blackHoleAutoPauseMode = 0;
     player.blackHolePauseTime = 0;
     player.blackHoleNegative = 1;
-    player.celestials.teresa.pouredAmount = 0;
+    if (EndgameMastery(42).isBought) {
+      player.blackHole[0].unlocked = true;
+      player.blackHole[1].unlocked = true;
+    }
+    player.celestials.teresa.pouredAmount = DC.D0;
     player.celestials.teresa.quoteBits = 0;
     player.celestials.teresa.unlockBits = 0;
     player.celestials.teresa.run = false;
@@ -230,7 +258,7 @@ export const Endgame = {
     player.celestials.effarig.glyphWeights.eternities = 25;
     player.celestials.effarig.autoAdjustGlyphWeights = false;
     player.celestials.enslaved.isStoring = false;
-    player.celestials.enslaved.stored = 0;
+    player.celestials.enslaved.stored = DC.D0;
     player.celestials.enslaved.isStoringReal = false;
     player.celestials.enslaved.storedReal = 0;
     player.celestials.enslaved.autoStoreReal = false;
@@ -295,7 +323,7 @@ export const Endgame = {
     player.celestials.ra.run = false;
     player.celestials.ra.charged = new Set();
     player.celestials.ra.disCharge = false;
-    player.celestials.ra.peakGamespeed = 1;
+    player.celestials.ra.peakGamespeed = DC.D1;
     player.celestials.ra.petWithRemembrance = "";
     player.celestials.laitela.darkMatter = DC.D0;
     player.celestials.laitela.maxDarkMatter = DC.D0;
@@ -345,6 +373,7 @@ export const Endgame = {
     player.celestials.pelle.rebuyables.galaxyGeneratorAntimatterMult = 0;
     player.celestials.pelle.rebuyables.galaxyGeneratorIPMult = 0;
     player.celestials.pelle.rebuyables.galaxyGeneratorEPMult = 0;
+    player.celestials.pelle.rebuyables.galaxyGeneratorRSMult = 0;
     player.celestials.pelle.rifts.vacuum.fill = DC.D0;
     player.celestials.pelle.rifts.vacuum.active = false;
     player.celestials.pelle.rifts.vacuum.reducedTo = 1;
@@ -458,32 +487,34 @@ export const Endgame = {
     Currency.antimatter.reset();
     CelestialDimensions.resetAmount();
     initializeChallengeCompletions(true);
-    lockAchievementsOnEndgame();
+    if (!EndgameMastery(61).isBought) {
+      lockAchievementsOnEndgame();
+    }
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
-    player.records.totalTimePlayed = player.records.realTimePlayed;
-    player.records.timePlayedAtBHUnlock = Number.MAX_VALUE;
+    player.records.totalTimePlayed = new Decimal(player.records.realTimePlayed);
+    player.records.timePlayedAtBHUnlock = Decimal.MAX_VALUE;
     player.records.realTimeDoomed = 0;
     player.records.totalEndgameAntimatter = DC.E1;
     player.records.totalRealityAntimatter = DC.E1;
     player.records.totalEternityAntimatter = DC.E1;
     player.records.totalInfinityAntimatter = DC.E1;
     player.records.recentInfinities = Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]);
+      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]);
     player.records.recentEternities = Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]);
+      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]);
     player.records.recentRealities = Array.range(0, 10).map(() =>
-      [Number.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]);
-    player.records.thisInfinity.time = 0;
+      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]);
+    player.records.thisInfinity.time = DC.D0;
     player.records.thisInfinity.realTime = 0;
-    player.records.thisInfinity.lastBuyTime = 0;
+    player.records.thisInfinity.lastBuyTime = DC.D0;
     player.records.thisInfinity.maxAM = DC.D0;
     player.records.thisInfinity.bestIPmin = DC.D0;
     player.records.thisInfinity.bestIPminVal = DC.D0;
-    player.records.bestInfinity.time = Number.MAX_VALUE;
+    player.records.bestInfinity.time = Decimal.MAX_VALUE;
     player.records.bestInfinity.realTime = Number.MAX_VALUE;
     player.records.bestInfinity.bestIPminEternity = DC.D0;
     player.records.bestInfinity.bestIPminReality = DC.D0;
-    player.records.thisEternity.time = 0;
+    player.records.thisEternity.time = DC.D0;
     player.records.thisEternity.realTime = 0;
     player.records.thisEternity.maxAM = DC.D0;
     player.records.thisEternity.maxIP = DC.D0;
@@ -491,10 +522,10 @@ export const Endgame = {
     player.records.thisEternity.bestEPmin = DC.D0;
     player.records.thisEternity.bestEPminVal = DC.D0;
     player.records.thisEternity.bestInfinitiesPerMs = DC.D0;
-    player.records.bestEternity.time = Number.MAX_VALUE;
+    player.records.bestEternity.time = Decimal.MAX_VALUE;
     player.records.bestEternity.realTime = Number.MAX_VALUE;
     player.records.bestEternity.bestEPminReality = DC.D0;
-    player.records.thisReality.time = 0;
+    player.records.thisReality.time = DC.D0;
     player.records.thisReality.realTime = 0;
     player.records.thisReality.maxAM = DC.D0;
     player.records.thisReality.maxIP = DC.D0;
@@ -504,7 +535,7 @@ export const Endgame = {
     player.records.thisReality.maxDT = DC.D0;
     player.records.thisReality.bestRSmin = 0;
     player.records.thisReality.bestRSminVal = 0;
-    player.records.bestReality.time = Number.MAX_VALUE;
+    player.records.bestReality.time = Decimal.MAX_VALUE;
     player.records.bestReality.realTime = Number.MAX_VALUE;
     player.records.bestReality.glyphStrength = 0;
     player.records.bestReality.RM = DC.D0;
@@ -518,6 +549,14 @@ export const Endgame = {
     player.records.bestReality.speedSet = [];
     player.records.bestReality.iMCapSet = [];
     player.records.bestReality.laitelaSet = [];
+    if (EndgameMastery(112).isBought) {
+      Achievement(146).unlock();
+    }
+    if (EndgameMastery(42).isBought) {
+      Achievement(142).unlock();
+      Achievement(144).unlock();
+      Achievement(147).unlock();
+    }
   }
 };
 function lockAchievementsOnEndgame() {
@@ -525,3 +564,18 @@ function lockAchievementsOnEndgame() {
     achievement.lock();
   }
 }
+export class EndgameMilestoneState {
+  constructor(config) {
+    this.config = config;
+  }
+
+  get isReached() {
+    return Currency.endgames.gte(this.config.endgames);
+  }
+}
+export const EndgameMilestone = mapGameDataToObject(
+  GameDatabase.endgame.milestones,
+  config => (config.isBaseResource
+    ? new EndgameMilestoneState(config)
+    : new EndgameMilestoneState(config))
+);

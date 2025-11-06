@@ -164,6 +164,7 @@ class InfinityDimensionState extends DimensionState {
     mult = mult.powEffectOf(AlchemyResource.infinity);
     mult = mult.pow(Ra.momentumValue);
     mult = mult.powEffectOf(PelleRifts.paradox);
+    mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
 
     if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
       mult = dilatedValueOf(mult);
@@ -183,7 +184,7 @@ class InfinityDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
-    if (mult.gte(InfinityDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / player.endgame.compressionMagnitude.infinity).times(1e15));
+    if (mult.gte(InfinityDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / InfinityDimensions.compressionMagnitude).times(1e15));
 
     return mult;
   }
@@ -334,7 +335,14 @@ export const InfinityDimensions = {
    */
   all: InfinityDimension.index.compact(),
   HARDCAP_PURCHASES: 2000000,
-  OVERFLOW: DC.E1E15,
+  get OVERFLOW() {
+    return DC.E1E15.powEffectsOf(EndgameMastery(92));
+  },
+
+  get compressionMagnitude() {
+    const reduction = Effects.product(EndgameMastery(82));
+    return 10 * reduction;
+  },
 
   unlockNext() {
     if (InfinityDimension(8).isUnlocked) return;
@@ -380,7 +388,7 @@ export const InfinityDimensions = {
 
   tick(diff) {
     for (let tier = 8; tier > 1; tier--) {
-      InfinityDimension(tier).produceDimensions(InfinityDimension(tier - 1), diff / 10);
+      InfinityDimension(tier).produceDimensions(InfinityDimension(tier - 1), new Decimal(diff).div(10));
     }
 
     if (EternityChallenge(7).isRunning) {
@@ -422,6 +430,7 @@ export const InfinityDimensions = {
     const multiplier2 = Effects.product(
       BreakEternityUpgrade.infinityPowerConversion
     );
-    return (7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2;
+    const exponent = Effects.product(EndgameMastery(102));
+    return Math.pow((7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2, exponent);
   }
 };

@@ -64,7 +64,7 @@ export const imaginaryUpgrades = [
     description: () => `Increase the Reality Machine cap by ${formatX(1e100)}`,
     effect: 1e100,
     scaleStart: 5,
-    formatEffect: value => `${formatX(value)}`,
+    formatEffect: value => `${formatX(EndgameMastery(153).isBought ? value.powEffectsOf(EndgameMastery(153)) : value)}`,
     isDecimal: true
   }),
   rebuyable({
@@ -106,7 +106,7 @@ export const imaginaryUpgrades = [
     description: () => `Increase Singularity gain`,
     effect: 1,
     scaleStart: 2,
-    formatEffect: value => `${formatX(1 + value, 2)}`
+    formatEffect: value => `${formatX(EndgameMastery(131).isBought ? Math.pow(1 + value, value) : 1 + value, 2)}`
   }),
   {
     name: "Suspicion of Interference",
@@ -149,7 +149,7 @@ export const imaginaryUpgrades = [
       MachineHandler.uncappedRM.times(simulatedRealityCount(false) + 1).gte(Number.MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Increase Imaginary Machine Cap based on Imaginary Upgrades purchased",
-    effect: () => 1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2,
+    effect: () => Math.pow(1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2, EndgameMastery(154).effectOrDefault(1)),
     formatEffect: value => `${formatX(value, 2, 1)}`,
     isDisabledInDoomed: true
   },
@@ -334,9 +334,9 @@ export const imaginaryUpgrades = [
     name: "Singularity Stockpile",
     id: 26,
     cost: 1e50,
-    requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 2)} Singularities`,
+    requirement: () => `Reach ${format(DC.E100, 2)} Singularities`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.singularities.value >= Number.MAX_VALUE,
+    checkRequirement: () => Currency.singularities.value >= 1e100,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
   },

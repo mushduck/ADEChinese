@@ -155,7 +155,7 @@ export const breakEternityUpgrades = {
   glyphSlotImprovement: {
     id: "glyphSlotImprovement",
     cost: Decimal.pow(10, 1e100),
-    description: "Add 3 more Glyph Slots",
+    description: "Add 3 more Glyph Slots outside Pelle",
     effect: 3
   },
 };

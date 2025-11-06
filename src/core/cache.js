@@ -44,8 +44,18 @@ class Lazy {
 }
 window.Lazy = Lazy;
 
+function highestInArray(array, isNum = false) {
+  let i = 0;
+  let highestVal = isNum ? 0 : new Decimal(0);
+  while (array[i] !== undefined) {
+    highestVal = isNum ? Math.max(highestVal, array[i]) : Decimal.max(highestVal, array[i]);
+    i++;
+  }
+  return highestVal;
+}
+
 export const GameCache = {
-  worstChallengeTime: new Lazy(() => player.challenge.normal.bestTimes.max()),
+  worstChallengeTime: new Lazy(() => highestInArray(player.challenge.normal.bestTimes)),
 
   bestRunIPPM: new Lazy(() =>
     player.records.recentInfinities
@@ -77,12 +87,12 @@ export const GameCache = {
 
   currentMasteryTree: new Lazy(() => new EndgameMasteryTree(EndgameMasteryTree.currentMasteries)),
 
-  achievementPeriod: new Lazy(() => TimeSpan.fromMinutes(30 - Effects.sum(
+  achievementPeriod: new Lazy(() => TimeSpan.fromMinutes(new Decimal(30).sub(Effects.sum(
     Perk.achievementGroup1,
     Perk.achievementGroup2,
     Perk.achievementGroup3,
     Perk.achievementGroup4
-  )).totalMilliseconds),
+  ))).totalMilliseconds.toNumber()),
 
   buyablePerks: new Lazy(() => Perks.all.filter(p => p.canBeBought)),
 
@@ -118,9 +128,9 @@ export const GameCache = {
 
   totalIPMult: new Lazy(() => totalIPMult()),
 
-  challengeTimeSum: new Lazy(() => player.challenge.normal.bestTimes.sum()),
+  challengeTimeSum: new Lazy(() => player.challenge.normal.bestTimes.reduce(Decimal.sumReducer)),
 
-  infinityChallengeTimeSum: new Lazy(() => player.challenge.infinity.bestTimes.sum()),
+  infinityChallengeTimeSum: new Lazy(() => player.challenge.infinity.bestTimes.reduce(Decimal.sumReducer)),
 };
 
 EventHub.logic.on(GAME_EVENT.GLYPHS_CHANGED, () => {

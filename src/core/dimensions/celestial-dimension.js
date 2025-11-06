@@ -96,6 +96,7 @@ class CelestialDimensionState extends DimensionState {
     const tier = this.tier;
     let mult = GameCache.celestialDimensionCommonMultiplier.value;
     mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount)));
+    mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
     return mult;
   }
 
@@ -205,6 +206,14 @@ export const CelestialDimensions = {
    */
   all: CelestialDimension.index.compact(),
   HARDCAP_PURCHASES: Decimal.NUMBER_MAX_VALUE,
+  get SOFTCAP() {
+    return DC.E100.timesEffectsOf(EndgameMastery(94));
+  },
+
+  get softcapPow() {
+    const reduction = Effects.product(EndgameMastery(84));
+    return 10 * reduction;
+  },
 
   unlockNext() {
     if (CelestialDimension(8).isUnlocked) return;
@@ -218,6 +227,7 @@ export const CelestialDimensions = {
   },
 
   resetAmount() {
+    Currency.unnerfedCelestialMatter.reset();
     Currency.celestialMatter.reset();
     for (const dimension of CelestialDimensions.all) {
       dimension.resetAmount();
@@ -245,7 +255,7 @@ export const CelestialDimensions = {
   tick(realDiff) {
     for (let tier = 8; tier > 1; tier--) {
       CelestialDimension(tier).produceDimensions(CelestialDimension(tier - 1), realDiff / 10);
-      CelestialDimension(1).produceCurrency(Currency.celestialMatter, realDiff);
+      CelestialDimension(1).produceCurrency(Currency.unnerfedCelestialMatter, realDiff);
     }
   },
 
@@ -264,7 +274,10 @@ export const CelestialDimensions = {
   },
 
   get conversionExponent() {
-    if (Pelle.isDoomed) return 0.2;
-    return 2;
+    let base = 2;
+    if (Pelle.isDoomed) base /= 10;
+    let exponent = 1;
+    if (base > 1) exponent *= Effects.product(EndgameMastery(104));
+    return Math.pow(base, exponent);
   }
 };

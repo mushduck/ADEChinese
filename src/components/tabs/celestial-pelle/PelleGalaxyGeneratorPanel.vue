@@ -34,6 +34,7 @@ export default {
         : "fas fa-compress-arrows-alt";
     },
     upgrades() {
+      if (!EndgameMilestone.fasterGalaxies.isReached) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorRSMult");
       return GalaxyGeneratorUpgrades.all;
     },
     galaxyText() {
@@ -64,8 +65,8 @@ export default {
       this.barWidth = (this.isCapped ? this.capRift.reducedTo : this.emphasisedStart);
       if (this.capRift) this.capRiftName = wordShift.wordCycle(this.capRift.name);
       this.galGenInstability = GalaxyGenerator.galGenInstability;
-      this.generationReduction = Math.max(1, Math.pow(this.galGenInstability, Math.log10(Math.max(Math.pow(this.generatedGalaxies / 1e10, 0.75), 1))));
-      this.isInstabilityShown = PlayerProgress.endgameUnlocked() || this.generatedGalaxies >= 1e10;
+      this.generationReduction = Math.max(1, Math.pow(this.galGenInstability, Math.log10(Math.max(Math.pow(this.galaxies / 1e10, 0.75), 1))));
+      this.isInstabilityShown = PlayerProgress.endgameUnlocked() || this.galaxies >= 1e10;
     },
     increaseCap() {
       if (GalaxyGenerator.isCapped) GalaxyGenerator.startSacrifice();

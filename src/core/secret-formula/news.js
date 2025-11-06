@@ -12,7 +12,7 @@ import wordShift from "../word-shift";
 // M = Mature
 
 function newsAnimSpd(seconds) {
-  return seconds / player.options.news.speed;
+  return new Decimal(seconds).toNumber() / player.options.news.speed;
 }
 
 
@@ -1317,7 +1317,7 @@ export const news = [
     id: "a230",
     get text() {
       return `You started playing this game nearly
-        ${TimeSpan.fromMilliseconds(Date.now() - player.records.gameCreatedTime).toString()}
+        ${TimeSpan.fromMilliseconds(new Decimal(Date.now() - player.records.gameCreatedTime)).toString()}
         ago. Thank you for playing!`;
     },
     dynamic: true
@@ -2694,7 +2694,7 @@ export const news = [
     id: "ae407",
     get text() {
       return `The update will be released at
-        ${TimeSpan.fromMilliseconds(Date.now() + 432000000 + 62124292800000).toString()}
+        ${TimeSpan.fromMilliseconds(new Decimal(Date.now() + 432000000 + 62124292800000)).toString()}
         .`;
     },
     dynamic: true
@@ -3024,14 +3024,16 @@ export const news = [
     id: "ae472",
     get text() {
       return `MY DAD IS HEVIPELLE AND HE CAN ${wordShift.wordCycle(["BAN", "DESTROY", "REMOVE"])} YOU!`
-    }
+    },
+    dynamic: true
   },
   {
     id: "ae473",
     get text() {
       return `Only way to destroy Pelle’s sanity: just use the Darkness. Skill issue!!! HAHA! NO- WAIT- STOP- OW-
       ${wordShift.wordCycle(["Error", "Warning", "Stop"])}.`
-    }
+    },
+    dynamic: true
   },
   {
     id: "ae474",
@@ -3086,7 +3088,8 @@ export const news = [
     get text() {
       return `Hi I'm Egg Ok Cool Sigma News Ticker Suggestion Suggestion Suggestion Type this in console:
       "dev.giveAllAchievements()" to get every achieve- ${wordShift.wordCycle(["Stop-", "Please-", "Don't-"])} ment!`
-    }
+    },
+    dynamic: true
   },
   {
     id: "ae487",
@@ -3397,7 +3400,8 @@ export const news = [
       const chapter = chapters[player.news.specialTickerData.dayOfEndgame];
       player.news.specialTickerData.dayOfEndgame = (player.news.specialTickerData.dayOfEndgame + 1) % 12;
       return chapter;
-    }
+    },
+    dynamic: true
   },
   {
     id: "ae533",
@@ -3841,19 +3845,19 @@ export const news = [
   {
     id: "l41",
     text: "I thought the update was 5 hours away... -new players after more than 5 hours of gameplay",
-    get unlocked() { return Time.totalTimePlayed.totalHours >= 5; }
+    get unlocked() { return Time.totalTimePlayed.totalHours.gte(5); }
   },
   {
     id: "l42",
     text:
       `Somebody told me to wait five hours for the update yesterday but it's today
       and it still hasn't come! What do I do?`,
-    get unlocked() { return Time.totalTimePlayed.totalHours >= 5; }
+    get unlocked() { return Time.totalTimePlayed.totalHours.gte(5); }
   },
   {
     id: "l43",
     text: "You do know that you won't reach Infinity in -1 seconds, right?",
-    get unlocked() { return player.records.bestInfinity.time === 0.1; }
+    get unlocked() { return player.records.bestInfinity.time.eq(0.1); }
   },
   {
     id: "l44",
@@ -3878,7 +3882,7 @@ export const news = [
   {
     id: "l48",
     text: "Keep up the quick pace!",
-    get unlocked() { return AchievementTimers.marathon1.time > 1200; }
+    get unlocked() { return AchievementTimers.marathon1.time.gt(1200); }
   },
   {
     id: "l49",
@@ -3893,7 +3897,7 @@ export const news = [
   {
     id: "l51",
     text: "Are you serious?",
-    get unlocked() { return Time.worstChallenge.totalSeconds <= 1; }
+    get unlocked() { return Time.worstChallenge.totalSeconds.lte(1); }
   },
   {
     id: "l52",
@@ -4204,7 +4208,7 @@ export const news = [
       return `The Great Scribes of Antia have labored intensively for years. They were given a mammoth task from the
       gods; write out an incomprehensibly long number. These scribes took turns, each writing out a few numbers a
       second, writing day and night, for what seemed like an eternity. At last, after
-      ${TimeSpan.fromSeconds(Currency.antimatter.value.log10() / 3).toString()}, they finally accomplished
+      ${TimeSpan.fromSeconds(new Decimal(Currency.antimatter.value.log10() / 3)).toString()}, they finally accomplished
       the impossible. That week, when they went to worship their gods, they sent them a simple message: "What was
       the purpose? What made our years of labor significant?" The gods responded duly: "We wanted to know how long
       it would take to write out, for a statistic in our game."`;
@@ -8685,7 +8689,7 @@ export const news = [
   },
   {
     id: "fe7",
-    text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(Date.now() + 432000000).toString()</span>"
+    text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(new Decimal(Date.now() + 432000000)).toString()</span>"
   },
   {
     id: "se",
