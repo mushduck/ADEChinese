@@ -15,11 +15,11 @@ export const Teresa = {
   },
   pourRM(diff) {
     if (this.pouredAmount.gte(Teresa.pouredAmountCap)) return;
-    this.timePoured.add(diff);
+    this.timePoured = this.timePoured.add(diff);
     const rm = Currency.realityMachines.value;
     const rmPoured = Decimal.min((this.pouredAmount.plus(1e6)).times(0.01).times(Decimal.pow(this.timePoured, 2)), rm);
-    this.pouredAmount.add(Decimal.min(rmPoured, Teresa.pouredAmountCap.sub(this.pouredAmount)));
-    Currency.realityMachines.subtract(rmPoured);
+    this.pouredAmount = this.pouredAmount.add(Decimal.min(rmPoured, Teresa.pouredAmountCap.sub(this.pouredAmount)));
+    Currency.realityMachines = Currency.realityMachines.subtract(rmPoured);
     this.checkForUnlocks();
     player.celestials.teresa.pouredAmount = this.pouredAmount;
   },
