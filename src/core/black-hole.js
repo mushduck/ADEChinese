@@ -244,7 +244,7 @@ class BlackHoleState {
     // should work even if activePeriods[i] is very large. To check:
     // This used to always use the period of blackHole[0], now it doesn't,
     // will this cause other bugs?
-    this._data.phase += activePeriod;
+    this._data.phase += new Decimal(activePeriod).toNumber();
 
     if (this.phase >= this.cycleLength) {
       // One activation for each full cycle.
@@ -652,20 +652,21 @@ export const BlackHoles = {
    * [will BH be paused in the given amount of real time, real time until pause if so].
    */
   autoPauseData(realTime) {
+    const time = new Decimal(realTime).toNumber();
     // This can be called when determining offline time if the black holes are already paused.
     // In that case we don't need to pause them (need to pause = false), but they're already paused (0 time).
     // This saves us some computation.
     if (this.arePaused) return [false, 0];
     if (player.blackHoleAutoPauseMode === BLACK_HOLE_PAUSE_MODE.NO_PAUSE) {
-      return [false, realTime];
+      return [false, time];
     }
     const timeLeft = this.timeToNextPause(player.blackHoleAutoPauseMode);
     // Cases in which we don't pause in the given amount of real time:
     // null = no pause, (timeLeft < 1e-9) = we auto-paused and there was maybe rounding error,
     // now the player's unpaused at this exact point (so we shouldn't pause again),
     // (timeLeft > realTime) = we will pause but it'll take longer than the given time.
-    if (timeLeft === null || timeLeft < 1e-9 || timeLeft > realTime) {
-      return [false, realTime];
+    if (timeLeft === null || timeLeft < 1e-9 || timeLeft > time) {
+      return [false, time];
     }
     return [true, timeLeft];
   }
