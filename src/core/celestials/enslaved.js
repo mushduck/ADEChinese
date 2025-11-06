@@ -36,7 +36,6 @@ export const Enslaved = {
   isReleaseTick: false,
   autoReleaseTick: 0,
   autoReleaseSpeed: new Decimal(0),
-  timeCap: new Decimal(1e300),
   glyphLevelMin: 5000,
   currentBlackHoleStoreAmountPerMs: new Decimal(0),
   tachyonNerf: 0.3,
@@ -53,6 +52,10 @@ export const Enslaved = {
   toggleAutoStoreReal() {
     if (!this.canModifyRealTimeStorage) return;
     player.celestials.enslaved.autoStoreReal = !player.celestials.enslaved.autoStoreReal;
+  },
+  get timeCap() {
+    if (EndgameMilestone.gameSpeedUncap.isReached) return Decimal.pow(10, 1e300);
+    return new Decimal(1e300);
   },
   get canModifyGameTimeStorage() {
     return Enslaved.isUnlocked && !Pelle.isDoomed && !BlackHoles.arePaused && !EternityChallenge(12).isRunning &&
