@@ -186,14 +186,14 @@
 
 .o-endgame-mastery-permanent--available {
   color: black;
-  background-color: var(--color-pelle--base);
-  border-color: var(--color-pelle--base);
+  background-color: var(--color-endgame);
+  border-color: var(--color-endgame);
   animation: a-endgame-mastery-permanent 10s infinite;
 }
 
 .o-endgame-mastery-permanent--available:hover {
   color: white;
-  background-color: var(--color-pelle--base);
+  background-color: var(--color-endgame);
   animation: a-endgame-mastery-permanent 10s infinite;
 }
 
@@ -307,8 +307,8 @@
 }
 
 .o-endgame-mastery-permanent--bought {
-  color: var(--color-endgame);
-  background-color: var(--color-pelle--base);
+  color: black;
+  background-color: linear-gradient(var(--color-endgame), var(--color-pelle--base));
   border-color: black;
 }
 
@@ -446,5 +446,5 @@
 }
 
 .o-endgame-mastery-connection--bought.o-endgame-mastery-connection--permanent {
-  stroke: var(--color-pelle--base);
+  stroke: var(--color-endgame);
 }
