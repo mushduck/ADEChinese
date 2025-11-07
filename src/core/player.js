@@ -109,7 +109,7 @@ window.player = {
       cost: 1,
       interval: 4000,
       limitDimBoosts: false,
-      maxDimBoosts: 1,
+      maxDimBoosts: DC.D1,
       limitUntilGalaxies: false,
       galaxies: 10,
       buyMaxInterval: 0,
