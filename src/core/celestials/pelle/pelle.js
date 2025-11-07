@@ -360,7 +360,7 @@ export const Pelle = {
 
     const gainNew = (
       (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.5
-    ) ** 12;
+    ) ** 9;
 
     const gain = EndgameMilestone.remnantFormula.isReached ? gainNew : gainOld;
     
