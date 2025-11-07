@@ -25,7 +25,7 @@ export default {
     boostCountText() {
       if (this.requirementText) return this.requirementText;
       const parts = [this.purchasedBoosts];
-      if (this.imaginaryBoosts.neq(new Decimal(0))) {
+      if (this.imaginaryBoosts.neq(0)) {
         parts.push(this.imaginaryBoosts);
       }
       const sum = parts.map(formatInt).join(" + ");
@@ -47,7 +47,7 @@ export default {
     update() {
       const requirement = DimBoost.requirement;
       this.requirement.tier = requirement.tier;
-      this.requirement.amount = requirement.amount;
+      this.requirement.amount.copyFrom(requirement.amount);
       this.isBuyable = requirement.isSatisfied && DimBoost.canBeBought;
       this.purchasedBoosts.copyFrom(DimBoost.purchasedBoosts);
       this.imaginaryBoosts.copyFrom(DimBoost.imaginaryBoosts);
