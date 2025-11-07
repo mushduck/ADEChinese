@@ -76,7 +76,7 @@ export default {
   methods: {
     update() {
       const tier = this.tier;
-      if (tier > DimBoost.maxDimensionsUnlockable.toNumber() && !this.isDoomed) return;
+      if (tier > DimBoost.maxDimensionsUnlockable && !this.isDoomed) return;
       const dimension = AntimatterDimension(tier);
       this.isUnlocked = dimension.isAvailableForPurchase;
       const buyUntil10 = player.buyUntil10;
