@@ -93,7 +93,7 @@ export default {
     update() {
       const tier = this.tier;
       if (tier === 8 && this.isDoomed) this.formattedAmount = formatInt(this.amount);
-      if (tier > DimBoost.maxDimensionsUnlockable.toNumber()) return;
+      if (tier > DimBoost.maxDimensionsUnlockable) return;
       const dimension = AntimatterDimension(tier);
       this.isUnlocked = dimension.isAvailableForPurchase;
       this.isCapped = tier === 8 && Enslaved.isRunning && dimension.bought >= 1;
