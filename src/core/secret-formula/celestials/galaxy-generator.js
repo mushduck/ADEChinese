@@ -63,7 +63,7 @@ export const pelleGalaxyGeneratorUpgrades = {
   RSMult: rebuyable({
     id: "galaxyGeneratorRSMult",
     description: "Multiply Galaxy generation",
-    cost: x => Decimal.pow("1e100", 10000 ** x),
+    cost: x => new Decimal(1e100).times(10000 ** x),
     effect: x => Decimal.pow(2, x),
     formatEffect: x => formatX(x, 2),
     currency: () => Currency.realityShards,
