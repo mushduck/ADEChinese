@@ -830,7 +830,7 @@ window.player = {
   endgameMasteries: {
     skills: DC.D0,
     maxSkills: DC.D0,
-    amBought: 0,
+    ggBought: 0,
     cpBought: 0,
     dpBought: 0,
     masteries: [],
