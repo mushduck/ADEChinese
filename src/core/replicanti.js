@@ -23,7 +23,7 @@ function addReplicantiGalaxies(newGalaxies) {
       ? PelleUpgrade.replicantiGalaxyEM40.canBeApplied
       : EternityMilestone.replicantiNoReset.isReached;
     if (!keepResources) {
-      player.dimensionBoosts = 0;
+      player.dimensionBoosts = DC.D0;
       softReset(0, true, true);
     }
   }
