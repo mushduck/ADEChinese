@@ -92,7 +92,7 @@ export default {
       budget.cp.copyFrom(EndgameSkillPurchaseType.cp.currency);
       budget.dp.copyFrom(EndgameSkillPurchaseType.dp.currency);
       const costs = this.costs;
-      costs.am.copyFrom(EndgameSkillPurchaseType.am.cost);
+      costs.gg.copyFrom(EndgameSkillPurchaseType.gg.cost);
       costs.cp.copyFrom(EndgameSkillPurchaseType.cp.cost);
       costs.dp.copyFrom(EndgameSkillPurchaseType.dp.cost);
     },
