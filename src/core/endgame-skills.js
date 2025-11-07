@@ -122,7 +122,7 @@ export const EndgameSkills = {
     const esGG = this.buyOne(true, "gg");
     const esCP = this.buyOne(true, "cp");
     const esDP = this.buyOne(true, "dp");
-    return esAM + esCP + esDP;
+    return esGG + esCP + esDP;
   },
 
   buyMax(auto = false) {
