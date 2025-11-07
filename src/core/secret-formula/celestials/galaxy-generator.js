@@ -21,7 +21,7 @@ export const pelleGalaxyGeneratorUpgrades = {
     cost: x => Math.pow(3, x),
     effect: x => x * 2,
     formatEffect: x => `${format(x, 2, 2)}/s`,
-    currency: () => Currency.galaxyGeneratorGalaxies,
+    currency: () => Currency.galaxyGeneratorGalaxies.value.toNumber(),
     currencyLabel: "Galaxy"
   }),
   multiplicative: rebuyable({
@@ -30,7 +30,7 @@ export const pelleGalaxyGeneratorUpgrades = {
     cost: x => Math.pow(10, x),
     effect: x => Decimal.pow(2.5, x),
     formatEffect: x => formatX(x, 2, 1),
-    currency: () => Currency.galaxyGeneratorGalaxies,
+    currency: () => Currency.galaxyGeneratorGalaxies.value.toNumber(),
     currencyLabel: "Galaxy"
   }),
   antimatterMult: rebuyable({
