@@ -213,7 +213,7 @@ window.player = {
   infinityPoints: DC.D0,
   infinities: DC.D0,
   infinitiesBanked: DC.D0,
-  dimensionBoosts: 0,
+  dimensionBoosts: DC.D0,
   galaxies: 0,
   news: {
     // This is properly handled in NewsHandler.addSeenNews which adds properties as needed
