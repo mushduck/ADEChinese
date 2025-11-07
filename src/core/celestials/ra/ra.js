@@ -335,7 +335,7 @@ export const Ra = {
     return Math.min(10, Math.max(0, Currency.timeTheorems.value.pLog10() - 350) / 50);
   },
   get isUnlocked() {
-    return V.spaceTheorems >= 36;
+    return V.spaceTheorems >= 36 || EndgameMilestone.celestialEarlyUnlock.isReached;
   },
   get isRunning() {
     return player.celestials.ra.run;
