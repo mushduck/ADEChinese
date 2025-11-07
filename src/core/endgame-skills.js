@@ -71,13 +71,13 @@ export class EndgameSkillPurchaseType {
   }
 }
 
-EndgameSkillPurchaseType.am = new class extends EndgameSkillPurchaseType {
-  get amount() { return player.endgameMasteries.amBought; }
-  set amount(value) { player.endgameMasteries.amBought = value; }
+EndgameSkillPurchaseType.gg = new class extends EndgameSkillPurchaseType {
+  get amount() { return player.endgameMasteries.ggBought; }
+  set amount(value) { player.endgameMasteries.ggBought = value; }
 
-  get currency() { return new Decimal(Currency.antimatter.exponent); }
-  get costBase() { return DC.E15; }
-  get costIncrement() { return DC.E1; }
+  get currency() { return Currency.galaxyGeneratorGalaxies; }
+  get costBase() { return DC.E10; }
+  get costIncrement() { return DC.E2; }
 }();
 
 EndgameSkillPurchaseType.cp = new class extends EndgameSkillPurchaseType {
@@ -104,7 +104,7 @@ EndgameSkillPurchaseType.dp = new class extends EndgameSkillPurchaseType {
 
 export const EndgameSkills = {
   checkForBuying(auto) {
-    if (CelestialDimension(1).baseAmount > 0 && !Pelle.isDoomed) return true;
+    if (CelestialDimension(1).baseAmount > 0) return true;
     if (!auto) Modal.message.show(`You need to buy at least ${formatInt(1)} Celestial Dimension before you can purchase
       Endgame Skills. You also need to be outside Doom to prevent AM overflow.`, { closeEvent: GAME_EVENT.ENDGAME_RESET_AFTER });
     return false;
@@ -119,7 +119,7 @@ export const EndgameSkills = {
   // This is only called via automation and there's no manual use-case, so we assume auto is true and simplify a bit
   buyOneOfEach() {
     if (!this.checkForBuying(true)) return 0;
-    const esAM = this.buyOne(true, "am");
+    const esGG = this.buyOne(true, "gg");
     const esCP = this.buyOne(true, "cp");
     const esDP = this.buyOne(true, "dp");
     return esAM + esCP + esDP;
@@ -127,14 +127,14 @@ export const EndgameSkills = {
 
   buyMax(auto = false) {
     if (!this.checkForBuying(auto)) return 0;
-    const esAM = EndgameSkillPurchaseType.am.purchase(true);
+    const esGG = EndgameSkillPurchaseType.gg.purchase(true);
     const esCP = EndgameSkillPurchaseType.cp.purchase(true);
     const esDP = EndgameSkillPurchaseType.dp.purchase(true);
     return esAM + esCP + esDP;
   },
 
   totalPurchased() {
-    return EndgameSkillPurchaseType.am.amount +
+    return EndgameSkillPurchaseType.gg.amount +
           EndgameSkillPurchaseType.cp.amount +
           EndgameSkillPurchaseType.dp.amount;
   },
