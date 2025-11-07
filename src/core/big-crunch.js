@@ -152,7 +152,7 @@ function bigCrunchCheckUnlocks() {
 }
 
 export function secondSoftReset(enteringAntimatterChallenge) {
-  player.dimensionBoosts = 0;
+  player.dimensionBoosts = DC.D0;
   player.galaxies = 0;
   player.records.thisInfinity.maxAM = DC.D0;
   Currency.antimatter.reset();
