@@ -130,7 +130,7 @@ export const EndgameSkills = {
     const esGG = EndgameSkillPurchaseType.gg.purchase(true);
     const esCP = EndgameSkillPurchaseType.cp.purchase(true);
     const esDP = EndgameSkillPurchaseType.dp.purchase(true);
-    return esAM + esCP + esDP;
+    return esGG + esCP + esDP;
   },
 
   totalPurchased() {
