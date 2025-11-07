@@ -108,7 +108,7 @@ export const normalAchievements = [
     id: 25,
     name: "Boosting to the max",
     get description() { return `Buy ${formatInt(10)} Dimension Boosts.`; },
-    checkRequirement: () => DimBoost.purchasedBoosts >= 10,
+    checkRequirement: () => DimBoost.purchasedBoosts.gte(10),
     checkEvent: GAME_EVENT.DIMBOOST_AFTER
   },
   {
@@ -419,7 +419,7 @@ export const normalAchievements = [
     id: 64,
     name: "Zero Deaths",
     description: "Get to Infinity without Dimension Boosts or Antimatter Galaxies while in a Normal Challenge.",
-    checkRequirement: () => player.galaxies === 0 && DimBoost.purchasedBoosts === 0 && NormalChallenge.isRunning,
+    checkRequirement: () => player.galaxies === 0 && DimBoost.purchasedBoosts.eq(0) && NormalChallenge.isRunning,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() { return `Antimatter Dimensions 1-4 are ${formatPercents(0.25)} stronger.`; },
     effect: 1.25
@@ -474,7 +474,7 @@ export const normalAchievements = [
     checkRequirement: () =>
       NormalChallenge(2).isOnlyActiveChallenge &&
       AntimatterDimension(1).amount.eq(1) &&
-      DimBoost.purchasedBoosts === 0 &&
+      DimBoost.purchasedBoosts.eq(0) &&
       player.galaxies === 0,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() { return `1st Antimatter Dimensions are ${formatInt(3)} times stronger.`; },
