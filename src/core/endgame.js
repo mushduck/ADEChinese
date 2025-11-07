@@ -479,7 +479,7 @@ export const Endgame = {
     Currency.infinitiesBanked.reset();
     player.partInfinityPoint = 0;
     player.partInfinitied = 0;
-    player.dimensionBoosts = 0;
+    player.dimensionBoosts = DC.D0;
     player.galaxies = 0;
     player.break = false;
     resetTickspeed();
