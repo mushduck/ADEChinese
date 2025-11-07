@@ -30,7 +30,7 @@ export default {
       }
       const sum = parts.map(formatInt).join(" + ");
       if (parts.length >= 2) {
-        return `${sum} = ${formatInt(parts.sum())}`;
+        return `${sum} = ${formatInt(parts.decimalSum())}`;
       }
       return sum;
     },
