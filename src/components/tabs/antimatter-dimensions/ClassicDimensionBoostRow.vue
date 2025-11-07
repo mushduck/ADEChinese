@@ -10,7 +10,7 @@ export default {
     return {
       requirement: {
         tier: 1,
-        amount: 0
+        amount: new Decimal(0)
       },
       isBuyable: false,
       purchasedBoosts: new Decimal(0),
