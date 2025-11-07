@@ -8,8 +8,8 @@ export default {
         amount: 0
       },
       isBuyable: false,
-      purchasedBoosts: 0,
-      imaginaryBoosts: 0,
+      purchasedBoosts: new Decimal(0),
+      imaginaryBoosts: new Decimal(0),
       lockText: null,
       unlockedByBoost: null,
       creditsClosed: false,
@@ -25,7 +25,7 @@ export default {
     boostCountText() {
       if (this.requirementText) return this.requirementText;
       const parts = [this.purchasedBoosts];
-      if (this.imaginaryBoosts !== 0) {
+      if (this.imaginaryBoosts.neq(new Decimal(0))) {
         parts.push(this.imaginaryBoosts);
       }
       const sum = parts.map(formatInt).join(" + ");
@@ -49,8 +49,8 @@ export default {
       this.requirement.tier = requirement.tier;
       this.requirement.amount = requirement.amount;
       this.isBuyable = requirement.isSatisfied && DimBoost.canBeBought;
-      this.purchasedBoosts = DimBoost.purchasedBoosts;
-      this.imaginaryBoosts = DimBoost.imaginaryBoosts;
+      this.purchasedBoosts.copyFrom(DimBoost.purchasedBoosts);
+      this.imaginaryBoosts.copyFrom(DimBoost.imaginaryBoosts);
       this.lockText = DimBoost.lockText;
       this.unlockedByBoost = DimBoost.unlockedByBoost;
       this.creditsClosed = GameEnd.creditsEverClosed;
