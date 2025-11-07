@@ -18,12 +18,12 @@ export default {
       shopMinimized: false,
       minimizeAvailable: false,
       budget: {
-        am: new Decimal(0),
+        gg: new Decimal(0),
         cp: new Decimal(0),
         dp: new Decimal(0)
       },
       costs: {
-        am: new Decimal(0),
+        gg: new Decimal(0),
         cp: new Decimal(0),
         dp: new Decimal(0)
       },
@@ -61,11 +61,11 @@ export default {
     minimize() {
       player.endgameMasteries.shopMinimized = !player.endgameMasteries.shopMinimized;
     },
-    formatAM(am) {
-      return `${format(Decimal.pow(10, am))} AM`;
+    formatGG(gg) {
+      return `${format(gg, 2, 0)} Galaxies`;
     },
-    buyWithAM() {
-      EndgameSkills.buyOne(false, "am");
+    buyWithGG() {
+      EndgameSkills.buyOne(false, "gg");
     },
     formatCP(cp) {
       return `${format(cp, 2, 0)} CP`;
@@ -88,11 +88,11 @@ export default {
       this.shopMinimized = player.endgameMasteries.shopMinimized;
       this.minimizeAvailable = Currency.doomedParticles.gte(1e100);
       const budget = this.budget;
-      budget.am.copyFrom(EndgameSkillPurchaseType.am.currency);
+      budget.gg.copyFrom(EndgameSkillPurchaseType.gg.currency);
       budget.cp.copyFrom(EndgameSkillPurchaseType.cp.currency);
       budget.dp.copyFrom(EndgameSkillPurchaseType.dp.currency);
       const costs = this.costs;
-      costs.am.copyFrom(EndgameSkillPurchaseType.am.cost);
+      costs.gg.copyFrom(EndgameSkillPurchaseType.gg.cost);
       costs.cp.copyFrom(EndgameSkillPurchaseType.cp.cost);
       costs.dp.copyFrom(EndgameSkillPurchaseType.dp.cost);
     },
@@ -140,10 +140,10 @@ export default {
         :style="shopBottomRowHeightStyle"
       >
         <EndgameSkillBuyButton
-          :budget="budget.am"
-          :cost="costs.am"
-          :format-cost="formatAM"
-          :action="buyWithAM"
+          :budget="budget.gg"
+          :cost="costs.gg"
+          :format-cost="formatGG"
+          :action="buyWithGG"
         />
         <EndgameSkillBuyButton
           :budget="budget.cp"

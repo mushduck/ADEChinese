@@ -18,7 +18,7 @@ export const pelleGalaxyGeneratorUpgrades = {
   additive: rebuyable({
     id: "galaxyGeneratorAdditive",
     description: "Increase base Galaxy generation by 2",
-    cost: x => Math.pow(3, x),
+    cost: x => Decimal.pow(3, x),
     effect: x => x * 2,
     formatEffect: x => `${format(x, 2, 2)}/s`,
     currency: () => Currency.galaxyGeneratorGalaxies,
@@ -27,7 +27,7 @@ export const pelleGalaxyGeneratorUpgrades = {
   multiplicative: rebuyable({
     id: "galaxyGeneratorMultiplicative",
     description: "Multiply Galaxy generation",
-    cost: x => Math.pow(10, x),
+    cost: x => Decimal.pow(10, x),
     effect: x => Decimal.pow(2.5, x),
     formatEffect: x => formatX(x, 2, 1),
     currency: () => Currency.galaxyGeneratorGalaxies,
@@ -63,7 +63,7 @@ export const pelleGalaxyGeneratorUpgrades = {
   RSMult: rebuyable({
     id: "galaxyGeneratorRSMult",
     description: "Multiply Galaxy generation",
-    cost: x => Decimal.pow("1e100", 10000 ** x),
+    cost: x => new Decimal(1e100).times(1e10 ** x),
     effect: x => Decimal.pow(2, x),
     formatEffect: x => formatX(x, 2),
     currency: () => Currency.realityShards,

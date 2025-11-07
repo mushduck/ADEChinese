@@ -630,7 +630,7 @@ export function finishProcessReality(realityProps) {
   player.records.thisInfinity.time = DC.D0;
   player.records.thisInfinity.lastBuyTime = DC.D0;
   player.records.thisInfinity.realTime = 0;
-  player.dimensionBoosts = 0;
+  player.dimensionBoosts = DC.D0;
   player.galaxies = 0;
   player.partInfinityPoint = 0;
   player.partInfinitied = 0;
@@ -798,7 +798,7 @@ export function applyRUPG10() {
     if (autobuyer.data.interval !== undefined) autobuyer.data.interval = 100;
   }
 
-  player.dimensionBoosts = Math.max(4, player.dimensionBoosts);
+  player.dimensionBoosts = Decimal.max(DC.D4, player.dimensionBoosts);
   player.galaxies = Math.max(1, player.galaxies);
   player.break = true;
   Currency.eternities.bumpTo(100);

@@ -152,7 +152,7 @@ function bigCrunchCheckUnlocks() {
 }
 
 export function secondSoftReset(enteringAntimatterChallenge) {
-  player.dimensionBoosts = 0;
+  player.dimensionBoosts = DC.D0;
   player.galaxies = 0;
   player.records.thisInfinity.maxAM = DC.D0;
   Currency.antimatter.reset();
@@ -170,15 +170,16 @@ export function secondSoftReset(enteringAntimatterChallenge) {
 
 export function preProductionGenerateIP(diff) {
   if (InfinityUpgrade.ipGen.isBought) {
-    const genPeriod = Time.bestInfinity.totalMilliseconds.times(10);
+    const genPeriod = Time.bestInfinity.totalMilliseconds.clampMin(1e-100).times(10);
     let genCount;
-    if (diff.gte(DC.E300.times(genPeriod))) {
+    if (new Decimal(diff).gte(DC.E100)) {
       genCount = Decimal.div(diff, genPeriod);
     } else {
       // Partial progress (fractions from 0 to 1) are stored in player.partInfinityPoint
-      player.partInfinityPoint += new Decimal(diff).toNumber() / new Decimal(genPeriod).toNumber();
-      genCount = Math.floor(player.partInfinityPoint);
-      player.partInfinityPoint -= genCount;
+      const diffnum = new Decimal(diff).toNumber();
+      player.partInfinityPoint += diffnum / genPeriod.clampMax(1e300).toNumber();
+      genCount = Decimal.floor(player.partInfinityPoint);
+      player.partInfinityPoint -= genCount.toNumber();
     }
     let gainedPerGen = player.records.bestInfinity.time.gte(999999999999) ? DC.D0 : InfinityUpgrade.ipGen.effectValue;
     if (Laitela.isRunning) gainedPerGen = dilatedValueOf(gainedPerGen);

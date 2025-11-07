@@ -538,7 +538,7 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get isAvailableForPurchase() {
-    if (!EternityMilestone.unlockAllND.isReached && this.tier > DimBoost.totalBoosts + 4) return false;
+    if (!EternityMilestone.unlockAllND.isReached && this.tier > DimBoost.totalBoosts.plus(4).toNumber()) return false;
     const hasPrevTier = this.tier === 1 || AntimatterDimension(this.tier - 1).totalAmount.gt(0);
     if (!EternityMilestone.unlockAllND.isReached && !hasPrevTier) return false;
     return this.tier < 7 || !NormalChallenge(10).isRunning;
@@ -609,7 +609,7 @@ class AntimatterDimensionState extends DimensionState {
       }
       if (production.gt(10)) {
         const log10 = production.log10();
-        const endgameMult = Pelle.isDoomed ? 1 + (Math.log10(Currency.endgames.value + 1) / 200) : 1 + (Math.log10(Currency.endgames.value + 1) / 80);
+        const endgameMult = Pelle.isDoomed ? 1 + (Math.log10(Currency.endgames.value + 1) / 80) : 1 + (Math.log10(Currency.endgames.value + 1) / 200);
         production = Decimal.pow10(Math.pow(log10, getAdjustedGlyphEffect("effarigantimatter")));
         production = Decimal.pow10(Math.pow(log10, Effects.product(EndgameMastery(101))));
         if (EndgameMilestone.endgameAntimatter.isReached) production = Decimal.pow10(Math.pow(log10, endgameMult));
@@ -647,7 +647,7 @@ export const AntimatterDimensions = {
   },
 
   get buyTenMultiplier() {
-    if (NormalChallenge(7).isRunning) return DC.D2.min(1 + DimBoost.totalBoosts / 5);
+    if (NormalChallenge(7).isRunning) return DC.D2.min(DimBoost.totalBoosts.plus(1).div(5));
 
     let mult = DC.D2.plusEffectsOf(
       Achievement(141).effects.buyTenMult,

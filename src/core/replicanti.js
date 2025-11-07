@@ -23,7 +23,7 @@ function addReplicantiGalaxies(newGalaxies) {
       ? PelleUpgrade.replicantiGalaxyEM40.canBeApplied
       : EternityMilestone.replicantiNoReset.isReached;
     if (!keepResources) {
-      player.dimensionBoosts = 0;
+      player.dimensionBoosts = DC.D0;
       softReset(0, true, true);
     }
   }
@@ -158,11 +158,11 @@ export function totalReplicantiSpeedMult(overCap) {
     Achievement(81),
     TimeStudy(62),
     TimeStudy(213),
-    RealityUpgrade(2),
     RealityUpgrade(6),
     RealityUpgrade(23),
   );
   totalMult = totalMult.times(preCelestialEffects);
+  totalMult = totalMult.timesEffectOf(RealityUpgrade(2));
   if (TimeStudy(132).isBought) {
     totalMult = totalMult.times(Perk.studyPassive.isBought ? 3 : 1.5);
   }

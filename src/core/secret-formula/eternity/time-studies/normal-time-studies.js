@@ -87,7 +87,7 @@ export const normalTimeStudies = [
     requirement: [22],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: `You gain more Infinities based on Dimension Boosts`,
-    effect: () => Math.max(DimBoost.totalBoosts * 10, 1),
+    effect: () => Decimal.max(DimBoost.totalBoosts.times(10), 1),
     formatEffect: value => formatX(value, 2)
   },
   {
@@ -185,7 +185,7 @@ export const normalTimeStudies = [
     requirement: [72],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Dimension Boosts affect Infinity Dimensions",
-    effect: () => DC.D1_0000109.pow(Math.pow(DimBoost.totalBoosts, 2)),
+    effect: () => DC.D1_0000109.pow(Decimal.pow(DimBoost.totalBoosts, 2)),
     cap: DC.E1E7,
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -556,7 +556,7 @@ export const normalTimeStudies = [
       return `Distant Galaxy cost scaling starts ${quantifyInt("Galaxy", effect)} later
         (${formatInt(1)} per ${formatInt(2000)} Dim Boosts)`;
     },
-    effect: () => Math.floor(DimBoost.totalBoosts / 2000)
+    effect: () => Decimal.floor(DimBoost.totalBoosts.div(2000)).toNumber()
   },
   {
     id: 225,

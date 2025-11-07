@@ -135,7 +135,7 @@ export const v = {
       description: value => `Get ${formatInt(value)} Dimension Boosts while Dilated and inside Eternity Challenge 5.`,
       values: [51, 52, 53, 54, 55, 56],
       condition: () => V.isRunning && player.dilation.active && EternityChallenge(5).isRunning,
-      currentValue: () => DimBoost.purchasedBoosts,
+      currentValue: () => DimBoost.purchasedBoosts.toNumber(),
       formatRecord: x => formatInt(x),
       shardReduction: tiers => Math.floor(tiers),
       maxShardReduction: () => 5,

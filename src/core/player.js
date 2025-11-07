@@ -109,7 +109,7 @@ window.player = {
       cost: 1,
       interval: 4000,
       limitDimBoosts: false,
-      maxDimBoosts: 1,
+      maxDimBoosts: DC.D1,
       limitUntilGalaxies: false,
       galaxies: 10,
       buyMaxInterval: 0,
@@ -213,7 +213,7 @@ window.player = {
   infinityPoints: DC.D0,
   infinities: DC.D0,
   infinitiesBanked: DC.D0,
-  dimensionBoosts: 0,
+  dimensionBoosts: DC.D0,
   galaxies: 0,
   news: {
     // This is properly handled in NewsHandler.addSeenNews which adds properties as needed
@@ -830,7 +830,7 @@ window.player = {
   endgameMasteries: {
     skills: DC.D0,
     maxSkills: DC.D0,
-    amBought: 0,
+    ggBought: 0,
     cpBought: 0,
     dpBought: 0,
     masteries: [],

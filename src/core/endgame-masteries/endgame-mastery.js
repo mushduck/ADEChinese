@@ -81,6 +81,42 @@ export class EndgameMasteryState extends EndgameMasteriesState {
   get path() {
     return this._path;
   }
+
+  onPurchased() {
+    const id = this.id;
+    if (id === 31 && Currency.realities.value < 100) {
+      Currency.realities.value = 100;
+    }
+    if (id === 32 && Currency.realityMachines.value.lt(1000000)) {
+      Currency.realityMachines.value.eq(1000000);
+    }
+    if (id === 42) {
+      player.blackHole[0].unlocked = true;
+      player.blackHole[1].unlocked = true;
+      player.reality.upgradeBits = 67108800;
+      player.reality.upgReqs = 67108800;
+      if (player.reality.rebuyables[1] < 1) player.reality.rebuyables[1] = 1;
+      if (player.reality.rebuyables[2] < 1) player.reality.rebuyables[2] = 1;
+      if (player.reality.rebuyables[3] < 1) player.reality.rebuyables[3] = 1;
+      if (player.reality.rebuyables[4] < 1) player.reality.rebuyables[4] = 1;
+      if (player.reality.rebuyables[5] < 1) player.reality.rebuyables[5] = 1;
+    }
+    if (id === 61) {
+      for (const achievement of Achievements.preEndgame) {
+        achievement.unlock();
+      }
+    }
+    if (id === 71) {
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+      for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
+    }
+    if (id === 112) {
+      player.reality.perks.size = Perks.all.length;
+    }
+  }
 }
 
 EndgameMasteryState.masteries = mapGameData(

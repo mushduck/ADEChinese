@@ -495,13 +495,13 @@ Currency.replicanti = new class extends DecimalCurrency {
   set value(value) { player.replicanti.amount = value; }
 }();
 
-Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
+Currency.galaxyGeneratorGalaxies = new class extends DecimalCurrency {
   get value() {
-    return player.galaxies + GalaxyGenerator.galaxies;
+    return new Decimal(player.galaxies + GalaxyGenerator.galaxies);
   }
 
   set value(value) {
-    const spent = player.galaxies + GalaxyGenerator.galaxies - value;
+    const spent = player.galaxies + GalaxyGenerator.galaxies - value.toNumber();
     player.celestials.pelle.galaxyGenerator.spentGalaxies += spent;
   }
 }();

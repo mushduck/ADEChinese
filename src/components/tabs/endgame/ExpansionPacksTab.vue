@@ -86,7 +86,7 @@ export default {
 
 .c-primary-btn--expansion-packs-unlock--unavailable:hover {
   color: black;
-  background: var(--color-pelle--base);
+  background: var(--color-endgame);
 }
 
 .c-primary-btn--expansion-packs-unlock--available {
@@ -102,6 +102,7 @@ export default {
 .c-primary-btn--expansion-packs-unlock--bought {
   color: black;
   background: linear-gradient(var(--color-endgame), var(--color-pelle--base));
-  border: 0.1rem solid var(--color-pelle--secondary);
+  box-shadow: inset 0 0 2rem 0.1rem var(--color-pelle--secondary);
+  transition-duration: 0.3s;
 }
 </style>

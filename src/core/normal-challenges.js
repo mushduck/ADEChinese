@@ -6,7 +6,7 @@ export function updateNormalAndInfinityChallenges(diff) {
     if (AntimatterDimension(2).amount.neq(0)) {
       Currency.matter.bumpTo(1);
       // These caps are values which occur at approximately e308 IP
-      const cappedBase = 1.03 + Math.clampMax(DimBoost.totalBoosts, 400) / 200 +
+      const cappedBase = 1.03 + Decimal.clampMax(DimBoost.totalBoosts, 400).toNumber() / 200 +
         Math.clampMax(player.galaxies, 100) / 100;
       Currency.matter.multiply(Decimal.pow(cappedBase, new Decimal(diff).div(20)));
     }
@@ -23,7 +23,7 @@ export function updateNormalAndInfinityChallenges(diff) {
   }
 
   if (NormalChallenge(2).isRunning) {
-    player.chall2Pow = Decimal.min(player.chall2Pow.plus(new Decimal(diff).div(100).div(1800)), 1).toNumber();
+    player.chall2Pow = Decimal.min(new Decimal(player.chall2Pow).plus(new Decimal(diff).div(100).div(1800)), 1).toNumber();
   }
 
   if (InfinityChallenge(2).isRunning) {
