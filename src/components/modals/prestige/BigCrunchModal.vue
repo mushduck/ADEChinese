@@ -10,7 +10,7 @@ export default {
     return {
       gainedInfinities: new Decimal(),
       gainedInfinityPoints: new Decimal(),
-      startingBoosts: 0,
+      startingBoosts: new Decimal(0),
       startingAM: 10,
       willStartWithGalaxy: false
     };
@@ -34,7 +34,7 @@ export default {
     startingResources() {
       const gainedResources = [];
       if (this.startingAM.gte(10)) gainedResources.push(`${quantify("Antimatter", this.startingAM, 2, 1)}`);
-      if (this.startingBoosts > 0) gainedResources.push(`${quantify("Dimension Boost", this.startingBoosts)}`);
+      if (this.startingBoosts.gt(0)) gainedResources.push(`${quantify("Dimension Boost", this.startingBoosts)}`);
       if (this.willStartWithGalaxy) gainedResources.push(`${quantify("Galaxy", 1)}`);
 
       return `You will start your next Infinity with ${makeEnumeration(gainedResources)}.`;
