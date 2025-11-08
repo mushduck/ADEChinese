@@ -48,7 +48,7 @@ export function antimatterDimensionCommonMultiplier() {
   multiplier = multiplier.times(getAdjustedGlyphEffect("powermult"));
   multiplier = multiplier.times(Currency.realityMachines.value.powEffectOf(AlchemyResource.force));
 
-  if (Pelle.isDoomed) multiplier = multiplier.dividedBy(50 * Currency.antimatter.exponent);
+  if (Pelle.isDoomed && !PelleDestructionUpgrade.disableADNerf.isBought) multiplier = multiplier.dividedBy(50 * Currency.antimatter.exponent);
 
   return multiplier;
 }
@@ -174,7 +174,8 @@ function applyNDPowers(mult, tier) {
       InfinityUpgrade.thisInfinityTimeMult.chargedEffect,
       AlchemyResource.power,
       Achievement(183),
-      PelleRifts.paradox
+      PelleRifts.paradox,
+      SingularityMilestone.dimensionPow
     );
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
@@ -537,7 +538,7 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get isAvailableForPurchase() {
-    if (!EternityMilestone.unlockAllND.isReached && this.tier > DimBoost.totalBoosts + 4) return false;
+    if (!EternityMilestone.unlockAllND.isReached && this.tier > DimBoost.totalBoosts.plus(4).toNumber()) return false;
     const hasPrevTier = this.tier === 1 || AntimatterDimension(this.tier - 1).totalAmount.gt(0);
     if (!EternityMilestone.unlockAllND.isReached && !hasPrevTier) return false;
     return this.tier < 7 || !NormalChallenge(10).isRunning;
@@ -608,7 +609,10 @@ class AntimatterDimensionState extends DimensionState {
       }
       if (production.gt(10)) {
         const log10 = production.log10();
+        const endgameMult = Pelle.isDoomed ? 1 + (Math.log10(Currency.endgames.value + 1) / 80) : 1 + (Math.log10(Currency.endgames.value + 1) / 200);
         production = Decimal.pow10(Math.pow(log10, getAdjustedGlyphEffect("effarigantimatter")));
+        production = Decimal.pow10(Math.pow(log10, Effects.product(EndgameMastery(101))));
+        if (EndgameMilestone.endgameAntimatter.isReached) production = Decimal.pow10(Math.pow(log10, endgameMult));
       }
     }
     production = production.min(this.cappedProductionInNormalChallenges);
@@ -643,7 +647,7 @@ export const AntimatterDimensions = {
   },
 
   get buyTenMultiplier() {
-    if (NormalChallenge(7).isRunning) return DC.D2.min(1 + DimBoost.totalBoosts / 5);
+    if (NormalChallenge(7).isRunning) return DC.D2.min(DimBoost.totalBoosts.plus(1).div(5));
 
     let mult = DC.D2.plusEffectsOf(
       Achievement(141).effects.buyTenMult,
@@ -674,7 +678,7 @@ export const AntimatterDimensions = {
       nextTierOffset++;
     }
     for (let tier = maxTierProduced; tier >= 1; --tier) {
-      AntimatterDimension(tier + nextTierOffset).produceDimensions(AntimatterDimension(tier), diff / 10);
+      AntimatterDimension(tier + nextTierOffset).produceDimensions(AntimatterDimension(tier), new Decimal(diff).div(10));
     }
     if (AntimatterDimension(1).amount.gt(0)) {
       player.requirementChecks.eternity.noAD1 = false;

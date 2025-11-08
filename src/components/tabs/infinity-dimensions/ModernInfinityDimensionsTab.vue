@@ -65,11 +65,11 @@ export default {
       this.totalDimCap = InfinityDimensions.totalDimCap;
       this.canBuyTesseract = Tesseracts.canBuyTesseract;
       this.enslavedCompleted = Enslaved.isCompleted;
-      this.boughtTesseracts = Tesseracts.bought;
-      this.extraTesseracts = Tesseracts.extra;
+      this.boughtTesseracts = Tesseracts.bought * Tesseracts.totalMult;
+      this.extraTesseracts = Tesseracts.extra * Tesseracts.totalMult;
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
-      this.infinityDimCompressionMagnitude = player.endgame.compressionMagnitude.infinity;
+      this.infinityDimCompressionMagnitude = InfinityDimensions.compressionMagnitude;
       this.infinityDimOverflow = 1 / this.infinityDimCompressionMagnitude;
       this.infinityDimStart = InfinityDimensions.OVERFLOW;
     },
@@ -132,7 +132,7 @@ export default {
           which raises all Infinity Dimension Multipliers to the power of
           <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow, 2, 3) }}</span>
           while above
-          <span>{{ format(infinityDimStart, 2, 1) }}</span>.
+          <span>{{ formatPostBreak(infinityDimStart, 2, 1) }}</span>.
         </span>
       </p>
     </div>

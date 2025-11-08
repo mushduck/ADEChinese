@@ -64,7 +64,7 @@ export const imaginaryUpgrades = [
     description: () => `Increase the Reality Machine cap by ${formatX(1e100)}`,
     effect: 1e100,
     scaleStart: 5,
-    formatEffect: value => `${formatX(value)}`,
+    formatEffect: value => `${formatX(EndgameMastery(153).isBought ? value.powEffectsOf(EndgameMastery(153)) : value)}`,
     isDecimal: true
   }),
   rebuyable({
@@ -106,7 +106,7 @@ export const imaginaryUpgrades = [
     description: () => `Increase Singularity gain`,
     effect: 1,
     scaleStart: 2,
-    formatEffect: value => `${formatX(1 + value, 2)}`
+    formatEffect: value => `${formatX(EndgameMastery(131).isBought ? Math.pow(1 + value, value) : 1 + value, 2)}`
   }),
   {
     name: "Suspicion of Interference",
@@ -149,7 +149,7 @@ export const imaginaryUpgrades = [
       MachineHandler.uncappedRM.times(simulatedRealityCount(false) + 1).gte(Number.MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Increase Imaginary Machine Cap based on Imaginary Upgrades purchased",
-    effect: () => 1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2,
+    effect: () => Math.pow(1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2, EndgameMastery(154).effectOrDefault(1)),
     formatEffect: value => `${formatX(value, 2, 1)}`,
     isDisabledInDoomed: true
   },
@@ -334,9 +334,9 @@ export const imaginaryUpgrades = [
     name: "Singularity Stockpile",
     id: 26,
     cost: 1e50,
-    requirement: () => `Reach ${format(Decimal.NUMBER_MAX_VALUE, 2)} Singularities`,
+    requirement: () => `Reach ${format(DC.E100, 2)} Singularities`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.singularities.value >= 1.8e308,
+    checkRequirement: () => Currency.singularities.value >= 1e100,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
   },
@@ -345,21 +345,30 @@ export const imaginaryUpgrades = [
     id: 27,
     cost: 1e100,
     requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
-    hasFailed: () => !Pelle.isDoomed || Glyphs.activeWithoutCompanion.length > 0,
-    // We have to put this as 1e16 for now because Glyphs can still be switched out via Armageddon
-    // Hopefully we can fix this later
-    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16 && Pelle.isDoomed &&
-      Glyphs.activeWithoutCompanion.length <= 0,
+    hasFailed: () => !Pelle.isDoomed || player.requirementChecks.endgame.noGlyphsDoomed === false,
+    checkRequirement: () => Currency.antimatter.value.exponent >= 9e15 && Pelle.isDoomed &&
+      player.requirementChecks.endgame.noGlyphsDoomed === true,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
   },
   {
-    name: "Achievement Annihilation",
+    name: "Alchemical Annihilation",
     id: 28,
     cost: 1e150,
-    requirement: () => `Unlock Pelle without completing any Hard V-Achievements`,
-    hasFailed: () => V.spaceTheorems >= 37,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 1e16 && V.spaceTheorems <= 36,
+    requirement: () => `Unlock Pelle without having any Alchemy Resources`,
+    hasFailed: () => player.celestials.ra.alchemy[0].amount > 0 ||
+      player.celestials.ra.alchemy[1].amount > 0 ||
+      player.celestials.ra.alchemy[2].amount > 0 ||
+      player.celestials.ra.alchemy[3].amount > 0 ||
+      player.celestials.ra.alchemy[4].amount > 0 ||
+      player.celestials.ra.alchemy[5].amount > 0,
+    checkRequirement: () => Pelle.isUnlocked && !Pelle.isDoomed &&
+      player.celestials.ra.alchemy[0].amount === 0 &&
+      player.celestials.ra.alchemy[1].amount === 0 &&
+      player.celestials.ra.alchemy[2].amount === 0 &&
+      player.celestials.ra.alchemy[3].amount === 0 &&
+      player.celestials.ra.alchemy[4].amount === 0 &&
+      player.celestials.ra.alchemy[5].amount === 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
   },
@@ -377,7 +386,7 @@ export const imaginaryUpgrades = [
   {
     name: "Inception Initiation",
     id: 30,
-    cost: Math.pow(2, 1024),
+    cost: Number.MAX_VALUE,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
     hasFailed: () => !Pelle.isDoomed,
     checkRequirement: () => Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,

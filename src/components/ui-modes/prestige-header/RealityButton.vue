@@ -94,13 +94,13 @@ export default {
         .clampMax(MachineHandler.hardcapRM);
       this.newIMCap = MachineHandler.projectedIMCap;
       this.machinesGained = this.projectedRM.clampMax(MachineHandler.distanceToRMCap);
-      this.realityTime = Time.thisRealityRealTime.totalMinutes;
+      this.realityTime = Time.thisRealityRealTime.totalMinutes.toNumber();
       this.glyphLevel = gainedGlyphLevel().actualLevel;
       this.nextGlyphPercent = this.percentToNextGlyphLevelText();
       this.nextMachineEP = EPforRM(this.machinesGained.plus(1));
       this.ppGained = multiplier;
       this.shardsGained = Effarig.shardsGained * multiplier;
-      this.currentShardsRate = (this.shardsGained / Time.thisRealityRealTime.totalMinutes);
+      this.currentShardsRate = (this.shardsGained / Time.thisRealityRealTime.totalMinutes.toNumber());
       this.bestShardRate = player.records.thisReality.bestRSmin * multiplier;
       this.bestShardRateVal = player.records.thisReality.bestRSminVal * multiplier;
 

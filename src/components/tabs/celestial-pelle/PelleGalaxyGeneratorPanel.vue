@@ -22,6 +22,9 @@ export default {
       isCollapsed: false,
       barWidth: 0,
       capRiftName: "",
+      galGenInstability: 0,
+      generationReduction: 0,
+      isInstabilityShown: false,
     };
   },
   computed: {
@@ -31,6 +34,7 @@ export default {
         : "fas fa-compress-arrows-alt";
     },
     upgrades() {
+      if (!EndgameMilestone.fasterGalaxies.isReached) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorRSMult");
       return GalaxyGeneratorUpgrades.all;
     },
     galaxyText() {
@@ -60,6 +64,9 @@ export default {
       this.sacrificeActive = GalaxyGenerator.sacrificeActive;
       this.barWidth = (this.isCapped ? this.capRift.reducedTo : this.emphasisedStart);
       if (this.capRift) this.capRiftName = wordShift.wordCycle(this.capRift.name);
+      this.galGenInstability = GalaxyGenerator.galGenInstability;
+      this.generationReduction = Math.max(1, Math.pow(this.galGenInstability, Math.log10(Math.max(Math.pow(this.galaxies / 1e10, 0.75), 1))));
+      this.isInstabilityShown = PlayerProgress.endgameUnlocked() || this.galaxies >= 1e10;
     },
     increaseCap() {
       if (GalaxyGenerator.isCapped) GalaxyGenerator.startSacrifice();
@@ -97,6 +104,12 @@ export default {
           <span class="c-galaxies-amount">{{ galaxyText }}</span>
           Galaxies.
           <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/s</span>
+          <div v-if="isInstabilityShown">
+            Your Galaxy Generator Instability Magnitude is
+            <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>,
+            which is dividing Galaxies above {{ format(1e10, 2, 1) }} by
+            <span class="c-galaxies-amount">{{ format(generationReduction, 2, 1) }}</span>.
+          </div>
         </div>
         <div>
           <button

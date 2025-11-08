@@ -65,6 +65,7 @@ import ImportSaveModal from "@/components/modals/ImportSaveModal";
 import ImportTimeStudyConstants from "@/components/modals/ImportTimeStudyConstants";
 import InformationModal from "@/components/modals/InformationModal";
 import LoadGameModal from "@/components/modals/LoadGameModal";
+import MasteryStringModal from "@/components/modals/MasteryStringModal";
 import ModifySeedModal from "@/components/modals/ModifySeedModal";
 import PelleEffectsModal from "@/components/modals/PelleEffectsModal";
 import RealityGlyphCreationModal from "@/components/modals/RealityGlyphCreationModal";
@@ -81,6 +82,8 @@ import UndoGlyphModal from "@/components/modals/UndoGlyphModal";
 import UpgradeMechanicLockModal from "@/components/modals/UpgradeMechanicLockModal";
 
 import S12GamesModal from "@/components/modals/secret-themes/S12GamesModal";
+
+import UsernameModal from "@/components/modals/UsernameModal";
 
 let nextModalID = 0;
 export class Modal {
@@ -266,6 +269,7 @@ Modal.importTSConstants = new Modal(ImportTimeStudyConstants);
 Modal.autobuyerEditModal = new Modal(AutobuyerEditModal);
 Modal.shop = new Modal(StdStoreModal);
 Modal.studyString = new Modal(StudyStringModal);
+Modal.masteryString = new Modal(MasteryStringModal);
 Modal.singularityMilestones = new Modal(SingularityMilestonesModal);
 Modal.pelleEffects = new Modal(PelleEffectsModal);
 Modal.sacrifice = new Modal(SacrificeModal, 1, GAME_EVENT.DIMBOOST_AFTER);
@@ -274,6 +278,8 @@ Modal.breakInfinity = new Modal(BreakInfinityModal, 1, GAME_EVENT.ETERNITY_RESET
 Modal.respecIAP = new Modal(RespecIAPModal);
 
 Modal.s12Games = new Modal(S12GamesModal);
+
+Modal.username = new Modal(UsernameModal, 1);
 
 function getSaveInfo(save) {
   const resources = {

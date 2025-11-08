@@ -49,7 +49,7 @@ export default {
       this.unlockedCount = EternityChallenges.all
         .filter(this.isChallengeVisible)
         .length;
-      this.isAutoECVisible = Perk.autocompleteEC1.canBeApplied;
+      this.isAutoECVisible = Perk.autocompleteEC1.canBeApplied || EndgameMastery(22).isBought;
       this.autoEC = player.reality.autoEC;
       const shouldPreventEC7 = TimeDimension(1).amount.gt(0);
       this.hasUpgradeLock = RealityUpgrade(12).isLockingMechanics ||
@@ -60,8 +60,8 @@ export default {
       if (remainingCompletions !== 0) {
         const autoECInterval = EternityChallenges.autoComplete.interval;
         const untilNextEC = Math.max(autoECInterval - player.reality.lastAutoEC, 0);
-        this.untilNextEC.setFrom(untilNextEC);
-        this.untilAllEC.setFrom(untilNextEC + (autoECInterval * (remainingCompletions - 1)));
+        this.untilNextEC.setFrom(new Decimal(untilNextEC));
+        this.untilAllEC.setFrom(new Decimal(untilNextEC + (autoECInterval * (remainingCompletions - 1))));
       }
       this.hasECR = Perk.studyECRequirement.isBought;
     },

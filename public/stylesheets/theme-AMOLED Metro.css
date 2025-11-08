@@ -36,6 +36,34 @@ input.t-amoled-metro {
   border: 0.1rem solid var(--color-bad);
 }
 
+.t-amoled-metro .c-es-amount {
+  color: var(--color-endgame);
+  text-shadow: 0 0 7px var(--color-endgame);
+}
+
+.t-amoled-metro .c-es-buy-button--unlocked {
+  color: var(--color-endgame);
+  background: black;
+  border: 0.1rem solid var(--color-endgame);
+}
+
+.t-amoled-metro .c-es-buy-button--unlocked:hover {
+  color: black;
+  background: var(--color-endgame);
+}
+
+.t-amoled-metro .c-es-buy-button--locked {
+  color: var(--color-bad);
+  background: black;
+  border: 0.1rem solid var(--color-bad);
+}
+
+.t-amoled-metro .c-es-buy-button--locked:hover {
+  color: black;
+  background: var(--color-bad);
+  border: 0.1rem solid var(--color-bad);
+}
+
 .t-amoled-metro .c-rm-amount__desc {
   color: #757575;
 }

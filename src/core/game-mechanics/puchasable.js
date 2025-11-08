@@ -13,10 +13,6 @@ export class PurchasableMechanicState extends GameMechanicState {
     return this.currency.gte(this.cost);
   }
 
-  get isAffordableNumerically() {
-    return this.currency >= this.cost;
-  }
-
   get isAvailableForPurchase() {
     return true;
   }

@@ -128,6 +128,7 @@ export function timeDimensionCommonMultiplier() {
         4)
         .clampMin(1));
   }
+  
   return mult;
 }
 
@@ -219,6 +220,7 @@ class TimeDimensionState extends DimensionState {
     mult = mult.pow(Ra.momentumValue);
     mult = mult.pow(ImaginaryUpgrade(11).effectOrDefault(1));
     mult = mult.powEffectOf(PelleRifts.paradox);
+    mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
 
     if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
       mult = dilatedValueOf(mult);
@@ -233,6 +235,8 @@ class TimeDimensionState extends DimensionState {
     mult = mult.powEffectsOf(
       BreakEternityUpgrade.infinityDimensionPow
     );
+
+    if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / Decimal.log10(TimeDimensions.OVERFLOW), 1 / TimeDimensions.compressionMagnitude).times(Decimal.log10(TimeDimensions.OVERFLOW)));
 
     return mult;
   }
@@ -320,6 +324,14 @@ export const TimeDimensions = {
    * @type {TimeDimensionState[]}
    */
   all: TimeDimension.index.compact(),
+  get OVERFLOW() {
+    return DC.E1E15.powEffectsOf(EndgameMastery(93));
+  },
+
+  get compressionMagnitude() {
+    const reduction = Effects.product(EndgameMastery(83));
+    return 10 * reduction;
+  },
 
   get scalingPast1e6000() {
     return 4;
@@ -327,7 +339,7 @@ export const TimeDimensions = {
 
   tick(diff) {
     for (let tier = 8; tier > 1; tier--) {
-      TimeDimension(tier).produceDimensions(TimeDimension(tier - 1), diff / 10);
+      TimeDimension(tier).produceDimensions(TimeDimension(tier - 1), new Decimal(diff).div(10));
     }
 
     if (EternityChallenge(7).isRunning) {
@@ -337,7 +349,7 @@ export const TimeDimensions = {
     }
 
     EternityChallenge(7).reward.applyEffect(production => {
-      InfinityDimension(8).amount = InfinityDimension(8).amount.plus(production.times(diff / 1000));
+      InfinityDimension(8).amount = InfinityDimension(8).amount.plus(production.times(diff).div(1000));
     });
   }
 };

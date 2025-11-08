@@ -20,6 +20,7 @@ export default {
       currentChars: 0,
       totalChars: 0,
       withinLimit: false,
+      speed: 0,
     };
   },
   computed: {
@@ -34,7 +35,7 @@ export default {
       return this.fullScreen ? "fa-compress-arrows-alt" : "fa-expand-arrows-alt";
     },
     intervalText() {
-      const speedupText = `Each Reality makes it run ${formatPercents(0.006, 1)} faster, up to a maximum of
+      const speedupText = `Each Reality makes it run ${formatPercents(this.speed, 1)} faster, up to a maximum of
         ${formatInt(1000)} per second.`;
       return this.interval === 1
         ? `The Automator is running at max speed (${formatInt(1000)} commands per real-time second).`
@@ -55,6 +56,7 @@ export default {
       this.currentChars = AutomatorData.singleScriptCharacters();
       this.totalChars = AutomatorData.totalScriptCharacters();
       this.withinLimit = AutomatorData.isWithinLimit();
+      this.speed = EndgameMastery(21).isBought ? 0.06 : 0.006;
     }
   }
 };

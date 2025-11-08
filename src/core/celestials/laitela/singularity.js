@@ -220,13 +220,13 @@ export const Singularity = {
   },
 
   get gainPerCapIncrease() {
-    return SingularityMilestone.improvedSingularityCap.effectOrDefault(11);
+    return SingularityMilestone.improvedSingularityCap.effectOrDefault(11) + Effects.sum(EndgameMastery(161));
   },
 
   get singularitiesGained() {
+    const entropicCondensing = EndgameMastery(131).isBought ? Math.pow(ImaginaryUpgrade(10).effectOrDefault(1) + 1, Math.max(ImaginaryUpgrade(10).effectOrDefault(1), 1)) : 1 + ImaginaryUpgrade(10).effectOrDefault(0);
     return Math.floor(Math.pow(this.gainPerCapIncrease, player.celestials.laitela.singularityCapIncreases) *
-      SingularityMilestone.singularityMult.effectOrDefault(1) *
-      (1 + ImaginaryUpgrade(10).effectOrDefault(0)));
+      SingularityMilestone.singularityMult.effectOrDefault(1) * entropicCondensing);
   },
 
   // Time (in seconds) to go from 0 DE to the condensing requirement
@@ -249,7 +249,7 @@ export const Singularity = {
   },
 
   increaseCap() {
-    if (player.celestials.laitela.singularityCapIncreases >= 50) return;
+    if (player.celestials.laitela.singularityCapIncreases >= 100) return;
     player.celestials.laitela.singularityCapIncreases++;
   },
 

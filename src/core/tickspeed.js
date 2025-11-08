@@ -32,6 +32,7 @@ export function getTickSpeedMultiplier() {
     Achievement(86),
     Achievement(178),
     Achievement(193),
+    EndgameMastery(52),
     InfinityChallenge(5).reward,
     PelleUpgrade.galaxyPower,
     PelleRifts.decay.milestones[1]
@@ -61,6 +62,7 @@ export function getTickSpeedMultiplier() {
   galaxies *= getAdjustedGlyphEffect("realitygalaxies");
   galaxies *= 1 + ImaginaryUpgrade(9).effectOrDefault(0);
   if (Pelle.isDoomed) galaxies *= 0.5;
+  if (Pelle.isDoomed && EndgameMilestone.remnantGalaxy.isReached) galaxies *= Math.pow(1 + Math.log10(Currency.remnants.value + 1), 0.5);
 
   galaxies *= Pelle.specialGlyphEffect.power;
   const perGalaxy = DC.D0_965;
@@ -259,7 +261,8 @@ export const FreeTickspeed = {
     // This undoes the function we're implicitly applying to costs (the "+ 1") is because we want
     // the cost of the next upgrade.
     const next = Decimal.exp(priceToCap + boughtToCost(purchases + 1) * logTickmult);
-    this.multToNext = Decimal.exp((boughtToCost(purchases + 1) - boughtToCost(purchases)) * logTickmult);
+    const reductions = Effects.product(EndgameMastery(103));
+    this.multToNext = Decimal.pow(Decimal.exp((boughtToCost(purchases + 1) - boughtToCost(purchases)) * logTickmult), reductions);
     return {
       newAmount: purchases + FreeTickspeed.softcap,
       nextShards: next,

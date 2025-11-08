@@ -73,15 +73,15 @@ export default {
       this.shardRarityBoost = Effarig.maxRarityBoost / 100;
       this.shardPower = Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.effectOrDefault(1);
       this.shardsGained = Effarig.shardsGained;
-      this.currentShardsRate = (this.shardsGained / Time.thisRealityRealTime.totalMinutes);
+      this.currentShardsRate = (this.shardsGained / Time.thisRealityRealTime.totalMinutes.toNumber());
       this.amplification = simulatedRealityCount(false);
       this.amplifiedShards = this.shardsGained * (1 + this.amplification);
-      this.amplifiedShardsRate = (this.amplifiedShards / Time.thisRealityRealTime.totalMinutes);
+      this.amplifiedShardsRate = (this.amplifiedShards / Time.thisRealityRealTime.totalMinutes.toNumber());
       this.quote = Effarig.quote;
       this.runUnlocked = EffarigUnlock.run.isUnlocked;
       this.isRunning = Effarig.isRunning;
       this.vIsFlipped = V.isFlipped;
-      this.relicShardRarityAlwaysMax = Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied;
+      this.relicShardRarityAlwaysMax = Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMastery(53).isBought;
     },
     startRun() {
       if (this.isDoomed) return;

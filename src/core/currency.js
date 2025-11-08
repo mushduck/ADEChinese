@@ -237,7 +237,13 @@ Currency.antimatter = new class extends DecimalCurrency {
   }
 
   get startingValue() {
-    if (Pelle.isDisabled()) return new Decimal(100);
+    if (Pelle.isDoomed) {
+      if (PelleAchievementUpgrade.achievement78.isBought) return Effects.max(10, Achievement(78)).toDecimal();
+      if (PelleAchievementUpgrade.achievement55.isBought) return Effects.max(10, Achievement(55)).toDecimal();
+      if (PelleAchievementUpgrade.achievement54.isBought) return Effects.max(10, Achievement(54)).toDecimal();
+      if (PelleAchievementUpgrade.achievement37.isBought) return Effects.max(10, Achievement(37)).toDecimal();
+      return Effects.max(10, Achievement(21)).toDecimal();
+    }
     return Effects.max(
       10,
       Perk.startAM,
@@ -286,7 +292,10 @@ Currency.infinityPoints = new class extends DecimalCurrency {
   }
 
   get startingValue() {
-    if (Pelle.isDisabled()) return new Decimal(0);
+    if (Pelle.isDisabled()) {
+      if (PelleAchievementUpgrade.achievement104.isBought) return Effects.max(0, Achievement(104)).toDecimal();
+      return new Decimal(0);
+    }
     return Effects.max(
       0,
       Perk.startIP1,
@@ -396,6 +405,13 @@ Currency.dilatedTime = new class extends DecimalCurrency {
 Currency.realities = new class extends NumberCurrency {
   get value() { return player.realities; }
   set value(value) { player.realities = value; }
+
+  get startingValue() {
+    return Effects.max(
+      0,
+      EndgameMastery(31)
+    );
+  }
 }();
 
 Currency.realityMachines = new class extends DecimalCurrency {
@@ -409,6 +425,13 @@ Currency.realityMachines = new class extends DecimalCurrency {
       player.records.bestReality.RM = addedThisReality;
       player.records.bestReality.RMSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
     }
+  }
+
+  get startingValue() {
+    return Effects.max(
+      0,
+      EndgameMastery(32)
+    ).toDecimal();
   }
 }();
 
@@ -472,13 +495,13 @@ Currency.replicanti = new class extends DecimalCurrency {
   set value(value) { player.replicanti.amount = value; }
 }();
 
-Currency.galaxyGeneratorGalaxies = new class extends NumberCurrency {
+Currency.galaxyGeneratorGalaxies = new class extends DecimalCurrency {
   get value() {
-    return player.galaxies + GalaxyGenerator.galaxies;
+    return new Decimal(player.galaxies + GalaxyGenerator.galaxies);
   }
 
   set value(value) {
-    const spent = player.galaxies + GalaxyGenerator.galaxies - value;
+    const spent = player.galaxies + GalaxyGenerator.galaxies - value.toNumber();
     player.celestials.pelle.galaxyGenerator.spentGalaxies += spent;
   }
 }();
@@ -496,10 +519,19 @@ Currency.celestialPoints = new class extends DecimalCurrency {
   }
 }();
 
+Currency.unnerfedCelestialMatter = new class extends DecimalCurrency {
+  get value() { return player.endgame.unnerfedCelestialMatter; }
+  set value(value) {
+    const newValue = new Decimal(value);
+    player.endgame.unnerfedCelestialMatter = newValue;
+  }
+}();
+
 Currency.celestialMatter = new class extends DecimalCurrency {
   get value() { return player.endgame.celestialMatter; }
   set value(value) {
-    player.endgame.celestialMatter = value;
+    const newValue = new Decimal(value);
+    player.endgame.celestialMatter = newValue;
   }
 }();
 
@@ -508,5 +540,30 @@ Currency.doomedParticles = new class extends DecimalCurrency {
   set value(value) {
     const newValue = Decimal.min(value, DC.E100);
     player.endgame.doomedParticles = newValue;
+  }
+}();
+
+Currency.endgameSkills = new class extends DecimalCurrency {
+  get value() { return player.endgameMasteries.skills; }
+  set value(value) {
+    player.endgameMasteries.skills = value;
+    player.endgameMasteries.maxSkills = value.plus(EndgameSkills.calculateEndgameMasteriesCost());
+  }
+
+  get max() { return player.endgameMasteries.maxSkills; }
+
+  add(amount) {
+    super.add(amount);
+    player.endgameMasteries.maxSkills = player.endgameMasteries.maxSkills.plus(amount);
+    player.endgameMasteries.maxSkills = player.endgameMasteries.skills.plus(EndgameSkills.calculateEndgameMasteriesCost());
+  }
+
+  reset() {
+    respecEndgameMasteries(true);
+    super.reset();
+    EndgameSkillPurchaseType.am.reset();
+    EndgameSkillPurchaseType.cp.reset();
+    EndgameSkillPurchaseType.dp.reset();
+    player.endgameMasteries.maxSkills = this.startingValue;
   }
 }();

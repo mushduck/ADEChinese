@@ -23,7 +23,7 @@ function addReplicantiGalaxies(newGalaxies) {
       ? PelleUpgrade.replicantiGalaxyEM40.canBeApplied
       : EternityMilestone.replicantiNoReset.isReached;
     if (!keepResources) {
-      player.dimensionBoosts = 0;
+      player.dimensionBoosts = DC.D0;
       softReset(0, true, true);
     }
   }
@@ -139,17 +139,30 @@ export function totalReplicantiSpeedMult(overCap) {
   totalMult = totalMult.times(PelleRifts.decay.effectValue);
   totalMult = totalMult.times(Pelle.specialGlyphEffect.replication);
   totalMult = totalMult.times(ShopPurchase.replicantiPurchases.currentMult);
-  if (Pelle.isDisabled("replicantiIntervalMult")) return totalMult;
+  if (Pelle.isDisabled("replicantiIntervalMult")) {
+    let pelleRep = DC.D1;
+    if (PelleAchievementUpgrade.achievement81.isBought) pelleRep = pelleRep.times(Effects.product(Achievement(81)));
+    if (PelleDestructionUpgrade.timestudy62.isBought) pelleRep = pelleRep.times(Effects.product(TimeStudy(62)));
+    if (PelleDestructionUpgrade.timestudy213.isBought) pelleRep = pelleRep.times(Effects.product(TimeStudy(213)));
+    if (PelleRealityUpgrade.replicativeAmplifier.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(2)));
+    if (PelleRealityUpgrade.cosmicallyDuplicate.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(6)));
+    if (PelleRealityUpgrade.replicativeRapidity.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(23)));
+    if (PelleDestructionUpgrade.timestudy132.isBought) pelleRep = pelleRep.times(3);
+    if (PelleAchievementUpgrade.achievement134.isBought && !overCap) pelleRep = pelleRep.times(2);
+    //Leave space open for upcoming Celestial Reward Enabling
+    totalMult = totalMult.times(pelleRep);
+    return totalMult;
+  }
 
   const preCelestialEffects = Effects.product(
     Achievement(81),
     TimeStudy(62),
     TimeStudy(213),
-    RealityUpgrade(2),
     RealityUpgrade(6),
     RealityUpgrade(23),
   );
   totalMult = totalMult.times(preCelestialEffects);
+  totalMult = totalMult.timesEffectOf(RealityUpgrade(2));
   if (TimeStudy(132).isBought) {
     totalMult = totalMult.times(Perk.studyPassive.isBought ? 3 : 1.5);
   }
@@ -189,7 +202,7 @@ export function replicantiLoop(diff) {
 
   // Figure out how many ticks to calculate for and roll over any leftover time to the next tick. The rollover
   // calculation is skipped if there's more than 100 replicanti ticks per game tick to reduce round-off problems.
-  let tickCount = Decimal.divide(diff + player.replicanti.timer, interval);
+  let tickCount = Decimal.divide(new Decimal(diff).plus(player.replicanti.timer), interval);
   if (tickCount.lt(100)) player.replicanti.timer = tickCount.minus(tickCount.floor()).times(interval).toNumber();
   else player.replicanti.timer = 0;
   tickCount = tickCount.floor();

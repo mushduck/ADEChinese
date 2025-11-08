@@ -48,7 +48,7 @@ export default {
     >
       <template v-if="isCapped">
         <br>
-        <span>(Capped at {{ quantify("Infinity Point", upgrade.config.costCap) }})</span>
+        <span>(Capped at {{ quantify("Infinity Point", upgrade.costCap) }})</span>
       </template>
     </InfinityUpgradeButton>
     <PrimaryButton

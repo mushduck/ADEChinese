@@ -13,7 +13,7 @@ export const eternityChallenges = [
     reward: {
       description: "Time Dimension multiplier based on time spent this Eternity",
       effect: completions =>
-        Decimal.pow(Math.max(player.records.thisEternity.time / 10, 0.9), 0.3 + (completions * 0.05)),
+        Decimal.pow(Decimal.max(player.records.thisEternity.time.div(10), 0.9), 0.3 + (completions * 0.05)),
       formatEffect: value => formatX(value, 2, 1)
     },
     // These will get notation-formatted and scrambled between for the final goal
@@ -197,7 +197,7 @@ export const eternityChallenges = [
     pelleGoal: DC.E208000,
     goalIncrease: DC.E10000,
     restriction: completions => Math.max(10 - 2 * completions, 1) / 10,
-    checkRestriction: restriction => Time.thisEternity.totalSeconds < restriction,
+    checkRestriction: restriction => Time.thisEternity.totalSeconds.lt(restriction),
     formatRestriction: restriction => `in ${quantify("in-game second", restriction, 0, 1)} or less.`,
     failedRestriction: "(Too slow for more)",
     reward: {

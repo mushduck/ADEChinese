@@ -93,6 +93,7 @@ export const Pelle = {
     disChargeAll();
     clearCelestialRuns();
     CelestialDimensions.resetAmount();
+    player.requirementChecks.endgame.noGlyphsDoomed = true;
 
     // Force-enable the group toggle for AD autobuyers to be active; whether or not they can actually tick
     // is still handled through if the autobuyers are unlocked at all. This fixes an odd edge case where the player
@@ -187,16 +188,68 @@ export const Pelle = {
   },
 
   get disabledAchievements() {
-    return [164, 156, 143, 142, 141, 137, 134, 133, 132, 131, 125, 118, 117, 116, 113, 111, 104, 103, 95, 93, 92,
-      91, 87, 85, 81, 78, 76, 74, 65, 55, 54, 37];
+    let remainingAchs = [];
+    if (!PelleAchievementUpgrade.achievement37.isBought) remainingAchs.push(37);
+    if (!PelleAchievementUpgrade.achievement54.isBought) remainingAchs.push(54);
+    if (!PelleAchievementUpgrade.achievement55.isBought) remainingAchs.push(55);
+    if (!PelleAchievementUpgrade.achievement65.isBought) remainingAchs.push(65);
+    if (!PelleAchievementUpgrade.achievement74.isBought) remainingAchs.push(74);
+    if (!PelleAchievementUpgrade.achievement76.isBought) remainingAchs.push(76);
+    if (!PelleAchievementUpgrade.achievement78.isBought) remainingAchs.push(78);
+    if (!PelleAchievementUpgrade.achievement81.isBought) remainingAchs.push(81);
+    if (!PelleAchievementUpgrade.achievement85.isBought) remainingAchs.push(85);
+    if (!PelleAchievementUpgrade.achievement87.isBought) remainingAchs.push(87);
+    if (!PelleAchievementUpgrade.achievement91.isBought) remainingAchs.push(91);
+    if (!PelleAchievementUpgrade.achievement92.isBought) remainingAchs.push(92);
+    if (!PelleAchievementUpgrade.achievement93.isBought) remainingAchs.push(93);
+    if (!PelleAchievementUpgrade.achievement95.isBought) remainingAchs.push(95);
+    if (!PelleAchievementUpgrade.achievement102.isBought) remainingAchs.push(102);
+    if (!PelleAchievementUpgrade.achievement103.isBought) remainingAchs.push(103);
+    if (!PelleAchievementUpgrade.achievement104.isBought) remainingAchs.push(104);
+    if (!PelleAchievementUpgrade.achievement111.isBought) remainingAchs.push(111);
+    if (!PelleAchievementUpgrade.achievement113.isBought) remainingAchs.push(113);
+    if (!PelleAchievementUpgrade.achievement116.isBought) remainingAchs.push(116);
+    if (!PelleAchievementUpgrade.achievement117.isBought) remainingAchs.push(117);
+    if (!PelleAchievementUpgrade.achievement118.isBought) remainingAchs.push(118);
+    if (!PelleAchievementUpgrade.achievement125.isBought) remainingAchs.push(125);
+    if (!PelleAchievementUpgrade.achievement131.isBought) remainingAchs.push(131);
+    if (!PelleAchievementUpgrade.achievement132.isBought) remainingAchs.push(132);
+    if (!PelleAchievementUpgrade.achievement133.isBought) remainingAchs.push(133);
+    if (!PelleAchievementUpgrade.achievement134.isBought) remainingAchs.push(134);
+    if (!PelleAchievementUpgrade.achievement137.isBought) remainingAchs.push(137);
+    if (!PelleAchievementUpgrade.achievement141.isBought) remainingAchs.push(141);
+    if (!PelleAchievementUpgrade.achievement142.isBought) remainingAchs.push(142);
+    if (!PelleAchievementUpgrade.achievement143.isBought) remainingAchs.push(143);
+    if (!PelleAchievementUpgrade.achievement156.isBought) remainingAchs.push(156);
+    if (!PelleAchievementUpgrade.achievement164.isBought) remainingAchs.push(164);
+    return remainingAchs;
   },
 
   get uselessInfinityUpgrades() {
-    return ["passiveGen", "ipMult", "infinitiedGeneration"];
+    let remainingInfUpgs = [];
+    if (!PelleDestructionUpgrade.passiveIPGen.isBought) remainingInfUpgs.push("passiveGen");
+    if (!PelleDestructionUpgrade.passiveInfGen.isBought) remainingInfUpgs.push("infinitiedGeneration");
+    if (!PelleDestructionUpgrade.x2IPUpgrade.isBought) remainingInfUpgs.push("ipMult");
+    return remainingInfUpgs;
   },
 
   get uselessTimeStudies() {
-    return [32, 33, 41, 51, 61, 62, 121, 122, 123, 141, 142, 143, 192, 213];
+    let remainingTSs = [];
+    if (!PelleDestructionUpgrade.timestudy32.isBought) remainingTSs.push(32);
+    if (!PelleDestructionUpgrade.timestudy33.isBought) remainingTSs.push(33);
+    if (!PelleDestructionUpgrade.timestudy41.isBought) remainingTSs.push(41);
+    if (!PelleDestructionUpgrade.timestudy51.isBought) remainingTSs.push(51);
+    if (!PelleDestructionUpgrade.timestudy61.isBought) remainingTSs.push(61);
+    if (!PelleDestructionUpgrade.timestudy62.isBought) remainingTSs.push(62);
+    if (!PelleDestructionUpgrade.timestudy121.isBought) remainingTSs.push(121);
+    if (!PelleDestructionUpgrade.timestudy122.isBought) remainingTSs.push(122);
+    if (!PelleDestructionUpgrade.timestudy123.isBought) remainingTSs.push(123);
+    if (!PelleDestructionUpgrade.timestudy141.isBought) remainingTSs.push(141);
+    if (!PelleDestructionUpgrade.timestudy142.isBought) remainingTSs.push(142);
+    if (!PelleDestructionUpgrade.timestudy143.isBought) remainingTSs.push(143);
+    if (!PelleDestructionUpgrade.timestudy192.isBought) remainingTSs.push(192);
+    if (!PelleDestructionUpgrade.timestudy213.isBought) remainingTSs.push(213);
+    return remainingTSs;
   },
 
   get disabledRUPGs() {
@@ -246,7 +299,7 @@ export const Pelle = {
         return `Eternity Point gain ${formatX(Currency.eternityPoints.value.plus(1).pow(0.3), 2)}
           (based on current EP)`;
       case "replication":
-        return `Replication speed ${formatX(10 ** 53 ** (PelleRifts.vacuum.percentage), 2)} \
+        return `Replication speed ${formatX(Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300), 2)} \
         (based on ${wordShift.wordCycle(PelleRifts.vacuum.name)})`;
       case "dilation":
         return `Dilated Time gain ${formatX(Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1), 2)}
@@ -273,7 +326,7 @@ export const Pelle = {
   },
 
   resetResourcesForDilation() {
-    this.cel.records.totalAntimatter = new Decimal("1e180000");
+    this.cel.records.totalEndgameAntimatter = new Decimal("1e180000");
     this.cel.records.totalInfinityPoints = new Decimal("1e60000");
     Currency.eternityPoints.reset();
     // Oddly specific number? Yes, it's roughly the amount of EP you have
@@ -285,7 +338,7 @@ export const Pelle = {
   },
 
   get remnantsGain() {
-    let am = this.cel.records.totalAntimatter.plus(1).log10();
+    let am = this.cel.records.totalEndgameAntimatter.plus(1).log10();
     let ip = this.cel.records.totalInfinityPoints.plus(1).log10();
     let ep = this.cel.records.totalEternityPoints.plus(1).log10();
 
@@ -295,10 +348,22 @@ export const Pelle = {
       ep *= 5;
     }
 
-    const gain = (
+    if (EndgameMilestone.remnantFormula.isReached) {
+      am *= 10000;
+      ip *= 500;
+      ep *= 25;
+    }
+
+    const gainOld = (
       (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.7
     ) ** 8;
 
+    const gainNew = (
+      (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.6
+    ) ** 8.2;
+
+    const gain = EndgameMilestone.remnantFormula.isReached ? gainNew : gainOld;
+    
     return gain < 1 ? gain : Math.floor(gain - this.cel.remnants);
   },
 
@@ -316,6 +381,8 @@ export const Pelle = {
 
   // Calculations assume this is in units of proportion per second (eg. 0.03 is 3% drain per second)
   get riftDrainPercent() {
+    const extraDrain = Math.min(0.45, player.endgames * 0.05);
+    if (EndgameMilestone.riftFill.isReached) return 0.05 + extraDrain;
     return 0.05;
   },
 
@@ -397,6 +464,9 @@ EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
 });
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
   if (player.celestials.pelle.records.totalEndgameAntimatter.gte(DC.E9E15) && player.endgames >= 1) Pelle.quotes.end2.show();
+});
+EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
+  if (Glyphs.activeWithoutCompanion.length > 0) player.requirementChecks.endgame.noGlyphsDoomed = false;
 });
 
 export class RebuyablePelleUpgradeState extends RebuyableMechanicState {

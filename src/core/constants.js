@@ -47,9 +47,24 @@ export const DC = deepFreeze({
   D3:                   new Decimal("3"),
   D4:                   new Decimal("4"),
   D5:                   new Decimal("5"),
+  D6:                   new Decimal("6"),
   D6_66:                new Decimal("6.66"),
+  D7:                   new Decimal("7"),
+  D8:                   new Decimal("8"),
+  D9:                   new Decimal("9"),
+  D11:                  new Decimal("11"),
+  D12:                  new Decimal("12"),
+  D13:                  new Decimal("13"),
+  D14:                  new Decimal("14"),
   D15:                  new Decimal("15"),
   D16:                  new Decimal("16"),
+  D17:                  new Decimal("17"),
+  D18:                  new Decimal("18"),
+  D19:                  new Decimal("19"),
+  D20:                  new Decimal("20"),
+  D60:                  new Decimal("60"),
+  D80:                  new Decimal("80"),
+  D99:                  new Decimal("99"),
   D11111:               new Decimal("11111"),
   D3E4:                 new Decimal("30000"),
   D2E5:                 new Decimal("2e5"),
@@ -197,6 +212,7 @@ export const DC = deepFreeze({
 
   //Hardcoded post-e9e15 values to be reformatted later
   E9E115:               new Decimal("1e90000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
+  E1E300:               new Decimal("1e1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
 });
 
 window.AUTOBUYER_MODE = {
@@ -426,6 +442,30 @@ window.TS_REQUIREMENT_TYPE = {
   AT_LEAST_ONE: 0,
   ALL: 1,
   DIMENSION_PATH: 2,
+};
+
+window.ENDGAME_MASTERY_PATH = {
+  NONE: 0,
+  ANTIMATTER_DIM_COMPRESSION: 1,
+  INFINITY_DIM_COMPRESSION: 2,
+  TIME_DIM_COMPRESSION: 3,
+  CELESTIAL_DIM_COMPRESSION: 4,
+  INFINITY_POINTS: 5,
+  ETERNITY_POINTS: 6,
+  REALITY_MACHINES: 7,
+  IMAGINARY_MACHINES: 8
+};
+
+window.ENDGAME_MASTERY_TYPE = {
+  NORMAL: 0,
+  PERMANENT: 1
+};
+
+window.EM_REQUIREMENT_TYPE = {
+  AT_LEAST_ONE: 0,
+  ALL: 1,
+  COMPRESSION_PATH: 2,
+  CURRENCY_PATH: 3,
 };
 
 window.ALCHEMY_RESOURCE = {

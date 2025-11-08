@@ -14,6 +14,7 @@ export default {
       eternityUnlocked: false,
       realityUnlocked: false,
       alchemyUnlocked: false,
+      endgameUnlocked: false,
 
       showPercentage: false,
       achievements: false,
@@ -24,6 +25,7 @@ export default {
       realityUpgrades: false,
       perks: false,
       alchemy: false,
+      masteries: false,
     };
   },
   computed: {
@@ -59,6 +61,9 @@ export default {
     alchemy(newValue) {
       player.options.showHintText.alchemy = newValue;
     },
+    masteries(newValue) {
+      player.options.showHintText.masteries = newValue;
+    },
   },
   methods: {
     update() {
@@ -67,6 +72,7 @@ export default {
       this.eternityUnlocked = this.fullCompletion || progress.isEternityUnlocked;
       this.realityUnlocked = this.fullCompletion || progress.isRealityUnlocked;
       this.alchemyUnlocked = this.fullCompletion || Ra.unlocks.effarigUnlock.canBeApplied;
+      this.endgameUnlocked = this.fullCompletion || progress.isEndgameUnlocked;
 
       const options = player.options.showHintText;
       this.showPercentage = options.showPercentage;
@@ -130,6 +136,11 @@ export default {
         v-if="alchemyUnlocked"
         v-model="alchemy"
         text="Alchemy resource amounts:"
+      />
+      <ModalOptionsToggleButton
+        v-if="endgameUnlocked"
+        v-model="masteries"
+        text="Endgame Mastery IDs:"
       />
     </div>
     Note: All types of additional info above will always display when holding shift.

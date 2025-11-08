@@ -65,6 +65,7 @@ export * from "./dimensions/time-dimension";
 export * from "./dimensions/celestial-dimension";
 
 export * from "./time-studies";
+export * from "./endgame-masteries";
 
 export * from "./dimboost";
 export * from "./sacrifice";
@@ -78,6 +79,7 @@ export * from "./eternity-challenge";
 export * from "./reality";
 export * from "./replicanti";
 export * from "./time-theorems";
+export * from "./endgame-skills";
 export * from "./reality-upgrades";
 export * from "./imaginary-upgrades";
 export * from "./perks";

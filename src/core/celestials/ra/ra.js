@@ -290,7 +290,7 @@ export const Ra = {
       ? -c / b
       : (Math.sqrt(Math.pow(b, 2) - 4 * a * c) - b) / (2 * a);
     if (Number.isFinite(estimate)) {
-      return `in ${TimeSpan.fromSeconds(estimate).toStringShort()}`;
+      return `in ${TimeSpan.fromSeconds(new Decimal(estimate)).toStringShort()}`;
     }
     return "";
   },
@@ -335,7 +335,7 @@ export const Ra = {
     return Math.min(10, Math.max(0, Currency.timeTheorems.value.pLog10() - 350) / 50);
   },
   get isUnlocked() {
-    return V.spaceTheorems >= 36;
+    return V.spaceTheorems >= 36 || EndgameMilestone.celestialEarlyUnlock.isReached;
   },
   get isRunning() {
     return player.celestials.ra.run;
@@ -376,7 +376,7 @@ export const Ra = {
     return 25000;
   },
   get momentumValue() {
-    const hoursFromUnlock = TimeSpan.fromMilliseconds(player.celestials.ra.momentumTime).totalHours;
+    const hoursFromUnlock = TimeSpan.fromMilliseconds(new Decimal(player.celestials.ra.momentumTime)).totalHours.toNumber();
     return Math.clampMax(1 + 0.005 * hoursFromUnlock, AlchemyResource.momentum.effectValue);
   },
   quotes: Quotes.ra,

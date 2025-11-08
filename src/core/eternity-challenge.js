@@ -209,7 +209,7 @@ export class EternityChallengeState extends GameMechanicState {
     if (Player.canEternity) eternity(false, auto, { enteringEC: true });
     player.challenge.eternity.current = this.id;
     if (this.id === 12) {
-      if (enteringGamespeed < 0.001) SecretAchievement(42).unlock();
+      if (enteringGamespeed.lt(0.001)) SecretAchievement(42).unlock();
       player.requirementChecks.reality.slowestBH = 1;
     }
     if (Enslaved.isRunning) {
@@ -335,7 +335,7 @@ export const EternityChallenges = {
         player.reality.lastAutoEC = Math.clampMax(player.reality.lastAutoEC, this.interval);
         return;
       }
-      if (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied) {
+      if (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought) {
         let next = this.nextChallenge;
         while (next !== undefined) {
           while (!next.isFullyCompleted) {
@@ -361,15 +361,16 @@ export const EternityChallenges = {
     },
 
     get interval() {
-      if (!Perk.autocompleteEC1.canBeApplied) return Infinity;
+      if (!Perk.autocompleteEC1.canBeApplied && !EndgameMastery(22).isBought) return Infinity;
       let minutes = Effects.min(
         Number.MAX_VALUE,
         Perk.autocompleteEC1,
         Perk.autocompleteEC2,
         Perk.autocompleteEC3
       );
+      minutes /= Effects.sum(EndgameMastery(22));
       minutes /= VUnlocks.fastAutoEC.effectOrDefault(1);
-      return TimeSpan.fromMinutes(minutes).totalMilliseconds;
+      return TimeSpan.fromMinutes(new Decimal(minutes)).totalMilliseconds.toNumber();
     }
   }
 };

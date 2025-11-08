@@ -86,11 +86,11 @@ export default {
       this.isCapped = this.upgrade.isCapped;
       this.purchases = player.celestials.pelle.rebuyables[this.upgrade.config.id];
       this.currentTimeEstimate = TimeSpan
-        .fromSeconds(this.secondsUntilCost(this.galaxyGenerator ? GalaxyGenerator.gainPerSecond
-          : Pelle.realityShardGainPerSecond).toNumber())
+        .fromSeconds(this.secondsUntilCost(this.galaxyGenerator ? new Decimal(GalaxyGenerator.gainPerSecond)
+          : Pelle.realityShardGainPerSecond))
         .toTimeEstimate();
       this.projectedTimeEstimate = TimeSpan
-        .fromSeconds(this.secondsUntilCost(Pelle.nextRealityShardGain).toNumber())
+        .fromSeconds(this.secondsUntilCost(Pelle.nextRealityShardGain))
         .toTimeEstimate();
       this.hasRemnants = Pelle.cel.remnants > 0;
       this.galaxyCap = GalaxyGenerator.generationCap;

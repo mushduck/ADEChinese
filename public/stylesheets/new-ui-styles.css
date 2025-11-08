@@ -756,6 +756,10 @@ body.t-s12 {
   color: var(--color-celestials);
 }
 
+.c-celestial-dim-description__accent-unstable {
+  color: var(--color-pelle--base);
+}
+
 .c-celestial-dim-row:nth-child(even) {
   background: rgba(81, 81, 236, 30%);
 }

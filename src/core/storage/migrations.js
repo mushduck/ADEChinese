@@ -1009,7 +1009,7 @@ export const migrations = {
   setTutorialState(player) {
     if (player.infinities.gt(0) || player.eternities.gt(0) || player.realities > 0 || player.galaxies > 0) {
       player.tutorialState = 4;
-    } else if (player.dimensionBoosts > 0) player.tutorialState = TUTORIAL_STATE.GALAXY;
+    } else if (player.dimensionBoosts.gt(0)) player.tutorialState = TUTORIAL_STATE.GALAXY;
   },
 
   migrateLastTenRuns(player) {

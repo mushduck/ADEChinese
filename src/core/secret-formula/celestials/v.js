@@ -19,7 +19,7 @@ export const v = {
       resource: () => Currency.realities.value,
       requirement: 1250,
       format: x => formatInt(x),
-      progress: () => Currency.realities.value / 1250,
+      progress: () => Currency.realities.value / EndgameMastery(51).effectOrDefault(1250),
     },
     eternities: {
       id: 2,
@@ -135,7 +135,7 @@ export const v = {
       description: value => `Get ${formatInt(value)} Dimension Boosts while Dilated and inside Eternity Challenge 5.`,
       values: [51, 52, 53, 54, 55, 56],
       condition: () => V.isRunning && player.dilation.active && EternityChallenge(5).isRunning,
-      currentValue: () => DimBoost.purchasedBoosts,
+      currentValue: () => DimBoost.purchasedBoosts.toNumber(),
       formatRecord: x => formatInt(x),
       shardReduction: tiers => Math.floor(tiers),
       maxShardReduction: () => 5,
@@ -219,9 +219,9 @@ export const v = {
       description: () => `Have ${formatInt(10)} V-Achievements`,
       effect: () => Achievements.power,
       // Base rate is 60 ECs at 20 minutes each
-      format: x => (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied
+      format: x => (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought
         ? "Instant (Ra upgrade)"
-        : `${TimeSpan.fromMinutes(60 * 20 / x).toStringShort()} for full completion`),
+        : `${TimeSpan.fromMinutes(new Decimal(60 * 20 / x)).toStringShort()} for full completion`),
       requirement: () => V.spaceTheorems >= 10
     },
     autoAutoClean: {

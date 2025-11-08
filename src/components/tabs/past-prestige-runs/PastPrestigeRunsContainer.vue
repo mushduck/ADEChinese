@@ -159,10 +159,10 @@ export default {
       return cells;
     },
     gameTime(run) {
-      return timeDisplayShort(run[0]);
+      return timeDisplayShort(new Decimal(run[0]));
     },
     realTime(run) {
-      return timeDisplayShort(run[1]);
+      return timeDisplayShort(new Decimal(run[1]));
     },
     prestigeCurrencyGain(run) {
       if (this.hasIM && this.layer.name === "Reality") return `${format(run[7], 2)} iM`;

@@ -28,6 +28,7 @@ export default {
       hasReality: false,
       logTotalSacrifice: 0,
       pelleChaosEffect: {},
+      maxSpecialGlyphs: 1,
     };
   },
   computed: {
@@ -41,8 +42,8 @@ export default {
         `<span style="color: ${GlyphAppearanceHandler.getBorderColor("effarig")};">Effarig</span>`);
       if (this.hasReality) uniqueGlyphs.push(
         `<span style="animation: a-reality-glyph-description-cycle 10s infinite;">Reality</span>`);
-      return `You cannot have more than one ${uniqueGlyphs.join(" or ")}
-        Glyph equipped${uniqueGlyphs.length > 1 ? " each." : "."}`;
+      return `You cannot have more than ${formatInt(this.maxSpecialGlyphs)} ${uniqueGlyphs.join(" or ")}
+        ${this.maxSpecialGlyphs !== 1 ? "Glyphs" : "Glyph"} equipped${uniqueGlyphs.length > 1 ? " each." : "."}`;
     },
     noEffects() {
       return !this.effects.length;
@@ -81,6 +82,7 @@ export default {
       this.logTotalSacrifice = GameCache.logTotalGlyphSacrifice.value;
 
       this.pelleChaosEffect = Pelle.specialGlyphEffect;
+      this.maxSpecialGlyphs = Achievement(194).isUnlocked ? 2 : 1;
     },
     glyphsChanged() {
       this.effects = getActiveGlyphEffects();

@@ -5,12 +5,12 @@ export const glyphSacrifice = {
       if (Pelle.isDisabled("glyphsac")) return 0;
       const sac = player.reality.glyphs.sac.power + (added ?? 0);
       const capped = Math.clampMax(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
-      const base = Math.log10(capped + 1) / Math.log10(GlyphSacrificeHandler.maxSacrificeForEffects);
+      const base = Math.log10(capped + 1) / 100;
       return Math.floor(750 * Math.pow(base, 1.2));
     },
     description: amount => {
       const sacCap = GlyphSacrificeHandler.maxSacrificeForEffects;
-      const nextDistantGalaxy = Math.pow(10, Math.pow((amount + 1) / 750, 1 / 1.2) * Math.log10(sacCap)) - 1;
+      const nextDistantGalaxy = Math.pow(10, Math.pow((amount + 1) / 750, 1 / 1.2) * 100) - 1;
       const nextGalaxyText = amount < 750
         ? ` (next at ${format(nextDistantGalaxy, 2, 2)})`
         : "";
@@ -46,12 +46,12 @@ export const glyphSacrifice = {
       if (Pelle.isDisabled("glyphsac")) return 0;
       const sac = player.reality.glyphs.sac.replication + (added ?? 0);
       const capped = Math.clampMax(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
-      const base = Math.log10(capped + 1) / Math.log10(GlyphSacrificeHandler.maxSacrificeForEffects);
+      const base = Math.log10(capped + 1) / 100;
       return Math.floor(1500 * Math.pow(base, 1.2));
     },
     description: amount => {
       const sacCap = GlyphSacrificeHandler.maxSacrificeForEffects;
-      const nextDistantGalaxy = Math.pow(10, Math.pow((amount + 1) / 1500, 1 / 1.2) * Math.log10(sacCap)) - 1;
+      const nextDistantGalaxy = Math.pow(10, Math.pow((amount + 1) / 1500, 1 / 1.2) * 100) - 1;
       const nextGalaxyText = amount < 1500
         ? ` (next at ${format(nextDistantGalaxy, 2, 2)})`
         : "";
@@ -65,8 +65,7 @@ export const glyphSacrifice = {
       if (Pelle.isDisabled("glyphsac")) return 1;
       const sac = player.reality.glyphs.sac.dilation + (added ?? 0);
       const capped = Math.clampMax(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
-      const exponent = 0.32 * Math.pow(Math.log10(capped + 1) /
-        Math.log10(GlyphSacrificeHandler.maxSacrificeForEffects), 0.1);
+      const exponent = 0.32 * Math.pow(Math.log10(capped + 1) / 100, 0.1);
       return Math.pow(Math.clampMin(capped, 1), exponent);
     },
     description: amount => `Multiply Tachyon Particle gain by ${formatX(amount, 2, 2)}`,

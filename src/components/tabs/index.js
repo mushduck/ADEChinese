@@ -11,10 +11,13 @@ import CelestialNavigationTab from "./celestial-navigation/CelestialNavigationTa
 import ChallengeRecordsTab from "./challenge-records/ChallengeRecordsTab";
 import EffarigTab from "./celestial-effarig/EffarigTab";
 import EndgameTab from "./endgame/EndgameTab";
+import EndgameMasteriesTab from "./endgame-masteries/EndgameMasteriesTab";
+import EndgameMilestonesTab from "./endgame-milestones/EndgameMilestonesTab";
 import EnslavedTab from "./celestial-enslaved/EnslavedTab";
 import EternityChallengesTab from "./eternity-challenges/EternityChallengesTab";
 import EternityMilestonesTab from "./eternity-milestones/EternityMilestonesTab";
 import EternityUpgradesTab from "./eternity-upgrades/EternityUpgradesTab";
+import ExpansionPacksTab from "./endgame/ExpansionPacksTab";
 import GlyphSetRecordsTab from "./glyph-set-records/GlyphSetRecordsTab";
 import GlyphsTab from "./glyphs/GlyphsTab";
 import ImaginaryUpgradesTab from "./imaginary-upgrades/ImaginaryUpgradesTab";
@@ -91,6 +94,9 @@ const TabComponents = {
   EndgameTab,
   BreakEternityTab,
   PelleDestructionTab,
+  ExpansionPacksTab,
+  EndgameMasteriesTab,
+  EndgameMilestonesTab,
   ShopTab,
   MultiplierBreakdownTab
 };

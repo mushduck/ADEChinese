@@ -23,7 +23,7 @@ export const ShopPurchaseData = {
   // We also allow for respecs if it's been at least 3 days since the last one
   get timeUntilRespec() {
     const msSinceLast = Date.now() - new Date(ShopPurchaseData.lastRespec).getTime();
-    return TimeSpan.fromMilliseconds(3 * 86400 * 1000 - msSinceLast);
+    return TimeSpan.fromMilliseconds(new Decimal(3 * 86400 * 1000 - msSinceLast));
   },
 
   get canRespec() {

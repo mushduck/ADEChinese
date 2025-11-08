@@ -14,11 +14,31 @@ export default {
     };
   },
   methods: {
+    getNormalChallengeTimes() {
+      const times = [];
+      let BBV = new Decimal();
+      for (let i = 0; i < 11; i++) {
+        BBV = new Decimal();
+        BBV.copyFrom(player.challenge.normal.bestTimes[i]);
+        times.push(BBV);
+      }
+      return times;
+    },
+    getInfinityChallengeTimes() {
+      const timesi = [];
+      let BBVi = new Decimal();
+      for (let i = 0; i < 8; i++) {
+        BBVi = new Decimal();
+        BBVi.copyFrom(player.challenge.infinity.bestTimes[i]);
+        timesi.push(BBVi);
+      }
+      return timesi;
+    },
     update() {
       this.infinityChallengesUnlocked = PlayerProgress.infinityChallengeCompleted() ||
         PlayerProgress.eternityUnlocked();
-      this.normalChallenges = player.challenge.normal.bestTimes.slice(0);
-      this.infinityChallenges = player.challenge.infinity.bestTimes.slice(0);
+      this.normalChallenges = this.getNormalChallengeTimes();
+      this.infinityChallenges = this.getInfinityChallengeTimes();
     }
   }
 };

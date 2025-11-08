@@ -65,10 +65,16 @@ export const Glyphs = {
   },
   get activeSlotCount() {
     if (Pelle.isDoomed) {
-      if (PelleRifts.vacuum.milestones[0].canBeApplied) return 1;
-      return 0;
+      let PelleGlyphs = 0;
+      if (PelleRifts.vacuum.milestones[0].canBeApplied) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot1.isBought) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot2.isBought) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot3.isBought) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleDestructionUpgrade.glyphSlot4.isBought) PelleGlyphs = PelleGlyphs + 1;
+      PelleGlyphs += Effects.sum(EndgameMastery(121));
+      return PelleGlyphs;
     }
-    return 3 + Effects.sum(RealityUpgrade(9), RealityUpgrade(24));
+    return 3 + Effects.sum(RealityUpgrade(9), RealityUpgrade(24), BreakEternityUpgrade.glyphSlotImprovement);
   },
   get protectedSlots() {
     return 10 * player.reality.glyphs.protectedRows;
@@ -296,9 +302,17 @@ export const Glyphs = {
     if (["effarig", "reality"].includes(glyph.type)) {
       sameSpecialTypeIndex = this.active.findIndex(x => x && x.type === glyph.type);
     }
+    let maxSpecialGlyph = 1;
+    if (Achievement(194).isUnlocked) {
+      maxSpecialGlyph = 2;
+    }
+    let specialGlyphEquipped = 0;
+    if (["effarig", "reality"].includes(glyph.type)) {
+      specialGlyphEquipped = player.reality.glyphs.active.filter(g => g.type === glyph.type).length;
+    }
     if (this.active[targetSlot] === null) {
-      if (sameSpecialTypeIndex >= 0) {
-        Modal.message.show(`You may only have one ${glyph.type.capitalize()} Glyph equipped!`,
+      if (sameSpecialTypeIndex >= 0 && specialGlyphEquipped >= maxSpecialGlyph) {
+        Modal.message.show(`You may only have ${formatInt(maxSpecialGlyph)} ${glyph.type.capitalize()} Glyph equipped!`,
           { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
         return;
       }
@@ -314,8 +328,8 @@ export const Glyphs = {
       this.validate();
     } else {
       // We can only replace effarig/reality glyph
-      if (sameSpecialTypeIndex >= 0 && sameSpecialTypeIndex !== targetSlot) {
-        Modal.message.show(`You may only have one ${glyph.type.capitalize()} Glyph equipped!`,
+      if (sameSpecialTypeIndex >= 0 && sameSpecialTypeIndex !== targetSlot && specialGlyphEquipped >= maxSpecialGlyph) {
+        Modal.message.show(`You may only have ${formatInt(maxSpecialGlyph)} ${glyph.type.capitalize()} Glyph equipped!`,
           { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
         return;
       }
@@ -550,7 +564,11 @@ export const Glyphs = {
         g.id !== glyph.id &&
         (g.level >= glyph.level || g.strength >= glyph.strength) &&
         ((g.effects & glyph.effects) === glyph.effects));
-    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? 1 : 5;
+    let maxSpecialGlyph = 1;
+    if (Achievement(194).isUnlocked) {
+      maxSpecialGlyph = 2;
+    }
+    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? maxSpecialGlyph : 5;
     compareThreshold = Math.clampMax(compareThreshold, threshold);
     if (toCompare.length < compareThreshold) return false;
     const comparedEffects = getGlyphEffectsFromBitmask(glyph.effects).filter(x => x.id.startsWith(glyph.type));
@@ -656,6 +674,9 @@ export const Glyphs = {
   get extremeInstabilityThreshold() {
     return 75000;
   },
+  get levelCap() {
+    return Number.MAX_VALUE;
+  },
   clearUndo() {
     player.reality.glyphs.undo = [];
   },
@@ -706,7 +727,7 @@ export const Glyphs = {
     player.records.thisEternity.realTime = undoData.thisEternityRealTime;
     player.records.thisReality.time = undoData.thisRealityTime;
     player.records.thisReality.realTime = undoData.thisRealityRealTime;
-    player.celestials.enslaved.stored = undoData.storedTime || 0;
+    player.celestials.enslaved.stored = undoData.storedTime || new Decimal(0);
     if (undoData.dilationStudies) {
       player.dilation.studies = Array.fromBitmask(undoData.dilationStudies);
       player.dilation.upgrades = new Set(Array.fromBitmask(undoData.dilationUpgrades));

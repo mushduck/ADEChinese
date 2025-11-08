@@ -35,6 +35,25 @@ body.t-s1 {
   border-color: black;
 }
 
+.t-s1 .c-es-buy-button--unlocked {
+  color: #639565;
+  border-color: #639565;
+}
+
+.t-s1 .c-es-buy-button--unlocked:hover {
+  color: #232028;
+  background: #639565;
+}
+
+.t-s1 .c-es-buy-button--locked {
+  border-color: #639565;
+}
+
+.t-s1 .c-es-buy-button--locked:hover {
+  background: #d72621;
+  border-color: black;
+}
+
 #snow {
   display: block !important;
   width: 100%;
