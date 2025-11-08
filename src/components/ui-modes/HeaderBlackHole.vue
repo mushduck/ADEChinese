@@ -133,7 +133,10 @@ export default {
       />
     </span>
   </span>
-  <span v-if="isEndgameUnlocked">
+  <span
+    v-if="isEndgameUnlocked"
+    class="c-black-hole-header"
+  >
     <PrimaryButton
       class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
       @click="toggleCelestialMatterMultiplier"
