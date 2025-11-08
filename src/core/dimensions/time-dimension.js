@@ -236,7 +236,7 @@ class TimeDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
-    if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / 1e15, 1 / TimeDimensions.compressionMagnitude).times(1e15));
+    if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / Decimal.log10(TimeDimensions.OVERFLOW), 1 / TimeDimensions.compressionMagnitude).times(Decimal.log10(TimeDimensions.OVERFLOW)));
 
     return mult;
   }
