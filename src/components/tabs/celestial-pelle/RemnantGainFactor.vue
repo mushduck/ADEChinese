@@ -112,10 +112,10 @@ export default {
                 {{ format(Math.log10(best.ep.add(1).log10()*dilationMult[2]*milestoneMult[2] + 2), 2, 2) }}
               </div>
               <div class="l-remnant-factors-item">
-                {{ format(hasMilestone ? 1.5 : 1.7, 2, 2) }}
+                {{ format(hasMilestone ? 1.6 : 1.7, 2, 2) }}
               </div>
               <div class="l-remnant-factors-item">
-                {{ format(hasMilestone ? 9 : 8, 2, 2) }}
+                {{ format(hasMilestone ? 8.2 : 8, 2, 2) }}
               </div>
               <div class="l-remnant-factors-item">
                 {{ format(remnants, 2, 0) }}
