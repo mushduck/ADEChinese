@@ -12,7 +12,7 @@ class AchievementTimer {
     const addedTime = this.realTime
       ? Time.unscaledDeltaTime.totalSeconds
       : Time.deltaTime;
-    this.time.add(addedTime);
+    this.time = this.time.add(addedTime);
   }
 
   check(condition, duration) {
