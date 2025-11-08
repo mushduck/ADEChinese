@@ -166,7 +166,7 @@ export default {
 }
 
 .o-toggle-btn {
-  width: 30rem;
+  width: 20rem;
   font-size: 1rem;
 }
 
