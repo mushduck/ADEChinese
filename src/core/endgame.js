@@ -126,10 +126,6 @@ export const Endgame = {
     player.reality.glyphs.sac.effarig = 0;
     player.reality.glyphs.sac.reality = 0;
     player.reality.glyphs.undo = [];
-    player.reality.glyphs.sets = new Array(7).fill({
-      name: "",
-      glyphs: []
-    });
     player.reality.glyphs.protectedRows = 0;
     Glyphs.autoClean(0);
     player.reality.glyphs.protectedRows = 2;

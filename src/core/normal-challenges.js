@@ -109,6 +109,9 @@ class NormalChallengeState extends GameMechanicState {
     // unlocking autobuyers (such as Existentially Prolong) should also go through this code path
     TabNotification.newAutobuyer.clearTrigger();
     GameCache.cheapestAntimatterAutobuyer.invalidate();
+    if (this.id === 9) {
+      Autobuyer.tickspeed.mode = 100;
+    }
   }
 
   get goal() {

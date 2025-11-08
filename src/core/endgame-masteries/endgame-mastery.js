@@ -71,6 +71,7 @@ export class EndgameMasteryState extends EndgameMasteriesState {
     Currency.endgameSkills.subtract(this.cost);
     GameCache.endgameMasteries.invalidate();
     EndgameMasteryTree.commitToGameState([EndgameMastery(this.id)]);
+    this.onPurchased();
     return true;
   }
 
