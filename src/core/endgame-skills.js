@@ -122,7 +122,7 @@ export const EndgameSkills = {
     const esGG = this.buyOne(true, "gg");
     const esCP = this.buyOne(true, "cp");
     const esDP = this.buyOne(true, "dp");
-    return esAM + esCP + esDP;
+    return esGG + esCP + esDP;
   },
 
   buyMax(auto = false) {
@@ -130,7 +130,7 @@ export const EndgameSkills = {
     const esGG = EndgameSkillPurchaseType.gg.purchase(true);
     const esCP = EndgameSkillPurchaseType.cp.purchase(true);
     const esDP = EndgameSkillPurchaseType.dp.purchase(true);
-    return esAM + esCP + esDP;
+    return esGG + esCP + esDP;
   },
 
   totalPurchased() {

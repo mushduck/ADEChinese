@@ -173,7 +173,7 @@ class CelestialDimensionState extends DimensionState {
   buyMax() {
     if (!this.isAvailableForPurchase) return false;
 
-    let purchasesUntilHardcap = this.purchaseCap - this.purchases;
+    let purchasesUntilHardcap = this.purchaseCap.toNumber() - this.purchases;
     
     const costScaling = new LinearCostScaling(
       Currency.celestialPoints.value,
