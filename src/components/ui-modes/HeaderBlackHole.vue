@@ -136,7 +136,7 @@ export default {
     </span>
     <span v-if="isEndgameUnlocked">
       <PrimaryButton
-        class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
+        class="o-toggle-btn c-primary-btn--black-hole-header"
         @click="toggleCelestialMatterMultiplier"
       >
         Toggle Celestial Matter
@@ -162,6 +162,11 @@ export default {
 
 .o-discharge-btn {
   width: 20rem;
+  font-size: 1rem;
+}
+
+.o-toggle-btn {
+  width: 30rem;
   font-size: 1rem;
 }
 
