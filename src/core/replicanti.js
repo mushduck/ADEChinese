@@ -144,7 +144,7 @@ export function totalReplicantiSpeedMult(overCap) {
     if (PelleAchievementUpgrade.achievement81.isBought) pelleRep = pelleRep.times(Effects.product(Achievement(81)));
     if (PelleDestructionUpgrade.timestudy62.isBought) pelleRep = pelleRep.times(Effects.product(TimeStudy(62)));
     if (PelleDestructionUpgrade.timestudy213.isBought) pelleRep = pelleRep.times(Effects.product(TimeStudy(213)));
-    if (PelleRealityUpgrade.replicativeAmplifier.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(2)));
+    if (PelleRealityUpgrade.replicativeAmplifier.isBought) pelleRep = pelleRep.timesEffectOf(RealityUpgrade(2));
     if (PelleRealityUpgrade.cosmicallyDuplicate.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(6)));
     if (PelleRealityUpgrade.replicativeRapidity.isBought) pelleRep = pelleRep.times(Effects.product(RealityUpgrade(23)));
     if (PelleDestructionUpgrade.timestudy132.isBought) pelleRep = pelleRep.times(3);
