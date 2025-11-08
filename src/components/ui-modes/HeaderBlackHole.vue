@@ -132,14 +132,14 @@ export default {
         label="Pulse:"
       />
     </span>
-    <span v-if="isEndgameUnlocked">
-      <PrimaryButton
-        class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
-        @click="toggleCelestialMatterMultiplier"
-      >
-        Toggle Celestial Matter
-      </PrimaryButton>
-    </span>
+  </span>
+  <span v-if="isEndgameUnlocked">
+    <PrimaryButton
+      class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
+      @click="toggleCelestialMatterMultiplier"
+    >
+      Toggle Celestial Matter
+    </PrimaryButton>
   </span>
 </template>
 
