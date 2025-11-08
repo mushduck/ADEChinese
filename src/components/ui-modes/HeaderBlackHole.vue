@@ -21,7 +21,6 @@ export default {
       storedTime: new Decimal(0),
       canAutoRelease: false,
       isAutoReleasing: false,
-      isEndgameUnlocked: false,
     };
   },
   computed: {
@@ -54,7 +53,6 @@ export default {
       this.storedTime.copyFrom(player.celestials.enslaved.stored);
       this.canAutoRelease = Ra.unlocks.autoPulseTime.canBeApplied;
       this.isAutoReleasing = player.celestials.enslaved.isAutoReleasing;
-      this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
     },
     pauseButtonText() {
       if (BlackHoles.arePaused && player.blackHoleNegative < 1) return "Uninvert BH";
@@ -72,9 +70,6 @@ export default {
         "o-primary-btn--buy-max c-primary-btn--black-hole-header": true,
         "o-bh-charge-disabled": this.isAutoReleasing
       };
-    },
-    toggleCelestialMatterMultiplier() {
-      toggleCelestialMatter();
     }
   }
 };
@@ -132,17 +127,6 @@ export default {
         label="Pulse:"
       />
     </span>
-  </span>
-  <span
-    v-if="isEndgameUnlocked"
-    class="c-black-hole-header"
-  >
-    <PrimaryButton
-      class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
-      @click="toggleCelestialMatterMultiplier"
-    >
-      Toggle Celestial Matter
-    </PrimaryButton>
   </span>
 </template>
 
