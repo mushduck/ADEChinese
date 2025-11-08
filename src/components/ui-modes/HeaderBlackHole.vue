@@ -54,7 +54,7 @@ export default {
       this.storedTime.copyFrom(player.celestials.enslaved.stored);
       this.canAutoRelease = Ra.unlocks.autoPulseTime.canBeApplied;
       this.isAutoReleasing = player.celestials.enslaved.isAutoReleasing;
-      this.isEndgameUnlocked = player.endgame.celestialMatterMultiplier.isActive;
+      this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
     },
     pauseButtonText() {
       if (BlackHoles.arePaused && player.blackHoleNegative < 1) return "Uninvert BH";
