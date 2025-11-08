@@ -184,10 +184,10 @@ export const Achievements = {
   },
 
   get timeToNextAutoAchieve() {
-    if (!PlayerProgress.realityUnlocked()) return 0;
-    if (GameCache.achievementPeriod.value === 0) return 0;
-    if (Achievements.preReality.countWhere(a => !a.isUnlocked) === 0) return 0;
-    return this.period.sub(player.reality.achTimer).toNumber();
+    if (!PlayerProgress.realityUnlocked()) return new Decimal(0);
+    if (GameCache.achievementPeriod.value === 0) return new Decimal(0);
+    if (Achievements.preReality.countWhere(a => !a.isUnlocked) === 0) return new Decimal(0);
+    return this.period.sub(player.reality.achTimer);
   },
 
   _power: new Lazy(() => {
