@@ -9,6 +9,57 @@ export const changelog = [
    * }
    */
   {
+    date: [2025, 11, 8],
+    name: "v0.2.3: The Greater Reimagining I",
+    info: `
+The long-delayed update is finally out.
+<br>
+<br>
+<b><i>If nothing else got you hooked on the game, this should.</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>An Endgame Mastery Tree</li>
+<li>12 Endgame Milestones</li>
+<li>10 new Singularity Milestones</li>
+<li>Expansion Packs (still NYI mostly)</li>
+<li>Decimalization of Game Speed</li>
+<li>Decimalization of Dimension Boosts</li>
+<li>Decimalization of a few other things</li>
+<li>Infinite Tesseract Formula</li>
+<li>A new Galaxy Generator Upgrade</li>
+<li>Many helper functions</li>
+<li>A Celestial Matter Softcap</li>
+<li>Rebirths</li>
+</ul>
+<br>
+<b>Things removed:</b><br>
+<ul>
+<li>The Game Speed Hardcap</li>
+<li>Dimboost Overflow</li>
+<li>All semblance of balancing</li>
+<li>Rebirths</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Fixed Dimension Boost costs above e16 or so</li>
+<li>Remnant overflow</li>
+<li>Game Time overflow</li>
+<li>Dooming your Reality not being cool enough</li>
+<li>Reality Autobuyer settings</li>
+<li>Starting Remnants being too high</li>
+<li>Cel Point gain being too high</li>
+<li>The dev being too high</li>
+<li>Made the 9th Dimension work properly</li>
+<li>Compression Magnitudes not behaving properly</li>
+<li>Severla radnom tpyos</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2025, 9, 16],
     name: "v0.2.2: The Great Insect Purge",
     info: `
