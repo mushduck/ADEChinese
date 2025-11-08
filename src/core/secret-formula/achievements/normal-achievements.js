@@ -854,7 +854,7 @@ export const normalAchievements = [
     id: 117,
     name: "Costco sells Dimboosts now!",
     get description() { return `Bulk buy ${formatInt(750)} Dimension Boosts at once.`; },
-    checkRequirement: ([bulk]) => bulk >= 750,
+    checkRequirement: ([bulk]) => bulk.gte(750),
     checkEvent: GAME_EVENT.DIMBOOST_AFTER,
     get reward() {
       return `The multiplier from Dimension Boosts to Antimatter Dimensions is ${formatPercents(0.01)} higher.`;
