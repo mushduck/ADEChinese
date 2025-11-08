@@ -172,22 +172,22 @@ export const Achievements = {
     }
     if (Achievements.preReality.every(a => a.isUnlocked)) return;
 
-    player.reality.achTimer.add(diff);
+    player.reality.achTimer = player.reality.achTimer.add(diff);
     if (player.reality.achTimer.lt(this.period)) return;
 
     for (const achievement of Achievements.preReality.filter(a => !a.isUnlocked)) {
       achievement.unlock(true);
-      player.reality.achTimer.subtract(this.period);
+      player.reality.achTimer = player.reality.achTimer.subtract(this.period);
       if (player.reality.achTimer.lt(this.period)) break;
     }
     player.reality.gainedAutoAchievements = true;
   },
 
   get timeToNextAutoAchieve() {
-    if (!PlayerProgress.realityUnlocked()) return 0;
-    if (GameCache.achievementPeriod.value === 0) return 0;
-    if (Achievements.preReality.countWhere(a => !a.isUnlocked) === 0) return 0;
-    return this.period.sub(player.reality.achTimer).toNumber();
+    if (!PlayerProgress.realityUnlocked()) return new Decimal(0);
+    if (GameCache.achievementPeriod.value === 0) return new Decimal(0);
+    if (Achievements.preReality.countWhere(a => !a.isUnlocked) === 0) return new Decimal(0);
+    return this.period.sub(player.reality.achTimer);
   },
 
   _power: new Lazy(() => {
