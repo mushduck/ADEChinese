@@ -128,7 +128,7 @@ function galaxyReset() {
   EventHub.dispatch(GAME_EVENT.GALAXY_RESET_BEFORE);
   player.galaxies++;
   if (!Achievement(143).isUnlocked || ((Pelle.isDoomed && !PelleAchievementUpgrade.achievement143.isBought) && !PelleUpgrade.galaxyNoResetDimboost.canBeApplied)) {
-    player.dimensionBoosts = DC.D0;
+    player.dimensionBoosts = new Decimal(0);
   }
   softReset(0);
   if (Notations.current === Notation.emoji) player.requirementChecks.permanent.emojiGalaxies++;
