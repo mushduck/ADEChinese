@@ -172,12 +172,12 @@ export const Achievements = {
     }
     if (Achievements.preReality.every(a => a.isUnlocked)) return;
 
-    player.reality.achTimer.add(diff);
+    player.reality.achTimer = player.reality.achTimer.add(diff);
     if (player.reality.achTimer.lt(this.period)) return;
 
     for (const achievement of Achievements.preReality.filter(a => !a.isUnlocked)) {
       achievement.unlock(true);
-      player.reality.achTimer.subtract(this.period);
+      player.reality.achTimer = player.reality.achTimer.subtract(this.period);
       if (player.reality.achTimer.lt(this.period)) break;
     }
     player.reality.gainedAutoAchievements = true;
