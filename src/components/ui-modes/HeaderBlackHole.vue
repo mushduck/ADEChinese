@@ -21,6 +21,7 @@ export default {
       storedTime: new Decimal(0),
       canAutoRelease: false,
       isAutoReleasing: false,
+      isEndgameUnlocked: false,
     };
   },
   computed: {
@@ -53,6 +54,7 @@ export default {
       this.storedTime.copyFrom(player.celestials.enslaved.stored);
       this.canAutoRelease = Ra.unlocks.autoPulseTime.canBeApplied;
       this.isAutoReleasing = player.celestials.enslaved.isAutoReleasing;
+      this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
     },
     pauseButtonText() {
       if (BlackHoles.arePaused && player.blackHoleNegative < 1) return "Uninvert BH";
@@ -70,6 +72,9 @@ export default {
         "o-primary-btn--buy-max c-primary-btn--black-hole-header": true,
         "o-bh-charge-disabled": this.isAutoReleasing
       };
+    },
+    toggleCelestialMatterMultiplier() {
+      toggleCelestialMatter();
     }
   }
 };
@@ -77,55 +82,65 @@ export default {
 
 <template>
   <span
-    v-if="canModifyBlackHoles"
+    v-if="canModifyBlackHoles || isEndgameUnlocked"
     class="c-black-hole-header"
   >
-    <PrimaryButton
-      class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
-      onclick="BlackHoles.togglePause()"
-    >
-      {{ pauseText }}
-    </PrimaryButton>
-    <span v-if="canCharge">
+    <span v-if="canModifyBlackHoles">
       <PrimaryButton
-        :class="chargingClassObject()"
-        onclick="Enslaved.toggleStoreBlackHole()"
-      >
-        <span v-if="isCharging">
-          Stop Charging
-        </span>
-        <span v-else>
-          Charge
-        </span>
-      </PrimaryButton>
-    </span>
-    <span
-      v-if="displaySingle"
-      class="c-black-hole-status-text"
-      v-html="'🌀:' + singleState"
-    />
-    <span v-else>
-      <HeaderBlackHoleStatusText
-        v-for="(blackHole, i) in blackHoles"
-        :key="'state' + i"
-        :black-hole="blackHole"
-      />
-    </span>
-    <span v-if="canCharge">
-      <PrimaryButton
-        class="o-discharge-btn c-primary-btn--black-hole-header"
-        :class="{ 'o-small-discharge-text': hasLongText }"
-        onclick="Enslaved.useStoredTime(false)"
-      >
-        {{ dischargeText }}
-      </PrimaryButton>
-    </span>
-    <span v-if="canAutoRelease">
-      <PrimaryToggleButton
-        v-model="isAutoReleasing"
         class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
-        label="Pulse:"
+        onclick="BlackHoles.togglePause()"
+      >
+        {{ pauseText }}
+      </PrimaryButton>
+      <span v-if="canCharge">
+        <PrimaryButton
+          :class="chargingClassObject()"
+          onclick="Enslaved.toggleStoreBlackHole()"
+        >
+          <span v-if="isCharging">
+            Stop Charging
+          </span>
+          <span v-else>
+            Charge
+          </span>
+        </PrimaryButton>
+      </span>
+      <span
+        v-if="displaySingle"
+        class="c-black-hole-status-text"
+        v-html="'🌀:' + singleState"
       />
+      <span v-else>
+        <HeaderBlackHoleStatusText
+          v-for="(blackHole, i) in blackHoles"
+          :key="'state' + i"
+          :black-hole="blackHole"
+        />
+      </span>
+      <span v-if="canCharge">
+        <PrimaryButton
+          class="o-discharge-btn c-primary-btn--black-hole-header"
+          :class="{ 'o-small-discharge-text': hasLongText }"
+          onclick="Enslaved.useStoredTime(false)"
+        >
+          {{ dischargeText }}
+        </PrimaryButton>
+      </span>
+      <span v-if="canAutoRelease">
+        <PrimaryToggleButton
+          v-model="isAutoReleasing"
+          class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
+          label="Pulse:"
+        />
+      </span>
+    </span>
+    <span v-if="isEndgameUnlocked">
+      <PrimaryButton
+        class="o-toggle-btn c-primary-btn--black-hole-header"
+        @click="toggleCelestialMatterMultiplier"
+      >
+        Toggle Celestial Matter
+      </PrimaryButton>
     </span>
   </span>
 </template>
@@ -146,6 +161,11 @@ export default {
 }
 
 .o-discharge-btn {
+  width: 20rem;
+  font-size: 1rem;
+}
+
+.o-toggle-btn {
   width: 20rem;
   font-size: 1rem;
 }

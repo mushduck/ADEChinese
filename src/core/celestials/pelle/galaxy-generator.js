@@ -27,7 +27,7 @@ export const GalaxyGenerator = {
 
   get gainPerSecondPreCap() {
     let extraGain = 1;
-    if (EndgameMilestone.moreFasterGalaxies.isReached) extraGain = Math.pow(10, Math.min(Currency.endgames.value / 100, 100)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 100, 0));
+    if (EndgameMilestone.moreFasterGalaxies.isReached) extraGain = Math.pow(10, Math.min(Currency.endgames.value / 200, 50)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 50, 0));
     if (!Pelle.hasGalaxyGenerator) return 0;
     return new Decimal(GalaxyGeneratorUpgrades.additive.effectValue).timesEffectsOf(
       GalaxyGeneratorUpgrades.multiplicative,

@@ -51,7 +51,7 @@ export const endgameMilestones = {
     reward: () => {
       return "Endgames boost Galaxy Production in Pelle " + 
         (player.endgames >= 200
-         ? `(Currently: ${formatX(Math.pow(10, Math.min(Currency.endgames.value / 100, 100)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 100, 0)), 2, 2)})`
+         ? `(Currently: ${formatX(Math.pow(10, Math.min(Currency.endgames.value / 200, 50)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 50, 0)), 2, 2)})`
          : "(You have not yet reached this milestone)");
     }
   },

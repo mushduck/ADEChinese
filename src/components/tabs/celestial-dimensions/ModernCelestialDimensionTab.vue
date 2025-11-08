@@ -23,6 +23,7 @@ export default {
       softcapPow: 0,
       softcap: new Decimal(0),
       unstable: false,
+      isEffectActive: false,
     };
   },
   methods: {
@@ -39,6 +40,7 @@ export default {
       this.softcapPow = CelestialDimensions.softcapPow;
       this.softcap = CelestialDimensions.SOFTCAP;
       this.unstable = this.celestialMatter.gte(this.softcap);
+      this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
     },
     maxAll() {
       CelestialDimensions.buyMax();
@@ -76,7 +78,7 @@ export default {
       <p>
         You have
         <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
-        <span v-if="unstable">Unstable</span> Celestial Matter,
+        <span v-if="unstable">Unstable</span> Celestial Matter <span v-if="!isEffectActive">(Disabled)</span>,
         <br>
         <span>
           increased by

@@ -19,6 +19,7 @@ export default {
       totalDimCap: 0,
       creditsClosed: false,
       showLockedDimCostNote: true,
+      isEffectActive: false,
     };
   },
   methods: {
@@ -31,6 +32,7 @@ export default {
       this.incomeType = "Celestial Matter";
       this.totalDimCap = CelestialDimensions.totalDimCap;
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
     },
     maxAll() {
       CelestialDimensions.buyMax();
@@ -62,7 +64,7 @@ export default {
       <p>
         You have
         <span class="c-celestial-dim-description__accent">{{ format(celestialMatter, 2, 1) }}</span>
-        Celestial Matter,
+        Celestial Matter <span v-if="!isEffectActive">(Disabled)</span>,
         <br>
         <span>
           increased by
