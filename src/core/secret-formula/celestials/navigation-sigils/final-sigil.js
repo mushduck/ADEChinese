@@ -2,7 +2,7 @@ import { CELESTIAL_NAV_DRAW_ORDER } from "../navigation";
 
 function sigilProgress() {
   const riftProgress = PelleRifts.all.map(r => Math.clamp(r.realPercentage, 0, 1)).min();
-  const generatorProgress = Math.log10(1 + GalaxyGenerator.generatedGalaxies) / 11;
+  const generatorProgress = Decimal.log10(GalaxyGenerator.generatedGalaxies.add(1)) / 11;
   return Math.clampMax(0.2 * riftProgress + 0.8 * generatorProgress, 1);
 }
 
