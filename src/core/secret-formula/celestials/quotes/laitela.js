@@ -134,4 +134,98 @@ export const laitelaQuotes = {
       "The end...",
     ]
   },
+  expansionPacks: {
+    id: 10,
+    lines: [
+      "See Pelle?",
+      "I told you Ra was the one who tried to usurp me.",
+      "Can I smite him now?",
+      "PLEEEEEASE???",
+      "Wait, why is the Destroyer here?",
+      "I thought you defeated him, Pelle.",
+      "Have you just been giving him time?",
+      "That's nice of you, but people like him don't really deserve that kind of mercy.",
+      "Alright, I'll smite Ra, then I'll smite the Destroyer.",
+      "Does that sound good, Pelle?"
+    ]
+  },
+  dmd5: {
+    id: 11,
+    requirement: () => ImaginaryUpgrade(26).isBought,
+    lines: [
+      "Ah, so you found my secret dimensions...",
+      "How did you get the needed Singularities?",
+      "I don't understand...",
+      "What kind of powers do you even have?",
+      "It must be more than I thought.",
+      "Have you ever met a deity called the Elemental?",
+      "Can't remember, huh?",
+      "He told me about this secret power...",
+      "It was called...",
+      "A Galaxy?",
+      "Although I believe he was half-drunk, nobody I know can create a Galaxy.",
+      "Except maybe the Elemental himself.",
+      "But there must be something..."
+    ]
+  },
+  dmd6: {
+    id: 12,
+    requirement: () => ImaginaryUpgrade(27).isBought,
+    lines: [
+      "Took you long enough.",
+      "I was beginning to think you only ever found the 5th.",
+      "I suppose I was wrong...",
+      "I wonder how far you'll go now..."
+    ]
+  },
+  dmd7: {
+    id: 13,
+    requirement: () => ImaginaryUpgrade(28).isBought,
+    lines: [
+      "So fast...",
+      "You must have found a loophole.",
+      "Or my Singularities are just that strong.",
+      "I should use them more often."
+    ]
+  },
+  dmd8: {
+    id: 14,
+    requirement: () => ImaginaryUpgrade(29).isBought,
+    lines: [
+      "And there's the 8th.",
+      "You've found them all...",
+      "That can only mean...",
+      "You destroyed Pelle???",
+      "How?",
+      "He couldn't be destroyed by anything else...",
+      "The Elemental must be helping you somehow.",
+      "Where is he?",
+      "How do you not know?",
+      "What could you be possessing that we all lack?",
+      "I don't understand.",
+      "You didn't... KILL Pelle, did you?",
+      "I sure hope not...",
+      "You better not have, okay?",
+      "I'm not sure what I would do if he was gone..."
+    ]
+  },
+  laitelaPack: {
+    id: 15,
+    requirement: () => ExpansionPack.laitelaPack.isBought,
+    lines: [
+      "Just when I thought you couldn't get any more powerful...",
+      "Not only did you find and master the darkness I hid from you...",
+      "You also found a way to heal my Reality...",
+      "Just to destroy it again?",
+      "WHAT KIND OF SICK MONSTER ARE YOU?!?!",
+      "...",
+      "Sorry, I shouldn't have yelled.",
+      "But why?",
+      "Are you just trying to harvest it for the dark matter?",
+      "I suppose that would help...",
+      "At worst, I can just create a new Reality.",
+      "Don't destroy that one as well, okay?",
+      "Thanks."
+    ]
+  }
 };
