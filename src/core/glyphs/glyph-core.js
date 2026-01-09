@@ -71,10 +71,12 @@ export const Glyphs = {
       if (PelleDestructionUpgrade.glyphSlot2.isBought) PelleGlyphs = PelleGlyphs + 1;
       if (PelleDestructionUpgrade.glyphSlot3.isBought) PelleGlyphs = PelleGlyphs + 1;
       if (PelleDestructionUpgrade.glyphSlot4.isBought) PelleGlyphs = PelleGlyphs + 1;
-      PelleGlyphs += Effects.sum(EndgameMastery(121));
+      if (PelleRealityUpgrade.linguisticallyExpand.isBought) PelleGlyphs = PelleGlyphs + 1;
+      if (PelleRealityUpgrade.syntheticSymbolism.isBought) PelleGlyphs = PelleGlyphs + 1;
+      PelleGlyphs += Effects.sum(EndgameMastery(121), Ra.unlocks.glyphSlot);
       return PelleGlyphs;
     }
-    return 3 + Effects.sum(RealityUpgrade(9), RealityUpgrade(24), BreakEternityUpgrade.glyphSlotImprovement);
+    return 3 + Effects.sum(RealityUpgrade(9), RealityUpgrade(24), BreakEternityUpgrade.glyphSlotImprovement, Ra.unlocks.glyphSlot);
   },
   get protectedSlots() {
     return 10 * player.reality.glyphs.protectedRows;
@@ -270,7 +272,7 @@ export const Glyphs = {
   },
   equip(glyph, targetSlot) {
     const forbiddenByPelle = Pelle.isDisabled("glyphs") || ["effarig", "reality", "cursed"].includes(glyph.type);
-    if (Pelle.isDoomed && forbiddenByPelle) return;
+    if (Pelle.isDoomed && !PelleDestructionUpgrade.specialGlyphEffects.isBought && forbiddenByPelle) return;
     if (GameEnd.creditsEverClosed) return;
 
     if (glyph.type !== "companion") {
@@ -666,13 +668,17 @@ export const Glyphs = {
     }
   },
   get instabilityThreshold() {
-    return 1000 + getAdjustedGlyphEffect("effarigglyph") + ImaginaryUpgrade(7).effectOrDefault(0);
+    return 1000 + getAdjustedGlyphEffect("effarigglyph") + ImaginaryUpgrade(7).effectOrDefault(0) +
+      Ra.unlocks.instabilityDelay.effectOrDefault(0);
   },
   get hyperInstabilityThreshold() {
     return 3000 + this.instabilityThreshold;
   },
   get extremeInstabilityThreshold() {
-    return 75000;
+    return 75000 + Ra.unlocks.instabilityDelay.effectOrDefault(0);
+  },
+  get immenseInstabilityThreshold() {
+    return 200000;
   },
   get levelCap() {
     return Number.MAX_VALUE;
@@ -849,7 +855,7 @@ export function calculateGlyph(glyph) {
 
     // Used to randomly generate strength in this case; I don't think we actually care.
     if (glyph.strength === 1) glyph.strength = 1.5;
-    glyph.strength = Math.min(rarityToStrength(100), glyph.strength);
+    glyph.strength = Math.min(rarityToStrength(100 + Ra.unlocks.rarityBuff.effectOrDefault(0)), glyph.strength);
   }
 }
 
