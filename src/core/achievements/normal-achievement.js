@@ -194,7 +194,8 @@ export const Achievements = {
     const unlockedRows = Achievements.allRows
       .countWhere(row => row.every(ach => ach.isUnlocked));
     const basePower = Math.pow(1.35, unlockedRows) * Math.pow(1.05, Achievements.effectiveCount);
-    const exponent = getAdjustedGlyphEffect("effarigachievement") * Ra.unlocks.achievementPower.effectOrDefault(1);
+    const exponent = getAdjustedGlyphEffect("effarigachievement") * Ra.unlocks.achievementPower.effectOrDefault(1) *
+      Ra.unlocks.achievementMultPower.effectOrDefault(1) * Ra.unlocks.spaceTheoremAchPower.effectOrDefault(1);
     return Math.pow(basePower, exponent);
   }),
 
