@@ -34,7 +34,7 @@ export default {
       boughtCelestialUpgrades: [],
       perkUpgrades: [],
       boughtPerkUpgrades: [],
-      Alchemypgrades: [],
+      alchemyUpgrades: [],
       boughtAlchemyUpgrades: [],
       strikeUpgrades: [],
       boughtStrikeUpgrades: [],
