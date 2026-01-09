@@ -100,7 +100,7 @@ export function separateEffectKey(effectKey) {
 export function getGlyphEffectValuesFromBitmask(bitmask, level, baseStrength, type) {
   // If we don't specifically exclude companion glyphs, the first-reality EP record is wrong within Doomed since its
   // value is encoded in the rarity field
-  const strength = (Pelle.isDoomed && type !== "companion") ? Pelle.glyphStrength : baseStrength;
+  const strength = (Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.isBought && type !== "companion") ? Pelle.glyphStrength : baseStrength;
   return getGlyphEffectsFromBitmask(bitmask)
     .map(effect => ({
       id: effect.id,
