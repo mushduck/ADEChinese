@@ -17,6 +17,23 @@ Math.PI_2 = Math.PI * 2;
  */
 
 /**
+ * @param {Decimal|Number} a Variable before x^2 in ax^2 + bx + c = 0
+ * @param {Decimal|Number} a Variable before x in ax^2 + bx + c = 0
+ * @param {Decimal|Number} c Variable after x in ax^2 + bx + c = 0
+ * @param {Boolean} n Should the root be subtracted to -b?
+ * @returns {Decimal}
+*/
+window.decimalQuadraticSolution = function decimalQuadraticSolution(a, b, c, n = false) {
+  const divsr = a.times(2);
+  const nb = b.neg();
+  const lroot = b.pow(2);
+  const rroot = a.times(c).times(4);
+  const froot = lroot.sub(rroot).sqrt();
+  const top = n ? nb.sub(froot) : nb.add(froot);
+  return top.div(divsr);
+};
+
+/**
  * @param {Decimal|Number} a Variable before x^3 in ax^3 + bx^2 + cx + d = 0
  * @param {Decimal|Number} b Variable before x^2 in ax^3 + bx^2 + cx + d = 0
  * @param {Decimal|Number} c Variable before x in ax^3 +  bx^2 + cx + d = 0
@@ -30,6 +47,21 @@ window.decimalCubicSolution = function decimalCubicSolution(a, b, c, d, n = fals
   const ne = Decimal.sqrt(delta1.pow(2).sub(delta0.pow(3).times(4))).mul(n ? -1 : 1);
   const C = Decimal.cbrt(delta1.add(ne).div(2));
   const x = DC.D1.div(a.times(3)).neg().times(b.add(C).add(delta0.div(C)));
+  return x;
+};
+
+/**
+ * @param {Decimal|Number} a Variable before x^3 in ax^3 + bx^2 + cx + d = 0
+ * @param {Decimal|Number} b Variable before x^2 in ax^3 + bx^2 + cx + d = 0
+ * @param {Decimal|Number} c Variable before x in ax^3 +  bx^2 + cx + d = 0
+ * @param {Decimal|Number} d Variable after x in ax^3 +  bx^2 + cx + d = 0
+ * @returns {Decimal}
+*/
+window.decimalCubicSolutionX = function decimalCubicSolutionX(a, b, c, d) {
+  const p = b.neg().div(a.times(3));
+  const q = Decimal.pow(p, 3).add((b.times(c).sub(a.times(d).times(3))).div(Decimal.pow(a, 2).times(6)));
+  const r = c.div(a.times(3));
+  const x = Decimal.pow(q.add(Decimal.pow(Decimal.pow(q, 2).add(Decimal.pow(r.sub(Decimal.pow(p, 2)), 3)), 0.5)), new Decimal(1 / 3)).add(Decimal.pow(q.sub(Decimal.pow(Decimal.pow(q, 2).add(Decimal.pow(r.sub(Decimal.pow(p, 2)), 3)), 0.5)), new Decimal(1 / 3))).add(p);
   return x;
 };
 
@@ -370,6 +402,11 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
         (ExponentialCostScaling.log10(param.scalingCostThreshold) - this._logBaseCost) / this._logBaseIncrease);
     } else throw new Error("Must specify either scalingCostThreshold or purchasesBeforeScaling");
     this.updateCostScale();
+    this.log = {
+      _baseCost: new Decimal(Decimal.log10(param.baseCost)),
+      _baseIncrease: new Decimal(Math.log10(param.baseIncrease)),
+      _costScale: new Decimal(Math.log10(param.costScale)),
+    };
   }
 
   get costScale() {
@@ -403,6 +440,29 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
       ? currentPurchases * logMult + logBase + 0.5 * excess * (excess + 1) * this._logCostScale
       : currentPurchases * logMult + logBase;
     return DC.E1.pow(logCost);
+  }
+
+  decimalCalculateCost(currentPurchases) {
+    // Define these here just cause theyre easier to type
+    const base = this.log._baseCost;
+    const inc = this.log._baseIncrease;
+    const scale = this.log._costScale;
+    const purchases = this._purchasesBeforeScaling;
+
+    // If it never becomes exponential cost, just return linear and stop
+    if (currentPurchases.lte(purchases)) {
+      return DC.E1.pow(base.add(inc.times(currentPurchases)));
+    }
+
+    // Calculate linear cost
+    const costBeforeExpo = base.add(inc.times(currentPurchases));
+    // How many exponential purchases?
+    const expoPurchases = currentPurchases.sub(purchases);
+    // eslint-disable-next-line max-len
+    // Since we times by scale X times per purchase past max, we can find the triangular number of expoPurchases and just mult that by scale
+    const scaleCostFinal = expoPurchases.pow(2).add(expoPurchases).div(2).times(scale);
+    // Add and pow10
+    return DC.E1.pow(costBeforeExpo.add(scaleCostFinal));
   }
 
   /**
@@ -447,6 +507,61 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
       logPrice = (newPurchases - 1) * logMult + logBase + 0.5 * pExcess * (pExcess - 1) * this._logCostScale;
     }
     return { quantity: newPurchases - currentPurchases, logPrice: logPrice + Math.log10(numberPerSet) };
+  }
+
+  decimalGetMaxBought(currentPurchases, currency, purchasesPerIncrease, roundDown = true) {
+    // Copypaste
+    const base = this.log._baseCost;
+    const inc = this.log._baseIncrease;
+    const scale = this.log._costScale;
+    const purchases = new Decimal(this._purchasesBeforeScaling);
+    const ppIlog = new Decimal(purchasesPerIncrease.log10());
+    let logMoney = new Decimal(currency.log10()).sub(ppIlog);
+    // A console.log(logMoney);
+    // First, is the currency before the cost of Exponential? If so we solve it here and return
+    if (logMoney.lte(base.add(inc.times(purchases.floor())))) {
+      let purchaseAmount = logMoney.sub(base).div(inc).add(1);
+      // A console.log(purchaseAmount);
+      // Round value DOWN
+      if (roundDown) purchaseAmount = purchaseAmount.floor();
+      // Return null if its less than the purchases we already have
+      if (purchaseAmount.lte(currentPurchases)) return null;
+      const cost = new Decimal(this.decimalCalculateCost(purchaseAmount).log10()).add(ppIlog);
+      purchaseAmount = purchaseAmount.sub(currentPurchases);
+      purchaseAmount = purchaseAmount.times(purchasesPerIncrease);
+      return { quantity: purchaseAmount,
+        logPrice: cost };
+      // We invert the calc after the floor to find the highest cost
+    }
+    
+    // Deduct the cost up to the linear limit
+    let purchaseAmount = purchases;
+    logMoney = logMoney.sub(base.add(inc.times(purchases)));
+
+    // Where does this equation come from?
+    // Well it comes from the fact that if we subtract all preScaling costs, the cost is equal to:
+    // 0.5s(p^2 + p) + ip (i = log(inc), s = log(scale), p = purchases)
+    // Solving for p there gives us a quadratic with -0.5s as a, (-0.5s - i) as b and cost as c
+    // Put that into the quadratic (-b - sqrt(b^2 - 4ac))/2a and you get purchases
+
+    logMoney = logMoney.sub(ppIlog);
+    const a = new Decimal(0).sub(scale).div(2);
+    const b = a.sub(inc);
+    const c = logMoney;
+
+    purchaseAmount = purchaseAmount.add(decimalQuadraticSolution(a, b, c, true));
+
+    // Technically this only buys up to the nearest set, but post exponential thats a minor flaw at most (and correct?)
+    if (roundDown) purchaseAmount = purchaseAmount.floor();
+
+    if (purchaseAmount.lte(currentPurchases)) return null;
+
+    const purchaseCost = new Decimal(this.decimalCalculateCost(purchaseAmount).log10()).add(ppIlog);
+    purchaseAmount = purchaseAmount.sub(currentPurchases);
+    if (roundDown) purchaseAmount = purchaseAmount.floor();
+
+    purchaseAmount = purchaseAmount.times(purchasesPerIncrease);
+    return { quantity: purchaseAmount, logPrice: purchaseCost };
   }
 
   /**
