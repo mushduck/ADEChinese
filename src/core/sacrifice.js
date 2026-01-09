@@ -70,7 +70,7 @@ export class Sacrifice {
   }
 
   static get nextBoost() {
-    const nd1Amount = AntimatterDimension(1).amount;
+    const nd1Amount = AntimatterDimension(1).amount.clampMax(Decimal.pow(10, 1e25)).pow(Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(AntimatterDimension(1).amount) / 1e25)), 1));
     if (nd1Amount.eq(0)) return DC.D1;
     const sacrificed = player.sacrificed.clampMin(1);
     let prePowerSacrificeMult;
@@ -123,7 +123,7 @@ export function sacrificeReset() {
   EventHub.dispatch(GAME_EVENT.SACRIFICE_RESET_BEFORE);
   const nextBoost = Sacrifice.nextBoost;
   player.chall8TotalSacrifice = player.chall8TotalSacrifice.times(nextBoost);
-  player.sacrificed = player.sacrificed.plus(AntimatterDimension(1).amount);
+  player.sacrificed = player.sacrificed.plus(AntimatterDimension(1).amount.clampMax(Decimal.pow(10, 1e25)).pow(Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(AntimatterDimension(1).amount) / 1e25)), 1)));
   const isAch118Unlocked = Achievement(118).canBeApplied;
   if (NormalChallenge(8).isRunning) {
     if (!isAch118Unlocked) {
