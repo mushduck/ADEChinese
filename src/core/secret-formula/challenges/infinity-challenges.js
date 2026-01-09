@@ -34,13 +34,13 @@ export const infinityChallenges = [
       multiplier on all Antimatter Dimensions which increases based on Antimatter Galaxies.`,
     goal: DC.E5000,
     isQuickResettable: false,
-    effect: () => Decimal.pow(1.05 + (player.galaxies * 0.005), player.totalTickBought),
+    effect: () => Decimal.pow(player.galaxies.times(0.005).add(1.05), player.totalTickBought),
     formatEffect: value => formatX(value, 2, 2),
     reward: {
       description: `Antimatter Dimension multiplier based on Antimatter Galaxies and Tickspeed purchases`,
       effect: () => (Laitela.continuumActive
-        ? Decimal.pow(1.05 + (player.galaxies * 0.005), Tickspeed.continuumValue)
-        : Decimal.pow(1.05 + (player.galaxies * 0.005), player.totalTickBought)),
+        ? Decimal.pow(player.galaxies.times(0.005).add(1.05), Tickspeed.continuumValue)
+        : Decimal.pow(player.galaxies.times(0.005).add(1.05), player.totalTickBought)),
       formatEffect: value => formatX(value, 2, 2),
     },
     unlockAM: DC.E12000,
@@ -127,7 +127,7 @@ export const infinityChallenges = [
       description:
         "You get a multiplier to AD 2-7 based on 1st and 8th AD multipliers.",
       effect: () => AntimatterDimension(1).multiplier.times(AntimatterDimension(8).multiplier).pow(0.02),
-      cap: () => DC.E1E15.powEffectsOf(EndgameMastery(91)),
+      cap: () => DC.E1E15.powEffectsOf(EndgameMastery(91), EndgameUpgrade(11)),
       formatEffect: value => formatX(value, 2, 2)
     },
     unlockAM: DC.E28000,
