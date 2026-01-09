@@ -10,7 +10,7 @@ export class IPMultAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return EternityMilestone.autobuyerIPMult.isReached && !Pelle.isDoomed;
+    return EternityMilestone.autobuyerIPMult.isReached && (!Pelle.isDoomed || PelleDestructionUpgrade.x2IPUpgrade.isBought);
   }
 
   get hasUnlimitedBulk() {
@@ -32,7 +32,7 @@ export class EPMultAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return RealityUpgrade(13).isBought && !Pelle.isDoomed;
+    return RealityUpgrade(13).isBought && (!Pelle.isDoomed || PelleDestructionUpgrade.x5EPUpgrade.isBought);
   }
 
   get hasUnlimitedBulk() {
