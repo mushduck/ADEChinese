@@ -33,9 +33,9 @@ export default {
       if (this.imaginaryBoosts.neq(0)) {
         parts.push(this.imaginaryBoosts);
       }
-      const sum = parts.map(formatInt).join(" + ");
+      const sum = parts.map(formatDimboostParts).join(" + ");
       if (parts.length >= 2) {
-        return `${sum} = ${formatInt(parts.decimalSum())}`;
+        return `${sum} = ${formatHybridLarge(parts.decimalSum(), 3)}`;
       }
       return sum;
     },
@@ -58,7 +58,7 @@ export default {
       this.lockText = DimBoost.lockText;
       this.unlockedByBoost = DimBoost.unlockedByBoost;
       this.creditsClosed = GameEnd.creditsClosed;
-      if (this.isDoomed) this.requirementText = formatInt(this.purchasedBoosts);
+      if (this.isDoomed) this.requirementText = formatHybridLarge(this.purchasedBoosts, 3);
       this.hasTutorial = Tutorial.isActive(TUTORIAL_STATE.DIMBOOST);
     },
     dimensionBoost(bulk) {
@@ -73,7 +73,7 @@ export default {
   <div class="c-dimension-row c-antimatter-dim-row c-antimatter-prestige-row">
     <div class="l-dim-row__prestige-text c-dim-row__label c-dim-row__label--amount">
       Dimension Boost ({{ boostCountText }}):
-      requires {{ formatInt(requirement.amount) }} {{ dimName }} Dimensions
+      requires {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }} Dimensions
     </div>
     <PrimaryButton
       :enabled="isBuyable"
