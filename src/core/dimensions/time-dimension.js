@@ -48,6 +48,46 @@ export function toggleAllTimeDims() {
   }
 }
 
+export function calcHighestPurchaseableTD(tier, currency) {
+  const logC = currency.max(1).log10() * (PelleRifts.paradox.milestones[0].canBeApplied ? 2 : 1);
+  const logBase = (TimeDimension(tier)._baseCost.max(1).log10() - (PelleRifts.paradox.milestones[0].canBeApplied ? 2250 : 0)) /
+    (PelleRifts.paradox.milestones[0].canBeApplied ? 2 : 1);
+  let logMult = Decimal.log10(TimeDimension(tier)._costMultiplier);
+
+  if (tier > 4 && currency.lt(DC.E6000)) {
+    return Math.floor(Math.max(0, (logC - logBase) / logMult));
+  }
+
+  if (currency.gte(DC.E6000)) {
+    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * (tier <= 4 ? 2.2 : 1), 1));
+    const preInc = (Decimal.log10(DC.E6000) - logBase) / logMult;
+    const postInc = Math.clampMin(((logC - 6000) / logMult) / TimeDimensions.scalingPast1e6000, 0);
+    return Math.floor(postInc + preInc);
+  }
+
+  if (currency.lt(Decimal.NUMBER_MAX_VALUE)) {
+    return Math.floor(Math.max(0, ((logC - logBase) / logMult) + 1));
+  }
+
+  if (currency.lt(DC.E1300)) {
+    const preInc = Math.floor((Decimal.log10(Decimal.NUMBER_MAX_VALUE) - logBase) / logMult);
+    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
+    const decCur = logC - (preInc * logMult);
+    const postInc = Math.floor(Math.clampMin(decCur / logMult, 0));
+    return preInc + postInc;
+  }
+
+  if (currency.lt(DC.E6000)) {
+    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
+    const preInc = Math.floor((Decimal.log10(DC.E1300) - logBase) / logMult);
+    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 2.2, 1));
+    const decCur = logC - (preInc * logMult);
+    const postInc = Math.floor(Math.clampMin(decCur / logMult, 0));
+    return preInc + postInc;
+  }
+  throw new Error("calcHighestPurchasableTD reached too far in code");
+}
+
 export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) {
   const canSpend = Currency.eternityPoints.value.times(portionToSpend);
   const dim = TimeDimension(tier);
@@ -67,15 +107,12 @@ export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) 
     return false;
   }
   if (Enslaved.isRunning) return buySingleTimeDimension(tier);
-  const bulk = bulkBuyBinarySearch(canSpend, {
-    costFunction: bought => dim.nextCost(bought),
-    cumulative: true,
-    firstCost: dim.cost,
-  }, dim.bought);
-  if (!bulk) return false;
-  Currency.eternityPoints.subtract(bulk.purchasePrice);
-  dim.amount = dim.amount.plus(bulk.quantity);
-  dim.bought += bulk.quantity;
+  const pur = Math.clampMin(calcHighestPurchaseableTD(tier, canSpend) - dim.bought, 0);
+  const cost = dim.nextCost(pur + dim.bought).sub(1);
+  if (pur <= 0) return false;
+  Currency.eternityPoints.subtract(cost);
+  dim.amount = dim.amount.plus(pur);
+  dim.bought += pur;
   dim.cost = dim.nextCost(dim.bought);
   return true;
 }
@@ -116,7 +153,7 @@ export function timeDimensionCommonMultiplier() {
       EternityUpgrade.tdMultTheorems,
       EternityUpgrade.tdMultRealTime,
       Replicanti.areUnlocked && Replicanti.amount.gt(1) ? DilationUpgrade.tdMultReplicanti : null,
-      Pelle.isDoomed ? null : RealityUpgrade(22),
+      Pelle.isDoomed && !PelleRealityUpgrade.temporalTranscendence.isBought ? null : RealityUpgrade(22),
       AlchemyResource.dimensionality,
       PelleRifts.chaos
     );
@@ -221,8 +258,11 @@ class TimeDimensionState extends DimensionState {
     mult = mult.pow(ImaginaryUpgrade(11).effectOrDefault(1));
     mult = mult.powEffectOf(PelleRifts.paradox);
     mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
+    mult = mult.powEffectOf(Ra.unlocks.allDimPowTT);
 
-    if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
+    if (ExpansionPack.pellePack.isBought) mult = mult.pow(1 + Math.pow(Decimal.log10(player.records.bestEndgame.galaxies) / 100, 3));
+
+    if (player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed())) {
       mult = dilatedValueOf(mult);
     }
 
@@ -290,7 +330,7 @@ class TimeDimensionState extends DimensionState {
   get powerMultiplier() {
     return DC.D4
       .timesEffectsOf(this._tier === 8 ? GlyphSacrifice.time : null)
-      .pow(ImaginaryUpgrade(14).effectOrDefault(1));
+      .powEffectsOf(ImaginaryUpgrade(14), SingularityMilestone.perPurchaseDimMult);
   }
 
   get e6000ScalingAmount() {
@@ -329,7 +369,7 @@ export const TimeDimensions = {
   },
 
   get compressionMagnitude() {
-    const reduction = Effects.product(EndgameMastery(83));
+    const reduction = Effects.product(EndgameMastery(83), EndgameUpgrade(3));
     return 10 * reduction;
   },
 
