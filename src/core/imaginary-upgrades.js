@@ -60,7 +60,7 @@ class ImaginaryUpgradeState extends BitPurchasableMechanicState {
   // Note we don't actually show the modal if we already failed or unlocked it
   tryShowWarningModal(specialLockText) {
     if (this.isPossible && !this.isAvailableForPurchase) {
-      Modal.upgradeLock.show({ upgrade: this, isImaginary: true, specialLockText });
+      Modal.upgradeLock.show({ upgrade: this, isImaginary: true, isEndgame: false, specialLockText });
     }
   }
 
@@ -77,7 +77,11 @@ class ImaginaryUpgradeState extends BitPurchasableMechanicState {
   }
 
   get pelleDisabled() {
-    return Pelle.isDoomed && this.config.isDisabledInDoomed;
+    return Pelle.isDoomed && this.isDisabledInDoomed;
+  }
+
+  get isDisabledInDoomed() {
+    return this.config.isDisabledInDoomed ? this.config.isDisabledInDoomed() : false;
   }
 
   tryUnlock() {
@@ -103,7 +107,7 @@ class ImaginaryUpgradeState extends BitPurchasableMechanicState {
     }
     if (this.id === 22) {
       for (const key of Object.keys(player.reality.glyphs.sac)) {
-        player.reality.glyphs.sac[key] += ImaginaryUpgrade(22).effectValue;
+        player.reality.glyphs.sac[key] = player.reality.glyphs.sac[key].add(ImaginaryUpgrade(22).effectValue);
       }
     }
     if (this.id === 25) {
@@ -126,7 +130,11 @@ class RebuyableImaginaryUpgradeState extends RebuyableMechanicState {
   }
 
   get pelleDisabled() {
-    return Pelle.isDoomed;
+    return Pelle.isDoomed && this.isDisabledInDoomed;
+  }
+
+  get isDisabledInDoomed() {
+    return this.config.isDisabledInDoomed ? this.config.isDisabledInDoomed() : false;
   }
 
   set boughtAmount(value) {
