@@ -23,7 +23,8 @@ export default {
       isAffordable: false,
       isCapped: false,
       isAutoUnlocked: false,
-      isAutobuyerOn: false
+      isAutobuyerOn: false,
+      isDoomed: false
     };
   },
   computed: {
@@ -54,6 +55,7 @@ export default {
   },
   methods: {
     update() {
+      this.isDoomed = Pelle.isDoomed;
       this.isCapped = this.config.upgrade.value === 0;
       this.isAffordable = this.config.upgrade.isAffordable && !this.isCapped;
       const hasAutobuyer = this.config.upgrade.hasAutobuyer;
@@ -80,7 +82,7 @@ export default {
       <CostDisplay
         v-if="!isCapped"
         :config="costConfig"
-        name="Reality Machine"
+        :name="isDoomed ? 'Reality Shard' : 'Reality Machine'"
       />
     </button>
     <PrimaryToggleButton
