@@ -8,6 +8,10 @@ class PelleStrikeState extends BitUpgradeState {
     return this.isUnlocked;
   }
 
+  get isDestroyed() {
+    return this.config.isDestroyed;
+  }
+
   get canBeUnlocked() {
     return Pelle.isDoomed && !this.hasStrike;
   }
