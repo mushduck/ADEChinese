@@ -5,6 +5,25 @@ function emphasizeEnd(fraction) {
   return Math.pow(fraction, 10);
 }
 
+function rebuyableCost(initialCost, increment, id) {
+  return initialCost * Math.pow(increment, player.celestials.v.upgrades[id]);
+}
+
+function rebuyable(config) {
+  const { id, cap, costCap, description, formatEffect, formatCost } = config;
+  return {
+    id,
+    cost: () => rebuyableCost(config.initialCost, config.increment, config.id),
+    cap,
+    costCap,
+    description,
+    effect: () => config.effect(player.celestials.v.upgrades[config.id]),
+    formatEffect,
+    formatCost,
+    rebuyable: true
+  };
+}
+
 export const V_REDUCTION_MODE = {
   SUBTRACTION: 1,
   DIVISION: 2
@@ -82,7 +101,7 @@ export const v = {
       description: value => `Have ${formatInt(value)} total Galaxies from all types.`,
       values: [4000, 4300, 4600, 4900, 5200, 5500],
       condition: () => V.isRunning,
-      currentValue: () => Replicanti.galaxies.total + player.galaxies + player.dilation.totalTachyonGalaxies,
+      currentValue: () => Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).toNumber(),
       formatRecord: x => formatInt(x),
       shardReduction: tiers => Math.floor(300 * tiers),
       maxShardReduction: goal => goal - 4000,
@@ -203,7 +222,8 @@ export const v = {
       id: 1,
       reward: `You can spend Perk Points to reduce the goal requirement of all tiers of each V-Achievement.`,
       description: () => `Have ${formatInt(2)} V-Achievements`,
-      requirement: () => V.spaceTheorems >= 2
+      requirement: () => V.spaceTheorems >= 2,
+      pelleDisabled: () => !PelleCelestialUpgrade.vMilestones1.isBought
     },
     adPow: {
       id: 2,
@@ -211,7 +231,8 @@ export const v = {
       description: () => `Have ${formatInt(5)} V-Achievements`,
       effect: () => 1 + Math.sqrt(V.spaceTheorems) / 80,
       format: x => formatPow(x, 3, 3),
-      requirement: () => V.spaceTheorems >= 5
+      requirement: () => V.spaceTheorems >= 5,
+      pelleDisabled: () => !PelleCelestialUpgrade.vMilestones1.isBought
     },
     fastAutoEC: {
       id: 3,
@@ -222,13 +243,15 @@ export const v = {
       format: x => (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought
         ? "Instant (Ra upgrade)"
         : `${TimeSpan.fromMinutes(new Decimal(60 * 20 / x)).toStringShort()} for full completion`),
-      requirement: () => V.spaceTheorems >= 10
+      requirement: () => V.spaceTheorems >= 10,
+      pelleDisabled: () => !PelleCelestialUpgrade.vMilestones2.isBought
     },
     autoAutoClean: {
       id: 4,
       reward: "Unlock the ability to Automatically Purge Glyphs on Reality.",
       description: () => `Have ${formatInt(16)} V-Achievements`,
-      requirement: () => V.spaceTheorems >= 16
+      requirement: () => V.spaceTheorems >= 16,
+      pelleDisabled: () => !PelleCelestialUpgrade.vMilestones2.isBought
     },
     achievementBH: {
       id: 5,
@@ -236,7 +259,8 @@ export const v = {
       description: () => `Have ${formatInt(30)} V-Achievements`,
       effect: () => Achievements.power,
       format: x => formatX(x, 2, 0),
-      requirement: () => V.spaceTheorems >= 30
+      requirement: () => V.spaceTheorems >= 30,
+      pelleDisabled: () => !PelleCelestialUpgrade.vMilestones3.isBought
     },
     raUnlock: {
       id: 6,
@@ -246,7 +270,22 @@ export const v = {
       },
       description: () => `Have ${formatInt(36)} V-Achievements`,
       effect: 2,
-      requirement: () => V.spaceTheorems >= 36
+      requirement: () => V.spaceTheorems >= 36,
+      pelleDisabled: () => !PelleCelestialUpgrade.vMilestones3.isBought
     }
   }
+};
+
+export const vUpgrades = {
+  auto: rebuyable({
+    id: 0,
+    initialCost: 1e80,
+    increment: 1e5,
+    description: () => `Reduce the time to automatically complete V-Achievements`,
+    effect: bought => 60 / Math.pow(2, bought),
+    formatEffect: value => value <= 0.03 ? "Instant" : TimeSpan.fromMilliseconds(new Decimal(value * 1000)).toStringShort(),
+    formatCost: value => format(value, 2),
+    costCap: 1e135,
+    cap: Number.MAX_VALUE
+  }),
 };
