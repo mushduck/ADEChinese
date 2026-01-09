@@ -19,7 +19,7 @@ export default {
       canBuy: false,
       isBought: false,
       hovering: false,
-      notAffordable: false
+      notAffordable: false,
     };
   },
   computed: {
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     update() {
-      this.canBuy = this.upgrade.canBeBought;
+      this.canBuy = this.upgrade.canBeBought && this.upgrade.isAvailableForPurchase;
       this.isBought = this.upgrade.isBought;
     },
   }
