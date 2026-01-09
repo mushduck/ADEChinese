@@ -18,7 +18,7 @@ const rebuyable = props => {
   props.description = () => props.textTemplate.replace("{value}",
     ImaginaryUpgrade(props.id).effectValue === 0
       ? formatInt(effect)
-      : format(effect + ImaginaryUpgrade(props.id).effectValue, 2, 2));
+      : format(effect + ImaginaryUpgrade(props.id).effectOrDefault(0), 2, 2));
   props.formatEffect = value => formatX(value, 2, 0);
   props.formatCost = value => format(value, 2, 0);
   return props;
@@ -79,7 +79,7 @@ export const realityUpgrades = [
     canLock: true,
     lockEvent: "gain a Replicanti Galaxy",
     description: "Replicanti speed is multiplied based on Replicanti Galaxies",
-    effect: () => 1 + Replicanti.galaxies.total / 25,
+    effect: () => Replicanti.galaxies.total.div(25).add(1).toNumber(),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -87,13 +87,13 @@ export const realityUpgrades = [
     id: 7,
     cost: 15,
     requirement: "Complete your first Infinity with at most 1 Antimatter Galaxy",
-    hasFailed: () => !(player.galaxies <= 1 && player.requirementChecks.reality.noInfinities),
-    checkRequirement: () => player.galaxies <= 1 && player.requirementChecks.reality.noInfinities,
+    hasFailed: () => !(player.galaxies.lte(1) && player.requirementChecks.reality.noInfinities),
+    checkRequirement: () => player.galaxies.lte(1) && player.requirementChecks.reality.noInfinities,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     canLock: true,
     lockEvent: "gain another Antimatter Galaxy",
     description: "Infinity gain is boosted from Antimatter Galaxy count",
-    effect: () => 1 + player.galaxies / 20,
+    effect: () => player.galaxies.div(20).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -304,10 +304,10 @@ export const realityUpgrades = [
     name: "Cosmic Conglomerate",
     id: 21,
     cost: 100000,
-    requirement: () => `${formatInt(Replicanti.galaxies.total + player.galaxies +
-      player.dilation.totalTachyonGalaxies)}/${formatInt(2800)} total Galaxies from all types`,
+    requirement: () => `${formatInt(Replicanti.galaxies.total.add(player.galaxies).add(
+      player.dilation.totalTachyonGalaxies))}/${formatInt(2800)} total Galaxies from all types`,
     checkRequirement: () =>
-      Replicanti.galaxies.total + player.galaxies + player.dilation.totalTachyonGalaxies >= 2800,
+      Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).gte(2800),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Remote Antimatter Galaxy scaling is moved to ${formatInt(1e5)} galaxies`,
     effect: 1e5
