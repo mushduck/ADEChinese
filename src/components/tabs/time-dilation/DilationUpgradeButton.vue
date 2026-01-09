@@ -36,6 +36,8 @@ export default {
       isAffordable: false,
       isAutoUnlocked: false,
       isAutobuyerOn: false,
+      isPelleAutoUnlocked: false,
+      isPelleAutobuyerOn: false,
       boughtAmount: 0,
       currentDT: new Decimal(0),
       currentDTGain: new Decimal(0),
@@ -52,7 +54,7 @@ export default {
         // similar to the rest of the game - as strictly disabled.
         return {
           "o-dilation-upgrade o-pelle-disabled-pointer": true,
-          "o-pelle-disabled o-dilation-upgrade--useless": this.upgrade.id === 7 || this.upgrade.id === 3,
+          "o-pelle-disabled o-dilation-upgrade--useless": (this.upgrade.id === 7 && !PelleDestructionUpgrade.reenableIPDilationUpgrade.isBought) || (this.upgrade.id === 3 && !PelleDestructionUpgrade.x3TPUpgrade.isBought),
         };
       }
       return {
@@ -65,13 +67,16 @@ export default {
       };
     },
     isUseless() {
-      const tpip = this.upgrade.id === 3 || this.upgrade.id === 7;
+      const tpip = (this.upgrade.id === 3 && !PelleDestructionUpgrade.x3TPUpgrade.isBought) || (this.upgrade.id === 7 && !PelleDestructionUpgrade.reenableIPDilationUpgrade.isBought);
       return Pelle.isDoomed && tpip;
     }
   },
   watch: {
     isAutobuyerOn(newValue) {
       Autobuyer.dilationUpgrade(this.upgrade.id).isActive = newValue;
+    },
+    isPelleAutobuyerOn(newValue) {
+      Autobuyer.pelleDilationUpgrade(this.upgrade.id - 10).isActive = newValue;
     }
   },
   methods: {
@@ -86,7 +91,12 @@ export default {
         this.isCapped = upgrade.isCapped;
         const autobuyer = Autobuyer.dilationUpgrade(upgrade.id);
         this.boughtAmount = upgrade.boughtAmount;
-        if (!autobuyer) return;
+        if (!autobuyer) {
+          const autobuyerPelle = Autobuyer.pelleDilationUpgrade(upgrade.id - 10);
+          this.isPelleAutoUnlocked = autobuyerPelle.isUnlocked;
+          this.isPelleAutobuyerOn = autobuyerPelle.isActive;
+          return;
+        }
         this.isAutoUnlocked = autobuyer.isUnlocked;
         this.isAutobuyerOn = autobuyer.isActive;
         return;
@@ -141,6 +151,12 @@ export default {
     <PrimaryToggleButton
       v-if="isRebuyable && isAutoUnlocked"
       v-model="isAutobuyerOn"
+      label="Auto:"
+      class="l--spoon-btn-group__little-spoon o-primary-btn--dilation-upgrade-toggle"
+    />
+    <PrimaryToggleButton
+      v-if="isRebuyable && isPelleAutoUnlocked"
+      v-model="isPelleAutobuyerOn"
       label="Auto:"
       class="l--spoon-btn-group__little-spoon o-primary-btn--dilation-upgrade-toggle"
     />
