@@ -1,8 +1,10 @@
 <script>
 import AutobuyerToggles from "./AutobuyerToggles";
 import BigCrunchAutobuyerBox from "./BigCrunchAutobuyerBox";
+import BulkSingularityAutobuyerBox from "./BulkSingularityAutobuyerBox";
 import DimensionAutobuyerBox from "./DimensionAutobuyerBox";
 import DimensionBoostAutobuyerBox from "./DimensionBoostAutobuyerBox";
+import EndgameAutobuyerBox from "./EndgameAutobuyerBox";
 import EternityAutobuyerBox from "./EternityAutobuyerBox";
 import GalaxyAutobuyerBox from "./GalaxyAutobuyerBox";
 import OpenModalHotkeysButton from "@/components/OpenModalHotkeysButton";
@@ -15,11 +17,13 @@ export default {
   components: {
     AutobuyerToggles,
     OpenModalHotkeysButton,
+    EndgameAutobuyerBox,
     RealityAutobuyerBox,
     EternityAutobuyerBox,
     BigCrunchAutobuyerBox,
     GalaxyAutobuyerBox,
     DimensionBoostAutobuyerBox,
+    BulkSingularityAutobuyerBox,
     TickspeedAutobuyerBox,
     DimensionAutobuyerBox,
     SimpleAutobuyersMultiBox
@@ -83,11 +87,13 @@ export default {
       Antimatter Dimension Autobuyers can have their bulk upgraded once interval is below {{ formatInt(100) }} ms.
     </b>
     <b v-if="hasInstant">Autobuyers with "Instant" interval will trigger every game tick ({{ gameTickLength }}).</b>
+    <EndgameAutobuyerBox class="c-endgame-pos" />
     <RealityAutobuyerBox class="c-reality-pos" />
     <EternityAutobuyerBox class="c-eternity-pos" />
     <BigCrunchAutobuyerBox class="c-infinity-pos" />
     <GalaxyAutobuyerBox />
     <DimensionBoostAutobuyerBox />
+    <BulkSingularityAutobuyerBox />
     <TickspeedAutobuyerBox v-if="!hasContinuum" />
     <template v-if="displayADAutobuyersIndividually">
       <DimensionAutobuyerBox
@@ -105,6 +111,10 @@ export default {
 when they're open. It looks slightly hacky but actually can't be done any other way; each AutobuyerBox creates
 its own stacking context, which means that all z-indices specified within are essentially scoped and the
 AutobuyerBox components will always render in page order regardless of internal z-indices without these. */
+.c-endgame-pos {
+  z-index: 4;
+}
+  
 .c-reality-pos {
   z-index: 3;
 }
