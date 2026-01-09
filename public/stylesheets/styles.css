@@ -1257,6 +1257,51 @@ button:focus {
   background-color: var(--color-bad);
 }
 
+.l-reset-endgame-button {
+  display: block;
+  width: 44rem;
+  height: 6rem;
+}
+
+.c-reset-endgame-button {
+  font-family: Typewriter;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-bad);
+  background: var(--color-background);
+  border-color: var(--color-bad);
+  border-style: solid;
+  border-width: var(--var-border-width, 0.2rem);
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.c-reset-endgame-button:hover,
+.c-reset-endgame-button.force-hover,
+.t-s6 .c-reset-endgame-button:hover,
+.t-s6 .c-reset-endgame-button.force-hover,
+.t-s10 .c-reset-endgame-button:hover,
+.t-s10 .c-reset-endgame-button.force-hover {
+  color: black;
+  background: var(--color-bad);
+}
+
+.c-reset-endgame-button-doom {
+  color: var(--color-pelle--base);
+  border-color: var(--color-pelle--base);
+}
+
+.c-reset-endgame-button-doom:hover,
+.c-reset-endgame-button-doom.force-hover,
+.t-s6 .c-reset-endgame-button-doom:hover,
+.t-s6 .c-reset-endgame-button-doom.force-hover,
+.t-s10 .c-reset-endgame-button-doom:hover,
+.t-s10 .c-reset-endgame-button-doom.force-hover {
+  color: black;
+  background: var(--color-pelle--base);
+}
+
 [draggable] {
   -webkit-user-select: none;
   user-select: none;
@@ -2535,6 +2580,17 @@ br {
   text-shadow: none;
 }
 
+.l-hint-text--endgame-upgrade {
+  top: -1.7rem;
+  font-size: 1.25rem;
+}
+
+.c-hint-text--endgame-upgrade {
+  font-weight: bold;
+  color: var(--color-text);
+  text-shadow: none;
+}
+
 .l-hint-text--achievement {
   top: -2rem;
   z-index: 1;
@@ -2986,6 +3042,10 @@ br {
   0% { box-shadow: 1.5rem 1.5rem 0.5rem white, -1.5rem -1.5rem 0.5rem white; }
   50% { box-shadow: 1.5rem -1.5rem 0.5rem white, -1.5rem 1.5rem 0.5rem white; }
   100% { box-shadow: -1.5rem -1.5rem 0.5rem white, 1.5rem 1.5rem 0.5rem white; }
+}
+
+.o-primary-btn--tesseract-toggle {
+  font-size: 1.2rem;
 }
 
 /* #endregion l-infinity-dim-tab */
@@ -5625,6 +5685,16 @@ properly on certain themes. */
 
 /* #region Break Eternity Upgrades */
 
+.l-break-eternity-upgrade-btn {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem;
+  padding: 0 0.5rem;
+}
+
 /* #region o-break-eternity-upgrade-btn */
 
 .o-break-eternity-upgrade-btn {
@@ -5649,6 +5719,8 @@ properly on certain themes. */
 .o-break-eternity-upgrade-btn:hover {
   color: var(--color-text-inverted);
 }
+
+/* #endregion o-break-eternity-upgrade-btn */
 
 /* #region o-infinity-upgrade-btn--available */
 
@@ -7568,6 +7640,49 @@ kbd {
   border-color: #b89c2e;
 }
 
+.l-v-upgrades-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.o-v-upgrade {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 25rem;
+  height: 10rem;
+  font-family: Typewriter;
+  font-size: 1.2rem;
+  color: black;
+  background: #6b5f2e;
+  border: var(--var-border-width, 0.2rem) solid #473f1f;
+  border-radius: var(--var-border-radius, 0.5rem);
+  margin: 0 0.5rem;
+  padding: 1rem;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.o-v-upgrade--available {
+  background: #6b5f2e;
+  color: var(--color-v--base);
+  border-color: #b89c2e;
+}
+
+.o-v-upgrade--available:hover {
+  background: var(--color-v--base);
+  color: black;
+  border-color: #b89c2e;
+  cursor: pointer;
+}
+
+.o-v-upgrade--capped {
+  background: var(--color-v--base);
+  color: black;
+  border-color: #b89c2e;
+}
+
 .c-v-unlock-button--enabled {
   cursor: pointer;
 }
@@ -8606,6 +8721,10 @@ kbd {
   width: 44rem;
 }
 
+.o-laitela-run-button--larger {
+  height: 112rem;
+}
+
 .o-laitela-matter-amount {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
@@ -9006,6 +9125,10 @@ kbd {
   padding: 1rem;
 }
 
+.l-laitela-annihilation-container--large {
+  height: 27rem;
+}
+
 .l-laitela-annihilation-button {
   width: 35rem;
   height: 3rem;
@@ -9061,6 +9184,36 @@ kbd {
 
 .s-base--metro .c-laitela-automation-toggle {
   box-shadow: none;
+}
+
+.l-laitela-hadronize-button {
+  width: 20rem;
+  height: 3rem;
+  font-family: Typewriter, serif;
+  font-size: 1.1rem;
+  color: var(--color-laitela--accent);
+  background: linear-gradient(var(--color-laitela--base), var(--color-laitela--accent));
+  border: var(--var-border-width, 0.2rem) solid var(--color-laitela--accent);
+  border-radius: var(--var-border-radius, 0.5rem);
+  padding: 0.5rem;
+}
+
+.c-laitela-hadronize-button {
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+
+.c-laitela-hadronize-button h2 {
+  color: inherit;
+}
+
+.c-laitela-hadronize-button b {
+  color: inherit;
+}
+
+.c-laitela-hadronize-button:hover {
+  color: var(--color-laitela--base) !important; /* h2 color overrides this */
+  background: linear-gradient(var(--color-laitela--accent), var(--color-laitela--base));
 }
 
 /* #endregion laitela tab */
@@ -9511,6 +9664,357 @@ kbd {
 
 .c-perk-tab__perk-points {
   color: var(--color-reality);
+}
+
+.l-endgame-upgrade-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+
+.l-endgame-upgrade-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-endgame-upgrade-btn {
+  display: flex;
+  flex-direction: column;
+  width: 20.5rem;
+  height: 10rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem;
+  padding: 0 0.5rem;
+}
+
+.c-endgame-upgrade-btn {
+  text-align: center;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  color: var(--color-celestials);
+  background-color: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-endgame);
+  border-radius: var(--var-border-radius, 0.5rem);
+  transition-duration: 0.15s;
+  cursor: pointer;
+}
+
+.s-base--dark .c-endgame-upgrade-btn {
+  color: var(--color-celestials);
+}
+
+.c-endgame-upgrade-btn__requirement {
+  font-weight: bold;
+}
+
+.c-endgame-upgrade-btn:hover {
+  color: black;
+  background-color: var(--color-endgame);
+}
+
+.c-endgame-upgrade-btn--unavailable {
+  color: var(--color-endgame);
+  background-color: #404040;
+  cursor: default;
+}
+
+.c-endgame-upgrade-btn--unavailable:hover {
+  color: var(--color-endgame);
+  background-color: #404040;
+}
+
+.c-endgame-upgrade-btn--bought {
+  color: var(--color-celestials);
+  background-color: var(--color-endgame);
+  border-color: #6d6a09;
+  cursor: default;
+}
+
+.c-endgame-upgrade-btn--bought:hover {
+  color: var(--color-celestials);
+  background-color: var(--color-endgame);
+}
+
+.c-endgame-upgrade-btn--possible {
+  /* Text color gets inherited from other pseudo-classes; so we use !important here in order to ensure good contrast
+    specifically on reality and imaginary upgrades, the only upgrades which use this and the related --locked below */
+  color: black !important;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #A2A229,
+      #A2A229 3rem,
+      #919122 3rem,
+      #919122 6rem
+    );
+  cursor: default;
+}
+
+.c-endgame-upgrade-btn--possible:hover {
+  /* This is actually a solid color, but it flickers on hover if we don't make it a linear-gradient */
+  background: linear-gradient(0deg, #919122, #919122);
+}
+
+.c-endgame-upgrade-btn--locked {
+  color: white !important;
+  background: #952020;
+  background-image:
+    linear-gradient(45deg, #802222 25%, transparent 25%),
+    linear-gradient(135deg, #802222 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #802222 75%),
+    linear-gradient(135deg, transparent 75%, #802222 75%);
+  background-position: 0 0, 2rem 0, 2rem -2rem, 0 2rem;
+  background-size: 4rem 4rem;
+  cursor: default;
+}
+
+.c-endgame-upgrade-btn--locked:hover {
+  background-color: #802222;
+}
+
+.t-dark .c-endgame-upgrade-btn--unavailable {
+  color: var(--color-endgame);
+  background-color: #37474f;
+}
+
+.t-s6.c-endgame-upgrade-btn:hover,
+.t-s10.c-endgame-upgrade-btn:hover {
+  background-color: var(--color-endgame);
+}
+
+.t-s6.c-endgame-upgrade-btn--unavailable:hover,
+.t-s10.c-endgame-upgrade-btn--unavailable:hover {
+  color: var(--color-endgame);
+  background-color: #656565;
+}
+
+.t-s6.c-endgame-upgrade-btn--bought,
+.t-s10.c-endgame-upgrade-btn--bought {
+  background-color: var(--color-endgame);
+  border-color: #6d6a09;
+}
+
+.t-s6.c-endgame-upgrade-btn--bought:hover,
+.t-s10.c-endgame-upgrade-btn--bought:hover {
+  color: var(--color-celestials);
+  background-color: var(--color-endgame);
+}
+
+@keyframes a-galactic-power-amount-cycle {
+  0% {
+    color: #ff0000;
+    text-shadow: #ff0000 0 0 3px;
+  }
+
+  17% {
+    color: #ffff00;
+    text-shadow: #ffff00 0 0 3px;
+  }
+
+  33% {
+    color: #00ff00;
+    text-shadow: #00ff00 0 0 3px;
+  }
+
+  50% {
+    color: #00ffff;
+    text-shadow: #00ffff 0 0 3px;
+  }
+
+  67% {
+    color: #0000ff;
+    text-shadow: #0000ff 0 0 3px;
+  }
+
+  83% {
+    color: #ff00ff;
+    text-shadow: #ff00ff 0 0 3px;
+  }
+
+  100% {
+    color: #ff0000;
+    text-shadow: #ff0000 0 0 3px;
+  }
+}
+
+.l-endgame-button-column {
+  display: flex;
+  flex-direction: row;
+  width: 44rem;
+  height: 6rem;
+  padding: 0.5rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+.o-expansion-pack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Typewriter, serif;
+  width: 98rem;
+  height: 25rem;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.o-expansion-pack--teresa {
+  color: var(--color-teresa--base);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-teresa--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--teresa:hover {
+  color: black;
+  background: var(--color-teresa--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-teresa--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--teresa--bought {
+  color: black;
+  background: var(--color-teresa--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-teresa--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--effarig {
+  color: var(--color-effarig--base);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-effarig--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--effarig:hover {
+  color: black;
+  background: var(--color-effarig--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-effarig--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--effarig--bought {
+  color: black;
+  background: var(--color-effarig--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-effarig--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--enslaved {
+  color: var(--color-enslaved--base);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-enslaved--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--enslaved:hover {
+  color: black;
+  background: var(--color-enslaved--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-enslaved--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--enslaved--bought {
+  color: black;
+  background: var(--color-enslaved--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-enslaved--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--v {
+  color: var(--color-v--base);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-v--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--v:hover {
+  color: black;
+  background: var(--color-v--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-v--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--v--bought {
+  color: black;
+  background: var(--color-v--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-v--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--ra {
+  color: var(--color-ra--base);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-ra--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--ra:hover {
+  color: black;
+  background: var(--color-ra--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-ra--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--ra--bought {
+  color: black;
+  background: var(--color-ra--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-ra--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--laitela {
+  color: var(--color-laitela--accent);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-laitela--accent);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--laitela:hover {
+  color: black;
+  background: var(--color-laitela--accent);
+  border: var(--var-border-width, 0.2rem) solid var(--color-laitela--accent);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--laitela--bought {
+  color: black;
+  background: var(--color-laitela--accent);
+  border: var(--var-border-width, 0.2rem) solid var(--color-laitela--accent);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--pelle {
+  color: var(--color-pelle--base);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-pelle--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--pelle:hover {
+  color: black;
+  background: var(--color-pelle--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-pelle--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--pelle--bought {
+  color: black;
+  background: var(--color-pelle--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-pelle--base);
+  border-radius: var(--var-border-radius, 0.5rem);
 }
 
 /* #region reality-tab */
