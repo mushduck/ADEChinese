@@ -21,7 +21,7 @@ export default {
         [true, Glyphs.copyForRecords(bestReality.RMminSet), "Best Reality Machines per minute",
           `${format(bestReality.RMmin, 2, 2)} RM/min`],
         [true, Glyphs.copyForRecords(bestReality.glyphLevelSet), "Best Glyph Level",
-          `Level ${formatInt(bestReality.glyphLevel)}`],
+          `Level ${formatHybridLarge(bestReality.glyphLevel, 3)}`],
         [true, Glyphs.copyForRecords(bestReality.bestEPSet), "Highest Eternity Points",
           `${format(bestReality.bestEP, 2, 2)} EP`],
         [true, Glyphs.copyForRecords(bestReality.speedSet), "Fastest Reality (real time)",
