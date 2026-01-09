@@ -1,7 +1,7 @@
 import { GameMechanicState } from "./game-mechanics";
 
 export function tryCompleteInfinityChallenges() {
-  if (EternityMilestone.autoIC.isReached) {
+  if (EternityMilestone.autoIC.isReached || PelleDestructionUpgrade.autoICComp.isBought) {
     const toComplete = InfinityChallenges.all.filter(x => x.isUnlocked && !x.isCompleted);
     for (const challenge of toComplete) challenge.complete();
   }
