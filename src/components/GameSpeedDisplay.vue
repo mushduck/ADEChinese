@@ -35,8 +35,8 @@ export default {
   },
   methods: {
     update() {
-      this.baseSpeed = getGameSpeedupFactor();
-      this.pulsedSpeed = getGameSpeedupForDisplay();
+      this.baseSpeed.copyFrom(getGameSpeedupFactor());
+      this.pulsedSpeed.copyFrom(getGameSpeedupForDisplay());
       this.hasSeenAlteredSpeed = PlayerProgress.seenAlteredSpeed();
       this.isStopped = Enslaved.isStoringRealTime;
       this.isEC12 = EternityChallenge(12).isRunning;
