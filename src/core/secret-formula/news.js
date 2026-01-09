@@ -3594,7 +3594,7 @@ export const news = [
   {
     id: "l2",
     text: "Nerf the galaxies please.",
-    get unlocked() { return player.galaxies === 2 || Currency.infinities.gt(0); }
+    get unlocked() { return player.galaxies.eq(2) || Currency.infinities.gt(0); }
   },
   {
     id: "l3",
@@ -3616,7 +3616,7 @@ export const news = [
     text:
       `Antimatter people seem to be even more afraid of 13 than we are. They destroyed
       entire galaxies just to remove 13 from their percents.`,
-    get unlocked() { return player.galaxies > 0 || Currency.infinities.gt(0); }
+    get unlocked() { return player.galaxies.gt(0) || Currency.infinities.gt(0); }
   },
   {
     id: "l7",
@@ -3638,14 +3638,14 @@ export const news = [
     text:
       `The Heavenly Pelle has generated too much antimatter and needed to create another galaxy.
       This one can be seen in the southwestern sky.`,
-    get unlocked() { return player.galaxies > 0 || Currency.infinities.gt(0); }
+    get unlocked() { return player.galaxies.gt(0) || Currency.infinities.gt(0); }
   },
   {
     id: "l11",
     text: "9th Dimension is a lie.",
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3654,7 +3654,7 @@ export const news = [
     text: "The square root of 9 is 3, therefore the 9th dimension can't exist.",
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3663,7 +3663,7 @@ export const news = [
     text: "You got assimilated by the 9th dimension? Just call your doctor for mental illness!",
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3672,7 +3672,7 @@ export const news = [
     text: "Why is there no 9th dimension? Because 7 8 9.",
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3681,7 +3681,7 @@ export const news = [
     text: "The 9th dimension cannot exist because the Nein-speaking nazis died in WW2.",
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3692,7 +3692,7 @@ export const news = [
       before you encounter bad things, so you should be fine`,
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3705,7 +3705,7 @@ export const news = [
       forcefully to avoid getting the offline achievement.`,
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3714,7 +3714,7 @@ export const news = [
     text: "If the 9th dimension is all evil, then is 3 the root of all evil?",
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -3725,7 +3725,7 @@ export const news = [
       one with matter, and a large time vortex.`,
     get unlocked() {
       return DimBoost.totalBoosts.gte(5) ||
-      player.galaxies > 0 ||
+      player.galaxies.gt(0) ||
       PlayerProgress.infinityUnlocked();
     }
   },
@@ -4513,7 +4513,7 @@ export const news = [
       `4 Dimensions, Tickspeed and Antimatter. Good enough for your Reality. Not our Reality! Gentlemen, I give you Dimboosts;
       the Tickspeed of Tomorrow! Fully upgradeable, eternally variable. "Safe" Pelle-brand Dimboosts will assist your
       Destroyers every step of the way! That is not a Dimboost. That is a Galaxy. We make those too.`,
-    get unlocked() { return player.galaxies > 0 || PlayerProgress.infinityUnlocked() }
+    get unlocked() { return player.galaxies.gt(0) || PlayerProgress.infinityUnlocked() }
   },
   {
     id: "le114",
