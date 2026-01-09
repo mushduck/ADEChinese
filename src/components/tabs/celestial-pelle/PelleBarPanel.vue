@@ -1,4 +1,6 @@
 <script>
+import wordShift from "@/core/word-shift";
+  
 import PelleRift from "./PelleRift";
 
 export default {
@@ -10,6 +12,7 @@ export default {
     return {
       decayRate: 0,
       isCollapsed: false,
+      time: 0,
     };
   },
   computed: {
@@ -26,10 +29,31 @@ export default {
     update() {
       this.decayRate = Pelle.riftDrainPercent;
       this.isCollapsed = player.celestials.pelle.collapsed.rifts;
+      this.time = Date.now();
     },
     toggleCollapse() {
       player.celestials.pelle.collapsed.rifts = !this.isCollapsed;
     },
+    sickVisualStrikeText() {
+      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 0) {
+        return `Pelle Strike penalties are permanent and remain active even after Armageddon!`;
+      }
+      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 1) {
+        return this.time % 2500 > 500 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+      }
+      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 2) {
+        return this.time % 2500 > 1000 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+      }
+      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 3) {
+        return this.time % 2500 > 1500 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+      }
+      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 4) {
+        return this.time % 2500 > 2000 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+      }
+      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 5) {
+        return this.time % 2500 > 2400 ? `We will meet again...` : wordShift.randomCrossWords("We will meet again...");
+      }
+    }
   }
 };
 </script>
@@ -54,7 +78,7 @@ export default {
       When active, Rifts consume {{ formatPercents(decayRate) }} of another resource per second.
       <br>
       Rift effects apply even when not activated, and are based on the total amount drained.
-      <b class="o-strike-warning">Pelle Strike penalties are permanent and remain active even after Armageddon!</b>
+      <b class="o-strike-warning">{{ sickVisualStrikeText() }}</b>
       <div class="c-pelle-bar-container">
         <PelleRift
           v-for="strike in strikes"
