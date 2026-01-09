@@ -66,6 +66,10 @@ class AlchemyResourceState extends GameMechanicState {
     return this.unlockedWith.level >= this.unlockedAt;
   }
 
+  get isDestroyed() {
+    return Pelle.isDoomed && this.config.destroyed();
+  }
+
   get lockText() {
     return `${this.unlockedWith.name} Level ${formatInt(this.unlockedAt)}`;
   }
@@ -77,7 +81,7 @@ class AlchemyResourceState extends GameMechanicState {
   get effectValue() {
     // Disable Exponential alchemy effect in V reality.
     if (V.isRunning && this.config.id === 14) return 0;
-    return this.config.effect(Pelle.isDisabled("alchemy") ? 0 : this.amount);
+    return this.config.effect(Pelle.isDisabled("alchemy") && this.isDestroyed ? 0 : this.amount);
   }
 
   get reaction() {
