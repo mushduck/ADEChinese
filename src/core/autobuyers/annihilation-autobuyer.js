@@ -25,6 +25,10 @@ export class AnnihilationAutobuyerState extends AutobuyerState {
     return 0;
   }
 
+  get mode() {
+    return this.data.mode;
+  }
+
   get hasInput() {
     return true;
   }
@@ -38,7 +42,11 @@ export class AnnihilationAutobuyerState extends AutobuyerState {
   }
 
   tick() {
-    if (Laitela.darkMatterMultGain >= this.multiplier) {
+    if (this.mode === 0 && Laitela.darkMatterMultGain.gte(this.multiplier)) {
+      Laitela.annihilate();
+    }
+
+    if (this.mode === 1 && Laitela.darkMatterMultGain.gte(Laitela.darkMatterMult.times(this.multiplier))) {
       Laitela.annihilate();
     }
   }
