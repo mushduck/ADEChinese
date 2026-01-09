@@ -4,7 +4,8 @@ import { DimensionState } from "./dimension";
 
 export function celestialDimensionCommonMultiplier() {
   let mult = DC.D1;
-
+  mult = mult.timesEffectsOf(EndgameUpgrade(11));
+  
   return mult;
 }
 
@@ -96,7 +97,7 @@ class CelestialDimensionState extends DimensionState {
     const tier = this.tier;
     let mult = GameCache.celestialDimensionCommonMultiplier.value;
     mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount)));
-    mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
+    mult = mult.powEffectsOf(SingularityMilestone.dimensionPow, Ra.unlocks.celestialDimensionPower);
     return mult;
   }
 
@@ -115,7 +116,7 @@ class CelestialDimensionState extends DimensionState {
   }
 
   get powerMultiplier() {
-    return new Decimal(this._powerMultiplier);
+    return new Decimal(this._powerMultiplier).pow(SingularityMilestone.perPurchaseDimMult.effectOrDefault(1));
   }
 
   get purchases() {
@@ -123,7 +124,7 @@ class CelestialDimensionState extends DimensionState {
   }
 
   get purchaseCap() {
-    return Decimal.NUMBER_MAX_VALUE;
+    return DC.C2P1024;
   }
 
   get isCapped() {
@@ -205,9 +206,9 @@ export const CelestialDimensions = {
    * @type {CelestialDimensionState[]}
    */
   all: CelestialDimension.index.compact(),
-  HARDCAP_PURCHASES: Decimal.NUMBER_MAX_VALUE,
+  HARDCAP_PURCHASES: DC.C2P1024,
   get SOFTCAP() {
-    return DC.E100.timesEffectsOf(EndgameMastery(94));
+    return DC.E100.timesEffectsOf(EndgameMastery(94), EndgameUpgrade(5));
   },
 
   get softcapPow() {
@@ -277,7 +278,7 @@ export const CelestialDimensions = {
     let base = 2;
     if (Pelle.isDoomed) base /= 10;
     let exponent = 1;
-    if (base > 1) exponent *= Effects.product(EndgameMastery(104));
+    if (base > 1) exponent *= Effects.product(EndgameMastery(104), Ra.unlocks.celestialDimensionConversionPower);
     return Math.pow(base, exponent);
   }
 };
