@@ -11,13 +11,10 @@ export const tabNotifications = {
       {
         parent: "challenges",
         tab: "normal"
-      },
-      {
-        parent: "statistics",
-        tab: "multipliers"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked() &&
+    condition: () => !PlayerProgress.endgameUnlocked() &&
+      !PlayerProgress.realityUnlocked() &&
       !PlayerProgress.eternityUnlocked() &&
       !PlayerProgress.infinityUnlocked(),
     events: [GAME_EVENT.BIG_CRUNCH_BEFORE]
@@ -30,7 +27,7 @@ export const tabNotifications = {
         tab: "break"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked() &&
+    condition: () => !PlayerProgress.endgameUnlocked() && !PlayerProgress.realityUnlocked() &&
       !PlayerProgress.eternityUnlocked() && Autobuyer.bigCrunch.hasMaxedInterval
   },
   IDUnlock: {
@@ -41,7 +38,7 @@ export const tabNotifications = {
         tab: "infinity"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked() &&
+    condition: () => !PlayerProgress.endgameUnlocked() && !PlayerProgress.realityUnlocked() &&
       !PlayerProgress.eternityUnlocked() && !InfinityDimension(2).isUnlocked
   },
   ICUnlock: {
@@ -52,7 +49,7 @@ export const tabNotifications = {
         tab: "infinity"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked() &&
+    condition: () => !PlayerProgress.endgameUnlocked() && !PlayerProgress.realityUnlocked() &&
       !PlayerProgress.eternityUnlocked()
   },
   replicanti: {
@@ -63,7 +60,7 @@ export const tabNotifications = {
         tab: "replicanti"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked() &&
+    condition: () => !PlayerProgress.endgameUnlocked() && !PlayerProgress.realityUnlocked() &&
       !PlayerProgress.eternityUnlocked() && Currency.infinityPoints.gte(DC.E140),
     events: [GAME_EVENT.BIG_CRUNCH_AFTER]
   },
@@ -87,7 +84,8 @@ export const tabNotifications = {
         tab: "time"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked() &&
+    condition: () => !PlayerProgress.endgameUnlocked() &&
+      !PlayerProgress.realityUnlocked() &&
       !PlayerProgress.eternityUnlocked(),
     events: [GAME_EVENT.ETERNITY_RESET_BEFORE]
   },
@@ -99,7 +97,8 @@ export const tabNotifications = {
         tab: "dilation"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked()
+    condition: () => !PlayerProgress.endgameUnlocked() &&
+      !PlayerProgress.realityUnlocked()
   },
   realityUnlock: {
     id: 7,
@@ -109,7 +108,8 @@ export const tabNotifications = {
         tab: "studies"
       }
     ],
-    condition: () => !PlayerProgress.realityUnlocked() && TimeStudy.reality.canBeBought,
+    condition: () => !PlayerProgress.endgameUnlocked() &&
+      !PlayerProgress.realityUnlocked() && TimeStudy.reality.canBeBought,
     events: [GAME_EVENT.ETERNITY_RESET_AFTER, GAME_EVENT.SAVE_CONVERTED_FROM_PREVIOUS_VERSION,
       GAME_EVENT.OFFLINE_CURRENCY_GAINED, GAME_EVENT.ACHIEVEMENT_UNLOCKED]
   },
@@ -121,7 +121,8 @@ export const tabNotifications = {
         tab: "hole"
       }
     ],
-    condition: () => !BlackHoles.areUnlocked && Currency.realityMachines.gte(100),
+    condition: () => !PlayerProgress.endgameUnlocked() &&
+      !BlackHoles.areUnlocked && Currency.realityMachines.gte(100),
     events: [GAME_EVENT.REALITY_RESET_AFTER]
   },
   automatorUnlock: {
@@ -132,7 +133,7 @@ export const tabNotifications = {
         tab: "automator"
       }
     ],
-    condition: () => Player.automatorUnlocked,
+    condition: () => !PlayerProgress.endgameUnlocked() && Player.automatorUnlocked,
     events: [GAME_EVENT.REALITY_RESET_AFTER]
   },
   teresaUnlock: {
@@ -147,7 +148,8 @@ export const tabNotifications = {
         tab: "teresa"
       }
     ],
-    condition: () => player.celestials.teresa.pouredAmount.eq(new Decimal(0)) && Teresa.isUnlocked,
+    condition: () => !PlayerProgress.endgameUnlocked() &&
+      player.celestials.teresa.pouredAmount.eq(new Decimal(0)) && Teresa.isUnlocked,
     events: [GAME_EVENT.REALITY_UPGRADE_BOUGHT]
   },
   alchemyUnlock: {
@@ -162,7 +164,7 @@ export const tabNotifications = {
         tab: "alchemy"
       }
     ],
-    condition: () => player.celestials.ra.pets.effarig.level >= 2,
+    condition: () => !PlayerProgress.endgameUnlocked() && player.celestials.ra.pets.effarig.level >= 2,
     events: [GAME_EVENT.GAME_TICK_AFTER]
   },
   newAutobuyer: {
@@ -184,7 +186,7 @@ export const tabNotifications = {
         tab: "imag_upgrades"
       }
     ],
-    condition: () => MachineHandler.isIMUnlocked,
+    condition: () => !PlayerProgress.endgameUnlocked() && MachineHandler.isIMUnlocked,
     events: [GAME_EVENT.GAME_TICK_AFTER]
   },
   laitelaUnlock: {
@@ -216,6 +218,78 @@ export const tabNotifications = {
         parent: "reality",
         tab: "glyphs",
       },
+    ],
+    // Always externally triggered
+    condition: () => true,
+  },
+  endgameUnlock: {
+    id: 17,
+    tabsToHighLight: [
+      {
+        parent: "endgame",
+        tab: "endgame"
+      },
+      {
+        parent: "endgame",
+        tab: "break-eternity"
+      },
+      {
+        parent: "endgame",
+        tab: "pelle-destruction"
+      },
+      {
+        parent: "endgame",
+        tab: "expansion-packs"
+      },
+      {
+        parent: "endgame",
+        tab: "masteries"
+      },
+      {
+        parent: "endgame",
+        tab: "milestones"
+      },
+      {
+        parent: "reality",
+        tab: "imag_upgrades"
+      },
+      {
+        parent: "dimensions",
+        tab: "celestial"
+      }
+    ],
+    condition: () => !PlayerProgress.endgameUnlocked(),
+    events: [GAME_EVENT.ENDGAME_RESET_BEFORE]
+  },
+  breakEternity: {
+    id: 18,
+    tabsToHighLight: [
+      {
+        parent: "endgame",
+        tab: "break-eternity"
+      }
+    ],
+    condition: () => !player.break2 && Currency.antimatter.gte(DC.E9E15),
+    events: [GAME_EVENT.GAME_TICK_AFTER]
+  },
+  packsUnlock: {
+    id: 19,
+    tabsToHighLight: [
+      {
+        parent: "endgame",
+        tab: "expansion-packs"
+      }
+    ],
+    condition: () => !ExpansionPacks.areUnlocked && GalaxyGenerator.galaxies.gte(Decimal.pow(2, 64)),
+    events: [GAME_EVENT.GAME_TICK_AFTER]
+  },
+  endgameUpgrades: {
+    id: 20,
+    tabsToHighLight: [
+      {
+        parent: "endgame",
+        tab: "upgrades"
+      }
     ],
     // Always externally triggered
     condition: () => true,
