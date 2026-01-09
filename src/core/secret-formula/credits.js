@@ -237,7 +237,47 @@ export const credits = {
       name: "Zipi",
       roles: 17
     }, {
+      name: "ape",
+      roles: 18
+    }, {
+      name: "Blast100",
+      roles: 18
+    }, {
+      name: "Calm Carrot",
+      roles: 18
+    }, {
+      name: "Curtain Call",
+      roles: 18
+    }, {
+      name: "DavTheGl1tchyOne",
+      roles: 18
+    }, {
       name: "Error404",
+      roles: 18
+    }, {
+      name: "glitchy",
+      roles: 18
+    }, {
+      name: "Matthew the Kingus",
+      roles: 18
+    }, {
+      name: "MidnightLight",
+      name2: "Midnight",
+      roles: 18
+    }, {
+      name: "misc",
+      roles: 18
+    }, {
+      name: "Qwerty",
+      roles: 18
+    }, {
+      name: "sumi",
+      roles: [18, 21]
+    }, {
+      name: "SwordPunk",
+      roles: 18
+    }, {
+      name: "thedarklord2317",
       roles: 18
     }, {
       name: "txchy0nnn",
@@ -559,10 +599,6 @@ export const credits = {
     }, {
       name: "Airakogi",
       roles: 19
-    }, {
-      name: "MidnightLight",
-      name2: "Midnight",
-      roles: 21
     }, {
       name: "Creepmond",
       name2: "Creep",
