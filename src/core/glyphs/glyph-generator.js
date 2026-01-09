@@ -127,7 +127,7 @@ export const GlyphGenerator = {
   },
 
   realityGlyph(level) {
-    const str = rarityToStrength(100);
+    const str = rarityToStrength(100 + Ra.unlocks.realityGlyphRarity.effectOrDefault(0));
     const effects = this.generateRealityEffects(level);
     const effectBitmask = makeGlyphEffectBitmask(effects);
     return {
@@ -237,16 +237,16 @@ export const GlyphGenerator = {
   randomStrength(rng) {
     // Technically getting this upgrade really changes glyph gen but at this point almost all
     // the RNG is gone anyway.
-    if (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied) return rarityToStrength(100);
+    if (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied) return rarityToStrength(100 + Ra.unlocks.rarityBuff.effectOrDefault(0));
     let result = GlyphGenerator.gaussianBellCurve(rng) * GlyphGenerator.strengthMultiplier;
     const relicShardFactor = Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMastery(53).isBought ? 1 : rng.uniform();
     const increasedRarity = relicShardFactor * Effarig.maxRarityBoost +
-      Effects.sum(Achievement(146), GlyphSacrifice.effarig);
+      Effects.sum(Achievement(146)) + GlyphSacrifice.effarig.effectValue.toNumber();
     // Each rarity% is 0.025 strength.
     result += increasedRarity / 40;
     // Raise the result to the next-highest 0.1% rarity.
     result = Math.ceil(result * 400) / 400;
-    return Math.min(result, rarityToStrength(100));
+    return Math.min(result, rarityToStrength(100 + Ra.unlocks.rarityBuff.effectOrDefault(0)));
   },
 
   // eslint-disable-next-line max-params
@@ -257,6 +257,7 @@ export const GlyphGenerator = {
     const random1 = rng.uniform();
     const random2 = rng.uniform();
     if (type !== "effarig" && Ra.unlocks.glyphEffectCount.canBeApplied) return 4;
+    if (type === "effarig" && ExpansionPack.effarigPack.isBought) return 7;
     const maxEffects = Ra.unlocks.glyphEffectCount.canBeApplied ? 7 : 4;
     let num = Math.min(
       maxEffects,
