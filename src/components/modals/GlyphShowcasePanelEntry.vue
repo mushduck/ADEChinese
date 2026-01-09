@@ -67,7 +67,7 @@ export default {
         ? "#ff4444"
         : (this.isLevelBoosted ? "#44FF44" : "var(--color-text);");
       return `<span style="color: ${color}">
-                  ${arrow}${formatInt(this.effectiveLevel)}${arrow}
+                  ${arrow}${formatHybridLarge(this.effectiveLevel, 3)}${arrow}
                   </span>`;
     },
     typeStyle() {
