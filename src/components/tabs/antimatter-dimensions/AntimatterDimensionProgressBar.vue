@@ -35,7 +35,7 @@ export default {
       // the inside outwards, we show the goals in that priority as well. It only makes sense to check cel6 and not the
       // others because pre-cel3 completion it'll default to e4000 and cel4/5 don't have meaningful single goals
       const inSpecialRun = (Player.isInAntimatterChallenge || EternityChallenge.isRunning || player.dilation.active ||
-        Laitela.isRunning) && !Pelle.isDoomed;
+        Laitela.isRunning) && !Pelle.isDoomed && !player.antimatter.gte(DC.E9E15);
       if (inSpecialRun) {
         if (Player.isInAntimatterChallenge) {
           setProgress(Currency.antimatter.value, Player.antimatterChallenge.goal, "Percentage to Challenge goal");
@@ -63,8 +63,15 @@ export default {
           setProgress(Decimal.pow10(player.celestials.laitela.entropy), 10, "Percentage to Destabilized Reality");
         }
       } else if (Pelle.isDoomed) {
-        if (PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies > 0) {
-          setProgress(Currency.antimatter.value, DC.E9E15, "Percentage to Endgame");
+        if (ExpansionPacks.areUnlocked && ExpansionPacks.nextPackUnlockAM === undefined) {
+          setProgress(gainedCelestialPoints(), Decimal.NUMBER_MAX_VALUE, "Percentage to Celestial Point Cap");
+        } else if (ExpansionPacks.areUnlocked) {
+          setProgress(new Decimal(Currency.antimatter.value.exponent), new Decimal(Decimal.log10(ExpansionPacks.nextPackUnlockAM)),
+            "Percentage to next Expansion Pack");
+        } else if (GalaxyGenerator.galaxies.gt(1e15)) {
+          setLinearProgress(GalaxyGenerator.galaxies.toNumber(), Math.pow(2, 64), "Percentage to Expansion Packs");
+        } else if (PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0)) {
+          setProgress(new Decimal(Currency.antimatter.value.exponent), new Decimal(9e15), "Percentage to Endgame");
         } else if (PelleStrikes.dilation.hasStrike) {
           setProgress(Currency.eternityPoints.value, DC.E4000, "Percentage to Galaxy Generator");
         } else if (PelleStrikes.ECs.hasStrike) {
@@ -85,8 +92,14 @@ export default {
         } else {
           setProgress(Currency.antimatter.value, Decimal.NUMBER_MAX_VALUE, "Percentage to first Strike");
         }
-      } else if (Enslaved.isCompleted) {
+      } else if (GalacticPower.isUnlocked && GalacticPower.nextPowerUnlockGP === undefined) {
         // Show all other goals from the top down, starting at features in the highest prestige layer
+        setProgress(Currency.imaginaryMachines.value, Decimal.NUMBER_MAX_VALUE, "Percentage to Alpha");
+      } else if (GalacticPower.isUnlocked) {
+        setProgress(Currency.galacticPower.value, GalacticPower.nextPowerUnlockGP, "Percentage to the next Galactic Power");
+      } else if (Currency.antimatter.value.gte(DC.E9E15)) {
+        setProgress(Currency.singularities.value, DC.E300, "Percentage to Galactic Power");
+      } else if (Enslaved.isCompleted) {
         setProgress(Currency.infinityPoints.value, Tesseracts.nextCost, "Percentage to next Tesseract");
       } else if (PlayerProgress.dilationUnlocked()) {
         setProgress(Currency.eternityPoints.value, DC.E4000, "Percentage to Reality");
