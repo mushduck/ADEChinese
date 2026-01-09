@@ -53,14 +53,14 @@ export default {
       }
 
       const galaxiesPerSecond = log10GainFactorPerTickUncapped.times(ticksPerSecond / LOG10_MAX_VALUE);
-      const timeFromZeroRG = galaxies => 50 * Math.log((galaxies + 49.5) / 49.5);
+      const timeFromZeroRG = galaxies => 50 * Decimal.ln((galaxies.add(49.5)).div(49.5));
       let baseGalaxiesPerSecond, effectiveMaxRG, effectiveCurrentRG;
       if (RealityUpgrade(6).isBought && !Pelle.isDoomed) {
         baseGalaxiesPerSecond = galaxiesPerSecond.divide(RealityUpgrade(6).effectValue);
-        effectiveMaxRG = timeFromZeroRG(Replicanti.galaxies.max + Replicanti.galaxies.extra) -
-          timeFromZeroRG(Replicanti.galaxies.extra);
-        effectiveCurrentRG = timeFromZeroRG(Replicanti.galaxies.bought + Replicanti.galaxies.extra) -
-          timeFromZeroRG(Replicanti.galaxies.extra);
+        effectiveMaxRG = new Decimal(timeFromZeroRG(Replicanti.galaxies.max.add(Replicanti.galaxies.extra)) -
+          timeFromZeroRG(Replicanti.galaxies.extra));
+        effectiveCurrentRG = new Decimal(timeFromZeroRG(Replicanti.galaxies.bought.add(Replicanti.galaxies.extra)) -
+          timeFromZeroRG(Replicanti.galaxies.extra));
       } else {
         baseGalaxiesPerSecond = galaxiesPerSecond;
         effectiveMaxRG = Replicanti.galaxies.max;
@@ -82,14 +82,14 @@ export default {
       }
 
       // If the player can get RG, this text is redundant with text below. It denotes total time from 1 to e308
-      if (Replicanti.galaxies.max === 0 && !isAbove308) {
+      if (Replicanti.galaxies.max.eq(0) && !isAbove308) {
         this.remainingTimeText += ` (${TimeSpan.fromSeconds(new Decimal(totalTime))} total)`;
       }
 
 
-      if (Replicanti.galaxies.max > 0) {
+      if (Replicanti.galaxies.max.gt(0)) {
         // If the player has max RGs, don't display the "You are gaining blah" text
-        if (player.replicanti.galaxies === Replicanti.galaxies.max) {
+        if (player.replicanti.galaxies.eq(Replicanti.galaxies.max)) {
           this.galaxyText = "You have reached the maximum amount of Replicanti Galaxies";
         } else {
           this.galaxyText = `You are gaining a Replicanti Galaxy every
@@ -100,7 +100,7 @@ export default {
           // Take the total time from zero replicanti to max RG + e308 replicanti and then subtract away the time which
           // has already elapsed. The time elapsed is calculated from your current RG total (including the current one)
           // and then subtracts away the time spent in the current RG so far.
-          const allGalaxyTime = Decimal.divide(effectiveMaxRG - effectiveCurrentRG, baseGalaxiesPerSecond).toNumber();
+          const allGalaxyTime = Decimal.divide(effectiveMaxRG.sub(effectiveCurrentRG), baseGalaxiesPerSecond).toNumber();
 
           // Pending galaxy gain is here because the growth slows down significantly after
           // 1e308 normally. However, the seconds per galaxy code is calculated as if
@@ -111,13 +111,13 @@ export default {
           // Note: This pending case ignores Reality Upgrade 6 but it's not really accurate anyway
           // (basically assumes you'll get all your possible RGs now) so that's probably fine.
           const pending = Replicanti.galaxies.gain;
-          let pendingTime = pending * secondsPerGalaxy.toNumber();
+          let pendingTime = pending.times(secondsPerGalaxy).toNumber();
           // If popular music is unlocked add the divide amount
           if (Achievement(126).isUnlocked) {
-            const leftPercentAfterGalaxy = replicantiAmount.log10() / LOG10_MAX_VALUE - pending;
+            const leftPercentAfterGalaxy = new Decimal(replicantiAmount.log10() / LOG10_MAX_VALUE).sub(pending).toNumber();
             pendingTime += leftPercentAfterGalaxy * secondsPerGalaxy.toNumber();
           }
-          const thisGalaxyTime = pending > 0 ? pendingTime : secondsPerGalaxy.toNumber() - remainingTime;
+          const thisGalaxyTime = pending.gt(0) ? pendingTime : secondsPerGalaxy.toNumber() - remainingTime;
           this.galaxyText += ` (all Replicanti Galaxies within
             ${TimeSpan.fromSeconds(Decimal.clampMin(new Decimal(allGalaxyTime - thisGalaxyTime), 0))})`;
         }
