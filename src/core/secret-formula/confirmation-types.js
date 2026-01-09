@@ -2,11 +2,11 @@ export const confirmationTypes = [
   {
     name: "Dimension Boost",
     option: "dimensionBoost",
-    isUnlocked: () => PlayerProgress.infinityUnlocked() || player.galaxies > 0 || player.dimensionBoosts.gt(0),
+    isUnlocked: () => PlayerProgress.infinityUnlocked() || player.galaxies.gt(0) || player.dimensionBoosts.gt(0),
   }, {
     name: "Antimatter Galaxy",
     option: "antimatterGalaxy",
-    isUnlocked: () => PlayerProgress.infinityUnlocked() || player.galaxies > 0,
+    isUnlocked: () => PlayerProgress.infinityUnlocked() || player.galaxies.gt(0),
   }, {
     name: "Sacrifice",
     option: "sacrifice",
@@ -79,6 +79,10 @@ export const confirmationTypes = [
     name: "Armageddon",
     option: "armageddon",
     isUnlocked: () => Pelle.isDoomed,
+  }, {
+    name: "Reset Endgame",
+    option: "resetEndgame",
+    isUnlocked: () => PlayerProgress.endgameUnlocked(),
   }, {
     name: "Respec Shop Purchases",
     option: "respecIAP",
