@@ -1,4 +1,4 @@
-import { BitUpgradeState, GameMechanicState } from "../game-mechanics";
+import { BitUpgradeState, GameMechanicState, RebuyableMechanicState } from "../game-mechanics";
 import { GameDatabase } from "../secret-formula/game-database";
 
 import { SpeedrunMilestones } from "../speedrun";
@@ -102,7 +102,7 @@ class VUnlockState extends BitUpgradeState {
   set bits(value) { player.celestials.v.unlockBits = value; }
 
   get pelleDisabled() {
-    return Pelle.isDoomed && this !== VUnlocks.vAchievementUnlock;
+    return Pelle.isDoomed && this !== VUnlocks.vAchievementUnlock && this.config.pelleDisabled();
   }
 
   get isEffectActive() {
@@ -152,6 +152,39 @@ export const VUnlocks = mapGameDataToObject(
   config => new VUnlockState(config)
 );
 
+class VUpgradeState extends RebuyableMechanicState {
+  constructor(config) {
+    super(config);
+    this.costCap = config.costCap;
+    this.effect = config.effect;
+  }
+
+  get currency() {
+    return Currency.celestialPoints;
+  }
+
+  get boughtAmount() {
+    return player.celestials.v.upgrades[this.id];
+  }
+
+  set boughtAmount(value) {
+    player.celestials.v.upgrades[this.id] = value;
+  }
+
+  get isCapped() {
+    return new Decimal(this.cost).gte(this.costCap);
+  }
+
+  get isAvailableForPurchase() {
+    return new Decimal(this.cost).lte(new Decimal(this.currency.value));
+  }
+}
+
+export const VUpgrade = mapGameDataToObject(
+  GameDatabase.celestials.vUpgrades,
+  config => new VUpgradeState(config)
+);
+
 export const V = {
   displayName: "V",
   possessiveName: "V's",
@@ -169,7 +202,7 @@ export const V = {
       if (this.spaceTheorems >= 36) SpeedrunMilestones(22).tryComplete();
     }
 
-    if (VUnlocks.raUnlock.canBeApplied && !Ra.unlocks.autoTP.canBeApplied) {
+    if ((VUnlocks.raUnlock.canBeApplied || EndgameMilestone.celestialEarlyUnlock.isReached) && !Ra.unlocks.autoTP.canBeApplied) {
       Ra.checkForUnlocks();
     }
   },
@@ -192,7 +225,7 @@ export const V = {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
       else sum += player.celestials.v.runUnlocks[i] * 2;
     }
-    this.spaceTheorems = sum;
+    this.spaceTheorems = sum * Ra.unlocks.spaceTheoremBoost.effectOrDefault(1);
   },
   reset() {
     player.celestials.v = {
