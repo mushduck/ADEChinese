@@ -68,7 +68,7 @@ export function getDimensionFinalMultiplierUncached(tier) {
   multiplier = applyNDPowers(multiplier, tier);
 
   const glyphDilationPowMultiplier = getAdjustedGlyphEffect("dilationpow");
-  if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
+  if (player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed())) {
     multiplier = dilatedValueOf(multiplier.pow(glyphDilationPowMultiplier));
   } else if (Enslaved.isRunning) {
     multiplier = dilatedValueOf(multiplier);
@@ -175,14 +175,19 @@ function applyNDPowers(mult, tier) {
       AlchemyResource.power,
       Achievement(183),
       PelleRifts.paradox,
-      SingularityMilestone.dimensionPow
+      SingularityMilestone.dimensionPow,
+      Ra.unlocks.allDimPowTT
     );
+
+  if (ExpansionPack.pellePack.isBought) multiplier = multiplier.pow(1 + Math.pow(Decimal.log10(player.records.bestEndgame.galaxies) / 100, 3));
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
 
   multiplier = multiplier.pow(VUnlocks.adPow.effectOrDefault(1));
 
-  if (PelleStrikes.infinity.hasStrike) {
+  if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones1.isBought) multiplier = multiplier.pow(VUnlocks.adPow.effectValue);
+
+  if (PelleStrikes.infinity.hasStrike && !PelleStrikes.infinity.isDestroyed()) {
     multiplier = multiplier.pow(0.5);
   }
 
@@ -586,7 +591,7 @@ class AntimatterDimensionState extends DimensionState {
     const postBreak = (player.break && !NormalChallenge.isRunning) ||
       InfinityChallenge.isRunning ||
       Enslaved.isRunning;
-    const trueHardcap = player.break2 ? DC.E9E115 : DC.E9E15;
+    const trueHardcap = player.break2 ? DC.E1E300 : DC.E9E15;
     return postBreak ? trueHardcap : DC.E315;
   }
 
@@ -610,9 +615,12 @@ class AntimatterDimensionState extends DimensionState {
       if (production.gt(10)) {
         const log10 = production.log10();
         const endgameMult = Pelle.isDoomed ? 1 + (Math.log10(Currency.endgames.value + 1) / 80) : 1 + (Math.log10(Currency.endgames.value + 1) / 200);
-        production = Decimal.pow10(Math.pow(log10, getAdjustedGlyphEffect("effarigantimatter")));
-        production = Decimal.pow10(Math.pow(log10, Effects.product(EndgameMastery(101))));
-        if (EndgameMilestone.endgameAntimatter.isReached) production = Decimal.pow10(Math.pow(log10, endgameMult));
+        const endgameMultValue = EndgameMilestone.endgameAntimatter.isReached ? endgameMult : 1;
+        production = Decimal.pow10(Math.pow(log10, getAdjustedGlyphEffect("effarigantimatter") * Effects.product(EndgameMastery(101), EndgameUpgrade(15), SingularityMilestone.antimatterExponentPower) * endgameMult));
+      }
+      if (production.gt(Decimal.pow10(1e150))) {
+        const log10 = production.log10();
+        production = Decimal.pow10(Math.pow(log10 / 1e150, 0.5) * 1e150);
       }
     }
     production = production.min(this.cappedProductionInNormalChallenges);
@@ -661,6 +669,7 @@ export const AntimatterDimensions = {
 
     mult = mult.pow(getAdjustedGlyphEffect("effarigforgotten")).powEffectOf(InfinityUpgrade.buy10Mult.chargedEffect);
     mult = mult.pow(ImaginaryUpgrade(14).effectOrDefault(1));
+    mult = mult.pow(SingularityMilestone.perPurchaseDimMult.effectOrDefault(1));
 
     return mult;
   },
