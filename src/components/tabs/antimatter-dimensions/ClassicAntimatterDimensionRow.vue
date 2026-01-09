@@ -43,7 +43,7 @@ export default {
     },
     amountText() {
       if (this.formattedAmount) return this.formattedAmount;
-      const amount = this.tier < 8 ? format(this.amount, 2) : formatInt(this.amount);
+      const amount = this.tier < 8 ? format(this.amount, 2) : formatHybridLarge(this.amount, 3);
       return `${amount} (${formatInt(this.boughtBefore10)})`;
     },
     singleText() {
@@ -61,7 +61,7 @@ export default {
       return `${prefix} ${format(this.until10Cost)} ${suffix}`;
     },
     continuumString() {
-      return formatFloat(this.continuumValue, 2);
+      return formatHybridFloat(this.continuumValue, 2);
     },
     showRow() {
       return this.isShown || this.isUnlocked || this.amount.gt(0);
@@ -69,7 +69,7 @@ export default {
     boughtTooltip() {
       if (this.isCapped) return `Nameless prevents the purchase of more than ${format(1)} 8th Antimatter Dimension`;
       if (this.isContinuumActive) return "Continuum produces all your Antimatter Dimensions";
-      return `Purchased ${quantifyInt("time", this.bought)}`;
+      return `Purchased ${quantifyHybridLarge("time", this.bought)}`;
     },
     costUnit() {
       return `${AntimatterDimension(this.tier - 2).shortDisplayName} AD`;
@@ -92,7 +92,7 @@ export default {
   methods: {
     update() {
       const tier = this.tier;
-      if (tier === 8 && this.isDoomed) this.formattedAmount = formatInt(this.amount);
+      if (tier === 8 && this.isDoomed) this.formattedAmount = formatHybridLarge(this.amount, 3);
       if (tier > DimBoost.maxDimensionsUnlockable) return;
       const dimension = AntimatterDimension(tier);
       this.isUnlocked = dimension.isAvailableForPurchase;
