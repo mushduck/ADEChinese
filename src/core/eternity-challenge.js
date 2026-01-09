@@ -10,7 +10,7 @@ export function startEternityChallenge() {
   Replicanti.reset();
   resetChallengeStuff();
   AntimatterDimensions.reset();
-  player.replicanti.galaxies = 0;
+  player.replicanti.galaxies = DC.D0;
   Currency.infinityPoints.reset();
   InfinityDimensions.resetAmount();
   player.records.bestInfinity.bestIPminEternity = DC.D0;
@@ -129,14 +129,14 @@ export class EternityChallengeState extends GameMechanicState {
   }
 
   get initialGoal() {
-    if (Pelle.isDoomed && this.config.pelleGoal) {
+    if (Pelle.isDoomed && this.config.pelleGoal && this.config.hasPelleGoal()) {
       return this.config.pelleGoal;
     }
     return this.config.goal;
   }
 
   get goalIncrease() {
-    if (Pelle.isDoomed && this.config.pelleGoalIncrease) {
+    if (Pelle.isDoomed && this.config.pelleGoalIncrease && this.config.hasPelleGoal()) {
       return this.config.pelleGoalIncrease;
     }
     return this.config.goalIncrease;
@@ -331,7 +331,7 @@ export const EternityChallenges = {
       const hasUpgradeLock = RealityUpgrade(12).isLockingMechanics ||
         (ImaginaryUpgrade(15).isLockingMechanics && shouldPreventEC7 &&
           !Array.range(1, 6).some(ec => !EternityChallenge(ec).isFullyCompleted));
-      if (!player.reality.autoEC || Pelle.isDisabled("autoec") || hasUpgradeLock) {
+      if (!player.reality.autoEC || (Pelle.isDisabled("autoec") && !PellePerkUpgrade.perkPEC1.isBought) || hasUpgradeLock) {
         player.reality.lastAutoEC = Math.clampMax(player.reality.lastAutoEC, this.interval);
         return;
       }
@@ -372,6 +372,7 @@ export const EternityChallenges = {
       );
       minutes /= Effects.sum(EndgameMastery(22));
       minutes /= VUnlocks.fastAutoEC.effectOrDefault(1);
+      if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones2.isBought) minutes /= VUnlocks.fastAutoEC.effectValue;
       return TimeSpan.fromMinutes(new Decimal(minutes)).totalMilliseconds.toNumber();
     }
   }
