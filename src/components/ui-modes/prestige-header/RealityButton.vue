@@ -8,7 +8,7 @@ export default {
       hasRealityStudy: false,
       machinesGained: new Decimal(),
       projectedRM: new Decimal(),
-      newIMCap: 0,
+      newIMCap: new Decimal(),
       realityTime: 0,
       glyphLevel: 0,
       nextGlyphPercent: 0,
@@ -33,10 +33,10 @@ export default {
       if (this.machinesGained.gt(0) && this.machinesGained.lt(100)) {
         return `(Next at ${format(this.nextMachineEP, 2)} EP)`;
       }
-      if (this.machinesGained.eq(0) && this.newIMCap === 0) {
+      if (this.machinesGained.eq(0) && this.newIMCap.eq(0)) {
         return `(Projected: ${format(this.projectedRM, 2)} RM)`;
       }
-      if (this.newIMCap !== 0) {
+      if (this.newIMCap.neq(0)) {
         return `(iM Cap: ${formatMachines(0, this.newIMCap)})`;
       }
       if (this.machinesGained.lt(Number.MAX_VALUE)) {
@@ -45,8 +45,8 @@ export default {
       return "";
     },
     formatGlyphLevel() {
-      if (this.glyphLevel >= 10000) return `Glyph level: ${formatInt(this.glyphLevel)}`;
-      return `Glyph level: ${formatInt(this.glyphLevel)} (${this.nextGlyphPercent} to next)`;
+      if (this.glyphLevel >= 10000) return `Glyph level: ${formatHybridLarge(this.glyphLevel, 3)}`;
+      return `Glyph level: ${formatHybridLarge(this.glyphLevel, 3)} (${this.nextGlyphPercent} to next)`;
     },
     showsRate() {
       return this.currentsRate;
@@ -92,7 +92,7 @@ export default {
       const multiplier = simulatedRealityCount(false) + 1;
       this.projectedRM = MachineHandler.gainedRealityMachines.times(multiplier)
         .clampMax(MachineHandler.hardcapRM);
-      this.newIMCap = MachineHandler.projectedIMCap;
+      this.newIMCap.copyFrom(MachineHandler.projectedIMCap);
       this.machinesGained = this.projectedRM.clampMax(MachineHandler.distanceToRMCap);
       this.realityTime = Time.thisRealityRealTime.totalMinutes.toNumber();
       this.glyphLevel = gainedGlyphLevel().actualLevel;
@@ -107,9 +107,9 @@ export default {
       const teresaReward = this.formatScalingMultiplierText(
         "Glyph Sacrifice",
         Teresa.runRewardMultiplier,
-        Math.max(Teresa.runRewardMultiplier, Teresa.rewardMultiplier(Currency.antimatter.value)));
+        Decimal.max(Teresa.runRewardMultiplier, Teresa.rewardMultiplier(Currency.antimatter.value)));
       const teresaThreshold = this.formatThresholdText(
-        Teresa.rewardMultiplier(Currency.antimatter.value) > Teresa.runRewardMultiplier,
+        Teresa.rewardMultiplier(Currency.antimatter.value).gt(Teresa.runRewardMultiplier),
         player.celestials.teresa.bestRunAM,
         "antimatter");
       this.celestialRunText = [
@@ -129,7 +129,7 @@ export default {
     },
     // Make the button have a visual animation if Realitying will give a reward
     hasSpecialReward() {
-      if (Teresa.isRunning && Teresa.rewardMultiplier(Currency.antimatter.value) > Teresa.runRewardMultiplier) {
+      if (Teresa.isRunning && Teresa.rewardMultiplier(Currency.antimatter.value).gt(Teresa.runRewardMultiplier)) {
         return true;
       }
       return Currency.eternityPoints.value.exponent > 4000 &&
@@ -165,7 +165,7 @@ export default {
           class="infotooltiptext"
         >
           <div>Other resources gained:</div>
-          <div>{{ quantifyInt("Perk Point", ppGained) }}</div>
+          <div>{{ quantifyHybridLarge("Perk Point", ppGained) }}</div>
           <div v-if="shardsGained.neq(0)">
             {{ shardsGainedText }} ({{ format(currentShardsRate, 2) }}/min)
             <br>
