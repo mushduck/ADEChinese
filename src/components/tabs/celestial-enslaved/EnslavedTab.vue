@@ -47,13 +47,13 @@ export default {
       return timeDisplayShort(new Decimal(this.storedRealCap));
     },
     storedBHDesc() {
-      timeDisplayShort(new Decimal(this.storedBlackHole));
+      return timeDisplayShort(new Decimal(this.storedBlackHole));
     },
     nerfedBHTimeDesc() {
-      timeDisplayShort(new Decimal(this.nerfedBlackHoleTime));
+      return timeDisplayShort(new Decimal(this.nerfedBlackHoleTime));
     },
     storedRealDesc() {
-      timeDisplayShort(new Decimal(this.storedReal));
+      return timeDisplayShort(new Decimal(this.storedReal));
     },
     unlocksInfo() {
       return ENSLAVED_UNLOCKS;
@@ -90,7 +90,7 @@ export default {
         "o-enslaved-mechanic-button--clickable": this.canModifyGameTimeStorage,
         "o-enslaved-mechanic-button--storing-time": this.isStoringBlackHole,
         "l-fixed-setting": !this.canModifyGameTimeStorage,
-        "o-pelle-disabled": this.isDoomed
+        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
       };
     },
     storeRealTimeClass() {
@@ -99,7 +99,7 @@ export default {
         "o-enslaved-mechanic-button--clickable": !this.isDoomed,
         "o-enslaved-mechanic-button--storing-time": this.isStoringReal,
         "l-fixed-setting": !this.canChangeStoreRealTime,
-        "o-pelle-disabled": this.isDoomed
+        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
       };
     },
     dischargeClass() {
@@ -107,7 +107,7 @@ export default {
         "o-enslaved-mechanic-button": true,
         "o-enslaved-mechanic-button--clickable": !this.isDoomed,
         "l-fixed-setting": !this.canDischarge || this.hasNoCharge,
-        "o-pelle-disabled": this.isDoomed
+        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
       };
     },
     doomedDisabledClass() {
@@ -116,7 +116,7 @@ export default {
     mechanicButtonClass() {
       return {
         "o-enslaved-mechanic-button": true,
-        "o-enslaved-mechanic-button--clickable": !this.isDoomed
+        "o-enslaved-mechanic-button--clickable": !this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
       };
     }
   },
