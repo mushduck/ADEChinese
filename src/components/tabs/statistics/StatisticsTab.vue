@@ -183,7 +183,7 @@ export default {
       if (isEndgameUnlocked) {
         endgame.count = Math.floor(player.endgames);
         endgame.totalEndgameAntimatter.copyFrom(records.totalEndgameAntimatter);
-        endgame.hasBest = bestEndgame.time.lt(999999999999);
+        endgame.hasBest = bestEndgame.realTime <= 999999999999;
         endgame.best.setFrom(bestEndgame.time);
         endgame.bestReal.setFrom(new Decimal(bestEndgame.realTime));
         endgame.this.setFrom(records.thisEndgame.time);
@@ -251,7 +251,7 @@ export default {
         </div>
         <br>
         <div>
-          You have seen {{ quantifyInt("news message", totalNews) }} in total.
+          You have seen {{ quantifyHybridSmall("news message", totalNews) }} in total.
         </div>
         <div>
           You have seen {{ quantifyInt("unique news message", uniqueNews) }}.
