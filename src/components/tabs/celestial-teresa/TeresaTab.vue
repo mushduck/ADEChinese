@@ -5,10 +5,12 @@ import CelestialQuoteHistory from "@/components/CelestialQuoteHistory";
 import CustomizeableTooltip from "@/components/CustomizeableTooltip";
 import GlyphSetPreview from "@/components/GlyphSetPreview";
 import PerkShopUpgradeButton from "./PerkShopUpgradeButton";
+import PrimaryButton from "@/components/PrimaryButton";
 
 export default {
   name: "TeresaTab",
   components: {
+    PrimaryButton,
     GlyphSetPreview,
     PerkShopUpgradeButton,
     CelestialQuoteHistory,
@@ -27,7 +29,7 @@ export default {
       bestAM: new Decimal(0),
       bestAMSet: [],
       lastMachines: new Decimal(0),
-      runReward: 0,
+      runReward: new Decimal(0),
       perkPoints: 0,
       hasReality: false,
       hasEPGen: false,
@@ -35,6 +37,13 @@ export default {
       raisedPerkShop: false,
       isRunning: false,
       canUnlockNextPour: false,
+      chargeUnlocked: false,
+      totalCharges: 0,
+      chargesUsed: 0,
+      disCharge: false,
+      chargeView: false,
+      chargeUnlocked: false,
+      autoPour: false,
     };
   },
   computed: {
@@ -52,6 +61,7 @@ export default {
         PerkShopUpgrade.musicGlyph,
       ];
       if (this.raisedPerkShop) upgrades.push(PerkShopUpgrade.fillMusicGlyph);
+      if (ExpansionPack.teresaPack.isBought) upgrades.push(PerkShopUpgrade.addCharges);
       return upgrades;
     },
     runButtonClassObject() {
@@ -72,6 +82,16 @@ export default {
         "c-disabled-pour": this.isPouredAmountCapped
       };
     },
+    autoClassObject() {
+      return {
+        "o-teresa-shop-button": true,
+        "c-teresa-pour": true,
+        "o-teresa-shop-button--available": true
+      };
+    },
+    autoText() {
+      return this.autoPour ? "Auto ON" : "Auto OFF";
+    },
     pourText() {
       return this.isPouredAmountCapped ? "Filled" : "Pour RM";
     },
@@ -89,13 +109,33 @@ export default {
       };
     },
     isDoomed: () => Pelle.isDoomed,
+    disChargeClassObject() {
+      return {
+        "o-primary-btn--subtab-option": true,
+        "o-primary-btn--charged-respec-active": this.disCharge
+      };
+    },
+    chargeDisplay() {
+      return `Charge Upgrades: ${this.chargeView ? "ON" : "OFF"}`;
+    },
+  },
+  watch: {
+    disCharge(newValue) {
+      player.celestials.teresa.disCharge = newValue;
+    },
+    chargeView(newValue) {
+      player.celestials.teresa.chargeMode = newValue;
+    }
   },
   methods: {
     update() {
       const now = new Date().getTime();
       if (this.pour) {
-        const diff = (now - this.time) / 1000;
-        Teresa.pourRM(diff);
+        if (EndgameUpgrade(10).isLockingMechanics) EndgameUpgrade(10).tryShowWarningModal();
+        else {
+          const diff = (now - this.time) / 1000;
+          Teresa.pourRM(diff);
+        }
       } else {
         Teresa.timePoured = new Decimal(0);
       }
@@ -112,12 +152,19 @@ export default {
       this.bestAM.copyFrom(player.celestials.teresa.bestRunAM);
       this.bestAMSet = Glyphs.copyForRecords(player.celestials.teresa.bestAMSet);
       this.lastMachines.copyFrom(player.celestials.teresa.lastRepeatedMachines);
-      this.runReward = Teresa.runRewardMultiplier;
+      this.runReward.copyFrom(Teresa.runRewardMultiplier);
       this.perkPoints = Currency.perkPoints.value;
       this.rm.copyFrom(Currency.realityMachines);
       this.isRunning = Teresa.isRunning;
       this.canUnlockNextPour = TeresaUnlocks.all
         .filter(unlock => this.rm.plus(this.pouredAmount).gte(unlock.price) && !unlock.isUnlocked).length > 0;
+      this.chargeUnlocked = ExpansionPack.teresaPack.isBought;
+      this.totalCharges = Teresa.totalCharges;
+      this.chargesUsed = Teresa.totalCharges - Teresa.chargesLeft;
+      this.disCharge = player.celestials.teresa.disCharge;
+      this.chargeView = Teresa.chargeModeOn;
+      this.chargeUnlocked = ExpansionPack.teresaPack.isBought;
+      this.autoPour = player.celestials.teresa.autoPour;
     },
     startRun() {
       if (this.isDoomed) return;
@@ -136,6 +183,9 @@ export default {
         "c-teresa-unlock-description": true,
         "c-teresa-unlock-description--unlocked": this.hasUnlock(unlockInfo)
       };
+    },
+    toggleAuto() {
+      return player.celestials.teresa.autoPour = !player.celestials.teresa.autoPour;
     }
   }
 };
@@ -144,6 +194,23 @@ export default {
 <template>
   <div class="l-teresa-celestial-tab">
     <CelestialQuoteHistory celestial="teresa" />
+    <div
+      v-if="chargeUnlocked"
+      class="c-subtab-option-container"
+    >
+      <PrimaryButton
+        :class="disChargeClassObject"
+        @click="disCharge = !disCharge"
+      >
+        Respec Charged Perk Upgrades on next Endgame
+      </PrimaryButton>
+    </div>
+    <div v-if="chargeUnlocked">
+      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Perk Upgrades.
+      Charged Perk Upgrades have their effect altered.
+      <br>
+      Hold shift to show Charged Perk Upgrades. You can freely respec your choices on Endgame.
+    </div>
     <div>
       You have {{ quantify("Reality Machine", rm, 2, 2) }}.
     </div>
@@ -200,6 +267,13 @@ export default {
         </div>
       </div>
       <div class="l-rm-container l-teresa-mechanic-container">
+        <button
+          v-if="chargeUnlocked"
+          :class="autoClassObject"
+          @click="toggleAuto"
+        >
+          {{ autoText }}
+        </button>
         <button
           :class="pourButtonClassObject"
           @mousedown="pour = true"
@@ -262,6 +336,13 @@ export default {
           :key="upgrade.id"
           :upgrade="upgrade"
         />
+        <PrimaryButton
+          v-if="chargeUnlocked"
+          class="o-primary-btn--subtab-option"
+          @click="chargeView = !chargeView"
+        >
+          {{ chargeDisplay }}
+        </PrimaryButton>
         You can now modify the appearance of your Glyphs to look like Music Glyphs.
       </div>
       <div
