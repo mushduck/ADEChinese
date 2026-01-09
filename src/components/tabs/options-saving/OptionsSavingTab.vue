@@ -18,6 +18,9 @@ export default {
   },
   data() {
     return {
+      time: 0,
+      lastExportTime: 0,
+      hasExportedToday: false,
       cloudAvailable: false,
       cloudEnabled: false,
       forceCloudOverwrite: false,
@@ -71,6 +74,9 @@ export default {
   methods: {
     update() {
       const options = player.options;
+      this.time = Date.now();
+      this.lastExportTime = player.lastExportTime;
+      this.hasExportedToday = Math.floor(this.time / 86400000) <= Math.floor(this.lastExportTime / 86400000);
       this.cloudAvailable = Cloud.isAvailable;
       this.cloudEnabled = options.cloudEnabled;
       this.forceCloudOverwrite = options.forceCloudOverwrite;
@@ -110,6 +116,18 @@ export default {
         Modal.message.show(`You cannot modify your seed any more. Glyph RNG has already been used to generate
           at least one Glyph on this run.`);
       }
+    },
+    exportSave() {
+      if (!this.hasExportedToday) {
+        GameStorage.export();
+        player.lastExportTime = Date.now();
+        player.storedTime += 3600;
+        GameUI.notify.info("Daily Export rewards have been granted!");
+      }
+      if (this.hasExportedToday) {
+        GameStorage.export();
+        GameUI.notify.info("You have already exported your save today!");
+      }
     }
   }
 };
@@ -117,12 +135,15 @@ export default {
 
 <template>
   <div class="l-options-tab">
+    <div>
+      You can export your save once per day to get free rewards!
+    </div>
     <div class="l-options-grid">
       <div class="l-options-grid__row">
         <OptionsButton
           class="o-primary-btn--option_font-x-large"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
-          onclick="GameStorage.export()"
+          @click="exportSave()"
         >
           Export save
         </OptionsButton>
