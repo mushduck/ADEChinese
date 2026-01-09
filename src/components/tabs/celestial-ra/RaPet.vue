@@ -35,6 +35,7 @@ export default {
       currentChunkMult: 0,
       nextMemoryUpgradeEstimate: "",
       nextMemoryChunkUpgradeEstimate: "",
+      isExpanded: false,
     };
   },
   computed: {
@@ -87,6 +88,7 @@ export default {
       this.chunkUpgradeCapped = pet.chunkUpgradeCapped;
       this.currentMemoryMult = pet.memoryUpgradeCurrentMult;
       this.currentChunkMult = pet.chunkUpgradeCurrentMult;
+      this.isExpanded = ExpansionPack.raPack.isBought;
 
       this.nextMemoryUpgradeEstimate = Ra.timeToGoalString(pet, this.memoryUpgradeCost - this.memories);
       this.nextMemoryChunkUpgradeEstimate = Ra.timeToGoalString(pet, this.chunkUpgradeCost - this.memories);
@@ -122,6 +124,9 @@ export default {
         width: `${100 * Math.min(1, gone / cost)}%`,
         background: this.pet.color
       };
+    },
+    id(row, column) {
+      return (row - 1) * 7 + column - 1;
     },
   },
 };
@@ -274,13 +279,33 @@ export default {
         v-else
         class="l-ra-pet-postcompletion-spacer"
       />
-      <div class="l-ra-pet-milestones">
-        <!-- This choice of key forces a UI update every level up -->
-        <RaUpgradeIcon
-          v-for="(unlock, i) in unlocks"
-          :key="25 * level + i"
-          :unlock="unlock"
-        />
+      <div v-if="isExpanded">
+        <div
+          v-for="row in 2"
+          :key="row"
+          class="l-ra-pet-milestones"
+        >
+          <!-- This choice of key forces a UI update every level up -->
+          <RaUpgradeIcon
+            v-for="column in 7"
+            :key="id(row, column)"
+            :unlock="unlocks[id(row, column)]"
+          />
+        </div>
+      </div>
+      <div v-if="!isExpanded">
+        <div
+          v-for="row in 1"
+          :key="row"
+          class="l-ra-pet-milestones"
+        >
+          <!-- This choice of key forces a UI update every level up -->
+          <RaUpgradeIcon
+            v-for="column in 7"
+            :key="id(row, column)"
+            :unlock="unlocks[id(row, column)]"
+          />
+        </div>
       </div>
     </div>
   </div>
