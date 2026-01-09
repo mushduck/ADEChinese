@@ -22,7 +22,8 @@ export default {
       eternityUnlocked: false,
       bottomRowUnlocked: false,
       styleOfColumnBg: undefined,
-      isUncapped: false
+      isUncapped: false,
+      isSoftcapApplicable: false
     };
   },
   computed: {
@@ -80,15 +81,16 @@ export default {
   methods: {
     update() {
       this.isUseless = Pelle.isDoomed;
-      this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && !Pelle.isDoomed;
+      this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && (!Pelle.isDoomed || PelleCelestialUpgrade.raTeresa2.isBought);
       this.totalCharges = Ra.totalCharges;
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
       this.disCharge = player.celestials.ra.disCharge;
-      this.ipMultSoftCap = GameDatabase.infinity.upgrades.ipMult.costIncreaseThreshold;
+      this.ipMultSoftCap = InfinityUpgrade.ipMult.costIncreaseThreshold;
       this.ipMultHardCap = InfinityUpgrade.ipMult.costCap;
       this.eternityUnlocked = PlayerProgress.current.isEternityUnlocked;
       this.bottomRowUnlocked = Achievement(41).isUnlocked;
       this.isUncapped = BreakEternityUpgrade.doubleIPUncap.isBought;
+      this.isSoftcapApplicable = !EndgameUpgrade(21).isBought;
     },
     btnClassObject(column) {
       const classObject = {
@@ -172,11 +174,11 @@ export default {
         :class="btnClassObject(1)"
       />
     </div>
-    <div v-if="eternityUnlocked && bottomRowUnlocked">
+    <div v-if="eternityUnlocked && bottomRowUnlocked && isSoftcapApplicable">
       The Infinity Point multiplier becomes more expensive
       <br>
-      above {{ formatPostBreak(ipMultSoftCap, 2, 1) }} Infinity Points<span v-if="!isUncapped">, and cannot be purchased past
-      {{ formatPostBreak(ipMultHardCap, 2, 1) }} Infinity Points</span>.
+      above {{ formatPostBreak(ipMultSoftCap, 2, 1) }} Infinity
+      Points<span v-if="!isUncapped">, and cannot be purchased past {{ formatPostBreak(ipMultHardCap, 2, 1) }} Infinity Points</span>.
     </div>
   </div>
 </template>
