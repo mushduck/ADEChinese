@@ -13,10 +13,10 @@ export default {
       glyphLevel: 0,
       nextGlyphPercent: 0,
       nextMachineEP: 0,
-      shardsGained: 0,
-      currentShardsRate: 0,
-      bestShardRate: 0,
-      bestShardRateVal: 0,
+      shardsGained: new Decimal(0),
+      currentShardsRate: new Decimal(0),
+      bestShardRate: new Decimal(0),
+      bestShardRateVal: new Decimal(0),
       ppGained: 0,
       celestialRunText: ["", "", "", "", ""]
     };
@@ -48,8 +48,8 @@ export default {
       if (this.glyphLevel >= 10000) return `Glyph level: ${formatInt(this.glyphLevel)}`;
       return `Glyph level: ${formatInt(this.glyphLevel)} (${this.nextGlyphPercent} to next)`;
     },
-    showShardsRate() {
-      return this.currentShardsRate;
+    showsRate() {
+      return this.currentsRate;
     },
     shardsGainedText() {
       return quantify("Relic Shard", this.shardsGained, 2);
@@ -75,7 +75,7 @@ export default {
       this.canReality = isRealityAvailable();
       this.showSpecialEffect = this.hasSpecialReward();
       if (!this.canReality) {
-        this.shardsGained = 0;
+        this.sGained = new Decimal(0);
         return;
       }
       function EPforRM(rm) {
@@ -99,10 +99,10 @@ export default {
       this.nextGlyphPercent = this.percentToNextGlyphLevelText();
       this.nextMachineEP = EPforRM(this.machinesGained.plus(1));
       this.ppGained = multiplier;
-      this.shardsGained = Effarig.shardsGained * multiplier;
-      this.currentShardsRate = (this.shardsGained / Time.thisRealityRealTime.totalMinutes.toNumber());
-      this.bestShardRate = player.records.thisReality.bestRSmin * multiplier;
-      this.bestShardRateVal = player.records.thisReality.bestRSminVal * multiplier;
+      this.shardsGained.copyFrom(Effarig.shardsGained.times(multiplier));
+      this.currentShardsRate.copyFrom(this.shardsGained.div(Time.thisRealityRealTime.totalMinutes));
+      this.bestShardRate.copyFrom(player.records.thisReality.bestRSmin.times(multiplier));
+      this.bestShardRateVal.copyFrom(player.records.thisReality.bestRSminVal.times(multiplier));
 
       const teresaReward = this.formatScalingMultiplierText(
         "Glyph Sacrifice",
@@ -166,7 +166,7 @@ export default {
         >
           <div>Other resources gained:</div>
           <div>{{ quantifyInt("Perk Point", ppGained) }}</div>
-          <div v-if="shardsGained !== 0">
+          <div v-if="shardsGained.neq(0)">
             {{ shardsGainedText }} ({{ format(currentShardsRate, 2) }}/min)
             <br>
             Peak: {{ format(bestShardRate, 2) }}/min at {{ format(bestShardRateVal, 2) }} RS
