@@ -1,3 +1,4 @@
+import { endgameMigration } from "./endgame-migrations";
 import { deepmergeAll } from "@/utility/deepmerge";
 
 // WARNING: Don't use state accessors and functions from global scope here, that's not safe in long-term
@@ -419,6 +420,10 @@ export const migrations = {
 
       // This update has a rebalance that assumes the 3rd dilation repeatable is unpurchasable in cel7
       if (player.celestials.pelle.doomed) player.dilation.rebuyables[3] = 0;
+    },
+    //Start with 100 since Endgame is a "new era"
+    100: player => {
+      endgameMigration(player);
     }
   },
 
