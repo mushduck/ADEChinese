@@ -1533,7 +1533,7 @@ export const devMigrations = {
     player => {
       player.options.lightGlyphs = !player.options.forceDarkGlyphs;
       delete player.options.forceDarkGlyphs;
-    }
+    },
   ],
 
   patch(player) {
