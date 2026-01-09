@@ -94,13 +94,13 @@ export const shortcuts = [
       replicantiGalaxyRequest();
       setHoldingR(true);
     },
-    visible: () => Replicanti.areUnlocked || PlayerProgress.eternityUnlocked()
+    visible: () => Replicanti.areUnlocked || PlayerProgress.eternityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
     name: "Eternity",
     keys: ["e"],
     type: "bindRepeatableHotkey",
     function: () => eternityResetRequest(),
-    visible: () => PlayerProgress.eternityUnlocked() || Player.canEternity
+    visible: () => PlayerProgress.eternityUnlocked() || Player.canEternity || PlayerProgress.endgameUnlocked()
   }, {
     name: "Toggle Time Study respec",
     keys: ["shift", "e"],
@@ -109,19 +109,19 @@ export const shortcuts = [
       player.respec = !player.respec;
       GameUI.notify.info(`Time Study respec is now ${player.respec ? "active" : "inactive"}`);
     },
-    visible: () => PlayerProgress.eternityUnlocked()
+    visible: () => PlayerProgress.eternityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
     name: "Enter/Exit Dilation",
     keys: ["l"],
     type: "bindRepeatableHotkey",
     function: () => startDilatedEternityRequest(),
-    visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.dilationUnlocked()
+    visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.dilationUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
     name: "Reality",
     keys: ["y"],
     type: "bindRepeatableHotkey",
     function: () => requestManualReality(),
-    visible: () => PlayerProgress.realityUnlocked() || isRealityAvailable()
+    visible: () => PlayerProgress.realityUnlocked() || isRealityAvailable() || PlayerProgress.endgameUnlocked()
   }, {
     name: "Toggle Glyph unequip",
     keys: ["shift", "y"],
@@ -130,49 +130,49 @@ export const shortcuts = [
       player.reality.respec = !player.reality.respec;
       GameUI.notify.info(`Glyph respec is now ${player.reality.respec ? "active" : "inactive"}`);
     },
-    visible: () => PlayerProgress.realityUnlocked()
+    visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
     name: "Start/Pause Automator",
     keys: ["u"],
     type: "bindHotkey",
     function: () => keyboardAutomatorToggle(),
-    visible: () => Player.automatorUnlocked
+    visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
     name: "Restart Automator",
     keys: ["shift", "u"],
     type: "bindHotkey",
     function: () => keyboardAutomatorRestart(),
-    visible: () => Player.automatorUnlocked
+    visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
     name: "Undo Edit (Automator)",
     keys: ["mod", "z"],
     type: "bind",
     function: () => AutomatorData.undoScriptEdit(),
-    visible: () => Player.automatorUnlocked
+    visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
     name: "Redo Edit (Automator)",
     keys: ["mod", "y"],
     type: "bind",
     function: () => AutomatorData.redoScriptEdit(),
-    visible: () => Player.automatorUnlocked
+    visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
     name: "Toggle Black Hole",
     keys: ["b"],
     type: "bindHotkey",
     function: () => BlackHoles.togglePause(),
-    visible: () => PlayerProgress.realityUnlocked()
+    visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
     name: "Toggle Continuum",
     keys: ["alt", "a"],
     type: "bindHotkey",
     function: () => keyboardToggleContinuum(),
-    visible: () => Laitela.continuumUnlocked
+    visible: () => Laitela.continuumUnlocked || PlayerProgress.endgameUnlocked()
   }, {
     name: "Armageddon",
     keys: ["z"],
     type: "bindRepeatableHotkey",
     function: () => armageddonRequest(),
-    visible: () => Pelle.isDoomed
+    visible: () => Pelle.isDoomed || PlayerProgress.endgameUnlocked()
   }, {
     name: "Toggle Glyph unequip (Pelle)",
     keys: ["shift", "z"],
@@ -182,7 +182,34 @@ export const shortcuts = [
       player.reality.respec = !player.reality.respec;
       GameUI.notify.info(`Glyph respec is now ${player.reality.respec ? "active" : "inactive"}`);
     },
-    visible: () => Pelle.isDoomed
+    visible: () => Pelle.isDoomed || PlayerProgress.endgameUnlocked()
+  }, {
+    name: "Doom Reality",
+    keys: ["alt", "z"],
+    type: "bindHotkey",
+    function: () => Pelle.initializeRun(),
+    visible: () => PlayerProgress.endgameUnlocked()
+  }, {
+    name: "Endgame",
+    keys: ["n"],
+    type: "bindRepeatableHotkey",
+    function: () => Endgame.newEndgame(),
+    visible: () => PlayerProgress.endgameUnlocked()
+  }, {
+    name: "Reset Endgame",
+    keys: ["alt", "n"],
+    type: "bindHotkey",
+    function: () => Endgame.resetNoReward(),
+    visible: () => PlayerProgress.endgameUnlocked()
+  }, {
+    name: "Toggle Endgame Mastery respec",
+    keys: ["shift", "n"],
+    type: "bindHotkey",
+    function: () => {
+      player.endgame.respec = !player.endgame.respec;
+      GameUI.notify.info(`Endgame Mastery respec is now ${player.endgame.respec ? "active" : "inactive"}`);
+    },
+    visible: () => PlayerProgress.endgameUnlocked()
   }, {
     name: "Save game",
     keys: ["mod", "s"],
