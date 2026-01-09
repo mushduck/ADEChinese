@@ -14,8 +14,8 @@ export default {
       dilatedTime: new Decimal(),
       dilatedTimeIncome: new Decimal(),
       galaxyThreshold: new Decimal(),
-      baseGalaxies: 0,
-      totalGalaxies: 0,
+      baseGalaxies: new Decimal(),
+      totalGalaxies: new Decimal(),
       tachyonGalaxyGain: 1,
       hasPelleDilationUpgrades: false,
       galaxyTimeEstimate: "",
@@ -23,7 +23,9 @@ export default {
       toMaxTooltip: "",
       isHovering: false,
       isEndgameUnlocked: false,
-      scaleStart: new Decimal()
+      scaleStart: new Decimal(),
+      viewSoftcap: false,
+      softcapStart: new Decimal()
     };
   },
   computed: {
@@ -71,7 +73,7 @@ export default {
       return DilationUpgrade.ttGenerator;
     },
     baseGalaxyText() {
-      return `${formatInt(this.baseGalaxies)} Base`;
+      return `${formatHybridLarge(this.baseGalaxies, 3)} Base`;
     },
     hasMaxText: () => PlayerProgress.realityUnlocked() && !Pelle.isDoomed,
     allRebuyables() {
@@ -106,10 +108,10 @@ export default {
         this.dilatedTimeIncome = rawDTGain;
       }
       this.galaxyThreshold.copyFrom(player.dilation.nextThreshold);
-      this.baseGalaxies = player.dilation.baseTachyonGalaxies;
-      this.totalGalaxies = player.dilation.totalTachyonGalaxies;
+      this.baseGalaxies.copyFrom(player.dilation.baseTachyonGalaxies);
+      this.totalGalaxies.copyFrom(player.dilation.totalTachyonGalaxies);
       this.hasPelleDilationUpgrades = PelleRifts.paradox.milestones[0].canBeApplied;
-      if (this.baseGalaxies < 500 && DilationUpgrade.doubleGalaxies.isBought) {
+      if (this.baseGalaxies.lt(500) && DilationUpgrade.doubleGalaxies.isBought) {
         this.tachyonGalaxyGain = DilationUpgrade.doubleGalaxies.effectValue;
       } else {
         this.tachyonGalaxyGain = 1;
@@ -122,7 +124,9 @@ export default {
       else this.toMaxTooltip = estimateText.startsWith("<") ? "Currently Increasing" : estimateText;
 
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
-      this.scaleStart = DilationUpgradeScaling.PRIMARY_SCALING;
+      this.scaleStart.copyFrom(DilationUpgradeScaling.PRIMARY_SCALING);
+      this.viewSoftcap = this.maxDT.gte(this.softcapStart);
+      this.softcapStart.copyFrom(DilationSoftcapStart.PRIMARY_THRESHOLD);
     }
   }
 };
@@ -149,7 +153,7 @@ export default {
     </span>
     <span>
       Next
-      <span v-if="tachyonGalaxyGain > 1">{{ formatInt(tachyonGalaxyGain) }}</span>
+      <span v-if="tachyonGalaxyGain > 1">{{ formatHybridLarge(tachyonGalaxyGain, 3) }}</span>
       {{ pluralize("Tachyon Galaxy", tachyonGalaxyGain) }} at
       <span
         class="c-dilation-tab__galaxy-threshold"
@@ -159,7 +163,7 @@ export default {
       <span
         class="c-dilation-tab__galaxies"
         :ach-tooltip="baseGalaxyText"
-      >{{ formatInt(totalGalaxies) }}</span>
+      >{{ formatHybridLarge(totalGalaxies, 3) }}</span>
       {{ pluralize("Tachyon Galaxy", totalGalaxies) }}
     </span>
     <span v-if="hasMaxText">
@@ -171,6 +175,11 @@ export default {
     </span>
     <span v-if="isEndgameUnlocked">
       Past {{ format(scaleStart, 2, 1) }} Dilated Time, all rebuyable Dilation Upgrades will scale faster.
+    </span>
+    <span v-if="viewSoftcap">
+      Dilated Time has been softcapped. This effect started at {{ format(softcapStart, 2, 1) }} Dilated Time.
+      <br>
+      Note that you may not immediately encounter the softcap as it applies before the Game Speed effect.
     </span>
     <div class="l-dilation-upgrades-grid">
       <div
