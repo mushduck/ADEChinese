@@ -16,7 +16,7 @@ export class DilationUpgradeAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get isUnlocked() {
-    return Perk.autobuyerDilation.isEffectActive && !Pelle.isDoomed;
+    return Perk.autobuyerDilation.isEffectActive && (!Pelle.isDoomed || PellePerkUpgrade.perkDAU.isBought);
   }
 
   get resetTickOn() {
