@@ -53,8 +53,10 @@ export default {
     },
     pelleGlyphText() {
       return Pelle.isDoomed
-        ? `Glyph Rarity is set to ${formatPercents(strengthToRarity(Pelle.glyphStrength))}
-          and Level is capped at ${formatInt(Pelle.glyphMaxLevel)}`
+        ? (!PelleDestructionUpgrade.glyphRarity.isBought
+           ? `Glyph Rarity is set to ${formatPercents(strengthToRarity(Pelle.glyphStrength))} and `
+           : "")
+          + `Level is capped at ${formatInt(Pelle.glyphMaxLevel)}`
         : "";
     },
     showChaosText() {
