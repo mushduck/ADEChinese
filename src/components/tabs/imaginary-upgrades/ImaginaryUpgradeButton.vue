@@ -79,12 +79,16 @@ export default {
     getETAText() {
       if (this.canBeBought || !this.isAvailableForPurchase || this.isBought || Pelle.isDoomed) return "";
       const time = MachineHandler.estimateIMTimer(this.upgrade.cost);
-      if (isFinite(time)) return TimeSpan.fromSeconds(new Decimal(time)).toString();
+      if (isFinite(new Decimal(time).toNumber())) return TimeSpan.fromSeconds(new Decimal(time)).toString();
       return "Never affordable";
     },
     toggleLock(upgrade) {
       if (this.isRebuyable) return;
       upgrade.toggleMechanicLock();
+    },
+    attemptPurchase() {
+      if (this.upgrade.id === 15 && EndgameUpgrade(9).isLockingMechanics) EndgameUpgrade(9).tryShowWarningModal();
+      else this.upgrade.purchase();
     }
   }
 };
@@ -99,7 +103,7 @@ export default {
       :class="classObject"
       class="l-reality-upgrade-btn c-reality-upgrade-btn"
       @click.shift.exact="toggleLock(upgrade)"
-      @click.exact="upgrade.purchase()"
+      @click.exact="attemptPurchase"
     >
       <HintText
         type="realityUpgrades"
@@ -156,3 +160,4 @@ export default {
 <style scoped>
 
 </style>
+
