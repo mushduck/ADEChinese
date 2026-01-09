@@ -1,19 +1,56 @@
 <script>
 import PrimaryButton from "@/components/PrimaryButton";
+import ExpansionPacksContainer from "./ExpansionPacksContainer";
 
 export default {
   name: "ExpansionPacksTab",
   components: {
     PrimaryButton,
+    ExpansionPacksContainer
   },
   data() {
     return {
       isUnlocked: false,
       isUnlockAffordable: false,
       unlockCost: new Decimal(),
+      nextPack: 0
     };
   },
   computed: {
+    grid() {
+      return [
+        [
+          ExpansionPack.teresaPack
+        ],
+        [
+          ExpansionPack.effarigPack
+        ],
+        [
+          ExpansionPack.enslavedPack
+        ],
+        [
+          ExpansionPack.vPack
+        ],
+        [
+          ExpansionPack.raPack
+        ],
+        [
+          ExpansionPack.laitelaPack
+        ],
+        [
+          ExpansionPack.pellePack
+        ]
+      ];
+    },
+    nextAtDisplay() {
+      const first = this.nextPack?.id === 1;
+      const next = ExpansionPacks.nextPackUnlockAM;
+
+      if (first) return `The first Expansion Pack unlocks at ${format(next)} Antimatter.`;
+      return next === undefined
+        ? "All Expansion Packs unlocked"
+        : `Next Expansion Pack unlocks at ${format(next)} Antimatter.`;
+    },
     classObject() {
       return {
         "c-primary-btn--expansion-packs-unlock": true,
@@ -25,13 +62,13 @@ export default {
   },
   methods: {
     update() {
-      //this.isUnlocked = ExpansionPacks.areUnlocked;
-      //PrimaryButton onclick="ExpansionPacks.unlock();"
-      this.unlockCost = Math.pow(2, 64);
+      this.isUnlocked = ExpansionPacks.areUnlocked;
+      this.unlockCost.copyFrom(Decimal.pow(2, 64));
       if (!this.isUnlocked) {
-        this.isUnlockAffordable = player.galaxies + GalaxyGenerator.galaxies >= this.unlockCost;
+        this.isUnlockAffordable = player.galaxies.add(GalaxyGenerator.galaxies).gte(this.unlockCost);
         return;
       }
+      this.nextPack = ExpansionPacks.nextPack;
     }
   },
 };
@@ -44,11 +81,29 @@ export default {
       v-if="!isUnlocked"
       :enabled="isUnlockAffordable"
       :class="classObject"
+      onclick="ExpansionPacks.unlock();"
     >
       Unlock Expansion Packs
       <br>
       Cost: {{ format(unlockCost, 2, 3) }} Galaxies
     </PrimaryButton>
+    <div v-if="isUnlocked">
+      <div
+        v-for="(row, i) in grid"
+        :key="i"
+        class="l-expansion-packs-grid__row"
+      >
+        <ExpansionPacksContainer
+          v-for="pack in row"
+          :key="pack.id"
+          :pack="pack"
+          class="l-expansion-packs-grid__cell"
+        />
+      </div>
+      <div>
+        <span class="c-expansion-packs-next-text">{{ nextAtDisplay }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -97,6 +152,7 @@ export default {
 .c-primary-btn--expansion-packs-unlock--available:hover {
   color: var(--color-pelle--secondary);
   background: linear-gradient(var(--color-endgame), var(--color-pelle--base));
+  cursor: pointer;
 }
 
 .c-primary-btn--expansion-packs-unlock--bought {
@@ -104,5 +160,20 @@ export default {
   background: linear-gradient(var(--color-endgame), var(--color-pelle--base));
   box-shadow: inset 0 0 2rem 0.1rem var(--color-pelle--secondary);
   transition-duration: 0.3s;
+}
+
+.l-expansion-packs-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-expansion-packs-grid__cell {
+  margin: 0.5rem 0.8rem;
+}
+
+.c-expansion-packs-next-text {
+  color: var(--color-endgame);
+  font-size: 2rem;
+  font-weight: bold;
 }
 </style>

@@ -11,7 +11,7 @@ export default {
       isAffordable: false,
       tickspeed: new Decimal(0),
       gameSpeedMult: new Decimal(1),
-      galaxyCount: 0,
+      galaxyCount: new Decimal(0),
       isContinuumActive: false,
       continuumValue: 0,
       hasTutorial: false,
@@ -28,7 +28,7 @@ export default {
     },
     multiplierDisplay() {
       if (InfinityChallenge(3).isRunning) return `Multiply all Antimatter Dimensions by
-        ${formatX(1.05 + this.galaxyCount * 0.005, 3, 3)}`;
+        ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)}`;
       const tickmult = this.mult;
       return `${formatX(tickmult.reciprocal(), 2, 3)} faster / upgrade.`;
     },
@@ -36,13 +36,13 @@ export default {
       return `Tickspeed: ${format(this.tickspeed, 2, 3)} / sec`;
     },
     continuumString() {
-      return formatFloat(this.continuumValue, 2);
+      return formatHybridFloat(this.continuumValue, 2);
     },
     upgradeCount() {
       const purchased = this.purchasedTickspeed;
-      if (!this.freeTickspeed) return quantifyInt("Purchased Upgrade", purchased);
-      if (purchased === 0 || this.isContinuumActive) return `${formatInt(this.freeTickspeed)} Free Upgrades`;
-      return `${formatInt(purchased)} Purchased + ${formatInt(this.freeTickspeed)} Free`;
+      if (!this.freeTickspeed) return quantifyHybridLarge("Purchased Upgrade", purchased);
+      if (purchased === 0 || this.isContinuumActive) return `${formatHybridLarge(this.freeTickspeed, 3)} Free Upgrades`;
+      return `${formatHybridLarge(purchased, 3)} Purchased + ${formatHybridLarge(this.freeTickspeed, 3)} Free`;
     }
   },
   methods: {
@@ -57,8 +57,8 @@ export default {
       this.cost.copyFrom(Tickspeed.cost);
       this.isAffordable = Tickspeed.isAvailableForPurchase && Tickspeed.isAffordable;
       this.tickspeed.copyFrom(Tickspeed.perSecond);
-      this.gameSpeedMult = getGameSpeedupForDisplay();
-      this.galaxyCount = player.galaxies;
+      this.gameSpeedMult.copyFrom(getGameSpeedupForDisplay());
+      this.galaxyCount.copyFrom(player.galaxies);
       this.isContinuumActive = Laitela.continuumActive;
       if (this.isContinuumActive) this.continuumValue = Tickspeed.continuumValue;
       this.hasTutorial = Tutorial.isActive(TUTORIAL_STATE.TICKSPEED);

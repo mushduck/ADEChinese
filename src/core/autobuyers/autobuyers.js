@@ -2,21 +2,27 @@ import { AnnihilationAutobuyerState } from "./annihilation-autobuyer";
 import { AntimatterDimensionAutobuyerState } from "./antimatter-dimension-autobuyer";
 import { BigCrunchAutobuyerState } from "./big-crunch-autobuyer";
 import { BlackHolePowerAutobuyerState } from "./black-hole-power-autobuyer";
+import { BulkSingularityAutobuyerState } from "./bulk-singularity-autobuyer";
 import { DarkMatterDimensionAscensionAutobuyerState } from "./dark-matter-dimension-ascension-autobuyer";
 import { DarkMatterDimensionAutobuyerState } from "./dark-matter-dimension-autobuyer";
 import { DilationUpgradeAutobuyerState } from "./dilation-upgrade-autobuyer";
 import { DimBoostAutobuyerState } from "./dimboost-autobuyer";
+import { EndgameAutobuyerState } from "./endgame-autobuyer";
 import { EternityAutobuyerState } from "./eternity-autobuyer";
 import { GalaxyAutobuyerState } from "./galaxy-autobuyer";
+import { GalaxyGeneratorAutobuyerState } from "./galaxy-generator-autobuyer";
 import { ImaginaryUpgradeAutobuyerState } from "./imaginary-upgrade-autobuyer";
 import { InfinityDimensionAutobuyerState } from "./infinity-dimension-autobuyer";
 import { EPMultAutobuyerState, IPMultAutobuyerState } from "./prestige-currency-multiplier-autobuyer";
+import { MusicGlyphPurgeAutobuyerState } from "./music-glyph-purge-autobuyer";
+import { PelleDilationUpgradeAutobuyerState } from "./pelle-dilation-upgrade-autobuyer";
 import { RealityAutobuyerState } from "./reality-autobuyer";
 import { RealityUpgradeAutobuyerState } from "./reality-upgrade-autobuyer";
 import { ReplicantiGalaxyAutobuyerState } from "./replicanti-galaxy-autobuyer";
 import { ReplicantiUpgradeAutobuyerState } from "./replicanti-upgrade-autobuyer";
 import { SacrificeAutobuyerState } from "./sacrifice-autobuyer";
 import { SingularityAutobuyerState } from "./singularity-autobuyer";
+import { TesseractAutobuyerState } from "./tesseract-autobuyer";
 import { TickspeedAutobuyerState } from "./tickspeed-autobuyer";
 import { TimeDimensionAutobuyerState } from "./time-dimension-autobuyer";
 import { TimeTheoremAutobuyerState } from "./time-theorem-autobuyer";
@@ -26,22 +32,28 @@ export const Autobuyer = {
   antimatterDimension: AntimatterDimensionAutobuyerState.createAccessor(),
   bigCrunch: new BigCrunchAutobuyerState(),
   blackHolePower: BlackHolePowerAutobuyerState.createAccessor(),
+  bulkSingularity: new BulkSingularityAutobuyerState(),
   darkMatterDimsAscension: new DarkMatterDimensionAscensionAutobuyerState(),
   darkMatterDims: new DarkMatterDimensionAutobuyerState(),
   dilationUpgrade: DilationUpgradeAutobuyerState.createAccessor(),
   dimboost: new DimBoostAutobuyerState(),
+  endgame: new EndgameAutobuyerState(),
   eternity: new EternityAutobuyerState(),
   galaxy: new GalaxyAutobuyerState(),
+  galaxyGenerator: GalaxyGeneratorAutobuyerState.createAccessor(),
   imaginaryUpgrade: ImaginaryUpgradeAutobuyerState.createAccessor(),
   infinityDimension: InfinityDimensionAutobuyerState.createAccessor(),
   ipMult: new IPMultAutobuyerState(),
   epMult: new EPMultAutobuyerState(),
+  musicGlyphPurge: new MusicGlyphPurgeAutobuyerState(),
+  pelleDilationUpgrade: PelleDilationUpgradeAutobuyerState.createAccessor(),
   reality: new RealityAutobuyerState(),
   realityUpgrade: RealityUpgradeAutobuyerState.createAccessor(),
   replicantiGalaxy: new ReplicantiGalaxyAutobuyerState(),
   replicantiUpgrade: ReplicantiUpgradeAutobuyerState.createAccessor(),
   sacrifice: new SacrificeAutobuyerState(),
   singularity: new SingularityAutobuyerState(),
+  tesseract: new TesseractAutobuyerState(),
   tickspeed: new TickspeedAutobuyerState(),
   timeDimension: TimeDimensionAutobuyerState.createAccessor(),
   timeTheorem: new TimeTheoremAutobuyerState()
@@ -58,6 +70,7 @@ export const Autobuyers = (function() {
     Autobuyer.bigCrunch,
     Autobuyer.eternity,
     Autobuyer.reality,
+    Autobuyer.endgame,
   ];
 
   const single = [
@@ -70,20 +83,25 @@ export const Autobuyers = (function() {
     Autobuyer.darkMatterDimsAscension,
     Autobuyer.singularity,
     Autobuyer.annihilation,
+    Autobuyer.tesseract,
+    Autobuyer.musicGlyphPurge,
   ];
 
   const singleComplex = [
     Autobuyer.tickspeed,
     Autobuyer.galaxy,
     Autobuyer.dimboost,
+    Autobuyer.bulkSingularity
   ].concat(single);
 
   const arrays = [
     Autobuyer.replicantiUpgrade.zeroIndexed,
     Autobuyer.dilationUpgrade.zeroIndexed,
+    Autobuyer.pelleDilationUpgrade.zeroIndexed,
     Autobuyer.blackHolePower.zeroIndexed,
     Autobuyer.realityUpgrade.zeroIndexed,
     Autobuyer.imaginaryUpgrade.zeroIndexed,
+    Autobuyer.galaxyGenerator.zeroIndexed,
   ];
   const all = dimensions.concat(prestige, singleComplex, arrays);
   const multiple = [
@@ -92,9 +110,11 @@ export const Autobuyers = (function() {
     Autobuyer.timeDimension,
     Autobuyer.replicantiUpgrade,
     Autobuyer.dilationUpgrade,
+    Autobuyer.pelleDilationUpgrade,
     Autobuyer.blackHolePower,
     Autobuyer.realityUpgrade,
     Autobuyer.imaginaryUpgrade,
+    Autobuyer.galaxyGenerator,
   ];
 
   return {
@@ -112,11 +132,13 @@ export const Autobuyers = (function() {
     },
 
     get hasAutobuyersForEditModal() {
-      return [Autobuyer.dimboost,
+      return [Autobuyer.bulkSingularity,
+        Autobuyer.dimboost,
         Autobuyer.galaxy,
         Autobuyer.bigCrunch,
         Autobuyer.eternity,
-        Autobuyer.reality].some(autobuyer => autobuyer.isUnlocked);
+        Autobuyer.reality,
+        Autobuyer.endgame].some(autobuyer => autobuyer.isUnlocked);
     },
 
     toggle() {
@@ -159,3 +181,4 @@ EventHub.logic.on(GAME_EVENT.GALAXY_RESET_AFTER, () => Autobuyers.resetTick(PRES
 EventHub.logic.on(GAME_EVENT.BIG_CRUNCH_AFTER, () => Autobuyers.resetTick(PRESTIGE_EVENT.INFINITY));
 EventHub.logic.on(GAME_EVENT.ETERNITY_RESET_AFTER, () => Autobuyers.resetTick(PRESTIGE_EVENT.ETERNITY));
 EventHub.logic.on(GAME_EVENT.REALITY_RESET_AFTER, () => Autobuyers.resetTick(PRESTIGE_EVENT.REALITY));
+EventHub.logic.on(GAME_EVENT.ENDGAME_RESET_AFTER, () => Autobuyers.resetTick(PRESTIGE_EVENT.ENDGAME));

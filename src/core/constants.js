@@ -4,6 +4,7 @@ window.PRESTIGE_EVENT = {
   INFINITY: 2,
   ETERNITY: 3,
   REALITY: 4,
+  ENDGAME: 5,
 };
 
 function deepFreeze(obj) {
@@ -175,6 +176,8 @@ export const DC = deepFreeze({
   E12000:               new Decimal("1e12000"),
   E13000:               new Decimal("1e13000"),
   E14000:               new Decimal("1e14000"),
+  E15000:               new Decimal("1e15000"),
+  E16000:               new Decimal("1e16000"),
   E16500:               new Decimal("1e16500"),
   E17500:               new Decimal("1e17500"),
   E18000:               new Decimal("1e18000"),
@@ -211,8 +214,9 @@ export const DC = deepFreeze({
   E9E15:                new Decimal("1e9000000000000000"),
 
   //Hardcoded post-e9e15 values to be reformatted later
-  E9E115:               new Decimal("1e90000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
-  E1E300:               new Decimal("1e1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"),
+  E9E115:               Decimal.pow(10, 9e115),
+  E1E300:               Decimal.pow(10, 1e300),
+  ENUMMAX:              Decimal.pow(10, Number.MAX_VALUE),
 });
 
 window.AUTOBUYER_MODE = {
@@ -242,6 +246,14 @@ window.AUTO_REALITY_MODE = {
   RELIC_SHARD: 5,
 };
 
+window.AUTO_ENDGAME_MODE = {
+  AMOUNTCP: 0,
+  AMOUNTDP: 1,
+  TIME: 2,
+  X_HIGHEST_CP: 3,
+  X_HIGHEST_DP: 4
+};
+
 window.RECENT_PRESTIGE_RESOURCE = {
   ABSOLUTE_GAIN: 0,
   RATE: 1,
@@ -259,6 +271,13 @@ window.GLYPH_MIME_TYPE = "text/x-ivark-glyph";
 // in order for reality glyph color parsing to work properly in the cosmetic handler
 window.GlyphRarities = [
   {
+    minStrength: 4.125,
+    name: "Elysian",
+    darkColor: "#8020a0",
+    lightColor: "#8020a0",
+    darkHighContrast: "#a000a0",
+    lightHighContrast: "#800080"
+  }, {
     minStrength: 3.5,
     name: "Celestial",
     darkColor: "#3d3dec",

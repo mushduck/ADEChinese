@@ -17,6 +17,9 @@ export default {
       negativeBHDivisor: 1,
       maxNegativeBlackHole: 300,
       isDisabled: false,
+      amountSlider: 0.01,
+      timeSlider: 5,
+      areExtraSlidersUnlocked: false
     };
   },
   computed: {
@@ -39,6 +42,9 @@ export default {
       this.negativeBHDivisor = Math.pow(10, this.negativeSlider);
       const maxInversion = player.requirementChecks.reality.slowestBH <= 1e-300;
       this.isDisabled = ImaginaryUpgrade(24).isLockingMechanics && Ra.isRunning && maxInversion;
+      this.amountSlider = player.celestials.enslaved.pulseAmount * 500;
+      this.timeSlider = player.celestials.enslaved.pulseTime;
+      this.areExtraSlidersUnlocked = ExpansionPack.enslavedPack.isBought;
     },
     adjustSliderNegative(value) {
       this.negativeSlider = value;
@@ -48,10 +54,36 @@ export default {
         player.blackHoleNegative
       );
     },
+    adjustSliderPulseAmount(value) {
+      this.amountSlider = value;
+      player.celestials.enslaved.pulseAmount = this.amountSlider / 500;
+    },
+    adjustSliderPulseTime(value) {
+      this.timeSlider = value;
+      player.celestials.enslaved.pulseTime = this.timeSlider;
+    },
     sliderProps(negative) {
       return {
         min: 0,
         max: negative ? this.maxNegativeBlackHole : 990,
+        interval: 1,
+        width: "55rem",
+        tooltip: false
+      };
+    },
+    sliderPropsAmount() {
+      return {
+        min: 1,
+        max: 500,
+        interval: 1,
+        width: "55rem",
+        tooltip: false
+      };
+    },
+    sliderPropsTime() {
+      return {
+        min: 1,
+        max: 100,
         interval: 1,
         width: "55rem",
         tooltip: false
@@ -91,6 +123,31 @@ export default {
       <br>
       Inverting the Black Hole only affects its own speedup, no other upgrades or effects, although
       it will also indirectly affect the Effarig Game speed power effect.
+    </div>
+    <br>
+    <div
+      v-if="areExtraSlidersUnlocked"
+      class="l-black-hole-sliders"
+    >
+      <b>
+        Black Holes will auto-release {{ formatPercents(amountSlider / 500, 2, 1) }} of Stored Game Time per second if Pulse is on.
+      </b>
+      <SliderComponent
+        v-if="areExtraSlidersUnlocked"
+        v-bind="sliderPropsAmount()"
+        :value="amountSlider"
+        @input="adjustSliderPulseAmount($event)"
+      />
+      <br>
+      <b>
+        Black Holes currently release Stored Game Time every {{ formatInt(timeSlider) }} ticks of Pulse is on.
+      </b>
+      <SliderComponent
+        v-if="areExtraSlidersUnlocked"
+        v-bind="sliderPropsTime()"
+        :value="timeSlider"
+        @input="adjustSliderPulseTime($event)"
+      />
     </div>
   </div>
 </template>

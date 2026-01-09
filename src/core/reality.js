@@ -291,7 +291,9 @@ function updateRealityRecords(realityProps) {
   }
   if (player.records.bestReality.glyphLevel < realityProps.gainedGlyphLevel.actualLevel) {
     player.records.bestReality.glyphLevel = realityProps.gainedGlyphLevel.actualLevel;
-    player.records.bestEndgame.glyphLevel = player.records.bestReality.glyphLevel;
+    if (player.records.bestReality.glyphLevel > player.records.bestEndgame.glyphLevel) {
+      player.records.bestEndgame.glyphLevel = player.records.bestReality.glyphLevel;
+    }
     player.records.bestReality.glyphLevelSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
   }
   player.records.bestReality.time = Decimal.min(player.records.thisReality.time, player.records.bestReality.time);
@@ -314,12 +316,12 @@ function giveRealityRewards(realityProps) {
   Currency.realities.add(realityAndPPMultiplier);
   Currency.perkPoints.add(realityAndPPMultiplier);
   if (TeresaUnlocks.effarig.canBeApplied) {
-    Currency.relicShards.add(realityProps.gainedShards * multiplier);
+    Currency.relicShards.add(realityProps.gainedShards.times(multiplier));
   }
   if (multiplier > 1 && Enslaved.boostReality) {
     // Real time amplification is capped at 1 second of reality time; if it's faster then using all time at once would
     // be wasteful. Being faster than 1 second will only use as much time as needed to get the 1-second factor instead.
-    if (Time.thisRealityRealTime.totalSeconds < 1) {
+    if (Time.thisRealityRealTime.totalSeconds.lt(1)) {
       player.celestials.enslaved.storedReal *= 1 - Time.thisRealityRealTime.totalSeconds.toNumber();
     } else {
       player.celestials.enslaved.storedReal = 0;
@@ -330,7 +332,7 @@ function giveRealityRewards(realityProps) {
   if (Teresa.isRunning) {
     const current = Teresa.runRewardMultiplier;
     const newMultiplier = Teresa.rewardMultiplier(player.antimatter);
-    const isHigher = newMultiplier > current;
+    const isHigher = newMultiplier.gt(current);
     const modalText = `You have completed Teresa's Reality! ${isHigher
       ? `Since you gained more Antimatter, you increased your
       Glyph Sacrifice multiplier from ${format(current, 2, 2)} to ${format(newMultiplier, 2, 2)}`
@@ -343,7 +345,7 @@ function giveRealityRewards(realityProps) {
 
       // Encode iM values into the RM variable as e10000 * iM in order to only require one prop
       let machineRecord;
-      if (Currency.imaginaryMachines.value === 0) machineRecord = player.reality.maxRM;
+      if (Currency.imaginaryMachines.value.eq(0)) machineRecord = player.reality.maxRM;
       else machineRecord = DC.E10000.times(Currency.imaginaryMachines.value);
       player.celestials.teresa.lastRepeatedMachines = player.celestials.teresa.lastRepeatedMachines
         .clampMin(machineRecord);
@@ -631,8 +633,8 @@ export function finishProcessReality(realityProps) {
   player.records.thisInfinity.lastBuyTime = DC.D0;
   player.records.thisInfinity.realTime = 0;
   player.dimensionBoosts = DC.D0;
-  player.galaxies = 0;
-  player.partInfinityPoint = 0;
+  player.galaxies = DC.D0;
+  player.partInfinityPoint = DC.D0;
   player.partInfinitied = 0;
   player.break = false;
   player.IPMultPurchases = 0;
@@ -690,8 +692,8 @@ export function finishProcessReality(realityProps) {
     Currency.tachyonParticles.reset();
   }
   player.dilation.nextThreshold = DC.E3;
-  player.dilation.baseTachyonGalaxies = 0;
-  player.dilation.totalTachyonGalaxies = 0;
+  player.dilation.baseTachyonGalaxies = DC.D0;
+  player.dilation.totalTachyonGalaxies = DC.D0;
   Currency.dilatedTime.reset();
   player.records.thisInfinity.maxAM = DC.D0;
   player.records.thisEternity.maxAM = DC.D0;
@@ -700,7 +702,7 @@ export function finishProcessReality(realityProps) {
   Currency.antimatter.reset();
   Enslaved.autoReleaseTick = 0;
   player.celestials.enslaved.hasSecretStudy = false;
-  player.celestials.laitela.entropy = 0;
+  player.celestials.laitela.entropy = DC.D0;
 
   playerInfinityUpgradesOnReset();
   resetInfinityRuns();
@@ -720,8 +722,8 @@ export function finishProcessReality(realityProps) {
   player.records.thisEternity.bestIPMsWithoutMaxAll = DC.D0;
   player.records.bestEternity.bestEPminReality = DC.D0;
   player.records.thisReality.bestEternitiesPerMs = DC.D0;
-  player.records.thisReality.bestRSmin = 0;
-  player.records.thisReality.bestRSminVal = 0;
+  player.records.thisReality.bestRSmin = DC.D0;
+  player.records.thisReality.bestRSminVal = DC.D0;
   player.records.totalInfinityAntimatter = DC.E1;
   player.records.totalEternityAntimatter = DC.E1;
   player.records.totalRealityAntimatter = DC.E1;
@@ -799,7 +801,7 @@ export function applyRUPG10() {
   }
 
   player.dimensionBoosts = Decimal.max(DC.D4, player.dimensionBoosts);
-  player.galaxies = Math.max(1, player.galaxies);
+  player.galaxies = Decimal.max(1, player.galaxies);
   player.break = true;
   Currency.eternities.bumpTo(100);
   Replicanti.amount = Replicanti.amount.clampMin(1);

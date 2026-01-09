@@ -114,7 +114,7 @@ export const progressStages = [
     name: "Effarig (2nd Celestial)",
     hasReached: save => save.celestials?.effarig?.quoteBits > 0,
     suggestedResource: "Reality Machines and Relic Shards",
-    subProgressValue: save => Math.log10(1 + save.celestials.effarig.relicShards) / 14,
+    subProgressValue: save => Decimal.log10(new Decimal(save.celestials.effarig.relicShards).add(1)) / 14,
   },
   {
     id: PROGRESS_STAGE.ENSLAVED,
@@ -141,9 +141,9 @@ export const progressStages = [
   {
     id: PROGRESS_STAGE.IMAGINARY_MACHINES,
     name: "Imaginary Machines",
-    hasReached: save => save.reality?.iMCap > 0,
+    hasReached: save => new Decimal(save.reality?.iMCap).gt(0),
     suggestedResource: "Imaginary Machines",
-    subProgressValue: save => Math.log10(1 + save.reality.iMCap) / 9,
+    subProgressValue: save => Decimal.log10(new Decimal(save.reality.iMCap).add(1)) / 9,
   },
   {
     id: PROGRESS_STAGE.LAITELA,

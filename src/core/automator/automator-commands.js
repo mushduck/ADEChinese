@@ -18,6 +18,7 @@ function prestigeNotify(flag) {
 EventHub.logic.on(GAME_EVENT.BIG_CRUNCH_AFTER, () => prestigeNotify(T.Infinity.$prestigeLevel));
 EventHub.logic.on(GAME_EVENT.ETERNITY_RESET_AFTER, () => prestigeNotify(T.Eternity.$prestigeLevel));
 EventHub.logic.on(GAME_EVENT.REALITY_RESET_AFTER, () => prestigeNotify(T.Reality.$prestigeLevel));
+EventHub.logic.on(GAME_EVENT.ARMAGEDDON_AFTER, () => prestigeNotify(T.Armageddon.$prestigeLevel));
 
 // Used by while and until - in order to get the text corrext, we need to invert the boolean if it's an until
 // eslint-disable-next-line max-params
@@ -68,6 +69,8 @@ function findLastPrestigeRecord(layer) {
         : `${gainedEP}, ${addedECs} completions`;
     case "REALITY":
       return `${format(player.records.recentRealities[0][1], 2)} RM`;
+    case "ARMAGEDDON":
+      return `There is no currency logging for Armageddon (yet)`;
     default:
       throw Error(`Unrecognized prestige ${layer} in Automator event log`);
   }
@@ -889,6 +892,9 @@ export const AutomatorCommands = [
           break;
         case T.Reality:
           prestigeName = "Reality";
+          break;
+        case T.Armageddon:
+          prestigeName = "Armageddon";
           break;
         default:
           throw Error("Unrecognized prestige layer in until loop");

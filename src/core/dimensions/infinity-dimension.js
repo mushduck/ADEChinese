@@ -165,8 +165,12 @@ class InfinityDimensionState extends DimensionState {
     mult = mult.pow(Ra.momentumValue);
     mult = mult.powEffectOf(PelleRifts.paradox);
     mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
+    mult = mult.powEffectOf(Ra.unlocks.allDimPowTT);
+    mult = mult.powEffectOf(Ra.unlocks.infinityDimPower);
 
-    if (player.dilation.active || PelleStrikes.dilation.hasStrike) {
+    if (ExpansionPack.pellePack.isBought) mult = mult.pow(1 + Math.pow(Decimal.log10(player.records.bestEndgame.galaxies) / 100, 3));
+
+    if (player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed())) {
       mult = dilatedValueOf(mult);
     }
 
@@ -176,7 +180,7 @@ class InfinityDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
-    if (PelleStrikes.powerGalaxies.hasStrike) {
+    if (PelleStrikes.powerGalaxies.hasStrike && !PelleStrikes.powerGalaxies.isDestroyed()) {
       mult = mult.pow(0.5);
     }
 
@@ -212,7 +216,7 @@ class InfinityDimensionState extends DimensionState {
   get powerMultiplier() {
     return new Decimal(this._powerMultiplier)
       .timesEffectsOf(this._tier === 8 ? GlyphSacrifice.infinity : null)
-      .pow(ImaginaryUpgrade(14).effectOrDefault(1));
+      .powEffectsOf(ImaginaryUpgrade(14), SingularityMilestone.perPurchaseDimMult);
   }
 
   get purchases() {
@@ -340,7 +344,8 @@ export const InfinityDimensions = {
   },
 
   get compressionMagnitude() {
-    const reduction = Effects.product(EndgameMastery(82));
+    const extraReduction = ExpansionPack.enslavedPack.isBought ? Math.pow(1 / Math.log10(Tesseracts.effectiveCount + 1), 0.2) : 1;
+    const reduction = Effects.product(EndgameMastery(82), EndgameUpgrade(2)) * extraReduction;
     return 10 * reduction;
   },
 
@@ -430,7 +435,7 @@ export const InfinityDimensions = {
     const multiplier2 = Effects.product(
       BreakEternityUpgrade.infinityPowerConversion
     );
-    const exponent = Effects.product(EndgameMastery(102));
+    const exponent = Effects.product(EndgameMastery(102), Ra.unlocks.spaceTheoremIPowConversion);
     return Math.pow((7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2, exponent);
   }
 };

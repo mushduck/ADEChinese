@@ -13,11 +13,14 @@ import EffarigTab from "./celestial-effarig/EffarigTab";
 import EndgameTab from "./endgame/EndgameTab";
 import EndgameMasteriesTab from "./endgame-masteries/EndgameMasteriesTab";
 import EndgameMilestonesTab from "./endgame-milestones/EndgameMilestonesTab";
+import EndgameUpgradesTab from "./endgame-upgrades/EndgameUpgradesTab";
 import EnslavedTab from "./celestial-enslaved/EnslavedTab";
 import EternityChallengesTab from "./eternity-challenges/EternityChallengesTab";
 import EternityMilestonesTab from "./eternity-milestones/EternityMilestonesTab";
 import EternityUpgradesTab from "./eternity-upgrades/EternityUpgradesTab";
+import EtherealTab from "./ethereal/EtherealTab";
 import ExpansionPacksTab from "./endgame/ExpansionPacksTab";
+import GalacticPowerTab from "./galactic-power/GalacticPowerTab";
 import GlyphSetRecordsTab from "./glyph-set-records/GlyphSetRecordsTab";
 import GlyphsTab from "./glyphs/GlyphsTab";
 import ImaginaryUpgradesTab from "./imaginary-upgrades/ImaginaryUpgradesTab";
@@ -43,6 +46,7 @@ import SecretAchievementTab from "./secret-achievements/SecretAchievementTab";
 import ShopTab from "./shop/ShopTab";
 import SpeedrunMilestonesTab from "./speedrun-milestones/SpeedrunMilestonesTab";
 import StatisticsTab from "./statistics/StatisticsTab";
+import StoredTimeTab from "./statistics/StoredTimeTab";
 import TeresaTab from "./celestial-teresa/TeresaTab";
 import TimeDilationTab from "./time-dilation/TimeDilationTab";
 import TimeDimensionsTab from "./time-dimensions/TimeDimensionsTab";
@@ -63,6 +67,7 @@ const TabComponents = {
   GlyphSetRecordsTab,
   SpeedrunMilestonesTab,
   PreviousSpeedrunTab,
+  StoredTimeTab,
   NormalAchievementsTab,
   SecretAchievementTab,
   TeresaTab,
@@ -97,6 +102,9 @@ const TabComponents = {
   ExpansionPacksTab,
   EndgameMasteriesTab,
   EndgameMilestonesTab,
+  EndgameUpgradesTab,
+  GalacticPowerTab,
+  EtherealTab,
   ShopTab,
   MultiplierBreakdownTab
 };

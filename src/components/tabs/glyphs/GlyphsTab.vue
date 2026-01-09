@@ -32,9 +32,12 @@ export default {
     return {
       enslavedHint: "",
       showInstability: false,
+      showHigherInstability: false,
+      showMoreHigherInstability: false,
       instabilityThreshold: 0,
       hyperInstabilityThreshold: 0,
       extremeInstabilityThreshold: 0,
+      immenseInstabilityThreshold: 0,
       isInCelestialReality: false,
       canAmplify: false,
       glyphTextColors: true,
@@ -59,10 +62,13 @@ export default {
   methods: {
     update() {
       this.resetRealityDisplayed = PlayerProgress.realityUnlocked();
-      this.showInstability = player.records.bestReality.glyphLevel > 800;
+      this.showInstability = player.records.bestReality.glyphLevel > 800 || player.records.bestEndgame.glyphLevel > 800;
+      this.showHigherInstability = player.records.bestEndgame.glyphLevel > 60000;
+      this.showMoreHigherInstability = player.records.bestEndgame.glyphLevel > 160000;
       this.instabilityThreshold = Glyphs.instabilityThreshold;
       this.hyperInstabilityThreshold = Glyphs.hyperInstabilityThreshold;
       this.extremeInstabilityThreshold = Glyphs.extremeInstabilityThreshold;
+      this.immenseInstabilityThreshold = Glyphs.immenseInstabilityThreshold;
       this.isInCelestialReality = isInCelestialReality();
       this.canAmplify = Enslaved.isUnlocked && !this.isInCelestialReality;
       this.autoRestartCelestialRuns = player.options.retryCelestial;
@@ -159,7 +165,12 @@ export default {
           <br>
           This effect is even stronger above level {{ formatInt(hyperInstabilityThreshold) }}.
           <br>
-          Above level {{ formatInt(extremeInstabilityThreshold) }}, higher Glyph levels are nearly impossible to reach.
+          <div v-if="showHigherInstability">
+            Above level {{ formatInt(extremeInstabilityThreshold) }}, higher Glyph levels are nearly impossible to reach.
+          </div>
+          <div v-if="showMoreHigherInstability">
+            Past level {{ formatInt(immenseInstabilityThreshold) }}, higher Glyph levels become not much more than a dream.
+          </div>
         </div>
         <SingleGlyphCustomzationPanel />
         <ExpandingControlBox

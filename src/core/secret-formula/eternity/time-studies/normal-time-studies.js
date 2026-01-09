@@ -103,7 +103,7 @@ export const normalTimeStudies = [
     requirement: [31],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `All Galaxies give a ${formatX(DC.D1_2, 1, 1)} multiplier to Infinity Points gained`,
-    effect: () => DC.D1_2.pow(Replicanti.galaxies.total + player.galaxies + player.dilation.totalTachyonGalaxies),
+    effect: () => DC.D1_2.pow(Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies)),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -252,7 +252,7 @@ export const normalTimeStudies = [
     requirement: [93],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Time Dimension multiplier equal to Replicanti Galaxy amount",
-    effect: () => Math.max(player.replicanti.galaxies, 1),
+    effect: () => Decimal.max(player.replicanti.galaxies, 1),
     formatEffect: value => formatX(value, 2, 0)
   },
   {
@@ -319,7 +319,7 @@ export const normalTimeStudies = [
     description: () => (Achievement(138).isUnlocked
       ? `You can get ${formatPercents(0.5)} more Replicanti Galaxies`
       : `Automatic Replicanti Galaxies are disabled, but you can get ${formatPercents(0.5)} more`),
-    effect: () => Math.floor(player.replicanti.boughtGalaxyCap / 2)
+    effect: () => Decimal.floor(player.replicanti.boughtGalaxyCap.div(2))
   },
   {
     id: 132,
@@ -328,7 +328,7 @@ export const normalTimeStudies = [
     requirement: [122],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [131, 133],
-    description: () => (Pelle.isDoomed
+    description: () => ((Pelle.isDoomed && !PelleDestructionUpgrade.timestudy132.isBought)
       ? `Replicanti Galaxies are ${formatPercents(0.4)} stronger`
       : `Replicanti Galaxies are ${formatPercents(0.4)} stronger and Replicanti are 
         ${Perk.studyPassive.isBought ? formatX(3) : formatX(1.5, 1, 1)} faster`),
@@ -553,7 +553,7 @@ export const normalTimeStudies = [
     requiresST: [223],
     description() {
       const effect = TimeStudy(224).effectValue;
-      return `Distant Galaxy cost scaling starts ${quantifyInt("Galaxy", effect)} later
+      return `Distant Galaxy cost scaling starts ${quantifyHybridLarge("Galaxy", effect)} later
         (${formatInt(1)} per ${formatInt(2000)} Dim Boosts)`;
     },
     effect: () => Decimal.floor(DimBoost.totalBoosts.div(2000)).toNumber()
@@ -566,8 +566,8 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [226],
     description: "You gain extra Replicanti Galaxies based on Replicanti amount",
-    effect: () => Math.floor(Replicanti.amount.exponent / 1000),
-    formatEffect: value => `+${formatInt(value)} RG`
+    effect: () => Decimal.floor(Replicanti.amount.exponent / 1000),
+    formatEffect: value => `+${formatHybridLarge(value, 3)} RG`
   },
   {
     id: 226,
@@ -577,8 +577,8 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [225],
     description: "You gain extra Replicanti Galaxies based on their max",
-    effect: () => Math.floor(player.replicanti.boughtGalaxyCap / 12),
-    formatEffect: value => `+${formatInt(value)} RG`
+    effect: () => Decimal.floor(player.replicanti.boughtGalaxyCap.div(12)),
+    formatEffect: value => `+${formatHybridLarge(value, 3)} RG`
   },
   {
     id: 227,
@@ -623,7 +623,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [231],
     description: "All Galaxies are stronger based on Antimatter Galaxies",
-    effect: () => Math.pow(1 + player.galaxies / 500, 0.25),
+    effect: () => Decimal.pow(player.galaxies.div(500).add(1), 0.25).toNumber(),
     formatEffect: value => `+${formatPercents(value - 1, 3)}`
   },
   {
@@ -656,7 +656,8 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [221, 222, 231],
     description: "Time Study 231 improves the effect of Time Study 221",
-    effect: () => TimeStudy(221).effectValue.pow(TimeStudy(231).effectValue.minus(1)).clampMin(1),
+    effect: () => Decimal.pow(TimeStudy(221).effectValue.pow(TimeStudy(231).effectValue.minus(1)),
+      Ra.unlocks.triadBuff.effectOrDefault(1)).clampMin(1),
     formatEffect: value => formatX(value, 2, 1),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 1
   },
@@ -667,8 +668,9 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 2, 223, 224, 232],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [223, 224, 232],
-    description: () => `Distant Galaxy scaling threshold starts another ${formatInt(3000)} Antimatter Galaxies later`,
-    effect: 3000,
+    description: () => `Distant Galaxy scaling threshold starts another
+      ${formatInt(Math.pow(3000, Ra.unlocks.triadBuff.effectOrDefault(1)))} Antimatter Galaxies later`,
+    effect: () => Math.pow(3000, Ra.unlocks.triadBuff.effectOrDefault(1)),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 2
   },
   {
@@ -678,9 +680,9 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 3, 225, 226, 233],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [225, 226, 233],
-    description: () => `Gain ${formatPercents(0.5)} more extra Replicanti Galaxies from Time Studies 225 and 226,
-      and from Effarig's Infinity`,
-    effect: 1.5,
+    description: () => `Gain ${formatPercents(0.5 * Ra.unlocks.triadBuff.effectOrDefault(1))} more extra Replicanti
+      Galaxies from Time Studies 225 and 226, and from Effarig's Infinity`,
+    effect: () => 1 + 0.5 * Ra.unlocks.triadBuff.effectOrDefault(1),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 3
   },
   {
@@ -690,8 +692,10 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 4, 227, 228, 234],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [227, 228, 234],
-    description: "Dimensional Sacrifice multiplier is squared",
-    effect: 2,
+    description: () => (Ra.unlocks.triadBuff.canBeApplied
+      ? `Dimensional Sacrifice multiplier is raised to the power of ${format(2 * Ra.unlocks.triadBuff.effectOrDefault(1), 2, 2)}`
+      : `Dimensional Sacrifice multiplier is squared`),
+    effect: () => 2 * Ra.unlocks.triadBuff.effectOrDefault(1),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 4
   }
 ];

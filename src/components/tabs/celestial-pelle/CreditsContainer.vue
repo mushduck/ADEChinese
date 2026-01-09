@@ -12,6 +12,7 @@ export default {
       scroll: 0,
       audio: null,
       isMuted: false,
+      isFastForward: false,
     };
   },
   computed: {
@@ -29,6 +30,15 @@ export default {
     },
     muteIconClass() {
       return this.isMuted ? "fa-volume-xmark" : "fa-volume-high";
+    },
+    speedStyle() {
+      return {
+        top: `calc(${this.scroll + 20}px - 100vh)`,
+        display: this.rolling ? "block" : "none"
+      };
+    },
+    speedIconClass() {
+      return this.isFastForward ? "fa-forward" : "fa-play";
     },
     celestialDisplays() {
       return {
@@ -63,10 +73,11 @@ export default {
   methods: {
     update() {
       const height = (this.$refs.creditsDisplay?.offsetHeight || 0) + innerHeight;
+      const fast = this.isFastForward ? 10 : 1;
       this.rolling = GameEnd.endState > END_STATE_MARKERS.CREDITS_START;
       this.scroll = (
         Math.clampMax(GameEnd.endState, END_STATE_MARKERS.CREDITS_END) - END_STATE_MARKERS.CREDITS_START
-      ) / (END_STATE_MARKERS.SONG_END - END_STATE_MARKERS.CREDITS_START) * height * 10;
+      ) / (END_STATE_MARKERS.SONG_END - END_STATE_MARKERS.CREDITS_START) * height * fast;
       if (this.audio) this.audio.volume = this.isMuted
         ? 0
         : Math.clamp((GameEnd.endState - END_STATE_MARKERS.CREDITS_START), 0, 0.3);
@@ -85,6 +96,12 @@ export default {
       :class="muteIconClass"
       :style="muteStyle"
       @click="isMuted = !isMuted"
+    />
+    <i
+      class="c-speed-button fa-solid"
+      :class="speedIconClass"
+      :style="speedStyle"
+      @click="isFastForward = !isFastForward"
     />
     <div
       v-for="(celSymbol, celIndex) in celestialDisplays"
@@ -208,6 +225,19 @@ perfectly the same. */
 }
 
 .t-s12 .c-mute-button {
+  color: white;
+}
+
+.c-speed-button {
+  position: fixed;
+  left: 6rem;
+  font-size: 2rem;
+  opacity: 0.5;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.t-s12 .c-speed-button {
   color: white;
 }
 

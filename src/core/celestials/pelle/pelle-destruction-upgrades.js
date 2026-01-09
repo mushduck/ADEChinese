@@ -193,6 +193,10 @@ export class PelleStrikeUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get isAvailableForPurchase() {
+    return Achievement(195).isUnlocked;
+  }
+
 }
 
 export const PelleStrikeUpgrade = mapGameDataToObject(

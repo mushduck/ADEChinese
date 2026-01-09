@@ -107,7 +107,7 @@ GameDatabase.celestials.descriptions = [
       and you gain a reward based on how quickly you reached ${formatPercents(1)}.
       Destabilizing the Reality in less than ${formatInt(30)} seconds makes it become significantly more difficult,\
       in exchange for giving a much stronger reward.\
-      Doing this ${formatInt(8)} times will also give a ${formatX(8)} to Dark Energy gain.`;
+      Doing this ${formatInt(8)} times will also give a ${formatX(Math.pow(8, Laitela.hadronizes + 1))} to Dark Energy gain.`;
     }
   },
 

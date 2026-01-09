@@ -36,7 +36,7 @@ export class RealityAutobuyerState extends AutobuyerState {
   set time(value) { this.data.time = value; }
 
   get shard() { return this.data.shard; }
-  set shard(value) { this.data.shard = value.clamp(0, Number.MAX_VALUE).toNumber(); }
+  set shard(value) { this.data.shard = value; }
 
   toggleMode() {
     this.mode = [
@@ -93,10 +93,9 @@ export class RealityAutobuyerState extends AutobuyerState {
       case AUTO_REALITY_MODE.EITHER:      proc = rmProc || glyphProc; break;
       case AUTO_REALITY_MODE.BOTH:        proc = rmProc && glyphProc; break;
       case AUTO_REALITY_MODE.TIME:        proc = player.records.thisReality.realTime / 1000 > this.time; break;
-      case AUTO_REALITY_MODE.RELIC_SHARD: proc = Effarig.shardsGained * ampFactor > this.shard; break;
+      case AUTO_REALITY_MODE.RELIC_SHARD: proc = Effarig.shardsGained.times(ampFactor).gt(this.shard); break;
     }
 
     if (proc) autoReality();
   }
 }
-

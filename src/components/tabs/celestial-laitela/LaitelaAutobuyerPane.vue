@@ -24,12 +24,12 @@ export default {
   },
   computed: {
     autobuyStr() {
-      return this.maxAutobuy === 4
+      return this.maxAutobuy === 8
         ? "ON (all DMD)"
         : `ON (max. DMD ${this.maxAutobuy})`;
     },
     autoAscendStr() {
-      return this.maxAutoAscend === 4
+      return this.maxAutoAscend === 8
         ? "ON (all DMD)"
         : `ON (max. DMD ${this.maxAutoAscend})`;
     },
@@ -65,8 +65,8 @@ export default {
       this.singularity = auto.singularity.isActive;
       this.annihilation = auto.annihilation.isActive;
 
-      this.maxAutobuy = SingularityMilestone.darkDimensionAutobuyers.effectValue;
-      this.maxAutoAscend = SingularityMilestone.ascensionAutobuyers.effectValue;
+      this.maxAutobuy = SingularityMilestone.darkDimensionAutobuyers.effectValue + SingularityMilestone.darkDimAuto5to8.effectValue;
+      this.maxAutoAscend = SingularityMilestone.ascensionAutobuyers.effectValue + SingularityMilestone.darkDimAscension5to8.effectValue;
       this.autoSingularityFactor = SingularityMilestone.autoCondense.effectValue;
     },
   }

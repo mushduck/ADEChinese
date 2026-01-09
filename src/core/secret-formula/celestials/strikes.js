@@ -8,21 +8,24 @@ export const pelleStrikes = {
     penaltyDescription: () => `Antimatter Dimensions are raised to ${formatPow(0.5, 1, 1)}`,
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.vacuum.name)}
       and get a permanent Infinity Autobuyer`,
-    rift: () => PelleRifts.vacuum
+    rift: () => PelleRifts.vacuum,
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike1.isBought
   },
   powerGalaxies: {
     id: 2,
     requirementDescription: "Power-up Galaxies",
     penaltyDescription: () => `Infinity Dimensions are raised to ${formatPow(0.5, 1, 1)}`,
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.decay.name)}`,
-    rift: () => PelleRifts.decay
+    rift: () => PelleRifts.decay,
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike2.isBought
   },
   eternity: {
     id: 3,
     requirementDescription: "Reach Eternity",
     penaltyDescription: () => `Replicanti speed slows down even more above ${format(DC.E2000)}`,
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.chaos.name)}`,
-    rift: () => PelleRifts.chaos
+    rift: () => PelleRifts.chaos,
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike3.isBought
   },
   ECs: {
     id: 4,
@@ -31,7 +34,8 @@ export const pelleStrikes = {
       IP multiplier is only ${formatPercents(0.3)} as strong and capped at ${formatPercents(0.15)}
       of the goal`,
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.recursion.name)}`,
-    rift: () => PelleRifts.recursion
+    rift: () => PelleRifts.recursion,
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike4.isBought
   },
   dilation: {
     id: 5,
@@ -39,6 +43,7 @@ export const pelleStrikes = {
     penaltyDescription: "Time Dilation is permanently active",
     rewardDescription: () => `Keep the Time Dilation study across Armageddon, boost Remnant gain, and unlock
       ${wordShift.wordCycle(PelleRifts.paradox.name)}`,
-    rift: () => PelleRifts.paradox
+    rift: () => PelleRifts.paradox,
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike5.isBought
   }
 };

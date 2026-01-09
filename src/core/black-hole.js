@@ -28,7 +28,7 @@ class BlackHoleUpgradeState {
   }
 
   get isAffordable() {
-    return Currency.realityMachines.gte(this.cost);
+    return Pelle.isDoomed ? Currency.realityShards.gte(this.cost) : Currency.realityMachines.gte(this.cost);
   }
 
   purchase() {
@@ -39,7 +39,7 @@ class BlackHoleUpgradeState {
     const bh = BlackHole(this.id);
     const beforeProg = bh.isCharged ? 1 - bh.stateProgress : bh.stateProgress;
 
-    Currency.realityMachines.purchase(this.cost);
+    Pelle.isDoomed ? Currency.realityShards.gte(this.cost) : Currency.realityMachines.purchase(this.cost);
     this.incrementAmount();
     this._lazyValue.invalidate();
     this._lazyCost.invalidate();
@@ -138,7 +138,7 @@ class BlackHoleState {
   }
 
   get isUnlocked() {
-    return this._data.unlocked && !Enslaved.isRunning && !Pelle.isDisabled("blackhole");
+    return this._data.unlocked && !Enslaved.isRunning && (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.isBought);
   }
 
   get isCharged() {
@@ -196,7 +196,8 @@ class BlackHoleState {
 
   // The logic to determine what state the black hole is in for displaying is nontrivial and used in multiple places
   get displayState() {
-    if (Pelle.isDisabled("blackhole")) return `<i class="fas fa-ban"></i> Disabled`;
+    if (Pelle.isDisabled("blackhole") && !PelleDestructionUpgrade.blackHole.isBought) return `<i class="fas fa-ban"></i> Disabled`;
+    if (Pelle.isDoomed && PelleDestructionUpgrade.blackHole.isBought) return `♅ Doomed`;
     if (Enslaved.isAutoReleasing) {
       if (Enslaved.autoReleaseTick < 3) return `<i class="fas fa-compress-arrows-alt u-fa-padding"></i> Pulsing`;
       return `<i class="fas fa-expand-arrows-alt u-fa-padding"></i> Pulsing`;
@@ -212,7 +213,7 @@ class BlackHoleState {
   }
 
   get isActive() {
-    return this.isCharged && (this.id === 1 || BlackHole(this.id - 1).isActive) && !Pelle.isDisabled("blackhole");
+    return this.isCharged && (this.id === 1 || BlackHole(this.id - 1).isActive) && (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.isBought);
   }
 
   // Proportion of active time, scaled 0 to 1
@@ -490,14 +491,15 @@ export const BlackHoles = {
    */
   calculateSpeedups() {
     const effectsToConsider = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH,
-      GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS, GAME_SPEED_EFFECT.CELESTIAL_MATTER];
+      GAME_SPEED_EFFECT.SINGULARITY_MILESTONE, GAME_SPEED_EFFECT.NERFS, GAME_SPEED_EFFECT.CELESTIAL_MATTER,
+      GAME_SPEED_EFFECT.RA_BUFFS];
     const speedupWithoutBlackHole = getGameSpeedupFactor(effectsToConsider);
     const speedups = [speedupWithoutBlackHole];
     effectsToConsider.push(GAME_SPEED_EFFECT.BLACK_HOLE);
     // Crucial thing: this works even if the black holes are paused, it's just that the speedups will be 1.
     for (const blackHole of this.list) {
       if (!blackHole.isUnlocked) break;
-      speedups.push(getGameSpeedupFactor(effectsToConsider, blackHole.id).div(speedupWithoutBlackHole));
+      speedups.push(getGameSpeedupFactor(effectsToConsider, true, blackHole.id).div(speedupWithoutBlackHole));
     }
     return speedups;
   },

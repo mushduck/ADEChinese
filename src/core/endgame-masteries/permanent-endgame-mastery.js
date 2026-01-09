@@ -31,9 +31,8 @@ export class PermanentEndgameMasteryState extends EndgameMasteriesState {
     if (this.id === 1) {
       // ID 1 is the endgame upgrades unlock mastery
       if (!quiet) {
-        //Tab.endgame.upgrades.show();
+        Tab.endgame.upgrades.show();
       }
-      //TabNotification.endgameUpgradesAfterUnlock.tryTrigger();
     }
 
     player.endgameMasteries.permanentMasteries.push(this.id);

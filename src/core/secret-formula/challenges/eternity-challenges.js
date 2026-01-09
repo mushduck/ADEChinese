@@ -1,6 +1,6 @@
 import { DC } from "../../constants";
 
-const specialInfinityGlyphDisabledEffectText = () => (PelleRifts.chaos.milestones[1].canBeApplied
+const specialInfinityGlyphDisabledEffectText = () => (PelleRifts.chaos.milestones[1].canBeApplied && !PelleDestructionUpgrade.pelleGlyphEffects.isBought
   ? "The Pelle-Specific effect from Infinity Glyphs is also disabled."
   : "");
 
@@ -25,6 +25,7 @@ export const eternityChallenges = [
     goal: DC.E975,
     pelleGoal: DC.E1750,
     goalIncrease: DC.E175,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC2Nerf,
     reward: {
       description: "1st Infinity Dimension multiplier based on Infinity Power",
       effect: completions => Currency.infinityPower.value.pow(5 / (700 - completions * 100)).clampMin(1),
@@ -38,6 +39,7 @@ export const eternityChallenges = [
     goal: DC.E600,
     pelleGoal: DC.E925,
     goalIncrease: DC.E75,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC3Nerf,
     reward: {
       description: () => `Increase the multiplier for buying ${formatInt(10)} Antimatter Dimensions`,
       effect: completions => completions * 0.72,
@@ -70,6 +72,7 @@ export const eternityChallenges = [
     goal: DC.E750,
     pelleGoal: DC.E1400,
     goalIncrease: DC.E400,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC5Nerf,
     reward: {
       description: "Distant Galaxy cost scaling starts later",
       effect: completions => completions * 5,
@@ -87,6 +90,7 @@ export const eternityChallenges = [
     goal: DC.E750,
     pelleGoal: DC.E1500,
     goalIncrease: DC.E200,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC6Nerf,
     reward: {
       description: "Further reduce Antimatter Dimension cost multiplier growth",
       effect: completions => completions * 0.2,
@@ -105,6 +109,7 @@ export const eternityChallenges = [
     goal: DC.E2000,
     pelleGoal: DC.E2700,
     goalIncrease: DC.E530,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC7Nerf,
     effect: () => TimeDimension(1).productionPerSecond,
     reward: {
       description: "1st Time Dimension produces 8th Infinity Dimensions",
@@ -119,6 +124,7 @@ export const eternityChallenges = [
     goal: DC.E1300,
     pelleGoal: DC.E2800,
     goalIncrease: DC.E750,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC8Nerf,
     reward: {
       description: "Infinity Power strengthens Replicanti Galaxies",
       effect: completions => {
@@ -135,6 +141,7 @@ export const eternityChallenges = [
     goal: DC.E1750,
     pelleGoal: DC.E2900,
     goalIncrease: DC.E250,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC9Nerf,
     reward: {
       description: "Infinity Dimension multiplier based on Time Shards",
       effect: completions => Currency.timeShards.value.pow(completions * 0.1).clampMin(1),
@@ -153,6 +160,7 @@ export const eternityChallenges = [
     goal: DC.E3000,
     pelleGoal: DC.E3200,
     goalIncrease: DC.E300,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC10Nerf,
     effect: () => Decimal.pow(Currency.infinitiesTotal.value, 950).clampMin(1).pow(TimeStudy(31).effectOrDefault(1)),
     reward: {
       description: "Time Dimension multiplier based on Infinities",
@@ -177,6 +185,7 @@ export const eternityChallenges = [
     pelleGoal: DC.E11200,
     goalIncrease: DC.E175,
     pelleGoalIncrease: DC.E1400,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC11Nerf,
     reward: {
       description: "Further reduce Tickspeed cost multiplier growth",
       effect: completions => completions * 0.07,
@@ -196,6 +205,7 @@ export const eternityChallenges = [
     goal: DC.E100000,
     pelleGoal: DC.E208000,
     goalIncrease: DC.E10000,
+    hasPelleGoal: () => !PelleDestructionUpgrade.disableEC12Nerf,
     restriction: completions => Math.max(10 - 2 * completions, 1) / 10,
     checkRestriction: restriction => Time.thisEternity.totalSeconds.lt(restriction),
     formatRestriction: restriction => `in ${quantify("in-game second", restriction, 0, 1)} or less.`,

@@ -90,5 +90,45 @@ export const vQuotes = {
       "No one is better than me...",
       "No one... no one... no on-",
     ],
+  },
+  expansionPacks: {
+    id: 11,
+    lines: [
+      "Because you committed a crime against the higher-ups.",
+      "And by the way, I'm tired of hearing the BS that Ra did it.",
+      "You've always been begging for a higher rank.",
+      "I, on the other hand, should've taken Ra's rank when Pelle wiped his memories...",
+      "But NOOOO, that HAD to be the ONE THING he remembered...",
+      "So now I, rightful ruler of the Celestials, am stuck here at fourth-best.",
+      "Oh, hi Pelle.",
+      "I didn't MEAN rightful ruler, I just meant I should have a higher rank.",
+      "Why didn't I get Ra's after he was exiled?",
+      "Surely I must be better than him.",
+      "After all, I AM the Celestial of Achievements."
+    ]
+  },
+  vPack: {
+    id: 12,
+    requirement: () => ExpansionPack.vPack.isBought,
+    lines: [
+      "...",
+      "Destroyer?!?!",
+      "Why are you back?",
+      "And... you found my secret upgrade...",
+      "No no no...",
+      "You cannot be better than me..."
+    ]
+  },
+  maxAutoV: {
+    id: 13,
+    requirement: () => VUpgrade.auto.isCapped,
+    lines: [
+      "Wait...",
+      "How did you cap the upgrade?",
+      "You've reduced me to nothing but a memory...",
+      "I will not be cast aside!",
+      "Do you hear me?",
+      "I will not be-"
+    ]
   }
 };

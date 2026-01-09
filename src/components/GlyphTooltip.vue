@@ -29,9 +29,9 @@ export default {
       default: 0,
     },
     sacrificeReward: {
-      type: Number,
+      type: Decimal,
       required: false,
-      default: 0,
+      default: new Decimal(0),
     },
     refineReward: {
       type: Number,
@@ -126,7 +126,7 @@ export default {
     },
     rarityText() {
       if (!GlyphTypes[this.type].hasRarity) return "";
-      const strength = Pelle.isDoomed ? Pelle.glyphStrength : this.strength;
+      const strength = Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.isBought ? Pelle.glyphStrength : this.strength;
       return `| Rarity:
         <span style="color: ${this.descriptionStyle.color}">${formatRarity(strengthToRarity(strength))}</span>`;
     },
@@ -141,7 +141,7 @@ export default {
         ? "#ff4444"
         : (this.isLevelBoosted ? "#44FF44" : undefined);
       return `Level: <span style="color: ${color}">
-              ${arrow}${formatInt(this.effectiveLevel)}${arrow}
+              ${arrow}${formatHybridLarge(this.effectiveLevel, 3)}${arrow}
               </span>`;
     },
     eventHandlers() {

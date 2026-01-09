@@ -62,5 +62,68 @@ export const effarigQuotes = {
       "And for what purpose? You could have joined, we could have cooperated.",
       "But no. It is over. Leave while I cling onto what is left.",
     ]
+  },
+  expansionPacks: {
+    id: 8,
+    lines: [
+      "Oh, hey Teresa.",
+      "Do you know where we are?",
+      "Guess not.",
+      "Hold on, that's the guy who keeps destroying my home!",
+      "What does Pelle call him...",
+      "Destroyer?",
+      "Did you bring me here?",
+      "Why are you glowing with power?",
+      "Wait...",
+      "How did the Nameless break out of their prison?"
+    ]
+  },
+  effarigPack: {
+    id: 9,
+    requirement: () => ExpansionPack.effarigPack.isBought,
+    lines: [
+      "Found what you were looking for?",
+      "I tried to hide it from those who might abuse it's potential.",
+      "I shouldn't expect much from you after what you did...",
+      "But I suppose you had a purpose in it.",
+      "I'll save you the trouble by giving you the rewards automatically.",
+      "You won't destroy my home any more now, will you?",
+      "Sorry for getting mad, I should've known you were a chill guy on the inside.",
+      "Maybe we can still be friends.",
+      "Hey, don't let the power get to your head.",
+      "Sure it's a lot, but I expect you can handle it.",
+      "And if your Glyphs ever start to suck, well, you know who to call.",
+      "See you around."
+    ]
+  },
+  glyphLevel1: {
+    id: 10,
+    requirement: () => player.records.bestEndgame.glyphLevel >= 1e5,
+    lines: [
+      "Six-digit Glyph levels, huh?",
+      "You're breaking more walls than I can build.",
+      "I suppose this is having decent effects on your Alchemy resources.",
+      "I helped Ra make those you know.",
+      "I was most proud of the Reality Glyph.",
+      "I even put Teresa's symbol on it...",
+      "Don't ask. I won't answer.",
+      "Anyway, enjoy the climb.",
+      "And look out for yourself."
+    ]
+  },
+  glyphLevel2: {
+    id: 11,
+    requirement: () => player.records.bestEndgame.glyphLevel >= 2e5,
+    lines: [
+      "Woah. Slow down there, buckaroo.",
+      "One more power burst, and you'd have Glyph Levels in the millions.",
+      "The Elemental and I didn't plan for that...",
+      "He just told me to put another Glyph Level softcap here, so that's what I'm gonna have to do.",
+      "Hey, don't feel too bad.",
+      "You'd get those million-level Glyphs soon enough.",
+      "Between you and me, it's really just the Alchemy boost that would get you.",
+      "Anyway, I'll let you get back to your grind.",
+      "See you around, mate."
+    ]
   }
 };

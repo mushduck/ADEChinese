@@ -14,8 +14,8 @@ export default {
       hasDragover: false,
       hasAlteration: false,
       hideAlteration: false,
-      maxSacrifice: 0,
-      teresaMult: 0,
+      maxSacrifice: new Decimal(0),
+      teresaMult: new Decimal(0),
       lastMachinesTeresa: new Decimal(0),
     };
   },
@@ -65,8 +65,8 @@ export default {
       this.anySacrifices = GameCache.logTotalGlyphSacrifice !== 0;
       this.hasAlteration = Ra.unlocks.alteredGlyphs.canBeApplied;
       this.hideAlteration = player.options.hideAlterationEffects;
-      this.maxSacrifice = GlyphSacrificeHandler.maxSacrificeForEffects;
-      this.teresaMult = Teresa.runRewardMultiplier;
+      this.maxSacrifice.copyFrom(GlyphSacrificeHandler.maxSacrificeForEffects);
+      this.teresaMult.copyFrom(Teresa.runRewardMultiplier);
       this.lastMachinesTeresa.copyFrom(player.celestials.teresa.lastRepeatedMachines);
     },
     dragover(event) {
@@ -160,7 +160,7 @@ export default {
       Glyph Sacrifice Boosts:
     </div>
     <div v-if="anySacrifices && !isDoomed">
-      <div v-if="teresaMult > 1">
+      <div v-if="teresaMult.gt(1)">
         Glyph sacrifice values are multiplied by {{ formatX(teresaMult, 2, 2) }};
         Teresa was last done at {{ lastMachines }}.
         <span v-if="hasSeenRealityGlyph">

@@ -13,8 +13,8 @@ export default {
   },
   data() {
     return {
-      amount: 0,
-      effectValue: 0,
+      amount: new Decimal(0),
+      effectValue: new Decimal(0),
       isColored: true,
       willSacrifice: false,
     };
@@ -66,7 +66,7 @@ export default {
       return format(this.currentSacrifice.sacrificeValue, 2, 2);
     },
     formatTotalAmount() {
-      return format(this.amount + this.currentSacrifice.sacrificeValue, 2, 2);
+      return format(this.amount.add(this.currentSacrifice.sacrificeValue), 2, 2);
     },
   },
   created() {
@@ -76,8 +76,8 @@ export default {
   },
   methods: {
     update() {
-      this.amount = player.reality.glyphs.sac[this.type];
-      this.effectValue = GlyphSacrifice[this.type].effectValue;
+      this.amount.copyFrom(player.reality.glyphs.sac[this.type]);
+      this.effectValue.copyFrom(GlyphSacrifice[this.type].effectValue);
       this.isColored = player.options.glyphTextColors;
       this.willSacrifice = AutoGlyphProcessor.sacMode === AUTO_GLYPH_REJECT.SACRIFICE ||
         (AutoGlyphProcessor.sacMode === AUTO_GLYPH_REJECT.REFINE_TO_CAP &&
@@ -89,7 +89,7 @@ export default {
 
 <template>
   <div
-    v-if="amount > 0"
+    v-if="amount.gt(0)"
     :style="style"
   >
     <div>

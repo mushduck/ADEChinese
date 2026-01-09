@@ -1,7 +1,7 @@
 import { DC } from "../../constants";
 
 const rebuyable = props => {
-  props.cost = () => props.initialCost * Math.pow(props.costMult + (Math.max(player.reality.imaginaryRebuyables[props.id] - props.scaleStart, 0) * props.costMult / 2), player.reality.imaginaryRebuyables[props.id]);
+  props.cost = () => new Decimal(props.initialCost).times(Decimal.pow(new Decimal(props.costMult).add(Decimal.max(new Decimal(player.reality.imaginaryRebuyables[props.id]).sub(props.scaleStart), 0).times(new Decimal(props.costMult).div(2))), player.reality.imaginaryRebuyables[props.id]));
   const { effect } = props;
   if (props.isDecimal) props.effect = () => Decimal.pow(effect, player.reality.imaginaryRebuyables[props.id]);
   else props.effect = () => effect * player.reality.imaginaryRebuyables[props.id];
@@ -18,7 +18,8 @@ export const imaginaryUpgrades = [
     costMult: 60,
     description: () => `Increase Temporal Amplifier multiplier by +${format(0.15, 2, 2)}`,
     effect: 0.15,
-    scaleStart: 9
+    scaleStart: 9,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.temporalIntensifier.isBought
   }),
   rebuyable({
     name: "Replicative Intensifier",
@@ -27,7 +28,8 @@ export const imaginaryUpgrades = [
     costMult: 60,
     description: () => `Increase Replicative Amplifier multiplier by +${format(0.15, 2, 2)}`,
     effect: 0.15,
-    scaleStart: 9
+    scaleStart: 9,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.replicativeIntensifier.isBought
   }),
   rebuyable({
     name: "Eternal Intensifier",
@@ -36,7 +38,8 @@ export const imaginaryUpgrades = [
     costMult: 40,
     description: () => `Increase Eternal Amplifier multiplier by +${format(0.4, 2, 2)}`,
     effect: 0.4,
-    scaleStart: 10
+    scaleStart: 10,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.eternalIntensifier.isBought
   }),
   rebuyable({
     name: "Superluminal Intensifier",
@@ -45,7 +48,8 @@ export const imaginaryUpgrades = [
     costMult: 80,
     description: () => `Increase Superluminal Amplifier multiplier by +${format(0.15, 2, 2)}`,
     effect: 0.15,
-    scaleStart: 8
+    scaleStart: 8,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.superluminalIntensifier.isBought
   }),
   rebuyable({
     name: "Boundless Intensifier",
@@ -54,7 +58,8 @@ export const imaginaryUpgrades = [
     costMult: 30,
     description: () => `Increase Boundless Amplifier multiplier by +${format(0.6, 2, 2)}`,
     effect: 0.6,
-    scaleStart: 11
+    scaleStart: 11,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.boundlessIntensifier.isBought
   }),
   rebuyable({
     name: "Elliptic Materiality",
@@ -65,7 +70,8 @@ export const imaginaryUpgrades = [
     effect: 1e100,
     scaleStart: 5,
     formatEffect: value => `${formatX(EndgameMastery(153).isBought ? value.powEffectsOf(EndgameMastery(153)) : value)}`,
-    isDecimal: true
+    isDecimal: true,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.ellipticMateriality.isBought
   }),
   rebuyable({
     name: "Runic Assurance",
@@ -75,7 +81,8 @@ export const imaginaryUpgrades = [
     description: () => `Delay Glyph Instability starting level by ${formatInt(200)}`,
     effect: 200,
     scaleStart: 4,
-    formatEffect: value => `+${formatInt(value)} levels`
+    formatEffect: value => `+${formatInt(value)} levels`,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.runicAssurance.isBought
   }),
   rebuyable({
     name: "Hyperbolic Apeirogon",
@@ -86,7 +93,8 @@ export const imaginaryUpgrades = [
     effect: DC.E100000,
     scaleStart: 3,
     formatEffect: value => `${formatX(value)}`,
-    isDecimal: true
+    isDecimal: true,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.hyperbolicApeirogon.isBought
   }),
   rebuyable({
     name: "Cosmic Filament",
@@ -97,6 +105,7 @@ export const imaginaryUpgrades = [
     effect: 0.03,
     scaleStart: 2,
     formatEffect: value => `+${formatPercents(value)}`,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.cosmicFilament.isBought
   }),
   rebuyable({
     name: "Entropic Condensing",
@@ -106,26 +115,27 @@ export const imaginaryUpgrades = [
     description: () => `Increase Singularity gain`,
     effect: 1,
     scaleStart: 2,
-    formatEffect: value => `${formatX(EndgameMastery(131).isBought ? Math.pow(1 + value, value) : 1 + value, 2)}`
+    formatEffect: value => `${formatX(EndgameMastery(131).isBought ? Decimal.pow(1 + value, value) : new Decimal(1 + value), 2)}`,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.entropicCondensing.isBought
   }),
   {
     name: "Suspicion of Interference",
     id: 11,
-    cost: 5e7,
+    cost: new Decimal(5e7),
     requirement: () => `${format(1e90)} total Relic Shards
       (You have ${format(player.celestials.effarig.relicShards, 2)})`,
     hasFailed: () => false,
-    checkRequirement: () => player.celestials.effarig.relicShards >= 1e90,
+    checkRequirement: () => player.celestials.effarig.relicShards.gte(1e90),
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
     description: "Time Dimension power based on total antimatter",
-    effect: () => 1 + Math.log10(player.records.totalAntimatter.log10()) / 100,
+    effect: () => 1 + Math.log10(player.records.totalEndgameAntimatter.log10()) / 100,
     formatEffect: value => `${formatPow(value, 0, 4)}`,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.suspicionOfInterference.isBought
   },
   {
     name: "Consequences of Illusions",
     id: 12,
-    cost: 5e7,
+    cost: new Decimal(5e7),
     requirement: () => `Make a level ${formatInt(9000)} Glyph with a single Glyph level factor weight at
     ${formatInt(100)}`,
     hasFailed: () => false,
@@ -135,12 +145,12 @@ export const imaginaryUpgrades = [
     description: "Gain free Dimboosts based on Imaginary rebuyable count",
     effect: () => 2e4 * ImaginaryUpgrades.totalRebuyables,
     formatEffect: value => `${format(value, 1)}`,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.consequencesOfIllusions.isBought
   },
   {
     name: "Transience of Information",
     id: 13,
-    cost: 5e7,
+    cost: new Decimal(5e7),
     requirement: () => `Reach ${format(Number.MAX_VALUE, 2)} projected Reality Machines within
       The Nameless Ones' Reality`,
     hasFailed: () => !Enslaved.isRunning,
@@ -151,12 +161,12 @@ export const imaginaryUpgrades = [
     description: "Increase Imaginary Machine Cap based on Imaginary Upgrades purchased",
     effect: () => Math.pow(1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2, EndgameMastery(154).effectOrDefault(1)),
     formatEffect: value => `${formatX(value, 2, 1)}`,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.transienceOfInformation.isBought
   },
   {
     name: "Recollection of Intrusion",
     id: 14,
-    cost: 3.5e8,
+    cost: new Decimal(3.5e8),
     formatCost: x => format(x, 1),
     requirement: () => `Reach a tickspeed of ${format("1e75000000000")} / sec within Eternity Challenge 5`,
     hasFailed: () => false,
@@ -164,12 +174,12 @@ export const imaginaryUpgrades = [
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Raise all Dimension per-purchase multipliers to ${formatPow(1.5, 0, 1)}`,
     effect: 1.5,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.recollectionOfIntrusion.isBought
   },
   {
     name: "Fabrication of Ideals",
     id: 15,
-    cost: 1e9,
+    cost: new Decimal(1e9),
     requirement: () => `Reach ${format("1e1500000000000")} antimatter without
       ever having any 1st Infinity Dimensions`,
     hasFailed: () => player.requirementChecks.reality.maxID1.gt(0),
@@ -188,7 +198,7 @@ export const imaginaryUpgrades = [
   {
     name: "Massless Momentum",
     id: 16,
-    cost: 3.5e9,
+    cost: new Decimal(3.5e9),
     formatCost: x => format(x, 1),
     requirement: () => `Destabilize Lai'tela's Reality in under ${formatInt(30)} seconds twice`,
     hasFailed: () => false,
@@ -199,30 +209,30 @@ export const imaginaryUpgrades = [
   {
     name: "Chiral Oscillation",
     id: 17,
-    cost: 6e9,
+    cost: new Decimal(6e9),
     requirement: () => `Automatically condense at least ${formatInt(20)} Singularities at once`,
     hasFailed: () => false,
-    checkRequirement: () => Singularity.singularitiesGained >= 20 &&
-      Currency.darkEnergy.gte(Singularity.cap * SingularityMilestone.autoCondense.effectOrDefault(Infinity)),
+    checkRequirement: () => Singularity.singularitiesGained.gte(20) &&
+      Currency.darkEnergy.gte(Singularity.cap.times(SingularityMilestone.autoCondense.effectOrDefault(Infinity))),
     checkEvent: GAME_EVENT.SINGULARITY_RESET_BEFORE,
     description: "Unlock the 3rd Dark Matter Dimension",
   },
   {
     name: "Dimensional Symmetry",
     id: 18,
-    cost: 1.5e10,
+    cost: new Decimal(1.5e10),
     formatCost: x => format(x, 1),
     requirement: () => `Have ${formatInt(80000)} total Galaxies`,
     hasFailed: () => false,
-    checkRequirement: () => Replicanti.galaxies.total + player.galaxies +
-      player.dilation.totalTachyonGalaxies >= 80000,
+    checkRequirement: () => Replicanti.galaxies.total.add(player.galaxies).add(
+      player.dilation.totalTachyonGalaxies).gte(80000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock the 4th Dark Matter Dimension",
   },
   {
     name: "Deterministic Radiation",
     id: 19,
-    cost: 2.8e10,
+    cost: new Decimal(2.8e10),
     formatCost: x => format(x, 1),
     requirement: () => `Reach ${formatInt(3.85e6)} Tickspeed Continuum without ever having more than
       ${formatInt(8)} Time Studies in this Reality`,
@@ -237,7 +247,7 @@ export const imaginaryUpgrades = [
   {
     name: "Vacuum Acceleration",
     id: 20,
-    cost: 3e12,
+    cost: new Decimal(3e12),
     requirement: () => `Have a Continuum increase of at least ${formatPercents(1)}`,
     hasFailed: () => false,
     checkRequirement: () => Laitela.matterExtraPurchaseFactor >= 2,
@@ -245,12 +255,12 @@ export const imaginaryUpgrades = [
     description: () => `Unlock Autobuyers for repeatable Imaginary Upgrades and generate Imaginary Machines
       ${formatInt(10)} times faster`,
     effect: 10,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.vacuumAcceleration.isBought
   },
   {
     name: "Existential Elimination",
     id: 21,
-    cost: 1e13,
+    cost: new Decimal(1e13),
     requirement: () => `Reach ${format("1e7400000000000")} antimatter with Continuum disabled for the entire Reality`,
     hasFailed: () => !player.requirementChecks.reality.noContinuum,
     checkRequirement: () => player.requirementChecks.reality.noContinuum &&
@@ -259,14 +269,14 @@ export const imaginaryUpgrades = [
     canLock: true,
     lockEvent: "enable Continuum",
     description: "Annihilation multiplier gain is improved based on Imaginary Machines",
-    effect: () => Math.clampMin(Math.pow(Math.log10(Currency.imaginaryMachines.value) - 10, 3), 1),
+    effect: () => Math.clampMin(Math.pow(Decimal.log10(Currency.imaginaryMachines.value) - 10, 3), 1),
     formatEffect: value => `${formatX(value, 2, 1)}`,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.existentialElimination.isBought
   },
   {
     name: "Total Termination",
     id: 22,
-    cost: 1.5e14,
+    cost: new Decimal(1.5e14),
     formatCost: x => format(x, 1),
     requirement: () => `Reach ${format("1e150000000000")} antimatter in Effarig's Reality with
       at least ${formatInt(4)} Cursed Glyphs equipped`,
@@ -276,13 +286,13 @@ export const imaginaryUpgrades = [
       Currency.antimatter.value.exponent >= 1.5e11,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `All Glyph Sacrifice totals are increased to ${format(1e100)}`,
-    effect: 1e100,
-    isDisabledInDoomed: true
+    effect: new Decimal(1e100),
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.totalTermination.isBought
   },
   {
     name: "Planar Purification",
     id: 23,
-    cost: 6e14,
+    cost: new Decimal(6e14),
     requirement: () => `Reach Glyph level ${formatInt(20000)} in Ra's Reality with
       at most ${formatInt(0)} Glyphs equipped`,
     hasFailed: () => !Ra.isRunning || player.requirementChecks.reality.maxGlyphs > 0,
@@ -292,12 +302,12 @@ export const imaginaryUpgrades = [
     description: "Increase free Dimboost count based on Tesseract count",
     effect: () => Math.floor(0.25 * Math.pow(Tesseracts.effectiveCount, 2)),
     formatEffect: value => `${formatX(value)}`,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.planarPurification.isBought
   },
   {
     name: "Absolute Annulment",
     id: 24,
-    cost: 6e14,
+    cost: new Decimal(6e14),
     // We unfortunately don't have the UI space to be more descriptive on this button without causing text overflow,
     // so hopefully the additional modals (from the upgrade lock) will mostly communicate the idea that this is under
     // the same conditions as hard V's Post-destination
@@ -305,19 +315,19 @@ export const imaginaryUpgrades = [
       with a fully inverted Black Hole`,
     hasFailed: () => !Ra.isRunning || player.requirementChecks.reality.slowestBH > 1e-300,
     checkRequirement: () => Ra.isRunning && player.requirementChecks.reality.slowestBH <= 1e-300 &&
-      player.galaxies >= 13000,
+      player.galaxies.gte(13000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     // Three locking events: uninvert, discharge, and entering (but not auto-completing) EC12
     description: "Increase free Dimboost strength based on Singularity count",
     effect: () => Decimal.pow(player.celestials.laitela.singularities, 300),
     formatEffect: value => `${formatX(value, 2, 1)}`,
-    isDisabledInDoomed: true
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.absoluteAnnulment.isBought
   },
   {
     name: "Omnipresent Obliteration",
     id: 25,
-    cost: 1.6e15,
+    cost: new Decimal(1.6e15),
     formatCost: x => format(x, 1),
     requirement: () => `Reach Reality in Lai'tela's Reality with all Dimensions disabled and
       at least ${formatInt(4)} empty Glyph slots`,
@@ -333,28 +343,28 @@ export const imaginaryUpgrades = [
   {
     name: "Singularity Stockpile",
     id: 26,
-    cost: 1e50,
+    cost: new Decimal(1e50),
     requirement: () => `Reach ${format(DC.E100, 2)} Singularities`,
     hasFailed: () => false,
-    checkRequirement: () => Currency.singularities.value >= 1e100,
+    checkRequirement: () => Currency.singularities.value.gte(1e100),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to 1e1000",
+    description: () => `Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e1000")}`,
   },
   {
     name: "Exigent Extinction",
     id: 27,
-    cost: 1e100,
-    requirement: () => `Reach 1e9e15 Antimatter in Pelle without ever equipping Glyphs`,
+    cost: new Decimal(1e100),
+    requirement: () => `Reach ${format(DC.E9E15)} Antimatter in Pelle without ever equipping Glyphs`,
     hasFailed: () => !Pelle.isDoomed || player.requirementChecks.endgame.noGlyphsDoomed === false,
     checkRequirement: () => Currency.antimatter.value.exponent >= 9e15 && Pelle.isDoomed &&
       player.requirementChecks.endgame.noGlyphsDoomed === true,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to 1e4000",
+    description: () => `Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e4000")}`,
   },
   {
     name: "Alchemical Annihilation",
     id: 28,
-    cost: 1e150,
+    cost: new Decimal(1e150),
     requirement: () => `Unlock Pelle without having any Alchemy Resources`,
     hasFailed: () => player.celestials.ra.alchemy[0].amount > 0 ||
       player.celestials.ra.alchemy[1].amount > 0 ||
@@ -370,26 +380,26 @@ export const imaginaryUpgrades = [
       player.celestials.ra.alchemy[4].amount === 0 &&
       player.celestials.ra.alchemy[5].amount === 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to 1e20000",
+    description: () => `Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e20000")}`,
   },
   {
     name: "Galactic Genocide",
     id: 29,
-    cost: 1e200,
-    requirement: () => `Have a total of 1e100 Galaxies`,
+    cost: new Decimal(1e200),
+    requirement: () => `Have a total of ${format(1e75, 2, 2)} Galaxies`,
     hasFailed: () => false,
-    checkRequirement: () => Replicanti.galaxies.total + player.galaxies + 
-      player.dilation.totalTachyonGalaxies >= 1e100,
+    checkRequirement: () => Replicanti.galaxies.total.add(player.galaxies).add(
+      player.dilation.totalTachyonGalaxies).add(GalaxyGenerator.galaxies).gte(1e75),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to 1e100000",
+    description: () => `Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e100000")}`,
   },
   {
     name: "Inception Initiation",
     id: 30,
-    cost: Number.MAX_VALUE,
+    cost: Decimal.NUMBER_MAX_VALUE,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
-    hasFailed: () => !Pelle.isDoomed,
-    checkRequirement: () => Currency.antimatter.value.exponent >= 9e115 && Pelle.isDoomed,
+    hasFailed: () => !PelleStrikeUpgrade.pelleStrike1.isAvailableForPurchase,
+    checkRequirement: () => PelleStrikeUpgrade.all.filter(u => u.isBought).length >= 5,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => {
       if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";

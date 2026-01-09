@@ -18,6 +18,8 @@ export * from "./notations";
 export * from "./tutorial";
 
 export * from "./endgame";
+export * from "./galactic-power";
+export * from "./expansion-packs";
 
 export * from "./celestials/quotes";
 export * from "./celestials/teresa";
@@ -82,6 +84,7 @@ export * from "./time-theorems";
 export * from "./endgame-skills";
 export * from "./reality-upgrades";
 export * from "./imaginary-upgrades";
+export * from "./endgame-upgrades";
 export * from "./perks";
 export * from "./dilation";
 export * from "./black-hole";

@@ -44,7 +44,7 @@ export default {
       // of all current studies for every study, and even then it looks odd in practice because then a few studies
       // appear more expensive simply due to buy order.
       this.showSTCost = VUnlocks.vAchievementUnlock.isUnlocked && !TimeStudy(this.study.id).isBought &&
-        TimeStudy(this.study.id).costsST() && !Pelle.isDoomed;
+        TimeStudy(this.study.id).costsST() && (!Pelle.isDoomed || PelleDestructionUpgrade.spaceTheorems.isBought);
     },
   }
 };

@@ -38,8 +38,8 @@ export default {
       }
       this.isInLaitela = Laitela.isRunning;
       if (this.isInLaitela) {
-        if (player.celestials.laitela.entropy > 0) {
-          this.laitelaEntropy = `${formatPercents(player.celestials.laitela.entropy, 2, 2)}`;
+        if (player.celestials.laitela.entropy.gt(0)) {
+          this.laitelaEntropy = `${formatPercents(new Decimal(player.celestials.laitela.entropy).toNumber(), 2, 2)}`;
           this.laitelaTimer = Time.thisRealityRealTime.toStringShort();
         } else {
           this.laitelaEntropy = `${formatPercents(1, 2, 2)}`;

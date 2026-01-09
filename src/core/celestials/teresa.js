@@ -6,7 +6,9 @@ import { Quotes } from "./quotes";
 export const Teresa = {
   timePoured: new Decimal(0),
   lastUnlock: "effarig",
-  pouredAmountCap: new Decimal(1e24),
+  get pouredAmountCap() {
+    return ExpansionPack.teresaPack.isBought ? Decimal.pow(10, 1e300) : new Decimal(1e24);
+  },
   displayName: "Teresa",
   possessiveName: "Teresa's",
   get isUnlocked() {
@@ -33,7 +35,7 @@ export const Teresa = {
     player.celestials.teresa.run = true;
   },
   rewardMultiplier(antimatter) {
-    return Decimal.max(Decimal.pow(antimatter.plus(1).log10() / 1.5e8, 12), 1).toNumber();
+    return Decimal.max(Decimal.pow(antimatter.plus(1).log10() / 1.5e8, 12), 1);
   },
   get pouredAmount() {
     return player.celestials.teresa.pouredAmount;
@@ -59,6 +61,15 @@ export const Teresa = {
   get runCompleted() {
     return player.celestials.teresa.bestRunAM.gt(1);
   },
+  get totalCharges() {
+    return PerkShopUpgrade.addCharges.effectOrDefault(0);
+  },
+  get chargesLeft() {
+    return this.totalCharges - player.celestials.teresa.charged.size;
+  },
+  get chargeModeOn() {
+    return player.celestials.teresa.chargeMode;
+  },
   quotes: Quotes.teresa,
   symbol: "Ϟ"
 };
@@ -67,10 +78,22 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
   constructor(config) {
     super(config);
     this.costCap = config.costCap;
+    this.showEffectAfterCharge = config.showEffectAfterCharge;
+    this.chargedEffect = config.chargedEffect;
+    this.preChargedEffect = config.preChargedEffect;
+    this.effect = config.effect;
+  }
+
+  get chargedValue() {
+    return this.viewCharge ? this.chargedEffect : this.effect;
+  }
+
+  get displayEffect() {
+    return !this.viewCharge || this.showEffectAfterCharge;
   }
 
   get currency() {
-    return Currency.perkPoints;
+    return this.id === 6 ? Currency.celestialPoints : Currency.perkPoints;
   }
 
   get boughtAmount() {
@@ -82,12 +105,12 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
   }
 
   get isCapped() {
-    return this.cost === this.costCap(this.bought);
+    return this.id === 6 ? new Decimal(this.cost).gte(this.costCap(this.bought)) : this.cost === this.costCap(this.bought);
   }
 
   get isAvailableForPurchase() {
     const otherReq = this.config.otherReq ? this.config.otherReq() : true;
-    return this.cost <= this.currency.value && otherReq;
+    return new Decimal(this.cost).lte(new Decimal(this.currency.value)) && otherReq;
   }
 
   onPurchased() {
@@ -98,7 +121,7 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
       Autobuyer.reality.bumpAmount(2);
     }
     // Give a single music glyph
-    if (this.id === 4 && !Pelle.isDoomed) {
+    if (this.id === 4 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.isBought)) {
       if (GameCache.glyphInventorySpace.value === 0) {
         // Refund the perk point if they didn't actually get a glyph
         Currency.perkPoints.add(1);
@@ -109,12 +132,58 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
       }
     }
     // Fill the inventory with music glyphs
-    if (this.id === 5 && !Pelle.isDoomed) {
+    if (this.id === 5 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.isBought)) {
       const toCreate = GameCache.glyphInventorySpace.value;
       for (let count = 0; count < toCreate; count++) Glyphs.addToInventory(GlyphGenerator.musicGlyph());
       GameUI.notify.success(`Created ${quantifyInt("Music Glyph", toCreate)}`);
     }
   }
+
+  get viewCharge() {
+    return (Teresa.chargeModeOn || this.isCharged || ui.view.shiftDown) && this.ableToCharge && ExpansionPack.teresaPack.isBought;
+  }
+
+  get ableToCharge() {
+    return this.id <= 4;
+  }
+
+  get isCharged() {
+    return player.celestials.teresa.charged.has(this.id);
+  }
+
+  get canCharge() {
+    return !this.isCharged && Teresa.chargesLeft !== 0 && this.ableToCharge;
+  }
+
+  charge() {
+    player.celestials.teresa.charged.add(this.id);
+    if (this.id === 0) {
+      GameCache.staticGlyphWeights.invalidate();
+    }
+  }
+
+  disCharge() {
+    player.celestials.teresa.charged.delete(this.id);
+    if (this.id === 0) {
+      GameCache.staticGlyphWeights.invalidate();
+    }
+  }
+}
+
+export function disChargeAllPerkUpgrades() {
+  const upgrades = [
+    PerkShopUpgrade.glyphLevel,
+    PerkShopUpgrade.rmMult,
+    PerkShopUpgrade.bulkDilation,
+    PerkShopUpgrade.autoSpeed,
+    PerkShopUpgrade.musicGlyph
+  ];
+  for (const upgrade of upgrades) {
+    if (upgrade.isCharged) {
+      upgrade.disCharge();
+    }
+  }
+  player.celestials.teresa.disCharge = false;
 }
 
 class TeresaUnlockState extends BitUpgradeState {
@@ -126,7 +195,11 @@ class TeresaUnlockState extends BitUpgradeState {
   }
 
   get pelleDisabled() {
-    return Pelle.isDoomed && this.config.isDisabledInDoomed;
+    return Pelle.isDoomed && this.isDisabledInDoomed;
+  }
+
+  get isDisabledInDoomed() {
+    return this.config.isDisabledInDoomed ? this.config.isDisabledInDoomed() : false;
   }
 
   get isEffectActive() {

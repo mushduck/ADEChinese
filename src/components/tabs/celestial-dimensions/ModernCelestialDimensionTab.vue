@@ -17,7 +17,7 @@ export default {
       incomeType: "",
       conversionExponent: 0,
       nextDimCapIncrease: 0,
-      totalDimCap: 0,
+      totalDimCap: new Decimal(0),
       creditsClosed: false,
       showLockedDimCostNote: true,
       softcapPow: 0,
@@ -35,10 +35,10 @@ export default {
       this.dimMultiplier.copyFrom(this.celestialMatter.pow(this.conversionExponent).max(1));
       this.matterPerSecond.copyFrom(CelestialDimension(1).productionPerSecond);
       this.incomeType = "Celestial Matter";
-      this.totalDimCap = CelestialDimensions.totalDimCap;
+      this.totalDimCap.copyFrom(CelestialDimensions.totalDimCap);
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.softcapPow = CelestialDimensions.softcapPow;
-      this.softcap = CelestialDimensions.SOFTCAP;
+      this.softcap.copyFrom(CelestialDimensions.SOFTCAP);
       this.unstable = this.celestialMatter.gte(this.softcap);
       this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
     },
@@ -78,14 +78,16 @@ export default {
       <p>
         You have
         <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
-        <span v-if="unstable">Unstable</span> Celestial Matter <span v-if="!isEffectActive">(Disabled)</span>,
+        <span v-if="unstable"> Unstable</span> Celestial Matter,
         <br>
         <span>
           increased by
           <span :class="instabilityClassObject()">{{ formatPow(conversionExponent, 2, 3) }}</span>
         </span>
         to a
-        <span :class="instabilityClassObject()">{{ formatX(dimMultiplier, 2, 1) }}</span>
+        <span :class="instabilityClassObject()">
+          {{ formatX(dimMultiplier, 2, 1) }}<span v-if="!isEffectActive"> (Disabled)</span>
+        </span>
         multiplier to
         <span>Game Speed.</span>
         <div v-if="unstable">

@@ -117,6 +117,7 @@ createInCategory(AutomatorCurrency, "DT", /dt/i, { $getter: () => Currency.dilat
 createInCategory(AutomatorCurrency, "TP", /tp/i, { $getter: () => Currency.tachyonParticles.value });
 createInCategory(AutomatorCurrency, "RG", /rg/i, { $getter: () => new Decimal(Replicanti.galaxies.total) });
 createInCategory(AutomatorCurrency, "RM", /rm/i, { $getter: () => Currency.realityMachines.value });
+createInCategory(AutomatorCurrency, "RS", /rs/i, { $getter: () => Currency.realityShards.value });
 
 createInCategory(AutomatorCurrency, "infinities", /infinities/i, { $getter: () => Currency.infinities.value });
 createInCategory(AutomatorCurrency, "bankedInfinities", /banked[ \t]+infinities/i, {
@@ -125,6 +126,10 @@ createInCategory(AutomatorCurrency, "bankedInfinities", /banked[ \t]+infinities/
 });
 createInCategory(AutomatorCurrency, "eternities", /eternities/i, { $getter: () => Currency.eternities.value });
 createInCategory(AutomatorCurrency, "realities", /realities/i, { $getter: () => Currency.realities.value });
+createInCategory(AutomatorCurrency, "remnants", /remnants/i, {
+  $autocomplete: "remnants",
+  $getter: () => new Decimal(Currency.remnants.value)
+});
 
 createInCategory(AutomatorCurrency, "PendingIP", /pending[ \t]+ip/i, {
   $autocomplete: "pending IP",
@@ -142,9 +147,17 @@ createInCategory(AutomatorCurrency, "PendingRM", /pending[ \t]+rm/i, {
   $autocomplete: "pending RM",
   $getter: () => (isRealityAvailable() ? MachineHandler.gainedRealityMachines : DC.D0)
 });
+createInCategory(AutomatorCurrency, "PendingRS", /pending[ \t]+rs/i, {
+  $autocomplete: "pending RS",
+  $getter: () => (Pelle.isDoomed ? Pelle.nextRealityShardGain : DC.D0)
+});
 createInCategory(AutomatorCurrency, "PendingGlyphLevel", /pending[ \t]+glyph[ \t]+level/i, {
   $autocomplete: "pending Glyph level",
   $getter: () => new Decimal(isRealityAvailable() ? gainedGlyphLevel().actualLevel : 0),
+});
+createInCategory(AutomatorCurrency, "PendingRemnants", /pending[ \t]+remnants/i, {
+  $autocomplete: "pending remnants",
+  $getter: () => new Decimal(Pelle.isDoomed ? Pelle.remnantsGain : 0)
 });
 
 createInCategory(AutomatorCurrency, "Rep", /rep(licanti)?/i, {
@@ -252,6 +265,12 @@ createInCategory(PrestigeEvent, "Reality", /reality/i, {
   $respec: () => {
     player.reality.respec = true;
   },
+});
+createInCategory(PrestigeEvent, "Armageddon", /armageddon/i, {
+  $prestigeAvailable: () => Pelle.canArmageddon,
+  $prestigeLevel: 4,
+  $prestigeCurrency: "RS",
+  $prestige: () => Pelle.armageddon(true),
 });
 
 createInCategory(StudyPath, "Idle", /idle/i, { $studyPath: TIME_STUDY_PATH.IDLE });

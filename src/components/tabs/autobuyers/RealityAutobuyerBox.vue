@@ -115,7 +115,7 @@ export default {
         :property="(hasAlternateInputs && hasRelicMode) ? 'shard' : 'glyph'"
       />
       <div v-if="isOverCap">
-        Autobuyer will trigger at the Glyph level cap of {{ formatInt(levelCap) }}.
+        Autobuyer will trigger at the Glyph level cap of {{ formatHybridLarge(levelCap, 3) }}.
       </div>
     </template>
   </AutobuyerBox>

@@ -206,7 +206,7 @@ export function skipResetsIfPossible(enteringAntimatterChallenge) {
   if (enteringAntimatterChallenge || Player.isInAntimatterChallenge) return;
   if (InfinityUpgrade.skipResetGalaxy.isBought && player.dimensionBoosts.lt(4)) {
     player.dimensionBoosts = DC.D4;
-    if (player.galaxies < 1) player.galaxies = 1;
+    if (player.galaxies.lt(1)) player.galaxies = DC.D1;
   } else if (InfinityUpgrade.skipReset3.isBought && player.dimensionBoosts.lt(3)) player.dimensionBoosts = DC.D3;
   else if (InfinityUpgrade.skipReset2.isBought && player.dimensionBoosts.lt(2)) player.dimensionBoosts = DC.D2;
   else if (InfinityUpgrade.skipReset1.isBought && player.dimensionBoosts.lt(1)) player.dimensionBoosts = DC.D1;
@@ -270,16 +270,38 @@ function maxBuyDimBoosts() {
 
 
   if (EternityChallenge(5).isRunning) {
-    calcBoosts = decimalCubicSolution(DC.D1, DC.D1.neg(), multiplierPerDB.add(2), ad.add(18).neg());
+    const ad = AntimatterDimension(tier).totalAmount;
+    let estimateTotalAmount = Decimal.floor(Decimal.cbrt(ad.div(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1)))).add(1);
+    const freeBoost = NormalChallenge(10).isRunning ? new Decimal(2) : new Decimal(4);
+    const divisor1 = NormalChallenge(10).isRunning ? new Decimal(20) : new Decimal(15);
+    const divisor2 = Effects.sum(TimeStudy(211), TimeStudy(222));
+    const extraEffect = InfinityChallenge(5).isCompleted ? new Decimal(1) : new Decimal(0);
+    const cubicSum = DC.D20.add(estimateTotalAmount.sub(freeBoost.add(1)).mul(divisor1.sub(divisor2)));
+    const listedCost = estimateTotalAmount.lt(freeBoost) ? new Decimal(0) : (Decimal.pow(estimateTotalAmount.sub(1), 3).add(estimateTotalAmount).add(cubicSum).sub(1).sub(Effects.sum(InfinityUpgrade.resetBoost)).sub(extraEffect)).times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
+    if (listedCost.gt(0)) {
+      if (listedCost.lt(ad)) {
+        estimateTotalAmount = estimateTotalAmount.add(1);
+      }
+      if (listedCost.gte(ad)) {
+        estimateTotalAmount = estimateTotalAmount.sub(1);
+        if (listedCost.gte(ad)) {
+          estimateTotalAmount = estimateTotalAmount.add(1);
+        }
+      }
+      calcBoosts = estimateTotalAmount;
+    } else {
+      calcBoosts = freeBoost;
+      // Dimension boosts 1-4 dont use 8th dims, 1-2 dont use 6th dims, so add those extras afterwards.
+    }
+    calcBoosts = calcBoosts.sub(1);
+  } else {
+    calcBoosts = calcBoosts.add(NormalChallenge(10).isRunning ? 2 : 4);
+    // Dimension boosts 1-4 dont use 8th dims, 1-2 dont use 6th dims, so add those extras afterwards.
   }
-
-  calcBoosts = calcBoosts.add(NormalChallenge(10).isRunning ? 2 : 4);
-  // Dimension boosts 1-4 dont use 8th dims, 1-2 dont use 6th dims, so add those extras afterwards.
-
+  
   // Add one cause (x-b)/i is off by one otherwise
   if (calcBoosts.floor().add(1).lte(DimBoost.purchasedBoosts)) return;
   calcBoosts = calcBoosts.sub(DimBoost.purchasedBoosts);
   const minBoosts = Decimal.min(DC.E9E15, calcBoosts.floor().add(1));
-
   softReset(minBoosts);
 }

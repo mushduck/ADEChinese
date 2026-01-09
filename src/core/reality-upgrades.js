@@ -68,7 +68,7 @@ class RealityUpgradeState extends BitPurchasableMechanicState {
   // Note we don't actually show the modal if we already failed or unlocked it
   tryShowWarningModal(specialLockText) {
     if (this.isPossible && !this.isAvailableForPurchase) {
-      Modal.upgradeLock.show({ upgrade: this, isImaginary: false, specialLockText });
+      Modal.upgradeLock.show({ upgrade: this, isImaginary: false, isEndgame: false, specialLockText });
     }
   }
 

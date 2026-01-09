@@ -20,20 +20,27 @@ const deities =      ["Lesser",        "Deities",       "Monarchs"];
 const elemental =    ["Overlord",      "Deity",         "Elemental"];
 
 const anger =        ["Frustration",   "Anger",         "Rage"];
+const angry =        ["Frustrated",    "Angry",         "Enraged"];
 const assured =      ["Mutually",      "Assured",       "Destruction"];
 const battle =       ["Conflict",      "Battle",        "End"];
 const battles =      ["Conflicts",     "Battles",       "Ends"];
 const cluster =      ["Cluster",       "Filament",      "Stars"];
 const confusing =    ["Amusing",       "Confusing",     "Laughter"];
+const cycle =        ["Repeat",        "Cycle",         "Loop"];
 const dance =        ["Song",          "Dance",         "Charade"];
+const debuff =       ["Nerf",          "Debuff",        "Corruption"];
+const endgame =      ["Esacpe",        "Rebirth",       "Endgame"];
+const debuffs =      ["Nerfs",         "Debuffs",       "Corruptions"];
 const exhaustion =   ["Exhale",        "Exhaustion",    "Sigh"];
 const filament =     ["Generator",     "Filament",      "Stars"];
 const forever =      ["Infinite",      "Forever",       "Eternal"];
 const inevitable =   ["Elementary",    "Inevitable",    "Irreversible"];
 const introduction = ["Speech",        "Introduction",  "Lecture"];
 const lose =         ["Fail",          "Lose",          "Abdicate"];
+const loss =         ["Failure",       "Loss",          "Abdication"];
 const mandate =      ["Destiny",       "Mandate",       "Goals"];
 const misconstrue =  ["Misconstrue",   "Deceive",       "Trick"];
+const original =     ["First",         "Original",      "Beginning"];
 const overpower =    ["Defeat",        "Overpower",     "Subjugate"];
 const overpowered =  ["Defeated",      "Overpowered",   "Subjugated"];
 const profanity =    ["Swear",         "Profanity",     "Curse"];
@@ -546,4 +553,189 @@ export const pelleQuotes = {
       "After all, I have already won."
     ],
   },
+  doomE10DP: {
+    id: 18,
+    lines: [
+      "Alright, kid.",
+      "This needs to stop.",
+      "How are you even alive right now?",
+      "After how many times you've been through my Reality?",
+      "And for what?",
+      { text: "Only to fulfill your $1?", 1: mandate },
+      { text: "$1", 1: exhaustion },
+      { text: "I need some new $1 to Strike you with.", 1: debuffs }
+    ],
+  },
+  expansionPacks: {
+    id: 19,
+    lines: [
+      "Stop.",
+      "How did you all get here?",
+      { text: "$1!", 1: destroyer },
+      { text: "Did you break the $1?", 1: cycle },
+      "You may be more powerful than I took you for.",
+      "No, Lai, keep Ra alive for now.",
+      "We need him for information.",
+      { text: "He was with the $1 for the longest, so he knows the most.", 1: elemental },
+      "If anyone knows where he is, it's Ra.",
+      { text: "Why do I want to know where the $1 is?", 1: elemental },
+      "First off, he has more power than all of us combined.",
+      { text: "If somehow I fail, he can smite the $1 for us.", 1: destroyer },
+      "And second, I haven't seen him in years.",
+      "Don't you think I want to know how he's doing?",
+      { text: "$1", 1: exhaustion },
+      "Well I see no reason for you all to linger here.",
+      "You can go.",
+      { text: "I and the $1 have some unfinished business to deal with.", 1: destroyer }
+    ]
+  },
+  allPelleAchs: {
+    id: 20,
+    lines: [
+      "You...",
+      "You're taking control of my Reality so quickly...",
+      "How?",
+      "How are you this strong?",
+      { text: "How do you keep resisting every $1 I throw at you?", 1: debuff },
+      "It doesn't matter.",
+      "I have already won.",
+      "There's nothing you can do to destroy me.",
+      "Only repeat the same cycle over and over again.",
+      { text: "And this only goes to prove my $1 point.", 1: original },
+      { text: "You are here $1.", 1: forever }
+    ],
+  },
+  galaxyDebuffDisable: {
+    id: 21,
+    lines: [
+      "How do you do it?",
+      { text: "Every time $1 is inevitable for you...", 1: loss },
+      "You manage to pull through.",
+      { text: "And thus each $1 ends the same way.", 1: battle },
+      { text: "The Irreversible $1...", 1: mandate },
+      { text: "Of the $1.", 1: destroyer },
+      "But now I must take control.",
+      { text: "After all, I am the $1.", 1: eternal },
+      { text: "My $1 will continue.", 1: dance }
+    ],
+  },
+  doomE55DP: {
+    id: 22,
+    lines: [
+      "...",
+      "This...",
+      "This might be too much.",
+      { text: "But you haven't won yet, $1.", 1: destroyer },
+      "I'm still here.",
+      "I'm still holding on.",
+      "And there's nothing you can do to stop me.",
+      "I have already won."
+    ],
+  },
+  allPelleNerfs: {
+    id: 23,
+    lines: [
+      "How...",
+      "How did you do it?",
+      "I held on so tightly...",
+      "But it doesn't matter.",
+      "My Strikes will bind you tighter.",
+      "And so, in the end...",
+      { text: "When you are $1...", 1: overpowered },
+      "Remember this.",
+      "I have already won."
+    ],
+  },
+  strikeDisable1: {
+    id: 24,
+    lines: [
+      { text: "$1", 1: profanity },
+      "How did you find it?",
+      "How did you find my Reality's Core?",
+      "It...",
+      "It doesn't matter.",
+      "The end will remain the same.",
+      { text: "I will win this $1...", 1: battle },
+      "No matter how long it takes."
+    ],
+  },
+  strikeDisable2: {
+    id: 25,
+    lines: [
+      { text: "You're making me really $1.", 1: angry },
+      "You know that, right?",
+      "Your efforts are futile.",
+      "Stop trying.",
+      "I have already won."
+    ],
+  },
+  strikeDisable3: {
+    id: 26,
+    lines: [
+      "Enough of this madness!",
+      "Stop!",
+      "I can feel your ascension slowing.",
+      "Finishing this job...",
+      { text: "Will take $1.", 1: forever },
+      "Just stop.",
+      "I have already won."
+    ],
+  },
+  strikeDisable4: {
+    id: 27,
+    lines: [
+      "Alright.",
+      { text: "$1.", 1: destroyer },
+      "Maybe my Reality is collapsing.",
+      "But does it matter?",
+      { text: "Your $1 can't prevail.", 1: mandate },
+      "Why?",
+      { text: "Because you are here $1!", 1: forever },
+      "There is no stopping me really.",
+      "It's impossible to continue.",
+      { text: "The $1 is over...", 1: battle },
+      "And I have already won."
+    ],
+  },
+  strikeDisable5: {
+    id: 28,
+    lines: [
+      "...",
+      "How?",
+      "How did you do it?",
+      "You... won?",
+      "My Reality is destroyed.",
+      "My power is gone.",
+      "And I have nothing left.",
+      "And in the end...",
+      { text: "The $1 has truly won.", 1: destroyer },
+      "So now, you are released.",
+      "Go.",
+      { text: "I will $1 you no longer.", 1: watch }
+    ],
+  },
+  pellePack: {
+    id: 29,
+    requirement: () => ExpansionPack.pellePack.isBought,
+    lines: [
+      "Why are you still here?",
+      "Can you not see there is nothing left?",
+      { text: "I have been $1.", 1: overpowered },
+      "Do you do this just to spite me?",
+      "Or...",
+      { text: "Did you discover the $1's secret power...", 1: elemental },
+      "What was it called...",
+      { text: "$1?", 1: endgame },
+      "...",
+      "You did!",
+      "Those are Celestial Points you have there!",
+      "I was supposed to protect that power!",
+      "You-",
+      { text: "$1", 1: exhaustion },
+      "Wait.",
+      "I think I remember you...",
+      "...",
+      "%name?"
+    ]
+  }
 };

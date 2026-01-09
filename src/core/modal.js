@@ -20,6 +20,7 @@ import ExitDilationModal from "@/components/modals/prestige/ExitDilationModal";
 import HardResetModal from "@/components/modals/prestige/HardResetModal";
 import RealityModal from "@/components/modals/prestige/RealityModal";
 import ReplicantiGalaxyModal from "@/components/modals/prestige/ReplicantiGalaxyModal";
+import ResetEndgameModal from "@/components/modals/prestige/ResetEndgameModal";
 import ResetRealityModal from "@/components/modals/prestige/ResetRealityModal";
 
 import AnimationOptionsModal from "@/components/modals/options/AnimationOptionsModal";
@@ -215,6 +216,7 @@ Modal.enterDilation = new Modal(EnterDilationModal, 1, GAME_EVENT.REALITY_RESET_
 Modal.exitDilation = new Modal(ExitDilationModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
 Modal.reality = new Modal(RealityModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
 Modal.resetReality = new Modal(ResetRealityModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
+Modal.resetEndgame = new Modal(ResetEndgameModal, 1, GAME_EVENT.ENDGAME_RESET_AFTER);
 Modal.celestials = new Modal(EnterCelestialsModal, 1);
 Modal.hardReset = new Modal(HardResetModal, 1);
 Modal.backupWindows = new Modal(BackupWindowModal, 1);
@@ -291,7 +293,7 @@ function getSaveInfo(save) {
     infinityPoints: new Decimal(0),
     eternityPoints: new Decimal(0),
     realityMachines: new Decimal(0),
-    imaginaryMachines: 0,
+    imaginaryMachines: new Decimal(0),
     dilatedTime: new Decimal(0),
     bestLevel: 0,
     pelleAM: new Decimal(0),
@@ -312,7 +314,7 @@ function getSaveInfo(save) {
   resources.infinityPoints.copyFrom(new Decimal(save.infinityPoints));
   resources.eternityPoints.copyFrom(new Decimal(save.eternityPoints));
   resources.realityMachines.copyFrom(new Decimal(save.reality?.realityMachines));
-  resources.imaginaryMachines = save.reality?.iMCap ?? 0;
+  resources.imaginaryMachines.copyFrom(new Decimal(save.reality?.iMCap));
   // Use max DT instead of current DT because spending it can cause it to drop and trigger the conflict modal
   // unnecessarily. We only use current DT as a fallback (eg. loading a save from pre-reality versions)
   resources.dilatedTime.copyFrom(new Decimal(save.records?.thisReality.maxDT ?? (save.dilation?.dilatedTime ?? 0)));

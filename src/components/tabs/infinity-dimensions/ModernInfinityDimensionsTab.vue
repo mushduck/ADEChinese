@@ -1,11 +1,13 @@
 <script>
 import InfinityDimensionRow from "./ModernInfinityDimensionRow";
 import PrimaryButton from "@/components/PrimaryButton";
+import PrimaryToggleButton from "@/components/PrimaryToggleButton";
 
 export default {
   name: "ModernInfinityDimensionsTab",
   components: {
     PrimaryButton,
+    PrimaryToggleButton,
     InfinityDimensionRow
   },
   data() {
@@ -32,13 +34,24 @@ export default {
       isEndgameUnlocked: false,
       infinityDimCompressionMagnitude: 0,
       infinityDimOverflow: 0,
-      infinityDimStart: new Decimal(0)
+      infinityDimStart: new Decimal(0),
+      freeTesseractSoftcap: 0,
+      freeTesseractHardcap: 0,
+      isAutoUnlocked: false,
+      isAutoActive: false,
     };
   },
   computed: {
     tesseractCountString() {
       const extra = this.extraTesseracts > 0 ? ` + ${format(this.extraTesseracts, 2, 2)}` : "";
-      return `${formatInt(this.boughtTesseracts)}${extra}`;
+      return `${formatHybridSmall(this.boughtTesseracts, 3)}${extra}`;
+    },
+    autobuyer() {
+      return Autobuyer.tesseract;
+    },
+    autobuyerTextDisplay() {
+      const auto = this.isAutoActive;
+      return `Auto Tesseract ${auto ? "ON" : "OFF"}`;
     },
   },
   methods: {
@@ -72,6 +85,11 @@ export default {
       this.infinityDimCompressionMagnitude = InfinityDimensions.compressionMagnitude;
       this.infinityDimOverflow = 1 / this.infinityDimCompressionMagnitude;
       this.infinityDimStart = InfinityDimensions.OVERFLOW;
+      this.freeTesseractSoftcap = Tesseracts.freeSoftcapStart;
+      this.freeTesseractHardcap = this.freeTesseractSoftcap * 2;
+      const auto = Autobuyer.tesseract;
+      this.isAutoUnlocked = auto.isUnlocked;
+      this.isAutoActive = auto.isActive;
     },
     maxAll() {
       InfinityDimensions.buyMax();
@@ -81,6 +99,10 @@ export default {
     },
     buyTesseract() {
       Tesseracts.buyTesseract();
+    },
+    handleAutoToggle(value) {
+      Autobuyer.tesseract.isActive = value;
+      this.update();
     }
   }
 };
@@ -154,6 +176,21 @@ export default {
         <p>Increase dimension caps by {{ format(nextDimCapIncrease, 2) }}</p>
         <p><b>Costs: {{ format(tesseractCost) }} IP</b></p>
       </button>
+      <br>
+      <PrimaryToggleButton
+        v-if="isAutoUnlocked"
+        :value="isAutoActive"
+        :on="autobuyerTextDisplay"
+        :off="autobuyerTextDisplay"
+        class="l--spoon-btn-group__little-spoon o-primary-btn--tesseract-toggle"
+        @input="handleAutoToggle"
+      />
+    </div>
+    <div>
+      Free Tesseracts are softcapped past {{ format(freeTesseractSoftcap, 2, 2) }}.
+      <br>
+      This softcap causes Tesseracts past {{ format(freeTesseractSoftcap, 2, 2) }} to eternally approach
+      a hardcap of {{ format(freeTesseractHardcap, 2, 2) }} without ever actually reaching it.
     </div>
     <div v-if="isEnslavedRunning">
       All Infinity Dimensions are limited to a single purchase.

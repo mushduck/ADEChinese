@@ -11,10 +11,14 @@ export default {
       realityTime: 0,
       maxDimTier: 0,
       isRunning: false,
-      realityReward: 1,
+      realityReward: new Decimal(1),
       singularitiesUnlocked: false,
       bestSet: [],
       tierNotCompleted: true,
+      hadronizeUnlocked: false,
+      darkEnergyBoost: 0,
+      hasHadronizes: false,
+      hadronizes: 0,
     };
   },
   computed: {
@@ -34,11 +38,15 @@ export default {
     update() {
       this.realityTime = player.celestials.laitela.fastestCompletion;
       this.maxDimTier = Laitela.maxAllowedDimension;
-      this.realityReward = Laitela.realityReward;
+      this.realityReward.copyFrom(Laitela.realityReward);
       this.isRunning = Laitela.isRunning;
       this.singularitiesUnlocked = Currency.singularities.gt(0);
       this.bestSet = Glyphs.copyForRecords(player.records.bestReality.laitelaSet);
       this.tierNotCompleted = this.realityTime === 3600 || (this.realityTime === 300 && this.maxDimTier < 8);
+      this.hadronizeUnlocked = ExpansionPack.laitelaPack.isBought;
+      this.darkEnergyBoost = Laitela.realityRewardDE;
+      this.hasHadronizes = this.hadronizes > 0;
+      this.hadronizes = Laitela.hadronizes;
     },
     startRun() {
       if (this.isDoomed) return;
@@ -47,7 +55,8 @@ export default {
     classObject() {
       return {
         "o-laitela-run-button": true,
-        "o-laitela-run-button--large": !this.singularitiesUnlocked
+        "o-laitela-run-button--large": !this.singularitiesUnlocked,
+        "o-laitela-run-button--larger": this.hadronizeUnlocked
       };
     },
     runButtonClassObject() {
@@ -58,6 +67,9 @@ export default {
         "o-pelle-disabled-pointer": this.isDoomed
       };
     },
+    hadronize() {
+      Laitela.hadronize();
+    }
   }
 };
 </script>
@@ -71,10 +83,21 @@ export default {
       :class="runButtonClassObject()"
       @click="startRun"
     />
-    <div v-if="realityReward > 1">
+    <div v-if="realityReward.gt(1)">
       <b>
         All Dark Matter multipliers are {{ formatX(realityReward, 2, 2) }} higher.
       </b>
+      <br>
+      <span v-if="maxDimTier === 0 || hasHadronizes">
+        <b>
+          You also gain an additional {{ formatX(darkEnergyBoost) }} Dark Energy.
+        </b>
+      </span>
+      <span v-if="hasHadronizes">
+        <b>
+          You have Hadronized Lai'tela's Reality {{ formatHybridSmall(hadronizes, 3) }} times.
+        </b>
+      </span>
       <span v-if="maxDimTier > 0">
         <br><br>
         {{ completionTime }}
@@ -92,10 +115,6 @@ export default {
         />
       </span>
       <span v-else>
-        <br>
-        <b>
-          You also gain an additional {{ formatX(8) }} Dark Energy.
-        </b>
         <br><br>
         Lai'tela's Reality has been fully destabilized and cannot have its reward further improved.
       </span>
@@ -109,5 +128,20 @@ export default {
     </div>
     <br>
     <div>{{ runDescription }}</div>
+    <br>
+    <div v-if="hadronizeUnlocked">
+      <button
+        class="l-laitela-hadronize-button c-laitela-hadronize-button"
+        @click="hadronize"
+      >
+        <b>Hadronize Laitela's Reality</b>
+      </button>
+      <br>
+      <br>
+      Hadronizing Lai'tela's Reality will restabilize all {{ formatInt(8) }} Dimensions, so you can use them again.
+      Rewards for completing Lai'tela's Reality from previous Hadronizes will persist, and you will be able to gain
+      more rewards for destabilizing Lai'tela's Reality again. Each Hadronization, the reward for destabilizing
+      Lai'tela's Reality will be multiplied by {{ formatInt(8) }}.
+    </div>
   </button>
 </template>

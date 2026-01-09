@@ -31,15 +31,15 @@ export default {
 
 const AUTOMATOR_BLOCKS_COMPARISON_OPERATORS = ["<", ">", ">=", "<="];
 const AUTOMATOR_BLOCKS_COMPARISON_CURRENCIES = [
-  "AM", "IP", "EP", "RM", "INFINITIES", "BANKED INFINITIES", "ETERNITIES", "REALITIES",
-  "PENDING IP", "PENDING EP", "PENDING TP", "PENDING RM", "PENDING GLYPH LEVEL",
+  "AM", "IP", "EP", "RM", "RS", "INFINITIES", "BANKED INFINITIES", "ETERNITIES", "REALITIES", "REMNANTS",
+  "PENDING IP", "PENDING EP", "PENDING TP", "PENDING RM", "PENDING RS", "PENDING GLYPH LEVEL", "PENDING REMNANTS",
   "DT", "TP", "RG", "REP", "TT", "TOTAL TT", "SPENT TT", "TOTAL COMPLETIONS", "PENDING COMPLETIONS",
   "EC1 COMPLETIONS", "EC2 COMPLETIONS", "EC3 COMPLETIONS", "EC4 COMPLETIONS",
   "EC5 COMPLETIONS", "EC6 COMPLETIONS", "EC7 COMPLETIONS", "EC8 COMPLETIONS",
   "EC9 COMPLETIONS", "EC10 COMPLETIONS", "EC11 COMPLETIONS", "EC12 COMPLETIONS",
 ];
 
-const AUTOMATOR_BLOCKS_RESETS = ["INFINITY", "ETERNITY", "REALITY"];
+const AUTOMATOR_BLOCKS_RESETS = ["INFINITY", "ETERNITY", "REALITY", "ARMAGEDDON"];
 
 /**
  *  @property {String} cmd          Name of automator command
@@ -88,6 +88,9 @@ export const automatorBlocks = [
     canRespec: true,
     canWait: true,
     isUnlocked: () => RealityUpgrade(25).isBought
+  }, {
+    cmd: "ARMAGEDDON",
+    canWait: true
   }, {
     cmd: "UNLOCK",
     allowedPatterns: ["AB", "C"],

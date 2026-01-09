@@ -15,6 +15,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    isEndgame: {
+      type: Boolean,
+      required: true,
+    },
     specialLockText: {
       type: String,
       required: false,
@@ -23,6 +27,7 @@ export default {
   },
   computed: {
     upgradeStr() {
+      if (this.isEndgame) return "Endgame Upgrade";
       return this.isImaginary ? "Imaginary Upgrade" : "Reality Upgrade";
     },
     lockEvent() {

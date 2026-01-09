@@ -20,6 +20,11 @@ export default {
     return {
       isAvailableForPurchase: false,
       isCapped: false,
+      isCharged: false,
+      otherCurr: false,
+      displayEffect: false,
+      chargesLeft: 0,
+      viewingCharge: false,
     };
   },
   computed: {
@@ -27,10 +32,18 @@ export default {
     classObject() {
       return {
         "o-teresa-shop-button": true,
-        "o-teresa-shop-button--available": this.isAvailableForPurchase && !this.isCapped,
-        "o-teresa-shop-button--capped": this.isCapped,
-        "o-teresa-shop-button--pelle-disabled": this.isDoomed &&
+        "o-teresa-shop-button--available": ((this.isAvailableForPurchase && !this.isCapped) ||
+          (this.chargesLeft > 0 && !this.isCharged)) && !(this.viewingCharge && this.chargesLeft <= 0),
+        "o-teresa-shop-button--capped": (this.isCapped && !this.viewingCharge) || this.isCharged,
+        "o-teresa-shop-button--pelle-disabled": (this.isDoomed && !PelleDestructionUpgrade.teresaShop.isBought) &&
           (this.upgrade === PerkShopUpgrade.musicGlyph || this.upgrade === PerkShopUpgrade.fillMusicGlyph)
+      };
+    },
+    effectConfig() {
+      const upgrade = this.upgrade;
+      return {
+        effect: () => upgrade.chargedValue(),
+        formatEffect: upgrade.config.formatEffect
       };
     },
   },
@@ -38,7 +51,16 @@ export default {
     update() {
       this.isAvailableForPurchase = this.upgrade.isAvailableForPurchase;
       this.isCapped = this.upgrade.isCapped;
-    }
+      this.isCharged = this.upgrade.isCharged;
+      this.otherCurr = (this.upgrade === PerkShopUpgrade.addCharges);
+      this.displayEffect = this.upgrade.displayEffect;
+      this.chargesLeft = Teresa.chargesLeft;
+      this.viewingCharge = this.upgrade.viewCharge;
+    },
+    performActions() {
+      if (!this.viewingCharge) this.upgrade.purchase();
+      if (this.viewingCharge && this.chargesLeft > 0) this.upgrade.charge();
+    },
   }
 };
 </script>
@@ -47,19 +69,22 @@ export default {
   <div class="l-spoon-btn-group">
     <button
       :class="classObject"
-      @click="upgrade.purchase()"
+      @click="performActions"
     >
       <DescriptionDisplay
         :config="upgrade.config"
         :length="70"
       />
-      <br>
-      <EffectDisplay :config="upgrade.config" />
-      <br>
+      <EffectDisplay
+        v-if="displayEffect"
+        br
+        :config="effectConfig"
+      />
       <CostDisplay
-        v-if="!isCapped"
+        v-if="!isCapped && !viewingCharge"
+        br
         :config="upgrade.config"
-        name="Perk Point"
+        :name="otherCurr ? 'Celestial Point' : 'Perk Point'"
       />
     </button>
   </div>

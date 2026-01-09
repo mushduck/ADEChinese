@@ -8,14 +8,14 @@ export const endgameMasteries = [
     reqType: EM_REQUIREMENT_TYPE.ALL,
     description: () => `Generate ${formatInt(1)} Perk Point per minute per Endgame`,
     effect: () => player.endgames,
-    formatEffect: value => `${formatInt(value)}/min`
+    formatEffect: value => `${formatHybridSmall(value, 3)}/min`
   },
   {
     id: 21,
     cost: 2,
     requirement: [11],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Automator Speed goes up by ${formatPercents(0.06)} rather than ${formatPercents(0.006)}`
+    description: () => `Automator Speed goes up by ${formatPercents(0.06)} rather than ${formatPercents(0.006, 1, 1)}`
   },
   {
     id: 22,
@@ -94,7 +94,7 @@ export const endgameMasteries = [
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and peak GL`,
     effect: () => (1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)) * player.records.bestEndgame.glyphLevel,
-    formatEffect: value => formatInt(value)
+    formatEffect: value => formatHybridSmall(value, 3)
   },
   {
     id: 81,
@@ -160,7 +160,7 @@ export const endgameMasteries = [
     requirement: [84],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Delay the Celestial Matter Softcap Start based on Endgames",
-    effect: () => Math.pow(10, Math.pow(player.endgames, 0.5)),
+    effect: () => Math.pow(10, Math.pow(player.endgames, 0.25)),
     formatEffect: value => formatX(value, 2)
   },
   {
@@ -269,9 +269,9 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [141],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Improve the Infinity Point Conversion Rate based on Celestial Points`,
-    effect: () => 1 + (Math.log10(Decimal.log10(Currency.celestialPoints.value.plus(1)) + 1) / 20),
-    formatEffect: value => `/${format(value, 2, 2)}`
+    description: () => `Make the Infinity Point formula better`,
+    effect: () => Effects.min(308, Achievement(103), TimeStudy(111)) / (1 + (Math.log10(Decimal.log10(Currency.celestialPoints.value.plus(1)) + 1) / 20)),
+    formatEffect: value => `log(x)/${format(Effects.min(308, Achievement(103), TimeStudy(111)), 2, 2)} ➜ log(x)/${format(value, 2, 2)}`
   },
   {
     id: 152,
@@ -302,7 +302,11 @@ export const endgameMasteries = [
     requirement: [151, 152, 153, 154],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Improve Singularity Gain per bulk increase based on Singularities owned",
-    effect: () => Math.floor(1 + (Math.log10(Math.max(Currency.singularities.value / 1e50, 1)) / 5)),
+    effect: () => Decimal.floor((new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(1e50), 1, 1e120))).div(5)).add(
+      new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(1e170), 1, 1e250))).div(10)).add(
+      new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(new Decimal("1e420")), 1, new Decimal("1e2500")))).div(100)).add(
+      Decimal.pow(new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(new Decimal("1e2920")), 1, new Decimal("1e390625")))), 0.25)).add(1)),
+    cap: DC.E2,
     formatEffect: value => `+${format(value, 2)}`
   },
   {

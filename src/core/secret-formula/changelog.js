@@ -9,6 +9,69 @@ export const changelog = [
    * }
    */
   {
+    date: [2026, 1, 9],
+    name: "v0.3.0: The Greater Reimagining II",
+    info: `
+Happy New Year!
+<br>
+<br>
+<b><i>Think we got all the bugs this time.</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>Endgame Upgrades</li>
+<li>Galactic Powers</li>
+<li>Expansion Packs (for real this time)</li>
+<li>New Dark Matter Dimensions: 5th, 6th, 7th, 8th (9th? 10th?? 11th???)</li>
+<li>Decimalization of Relic Shards</li>
+<li>Decimalization of Galaxies</li>
+<li>Decimalization of Glyph Sacrifice</li>
+<li>Decimalization of Imaginary Machines</li>
+<li>Decimalization of Singularities, Dark Energy and other Lai features</li>
+<li>Hadronization</li>
+<li>Bosonic Lab</li>
+<li>Infinite Tesseract Formula</li>
+<li>A ton of Autobuyers</li>
+<li>Every single Pelle Destruction Upgrade</li>
+<li>A few hardcaps</li>
+<li>Cool visual effects</li>
+<li>A fourth Glyph Instability threshold</li>
+<li>A new Glyph Rarity if you get far enough</li>
+<li>Achievements 195-198</li>
+<li>Game overhaul</li>
+<li>New Celestial quotes</li>
+<li>Break Eternity Upgrade names</li>
+<li>Automator commands</li>
+<li>Made Exporting your save give rewards</li>
+</ul>
+<br>
+<b>Things removed:</b><br>
+<ul>
+<li>Reactivity</li>
+<li>Bosonic Lab</li>
+<li>My sleep schedule</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Far too many overflow values</li>
+<li>Added a resetting of Alchemy to prevent locking out of Imaginary Upgrade 28</li>
+<li>Decimalized a few trivials to prevent crash</li>
+<li>Dooming your Reality being useless in the late-game</li>
+<li>Zero Endgame Time</li>
+<li>Formatting overflows</li>
+<li>Aliens trying to invade the game</li>
+<li>Antimatter exponent formulas not interacting with each other properly</li>
+<li>Pelle Destruction Upgrades not working</li>
+<li>Being able to disable Strikes before all the other upgrades are bought</li>
+<li>Random game crashing</li>
+<li>Severla moer radnom tpyos</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2025, 11, 8],
     name: "v0.2.3: The Greater Reimagining I",
     info: `

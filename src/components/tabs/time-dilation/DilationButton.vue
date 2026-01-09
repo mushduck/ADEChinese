@@ -18,7 +18,7 @@ export default {
   computed: {
     disableText() {
       // Doesn't need to be reactive or check strike status; it's always permanent once entered in Doomed
-      return Pelle.isDoomed ? "Dilation is permanent." : "Disable Dilation.";
+      return Pelle.isDoomed && !PelleStrikes.dilation.isDestroyed() ? "Dilation is permanent." : "Disable Dilation.";
     }
   },
   methods: {

@@ -89,6 +89,25 @@ window.formatMachines = function formatMachines(realPart, imagPart) {
   return parts.join(" + ");
 };
 
+window.formatHybridSmall = function formatHybridSmall(value, places, placesUnder1000) {
+  if (new Decimal(value).gt(1e6)) return `${format(value, places, placesUnder1000)}`;
+  return `${formatInt(value)}`;
+};
+
+window.formatHybridLarge = function formatHybridLarge(value, places, placesUnder1000) {
+  if (new Decimal(value).gt(1e12)) return `${format(value, places, placesUnder1000)}`;
+  return `${formatInt(value)}`;
+};
+
+window.formatHybridFloat = function formatHybridFloat(value, digits) {
+  if (new Decimal(value).gt(1e12)) return `${format(value, 3, 0)}`;
+  return `${formatFloat(value, digits)}`;
+};
+
+window.formatDimboostParts = function formatDimboostParts(value, places, placesUnder1000) {
+  return formatHybridLarge(value, 3, 0);
+};
+
 window.timeDisplay = function timeDisplay(ms) {
   return TimeSpan.fromMilliseconds(ms).toString();
 };
@@ -198,6 +217,34 @@ window.quantifyInt = function quantifyInt(name, value) {
   if (name === undefined || value === undefined) throw "Arguments must be defined";
 
   const number = formatInt(value);
+  const plural = pluralize(name, value);
+  return `${number} ${plural}`;
+};
+
+/**
+ * Returns the value formatted to formatHybridSmall followed by a name, pluralized based on the value input.
+ * @param  {string} name                  - name to pluralize and display after {value}
+ * @param  {number|Decimal} value         - number to format
+ * @return {string} - the formatted {value} followed by the {name} after having been pluralized based on the {value}
+ */
+window.quantifyHybridSmall = function quantifyHybridSmall(name, value) {
+  if (name === undefined || value === undefined) throw "Arguments must be defined";
+
+  const number = formatHybridSmall(value, 3);
+  const plural = pluralize(name, value);
+  return `${number} ${plural}`;
+};
+
+/**
+ * Returns the value formatted to formatHybridLarge followed by a name, pluralized based on the value input.
+ * @param  {string} name                  - name to pluralize and display after {value}
+ * @param  {number|Decimal} value         - number to format
+ * @return {string} - the formatted {value} followed by the {name} after having been pluralized based on the {value}
+ */
+window.quantifyHybridLarge = function quantifyHybridLarge(name, value) {
+  if (name === undefined || value === undefined) throw "Arguments must be defined";
+
+  const number = formatHybridLarge(value, 3);
   const plural = pluralize(name, value);
   return `${number} ${plural}`;
 };

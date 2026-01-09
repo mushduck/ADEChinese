@@ -83,7 +83,7 @@ class GlyphEffectConfig {
     /** @type {boolean} Indicates whether the effect grows with level or shrinks */
     this._biggerIsBetter = undefined;
     /** @type {boolean} Determines if effect is disabled while in doomed */
-    this._enabledInDoomed = setup.enabledInDoomed ?? false;
+    this._enabledInDoomed = setup.enabledInDoomed;
   }
 
   /**

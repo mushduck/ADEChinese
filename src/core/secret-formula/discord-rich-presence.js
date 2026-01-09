@@ -84,7 +84,7 @@ export const discordRichPresence = {
         return `${Laitela.possessiveName} Reality - ${dimStr}`;
       },
       activityToken: () => Laitela.isRunning,
-      resource: () => `${formatPercents(player.celestials.laitela.entropy, 2, 2)} Entropy`,
+      resource: () => `${formatPercents(new Decimal(player.celestials.laitela.entropy).toNumber(), 2, 2)} Entropy`,
     },
     {
       name: () => "Dilation",

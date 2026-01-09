@@ -223,10 +223,16 @@ export class EndgameMasteryTree {
   }
 
   get allowedCompPathCount() {
+    if (EndgameUpgrade(20).isBought) return 4;
+    if (EndgameUpgrade(19).isBought) return 3;
+    if (EndgameUpgrade(17).isBought) return 2;
     return 1;
   }
 
   get allowedCurrPathCount() {
+    if (EndgameUpgrade(20).isBought) return 4;
+    if (EndgameUpgrade(18).isBought) return 3;
+    if (EndgameUpgrade(16).isBought) return 2;
     return 1;
   }
 

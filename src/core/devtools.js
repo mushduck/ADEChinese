@@ -113,8 +113,8 @@ dev.resetDilation = function() {
   player.dilation.rebuyables[1] = 0;
   player.dilation.rebuyables[2] = 0;
   player.dilation.rebuyables[3] = 0;
-  player.dilation.baseTachyonGalaxies = 0;
-  player.dilation.totalTachyonGalaxies = 0;
+  player.dilation.baseTachyonGalaxies = DC.D0;
+  player.dilation.totalTachyonGalaxies = DC.D0;
 };
 
 // We want to give a large degree of options
@@ -230,9 +230,9 @@ dev.printResourceTotals = function() {
 
   console.log(`Tickspeed: e${-Tickspeed.current.exponent.toPrecision(3)}`);
   console.log(`Gamespeed: ${Decimal.pow(getGameSpeedupFactor(), 1.2).toPrecision(1)}`);
-  const aGalaxy = 100 * Math.floor(player.galaxies / 100 + 0.5);
-  const rGalaxy = 100 * Math.floor(Replicanti.galaxies.total / 100 + 0.5);
-  const dGalaxy = 100 * Math.floor(player.dilation.totalTachyonGalaxies / 100 + 0.5);
+  const aGalaxy = Decimal.floor(player.galaxies.div(100).add(0.5)).times(100);
+  const rGalaxy = Decimal.floor(Replicanti.galaxies.total.div(100).add(0.5)).times(100);
+  const dGalaxy = Decimal.floor(player.dilation.totalTachyonGalaxies.div(100).add(0.5)).times(100);
   console.log(`Galaxies: ${aGalaxy}+${rGalaxy}+${dGalaxy} (${aGalaxy + rGalaxy + dGalaxy})`);
   console.log(`Tick reduction: e${-Math.round(getTickSpeedMultiplier().log10())}`);
 
@@ -360,11 +360,11 @@ dev.testReplicantiCode = function(singleId, useDebugger = false) {
     ],
     [
       function() {
-        player.replicanti.boughtGalaxyCap = 100;
+        player.replicanti.boughtGalaxyCap = new Decimal(100);
       },
       function() {
-        player.replicanti.boughtGalaxyCap = 100;
-        player.replicanti.galaxies = 50;
+        player.replicanti.boughtGalaxyCap = new Decimal(100);
+        player.replicanti.galaxies = new Decimal(50);
       }
     ],
     [
@@ -487,7 +487,7 @@ dev.testGlyphs = function(config) {
     const ip = padString(player.infinityPoints.exponent.toString(), 8);
     const am = padString(Currency.antimatter.exponent.toString(), 12);
     const dimboosts = DimBoost.purchasedBoosts;
-    const galaxies = Replicanti.galaxies.total + player.galaxies + player.dilation.totalTachyonGalaxies;
+    const galaxies = Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies);
     const glyphData = glyphSets[index].map(glyphToShortString).sum();
     console.log(`${done} ${glyphData} rm=${rm} gl=${gl} ep=${ep} ip=${ip} am=${am} ` +
       `dimboosts=${dimboosts} galaxies=${galaxies}`);

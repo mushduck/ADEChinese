@@ -60,7 +60,7 @@ export default {
     },
     capTooltip() {
       if (this.isCapped) return `Cap reached at ${format(this.capCP)} CP`;
-      return `Purchased ${quantifyInt("time", this.purchases)}`;
+      return `Purchased ${quantifyHybridLarge("time", this.purchases)}`;
     },
     showRow() {
       return this.isUnlocked || this.canUnlock || this.amount.gt(0) ||
@@ -85,10 +85,8 @@ export default {
       this.cost.copyFrom(dimension.cost);
       this.isAvailableForPurchase = dimension.isAvailableForPurchase;
       this.isCapped = dimension.isCapped;
-      if (this.isCapped) {
-        this.capCP.copyFrom(dimension.hardcapCPAmount);
-        this.hardcap = dimension.purchaseCap;
-      }
+      this.capCP.copyFrom(dimension.hardcapCPAmount);
+      this.hardcap.copyFrom(dimension.purchaseCap);
     },
     buySingleCelestialDimension() {
       CelestialDimension(this.tier).buySingle();

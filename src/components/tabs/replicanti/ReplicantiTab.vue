@@ -33,6 +33,8 @@ export default {
       capMultText: "",
       distantRG: 0,
       remoteRG: 0,
+      contingentRG: 0,
+      isContingent: false,
       effarigInfinityBonusRG: 0,
       isUncapped: false,
       nextEffarigRGThreshold: 0,
@@ -84,11 +86,11 @@ export default {
         value => {
           let description = `Max Replicanti Galaxies: `;
           const extra = upgrade.extra;
-          if (extra > 0) {
-            const total = value + extra;
-            description += `<br>${formatInt(value)} + ${formatInt(extra)} = ${formatInt(total)}`;
+          if (extra.gt(0)) {
+            const total = value.add(extra);
+            description += `<br>${formatHybridLarge(value, 3)} + ${formatHybridLarge(extra, 3)} = ${formatHybridLarge(total, 3)}`;
           } else {
-            description += formatInt(value);
+            description += formatHybridLarge(value, 3);
           }
           return description;
         },
@@ -150,7 +152,7 @@ export default {
       this.hasIPMult = AlchemyResource.exponential.amount > 0 && !this.isDoomed;
       this.multIP = Replicanti.amount.powEffectOf(AlchemyResource.exponential);
       this.isUncapped = PelleRifts.vacuum.milestones[1].canBeApplied;
-      this.hasRaisedCap = EffarigUnlock.infinity.isUnlocked && !this.isUncapped;
+      this.hasRaisedCap = (EffarigUnlock.infinity.isUnlocked && !this.isUncapped) || (Pelle.isDoomed && PelleCelestialUpgrade.replicantiCapIncrease.isBought);
       this.replicantiCap.copyFrom(replicantiCap());
       if (this.hasRaisedCap) {
         const mult = this.replicantiCap.div(Decimal.NUMBER_MAX_VALUE);
@@ -160,12 +162,14 @@ export default {
       }
       this.distantRG = ReplicantiUpgrade.galaxies.distantRGStart;
       this.remoteRG = ReplicantiUpgrade.galaxies.remoteRGStart;
+      this.contingentRG = ReplicantiUpgrade.galaxies.contingentRGStart;
+      this.isContingent = Replicanti.galaxies.bought.gte(this.contingentRG);
       this.effarigInfinityBonusRG = Effarig.bonusRG;
       this.nextEffarigRGThreshold = Decimal.NUMBER_MAX_VALUE.pow(
         Effarig.bonusRG + 2
       );
       this.canSeeGalaxyButton =
-        Replicanti.galaxies.max >= 1 || PlayerProgress.eternityUnlocked();
+        Replicanti.galaxies.max.gte(1) || PlayerProgress.eternityUnlocked();
       this.maxReplicanti.copyFrom(player.records.thisReality.maxReplicanti);
       this.estimateToMax = this.calculateEstimate();
     },
@@ -215,7 +219,7 @@ export default {
         Your Replicanti cap without TS192 is now {{ format(replicantiCap, 2) }}
         ({{ capMultText }})
         <br>
-        {{ quantifyInt("extra Replicanti Galaxy", effarigInfinityBonusRG) }}
+        {{ quantifyHybridLarge("extra Replicanti Galaxy", effarigInfinityBonusRG) }}
         (Next Replicanti Galaxy at {{ format(nextEffarigRGThreshold, 2) }} cap)
       </div>
       <p class="c-replicanti-description">
@@ -250,6 +254,15 @@ export default {
         more rapidly above {{ formatInt(distantRG) }} Replicanti Galaxies
         and even more so above {{ formatInt(remoteRG) }} Replicanti Galaxies.
       </div>
+      <br>
+      <div
+        v-if="isContingent"
+        class="contingency-text"
+      >
+        Your Replicanti Galaxies have become Contingent. This is because they are taking up too much space in the Universe.
+        <br>
+        This effect started at {{ formatInt(contingentRG) }} Replicanti Galaxies, and will continue until the End of Time.
+      </div>
       <br><br>
       <ReplicantiGainText />
       <br>
@@ -268,5 +281,11 @@ export default {
 .modified-cap {
   margin: -0.8rem 0 0.8rem;
   font-weight: bold;
+}
+
+.contingency-text {
+  color: var(--color-pelle--base);
+  text-shadow: 0 0 0.2rem var(--color-pelle--base);
+  cursor: default;
 }
 </style>

@@ -1,12 +1,20 @@
-import { BitUpgradeState, GameMechanicState } from "../../game-mechanics";
+import { GameMechanicState } from "../../game-mechanics";
 import { Quotes } from "../quotes";
 
-class RaUnlockState extends BitUpgradeState {
+class RaUnlockState extends GameMechanicState {
   get bits() { return player.celestials.ra.unlockBits; }
   set bits(value) { player.celestials.ra.unlockBits = value; }
 
+  get isUnlocked() {
+    return player.celestials.ra.unlocks.includes(this.id);
+  }
+
   get disabledByPelle() {
-    return Pelle.isDoomed && this.config.disabledByPelle;
+    return Pelle.isDoomed && this.isDisabledByPelle;
+  }
+
+  get isDisabledByPelle() {
+    return this.config.disabledByPelle ? this.config.disabledByPelle() : false;
   }
 
   get isEffectActive() {
@@ -42,7 +50,12 @@ class RaUnlockState extends BitUpgradeState {
     return this.pet.level >= this.level && !this.isUnlocked;
   }
 
+  unlock() {
+    if (this.canBeUnlocked) player.celestials.ra.unlocks.push(this.id);
+  }
+
   onUnlock() {
+    player.celestials.ra.unlocks.push(this.id);
     this.config.onUnlock?.();
   }
 }
@@ -124,9 +137,10 @@ class RaPetState extends GameMechanicState {
   get memoryChunksPerSecond() {
     if (!this.canGetMemoryChunks) return 0;
     let res = this.rawMemoryChunksPerSecond * this.chunkUpgradeCurrentMult *
-      Effects.product(Ra.unlocks.continuousTTBoost.effects.memoryChunks, GlyphSacrifice.reality);
+      Effects.product(Ra.unlocks.continuousTTBoost.effects.memoryChunks) * GlyphSacrifice.reality.effectValue.toNumber();
     if (this.hasRemembrance) res *= Ra.remembrance.multiplier;
     else if (Ra.petWithRemembrance) res *= Ra.remembrance.nerf;
+    if (ExpansionPack.raPack.isBought) res *= 10;
     return res;
   }
 
@@ -257,6 +271,7 @@ export const Ra = {
     for (const pet of Ra.pets.all) {
       if (pet.isUnlocked) res *= pet.memoryProductionMultiplier;
     }
+    if (ExpansionPack.raPack.isBought) res *= 10;
     return res;
   },
   get memoryBoostResources() {
@@ -276,7 +291,8 @@ export const Ra = {
     if (level >= Ra.levelCap) return Infinity;
     const adjustedLevel = level + Math.pow(level, 2) / 10;
     const post15Scaling = Math.pow(1.5, Math.max(0, level - 15));
-    return Math.floor(Math.pow(adjustedLevel, 5.52) * post15Scaling * 1e6);
+    const post25Scaling = Math.pow(10 + Math.max(0, level - 25), 2 * Math.max(0, level - 25));
+    return Math.floor(Math.pow(adjustedLevel, 5.52) * post15Scaling * post25Scaling * 1e6);
   },
   // Returns a string containing a time estimate for gaining a specific amount of exp (UI only)
   timeToGoalString(pet, expToGain) {
@@ -298,13 +314,14 @@ export const Ra = {
     return this.pets.all.map(pet => (pet.isUnlocked ? pet.level : 0)).sum();
   },
   get levelCap() {
-    return 25;
+    if (!ExpansionPack.raPack.isBought) return 25;
+    return Math.floor(Math.max(25, Math.log10(player.records.bestAntimatterExponentOutsideDoom)));
   },
   get maxTotalPetLevel() {
     return this.levelCap * this.pets.all.length;
   },
   checkForUnlocks() {
-    if (!VUnlocks.raUnlock.canBeApplied) return;
+    if (!VUnlocks.raUnlock.canBeApplied && !EndgameMilestone.celestialEarlyUnlock.isReached) return;
     for (const unl of Ra.unlocks.all) {
       unl.unlock();
     }
@@ -373,7 +390,9 @@ export const Ra = {
     this.updateAlchemyFlow(realityRealTime);
   },
   get alchemyResourceCap() {
-    return 25000;
+    return ExpansionPack.effarigPack.isBought
+      ? Math.max(25000, (player.records.bestEndgame.glyphLevel / 3) * Ra.unlocks.alchemyCapIncrease.effectOrDefault(1))
+      : 25000 * Ra.unlocks.alchemyCapIncrease.effectOrDefault(1);
   },
   get momentumValue() {
     const hoursFromUnlock = TimeSpan.fromMilliseconds(new Decimal(player.celestials.ra.momentumTime)).totalHours.toNumber();
@@ -386,18 +405,18 @@ export const Ra = {
 export const GlyphAlteration = {
   // Adding a secondary effect to some effects
   get additionThreshold() {
-    return 1e36;
+    return new Decimal(1e36);
   },
   // One-time massive boost of a single effect
   get empowermentThreshold() {
-    return 1e43;
+    return new Decimal(1e43);
   },
   // Scaling boost from sacrifice quantity
   get boostingThreshold() {
-    return 1e60;
+    return new Decimal(1e60);
   },
   getSacrificePower(type) {
-    if (Pelle.isDisabled("alteration")) return 0;
+    if (Pelle.isDisabled("alteration") && !PelleCelestialUpgrade.raTeresa3.isBought) return new Decimal(0);
     const sacPower = player.reality.glyphs.sac[type];
     if (sacPower === undefined) {
       throw new Error("Unknown sacrifice type");
@@ -405,21 +424,21 @@ export const GlyphAlteration = {
     return sacPower;
   },
   get isUnlocked() {
-    if (Pelle.isDisabled("alteration")) return false;
+    if (Pelle.isDisabled("alteration") && !PelleCelestialUpgrade.raTeresa3.isBought) return false;
     return Ra.unlocks.alteredGlyphs.canBeApplied;
   },
   isAdded(type) {
-    return this.isUnlocked && this.getSacrificePower(type) >= this.additionThreshold;
+    return this.isUnlocked && this.getSacrificePower(type).gte(this.additionThreshold);
   },
   isEmpowered(type) {
-    return this.isUnlocked && this.getSacrificePower(type) >= this.empowermentThreshold;
+    return this.isUnlocked && this.getSacrificePower(type).gte(this.empowermentThreshold);
   },
   isBoosted(type) {
-    return this.isUnlocked && this.getSacrificePower(type) >= this.boostingThreshold;
+    return this.isUnlocked && this.getSacrificePower(type).gte(this.boostingThreshold);
   },
   sacrificeBoost(type) {
-    const capped = Math.clampMax(this.getSacrificePower(type), GlyphSacrificeHandler.maxSacrificeForEffects);
-    return Math.log10(Math.clampMin(capped / this.boostingThreshold, 1)) / 2;
+    const capped = Decimal.clampMax(this.getSacrificePower(type), GlyphSacrificeHandler.maxSacrificeForEffects);
+    return Decimal.log10(Decimal.clampMin(capped.div(this.boostingThreshold), 1)) / 2;
   },
   baseAdditionColor(isDark = Theme.current().isDark()) {
     return isDark ? "#CCCCCC" : "black";
