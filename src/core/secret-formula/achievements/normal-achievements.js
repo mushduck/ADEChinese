@@ -122,7 +122,7 @@ export const normalAchievements = [
     id: 27,
     name: "Double Galaxy",
     get description() { return `Buy ${formatInt(2)} Antimatter Galaxies.`; },
-    checkRequirement: () => player.galaxies >= 2,
+    checkRequirement: () => player.galaxies.gte(2),
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER
   },
   {
@@ -191,7 +191,7 @@ export const normalAchievements = [
     get description() {
       return `Infinity with just ${formatInt(1)} Antimatter Galaxy. (Your Antimatter Galaxies are reset on Infinity.)`;
     },
-    checkRequirement: () => player.galaxies === 1,
+    checkRequirement: () => player.galaxies.eq(1),
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() { return `Multiply starting tick speed by ${format(1.02, 2, 2)}.`; },
     effect: 1 / 1.02
@@ -419,7 +419,7 @@ export const normalAchievements = [
     id: 64,
     name: "Zero Deaths",
     description: "Get to Infinity without Dimension Boosts or Antimatter Galaxies while in a Normal Challenge.",
-    checkRequirement: () => player.galaxies === 0 && DimBoost.purchasedBoosts.eq(0) && NormalChallenge.isRunning,
+    checkRequirement: () => player.galaxies.eq(0) && DimBoost.purchasedBoosts.eq(0) && NormalChallenge.isRunning,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() { return `Antimatter Dimensions 1-4 are ${formatPercents(0.25)} stronger.`; },
     effect: 1.25
@@ -475,7 +475,7 @@ export const normalAchievements = [
       NormalChallenge(2).isOnlyActiveChallenge &&
       AntimatterDimension(1).amount.eq(1) &&
       DimBoost.purchasedBoosts.eq(0) &&
-      player.galaxies === 0,
+      player.galaxies.eq(0),
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() { return `1st Antimatter Dimensions are ${formatInt(3)} times stronger.`; },
     effect: 3
@@ -498,7 +498,8 @@ export const normalAchievements = [
     checkRequirement: () => Currency.antimatter.gte(DC.D9_9999E9999),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Antimatter Dimensions gain a multiplier based on current antimatter.",
-    effect: () => Currency.antimatter.value.pow(0.00002).plus(1),
+    effect: () => Currency.antimatter.value.pow(0.00002).plus(1).clampMax(Decimal.pow(10, 1e30)).pow(
+      Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(Currency.antimatter.value.pow(0.00002).plus(1)) / 1e30)), 1)),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
   {
@@ -574,7 +575,7 @@ export const normalAchievements = [
     id: 83,
     name: "YOU CAN GET 50 GALAXIES?!?!",
     get description() { return `Get ${formatInt(50)} Antimatter Galaxies.`; },
-    checkRequirement: () => player.galaxies >= 50,
+    checkRequirement: () => player.galaxies.gte(50),
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER,
     get reward() { return `Tickspeed is just over ${formatPercents(0.05)} faster per Antimatter Galaxy.`; },
     effect: () => DC.D0_95.pow(player.galaxies),
@@ -587,7 +588,8 @@ export const normalAchievements = [
     checkRequirement: () => Currency.antimatter.exponent >= 35000,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Antimatter Dimensions are stronger the more unspent antimatter you have.",
-    effect: () => Currency.antimatter.value.pow(0.00002).plus(1),
+    effect: () => Currency.antimatter.value.pow(0.00002).plus(1).clampMax(Decimal.pow(10, 1e30)).pow(
+      Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(Currency.antimatter.value.pow(0.00002).plus(1)) / 1e30)), 1)),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
   {
@@ -692,7 +694,7 @@ export const normalAchievements = [
     get description() { return `Gain ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} Replicanti in ${formatInt(1)} hour.`; },
     get reward() { return `You keep your Replicanti and ${formatInt(1)} Replicanti Galaxy on Infinity.`; },
     checkRequirement: () =>
-      (Replicanti.amount.eq(Decimal.NUMBER_MAX_VALUE) || player.replicanti.galaxies > 0) &&
+      (Replicanti.amount.eq(Decimal.NUMBER_MAX_VALUE) || player.replicanti.galaxies.gt(0)) &&
       Time.thisInfinityRealTime.totalHours.toNumber() <= 1,
     checkEvent: GAME_EVENT.REPLICANTI_TICK_AFTER
   },
@@ -767,7 +769,7 @@ export const normalAchievements = [
     id: 106,
     name: "The swarm",
     get description() { return `Get ${formatInt(10)} Replicanti Galaxies in ${formatInt(15)} seconds.`; },
-    checkRequirement: () => Replicanti.galaxies.total >= 10 && Time.thisInfinity.totalSeconds.lte(15),
+    checkRequirement: () => Replicanti.galaxies.total.gte(10) && Time.thisInfinity.totalSeconds.lte(15),
     checkEvent: GAME_EVENT.REPLICANTI_TICK_AFTER
   },
   {
@@ -928,7 +930,7 @@ export const normalAchievements = [
     id: 126,
     name: "Popular music",
     get description() { return `Have ${formatInt(180)} times more Replicanti Galaxies than Antimatter Galaxies.`; },
-    checkRequirement: () => Replicanti.galaxies.total >= 180 * player.galaxies && player.galaxies > 0,
+    checkRequirement: () => Replicanti.galaxies.total.gte(player.galaxies.times(180)) && player.galaxies.gt(0),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Replicanti Galaxies divide your Replicanti by ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)}
@@ -955,7 +957,7 @@ export const normalAchievements = [
   {
     id: 131,
     name: "No ethical consumption",
-    get description() { return `Get ${formatInt(DC.E9)} Banked Infinities.`; },
+    get description() { return `Get ${format(DC.E9, 3)} Banked Infinities.`; },
     checkRequirement: () => Currency.infinitiesBanked.gte(DC.E9),
     checkEvent: [GAME_EVENT.ETERNITY_RESET_AFTER, GAME_EVENT.SAVE_CONVERTED_FROM_PREVIOUS_VERSION],
     get reward() {
@@ -975,10 +977,10 @@ export const normalAchievements = [
       return `Have ${formatInt(569)} Antimatter Galaxies without gaining any
         Replicanti Galaxies in your current Eternity.`;
     },
-    checkRequirement: () => player.galaxies >= 569 && player.requirementChecks.eternity.noRG,
+    checkRequirement: () => player.galaxies.gte(569) && player.requirementChecks.eternity.noRG,
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER,
     reward: "Gain a multiplier to Tachyon Particle and Dilated Time gain based on Antimatter Galaxies.",
-    effect: () => 1.22 * Math.max(Math.pow(player.galaxies, 0.04), 1),
+    effect: () => Decimal.max(Decimal.pow(player.galaxies, 0.04), 1).times(1.22).toNumber(),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
   {
@@ -1140,7 +1142,7 @@ export const normalAchievements = [
       return `Get ${formatInt(800)} Antimatter Galaxies without
       buying 8th Antimatter Dimensions in your current Infinity.`;
     },
-    checkRequirement: () => player.galaxies >= 800 && player.requirementChecks.infinity.noAD8,
+    checkRequirement: () => player.galaxies.gte(800) && player.requirementChecks.infinity.noAD8,
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER,
     reward: "Unlock V, the Celestial of Achievements."
   },
@@ -1282,7 +1284,7 @@ export const normalAchievements = [
     id: 171,
     name: "The god is delighted",
     description: "Sacrifice every sacrificable Glyph type at least once.",
-    checkRequirement: () => Object.values(player.reality.glyphs.sac).every(s => s > 0),
+    checkRequirement: () => Object.values(player.reality.glyphs.sac).every(s => s.gt(0)),
     checkEvent: GAME_EVENT.GLYPHS_CHANGED,
     get reward() { return `Glyph sacrifice is ${formatX(2)} stronger.`; },
     effect: 2,
@@ -1316,8 +1318,8 @@ export const normalAchievements = [
   {
     id: 175,
     name: "The First Antihistorian",
-    get description() { return `Get ${formatInt(Ra.alchemyResourceCap)} of all Alchemy Resources.`; },
-    checkRequirement: () => AlchemyResources.all.every(x => x.amount >= Ra.alchemyResourceCap),
+    get description() { return `Get ${formatInt(25000)} of all Alchemy Resources.`; },
+    checkRequirement: () => AlchemyResources.all.every(x => x.amount >= 25000),
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
     get reward() {
       return `Synergism can go above ${formatPercents(1)} and Momentum increases ${formatX(10)} faster.`;
@@ -1333,14 +1335,14 @@ export const normalAchievements = [
     id: 177,
     name: "This mile took a celestial",
     description: "Complete all Singularity Milestones in the first six rows at least once.",
-    checkRequirement: () => SingularityMilestone.tesseractMultFromSingularities.completions > 0,
+    checkRequirement: () => SingularityMilestone.tesseractMultFromSingularities.completions.gt(0),
     checkEvent: GAME_EVENT.SINGULARITY_RESET_AFTER,
   },
   {
     id: 178,
     name: "Destroyer of Worlds",
     get description() { return `Get ${formatInt(100000)} Antimatter Galaxies.`; },
-    checkRequirement: () => player.galaxies >= 100000,
+    checkRequirement: () => player.galaxies.gte(100000),
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER,
     get reward() { return `All Galaxies are ${formatPercents(0.01)} stronger.`; },
     effect: 1.01
@@ -1415,7 +1417,7 @@ export const normalAchievements = [
   },
   {
     id: 191,
-    name: "...for now",
+    name: "...For Now",
     description: "Purchase a 1st Dimension in Run 2.",
     checkRequirement: () => PlayerProgress.endgameUnlocked() && AntimatterDimension(1).amount.gte(1),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
@@ -1451,7 +1453,15 @@ export const normalAchievements = [
   {
     id: 195,
     name: "Hard Reset",
-    description: "Disable all Pelle Nerfs. (NYI)",
+    description: "Disable all Pelle Nerfs.",
+    checkRequirement: () => PelleAchievementUpgrade.all.filter(u => u.isBought).length >= 33 &&
+      PelleDestructionUpgrade.all.filter(u => u.isBought).length >= 50 &&
+      PelleRealityUpgrade.all.filter(u => u.isBought).length >= 20 &&
+      PelleImaginaryUpgrade.all.filter(u => u.isBought).length >= 19 &&
+      PelleCelestialUpgrade.all.filter(u => u.isBought).length >= 21 &&
+      PellePerkUpgrade.all.filter(u => u.isBought).length >= 29 &&
+      PelleAlchemyUpgrade.all.filter(u => u.isBought).length >= 21,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Unlock Strike Disabling.`;
     }
@@ -1459,7 +1469,9 @@ export const normalAchievements = [
   {
     id: 196,
     name: "Full Control of the Dark",
-    description: "Purchase the 8th Dark Matter Dimension. (NYI)",
+    description: "Purchase the 8th Dark Matter Dimension.",
+    checkRequirement: () => ImaginaryUpgrade(29).isBought,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Decrease Galaxy Generator Instability by ${formatInt(2)}.`;
     },
@@ -1468,14 +1480,18 @@ export const normalAchievements = [
   {
     id: 197,
     name: "Gone...",
-    description: "Destroy Pelle. (NYI)",
+    description: "Destroy Pelle.",
+    checkRequirement: () => PelleStrikeUpgrade.all.filter(u => u.isBought).length >= 5,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Boost Celestial Point Gain.`;
     }
   },
   {
     id: 198,
-    name: "...but not forgotten",
-    description: "Reach 1.8e308 Imaginary Machines. (NYI)",
+    name: "...But Not Forgotten",
+    description: "Reach 1.8e308 Imaginary Machines.",
+    checkRequirement: () => Currency.imaginaryMachines.value.gte(Decimal.NUMBER_MAX_VALUE),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
 ];
