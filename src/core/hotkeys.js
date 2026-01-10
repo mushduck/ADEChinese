@@ -193,7 +193,7 @@ export const shortcuts = [
     name: "Endgame",
     keys: ["n"],
     type: "bindRepeatableHotkey",
-    function: () => Endgame.newEndgame(),
+    function: () => Endgame.hotkeyReset(),
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
     name: "Reset Endgame",
