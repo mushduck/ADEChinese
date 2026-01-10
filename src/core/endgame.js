@@ -41,6 +41,11 @@ function giveEndgameRewards() {
 }
 
 export const Endgame = {
+  hotkeyReset() {
+    if (!Pelle.isDoomed || player.antimatter.lt(DC.E9E15)) return false;
+    this.newEndgame();
+    return true;
+  },
   resetNoReward() {
     GameEnd.creditsClosed = false;
     GameEnd.creditsEverClosed = false;
@@ -77,6 +82,10 @@ export const Endgame = {
     if (player.endgame.respec) {
       respecEndgameMasteries();
       player.endgame.respec = false;
+    }
+    if (player.celestials.teresa.disCharge) {
+      disChargeAllPerkUpgrades();
+      player.celestials.teresa.disCharge = false;
     }
     this.resetStuff();
 
@@ -130,12 +139,18 @@ export const Endgame = {
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_BEFORE);
 
     // Modify beaten-game quantities before doing a carryover reset
-    giveEndgameRewards();
-    updateEndgameRecords();
-    GlyphAppearanceHandler.unlockSet();
+    if (Pelle.isDoomed && player.antimatter.gte(DC.E9E15)) {
+      giveEndgameRewards();
+      updateEndgameRecords();
+      GlyphAppearanceHandler.unlockSet();
+    }
     if (player.endgame.respec) {
       respecEndgameMasteries();
       player.endgame.respec = false;
+    }
+    if (player.celestials.teresa.disCharge) {
+      disChargeAllPerkUpgrades();
+      player.celestials.teresa.disCharge = false;
     }
     this.resetStuff();
 
@@ -446,6 +461,7 @@ export const Endgame = {
     player.celestials.ra.momentumTime = 0;
     if (!ExpansionPack.raPack.isBought) {
       player.celestials.ra.unlockBits = 0;
+      player.celestials.ra.unlocks = [];
     }
     player.celestials.ra.run = false;
     player.celestials.ra.charged = new Set();
@@ -468,6 +484,14 @@ export const Endgame = {
         timeSinceLastUpdate: 0,
         ascensionCount: DC.D0
       }));
+    if (ImaginaryUpgrade(15).isBought) DarkMatterDimension(1).amount = DC.D1;
+    if (ImaginaryUpgrade(16).isBought) DarkMatterDimension(2).amount = DC.D1;
+    if (ImaginaryUpgrade(17).isBought) DarkMatterDimension(3).amount = DC.D1;
+    if (ImaginaryUpgrade(18).isBought) DarkMatterDimension(4).amount = DC.D1;
+    if (ImaginaryUpgrade(26).isBought) DarkMatterDimension(5).amount = DC.D1;
+    if (ImaginaryUpgrade(27).isBought) DarkMatterDimension(6).amount = DC.D1;
+    if (ImaginaryUpgrade(28).isBought) DarkMatterDimension(7).amount = DC.D1;
+    if (ImaginaryUpgrade(29).isBought) DarkMatterDimension(8).amount = DC.D1;
     player.celestials.laitela.entropy = DC.D0;
     player.celestials.laitela.thisCompletion = 3600;
     player.celestials.laitela.fastestCompletion = 3600;
