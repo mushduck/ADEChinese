@@ -72,6 +72,22 @@ export const GalaxyGenerator = {
     return this.gainPerSecondPreCap.div(this.gainPerSecondPostCap);
   },
 
+  gainPerSecondDisplay(neededCount) {
+    if (!Pelle.hasGalaxyGenerator) return new Decimal(0);
+    const Instability = Decimal.pow(this.galGenInstability, this.harshGalGenInstability);
+    const gainPerSecond = new Decimal(this.gainPerSecondPreCap);
+    if (Instability.eq(1)) return gainPerSecond;
+
+    const galaxiesNow = player.galaxies.add(GalaxyGenerator.galaxies);
+    const k = Decimal.log10(Instability) * 0.75;
+    // Instability^log10(((Galaxies)/instabilityStart)^0.75)
+    // === Instability*0.75^log10((Galaxies)/instabilityStart)
+
+    const denominator = gainPerSecond.mul(Decimal.pow(this.instabilityStart, k)).mul(k + 1);
+    const numerator = Decimal.pow(neededCount, k + 1).sub(Decimal.pow(galaxiesNow, k + 1));
+    return numerator.div(denominator);
+  },
+
   get capObj() {
     return this.generationCaps[player.celestials.pelle.galaxyGenerator.phase];
   },
