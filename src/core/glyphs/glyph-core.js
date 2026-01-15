@@ -536,7 +536,10 @@ export const Glyphs = {
     this.sort((a, b) => b.level * b.strength - a.level * a.strength);
   },
   sortByScore() {
-    this.sort((a, b) => AutoGlyphProcessor.filterValue(b) - AutoGlyphProcessor.filterValue(a));
+    // If you want to migrate AutoGlyphProcessor to Break_Eternity.js, remember to change this sort,
+    // or the game will crash because BE's log10 returns Decimal instead of number.
+    // original: sort(a,b => return filterValue(b) - return filterValue(A))
+    this.sort((a, b) => Decimal.log10(AutoGlyphProcessor.filterValue(b).sub(AutoGlyphProcessor.filterValue(a))));
   },
   sortByEffect() {
     function reverseBitstring(eff) {
