@@ -126,7 +126,12 @@ export default {
       v-if="showChaosText"
       class="pelle-current-glyph-effects"
     >
-      {{ chaosEffect }}
+      <div
+        v-for="effect in chaosEffect"
+        :key="effect"
+      >
+        {{ effect }}
+      </div>
     </div>
   </div>
 </template>
