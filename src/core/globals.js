@@ -20,6 +20,7 @@ export * from "./tutorial";
 export * from "./endgame";
 export * from "./galactic-power";
 export * from "./expansion-packs";
+export * from "./ethereal";
 
 export * from "./celestials/quotes";
 export * from "./celestials/teresa";
