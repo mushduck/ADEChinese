@@ -97,7 +97,7 @@ export default {
       this.galaxyCap = GalaxyGenerator.generationCap;
       const genDB = GameDatabase.celestials.pelle.galaxyGeneratorUpgrades;
       this.notAffordable = (this.config === genDB.additive || this.config === genDB.multiplicative) &&
-        (Decimal.gt(this.upgrade.cost, new Decimal(this.galaxyCap).sub(GalaxyGenerator.generatedGalaxies).add(player.galaxies)));
+        (Decimal.gt(this.upgrade.cost, new Decimal(this.galaxyCap).sub(GalaxyGenerator.generatedGalaxies).add(player.galaxies).add(GalaxyGenerator.galaxies)));
     },
     secondsUntilRSCost(rate) {
       const value = Currency.realityShards.value;
