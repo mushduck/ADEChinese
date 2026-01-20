@@ -480,7 +480,7 @@ export const Pelle = {
   },
 
   antimatterDimensionMult(x) {
-    return Decimal.pow(10, Math.log10(x + 1) + x ** 5 / 1e3 + 4 ** x / 1e18);
+    return Decimal.pow(10, Math.log10(x + 1) + x ** 5.2 / 1e3 + 4 ** x / 1e18);
   },
 
   get activeGlyphType() {
