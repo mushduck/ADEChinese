@@ -240,7 +240,7 @@ window.TimeSpan = class TimeSpan {
     if (format(0) === "END" && !isSpeedrun) return "END";
 
     const totalSeconds = this.totalSeconds;
-    if (totalSeconds.lt(1e-7)) {
+    if (totalSeconds.lt(1e-7) && !totalSeconds.eq(0)) {
       // Well I give up on fixing notation. I choose to make a new one.
       // TODO: make it a new notation
       // Break eternity port: Nothing changed
