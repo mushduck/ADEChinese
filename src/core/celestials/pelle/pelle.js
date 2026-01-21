@@ -64,14 +64,14 @@ export const Pelle = {
       return;
     }
 
-    Glyphs.harshAutoClean();
     if (!Glyphs.unequipAll()) {
       Modal.hideAll();
       Modal.message.show(`Dooming your Reality will unequip your Glyphs. Some of your
         Glyphs could not be unequipped due to lack of inventory space.`, 1);
       return;
     }
-    Glyphs.harshAutoClean();
+    // Keep 8 of each glyphs.
+    Glyphs.autoClean(8);
     if (Glyphs.freeInventorySpace < 5) {
       Modal.hideAll();
       Modal.message.show(`You must have enough empty unprotected Glyph slots for
@@ -352,24 +352,16 @@ export const Pelle = {
       const count = this.getAllActive.get(type);
       return count === undefined ? 0 : count;
     };
+    const PGEC = this.isPelleGlyphEffectCapped;
     return {
       isUnlocked,
       description,
-      infinity: (activeCount("infinity") > 0 && (player.challenge.eternity.current <= 8 || PelleDestructionUpgrade.pelleGlyphEffects.isBought))
-        ? Currency.infinityPoints.value.plus(1).pow(0.2).pow(activeCount("infinity"))
-        : DC.D1,
-      time: activeCount("time") > 0
-        ? Currency.eternityPoints.value.plus(1).pow(0.3).pow(activeCount("time"))
-        : DC.D1,
-      replication: activeCount("replication") > 0
-        ? Decimal.pow(Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300), activeCount("replication"))
-        : DC.D1,
-      dilation: activeCount("dilation") > 0
-        ? Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1).pow(activeCount("dilation"))
-        : DC.D1,
-      power: activeCount("power") > 0
-        ? 1 + 0.02 * activeCount("power")
-        : 1,
+      hasCappedEffect: PGEC("infinity") || PGEC("time") || PGEC("replication") || PGEC("dilation") || PGEC("power"),
+      infinity: this.calculatePelleInfinity(activeCount("infinity")),
+      time: this.calculatePelleTime(activeCount("time")),
+      replication: this.calculatePelleReplication(activeCount("replication")),
+      dilation: this.calculatePelleDilation(activeCount("dilation")),
+      power: this.calculatePellePower(activeCount("power")),
       companion: activeCount("companion") > 0
         ? 1.34 * activeCount("companion")
         : 1,
@@ -380,25 +372,62 @@ export const Pelle = {
       },
     };
   },
+  isPelleGlyphEffectCapped(type) {
+    switch (type) {
+      case "infinity":
+        // TODO: Set a real formula
+        return true;
+      case "time":
+        // TODO: Set a real formula
+        return true;
+      case "replication":
+      case "dilation":
+      case "power":
+      case "companion":
+      default:
+        return false;
+    }
+  },
+  calculatePelleInfinity(count) {
+    return (count > 0 && (player.challenge.eternity.current <= 8 || PelleDestructionUpgrade.pelleGlyphEffects.isBought))
+        ? Currency.infinityPoints.value.plus(1).pow(0.2).pow(Math.min(1, count)) // Limit to at most 1
+        : DC.D1
+  },
+  calculatePelleTime(count) {
+    return count > 0
+        ? Currency.eternityPoints.value.plus(1).pow(0.3).pow(Math.min(1, count)) // Limit to at most 1
+        : DC.D1
+  },
+  calculatePelleReplication(count) {
+    return count > 0
+        ? Decimal.pow(Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300), count)
+        : DC.D1
+  },
+  calculatePelleDilation(count) {
+    return count > 0
+        ? Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1).pow(count)
+        : DC.D1
+  },
+  calculatePellePower(count) {
+    return count > 0
+        ? 1 + 0.02 * count
+        : 1
+  },
   getSpecialGlyphEffectDescription(type, count = 1, onlyReturnUseful = false) {
     switch (type) {
       case "infinity":
-        return `Infinity Point gain ${(player.challenge.eternity.current <= 8 || PelleDestructionUpgrade.pelleGlyphEffects.isBought)
-          ? formatX(Currency.infinityPoints.value.plus(1).pow(0.2).pow(count), 2)
-          : formatX(DC.D1, 2)} (based on current IP)`;
+        return `Infinity Point gain ${formatX(this.calculatePelleInfinity(count), 2)} (based on current IP)`;
       case "time":
-        return `Eternity Point gain ${formatX(Currency.eternityPoints.value.plus(1).pow(0.3).pow(count), 2)}
+        return `Eternity Point gain ${formatX(this.calculatePelleTime(count), 2)}
           (based on current EP)`;
       case "replication":
-        return `Replication speed \
-        ${formatX(Decimal.pow(Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300), count), 2)} \
+        return `Replication speed ${formatX(this.calculatePelleReplication(count), 2)}
         (based on ${wordShift.wordCycle(PelleRifts.vacuum.name)})`;
       case "dilation":
-        return `Dilated Time gain \
-        ${formatX(Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1).pow(count), 2)}
+        return `Dilated Time gain ${formatX(this.calculatePelleDilation(count), 2)}
           (based on Tachyon Galaxies)`;
       case "power":
-        return `Galaxies are ${formatPercents(0.02 * count)} stronger`;
+        return `Galaxies are ${formatPercents(this.calculatePellePower(count) - 1)} stronger`;
       case "companion":
         // It's intended to see something like "You feel 34% 34% 34% better" because it's interesting
         return onlyReturnUseful ? null : `You feel ${(formatPercents(0.34) + " ").repeat(count)}better`;
@@ -417,7 +446,7 @@ export const Pelle = {
     const list = [];
     map.forEach((value, key) => {
       const desp = this.getSpecialGlyphEffectDescription(key, value, true);
-      if (desp !== null) list.push(desp);
+      if (desp !== null) list.push([desp, this.isPelleGlyphEffectCapped(key)]);
     });
     return list;
   },
