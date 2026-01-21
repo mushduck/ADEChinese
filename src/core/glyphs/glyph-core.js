@@ -573,7 +573,7 @@ export const Glyphs = {
     if (Achievement(194).isUnlocked) {
       maxSpecialGlyph = 2;
     }
-    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? maxSpecialGlyph : 5;
+    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? maxSpecialGlyph : Math.max(5, threshold);
     compareThreshold = Math.clampMax(compareThreshold, threshold);
     if (toCompare.length < compareThreshold) return false;
     const comparedEffects = getGlyphEffectsFromBitmask(glyph.effects).filter(x => x.id.startsWith(glyph.type));
