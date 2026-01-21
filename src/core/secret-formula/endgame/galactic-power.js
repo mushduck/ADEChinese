@@ -48,9 +48,9 @@ export const galacticPowerRewards = {
     effect: () => 1 + (Math.pow(Decimal.log10(Currency.galacticPower.value.add(1)) / 100, 1.5) / 10),
     formatEffect: value => `Apply a ${format(value, 2, 2)}th root to the second Galaxy Generator Instability Magnitude`
   },
-  ethrealUnlock: {
+  etherealUnlock: {
     id: 8,
     galacticPower: Number.MAX_VALUE,
-    reward: "Unlock the Ethreal"
+    reward: "Unlock the Ethereal"
   },
 };
