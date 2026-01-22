@@ -373,13 +373,18 @@ export const Pelle = {
     };
   },
   isPelleGlyphEffectCapped(type) {
+    const activeCount = t => {
+      if (!(Pelle.isDoomed && PelleRifts.chaos.milestones[1].canBeApplied)) return 0;
+      const count = Pelle.getAllActive.get(t);
+      return count === undefined ? 0 : count;
+    };
     switch (type) {
       case "infinity":
         // TODO: Set a real formula
-        return true;
+        return activeCount("infinity") > 0;
       case "time":
         // TODO: Set a real formula
-        return true;
+        return activeCount("time") > 0;
       case "replication":
       case "dilation":
       case "power":
