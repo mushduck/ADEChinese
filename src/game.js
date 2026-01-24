@@ -463,7 +463,7 @@ export function getGameSpeedupForDisplay() {
     Enslaved.isAutoReleasing &&
     Enslaved.canRelease(true) &&
     !BlackHoles.areNegative &&
-    !Pelle.isDisabled("blackhole")
+    (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.isBought)
   ) {
     return Decimal.max(Enslaved.autoReleaseSpeed, speedFactor);
   }
