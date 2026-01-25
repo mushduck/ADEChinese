@@ -12,6 +12,7 @@ export default {
   },
   data() {
     return {
+      isDoomed: false,
       isUseless: false,
       chargeUnlocked: false,
       totalCharges: 0,
@@ -80,7 +81,8 @@ export default {
   },
   methods: {
     update() {
-      this.isUseless = Pelle.isDoomed;
+      this.isDoomed = Pelle.isDoomed;
+      this.isUseless = Pelle.isDoomed && !PelleCelestialUpgrade.raTeresa2.isBought;
       this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && (!Pelle.isDoomed || PelleCelestialUpgrade.raTeresa2.isBought);
       this.totalCharges = Ra.totalCharges;
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
@@ -142,6 +144,9 @@ export default {
     </div>
     <div v-if="isUseless">
       You cannot Charge Infinity Upgrades while Doomed.
+    </div>
+    <div v-if="isDoomed && !isUseless">
+      Charged Infinity Upgrades always reset on Armageddon.
     </div>
     <br>
     Within each column, the upgrades must be purchased from top to bottom.
