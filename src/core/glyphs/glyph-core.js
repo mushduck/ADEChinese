@@ -271,7 +271,7 @@ export const Glyphs = {
     return this.active[activeIndex];
   },
   equip(glyph, targetSlot) {
-    const forbiddenByPelle = Pelle.isDisabled("glyphs") || ["effarig", "reality", "cursed"].includes(glyph.type);
+    const forbiddenByPelle = Pelle.isDisabled("glyphs") || Pelle.isGlyphTypeDisabled(glyph.type);
     if (Pelle.isDoomed && !PelleDestructionUpgrade.specialGlyphEffects.isBought && forbiddenByPelle) return;
     if (GameEnd.creditsEverClosed) return;
 
@@ -536,7 +536,10 @@ export const Glyphs = {
     this.sort((a, b) => b.level * b.strength - a.level * a.strength);
   },
   sortByScore() {
-    this.sort((a, b) => AutoGlyphProcessor.filterValue(b) - AutoGlyphProcessor.filterValue(a));
+    // If you want to migrate AutoGlyphProcessor to Break_Eternity.js, remember to change this sort,
+    // or the game will crash because BE's log10 returns Decimal instead of number.
+    // original: sort(a,b => return filterValue(b) - return filterValue(A))
+    this.sort((a, b) => Decimal.log10(AutoGlyphProcessor.filterValue(b).sub(AutoGlyphProcessor.filterValue(a))));
   },
   sortByEffect() {
     function reverseBitstring(eff) {
@@ -570,7 +573,7 @@ export const Glyphs = {
     if (Achievement(194).isUnlocked) {
       maxSpecialGlyph = 2;
     }
-    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? maxSpecialGlyph : 5;
+    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? maxSpecialGlyph : Math.max(5, threshold);
     compareThreshold = Math.clampMax(compareThreshold, threshold);
     if (toCompare.length < compareThreshold) return false;
     const comparedEffects = getGlyphEffectsFromBitmask(glyph.effects).filter(x => x.id.startsWith(glyph.type));

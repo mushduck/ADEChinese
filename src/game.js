@@ -362,13 +362,19 @@ export const GAME_SPEED_EFFECT = {
   RA_BUFFS: 8
 };
 
+function shouldApplyMaxThisEndgame() {
+  if (Teresa.isRunning || Effarig.isRunning || Enslaved.isRunning || V.isRunning || Ra.isRunning || Laitela.isRunning || Pelle.isDoomed) return false;
+  return player.endgame.celestialMatterMultiplier.isActive;
+}
+
 /**
   * @param {number[]?} effectsToConsider A list of various game speed changing effects to apply when calculating
   *   the game speed.  If left undefined, all effects will be applied.
   * @param {number?} blackHolesActiveOverride A numerical value which forces all black holes up to its specified index
   *   to be active for the purposes of game speed calculation. This is only used during offline black hole stuff.
   */
-export function getGameSpeedupFactor(effectsToConsider, applyMaxThisEndgame = true, blackHolesActiveOverride) {
+export function getGameSpeedupFactor(effectsToConsider, _applyMaxThisEndgame, blackHolesActiveOverride) {
+  const applyMaxThisEndgame = _applyMaxThisEndgame === undefined ? shouldApplyMaxThisEndgame() : _applyMaxThisEndgame;
   let effects;
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
@@ -463,7 +469,7 @@ export function getGameSpeedupForDisplay() {
     Enslaved.isAutoReleasing &&
     Enslaved.canRelease(true) &&
     !BlackHoles.areNegative &&
-    !Pelle.isDisabled("blackhole")
+    (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.isBought)
   ) {
     return Decimal.max(Enslaved.autoReleaseSpeed, speedFactor);
   }

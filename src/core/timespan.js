@@ -240,11 +240,17 @@ window.TimeSpan = class TimeSpan {
     if (format(0) === "END" && !isSpeedrun) return "END";
 
     const totalSeconds = this.totalSeconds;
-    if (totalSeconds.gt(5e-7) && totalSeconds.lt(1e-3)) {
+    if (totalSeconds.lt(1e-7) && !totalSeconds.eq(0)) {
+      // Well I give up on fixing notation. I choose to make a new one.
+      // TODO: make it a new notation
+      // Break eternity port: Nothing changed
+      return `${format(totalSeconds.times(1000).mantissa, 0, 1)}e${format(totalSeconds.times(1000).exponent)} ms`;
+    }
+    if (totalSeconds.gt(1e-7) && totalSeconds.lt(1e-3)) {
       // This conditional happens when when the time is less than 1 millisecond
-      // but big enough not to round to 0 with 3 decimal places (so showing decimal places
+      // but big enough not to round to 0 with 4 decimal places (so showing decimal places
       // won't just show 0 and waste space).
-      return `${format(totalSeconds.times(1000), 0, 3)} ms`;
+      return `${format(totalSeconds.times(1000), 0, 4)} ms`;
     }
     if (totalSeconds.lt(1)) {
       // This catches all the cases when totalSeconds is less than 1 but not

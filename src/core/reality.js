@@ -44,7 +44,8 @@ export const GlyphSelection = {
     // To attempt to reduce RNG swing, we follow slightly different logic early on in order
     // to spread out types and effects more equally for the first few realities. Types and
     // effects are spread out over the choices of each consecutive group of 5 realities
-    if (GlyphGenerator.isUniformityActive) {
+    // This is disabled when you can pick over 4 Glyphs.
+    if (GlyphGenerator.isUniformityActive && GlyphSelection.choiceCount <= 4) {
       glyphList = GlyphGenerator.uniformGlyphs(level, rng, player.realities);
     } else {
       for (let out = 0; out < count; ++out) {

@@ -33,7 +33,7 @@ export default {
   },
   computed: {
     isSoftcapActive() {
-      return this.effects.length && !this.effects.every(e => e.value.capped === false);
+      return this.effects.length && !this.effects.every(e => e.value.capped === false) || this.pelleChaosEffect.hasCappedEffect;
     },
     uniqueGlyphText() {
       if (!this.hasEffarig && !this.hasReality) return "";
@@ -65,6 +65,9 @@ export default {
     chaosEffect() {
       return this.pelleChaosEffect.description;
     },
+    valueClass(bool) {
+      return bool ? "c-current-glyph-effects__effect--capped" : "";
+    }
   },
   watch: {
     logTotalSacrifice() {
@@ -126,7 +129,14 @@ export default {
       v-if="showChaosText"
       class="pelle-current-glyph-effects"
     >
-      {{ chaosEffect }}
+      <div
+        v-for="effect in chaosEffect"
+        :key="effect[0]"
+      >
+        <span :class="{'c-current-glyph-effects__effect--capped' : effect[1]}">
+          {{ effect[0] }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
