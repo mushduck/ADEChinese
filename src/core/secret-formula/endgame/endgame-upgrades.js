@@ -87,7 +87,7 @@ export const endgameUpgrades = [
     requirement: () => `Play for ${formatPostBreak("1e666")} Years`,
     checkRequirement: () => Time.totalTimePlayed.totalYears.gt(Decimal.pow(10, 666)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Outside of Celestial Realities, Game Speed is equal to maximum Game Speed this Endgame"
+    description: "Outside of Celestial Realities, Game Speed is equal to maximum Game Speed this Endgame if you enabled Celestial Matter"
   },
   {
     name: "Endgame Emolument",
