@@ -135,7 +135,7 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        Respec Charged Infinity Upgrades on next Reality
+        Respec Charged Infinity Upgrades on next {{ isDoomed ? "Armageddon" : "Reality" }}
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
