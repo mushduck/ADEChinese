@@ -576,9 +576,11 @@ export const Pelle = {
   
   quotes: Quotes.pelle,
 
-  isGlyphTypeDisabled(type) {
-    if (!this.isDoomed || PelleDestructionUpgrade.specialGlyphEffects.isBought) return false;
-    if (type === "reality" || type === "cursed" || type === "effarig") return true;
+  isGlyphTypeDisabled(type, alwaysInDoom = false) {
+    if (!(this.isDoomed || alwaysInDoom)) return false;
+    if (type === "reality") return !PelleAlchemyUpgrade.alchemyReality.isBought;
+    if (type === "effarig") return !PelleDestructionUpgrade.specialGlyphEffects.isBought;
+    if (type === "cursed") return true;
     return false;
   },
 

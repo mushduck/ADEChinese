@@ -114,7 +114,7 @@ export function getSingleGlyphEffectFromBitmask(effectName, glyph) {
   if ((glyph.effects & (1 << glyphEffect.bitmaskIndex)) === 0) {
     return undefined;
   }
-  return glyphEffect.effect(getAdjustedGlyphLevel(glyph), Pelle.isDoomed ? Pelle.glyphStrength : glyph.strength);
+  return glyphEffect.effect(getAdjustedGlyphLevel(glyph), (Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.isBought) ? Pelle.glyphStrength : glyph.strength);
 }
 
 // Note this function is used for glyph bitmasks, news ticker bitmasks, and offline achievements
