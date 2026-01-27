@@ -58,6 +58,19 @@ export default {
     },
     pelleSymbol() {
       return Pelle.symbol;
+    },
+    shouldDisplayPelle() {
+      return this.PelleStage() !== -1;
+    },
+    PelleClass() {
+      return {
+        "c-pelle-symbol-overlay": true,
+        "c-pelle-symbol-overlay-tier0": this.PelleStage() === 0,
+        "c-pelle-symbol-overlay-tier1": this.PelleStage() === 1,
+        "c-pelle-symbol-overlay-tier2": this.PelleStage() === 2,
+        "c-pelle-symbol-overlay-tier3": this.PelleStage() === 3,
+        "c-pelle-symbol-overlay-tier4": this.PelleStage() === 4,
+      };
     }
   },
   methods: {
@@ -191,6 +204,18 @@ export default {
         "o-clickable": resource.isUnlocked && !resource.isBaseResource && !this.isDoomed
       };
     },
+    PelleStage() {
+      if (!this.isDoomed) return -1;
+      if (AlchemyResource.power.isDestroyed || AlchemyResource.infinity.isDestroyed || AlchemyResource.time.isDestroyed ||
+        AlchemyResource.replication.isDestroyed || AlchemyResource.dilation.isDestroyed || AlchemyResource.effarig.isDestroyed) return 0;
+      if (AlchemyResource.cardinality.isDestroyed || AlchemyResource.eternity.isDestroyed || AlchemyResource.dimensionality.isDestroyed ||
+        AlchemyResource.inflation.isDestroyed || AlchemyResource.alternation.isDestroyed) return 1;
+      if (AlchemyResource.synergism.isDestroyed || AlchemyResource.momentum.isDestroyed || AlchemyResource.decoherence.isDestroyed) return 2;
+      if (AlchemyResource.exponential.isDestroyed || AlchemyResource.force.isDestroyed || AlchemyResource.uncountability.isDestroyed ||
+        AlchemyResource.boundless.isDestroyed || AlchemyResource.multiversal.isDestroyed || AlchemyResource.unpredictability.isDestroyed) return 3;
+      if (AlchemyResource.reality.isDestroyed) return 4;
+      return -1;
+    }
   }
 };
 </script>
@@ -242,8 +267,8 @@ export default {
       :style="circleStyle"
     >
       <span
-        v-if="isDoomed"
-        class="c-pelle-symbol-overlay"
+        v-if="shouldDisplayPelle"
+        :class="PelleClass"
         v-html="pelleSymbol"
       />
       <svg class="l-alchemy-orbit-canvas">
@@ -295,16 +320,33 @@ export default {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: -1.5rem;
   left: 0;
   justify-content: center;
   align-items: center;
-  font-size: 60rem;
   color: var(--color-pelle--base);
   text-shadow: 0 0 3rem;
   pointer-events: none;
   user-select: none;
   opacity: 0.8;
   z-index: 2;
+}
+
+.c-pelle-symbol-overlay-tier0 {
+  font-size: 60rem;
+  top: -1.5rem;
+}
+.c-pelle-symbol-overlay-tier1 {
+  font-size: 45rem;
+  top: -1.125rem;
+}
+.c-pelle-symbol-overlay-tier2 {
+  font-size: 30rem;
+}
+.c-pelle-symbol-overlay-tier3 {
+  font-size: 20rem;
+  top: -0.5rem;
+}
+.c-pelle-symbol-overlay-tier4 {
+  font-size: 5rem;
 }
 </style>
