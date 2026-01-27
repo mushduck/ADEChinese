@@ -2,7 +2,6 @@ import TWEEN from "tween.js";
 
 import { ElectronRuntime, SteamRuntime } from "@/steam";
 
-import { DC } from "./core/constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { DEV } from "@/env";
 import { SpeedrunMilestones } from "./core/speedrun";
@@ -100,7 +99,7 @@ export function gainedInfinityPoints() {
     EndgameMastery(151)
   );
   if (Pelle.isDisabled("IPMults")) {
-    let ip = Decimal.pow10(player.records.thisInfinity.maxAM.log10() / div - 0.75)
+    let ip = Decimal.pow10(player.records.thisInfinity.maxAM.log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
       .times(Pelle.specialGlyphEffect.infinity);
     if (PelleDestructionUpgrade.timestudy41.isBought) ip = ip.timesEffectOf(TimeStudy(41));
@@ -122,7 +121,7 @@ export function gainedInfinityPoints() {
     return ip.floor();
   }
   let ip = player.break
-    ? Decimal.pow10(player.records.thisInfinity.maxAM.log10() / div - 0.75)
+    ? Decimal.pow10(player.records.thisInfinity.maxAM.log10().div(div).sub(0.75))
     : new Decimal(308 / div);
   if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ETERNITY) {
     ip = ip.min(DC.E200);
@@ -172,7 +171,7 @@ function totalEPMult() {
 
 export function gainedEternityPoints() {
   let ep = DC.D5.pow(player.records.thisEternity.maxIP.plus(
-    gainedInfinityPoints()).log10() / (308 - PelleRifts.recursion.effectValue.toNumber()) - 0.7).times(totalEPMult());
+    gainedInfinityPoints()).log10().div(308 - PelleRifts.recursion.effectValue.toNumber()).sub(0.7)).times(totalEPMult());
 
   if (Teresa.isRunning) {
     ep = ep.pow(0.55);
@@ -193,7 +192,7 @@ export function gainedEternityPoints() {
 }
 
 export function requiredIPForEP(epAmount) {
-  return Decimal.pow10(308 * (Decimal.log(Decimal.divide(epAmount, totalEPMult()), 5) + 0.7))
+  return Decimal.pow10((Decimal.log(Decimal.divide(epAmount, totalEPMult()), 5).add(0.7)).times(308))
     .clampMin(Number.MAX_VALUE);
 }
 
@@ -218,7 +217,8 @@ export function resetChallengeStuff() {
 }
 
 export function ratePerMinute(amount, time) {
-  return Decimal.divide(amount, new Decimal(time).div(60 * 1000));
+  if (new Decimal(time).eq(0)) return DC.D0;
+  return Decimal.divide(amount, new Decimal(time).div(60 * 1000).clampMin(1e-300));
 }
 
 // eslint-disable-next-line max-params
@@ -362,13 +362,19 @@ export const GAME_SPEED_EFFECT = {
   RA_BUFFS: 8
 };
 
+function shouldApplyMaxThisEndgame() {
+  if (Teresa.isRunning || Effarig.isRunning || Enslaved.isRunning || V.isRunning || Ra.isRunning || Laitela.isRunning || Pelle.isDoomed) return false;
+  return player.endgame.celestialMatterMultiplier.isActive;
+}
+
 /**
   * @param {number[]?} effectsToConsider A list of various game speed changing effects to apply when calculating
   *   the game speed.  If left undefined, all effects will be applied.
   * @param {number?} blackHolesActiveOverride A numerical value which forces all black holes up to its specified index
   *   to be active for the purposes of game speed calculation. This is only used during offline black hole stuff.
   */
-export function getGameSpeedupFactor(effectsToConsider, applyMaxThisEndgame = true, blackHolesActiveOverride) {
+export function getGameSpeedupFactor(effectsToConsider, _applyMaxThisEndgame, blackHolesActiveOverride) {
+  const applyMaxThisEndgame = _applyMaxThisEndgame === undefined ? shouldApplyMaxThisEndgame() : _applyMaxThisEndgame;
   let effects;
   if (effectsToConsider === undefined) {
     effects = [GAME_SPEED_EFFECT.FIXED_SPEED, GAME_SPEED_EFFECT.TIME_GLYPH, GAME_SPEED_EFFECT.BLACK_HOLE,
@@ -451,7 +457,7 @@ export function getGameSpeedupFactor(effectsToConsider, applyMaxThisEndgame = tr
   // 1e-300 is now possible with max inverted BH, going below it would be possible with
   // an effarig glyph.
   let gameSpeedCap = DC.E300;
-  if (EndgameMilestone.gameSpeedUncap.isReached) gameSpeedCap = DC.E1E300;
+  if (EndgameMilestone.gameSpeedUncap.isReached) gameSpeedCap = DC.BEMAX;
   factor = Decimal.clamp(factor, new Decimal(1e-300), gameSpeedCap);
 
   return factor;
@@ -463,7 +469,7 @@ export function getGameSpeedupForDisplay() {
     Enslaved.isAutoReleasing &&
     Enslaved.canRelease(true) &&
     !BlackHoles.areNegative &&
-    !Pelle.isDisabled("blackhole")
+    (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.isBought)
   ) {
     return Decimal.max(Enslaved.autoReleaseSpeed, speedFactor);
   }
@@ -648,7 +654,7 @@ export function gameLoop(passedDiff, options = {}) {
   updateImaginaryMachines(realDiff);
 
   if (ExpansionPack.teresaPack.isBought && player.celestials.teresa.autoPour) {
-    Teresa.pourRM(realDiff);
+    Teresa.pourRM(realDiff, true);
   }
 
   if (!Pelle.isDoomed) {
@@ -737,7 +743,10 @@ export function gameLoop(passedDiff, options = {}) {
       player.celestials.v.vAuto += 1;
       player.celestials.v.vTotal += 1;
     }
-    if (player.celestials.v.vAuto >= 6) {
+    if (player.celestials.v.vAuto >= 6 && player.celestials.v.vLayer === 0) {
+      player.celestials.v.vAuto = 0;
+    }
+    if (player.celestials.v.vAuto >= 3 && player.celestials.v.vLayer === 1) {
       player.celestials.v.vAuto = 0;
     }
     if (player.celestials.v.vTotal >= 36 && V.isFlipped && player.celestials.v.vLayer === 0) {
@@ -774,9 +783,7 @@ export function gameLoop(passedDiff, options = {}) {
 
   replicantiLoop(diff);
 
-  if (PlayerProgress.dilationUnlocked()) {
-    Currency.dilatedTime.add(getDilationGainPerSecond().times(diff).div(1000));
-  }
+  Currency.dilatedTime.add(getDilationGainPerSecond());
 
   updateTachyonGalaxies();
   Currency.timeTheorems.add(getTTPerSecond().times(diff).div(1000));
@@ -806,7 +813,7 @@ export function gameLoop(passedDiff, options = {}) {
 
   const uncapped = Decimal.min(player.endgame.unnerfedCelestialMatter, CelestialDimensions.SOFTCAP);
   const instability = Decimal.pow(Decimal.max(player.endgame.unnerfedCelestialMatter.div(CelestialDimensions.SOFTCAP), 1), 1 / CelestialDimensions.softcapPow);
-  player.endgame.celestialMatter = Decimal.min(uncapped.times(instability), Decimal.NUMBER_MAX_VALUE);
+  player.endgame.celestialMatter = Decimal.min(uncapped.times(instability), DC.NUMMAX);
 
   let darkMatterProd = DC.D1;
   const unnerfedDM = player.celestials.laitela.unnerfedDarkMatter;
@@ -829,9 +836,13 @@ export function gameLoop(passedDiff, options = {}) {
   if (GalacticPower.isUnlocked) {
     Currency.galacticPower.add(getGalacticPowerGainPerSecond().times(realDiff).div(1000));
   }
+
+  if (Ethereal.isUnlocked) {
+    Currency.etherealPower.add(getEtherealPowerGainPerSecond().times(realDiff).div(1000));
+  }
   
-  player.records.bestAntimatterExponentOutsideDoom = Math.max(Decimal.log10(
-    player.records.totalAntimatterOutsideDoom), player.records.bestAntimatterExponentOutsideDoom);
+  player.records.bestAntimatterExponentOutsideDoom = Decimal.max(Decimal.log10(
+    Decimal.max(player.records.totalAntimatterOutsideDoom, 1)), player.records.bestAntimatterExponentOutsideDoom);
 
   player.records.bestEndgame.galaxies = Decimal.max(player.records.bestEndgame.galaxies, Replicanti.galaxies.total.add(
     player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalaxyGenerator.galaxies));
@@ -851,6 +862,7 @@ export function gameLoop(passedDiff, options = {}) {
   Pelle.gameLoop(realDiff);
   GalaxyGenerator.loop(realDiff);
   GameEnd.gameLoop(realDiff);
+  tryAdvanceSector();
 
   if (!Enslaved.canAmplify) {
     Enslaved.boostReality = false;
@@ -911,7 +923,7 @@ function globalPassivePrestigeGen(realDiff) {
   let endgamedGain = 0;
   let endgameMult = 1;
   endgameMult = (ExpansionPack.enslavedPack.isBought
-    ? Math.floor(1 + Math.pow(Math.log10(Tesseracts.effectiveCount + 1), Math.log10(player.endgames + 1)))
+    ? Math.floor(1 + Math.pow(Math.log10(Math.min(Tesseracts.effectiveCount, 1000) * Math.max(Math.log10(Tesseracts.effectiveCount) - 2, 1) + 1), Math.log10(player.endgames + 1)))
     : 1);
   if (EndgameUpgrade(8).isBought) {
     endgamedGain = endgameMult * Time.unscaledDeltaTime.totalMilliseconds.div(Decimal.clampMin(1000, EndgameUpgrade(8).effectValue)).toNumber();
@@ -1073,7 +1085,7 @@ function applyAutoprestige(diff) {
       .times(getGameSpeedupFactor().times(diff).div(1000)).timesEffectOf(Ra.unlocks.continuousTTBoost.effects.autoPrestige));
   }
 
-  if (InfinityUpgrade.ipGen.isCharged) {
+  if (InfinityUpgrade.ipGen.isCharged && !Pelle.isDoomed) {
     const addedRM = MachineHandler.gainedRealityMachines
       .timesEffectsOf(InfinityUpgrade.ipGen.chargedEffect)
       .times(diff).div(1000);
@@ -1095,37 +1107,37 @@ function updateTachyonGalaxies() {
   const tachyonGalaxyThreshold = 1000;
   const thresholdMult = getTachyonGalaxyMult();
   player.dilation.baseTachyonGalaxies = Decimal.max(player.dilation.baseTachyonGalaxies,
-    1 + Math.floor(Decimal.log(Currency.dilatedTime.value.dividedBy(1000), thresholdMult)));
+    Decimal.floor(Decimal.log(Currency.dilatedTime.value.dividedBy(1000), thresholdMult)).add(1));
   player.dilation.nextThreshold = DC.E3.times(new Decimal(thresholdMult)
     .pow(player.dilation.baseTachyonGalaxies));
   player.dilation.totalTachyonGalaxies =
     Decimal.min(player.dilation.baseTachyonGalaxies.times(tachyonGalaxyMult), tachyonGalaxyThreshold).add(
-    Decimal.max(player.dilation.baseTachyonGalaxies.times(tachyonGalaxyMult).sub(tachyonGalaxyThreshold), 0)).div(tachyonGalaxyMult);
+    Decimal.max(player.dilation.baseTachyonGalaxies.times(tachyonGalaxyMult).sub(tachyonGalaxyThreshold), 0).div(tachyonGalaxyMult));
 
   player.dilation.totalTachyonGalaxies = player.dilation.totalTachyonGalaxies.times(DilationUpgrade.galaxyMultiplier.effectValue);
 }
 
 export function getTTPerSecond() {
   // All TT multipliers (note that this is equal to 1 pre-Ra)
-  let ttMult = Effects.product(
+  let ttMult = new Decimal(Effects.product(
     Ra.unlocks.continuousTTBoost.effects.ttGen,
-    Ra.unlocks.achievementTTMult,
     Achievement(137),
     Achievement(156),
-  );
-  if (GlyphAlteration.isAdded("dilation")) ttMult *= getSecondaryGlyphEffect("dilationTTgen");
+  ));
+  ttMult = ttMult.timesEffectOf(Ra.unlocks.achievementTTMult);
+  if (GlyphAlteration.isAdded("dilation")) ttMult = ttMult.times(getSecondaryGlyphEffect("dilationTTgen"));
 
-  let pelleTTMult = 1;
-  if (PelleCelestialUpgrade.raV3.isBought) pelleTTMult *= Effects.product(Ra.unlocks.continuousTTBoost.effects.ttGen);
-  if (PelleCelestialUpgrade.raV4.isBought) pelleTTMult *= Effects.product(Ra.unlocks.achievementTTMult);
-  if (PelleAchievementUpgrade.achievement137.isBought) pelleTTMult *= Effects.product(Achievement(137));
-  if (PelleAchievementUpgrade.achievement156.isBought) pelleTTMult *= Effects.product(Achievement(156));
-  if (PelleCelestialUpgrade.raTeresa3.isBought) pelleTTMult *= getSecondaryGlyphEffect("dilationTTgen");
+  let pelleTTMult = DC.D1;
+  if (PelleCelestialUpgrade.raV3.isBought) pelleTTMult = pelleTTMult.times(Effects.product(Ra.unlocks.continuousTTBoost.effects.ttGen));
+  if (PelleCelestialUpgrade.raV4.isBought) pelleTTMult = pelleTTMult.timesEffectOf(Ra.unlocks.achievementTTMult);
+  if (PelleAchievementUpgrade.achievement137.isBought) pelleTTMult = pelleTTMult.times(Effects.product(Achievement(137)));
+  if (PelleAchievementUpgrade.achievement156.isBought) pelleTTMult = pelleTTMult.times(Effects.product(Achievement(156)));
+  if (PelleCelestialUpgrade.raTeresa3.isBought) pelleTTMult = pelleTTMult.times(getSecondaryGlyphEffect("dilationTTgen"));
 
   // Glyph TT generation
   const glyphTT = Teresa.isRunning || Enslaved.isRunning || (Pelle.isDoomed && !PelleDestructionUpgrade.destroyedGlyphEffects.isBought)
-    ? 0
-    : getAdjustedGlyphEffect("dilationTTgen") * (Pelle.isDoomed ? pelleTTMult : ttMult);
+    ? DC.D0
+    : new Decimal(getAdjustedGlyphEffect("dilationTTgen")).times(Pelle.isDoomed ? pelleTTMult : ttMult);
 
   // Dilation TT generation
   const dilationTT = DilationUpgrade.ttGenerator.isBought
@@ -1145,17 +1157,17 @@ export function getTTPerSecond() {
 
 export function gainedCelestialPoints() {
   if (!player.break2) return DC.D1;
-  let cp = new Decimal(player.celestials.pelle.records.totalEndgameAntimatter.log10() / 9e15);
+  let cp = player.celestials.pelle.records.totalEndgameAntimatter.add(1).log10().div(9e15);
   if (Achievement(197).isUnlocked) {
-    cp = cp.times(Decimal.max(9e115, player.celestials.pelle.records.totalEndgameAntimatter.log10()).div(9e115));
+    cp = cp.times(Decimal.max(9e115, player.celestials.pelle.records.totalEndgameAntimatter.add(1).log10()).div(9e115));
   }
-  cp = Decimal.min(cp, Decimal.NUMBER_MAX_VALUE.sub(player.endgame.celestialPoints));
+  cp = Decimal.min(cp, DC.NUMMAX.sub(player.endgame.celestialPoints));
   return cp.floor();
 }
 
 export function gainedDoomedParticles() {
   if (!player.break2) return DC.D1;
-  let dp = Decimal.min(player.celestials.pelle.records.totalEndgameAntimatter.log10() / 9e15, DC.E100.sub(player.endgame.doomedParticles));
+  let dp = Decimal.min(player.celestials.pelle.records.totalEndgameAntimatter.add(1).log10().div(9e15), new Decimal(1e100 - player.endgame.doomedParticles.toNumber()));
   return dp.floor();
 }
 
