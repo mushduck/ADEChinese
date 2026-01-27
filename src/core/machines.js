@@ -1,5 +1,3 @@
-import { DC } from "./constants";
-
 export const MachineHandler = {
   get baseRMCap() { return DC.E1000; },
 
@@ -18,19 +16,19 @@ export const MachineHandler = {
   },
 
   get realityMachineMultiplier() {
-    return ShopPurchase.RMPurchases.currentMult * Effects.max(1, PerkShopUpgrade.rmMult) *
-      getAdjustedGlyphEffect("effarigrm") * Achievement(167).effectOrDefault(1);
+    return new Decimal(ShopPurchase.RMPurchases.currentMult).timesEffectOf(PerkShopUpgrade.rmMult).times(
+      getAdjustedGlyphEffect("effarigrm")).times(Achievement(167).effectOrDefault(1));
   },
 
   get uncappedRM() {
     let log10FinalEP = player.records.thisReality.maxEP.plus(gainedEternityPoints()).log10();
     if (!PlayerProgress.realityUnlocked()) {
-      if (log10FinalEP > 8000) log10FinalEP = 8000;
-      if (log10FinalEP > 6000) log10FinalEP -= (log10FinalEP - 6000) * 0.75;
+      if (log10FinalEP.gt(8000)) log10FinalEP = new Decimal(8000);
+      if (log10FinalEP.gt(6000)) log10FinalEP = log10FinalEP.sub((log10FinalEP.sub(6000)).times(0.75));
     }
-    let rmGain = DC.E3.pow(log10FinalEP / 4000 - 1);
+    let rmGain = DC.E3.pow(log10FinalEP.div(4000).sub(1));
     // Increase base RM gain if <10 RM
-    if (rmGain.gte(1) && rmGain.lt(10)) rmGain = new Decimal(27 / 4000 * log10FinalEP - 26);
+    if (rmGain.gte(1) && rmGain.lt(10)) rmGain = new Decimal(27).div(4000).times(log10FinalEP).sub(26);
     rmGain = rmGain.times(this.realityMachineMultiplier);
     rmGain = rmGain.times(Teresa.rmMultiplier);
     if (EndgameMastery(143).isBought) {
@@ -53,7 +51,8 @@ export const MachineHandler = {
       Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.log10()).sub(100000), 1), 0.2)).times(
       Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.log10()).div(1000000000), 1),
       new Decimal(Decimal.log10(this.uncappedRM.log10())).div(7.5)))).pow(
-      Effects.product(EndgameMastery(144), Ra.unlocks.imaginaryMachines, Ra.unlocks.imaginaryMachineEternityPower));
+      new Decimal(Effects.product(EndgameMastery(144), Ra.unlocks.imaginaryMachines, Ra.unlocks.imaginaryMachineEternityPower)).times(
+      Decimal.max(Decimal.log10(this.uncappedRM.log10()).sub(45), 0).div(10).add(1)));
   },
 
   get currentIMCap() {
