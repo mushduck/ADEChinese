@@ -7,7 +7,7 @@ export const ra = {
       chunkGain: "Eternity Points",
       memoryGain: "current RM",
       requiredUnlock: () => undefined,
-      rawMemoryChunksPerSecond: () => 4 * Math.pow(Currency.eternityPoints.value.pLog10() / 5e3, 3.5),
+      rawMemoryChunksPerSecond: () => 4 * Decimal.pow(Currency.eternityPoints.value.add(1).pLog10().div(5e3), 3.5).toNumber(),
       memoryProductionMultiplier: () => Ra.unlocks.teresaXP.effectOrDefault(1)
     },
     effarig: {
@@ -27,7 +27,7 @@ export const ra = {
       chunkGain: "Time Shards",
       memoryGain: "total time played",
       requiredUnlock: () => Ra.unlocks.enslavedUnlock,
-      rawMemoryChunksPerSecond: () => 4 * Math.pow(Currency.timeShards.value.pLog10() / 5e4, 2.5),
+      rawMemoryChunksPerSecond: () => 4 * Decimal.pow(Currency.timeShards.value.add(1).pLog10().div(5e4), 2.5).toNumber(),
       memoryProductionMultiplier: () => Ra.unlocks.enslavedXP.effectOrDefault(1)
     },
     v: {
@@ -37,7 +37,7 @@ export const ra = {
       chunkGain: "Infinity Power",
       memoryGain: "total Memory levels",
       requiredUnlock: () => Ra.unlocks.vUnlock,
-      rawMemoryChunksPerSecond: () => 4 * Math.pow(Currency.infinityPower.value.pLog10() / 1e6, 1.875),
+      rawMemoryChunksPerSecond: () => 4 * Decimal.pow(Currency.infinityPower.value.add(1).pLog10().div(1e6), 1.875).toNumber(),
       memoryProductionMultiplier: () => Ra.unlocks.vXP.effectOrDefault(1)
     }
   },
@@ -63,7 +63,7 @@ export const ra = {
     teresaXP: {
       id: 2,
       reward: "All Memory Chunks produce more Memories based on Reality Machines",
-      effect: () => 1 + Math.pow(Currency.realityMachines.value.pLog10() / 100, 0.5),
+      effect: () => 1 + Decimal.pow(Currency.realityMachines.value.add(1).pLog10().div(100), 0.5).toNumber(),
       pet: "teresa",
       level: 5,
       displayIcon: `Ϟ`
@@ -141,7 +141,7 @@ export const ra = {
     relicShardGlyphLevelBoost: {
       id: 12,
       reward: "Glyph level is increased based on Relic Shards gained",
-      effect: () => 100 * Math.pow(Decimal.log10(Decimal.max(Effarig.shardsGained, 1)), 2),
+      effect: () => 100 * Decimal.pow(Decimal.log10(Decimal.max(Effarig.shardsGained, 1)), 2).toNumber(),
       pet: "effarig",
       level: 15,
       displayIcon: `<span class="fas fa-fire"></span>`
@@ -178,7 +178,7 @@ export const ra = {
     enslavedXP: {
       id: 16,
       reward: "All Memory Chunks produce more Memories based on total time played",
-      effect: () => 1 + Decimal.log10(player.records.totalTimePlayed) / 200,
+      effect: () => 1 + Decimal.log10(player.records.totalTimePlayed).div(200).toNumber(),
       pet: "enslaved",
       level: 5,
       displayIcon: `<span class="fas fa-stopwatch"></span>`
@@ -202,7 +202,7 @@ export const ra = {
     peakGamespeedDT: {
       id: 19,
       reward: "Gain more Dilated Time based on peak game speed in each Reality",
-      effect: () => Math.max(Math.pow(Decimal.log10(player.celestials.ra.peakGamespeed) - 90, 3), 1),
+      effect: () => Decimal.max(Decimal.pow(Decimal.log10(player.celestials.ra.peakGamespeed).sub(90), 3), 1).toNumber(),
       pet: "enslaved",
       level: 15,
       displayIcon: `<span class="fas fa-tachometer-alt"></span>`,
@@ -344,7 +344,7 @@ export const ra = {
         const sacrificeSum = new Decimal(player.reality.glyphs.sac.power).add(player.reality.glyphs.sac.infinity).add(
           player.reality.glyphs.sac.time).add(player.reality.glyphs.sac.replication).add(player.reality.glyphs.sac.dilation).add(
           player.reality.glyphs.sac.effarig).add(player.reality.glyphs.sac.reality);
-        return 1 + Math.log10(Decimal.log10(sacrificeSum.add(1)) + 1) / 20;
+        return 1 + Decimal.log10(Decimal.log10(sacrificeSum.add(1)).add(1)).div(20);
       },
       pet: "teresa",
       level: 100,
@@ -372,7 +372,7 @@ export const ra = {
     instabilityDelay: {
       id: 36,
       reward: "Relic Shards delay the first three levels of Glyph Instability",
-      effect: () => Decimal.log10(player.celestials.effarig.relicShards) * 10,
+      effect: () => Decimal.log10(player.celestials.effarig.relicShards.add(1)).times(10).toNumber(),
       pet: "effarig",
       level: 40,
       displayIcon: `<span class="fas fa-arrow-right"></span>`,
@@ -471,7 +471,7 @@ export const ra = {
     imaginaryMachineEternityPower: {
       id: 47,
       reward: "Gain a power to Imaginary Machines based on Eternities",
-      effect: () => 1 + Math.log10(Decimal.log10(player.eternities) + 1) / 20,
+      effect: () => 1 + Decimal.log10(Decimal.log10(player.eternities.add(1)).add(1)).div(20).toNumber(),
       pet: "enslaved",
       level: 100,
       displayIcon: `<span class="fas fa-lightbulb"></span>`,
@@ -498,7 +498,7 @@ export const ra = {
     allDimPowTT: {
       id: 50,
       reward: "Time Theorems empower the first three Dimension types",
-      effect: () => Math.pow(1 + Math.log10(Decimal.log10(Currency.timeTheorems.value.add(1)) + 1) / 10, 5),
+      effect: () => Math.pow(1 + Decimal.log10(Decimal.log10(Currency.timeTheorems.value.add(1)).add(1)).div(10).toNumber(), 5),
       pet: "v",
       level: 40,
       displayIcon: `<span class="fas fa-brain"></span>`,
