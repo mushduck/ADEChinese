@@ -1,3 +1,5 @@
+import { cloneDeep } from "lodash";
+
 window.PRESTIGE_EVENT = {
   DIMENSION_BOOST: 0,
   ANTIMATTER_GALAXY: 1,
@@ -15,7 +17,7 @@ function deepFreeze(obj) {
   return Object.freeze(obj);
 }
 
-export const DC = deepFreeze({
+window.DC = deepFreeze({
   // Naming Scheme:
   // D[0-9]: Decimal mantissa variable
   // _: decimal (.) part of the mantissa
@@ -217,6 +219,12 @@ export const DC = deepFreeze({
   E9E115:               Decimal.pow(10, 9e115),
   E1E300:               Decimal.pow(10, 1e300),
   ENUMMAX:              Decimal.pow(10, Number.MAX_VALUE),
+
+  // Special case values
+  NUMSAFE:              new Decimal(Number.MAX_SAFE_INTEGER),
+  NUMMAX:               new Decimal(Number.MAX_VALUE),
+  BIMAX:                new Decimal("e9e15"),
+  BEMAX:                new Decimal("10^^9000000000000000")
 });
 
 window.AUTOBUYER_MODE = {
@@ -570,3 +578,5 @@ window.SPEEDRUN_SEED_STATE = {
   RANDOM: 2,
   PLAYER: 3,
 };
+
+window.cloneDeep = value => cloneDeep(value);
