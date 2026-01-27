@@ -1,5 +1,3 @@
-import { DC } from "./constants";
-
 /**
  * Object that manages the selection of glyphs offered to the player
  */
@@ -44,7 +42,8 @@ export const GlyphSelection = {
     // To attempt to reduce RNG swing, we follow slightly different logic early on in order
     // to spread out types and effects more equally for the first few realities. Types and
     // effects are spread out over the choices of each consecutive group of 5 realities
-    if (GlyphGenerator.isUniformityActive) {
+    // This is disabled when you can pick over 4 Glyphs.
+    if (GlyphGenerator.isUniformityActive && GlyphSelection.choiceCount <= 4) {
       glyphList = GlyphGenerator.uniformGlyphs(level, rng, player.realities);
     } else {
       for (let out = 0; out < count; ++out) {
@@ -119,7 +118,7 @@ export const GlyphSelection = {
 };
 
 export function isRealityAvailable() {
-  return player.records.thisReality.maxEP.exponent >= 4000 && TimeStudy.reality.isBought;
+  return player.records.thisReality.maxEP.add(1).log10().gte(4000) && TimeStudy.reality.isBought;
 }
 
 // Returns the number of "extra" realities from stored real time or Multiversal effects, should be called
@@ -375,7 +374,9 @@ export function beginProcessReality(realityProps) {
   // Save a few important props before resetting all resources. We need to do this before processing glyphs so
   // that we don't try to reality again while async is running, but we need to retain RNG and level or else
   // glyphs will be generated with values based on post-reset values
-  const glyphsToProcess = realityProps.simulatedRealities + (realityProps.alreadyGotGlyph ? 0 : 1);
+  const glyphsToProcess = (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied && Ra.unlocks.glyphEffectCount.canBeApplied
+    ? Math.min(realityProps.simulatedRealities + (realityProps.alreadyGotGlyph ? 0 : 1), 99)
+    : realityProps.simulatedRealities + (realityProps.alreadyGotGlyph ? 0 : 1));
   const rng = GlyphGenerator.getRNG(false);
   const glyphLevel = gainedGlyphLevel();
   finishProcessReality(realityProps);
@@ -636,7 +637,7 @@ export function finishProcessReality(realityProps) {
   player.galaxies = DC.D0;
   player.partInfinityPoint = DC.D0;
   player.partInfinitied = 0;
-  player.break = false;
+  if (!Pelle.isDoomed || !PelleRealityUpgrade.existentiallyProlong.isBought) player.break = false;
   player.IPMultPurchases = 0;
   Currency.infinityPower.reset();
   Currency.timeShards.reset();
@@ -671,9 +672,9 @@ export function finishProcessReality(realityProps) {
   player.records.thisReality.time = DC.D0;
   player.records.thisReality.realTime = 0;
   player.records.thisReality.maxReplicanti = DC.D0;
-  if (!PelleUpgrade.timeStudiesNoReset.canBeApplied) Currency.timeTheorems.reset();
-  player.celestials.v.STSpent = 0;
   if (!PelleUpgrade.timeStudiesNoReset.canBeApplied) {
+    Currency.timeTheorems.reset();
+    player.celestials.v.STSpent = 0;
     player.dilation.studies = [];
     player.dilation.active = false;
   }
