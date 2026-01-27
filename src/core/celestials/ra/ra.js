@@ -315,7 +315,7 @@ export const Ra = {
   },
   get levelCap() {
     if (!ExpansionPack.raPack.isBought) return 25;
-    return Math.floor(Math.max(25, Math.log10(player.records.bestAntimatterExponentOutsideDoom)));
+    return Math.floor(Math.max(25, Decimal.log10(player.records.bestAntimatterExponentOutsideDoom).toNumber()));
   },
   get maxTotalPetLevel() {
     return this.levelCap * this.pets.all.length;
@@ -349,7 +349,7 @@ export const Ra = {
   // It also includes the 1% IP time study, Teresa's 1% EP upgrade, and the charged RM generation upgrade. Note that
   // removing the hardcap of 10 may cause runaways.
   theoremBoostFactor() {
-    return Math.min(10, Math.max(0, Currency.timeTheorems.value.pLog10() - 350) / 50);
+    return Decimal.min(10, Decimal.max(0, Currency.timeTheorems.value.add(1).pLog10().sub(350)).div(50)).toNumber();
   },
   get isUnlocked() {
     return V.spaceTheorems >= 36 || EndgameMilestone.celestialEarlyUnlock.isReached;
@@ -438,7 +438,7 @@ export const GlyphAlteration = {
   },
   sacrificeBoost(type) {
     const capped = Decimal.clampMax(this.getSacrificePower(type), GlyphSacrificeHandler.maxSacrificeForEffects);
-    return Decimal.log10(Decimal.clampMin(capped.div(this.boostingThreshold), 1)) / 2;
+    return Decimal.log10(Decimal.clampMin(capped.div(this.boostingThreshold), 1)).div(2).toNumber();
   },
   baseAdditionColor(isDark = Theme.current().isDark()) {
     return isDark ? "#CCCCCC" : "black";
