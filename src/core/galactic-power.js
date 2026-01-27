@@ -41,16 +41,16 @@ export const GalacticPower = {
 
 export function getGalacticPowerGainPerSecond() {
   const allGalaxies = Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies);
-  const galaxyFactor = Decimal.max(allGalaxies.div(100000), 1).toNumber();
-  const celMatterFactor = Math.max(Math.pow(Decimal.log10(player.endgame.celestialMatter.add(1)) / 10, 4), 1);
-  const imaginaryFactor = Math.max(Math.pow(Decimal.log10(player.reality.imaginaryMachines.add(1)), 2.5), 1);
+  const galaxyFactor = Decimal.max(allGalaxies.div(100000), 1);
+  const celMatterFactor = Decimal.max(Decimal.pow(Decimal.log10(player.endgame.celestialMatter.add(1)).div(10), 4), 1);
+  const imaginaryFactor = Decimal.max(Decimal.pow(Decimal.log10(player.reality.imaginaryMachines.add(1)), 2.5), 1);
   const staticDivisor = 1e7;
-  const base = galaxyFactor * celMatterFactor * imaginaryFactor / staticDivisor;
-  const galaxyExponent1 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(1680000), 6.4), 4), 1).toNumber();
-  const galaxyExponent2 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(1960000), 15), 5), 1).toNumber();
-  const galaxyExponent3 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(2160000), 5), 1.6), 1).toNumber();
-  const galaxyExponent4 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(4500000), 0.75), 1.25), 1).toNumber();
-  const galaxyExponent5 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(6000000), 0.5), 2.5), 1).toNumber();
-  const exponent = galaxyExponent1 * galaxyExponent2 * galaxyExponent3 * galaxyExponent4 * galaxyExponent5;
+  const base = galaxyFactor.times(celMatterFactor).times(imaginaryFactor).div(staticDivisor);
+  const galaxyExponent1 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(1680000), 6.4), 4), 1);
+  const galaxyExponent2 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(1960000), 15), 5), 1);
+  const galaxyExponent3 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(2160000), 5), 1.6), 1);
+  const galaxyExponent4 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(4500000), 0.75), 1.25), 1);
+  const galaxyExponent5 = Decimal.max(Decimal.min(Decimal.pow(allGalaxies.div(6000000), 0.5), 2.5), 1);
+  const exponent = galaxyExponent1.times(galaxyExponent2).times(galaxyExponent3).times(galaxyExponent4).times(galaxyExponent5);
   return Pelle.isDoomed ? new Decimal(0) : Decimal.pow(base, exponent);
 }
