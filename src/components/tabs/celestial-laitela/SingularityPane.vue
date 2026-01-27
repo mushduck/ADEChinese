@@ -67,8 +67,8 @@ export default {
         : null;
     },
     increaseTooltip() {
-      return this.singularityCapIncreases.gte(1000)
-        ? "You cannot increase the cap any further!"
+      return this.singularityCapIncreases.gte(5e11)
+        ? `The cap over 5e11 is more stronger. ${formatX(Decimal.pow10(new Decimal(this.singularityCapIncreases.log(10)).sub(10).floor()), 2, 2)}`
         : null;
     }
   },
@@ -153,7 +153,7 @@ export default {
         </button>
         <button
           class="c-laitela-singularity__cap-control"
-          :class="{ 'c-laitela-singularity__cap-control--available' : singularityCapIncreases.lt(1000) }"
+          :class="{ 'c-laitela-singularity__cap-control--available' : true }"
           :ach-tooltip="increaseTooltip"
           @click="increaseCap"
         >
