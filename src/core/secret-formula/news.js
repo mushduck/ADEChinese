@@ -1,4 +1,3 @@
-import { DC } from "../constants";
 import wordShift from "../word-shift";
 
 // A = always there
