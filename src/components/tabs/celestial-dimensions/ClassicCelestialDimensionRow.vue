@@ -67,7 +67,7 @@ export default {
         this.hasPrevTier;
     },
     showCostTitle() {
-      return this.cost.exponent < 1e5;
+      return this.cost.log10().lt(1e5);
     }
   },
   methods: {
