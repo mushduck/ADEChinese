@@ -1,6 +1,4 @@
 <script>
-import { DC } from "@/core/constants";
-
 import { BreakdownEntryInfo } from "./breakdown-entry-info";
 import { getResourceEntryInfoGroups } from "./breakdown-entry-info-group";
 import { PercentageRollingAverage } from "./percentage-rolling-average";
