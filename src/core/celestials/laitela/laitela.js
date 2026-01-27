@@ -1,4 +1,3 @@
-import { DC } from "../../constants";
 import { Quotes } from "../quotes";
 
 import { DarkMatterDimensions } from "./dark-matter-dimension";
@@ -48,7 +47,7 @@ export const Laitela = {
   },
   get matterExtraPurchaseFactor() {
     if (Pelle.isDoomed && !PelleDestructionUpgrade.continuumBuff.isBought) return 1;
-    return (Decimal.pow(new Decimal(Decimal.log10(Currency.darkMatter.max)).div(50), 0.4).times(0.5).add(1).times(
+    return (Decimal.pow(new Decimal(Decimal.log10(Currency.darkMatter.max.add(1))).div(50), 0.4).times(0.5).add(1).times(
       SingularityMilestone.continuumMult.effectOrDefault(new Decimal(0)).add(1))).toNumber();
   },
   get hadronizes() {
@@ -74,7 +73,7 @@ export const Laitela = {
   },
   get darkMatterMultGain() {
     const extraPow = ExpansionPack.laitelaPack.isBought
-      ? Decimal.pow((Math.log10(Decimal.log10(Currency.darkMatter.value) + 1) + 1) / 2, 2).add(1) : 1;
+      ? Decimal.pow((Decimal.log10(Decimal.log10(Currency.darkMatter.value.add(1)).add(1)).add(1)).div(2), 2).add(1) : 1;
     return Decimal.pow(Decimal.pow(Currency.darkMatter.value.dividedBy(this.annihilationDMRequirement)
       .plus(1).log10(), 1.5).times(ImaginaryUpgrade(21).effectOrDefault(1)), extraPow);
   },
@@ -85,7 +84,7 @@ export const Laitela = {
     return (this.celestial.darkMatterMult.add(this.darkMatterMultGain)).div(this.celestial.darkMatterMult);
   },
   get darkMatterCap() {
-    let baseCap = Decimal.NUMBER_MAX_VALUE;
+    let baseCap = DC.NUMMAX;
     if (ImaginaryUpgrade(26).isBought) baseCap = DC.E1000;
     if (ImaginaryUpgrade(27).isBought) baseCap = DC.E4000;
     if (ImaginaryUpgrade(28).isBought) baseCap = DC.E20000;
@@ -118,8 +117,8 @@ export const Laitela = {
     const upgradeInfo = unlockedDimensions
       .map(d => [
         [d.rawIntervalCost, d.intervalCostIncrease, d.maxIntervalPurchases, x => d.buyManyInterval(x)],
-        [d.rawPowerDMCost, d.powerDMCostIncrease, Decimal.MAX_VALUE, x => d.buyManyPowerDM(x)],
-        [d.rawPowerDECost, d.powerDECostIncrease, Decimal.MAX_VALUE, x => d.buyManyPowerDE(x)]])
+        [d.rawPowerDMCost, d.powerDMCostIncrease, DC.BEMAX, x => d.buyManyPowerDM(x)],
+        [d.rawPowerDECost, d.powerDECostIncrease, DC.BEMAX, x => d.buyManyPowerDE(x)]])
       .flat(1);
     const buy = function(upgrade, purchases) {
       upgrade[3](purchases);
@@ -129,11 +128,11 @@ export const Laitela = {
     // Buy everything costing less than 0.02 of initial matter.
     const darkMatter = Currency.darkMatter.value;
     for (const upgrade of upgradeInfo) {
-      const purchases = Decimal.clamp(Decimal.floor(darkMatter.times(0.02).div(upgrade[0]).log(upgrade[1].toNumber())), 0, upgrade[2]);
+      const purchases = Decimal.clamp(Decimal.floor(darkMatter.times(0.02).div(upgrade[0]).max(1).log(upgrade[1].toNumber())), 0, upgrade[2]);
       buy(upgrade, purchases);
     }
     while (upgradeInfo.some(upgrade => upgrade[0].lte(darkMatter) && upgrade[2].gt(0))) {
-      const cheapestUpgrade = upgradeInfo.filter(upgrade => upgrade[2].gt(0)).sort((a, b) => new Decimal(Decimal.compare(a[0], b[0])).sign())[0];
+      const cheapestUpgrade = upgradeInfo.filter(upgrade => upgrade[2].gt(0)).sort((a, b) => new Decimal(Decimal.compare(a[0], b[0])).sign)[0];
       buy(cheapestUpgrade, DC.D1);
     }
   },
