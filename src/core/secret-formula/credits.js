@@ -246,16 +246,38 @@ export const credits = {
       name: "Calm Carrot",
       roles: 18
     }, {
-      name: "Curtain Call",
+      name: "dark fox",
       roles: 18
     }, {
       name: "DavTheGl1tchyOne",
+      roles: 18
+    }, {
+      name: "Didgoty",
+      roles: 18
+    }, {
+      name: "Elys",
       roles: 18
     }, {
       name: "Error404",
       roles: 18
     }, {
       name: "glitchy",
+      roles: 18
+    }, {
+      name: "iliketrains123_no",
+      roles: 18
+    }, {
+      name: "Kirito",
+      roles: 18
+    }, {
+      name: "Living_Person",
+      name2: "Life",
+      roles: 18
+    }, {
+      name: "M3t0s1m",
+      roles: 18
+    }, {
+      name: "MagolorGamerJC",
       roles: 18
     }, {
       name: "Matthew the Kingus",
@@ -268,20 +290,22 @@ export const credits = {
       name: "misc",
       roles: 18
     }, {
+      name: "Quantaum",
+      roles: 18
+    }, {
       name: "Qwerty",
+      roles: 18
+    }, {
+      name: "Riley",
+      roles: 18
+    }, {
+      name: "S____",
       roles: 18
     }, {
       name: "sumi",
       roles: [18, 21]
     }, {
       name: "SwordPunk",
-      roles: 18
-    }, {
-      name: "thedarklord2317",
-      roles: 18
-    }, {
-      name: "txchy0nnn",
-      name2: "Tachyon",
       roles: 18
     }, {
       name: "about:blank",
