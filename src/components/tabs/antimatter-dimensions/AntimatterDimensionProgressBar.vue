@@ -1,6 +1,4 @@
 <script>
-import { DC } from "@/core/constants";
-
 export default {
   name: "AntimatterDimensionProgressBar",
   data() {
@@ -22,7 +20,7 @@ export default {
     update() {
       this.displayPercents = formatPercents(this.fill, 2);
       const setProgress = (current, goal, tooltip) => {
-        this.fill = Math.clampMax(current.pLog10() / Decimal.log10(goal), 1);
+        this.fill = Decimal.clampMax(current.pLog10().div(Decimal.log10(goal)), 1).toNumber();
         this.tooltip = tooltip;
       };
       const setLinearProgress = (current, goal, tooltip) => {
@@ -64,14 +62,14 @@ export default {
         }
       } else if (Pelle.isDoomed) {
         if (ExpansionPacks.areUnlocked && ExpansionPacks.nextPackUnlockAM === undefined) {
-          setProgress(gainedCelestialPoints(), Decimal.NUMBER_MAX_VALUE, "Percentage to Celestial Point Cap");
+          setProgress(gainedCelestialPoints(), DC.NUMMAX, "Percentage to Celestial Point Cap");
         } else if (ExpansionPacks.areUnlocked) {
-          setProgress(new Decimal(Currency.antimatter.value.exponent), new Decimal(Decimal.log10(ExpansionPacks.nextPackUnlockAM)),
+          setProgress(new Decimal(Currency.antimatter.value.add(1).log10()), new Decimal(Decimal.log10(ExpansionPacks.nextPackUnlockAM)),
             "Percentage to next Expansion Pack");
         } else if (GalaxyGenerator.galaxies.gt(1e15)) {
           setLinearProgress(GalaxyGenerator.galaxies.toNumber(), Math.pow(2, 64), "Percentage to Expansion Packs");
         } else if (PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0)) {
-          setProgress(new Decimal(Currency.antimatter.value.exponent), new Decimal(9e15), "Percentage to Endgame");
+          setProgress(new Decimal(Currency.antimatter.value.add(1).log10()), new Decimal(9e15), "Percentage to Endgame");
         } else if (PelleStrikes.dilation.hasStrike) {
           setProgress(Currency.eternityPoints.value, DC.E4000, "Percentage to Galaxy Generator");
         } else if (PelleStrikes.ECs.hasStrike) {
@@ -87,14 +85,14 @@ export default {
           if (player.break) {
             setProgress(Currency.infinityPoints.value, 5e11, "Percentage to second Strike");
           } else {
-            setProgress(Currency.antimatter.value, Decimal.NUMBER_MAX_VALUE, "Percentage to Infinity");
+            setProgress(Currency.antimatter.value, DC.NUMMAX, "Percentage to Infinity");
           }
         } else {
-          setProgress(Currency.antimatter.value, Decimal.NUMBER_MAX_VALUE, "Percentage to first Strike");
+          setProgress(Currency.antimatter.value, DC.NUMMAX, "Percentage to first Strike");
         }
       } else if (GalacticPower.isUnlocked && GalacticPower.nextPowerUnlockGP === undefined) {
         // Show all other goals from the top down, starting at features in the highest prestige layer
-        setProgress(Currency.imaginaryMachines.value, Decimal.NUMBER_MAX_VALUE, "Percentage to Alpha");
+        setProgress(Currency.imaginaryMachines.value, DC.NUMMAX, "Percentage to Alpha");
       } else if (GalacticPower.isUnlocked) {
         setProgress(Currency.galacticPower.value, GalacticPower.nextPowerUnlockGP, "Percentage to the next Galactic Power");
       } else if (Currency.antimatter.value.gte(DC.E9E15)) {
@@ -116,7 +114,7 @@ export default {
           setProgress(player.infinityPoints, nextID.ipRequirement, text);
         }
       } else {
-        setProgress(Currency.antimatter.value, Decimal.NUMBER_MAX_VALUE, "Percentage to Infinity");
+        setProgress(Currency.antimatter.value, DC.NUMMAX, "Percentage to Infinity");
       }
     }
   }
