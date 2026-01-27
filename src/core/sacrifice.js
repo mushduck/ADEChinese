@@ -1,5 +1,3 @@
-import { DC } from "./constants";
-
 export class Sacrifice {
   // This is tied to the "buying an 8th dimension" achievement in order to hide it from new players before they reach
   // sacrifice for the first time.
@@ -70,7 +68,7 @@ export class Sacrifice {
   }
 
   static get nextBoost() {
-    const nd1Amount = AntimatterDimension(1).amount.clampMax(Decimal.pow(10, 1e25)).pow(Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(AntimatterDimension(1).amount) / 1e25)), 1));
+    const nd1Amount = AntimatterDimension(1).amount.clampMax(Decimal.pow(10, 1e25)).pow(Decimal.max(Decimal.pow(2, Decimal.log10(Decimal.log10(AntimatterDimension(1).amount).div(1e25))), 1));
     if (nd1Amount.eq(0)) return DC.D1;
     const sacrificed = player.sacrificed.clampMin(1);
     let prePowerSacrificeMult;
@@ -84,7 +82,7 @@ export class Sacrifice {
     } else if (InfinityChallenge(2).isCompleted) {
       prePowerSacrificeMult = nd1Amount.dividedBy(sacrificed);
     } else {
-      prePowerSacrificeMult = new Decimal((nd1Amount.log10() / 10) / Math.max(sacrificed.log10() / 10, 1));
+      prePowerSacrificeMult = new Decimal((nd1Amount.add(1).log10().div(10)).div(Decimal.max(sacrificed.add(1).log10().div(10), 1)));
     }
 
     return prePowerSacrificeMult.clampMin(1).pow(this.sacrificeExponent);
@@ -103,7 +101,7 @@ export class Sacrifice {
     if (InfinityChallenge(2).isCompleted) {
       prePowerBoost = player.sacrificed;
     } else {
-      prePowerBoost = new Decimal(player.sacrificed.log10() / 10);
+      prePowerBoost = new Decimal(player.sacrificed.add(1).log10().div(10));
     }
 
     return prePowerBoost.clampMin(1).pow(this.sacrificeExponent);
@@ -113,17 +111,17 @@ export class Sacrifice {
 export function sacrificeReset() {
   if (!Sacrifice.canSacrifice) return false;
   if ((!player.break || (!InfinityChallenge.isRunning && NormalChallenge.isRunning)) &&
-    Currency.antimatter.gt(Decimal.NUMBER_MAX_VALUE)) return false;
+    Currency.antimatter.gt(DC.NUMMAX)) return false;
   if (
     NormalChallenge(8).isRunning &&
-    (Sacrifice.totalBoost.gte(Decimal.NUMBER_MAX_VALUE))
+    (Sacrifice.totalBoost.gte(DC.NUMMAX))
   ) {
     return false;
   }
   EventHub.dispatch(GAME_EVENT.SACRIFICE_RESET_BEFORE);
   const nextBoost = Sacrifice.nextBoost;
   player.chall8TotalSacrifice = player.chall8TotalSacrifice.times(nextBoost);
-  player.sacrificed = player.sacrificed.plus(AntimatterDimension(1).amount.clampMax(Decimal.pow(10, 1e25)).pow(Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(AntimatterDimension(1).amount) / 1e25)), 1)));
+  player.sacrificed = player.sacrificed.plus(AntimatterDimension(1).amount.clampMax(Decimal.pow(10, 1e25)).pow(Decimal.max(Decimal.pow(2, Decimal.log10(Decimal.log10(AntimatterDimension(1).amount).div(1e25))), 1)));
   const isAch118Unlocked = Achievement(118).canBeApplied;
   if (NormalChallenge(8).isRunning) {
     if (!isAch118Unlocked) {
