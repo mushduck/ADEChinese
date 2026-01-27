@@ -116,14 +116,10 @@ Decimal.prototype.timesEffectOf = function(effectSource) {
 Decimal.prototype.timesEffectsOf = function(...effectSources) {
   // Normalize is expensive; when we multiply many things together, it's faster
   // to get a big mantissa and then fix it at the end.
-  let resultMantissa = this.mantissa;
-  let resultExponent = this.exponent;
-  applyEffectsOf(effectSources, v => {
-    const decimal = typeof v === "number" ? new Decimal(v) : v;
-    resultMantissa *= decimal.mantissa;
-    resultExponent += decimal.exponent;
-  });
-  return Decimal.fromMantissaExponent(resultMantissa, resultExponent);
+  // eslint-disable-next-line consistent-this
+  let result = this;
+  applyEffectsOf(effectSources, v => result = result.times(v));
+  return result;
 };
 
 /**
