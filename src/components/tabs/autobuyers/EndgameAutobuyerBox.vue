@@ -35,7 +35,8 @@ export default {
       AUTO_ENDGAME_MODE.X_HIGHEST_CP,      
       AUTO_ENDGAME_MODE.X_HIGHEST_DP,
     ],
-    amountMode: () => AUTO_ENDGAME_MODE.AMOUNTCP
+    amountMode: () => AUTO_ENDGAME_MODE.AMOUNTCP,
+    amountMode2: () => AUTO_ENDGAME_MODE.AMOUNTDP
   },
   watch: {
     increaseWithMult(newValue) {
@@ -131,7 +132,7 @@ export default {
       />
     </template>
     <template
-      v-if="mode === amountMode"
+      v-if="mode === amountMode || mode === amountMode2"
       #checkboxSlot
     >
       <label
