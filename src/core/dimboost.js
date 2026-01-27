@@ -1,5 +1,3 @@
-import { DC } from "./constants";
-
 class DimBoostRequirement {
   constructor(tier, amount) {
     this.tier = tier;
