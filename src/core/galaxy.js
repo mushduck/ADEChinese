@@ -204,7 +204,7 @@ export function manualRequestGalaxyReset(bulk) {
 
 // All galaxy reset requests, both automatic and manual, eventually go through this function; therefore it suffices
 // to restrict galaxy count for RUPG7's requirement here and nowhere else
-export function requestGalaxyReset(bulk, limit = Decimal.MAX_VALUE) {
+export function requestGalaxyReset(bulk, limit = DC.BEMAX) {
   const restrictedLimit = RealityUpgrade(7).isLockingMechanics ? new Decimal(1) : limit;
   if (EternityMilestone.autobuyMaxGalaxies.isReached && bulk) return maxBuyGalaxies(restrictedLimit);
   if (player.galaxies.gte(restrictedLimit) || !Galaxy.canBeBought || !Galaxy.requirement.isSatisfied) return false;
@@ -213,7 +213,7 @@ export function requestGalaxyReset(bulk, limit = Decimal.MAX_VALUE) {
   return true;
 }
 
-function maxBuyGalaxies(limit = Decimal.MAX_VALUE) {
+function maxBuyGalaxies(limit = DC.BEMAX) {
   if (player.galaxies.gte(limit) || !Galaxy.canBeBought) return false;
   // Check for ability to buy one galaxy (which is pretty efficient)
   const req = Galaxy.requirement;
