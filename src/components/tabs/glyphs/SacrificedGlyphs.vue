@@ -1,6 +1,4 @@
 <script>
-import { DC } from "@/core/constants";
-
 import TypeSacrifice from "./TypeSacrifice";
 
 export default {
@@ -30,7 +28,7 @@ export default {
       return this.hideAlteration ? "far fa-plus-square" : "far fa-minus-square";
     },
     isDoomed() {
-      return Pelle.isDoomed;
+      return (Pelle.isDisabled("glyphsac") && !PelleRealityUpgrade.scourToEmpower.isBought);
     },
     addThreshold() {
       return GlyphAlteration.additionThreshold;
