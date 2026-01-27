@@ -12,6 +12,7 @@
   --color-antimatter--bg: #df50504d;
   --color-infinity--bg: #b67f334d;
   --color-eternity--bg: #b341e04d;
+  --color-celestials--bg: #5151ec4d;
 }
 
 :root .t-s12 {
@@ -691,7 +692,7 @@ body.t-s12 {
 }
 
 .l-dimension-row-celestial-dim:nth-child(even) {
-  background-color: var(--color-celestials);
+  background-color: var(--color-celestials--bg);
 }
 
 .c-infinity-dim-description__accent {
