@@ -1,5 +1,3 @@
-import { DC } from "../../constants";
-
 export const normalAchievements = [
   {
     id: 11,
@@ -15,7 +13,7 @@ export const normalAchievements = [
     description: "Buy a 2nd Antimatter Dimension.",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
     get reward() { return `Multiply the 2nd Antimatter Dimension by the Antimatter Exponent.`; },
-    effect: () => Currency.antimatter.exponent
+    effect: () => Currency.antimatter.value.add(1).log10()
   },
   {
     id: 13,
@@ -101,7 +99,7 @@ export const normalAchievements = [
     id: 24,
     name: "Antimatter Apocalypse",
     get description() { return `Get over ${format(DC.E80)} antimatter.`; },
-    checkRequirement: () => Currency.antimatter.exponent >= 80,
+    checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(80),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
@@ -131,7 +129,7 @@ export const normalAchievements = [
     get description() {
       return `Buy a single 1st Antimatter Dimension when you have over ${format(DC.E150)} of them.`;
     },
-    checkRequirement: () => AntimatterDimension(1).amount.exponent >= 150,
+    checkRequirement: () => AntimatterDimension(1).amount.add(1).log10().gte(150),
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
     get reward() { return `1st Antimatter Dimensions are ${formatPercents(0.1)} stronger.`; },
     effect: 1.1
@@ -140,7 +138,7 @@ export const normalAchievements = [
     id: 31,
     name: "I forgot to nerf that",
     get description() { return `Get any Antimatter Dimension multiplier over ${formatX(DC.E31)}.`; },
-    checkRequirement: () => AntimatterDimensions.all.some(x => x.multiplier.exponent >= 31),
+    checkRequirement: () => AntimatterDimensions.all.some(x => x.multiplier.add(1).log10().gte(31)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `1st Antimatter Dimensions are ${formatPercents(0.05)} stronger.`; },
     effect: 1.05
@@ -236,7 +234,7 @@ export const normalAchievements = [
       return `Have antimatter per second exceed your current antimatter above ${format(DC.E63)}.`;
     },
     checkRequirement: () =>
-      Currency.antimatter.exponent >= 63 &&
+      Currency.antimatter.value.add(1).log10().gte(63) &&
       Currency.antimatter.productionPerSecond.gt(Currency.antimatter.value),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
@@ -274,7 +272,7 @@ export const normalAchievements = [
     id: 45,
     name: "Faster than a potato",
     get description() { return `Get more than ${format(DC.E29)} ticks per second.`; },
-    checkRequirement: () => Tickspeed.current.exponent <= -26,
+    checkRequirement: () => Tickspeed.current.log10().lte(-26),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `Multiply starting tickspeed by ${formatX(1.02, 0, 2)}.`; },
     effect: 0.98
@@ -283,7 +281,7 @@ export const normalAchievements = [
     id: 46,
     name: "Multidimensional",
     get description() { return `Reach ${format(DC.E12)} of all Antimatter Dimensions except the 8th.`; },
-    checkRequirement: () => AntimatterDimension(7).amount.exponent >= 12,
+    checkRequirement: () => AntimatterDimension(7).amount.add(1).log10().gte(12),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
@@ -403,7 +401,7 @@ export const normalAchievements = [
     id: 62,
     name: "Oh, hey... You're still here?",
     get description() { return `Reach ${format(DC.E8)} Infinity Points per minute.`; },
-    checkRequirement: () => Player.bestRunIPPM.exponent >= 8,
+    checkRequirement: () => Player.bestRunIPPM.add(1).log10().gte(8),
     checkEvent: GAME_EVENT.BIG_CRUNCH_AFTER
   },
   {
@@ -442,7 +440,7 @@ export const normalAchievements = [
     id: 66,
     name: "Faster than a squared potato",
     get description() { return `Get more than ${format(DC.E58)} ticks per second.`; },
-    checkRequirement: () => Tickspeed.current.exponent <= -55,
+    checkRequirement: () => Tickspeed.current.log10().lte(-55),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `Multiply starting tickspeed by ${formatX(1.02, 0, 2)}.`; },
     effect: 0.98
@@ -484,9 +482,9 @@ export const normalAchievements = [
     id: 72,
     name: "Can't hold all these infinities",
     get description() {
-      return `Get all Antimatter Dimension multipliers over ${formatX(Decimal.NUMBER_MAX_VALUE, 1)}.`;
+      return `Get all Antimatter Dimension multipliers over ${formatX(DC.NUMMAX, 1)}.`;
     },
-    checkRequirement: () => AntimatterDimensions.all.every(x => x.multiplier.gte(Decimal.NUMBER_MAX_VALUE)),
+    checkRequirement: () => AntimatterDimensions.all.every(x => x.multiplier.gte(DC.NUMMAX)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `All Antimatter Dimensions are ${formatPercents(0.1)} stronger.`; },
     effect: 1.1
@@ -499,7 +497,7 @@ export const normalAchievements = [
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Antimatter Dimensions gain a multiplier based on current antimatter.",
     effect: () => Currency.antimatter.value.pow(0.00002).plus(1).clampMax(Decimal.pow(10, 1e30)).pow(
-      Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(Currency.antimatter.value.pow(0.00002).plus(1)) / 1e30)), 1)),
+      Decimal.max(Decimal.pow(2, Decimal.log10(Decimal.log10(Currency.antimatter.value.pow(0.00002).plus(1)).div(1e30))), 1)),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
   {
@@ -535,12 +533,12 @@ export const normalAchievements = [
     id: 77,
     name: "1 Million is a lot",
     get description() { return `Reach ${format(1e6)} Infinity Power.`; },
-    checkRequirement: () => Currency.infinityPower.exponent >= 6,
+    checkRequirement: () => Currency.infinityPower.value.add(1).log10().gte(6),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `All Infinity Dimensions are stronger based on Infinity Points.`;
     },
-    effect: () => Currency.infinityPoints.exponent
+    effect: () => Currency.infinityPoints.value.add(1).log10()
   },
   {
     id: 78,
@@ -585,18 +583,18 @@ export const normalAchievements = [
     id: 84,
     name: "I got a few to spare",
     get description() { return `Reach ${formatPostBreak("1e35000")} antimatter.`; },
-    checkRequirement: () => Currency.antimatter.exponent >= 35000,
+    checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(35000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Antimatter Dimensions are stronger the more unspent antimatter you have.",
     effect: () => Currency.antimatter.value.pow(0.00002).plus(1).clampMax(Decimal.pow(10, 1e30)).pow(
-      Decimal.max(Decimal.pow(2, Math.log10(Decimal.log10(Currency.antimatter.value.pow(0.00002).plus(1)) / 1e30)), 1)),
+      Decimal.max(Decimal.pow(2, Decimal.log10(Decimal.log10(Currency.antimatter.value.pow(0.00002).plus(1)).div(1e30))), 1)),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
   {
     id: 85,
     name: "ALL YOUR IP ARE BELONG TO US",
     get description() { return `Big Crunch for ${format(DC.E150)} Infinity Points.`; },
-    checkRequirement: () => gainedInfinityPoints().exponent >= 150,
+    checkRequirement: () => gainedInfinityPoints().add(1).log10().gte(150),
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() { return `Additional ${formatX(4)} multiplier to Infinity Points.`; },
     effect: 4
@@ -627,9 +625,9 @@ export const normalAchievements = [
     id: 88,
     name: "Yet another infinity reference",
     get description() {
-      return `Get a ${formatX(Decimal.NUMBER_MAX_VALUE, 1, 0)} multiplier in a single Dimensional Sacrifice.`;
+      return `Get a ${formatX(DC.NUMMAX, 1, 0)} multiplier in a single Dimensional Sacrifice.`;
     },
-    checkRequirement: () => Sacrifice.nextBoost.gte(Decimal.NUMBER_MAX_VALUE),
+    checkRequirement: () => Sacrifice.nextBoost.gte(DC.NUMMAX),
     checkEvent: GAME_EVENT.SACRIFICE_RESET_BEFORE,
     get reward() {
       return `Dimensional Sacrifice is stronger.
@@ -644,7 +642,7 @@ export const normalAchievements = [
     get description() {
       return `Big Crunch for ${format(DC.E200)} Infinity Points in ${formatInt(2)} seconds or less.`;
     },
-    checkRequirement: () => gainedInfinityPoints().exponent >= 200 && Time.thisInfinityRealTime.totalSeconds.toNumber() <= 2,
+    checkRequirement: () => gainedInfinityPoints().add(1).log10().gte(200) && Time.thisInfinityRealTime.totalSeconds.toNumber() <= 2,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() {
       return `All Antimatter Dimensions are significantly stronger in the
@@ -660,7 +658,7 @@ export const normalAchievements = [
     get description() {
       return `Big Crunch for ${format(DC.E250)} Infinity Points in ${formatInt(20)} seconds or less.`;
     },
-    checkRequirement: () => gainedInfinityPoints().exponent >= 250 && Time.thisInfinityRealTime.totalSeconds.toNumber() <= 20,
+    checkRequirement: () => gainedInfinityPoints().add(1).log10().gte(250) && Time.thisInfinityRealTime.totalSeconds.toNumber() <= 20,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() {
       return `All Antimatter Dimensions are significantly stronger in the
@@ -674,7 +672,7 @@ export const normalAchievements = [
     id: 93,
     name: "MAXIMUM OVERDRIVE",
     get description() { return `Big Crunch for ${format(DC.E300)} Infinity Points.`; },
-    checkRequirement: () => gainedInfinityPoints().exponent >= 300,
+    checkRequirement: () => gainedInfinityPoints().add(1).log10().gte(300),
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() { return `Additional ${formatX(4)} multiplier to Infinity Points.`; },
     effect: 4
@@ -683,7 +681,7 @@ export const normalAchievements = [
     id: 94,
     name: "4.3333 minutes of Infinity",
     get description() { return `Reach ${format(DC.E260)} Infinity Power.`; },
-    checkRequirement: () => Currency.infinityPower.exponent >= 260,
+    checkRequirement: () => Currency.infinityPower.value.add(1).log10().gte(260),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Double Infinity Power gain.",
     effect: 2
@@ -691,10 +689,10 @@ export const normalAchievements = [
   {
     id: 95,
     name: "Is this safe?",
-    get description() { return `Gain ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} Replicanti in ${formatInt(1)} hour.`; },
+    get description() { return `Gain ${format(DC.NUMMAX, 1, 0)} Replicanti in ${formatInt(1)} hour.`; },
     get reward() { return `You keep your Replicanti and ${formatInt(1)} Replicanti Galaxy on Infinity.`; },
     checkRequirement: () =>
-      (Replicanti.amount.eq(Decimal.NUMBER_MAX_VALUE) || player.replicanti.galaxies.gt(0)) &&
+      (Replicanti.amount.eq(DC.NUMMAX) || player.replicanti.galaxies.gt(0)) &&
       Time.thisInfinityRealTime.totalHours.toNumber() <= 1,
     checkEvent: GAME_EVENT.REPLICANTI_TICK_AFTER
   },
@@ -739,7 +737,7 @@ export const normalAchievements = [
     id: 103,
     name: "Tätä saavutusta ei ole olemassa II",
     get description() { return `Reach ${formatPostBreak(DC.D9_99999E999, 5, 0)} Infinity Points.`; },
-    checkRequirement: () => Currency.infinityPoints.exponent >= 1000,
+    checkRequirement: () => Currency.infinityPoints.value.add(1).log10().gte(1000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Make the Infinity Point formula better. log(x)/${formatInt(308)} ➜ log(x)/${formatFloat(307.8, 1)}`;
@@ -791,13 +789,13 @@ export const normalAchievements = [
     name: "Yo dawg, I heard you liked infinities...",
     get description() {
       return `Have all your Infinities in your past ${formatInt(10)} Infinities be at least
-      ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} times higher Infinity Points than the previous one.`;
+      ${format(DC.NUMMAX, 1, 0)} times higher Infinity Points than the previous one.`;
     },
     checkRequirement: () => {
       if (player.records.recentInfinities.some(i => i[0] === Number.MAX_VALUE)) return false;
       const infinities = player.records.recentInfinities.map(run => run[2]);
       for (let i = 0; i < infinities.length - 1; i++) {
-        if (infinities[i].lt(infinities[i + 1].times(Decimal.NUMBER_MAX_VALUE))) return false;
+        if (infinities[i].lt(infinities[i + 1].times(DC.NUMMAX))) return false;
       }
       return true;
     },
@@ -867,7 +865,7 @@ export const normalAchievements = [
     id: 118,
     name: "IT'S OVER 9000",
     get description() { return `Get a total Dimensional Sacrifice multiplier of ${formatPostBreak(DC.E9000)}.`; },
-    checkRequirement: () => Sacrifice.totalBoost.exponent >= 9000,
+    checkRequirement: () => Sacrifice.totalBoost.add(1).log10().gte(9000),
     checkEvent: GAME_EVENT.SACRIFICE_RESET_AFTER,
     reward: `Dimensional Sacrifice doesn't reset your Antimatter Dimensions
       and the Autobuyer activates every tick if turned on.`,
@@ -876,7 +874,7 @@ export const normalAchievements = [
     id: 121,
     name: "Can you get infinite IP?",
     get description() { return `Reach ${formatPostBreak("1e30008")} Infinity Points.`; },
-    checkRequirement: () => Currency.infinityPoints.exponent >= 30008,
+    checkRequirement: () => Currency.infinityPoints.value.add(1).log10().gte(30008),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
@@ -915,13 +913,13 @@ export const normalAchievements = [
       return `Reach ${format(DC.E90)} Infinity Points without having any Infinities
       or any 1st Antimatter Dimensions in your current Eternity.`;
     },
-    checkRequirement: () => Currency.infinityPoints.exponent >= 90 &&
+    checkRequirement: () => Currency.infinityPoints.value.add(1).log10().gte(90) &&
       player.requirementChecks.eternity.noAD1 && Currency.infinities.eq(0),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Infinity Point multiplier based on time spent this Infinity.",
     effect() {
       const thisInfinity = Time.thisInfinity.totalSeconds.times(10).plus(1);
-      return DC.D2.pow(Decimal.ln(thisInfinity) * Decimal.min(Decimal.pow(thisInfinity, 0.11), 500).toNumber());
+      return DC.D2.pow(Decimal.ln(thisInfinity).times(Decimal.min(Decimal.pow(thisInfinity, 0.11), 500)));
     },
     cap: () => Effarig.eternityCap,
     formatEffect: value => `${formatX(value, 2, 2)}`
@@ -933,22 +931,22 @@ export const normalAchievements = [
     checkRequirement: () => Replicanti.galaxies.total.gte(player.galaxies.times(180)) && player.galaxies.gt(0),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Replicanti Galaxies divide your Replicanti by ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)}
+      return `Replicanti Galaxies divide your Replicanti by ${format(DC.NUMMAX, 1, 0)}
       instead of resetting them to ${formatInt(1)}.`;
     },
   },
   {
     id: 127,
     name: "But I wanted another prestige layer...",
-    get description() { return `Reach ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} Eternity Points.`; },
-    checkRequirement: () => Currency.eternityPoints.gte(Decimal.NUMBER_MAX_VALUE),
+    get description() { return `Reach ${format(DC.NUMMAX, 1, 0)} Eternity Points.`; },
+    checkRequirement: () => Currency.eternityPoints.gte(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
     id: 128,
     name: "What do I have to do to get rid of you",
     get description() { return `Reach ${formatPostBreak("1e22000")} Infinity Points without any Time Studies.`; },
-    checkRequirement: () => Currency.infinityPoints.exponent >= 22000 && player.timestudy.studies.length === 0,
+    checkRequirement: () => Currency.infinityPoints.value.add(1).log10().gte(22000) && player.timestudy.studies.length === 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Time Dimensions are multiplied by the number of Time Studies you have.",
     effect: () => Math.max(player.timestudy.studies.length, 1),
@@ -993,7 +991,7 @@ export const normalAchievements = [
     checkRequirement: () =>
       Array.dimensionTiers.map(InfinityDimension).every(dim => dim.baseAmount === 0) &&
       player.IPMultPurchases === 0 &&
-      Currency.infinityPoints.exponent >= 200000,
+      Currency.infinityPoints.value.add(1).log10().gte(200000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "You start Eternities with all Infinity Challenges unlocked and completed."
   },
@@ -1001,7 +999,7 @@ export const normalAchievements = [
     id: 134,
     name: "When will it be enough?",
     get description() { return `Reach ${formatPostBreak("1e15000")} Replicanti.`; },
-    checkRequirement: () => Replicanti.amount.exponent >= 15000,
+    checkRequirement: () => Replicanti.amount.add(1).log10().gte(15000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `You gain Replicanti ${formatInt(2)} times faster under ${format(replicantiCap(), 1)} Replicanti.`;
@@ -1011,7 +1009,7 @@ export const normalAchievements = [
     id: 135,
     name: "Faster than a potato^286078",
     get description() { return `Get more than ${formatPostBreak("1e8296262")} ticks per second.`; },
-    checkRequirement: () => Tickspeed.current.exponent <= -8296262,
+    checkRequirement: () => Tickspeed.current.log10().lte(-8296262),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
@@ -1028,7 +1026,7 @@ export const normalAchievements = [
       in ${formatInt(1)} minute or less while Dilated.`;
     },
     checkRequirement: () =>
-      Currency.antimatter.exponent >= 260000 &&
+      Currency.antimatter.value.add(1).log10().gte(260000) &&
       Time.thisEternity.totalMinutes.lte(1) &&
       player.dilation.active,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -1044,7 +1042,7 @@ export const normalAchievements = [
     checkRequirement: () =>
       player.timestudy.studies.length === 0 &&
       player.dilation.active &&
-      Currency.infinityPoints.exponent >= 26000,
+      Currency.infinityPoints.value.add(1).log10().gte(26000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Removes the downsides from Time Study 131 and 133 in the Active and Idle Time Study paths."
   },
@@ -1078,13 +1076,13 @@ export const normalAchievements = [
     name: "Yo dawg, I heard you liked reskins...",
     get description() {
       return `Have all your Eternities in your past ${formatInt(10)} Eternities be at least
-      ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} times higher Eternity Points than the previous one.`;
+      ${format(DC.NUMMAX, 1, 0)} times higher Eternity Points than the previous one.`;
     },
     checkRequirement: () => {
       if (player.records.recentEternities.some(i => i[0] === Number.MAX_VALUE)) return false;
       const eternities = player.records.recentEternities.map(run => run[2]);
       for (let i = 0; i < eternities.length - 1; i++) {
-        if (eternities[i].lt(eternities[i + 1].times(Decimal.NUMBER_MAX_VALUE))) return false;
+        if (eternities[i].lt(eternities[i + 1].times(DC.NUMMAX))) return false;
       }
       return true;
     },
@@ -1212,7 +1210,7 @@ export const normalAchievements = [
     id: 161,
     name: "that's where you're wrong kiddo",
     get description() { return `Get ${formatPostBreak(DC.E1E8)} antimatter while Dilated.`; },
-    checkRequirement: () => Currency.antimatter.exponent >= 100000000 && player.dilation.active,
+    checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(100000000) && player.dilation.active,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
@@ -1236,8 +1234,8 @@ export const normalAchievements = [
   {
     id: 164,
     name: "Infinity times two",
-    get description() { return `Get ${format(Decimal.NUMBER_MAX_VALUE, 1)} Infinities.`; },
-    checkRequirement: () => Currency.infinitiesTotal.gte(Decimal.NUMBER_MAX_VALUE),
+    get description() { return `Get ${format(DC.NUMMAX, 1)} Infinities.`; },
+    checkRequirement: () => Currency.infinitiesTotal.gte(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `Gain ×${formatInt(1024)} more Infinities.`; },
     effect: 1024
@@ -1264,11 +1262,11 @@ export const normalAchievements = [
   {
     id: 167,
     name: "Mr. Layer? Sorry, you're not on the list",
-    get description() { return `Reach ${format(Decimal.NUMBER_MAX_VALUE, 1, 0)} Reality Machines.`; },
-    checkRequirement: () => Currency.realityMachines.gte(Decimal.NUMBER_MAX_VALUE),
+    get description() { return `Reach ${format(DC.NUMMAX, 1, 0)} Reality Machines.`; },
+    checkRequirement: () => Currency.realityMachines.gte(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Gain more Reality Machines based on your current Reality Machines.",
-    effect: () => Math.clampMin(1, Currency.realityMachines.value.log2()),
+    effect: () => Decimal.clampMin(1, Currency.realityMachines.value.add(1).log2()),
     formatEffect: value => `${formatX(value, 2, 2)}`
   },
   {
@@ -1293,10 +1291,10 @@ export const normalAchievements = [
     id: 172,
     name: "Hitchhiker's Guide to Reality",
     get description() {
-      return `Reality for ${format(Decimal.NUMBER_MAX_VALUE, 1)} Reality Machines without having
+      return `Reality for ${format(DC.NUMMAX, 1)} Reality Machines without having
       any Charged Infinity Upgrades, having any equipped Glyphs, or buying any Triad Studies.`;
     },
-    checkRequirement: () => MachineHandler.gainedRealityMachines.gte(Decimal.NUMBER_MAX_VALUE) &&
+    checkRequirement: () => MachineHandler.gainedRealityMachines.gte(DC.NUMMAX) &&
       player.celestials.ra.charged.size === 0 && Glyphs.activeWithoutCompanion.length === 0 &&
       player.requirementChecks.reality.noTriads,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
@@ -1412,7 +1410,7 @@ export const normalAchievements = [
     id: 188,
     name: "The End...",
     description: "Escape the Doomed Reality.",
-    checkRequirement: () => Currency.antimatter.exponent >= 9e15 && Pelle.isDoomed,
+    checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(9e15) && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
   {
@@ -1433,7 +1431,7 @@ export const normalAchievements = [
     id: 193,
     name: "Unstoppable",
     description: "Beat Doom in Run 2.",
-    checkRequirement: () => PlayerProgress.endgameUnlocked() && Currency.antimatter.exponent >= 9e15 && Pelle.isDoomed,
+    checkRequirement: () => PlayerProgress.endgameUnlocked() && Currency.antimatter.value.add(1).log10().gte(9e15) && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
       return `Galaxies are ${formatPercents(0.1)} stronger.`;
@@ -1490,8 +1488,13 @@ export const normalAchievements = [
   {
     id: 198,
     name: "...But Not Forgotten",
-    description: "Reach 1.8e308 Imaginary Machines.",
-    checkRequirement: () => Currency.imaginaryMachines.value.gte(Decimal.NUMBER_MAX_VALUE),
-    checkEvent: GAME_EVENT.GAME_TICK_AFTER
+    get description() { return `Reach ${format(DC.NUMMAX, 1, 0)} Imaginary Machines.` },
+    checkRequirement: () => Currency.imaginaryMachines.value.gte(DC.NUMMAX),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Gain a small multiplier to the Celestial Matter Conversion Exponent based on unnerfed Celestial Matter.`;
+    },
+    effect: () => Decimal.pow(Decimal.log10(Currency.unnerfedCelestialMatter.value.add(1).log10().add(1)).add(1), 0.1).toNumber(),
+    formatEffect: value => `${formatX(value, 2, 3)}`
   },
 ];
