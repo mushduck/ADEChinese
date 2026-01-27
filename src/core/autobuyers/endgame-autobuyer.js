@@ -85,6 +85,13 @@ get increaseWithMult() {
     return Math.clampMin(this.time - Time.thisEndgameRealTime.totalSeconds.toNumber(), 0);
   }
 
+  bumpAmount(mult) {
+    if (this.isUnlocked && this.increaseWithMult) {
+      this.amountCP = this.amount.times(mult);
+      this.amountDP = this.amount.times(mult);
+    }
+  }
+
   get willEndgame() {
     switch (this.mode) {
       case AUTO_ENDGAME_MODE.AMOUNTCP:
@@ -103,7 +110,7 @@ get increaseWithMult() {
   }
 
   tick() {
-    if (this.willEndgame) Endgame.newEndgame();
+    if (this.willEndgame && isEndgameAvailable()) Endgame.newEndgame();
   }
 
   reset() {
