@@ -1,8 +1,6 @@
 import { BitUpgradeState } from "../game-mechanics";
 import { GameDatabase } from "../secret-formula/game-database";
 
-import { DC } from "../constants";
-
 import { Quotes } from "./quotes";
 
 export const EFFARIG_STAGES = {
@@ -71,13 +69,13 @@ export const Effarig = {
     return countValuesFromBitmask(genEffectBitmask) + countValuesFromBitmask(nongenEffectBitmask);
   },
   get shardsGained() {
-    const extraBoost = ExpansionPack.effarigPack.isBought ? Decimal.log10(player.antimatter) : 1;
+    const extraBoost = ExpansionPack.effarigPack.isBought ? Decimal.log10(player.antimatter.add(10)) : DC.D1;
     if (!TeresaUnlocks.effarig.canBeApplied && !EndgameMilestone.celestialEarlyUnlock.isReached) return new Decimal(0);
-    return Decimal.floor(Decimal.pow(Currency.eternityPoints.exponent / 7500, this.glyphEffectAmount)).times(
+    return Decimal.floor(Decimal.pow(Currency.eternityPoints.value.add(1).log10().div(7500), this.glyphEffectAmount)).times(
       AlchemyResource.effarig.effectValue).times(extraBoost).timesEffectOf(Ra.unlocks.relicShardBoost);
   },
   get maxRarityBoost() {
-    return 15 * (Math.pow(Math.log10(Decimal.log10(Currency.relicShards.value.plus(10))) + 1, 1.5) - 1);
+    return 15 * (Decimal.pow(Decimal.log10(Decimal.log10(Currency.relicShards.value.plus(10))).add(1), 1.5).sub(1)).toNumber();
   },
   nerfFactor(power) {
     let c;
@@ -93,7 +91,7 @@ export const Effarig = {
         c = 25;
         break;
     }
-    return 3 * (1 - c / (c + Math.sqrt(power.pLog10())));
+    return (DC.D1.sub(new Decimal(c).div(Decimal.sqrt(power.add(1).pLog10()).add(c)))).times(3).toNumber();
   },
   get tickDilation() {
     return 0.7 + 0.1 * this.nerfFactor(Currency.timeShards.value);
@@ -102,17 +100,17 @@ export const Effarig = {
     return 0.25 + 0.25 * this.nerfFactor(Currency.infinityPower.value);
   },
   get tickspeed() {
-    const base = 3 + Tickspeed.baseValue.reciprocal().log10();
-    return Decimal.pow10(Math.pow(base, this.tickDilation)).reciprocal();
+    const base = Tickspeed.baseValue.reciprocal().log10().add(3);
+    return Decimal.pow10(Decimal.pow(base, this.tickDilation)).reciprocal();
   },
   multiplier(mult) {
-    const base = new Decimal(mult).pLog10();
-    return Decimal.pow10(Math.pow(base, this.multDilation));
+    const base = new Decimal(mult).add(1).pLog10();
+    return Decimal.pow10(Decimal.pow(base, this.multDilation));
   },
   get bonusRG() {
     if (Pelle.isDoomed && !PelleCelestialUpgrade.maxRGIncrease.isBought) return 0;
     // Will return 0 if Effarig Infinity is uncompleted
-    return Math.floor(replicantiCap().pLog10() / LOG10_MAX_VALUE - 1);
+    return Decimal.floor(replicantiCap().pLog10().div(LOG10_MAX_VALUE).sub(1)).toNumber();
   },
   quotes: Quotes.effarig,
   symbol: "Ϙ"
