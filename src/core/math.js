@@ -1,7 +1,5 @@
 import { log as lngamma } from "gamma";
 
-import { DC } from "./constants";
-
 /* eslint-disable no-use-before-define */
 /* eslint-disable max-params */
 
@@ -281,6 +279,23 @@ window.getCostWithLinearCostScaling = function getCostWithLinearCostScaling(
   return preScalingCost * postScalingCost;
 };
 
+//Since our old formula fails after some time
+window.decimalGetCostWithLinearCostScaling = function decimalGetCostWithLinearCostScaling(
+  amountOfPurchases, costScalingStart, initialCost, costMult, costMultGrowth
+) {
+  let decimalPurchaseCount = new Decimal(amountOfPurchases);
+  let decimalScalingStart = new Decimal(costScalingStart);
+  let decimalInitialCost = new Decimal(initialCost);
+  let decimalCostMult = new Decimal(costMult);
+  let decimalCostGrowth = new Decimal(costMultGrowth);
+  const preScalingPurchases = Decimal.max(0, Decimal.floor(Decimal.log(decimalScalingStart.div(decimalInitialCost)).div(Decimal.log(decimalCostMult))));
+  const preScalingCost = Decimal.ceil(Decimal.pow(decimalCostMult, Decimal.min(preScalingPurchases, decimalPurchaseCount)).times(decimalInitialCost));
+  const scaling = new LinearMultiplierScaling(costMult, costMultGrowth);
+  const postScalingCost = Decimal.exp(scaling.logTotalMultiplierAfterPurchases(
+    Decimal.max(0, decimalPurchaseCount.sub(preScalingPurchases)).toNumber()));
+  return preScalingCost.times(postScalingCost);
+};
+
 // Using the same arguments as getCostWithLinearCostScaling() above, do a binary search for the first purchase with a
 // cost of Infinity.
 window.findFirstInfiniteCostPurchase = function findFirstInfiniteCostPurchase(
@@ -329,11 +344,11 @@ window.LinearCostScaling = class LinearCostScaling {
   constructor(resourcesAvailable, initialCost, costMultiplier, maxPurchases = Number.MAX_SAFE_INTEGER, free = false) {
     if (free) {
       this._purchases = Math.clampMax(Math.floor(
-        resourcesAvailable.div(initialCost).log10() /
+        resourcesAvailable.div(initialCost).log10().toNumber() /
         Math.log10(costMultiplier) + 1), maxPurchases);
     } else {
       this._purchases = Math.clampMax(Math.floor(
-        resourcesAvailable.mul(costMultiplier - 1).div(initialCost).add(1).log10() /
+        resourcesAvailable.mul(costMultiplier - 1).div(initialCost).add(1).log10().toNumber() /
         Math.log10(costMultiplier)), maxPurchases);
     }
     this._totalCostMultiplier = Decimal.pow(costMultiplier, this._purchases);
@@ -391,15 +406,16 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
     if (typeof this._baseIncrease !== "number") throw new Error("baseIncrease must be a number");
     this._costScale = param.costScale;
     if (typeof this._costScale !== "number") throw new Error("costScale must be a number");
-    this._logBaseCost = ExponentialCostScaling.log10(param.baseCost);
+    this._logBaseCost = new Decimal(ExponentialCostScaling.log10(param.baseCost));
     this._logBaseIncrease = ExponentialCostScaling.log10(param.baseIncrease);
     this._logCostScale = ExponentialCostScaling.log10(param.costScale);
     if (param.purchasesBeforeScaling !== undefined) {
       this._purchasesBeforeScaling = param.purchasesBeforeScaling;
     // eslint-disable-next-line no-negated-condition
     } else if (param.scalingCostThreshold !== undefined) {
-      this._purchasesBeforeScaling = Math.ceil(
-        (ExponentialCostScaling.log10(param.scalingCostThreshold) - this._logBaseCost) / this._logBaseIncrease);
+      this._purchasesBeforeScaling = Decimal.ceil(
+        (new Decimal(ExponentialCostScaling.log10(param.scalingCostThreshold)).sub(this._logBaseCost)).div(
+          this._logBaseIncrease)).toNumber();
     } else throw new Error("Must specify either scalingCostThreshold or purchasesBeforeScaling");
     this.updateCostScale();
     this.log = {
@@ -423,8 +439,8 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
   }
 
   updateCostScale() {
-    this._precalcDiscriminant = Math.pow((2 * this._logBaseIncrease + this._logCostScale), 2) -
-      8 * this._logCostScale * (this._purchasesBeforeScaling * this._logBaseIncrease + this._logBaseCost);
+    this._precalcDiscriminant = Decimal.pow((2 * this._logBaseIncrease + this._logCostScale), 2).sub(
+      DC.D8.times(this._logCostScale).times(new Decimal(this._purchasesBeforeScaling).times(this._logBaseIncrease).add(this._logBaseCost))).toNumber();
     this._precalcCenter = -this._logBaseIncrease / this._logCostScale + this._purchasesBeforeScaling + 0.5;
   }
 
@@ -437,8 +453,8 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
     const logBase = this._logBaseCost;
     const excess = currentPurchases - this._purchasesBeforeScaling;
     const logCost = excess > 0
-      ? currentPurchases * logMult + logBase + 0.5 * excess * (excess + 1) * this._logCostScale
-      : currentPurchases * logMult + logBase;
+      ? new Decimal(currentPurchases).times(logMult).add(logBase).add(0.5 * excess * (excess + 1) * this._logCostScale)
+      : new Decimal(currentPurchases).times(logMult).add(logBase);
     return DC.E1.pow(logCost);
   }
 
@@ -481,11 +497,11 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
     // so that we don't, for example, buy all of a set of 10 dimensions
     // when we can only afford 1.
     const money = rawMoney.div(numberPerSet);
-    const logMoney = money.log10();
+    const logMoney = money.max(1).log10().toNumber();
     const logMult = this._logBaseIncrease;
     const logBase = this._logBaseCost;
     // The 1 + is because the multiplier isn't applied to the first purchase
-    let newPurchases = Math.floor(1 + (logMoney - logBase) / logMult);
+    let newPurchases = Decimal.floor((new Decimal(logMoney).sub(logBase)).div(logMult).add(1)).toNumber();
     // We can use the linear method up to one purchase past the threshold, because the first purchase
     // past the threshold doesn't have cost scaling in it yet.
     if (newPurchases > this._purchasesBeforeScaling) {
@@ -501,10 +517,10 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
     // case:
     let logPrice;
     if (newPurchases <= this._purchasesBeforeScaling + 1) {
-      logPrice = (newPurchases - 1) * logMult + logBase;
+      logPrice = new Decimal(newPurchases - 1).times(logMult).add(logBase).toNumber();
     } else {
       const pExcess = newPurchases - this._purchasesBeforeScaling;
-      logPrice = (newPurchases - 1) * logMult + logBase + 0.5 * pExcess * (pExcess - 1) * this._logCostScale;
+      logPrice = new Decimal(newPurchases - 1).times(logMult).add(logBase).add(0.5 * pExcess * (pExcess - 1) * this._logCostScale).toNumber();
     }
     return { quantity: newPurchases - currentPurchases, logPrice: logPrice + Math.log10(numberPerSet) };
   }
@@ -578,21 +594,21 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
     // for example, that 10 AM buys 2/3 of a set of 10 first dimensions rather than
     // buying the whole set of 10, which at least feels more correct.
     const money = rawMoney.div(numberPerSet);
-    const logMoney = money.log10();
+    const logMoney = money.max(1).log10();
     const logMult = this._logBaseIncrease;
     const logBase = this._logBaseCost;
     // The 1 + is because the multiplier isn't applied to the first purchase
-    let contValue = 1 + (logMoney - logBase) / logMult;
+    let contValue = logMoney.sub(logBase).div(logMult).add(1);
     // We can use the linear method up to one purchase past the threshold, because the first purchase
     // past the threshold doesn't have cost scaling in it yet.
-    if (contValue > this._purchasesBeforeScaling) {
-      const discrim = this._precalcDiscriminant + 8 * this._logCostScale * logMoney;
-      if (discrim < 0) {
-        return 0;
+    if (contValue.gt(this._purchasesBeforeScaling)) {
+      const discrim = DC.D8.times(this._logCostScale).times(logMoney).add(this._precalcDiscriminant);
+      if (discrim.lt(0)) {
+        return DC.D0;
       }
-      contValue = this._precalcCenter + Math.sqrt(discrim) / (2 * this._logCostScale);
+      contValue = Decimal.sqrt(discrim).div(DC.D2.times(this._logCostScale)).add(this._precalcCenter);
     }
-    return Math.clampMin(contValue, 0);
+    return Decimal.clampMin(contValue, 0);
   }
 
   static log10(value) {
@@ -645,7 +661,8 @@ window.getHybridCostScaling = function getHybridCostScaling(
   const normalCost = getCostWithLinearCostScaling(amountOfPurchases, linCostScalingStart, linInitialCost,
     linCostMult, linCostMultGrowth);
   if (Number.isFinite(normalCost)) {
-    return new Decimal(normalCost);
+    return decimalGetCostWithLinearCostScaling(amountOfPurchases, linCostScalingStart, linInitialCost,
+      linCostMult, linCostMultGrowth);
   }
   const postInfinityAmount = amountOfPurchases - findFirstInfiniteCostPurchase(linCostScalingStart, linInitialCost,
     linCostMult, linCostMultGrowth);
