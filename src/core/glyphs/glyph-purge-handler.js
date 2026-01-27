@@ -2,7 +2,7 @@
 export const GlyphSacrificeHandler = {
   // Anything scaling on sacrifice caps at this value, even though the actual sacrifice values can go higher
   get maxSacrificeForEffects() {
-    return BreakEternityUpgrade.glyphSacrificeUncap.isBought ? Decimal.MAX_VALUE : new Decimal(1e100);
+    return BreakEternityUpgrade.glyphSacrificeUncap.isBought ? DC.BEMAX : new Decimal(1e100);
   },
   // This is used for glyph UI-related things in a few places, but is handled here as a getter which is only called
   // sparingly - that is, whenever the cache is invalidated after a glyph is sacrificed. Thus it only gets recalculated
@@ -12,7 +12,7 @@ export const GlyphSacrificeHandler = {
     // should check for -Infinity, but the clampMin works in practice because the minimum possible sacrifice
     // value is greater than 1 for even the weakest possible glyph
     return BASIC_GLYPH_TYPES.reduce(
-      (tot, type) => tot + Decimal.log10(Decimal.clampMin(player.reality.glyphs.sac[type], 1)), 0);
+      (tot, type) => tot + Decimal.log10(Decimal.clampMin(player.reality.glyphs.sac[type], 1)).toNumber(), 0);
   },
   get canSacrifice() {
     return RealityUpgrade(19).isBought;
