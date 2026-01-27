@@ -34,6 +34,7 @@ import HotkeysModal from "@/components/modals/options/HotkeysModal";
 import InfoDisplayOptionsModal from "@/components/modals/options/InfoDisplayOptionsModal";
 import NewsOptionsModal from "@/components/modals/options/NewsOptionsModal";
 import NotationModal from "@/components/modals/options/NotationModal";
+import PreferredMasteryTreeModal from "@/components/modals/options/PreferredMasteryTreeModal";
 import PreferredTreeModal from "@/components/modals/options/PreferredTreeModal";
 import SingleGlyphAppearanceModal from "@/components/modals/options/glyph-appearance/SingleGlyphAppearanceModal";
 
@@ -235,6 +236,7 @@ Modal.hotkeys = new Modal(HotkeysModal);
 Modal.newsOptions = new Modal(NewsOptionsModal);
 Modal.animationOptions = new Modal(AnimationOptionsModal);
 Modal.hiddenTabs = new Modal(HiddenTabsModal);
+Modal.preferredMasteryTree = new Modal(PreferredMasteryTreeModal);
 Modal.preferredTree = new Modal(PreferredTreeModal);
 Modal.notation = new Modal(NotationModal);
 
