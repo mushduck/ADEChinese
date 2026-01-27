@@ -12,7 +12,9 @@ export default {
   },
   data() {
     return {
+      isDoomed: false,
       isUseless: false,
+      alwaysRecpec: false,
       chargeUnlocked: false,
       totalCharges: 0,
       chargesUsed: 0,
@@ -61,7 +63,9 @@ export default {
     disChargeClassObject() {
       return {
         "o-primary-btn--subtab-option": true,
-        "o-primary-btn--charged-respec-active": this.disCharge
+        "o-primary-btn--charged-respec-active": this.disCharge ||
+          this.alwaysRecpec, // See src/core/celestials/pelle/pelle.js armageddon(...)
+        "o-pelle-disabled-pointer": this.alwaysRecpec
       };
     },
     offlineIpUpgrade: () => InfinityUpgrade.ipOffline
@@ -80,8 +84,10 @@ export default {
   },
   methods: {
     update() {
-      this.isUseless = Pelle.isDoomed;
-      this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && (!Pelle.isDoomed || PelleCelestialUpgrade.raTeresa2.isBought);
+      this.isDoomed = Pelle.isDoomed;
+      this.isUseless = Pelle.isDoomed && !PelleCelestialUpgrade.raTeresa2.isBought;
+      this.alwaysRecpec = this.isDoomed && Pelle.isAlwaysDischargeCIU;
+      this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && !this.isUseless;
       this.totalCharges = Ra.totalCharges;
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
       this.disCharge = player.celestials.ra.disCharge;
@@ -131,17 +137,21 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        Respec Charged Infinity Upgrades on next Reality
+        Respec Charged Infinity Upgrades on next {{ isDoomed ? "Armageddon" : "Reality" }}
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
       You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Infinity Upgrades.
       Charged Infinity Upgrades have their effect altered.
       <br>
-      Hold shift to show Charged Infinity Upgrades. You can freely respec your choices on Reality.
+      Hold shift to show Charged Infinity Upgrades.
+      <span v-if="!isDoomed || !alwaysRecpec"> You can freely respec your choices on Reality.</span>
     </div>
     <div v-if="isUseless">
       You cannot Charge Infinity Upgrades while Doomed.
+    </div>
+    <div v-if="isDoomed && !isUseless && alwaysRecpec">
+      Charged Infinity Upgrades always reset on Armageddon, until you can keep your Break Infinity Upgrades on Armageddon.
     </div>
     <br>
     Within each column, the upgrades must be purchased from top to bottom.
