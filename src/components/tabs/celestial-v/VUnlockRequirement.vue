@@ -10,22 +10,22 @@ export default {
   data() {
     return {
       resource: new Decimal(0),
-      progress: 0,
+      progress: new Decimal(0),
     };
   },
   computed: {
     barProgressStyle() {
-      const color = this.progress === 1
+      const color = this.progress.eq(1)
         ? "var(--color-v--base)"
         : "#6b5f2e";
       return {
         background: color,
-        width: `${100 * this.progress}%`
+        width: `${this.progress.times(100).toNumber()}%`
       };
     },
     textStyle() {
       return {
-        color: this.progress === 1
+        color: this.progress.eq(1)
           ? "black"
           : "var(--color-text)",
         "border-color": "var(--color-text)",
@@ -35,7 +35,7 @@ export default {
   methods: {
     update() {
       this.resource.copyFrom(new Decimal(this.dbEntry.resource()));
-      this.progress = Math.clampMax(this.dbEntry.progress(), 1);
+      this.progress.copyFrom(Decimal.clampMax(this.dbEntry.progress(), 1));
     }
   }
 };
