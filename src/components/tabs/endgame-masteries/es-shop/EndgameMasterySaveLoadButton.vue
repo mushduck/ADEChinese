@@ -62,7 +62,7 @@ export default {
         // tree are only reachable if the current tree is already bought
         const combinedTree = new EndgameMasteryTree();
         combinedTree.attemptBuyArray(EndgameMasteryTree.currentMasteries, false);
-        combinedTree.attemptBuyArray(combinedTree.parseStudyImport(this.preset.masteries), true);
+        combinedTree.attemptBuyArray(combinedTree.parseMasteryImport(this.preset.masteries), true);
         EndgameMasteryTree.commitToGameState(combinedTree.purchasedMasteries, false);
 
         const presetName = this.name ? `Mastery preset "${this.name}"` : "Mastery preset";
