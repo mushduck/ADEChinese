@@ -108,10 +108,12 @@ export const automator = {
         <b>infinity</b> [nowait]<br>
         <b>eternity</b> [nowait] [respec]<br>
         <b>reality</b> [nowait] [respec]<br>
-        <b>armageddon</b> [nowait]`,
-      description: `Triggers an Infinity, Eternity, Reality or Armageddon reset if possible, otherwise the automator will wait at
-        this command until it becomes possible. If you find that your script often gets stuck on this command, an
-        Autobuyer may be triggering a prestige before the Automator reaches this line - consider using <i>nowait</i> or
+        <b>doom</b> [nowait]<br>
+        <b>armageddon</b> [nowait]<br>
+        <b>endgame</b> [nowait]`,
+      description: `Triggers an Infinity, Eternity, Reality, Doom, Armageddon or Endgame reset if possible, otherwise the
+        automator will wait at this command until it becomes possible. If you find that your script often gets stuck on this
+        command, an Autobuyer may be triggering a prestige before the Automator reaches this line - consider using <i>nowait</i> or
         adjusting your Autobuyer settings using AUTO.`,
       sections: [
         {
@@ -127,9 +129,10 @@ export const automator = {
             {
               header: "<i>respec</i>",
               description: `
-                For non-Infinity/Armageddon prestiges, also does the related respec action when triggering prestige.
+                For non-Infinity/Doom/Armageddon prestiges, also does the related respec action when triggering prestige.
                 Eternity: Respec Time Studies and Eternity.<br>
-                Reality: Unequip Glyphs and Reality.
+                Reality: Unequip Glyphs and Reality.<br>
+                Endgame: Respec Endgame Masteries and Endgame.
               `
             },
           ]
@@ -139,7 +142,9 @@ export const automator = {
         "infinity",
         "eternity respec",
         "reality nowait",
-        "armageddon"
+        "doom",
+        "armageddon",
+        "endgame nowait respec"
       ]
     },
     {
