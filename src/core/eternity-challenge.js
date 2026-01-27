@@ -1,4 +1,3 @@
-import { DC } from "./constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { GameMechanicState } from "./game-mechanics";
 
@@ -162,8 +161,8 @@ export class EternityChallengeState extends GameMechanicState {
 
   completionsAtIP(ip) {
     if (ip.lt(this.initialGoal)) return 0;
-    const completions = 1 + (ip.dividedBy(this.initialGoal)).log10() / this.goalIncrease.log10();
-    return Math.min(Math.floor(completions), this.maxCompletions);
+    const completions = (ip.dividedBy(this.initialGoal)).log10().div(this.goalIncrease.log10()).add(1);
+    return Decimal.min(Decimal.floor(completions), this.maxCompletions).toNumber();
   }
 
   addCompletion(auto = false) {
@@ -362,18 +361,18 @@ export const EternityChallenges = {
 
     get interval() {
       if (!Perk.autocompleteEC1.canBeApplied && !EndgameMastery(22).isBought) return Infinity;
-      let startingmin = Number.MAX_VALUE;
+      let startingmin = 1e300;
       if (EndgameMastery(22).isBought) startingmin = 60;
-      let minutes = Effects.min(
+      let minutes = new Decimal(Effects.min(
         startingmin,
         Perk.autocompleteEC1,
         Perk.autocompleteEC2,
         Perk.autocompleteEC3
-      );
-      minutes /= Effects.sum(EndgameMastery(22));
-      minutes /= VUnlocks.fastAutoEC.effectOrDefault(1);
-      if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones2.isBought) minutes /= VUnlocks.fastAutoEC.effectValue;
-      return TimeSpan.fromMinutes(new Decimal(minutes)).totalMilliseconds.toNumber();
+      ));
+      minutes = minutes.div(Effects.sum(EndgameMastery(22)));
+      minutes = minutes.div(VUnlocks.fastAutoEC.effectOrDefault(1));
+      if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones2.isBought) minutes = minutes.div(VUnlocks.fastAutoEC.effectValue);
+      return TimeSpan.fromMinutes(minutes).totalMilliseconds.toNumber();
     }
   }
 };
