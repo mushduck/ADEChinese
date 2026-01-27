@@ -107,7 +107,7 @@ export default {
       this.totalUnlocks = V.spaceTheorems;
       this.pp = Currency.perkPoints.value;
       this.showReduction = VUnlocks.shardReduction.isUnlocked;
-      this.runRecords = Array.from(player.celestials.v.runRecords);
+      this.runRecords = cloneDeep(player.celestials.v.runRecords);
       this.runGlyphs = player.celestials.v.runGlyphs.map(gList => Glyphs.copyForRecords(gList));
       this.isFlipped = V.isFlipped;
       this.wantsFlipped = player.celestials.v.wantsFlipped;
@@ -134,7 +134,7 @@ export default {
         : format(Decimal.pow10(hex.reduction));
     },
     showRecord(hex) {
-      return this.runRecords[hex.id] > 0 || hex.completions > 0;
+      return new Decimal(this.runRecords[hex.id]).gt(0) || hex.completions > 0;
     },
     reduceGoals(hex) {
       if (!Currency.perkPoints.purchase(hex.reductionCost)) return;
