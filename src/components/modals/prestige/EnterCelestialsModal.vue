@@ -22,11 +22,13 @@ export default {
     return {
       laitelaFastest: 3600,
       teresaBestAM: new Decimal(),
-      teresaRunMult: 0,
+      teresaRunMult: new Decimal(0),
       effarigDone: false,
       effarigLayer: "",
       enslavedDone: false,
       laitelaTime: "",
+      alphaStage: 0,
+      alphaReq: "",
     };
   },
   computed: {
@@ -42,6 +44,13 @@ export default {
     },
     message() {
       return `Perform a Reality reset and enter ${this.name} Reality, in which:`;
+    },
+    formatStageNum() {
+      const a = this.alphaStage;
+      if (a % 10 === 1 && Math.floor(a / 10) !== 1) return `${a}st`;
+      if (a % 10 === 2 && Math.floor(a / 10) !== 1) return `${a}nd`;
+      if (a % 10 === 3 && Math.floor(a / 10) !== 1) return `${a}rd`;
+      return `${a}th`;
     },
     extraLine() {
       switch (this.number) {
@@ -64,6 +73,8 @@ export default {
           ? "You have not completed Lai'tela at this tier."
           : `Your fastest completion on this tier is ${this.laitelaTime}.`;
         case 6: return "";
+        case 7: return `You are currently on the ${this.formatStageNum} Stage of Alpha's Reality.
+          Your current goal is to ${this.alphaReq}.`;
         default: throw new Error(`Attempted to start an Unknown Celestial in Celestial Modal Confirmation.`);
       }
     }
@@ -71,13 +82,15 @@ export default {
   methods: {
     update() {
       this.teresaBestAM.copyFrom(player.celestials.teresa.bestRunAM);
-      this.teresaRunMult = Teresa.runRewardMultiplier;
+      this.teresaRunMult.copyFrom(Teresa.runRewardMultiplier);
       const effarigStage = Effarig.currentStage;
       this.effarigDone = effarigStage === EFFARIG_STAGES.COMPLETED;
       this.effarigLayer = [null, "Infinity", "Eternity", "Reality"][effarigStage];
       this.enslavedDone = Enslaved.isCompleted;
       this.laitelaFastest = player.celestials.laitela.fastestCompletion;
       this.laitelaTime = TimeSpan.fromSeconds(new Decimal(this.laitelaFastest)).toStringShort();
+      this.alphaStage = Alpha.currentStage;
+      this.alphaReq = Alpha.currentStageName;
     },
     handleYesClick() {
       beginProcessReality(getRealityProps(true));
@@ -89,6 +102,7 @@ export default {
         case 4: return Ra.initializeRun();
         case 5: return Laitela.initializeRun();
         case 6: throw new Error(`Attempted to start Pelle through EnterCelestialsModal instead of ArmageddonModal`);
+        case 7: return Alpha.initializeRun();
         default: throw new Error(`Attempted to start an Unknown Celestial in Celestial Modal Confirmation.`);
       }
     },
