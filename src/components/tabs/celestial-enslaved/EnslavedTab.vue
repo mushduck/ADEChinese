@@ -118,6 +118,9 @@ export default {
         "o-enslaved-mechanic-button": true,
         "o-enslaved-mechanic-button--clickable": !this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
       };
+    },
+    BHDescClass() {
+      return { "o-pelle-disabled": Pelle.isDoomed && !PelleDestructionUpgrade.blackHole.isBought };
     }
   },
   watch: {
@@ -228,7 +231,7 @@ export default {
           <div class="c-enslaved-run-button">
             <div
               class="c-enslaved-run-button__title"
-              :class="doomedDisabledClass"
+              :class="BHDescClass"
             >
               {{ realityTitle }}
             </div>
