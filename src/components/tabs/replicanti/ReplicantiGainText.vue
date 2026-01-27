@@ -20,7 +20,7 @@ export default {
         (Math.log(player.replicanti.chance + 1))), getReplicantiInterval(false)).dividedBy(Math.LN10);
 
       const replicantiAmount = Replicanti.amount;
-      const isAbove308 = Replicanti.isUncapped && replicantiAmount.log10() > LOG10_MAX_VALUE;
+      const isAbove308 = Replicanti.isUncapped && replicantiAmount.log10().gt(LOG10_MAX_VALUE);
 
       if (isAbove308) {
         const postScale = Math.log10(ReplicantiGrowth.scaleFactor) / ReplicantiGrowth.scaleLog10;
@@ -31,7 +31,7 @@ export default {
         // The calculations to estimate time to next milestone of OoM based on game state, assumes that uncapped
         // replicanti growth scales as time^1/postScale, which turns out to be a reasonable approximation.
         const milestoneStep = Pelle.isDoomed ? 100 : 1000;
-        const nextMilestone = Decimal.pow10(milestoneStep * Math.floor(replicantiAmount.log10() / milestoneStep + 1));
+        const nextMilestone = Decimal.pow10(Decimal.floor(replicantiAmount.log10().div(milestoneStep).add(1)).times(milestoneStep));
         const coeff = Decimal.divide(updateRateMs / 1000, logGainFactorPerTick.times(postScale));
         const timeToThousand = coeff.times(nextMilestone.divide(replicantiAmount).pow(postScale).minus(1));
         // The calculation seems to choke and return zero if the time is too large, probably because of rounding issues
@@ -45,15 +45,15 @@ export default {
       }
 
       const totalTime = LOG10_MAX_VALUE / (ticksPerSecond * log10GainFactorPerTick.toNumber());
-      let remainingTime = (LOG10_MAX_VALUE - replicantiAmount.log10()) /
-        (ticksPerSecond * log10GainFactorPerTick.toNumber());
-      if (remainingTime < 0) {
+      let remainingTime = (new Decimal(LOG10_MAX_VALUE).sub(replicantiAmount.log10())).div(
+        ticksPerSecond * log10GainFactorPerTick.toNumber());
+      if (remainingTime.lt(0)) {
         // If the cap is raised via Effarig Infinity but the player doesn't have TS192, this will be a negative number
-        remainingTime = 0;
+        remainingTime = DC.D0;
       }
 
       const galaxiesPerSecond = log10GainFactorPerTickUncapped.times(ticksPerSecond / LOG10_MAX_VALUE);
-      const timeFromZeroRG = galaxies => 50 * Decimal.ln((galaxies.add(49.5)).div(49.5));
+      const timeFromZeroRG = galaxies => Decimal.ln((galaxies.add(49.5)).div(49.5)).times(50).toNumber();
       let baseGalaxiesPerSecond, effectiveMaxRG, effectiveCurrentRG;
       if (RealityUpgrade(6).isBought && !Pelle.isDoomed) {
         baseGalaxiesPerSecond = galaxiesPerSecond.divide(RealityUpgrade(6).effectValue);
@@ -69,7 +69,7 @@ export default {
       const secondsPerGalaxy = galaxiesPerSecond.reciprocal();
 
       if (this.remainingTimeText === "") {
-        if (remainingTime === 0) {
+        if (remainingTime.eq(0)) {
           this.remainingTimeText = `At Infinite Replicanti (normally takes
             ${TimeSpan.fromSeconds(secondsPerGalaxy)})`;
         } else if (replicantiAmount.lt(100)) {
@@ -114,10 +114,10 @@ export default {
           let pendingTime = pending.times(secondsPerGalaxy).toNumber();
           // If popular music is unlocked add the divide amount
           if (Achievement(126).isUnlocked) {
-            const leftPercentAfterGalaxy = new Decimal(replicantiAmount.log10() / LOG10_MAX_VALUE).sub(pending).toNumber();
+            const leftPercentAfterGalaxy = new Decimal(replicantiAmount.log10().div(LOG10_MAX_VALUE)).sub(pending).toNumber();
             pendingTime += leftPercentAfterGalaxy * secondsPerGalaxy.toNumber();
           }
-          const thisGalaxyTime = pending.gt(0) ? pendingTime : secondsPerGalaxy.toNumber() - remainingTime;
+          const thisGalaxyTime = pending.gt(0) ? pendingTime : secondsPerGalaxy.sub(remainingTime).toNumber();
           this.galaxyText += ` (all Replicanti Galaxies within
             ${TimeSpan.fromSeconds(Decimal.clampMin(new Decimal(allGalaxyTime - thisGalaxyTime), 0))})`;
         }
