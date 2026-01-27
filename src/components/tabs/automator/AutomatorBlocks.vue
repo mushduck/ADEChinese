@@ -39,7 +39,7 @@ const AUTOMATOR_BLOCKS_COMPARISON_CURRENCIES = [
   "EC9 COMPLETIONS", "EC10 COMPLETIONS", "EC11 COMPLETIONS", "EC12 COMPLETIONS",
 ];
 
-const AUTOMATOR_BLOCKS_RESETS = ["INFINITY", "ETERNITY", "REALITY", "ARMAGEDDON"];
+const AUTOMATOR_BLOCKS_RESETS = ["INFINITY", "ETERNITY", "REALITY", "DOOM", "ARMAGEDDON", "ENDGAME"];
 
 /**
  *  @property {String} cmd          Name of automator command
@@ -89,8 +89,17 @@ export const automatorBlocks = [
     canWait: true,
     isUnlocked: () => RealityUpgrade(25).isBought
   }, {
+    cmd: "DOOM",
+    canWait: true,
+    isUnlocked: () => ExpansionPack.pellePack.isBought
+  }, {
     cmd: "ARMAGEDDON",
     canWait: true
+  }, {
+    cmd: "ENDGAME",
+    canRespec: true,
+    canWait: true,
+    isUnlocked: () => ExpansionPack.pellePack.isBought
   }, {
     cmd: "UNLOCK",
     allowedPatterns: ["AB", "C"],
