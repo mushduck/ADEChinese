@@ -7,7 +7,7 @@ export const Teresa = {
   timePoured: new Decimal(0),
   lastUnlock: "effarig",
   get pouredAmountCap() {
-    return ExpansionPack.teresaPack.isBought ? Decimal.pow(10, 1e300) : new Decimal(1e24);
+    return ExpansionPack.teresaPack.isBought ? DC.BEMAX : new Decimal(1e24);
   },
   displayName: "Teresa",
   possessiveName: "Teresa's",
@@ -15,8 +15,15 @@ export const Teresa = {
     if (EndgameMilestone.celestialEarlyUnlock.isReached) return true;
     return Achievement(147).isUnlocked;
   },
-  pourRM(diff) {
+  pourRM(diff, auto = false) {
     if (this.pouredAmount.gte(Teresa.pouredAmountCap)) return;
+    if (auto) {
+      const autoPouredRM = Currency.realityMachines.value.div(1000);
+      this.pouredAmount = this.pouredAmount.add(autoPouredRM);
+      Currency.realityMachines.subtract(autoPouredRM);
+      this.checkForUnlocks();
+      return;
+    }
     this.timePoured = this.timePoured.add(diff);
     const rm = Currency.realityMachines.value;
     const rmPoured = Decimal.min((this.pouredAmount.plus(1e6)).times(0.01).times(Decimal.pow(this.timePoured, 2)), rm);
@@ -35,7 +42,7 @@ export const Teresa = {
     player.celestials.teresa.run = true;
   },
   rewardMultiplier(antimatter) {
-    return Decimal.max(Decimal.pow(antimatter.plus(1).log10() / 1.5e8, 12), 1);
+    return Decimal.max(Decimal.pow(antimatter.plus(1).log10().div(1.5e8), 12), 1);
   },
   get pouredAmount() {
     return player.celestials.teresa.pouredAmount;
@@ -44,10 +51,10 @@ export const Teresa = {
     player.celestials.teresa.pouredAmount = amount;
   },
   get fill() {
-    return Math.min(Decimal.log10(this.pouredAmount) / 24, 1);
+    return Decimal.min(Decimal.log10(this.pouredAmount.add(1)).div(24), 1).toNumber();
   },
   get possibleFill() {
-    return Math.min(Currency.realityMachines.value.plus(this.pouredAmount).log10() / 24, 1);
+    return Decimal.min(Currency.realityMachines.value.plus(this.pouredAmount).add(1).log10().div(24), 1).toNumber();
   },
   get rmMultiplier() {
     return Decimal.max(new Decimal(250).times(Decimal.pow(this.pouredAmount.div(1e24), 0.1)), 1);
