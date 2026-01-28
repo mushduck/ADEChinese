@@ -53,7 +53,7 @@ export const dilationTimeStudies = [
     scrambleText: ["You cannot escape a Doomed Reality", "Escape the Doomed Reality (Requires e9e15 Antimatter)"],
     cost: 1,
     requirement: () => TimeStudy.timeDimension(8).isBought &&
-      player.records.thisReality.maxEP.exponent >= 4000 &&
+      player.records.thisReality.maxEP.log10().gte(4000) &&
       (Perk.firstPerk.isBought || Achievements.preReality.every(a => a.isUnlocked)) &&
       !Pelle.isDoomed
   }

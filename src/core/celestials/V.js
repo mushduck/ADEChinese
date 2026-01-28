@@ -225,7 +225,7 @@ export const V = {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
       else sum += player.celestials.v.runUnlocks[i] * 2;
     }
-    this.spaceTheorems = sum * Ra.unlocks.spaceTheoremBoost.effectOrDefault(1);
+    this.spaceTheorems = sum * (ExpansionPack.vPack.isBought ? 2 : 1) * Ra.unlocks.spaceTheoremBoost.effectOrDefault(1);
   },
   reset() {
     player.celestials.v = {
@@ -236,7 +236,7 @@ export const V = {
       goalReductionSteps: [0, 0, 0, 0, 0, 0, 0, 0, 0],
       STSpent: 0,
       runGlyphs: [[], [], [], [], [], [], [], [], []],
-      runRecords: [-10, 0, 0, 0, 0, 0, 0, 0, 0],
+      runRecords: [DC.E1.neg(), DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
     };
     this.spaceTheorems = 0;
   },
@@ -268,4 +268,5 @@ EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
 
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
   if (EndgameMastery(51).isBought) GameDatabase.celestials.v.mainUnlock.realities.requirement = 100;
+  if (!EndgameMastery(51).isBought) GameDatabase.celestials.v.mainUnlock.realities.requirement = 1250;
 });

@@ -50,11 +50,15 @@ export const GalaxyGenerator = {
     return 1e60;
   },
 
+  harshGalGenInstabilityByGalaxies(currGalaxies) {
+    const extremePower = GalacticPowers.galGenInstability2.isUnlocked ? GalacticPowers.galGenInstability2.reward : 1;
+    const power = (Decimal.log10(Decimal.max(currGalaxies.div(this.harshInstabilityStart), 1)).div(1000)).times(Effects.product(EndgameUpgrade(14))).times(1 / extremePower).toNumber();
+    return Math.pow(1 + power, Decimal.log10(Decimal.max(currGalaxies.div(this.harshInstabilityStart), 1)).toNumber());
+  },
+
   get harshGalGenInstability() {
     const currGalaxies = player.galaxies.add(GalaxyGenerator.galaxies);
-    const extremePower = GalacticPowers.galGenInstability2.isUnlocked ? GalacticPowers.galGenInstability2.reward : 1;
-    const power = (Decimal.log10(Decimal.max(currGalaxies.div(this.harshInstabilityStart), 1)) / 1000) * Effects.product(EndgameUpgrade(14)) * (1 / extremePower);
-    return Math.pow(1 + power, Decimal.log10(Decimal.max(currGalaxies.div(this.harshInstabilityStart), 1)));
+    return this.harshGalGenInstabilityByGalaxies(currGalaxies);
   },
 
   get instabilityStart() {
@@ -62,14 +66,37 @@ export const GalaxyGenerator = {
     return 1e10 * delay;
   },
 
+  gainPerSecondPostCapByGalaxies(currGalaxies) {
+    if (!Pelle.hasGalaxyGenerator) return new Decimal(1);
+    return Decimal.max(1, Decimal.pow(Decimal.pow(this.galGenInstability, this.harshGalGenInstabilityByGalaxies(currGalaxies)), Decimal.log10(Decimal.max(Decimal.pow(currGalaxies.div(this.instabilityStart), 0.75), 1))));
+  },
+
   get gainPerSecondPostCap() {
     if (!Pelle.hasGalaxyGenerator) return new Decimal(1);
-    return Decimal.max(1, Decimal.pow(Decimal.pow(this.galGenInstability, this.harshGalGenInstability), Decimal.log10(Decimal.max(Decimal.pow((player.galaxies.add(GalaxyGenerator.galaxies)).div(this.instabilityStart), 0.75), 1))));
+    const currGalaxies = player.galaxies.add(GalaxyGenerator.galaxies);
+    return this.gainPerSecondPostCapByGalaxies(currGalaxies);
   },
 
   get gainPerSecond() {
     if (!Pelle.hasGalaxyGenerator) return new Decimal(0);
     return this.gainPerSecondPreCap.div(this.gainPerSecondPostCap);
+  },
+
+  gainPerSecondDisplay(neededCount) {
+    // Equals to 1/gainPerSecond
+    function g(x) {
+      return new Decimal(GalaxyGenerator.gainPerSecondPostCapByGalaxies(x)).div(GalaxyGenerator.gainPerSecondPreCap);
+    }
+
+    const currGalaxies = player.galaxies.add(GalaxyGenerator.galaxies);
+    const N = 1000;
+    const h = new Decimal(neededCount).sub(currGalaxies).div(N);
+    let s = g(currGalaxies).add(g(neededCount));
+    for (let i = 1; i <= N - 1; i++) {
+      const x = currGalaxies.add(h.mul(i));
+      s = s.add(g(x).mul((i & 1) ? 4 : 2));
+    }
+    return s.mul(h).div(3);
   },
 
   get capObj() {

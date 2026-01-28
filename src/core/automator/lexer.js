@@ -3,8 +3,6 @@
 /* eslint-disable camelcase */
 import { createToken, Lexer } from "chevrotain";
 
-import { DC } from "../constants";
-
 const createCategory = name => createToken({ name, pattern: Lexer.NA, longer_alt: Identifier });
 
 // Shorthand for creating tokens and adding them to a list
@@ -187,7 +185,7 @@ createInCategory(AutomatorCurrency, "PendingCompletions", /pending[ \t]+completi
   $getter: () => {
     // If we are not in an EC, pretend like we have a ton of completions so any check for sufficient
     // completions returns true
-    if (!EternityChallenge.isRunning) return Decimal.NUMBER_MAX_VALUE;
+    if (!EternityChallenge.isRunning) return DC.NUMMAX;
     return EternityChallenge.current.gainedCompletionStatus.totalCompletions;
   }
 });
@@ -266,11 +264,27 @@ createInCategory(PrestigeEvent, "Reality", /reality/i, {
     player.reality.respec = true;
   },
 });
+createInCategory(PrestigeEvent, "Doom", /doom/i, {
+  $prestigeAvailable: () => Pelle.isUnlocked,
+  $prestigeLevel: 4,
+  $prestige: () => Pelle.initializeRun(),
+});
 createInCategory(PrestigeEvent, "Armageddon", /armageddon/i, {
   $prestigeAvailable: () => Pelle.canArmageddon,
-  $prestigeLevel: 4,
+  $prestigeLevel: 5,
   $prestigeCurrency: "RS",
   $prestige: () => Pelle.armageddon(true),
+});
+createInCategory(PrestigeEvent, "Endgame", /endgame/i, {
+  $autobuyer: () => Autobuyer.endgame,
+  $autobuyerCurrencyMode: AUTO_ENDGAME_MODE.CP,
+  $prestigeAvailable: () => isEndgameAvailable(),
+  $prestigeLevel: 6,
+  $prestigeCurrency: "CP",
+  $prestige: () => Endgame.newEndgame(),
+  $respec: () => {
+    player.endgame.respec = true;
+  },
 });
 
 createInCategory(StudyPath, "Idle", /idle/i, { $studyPath: TIME_STUDY_PATH.IDLE });

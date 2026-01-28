@@ -271,7 +271,7 @@ export const Glyphs = {
     return this.active[activeIndex];
   },
   equip(glyph, targetSlot) {
-    const forbiddenByPelle = Pelle.isDisabled("glyphs") || ["effarig", "reality", "cursed"].includes(glyph.type);
+    const forbiddenByPelle = Pelle.isDisabled("glyphs") || Pelle.isGlyphTypeDisabled(glyph.type);
     if (Pelle.isDoomed && !PelleDestructionUpgrade.specialGlyphEffects.isBought && forbiddenByPelle) return;
     if (GameEnd.creditsEverClosed) return;
 
@@ -536,7 +536,7 @@ export const Glyphs = {
     this.sort((a, b) => b.level * b.strength - a.level * a.strength);
   },
   sortByScore() {
-    this.sort((a, b) => AutoGlyphProcessor.filterValue(b) - AutoGlyphProcessor.filterValue(a));
+    this.sort((a, b) => AutoGlyphProcessor.filterValue(b).toNumber() - AutoGlyphProcessor.filterValue(a).toNumber());
   },
   sortByEffect() {
     function reverseBitstring(eff) {
@@ -570,7 +570,7 @@ export const Glyphs = {
     if (Achievement(194).isUnlocked) {
       maxSpecialGlyph = 2;
     }
-    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? maxSpecialGlyph : 5;
+    let compareThreshold = glyph.type === "effarig" || glyph.type === "reality" ? maxSpecialGlyph : Math.max(5, threshold);
     compareThreshold = Math.clampMax(compareThreshold, threshold);
     if (toCompare.length < compareThreshold) return false;
     const comparedEffects = getGlyphEffectsFromBitmask(glyph.effects).filter(x => x.id.startsWith(glyph.type));

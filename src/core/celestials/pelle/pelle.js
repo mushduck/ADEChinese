@@ -1,5 +1,4 @@
 import { Currency } from "../../currency";
-import { DC } from "../../constants";
 import { RebuyableMechanicState } from "../../game-mechanics/rebuyable";
 import { SetPurchasableMechanicState } from "../../utils";
 
@@ -64,14 +63,15 @@ export const Pelle = {
       return;
     }
 
-    Glyphs.harshAutoClean();
+    EventHub.dispatch(GAME_EVENT.DOOM_REALITY_BEFORE);
     if (!Glyphs.unequipAll()) {
       Modal.hideAll();
       Modal.message.show(`Dooming your Reality will unequip your Glyphs. Some of your
         Glyphs could not be unequipped due to lack of inventory space.`, 1);
       return;
     }
-    Glyphs.harshAutoClean();
+    // Keep 8 of each glyphs.
+    Glyphs.autoClean(8);
     if (Glyphs.freeInventorySpace < 5) {
       Modal.hideAll();
       Modal.message.show(`You must have enough empty unprotected Glyph slots for
@@ -81,8 +81,6 @@ export const Pelle = {
     for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.doomedGlyph(type));
     Glyphs.refreshActive();
     player.options.confirmations.glyphReplace = true;
-    player.reality.automator.state.repeat = false;
-    player.reality.automator.state.forceRestart = false;
     if (BlackHoles.arePaused) BlackHoles.togglePause();
     player.celestials.pelle.doomed = true;
     Pelle.armageddon(false);
@@ -125,7 +123,9 @@ export const Pelle = {
     if (!PelleAlchemyUpgrade.alchemyBoundless.isBought) player.celestials.ra.alchemy[18].amount = 0;
     if (!PelleAlchemyUpgrade.alchemyUnpredictability.isBought) player.celestials.ra.alchemy[19].amount = 0;
     if (!PelleAlchemyUpgrade.alchemyReality.isBought) player.celestials.ra.alchemy[20].amount = 0;
-    AutomatorBackend.stop();
+    if (!ExpansionPack.pellePack.isBought) {
+      AutomatorBackend.stop();
+    }
 
     // Force-unhide all tabs except for the shop tab, for which we retain the hide state instead
     const shopTab = ~1 & (1 << GameDatabase.tabs.find(t => t.key === "shop").id);
@@ -152,6 +152,7 @@ export const Pelle = {
       Pelle.quotes.doomE55DP.show();
     }
     GameStorage.save(true);
+    EventHub.dispatch(GAME_EVENT.DOOM_REALITY_AFTER);
   },
 
   get displayName() {
@@ -193,11 +194,15 @@ export const Pelle = {
       this.cel.remnants += this.remnantsGain;
     }
     finishProcessReality({ reset: true, armageddon: true });
-    disChargeAll();
+    if (this.isAlwaysDischargeCIU || player.celestials.ra.disCharge) disChargeAll();
     player.celestials.enslaved.isStoringReal = false;
     player.celestials.enslaved.autoStoreReal = false;
     if (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed()) player.dilation.active = true;
     EventHub.dispatch(GAME_EVENT.ARMAGEDDON_AFTER, gainStuff);
+  },
+
+  get isAlwaysDischargeCIU() {
+    return Ra.unlocks.chargedInfinityUpgrades.isDisabledByPelle || !PelleUpgrade.keepBreakInfinityUpgrades.canBeApplied;
   },
 
   gameLoop(diff) {
@@ -346,60 +351,113 @@ export const Pelle = {
 
   get specialGlyphEffect() {
     const isUnlocked = this.isDoomed && PelleRifts.chaos.milestones[1].canBeApplied;
-    const description = this.getSpecialGlyphEffectDescription(this.activeGlyphType);
-    const isActive = type => isUnlocked && this.activeGlyphType === type;
+    const description = this.getSpecialGlyphEffectDescriptionList(this.getAllActive);
+    const activeCount = type => {
+      if (!isUnlocked) return 0;
+      const count = this.getAllActive.get(type);
+      return count === undefined ? 0 : count;
+    };
+    const PGEC = this.isPelleGlyphEffectCapped;
     return {
       isUnlocked,
       description,
-      infinity: (isActive("infinity") && (player.challenge.eternity.current <= 8 || PelleDestructionUpgrade.pelleGlyphEffects.isBought))
-        ? Currency.infinityPoints.value.plus(1).pow(0.2)
-        : DC.D1,
-      time: isActive("time")
-        ? Currency.eternityPoints.value.plus(1).pow(0.3)
-        : DC.D1,
-      replication: isActive("replication")
-        ? Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300)
+      hasCappedEffect: PGEC("infinity") || PGEC("time") || PGEC("replication") || PGEC("dilation") || PGEC("power"),
+      infinity: this.calculatePelleInfinity(activeCount("infinity")),
+      time: this.calculatePelleTime(activeCount("time")),
+      replication: this.calculatePelleReplication(activeCount("replication")),
+      dilation: this.calculatePelleDilation(activeCount("dilation")),
+      power: this.calculatePellePower(activeCount("power")),
+      companion: activeCount("companion") > 0
+        ? 1.34 * activeCount("companion")
         : 1,
-      dilation: isActive("dilation")
-        ? Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1)
-        : DC.D1,
-      power: isActive("power")
-        ? 1.02
-        : 1,
-      companion: isActive("companion")
-        ? 1.34
-        : 1,
-      isScaling: () => ["infinity", "time", "replication", "dilation"].includes(this.activeGlyphType),
+      isScaling: () => {
+        const include = type => this.getAllActive.get(type) !== undefined;
+        if (include("infinity") || include("time") || include("replication") || include("dilation")) return true;
+        return false;
+      },
     };
   },
-  getSpecialGlyphEffectDescription(type) {
+  isPelleGlyphEffectCapped(type) {
+    const activeCount = t => {
+      if (!(Pelle.isDoomed && PelleRifts.chaos.milestones[1].canBeApplied)) return 0;
+      const count = Pelle.getAllActive.get(t);
+      return count === undefined ? 0 : count;
+    };
     switch (type) {
       case "infinity":
-        return `Infinity Point gain ${(player.challenge.eternity.current <= 8 || PelleDestructionUpgrade.pelleGlyphEffects.isBought)
-          ? formatX(Currency.infinityPoints.value.plus(1).pow(0.2), 2)
-          : formatX(DC.D1, 2)} (based on current IP)`;
+        // TODO: Set a real formula
+        return activeCount("infinity") > 0;
       case "time":
-        return `Eternity Point gain ${formatX(Currency.eternityPoints.value.plus(1).pow(0.3), 2)}
+        // TODO: Set a real formula
+        return activeCount("time") > 0;
+      case "replication":
+      case "dilation":
+      case "power":
+      case "companion":
+      default:
+        return false;
+    }
+  },
+  calculatePelleInfinity(count) {
+    return (count > 0 && (player.challenge.eternity.current <= 8 || PelleDestructionUpgrade.pelleGlyphEffects.isBought))
+        ? Currency.infinityPoints.value.plus(1).pow(0.2).pow(Math.min(1, count)) // Limit to at most 1
+        : DC.D1
+  },
+  calculatePelleTime(count) {
+    return count > 0
+        ? Currency.eternityPoints.value.plus(1).pow(0.3).pow(Math.min(1, count)) // Limit to at most 1
+        : DC.D1
+  },
+  calculatePelleReplication(count) {
+    return count > 0
+        ? Decimal.pow(Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300), count)
+        : DC.D1
+  },
+  calculatePelleDilation(count) {
+    return count > 0
+        ? Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1).pow(count)
+        : DC.D1
+  },
+  calculatePellePower(count) {
+    return count > 0
+        ? 1 + 0.02 * count
+        : 1
+  },
+  getSpecialGlyphEffectDescription(type, count = 1, onlyReturnUseful = false) {
+    switch (type) {
+      case "infinity":
+        return `Infinity Point gain ${formatX(this.calculatePelleInfinity(count), 2)} (based on current IP)`;
+      case "time":
+        return `Eternity Point gain ${formatX(this.calculatePelleTime(count), 2)}
           (based on current EP)`;
       case "replication":
-        return `Replication speed ${formatX(Math.min(10 ** 60 ** (PelleRifts.vacuum.percentage), 1e300), 2)} \
+        return `Replication speed ${formatX(this.calculatePelleReplication(count), 2)}
         (based on ${wordShift.wordCycle(PelleRifts.vacuum.name)})`;
       case "dilation":
-        return `Dilated Time gain ${formatX(Decimal.pow(player.dilation.totalTachyonGalaxies, 1.5).max(1), 2)}
+        return `Dilated Time gain ${formatX(this.calculatePelleDilation(count), 2)}
           (based on Tachyon Galaxies)`;
       case "power":
-        return `Galaxies are ${formatPercents(0.02)} stronger`;
+        return `Galaxies are ${formatPercents(this.calculatePellePower(count) - 1)} stronger`;
       case "companion":
         return `You feel ${formatPercents(0.34)} better`;
       // Undefined means that there is no glyph equipped, needs to be here since this function is used in
       // both Current Glyph Effects and Glyph Tooltip
       case undefined:
-        return "No Glyph equipped!";
+        return onlyReturnUseful ? null : "No Glyph equipped!";
       default:
-        return PelleDestructionUpgrade.specialGlyphEffects.isBought
-          ? "This Glyph has no Pelle-exclusive effect! That sucks."
-          : "You cannot equip this Glyph while Doomed!";
+        if (onlyReturnUseful) return null;
+        if (this.isGlyphTypeDisabled(type)) return "You cannot equip this Glyph while Doomed!";
+        return "This Glyph has no Pelle-exclusive effect! That sucks.";
     }
+  },
+
+  getSpecialGlyphEffectDescriptionList(map) {
+    const list = [];
+    map.forEach((value, key) => {
+      const desp = this.getSpecialGlyphEffectDescription(key, value, true);
+      if (desp !== null) list.push([desp, this.isPelleGlyphEffectCapped(key)]);
+    });
+    return list;
   },
 
   get remnantRequirementForDilation() {
@@ -428,24 +486,20 @@ export const Pelle = {
     let ep = this.cel.records.totalEternityPoints.plus(1).log10();
 
     if (PelleStrikes.dilation.hasStrike) {
-      am *= 500;
-      ip *= 10;
-      ep *= 5;
+      am = am.times(500);
+      ip = ip.times(10);
+      ep = ep.times(5);
     }
 
     if (EndgameMilestone.remnantFormula.isReached) {
-      am *= 10000;
-      ip *= 500;
-      ep *= 25;
+      am = am.times(10000);
+      ip = ip.times(500);
+      ep = ep.times(25);
     }
 
-    const gainOld = (
-      (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.7
-    ) ** 8;
+    const gainOld = Decimal.pow((Decimal.log10(am.add(2)).add(Decimal.log10(ip.add(2))).add(Decimal.log10(ep.add(2)))).div(1.7), 8).toNumber();
 
-    const gainNew = (
-      (Math.log10(am + 2) + Math.log10(ip + 2) + Math.log10(ep + 2)) / 1.6
-    ) ** 8.2;
+    const gainNew = Decimal.pow((Decimal.log10(am.add(2)).add(Decimal.log10(ip.add(2))).add(Decimal.log10(ep.add(2)))).div(1.6), 8.2).toNumber();
 
     const gain = EndgameMilestone.remnantFormula.isReached ? gainNew : gainOld;
     
@@ -480,9 +534,10 @@ export const Pelle = {
   },
 
   antimatterDimensionMult(x) {
-    return Decimal.pow(10, Math.log10(x + 1) + x ** 5 / 1e3 + 4 ** x / 1e18);
+    return Decimal.pow(10, Math.log10(x + 1) + x ** 5.2 / 1e3 + 4 ** x / 1e18);
   },
 
+  // Deprecated
   get activeGlyphType() {
     return Glyphs.active.filter(Boolean)[0]?.type;
   },
@@ -520,6 +575,26 @@ export const Pelle = {
   },
   
   quotes: Quotes.pelle,
+  
+  isGlyphTypeDisabled(type, alwaysInDoom = false) {
+    if (!(this.isDoomed || alwaysInDoom)) return false;
+    if (type === "reality") return !PelleAlchemyUpgrade.alchemyReality.isBought;
+    if (type === "effarig") return !PelleDestructionUpgrade.specialGlyphEffects.isBought;
+    if (type === "cursed") return true;
+    return false;
+  },
+
+  get getAllActive() {
+    const map = new Map();
+    Glyphs.active.forEach(glyph => {
+      if (glyph) {
+        const i = map.get(glyph.type);
+        if (i === undefined) map.set(glyph.type, 1);
+        else map.set(glyph.type, i + 1);
+      }
+    });
+    return map;
+  }
 };
 
 EventHub.logic.on(GAME_EVENT.ARMAGEDDON_AFTER, () => {

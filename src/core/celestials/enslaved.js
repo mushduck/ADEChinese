@@ -302,7 +302,7 @@ export const Tesseracts = {
 
   costs(index) {
     index = index + 1;
-    return Decimal.pow10(2e7 * Math.min(index, 3) * Decimal.max(index - 3, 1).factorial().toNumber() * Math.pow(2, Math.max(index - 3, 0)));
+    return Decimal.pow10(new Decimal(2e7).times(Decimal.min(index, 3)).times(Decimal.max(index - 3, 1).factorial()).times(Decimal.pow(2, Decimal.max(index - 3, 0))));
   },
 
   get nextCost() {

@@ -196,11 +196,11 @@ export const Achievements = {
     const basePower = Math.pow(1.35, unlockedRows) * Math.pow(1.05, Achievements.effectiveCount);
     const exponent = getAdjustedGlyphEffect("effarigachievement") * Ra.unlocks.achievementPower.effectOrDefault(1) *
       Ra.unlocks.achievementMultPower.effectOrDefault(1) * Ra.unlocks.spaceTheoremAchPower.effectOrDefault(1);
-    return Math.pow(basePower, exponent);
+    return Decimal.pow(basePower, exponent);
   }),
 
   get power() {
-    if (Pelle.isDisabled("achievementMult") && !PelleDestructionUpgrade.achievementMultiplier.isBought) return 1;
+    if (Pelle.isDisabled("achievementMult") && !PelleDestructionUpgrade.achievementMultiplier.isBought) return DC.D1;
     return Achievements._power.value;
   },
 

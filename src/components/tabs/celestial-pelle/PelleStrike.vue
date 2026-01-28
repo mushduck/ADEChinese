@@ -35,7 +35,7 @@ export default {
       </template>
       <template #dropdown>
         <div class="c-pelle-strike-dropdown">
-          <span :class="{ 'o-pelle-disabled': strike.isDestroyed }">Penalty: {{ strike.penalty }}</span>
+          <span :class="{ 'o-pelle-disabled': strike.isDestroyed() == true }">Penalty: {{ strike.penalty }}</span>
           <br>
           <span>Reward: {{ strikeReward }}</span>
         </div>

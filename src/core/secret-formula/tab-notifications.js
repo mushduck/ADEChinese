@@ -1,5 +1,3 @@
-import { DC } from "../constants";
-
 export const tabNotifications = {
   firstInfinity: {
     id: 0,
@@ -289,6 +287,39 @@ export const tabNotifications = {
       {
         parent: "endgame",
         tab: "upgrades"
+      }
+    ],
+    // Always externally triggered
+    condition: () => true,
+  },
+  galacticPower: {
+    id: 21,
+    tabsToHighLight: [
+      {
+        parent: "endgame",
+        tab: "power"
+      }
+    ],
+    condition: () => GalacticPower.isUnlocked,
+    events: [GAME_EVENT.GAME_TICK_AFTER]
+  },
+  ethereal: {
+    id: 22,
+    tabsToHighLight: [
+      {
+        parent: "endgame",
+        tab: "ethereal"
+      }
+    ],
+    condition: () => Ethereal.isUnlocked,
+    events: [GAME_EVENT.GAME_TICK_AFTER]
+  },
+  alphaUnlock: {
+    id: 23,
+    tabsToHighLight: [
+      {
+        parent: "celestials",
+        tab: "alpha"
       }
     ],
     // Always externally triggered

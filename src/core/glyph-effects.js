@@ -82,7 +82,7 @@ class GlyphEffectConfig {
     this.alterationType = setup.alterationType;
     /** @type {boolean} Indicates whether the effect grows with level or shrinks */
     this._biggerIsBetter = undefined;
-    /** @type {boolean} Determines if effect is disabled while in doomed */
+    /** @type {boolean | function(): boolean} Determines if effect is disabled while in doomed */
     this._enabledInDoomed = setup.enabledInDoomed;
   }
 
@@ -114,8 +114,13 @@ class GlyphEffectConfig {
     return typeof shortDesc === "function" ? shortDesc() : shortDesc;
   }
 
+  get enabledInDoomed() {
+    const enabledInDoomed = this._enabledInDoomed;
+    return typeof enabledInDoomed === "function" ? enabledInDoomed() : enabledInDoomed;
+  }
+
   get isDisabledByDoomed() {
-    return Pelle.isDoomed && !this._enabledInDoomed;
+    return Pelle.isDoomed && !this.enabledInDoomed;
   }
 
   /** @returns {number} */

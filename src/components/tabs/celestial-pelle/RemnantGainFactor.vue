@@ -103,13 +103,13 @@ export default {
             </div>
             <div class="l-remnant-factors-col">
               <div class="l-remnant-factors-item">
-                {{ format(Math.log10(best.am.add(1).log10()*dilationMult[0]*milestoneMult[0] + 2), 2, 2) }}
+                {{ format(best.am.add(1).log10().times(dilationMult[0]).times(milestoneMult[0]).add(2).log10(), 2, 2) }}
               </div>
               <div class="l-remnant-factors-item">
-                {{ format(Math.log10(best.ip.add(1).log10()*dilationMult[1]*milestoneMult[1] + 2), 2, 2) }}
+                {{ format(best.ip.add(1).log10().times(dilationMult[1]).times(milestoneMult[1]).add(2).log10(), 2, 2) }}
               </div>
               <div class="l-remnant-factors-item">
-                {{ format(Math.log10(best.ep.add(1).log10()*dilationMult[2]*milestoneMult[2] + 2), 2, 2) }}
+                {{ format(best.ep.add(1).log10().times(dilationMult[2]).times(milestoneMult[2]).add(2).log10(), 2, 2) }}
               </div>
               <div class="l-remnant-factors-item">
                 {{ format(hasMilestone ? 1.6 : 1.7, 2, 2) }}

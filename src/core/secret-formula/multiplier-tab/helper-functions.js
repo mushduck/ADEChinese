@@ -1,5 +1,3 @@
-import { DC } from "../../constants";
-
 export const MultiplierTabHelper = {
   // Helper method for counting enabled dimensions
   activeDimCount(type) {
@@ -68,7 +66,7 @@ export const MultiplierTabHelper = {
       // These all need to be framed as INCREASING x/sec tick rate (ie. all multipliers > 1, all logs > 0)
       const baseMult = 0.965 ** 2 / (NormalChallenge(5).isRunning ? 0.83 : 0.8);
       const logBase = Math.log10(baseMult);
-      const logPerGalaxy = -DC.D0_965.log10();
+      const logPerGalaxy = -DC.D0_965.log10().toNumber();
 
       tickFrac = Tickspeed.totalUpgrades * logBase;
       galFrac = (1 + effectiveCount / logBase * logPerGalaxy);
@@ -84,7 +82,7 @@ export const MultiplierTabHelper = {
       Achievement(66),
       Achievement(83)
     );
-    let baseFrac = base.log10() / Tickspeed.perSecond.log10();
+    let baseFrac = base.log10().div(Tickspeed.perSecond.log10()).toNumber();
 
     // We want to make sure to zero out components in some edge cases
     if (base.eq(1)) baseFrac = 0;

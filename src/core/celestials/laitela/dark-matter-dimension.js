@@ -1,4 +1,3 @@
-import { DC } from "../../constants";
 import { DimensionState } from "../../dimensions/dimension";
 
 /**
@@ -86,8 +85,8 @@ export class DarkMatterDimensionState extends DimensionState {
       .times(this.commonDarkMult)
       .times(Decimal.pow(this.powerDMPerAscension, this.ascensions))
       .timesEffectsOf(SingularityMilestone.darkMatterMult, SingularityMilestone.multFromInfinitied)
-      .times(ExpansionPack.laitelaPack.isBought ? Decimal.max(Math.log10(Decimal.log10(player.antimatter)), Decimal.log10(
-        player.reality.imaginaryMachines)) : 1)
+      .times(ExpansionPack.laitelaPack.isBought ? Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)), Decimal.log10(
+        player.reality.imaginaryMachines.add(1))) : 1)
       .dividedBy(Decimal.pow(1e4, Decimal.pow(this.tier - 1, 0.5)));
   }
 
@@ -100,7 +99,7 @@ export class DarkMatterDimensionState extends DimensionState {
       .mul(Decimal.pow(1.005, this.data.powerDEUpgrades)).mul(tierFactor).div(1000)
       .times(this.commonDarkMult)
       .times(Decimal.pow(POWER_DE_PER_ASCENSION, this.ascensions))
-      .times(ExpansionPack.laitelaPack.isBought ? Decimal.pow(Decimal.log10(player.celestials.laitela.singularities), 2) : 1)
+      .times(ExpansionPack.laitelaPack.isBought ? Decimal.pow(Decimal.log10(player.celestials.laitela.singularities.add(1)), 2) : 1)
       .timesEffectsOf(
         SingularityMilestone.darkEnergyMult,
         SingularityMilestone.realityDEMultiplier,
@@ -113,8 +112,8 @@ export class DarkMatterDimensionState extends DimensionState {
     const purchases = Decimal.affordGeometricSeries(Currency.darkMatter.value, this.rawIntervalCost,
       this.intervalCostIncrease, 0);
     const intervalReduction = ExpansionPack.laitelaPack.isBought ? 200 : 0;
-    return Decimal.clampMin(this.intervalPurchaseCap, SingularityMilestone.ascensionIntervalScaling.effectOrDefault(
-      new Decimal(1200).sub(intervalReduction)).times(this.rawInterval.times(Decimal.pow(INTERVAL_PER_UPGRADE, purchases))));
+    return Decimal.max(SingularityMilestone.ascensionIntervalScaling.effectOrDefault(new Decimal(1200).sub(intervalReduction))
+      .times(this.rawInterval.times(Decimal.pow(INTERVAL_PER_UPGRADE, purchases))), this.intervalPurchaseCap);
   }
 
   get adjustedStartingCost() {
@@ -174,7 +173,7 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get canBuyInterval() {
-    return Currency.darkMatter.gte(this.intervalCost) && this.interval.gt(this.intervalPurchaseCap);
+    return Currency.darkMatter.gte(this.intervalCost);
   }
 
   get canBuyPowerDM() {
@@ -186,14 +185,11 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get maxIntervalPurchases() {
-    return Decimal.ceil(new Decimal(Decimal.log10(this.intervalPurchaseCap.div(this.interval)))
-      .div(new Decimal(Decimal.log10(INTERVAL_PER_UPGRADE))));
+    //return Decimal.ceil(new Decimal(Decimal.log10(this.intervalPurchaseCap.div(this.interval))).div(new Decimal(Decimal.log10(INTERVAL_PER_UPGRADE))));
+    return DC.NUMMAX;
   }
 
   buyManyInterval(x) {
-    if (new Decimal(x).gt(this.maxIntervalPurchases)) {
-      x = this.maxIntervalPurchases;
-    }
     const cost = this.rawIntervalCost.times(
       Decimal.pow(this.intervalCostIncrease, x).minus(1)).div(this.intervalCostIncrease.sub(1)).floor();
     if (!Currency.darkMatter.purchase(cost)) return false;
@@ -235,12 +231,19 @@ export class DarkMatterDimensionState extends DimensionState {
     return this.buyManyPowerDE(1);
   }
 
+  get affordableAscensions() {
+    const intervalReduction = ExpansionPack.laitelaPack.isBought ? 200 : 0;
+    const intervalIncrease = SingularityMilestone.ascensionIntervalScaling.effectOrDefault(new Decimal(1200).sub(intervalReduction));
+    const purchasesToMax = Decimal.log(intervalIncrease, DC.D1.div(INTERVAL_PER_UPGRADE));
+    const intervalBeyondCap = this.intervalPurchaseCap.div(this.rawInterval);
+    const purchasesBeyondCap = Decimal.log(intervalBeyondCap, DC.D1.div(INTERVAL_PER_UPGRADE));
+    const rawAscensions = purchasesBeyondCap.div(purchasesToMax);
+    return rawAscensions.add(1).floor();
+  }
+
   ascend() {
     if (this.interval.gt(this.intervalPurchaseCap)) return;
-    this.data.ascensionCount = this.data.ascensionCount.add(1);
-
-    // Immediately buy as many interval upgrades as possible
-    this.buyManyInterval(Infinity);
+    this.data.ascensionCount = this.data.ascensionCount.add(this.affordableAscensions);
   }
 
   static get dimensionCount() { return 8; }

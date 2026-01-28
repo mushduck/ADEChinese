@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     update() {
-      this.opacity = (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2;
+      this.opacity = Alpha.isRunning ? (player.options.brightAlpha ? 0.2 : 0.5) : (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2;
     }
   }
 };

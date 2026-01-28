@@ -2,7 +2,6 @@ import { AutomatorPanels } from "@/components/tabs/automator/AutomatorDocs";
 import { GlyphInfo } from "@/components/modals/options/SelectGlyphInfoDropdown";
 
 import { AUTOMATOR_MODE, AUTOMATOR_TYPE } from "./automator/automator-backend";
-import { DC } from "./constants";
 import { deepmergeAll } from "@/utility/deepmerge";
 import { GlyphTypes } from "./glyph-effects";
 
@@ -48,12 +47,12 @@ window.player = {
   challenge: {
     normal: {
       current: 0,
-      bestTimes: Array.repeat(Decimal.MAX_VALUE, 11),
+      bestTimes: Array.repeat(DC.BEMAX, 11),
       completedBits: 0,
     },
     infinity: {
       current: 0,
-      bestTimes: Array.repeat(Decimal.MAX_VALUE, 8),
+      bestTimes: Array.repeat(DC.BEMAX, 8),
       completedBits: 0,
     },
     eternity: {
@@ -329,26 +328,26 @@ window.player = {
   records: {
     gameCreatedTime: Date.now(),
     totalTimePlayed: DC.D0,
-    timePlayedAtBHUnlock: Decimal.MAX_VALUE,
+    timePlayedAtBHUnlock: DC.BEMAX,
     realTimePlayed: 0,
     realTimeDoomed: 0,
     fullGameCompletions: 0,
     previousRunRealTime: 0,
     totalAntimatter: DC.E1,
     totalAntimatterOutsideDoom: DC.E1,
-    bestAntimatterExponentOutsideDoom: 0,
+    bestAntimatterExponentOutsideDoom: DC.D0,
     totalEndgameAntimatter: DC.E1,
     totalRealityAntimatter: DC.E1,
     totalEternityAntimatter: DC.E1,
     totalInfinityAntimatter: DC.E1,
     recentInfinities: Array.range(0, 10).map(() =>
-      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
+      [DC.BEMAX, Number.MAX_VALUE, DC.D1, DC.D1, ""]),
     recentEternities: Array.range(0, 10).map(() =>
-      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]),
+      [DC.BEMAX, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]),
     recentRealities: Array.range(0, 10).map(() =>
-      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]),
+      [DC.BEMAX, Number.MAX_VALUE, DC.D1, 1, "", 0, 0]),
     recentEndgames: Array.range(0, 10).map(() =>
-      [Decimal.MAX_VALUE, Number.MAX_VALUE, DC.D1, DC.D1, 1]),
+      [DC.BEMAX, Number.MAX_VALUE, DC.D1, DC.D1, 1]),
     thisInfinity: {
       time: DC.D0,
       realTime: 0,
@@ -358,7 +357,7 @@ window.player = {
       bestIPminVal: DC.D0,
     },
     bestInfinity: {
-      time: Decimal.MAX_VALUE,
+      time: DC.BEMAX,
       realTime: Number.MAX_VALUE,
       bestIPminEternity: DC.D0,
       bestIPminReality: DC.D0,
@@ -374,7 +373,7 @@ window.player = {
       bestInfinitiesPerMs: DC.D0,
     },
     bestEternity: {
-      time: Decimal.MAX_VALUE,
+      time: DC.BEMAX,
       realTime: Number.MAX_VALUE,
       bestEPminReality: DC.D0,
     },
@@ -391,7 +390,7 @@ window.player = {
       bestRSminVal: DC.D0,
     },
     bestReality: {
-      time: Decimal.MAX_VALUE,
+      time: DC.BEMAX,
       realTime: Number.MAX_VALUE,
       glyphStrength: 0,
       RM: DC.D0,
@@ -414,7 +413,7 @@ window.player = {
       peakGameSpeed: DC.D1,
     },
     bestEndgame: {
-      time: Decimal.MAX_VALUE,
+      time: DC.BEMAX,
       realTime: Number.MAX_VALUE,
       bestCPmin: DC.D0,
       bestDPmin: DC.D0,
@@ -698,7 +697,7 @@ window.player = {
       STSpent: 0,
       runGlyphs: [[], [], [], [], [], [], [], [], []],
       // The -10 is for glyph count, as glyph count for V is stored internally as a negative number
-      runRecords: [-10, 0, 0, 0, 0, 0, 0, 0, 0],
+      runRecords: [DC.E1.neg(), DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0],
       wantsFlipped: true,
       upgrades: Array.repeat(0, 1),
       vTime: 0,
@@ -865,6 +864,12 @@ window.player = {
         galaxies: false
       },
       showBought: false,
+    },
+    alpha: {
+      unlockBits: 0,
+      run: false,
+      quoteBits: 0,
+      stage: 0
     }
   },
   endgames: 0,
@@ -903,6 +908,10 @@ window.player = {
       areUnlocked: false,
       boughtPacks: new Set()
     },
+    ethereal: {
+      power: DC.D0,
+      sector: 1
+    },
   },
   endgameMasteries: {
     skills: DC.D0,
@@ -912,7 +921,7 @@ window.player = {
     dpBought: 0,
     masteries: [],
     shopMinimized: false,
-    preferredPaths: [[], 0],
+    preferredPaths: [[], []],
     presets: new Array(6).fill({
       name: "",
       masteries: "",
@@ -937,6 +946,7 @@ window.player = {
       includeAnimated: true,
     },
     notation: "Mixed scientific",
+    lnotation: "Stacked Scientific",
     notationDigits: {
       comma: 5,
       notation: 9
@@ -1075,6 +1085,7 @@ window.player = {
     },
     invertTTgenDisplay: false,
     autoRealityForFilter: false,
+    brightAlpha: false,
   },
   IAP: {
     enabled: false,
@@ -1110,7 +1121,7 @@ export const Player = {
   get canCrunch() {
     if (Enslaved.isRunning && Enslaved.BROKEN_CHALLENGES.includes(NormalChallenge.current?.id)) return false;
     const challenge = NormalChallenge.current || InfinityChallenge.current;
-    const goal = challenge === undefined ? Decimal.NUMBER_MAX_VALUE : challenge.goal;
+    const goal = challenge === undefined ? DC.NUMMAX : challenge.goal;
     return player.records.thisInfinity.maxAM.gte(goal);
   },
 
@@ -1136,11 +1147,11 @@ export const Player = {
 
   get infinityGoal() {
     const challenge = NormalChallenge.current || InfinityChallenge.current;
-    return challenge === undefined ? Decimal.NUMBER_MAX_VALUE : challenge.goal;
+    return challenge === undefined ? DC.NUMMAX : challenge.goal;
   },
 
   get infinityLimit() {
-    const trueHardcap = player.break2 ? DC.E1E300 : DC.E9E15;
+    const trueHardcap = player.break2 ? DC.ENUMMAX : DC.E9E15;
     const challenge = NormalChallenge.current || InfinityChallenge.current;
     return challenge === undefined ? trueHardcap : challenge.goal;
   },
@@ -1221,14 +1232,17 @@ export function guardFromNaNValues(obj) {
         configurable: true,
         get: () => value,
         set: function guardedSetter(newValue) {
-          if (newValue === null || newValue === undefined) {
-            throw new Error("null/undefined player property assignment");
+          if (newValue === null) {
+            throw new Error("Null numerical player property assignment");
+          }
+          if (newValue === undefined) {
+            throw new Error("Undefined numerical player property assignment");
           }
           if (typeof newValue !== "number") {
             throw new Error("Non-Number assignment to Number player property");
           }
           if (!isFinite(newValue)) {
-            throw new Error("NaN player property assignment");
+            throw new Error("NaN player property assignment (numerical overflow)");
           }
           value = newValue;
         }
@@ -1241,15 +1255,32 @@ export function guardFromNaNValues(obj) {
         configurable: true,
         get: () => value,
         set: function guardedSetter(newValue) {
-          if (newValue === null || newValue === undefined) {
-            throw new Error("null/undefined player property assignment");
+          if (newValue === null) {
+            throw new Error("Null Decimal player property assignment");
+          }
+          if (newValue === undefined) {
+            throw new Error("Undefined Decimal player property assignment");
           }
           if (!(newValue instanceof Decimal)) {
             throw new Error("Non-Decimal assignment to Decimal player property");
           }
-          if (!isFinite(newValue.mantissa) || !isFinite(newValue.exponent)) {
-            throw new Error("NaN player property assignment");
+          if (!isFinite(newValue.mag)) {
+            throw new Error("NaN player property assignment (new decimal mag value) this usually means Layer failed to work properly");
           }
+          if (!isFinite(newValue.sign)) {
+            throw new Error("NaN player property assignment (new decimal sign value) this usually means Decimal iteration failed");
+          }
+          if (!isFinite(newValue.layer)) {
+            throw new Error("NaN player property assignment (new decimal layer value) this usually means you exceeded Infinity");
+          }
+          /*
+          if (!isFinite(newValue.mantissa)) {
+            throw new Error("NaN player property assignment (old decimal value) old log10 failed ignore this error");
+          }
+          if (!isFinite(newValue.exponent)) {
+            throw new Error("NaN player property assignment (old decimal value) number exceeded ee308 on some end ignore this error");
+          }
+          */
           value = newValue;
         }
       });

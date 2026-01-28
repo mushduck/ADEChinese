@@ -18,7 +18,9 @@ function prestigeNotify(flag) {
 EventHub.logic.on(GAME_EVENT.BIG_CRUNCH_AFTER, () => prestigeNotify(T.Infinity.$prestigeLevel));
 EventHub.logic.on(GAME_EVENT.ETERNITY_RESET_AFTER, () => prestigeNotify(T.Eternity.$prestigeLevel));
 EventHub.logic.on(GAME_EVENT.REALITY_RESET_AFTER, () => prestigeNotify(T.Reality.$prestigeLevel));
+EventHub.logic.on(GAME_EVENT.DOOM_REALITY_AFTER, () => prestigeNotify(T.Doom.$prestigeLevel));
 EventHub.logic.on(GAME_EVENT.ARMAGEDDON_AFTER, () => prestigeNotify(T.Armageddon.$prestigeLevel));
+EventHub.logic.on(GAME_EVENT.ENDGAME_RESET_AFTER, () => prestigeNotify(T.Endgame.$prestigeLevel));
 
 // Used by while and until - in order to get the text corrext, we need to invert the boolean if it's an until
 // eslint-disable-next-line max-params
@@ -69,8 +71,12 @@ function findLastPrestigeRecord(layer) {
         : `${gainedEP}, ${addedECs} completions`;
     case "REALITY":
       return `${format(player.records.recentRealities[0][1], 2)} RM`;
+    case "DOOM":
+      return `Dooming your Reality does not give a currency`;
     case "ARMAGEDDON":
       return `There is no currency logging for Armageddon (yet)`;
+    case "ENDGAME":
+      return `${format(player.records.recentEndgames[0][1], 2)} CP`;
     default:
       throw Error(`Unrecognized prestige ${layer} in Automator event log`);
   }
@@ -146,6 +152,19 @@ export const AutomatorCommands = [
           V.addError((ctx.duration || ctx.xHighest)[0],
             "Auto Reality cannot be set to a duration or x highest",
             "Use RM for Auto Reality");
+          return false;
+        }
+      }
+      if (ctx.PrestigeEvent[0].tokenType === T.Endgame) {
+        if (!EndgameMilestone.autobuyerEndgame.isReached) {
+          V.addError(ctx.PrestigeEvent, "Endgame autobuyer is not unlocked",
+            "Reach the Endgame Milestone which unlocks the Endgame autobuyer");
+          return false;
+        }
+        if (advSetting) {
+          V.addError((ctx.duration || ctx.xHighest)[0],
+            "Auto Endgame cannot be set to a duration or x highest",
+            "Use CP for Auto Endgame");
           return false;
         }
       }
@@ -893,8 +912,14 @@ export const AutomatorCommands = [
         case T.Reality:
           prestigeName = "Reality";
           break;
+        case T.Doom:
+          prestigeName = "Doom";
+          break;
         case T.Armageddon:
           prestigeName = "Armageddon";
+          break;
+        case T.Endgame:
+          prestigeName = "Endgame";
           break;
         default:
           throw Error("Unrecognized prestige layer in until loop");

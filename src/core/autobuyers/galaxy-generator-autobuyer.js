@@ -12,7 +12,7 @@ export class GalaxyGeneratorAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get interval() {
-    return 1000 / Math.max(Decimal.log10(player.records.bestEndgame.galaxies.add(1)) - 100, 1);
+    return 1000 / Decimal.max(Decimal.log10(player.records.bestEndgame.galaxies.add(1)).sub(100), 1).toNumber();
   }
 
   get isUnlocked() {

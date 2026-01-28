@@ -1,5 +1,3 @@
-import { DC } from "../../../constants";
-
 const thisInfinityMult = thisInfinity => {
   // All "this inf time" or "best inf time" mults are * 10
   const scaledInfinity = thisInfinity.times(10).plus(1);
@@ -62,7 +60,7 @@ export const normalTimeStudies = [
     formatEffect: value => {
       const oldVal = Decimal.pow(Decimal.log2(Replicanti.amount.clampMin(1)), 2);
       const newVal = oldVal.plus(value);
-      return formatX(newVal.div(oldVal).clampMin(1), 2, 2);
+      return formatX(newVal.div(oldVal.clampMin(1)), 2, 2);
     }
   },
   {
@@ -486,7 +484,7 @@ export const normalTimeStudies = [
     requirement: [191],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "All Galaxies are stronger based on your Time Shards",
-    effect: () => Math.pow(Currency.timeShards.value.clampMin(2).log2(), 0.008),
+    effect: () => Decimal.pow(Currency.timeShards.value.clampMin(2).log2(), 0.008).toNumber(),
     cap: 1.2,
     formatEffect: value => `+${formatPercents(value - 1, 3)}`
   },
@@ -566,7 +564,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [226],
     description: "You gain extra Replicanti Galaxies based on Replicanti amount",
-    effect: () => Decimal.floor(Replicanti.amount.exponent / 1000),
+    effect: () => Decimal.floor(Replicanti.amount.add(1).log10().div(1000)),
     formatEffect: value => `+${formatHybridLarge(value, 3)} RG`
   },
   {
@@ -588,7 +586,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [228],
     description: "Dimensional Sacrifice affects 4th Time Dimension with reduced effect",
-    effect: () => Math.max(Math.pow(Sacrifice.totalBoost.pLog10(), 20), 1),
+    effect: () => Decimal.max(Decimal.pow(Sacrifice.totalBoost.add(1).pLog10(), 20), 1).toNumber(),
     cap: 1e300,
     formatEffect: value => formatX(value, 2, 2)
   },

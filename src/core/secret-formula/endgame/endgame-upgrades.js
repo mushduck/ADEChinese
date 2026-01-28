@@ -1,5 +1,3 @@
-import { DC } from "../../constants";
-
 const rebuyable = props => {
   props.cost = () => getHybridCostScaling(
     player.endgame.rebuyables[props.id],
@@ -69,9 +67,9 @@ export const endgameUpgrades = [
     name: "Resourceful Rebirth",
     id: 6,
     cost: new Decimal(1e45),
-    requirement: () => `Have ${format(Decimal.NUMBER_MAX_VALUE)} Reality Shards without purchasing the 6th Galaxy Generator Upgrade`,
+    requirement: () => `Have ${format(DC.E280)} Reality Shards without purchasing the 6th Galaxy Generator Upgrade`,
     hasFailed: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount > 0,
-    checkRequirement: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount === 0 && Currency.realityShards.gte(Decimal.NUMBER_MAX_VALUE) && 
+    checkRequirement: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount === 0 && Currency.realityShards.gte(DC.E280) && 
       player.endgames >= 20,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
@@ -87,7 +85,7 @@ export const endgameUpgrades = [
     requirement: () => `Play for ${formatPostBreak("1e666")} Years`,
     checkRequirement: () => Time.totalTimePlayed.totalYears.gt(Decimal.pow(10, 666)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Outside of Celestial Realities, Game Speed is equal to maximum Game Speed this Endgame"
+    description: "Outside of Celestial Realities, Game Speed is equal to maximum Game Speed this Endgame if you enabled Celestial Matter"
   },
   {
     name: "Endgame Emolument",
@@ -103,7 +101,7 @@ export const endgameUpgrades = [
       if (new Decimal(value).gte(9999999999)) return "No Endgame generation";
       let endgames = 1;
       endgames = (ExpansionPack.enslavedPack.isBought
-        ? Math.floor(1 + Math.pow(Math.log10(Tesseracts.effectiveCount + 1), Math.log10(player.endgames + 1)))
+        ? Math.floor(1 + Math.pow(Math.log10(Math.min(Tesseracts.effectiveCount, 1000) * Math.max(Math.log10(Tesseracts.effectiveCount) - 2, 1) + 1), Math.log10(player.endgames + 1)))
         : 1);
       const timeStr = Time.bestEndgameRealTime.totalMilliseconds.lte(100)
         ? `${TimeSpan.fromMilliseconds(new Decimal(1000)).toStringShort()} (capped)`
@@ -142,7 +140,7 @@ export const endgameUpgrades = [
     id: 11,
     cost: new Decimal(1e50),
     requirement: () => `Reach ${format(1e50)} Celestial Matter`,
-    checkRequirement: () => Currency.celestialMatter.exponent >= 50,
+    checkRequirement: () => Currency.celestialMatter.value.add(1).log10().gte(50),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () =>
       `Delay the Infinity Challenge 8 Reward Hardcap by ${formatPow(9)},
@@ -188,10 +186,10 @@ export const endgameUpgrades = [
     cost: new Decimal(1e150),
     requirement: () => `Reach ${format(Decimal.pow(10, 1e33))} Antimatter outside Pelle`,
     hasFailed: () => Pelle.isDoomed,
-    checkRequirement: () => Currency.antimatter.exponent >= 1e33 && !Pelle.isDoomed,
+    checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(1e33) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Gain a power to the Antimatter Exponent based on Imaginary Machines`,
-    effect: () => 1 + (Math.pow(Math.log10(Decimal.log10(player.reality.imaginaryMachines.add(1)) + 1), 2) / 200),
+    effect: () => 1 + (Decimal.pow(Decimal.log10(Decimal.log10(player.reality.imaginaryMachines.add(1)).add(1)), 2).div(200)).toNumber(),
     formatEffect: value => formatPow(value, 2, 3)
   },
   {
@@ -278,7 +276,7 @@ export const endgameUpgrades = [
     checkRequirement: () => BreakEternityUpgrade.tesseractMultiplier.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Celestial Points delay the Free Tesseract Softcap",
-    effect: () => Math.pow(1 + Math.log10(Math.max(Decimal.log10(player.endgame.celestialPoints) / 200, 1)), 2),
+    effect: () => Math.pow(1 + Decimal.log10(Decimal.max(Decimal.log10(player.endgame.celestialPoints.add(1)).div(200), 1)).toNumber(), 2),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -290,7 +288,7 @@ export const endgameUpgrades = [
     checkRequirement: () => BreakEternityUpgrade.glyphSacrificeUncap.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "All Glyph Sacrifice Values are increased based on Celestial Matter",
-    effect: () => Math.pow(Math.max(Math.log10(Decimal.log10(player.endgame.celestialMatter)) / 2, 1), 1.5),
+    effect: () => Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.endgame.celestialMatter.add(1)).add(1)).div(2), 1), 1.5).toNumber(),
     formatEffect: value => formatPow(value, 2, 3)
   },
   {
@@ -302,7 +300,7 @@ export const endgameUpgrades = [
     checkRequirement: () => BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Glyph Level gains a multiplier based on Antimatter which applies after Instability",
-    effect: () => Math.min(Math.pow(Math.max(Math.log10(Decimal.log10(player.antimatter)) / 100, 1), 0.05), 1.2),
+    effect: () => Decimal.min(Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)).div(100), 1), 0.05), 1.2).toNumber(),
     formatEffect: value => formatX(value, 2, 2)
   },
 ];

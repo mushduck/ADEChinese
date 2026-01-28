@@ -1,4 +1,3 @@
-import { DC } from "../../constants";
 import wordShift from "../../word-shift";
 
 export const pelleRifts = {
@@ -10,7 +9,7 @@ export const pelleRifts = {
     baseEffect: x => `IP gain ${formatX(x, 2, 2)}`,
     additionalEffects: () => [PelleRifts.vacuum.milestones[2]],
     strike: () => PelleStrikes.infinity,
-    percentage: totalFill => Math.log10(totalFill.plus(1).log10() * 10 + 1) ** 2.5 / 100,
+    percentage: totalFill => Decimal.pow(Decimal.log10(totalFill.plus(1).log10().times(10).add(1)), 2.5).div(100).toNumber(),
     percentageToFill: percentage => Decimal.pow(10,
       Decimal.pow(10, (percentage * 100) ** (1 / 2.5)).div(10).minus(0.1)
     ).minus(1),
@@ -40,7 +39,7 @@ export const pelleRifts = {
         resource: "vacuum",
         requirement: 0.4,
         description: () => `${wordShift.wordCycle(PelleRifts.vacuum.name)} also affects EP gain`,
-        effect: () => Decimal.pow(4, PelleRifts.vacuum.totalFill.log10() / 2 / 308 + 3),
+        effect: () => Decimal.pow(4, PelleRifts.vacuum.totalFill.add(1).log10().div(2).div(308).add(3)),
         formatEffect: x => `EP gain ${formatX(x, 2, 2)}`
       },
     ],
@@ -56,11 +55,11 @@ export const pelleRifts = {
     additionalEffects: () => [PelleRifts.decay.milestones[0], PelleRifts.decay.milestones[2]],
     strike: () => PelleStrikes.powerGalaxies,
     // 0 - 1
-    percentage: totalFill => totalFill.plus(1).log10() * 0.05 / 100,
+    percentage: totalFill => totalFill.plus(1).log10().times(0.05).div(100).toNumber(),
     // 0 - 1
     percentageToFill: percentage => Decimal.pow(10, 20 * percentage * 100).minus(1),
     effect: totalFill => (PelleRifts.chaos.milestones[0].canBeApplied
-      ? Decimal.sqrt(2000 + 1) : Decimal.sqrt(totalFill.plus(1).log10() + 1)),
+      ? Decimal.sqrt(2000 + 1) : Decimal.sqrt(totalFill.plus(1).log10().add(1))),
     currency: () => Currency.replicanti,
     galaxyGeneratorThreshold: 1e7,
     milestones: [
@@ -149,9 +148,9 @@ export const pelleRifts = {
     baseEffect: x => `EP formula: log(x)/${formatInt(308)} ➜ log(x)/${formatFloat(308 - x.toNumber(), 2)}`,
     additionalEffects: () => [PelleRifts.recursion.milestones[0], PelleRifts.recursion.milestones[1]],
     strike: () => PelleStrikes.ECs,
-    percentage: totalFill => totalFill.plus(1).log10() ** 0.4 / 4000 ** 0.4,
+    percentage: totalFill => Decimal.pow(totalFill.plus(1).log10(), 0.4).div(4000 ** 0.4).toNumber(),
     percentageToFill: percentage => Decimal.pow(10, percentage ** 2.5 * 4000).minus(1),
-    effect: totalFill => new Decimal(58 * totalFill.plus(1).log10() ** 0.2 / 4000 ** 0.2),
+    effect: totalFill => Decimal.pow(totalFill.plus(1).log10(), 0.2).div(4000 ** 0.2).times(58),
     currency: () => Currency.eternityPoints,
     galaxyGeneratorThreshold: 1e10,
     milestones: [
@@ -167,7 +166,7 @@ export const pelleRifts = {
         resource: "recursion",
         requirement: 0.15,
         description: "Infinity Dimensions are stronger based on EC completions",
-        effect: () => Decimal.pow("1e1500", ((EternityChallenges.completions - 25) / 20) ** 1.7).max(1),
+        effect: () => Decimal.pow("1e1500", (Math.max(EternityChallenges.completions - 25, 0) / 20) ** 1.7).max(1),
         formatEffect: x => `Infinity Dimensions ${formatX(x)}`
       },
       {
@@ -186,9 +185,9 @@ export const pelleRifts = {
     baseEffect: x => `All Dimensions ${formatPow(x, 2, 3)}`,
     additionalEffects: () => [PelleRifts.paradox.milestones[2]],
     strike: () => PelleStrikes.dilation,
-    percentage: totalFill => totalFill.plus(1).log10() / 100,
+    percentage: totalFill => totalFill.plus(1).log10().div(100).toNumber(),
     percentageToFill: percentage => Decimal.pow10(percentage * 100).minus(1),
-    effect: totalFill => new Decimal(1 + totalFill.plus(1).log10() * 0.004),
+    effect: totalFill => totalFill.plus(1).log10().times(0.004).add(1),
     currency: () => Currency.dilatedTime,
     galaxyGeneratorThreshold: 1e5,
     milestones: [

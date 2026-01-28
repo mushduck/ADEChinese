@@ -1,5 +1,3 @@
-import { DC } from "../../constants";
-
 export const alchemyResources = {
   // T1 resources (Non-Effarig "base" resources)
   "power": {

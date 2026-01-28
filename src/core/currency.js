@@ -1,6 +1,3 @@
-import { DC } from "./constants";
-
-
 /**
  * @abstract
  */
@@ -125,6 +122,7 @@ export class Currency {
   }
 
   subtract(amount) {
+    if (new Decimal(amount).gte(DC.E9E15)) return;
     this.value = this.operations.max(this.operations.subtract(this.value, amount), 0);
   }
 
@@ -158,6 +156,7 @@ export class Currency {
 
   purchase(cost) {
     if (!this.gte(cost)) return false;
+    if (new Decimal(cost).gte(DC.E9E15)) return true;
     this.subtract(cost);
     return true;
   }
@@ -190,8 +189,9 @@ class NumberCurrency extends Currency {
  */
 class DecimalCurrency extends Currency {
   get operations() { return MathOperations.decimal; }
-  get mantissa() { return this.value.mantissa; }
-  get exponent() { return this.value.exponent; }
+  get sign() { return this.value.sign; }
+  get mag() { return this.value.mag; }
+  get layer() { return this.value.layer; }
   get startingValue() { return DC.D0; }
 }
 window.DecimalCurrency = DecimalCurrency;
@@ -264,7 +264,7 @@ Currency.antimatter = new class extends DecimalCurrency {
 Currency.matter = new class extends DecimalCurrency {
   get value() { return player.matter; }
   set value(value) {
-    player.matter = Decimal.min(value, Decimal.MAX_VALUE);
+    player.matter = Decimal.min(value, DC.BEMAX);
   }
 }();
 
@@ -566,7 +566,7 @@ Currency.unnerfedCelestialMatter = new class extends DecimalCurrency {
 Currency.celestialMatter = new class extends DecimalCurrency {
   get value() { return player.endgame.celestialMatter; }
   set value(value) {
-    const newValue = Decimal.min(value, Decimal.NUMBER_MAX_VALUE);
+    const newValue = Decimal.min(value, DC.NUMMAX);
     player.endgame.celestialMatter = newValue;
   }
 }();
@@ -607,7 +607,15 @@ Currency.endgameSkills = new class extends DecimalCurrency {
 Currency.galacticPower = new class extends DecimalCurrency {
   get value() { return player.endgame.galacticPower; }
   set value(value) {
-    const newValue = Decimal.min(value, Decimal.NUMBER_MAX_VALUE);
+    const newValue = Decimal.min(value, DC.NUMMAX);
     player.endgame.galacticPower = newValue;
+  }
+}();
+
+Currency.etherealPower = new class extends DecimalCurrency {
+  get value() { return player.endgame.ethereal.power; }
+  set value(value) {
+    const newValue = new Decimal(value);
+    player.endgame.ethereal.power = newValue;
   }
 }();

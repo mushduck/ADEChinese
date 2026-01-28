@@ -78,8 +78,8 @@ CodeMirror.defineSimpleMode("automato", {
       token: "keyword",
       next: "startUnlock"
     },
-    { regex: /infinity\S+|eternity\S+|reality\S+|armageddon\S+|pause\S+|restart\S+/ui, token: "error", next: "commandDone" },
-    { regex: /infinity|eternity|reality|armageddon/ui, token: "keyword", next: "prestige" },
+    { regex: /infinity\S+|eternity\S+|reality\S+|doom\S+|armageddon\S+|endgame\S+|pause\S+|restart\S+/ui, token: "error", next: "commandDone" },
+    { regex: /infinity|eternity|reality|doom|armageddon|endgame/ui, token: "keyword", next: "prestige" },
     { regex: /pause|restart/ui, token: "keyword", next: "commandDone" },
     { regex: /\}/ui, dedent: true },
     { regex: /\S+\s/ui, token: "error", next: "commandDone" },

@@ -1,5 +1,3 @@
-import { DC } from "../../constants";
-
 export const effarigUnlocks = {
   adjuster: {
     id: 0,

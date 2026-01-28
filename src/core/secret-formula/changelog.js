@@ -9,6 +9,57 @@ export const changelog = [
    * }
    */
   {
+    date: [2026, 1, 27],
+    name: "v0.3.1: The Ethereal Rebalance",
+    info: `
+Well this didn't take long.
+<br>
+<br>
+<b><i>Next update is the big one...</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>The Ethereal</li>
+<li>The break_eternity.js framework</li>
+<li>New Notations</li>
+<li>A reward to Achievement 198</li>
+<li>Bulk Ascension Autobuyers</li>
+<li>Metaclicks</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>Endgame Milestone requirements</li>
+<li>Added a softcap to Endgame Emolument</li>
+<li>Added a softcap to Endgame Milestone 10000</li>
+<li>Bulk Dilation Upgrades always tick</li>
+<li>Small time formatting</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>General overflow</li>
+<li>Negative Antimatter</li>
+<li>Decimalized a bunch of stuff</li>
+<li>Fixed costs</li>
+<li>Made expensive stuff not consume all your resource</li>
+<li>Fixed Teresa's Canister eating all the Reality Machines</li>
+<li>Values above e9e15 no longer reset to e9e15 on game refresh</li>
+<li>Fixed Autobuyers</li>
+<li>Perk Upgrades not resetting properly</li>
+<li>Fixed Charged IUs</li>
+<li>Made ping no longer inflate to extreme values such as LLL10 and P3</li>
+<li>Fixed Bulk Singularity Theshold Autobuyer not ticking at the beginning of Endgames</li>
+<li>Fixed Doomed Particle rounding errors</li>
+<li>Fixed Endgame Autobuyer</li>
+<li>Fixed Glyph effects in Pelle not stacking</li>
+<li>A lot moer tpyos</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2026, 1, 9],
     name: "v0.3.0: The Greater Reimagining II",
     info: `

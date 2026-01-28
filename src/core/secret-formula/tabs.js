@@ -502,6 +502,15 @@ export const tabs = [
         condition: () => Pelle.isUnlocked,
         id: 7,
         hidable: true,
+      },
+      {
+        key: "alpha",
+        name: "Alpha",
+        symbol: "α",
+        component: "AlphaTab",
+        condition: () => Alpha.isUnlocked,
+        id: 8,
+        hidable: true,
       }
     ]
   },
@@ -604,7 +613,7 @@ export const tabs = [
         name: "The Ethereal",
         symbol: "<i class='fas fa-meteor'></i>",
         component: "EtherealTab",
-        condition: () => GalacticPowers.ethrealUnlock.isUnlocked,
+        condition: () => Ethereal.isUnlocked,
         id: 8,
         hidable: true,
       },

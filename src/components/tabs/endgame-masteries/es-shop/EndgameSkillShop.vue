@@ -109,7 +109,7 @@ export default {
       >
         <button
           class="l-es-save-load-btn c-es-buy-button c-es-buy-button--unlocked"
-          onClick="Modal.preferredTree.show()"
+          onClick="Modal.preferredMasteryTree.show()"
         >
           <i class="fas fa-cog" />
         </button>

@@ -50,14 +50,20 @@ export class BulkSingularityAutobuyerState extends AutobuyerState {
   }
 
   tick() {
-    if (Singularity.timePerCondense.gt(this.upperBound) && this.data.hasUpperBound && player.celestials.laitela.singularityCapIncreases.gt(0)) {
-      const bulk = Math.floor(Decimal.log10(Singularity.timePerCondense.div(this.upperBound))) + 1;
-      player.celestials.laitela.singularityCapIncreases = Decimal.max(player.celestials.laitela.singularityCapIncreases.sub(bulk), 0);
+    if (player.celestials.laitela.singularities.lte(10)) {
+      player.celestials.laitela.singularityCapIncreases = DC.E1;
     }
 
-    if (Singularity.timePerCondense.lt(this.lowerBound) && this.data.hasLowerBound) {
-      const bulk = Math.floor(Decimal.log10(Singularity.timePerCondense.div(this.lowerBound).recip())) + 1;
-      player.celestials.laitela.singularityCapIncreases = player.celestials.laitela.singularityCapIncreases.add(bulk);
+    if (player.celestials.laitela.singularities.gt(10)) {
+      if (Singularity.timePerCondense.gt(this.upperBound) && this.data.hasUpperBound && player.celestials.laitela.singularityCapIncreases.gt(0)) {
+        const bulk = Decimal.floor(Decimal.log10(Singularity.timePerCondense.div(this.upperBound))).add(1);
+        player.celestials.laitela.singularityCapIncreases = Decimal.max(player.celestials.laitela.singularityCapIncreases.sub(bulk), 0);
+      }
+
+      if (Singularity.timePerCondense.lt(this.lowerBound) && this.data.hasLowerBound) {
+        const bulk = Decimal.floor(Decimal.log10(Singularity.timePerCondense.div(this.lowerBound).recip())).add(1);
+        player.celestials.laitela.singularityCapIncreases = player.celestials.laitela.singularityCapIncreases.add(bulk);
+      }
     }
   }
 }

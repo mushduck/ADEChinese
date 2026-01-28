@@ -26,19 +26,19 @@ export const endgameMilestones = {
          : "(You have not yet reached this milestone)");
     }
   },
-  gameSpeedUncap: {
-    endgames: 10,
-    reward: () => {
-      return `Remove the ${format(1e300, 2, 2)} Game Speed Hardcap`;
-    }
-  },
   fasterGalaxies: {
-    endgames: 15,
+    endgames: 10,
     reward: "Unlock a new Galaxy Generator Upgrade"
   },
   remnantFormula: {
-    endgames: 25,
+    endgames: 15,
     reward: "Improve the Remnant Formula (see Remnant Gain Factors in the Pelle subtab)"
+  },
+  gameSpeedUncap: {
+    endgames: 25,
+    reward: () => {
+      return `Remove the ${format(1e300, 2, 2)} Game Speed Hardcap`;
+    }
   },
   celestialEarlyUnlock: {
     endgames: 50,
@@ -60,7 +60,7 @@ export const endgameMilestones = {
     reward: () => {
       return "Endgames boost Galaxy Production in Pelle " + 
         (player.endgames >= 250
-         ? `(Currently: ${formatX(Math.pow(10, Math.min(Currency.endgames.value / 200, 50)) * Math.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 50, 0)), 2, 2)})`
+         ? `(Currently: ${formatX(Decimal.pow(10, Math.min(Currency.endgames.value / 200, 50)).times(Decimal.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 50, 0))), 2, 2)})`
          : "(You have not yet reached this milestone)");
     }
   },
@@ -73,7 +73,7 @@ export const endgameMilestones = {
     reward: () => {
       return "Gain a power to Antimatter Production based on Endgames, which is stronger in Pelle " + 
         (player.endgames >= 10000
-         ? `(Currently: ${formatPow(Pelle.isDoomed ? 1 + (Math.log10(Currency.endgames.value + 1) / 80) : 1 + (Math.log10(Currency.endgames.value + 1) / 200), 2, 3)})`
+         ? `(Currently: ${formatPow(Pelle.isDoomed ? 1 + (Math.log10(Math.min(Currency.endgames.value, 1e6) * Math.max(Math.log2(Currency.endgames.value + 1) - Math.log2(5e5), 1) + 1) / 80) : 1 + (Math.log10(Math.min(Currency.endgames.value, 1e6) * Math.max(Math.log2(Currency.endgames.value + 1) - Math.log2(5e5), 1) + 1) / 200), 2, 3)})`
          : "(You have not yet reached this milestone)");
     }
   },

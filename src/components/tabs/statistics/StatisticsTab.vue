@@ -12,6 +12,7 @@ export default {
       isDoomed: false,
       realTimeDoomed: TimeSpan.zero,
       totalAntimatter: new Decimal(0),
+      totalAntimatterOutsideDoom: new Decimal(0),
       realTimePlayed: TimeSpan.zero,
       timeSinceCreation: 0,
       uniqueNews: 0,
@@ -87,15 +88,15 @@ export default {
         : "no Eternities";
     },
     realityCountString() {
-      const num = this.reality.count;
-      return num > 0
-        ? `${num} ${pluralize("Reality", num)}`
+      const num = new Decimal(this.reality.count);
+      return num.gt(0)
+        ? `${this.formatDecimalAmount(num)} ${pluralize("Reality", num.floor())}`
         : "no Realities";
     },
     endgameCountString() {
-      const num = this.endgame.count;
-      return num > 0
-        ? `${num} ${pluralize("Endgame", num)}`
+      const num = new Decimal(this.endgame.count);
+      return num.gt(0)
+        ? `${this.formatDecimalAmount(num)} ${pluralize("Endgame", num.floor())}`
         : "no Endgames";
     },
     fullGameCompletions() {
@@ -112,6 +113,7 @@ export default {
     update() {
       const records = player.records;
       this.totalAntimatter.copyFrom(records.totalAntimatter);
+      this.totalAntimatterOutsideDoom.copyFrom(player.records.totalAntimatterOutsideDoom);
       this.realTimePlayed.setFrom(new Decimal(records.realTimePlayed));
       this.fullTimePlayed = TimeSpan.fromMilliseconds(
         new Decimal(records.previousRunRealTime + records.realTimePlayed));
@@ -229,6 +231,9 @@ export default {
       </div>
       <div class="c-stats-tab-general">
         <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter.</div>
+        <div v-if="endgame.isUnlocked">
+          You have made a total of {{ format(totalAntimatterOutsideDoom, 2, 1) }} antimatter outside Doom.
+        </div>
         <div v-if="endgame.isUnlocked">
           You have made a total of {{ format(endgame.totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
         </div>

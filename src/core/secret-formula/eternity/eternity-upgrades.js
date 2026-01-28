@@ -1,5 +1,3 @@
-import { DC } from "../../constants";
-
 export const eternityUpgrades = {
   idMultEP: {
     id: 1,
@@ -20,9 +18,9 @@ export const eternityUpgrades = {
       const base = eterPreCap / 200 + 1;
       const pow = Math.log(eterPreCap * 2 + 1) / log4;
       const multPreCap = Math.pow(base, pow);
-      const eterPostCap = Currency.eternities.value.sub(1e5);
+      const eterPostCap = Decimal.max(Currency.eternities.value.sub(1e5), 0);
       const mult1 = eterPostCap.divide(200).plus(1);
-      const mult2 = eterPostCap.times(2).plus(1).log(Math.E) / log4;
+      const mult2 = eterPostCap.times(2).plus(1).log(Math.E).div(log4);
       const multPostCap = mult1.times(mult2).clampMin(1);
       return multPostCap.times(multPreCap);
     },

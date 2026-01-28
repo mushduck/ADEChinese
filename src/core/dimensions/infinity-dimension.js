@@ -1,5 +1,3 @@
-import { DC } from "../constants";
-
 import { DimensionState } from "./dimension";
 
 export function infinityDimensionCommonMultiplier() {
@@ -168,7 +166,7 @@ class InfinityDimensionState extends DimensionState {
     mult = mult.powEffectOf(Ra.unlocks.allDimPowTT);
     mult = mult.powEffectOf(Ra.unlocks.infinityDimPower);
 
-    if (ExpansionPack.pellePack.isBought) mult = mult.pow(1 + Math.pow(Decimal.log10(player.records.bestEndgame.galaxies) / 100, 3));
+    if (ExpansionPack.pellePack.isBought) mult = mult.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 3).add(1));
 
     if (player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed())) {
       mult = dilatedValueOf(mult);
@@ -188,7 +186,7 @@ class InfinityDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
-    if (mult.gte(InfinityDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10() / Decimal.log10(InfinityDimensions.OVERFLOW), 1 / InfinityDimensions.compressionMagnitude).times(Decimal.log10(InfinityDimensions.OVERFLOW)));
+    if (mult.gte(InfinityDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(InfinityDimensions.OVERFLOW)), 1 / InfinityDimensions.compressionMagnitude).times(Decimal.log10(InfinityDimensions.OVERFLOW)));
 
     return mult;
   }

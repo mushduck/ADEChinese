@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     update() {
-      this.canEndgame = player.celestials.pelle.records.totalEndgameAntimatter.log10() >= 9e15;
+      this.canEndgame = player.celestials.pelle.records.totalEndgameAntimatter.add(1).log10().gte(9e15);
       this.isDoomed = Pelle.isDoomed;
     },
     resetEndgame() {

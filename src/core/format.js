@@ -8,7 +8,9 @@ function isEND() {
 
 window.format = function format(value, places = 0, placesUnder1000 = 0) {
   if (isEND()) return "END";
-  return Notations.current.format(value, places, placesUnder1000, 3);
+  if (!(value instanceof Decimal)) value = new Decimal(value);
+  if (value.lt("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
+  return LNotations.current.formatLDecimal(value, 4);
 };
 
 window.formatInt = function formatInt(value) {
@@ -32,6 +34,7 @@ window.formatFloat = function formatFloat(value, digits) {
 window.formatPostBreak = function formatPostBreak(value, places, placesUnder1000) {
   if (isEND()) return "END";
   const notation = Notations.current;
+  const lNotation = LNotations.current;
   // This is basically just a copy of the format method from notations library,
   // with the pre-break case removed.
   if (typeof value === "number" && !Number.isFinite(value)) {
@@ -40,20 +43,26 @@ window.formatPostBreak = function formatPostBreak(value, places, placesUnder1000
 
   const decimal = Decimal.fromValue_noAlloc(value);
 
-  if (decimal.exponent < -300) {
-    return decimal.sign() < 0
+  if (decimal.eq(0)) return notation.formatUnder1000(0, placesUnder1000);
+
+  if (decimal.abs().log10().lt(-300)) {
+    return decimal.sign < 0
       ? notation.formatVerySmallNegativeDecimal(decimal.abs(), placesUnder1000)
       : notation.formatVerySmallDecimal(decimal, placesUnder1000);
   }
 
-  if (decimal.exponent < 3) {
+  if (decimal.abs().log10().lt(3)) {
     const number = decimal.toNumber();
     return number < 0
       ? notation.formatNegativeUnder1000(Math.abs(number), placesUnder1000)
       : notation.formatUnder1000(number, placesUnder1000);
   }
 
-  return decimal.sign() < 0
+  if (decimal.layer >= 2) {
+    return lNotation.formatLDecimal(decimal, 4);
+  }
+
+  return decimal.sign < 0
     ? notation.formatNegativeDecimal(decimal.abs(), places)
     : notation.formatDecimal(decimal, places);
 };

@@ -1,5 +1,4 @@
 import { GameMechanicState, SetPurchasableMechanicState } from "./game-mechanics";
-import { DC } from "./constants";
 import FullScreenAnimationHandler from "./full-screen-animation-handler";
 
 function giveEternityRewards(auto) {
@@ -323,33 +322,33 @@ class EPMultiplierState extends GameMechanicState {
   }
 
   costInv() {
-    let tempVal = 0;
-    let bulk = 1;
+    let tempVal = DC.D0;
+    let bulk = DC.D1;
     let cur = Currency.eternityPoints.value.max(1);
     if (cur.gt(this.costIncreaseThresholds[3]) && !EndgameMastery(152).isBought) {
       cur = Decimal.log(cur.div(500), 1e3);
-      return Math.max(Math.floor(Math.pow(cur + Math.pow(1332, 1.2), 1 / 1.2)), 1332);
+      return Decimal.max(Decimal.floor(Decimal.pow(cur.add(Decimal.pow(1332, 1.2)), 1 / 1.2)), 1332).toNumber();
       // eslint-disable-next-line no-else-return
     }
     if (cur.gt(this.costIncreaseThresholds[2])) {
-      bulk = Math.floor(this.costIncreaseThresholds[2].div(500).log(500));
+      bulk = Decimal.floor(this.costIncreaseThresholds[2].div(500).log(500));
       tempVal = DC.E3.pow(bulk).times(500);
       cur = cur.div(tempVal.max(1 / 1e3));
-      return Math.floor(bulk + cur.log(1e3) + 1);
+      return Decimal.floor(bulk.add(cur.log(1e3)).add(1)).toNumber();
     }
     if (cur.gt(this.costIncreaseThresholds[1])) {
-      bulk = Math.floor(this.costIncreaseThresholds[1].div(500).log(100));
+      bulk = Decimal.floor(this.costIncreaseThresholds[1].div(500).log(100));
       tempVal = (DC.E2.times(5)).pow(bulk).times(500);
       cur = cur.div(tempVal.max(1 / 500));
-      return Math.floor(bulk + cur.log(500) + 1);
+      return Decimal.floor(bulk.add(cur.log(500)).add(1)).toNumber();
     }
     if (cur.gt(this.costIncreaseThresholds[0])) {
-      bulk = Math.floor(this.costIncreaseThresholds[0].div(500).log(50));
+      bulk = Decimal.floor(this.costIncreaseThresholds[0].div(500).log(50));
       tempVal = DC.E2.pow(bulk).times(500);
       cur = cur.div(tempVal.max(1 / 100));
-      return Math.floor(bulk + cur.log(100) + 1);
+      return Decimal.floor(bulk.add(cur.log(100)).add(1)).toNumber();
     }
-    return Math.floor(cur.div(500).max(1 / 50).log(50) + 1);
+    return Decimal.floor(cur.div(500).max(1 / 50).log(50).add(1)).toNumber();
   }
 
   buyMax(auto) {
@@ -382,7 +381,7 @@ class EPMultiplierState extends GameMechanicState {
   get costIncreaseThresholds() {
     return [
       DC.E100.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay),
-      Decimal.NUMBER_MAX_VALUE.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay),
+      DC.NUMMAX.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay),
       DC.E1300.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay),
       DC.E4000.powEffectsOf(BreakEternityUpgrade.epMultiplierDelay)
     ];

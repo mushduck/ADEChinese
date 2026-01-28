@@ -9,7 +9,7 @@ export default {
   computed: {
     upgrades: () => EndgameUpgrades.all,
     costScalingTooltip: () => `Prices start increasing faster above ${format(1e100)} CP and then even faster
-      above ${format(Decimal.NUMBER_MAX_VALUE, 1)} CP`,
+      above ${format(DC.NUMMAX, 1)} CP`,
     possibleTooltip: () => `Checkered upgrades are impossible to unlock this Endgame. Striped upgrades are
       still possible.`,
     lockTooltip: () => `This will only function if you have not already failed the condition or

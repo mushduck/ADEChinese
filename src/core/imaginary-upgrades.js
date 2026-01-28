@@ -1,5 +1,4 @@
 import { BitPurchasableMechanicState, RebuyableMechanicState } from "./game-mechanics";
-import { DC } from "./constants";
 
 class ImaginaryUpgradeState extends BitPurchasableMechanicState {
   constructor(config) {
@@ -112,6 +111,9 @@ class ImaginaryUpgradeState extends BitPurchasableMechanicState {
     }
     if (this.id === 25) {
       TabNotification.pelleUnlock.tryTrigger();
+    }
+    if (this.id === 30) {
+      TabNotification.alphaUnlock.tryTrigger();
     }
   }
 }

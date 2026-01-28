@@ -50,15 +50,15 @@ export default {
         ],
         [0, 255, 0]
       ];
-      const ratio = this.gainedIP.log10() / this.currentIP.log10();
+      const ratio = this.gainedIP.log10().div(this.currentIP.log10());
       const interFn = index => {
-        if (ratio < 0.9) return stepRGB[0][index];
-        if (ratio < 1) {
-          const r = 10 * (ratio - 0.9);
+        if (ratio.lt(0.9)) return stepRGB[0][index];
+        if (ratio.lt(1)) {
+          const r = (ratio.sub(0.9)).times(10).toNumber();
           return Math.round(stepRGB[0][index] * (1 - r) + stepRGB[1][index] * r);
         }
-        if (ratio < 1.1) {
-          const r = 10 * (ratio - 1);
+        if (ratio.lt(1.1)) {
+          const r = (ratio.sub(1)).times(10).toNumber();
           return Math.round(stepRGB[1][index] * (1 - r) + stepRGB[2][index] * r);
         }
         return stepRGB[2][index];

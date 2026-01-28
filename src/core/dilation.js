@@ -1,5 +1,4 @@
 import { RebuyableMechanicState, SetPurchasableMechanicState } from "./game-mechanics";
-import { DC } from "./constants";
 import FullScreenAnimationHandler from "./full-screen-animation-handler";
 import { SpeedrunMilestones } from "./speedrun";
 
@@ -78,7 +77,11 @@ export function buyDilationUpgrade(id, bulk = 1) {
     buying = Math.clampMax(buying, bulk);
     buying = Math.clampMax(buying, upgrade.purchaseCap - upgAmount);
     if (upgrade.cost.lt(DilationUpgradeScaling.PRIMARY_SCALING)) buying = Math.clampMax(buying, upgrade.capIncreaseAt - upgAmount);
-    if (upgrade.cost.gte(DilationUpgradeScaling.PRIMARY_SCALING)) buying = 1;
+    const hasBoughtOverThreshold = Math.max(upgAmount - upgrade.capIncreaseAt, 0);
+    const exactCostAtThreshold = Decimal.multiply(upgrade.config.initialCost, Decimal.pow(upgrade.config.increment, upgrade.capIncreaseAt));
+    const dtOverThreshold = Decimal.log10(Currency.dilatedTime.value.div(exactCostAtThreshold)).toNumber();
+    const canBuyOverThreshold = Math.floor(Math.sqrt(((dtOverThreshold / Math.log10(upgrade.config.increment)) * 2) + 0.25) - 0.5);
+    if (upgrade.cost.gte(DilationUpgradeScaling.PRIMARY_SCALING)) buying = canBuyOverThreshold - hasBoughtOverThreshold + 1;
     const cost = Decimal.sumGeometricSeries(buying, upgrade.config.initialCost, upgrade.config.increment, upgAmount);
     Currency.dilatedTime.subtract(cost);
     player.dilation.rebuyables[id] += buying;
@@ -138,17 +141,18 @@ export function getDilationGainPerSecond() {
     if (PelleCelestialUpgrade.raNameless4.isBought) pelleExtraDT = pelleExtraDT.timesEffectOf(Ra.unlocks.peakGamespeedDT);
     if (PelleDestructionUpgrade.destroyedGlyphEffects.isBought) pelleExtraDT = pelleExtraDT.times(getAdjustedGlyphEffect("dilationDT"));
     if (PelleDestructionUpgrade.destroyedGlyphEffects.isBought) pelleExtraDT = pelleExtraDT.times(
-      Math.clampMin(Decimal.log10(Replicanti.amount) * getAdjustedGlyphEffect("replicationdtgain"), 1));
+      Decimal.clampMin(Decimal.log10(Replicanti.amount.add(1)).times(getAdjustedGlyphEffect("replicationdtgain")), 1));
     if (!PelleDestructionUpgrade.disableDTNerf.isBought) pelleExtraDT = pelleExtraDT.div(1e5);
     if (EndgameMilestone.realityShardDTBoost.isReached) pelleExtraDT = pelleExtraDT.times(Currency.realityShards.value.plus(1));
     const tachyonEffect = Currency.tachyonParticles.value.pow(PelleRifts.paradox.milestones[1].effectOrDefault(1));
     let dtRate = new Decimal(tachyonEffect)
       .timesEffectsOf(DilationUpgrade.dtGain, DilationUpgrade.dtGainPelle, DilationUpgrade.flatDilationMult)
       .times(ShopPurchase.dilatedTimePurchases.currentMult ** 0.5)
-      .times(Pelle.specialGlyphEffect.dilation).times(pelleExtraDT);
+      .times(Pelle.specialGlyphEffect.dilation).times(pelleExtraDT)
+      .times(getGameSpeedupForDisplay());
     if (dtRate.gte(DilationSoftcapStart.PRIMARY_THRESHOLD)) {
-      dtRate = Decimal.pow(10, (((Decimal.log10(dtRate) - Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD)) / 10) +
-        Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD)));
+      dtRate = Decimal.pow(10, (((Decimal.log10(dtRate).sub(Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))).div(10)).add(
+        Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))));
     }
     return dtRate;
   }
@@ -165,12 +169,13 @@ export function getDilationGainPerSecond() {
   dtRate = dtRate.times(getAdjustedGlyphEffect("dilationDT"));
   dtRate = dtRate.times(ShopPurchase.dilatedTimePurchases.currentMult);
   dtRate = dtRate.times(
-    Math.clampMin(Decimal.log10(Replicanti.amount) * getAdjustedGlyphEffect("replicationdtgain"), 1));
-  if (Enslaved.isRunning && !dtRate.eq(0)) dtRate = Decimal.pow10(Math.pow(dtRate.plus(1).log10(), 0.85) - 1);
+    Decimal.clampMin(Decimal.log10(Replicanti.amount.add(1)).times(getAdjustedGlyphEffect("replicationdtgain")), 1));
+  if (Enslaved.isRunning && !dtRate.eq(0)) dtRate = Decimal.pow10(Decimal.pow(dtRate.plus(1).log10(), 0.85).sub(1));
   if (V.isRunning) dtRate = dtRate.pow(0.5);
+  dtRate = dtRate.times(getGameSpeedupForDisplay());
   if (dtRate.gte(DilationSoftcapStart.PRIMARY_THRESHOLD)) {
-    dtRate = Decimal.pow(10, (((Decimal.log10(dtRate) - Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD)) / 10) +
-      Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD)));
+    dtRate = Decimal.pow(10, (((Decimal.log10(dtRate).sub(Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))).div(10)).add(
+      Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))));
   }
   return dtRate;
 }
@@ -218,7 +223,7 @@ export function getBaseTP(antimatter, requireEternity) {
   const am = (isInCelestialReality() || Pelle.isDoomed)
     ? antimatter
     : Ra.unlocks.unlockDilationStartingTP.effectOrDefault(antimatter);
-  let baseTP = Decimal.pow(Decimal.log10(am) / 160, 1.8);
+  let baseTP = Decimal.pow(Decimal.log10(am).div(160), 1.8);
   if (Enslaved.isRunning) baseTP = baseTP.pow(Enslaved.tachyonNerf);
   baseTP = baseTP.powEffectsOf(
     BreakEternityUpgrade.tachyonParticlePow
@@ -252,25 +257,24 @@ export function getTachyonReq() {
 }
 
 export function getDilationTimeEstimate(goal) {
-  const currentDTGain = getDilationGainPerSecond();
-  const rawDTGain = currentDTGain.times(getGameSpeedupForDisplay());
+  const rawDTGain = getDilationGainPerSecond();
   const currentDT = Currency.dilatedTime.value;
-  if (currentDTGain.eq(0)) return null;
-  if (PelleRifts.paradox.isActive) {
+  if (rawDTGain.eq(0)) return null;
+  if (PelleRifts.paradox.isActive && !PelleRifts.paradox.isMaxed) {
     const drain = Pelle.riftDrainPercent;
     const goalNetRate = rawDTGain.minus(Decimal.multiply(goal, drain));
     const currNetRate = rawDTGain.minus(currentDT.times(drain));
     if (goalNetRate.lt(0)) return "Never affordable due to Rift drain";
-    return TimeSpan.fromSeconds(new Decimal(currNetRate.div(goalNetRate).ln() / drain)).toTimeEstimate();
+    return TimeSpan.fromSeconds(currNetRate.div(goalNetRate).ln().div(drain)).toTimeEstimate();
   }
   return TimeSpan.fromSeconds(Decimal.sub(goal, currentDT)
     .div(rawDTGain)).toTimeEstimate();
 }
 
 export function dilatedValueOf(value) {
-  const log10 = value.log10();
+  const log10 = value.max(1).log10();
   const dilationPenalty = 0.75 * Effects.product(DilationUpgrade.dilationPenalty);
-  return Decimal.pow10(Math.sign(log10) * Math.pow(Math.abs(log10), dilationPenalty));
+  return Decimal.pow10(new Decimal(Decimal.sign(log10)).times(Decimal.pow(Decimal.abs(log10), dilationPenalty)));
 }
 
 class DilationUpgradeState extends SetPurchasableMechanicState {
@@ -339,5 +343,5 @@ export const DilationUpgradeScaling = {
 };
 
 export const DilationSoftcapStart = {
-  PRIMARY_THRESHOLD: DC.E15000
+  PRIMARY_THRESHOLD: DC.E20000
 };

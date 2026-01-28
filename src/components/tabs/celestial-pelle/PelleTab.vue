@@ -38,7 +38,7 @@ export default {
       this.isDoomed = Pelle.isDoomed;
       if (!this.isDoomed) {
         this.completedRows = Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked));
-        this.cappedResources = AlchemyResources.all.countWhere(r => r.capped);
+        this.cappedResources = AlchemyResources.all.countWhere(r => r.amount >= 25000);
         this.canEnterPelle = this.completedRows === this.totalRows &&
           this.cappedResources === this.totalAlchemyResources;
       }
