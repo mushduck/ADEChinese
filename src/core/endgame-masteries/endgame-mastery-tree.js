@@ -134,7 +134,6 @@ export class EndgameMasteryTree {
         }
       }
     }
-    return output;
   }
 
   masteryRangeToArray(firstNumber, lastNumber) {

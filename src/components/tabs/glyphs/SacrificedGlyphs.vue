@@ -30,7 +30,7 @@ export default {
       return this.hideAlteration ? "far fa-plus-square" : "far fa-minus-square";
     },
     isDoomed() {
-      return (Pelle.isDisabled("glyphsac") && !PelleRealityUpgrade.scourToEmpower.isBought);
+      return Pelle.isDoomed;
     },
     addThreshold() {
       return GlyphAlteration.additionThreshold;

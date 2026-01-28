@@ -65,7 +65,7 @@ export default {
       return !(this.canBuy ||
         this.isBought ||
         this.isCapped ||
-        (this.galaxyGenerator && !(this.config.currencyLabel === "Galaxy" || this.config.currencyLabel === "Reality Shard"))
+        (this.galaxyGenerator && this.config.currencyLabel !== "Galaxy")
       );
     },
     shouldEstimateImprovement() {
@@ -86,21 +86,20 @@ export default {
       this.isCapped = this.upgrade.isCapped;
       this.purchases = player.celestials.pelle.rebuyables[this.upgrade.config.id];
       this.currentTimeEstimate = TimeSpan
-        .fromSeconds((this.galaxyGenerator && this.config.currencyLabel === "Galaxy")
-          ? GalaxyGenerator.gainPerSecondDisplay(this.upgrade.cost)
-          : this.secondsUntilRSCost(Pelle.realityShardGainPerSecond))
+        .fromSeconds(this.secondsUntilCost(this.galaxyGenerator ? GalaxyGenerator.gainPerSecond
+          : Pelle.realityShardGainPerSecond))
         .toTimeEstimate();
       this.projectedTimeEstimate = TimeSpan
-        .fromSeconds(this.secondsUntilRSCost(Pelle.nextRealityShardGain))
+        .fromSeconds(this.secondsUntilCost(Pelle.nextRealityShardGain))
         .toTimeEstimate();
       this.hasRemnants = Pelle.cel.remnants > 0;
       this.galaxyCap = GalaxyGenerator.generationCap;
       const genDB = GameDatabase.celestials.pelle.galaxyGeneratorUpgrades;
       this.notAffordable = (this.config === genDB.additive || this.config === genDB.multiplicative) &&
-        (Decimal.gt(this.upgrade.cost, new Decimal(this.galaxyCap).sub(GalaxyGenerator.generatedGalaxies).add(player.galaxies).add(GalaxyGenerator.galaxies)));
+        (Decimal.gt(this.upgrade.cost, new Decimal(this.galaxyCap).sub(GalaxyGenerator.generatedGalaxies).add(player.galaxies)));
     },
-    secondsUntilRSCost(rate) {
-      const value = Currency.realityShards.value;
+    secondsUntilCost(rate) {
+      const value = this.galaxyGenerator ? player.galaxies.add(GalaxyGenerator.galaxies) : Currency.realityShards.value;
       return Decimal.sub(this.upgrade.cost, value).div(rate);
     },
     attemptPurchase() {

@@ -201,7 +201,7 @@ export default {
   },
   methods: {
     update() {
-      this.showChaosText = Pelle.specialGlyphEffect.isUnlocked || Pelle.isGlyphTypeDisabled(this.type);
+      this.showChaosText = Pelle.specialGlyphEffect.isUnlocked;
       if (this.showChaosText) {
         this.chaosDescription = Pelle.getSpecialGlyphEffectDescription(this.type);
       }

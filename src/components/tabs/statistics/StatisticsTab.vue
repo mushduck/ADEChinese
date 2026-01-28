@@ -87,15 +87,15 @@ export default {
         : "no Eternities";
     },
     realityCountString() {
-      const num = new Decimal(this.reality.count);
-      return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Reality", num.floor())}`
+      const num = this.reality.count;
+      return num > 0
+        ? `${num} ${pluralize("Reality", num)}`
         : "no Realities";
     },
     endgameCountString() {
-      const num = new Decimal(this.endgame.count);
-      return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Endgame", num.floor())}`
+      const num = this.endgame.count;
+      return num > 0
+        ? `${num} ${pluralize("Endgame", num)}`
         : "no Endgames";
     },
     fullGameCompletions() {
