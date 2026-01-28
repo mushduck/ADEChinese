@@ -193,15 +193,11 @@ export const Pelle = {
       this.cel.remnants += this.remnantsGain;
     }
     finishProcessReality({ reset: true, armageddon: true });
-    if (this.isAlwaysDischargeCIU || player.celestials.ra.disCharge) disChargeAll();
+    disChargeAll();
     player.celestials.enslaved.isStoringReal = false;
     player.celestials.enslaved.autoStoreReal = false;
     if (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed()) player.dilation.active = true;
     EventHub.dispatch(GAME_EVENT.ARMAGEDDON_AFTER, gainStuff);
-  },
-
-  get isAlwaysDischargeCIU() {
-    return Ra.unlocks.chargedInfinityUpgrades.isDisabledByPelle || !PelleUpgrade.keepBreakInfinityUpgrades.canBeApplied;
   },
 
   gameLoop(diff) {
