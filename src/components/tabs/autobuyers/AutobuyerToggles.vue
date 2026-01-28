@@ -60,7 +60,7 @@ export default {
     >
       {{ allAutobuyersDisabled ? "Enable" : "Disable" }} all autobuyers
     </PrimaryButton>
-    <span v-if="false">
+    <span v-if="isDoomed">
       <PrimaryButton
         v-if="showContinuum"
         class="o-primary-btn--subtab-option"

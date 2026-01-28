@@ -19,7 +19,7 @@ export class BlackHolePowerAutobuyerState extends AutobuyerState {
 
   tick() {
     const bh = BlackHole(this.id);
-    while (bh.powerUpgrade.isAffordable) bh.powerUpgrade.purchase();
+    while (Currency.realityMachines.gte(bh.powerUpgrade.cost)) bh.powerUpgrade.purchase();
   }
 
   static get entryCount() { return 2; }
