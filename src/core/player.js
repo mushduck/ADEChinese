@@ -1264,23 +1264,21 @@ export function guardFromNaNValues(obj) {
           if (!(newValue instanceof Decimal)) {
             throw new Error("Non-Decimal assignment to Decimal player property");
           }
-          if (!isFinite(newValue.mag)) {
-            throw new Error("NaN player property assignment (new decimal mag value) this usually means Layer failed to work properly");
-          }
           if (!isFinite(newValue.sign)) {
-            throw new Error("NaN player property assignment (new decimal sign value) this usually means Decimal iteration failed");
+            throw new Error("NaN player property assignment (new decimal sign value) this usually means a log10 property has failed");
           }
           if (!isFinite(newValue.layer)) {
             throw new Error("NaN player property assignment (new decimal layer value) this usually means you exceeded Infinity");
           }
-          /*
+          if (!isFinite(newValue.mag)) {
+            throw new Error("NaN player property assignment (new decimal mag value) this usually means Layer failed to work properly");
+          }
           if (!isFinite(newValue.mantissa)) {
-            throw new Error("NaN player property assignment (old decimal value) old log10 failed ignore this error");
+            console.log("NaN player property assignment (old decimal value) old log10 failed ignore this error");
           }
           if (!isFinite(newValue.exponent)) {
-            throw new Error("NaN player property assignment (old decimal value) number exceeded ee308 on some end ignore this error");
+            console.log("NaN player property assignment (old decimal value) number exceeded ee308 on some end ignore this error");
           }
-          */
           value = newValue;
         }
       });

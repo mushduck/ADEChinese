@@ -98,10 +98,9 @@ export default {
           </template>
         </ExpandingControlBox>
         <ExpandingControlBox
-          class="l-options-grid__button c-options-grid__notations"
+          class="l-options-grid__button c-options-grid__notations l-high-z-index"
           button-class="o-primary-btn o-primary-btn--option l-options-grid__notations-header"
           :label="notationLabel"
-          needs-high-zindex="true"
         >
           <template #dropdown>
             <SelectNotationDropdown />
@@ -159,7 +158,7 @@ export default {
       </div>
       <div class="l-options-grid__row">
         <ExpandingControlBox
-          class="l-options-grid__button c-options-grid__notations"
+          class="l-options-grid__button c-options-grid__notations l-low-z-index"
           button-class="o-primary-btn o-primary-btn--option l-options-grid__notations-header"
           :label="postNotationLabel"
         >
@@ -172,3 +171,12 @@ export default {
     </div>
   </div>
 </template>
+<style scoped>
+.l-high-z-index {
+  z-index: 2;
+}
+
+.l-low-z-index {
+  z-index: 1;
+}
+</style>

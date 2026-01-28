@@ -212,6 +212,7 @@ export const Endgame = {
     ui.view.news = player.options.news.enabled;
     Themes.find(Theme.currentName()).set();
     Notations.all.find(n => n.name === player.options.notation).setAsCurrent();
+    LNotations.find(player.options.lnotation).setAsCurrent(true);
     ADNotations.Settings.exponentCommas.min = 10 ** player.options.notationDigits.comma;
     ADNotations.Settings.exponentCommas.max = 10 ** player.options.notationDigits.notation;
     Currency.realities.reset();
@@ -308,6 +309,7 @@ export const Endgame = {
     player.reality.glyphs.sac.dilation = DC.D0;
     player.reality.glyphs.sac.effarig = DC.D0;
     player.reality.glyphs.sac.reality = DC.D0;
+    if (ImaginaryUpgrade(22).isBought) ImaginaryUpgrade(22).onPurchased();
     player.blackHole = Array.range(0, 2).map(id => ({
       id,
       intervalUpgrades: EndgameUpgrade(6).isBought ? 40 : 0,
