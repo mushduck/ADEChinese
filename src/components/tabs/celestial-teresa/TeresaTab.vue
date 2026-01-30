@@ -107,6 +107,7 @@ export default {
       };
     },
     isDoomed: () => Pelle.isDoomed,
+    isEPGenDoomed: () => Pelle.isDoomed && !PelleCelestialUpgrade.passiveEPGen.isBought,
     disChargeClassObject() {
       return {
         "o-primary-btn--subtab-option": true,
@@ -259,7 +260,7 @@ export default {
           v-if="hasEPGen"
           class="c-teresa-unlock"
         >
-          <span :class="{ 'o-pelle-disabled': isDoomed }">
+          <span :class="{ 'o-pelle-disabled': isEPGenDoomed }">
             Every second, you gain {{ formatPercents(0.01) }} of your peaked Eternity Points per minute this Reality.
           </span>
         </div>
