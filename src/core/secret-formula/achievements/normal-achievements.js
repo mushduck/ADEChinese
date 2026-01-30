@@ -538,7 +538,7 @@ export const normalAchievements = [
     get reward() {
       return `All Infinity Dimensions are stronger based on Infinity Points.`;
     },
-    effect: () => Currency.infinityPoints.value.add(1).log10()
+    effect: () => Currency.infinityPoints.value.add(1).log10().clampMin(1)
   },
   {
     id: 78,
