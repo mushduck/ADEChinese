@@ -185,4 +185,12 @@ export default {
 .o-sidebar-currency--celestials {
   color: var(--color-celestials);
 }
+
+.o-sidebar-currency--power {
+  animation: a-galactic-power-amount-cycle 12s infinite;
+}
+
+.o-sidebar-currency--ethereal {
+  color: #0000c0;
+}
 </style>
