@@ -123,7 +123,11 @@ export class Currency {
 
   subtract(amount) {
     if (new Decimal(amount).gte(DC.E9E15)) return;
-    this.value = this.operations.max(this.operations.subtract(this.value, amount), 0);
+    if (new Decimal(amount).gte(this.value) && (this.value instanceof DecimalCurrency || this.value instanceof Decimal)) {
+      this.value = Decimal.floor(this.value.div(1e15));
+    }
+    else if (new Decimal(amount).gte(this.value)) { this.value = Math.floor(this.value / 1e15); }
+    else { this.value = this.operations.max(this.operations.subtract(this.value, amount), 0); }
   }
 
   multiply(amount) {
