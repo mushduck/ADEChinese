@@ -272,7 +272,7 @@ export function getDilationTimeEstimate(goal) {
 }
 
 export function dilatedValueOf(value) {
-  if (value.lte(0)) return 0;
+  if (value.lte(0)) return new Decimal(0);
   const log10 = value.log10();
   const dilationPenalty = 0.75 * Effects.product(DilationUpgrade.dilationPenalty);
   return Decimal.pow10(new Decimal(Decimal.sign(log10)).times(Decimal.pow(Decimal.abs(log10), dilationPenalty)));
