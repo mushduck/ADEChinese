@@ -59,7 +59,16 @@ window.decimalCubicSolutionX = function decimalCubicSolutionX(a, b, c, d) {
   const p = b.neg().div(a.times(3));
   const q = Decimal.pow(p, 3).add((b.times(c).sub(a.times(d).times(3))).div(Decimal.pow(a, 2).times(6)));
   const r = c.div(a.times(3));
-  const x = Decimal.pow(q.add(Decimal.pow(Decimal.pow(q, 2).add(Decimal.pow(r.sub(Decimal.pow(p, 2)), 3)), 0.5)), new Decimal(1 / 3)).add(Decimal.pow(q.sub(Decimal.pow(Decimal.pow(q, 2).add(Decimal.pow(r.sub(Decimal.pow(p, 2)), 3)), 0.5)), new Decimal(1 / 3))).add(p);
+  const a1 = Decimal.pow(q, 2).add(Decimal.pow(r.sub(Decimal.pow(p, 2)), 3));
+  const na = a1.abs();
+  const sa = Decimal.sign(a1);
+  const b1 = q.add(Decimal.pow(na, 0.5).mul(sa));
+  const b2 = q.sub(Decimal.pow(na, 0.5).mul(sa));
+  const nb1 = b1.abs();
+  const sb1 = Decimal.sign(b1);
+  const nb2 = b2.abs();
+  const sb2 = Decimal.sign(b2);
+  const x = Decimal.pow(nb1, new Decimal(1 / 3)).mul(sb1).add(Decimal.pow(nb2, new Decimal(1 / 3)).mul(sb2)).add(p);
   return x;
 };
 
@@ -288,7 +297,7 @@ window.decimalGetCostWithLinearCostScaling = function decimalGetCostWithLinearCo
   let decimalInitialCost = new Decimal(initialCost);
   let decimalCostMult = new Decimal(costMult);
   let decimalCostGrowth = new Decimal(costMultGrowth);
-  const preScalingPurchases = Decimal.max(0, Decimal.floor(Decimal.log(decimalScalingStart.div(decimalInitialCost)).div(Decimal.log(decimalCostMult))));
+  const preScalingPurchases = Decimal.max(0, Decimal.floor(Decimal.ln(decimalScalingStart.div(decimalInitialCost)).div(Decimal.ln(decimalCostMult))));
   const preScalingCost = Decimal.ceil(Decimal.pow(decimalCostMult, Decimal.min(preScalingPurchases, decimalPurchaseCount)).times(decimalInitialCost));
   const scaling = new LinearMultiplierScaling(costMult, costMultGrowth);
   const postScalingCost = Decimal.exp(scaling.logTotalMultiplierAfterPurchases(
@@ -440,7 +449,7 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
 
   updateCostScale() {
     this._precalcDiscriminant = Decimal.pow((2 * this._logBaseIncrease + this._logCostScale), 2).sub(
-      DC.D8.times(this._logCostScale).times(new Decimal(this._purchasesBeforeScaling).times(this._logBaseIncrease).add(this._logBaseCost))).toNumber();
+      DC.D8.times(this._logCostScale).times(new Decimal(this._purchasesBeforeScaling).times(this._logBaseIncrease).add(this._logBaseCost)));
     this._precalcCenter = -this._logBaseIncrease / this._logCostScale + this._purchasesBeforeScaling + 0.5;
   }
 
@@ -497,18 +506,16 @@ window.ExponentialCostScaling = class ExponentialCostScaling {
     // so that we don't, for example, buy all of a set of 10 dimensions
     // when we can only afford 1.
     const money = rawMoney.div(numberPerSet);
-    const logMoney = money.max(1).log10().toNumber();
+    const logMoney = money.clampMin(1).log10();
     const logMult = this._logBaseIncrease;
     const logBase = this._logBaseCost;
     // The 1 + is because the multiplier isn't applied to the first purchase
-    let newPurchases = Decimal.floor((new Decimal(logMoney).sub(logBase)).div(logMult).add(1)).toNumber();
+    let newPurchases = Decimal.floor((logMoney.sub(logBase)).div(logMult).add(1)).toNumber();
     // We can use the linear method up to one purchase past the threshold, because the first purchase
     // past the threshold doesn't have cost scaling in it yet.
     if (newPurchases > this._purchasesBeforeScaling) {
-      const discrim = this._precalcDiscriminant + 8 * this._logCostScale * logMoney;
-      if (discrim < 0) {
-        return null;
-      }
+      const discrim = this._precalcDiscriminant.toNumber() + 8 * this._logCostScale * logMoney.toNumber();
+      if (discrim < 0) return null;
       newPurchases = Math.floor(this._precalcCenter + Math.sqrt(discrim) / (2 * this._logCostScale));
     }
     if (newPurchases <= currentPurchases) return null;
