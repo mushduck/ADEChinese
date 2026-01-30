@@ -26,7 +26,7 @@ export default {
     update() {
       this.isBroken = player.break2;
       this.isUnlocked = PlayerProgress.endgameUnlocked() && player.antimatter.gte(this.antimatterReq) || this.isBroken;
-      this.antimatterReq = new Decimal(1e9000000000000000);
+      this.antimatterReq = new Decimal("e9e15");
     },
     clicked() {
       if (!this.isBroken && this.isUnlocked) Modal.breakEternity.show();
