@@ -222,7 +222,7 @@ export function buyOneDimension(tier) {
 
   if (tier === 8 && Enslaved.isRunning && AntimatterDimension(8).bought >= 1) return false;
 
-  dimension.currencyAmount = dimension.currencyAmount.minus(cost);
+  if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(cost);
 
   if (dimension.boughtBefore10 === 9) {
     dimension.challengeCostBump();
@@ -247,7 +247,7 @@ export function buyManyDimension(tier) {
 
   if (tier === 8 && Enslaved.isRunning) return buyOneDimension(8);
 
-  dimension.currencyAmount = dimension.currencyAmount.minus(cost);
+  if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(cost);
   dimension.challengeCostBump();
   dimension.amount = dimension.amount.plus(dimension.remainingUntil10);
   dimension.bought += dimension.remainingUntil10;
@@ -265,7 +265,7 @@ export function buyAsManyAsYouCanBuy(tier) {
 
   if (tier === 8 && Enslaved.isRunning) return buyOneDimension(8);
 
-  dimension.currencyAmount = dimension.currencyAmount.minus(cost);
+  if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(cost);
   dimension.challengeCostBump();
   dimension.amount = dimension.amount.plus(howMany);
   dimension.bought += howMany;
@@ -314,7 +314,7 @@ export function buyMaxDimension(tier, bulk = Infinity) {
 
   // Buy any remaining until 10 before attempting to bulk-buy
   if (dimension.currencyAmount.gte(cost)) {
-    dimension.currencyAmount = dimension.currencyAmount.minus(cost);
+    if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(cost);
     buyUntilTen(tier);
     bulkLeft--;
   }
@@ -326,7 +326,7 @@ export function buyMaxDimension(tier, bulk = Infinity) {
     while (dimension.isAffordableUntil10 && dimension.cost.lt(goal) && bulkLeft > 0) {
       // We can use dimension.currencyAmount or Currency.antimatter here, they're the same,
       // but it seems safest to use dimension.currencyAmount for consistency.
-      dimension.currencyAmount = dimension.currencyAmount.minus(dimension.costUntil10);
+      if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(dimension.costUntil10);
       buyUntilTen(tier);
       bulkLeft--;
     }
@@ -345,7 +345,7 @@ export function buyMaxDimension(tier, bulk = Infinity) {
   if (dimension.currencyAmount.gte(Decimal.pow10(maxBought.logPrice))) {
     dimension.amount = dimension.amount.plus(10 * buying).round();
     dimension.bought += 10 * buying;
-    dimension.currencyAmount = dimension.currencyAmount.minus(Decimal.pow10(maxBought.logPrice));
+    if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(Decimal.pow10(maxBought.logPrice));
   }
 }
 

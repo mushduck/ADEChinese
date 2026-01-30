@@ -96,7 +96,7 @@ export const sidebarResources = [
     isAvailable: () => MachineHandler.isIMUnlocked || PlayerProgress.endgameUnlocked(),
     // This is a dummy value to prevent vue errors
     value: () => Currency.realityMachines.value,
-    formatValue: () => formatMachines(Currency.realityMachines.value, Currency.imaginaryMachines.value),
+    formatValue: () => formatMachines(Currency.realityMachines.value, Currency.imaginaryMachines.value, Currency.dualMachines.value),
     formatClass: "o-sidebar-currency--reality",
   },
   {
@@ -154,5 +154,29 @@ export const sidebarResources = [
     value: () => Currency.celestialMatter,
     formatValue: x => format(x, 2, 2),
     formatClass: "o-sidebar-currency--celestials",
+  },
+  {
+    id: 20,
+    optionName: "Total Endgame Skills",
+    isAvailable: () => Currency.endgameSkills.max.gt(0),
+    value: () => Currency.endgameSkills.max,
+    formatValue: x => format(x, 2),
+    formatClass: "o-sidebar-currency--endgame",
+  },
+  {
+    id: 21,
+    optionName: "Galactic Power",
+    isAvailable: () => Currency.galacticPower.gt(0),
+    value: () => Currency.galacticPower,
+    formatValue: x => format(x, 2, 2),
+    formatClass: "o-sidebar-currency--power",
+  },
+  {
+    id: 22,
+    optionName: "Ethereal Power",
+    isAvailable: () => Currency.etherealPower.gt(0),
+    value: () => Currency.etherealPower,
+    formatValue: x => format(x, 2, 2),
+    formatClass: "o-sidebar-currency--ethereal",
   },
 ];

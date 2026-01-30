@@ -47,12 +47,12 @@ export const MachineHandler = {
 
   get baseIMCap() {
     if (Pelle.isDoomed) return new Decimal(1.6e15);
-    return (Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.log10()).sub(1000), 0), 2).times(
-      Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.log10()).sub(100000), 1), 0.2)).times(
-      Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.log10()).div(1000000000), 1),
-      new Decimal(Decimal.log10(this.uncappedRM.log10())).div(7.5)))).pow(
+    return (Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.add(1).log10()).sub(1000), 0), 2).times(
+      Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.add(1).log10()).sub(100000), 1), 0.2)).times(
+      Decimal.pow(Decimal.clampMin(new Decimal(this.uncappedRM.add(1).log10()).div(1000000000), 1),
+      new Decimal(Decimal.log10(this.uncappedRM.add(1).log10())).div(7.5)))).pow(
       new Decimal(Effects.product(EndgameMastery(144), Ra.unlocks.imaginaryMachines, Ra.unlocks.imaginaryMachineEternityPower)).times(
-      Decimal.max(Decimal.log10(this.uncappedRM.log10()).sub(45), 0).div(10).add(1)));
+      Decimal.max(Decimal.log10(this.uncappedRM.add(1).log10()).sub(45), 0).div(10).add(1)));
   },
 
   get currentIMCap() {

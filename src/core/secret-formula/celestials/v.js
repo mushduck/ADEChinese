@@ -1,6 +1,7 @@
 // This is supposed to be in ./navigation.js but importing doesn't work for some stupid reason
+// progress should always return number, even if it will return infinity
 function emphasizeEnd(fraction) {
-  return Decimal.pow(fraction, 10);
+  return Decimal.pow(fraction, 10).toNumber();
 }
 
 function rebuyableCost(initialCost, increment, id) {
@@ -36,7 +37,7 @@ export const v = {
       resource: () => Currency.realities.value,
       requirement: 1250,
       format: x => formatInt(x),
-      progress: () => new Decimal(Currency.realities.value).div(EndgameMastery(51).effectOrDefault(1250)),
+      progress: () => new Decimal(Currency.realities.value).div(EndgameMastery(51).effectOrDefault(1250)).toNumber(),
     },
     eternities: {
       id: 2,
@@ -214,7 +215,7 @@ export const v = {
       id: 0,
       reward: "Unlock V, The Celestial Of Achievements",
       description: "Meet all the above requirements simultaneously",
-      requirement: () => Object.values(GameDatabase.celestials.v.mainUnlock).every(e => e.progress().gte(1))
+      requirement: () => Object.values(GameDatabase.celestials.v.mainUnlock).every(e => e.progress() >= 1)
     },
     shardReduction: {
       id: 1,

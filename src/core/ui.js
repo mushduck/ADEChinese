@@ -109,9 +109,8 @@ const ReactivityComplainer = {
     if (obj === undefined || obj === null) {
       return;
     }
-    if (obj.__ob__ !== undefined) {
-      throw new Error(`Boi you fukked up - ${path} became REACTIVE (oh shite)`);
-    }
+    // If you are not a developer just ignore it. I guess it's used to tell devs there may be lagging when pressing buttons
+    if (obj.__ob__ !== undefined) throw new Error(`[Dev only] Boi you fukked up - ${path} became REACTIVE (oh shite)`);
     for (const key in obj) {
       if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
       const prop = obj[key];

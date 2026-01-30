@@ -35,7 +35,7 @@ class SubtabState {
   }
 
   get hasNotification() {
-    return player.tabNotifications.has(this._parent.key + this.key);
+    return this.isUnlocked && player.tabNotifications.has(this._parent.key + this.key);
   }
 
   get key() {
