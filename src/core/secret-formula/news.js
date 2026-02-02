@@ -3384,23 +3384,22 @@ export const news = [
         `On the [INVALID VALUE] day of Endgame, S7 gave to me: [INVALID VALUE] bad jokes, 8 more Dimensions, 7 NYI Achievements,
         6 shipped Celestials, 5 Reset Layers! 4 Celestial Points, 3 updates that will never come out, 2 kekw emojis,
         and a release date for 0.2.3!`,
-        `On the tenth day of Endgame, S7 gave to me: 10 ${wordShift.wordCycle(["FALSE", "DEITY", "DESTROYER"])},
+        `On the tenth day of Endgame, S7 gave to me: 10 [FALSE/DEITY/DESTROYER],
         [INVALID VALUE] bad jokes, 8 more Dimensions, 7 NYI Achievements, 6 shipped Celestials, 5 Reset Layers!
         4 Celestial Points, 3 updates that will never come out, 2 kekw emojis, and a release date for 0.2.3!`,
         `On the eleventh day of Endgame, S7 gave to me: 11 fake Dimensions,
-        10 ${wordShift.wordCycle(["FALSE", "DEITY", "DESTROYER"])}, [INVALID VALUE] bad jokes, 8 more Dimensions,
+        10 [FALSE/DEITY/DESTROYER], [INVALID VALUE] bad jokes, 8 more Dimensions,
         7 NYI Achievements, 6 shipped Celestials, 5 Reset Layers! 4 Celestial Points, 3 updates that will never come out,
         2 kekw emojis, and a release date for 0.2.3!`,
         `On the twelfth day of Endgame, S7 gave to me: 12 paperclips, 11 fake Dimensions,
-        10 ${wordShift.wordCycle(["FALSE", "DEITY", "DESTROYER"])}, [̸̅̉̅̅N̸͒͋̿̔U̴̵̵̷̔̆̌̏̆̓̏͌̍͊̋́̈́͘͘͠]̵̭͈͗̈́]̷̛̈̒͝[̸̛̑̀͝L̶̛̑̓͘]̷̋͐̆͘n̷̛͊ bad jokes, 8 more Dimensions, 7 NYI Achievements,
+        10 [FALSE/DEITY/DESTROYER], [̸̅̉̅̅N̸͒͋̿̔U̴̵̵̷̔̆̌̏̆̓̏͌̍͊̋́̈́͘͘͠]̵̭͈͗̈́]̷̛̈̒͝[̸̛̑̀͝L̶̛̑̓͘]̷̋͐̆͘n̷̛͊ bad jokes, 8 more Dimensions, 7 NYI Achievements,
         6 shipped Celestials, 5 Reset Layers! 4 Celestial Points, 3 updates that will never come out, 2 kekw emojis,
         AND A RELEASE DATE FOR 0.2.3!`
       ];
       const chapter = chapters[player.news.specialTickerData.dayOfEndgame];
       player.news.specialTickerData.dayOfEndgame = (player.news.specialTickerData.dayOfEndgame + 1) % 12;
       return chapter;
-    },
-    dynamic: true
+    }
   },
   {
     id: "ae533",
@@ -8691,7 +8690,7 @@ export const news = [
     text: "Fun Fact: The game will be completed on [REDACTED] at the time <span style='color: red'>TimeSpan.fromMilliseconds(new Decimal(Date.now() + 432000000)).toString()</span>"
   },
   {
-    id: "se",
+    id: "se1",
     get text() {
       const chapters = [
         `<span style='color: cyan'>Hello, I am Living_Person eight, also known as Life.</span><span style='color: red'>
