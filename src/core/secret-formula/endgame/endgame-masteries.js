@@ -291,8 +291,8 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [144],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise the effect of the Imaginary Upgrade "Transience of Information" to the power of ${formatInt(5)}`,
-    effect: 5
+    description: () => `Raise the effect of the Imaginary Upgrade "Transience of Information" to the power of ${formatInt(10)}`,
+    effect: 10
   },
   {
     id: 161,
