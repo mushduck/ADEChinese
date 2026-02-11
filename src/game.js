@@ -865,6 +865,7 @@ export function gameLoop(passedDiff, options = {}) {
   GalaxyGenerator.loop(realDiff);
   GameEnd.gameLoop(realDiff);
   tryAdvanceSector();
+  quoteCheck();
 
   if (!Enslaved.canAmplify) {
     Enslaved.boostReality = false;
@@ -1171,6 +1172,49 @@ export function gainedDoomedParticles() {
   if (!player.break2) return DC.D1;
   let dp = Decimal.min(player.celestials.pelle.records.totalEndgameAntimatter.add(1).log10().div(9e15), new Decimal(1e100 - player.endgame.doomedParticles.toNumber()));
   return dp.floor();
+}
+
+export function quoteCheck() {
+  for (const quote of Teresa.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
+  for (const quote of Effarig.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
+  for (const quote of Enslaved.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
+  for (const quote of V.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
+  for (const quote of Ra.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
+  for (const quote of Laitela.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
+  for (const quote of Pelle.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
+  for (const quote of Alpha.quotes.all) {
+    if (quote.requirement) {
+      quote.show();
+    }
+  }
 }
 
 // eslint-disable-next-line no-unused-vars
