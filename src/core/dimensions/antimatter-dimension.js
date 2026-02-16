@@ -660,7 +660,7 @@ export const AntimatterDimensions = {
   },
 
   get buyTenMultiplier() {
-    if (NormalChallenge(7).isRunning) return DC.D2.min(DimBoost.totalBoosts.plus(1).div(5));
+    if (NormalChallenge(7).isRunning) return DC.D2.min(DimBoost.totalBoosts.div(5).add(1));
 
     let mult = DC.D2.plusEffectsOf(
       Achievement(141).effects.buyTenMult,
