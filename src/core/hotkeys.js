@@ -22,7 +22,7 @@ import { GameKeyboard } from "./keyboard";
 // for the other modifier keys (#3093).
 
 // Free keys:
-// i, j, k, l, n, o, p, q, v, w, x
+// i, j, k, l, o, p, q, v, w, x
 
 
 export const shortcuts = [
@@ -187,19 +187,28 @@ export const shortcuts = [
     name: "Doom Reality",
     keys: ["alt", "z"],
     type: "bindHotkey",
-    function: () => Pelle.initializeRun(),
+    function: () => {
+      if (!PlayerProgress.endgameUnlocked() || !Pelle.isUnlocked) return;
+      Pelle.initializeRun();
+    },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
     name: "Endgame",
     keys: ["n"],
     type: "bindRepeatableHotkey",
-    function: () => Endgame.hotkeyReset(),
+    function: () => {
+      if (!PlayerProgress.endgameUnlocked()) return;
+      Endgame.hotkeyReset();
+    },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
     name: "Reset Endgame",
     keys: ["alt", "n"],
     type: "bindHotkey",
-    function: () => Endgame.resetNoReward(),
+    function: () => {
+      if (!PlayerProgress.endgameUnlocked()) return;
+      Endgame.resetNoReward();
+    },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
     name: "Toggle Endgame Mastery respec",
