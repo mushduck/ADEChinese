@@ -236,7 +236,7 @@ export const GameStorage = {
     }
     checkNaN(save, "player");
 
-    if (invalidProps.length === 0) return "";
+    if (invalidProps.length === 0 || player.DEV) return "";
     return `${quantify("NaN player property", invalidProps.length)} found:
       ${invalidProps.join(", ")}`;
   },
