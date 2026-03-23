@@ -1093,6 +1093,7 @@ window.player = {
       id: false,
     }
   },
+  DEV: false
 };
 
 export const Player = {
