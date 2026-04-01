@@ -893,9 +893,6 @@ export function gameLoop(passedDiff, options = {}) {
     }
   }
 
-  player.options.themeModern = "S13";
-  player.options.themeClassic = "S13";
-
   EventHub.dispatch(GAME_EVENT.GAME_TICK_AFTER);
   GameUI.update();
   player.lastUpdate = thisUpdate;
