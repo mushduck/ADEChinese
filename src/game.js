@@ -355,7 +355,8 @@ export function crashTetr() {
   GameStorage.save();
   GameStorage.export();
   GameStorage.exportAsFile();
-  player.antimatter = Decimal.tetrate(player.antimatter, 2);
+  //player.antimatter = Decimal.tetrate(player.antimatter, 2);
+  GameUI.notify.info("You can't do that, silly!");
   throw new Error("Oh noes! Antimatter overflow! Game is dead! (Save before crash exported to clipboard)");
 }
 
