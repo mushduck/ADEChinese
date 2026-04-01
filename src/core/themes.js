@@ -89,6 +89,7 @@ Theme.secretThemeIndex = function(name) {
     "73de8a7f9efa1cbffc80a8effc9891a799127cd204b3a8b023bea8f513ed4753",
     "f3a71114261b4af6517a53f89bf0c6b56bb81b6f0e931d0e0d71249eb196628c",
     "1248689171faaa0abb68279199a8d2eb232dba10d2dacb79a705f680b6862c0e",
+    "d66c249a8f398621fbadaa1b9aaa7716546f4d995dc20e0d8271cf2bb6b19efc",
   ];
   const sha = sha512_256(name.toUpperCase());
   return secretThemes.indexOf(sha);
