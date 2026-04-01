@@ -125,4 +125,11 @@ export default {
   background-size: cover;
   filter: brightness(0.5);
 }
+
+.t-s13 .c-background-overlay {
+  background: url("../../../../public/images/s13-bg.jpg");
+  background-position-x: 50%;
+  background-position-y: 50%;
+  background-size: 150%;
+}
 </style>
