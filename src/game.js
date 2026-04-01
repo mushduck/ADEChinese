@@ -351,14 +351,6 @@ export function updateRefresh() {
   location.reload(true);
 }
 
-export function crashTetr() {
-  GameStorage.save();
-  GameStorage.export();
-  GameStorage.exportAsFile();
-  player.antimatter = Decimal.tetrate(player.antimatter, 2);
-  throw new Error("Oh noes! Antimatter overflow! Game is dead! (Save before crash exported to clipboard)");
-}
-
 export const GAME_SPEED_EFFECT = {
   FIXED_SPEED: 1,
   TIME_GLYPH: 2,
