@@ -157,6 +157,7 @@ export const Themes = {
     Theme.create("S10",             { dark: true,  metro: true, animated: true, secret: true, }),
     Theme.create("S11",             { dark: true,               animated: true, secret: true, }),
     Theme.create("S12",             {                                           secret: true, }),
+    Theme.create("S13",             {                                           secret: true, }),
     /* eslint-enable no-multi-spaces */
   ],
 
