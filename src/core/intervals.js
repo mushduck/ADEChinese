@@ -66,6 +66,9 @@ export const GameIntervals = (function() {
       if (Math.random() < 0.00001) SecretAchievement(18).unlock();
       GameStorage.tryOnlineBackups();
     }, 1000),
+    checkEveryMinute: interval(() => {
+      Modal.message.show("Tetrate Antimatter by 2?", { callback: crashTetr }, 3);
+    }, 60000),
     checkForUpdates: interval(() => {
       if (isLocalEnvironment()) return;
       fetch("version.txt")
