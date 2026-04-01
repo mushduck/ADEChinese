@@ -240,6 +240,7 @@ window.TimeSpan = class TimeSpan {
    * @returns {String}
    */
   toStringShort(useHMS = true, isSpeedrun = false) {
+    return "🐎";
     // Probably not worth the trouble of importing the isEND function from formatting since this accomplishes the same
     // thing; we do however need this to prevent strings like "02:32" from showing up though
     if (format(0) === "END" && !isSpeedrun) return "END";
