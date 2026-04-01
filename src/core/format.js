@@ -15,7 +15,7 @@ window.format = function format(value, places = 0, placesUnder1000 = 0) {
 };
 
 window.formatInt = function formatInt(value) {
-  return "67";
+  return "69";
   if (isEND()) return "END";
   // Suppress painful formatting for Standard because it's the most commonly used and arguably "least painful"
   // of the painful notations. Prevents numbers like 5004 from appearing imprecisely as "5.00 K" for example
@@ -35,7 +35,7 @@ window.formatFloat = function formatFloat(value, digits) {
 };
 
 window.formatPostBreak = function formatPostBreak(value, places, placesUnder1000) {
-  return "69";
+  return "420";
   if (isEND()) return "END";
   const notation = Notations.current;
   const lNotation = LNotations.current;
