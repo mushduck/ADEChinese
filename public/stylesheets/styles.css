@@ -7404,27 +7404,6 @@ properly on certain themes. */
 
 /* #endregion c-modal-username */
 
-/* #region c-modal-password */
-
-.c-modal-password-danger {
-  font-weight: bold;
-  color: var(--color-bad);
-}
-
-.c-modal-password-btn {
-  margin-top: 0.3rem;
-}
-
-.c-modal-password-info > div {
-  margin-top: 0.2rem;
-}
-
-.c-modal-password__input {
-  width: 45rem;
-}
-
-/* #endregion c-modal-password */
-
 /* #region c-modal-away-progress */
 
 .c-modal-away-progress {
