@@ -89,7 +89,6 @@ import UpgradeMechanicLockModal from "@/components/modals/UpgradeMechanicLockMod
 import S12GamesModal from "@/components/modals/secret-themes/S12GamesModal";
 
 import UsernameModal from "@/components/modals/UsernameModal";
-import PasswordModal from "@/components/modals/PasswordModal";
 
 let nextModalID = 0;
 export class Modal {
@@ -291,7 +290,6 @@ Modal.respecIAP = new Modal(RespecIAPModal);
 Modal.s12Games = new Modal(S12GamesModal);
 
 Modal.username = new Modal(UsernameModal, 1);
-Modal.password = new Modal(PasswordModal, 1);
 
 function getSaveInfo(save) {
   const resources = {
