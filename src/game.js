@@ -798,8 +798,7 @@ export function gameLoop(passedDiff, options = {}) {
   // These need to all be done consecutively in order to minimize the chance of a reset occurring between real time
   // updating and game time updating. This is only particularly noticeable when game speed is 1 and the player
   // expects to see identical numbers. We also don't increment the timers if the game has been beaten (Achievement 188)
-  if ((!Achievement(188).isUnlocked || PlayerProgress.endgameUnlocked()) &&
-      sha512_256(player.password.replace(/\s/gu, "").toUpperCase()) === "060646bd56a29d5cbdad16195f6afbcb0367ce33dba3150e882b961d14885544") {
+  if (!Achievement(188).isUnlocked || PlayerProgress.endgameUnlocked()) {
     player.records.realTimeDoomed += realDiff;
     player.records.realTimePlayed += realDiff;
     player.records.totalTimePlayed = player.records.totalTimePlayed.add(diff);
@@ -1119,10 +1118,6 @@ export function gameLoop(passedDiff, options = {}) {
 
   if (!Enslaved.canAmplify) {
     Enslaved.boostReality = false;
-  }
-
-  if (sha512_256(player.password.replace(/\s/gu, "").toUpperCase()) !== "060646bd56a29d5cbdad16195f6afbcb0367ce33dba3150e882b961d14885544") {
-    Modal.password.show();
   }
 
   // Stopping these checks after CREDITS_START reduces lag and allows for the glyph customization modal to appear
@@ -1587,9 +1582,6 @@ export function simulateTime(seconds, real, fast) {
 
   // Limit the tick count (this also applies if the black hole is unlocked)
   let maxTicks = GameStorage.maxOfflineTicks(1000 * seconds, GameStorage.offlineTicks ?? player.options.offlineTicks);
-  if (sha512_256(player.password.replace(/\s/gu, "").toUpperCase()) !== "060646bd56a29d5cbdad16195f6afbcb0367ce33dba3150e882b961d14885544") {
-    maxTicks = 500;
-  }
   if (ticks > maxTicks && !fast) {
     ticks = maxTicks;
   } else if (ticks > 50 && !real && fast) {
