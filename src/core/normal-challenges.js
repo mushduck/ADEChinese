@@ -53,9 +53,9 @@ class NormalChallengeState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    if (PlayerProgress.eternityUnlocked()) return true;
+    if (PlayerProgress.eternityUnlocked() && (!Alpha.isRunning || Currency.eternities.gt(0))) return true;
     if (this.id === 0) return true;
-    const ip = GameDatabase.challenges.normal[this.id - 1].lockedAt;
+    const ip = Alpha.isRunning ? GameDatabase.challenges.normal[this.id - 1].alphaLockedAt : GameDatabase.challenges.normal[this.id - 1].lockedAt;
     return Currency.infinitiesTotal.gte(ip);
   }
 
@@ -64,7 +64,7 @@ class NormalChallengeState extends GameMechanicState {
   }
 
   get lockedAt() {
-    return GameDatabase.challenges.normal[this.id].lockedAt;
+    return Alpha.isRunning ? GameDatabase.challenges.normal[this.id].alphaLockedAt : GameDatabase.challenges.normal[this.id].lockedAt;
   }
 
   requestStart() {
@@ -110,6 +110,10 @@ class NormalChallengeState extends GameMechanicState {
     GameCache.cheapestAntimatterAutobuyer.invalidate();
     if (this.id === 9) {
       Autobuyer.tickspeed.mode = 100;
+    }
+    if (this.id === 12 && Alpha.isRunning && Alpha.currentStage === 4) {
+      Alpha.advanceLayer();
+      Alpha.quotes.autoCrunch.show();
     }
   }
 

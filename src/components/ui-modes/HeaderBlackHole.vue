@@ -52,7 +52,7 @@ export default {
       this.canCharge = Enslaved.isUnlocked;
       this.isCharging = Enslaved.isStoringGameTime;
       this.storedTime.copyFrom(player.celestials.enslaved.stored);
-      this.canAutoRelease = Ra.unlocks.autoPulseTime.canBeApplied;
+      this.canAutoRelease = Ra.unlocks.autoPulseTime.canBeApplied && !player.disablePostReality;
       this.isAutoReleasing = player.celestials.enslaved.isAutoReleasing;
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
     },

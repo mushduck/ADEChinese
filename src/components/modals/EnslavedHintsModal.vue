@@ -10,8 +10,8 @@ export default {
   },
   data() {
     return {
-      currentStored: DC.D0,
-      nextHintCost: 0,
+      currentStored: new Decimal(0),
+      nextHintCost: new Decimal(0),
       canGetHint: false,
       shownEntries: [],
       realityHintsLeft: 0,
@@ -58,7 +58,7 @@ export default {
   methods: {
     update() {
       this.currentStored.copyFrom(player.celestials.enslaved.stored);
-      this.nextHintCost = Enslaved.nextHintCost;
+      this.nextHintCost.copyFrom(Enslaved.nextHintCost);
       this.canGetHint = this.currentStored.gte(new Decimal(this.nextHintCost));
       this.shownEntries = [];
 

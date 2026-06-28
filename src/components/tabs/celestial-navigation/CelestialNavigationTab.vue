@@ -356,6 +356,51 @@ const CelestialNavigationViewportCache = {
             stop-color="#00ff00"
           />
         </linearGradient>
+        <linearGradient
+          id="gradAlphaCelBreak"
+          y2="0"
+          x2="1"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0"
+            stop-color="#00ff00"
+          />
+          <stop
+            offset="1"
+            stop-color="#5151ec"
+          />
+        </linearGradient>
+        <linearGradient
+          id="gradCelBreakCelEternity"
+          y2="0"
+          x2="1"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0"
+            stop-color="#5151ec"
+          />
+          <stop
+            offset="1"
+            stop-color="#8051ec"
+          />
+        </linearGradient>
+        <linearGradient
+          id="gradCelEternitySlabdrill"
+          y2="0"
+          x2="1"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop
+            offset="0"
+            stop-color="#8051ec"
+          />
+          <stop
+            offset="1"
+            stop-color="#952ba8"
+          />
+        </linearGradient>
         <mask
           id="fade"
           maskContentUnits="objectBoundingBox"

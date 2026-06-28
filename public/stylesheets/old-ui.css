@@ -41,6 +41,16 @@
   transform: translateX(-50%);
 }
 
+.l-old-ui__divinity-btn {
+  flex-shrink: 0;
+  margin-top: 1.9rem;
+}
+
+.l-old-ui__nullify-btn {
+  flex-shrink: 0;
+  margin-top: 1.9rem;
+}
+
 .l-old-ui__page {
   display: flex;
   flex: 1 0 auto;
@@ -54,6 +64,22 @@
 }
 
 .o-big-crunch-btn {
+  width: 36rem;
+  height: 10rem;
+  z-index: 1;
+  font-family: Typewriter, serif;
+  font-size: 5rem;
+}
+
+.o-divinity-btn {
+  width: 36rem;
+  height: 10rem;
+  z-index: 1;
+  font-family: Typewriter, serif;
+  font-size: 5rem;
+}
+
+.o-nullify-btn {
   width: 36rem;
   height: 10rem;
   z-index: 1;

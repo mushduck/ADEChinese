@@ -18,6 +18,9 @@ export class PelleAchievementUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PelleAchievementUpgrade = mapGameDataToObject(
@@ -43,6 +46,9 @@ export class PelleDestructionUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PelleDestructionUpgrade = mapGameDataToObject(
@@ -68,6 +74,9 @@ export class PelleRealityUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PelleRealityUpgrade = mapGameDataToObject(
@@ -93,6 +102,9 @@ export class PelleImaginaryUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PelleImaginaryUpgrade = mapGameDataToObject(
@@ -118,6 +130,9 @@ export class PelleCelestialUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PelleCelestialUpgrade = mapGameDataToObject(
@@ -143,6 +158,9 @@ export class PellePerkUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PellePerkUpgrade = mapGameDataToObject(
@@ -168,6 +186,9 @@ export class PelleAlchemyUpgradeState extends SetPurchasableMechanicState {
     return this.config.cost;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PelleAlchemyUpgrade = mapGameDataToObject(
@@ -194,9 +215,12 @@ export class PelleStrikeUpgradeState extends SetPurchasableMechanicState {
   }
 
   get isAvailableForPurchase() {
-    return Achievement(195).isUnlocked;
+    return Achievement(204).isUnlocked;
   }
 
+  get canBeApplied() {
+    return this.isBought && !player.disablePostReality;
+  }
 }
 
 export const PelleStrikeUpgrade = mapGameDataToObject(

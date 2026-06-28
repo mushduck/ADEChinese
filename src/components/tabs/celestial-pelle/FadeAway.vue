@@ -3,12 +3,14 @@ export default {
   name: "FadeAway",
   data() {
     return {
-      opacity: 0
+      opacity: 0,
+      isDarker: false
     };
   },
   methods: {
     update() {
-      this.opacity = Alpha.isRunning ? (player.options.brightAlpha ? 0.2 : 0.5) : (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2;
+      this.isDarker = Alpha.isRunning;
+      this.opacity = this.isDarker ? (player.options.brightAlpha ? 0.2 : 0.5) : (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2;
     }
   }
 };

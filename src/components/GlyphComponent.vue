@@ -82,6 +82,71 @@ const rarityBorderStyles = {
       colorSplit: [10, 12, 14, 16, 84, 86, 88, 90],
     }
   ],
+  empyrean: [
+    {
+      lineType: "bump",
+      colorSplit: [15, 35],
+    },
+    {
+      lineType: "radial",
+      colorSplit: [65, 85],
+    },
+    {
+      lineType: "linear",
+      angles: [45, 135],
+      colorSplit: [10, 12, 14, 16, 18, 20, 80, 82, 84, 86, 88, 90],
+    }
+  ],
+  sublime: [
+    {
+      lineType: "bump",
+      colorSplit: [15, 40],
+    },
+    {
+      lineType: "radial",
+      colorSplit: [60, 85],
+    },
+    {
+      lineType: "linear",
+      angles: [45, 135],
+      colorSplit: [10, 12, 14, 16, 18, 20, 80, 82, 84, 86, 88, 90],
+    }
+  ],
+  superlunary: [
+    {
+      lineType: "bump",
+      colorSplit: [15, 40],
+    },
+    {
+      lineType: "radial",
+      colorSplit: [60, 85],
+    },
+    {
+      lineType: "linear",
+      angles: [45, 135],
+      colorSplit: [10, 12, 14, 16, 18, 20, 22, 24, 76, 78, 80, 82, 84, 86, 88, 90],
+    }
+  ],
+  perfect: [
+    {
+      lineType: "bump",
+      colorSplit: [15, 40],
+    },
+    {
+      lineType: "radial",
+      colorSplit: [60, 85],
+    },
+    {
+      lineType: "linear",
+      angles: [45, 135],
+      colorSplit: [10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 72, 74, 76, 78, 80, 82, 84, 86, 88, 90],
+    },
+    {
+      lineType: "linear",
+      angles: [0, 90],
+      colorSplit: [10, 12, 14, 16, 18, 20, 80, 82, 84, 86, 88, 90],
+    }
+  ],
   cursed: [
     {
       lineType: "spike",
@@ -488,7 +553,7 @@ export default {
           this.updateDisplayLevel();
           return formatHybridLarge(this.displayLevel === 0 ? this.glyph.level : this.displayLevel, 3);
         case typeEnum.RARITY:
-          return formatRarity(strengthToRarity(Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.isBought ? Pelle.glyphStrength : this.glyph.strength));
+          return formatRarity(strengthToRarity(Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.canBeApplied ? Pelle.glyphStrength : this.glyph.strength));
         case typeEnum.SAC_VALUE:
           return format(this.sacrificeReward, 2, 2);
         case typeEnum.FILTER_SCORE:

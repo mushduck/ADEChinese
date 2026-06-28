@@ -10,7 +10,7 @@ export default {
   },
   data() {
     return {
-      totalUpgrades: 0,
+      totalUpgrades: new Decimal(0),
       multPerTickspeed: 0,
       tickspeedSoftcap: 0,
       timeShards: new Decimal(0),
@@ -22,7 +22,12 @@ export default {
       isEndgameUnlocked: false,
       timeDimCompressionMagnitude: 0,
       timeDimOverflow: 0,
-      timeDimStart: new Decimal(0)
+      timeDimStart: new Decimal(0),
+      timeDimCompressionMagnitude2: 0,
+      timeDimOverflow2: 0,
+      timeDimStart2: new Decimal(0),
+      hasSecond: false,
+      hasCap: true
     };
   },
   computed: {
@@ -30,8 +35,8 @@ export default {
   },
   methods: {
     update() {
-      this.showLockedDimCostNote = !TimeDimension(8).isUnlocked && player.realities >= 1;
-      this.totalUpgrades = player.totalTickGained;
+      this.showLockedDimCostNote = !TimeDimension(8).isUnlocked && player.realities.gte(1);
+      this.totalUpgrades.copyFrom(player.totalTickGained);
       this.multPerTickspeed = FreeTickspeed.multToNext;
       this.tickspeedSoftcap = FreeTickspeed.softcap;
       this.timeShards.copyFrom(Currency.timeShards);
@@ -43,6 +48,11 @@ export default {
       this.timeDimCompressionMagnitude = TimeDimensions.compressionMagnitude;
       this.timeDimOverflow = 1 / this.timeDimCompressionMagnitude;
       this.timeDimStart = TimeDimensions.OVERFLOW;
+      this.timeDimCompressionMagnitude2 = TimeDimensions.compressionMag2;
+      this.timeDimOverflow2 = 1 / this.timeDimCompressionMagnitude2;
+      this.timeDimStart2 = TimeDimensions.OVERFLOW_SQUARED;
+      this.hasSecond = Currency.timeShards.gte(DC.ENUMMAX);
+      this.hasCap = Alpha.currentStage < 11 || player.disablePostReality;
     },
     maxAll() {
       tryUnlockTimeDimensions();
@@ -98,6 +108,18 @@ export default {
       </p>
     </div>
     <div>
+      <p>
+        <span v-if="hasSecond">
+          Your Time Dimension Compression^2 Magnitude is
+          <span class="c-time-dim-compression-description__accent">{{ format(timeDimCompressionMagnitude2, 2, 3) }}</span>,
+          which raises all Time Dimension Multipliers to the power of
+          <span class="c-time-dim-compression-description__accent">{{ format(timeDimOverflow2, 2, 3) }}</span>
+          while above
+          <span>{{ formatPostBreak(timeDimStart2, 2, 1) }}</span>.
+        </span>
+      </p>
+    </div>
+    <div>
       The amount each additional upgrade requires will start
       increasing above {{ formatHybridLarge(tickspeedSoftcap, 3) }} Tickspeed upgrades.
     </div>
@@ -119,7 +141,9 @@ export default {
       <div v-if="showLockedDimCostNote">
         Hold shift to see the Eternity Point cost for locked Time Dimensions.
       </div>
-      Any 8th Time Dimensions purchased above {{ format(1e8) }} will not further increase the multiplier.
+      <div v-if="hasCap">
+        Any 8th Time Dimensions purchased above {{ format(1e8) }} will not further increase the multiplier.
+      </div>
     </div>
   </div>
 </template>

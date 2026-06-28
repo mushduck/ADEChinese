@@ -85,9 +85,9 @@ export default {
   methods: {
     update() {
       this.isDoomed = Pelle.isDoomed;
-      this.isUseless = Pelle.isDoomed && !PelleCelestialUpgrade.raTeresa2.isBought;
+      this.isUseless = Pelle.isDoomed && !PelleCelestialUpgrade.raTeresa2.canBeApplied;
       this.alwaysRecpec = this.isDoomed && Pelle.isAlwaysDischargeCIU;
-      this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && !this.isUseless;
+      this.chargeUnlocked = Ra.unlocks.chargedInfinityUpgrades.canBeApplied && !this.isUseless && !player.disablePostReality;
       this.totalCharges = Ra.totalCharges;
       this.chargesUsed = Ra.totalCharges - Ra.chargesLeft;
       this.disCharge = player.celestials.ra.disCharge;
@@ -95,8 +95,8 @@ export default {
       this.ipMultHardCap = InfinityUpgrade.ipMult.costCap;
       this.eternityUnlocked = PlayerProgress.current.isEternityUnlocked;
       this.bottomRowUnlocked = Achievement(41).isUnlocked;
-      this.isUncapped = BreakEternityUpgrade.doubleIPUncap.isBought;
-      this.isSoftcapApplicable = !EndgameUpgrade(21).isBought;
+      this.isUncapped = BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality;
+      this.isSoftcapApplicable = !EndgameUpgrade(21).isBought || player.disablePostReality || player.infinityPoints.gte("e1e125");
     },
     btnClassObject(column) {
       const classObject = {

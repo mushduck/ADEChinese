@@ -236,7 +236,7 @@ export const BlackHoleAnimation = (function() {
       // Time taken for one orbit (in seconds)
       this.period = BlackHole(1).cycleLength;
       // Fixed-point iteration for eccentricity (I'm really hoping this always converges)
-      const y = (1 - Math.pow(ACTIVE_THRESHOLD, -2)) / (1 - Math.pow(BlackHole(1).power, -2));
+      const y = (1 - Math.pow(ACTIVE_THRESHOLD, -2)) / (1 - Math.pow(BlackHole(1).power.min(1e300).toNumber(), -2));
       let eccentricity = 0.5;
       const maxIter = 1000;
       const meanAnomaly = 2 * Math.PI * Math.min(0.9, BlackHole(1).duration / this.period);
@@ -247,7 +247,7 @@ export const BlackHoleAnimation = (function() {
       this.eccentricity = eccentricity;
 
       // Black Hole size, calculated from orbit shape in order to give the right max boost
-      holeSize = SEMIMAJOR_AXIS * (1 - eccentricity) * (1 - Math.pow(BlackHole(1).power, -2));
+      holeSize = SEMIMAJOR_AXIS * (1 - eccentricity) * (1 - Math.pow(BlackHole(1).power.min(1e300).toNumber(), -2));
       // Prevent planet + hole overlapping
       this.hole = new Hole((holeSize - PLANET_SIZE) / 2);
 

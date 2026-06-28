@@ -16,6 +16,7 @@ export default {
   data() {
     return {
       isDoomed: false,
+      isDisabled: false,
       isUnlocked: false,
       isPaused: false,
       isEnslaved: false,
@@ -51,7 +52,8 @@ export default {
   },
   methods: {
     update() {
-      this.isDoomed = Pelle.isDoomed && !PelleDestructionUpgrade.blackHole.isBought;
+      this.isDoomed = Pelle.isDoomed && !PelleDestructionUpgrade.blackHole.canBeApplied;
+      this.isDisabled = player.disablePostReality;
       this.isUnlocked = BlackHoles.areUnlocked;
       this.isPaused = BlackHoles.arePaused;
       // If stop running enslaved, re-mount the black hole animation as it reappears
@@ -150,7 +152,7 @@ export default {
 <template>
   <div class="l-black-hole-tab">
     <div
-      v-if="isEnslaved || isDoomed"
+      v-if="isEnslaved || isDoomed || isDisabled"
       class="c-black-hole-disabled-description"
     >
       <i v-if="isEnslaved">

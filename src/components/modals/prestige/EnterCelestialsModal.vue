@@ -46,7 +46,7 @@ export default {
       return `Perform a Reality reset and enter ${this.name} Reality, in which:`;
     },
     formatStageNum() {
-      const a = this.alphaStage;
+      const a = this.alphaStage + 1;
       if (a % 10 === 1 && Math.floor(a / 10) !== 1) return `${a}st`;
       if (a % 10 === 2 && Math.floor(a / 10) !== 1) return `${a}nd`;
       if (a % 10 === 3 && Math.floor(a / 10) !== 1) return `${a}rd`;
@@ -85,7 +85,7 @@ export default {
       this.teresaRunMult.copyFrom(Teresa.runRewardMultiplier);
       const effarigStage = Effarig.currentStage;
       this.effarigDone = effarigStage === EFFARIG_STAGES.COMPLETED;
-      this.effarigLayer = [null, "Infinity", "Eternity", "Reality"][effarigStage];
+      this.effarigLayer = [null, "Infinity", "Eternity", "Reality", "Endgame"][effarigStage];
       this.enslavedDone = Enslaved.isCompleted;
       this.laitelaFastest = player.celestials.laitela.fastestCompletion;
       this.laitelaTime = TimeSpan.fromSeconds(new Decimal(this.laitelaFastest)).toStringShort();

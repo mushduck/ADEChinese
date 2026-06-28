@@ -11,8 +11,8 @@ export default {
       mult: new Decimal(0),
       tickspeed: new Decimal(0),
       galaxyCount: new Decimal(0),
-      purchasedTickspeed: 0,
-      freeTickspeed: 0,
+      purchasedTickspeed: new Decimal(0),
+      freeTickspeed: new Decimal(0),
     };
   },
   computed: {
@@ -30,8 +30,8 @@ export default {
       this.mult.copyFrom(Tickspeed.multiplier);
       this.tickspeed.copyFrom(Tickspeed.perSecond);
       this.galaxyCount.copyFrom(player.galaxies);
-      this.purchasedTickspeed = player.totalTickBought;
-      this.freeTickspeed = FreeTickspeed.amount;
+      this.purchasedTickspeed.copyFrom(player.totalTickBought);
+      this.freeTickspeed.copyFrom(FreeTickspeed.amount);
     },
   },
 };

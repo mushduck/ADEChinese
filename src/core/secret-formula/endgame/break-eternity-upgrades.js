@@ -8,7 +8,7 @@ function rebuyable(config) {
     cost: () => Decimal.pow(10, config.initialCost * Math.pow(config.costIncrease, player.breakEternityRebuyables[config.id])),
     maxUpgrades,
     description,
-    effect: () => effectFunction(player.breakEternityRebuyables[config.id]),
+    effect: () => player.disablePostReality ? 1 : effectFunction(player.breakEternityRebuyables[config.id]),
     isDisabled,
     // There isn't enough room in the button to fit the EC reduction and "Next:" at the same time while still
     // presenting all the information in an understandable way, so we only show it if the upgrade is maxed

@@ -1,13 +1,15 @@
-function rebuyableCost(initialCost, increment, id, capIncreaseAt) {
+function rebuyableCost(initialCost, increment, id, capIncreaseAt, superExponent) {
+  if (player.dilation.rebuyables[id] >= superExponent) return Decimal.pow10(1e10).pow(Decimal.pow(1.0002, Math.max(player.dilation.rebuyables[id] - superExponent, 0)));
   return Decimal.multiply(initialCost, Decimal.pow(increment, player.dilation.rebuyables[id] + (Math.max(player.dilation.rebuyables[id] - capIncreaseAt, 0) * Math.max(player.dilation.rebuyables[id] - (capIncreaseAt + 1), 0) / 2)));
 }
 function rebuyable(config) {
   return {
     id: config.id,
-    cost: () => rebuyableCost(config.initialCost, config.increment, config.id, config.capIncreaseAt(player.dilation.rebuyables[config.id])),
+    cost: () => rebuyableCost(config.initialCost, config.increment, config.id, config.capIncreaseAt(player.dilation.rebuyables[config.id]), config.superExponent ? config.superExponent(player.dilation.rebuyables[config.id]) : Infinity),
     initialCost: config.initialCost,
     increment: config.increment,
     capIncreaseAt: () => config.capIncreaseAt(player.dilation.rebuyables[config.id]),
+    superExponent: () => config.superExponent ? config.superExponent(player.dilation.rebuyables[config.id]) : Infinity,
     description: config.description,
     effect: () => config.effect(player.dilation.rebuyables[config.id]),
     formatEffect: config.formatEffect,
@@ -55,20 +57,21 @@ export const dilationUpgrades = {
     initialCost: 1e6,
     increment: 100,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(2)).sub(2)).toNumber(),
+    superExponent: () => 100000,
     description: () =>
-      (Perk.bypassTGReset.isBought && (!Pelle.isDoomed || PellePerkUpgrade.perkTGR.isBought)
+      ((Perk.bypassTGReset.isBought && !player.disablePostReality) && (!Pelle.isDoomed || PellePerkUpgrade.perkTGR.canBeApplied)
         ? "Reset Tachyon Galaxies, but lower their threshold"
         : "Reset Dilated Time and Tachyon Galaxies, but lower their threshold"),
     // The 38th purchase is at 1e80, and is the last purchase.
-    effect: bought => (bought < 38 || BreakEternityUpgrade.tgThresholdUncap.isBought ? Math.pow(0.8, bought) : 0),
+    effect: bought => (bought < 38 || (BreakEternityUpgrade.tgThresholdUncap.isBought && !player.disablePostReality) ? Decimal.pow(0.8, bought) : DC.D0),
     formatEffect: effect => {
-      if (effect === 0) return `${formatX(getTachyonGalaxyMult(effect), 4, 4)}`;
-      const nextEffect = effect === Math.pow(0.8, 37) && !BreakEternityUpgrade.tgThresholdUncap.isBought ? 0 : 0.8 * effect;
-      return `${formatX(getTachyonGalaxyMult(effect), 4, 4)} ➜
-        Next: ${formatX(getTachyonGalaxyMult(nextEffect), 4, 4)}`;
+      if (effect.eq(0)) return `${formatX(getTachyonGalaxyMultForDisplay(effect), 4, 4)}`;
+      const nextEffect = effect.eq(Decimal.pow(0.8, 37)) && (!BreakEternityUpgrade.tgThresholdUncap.isBought || player.disablePostReality) ? DC.D0 : effect.times(0.8);
+      return `${formatX(getTachyonGalaxyMultForDisplay(effect), 4, 4)} ➜
+        Next: ${formatX(getTachyonGalaxyMultForDisplay(nextEffect), 4, 4)}`;
     },
     formatCost: value => format(value, 2),
-    purchaseCap: () => BreakEternityUpgrade.tgThresholdUncap.isBought ? Number.MAX_VALUE : 38
+    purchaseCap: () => (BreakEternityUpgrade.tgThresholdUncap.isBought && !player.disablePostReality) ? Number.MAX_VALUE : 38
   }),
   tachyonGain: rebuyable({
     id: 3,
@@ -76,13 +79,13 @@ export const dilationUpgrades = {
     increment: 20,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(Math.log10(20))).sub(Math.log10(5e5) / Math.log10(20))).toNumber(),
     description: () => {
-      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade) return `Multiply the amount of Tachyon Particles gained by ${formatInt(1)}`;
+      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return `Multiply the amount of Tachyon Particles gained by ${formatInt(1)}`;
       if (Enslaved.isRunning) return `Multiply the amount of Tachyon Particles gained
       by ${Math.pow(3, Enslaved.tachyonNerf).toFixed(2)}`;
       return "Triple the amount of Tachyon Particles gained";
     },
     effect: bought => {
-      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade) return DC.D1.pow(bought);
+      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return DC.D1.pow(bought);
       return DC.D3.pow(bought);
     },
     formatEffect: value => formatX(value, 2),
@@ -92,7 +95,9 @@ export const dilationUpgrades = {
   doubleGalaxies: {
     id: 4,
     cost: 5e6,
-    description: () => `Gain twice as many Tachyon Galaxies, up to ${formatInt(500)} base Galaxies`,
+    description: () => (Alpha.isDestroyed
+      ? `Gain twice as many Tachyon Galaxies`
+      : `Gain twice as many Tachyon Galaxies, up to ${formatInt(500)} base Galaxies`),
     effect: 2
   },
   tdMultReplicanti: {
@@ -147,7 +152,8 @@ export const dilationUpgrades = {
     id: 10,
     cost: 1e15,
     description: "Generate Time Theorems based on Tachyon Particles",
-    effect: () => Currency.tachyonParticles.value.div(20000),
+    effect: () => Currency.tachyonParticles.value.div(20000).times(
+      Alpha.isRunning ? AlphaUnlocks.timeTheoremGeneration.effects.nerf.effectOrDefault(1) : 1),
     formatEffect: value => `${format(value, 2, 1)}/sec`
   },
   dtGainPelle: rebuyable({
@@ -198,7 +204,7 @@ export const dilationUpgrades = {
     cost: 1e55,
     pelleOnly: true,
     description: () => `Gain more Dilated Time based on current EP`,
-    effect: () => 1e9 ** Decimal.min(Decimal.pow(Decimal.max(player.eternityPoints.add(1).log10().sub(1500), 0).div(2500), 1.2), 1).toNumber(),
+    effect: () => Decimal.pow(1e9, Decimal.min(Decimal.pow(Decimal.max(player.eternityPoints.add(1).log10().sub(1500), 0).div(2500), 1.2), 1).times(Alpha.isDestroyed ? player.eternityPoints.add(1).log10().sub(4000).max(1).log10().max(1) : 1)),
     formatEffect: value => formatX(value, 2, 2)
   },
 };

@@ -110,7 +110,7 @@ export class TimeStudyTreeLayout {
       wideRow  (TS(221), TS(222), TS(223), TS(224), TS(225), TS(226), TS(227), TS(228))
     );
 
-    if (type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES && (!Pelle.isDoomed || PelleCelestialUpgrade.raV2.isBought)) {
+    if (type === STUDY_TREE_LAYOUT_TYPE.ALTERNATIVE_TRIAD_STUDIES && (!Pelle.isDoomed || PelleCelestialUpgrade.raV2.canBeApplied)) {
       this.rows.push(
         normalRow(                 TS(301), TS(302), TS(303), TS(304)                 )
       );
@@ -212,8 +212,8 @@ export const STUDY_TREE_LAYOUT_TYPE = {
   ALTERNATIVE_62_181: 3,
   ALTERNATIVE_TRIAD_STUDIES: 4,
   get current() {
-    const alt62 = Perk.bypassEC5Lock.isBought;
-    const alt181 = Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought;
+    const alt62 = (Perk.bypassEC5Lock.isBought && !player.disablePostReality);
+    const alt181 = (Perk.bypassEC1Lock.isBought && Perk.bypassEC2Lock.isBought && Perk.bypassEC3Lock.isBought && !player.disablePostReality);
     if (Ra.canBuyTriad) return this.ALTERNATIVE_TRIAD_STUDIES;
     if (alt62 && alt181) return this.ALTERNATIVE_62_181;
     if (alt62) return this.ALTERNATIVE_62;

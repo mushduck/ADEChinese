@@ -59,7 +59,7 @@ export const GlyphGenerator = {
   // glyphs excludes the first fixed glyph and only starts from the 2nd one onward
   uniformityGroups: 4,
   get isUniformityActive() {
-    return player.realities <= 5 * this.uniformityGroups;
+    return player.realities.lte(5 * this.uniformityGroups);
   },
 
   fakeSeed: Date.now() % Math.pow(2, 32),
@@ -127,7 +127,8 @@ export const GlyphGenerator = {
   },
 
   realityGlyph(level) {
-    const str = rarityToStrength(100 + Ra.unlocks.realityGlyphRarity.effectOrDefault(0));
+    const str = rarityToStrength(Math.min(100 + Ra.unlocks.realityGlyphRarity.effectOrDefault(0) + Effarig.rarityCapIncrease +
+      GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300));
     const effects = this.generateRealityEffects(level);
     const effectBitmask = makeGlyphEffectBitmask(effects);
     return {
@@ -165,11 +166,13 @@ export const GlyphGenerator = {
     let bitmask = 0;
     for (const effect of effectList) bitmask |= 1 << effect.bitmaskIndex;
     const glyphLevel = Math.max(player.records.bestReality.glyphLevel, 5000);
+    const rarity = EffarigUnlock.glyphGenerationBoost.isUnlocked ? rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
+      GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300)) : 3.5;
     return {
       id: undefined,
       idx: null,
       type,
-      strength: 3.5,
+      strength: rarity,
       level: glyphLevel,
       rawLevel: glyphLevel,
       effects: bitmask,
@@ -178,15 +181,36 @@ export const GlyphGenerator = {
 
   endgameGlyph(type) {
     const effectList = GlyphEffects.all.filter(e => e.id.startsWith(type));
-    effectList.push(GlyphEffects.timespeed);
+    if (type !== "effarig" && type !== "reality") effectList.push(GlyphEffects.timespeed);
     let bitmask = 0;
     for (const effect of effectList) bitmask |= 1 << effect.bitmaskIndex;
     const glyphLevel = Effects.max(1, EndgameMastery(71));
+    const rarity = EffarigUnlock.glyphGenerationBoost.isUnlocked ? rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
+      GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300)) : 3.5;
     return {
       id: undefined,
       idx: null,
       type,
-      strength: 3.5,
+      strength: rarity,
+      level: glyphLevel,
+      rawLevel: glyphLevel,
+      effects: bitmask,
+    };
+  },
+
+  omniGlyph(type) {
+    const effectList = GlyphEffects.all.filter(e => e.id.startsWith(type));
+    effectList.push(GlyphEffects.timespeed);
+    let bitmask = 0;
+    for (const effect of effectList) bitmask |= 1 << effect.bitmaskIndex;
+    const glyphLevel = 1e9;
+    const rarity = EffarigUnlock.glyphGenerationBoost.isUnlocked ? rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
+      GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300)) : 3.5;
+    return {
+      id: undefined,
+      idx: null,
+      type,
+      strength: rarity,
       level: glyphLevel,
       rawLevel: glyphLevel,
       effects: bitmask,
@@ -212,7 +236,8 @@ export const GlyphGenerator = {
   musicGlyph() {
     const rng = new GlyphGenerator.MusicGlyphRNG();
     const glyph =
-      this.randomGlyph({ actualLevel: Math.floor(player.records.bestReality.glyphLevel * 0.8), rawLevel: 1 }, rng);
+      this.randomGlyph({ actualLevel: (ResurgenceUpgrade.glyphSurge.isBought && !player.disablePostReality
+        ? player.records.bestEndgame.glyphLevel - 1 : Math.floor(player.records.bestReality.glyphLevel * 0.8)), rawLevel: 1 }, rng);
     rng.finalize();
     glyph.cosmetic = "music";
     glyph.fixedCosmetic = "music";
@@ -237,16 +262,18 @@ export const GlyphGenerator = {
   randomStrength(rng) {
     // Technically getting this upgrade really changes glyph gen but at this point almost all
     // the RNG is gone anyway.
-    if (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied) return rarityToStrength(100 + Ra.unlocks.rarityBuff.effectOrDefault(0));
+    if (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied && !player.disablePostReality) return rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
+      GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300));
     let result = GlyphGenerator.gaussianBellCurve(rng) * GlyphGenerator.strengthMultiplier;
-    const relicShardFactor = Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMastery(53).isBought ? 1 : rng.uniform();
+    const relicShardFactor = (Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality ? 1 : rng.uniform();
     const increasedRarity = relicShardFactor * Effarig.maxRarityBoost +
       Effects.sum(Achievement(146)) + GlyphSacrifice.effarig.effectValue.toNumber();
     // Each rarity% is 0.025 strength.
     result += increasedRarity / 40;
     // Raise the result to the next-highest 0.1% rarity.
     result = Math.ceil(result * 400) / 400;
-    return Math.min(result, rarityToStrength(100 + Ra.unlocks.rarityBuff.effectOrDefault(0)));
+    return Math.min(result, rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
+      GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300)));
   },
 
   // eslint-disable-next-line max-params
@@ -256,9 +283,9 @@ export const GlyphGenerator = {
     // as preventing all of the glyphs changing drastically when RU17 is purchased.
     const random1 = rng.uniform();
     const random2 = rng.uniform();
-    if (type !== "effarig" && Ra.unlocks.glyphEffectCount.canBeApplied) return 4;
-    if (type === "effarig" && ExpansionPack.effarigPack.isBought) return 7;
-    const maxEffects = Ra.unlocks.glyphEffectCount.canBeApplied ? 7 : 4;
+    if (type !== "effarig" && Ra.unlocks.glyphEffectCount.canBeApplied && !player.disablePostReality) return 4;
+    if (type === "effarig" && ExpansionPack.effarigPack.isBought && !player.disablePostReality) return 7;
+    const maxEffects = (Ra.unlocks.glyphEffectCount.canBeApplied && !player.disablePostReality) ? 7 : 4;
     let num = Math.min(
       maxEffects,
       Math.floor(Math.pow(random1, 1 - (Math.pow(level * strength, 0.5)) / 100) * 1.5 + 1)
@@ -268,7 +295,7 @@ export const GlyphGenerator = {
     if (RealityUpgrade(17).isBought && random2 < Effects.max(0, RealityUpgrade(17))) {
       num = Math.min(num + 1, maxEffects);
     }
-    return Ra.unlocks.glyphEffectCount.canBeApplied ? Math.max(num, 4) : num;
+    return (Ra.unlocks.glyphEffectCount.canBeApplied && !player.disablePostReality) ? Math.max(num, 4) : num;
   },
 
   // Populate a list of reality glyph effects based on level

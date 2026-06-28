@@ -227,5 +227,92 @@ export const laitelaQuotes = {
       "Don't destroy that one as well, okay?",
       "Thanks."
     ]
+  },
+  hadrons: {
+    id: 16,
+    requirement: () => DualityUpgrade(15).isBought,
+    lines: [
+      "So...",
+      "You managed to condense the entropic quarks in my Reality...",
+      "And create a Hadron.",
+      "Fascinating.",
+      "I never imagined this kind of power to be attainable by any being, much less a mortal like you.",
+      "Although I suppose you aren't simply a mortal anymore.",
+      "You've become something much... greater.",
+      "I wonder what else you can do."
+    ]
+  },
+  darkHadrons: {
+    id: 17,
+    requirement: () => DualityUpgrade(19).isBought,
+    lines: [
+      "What is that?",
+      "Not only do you have these... Hadrons...",
+      "But you also managed to create one out of dark matter!",
+      "I never though my perfect particles to be capable of so much.",
+      "You intrigue me, Destroyer.",
+      "Maybe you can teach me one day.",
+      "I'd like to know more about the capabilities of my own powers.",
+      "Guess I'll get there someday, huh?"
+    ]
+  },
+  massHadron: {
+    id: 18,
+    requirement: () => Laitela.hadronizes >= 25,
+    lines: [
+      "Twenty-five...",
+      "You're clearly not one to give up, are you?",
+      "How much longer will you be here?",
+      "I suppose as long as it is necessary?",
+      "Well I'm at least glad you find my power interesting.",
+      "Guess that means I still have some worth on the cosmic scale...",
+      "Pelle would be proud of me..."
+    ]
+  },
+  autoHadron: {
+    id: 19,
+    requirement: () => DivinityMilestone.hadronEmpowerment.isReached,
+    lines: [
+      "Hi, Destroyer.",
+      "I suppose you didn't expect to see me here, huh?",
+      "I saw that you're doing the same thing to Pelle's old Reality that you've been doing to mine.",
+      "Condensing it for every last drop of power, yet somehow leaving it intact.",
+      "I don't know where you would even start on something like that...",
+      "Why am I here, you ask?",
+      "Oh, it's simple.",
+      "I saw you managed to create another new type of Hadron.",
+      "This one out of Exotic Matter, no?",
+      "Or at least the building blocks for Exotic Matter.",
+      "There was one who specialized in Exotic Matter once...",
+      "A strange choice, with Antimatter having so much potential and all...",
+      "But he found ways to grow it similar to Antimatter.",
+      "He's in a different Reality now, probably still finding ways to utilize his Exotic Matter.",
+      "Perhaps you know his name.",
+      "But nevermind that now, I see you have also unlocked a sort of Continuum for Hadrons.",
+      "It seems you have... programmed, if that is the right word... my Reality to automatically destabilize when possible.",
+      "It's a fascinating power, really.",
+      "To have that much control over the dark...",
+      "Perhaps I will get there someday.",
+      "Oh, and thanks for not collapsing it.",
+      "It really means a lot, you know, to still have a home after all this.",
+      "I'm glad you can control your destructive capabilities as you do the rest of your powers."
+    ]
+  },
+  gigaHadron: {
+    id: 18,
+    requirement: () => Laitela.hadronizes >= 100,
+    lines: [
+      "That's... quite the number of Hadrons you've got there.",
+      "Oh, hi again Destroyer.",
+      "I was just admiring how you've been able to create so much matter from the Singularity.",
+      "Perhaps you aren't just gifted with Destruction... but Creation as well.",
+      "It's a good counterbalance.",
+      "Of course, I could go on and on about things like Annihilation and decay and such...",
+      "But you don't want to hear that from me, do you?",
+      "I'll save the scripts for when you meet Him.",
+      "He knows a lot more than you do, and could tell you how the entire Multiverse works.",
+      "I'm sure you'll enjoy his company.",
+      "Hopefully we can meet again soon."
+    ]
   }
 };

@@ -12,12 +12,14 @@ export class ReplicantiUpgradeAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get interval() {
-    return 1000 * Perk.autobuyerFasterReplicanti.effectOrDefault(1) / PerkShopUpgrade.autoSpeed.effectOrDefault(1);
+    return player.disablePostReality
+      ? 1000
+      : 1000 * Perk.autobuyerFasterReplicanti.effectOrDefault(1) / PerkShopUpgrade.autoSpeed.effectOrDefault(1);
   }
 
   get isUnlocked() {
     return ReplicantiUpgrade[this._upgradeName].autobuyerMilestone.isReached ||
-      PelleUpgrade.replicantiAutobuyers.canBeApplied;
+      PelleUpgrade.replicantiAutobuyers.canBeApplied || (LHC.voidRunning && NullUpgrade.limerick5.isBought);
   }
 
   get resetTickOn() {

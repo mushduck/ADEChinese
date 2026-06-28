@@ -41,7 +41,7 @@ export default {
   methods: {
     update() {
       const upgrade = this.upgrade;
-      this.isBought = upgrade.isBought;
+      this.isBought = upgrade.isBought || upgrade.isCapped;
       this.isAffordable = upgrade.isAffordable && upgrade.isAvailable;
       this.isAvailable = upgrade.isAvailable;
     }
@@ -66,6 +66,7 @@ export default {
       <DescriptionDisplay :config="upgrade.config" />
       <EffectDisplay :config="upgrade.config" />
       <CostDisplay
+        v-if="!isBought"
         :config="upgrade.config"
         name="Antimatter"
       />
@@ -84,6 +85,7 @@ export default {
       <DescriptionDisplay :config="upgrade.config" />
       <EffectDisplay :config="upgrade.config" />
       <CostDisplay
+        v-if="!isBought"
         :config="upgrade.config"
         name="Antimatter"
       />

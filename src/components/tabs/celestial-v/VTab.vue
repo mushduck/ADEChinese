@@ -113,7 +113,7 @@ export default {
       this.wantsFlipped = player.celestials.v.wantsFlipped;
       this.isRunning = V.isRunning;
       this.hasAlchemy = Ra.unlocks.unlockGlyphAlchemy.canBeApplied;
-      this.hasUpgrades = ExpansionPack.vPack.isBought;
+      this.hasUpgrades = ExpansionPack.vPack.isBought && !player.disablePostReality;
     },
     unlockCelestial() {
       if (V.canUnlockCelestial) V.unlockCelestial();

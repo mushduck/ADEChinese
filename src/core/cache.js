@@ -63,18 +63,50 @@ export const GameCache = {
       .reduce(Decimal.maxReducer)
   ),
 
+  bestRunCIPPM: new Lazy(() =>
+    player.records.recentCelestialInfinities
+      .map(run => ratePerMinute(run[2], run[1]))
+      .reduce(Decimal.maxReducer)
+  ),
+
+  bestRunVSPM: new Lazy(() =>
+    player.records.recentCondenses
+      .map(run => ratePerMinute(run[2], run[1]))
+      .reduce(Decimal.maxReducer)
+  ),
+
   averageRealTimePerEternity: new Lazy(() => player.records.recentEternities
     .map(run => run[1])
     .reduce(Number.sumReducer) / (1000 * player.records.recentEternities.length)),
 
-  tickSpeedMultDecrease: new Lazy(() => 10 - Effects.sum(
+  tickSpeedMultDecrease: new Lazy(() => (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(10) : 10) - Effects.sum(
     BreakInfinityUpgrade.tickspeedCostMult,
-    EternityChallenge(11).reward
-  )),
+    EternityChallenge(11).reward) - (player.disablePostReality ? 0 : Effects.sum(
+    AlphaUnlocks.breakInfinity.effects.buffA,
+    AlphaUnlocks.breakUpgrades.effects.buffA,
+    AlphaUnlocks.eternityChallenge11.effects.buff,
+    AlphaUnlocks.ec11Bulk.effects.buff
+  ))),
 
-  dimensionMultDecrease: new Lazy(() => 10 - Effects.sum(
+  dimensionMultDecrease: new Lazy(() => (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(10) : 10) - Effects.sum(
     BreakInfinityUpgrade.dimCostMult,
-    EternityChallenge(6).reward
+    EternityChallenge(6).reward) - (player.disablePostReality ? 0 : Effects.sum(
+    AlphaUnlocks.breakInfinity.effects.buffB,
+    AlphaUnlocks.breakUpgrades.effects.buffB
+  ))),
+
+  celestialTickSpeedMultDecrease: new Lazy(() => 10 - Effects.sum(
+    CelestialBreakInfinityUpgrade.celTickspeedCostMult
+  ) - CelestialEternityUpgrade.celTickReduction.effectOrDefault(0) -
+  CelestialEternityPlusUpgrade.megaCelTickspeedReduction.effectOrDefault(0)),
+
+  celestialDimensionMultDecrease: new Lazy(() => 10 - Effects.sum(
+    CelestialBreakInfinityUpgrade.celDimCostMult
+  ) - CelestialEternityUpgrade.celDimReduction.effectOrDefault(0) -
+  CelestialEternityPlusUpgrade.megaCelDimReduction.effectOrDefault(0)),
+
+  divineDimensionMultDecrease: new Lazy(() => 10 - Effects.sum(
+    DivinityUpgrade.divineL3U1
   )),
 
   timeStudies: new Lazy(() => NormalTimeStudyState.studies
@@ -118,6 +150,8 @@ export const GameCache = {
 
   celestialDimensionCommonMultiplier: new Lazy(() => celestialDimensionCommonMultiplier()),
 
+  divineDimensionCommonMultiplier: new Lazy(() => divineDimensionCommonMultiplier()),
+
   glyphInventorySpace: new Lazy(() => Glyphs.freeInventorySpace),
 
   glyphEffects: new Lazy(() => orderedEffectList.mapToObject(k => k, k => getAdjustedGlyphEffectUncached(k))),
@@ -127,6 +161,8 @@ export const GameCache = {
   logTotalGlyphSacrifice: new Lazy(() => GlyphSacrificeHandler.logTotalSacrifice),
 
   totalIPMult: new Lazy(() => totalIPMult()),
+
+  totalCIPMult: new Lazy(() => totalCIPMult()),
 
   challengeTimeSum: new Lazy(() => player.challenge.normal.bestTimes.reduce(Decimal.sumReducer)),
 

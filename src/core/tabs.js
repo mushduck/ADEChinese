@@ -207,6 +207,8 @@ export const Tabs = (function() {
       Tab.reality,
       Tab.celestials,
       Tab.endgame,
+      Tab.cdexpansion,
+      Tab.divinity,
       Tab.shop
     ],
     newUI: [
@@ -218,6 +220,8 @@ export const Tabs = (function() {
       Tab.reality,
       Tab.celestials,
       Tab.endgame,
+      Tab.cdexpansion,
+      Tab.divinity,
       Tab.achievements,
       Tab.statistics,
       Tab.options,

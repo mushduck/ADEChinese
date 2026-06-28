@@ -7,7 +7,7 @@ export const ra = {
       chunkGain: "Eternity Points",
       memoryGain: "current RM",
       requiredUnlock: () => undefined,
-      rawMemoryChunksPerSecond: () => 4 * Decimal.pow(Currency.eternityPoints.value.add(1).pLog10().div(5e3), 3.5).toNumber(),
+      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.eternityPoints.value.add(1).pLog10().div(5e3), 3.5).times(4),
       memoryProductionMultiplier: () => Ra.unlocks.teresaXP.effectOrDefault(1)
     },
     effarig: {
@@ -17,7 +17,7 @@ export const ra = {
       chunkGain: "Relic Shards gained",
       memoryGain: "best Glyph level",
       requiredUnlock: () => Ra.unlocks.effarigUnlock,
-      rawMemoryChunksPerSecond: () => 4 * Decimal.pow(Effarig.shardsGained, 0.175).toNumber(),
+      rawMemoryChunksPerSecond: () => Decimal.pow(Effarig.shardsGained, 0.175).times(4),
       memoryProductionMultiplier: () => Ra.unlocks.effarigXP.effectOrDefault(1)
     },
     enslaved: {
@@ -27,7 +27,7 @@ export const ra = {
       chunkGain: "Time Shards",
       memoryGain: "total time played",
       requiredUnlock: () => Ra.unlocks.enslavedUnlock,
-      rawMemoryChunksPerSecond: () => 4 * Decimal.pow(Currency.timeShards.value.add(1).pLog10().div(5e4), 2.5).toNumber(),
+      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.timeShards.value.add(1).pLog10().div(5e4), ResurgenceUpgrade.memSurge.isBought ? 3.5 : 2.5).times(4),
       memoryProductionMultiplier: () => Ra.unlocks.enslavedXP.effectOrDefault(1)
     },
     v: {
@@ -37,7 +37,7 @@ export const ra = {
       chunkGain: "Infinity Power",
       memoryGain: "total Memory levels",
       requiredUnlock: () => Ra.unlocks.vUnlock,
-      rawMemoryChunksPerSecond: () => 4 * Decimal.pow(Currency.infinityPower.value.add(1).pLog10().div(1e6), 1.875).toNumber(),
+      rawMemoryChunksPerSecond: () => Decimal.pow(Currency.infinityPower.value.add(1).pLog10().div(1e6), ResurgenceUpgrade.memSurge.isBought ? 3.5 : 1.875).times(4),
       memoryProductionMultiplier: () => Ra.unlocks.vXP.effectOrDefault(1)
     }
   },
@@ -48,22 +48,22 @@ export const ra = {
       pet: "teresa",
       level: 1,
       displayIcon: `<span class="fas fa-atom"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raTeresa1.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raTeresa1.canBeApplied
     },
     chargedInfinityUpgrades: {
       id: 1,
       reward: () => `Unlock Charged Infinity Upgrades. You get one more maximum
         Charged Infinity Upgrade every ${formatInt(2)} levels`,
-      effect: () => Math.min(12, Math.floor(Ra.pets.teresa.level / 2)),
+      effect: () => player.disablePostReality ? 0 : Math.min(12, Math.floor(Ra.pets.teresa.level / 2)),
       pet: "teresa",
       level: 2,
       displayIcon: `<span class="fas fa-infinity"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raTeresa2.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raTeresa2.canBeApplied
     },
     teresaXP: {
       id: 2,
       reward: "All Memory Chunks produce more Memories based on Reality Machines",
-      effect: () => 1 + Decimal.pow(Currency.realityMachines.value.add(1).pLog10().div(100), 0.5).toNumber(),
+      effect: () => player.disablePostReality ? 1 : 1 + Decimal.pow(Currency.realityMachines.value.add(1).pLog10().div(100), 0.5).toNumber(),
       pet: "teresa",
       level: 5,
       displayIcon: `Ϟ`
@@ -74,7 +74,7 @@ export const ra = {
       pet: "teresa",
       level: 10,
       displayIcon: `<span class="fas fa-bolt"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raTeresa3.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raTeresa3.canBeApplied
     },
     effarigUnlock: {
       id: 4,
@@ -119,7 +119,7 @@ export const ra = {
     effarigXP: {
       id: 9,
       reward: "All Memory Chunks produce more Memories based on highest Glyph level",
-      effect: () => 1 + player.records.bestReality.glyphLevel / 7000,
+      effect: () => player.disablePostReality ? 1 : 1 + player.records.bestReality.glyphLevel / 7000,
       pet: "effarig",
       level: 5,
       displayIcon: `<span class="fas fa-clone"></span>`
@@ -141,7 +141,7 @@ export const ra = {
     relicShardGlyphLevelBoost: {
       id: 12,
       reward: "Glyph level is increased based on Relic Shards gained",
-      effect: () => 100 * Decimal.pow(Decimal.log10(Decimal.max(Effarig.shardsGained, 1)), 2).toNumber(),
+      effect: () => player.disablePostReality ? 0 : 100 * Decimal.pow(Decimal.log10(Decimal.max(Effarig.shardsGained, 1)), 2).toNumber(),
       pet: "effarig",
       level: 15,
       displayIcon: `<span class="fas fa-fire"></span>`
@@ -161,24 +161,24 @@ export const ra = {
       pet: "enslaved",
       level: 1,
       displayIcon: `<span class="fas fa-circle"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raNameless1.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raNameless1.canBeApplied
     },
     improvedStoredTime: {
       id: 15,
       reward: "Stored game time is amplified and you can store more real time, increasing with Nameless levels",
       effects: {
-        gameTimeAmplification: () => Math.pow(20, Math.clampMax(Ra.pets.enslaved.level, Ra.levelCap)),
-        realTimeCap: () => 1000 * 3600 * Ra.pets.enslaved.level,
+        gameTimeAmplification: () => player.disablePostReality ? 1 : Decimal.pow(20, Decimal.clampMax(Ra.pets.enslaved.level, Ra.levelCap)),
+        realTimeCap: () => player.disablePostReality ? 0 : 1000 * 3600 * Ra.pets.enslaved.level,
       },
       pet: "enslaved",
       level: 2,
       displayIcon: `<span class="fas fa-history"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raNameless2.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raNameless2.canBeApplied
     },
     enslavedXP: {
       id: 16,
       reward: "All Memory Chunks produce more Memories based on total time played",
-      effect: () => 1 + Decimal.log10(player.records.totalTimePlayed).div(200).toNumber(),
+      effect: () => player.disablePostReality ? 1 : 1 + Decimal.log10(player.records.totalTimePlayed).div(200).toNumber(),
       pet: "enslaved",
       level: 5,
       displayIcon: `<span class="fas fa-stopwatch"></span>`
@@ -190,7 +190,7 @@ export const ra = {
       pet: "enslaved",
       level: 10,
       displayIcon: `<span class="fas fa-expand-arrows-alt"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raNameless3.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raNameless3.canBeApplied
     },
     vUnlock: {
       id: 18,
@@ -202,11 +202,11 @@ export const ra = {
     peakGamespeedDT: {
       id: 19,
       reward: "Gain more Dilated Time based on peak game speed in each Reality",
-      effect: () => Decimal.max(Decimal.pow(Decimal.log10(player.celestials.ra.peakGamespeed).sub(90), 3), 1).toNumber(),
+      effect: () => player.disablePostReality ? 1 : Decimal.max(Decimal.pow(Decimal.log10(player.celestials.ra.peakGamespeed).sub(90), 3), 1).toNumber(),
       pet: "enslaved",
       level: 15,
       displayIcon: `<span class="fas fa-tachometer-alt"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raNameless4.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raNameless4.canBeApplied
     },
     allGamespeedGlyphs: {
       id: 20,
@@ -228,7 +228,7 @@ export const ra = {
       pet: "v",
       level: 1,
       displayIcon: `<span class="fas fa-sync-alt"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raV1.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raV1.canBeApplied
     },
     autoUnlockDilation: {
       id: 22,
@@ -241,7 +241,7 @@ export const ra = {
     vXP: {
       id: 23,
       reward: "All Memory Chunks produce more Memories based on total Celestial levels.",
-      effect: () => 1 + Ra.totalPetLevel / 50,
+      effect: () => player.disablePostReality ? 1 : 1 + Ra.totalPetLevel / 50,
       pet: "v",
       level: 5,
       displayIcon: `<span class="fas fa-book"></span>`
@@ -250,52 +250,52 @@ export const ra = {
       id: 24,
       reward: () => `Unlock Hard V-Achievements and unlock a Triad Study every ${formatInt(6)} levels.
         Triad Studies are located at the bottom of the Time Studies page`,
-      effect: () => Math.min(Math.floor(Ra.pets.v.level / 6), 4),
+      effect: () => player.disablePostReality ? 0 : Math.min(Math.floor(Ra.pets.v.level / 6), 4),
       pet: "v",
       level: 6,
       displayIcon: `<span class="fas fa-trophy"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raV2.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raV2.canBeApplied
     },
     continuousTTBoost: {
       id: 25,
       reward: "Time Theorems boost all forms of continuous non-dimension production",
       effects: {
-        ttGen: () => Math.pow(10, 5 * Ra.theoremBoostFactor()),
-        eternity: () => Math.pow(10, 2 * Ra.theoremBoostFactor()),
-        infinity: () => Math.pow(10, 15 * Ra.theoremBoostFactor()),
-        replicanti: () => Math.pow(10, 20 * Ra.theoremBoostFactor()),
-        dilatedTime: () => Math.pow(10, 3 * Ra.theoremBoostFactor()),
-        memories: () => 1 + Ra.theoremBoostFactor() / 50,
-        memoryChunks: () => 1 + Ra.theoremBoostFactor() / 50,
-        autoPrestige: () => 1 + 2.4 * Ra.theoremBoostFactor()
+        ttGen: () => player.disablePostReality ? 1 : Math.pow(10, 5 * Ra.theoremBoostFactor()),
+        eternity: () => player.disablePostReality ? 1 : Math.pow(10, 2 * Ra.theoremBoostFactor()),
+        infinity: () => player.disablePostReality ? 1 : Math.pow(10, 15 * Ra.theoremBoostFactor()),
+        replicanti: () => player.disablePostReality ? 1 : Math.pow(10, 20 * Ra.theoremBoostFactor()),
+        dilatedTime: () => player.disablePostReality ? 1 : Math.pow(10, 3 * Ra.theoremBoostFactor()),
+        memories: () => player.disablePostReality ? 1 : 1 + Ra.theoremBoostFactor() / 50,
+        memoryChunks: () => player.disablePostReality ? 1 : 1 + Ra.theoremBoostFactor() / 50,
+        autoPrestige: () => player.disablePostReality ? 1 : 1 + 2.4 * Ra.theoremBoostFactor()
       },
       pet: "v",
       level: 10,
       displayIcon: `<span class="fas fa-university"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raV3.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raV3.canBeApplied
     },
     achievementTTMult: {
       id: 26,
       reward: "Achievement multiplier applies to Time Theorem generation",
-      effect: () => Achievements.power,
+      effect: () => player.disablePostReality ? 1 : Achievements.power,
       pet: "v",
       level: 15,
       displayIcon: `<span class="fas fa-graduation-cap"></span>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raV4.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raV4.canBeApplied
     },
     achievementPower: {
       id: 27,
       reward: () => `Achievement multiplier is raised ${formatPow(1.5, 1, 1)}`,
-      effect: 1.5,
+      effect: () => player.disablePostReality ? 1 : 1.5,
       pet: "v",
       level: 25,
       displayIcon: `<i class="fab fa-buffer"></i>`,
-      disabledByPelle: () => !PelleCelestialUpgrade.raV5.isBought
+      disabledByPelle: () => !PelleCelestialUpgrade.raV5.canBeApplied
     },
     eternityPointPower: {
       id: 28,
       reward: "Eternity Points are raised based on Teresa Level",
-      effect: () => 1 + Math.floor(Ra.pets.teresa.level) / 100,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.teresa.level) / 100,
       pet: "teresa",
       level: 30,
       displayIcon: `<span class="fas fa-angle-up"></span>`,
@@ -304,7 +304,7 @@ export const ra = {
     realityMachineCap: {
       id: 29,
       reward: "Reality Machine cap is raised based on Teresa Level",
-      effect: () => 1 + Math.floor(Ra.pets.teresa.level) / 100,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.teresa.level) / 100,
       pet: "teresa",
       level: 40,
       displayIcon: `<span class="fas fa-arrow-turn-up"></span>`,
@@ -313,7 +313,7 @@ export const ra = {
     celestialDimensionConversionPower: {
       id: 30,
       reward: "The Celestial Dimension Conversion Exponent is increased based on Teresa Level",
-      effect: () => 1 + Math.floor(Ra.pets.teresa.level) / 200,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.teresa.level) / 200,
       pet: "teresa",
       level: 50,
       displayIcon: `<span class="fas fa-star"></span>`,
@@ -322,7 +322,7 @@ export const ra = {
     chargeBoost: {
       id: 31,
       reward: "Charged Infinity Upgrades act as if your Teresa Level was twice as high",
-      effect: 2,
+      effect: () => player.disablePostReality ? 1 : 2,
       pet: "teresa",
       level: 65,
       displayIcon: `<span class="fas fa-bolt"></span>`,
@@ -331,7 +331,7 @@ export const ra = {
     sacrificePower: {
       id: 32,
       reward: "Dimensional Sacrifice gain for all Glyphs is squared",
-      effect: 2,
+      effect: () => player.disablePostReality ? 1 : 2,
       pet: "teresa",
       level: 80,
       displayIcon: `Ω`,
@@ -344,7 +344,7 @@ export const ra = {
         const sacrificeSum = new Decimal(player.reality.glyphs.sac.power).add(player.reality.glyphs.sac.infinity).add(
           player.reality.glyphs.sac.time).add(player.reality.glyphs.sac.replication).add(player.reality.glyphs.sac.dilation).add(
           player.reality.glyphs.sac.effarig).add(player.reality.glyphs.sac.reality);
-        return 1 + Decimal.log10(Decimal.log10(sacrificeSum.add(1)).add(1)).div(20);
+        return player.disablePostReality ? 1 : 1 + Decimal.log10(Decimal.log10(sacrificeSum.add(1)).add(1)).div(20).toNumber();
       },
       pet: "teresa",
       level: 100,
@@ -354,7 +354,7 @@ export const ra = {
     celestialDimensionPower: {
       id: 34,
       reward: "Endgames and Teresa level empower Celestial Dimensions",
-      effect: () => Math.pow(1 + Math.log10(1 + (Math.floor(Ra.pets.teresa.level) * player.endgames / 1e6)), 3),
+      effect: () => player.disablePostReality ? 1 : Math.pow(Math.clamp(Ra.pets.teresa.level * Math.log10(player.endgames + 1) / 2000, 1, 1.5) * Math.pow(Math.max(Ra.pets.teresa.level * Math.log10(player.endgames + 1) / 3000, 1), 0.1), 5),
       pet: "teresa",
       level: 125,
       displayIcon: `<span class="fas fa-award"></span>`,
@@ -363,7 +363,7 @@ export const ra = {
     relicShardBoost: {
       id: 35,
       reward: "Relic Shard gain is boosted based on Effarig Level",
-      effect: () => Decimal.pow(10, Math.floor(Ra.pets.effarig.level)),
+      effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(10, Math.floor(Ra.pets.effarig.level)),
       pet: "effarig",
       level: 30,
       displayIcon: `<span class="fas fa-flask"></span>`,
@@ -372,7 +372,7 @@ export const ra = {
     instabilityDelay: {
       id: 36,
       reward: "Relic Shards delay the first three levels of Glyph Instability",
-      effect: () => Decimal.log10(player.celestials.effarig.relicShards.add(1)).times(10).toNumber(),
+      effect: () => player.disablePostReality ? 0 : Decimal.log10(player.celestials.effarig.relicShards.add(1)).times(10).toNumber(),
       pet: "effarig",
       level: 40,
       displayIcon: `<span class="fas fa-arrow-right"></span>`,
@@ -381,7 +381,7 @@ export const ra = {
     rarityBuff: {
       id: 37,
       reward: "Maximum Glyph Rarity is increased based on Effarig Level",
-      effect: () => Math.floor(Ra.pets.effarig.level) / 2,
+      effect: () => player.disablePostReality ? 0 : Math.floor(Ra.pets.effarig.level) / 2,
       pet: "effarig",
       level: 50,
       displayIcon: `<span class="fas fa-dice"></span>`,
@@ -390,7 +390,7 @@ export const ra = {
     glyphLevelBuff: {
       id: 38,
       reward: "Gain a small multiplier to Glyph Level based on Effarig Level which applies after Instability",
-      effect: () => 1 + Math.floor(Ra.pets.effarig.level) / 1000,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.effarig.level) / 1000,
       pet: "effarig",
       level: 65,
       displayIcon: `<span class="fas fa-chart-line"></span>`,
@@ -399,7 +399,7 @@ export const ra = {
     alchemyCapIncrease: {
       id: 39,
       reward: "Effarig Level multiplies Glyph Alchemy cap",
-      effect: () => 1 + Math.floor(Ra.pets.effarig.level) / 100,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.effarig.level) / 100,
       pet: "effarig",
       level: 80,
       displayIcon: `<span class="fas fa-flask-vial"></span>`,
@@ -408,7 +408,7 @@ export const ra = {
     realityGlyphRarity: {
       id: 40,
       reward: "Effarig Level increases Reality Glyph rarity",
-      effect: () => Math.floor(Ra.pets.effarig.level) / 5,
+      effect: () => player.disablePostReality ? 0 : Math.floor(Ra.pets.effarig.level) / 5,
       pet: "effarig",
       level: 100,
       displayIcon: `Ϟ`,
@@ -426,7 +426,7 @@ export const ra = {
     gameSpeedImprovement: {
       id: 42,
       reward: "Game Speed gains a power based on Nameless Level",
-      effect: () => 1 + Math.pow(Math.floor(Ra.pets.enslaved.level) / 100, 2),
+      effect: () => player.disablePostReality ? 1 : 1 + Math.pow(Math.floor(Ra.pets.enslaved.level) / 100, 2),
       pet: "enslaved",
       level: 30,
       displayIcon: `<span class="fas fa-hourglass"></span>`,
@@ -435,7 +435,7 @@ export const ra = {
     tickspeedPower: {
       id: 43,
       reward: "Gain a power to Tickspeed based on Nameless Level",
-      effect: () => 1 + Math.floor(Ra.pets.enslaved.level) / 100,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.enslaved.level) / 100,
       pet: "enslaved",
       level: 40,
       displayIcon: `<span class="fas fa-power-off"></span>`,
@@ -444,7 +444,7 @@ export const ra = {
     gameSpeedTesseractBoost: {
       id: 44,
       reward: "Tesseracts boost Game Speed",
-      effect: () => Decimal.pow(10, Tesseracts.effectiveCount),
+      effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(10, Tesseracts.effectiveCount),
       pet: "enslaved",
       level: 50,
       displayIcon: `<span class="fas fa-forward"></span>`,
@@ -453,7 +453,7 @@ export const ra = {
     gameSpeedTachyonMult: {
       id: 45,
       reward: "Peak Game Speed this Endgame multiplies Tachyon Particles gained",
-      effect: () => player.records.thisEndgame.peakGameSpeed,
+      effect: () => player.disablePostReality ? DC.D1 : player.records.thisEndgame.peakGameSpeed,
       pet: "enslaved",
       level: 65,
       displayIcon: `<span class="fas fa-atom"></span>`,
@@ -462,7 +462,7 @@ export const ra = {
     eternityGenBuff: {
       id: 46,
       reward: "Nameless Level boosts Eternity Generation",
-      effect: () => 1 + Math.floor(Ra.pets.enslaved.level) / 100,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.enslaved.level) / 100,
       pet: "enslaved",
       level: 80,
       displayIcon: `∆`,
@@ -471,7 +471,7 @@ export const ra = {
     imaginaryMachineEternityPower: {
       id: 47,
       reward: "Gain a power to Imaginary Machines based on Eternities",
-      effect: () => 1 + Decimal.log10(Decimal.log10(player.eternities.add(1)).add(1)).div(20).toNumber(),
+      effect: () => player.disablePostReality ? 1 : 1 + Decimal.log10(Decimal.log10(player.eternities.add(1)).add(1)).div(20).toNumber(),
       pet: "enslaved",
       level: 100,
       displayIcon: `<span class="fas fa-lightbulb"></span>`,
@@ -479,8 +479,8 @@ export const ra = {
     },
     freeTesseractIncrease: {
       id: 48,
-      reward: "Nameless Level increases the Free Tesseract Softcap",
-      effect: () => Math.floor(Ra.pets.enslaved.level) / 5,
+      reward: "Nameless Level increases the Free Tesseract Softcap starting threshold",
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.enslaved.level) / 250,
       pet: "enslaved",
       level: 125,
       displayIcon: `<span class="fas fa-cubes"></span>`,
@@ -489,7 +489,7 @@ export const ra = {
     achievementMultPower: {
       id: 49,
       reward: "Gain a power to Achievement Multiplier based on V Level",
-      effect: () => 1 + Math.floor(Ra.pets.v.level) / 100,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.v.level) / 100,
       pet: "v",
       level: 30,
       displayIcon: `<span class="fas fa-medal"></span>`,
@@ -498,7 +498,7 @@ export const ra = {
     allDimPowTT: {
       id: 50,
       reward: "Time Theorems empower the first three Dimension types",
-      effect: () => Math.pow(1 + Decimal.log10(Decimal.log10(Currency.timeTheorems.value.add(1)).add(1)).div(10).toNumber(), 5),
+      effect: () => player.disablePostReality ? 1 : Math.pow(1 + Decimal.log10(Decimal.log10(Currency.timeTheorems.value.add(1)).add(1)).div(10).toNumber(), 5),
       pet: "v",
       level: 40,
       displayIcon: `<span class="fas fa-brain"></span>`,
@@ -507,7 +507,7 @@ export const ra = {
     triadBuff: {
       id: 51,
       reward: "Triad Studies are more powerful based on V Level",
-      effect: () => 1 + Math.floor(Ra.pets.v.level) / 200,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.v.level) / 200,
       pet: "v",
       level: 50,
       displayIcon: `<span class="fas fa-3"></span>`,
@@ -516,7 +516,7 @@ export const ra = {
     spaceTheoremIPowConversion: {
       id: 52,
       reward: "Space Theorems boost the Infinity Power Conversion Rate",
-      effect: () => Math.pow(V.spaceTheorems + 1, 0.05),
+      effect: () => player.disablePostReality ? 1 : Math.pow(V.spaceTheorems + 1, 0.05),
       pet: "v",
       level: 65,
       displayIcon: `<span class="fas fa-ranking-star"></span>`,
@@ -525,7 +525,7 @@ export const ra = {
     spaceTheoremBoost: {
       id: 53,
       reward: "Space Theorems are boosted by V Level",
-      effect: () => 1 + Math.floor(Ra.pets.v.level) / 200,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.v.level) / 200,
       pet: "v",
       level: 80,
       displayIcon: `<span class="fas fa-star"></span>`,
@@ -534,7 +534,7 @@ export const ra = {
     spaceTheoremAchPower: {
       id: 54,
       reward: "Space Theorems empower Achievement Multiplier",
-      effect: () => 1 + Math.log10(V.spaceTheorems + 1),
+      effect: () => player.disablePostReality ? 1 : 1 + Math.log10(V.spaceTheorems + 1),
       pet: "v",
       level: 100,
       displayIcon: `<span class="fas fa-award"></span>`,
@@ -543,7 +543,7 @@ export const ra = {
     infinityDimPower: {
       id: 55,
       reward: "Gain a power to Infinity Dimensions based on V Level",
-      effect: () => 1 + Math.floor(Ra.pets.v.level) / 40,
+      effect: () => player.disablePostReality ? 1 : 1 + Math.floor(Ra.pets.v.level) / 40,
       pet: "v",
       level: 125,
       displayIcon: `<span class="fas fa-infinity"></span>`,

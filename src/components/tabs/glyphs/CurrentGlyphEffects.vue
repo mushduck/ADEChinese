@@ -53,7 +53,7 @@ export default {
     },
     pelleGlyphText() {
       return Pelle.isDoomed
-        ? (!PelleDestructionUpgrade.glyphRarity.isBought
+        ? (!PelleDestructionUpgrade.glyphRarity.canBeApplied
            ? `Glyph Rarity is set to ${formatPercents(strengthToRarity(Pelle.glyphStrength))} and `
            : "")
           + `Level is capped at ${formatInt(Pelle.glyphMaxLevel)}`
@@ -87,7 +87,7 @@ export default {
       this.logTotalSacrifice = GameCache.logTotalGlyphSacrifice.value;
 
       this.pelleChaosEffect = Pelle.specialGlyphEffect;
-      this.maxSpecialGlyphs = Achievement(194).isUnlocked ? 2 : 1;
+      this.maxSpecialGlyphs = (Achievement(196).isUnlocked && !player.disablePostReality) ? 2 : 1;
     },
     glyphsChanged() {
       this.effects = getActiveGlyphEffects();

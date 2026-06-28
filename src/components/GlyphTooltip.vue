@@ -126,7 +126,7 @@ export default {
     },
     rarityText() {
       if (!GlyphTypes[this.type].hasRarity) return "";
-      const strength = Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.isBought ? Pelle.glyphStrength : this.strength;
+      const strength = Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.canBeApplied ? Pelle.glyphStrength : this.strength;
       return `| Rarity:
         <span style="color: ${this.descriptionStyle.color}">${formatRarity(strengthToRarity(strength))}</span>`;
     },
@@ -201,7 +201,7 @@ export default {
   },
   methods: {
     update() {
-      this.showChaosText = Pelle.specialGlyphEffect.isUnlocked;
+      this.showChaosText = Pelle.specialGlyphEffect.isUnlocked || Pelle.isGlyphTypeDisabled(this.type);
       if (this.showChaosText) {
         this.chaosDescription = Pelle.getSpecialGlyphEffectDescription(this.type);
       }

@@ -5,7 +5,7 @@ export const endgameMasteries = [
     requirement: [],
     reqType: EM_REQUIREMENT_TYPE.ALL,
     description: () => `Generate ${formatInt(1)} Perk Point per minute per Endgame`,
-    effect: () => player.endgames,
+    effect: () => player.disablePostReality ? 0 : player.endgames,
     formatEffect: value => `${formatHybridSmall(value, 3)}/min`
   },
   {
@@ -21,7 +21,7 @@ export const endgameMasteries = [
     requirement: [11],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Start with Auto-EC Unlocked, and divide the time by ${formatInt(60)}`,
-    effect: 60
+    effect: () => player.disablePostReality ? 1 : 60
   },
   {
     id: 31,
@@ -29,7 +29,7 @@ export const endgameMasteries = [
     requirement: [21],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Start Endgames with ${formatInt(100)} Realities`,
-    effect: 100
+    effect: () => player.disablePostReality ? 0 : 100
   },
   {
     id: 32,
@@ -37,7 +37,7 @@ export const endgameMasteries = [
     requirement: [22],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Start Endgames with ${formatInt(1000000)} Reality Machines`,
-    effect: 1000000
+    effect: () => player.disablePostReality ? 0 : 1000000
   },
   {
     id: 41,
@@ -45,7 +45,7 @@ export const endgameMasteries = [
     requirement: [31],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Buff the reward of the Achievement "I Am Speed" to a ${formatPercents(1)} Chance`,
-    effect: 1
+    effect: () => player.disablePostReality ? 0.1 : 1
   },
   {
     id: 42,
@@ -60,7 +60,7 @@ export const endgameMasteries = [
     requirement: [41],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Reduce the Realities requirement for unlocking V's Reality to ${formatInt(100)}`,
-    effect: 100
+    effect: () => player.disablePostReality ? 1250 : 100
   },
   {
     id: 52,
@@ -68,7 +68,7 @@ export const endgameMasteries = [
     requirement: [41, 42],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Galaxies are ${formatPercents(0.1)} stronger`,
-    effect: 1.1
+    effect: () => player.disablePostReality ? 1 : 1.1
   },
   {
     id: 53,
@@ -83,7 +83,7 @@ export const endgameMasteries = [
     requirement: [52],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Keep Achievements on Endgame and gain a free Tesseract",
-    effect: 1
+    effect: () => player.disablePostReality ? 0 : 1
   },
   {
     id: 71,
@@ -91,7 +91,7 @@ export const endgameMasteries = [
     requirement: [61],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and peak GL`,
-    effect: () => (1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)) * player.records.bestEndgame.glyphLevel,
+    effect: () => player.disablePostReality ? 1 : (EffarigUnlock.endgame.canBeApplied ? player.records.bestEndgame.glyphLevel : (1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)) * player.records.bestEndgame.glyphLevel),
     formatEffect: value => formatHybridSmall(value, 3)
   },
   {
@@ -107,7 +107,7 @@ export const endgameMasteries = [
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
     description: () => `Reduce the Infinity Dimension Compression Magnitude by ${formatPercents(0.05)}`,
-    effect: 0.95
+    effect: () => player.disablePostReality ? 1 : 0.95
   },
   {
     id: 83,
@@ -115,7 +115,7 @@ export const endgameMasteries = [
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
     description: () => `Reduce the Time Dimension Compression Magnitude by ${formatPercents(0.05)}`,
-    effect: 0.95
+    effect: () => player.disablePostReality? 1 : 0.95
   },
   {
     id: 84,
@@ -123,7 +123,7 @@ export const endgameMasteries = [
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
     description: () => `Reduce the Celestial Matter Softcap by ${formatPercents(0.1)}`,
-    effect: 0.9
+    effect: () => player.disablePostReality ? 1 : 0.9
   },
   {
     id: 91,
@@ -131,7 +131,7 @@ export const endgameMasteries = [
     requirement: [81],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Delay the Infinity Challenge ${formatInt(8)} Reward Hardcap based on Endgames`,
-    effect: () => player.endgames,
+    effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
   {
@@ -140,7 +140,7 @@ export const endgameMasteries = [
     requirement: [82],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Delay the Infinity Dimension Compression Start based on Endgames",
-    effect: () => player.endgames,
+    effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
   {
@@ -149,7 +149,7 @@ export const endgameMasteries = [
     requirement: [83],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Delay the Time Dimension Compression Start based on Endgames",
-    effect: () => player.endgames,
+    effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
   {
@@ -158,7 +158,7 @@ export const endgameMasteries = [
     requirement: [84],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Delay the Celestial Matter Softcap Start based on Endgames",
-    effect: () => Decimal.pow(10, Decimal.pow(player.endgames, 0.25)),
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(10, Decimal.pow(player.endgames, 0.25)),
     formatEffect: value => formatX(value, 2)
   },
   {
@@ -167,7 +167,7 @@ export const endgameMasteries = [
     requirement: [91],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Raise the Antimatter Exponent to the power of ${format(1.01, 2, 2)}`,
-    effect: 1.01
+    effect: () => player.disablePostReality ? 1 : 1.01
   },
   {
     id: 102,
@@ -175,7 +175,7 @@ export const endgameMasteries = [
     requirement: [92],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Raise the Infinity Power Conversion Rate to the power of ${format(1.01, 2, 2)}`,
-    effect: 1.01
+    effect: () => player.disablePostReality ? 1 : 1.01
   },
   {
     id: 103,
@@ -183,7 +183,7 @@ export const endgameMasteries = [
     requirement: [93],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Apply a square-root to the Free Tickspeed Threshold Multiplier",
-    effect: 0.5
+    effect: () => player.disablePostReality ? 1 : 0.5
   },
   {
     id: 104,
@@ -191,7 +191,7 @@ export const endgameMasteries = [
     requirement: [94],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Increase the CM conversion exponent by ${formatPercents(0.1)}`,
-    effect: 1.1
+    effect: () => player.disablePostReality ? 1 : 1.1
   },
   {
     id: 111,
@@ -221,7 +221,7 @@ export const endgameMasteries = [
     requirement: [111],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Decrease Galaxy Generator Instability by ${formatInt(1)}`,
-    effect: 1
+    effect: () => player.disablePostReality ? 0 : 1
   },
   {
     id: 131,
@@ -236,7 +236,7 @@ export const endgameMasteries = [
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `IP Gain is raised to the power of ${format(1.2, 2, 1)}`,
-    effect: 1.2
+    effect: () => player.disablePostReality ? 1 : 1.2
   },
   {
     id: 142,
@@ -244,7 +244,7 @@ export const endgameMasteries = [
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `EP Gain is raised to the power of ${format(1.3, 2, 1)}`,
-    effect: 1.3
+    effect: () => player.disablePostReality ? 1 : 1.3
   },
   {
     id: 143,
@@ -252,7 +252,7 @@ export const endgameMasteries = [
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `RM Gain is raised to the power of ${format(1.4, 2, 1)}`,
-    effect: 1.4
+    effect: () => player.disablePostReality ? 1 : 1.4
   },
   {
     id: 144,
@@ -260,7 +260,7 @@ export const endgameMasteries = [
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
     description: () => `iM Gain is raised to the power of ${format(1.1, 2, 1)}`,
-    effect: 1.1
+    effect: () => player.disablePostReality ? 1 : 1.1
   },
   {
     id: 151,
@@ -268,7 +268,7 @@ export const endgameMasteries = [
     requirement: [141],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Make the Infinity Point formula better`,
-    effect: () => Effects.min(308, Achievement(103), TimeStudy(111)) / ((Decimal.log10(Decimal.log10(Currency.celestialPoints.value.plus(1)).add(1)).div(20)).add(1)).toNumber(),
+    effect: () => player.disablePostReality ? Effects.min(308, Achievement(103), TimeStudy(111)) : Effects.min(308, Achievement(103), TimeStudy(111)) / ((Decimal.log10(Decimal.log10(Currency.celestialPoints.value.plus(1)).add(1)).div(20)).add(1)).toNumber(),
     formatEffect: value => `log(x)/${format(Effects.min(308, Achievement(103), TimeStudy(111)), 2, 2)} ➜ log(x)/${format(value, 2, 2)}`
   },
   {
@@ -284,7 +284,7 @@ export const endgameMasteries = [
     requirement: [143],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Increase the effectiveness of the Imaginary Upgrade "Elliptic Materiality" by ${formatPercents(0.5)}`,
-    effect: 1.5
+    effect: () => player.disablePostReality ? 1 : 1.5
   },
   {
     id: 154,
@@ -292,7 +292,7 @@ export const endgameMasteries = [
     requirement: [144],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Raise the effect of the Imaginary Upgrade "Transience of Information" to the power of ${formatInt(10)}`,
-    effect: 10
+    effect: () => player.disablePostReality ? 1 : 10
   },
   {
     id: 161,
@@ -300,7 +300,7 @@ export const endgameMasteries = [
     requirement: [151, 152, 153, 154],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Improve Singularity Gain per bulk increase based on Singularities owned",
-    effect: () => Decimal.floor((new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(1e50), 1, 1e120))).div(5)).add(
+    effect: () => player.disablePostReality ? DC.D0 : Decimal.floor((new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(1e50), 1, 1e120))).div(5)).add(
       new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(1e170), 1, 1e250))).div(10)).add(
       new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(new Decimal("1e420")), 1, new Decimal("1e2500")))).div(100)).add(
       Decimal.pow(new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(new Decimal("1e2920")), 1, new Decimal("1e390625")))), 0.25)).add(1)),
@@ -313,6 +313,6 @@ export const endgameMasteries = [
     requirement: [161],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Momentum increases ${formatInt(10)} times faster`,
-    effect: 10
+    effect: () => player.disablePostReality ? 1 : 10
   }
 ];

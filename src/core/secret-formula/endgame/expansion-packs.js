@@ -28,7 +28,7 @@ export const expansionPacks = {
     symbol: "\uf0c1",
     description: () =>
       `Charging your Black Hole always only takes ${formatPercents(0.99)} of your total Game Speed. Unlock optimizers for
-      for adjusting the amount of your stored time you desire to discharge as well as the interval at which you want to discharge
+      adjusting the amount of your stored time you desire to discharge as well as the interval at which you want to discharge
       your Stored Time. Double the strength of all Effective Tesseracts. Tesseracts multiply Endgames as well as reducing the Infinity
       Dimension Compression Magnitude slightly. Start Endgames with the Nameless Ones completed. Unlock an autobuyer for Tesseracts.`,
     cost: Decimal.pow(10, 1e70),
@@ -65,7 +65,7 @@ export const expansionPacks = {
       if Annihilation multiplier currently affects the ${formatInt(8)}th DMD. Reduce the DMD Interval increase on Ascension
       by ${formatInt(200)}. Multiply Dark Matter gain by the double-logarithm of your Antimatter amount or the logarithm of
       your Imaginary Machine amount, whichever is bigger. Start Endgames with ${formatInt(10)} Singularities. Multiply Dark Energy
-      gain by the logarithm of your Singularity amount squared. Raise the Annhilation effect to a power based on Dark Matter.
+      gain by the logarithm of your Singularity amount squared. Raise the Annihilation effect to a power based on Dark Matter.
       Improve the Annihilation autobuyer. Unlock the ability to Hadronize Lai'tela's Reality. The reward for destabilizing Lai'tela's
       Reality now affects the Dark Matter Cap as well. The maximum gain of Entropy per second is multiplied by ${formatInt(10)}.`,
     cost: Decimal.pow(10, 1e130),
@@ -79,6 +79,16 @@ export const expansionPacks = {
       `Reduce the Galaxy Generator Instability Magnitude by ${formatInt(1)}, raise the first three types of Dimensions to
       a power based on your all-time record Galaxy amount, and unlock autobuyers for the repeatable Galaxy Generator upgrades.`,
     cost: Decimal.pow(10, 1e150),
+    formatCost: value => formatPostBreak(value, 2, 0)
+  },
+  alphaPack: {
+    name: "Alpha's Expansion Pack",
+    id: "alphaPack",
+    symbol: "α",
+    description: () =>
+      `Unlock the Large Hadron Collider, which can accelerate your Hadrons to exponentially gain more Antimatter. This will also
+      unlock The Void, which is a feature that functions similarly to Time Dilation and boosts Accelerator production.`,
+    cost: Decimal.pow(10, 1e200),
     formatCost: value => formatPostBreak(value, 2, 0)
   }
 };

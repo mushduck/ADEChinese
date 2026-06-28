@@ -52,7 +52,7 @@ export default {
       return this.compareLayeredValues(
         ["realityShards", "imaginaryMachines", "realityMachines", "eternityPoints", "infinityPoints"],
         ["Reality Shards:", "Reality Machines:", "Reality Machines:", "Eternity Points:", "Infinity Points:"],
-        [format, x => formatMachines(this.saveData.realityMachines, x), format, format, format],
+        [format, x => formatMachines(this.saveData.realityMachines, x, 0), format, format, format],
         ""
       );
     },

@@ -10,11 +10,30 @@ export default {
     HeaderEternityContainer,
     HeaderInfinityContainer,
   },
+  data() {
+    return {
+      isDestroyed: false,
+      isDivine: false
+    };
+  },
+  methods: {
+    update() {
+      this.isDestroyed = Alpha.isDestroyedForDisplay;
+      this.isDivine = DivinityMilestone.divineDimensions.isReached;
+    },
+    classObject() {
+      return {
+        "c-prestige-info-blocks": true,
+        "c-prestige-info-blocks--tall": this.isDestroyed && !this.isDivine,
+        "c-prestige-info-blocks--taller": this.isDivine
+      };
+    }
+  }
 };
 </script>
 
 <template>
-  <div class="c-prestige-info-blocks">
+  <div :class="classObject()">
     <HeaderEternityContainer class="l-game-header__eternity" />
     <HeaderCenterContainer class="l-game-header__center" />
     <HeaderInfinityContainer class="l-game-header__infinity" />
@@ -28,6 +47,14 @@ export default {
   height: 14rem;
   width: 100%;
   color: var(--color-text);
+}
+
+.c-prestige-info-blocks--tall {
+  height: 24rem;
+}
+
+.c-prestige-info-blocks--taller {
+  height: 28rem;
 }
 
 .l-game-header__eternity {

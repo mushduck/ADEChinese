@@ -230,7 +230,7 @@ export const singularityMilestones = {
     repeat: new Decimal(0),
     limit: 1,
     description: "Annihilation mult. generates highest DMD (above the third) when Annihilation is available",
-    effect: () => (DarkMatterDimension(8).amount.gt(1) && ExpansionPack.laitelaPack.isBought
+    effect: () => (DarkMatterDimension(8).amount.gt(1) && (ExpansionPack.laitelaPack.isBought && !player.disablePostReality)
       ? Decimal.pow(Laitela.darkMatterMult, 2) : Laitela.darkMatterMult),
     effectFormat: x => `${format(x, 2, 1)}/s`,
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
@@ -285,7 +285,8 @@ export const singularityMilestones = {
     repeat: new Decimal(0),
     limit: 1,
     description: "Dilated Time boosts Dark Matter production",
-    effect: () => Decimal.pow(1.6, Decimal.log10(Currency.dilatedTime.value.plus(1)).div(1000)),
+    effect: () => Decimal.pow(1.6, Decimal.log10(Currency.dilatedTime.value.min(Decimal.pow10(1e12)).plus(1)).div(1000)).pow(
+      Currency.dilatedTime.value.max(10).log10().log10().min(12).div(12).pow(10)),
     effectFormat: x => formatX(x, 2, 2),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_LAITELA,
   },
@@ -358,7 +359,7 @@ export const singularityMilestones = {
     limit: 1,
     description: "Increase the Per-Purchase Multiplier for the other four Dimension types based on Singularities",
     effect: () => Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(Currency.singularities.value.plus(1)).add(1)).div(2), 1), 1.5),
-    effectFormat: x => `+${formatPercents(x.toNumber() - 1, 2, 2)}`,
+    effectFormat: x => `+${formatDecimalPercents(x.sub(1), 2, 2)}`,
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_MAIN,
   },
   darkFromGalacticPower: {

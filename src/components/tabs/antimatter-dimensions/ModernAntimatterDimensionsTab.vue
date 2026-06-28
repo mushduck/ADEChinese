@@ -65,6 +65,10 @@ export default {
           ImaginaryUpgrade(21).tryShowWarningModal();
           return;
         }
+        if (DualityUpgrade(21).isLockingMechanics && player.auto.disableContinuum) {
+          DualityUpgrade(21).tryShowWarningModal();
+          return;
+        }
         Laitela.setContinuum(true);
       }
     },
@@ -86,7 +90,9 @@ export default {
 
       this.multiplierText = `Buy 10 Dimension purchase multiplier: ${formatX(this.buy10Mult, 2, 2)}`;
       if (!isSacrificeUnlocked) return;
-      this.isFullyAutomated = Autobuyer.sacrifice.isActive && Achievement(118).isUnlocked;
+      this.isFullyAutomated = Autobuyer.sacrifice.isActive && Achievement(118).isUnlocked &&
+        (!player.disablePostReality || (Alpha.isRunning && Alpha.currentStage >= 12) ||
+        (LHC.voidRunning && NullUpgrade.limerick1.isBought));
       this.isSacrificeAffordable = Sacrifice.canSacrifice && !this.isFullyAutomated;
       this.currentSacrifice.copyFrom(Sacrifice.totalBoost);
       this.sacrificeBoost.copyFrom(Sacrifice.nextBoost);

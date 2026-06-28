@@ -15,13 +15,20 @@ export default {
       laitelaEntropy: "",
       waitingforHint: false,
       enslavedTimer: "",
+      isInAlpha: false,
+      alphaDecayTimer: new Decimal(0),
+      alphaDecayTimeToMax: "",
     };
   },
   computed: {
     enslavedText() {
       return `${Enslaved.displayName} are helping you look for cracks in their Reality -
         they can give you some advice in ${this.enslavedTimer}`;
-    }
+    },
+    alphaText() {
+      if (this.alphaDecayTimer.lte(0)) return `Alpha Decay is capped`;
+      return `Alpha Decay will cap in ${this.alphaDecayTimeToMax}`;
+    },
   },
   methods: {
     update() {
@@ -51,6 +58,12 @@ export default {
       const rawMsUntilHints = 5 * 3600 * 1000 - player.celestials.enslaved.hintUnlockProgress;
       this.enslavedTimer = TimeSpan.fromMilliseconds(new Decimal(rawMsUntilHints / (Enslaved.isRunning ? 1 : 0.4)))
         .toStringShort();
+
+      this.isInAlpha = Alpha.isRunning;
+      if (this.isInAlpha) {
+        this.alphaDecayTimer = TimeSpan.fromHours(Decimal.max(Alpha.hoursToMax, 0)).totalMilliseconds;
+        this.alphaDecayTimeToMax = TimeSpan.fromHours(Decimal.max(Alpha.hoursToMax, 0)).toStringShort();
+      }
     },
     updateChallengePower() {
       const isC2Running = NormalChallenge(2).isRunning;
@@ -76,6 +89,9 @@ export default {
 
 <template>
   <div>
+    <div v-if="isInAlpha">
+      {{ alphaText }}
+    </div>
     <div v-if="waitingforHint">
       {{ enslavedText }}
     </div>

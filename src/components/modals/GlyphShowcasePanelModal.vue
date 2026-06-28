@@ -62,11 +62,11 @@ export default {
         : this.glyphSet.filter(x => x);
       this.sortGlyphs();
       this.gainedLevel = gainedGlyphLevel().actualLevel;
-      // There should only be one reality glyph; this picks one pseudo-randomly if multiple are cheated/glitched in
-      const realityGlyph = this.glyphs.filter(g => g.type === "reality")[0];
-      this.realityGlyphBoost = realityGlyph
-        ? GlyphEffects.realityglyphlevel.effect(realityGlyph.level)
-        : 0;
+      let totalRealityGlyphBoost = 0;
+      for (let r = 0; r < getActiveGlyphEffects().length; r++) {
+        if (getActiveGlyphEffects()[r].id === "realityglyphlevel") totalRealityGlyphBoost += getActiveGlyphEffects()[r].value.value;
+      }
+      this.realityGlyphBoost = totalRealityGlyphBoost;
     },
     sortGlyphs() {
       const standardOrder = ["reality", "effarig", "power", "infinity", "replication", "time", "dilation",

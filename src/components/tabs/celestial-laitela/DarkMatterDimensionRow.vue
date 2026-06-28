@@ -142,7 +142,7 @@ export default {
     // however; it looks better in-game if we just format it as Infinity instead, as the resource used for these costs
     // is itself hardcapped at e308 and we specifically want to format here (and nowhere else) as Infinity.
     formatDMCost(cost) {
-      return cost.gt(Laitela.darkMatterCap) ? Notations.current.infinite : format(cost, 2);
+      return (cost.gt(Laitela.darkMatterCap) && !Alpha.isDestroyed) ? Notations.current.infinite : format(cost, 2);
     },
     dimensionProduction(tier) {
       if (tier === 8 && DarkMatterDimensions.highestUnlocked !== 8) return new Decimal(0);
@@ -153,7 +153,16 @@ export default {
     hoverState(state) {
       if (!this.isIntervalCapped) return;
       this.hoverOverAscension = state;
-    }
+    },
+    hasLongIntText() {
+      return this.intervalText.length > 20;
+    },
+    hasLongDMText() {
+      return this.darkMatterText.length > 20;
+    },
+    hasLongDEText() {
+      return this.darkEnergyText.length > 20;
+    },
   }
 };
 </script>
@@ -183,19 +192,19 @@ export default {
         >
           <i class="fas fa-question-circle" />
         </span>
-        <span v-html="intervalText" />
+        <span :class="{ 'l-dmd-interval-small-text': hasLongIntText }" v-html="intervalText" />
       </button>
       <button
         :class="darkMatterClassObject"
         @click="buyPowerDM"
       >
-        <span v-html="darkMatterText" />
+        <span :class="{ 'l-dmd-dm-small-text': hasLongDMText }" v-html="darkMatterText" />
       </button>
       <button
         :class="darkEnergyClassObject"
         @click="buyPowerDE"
       >
-        <span v-html="darkEnergyText" />
+        <span :class="{ 'l-dmd-de-small-text': hasLongDEText }" v-html="darkEnergyText" />
       </button>
     </div>
     <div v-if="interval.gt(200)">
@@ -209,3 +218,23 @@ export default {
     </div>
   </div>
 </template>
+
+<style scoped>
+.l-dmd-interval-small-text {
+  vertical-align: middle;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+}
+
+.l-dmd-dm-small-text {
+  vertical-align: middle;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+}
+
+.l-dmd-de-small-text {
+  vertical-align: middle;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+}
+</style>

@@ -7,7 +7,7 @@ export const Teresa = {
   timePoured: new Decimal(0),
   lastUnlock: "effarig",
   get pouredAmountCap() {
-    return ExpansionPack.teresaPack.isBought ? DC.BEMAX : new Decimal(1e24);
+    return (ExpansionPack.teresaPack.isBought && !player.disablePostReality) ? DC.BEMAX : new Decimal(1e24);
   },
   displayName: "Teresa",
   possessiveName: "Teresa's",
@@ -128,7 +128,7 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
       Autobuyer.reality.bumpAmount(2);
     }
     // Give a single music glyph
-    if (this.id === 4 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.isBought)) {
+    if (this.id === 4 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.canBeApplied)) {
       if (GameCache.glyphInventorySpace.value === 0) {
         // Refund the perk point if they didn't actually get a glyph
         Currency.perkPoints.add(1);
@@ -139,15 +139,15 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
       }
     }
     // Fill the inventory with music glyphs
-    if (this.id === 5 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.isBought)) {
+    if (this.id === 5 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.canBeApplied)) {
       const toCreate = GameCache.glyphInventorySpace.value;
       for (let count = 0; count < toCreate; count++) Glyphs.addToInventory(GlyphGenerator.musicGlyph());
-      GameUI.notify.success(`Created ${quantifyInt("Music Glyph", toCreate)}`);
+      if (!PerkShopUpgrade.musicGlyph.isCharged) GameUI.notify.success(`Created ${quantifyInt("Music Glyph", toCreate)}`);
     }
   }
 
   get viewCharge() {
-    return (Teresa.chargeModeOn || this.isCharged || ui.view.shiftDown) && this.ableToCharge && ExpansionPack.teresaPack.isBought;
+    return (Teresa.chargeModeOn || this.isCharged || ui.view.shiftDown) && this.ableToCharge && ExpansionPack.teresaPack.isBought && !player.disablePostReality;
   }
 
   get ableToCharge() {
@@ -210,7 +210,7 @@ class TeresaUnlockState extends BitUpgradeState {
   }
 
   get isEffectActive() {
-    return !this.pelleDisabled;
+    return !this.pelleDisabled && !player.disablePostReality;
   }
 
   get canBeUnlocked() {

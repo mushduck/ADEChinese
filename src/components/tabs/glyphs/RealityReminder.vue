@@ -29,7 +29,7 @@ export default {
       if (this.unpurchasedDilationUpgrades > 0) {
         arr.push(`Purchase the remaining Dilation Upgrades (${formatInt(this.unpurchasedDilationUpgrades)} left)`);
       }
-      if (this.currLog10EP.gt(this.cheapestLog10TD.times(1.3))) {
+      if (this.currLog10EP.gt(this.cheapestLog10TD.times(1.3)) && !(Laitela.continuumActive && Alpha.currentStage >= 17)) {
         arr.push(`Purchase more TDs (cheapest: ${format(Decimal.pow10(this.cheapestLog10TD))} EP)`);
       }
       if (this.currLog10EP.gt(this.multEPLog10Cost.times(1.3))) {

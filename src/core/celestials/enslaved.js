@@ -54,15 +54,15 @@ export const Enslaved = {
     player.celestials.enslaved.autoStoreReal = !player.celestials.enslaved.autoStoreReal;
   },
   get timeCap() {
-    if (EndgameMilestone.gameSpeedUncap.isReached) return Decimal.pow(10, 1e300);
+    if (EndgameMilestone.gameSpeedUncap.isReached && !player.disablePostReality) return DC.BEMAX;
     return new Decimal(1e300);
   },
   get canModifyGameTimeStorage() {
-    return Enslaved.isUnlocked && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.isBought) &&
+    return Enslaved.isUnlocked && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.canBeApplied) &&
       !BlackHoles.arePaused && !EternityChallenge(12).isRunning && !Enslaved.isRunning && !Laitela.isRunning;
   },
   get canModifyRealTimeStorage() {
-    return Enslaved.isUnlocked && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.isBought);
+    return Enslaved.isUnlocked && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.canBeApplied);
   },
   get isStoredRealTimeCapped() {
     return player.celestials.enslaved.storedReal < this.storedRealTimeCap;
@@ -84,10 +84,10 @@ export const Enslaved = {
     return 1000 * 3600 * 8 + addedCap;
   },
   get isAutoReleasing() {
-    return player.celestials.enslaved.isAutoReleasing && !BlackHoles.areNegative && (!Pelle.isDisabled("blackhole") || PelleCelestialUpgrade.raNameless3.isBought);
+    return player.celestials.enslaved.isAutoReleasing && !BlackHoles.areNegative && (!Pelle.isDoomed || PelleCelestialUpgrade.raNameless3.canBeApplied);
   },
   storeRealTime() {
-    if (Pelle.isDoomed && !PelleDestructionUpgrade.blackHole.isBought) return;
+    if (Pelle.isDoomed && !PelleDestructionUpgrade.blackHole.canBeApplied) return;
     const thisUpdate = Date.now();
     const diff = Math.max(thisUpdate - player.lastUpdate, 0);
     const efficiency = this.storedRealTimeEfficiency;
@@ -110,7 +110,7 @@ export const Enslaved = {
   },
   canRelease(auto) {
     return !Enslaved.isStoringRealTime && !EternityChallenge(12).isRunning && !Laitela.isRunning &&
-      !(Enslaved.isRunning && auto) && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.isBought);
+      !(Enslaved.isRunning && auto) && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.canBeApplied);
   },
   // "autoRelease" should only be true when called with the Ra upgrade
   useStoredTime(autoRelease) {
@@ -274,19 +274,31 @@ export const Tesseracts = {
     return player.celestials.enslaved.tesseracts;
   },
 
+  get canBeBoughtRaw() {
+    const estimate = Currency.infinityPoints.value.gt(Decimal.pow10(6e7)) ? Decimal.round(Decimal.exp(Decimal.lambertw(Decimal.ln(Decimal.pow(Decimal.log10(Currency.infinityPoints.value.add(1)).div(6e7), 2).div(Math.E)).div(Math.E))).times(Math.E).sub(1).div(2).add(3)) : Currency.infinityPoints.value.add(1).log10().div(2e7);
+    const costValue = Decimal.pow10(new Decimal(2e7).times(Decimal.min(estimate, 3)).times(Decimal.max(estimate.sub(3), 1).factorial()).times(Decimal.pow(2, Decimal.max(estimate.sub(3), 0))));
+    if (Currency.infinityPoints.value.gte(costValue)) return estimate;
+    return estimate.sub(1);
+  },
+
+  get amountNeeded() {
+    return this.canBeBoughtRaw.sub(this.bought);
+  },
+
   get rawExtra() {
     return (this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1)) + Effects.sum(EndgameMastery(61));
   },
 
   get freeSoftcapStart() {
-    return (50 * EndgameUpgrade(23).effectOrDefault(1)) + Ra.unlocks.freeTesseractIncrease.effectOrDefault(0);
+    return (50 * EndgameUpgrade(23).effectOrDefault(1)) * Ra.unlocks.freeTesseractIncrease.effectOrDefault(1);
   },
 
   get extra() {
-    return Math.max((this.rawExtra - this.freeSoftcapStart) * (1 / (1 + ((this.rawExtra - this.freeSoftcapStart) / this.freeSoftcapStart))), 0) + Math.min(this.rawExtra, this.freeSoftcapStart);
+    return Math.max(Math.max((this.rawExtra - this.freeSoftcapStart) * (1 / (1 + ((this.rawExtra - this.freeSoftcapStart) / this.freeSoftcapStart))), 0) + Math.min(this.rawExtra, this.freeSoftcapStart), Alpha.isDestroyed ? (Math.min(this.rawExtra, this.freeSoftcapStart) * (Math.log10(Math.max(this.rawExtra - this.freeSoftcapStart, 1)) + 1)) : 0);
   },
 
   get totalMult() {
+    if (player.disablePostReality) return 1;
     return 1 * Effects.product(BreakEternityUpgrade.tesseractMultiplier);
   },
 
@@ -300,6 +312,12 @@ export const Tesseracts = {
     player.celestials.enslaved.tesseracts++;
   },
 
+  buyMaxTesseract() {
+    if (!this.canBuyTesseract) return;
+    if (GameEnd.creditsEverClosed) return;
+    player.celestials.enslaved.tesseracts += this.amountNeeded.toNumber();
+  },
+
   costs(index) {
     index = index + 1;
     return Decimal.pow10(new Decimal(2e7).times(Decimal.min(index, 3)).times(Decimal.max(index - 3, 1).factorial()).times(Decimal.pow(2, Decimal.max(index - 3, 0))));
@@ -310,17 +328,17 @@ export const Tesseracts = {
   },
 
   get canBuyTesseract() {
-    return Enslaved.isCompleted && Currency.infinityPoints.gte(Tesseracts.nextCost);
+    return Enslaved.isCompleted && Currency.infinityPoints.gte(Tesseracts.nextCost) && !player.disablePostReality;
   },
 
   capIncrease(count = this.bought, extra = this.extra, mult = this.totalMult) {
     const totalCount = (count + extra) * mult;
-    const base = totalCount < 1 ? 0 : 250e3 * Math.pow(2, totalCount);
-    return base * (AlchemyResource.boundless.effectValue + 1) * (ExpansionPack.enslavedPack.isBought ? 2 : 1);
+    const base = totalCount < 1 ? DC.D0 : Decimal.pow(Decimal.pow(2, Octeracts.cubeBoost()), totalCount).times(250e3);
+    return base.times(AlchemyResource.boundless.effectValue + 1).times((ExpansionPack.enslavedPack.isBought && !player.disablePostReality) ? 2 : 1);
   },
 
   get nextTesseractIncrease() {
-    return this.capIncrease(this.bought + 1) - this.capIncrease(this.bought);
+    return this.capIncrease(this.bought + 1).sub(this.capIncrease(this.bought));
   },
 };
 

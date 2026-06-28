@@ -90,7 +90,7 @@ export default {
           throw new Error("Unrecognized Singularity Milestone mode");
       }
     },
-    isDoomed: () => Pelle.isDoomed && !PelleDestructionUpgrade.singularityMilestones.isBought,
+    isDoomed: () => Pelle.isDoomed && !PelleDestructionUpgrade.singularityMilestones.canBeApplied,
   },
   methods: {
     update() {

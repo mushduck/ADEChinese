@@ -10,6 +10,7 @@ export class BigCrunchAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get isUnlocked() {
+    if (LHC.voidRunning && NullUpgrade.limerick5.isBought) return true;
     return Pelle.isDoomed
       ? PelleStrikes.infinity.hasStrike
       : this.canBeUpgraded;

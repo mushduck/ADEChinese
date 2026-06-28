@@ -54,7 +54,7 @@ export default {
         // similar to the rest of the game - as strictly disabled.
         return {
           "o-dilation-upgrade o-pelle-disabled-pointer": true,
-          "o-pelle-disabled o-dilation-upgrade--useless": (this.upgrade.id === 7 && !PelleDestructionUpgrade.reenableIPDilationUpgrade.isBought) || (this.upgrade.id === 3 && !PelleDestructionUpgrade.x3TPUpgrade.isBought),
+          "o-pelle-disabled o-dilation-upgrade--useless": (this.upgrade.id === 7 && !PelleDestructionUpgrade.reenableIPDilationUpgrade.canBeApplied) || (this.upgrade.id === 3 && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied),
         };
       }
       return {
@@ -67,7 +67,7 @@ export default {
       };
     },
     isUseless() {
-      const tpip = (this.upgrade.id === 3 && !PelleDestructionUpgrade.x3TPUpgrade.isBought) || (this.upgrade.id === 7 && !PelleDestructionUpgrade.reenableIPDilationUpgrade.isBought);
+      const tpip = (this.upgrade.id === 3 && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) || (this.upgrade.id === 7 && !PelleDestructionUpgrade.reenableIPDilationUpgrade.canBeApplied);
       return Pelle.isDoomed && tpip;
     }
   },

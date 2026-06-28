@@ -1,10 +1,12 @@
 <script>
+import CelestialEternityButton from "./CelestialEternityButton";
 import EternityButton from "./EternityButton";
 import UnlockInfinityDimButton from "./UnlockInfinityDimButton";
 
 export default {
   name: "HeaderEternityContainer",
   components: {
+    CelestialEternityButton,
     EternityButton,
     UnlockInfinityDimButton,
   },
@@ -15,6 +17,11 @@ export default {
       showNextEP: false,
       eternityPoints: new Decimal(0),
       nextEP: new Decimal(0),
+      isPenteractUnlocked: false,
+      penteractCost: new Decimal(0),
+      penteractText: "",
+      hasCelestial: false,
+      celEternityPoints: new Decimal(0),
     };
   },
   methods: {
@@ -25,27 +32,55 @@ export default {
       this.showNextEP = Player.canEternity && player.records.thisReality.maxEP.lt(100) &&
         gainedEternityPoints().lt(100);
       if (this.showNextEP) this.nextEP.copyFrom(requiredIPForEP(gainedEternityPoints().floor().toNumber() + 1));
+      this.isPenteractUnlocked = DualityUpgrade(25).isBought && !player.disablePostReality;
+      this.penteractCost = Penteracts.nextCost;
+      this.penteractText = this.penteractProgress();
+      this.hasCelestial = PlayerProgress.celestialEternityUnlocked() ||
+        player.endgame.celDimExpansion.celestialInfinityPoints.gte(DC.NUMMAX);
+      this.celEternityPoints.copyFrom(Currency.celestialEternityPoints.value.floor());
+    },
+    penteractProgress() {
+      const progress = this.eternityPoints.add(1).log10().div(this.penteractCost.log10()).toNumber();
+      if (progress > 1) return `<b>(${formatPercents(1)})</b>`;
+      return `(${formatPercents(progress, 2, 2)})`;
     },
   },
 };
 </script>
 
 <template>
-  <div
-    v-if="showContainer"
-    class="c-prestige-button-container"
-  >
+  <div>
     <div
-      v-if="showEP"
-      class="c-eternity-points"
+      v-if="showContainer"
+      class="c-prestige-button-container"
     >
-      You have
-      <span class="c-game-header__ep-amount">{{ format(eternityPoints, 2) }}</span>
-      {{ pluralize("Eternity Point", eternityPoints) }}.
-      <span v-if="showNextEP">(Next EP at {{ format(nextEP, 1) }} IP)</span>
+      <div
+        v-if="showEP"
+        class="c-eternity-points"
+      >
+        You have
+        <span class="c-game-header__ep-amount">{{ format(eternityPoints, 2) }}</span>
+        {{ pluralize("Eternity Point", eternityPoints) }}.
+        <span v-if="showNextEP">(Next EP at {{ format(nextEP, 1) }} IP)</span>
+        <span
+          v-if="isPenteractUnlocked"
+          v-html="penteractText"
+        />
+      </div>
+      <UnlockInfinityDimButton />
+      <EternityButton />
     </div>
-    <UnlockInfinityDimButton />
-    <EternityButton />
+    <div
+      v-if="showContainer && hasCelestial"
+      class="c-prestige-button-container"
+    >
+      <div class="c-eternity-points">
+        You have
+        <span class="c-game-header__cep-amount">{{ format(celEternityPoints, 2) }}</span>
+        {{ pluralize("Celestial Eternity Point", celEternityPoints) }}.
+      </div>
+      <CelestialEternityButton />
+    </div>
   </div>
 </template>
 

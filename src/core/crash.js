@@ -18,7 +18,7 @@ window.GlobalErrorHandler = {
       requestAnimationFrame(() => this.crash(event));
       return;
     }
-    this.stopGame();
+    if (!player.DEV) this.stopGame();
     this.crash(event);
   },
   stopGame() {

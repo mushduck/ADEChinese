@@ -1,6 +1,9 @@
 import { finalSigil } from "./navigation-sigils/final-sigil";
 import { galaxyIcon } from "./navigation-sigils/galaxy-icon";
 import { alchemyResources } from "./alchemy";
+import { alphaUnlocks } from "./alpha";
+import { divinityMilestones } from "./divinity-milestones";
+import { divinityUpgrades } from "./divinity-upgrades";
 import { effarigUnlocks } from "./effarig";
 import { enslaved } from "./enslaved";
 import { pelleGalaxyGeneratorUpgrades } from "./galaxy-generator";
@@ -16,6 +19,7 @@ import { pelleAlchemyEnabling } from "./pelle-destruction-upgrades";
 import { pelleStrikeDisabling } from "./pelle-destruction-upgrades";
 import { perkShop } from "./perk-shop";
 import { ra } from "./ra";
+import { resurgenceUpgrades } from "./resurgence-upgrades";
 import { pelleRifts } from "./rifts";
 import { singularityMilestones } from "./singularity-milestones";
 import { pelleStrikes } from "./strikes";
@@ -30,6 +34,9 @@ export const celestials = {
   },
   alchemy: {
     resources: alchemyResources
+  },
+  alpha: {
+    unlocks: alphaUnlocks
   },
   pelle: {
     galaxyGeneratorUpgrades: pelleGalaxyGeneratorUpgrades,
@@ -47,6 +54,8 @@ export const celestials = {
     alchemy: pelleAlchemyEnabling,
     strikes: pelleStrikeDisabling
   },
+  divinityMilestones,
+  divinityUpgrades,
   descriptions: {},
   enslaved,
   navigation: celestialNavigation,
@@ -56,6 +65,7 @@ export const celestials = {
   },
   perkShop,
   ra,
+  resurgenceUpgrades,
   singularityMilestones,
   teresa,
   quotes,

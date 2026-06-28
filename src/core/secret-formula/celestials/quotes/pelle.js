@@ -29,11 +29,13 @@ const confusing =    ["Amusing",       "Confusing",     "Laughter"];
 const cycle =        ["Repeat",        "Cycle",         "Loop"];
 const dance =        ["Song",          "Dance",         "Charade"];
 const debuff =       ["Nerf",          "Debuff",        "Corruption"];
-const endgame =      ["Esacpe",        "Rebirth",       "Endgame"];
+const endgame =      ["Escape",        "Rebirth",       "Endgame"];
 const debuffs =      ["Nerfs",         "Debuffs",       "Corruptions"];
 const exhaustion =   ["Exhale",        "Exhaustion",    "Sigh"];
 const filament =     ["Generator",     "Filament",      "Stars"];
 const forever =      ["Infinite",      "Forever",       "Eternal"];
+const frightened =   ["Afraid",        "Frightened",    "Terrified"];
+const hardship =     ["Problem",       "Hardship",      "Struggle"];
 const inevitable =   ["Elementary",    "Inevitable",    "Irreversible"];
 const introduction = ["Speech",        "Introduction",  "Lecture"];
 const lose =         ["Fail",          "Lose",          "Abdicate"];
@@ -57,6 +59,7 @@ const usurper =      ["Usurper",       "Deity",         "Monarch"];
 const pride =        ["Pride",         "Deity",         "Monarch"];
 const forgotten =    ["Forgotten",     "Deity",         "Monarch"];
 const paramount =    ["Paramount",     "Deity",         "Monarch"];
+const weak =         ["Weak",          "Deity",         "Monarch"];
 /* eslint-enable no-multi-spaces */
 
 export const pelleQuotes = {
@@ -736,6 +739,63 @@ export const pelleQuotes = {
       "I think I remember you...",
       "...",
       "%name?"
+    ]
+  },
+  beatAlpha: {
+    id: 30,
+    lines: [
+      "Another end, and a new beginning.",
+      "...",
+      "I can sense surprise in you.",
+      "My powers have returned.",
+      "I would smite you, but...",
+      "Seeing as how you have freed me from Alpha's mental chains...",
+      "I'll give you another chance.",
+      { text: "I'll let you become a $1.", 1: lesser },
+      "On one condition.",
+      "My new domain has an entry fee.",
+      "You must reach 1e4000 Celestial Points of Eternity.",
+      { text: "But for a $1 like you...", 1: destroyer },
+      { text: "That shouldn't be a $1.", 1: hardship },
+      "So I'll expect to see you soon."
+    ]
+  },
+  divinity: {
+    id: 31,
+    lines: [
+      { text: "Hello there, $1.", 1: destroyer },
+      "I expect you are still working on the entry fee.",
+      "And in searching the remains of my old Reality, you have found something.",
+      { text: "An escape far stronger than $1.", 1: endgame },
+      { text: "The $1 and I worked together on that for a good while.", 1: elemental },
+      { text: "As part of your $1, you would want to master every power, would you not?", 1: mandate },
+      "As long as it helps you with accumulating the designated resource, I will allow it.",
+      { text: "Remember, I have no reason to $1 you.", 1: misconstrue },
+      { text: "For you would simply $1 time, once again.", 1: reverse },
+      "I will not bother you again until you are ready to enter my domain."
+    ]
+  },
+  reachGoal: {
+    id: 32,
+    lines: [
+      "That... took a while.",
+      { text: "No offense of course, but I expected you to $1 that challenge.", 1: overpower },
+      "But then again, power does take time.",
+      "Honestly I was almost convinced you had given up.",
+      { text: "But I suppose the great $1 isn't one to give up, are you?", 1: destroyer },
+      "I'm remembering a bit more now.",
+      { text: "I suppose this is how the $1 feels, huh?", 1: forgotten },
+      "He deserved his punishment though.",
+      "Did he ever tell you?",
+      { text: "Or did the $1 tell you herself?", 1: paramount },
+      { text: "So you may ask, if the $1 are innocent, why do we keep them in chains?", 1: usurper },
+      { text: "Even the strongest of us have things we are $1 of.", 1: frightened },
+      "I have set your next Reality destination to bring you here to us.",
+      { text: "I and the $1 will be expecting your arrival.", 1: deities },
+      "Oh, and I finally remembered the name I gave to Alpha.",
+      { text: "The $1.", 1: weak },
+      { text: "$1", 1: confusing },
+      "Come as soon as you can."
     ]
   }
 };

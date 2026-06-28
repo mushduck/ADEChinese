@@ -31,6 +31,7 @@ export default {
       garbleTimer: 0,
       garbleKey: 0,
       achievementTime: 0,
+      achievementProgress: new Decimal()
     };
   },
   computed: {
@@ -104,6 +105,10 @@ export default {
       return this.achievementTime === 0
         ? "Given at Speedrun start"
         : `Achieved after ${TimeSpan.fromMilliseconds(new Decimal(this.achievementTime)).toStringShort()}`;
+    },
+    achieveProgress() {
+      if (this.achievementProgress.lt(0)) return "Progress: Failed";
+      return `Progress: ${formatDecimalPercents(this.achievementProgress, 2, 2)}`;
     }
   },
   beforeDestroy() {
@@ -130,6 +135,7 @@ export default {
         this.garbleKey = this.id;
       }
       if (player.speedrun.isActive) this.achievementTime = player.speedrun.achievementTimes[this.id];
+      this.achievementProgress.copyFrom(this.config.progress());
     },
     onMouseEnter() {
       clearTimeout(this.mouseOverInterval);
@@ -217,6 +223,11 @@ export default {
         >
           {{ achievedTime }}
         </div>
+        <div
+          class="o-achievement-prog"
+        >
+          {{ achieveProgress }}
+        </div>
       </template>
     </div>
     <div
@@ -238,6 +249,11 @@ export default {
 .o-achievement-time {
   font-weight: bold;
   color: var(--color-accent);
+}
+
+.o-achievement-prog {
+  font-weight: bold;
+  color: var(--color-good);
 }
 
 .o-achievement--disabled {

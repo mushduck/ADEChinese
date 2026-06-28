@@ -19,8 +19,8 @@ export const ecTimeStudies = [
     secondary: {
       resource: "Tickspeed upgrades from Time Dimensions",
       current: () => player.totalTickGained,
-      required: completions => 1300 + Math.min(completions, 4) * 150,
-      formatValue: formatInt
+      required: completions => new Decimal(1300 + Math.min(completions, 4) * 150),
+      formatValue: value => formatInt(Math.floor(value.toNumber()))
     }
   },
   {

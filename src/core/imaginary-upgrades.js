@@ -59,7 +59,7 @@ class ImaginaryUpgradeState extends BitPurchasableMechanicState {
   // Note we don't actually show the modal if we already failed or unlocked it
   tryShowWarningModal(specialLockText) {
     if (this.isPossible && !this.isAvailableForPurchase) {
-      Modal.upgradeLock.show({ upgrade: this, isImaginary: true, isEndgame: false, specialLockText });
+      Modal.upgradeLock.show({ upgrade: this, isImaginary: true, isDual: false, isEndgame: false, specialLockText });
     }
   }
 
@@ -147,6 +147,22 @@ class RebuyableImaginaryUpgradeState extends RebuyableMechanicState {
     if (this.id === 7) {
       GameCache.staticGlyphWeights.invalidate();
     }
+  }
+
+  bulkPurchase() {
+    if (!this.isAffordable) return false;
+    this.boughtAmount += getInverseHybridCostScaling(
+      Currency.imaginaryMachines.value,
+      1e15,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 2,
+      DC.E309,
+      1e3,
+      this.config.costMult
+    ).sub(player.reality.imaginaryRebuyables[this.id]).toNumber();
+    Currency.imaginaryMachines.subtract(this.cost);
+    return true;
   }
 }
 

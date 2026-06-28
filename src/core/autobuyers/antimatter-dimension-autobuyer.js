@@ -23,7 +23,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
 
   get isUnlocked() {
     if (Pelle.isDisabled(`antimatterDimAutobuyer${this.tier}`)) return false;
-    return this.data.isBought || this.canBeUpgraded;
+    return this.data.isBought || this.canBeUpgraded || (LHC.voidRunning && NullUpgrade.limerick5.isBought);
   }
 
   get isBought() {
@@ -136,7 +136,9 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
   }
 
   get resetTickOn() {
-    return Perk.antimatterNoReset.canBeApplied ? PRESTIGE_EVENT.ANTIMATTER_GALAXY : PRESTIGE_EVENT.DIMENSION_BOOST;
+    return (Perk.antimatterNoReset.canBeApplied &&
+      (!player.disablePostReality || (LHC.voidRunning && player.endgame.largeHadronCollider.void.nullified)))
+      ? PRESTIGE_EVENT.ANTIMATTER_GALAXY : PRESTIGE_EVENT.DIMENSION_BOOST;
   }
 
   reset() {

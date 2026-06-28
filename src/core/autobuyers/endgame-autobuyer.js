@@ -10,7 +10,7 @@ export class EndgameAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return EndgameMilestone.autobuyerEndgame.isReached;
+    return EndgameMilestone.autobuyerEndgame.isReached && !player.disablePostReality;
   }
 
   get mode() {

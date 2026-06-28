@@ -60,7 +60,7 @@ class EndgameUpgradeState extends BitPurchasableMechanicState {
   // Note we don't actually show the modal if we already failed or unlocked it
   tryShowWarningModal(specialLockText) {
     if (this.isPossible && !this.isAvailableForPurchase) {
-      Modal.upgradeLock.show({ upgrade: this, isImaginary: false, isEndgame: true, specialLockText });
+      Modal.upgradeLock.show({ upgrade: this, isImaginary: false, isDual: false, isEndgame: true, specialLockText });
     }
   }
 
@@ -97,6 +97,22 @@ class RebuyableEndgameUpgradeState extends RebuyableMechanicState {
 
   set boughtAmount(value) {
     player.endgame.rebuyables[this.id] = value;
+  }
+
+  bulkPurchase() {
+    if (!this.isAffordable) return false;
+    this.boughtAmount += getInverseHybridCostScaling(
+      Currency.celestialPoints.value,
+      1e100,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 10,
+      DC.E309,
+      1e3,
+      this.config.initialCost * this.config.costMult
+    ).sub(player.endgame.rebuyables[this.id]).toNumber();
+    Currency.celestialPoints.subtract(this.cost);
+    return true;
   }
 }
 

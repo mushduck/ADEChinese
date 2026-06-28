@@ -26,8 +26,8 @@ export default {
       galGenInstability: 0,
       harshGalGenInstability: 0,
       effectiveInstability: new Decimal(0),
-      instabilityStart: 0,
-      harshInstabilityStart: 0,
+      instabilityStart: new Decimal(0),
+      harshInstabilityStart: new Decimal(0),
       generationReduction: new Decimal(0),
       trueGenerationReduction: new Decimal(0),
       isInstabilityShown: false,
@@ -41,7 +41,11 @@ export default {
         : "fas fa-compress-arrows-alt";
     },
     upgrades() {
-      if (!EndgameMilestone.fasterGalaxies.isReached) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorRSMult");
+      if (!EndgameMilestone.fasterGalaxies.isReached || player.disablePostReality) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorRSMult" && u.id !== "galaxyGeneratorDTMult" && u.id !== "galaxyGeneratorRemnantPow" && u.id !== "galaxyGeneratorExponential" && u.id !== "galaxyGeneratorSuperExponential");
+      if (!DivinityMilestone.firstDivine.isReached || player.disablePostReality) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorDTMult" && u.id !== "galaxyGeneratorRemnantPow" && u.id !== "galaxyGeneratorExponential" && u.id !== "galaxyGeneratorSuperExponential");
+      if (!DivinityMilestone.divineDimensions.isReached || player.disablePostReality) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorRemnantPow" && u.id !== "galaxyGeneratorExponential" && u.id !== "galaxyGeneratorSuperExponential");
+      if (!DivinityMilestone.celestialSurge.isReached || player.disablePostReality) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorExponential" && u.id !== "galaxyGeneratorSuperExponential");
+      if (!Accelerators.cosmic._milestones[1].isUnlocked || player.disablePostReality) return GalaxyGeneratorUpgrades.all.filter(u => u.id !== "galaxyGeneratorSuperExponential");
       return GalaxyGeneratorUpgrades.all;
     },
     galaxyText() {
@@ -75,8 +79,8 @@ export default {
       this.galGenInstability = GalaxyGenerator.galGenInstability;
       this.harshGalGenInstability = GalaxyGenerator.harshGalGenInstability;
       this.effectiveInstability.copyFrom(Decimal.pow(this.galGenInstability, this.harshGalGenInstability));
-      this.instabilityStart = GalaxyGenerator.instabilityStart;
-      this.harshInstabilityStart = GalaxyGenerator.harshInstabilityStart;
+      this.instabilityStart.copyFrom(GalaxyGenerator.instabilityStart);
+      this.harshInstabilityStart.copyFrom(GalaxyGenerator.harshInstabilityStart);
       this.generationReduction.copyFrom(Decimal.max(1, Decimal.pow(this.galGenInstability, Decimal.log10(Decimal.max(Decimal.pow(this.galaxies.div(this.instabilityStart), 0.75), 1)))));
       this.trueGenerationReduction.copyFrom(Decimal.max(1, Decimal.pow(Decimal.pow(this.galGenInstability, this.harshGalGenInstability), Decimal.log10(Decimal.max(Decimal.pow(this.galaxies.div(this.instabilityStart), 0.75), 1)))));
       this.isInstabilityShown = PlayerProgress.endgameUnlocked() || this.galaxies.gte(this.instabilityStart);

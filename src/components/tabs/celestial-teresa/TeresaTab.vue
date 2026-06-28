@@ -40,7 +40,6 @@ export default {
       chargesUsed: 0,
       disCharge: false,
       chargeView: false,
-      chargeUnlocked: false,
       autoPour: false,
     };
   },
@@ -59,7 +58,7 @@ export default {
         PerkShopUpgrade.musicGlyph,
       ];
       if (this.raisedPerkShop) upgrades.push(PerkShopUpgrade.fillMusicGlyph);
-      if (ExpansionPack.teresaPack.isBought) upgrades.push(PerkShopUpgrade.addCharges);
+      if (ExpansionPack.teresaPack.isBought && !player.disablePostReality) upgrades.push(PerkShopUpgrade.addCharges);
       return upgrades;
     },
     runButtonClassObject() {
@@ -97,9 +96,11 @@ export default {
       return GameDatabase.celestials.descriptions[0].effects();
     },
     lastMachinesString() {
-      return this.lastMachines.lt(DC.E10000)
-        ? `${quantify("Reality Machine", this.lastMachines, 2)}`
-        : `${quantify("Imaginary Machine", this.lastMachines.dividedBy(DC.E10000), 2)}`;
+      return this.lastMachines.gte(DC.E20000)
+        ? `${quantify("Dual Machine", this.lastMachines.dividedBy(DC.E20000), 2)}`
+        : (this.lastMachines.lt(DC.E10000)
+          ? `${quantify("Reality Machine", this.lastMachines, 2)}`
+          : `${quantify("Imaginary Machine", this.lastMachines.dividedBy(DC.E10000), 2)}`);
     },
     unlockInfoTooltipArrowStyle() {
       return {
@@ -107,7 +108,7 @@ export default {
       };
     },
     isDoomed: () => Pelle.isDoomed,
-    isEPGenDoomed: () => Pelle.isDoomed && !PelleCelestialUpgrade.passiveEPGen.isBought,
+    isEPGenDoomed: () => Pelle.isDoomed && !PelleCelestialUpgrade.passiveEPGen.canBeApplied,
     disChargeClassObject() {
       return {
         "o-primary-btn--subtab-option": true,
@@ -117,6 +118,9 @@ export default {
     chargeDisplay() {
       return `Charge Upgrades: ${this.chargeView ? "ON" : "OFF"}`;
     },
+    shouldDisplayPourLimit() {
+      return this.pouredAmountCap.lt(DC.BEMAX);
+    }
   },
   watch: {
     disCharge(newValue) {
@@ -157,12 +161,11 @@ export default {
       this.isRunning = Teresa.isRunning;
       this.canUnlockNextPour = TeresaUnlocks.all
         .filter(unlock => this.rm.plus(this.pouredAmount).gte(unlock.price) && !unlock.isUnlocked).length > 0;
-      this.chargeUnlocked = ExpansionPack.teresaPack.isBought;
+      this.chargeUnlocked = ExpansionPack.teresaPack.isBought && !player.disablePostReality;
       this.totalCharges = Teresa.totalCharges;
       this.chargesUsed = Teresa.totalCharges - Teresa.chargesLeft;
       this.disCharge = player.celestials.teresa.disCharge;
       this.chargeView = Teresa.chargeModeOn;
-      this.chargeUnlocked = ExpansionPack.teresaPack.isBought;
       this.autoPour = player.celestials.teresa.autoPour;
     },
     startRun() {
@@ -295,7 +298,13 @@ export default {
             <div class="c-rm-store-label">
               {{ formatX(rmMult, 2, 2) }} RM gain
               <br>
-              {{ format(pouredAmount, 2, 2) }}/{{ format(pouredAmountCap, 2, 2) }}
+              {{ format(pouredAmount, 2, 2) }}
+              <span v-if="shouldDisplayPourLimit">
+                / {{ format(pouredAmountCap, 2, 2) }}
+              </span>
+              <span v-else>
+                RM
+              </span>
             </div>
           </div>
           <CustomizeableTooltip

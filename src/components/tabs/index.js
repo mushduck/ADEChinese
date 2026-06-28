@@ -7,9 +7,17 @@ import AutomatorTab from "./automator/AutomatorTab";
 import BlackHoleTab from "./black-hole/BlackHoleTab";
 import BreakInfinityTab from "./break-infinity/BreakInfinityTab";
 import BreakEternityTab from "./break-eternity/BreakEternityTab";
+import CelestialBreakInfinityTab from "./celestial-dimension-expansion/CelestialBreakInfinityTab";
 import CelestialDimensionsTab from "./celestial-dimensions/CelestialDimensionsTab";
+import CelestialEternityPlusUpgradesTab from "./celestial-dimension-expansion/CelestialEternityPlusUpgradesTab";
+import CelestialEternityUpgradesTab from "./celestial-dimension-expansion/CelestialEternityUpgradesTab";
+import CelestialInfinityUpgradesTab from "./celestial-dimension-expansion/CelestialInfinityUpgradesTab";
 import CelestialNavigationTab from "./celestial-navigation/CelestialNavigationTab";
 import ChallengeRecordsTab from "./challenge-records/ChallengeRecordsTab";
+import DivineDimensionsTab from "./divine-dimensions/DivineDimensionsTab";
+import DivinityMilestonesTab from "./divinity-milestones/DivinityMilestonesTab";
+import DivinityUpgradesTab from "./divinity-upgrades/DivinityUpgradesTab";
+import DualityUpgradesTab from "./duality-upgrades/DualityUpgradesTab";
 import EffarigTab from "./celestial-effarig/EffarigTab";
 import EndgameTab from "./endgame/EndgameTab";
 import EndgameMasteriesTab from "./endgame-masteries/EndgameMasteriesTab";
@@ -24,11 +32,13 @@ import ExpansionPacksTab from "./endgame/ExpansionPacksTab";
 import GalacticPowerTab from "./galactic-power/GalacticPowerTab";
 import GlyphSetRecordsTab from "./glyph-set-records/GlyphSetRecordsTab";
 import GlyphsTab from "./glyphs/GlyphsTab";
+import HypercubesTab from "./hypercubes/HypercubesTab";
 import ImaginaryUpgradesTab from "./imaginary-upgrades/ImaginaryUpgradesTab";
 import InfinityChallengesTab from "./infinity-challenges/InfinityChallengesTab";
 import InfinityDimensionsTab from "./infinity-dimensions/InfinityDimensionsTab";
 import InfinityUpgradesTab from "./infinity-upgrades/InfinityUpgradesTab";
 import LaitelaTab from "./celestial-laitela/LaitelaTab";
+import LargeHadronColliderTab from "./large-hadron-collider/LargeHadronColliderTab";
 import MultiplierBreakdownTab from "./statistics/MultiplierBreakdownTab";
 import NormalAchievementsTab from "./normal-achievements/NormalAchievementsTab";
 import NormalChallengesTab from "./normal-challenges/NormalChallengesTab";
@@ -43,6 +53,7 @@ import PreviousSpeedrunTab from "./speedrun-milestones/PreviousSpeedrunTab";
 import RaTab from "./celestial-ra/RaTab";
 import RealityUpgradesTab from "./reality-upgrades/RealityUpgradesTab";
 import ReplicantiTab from "./replicanti/ReplicantiTab";
+import ResurgenceUpgradesTab from "./resurgence-upgrades/ResurgenceUpgradesTab";
 import SecretAchievementTab from "./secret-achievements/SecretAchievementTab";
 import ShopTab from "./shop/ShopTab";
 import SpeedrunMilestonesTab from "./speedrun-milestones/SpeedrunMilestonesTab";
@@ -59,6 +70,7 @@ const TabComponents = {
   InfinityDimensionsTab,
   TimeDimensionsTab,
   CelestialDimensionsTab,
+  DivineDimensionsTab,
   OptionsSavingTab,
   OptionsVisualTab,
   OptionsGameplayTab,
@@ -94,6 +106,7 @@ const TabComponents = {
   GlyphsTab,
   RealityUpgradesTab,
   ImaginaryUpgradesTab,
+  DualityUpgradesTab,
   PerksTab,
   BlackHoleTab,
   AlchemyTab,
@@ -107,6 +120,15 @@ const TabComponents = {
   EndgameUpgradesTab,
   GalacticPowerTab,
   EtherealTab,
+  HypercubesTab,
+  LargeHadronColliderTab,
+  CelestialInfinityUpgradesTab,
+  CelestialBreakInfinityTab,
+  CelestialEternityUpgradesTab,
+  CelestialEternityPlusUpgradesTab,
+  DivinityMilestonesTab,
+  DivinityUpgradesTab,
+  ResurgenceUpgradesTab,
   ShopTab,
   MultiplierBreakdownTab
 };

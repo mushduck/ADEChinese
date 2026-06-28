@@ -43,12 +43,14 @@ export const Laitela = {
     // If continuum is now not disabled (i.e. is enabled) we update the relevant requirement check.
     if (!player.auto.disableContinuum) {
       player.requirementChecks.reality.noContinuum = false;
+      player.requirementChecks.endgame.noContinuum = false;
     }
   },
   get matterExtraPurchaseFactor() {
-    if (Pelle.isDoomed && !PelleDestructionUpgrade.continuumBuff.isBought) return 1;
-    return (Decimal.pow(new Decimal(Decimal.log10(Currency.darkMatter.max.add(1))).div(50), 0.4).times(0.5).add(1).times(
-      SingularityMilestone.continuumMult.effectOrDefault(new Decimal(0)).add(1))).toNumber();
+    if ((Pelle.isDoomed && !PelleDestructionUpgrade.continuumBuff.canBeApplied) || player.disablePostReality) return 1;
+    return (Decimal.pow(Decimal.pow(new Decimal(Decimal.log10(Currency.darkMatter.max.add(1))).div(50), 0.4).times(0.5).add(1).times(
+      SingularityMilestone.continuumMult.effectOrDefault(new Decimal(0)).add(1)).times(
+      DualityUpgrade(11).effectOrDefault(1)).times(Hadrons.continuumMultiplier), DualityUpgrade(14).effectOrDefault(1))).toNumber();
   },
   get hadronizes() {
     return this.celestial.hadronizes;
@@ -61,18 +63,33 @@ export const Laitela = {
       fullLaitelaCompletion, (this.hadronizes * (this.hadronizes + 1)) / 2));
   },
   get realityRewardDE() {
-    const fullDestabilization = this.isFullyDestabilized ? Math.pow(8, this.hadronizes + 1) : 1;
-    return fullDestabilization * Math.pow(8, (this.hadronizes * (this.hadronizes + 1)) / 2);
+    const fullDestabilization = this.isFullyDestabilized ? Decimal.pow(8, this.hadronizes + 1) : DC.D1;
+    return Decimal.pow(8, (this.hadronizes * (this.hadronizes + 1)) / 2).times(fullDestabilization);
   },
   // Note that entropy goes from 0 to 1, with 1 being completion
   get entropyGainPerSecond() {
-    const maxSpeed = ExpansionPack.laitelaPack.isBought ? 1000 : 100;
+    const maxSpeed = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? 1000 : 100;
     const hadronizeBump = this.hadronizes > 0 ? 1e12 : 1;
-    const hadronizeAntimatter = Decimal.pow(1000, this.hadronizes).times(hadronizeBump).times(1e11);
-    return Decimal.clamp(Decimal.pow(new Decimal(Currency.antimatter.value.add(1).log10()).div(hadronizeAntimatter), 2), 0, maxSpeed).div(200);
+    const hadronizeAntimatter = Decimal.pow(1000, this.hadronizes).times(hadronizeBump).times(1e11)
+      .div(Hadrons.entropyFormulaBoost).div(Decimal.log10(player.records.bestEndgame.galaxies.max(1)))
+      .div(Accelerators.potency.effectValue2).div(
+      DivinityMilestone.finalRebirth.isReached && !player.disablePostReality ? Time.thisEndgameRealTime.totalMinutes.pow(3).add(1) : 1)
+      .dividedByEffectOf(ResurgenceUpgrade.entropySurge);
+    return Decimal.clamp(Decimal.pow(new Decimal(Currency.antimatter.value.add(1).log10()).div(
+      hadronizeAntimatter), 2), 0, maxSpeed).div(200);
+  },
+  get antimatterNeededToDestabilize() {
+    const hadrBump = this.hadronizes > 0 ? 1e12 : 1;
+    const hadrAM = Decimal.pow(1000, this.hadronizes).times(hadrBump).times(1e11)
+      .div(Hadrons.entropyFormulaBoost).div(Decimal.log10(player.records.bestEndgame.galaxies.max(1)))
+      .div(Accelerators.potency.effectValue2).div(
+      DivinityMilestone.finalRebirth.isReached && !player.disablePostReality ? Time.thisEndgameRealTime.totalMinutes.pow(3).add(1) : 1)
+      .dividedByEffectOf(ResurgenceUpgrade.entropySurge);
+    const currRoot = (this.maxAllowedDimension === 0 ? DC.BEMAX : 8 / this.maxAllowedDimension);
+    return Decimal.pow10(hadrAM).pow(Decimal.sqrt(20/3)).pow(currRoot);
   },
   get darkMatterMultGain() {
-    const extraPow = ExpansionPack.laitelaPack.isBought
+    const extraPow = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality)
       ? Decimal.pow((Decimal.log10(Decimal.log10(Currency.darkMatter.value.add(1)).add(1)).add(1)).div(2), 2).add(1) : 1;
     return Decimal.pow(Decimal.pow(Currency.darkMatter.value.dividedBy(this.annihilationDMRequirement)
       .plus(1).log10(), 1.5).times(ImaginaryUpgrade(21).effectOrDefault(1)), extraPow);
@@ -83,14 +100,21 @@ export const Laitela = {
   get darkMatterMultRatio() {
     return (this.celestial.darkMatterMult.add(this.darkMatterMultGain)).div(this.celestial.darkMatterMult);
   },
+  get darkMatterSoftcap1() {
+    return DC.E10000.times(EtherealStars.white.reward);
+  },
+  get darkMatterSoftcap2() {
+    return DC.E100000.times(EtherealStars.white.reward);
+  },
   get darkMatterCap() {
     let baseCap = DC.NUMMAX;
     if (ImaginaryUpgrade(26).isBought) baseCap = DC.E1000;
     if (ImaginaryUpgrade(27).isBought) baseCap = DC.E4000;
     if (ImaginaryUpgrade(28).isBought) baseCap = DC.E20000;
     if (ImaginaryUpgrade(29).isBought) baseCap = DC.E100000;
-    const realityReward = ExpansionPack.laitelaPack.isBought ? this.realityReward : 1;
-    return baseCap.times(EndgameUpgrade(4).effectOrDefault(1)).times(realityReward);
+    const realityReward = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? this.realityReward : 1;
+    return baseCap.times(EndgameUpgrade(4).effectOrDefault(1)).times(realityReward).times(
+      Hadrons.darkMatterCapMultiplier).times(EtherealStars.white.reward);
   },
   get annihilationUnlocked() {
     return ImaginaryUpgrade(19).isBought;
@@ -104,7 +128,7 @@ export const Laitela = {
   annihilate(force) {
     if (!force && !this.canAnnihilate) return false;
     this.celestial.darkMatterMult = this.celestial.darkMatterMult.add(this.darkMatterMultGain);
-    DarkMatterDimensions.reset();
+    if (force || !DivinityMilestone.hadronEmpowerment.isReached) DarkMatterDimensions.reset();
     Laitela.quotes.annihilation.show();
     Achievement(176).unlock();
     return true;
@@ -114,26 +138,14 @@ export const Laitela = {
     // Note that tier is 1-indexed
     const unlockedDimensions = DarkMatterDimensions.all
       .filter(d => d.isUnlocked && d.tier <= maxTier);
-    const upgradeInfo = unlockedDimensions
-      .map(d => [
-        [d.rawIntervalCost, d.intervalCostIncrease, d.maxIntervalPurchases, x => d.buyManyInterval(x)],
-        [d.rawPowerDMCost, d.powerDMCostIncrease, DC.BEMAX, x => d.buyManyPowerDM(x)],
-        [d.rawPowerDECost, d.powerDECostIncrease, DC.BEMAX, x => d.buyManyPowerDE(x)]])
-      .flat(1);
-    const buy = function(upgrade, purchases) {
-      upgrade[3](purchases);
-      upgrade[0] = upgrade[0].times(Decimal.pow(upgrade[1], purchases));
-      upgrade[2] = upgrade[2].sub(purchases);
-    };
-    // Buy everything costing less than 0.02 of initial matter.
-    const darkMatter = Currency.darkMatter.value;
-    for (const upgrade of upgradeInfo) {
-      const purchases = Decimal.clamp(Decimal.floor(darkMatter.times(0.02).div(upgrade[0]).max(1).log(upgrade[1].toNumber())), 0, upgrade[2]);
-      buy(upgrade, purchases);
+    for (let i = 0; i < unlockedDimensions.length; i++) {
+      unlockedDimensions[i].buyManyInterval(Infinity);
     }
-    while (upgradeInfo.some(upgrade => upgrade[0].lte(darkMatter) && upgrade[2].gt(0))) {
-      const cheapestUpgrade = upgradeInfo.filter(upgrade => upgrade[2].gt(0)).sort((a, b) => new Decimal(Decimal.compare(a[0], b[0])).sign)[0];
-      buy(cheapestUpgrade, DC.D1);
+    for (let i = 0; i < unlockedDimensions.length; i++) {
+      unlockedDimensions[i].buyManyPowerDM(Infinity);
+    }
+    for (let i = 0; i < unlockedDimensions.length; i++) {
+      unlockedDimensions[i].buyManyPowerDE(Infinity);
     }
   },
   hadronize() {
@@ -141,6 +153,9 @@ export const Laitela = {
     this.celestial.fastestCompletion = 3600;
     this.celestial.difficultyTier = 0;
     this.celestial.hadronizes += 1;
+    if (DualityUpgrade(15).isBought) this.celestial.hadrons.total += 1;
+    if (DualityUpgrade(15).isBought) this.celestial.hadrons.light += 1;
+    if (DivinityMilestone.hadronEmpowerment.isReached) this.celestial.hadrons.dark += 1;
     return true;
   },
   reset() {
@@ -149,10 +164,17 @@ export const Laitela = {
     Currency.darkMatter.max = DC.D1;
     Currency.darkMatter.reset();
     Currency.unnerfedDarkMatter.reset();
-    Currency.singularities.reset();
+    this.celestial.singularities = ExpansionPack.laitelaPack.isBought ? DC.E1 : DC.D0;
+    this.celestial.singularityCapIncreases = DC.D0;
+  },
+  fullReset() {
+    this.reset();
     this.celestial.fastestCompletion = 3600;
     this.celestial.difficultyTier = 0;
-    this.celestial.singularityCapIncreases = DC.D0;
+    this.celestial.hadronizes = 0;
+    this.celestial.hadrons.total = 0;
+    this.celestial.hadrons.light = 0;
+    this.celestial.hadrons.dark = 0;
   },
   quotes: Quotes.laitela,
   symbol: "ᛝ"

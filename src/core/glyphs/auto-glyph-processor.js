@@ -338,8 +338,10 @@ export function getGlyphLevelInputs() {
   };
   scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.instability, 500);
   scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.hyperInstability, 400);
-  scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.extremeInstability, EndgameUpgrade(13).isBought ? 5 : 1);
+  scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.extremeInstability, (EndgameUpgrade(13).isBought && !player.disablePostReality) ? 5 : 1);
   scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.immenseInstability, 1);
+  scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.extensiveInstability, 0.1);
+  scaledLevel = instabilitySoftcap(scaledLevel, staticFactors.prodigiousInstability, (DivinityMilestone.firstDivine.isReached && !player.disablePostReality) ? 0.001 : 0.00001);
 
   const scalePenalty = scaledLevel > 0 ? baseLevel / scaledLevel : 1;
   const incAfterInstability = staticFactors.realityUpgrades + staticFactors.achievements;
@@ -373,6 +375,8 @@ export function staticGlyphWeights() {
   const hyperInstability = Glyphs.hyperInstabilityThreshold;
   const extremeInstability = Glyphs.extremeInstabilityThreshold;
   const immenseInstability = Glyphs.immenseInstabilityThreshold;
+  const extensiveInstability = Glyphs.extensiveInstabilityThreshold;
+  const prodigiousInstability = Glyphs.prodigiousInstabilityThreshold;
   const realityUpgrades = [Array.range(1, 5).every(x => RealityUpgrade(x).boughtAmount > 0)]
     .concat(Array.range(1, 4).map(x => Array.range(1, 5).every(y => RealityUpgrade(5 * x + y).isBought)))
     .filter(x => x)
@@ -384,6 +388,8 @@ export function staticGlyphWeights() {
     hyperInstability,
     extremeInstability,
     immenseInstability,
+    extensiveInstability,
+    prodigiousInstability,
     realityUpgrades,
     achievements
   };

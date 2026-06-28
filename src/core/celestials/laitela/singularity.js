@@ -74,7 +74,7 @@ class SingularityMilestoneState extends GameMechanicState {
 
   get progressToNext() {
     const prog = (Currency.singularities.value.sub(this.previousGoal)).div(this.nextGoal);
-    return formatPercents(Decimal.clampMax(prog, 1).toNumber());
+    return formatDecimalPercents(Decimal.clampMax(prog, 1));
   }
 
   get isMaxed() {
@@ -95,7 +95,7 @@ class SingularityMilestoneState extends GameMechanicState {
   }
 
   get canBeApplied() {
-    return this.isUnlocked && (!Pelle.isDisabled("singularity") || PelleDestructionUpgrade.singularityMilestones.isBought);
+    return this.isUnlocked && (!Pelle.isDisabled("singularity") || PelleDestructionUpgrade.singularityMilestones.canBeApplied) && !player.disablePostReality;
   }
 }
 
@@ -224,9 +224,10 @@ export const Singularity = {
   },
 
   get singularitiesGained() {
-    const entropicCondensing = EndgameMastery(131).isBought ? Decimal.pow(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)).add(1), Decimal.max(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)), 1)) : new Decimal(ImaginaryUpgrade(10).effectOrDefault(0)).add(1);
+    const entropicCondensing = (EndgameMastery(131).isBought && !player.disablePostReality) ? Decimal.pow(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)).add(1), Decimal.max(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)), 1)) : new Decimal(ImaginaryUpgrade(10).effectOrDefault(0)).add(1);
     return Decimal.floor(Decimal.pow(this.gainPerCapIncrease, player.celestials.laitela.singularityCapIncreases).times(
-      SingularityMilestone.singularityMult.effectOrDefault(new Decimal(1)).times(entropicCondensing)));
+      SingularityMilestone.singularityMult.effectOrDefault(new Decimal(1)).times(entropicCondensing).times(
+      DualityUpgrade(10).effectOrDefault(1)))).times(Hadrons.singularityMultiplier);
   },
 
   // Time (in seconds) to go from 0 DE to the condensing requirement
@@ -266,7 +267,7 @@ export const Singularity = {
   },
 
   perform() {
-    if (!this.capIsReached || (Pelle.isDoomed && !PelleDestructionUpgrade.singularityMilestones.isBought)) return;
+    if (!this.capIsReached || (Pelle.isDoomed && !PelleDestructionUpgrade.singularityMilestones.canBeApplied)) return;
 
     EventHub.dispatch(GAME_EVENT.SINGULARITY_RESET_BEFORE);
 

@@ -22,15 +22,22 @@ export class InfinityDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get interval() {
-    return 1000 * Perk.autobuyerFasterID.effectOrDefault(1) / PerkShopUpgrade.autoSpeed.effectOrDefault(1);
+    return player.disablePostReality
+      ? 1000
+      : 1000 * Perk.autobuyerFasterID.effectOrDefault(1) / PerkShopUpgrade.autoSpeed.effectOrDefault(1);
   }
 
   get isUnlocked() {
-    return EternityMilestone[`autobuyerID${this.tier}`].isReached || PelleUpgrade.IDAutobuyers.canBeApplied;
+    return EternityMilestone[`autobuyerID${this.tier}`].isReached || PelleUpgrade.IDAutobuyers.canBeApplied ||
+      (LHC.voidRunning && NullUpgrade.limerick5.isBought);
   }
 
   get resetTickOn() {
     return PRESTIGE_EVENT.ETERNITY;
+  }
+
+  get disabledByContinuum() {
+    return Laitela.continuumActive && Alpha.currentStage >= 9 && !Alpha.isRunning;
   }
 
   get hasUnlimitedBulk() {

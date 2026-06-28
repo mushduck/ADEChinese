@@ -44,7 +44,7 @@ export default {
   methods: {
     update() {
       this.isUnlocked = PlayerProgress.endgameUnlocked();
-      this.antimatterReq = new Decimal(1e9000000000000000);
+      this.antimatterReq = DC.E9E15;
     },
     btnClassObject(column) {
       return {

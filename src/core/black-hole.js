@@ -4,6 +4,16 @@ class BlackHoleUpgradeState {
   constructor(config) {
     const { getAmount, setAmount, calculateValue, initialCost, costMult } = config;
     this.incrementAmount = () => setAmount(getAmount() + 1);
+    this.bulkIncrementAmount = () => setAmount(getAmount() + getInverseHybridCostScaling(
+      Pelle.isDoomed ? Currency.realityShards.value : Currency.realityMachines.value,
+      1e30,
+      initialCost,
+      costMult,
+      0.2,
+      DC.E310,
+      1e5,
+      10
+    ).sub(getAmount()).toNumber());
     this._lazyValue = new Lazy(() => calculateValue(getAmount()));
     this._lazyCost = new Lazy(() => getHybridCostScaling(getAmount(),
       1e30,
@@ -58,6 +68,35 @@ class BlackHoleUpgradeState {
 
     EventHub.dispatch(GAME_EVENT.BLACK_HOLE_UPGRADE_BOUGHT);
   }
+
+  bulkPurchase() {
+    if (!this.isAffordable || this.value === 0) return;
+
+    // Keep the cycle phase consistent before and after purchase so that upgrading doesn't cause weird behavior
+    // such as immediately activating it when inactive (or worse, skipping past the active segment entirely).
+    const bh = BlackHole(this.id);
+    const beforeProg = bh.isCharged ? 1 - bh.stateProgress : bh.stateProgress;
+
+    this.bulkIncrementAmount();
+    Pelle.isDoomed ? Currency.realityShards.purchase(this.cost) : Currency.realityMachines.purchase(this.cost);
+    this._lazyValue.invalidate();
+    this._lazyCost.invalidate();
+    if (this.onPurchase) {
+      this.onPurchase();
+    }
+
+    // Adjust the phase to what it was before purchase by changing it directly. This will often result in passing
+    // in a negative argument to updatePhase(), but this shouldn't cause any problems because it'll never make
+    // the phase itself negative. In very rare cases this may result in a single auto-pause getting skipped
+    const stateTime = bh.isCharged ? bh.duration : bh.interval;
+    bh.updatePhase(stateTime * beforeProg - bh.phase);
+
+    // Prevents a rare edge case where the player makes an inactive black hole permanent, locking themselves into
+    // a permanently inactive black hole
+    if (bh.isPermanent) player.blackHole[this.id - 1].active = true;
+
+    EventHub.dispatch(GAME_EVENT.BLACK_HOLE_UPGRADE_BOUGHT);
+  }
 }
 
 class BlackHoleState {
@@ -84,7 +123,7 @@ class BlackHoleState {
       id: this.id,
       getAmount: () => this._data.powerUpgrades,
       setAmount: amount => this._data.powerUpgrades = amount,
-      calculateValue: amount => (180 / Math.pow(2, id)) * Math.pow(1.35, amount),
+      calculateValue: amount => new Decimal(180).div(Decimal.pow(2, id)).times(Decimal.pow(1.35, amount)),
       initialCost: 20 * blackHoleCostMultipliers[id],
       costMult: 2,
       hasAutobuyer: true
@@ -126,7 +165,7 @@ class BlackHoleState {
    * Multiplier to time the black hole gives when active.
    */
   get power() {
-    return this.powerUpgrade.value * Achievement(158).effectOrDefault(1);
+    return this.powerUpgrade.value.times(Achievement(158).effectOrDefault(1));
   }
 
   /**
@@ -137,7 +176,7 @@ class BlackHoleState {
   }
 
   get isUnlocked() {
-    return this._data.unlocked && !Enslaved.isRunning && (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.isBought);
+    return this._data.unlocked && !Enslaved.isRunning && (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.canBeApplied) && !player.disablePostReality;
   }
 
   get isCharged() {
@@ -195,8 +234,8 @@ class BlackHoleState {
 
   // The logic to determine what state the black hole is in for displaying is nontrivial and used in multiple places
   get displayState() {
-    if (Pelle.isDisabled("blackhole") && !PelleDestructionUpgrade.blackHole.isBought) return `<i class="fas fa-ban"></i> Disabled`;
-    if (Pelle.isDoomed && PelleDestructionUpgrade.blackHole.isBought) return `♅ Doomed`;
+    if (Pelle.isDisabled("blackhole") && !PelleDestructionUpgrade.blackHole.canBeApplied) return `<i class="fas fa-ban"></i> Disabled`;
+    if (Pelle.isDoomed && PelleDestructionUpgrade.blackHole.canBeApplied) return `♅ Doomed`;
     if (Enslaved.isAutoReleasing) {
       if (Enslaved.autoReleaseTick < 3) return `<i class="fas fa-compress-arrows-alt u-fa-padding"></i> Pulsing`;
       return `<i class="fas fa-expand-arrows-alt u-fa-padding"></i> Pulsing`;
@@ -212,7 +251,7 @@ class BlackHoleState {
   }
 
   get isActive() {
-    return this.isCharged && (this.id === 1 || BlackHole(this.id - 1).isActive) && (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.isBought);
+    return this.isCharged && (this.id === 1 || BlackHole(this.id - 1).isActive) && (!Pelle.isDisabled("blackhole") || PelleDestructionUpgrade.blackHole.canBeApplied);
   }
 
   // Proportion of active time, scaled 0 to 1

@@ -33,8 +33,8 @@ export default {
       canBuy: false,
       isBought: false,
       purchases: 0,
-      currentTimeEstimate: new Decimal(0),
-      projectedTimeEstimate: new Decimal(0),
+      currentTimeEstimate: "Calculating...",
+      projectedTimeEstimate: "Calculating...",
       isCapped: false,
       hovering: false,
       hasRemnants: false,
@@ -85,15 +85,17 @@ export default {
       this.isBought = this.upgrade.isBought;
       this.isCapped = this.upgrade.isCapped;
       this.purchases = player.celestials.pelle.rebuyables[this.upgrade.config.id];
-      this.currentTimeEstimate = TimeSpan
-        .fromSeconds((this.galaxyGenerator && this.config.currencyLabel === "Galaxy")
-          ? GalaxyGenerator.gainPerSecondDisplay(this.upgrade.cost)
-          : this.secondsUntilRSCost(Pelle.realityShardGainPerSecond))
-        .toTimeEstimate();
-      this.projectedTimeEstimate = TimeSpan
-        .fromSeconds(this.secondsUntilRSCost(Pelle.nextRealityShardGain))
-        .toTimeEstimate();
-      this.hasRemnants = Pelle.cel.remnants > 0;
+      if (this.hasTimeEstimate && (this.hovering || this.shouldEstimateImprovement)) {
+        this.currentTimeEstimate = TimeSpan
+          .fromSeconds((this.galaxyGenerator && this.config.currencyLabel === "Galaxy")
+            ? GalaxyGenerator.gainPerSecondDisplay(this.upgrade.cost)
+            : this.secondsUntilRSCost(Pelle.realityShardGainPerSecond))
+          .toTimeEstimate();
+        this.projectedTimeEstimate = TimeSpan
+          .fromSeconds(this.secondsUntilRSCost(Pelle.nextRealityShardGain))
+          .toTimeEstimate();
+      }
+      this.hasRemnants = Pelle.cel.remnants.gt(0);
       this.galaxyCap = GalaxyGenerator.generationCap;
       const genDB = GameDatabase.celestials.pelle.galaxyGeneratorUpgrades;
       this.notAffordable = (this.config === genDB.additive || this.config === genDB.multiplicative) &&

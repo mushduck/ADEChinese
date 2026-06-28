@@ -10,7 +10,7 @@ export class BlackHolePowerAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return Ra.unlocks.blackHolePowerAutobuyers.canBeApplied || EndgameMastery(53).isBought;
+    return (Ra.unlocks.blackHolePowerAutobuyers.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality;
   }
 
   get hasUnlimitedBulk() {
@@ -19,7 +19,7 @@ export class BlackHolePowerAutobuyerState extends AutobuyerState {
 
   tick() {
     const bh = BlackHole(this.id);
-    while (bh.powerUpgrade.isAffordable) bh.powerUpgrade.purchase();
+    bh.powerUpgrade.bulkPurchase();
   }
 
   static get entryCount() { return 2; }

@@ -46,7 +46,10 @@ export function antimatterDimensionCommonMultiplier() {
   multiplier = multiplier.times(getAdjustedGlyphEffect("powermult"));
   multiplier = multiplier.times(Currency.realityMachines.value.powEffectOf(AlchemyResource.force));
 
-  if (Pelle.isDoomed && !PelleDestructionUpgrade.disableADNerf.isBought) multiplier = multiplier.dividedBy(Currency.antimatter.value.add(1).log10().times(50).max(1));
+  if (Pelle.isDoomed && !PelleDestructionUpgrade.disableADNerf.canBeApplied) multiplier = multiplier.dividedBy(Currency.antimatter.value.add(1).log10().times(50).max(1));
+  if (Alpha.isRunning) multiplier = multiplier.div(Currency.antimatter.value.add(1).log10().times(125).max(1));
+
+  if (LHC.voidRunning) multiplier = multiplier.timesEffectOf(NullUpgrade.antimatterDimensionMult);
 
   return multiplier;
 }
@@ -88,6 +91,25 @@ export function getDimensionFinalMultiplierUncached(tier) {
     BreakEternityUpgrade.antimatterDimensionPow
   );
 
+  if (Alpha.isRunning) multiplier = multiplier.pow(AlphaUnlocks.timestudy181.effects.nerf.effectOrDefault(1));
+
+  if (!player.disablePostReality) multiplier = multiplier.pow(AlphaUnlocks.timestudy181.effects.buff.effectOrDefault(1));
+
+  if (LHC.voidRunning) {
+    multiplier = multiplier.powEffectOf(Accelerators.potency._milestones[0]);
+    multiplier = multiplier.pow(Accelerators.emptiness.effectValue1);
+    multiplier = multiplier.powEffectOf(Accelerators.emptiness._milestones[0]);
+    if (DivinityMilestone.celestialSurge.isReached) multiplier = multiplier.pow(2);
+    if (DivinityMilestone.finalRebirth.isReached) multiplier = multiplier.pow(Time.thisEndgameRealTime.totalSeconds.max(1).log10().div(5).pow(3).add(1));
+    multiplier = multiplier.pow(Currency.nullParticles.value.max(1).log10().div(5).add(1).pow(5));
+  }
+
+  if (ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality) multiplier = multiplier.pow(Achievements.powerConv(Achievements.power));
+
+  multiplier = dilateMultiplier(multiplier, Achievement(231).effectOrDefault(1));
+
+  multiplier = dilateMultiplier(multiplier, EtherealStars.red.reward);
+
   return multiplier;
 }
 
@@ -98,7 +120,7 @@ function applyNDMultipliers(mult, tier) {
   if (Laitela.continuumActive) {
     buy10Value = AntimatterDimension(tier).continuumValue;
   } else {
-    buy10Value = Decimal.floor(AntimatterDimension(tier).bought / 10);
+    buy10Value = Decimal.floor(AntimatterDimension(tier).bought.div(10));
   }
 
   multiplier = multiplier.times(Decimal.pow(AntimatterDimensions.buyTenMultiplier, buy10Value));
@@ -177,13 +199,13 @@ function applyNDPowers(mult, tier) {
       Ra.unlocks.allDimPowTT
     );
 
-  if (ExpansionPack.pellePack.isBought) multiplier = multiplier.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 3).add(1));
+  if (ExpansionPack.pellePack.isBought && !player.disablePostReality) multiplier = multiplier.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 1.5).add(1));
 
   multiplier = multiplier.pow(getAdjustedGlyphEffect("curseddimensions"));
 
   multiplier = multiplier.pow(VUnlocks.adPow.effectOrDefault(1));
 
-  if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones1.isBought) multiplier = multiplier.pow(VUnlocks.adPow.effectValue);
+  if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones1.canBeApplied) multiplier = multiplier.pow(VUnlocks.adPow.effectValue);
 
   if (PelleStrikes.infinity.hasStrike && !PelleStrikes.infinity.isDestroyed()) {
     multiplier = multiplier.pow(0.5);
@@ -220,7 +242,13 @@ export function buyOneDimension(tier) {
 
   const cost = dimension.cost;
 
-  if (tier === 8 && Enslaved.isRunning && AntimatterDimension(8).bought >= 1) return false;
+  if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
+    const lockString = "purchase an 8th Antimatter Dimension";
+    DualityUpgrade(15).tryShowWarningModal(lockString);
+    return false;
+  }
+
+  if (tier === 8 && Enslaved.isRunning && AntimatterDimension(8).bought.gte(1)) return false;
 
   if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(cost);
 
@@ -229,7 +257,7 @@ export function buyOneDimension(tier) {
   }
 
   dimension.amount = dimension.amount.plus(1);
-  dimension.bought++;
+  dimension.bought = dimension.bought.plus(1);
 
   if (tier === 1) {
     Achievement(28).tryUnlock();
@@ -245,12 +273,18 @@ export function buyManyDimension(tier) {
   if (Laitela.continuumActive || !dimension.isAvailableForPurchase || !dimension.isAffordableUntil10) return false;
   const cost = dimension.costUntil10;
 
+  if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
+    const lockString = "purchase an 8th Antimatter Dimension";
+    DualityUpgrade(15).tryShowWarningModal(lockString);
+    return false;
+  }
+
   if (tier === 8 && Enslaved.isRunning) return buyOneDimension(8);
 
   if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(cost);
   dimension.challengeCostBump();
   dimension.amount = dimension.amount.plus(dimension.remainingUntil10);
-  dimension.bought += dimension.remainingUntil10;
+  dimension.bought = dimension.bought.plus(dimension.remainingUntil10);
 
   onBuyDimension(tier);
 
@@ -263,12 +297,18 @@ export function buyAsManyAsYouCanBuy(tier) {
   const howMany = dimension.howManyCanBuy;
   const cost = dimension.cost.times(howMany);
 
+  if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
+    const lockString = "purchase an 8th Antimatter Dimension";
+    DualityUpgrade(15).tryShowWarningModal(lockString);
+    return false;
+  }
+
   if (tier === 8 && Enslaved.isRunning) return buyOneDimension(8);
 
   if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(cost);
   dimension.challengeCostBump();
   dimension.amount = dimension.amount.plus(howMany);
-  dimension.bought += howMany;
+  dimension.bought = dimension.bought.plus(howMany);
 
   onBuyDimension(tier);
 
@@ -281,7 +321,7 @@ function buyUntilTen(tier) {
   const dimension = AntimatterDimension(tier);
   dimension.challengeCostBump();
   dimension.amount = Decimal.round(dimension.amount.plus(dimension.remainingUntil10));
-  dimension.bought += dimension.remainingUntil10;
+  dimension.bought = Decimal.round(dimension.bought.plus(dimension.remainingUntil10));
   onBuyDimension(tier);
 }
 
@@ -306,6 +346,12 @@ export function buyMaxDimension(tier, bulk = Infinity) {
   let bulkLeft = bulk;
   const goal = Player.infinityGoal;
   if (dimension.cost.gt(goal) && Player.isInAntimatterChallenge) return;
+
+  if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
+    const lockString = "purchase an 8th Antimatter Dimension";
+    DualityUpgrade(15).tryShowWarningModal(lockString);
+    return false;
+  }
 
   if (tier === 8 && Enslaved.isRunning) {
     buyOneDimension(8);
@@ -334,17 +380,17 @@ export function buyMaxDimension(tier, bulk = Infinity) {
   }
 
   // This is the bulk-buy math, explicitly ignored if abnormal cost increases are active
-  const maxBought = dimension.costScale.getMaxBought(
-    Math.floor(dimension.bought / 10) + dimension.costBumps, dimension.currencyAmount, 10
+  const maxBought = dimension.costScale.getMaxBoughtDecimal(
+    Decimal.floor(dimension.bought.div(10)).add(dimension.costBumps), dimension.currencyAmount, 10
   );
   if (maxBought === null) {
     return;
   }
   let buying = maxBought.quantity;
-  if (buying > bulkLeft) buying = bulkLeft;
+  if (buying.gt(bulkLeft)) buying = new Decimal(bulkLeft);
   if (dimension.currencyAmount.gte(Decimal.pow10(maxBought.logPrice))) {
-    dimension.amount = dimension.amount.plus(10 * buying).round();
-    dimension.bought += 10 * buying;
+    dimension.amount = dimension.amount.plus(buying.times(10)).round();
+    dimension.bought = dimension.bought.plus(buying.times(10)).round();
     if (cost.lt(DC.E9E15)) dimension.currencyAmount = dimension.currencyAmount.minus(Decimal.pow10(maxBought.logPrice));
   }
 }
@@ -378,7 +424,7 @@ class AntimatterDimensionState extends DimensionState {
    * @returns {Decimal}
    */
   get cost() {
-    return this.costScale.calculateCost(Math.floor(this.bought / 10) + this.costBumps);
+    return this.costScale.calculateCostDecimal(Decimal.floor(this.bought.div(10)).add(this.costBumps));
   }
 
   /** @returns {number} */
@@ -390,7 +436,7 @@ class AntimatterDimensionState extends DimensionState {
    * @returns {number}
    */
   get boughtBefore10() {
-    return this.bought % 10;
+    return Decimal.modulo(this.bought, 10).toNumber();
   }
 
   /**
@@ -551,8 +597,8 @@ class AntimatterDimensionState extends DimensionState {
 
   reset() {
     this.amount = DC.D0;
-    this.bought = 0;
-    this.costBumps = 0;
+    this.bought = DC.D0;
+    this.costBumps = DC.D0;
   }
 
   resetAmount() {
@@ -567,18 +613,18 @@ class AntimatterDimensionState extends DimensionState {
   multiplySameCosts() {
     for (const dimension of AntimatterDimensions.all.filter(dim => dim.tier !== this.tier)) {
       if (dimension.cost.e === this.cost.e) {
-        dimension.costBumps++;
+        dimension.costBumps = dimension.costBumps.add(1);
       }
     }
-    if (Tickspeed.cost.e === this.cost.e) player.chall9TickspeedCostBumps++;
+    if (Tickspeed.cost.e === this.cost.e) player.chall9TickspeedCostBumps = player.chall9TickspeedCostBumps.add(1);
   }
 
   multiplyIC5Costs() {
     for (const dimension of AntimatterDimensions.all.filter(dim => dim.tier !== this.tier)) {
       if (this.tier <= 4 && dimension.cost.lt(this.cost)) {
-        dimension.costBumps++;
+        dimension.costBumps = dimension.costBumps.add(1);
       } else if (this.tier >= 5 && dimension.cost.gt(this.cost)) {
-        dimension.costBumps++;
+        dimension.costBumps = dimension.costBumps.add(1);
       }
     }
   }
@@ -588,10 +634,11 @@ class AntimatterDimensionState extends DimensionState {
   }
 
   get cappedProductionInNormalChallenges() {
+    if (Alpha.isRunning && Alpha.currentStage < 3) return DC.E300;
     const postBreak = (player.break && !NormalChallenge.isRunning) ||
       InfinityChallenge.isRunning ||
       Enslaved.isRunning;
-    const trueHardcap = player.break2 ? DC.ENUMMAX : DC.E9E15;
+    const trueHardcap = player.break2 ? (Pelle.isDoomed ? DC.ENUMMAX : LHC.breakingPoint) : DC.E9E15;
     return postBreak ? trueHardcap : DC.E315;
   }
 
@@ -612,20 +659,49 @@ class AntimatterDimensionState extends DimensionState {
       if (NormalChallenge(3).isRunning) {
         production = production.times(player.chall3Pow);
       }
+      if (production.gt(1)) {
+        production = production.pow(Accelerators.potency.effectValue1);
+      }
+      if (production.gt(1)) {
+        production = production.powEffectOf(ResurgenceUpgrade.synergy5);
+      }
       if (production.gt(10)) {
         const log10 = production.log10();
         const eg = Currency.endgames.value;
         const endgameMult = Pelle.isDoomed ? 1 + (Math.log10(Math.min(eg, 1e6) * Math.max(Math.log2(eg + 1) - Math.log2(5e5), 1) + 1) / 80) : 1 + (Math.log10(Math.min(eg, 1e6) * Math.max(Math.log2(eg + 1) - Math.log2(5e5), 1) + 1) / 200);
-        const endgameMultValue = EndgameMilestone.endgameAntimatter.isReached ? endgameMult : 1;
-        production = Decimal.pow10(Decimal.pow(log10, getAdjustedGlyphEffect("effarigantimatter") * Effects.product(EndgameMastery(101), EndgameUpgrade(15), SingularityMilestone.antimatterExponentPower) * endgameMultValue));
+        const endgameMultValue = (EndgameMilestone.endgameAntimatter.isReached && !player.disablePostReality) ? endgameMult : 1;
+        const pelleOnly = Pelle.isDoomed ? DivineDimensions.conversionFormula2 * Accelerators.cosmic.effectValue2 : 1;
+        production = Decimal.pow10(Decimal.pow(log10, getAdjustedGlyphEffect("effarigantimatter") * Effects.product(EndgameMastery(101), EndgameUpgrade(15), SingularityMilestone.antimatterExponentPower, Achievement(233)) * endgameMultValue * EtherealStars.black.reward.toNumber() * pelleOnly));
       }
-      if (production.gt(Decimal.pow10(1e150))) {
+      if (production.gt(Decimal.pow10(1e150)) && Pelle.isDoomed && player.celestials.pelle.divinities < 1) {
         const log10 = production.log10();
         production = Decimal.pow10(Decimal.pow(log10.div(1e150), 0.5).times(1e150));
       }
-      if (production.gt(Decimal.pow10(1e225))) {
+      if (production.gt(Decimal.pow10(1e225)) && Pelle.isDoomed && player.celestials.pelle.divinities < 1) {
         const log10 = production.log10();
         production = Decimal.pow10(Decimal.pow(log10.div(1e225), 0.1).times(1e225));
+      }
+      if (production.gt(Decimal.pow10(9e15)) && Pelle.isDoomed && player.celestials.pelle.divinities >= 1) {
+        const log10 = production.log10();
+        production = Decimal.pow10(Decimal.pow(log10.div(9e15), 0.16 / Math.pow(2, player.celestials.pelle.divinities)).times(9e15));
+      }
+      if (production.gt(1e10) && Pelle.isDoomed) {
+        const log10 = production.log10().log10();
+        production = Decimal.pow10(Decimal.pow10(Decimal.pow(log10, DivinityUpgrade.divineL1U4.effectOrDefault(1) * Accelerators.cosmic.effectValue3)));
+      }
+      if (ResurgenceUpgrade.ipSurge.isBought && !player.disablePostReality) {
+        production = production.times(gainedInfinityPoints());
+      }
+      if (ResurgenceUpgrade.epSurge.isBought && !player.disablePostReality) {
+        production = production.times(gainedEternityPoints());
+      }
+      if (production.gt(Decimal.pow10(1e200)) && !Pelle.isDoomed) {
+        const log10 = production.log10();
+        production = Decimal.pow10(Decimal.pow(log10.div(1e200), 1 / Accelerators.emptiness.effectValue3).times(1e200));
+      }
+      if (production.gt(10) && LHC.nullifiedVoidRunning) {
+        const log10 = production.log10();
+        production = Decimal.pow10(Decimal.pow(log10, 0.01));
       }
     }
     production = production.min(this.cappedProductionInNormalChallenges);
@@ -683,6 +759,13 @@ export const AntimatterDimensions = {
     // Stop producing antimatter at Big Crunch goal because all the game elements
     // are hidden when pre-break Big Crunch button is on screen.
     const hasBigCrunchGoal = !player.break || Player.isInAntimatterChallenge;
+    let pendAmount = AntimatterDimension(1).productionPerSecond;
+    let amountLost = Decimal.pow(pendAmount, 0.01);
+    let amountGained = amountLost.eq(0) ? DC.D0 : pendAmount.div(amountLost);
+    let conversionToNull = Decimal.log10(amountLost.max(1)).pow(Decimal.log10(Decimal.log10(amountLost.max(1)).max(1)));
+    if (LHC.voidRunning) {
+      Currency.nullMatter.add(conversionToNull.times(diff).div(1000));
+    }
     if (hasBigCrunchGoal && Currency.antimatter.gte(Player.infinityGoal)) return;
 
     let maxTierProduced = EternityChallenge(3).isRunning ? 3 : 7;
@@ -697,7 +780,15 @@ export const AntimatterDimensions = {
     if (AntimatterDimension(1).amount.gt(0)) {
       player.requirementChecks.eternity.noAD1 = false;
     }
-    AntimatterDimension(1).produceCurrency(Currency.antimatter, diff);
+    if (AntimatterDimension(8).amount.gt(0) || AntimatterDimension(8).continuumAmount.gt(0)) {
+      player.requirementChecks.endgame.onlyLowDims = false;
+    }
+    if (!LHC.voidRunning) {
+      AntimatterDimension(1).produceCurrency(Currency.antimatter, diff);
+    }
+    if (LHC.voidRunning) {
+      Currency.antimatter.add(amountGained.times(diff).div(1000));
+    }
     if (NormalChallenge(12).isRunning) {
       AntimatterDimension(2).produceCurrency(Currency.antimatter, diff);
     }

@@ -1,5 +1,6 @@
 import { alphaQuotes } from "./alpha";
 import { effarigQuotes } from "./effarig";
+import { elementalQuotes } from "./elemental";
 import { enslavedQuotes } from "./enslaved";
 import { laitelaQuotes } from "./laitela";
 import { pelleQuotes } from "./pelle";
@@ -15,5 +16,6 @@ export const quotes = {
   ra: raQuotes,
   laitela: laitelaQuotes,
   pelle: pelleQuotes,
-  alpha: alphaQuotes
+  alpha: alphaQuotes,
+  elemental: elementalQuotes
 };

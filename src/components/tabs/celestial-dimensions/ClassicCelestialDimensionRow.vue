@@ -22,15 +22,17 @@ export default {
       isUnlocked: false,
       canUnlock: false,
       multiplier: new Decimal(0),
-      baseAmount: 0,
+      baseAmount: new Decimal(0),
       amount: new Decimal(0),
-      purchases: 0,
+      purchases: new Decimal(0),
       rateOfChange: new Decimal(0),
       cost: new Decimal(0),
       isAvailableForPurchase: false,
       isCapped: false,
       capCP: new Decimal(0),
       hardcap: CelestialDimensions.HARDCAP_PURCHASES,
+      isAutobuyerUnlocked: false,
+      isAutobuyerOn: false
     };
   },
   computed: {
@@ -70,6 +72,11 @@ export default {
       return this.cost.log10().lt(1e5);
     }
   },
+  watch: {
+    isAutobuyerOn(newValue) {
+      Autobuyer.celestialDimension(this.tier).isActive = newValue;
+    }
+  },
   methods: {
     update() {
       const tier = this.tier;
@@ -78,8 +85,8 @@ export default {
       this.isUnlocked = dimension.isUnlocked;
       this.canUnlock = dimension.canUnlock;
       this.multiplier.copyFrom(dimension.multiplier);
-      this.baseAmount = dimension.baseAmount;
-      this.purchases = dimension.purchases;
+      this.baseAmount.copyFrom(dimension.baseAmount);
+      this.purchases.copyFrom(dimension.purchases);
       this.amount.copyFrom(dimension.amount);
       this.rateOfChange.copyFrom(dimension.rateOfChange);
       this.cost.copyFrom(dimension.cost);
@@ -87,6 +94,8 @@ export default {
       this.isCapped = dimension.isCapped;
       this.capCP.copyFrom(dimension.hardcapCPAmount);
       this.hardcap.copyFrom(dimension.purchaseCap);
+      this.isAutobuyerUnlocked = Autobuyer.celestialDimension(tier).isUnlocked;
+      this.isAutobuyerOn = Autobuyer.celestialDimension(tier).isActive;
     },
     buySingleCelestialDimension() {
       CelestialDimension(this.tier).buySingle();
@@ -123,7 +132,14 @@ export default {
           {{ capTooltip }}
         </div>
       </PrimaryButton>
+      <PrimaryToggleButton
+        v-if="isAutobuyerUnlocked"
+        v-model="isAutobuyerOn"
+        class="o-primary-btn--cd-auto"
+        label="Auto:"
+      />
       <PrimaryButton
+        v-else
         :enabled="isAvailableForPurchase && isUnlocked"
         class="o-primary-btn--cd-auto"
         @click="buyMaxCelestialDimension"

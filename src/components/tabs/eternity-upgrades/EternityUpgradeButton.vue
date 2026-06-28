@@ -32,7 +32,7 @@ export default {
       };
     },
     hasEU2() {
-      return Perk.autounlockEU2.canBeApplied;
+      return Perk.autounlockEU2.canBeApplied && !player.disablePostReality;
     }
   },
   methods: {

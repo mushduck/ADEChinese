@@ -73,8 +73,8 @@ export default {
       // seems more likely to be read).
       const upgrade = this.upgrade;
       this.isBought = upgrade.isBought || upgrade.isCapped;
-      this.chargePossible = Ra.unlocks.chargedInfinityUpgrades.canBeApplied &&
-        upgrade.hasChargeEffect && (!Pelle.isDoomed || PelleCelestialUpgrade.raTeresa2.isBought);
+      this.chargePossible = (Ra.unlocks.chargedInfinityUpgrades.canBeApplied && !player.disablePostReality) &&
+        upgrade.hasChargeEffect && (!Pelle.isDoomed || PelleCelestialUpgrade.raTeresa2.canBeApplied);
       this.canBeBought = upgrade.canBeBought;
       this.canBeCharged = upgrade.canCharge;
       this.isCharged = upgrade.isCharged;

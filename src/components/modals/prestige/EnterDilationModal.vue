@@ -22,7 +22,7 @@ export default {
       if (player.dilation.lastEP.eq(-1)) {
         return "This is your first Dilation";
       }
-      if (!isInCelestialReality() && Ra.unlocks.unlockDilationStartingTP.canBeApplied) {
+      if (!isInCelestialReality() && Ra.unlocks.unlockDilationStartingTP.canBeApplied && !player.disablePostReality) {
         return `You already have the maximum feasible amount of Tachyon Particles you can attain due to
           Teresa's Level ${formatInt(25)} reward.`;
       }

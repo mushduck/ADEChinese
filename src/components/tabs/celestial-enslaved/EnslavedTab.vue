@@ -90,7 +90,7 @@ export default {
         "o-enslaved-mechanic-button--clickable": this.canModifyGameTimeStorage,
         "o-enslaved-mechanic-button--storing-time": this.isStoringBlackHole,
         "l-fixed-setting": !this.canModifyGameTimeStorage,
-        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
+        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.canBeApplied
       };
     },
     storeRealTimeClass() {
@@ -99,7 +99,7 @@ export default {
         "o-enslaved-mechanic-button--clickable": !this.isDoomed,
         "o-enslaved-mechanic-button--storing-time": this.isStoringReal,
         "l-fixed-setting": !this.canChangeStoreRealTime,
-        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
+        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.canBeApplied
       };
     },
     dischargeClass() {
@@ -107,7 +107,7 @@ export default {
         "o-enslaved-mechanic-button": true,
         "o-enslaved-mechanic-button--clickable": !this.isDoomed,
         "l-fixed-setting": !this.canDischarge || this.hasNoCharge,
-        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
+        "o-pelle-disabled": this.isDoomed && !PelleDestructionUpgrade.blackHole.canBeApplied
       };
     },
     doomedDisabledClass() {
@@ -116,11 +116,11 @@ export default {
     mechanicButtonClass() {
       return {
         "o-enslaved-mechanic-button": true,
-        "o-enslaved-mechanic-button--clickable": !this.isDoomed && !PelleDestructionUpgrade.blackHole.isBought
+        "o-enslaved-mechanic-button--clickable": !this.isDoomed && !PelleDestructionUpgrade.blackHole.canBeApplied
       };
     },
     BHDescClass() {
-      return { "o-pelle-disabled": Pelle.isDoomed && !PelleDestructionUpgrade.blackHole.isBought };
+      return { "o-pelle-disabled": Pelle.isDoomed && !PelleDestructionUpgrade.blackHole.canBeApplied };
     }
   },
   watch: {
@@ -135,9 +135,9 @@ export default {
       this.isStoringReal = Enslaved.isStoringRealTime;
       this.autoStoreReal = player.celestials.enslaved.autoStoreReal;
       this.offlineEnabled = player.options.offlineProgress;
-      this.hasAutoRelease = Ra.unlocks.autoPulseTime.canBeApplied;
+      this.hasAutoRelease = Ra.unlocks.autoPulseTime.canBeApplied && !player.disablePostReality;
       this.isRunning = Enslaved.isRunning;
-      this.completed = Enslaved.isCompleted && !this.isDoomed;
+      this.completed = Enslaved.isCompleted && !this.isDoomed && !player.disablePostReality;
       this.storedReal = player.celestials.enslaved.storedReal;
       this.storedRealEffiency = Enslaved.storedRealTimeEfficiency;
       this.storedRealCap = Enslaved.storedRealTimeCap;

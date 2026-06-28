@@ -1,3 +1,5 @@
+import { sha512_256 } from "js-sha512";
+
 export const END_STATE_MARKERS = {
   // Tab zalgoification starts as soon as endState > 0
   get GAME_END() {
@@ -9,14 +11,23 @@ export const END_STATE_MARKERS = {
     return 1.5;
   },
   get INTERACTIVITY_DISABLED() {
+    if (sha512_256(player.password.replace(/\s/gu, "").toUpperCase()) !== "060646bd56a29d5cbdad16195f6afbcb0367ce33dba3150e882b961d14885544") {
+      return -9e15;
+    }
     if (player.endgames >= 1) return 1e308;
     return 2.5;
   },
   get FADE_AWAY() {
+    if (sha512_256(player.password.replace(/\s/gu, "").toUpperCase()) !== "060646bd56a29d5cbdad16195f6afbcb0367ce33dba3150e882b961d14885544") {
+      return -9e15;
+    }
     if (player.endgames >= 1) return 1e308;
     return 2.5;
   },
   get SAVE_DISABLED() {
+    if (sha512_256(player.password.replace(/\s/gu, "").toUpperCase()) !== "060646bd56a29d5cbdad16195f6afbcb0367ce33dba3150e882b961d14885544") {
+      return -9e15;
+    }
     if (player.endgames >= 1) return 1e308;
     return 4;
   },

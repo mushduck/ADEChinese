@@ -18,7 +18,7 @@ export default {
       isCapped: false,
       multiplier: new Decimal(0),
       amount: new Decimal(0),
-      bought: 0,
+      bought: new Decimal(0),
       boughtBefore10: 0,
       rateOfChange: new Decimal(0),
       singleCost: new Decimal(0),
@@ -27,7 +27,7 @@ export default {
       buyUntil10: true,
       howManyCanBuy: 0,
       isContinuumActive: false,
-      continuumValue: 0,
+      continuumValue: new Decimal(0),
       isShown: false,
       isCostsAD: false,
       amountDisplay: "",
@@ -80,10 +80,10 @@ export default {
       const dimension = AntimatterDimension(tier);
       this.isUnlocked = dimension.isAvailableForPurchase;
       const buyUntil10 = player.buyUntil10;
-      this.isCapped = tier === 8 && Enslaved.isRunning && dimension.bought >= 1;
+      this.isCapped = tier === 8 && Enslaved.isRunning && dimension.bought.gte(1);
       this.multiplier.copyFrom(AntimatterDimension(tier).multiplier);
       this.amount.copyFrom(dimension.totalAmount);
-      this.bought = dimension.bought;
+      this.bought.copyFrom(dimension.bought);
       this.boughtBefore10 = dimension.boughtBefore10;
       this.howManyCanBuy = buyUntil10 ? dimension.howManyCanBuy : Math.min(dimension.howManyCanBuy, 1);
       this.singleCost.copyFrom(dimension.cost);
@@ -94,7 +94,7 @@ export default {
       this.isAffordable = dimension.isAffordable;
       this.buyUntil10 = buyUntil10;
       this.isContinuumActive = Laitela.continuumActive;
-      if (this.isContinuumActive) this.continuumValue = dimension.continuumValue;
+      if (this.isContinuumActive) this.continuumValue.copyFrom(dimension.continuumValue);
       this.isShown =
         (DimBoost.totalBoosts.gt(0) && DimBoost.totalBoosts.plus(3).toNumber() >= tier) || PlayerProgress.infinityUnlocked();
       this.isCostsAD = NormalChallenge(6).isRunning && tier > 2 && !this.isContinuumActive;

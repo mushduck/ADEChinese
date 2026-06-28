@@ -22,7 +22,7 @@ import { GameKeyboard } from "./keyboard";
 // for the other modifier keys (#3093).
 
 // Free keys:
-// i, j, k, l, o, p, q, v, w, x
+// i, j, k, l, p, q, w, x
 
 
 export const shortcuts = [
@@ -36,19 +36,19 @@ export const shortcuts = [
     name: "Buy one Tickspeed",
     keys: ["shift", "t"],
     type: "bindRepeatableHotkey",
-    function: () => buyTickSpeed(),
+    function: () => player.options.simpleHotkeysCelestialMode ? buyCelestialTickSpeed() : buyTickSpeed(),
     visible: true
   }, {
     name: "Buy max Tickspeed",
     keys: ["t"],
     type: "bindRepeatableHotkey",
-    function: () => buyMaxTickSpeed(),
+    function: () => player.options.simpleHotkeysCelestialMode ? buyMaxCelestialTickSpeed() : buyMaxTickSpeed(),
     visible: true
   }, {
     name: "Max all",
     keys: ["m"],
     type: "bindRepeatableHotkey",
-    function: () => maxAll(),
+    function: () => player.options.simpleHotkeysCelestialMode ? CelestialDimensions.buyMax() : maxAll(),
     visible: true
   }, {
     name: "Dimensional Sacrifice",
@@ -60,31 +60,31 @@ export const shortcuts = [
     name: "Dimension Boost",
     keys: ["d"],
     type: "bindRepeatableHotkey",
-    function: () => manualRequestDimensionBoost(true),
+    function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialDimensionBoost(true) : manualRequestDimensionBoost(true),
     visible: true
   }, {
     name: "Single Dimension Boost",
     keys: ["shift", "d"],
     type: "bindRepeatableHotkey",
-    function: () => manualRequestDimensionBoost(false),
+    function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialDimensionBoost(false) : manualRequestDimensionBoost(false),
     visible: false
   }, {
     name: "Antimatter Galaxy",
     keys: ["g"],
     type: "bindRepeatableHotkey",
-    function: () => manualRequestGalaxyReset(true),
+    function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(true) : manualRequestGalaxyReset(true),
     visible: true
   }, {
     name: "Single Antimatter Galaxy",
     keys: ["shift", "g"],
     type: "bindRepeatableHotkey",
-    function: () => manualRequestGalaxyReset(false),
+    function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(false) : manualRequestGalaxyReset(false),
     visible: false
   }, {
     name: "Big Crunch",
     keys: ["c"],
     type: "bindRepeatableHotkey",
-    function: () => manualBigCrunchResetRequest(),
+    function: () => player.options.simpleHotkeysCelestialMode ? manualCelestialCrunchResetRequest() : manualBigCrunchResetRequest(),
     visible: true
   }, {
     name: "Replicanti Galaxy",
@@ -99,7 +99,7 @@ export const shortcuts = [
     name: "Eternity",
     keys: ["e"],
     type: "bindRepeatableHotkey",
-    function: () => eternityResetRequest(),
+    function: () => player.options.simpleHotkeysCelestialMode ? celestialEternityResetRequest() : eternityResetRequest(),
     visible: () => PlayerProgress.eternityUnlocked() || Player.canEternity || PlayerProgress.endgameUnlocked()
   }, {
     name: "Toggle Time Study respec",
@@ -219,6 +219,34 @@ export const shortcuts = [
       GameUI.notify.info(`Endgame Mastery respec is now ${player.endgame.respec ? "active" : "inactive"}`);
     },
     visible: () => PlayerProgress.endgameUnlocked()
+  }, {
+    name: "Toggle Celestial Hotkeys",
+    keys: ["shift", "c"],
+    type: "bindHotkey",
+    function: () => {
+      if (!Alpha.isDestroyedForDisplay) return;
+      player.options.simpleHotkeysCelestialMode = !player.options.simpleHotkeysCelestialMode;
+      GameUI.notify.info(`Simple Hotkey Celestial commands are now ${player.options.simpleHotkeysCelestialMode ? "active" : "inactive"}`);
+    },
+    visible: () => Alpha.isDestroyedForDisplay
+  }, {
+    name: "Condense",
+    keys: ["o"],
+    type: "bindRepeatableHotkey",
+    function: () => {
+      if (!PlayerProgress.condenseUnlocked()) return;
+      resetForDivineStars();
+    },
+    visible: () => PlayerProgress.condenseUnlocked()
+  }, {
+    name: "Supernova",
+    keys: ["v"],
+    type: "bindRepeatableHotkey",
+    function: () => {
+      if (!PlayerProgress.supernovaUnlocked()) return;
+      supernovaResetRequest();
+    },
+    visible: () => PlayerProgress.supernovaUnlocked()
   }, {
     name: "Save game",
     keys: ["mod", "s"],
@@ -461,6 +489,10 @@ function keyboardToggleContinuum() {
   if (!Laitela.continuumUnlocked) return;
   if (ImaginaryUpgrade(21).isLockingMechanics && player.auto.disableContinuum) {
     ImaginaryUpgrade(21).tryShowWarningModal();
+    return;
+  }
+  if (DualityUpgrade(21).isLockingMechanics && player.auto.disableContinuum) {
+    DualityUpgrade(21).tryShowWarningModal();
     return;
   }
   // This is a toggle despite the lack of !, because player.auto.disableContinuum

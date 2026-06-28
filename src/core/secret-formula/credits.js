@@ -13,7 +13,7 @@ export const credits = {
     10: "Lead Design Consultant",
     11: "Design Consultant",
     12: "Writer",
-    13: "Achievement Art",
+    13: "Achievement Artist",
     14: "Visual Artist",
     15: "Modal Maker, Lady Taker, Pie Baker",
     16: "Lurker Tester",
@@ -21,7 +21,7 @@ export const credits = {
     18: "Endgame Web Tester",
     19: "Android Tester",
     20: "Endgame Mobile Tester",
-    21: "Other Contributer",
+    21: "Other Contributor",
   },
 
   // Each person must have a name and at least one role (the index of the desired role in roles). They can also have a
@@ -95,14 +95,21 @@ export const credits = {
       roles: 8
     }, {
       name: "Didgoty",
-      roles: 9
+      roles: [9, 18, 21]
     }, {
       name: "Living_Person",
       name2: "Life",
-      roles: 9
+      roles: [9, 18, 21]
+    }, {
+      name: "Qwerty",
+      roles: [9, 18, 21]
     }, {
       name: "Acamaeda",
       roles: [11, 17]
+    }, {
+      name: "epic_ducks",
+      name2: "Elys",
+      roles: [13, 18, 21]
     }, {
       name: "Spoofy",
       roles: 14
@@ -237,11 +244,17 @@ export const credits = {
       name: "Zipi",
       roles: 17
     }, {
+      name: "AKA",
+      roles: 18
+    }, {
       name: "ape",
       roles: 18
     }, {
-      name: "Blast100",
-      roles: 18
+      name: "AutismQueen",
+      roles: [18, 21]
+    }, {
+      name: "Blast2026",
+      roles: [18, 21]
     }, {
       name: "Calm Carrot",
       roles: 18
@@ -252,35 +265,31 @@ export const credits = {
       name: "DavTheGl1tchyOne",
       roles: 18
     }, {
-      name: "Didgoty",
+      name: "Deadly",
       roles: 18
     }, {
-      name: "Elys",
+      name: "enitiaty",
       roles: 18
     }, {
       name: "Error404",
-      roles: 18
+      roles: [18, 21]
     }, {
       name: "glitchy",
+      roles: [18, 21]
+    }, {
+      name: "hz",
       roles: 18
     }, {
       name: "iliketrains123_no",
       roles: 18
     }, {
-      name: "Kirito",
-      roles: 18
-    }, {
-      name: "Living_Person",
-      name2: "Life",
+      name: "Josearthu",
       roles: 18
     }, {
       name: "M3t0s1m",
       roles: 18
     }, {
       name: "MagolorGamerJC",
-      roles: 18
-    }, {
-      name: "Matthew the Kingus",
       roles: 18
     }, {
       name: "MidnightLight",
@@ -293,20 +302,28 @@ export const credits = {
       name: "Quantaum",
       roles: 18
     }, {
-      name: "Qwerty",
+      name: "Redshift_Shine",
       roles: 18
     }, {
       name: "Riley",
       roles: 18
     }, {
       name: "S____",
+      roles: [18, 21]
+    }, {
+      name: "spinfish96",
       roles: 18
     }, {
-      name: "sumi",
+      name: "Sumi",
+      name2: "Lilly",
       roles: [18, 21]
     }, {
       name: "SwordPunk",
       roles: 18
+    }, {
+      name: "realmatryx",
+      name2: "Matthew",
+      roles: [18, 21]
     }, {
       name: "about:blank",
       roles: 19
@@ -624,8 +641,17 @@ export const credits = {
       name: "Airakogi",
       roles: 19
     }, {
+      name: "Boney_joe",
+      roles: 21
+    }, {
       name: "Creepmond",
       name2: "Creep",
+      roles: 21
+    }, {
+      name: "Gigachad45",
+      roles: 21
+    }, {
+      name: "Tojo",
       roles: 21
     }
   ]

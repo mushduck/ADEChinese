@@ -8,6 +8,11 @@ export default {
     EternityUpgradeButton,
     EPMultiplierButton
   },
+  data() {
+    return {
+      hasSeenFinalSoftcap: false
+    };
+  },
   computed: {
     grid() {
       return [
@@ -26,6 +31,9 @@ export default {
     costIncreases: () => EternityUpgrade.epMult.costIncreaseThresholds.map(x => new Decimal(x))
   },
   methods: {
+    update() {
+      this.hasSeenFinalSoftcap = player.eternityPoints.gte("e1e125");
+    },
     formatPostBreak
   }
 };
@@ -51,6 +59,10 @@ export default {
       {{ formatPostBreak(costIncreases[1], 2) }}, and {{ formatPostBreak(costIncreases[2]) }} Eternity Points.
       <br>
       The cost increases super-exponentially after {{ formatPostBreak(costIncreases[3]) }} Eternity Points.
+      <div v-if="hasSeenFinalSoftcap">
+        <br>
+        The cost increases greatly beyond {{ formatPostBreak(costIncreases[4]) }} Eternity Points.
+      </div>
     </div>
   </div>
 </template>
