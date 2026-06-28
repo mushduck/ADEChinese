@@ -1640,8 +1640,7 @@ window.player = {
       id: false,
     }
   },
-  DEV: false,
-  password: ""
+  DEV: false
 };
 
 export const Player = {
