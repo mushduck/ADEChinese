@@ -24,7 +24,7 @@ export default {
       this.baseRMCap.copyFrom(MachineHandler.baseRMCap);
       this.capRM.copyFrom(MachineHandler.hardcapRM);
       this.scaleTime = MachineHandler.scaleTimeForIM;
-      this.capStr = formatMachines(MachineHandler.hardcapRM, MachineHandler.currentIMCap);
+      this.capStr = formatMachines(MachineHandler.hardcapRM, MachineHandler.currentIMCap, MachineHandler.currentDMCap);
     },
     id(row, column) {
       return (row - 1) * 5 + column - 1;

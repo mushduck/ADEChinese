@@ -50,14 +50,14 @@ export default {
       if (player.options.confirmations.autoClean) {
         Modal.glyphPurge.show({ harsh: false });
       } else {
-        Glyphs.autoClean(5);
+        Glyphs.autoClean();
       }
     },
     harshAutoClean() {
       if (player.options.confirmations.autoClean) {
         Modal.glyphPurge.show({ harsh: true });
       } else {
-        Glyphs.autoClean(1);
+        Glyphs.harshAutoClean();
       }
     },
     deleteAllUnprotected() {

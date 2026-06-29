@@ -22,7 +22,8 @@ export default {
       isCompleted: false,
       isBroken: false,
       isUnlocked: false,
-      lockedAt: new Decimal()
+      normalLockedAt: new Decimal(),
+      alphaLockedAt: new Decimal()
     };
   },
   computed: {
@@ -31,7 +32,7 @@ export default {
         return this.challenge.config;
       }
       return {
-        description: `Infinity ${formatInt(this.challenge.config.lockedAt)} times to unlock.`
+        description: `Infinity ${formatInt(this.lockedAt)} times to unlock.`
       };
     },
     name() {
@@ -47,7 +48,9 @@ export default {
       this.isUnlocked = this.challenge.isUnlocked;
       // This stops normal challenges from appearing like they're running during IC1
       this.isRunning = this.challenge.isOnlyActiveChallenge;
-      this.lockedAt = this.challenge.config.lockedAt;
+      this.normalLockedAt = this.challenge.config.lockedAt;
+      this.alphaLockedAt = this.challenge.config.alphaLockedAt;
+      this.lockedAt = Alpha.isRunning ? this.alphaLockedAt : this.normalLockedAt;
       this.isBroken = Enslaved.isRunning && Enslaved.BROKEN_CHALLENGES.includes(this.challenge.id);
       this.isCompleted = this.challenge.isCompleted && !this.isBroken;
     }

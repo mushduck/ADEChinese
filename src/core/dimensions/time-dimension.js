@@ -1,6 +1,8 @@
 import { DimensionState } from "./dimension";
 
 export function buySingleTimeDimension(tier, auto = false) {
+  if (tier === 4 && Alpha.isRunning && Alpha.currentStage < 13) return;
+  if (Laitela.continuumActive && Alpha.currentStage >= 17 && !player.disablePostReality) return;
   const dim = TimeDimension(tier);
   if (tier > 4) {
     if (!TimeStudy.timeDimension(tier).isBought) return false;
@@ -10,7 +12,7 @@ export function buySingleTimeDimension(tier, auto = false) {
     }
   }
   if (Currency.eternityPoints.lt(dim.cost)) return false;
-  if (Enslaved.isRunning && dim.bought > 0) return false;
+  if (Enslaved.isRunning && dim.bought.gt(0)) return false;
   if (ImaginaryUpgrade(15).isLockingMechanics && EternityChallenge(7).completions > 0) {
     if (!auto) {
       ImaginaryUpgrade(15).tryShowWarningModal(`purchase a Time Dimension,
@@ -18,11 +20,24 @@ export function buySingleTimeDimension(tier, auto = false) {
     }
     return false;
   }
+  if (DualityUpgrade(15).isLockingMechanics) {
+    const lockString = "purchase a Time Dimension";
+    DualityUpgrade(15).tryShowWarningModal(lockString);
+    return false;
+  }
 
   Currency.eternityPoints.subtract(dim.cost);
   dim.amount = dim.amount.plus(1);
-  dim.bought += 1;
+  dim.bought = dim.bought.plus(1);
   dim.cost = dim.nextCost(dim.bought);
+  if (TimeDimension(4).amount.gte(1) && Alpha.isRunning && Alpha.currentStage === 13) {
+    Alpha.advanceLayer();
+    Alpha.quotes.fourthTimeDimension.show();
+  }
+  if (TimeDimension(8).amount.gte(1) && Alpha.isRunning && Alpha.currentStage === 26) {
+    Alpha.advanceLayer();
+    Alpha.quotes.eighthTimeDimension.show();
+  }
   return true;
 }
 
@@ -35,7 +50,7 @@ export function fullResetTimeDimensions() {
   for (const dim of TimeDimensions.all) {
     dim.cost = new Decimal(dim.baseCost);
     dim.amount = DC.D0;
-    dim.bought = 0;
+    dim.bought = DC.D0;
   }
 }
 
@@ -47,32 +62,33 @@ export function toggleAllTimeDims() {
 }
 
 export function calcHighestPurchaseableTD(tier, currency) {
-  const logC = currency.max(1).log10().times(PelleRifts.paradox.milestones[0].canBeApplied ? 2 : 1);
-  const logBase = (TimeDimension(tier)._baseCost.max(1).log10().sub(PelleRifts.paradox.milestones[0].canBeApplied ? 2250 : 0)).div(
-    PelleRifts.paradox.milestones[0].canBeApplied ? 2 : 1);
+  const logC = currency.max(1).log10();
+  const logBase = (TimeDimension(tier)._baseCost.max(1).log10().sub(
+    PelleRifts.paradox.milestones[0].canBeApplied && tier > 4 ? 2250 : 0)).div(
+    PelleRifts.paradox.milestones[0].canBeApplied && tier > 4 ? 2 : 1);
   let logMult = Math.log10(TimeDimension(tier)._costMultiplier);
 
   if (tier > 4 && currency.lt(DC.E6000)) {
-    return Decimal.floor(Decimal.max(0, (logC.sub(logBase)).div(logMult))).toNumber();
+    return Decimal.ceil(Decimal.max(0, (logC.sub(logBase)).div(logMult)));
   }
 
   if (currency.gte(DC.E6000)) {
     logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * (tier <= 4 ? 2.2 : 1), 1));
     const preInc = (Decimal.log10(DC.E6000).sub(logBase)).div(logMult);
     const postInc = Decimal.clampMin(((logC.sub(6000)).div(logMult)).div(TimeDimensions.scalingPast1e6000), 0);
-    return Decimal.floor(postInc.add(preInc)).toNumber();
+    return Decimal.ceil(postInc.add(preInc));
   }
 
   if (currency.lt(DC.NUMMAX)) {
-    return Decimal.floor(Decimal.max(0, ((logC.sub(logBase)).div(logMult)).add(1))).toNumber();
+    return Decimal.ceil(Decimal.max(0, ((logC.sub(logBase)).div(logMult)).add(1)));
   }
 
   if (currency.lt(DC.E1300)) {
     const preInc = Decimal.floor((Decimal.log10(DC.NUMMAX).sub(logBase)).div(logMult));
     logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
     const decCur = logC.sub(preInc.times(logMult));
-    const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), 0));
-    return preInc.add(postInc).toNumber();
+    const postInc = Decimal.ceil(Decimal.clampMin(decCur.div(logMult), 0));
+    return preInc.add(postInc);
   }
 
   if (currency.lt(DC.E6000)) {
@@ -80,13 +96,15 @@ export function calcHighestPurchaseableTD(tier, currency) {
     const preInc = Decimal.floor((Decimal.log10(DC.E1300).sub(logBase)).div(logMult));
     logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 2.2, 1));
     const decCur = logC.sub(preInc.times(logMult));
-    const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), 0));
-    return preInc.add(postInc).toNumber();
+    const postInc = Decimal.ceil(Decimal.clampMin(decCur.div(logMult), 0));
+    return preInc.add(postInc);
   }
   throw new Error("calcHighestPurchasableTD reached too far in code");
 }
 
 export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) {
+  if (tier === 4 && Alpha.isRunning && Alpha.currentStage < 13) return;
+  if (Laitela.continuumActive && Alpha.currentStage >= 17 && !player.disablePostReality) return;
   const canSpend = Currency.eternityPoints.value.times(portionToSpend);
   const dim = TimeDimension(tier);
   if (canSpend.lt(dim.cost)) return false;
@@ -104,20 +122,34 @@ export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) 
     }
     return false;
   }
+  if (DualityUpgrade(15).isLockingMechanics) {
+    const lockString = "purchase a Time Dimension";
+    DualityUpgrade(15).tryShowWarningModal(lockString);
+    return false;
+  }
   if (Enslaved.isRunning) return buySingleTimeDimension(tier);
-  const pur = Math.clampMin(calcHighestPurchaseableTD(tier, canSpend) - dim.bought, 0);
-  const cost = dim.nextCost(pur + dim.bought).sub(1);
-  if (pur <= 0 || !isFinite(pur)) return false;
+  const pur = Decimal.clampMin(calcHighestPurchaseableTD(tier, canSpend).sub(dim.bought), 0);
+  const cost = dim.nextCost(pur.add(dim.bought).sub(1));
+  if (pur.lte(0)) return false;
   Currency.eternityPoints.subtract(cost);
   dim.amount = dim.amount.plus(pur);
-  dim.bought += pur;
+  dim.bought = dim.bought.plus(pur);
   dim.cost = dim.nextCost(dim.bought);
+  if (TimeDimension(4).amount.gte(1) && Alpha.isRunning && Alpha.currentStage === 13) {
+    Alpha.advanceLayer();
+    Alpha.quotes.fourthTimeDimension.show();
+  }
+  if (TimeDimension(8).amount.gte(1) && Alpha.isRunning && Alpha.currentStage === 26) {
+    Alpha.advanceLayer();
+    Alpha.quotes.eighthTimeDimension.show();
+  }
   return true;
 }
 
 export function maxAllTimeDimensions() {
+  if (Laitela.continuumActive && Alpha.currentStage >= 17 && !player.disablePostReality) return;
   // Try to buy single from the highest affordable new dimensions
-  for (let i = 8; i > 0 && TimeDimension(i).bought === 0; i--) {
+  for (let i = 8; i > 0 && TimeDimension(i).bought.eq(0); i--) {
     buySingleTimeDimension(i, true);
   }
 
@@ -127,11 +159,19 @@ export function maxAllTimeDimensions() {
   }
 
   // Loop buying the cheapest dimension possible; explicit infinite loops make me nervous
-  const tierCheck = tier => (RealityUpgrade(13).isLockingMechanics ? tier < 5 : true);
+  const tierCheck = tier => ((Alpha.isRunning && Alpha.currentStage < 13) ? tier < 4 : (RealityUpgrade(13).isLockingMechanics ? tier < 5 : true));
   const purchasableDimensions = TimeDimensions.all.filter(d => d.isUnlocked && tierCheck(d.tier));
   for (let stop = 0; stop < 1000; stop++) {
     const cheapestDim = purchasableDimensions.reduce((a, b) => (b.cost.gte(a.cost) ? a : b));
     if (!buySingleTimeDimension(cheapestDim.tier, true)) break;
+  }
+  if (TimeDimension(4).amount.gte(1) && Alpha.isRunning && Alpha.currentStage === 13) {
+    Alpha.advanceLayer();
+    Alpha.quotes.fourthTimeDimension.show();
+  }
+  if (TimeDimension(8).amount.gte(1) && Alpha.isRunning && Alpha.currentStage === 26) {
+    Alpha.advanceLayer();
+    Alpha.quotes.eighthTimeDimension.show();
   }
 }
 
@@ -150,11 +190,12 @@ export function timeDimensionCommonMultiplier() {
       EternityUpgrade.tdMultAchs,
       EternityUpgrade.tdMultTheorems,
       EternityUpgrade.tdMultRealTime,
-      Replicanti.areUnlocked && Replicanti.amount.gt(1) ? DilationUpgrade.tdMultReplicanti : null,
-      Pelle.isDoomed && !PelleRealityUpgrade.temporalTranscendence.isBought ? null : RealityUpgrade(22),
+      Pelle.isDoomed && !PelleRealityUpgrade.temporalTranscendence.canBeApplied ? null : RealityUpgrade(22),
       AlchemyResource.dimensionality,
       PelleRifts.chaos
     );
+
+  mult = mult.times(ReplicantiMultipliers.tdMult);
 
   if (EternityChallenge(9).isRunning) {
     mult = mult.times(
@@ -163,6 +204,8 @@ export function timeDimensionCommonMultiplier() {
         4)
         .clampMin(1));
   }
+
+  if (LHC.voidRunning) mult = mult.timesEffectOf(NullUpgrade.timeDimensionMult);
   
   return mult;
 }
@@ -196,7 +239,7 @@ class TimeDimensionState extends DimensionState {
   set cost(value) { this.data.cost = value; }
 
   nextCost(bought) {
-    if (this._tier > 4 && bought < this.e6000ScalingAmount) {
+    if (this._tier > 4 && bought.lt(this.e6000ScalingAmount)) {
       const cost = Decimal.pow(this.costMultiplier, bought).times(this.baseCost);
       if (PelleRifts.paradox.milestones[0].canBeApplied) {
         return cost.div("1e2250").pow(0.5);
@@ -212,7 +255,7 @@ class TimeDimensionState extends DimensionState {
 
     let base = this.costMultiplier;
     if (this._tier <= 4) base *= 2.2;
-    const exponent = new Decimal(bought - this.e6000ScalingAmount).mul(TimeDimensions.scalingPast1e6000).add(this.e6000ScalingAmount);
+    const exponent = new Decimal(bought.sub(this.e6000ScalingAmount)).mul(TimeDimensions.scalingPast1e6000).add(this.e6000ScalingAmount);
     const cost = Decimal.pow(base, exponent).times(this.baseCost);
 
     if (PelleRifts.paradox.milestones[0].canBeApplied && this._tier > 4) {
@@ -244,8 +287,15 @@ class TimeDimensionState extends DimensionState {
         tier === 4 ? TimeStudy(227) : null
       );
 
+    let bought;
     const dim = TimeDimension(tier);
-    const bought = tier === 8 ? Math.clampMax(dim.bought, 1e8) : dim.bought;
+    if (Laitela.continuumActive && Alpha.currentStage >= 17 && !player.disablePostReality) {
+      bought = TimeDimension(tier).continuumValue;
+    } else {
+      bought = new Decimal(dim.bought);
+    }
+
+    bought = (tier === 8 && (player.disablePostReality || Alpha.currentStage < 12)) ? Decimal.clampMax(bought, 1e8).times(Laitela.matterExtraPurchaseFactor) : bought;
     mult = mult.times(Decimal.pow(dim.powerMultiplier, bought));
 
     mult = mult.pow(getAdjustedGlyphEffect("timepow"));
@@ -258,7 +308,7 @@ class TimeDimensionState extends DimensionState {
     mult = mult.powEffectOf(SingularityMilestone.dimensionPow);
     mult = mult.powEffectOf(Ra.unlocks.allDimPowTT);
 
-    if (ExpansionPack.pellePack.isBought) mult = mult.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 3).add(1));
+    if (ExpansionPack.pellePack.isBought && !player.disablePostReality) mult = mult.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 1.5).add(1));
 
     if (player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed())) {
       mult = dilatedValueOf(mult);
@@ -274,7 +324,21 @@ class TimeDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
+    if (!player.disablePostReality) mult = mult.pow(AlphaUnlocks.ecCompletion5.effects.buff.effectOrDefault(1));
+
+    if (tier === 8 && !player.disablePostReality) {
+      mult = mult.pow(AlphaUnlocks.timeDimension8.effects.buff.effectOrDefault(1));
+    }
+
+    if (DilationUpgrade.tdMultReplicanti.isBought && ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality) mult = mult.pow(ReplicantiMultipliers.tdPow);
+
+    if (ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality) mult = mult.pow(Achievements.powerConv(EternityUpgrade.tdMultAchs.effectOrDefault(1)));
+
+    mult = dilateMultiplier(mult, EtherealStars.purple.reward);
+
     if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(TimeDimensions.OVERFLOW)), 1 / TimeDimensions.compressionMagnitude).times(Decimal.log10(TimeDimensions.OVERFLOW)));
+
+    if (mult.gte(TimeDimensions.OVERFLOW_SQUARED)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(TimeDimensions.OVERFLOW_SQUARED)), 1 / TimeDimensions.compressionMag2).times(Decimal.log10(TimeDimensions.OVERFLOW_SQUARED)));
 
     return mult;
   }
@@ -285,9 +349,12 @@ class TimeDimensionState extends DimensionState {
       return DC.D0;
     }
     if (EternityChallenge(11).isRunning) {
-      return this.amount;
+      return this.totalAmount;
     }
-    let production = this.amount.times(this.multiplier);
+    if (this.tier === this.highestProducingDimension && Alpha.isRunning && Alpha.currentStage >= 14 && Alpha.currentStage < 23) {
+      return this.totalAmount;
+    }
+    let production = this.totalAmount.times(this.multiplier);
     if (EternityChallenge(7).isRunning) {
       production = production.times(Tickspeed.perSecond);
     }
@@ -303,7 +370,7 @@ class TimeDimensionState extends DimensionState {
       return DC.D0;
     }
     const toGain = TimeDimension(tier + 1).productionPerSecond;
-    const current = Decimal.max(this.amount, 1);
+    const current = Decimal.max(this.totalAmount, 1);
     return toGain.times(10).dividedBy(current).times(getGameSpeedupForDisplay());
   }
 
@@ -314,7 +381,46 @@ class TimeDimensionState extends DimensionState {
       (Laitela.isRunning && tier > Laitela.maxAllowedDimension)) {
       return false;
     }
-    return this.amount.gt(0);
+    return this.totalAmount.gt(0);
+  }
+
+  get highestProducingDimension() {
+    if (TimeDimension(8).isProducing) return 8;
+    if (TimeDimension(7).isProducing) return 7;
+    if (TimeDimension(6).isProducing) return 6;
+    if (TimeDimension(5).isProducing) return 5;
+    if (TimeDimension(4).isProducing) return 4;
+    if (TimeDimension(3).isProducing) return 3;
+    if (TimeDimension(2).isProducing) return 2;
+    if (TimeDimension(1).isProducing) return 1;
+    return 1;
+  }
+
+  get continuumValue() {
+    if (!this.isAvailableForPurchase) return DC.D0;
+    // Nameless limits dim purchases to 1 only
+    // Continuum should be no different
+    if (Enslaved.isRunning) return DC.D1;
+    // It's safe to use dimension.currencyAmount because this is
+    // a dimension-only method (so don't just copy it over to tickspeed).
+    // We need to use dimension.currencyAmount here because of different costs in NC6.
+    return this.getContinuumValue.times(Laitela.matterExtraPurchaseFactor);
+  }
+
+  get getContinuumValue() {
+    return new Decimal(calcHighestPurchaseableTD(this.tier, Currency.eternityPoints.value));
+  }
+
+  /**
+   * @returns {number}
+   */
+  get continuumAmount() {
+    if (!Laitela.continuumActive || Alpha.currentStage < 17 || player.disablePostReality) return DC.D0;
+    return Decimal.floor(this.continuumValue);
+  }
+
+  get totalAmount() {
+    return this.amount.max(this.continuumAmount);
   }
 
   get baseCost() {
@@ -325,8 +431,14 @@ class TimeDimensionState extends DimensionState {
     return this._costMultiplier;
   }
 
+  get basePowerMultiplier() {
+    if (Alpha.isRunning) return new Decimal(AlphaUnlocks.eternity.effects.nerf.effectOrDefault(4));
+    if (!player.disablePostReality) return new Decimal(AlphaUnlocks.timeDimension4.effects.buff.effectOrDefault(4));
+    return DC.D4;
+  }
+
   get powerMultiplier() {
-    return DC.D4
+    return this.basePowerMultiplier
       .timesEffectsOf(this._tier === 8 ? GlyphSacrifice.time : null)
       .powEffectsOf(ImaginaryUpgrade(14), SingularityMilestone.perPurchaseDimMult);
   }
@@ -366,9 +478,20 @@ export const TimeDimensions = {
     return DC.E1E15.powEffectsOf(EndgameMastery(93));
   },
 
+  get OVERFLOW_SQUARED() {
+    return Pelle.isDoomed ?
+      Decimal.pow10(Decimal.pow(DC.NUMMAX, Decimal.pow(2, Math.max(player.celestials.pelle.divinities - 1, 0)))) : DC.ENUMMAX;
+  },
+
   get compressionMagnitude() {
-    const reduction = Effects.product(EndgameMastery(83), EndgameUpgrade(3));
-    return 10 * reduction;
+    let reduction = Effects.product(EndgameMastery(83), EndgameUpgrade(3));
+    if (!player.disablePostReality) reduction *= AlphaUnlocks.ecCompletion1.effects.buff.effectOrDefault(1);
+    return Math.max(10 * reduction, 2) - Math.max((0.2 - reduction) * 5, 0);
+  },
+
+  get compressionMag2() {
+    let reduction = 1;
+    return Math.max(10 * reduction, 2) - Math.max((0.2 - reduction) * 5, 0);
   },
 
   get scalingPast1e6000() {
@@ -384,6 +507,10 @@ export const TimeDimensions = {
       TimeDimension(1).produceDimensions(InfinityDimension(8), diff);
     } else {
       TimeDimension(1).produceCurrency(Currency.timeShards, diff);
+    }
+
+    if (!TimeDimensions.all.every(d => d.amount.eq(0)) || !TimeDimensions.all.every(d => d.continuumAmount.eq(0))) {
+      player.requirementChecks.endgame.onlyLowDims = false;
     }
 
     EternityChallenge(7).reward.applyEffect(production => {

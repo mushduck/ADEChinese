@@ -10,7 +10,7 @@ const rebuyable = props => {
     props.initialCost * props.costMult
   );
   const { effect } = props;
-  props.effect = () => Decimal.pow(
+  props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(
     effect + ImaginaryUpgrade(props.id).effectOrDefault(0),
     player.reality.rebuyables[props.id] * getAdjustedGlyphEffect("realityrow1pow"));
   props.description = () => props.textTemplate.replace("{value}",
@@ -77,7 +77,7 @@ export const realityUpgrades = [
     canLock: true,
     lockEvent: "gain a Replicanti Galaxy",
     description: "Replicanti speed is multiplied based on Replicanti Galaxies",
-    effect: () => Replicanti.galaxies.total.div(25).add(1).toNumber(),
+    effect: () => player.disablePostReality ? 1 : Replicanti.galaxies.total.div(25).add(1).toNumber(),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -91,7 +91,7 @@ export const realityUpgrades = [
     canLock: true,
     lockEvent: "gain another Antimatter Galaxy",
     description: "Infinity gain is boosted from Antimatter Galaxy count",
-    effect: () => player.galaxies.div(20).add(1),
+    effect: () => player.disablePostReality ? DC.D1 : player.galaxies.div(20).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -105,7 +105,7 @@ export const realityUpgrades = [
     canLock: true,
     // We don't have lockEvent because the modal can never show up for this upgrade
     description: "Tachyon Particle gain is boosted based on Achievement multiplier",
-    effect: () => Decimal.sqrt(Achievements.power),
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.sqrt(Achievements.power),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -143,7 +143,7 @@ export const realityUpgrades = [
     description: () => `Start every Reality with ${formatInt(100)} Eternities (also applies to current Reality)`,
     automatorPoints: 15,
     shortDescription: () => `Start with ${formatInt(100)} Eternities`,
-    effect: () => 100
+    effect: () => player.disablePostReality ? 0 : 100
   },
   {
     name: "The Boundless Flow",
@@ -155,7 +155,7 @@ export const realityUpgrades = [
     description: "Every second, gain 10% of the Infinities you would normally gain by Infinitying",
     automatorPoints: 5,
     shortDescription: () => `Continuous Infinity generation`,
-    effect: () => gainedInfinities().times(0.1),
+    effect: () => player.disablePostReality ? DC.D0 : gainedInfinities().times(0.1),
     formatEffect: value => `${format(value)} per second`
   },
   {
@@ -169,9 +169,9 @@ export const realityUpgrades = [
     canLock: true,
     lockEvent: "complete Eternity Challenge 1",
     description: "Eternity Point multiplier based on Reality and Time Theorem count",
-    effect: () => Currency.timeTheorems.value
+    effect: () => player.disablePostReality ? DC.D1 : Currency.timeTheorems.value
       .minus(DC.E3).clampMin(2)
-      .pow(Math.log2(Math.clamp(Currency.realities.value, 1, 1e4))).clampMin(1),
+      .pow(Decimal.log2(Decimal.clamp(Currency.realities.value, 1, 1e4))).clampMin(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -199,7 +199,7 @@ export const realityUpgrades = [
     description: "Gain Eternities per second equal to your Reality count",
     automatorPoints: 5,
     shortDescription: () => `Continuous Eternity generation`,
-    effect: () => Currency.realities.value * Ra.unlocks.continuousTTBoost.effects.eternity.effectOrDefault(1),
+    effect: () => player.disablePostReality ? 0 : Currency.realities.value.times(Ra.unlocks.continuousTTBoost.effects.eternity.effectOrDefault(1)),
     formatEffect: value => `${format(value)} per second`
   },
   {
@@ -208,13 +208,13 @@ export const realityUpgrades = [
     cost: 50,
     requirement: () => `Have ${format(DC.E10)} Eternity Points without purchasing
       the ${formatX(5)} Eternity Point upgrade`,
-    hasFailed: () => player.epmultUpgrades !== 0,
-    checkRequirement: () => Currency.eternityPoints.value.add(1).log10().gte(10) && player.epmultUpgrades === 0,
+    hasFailed: () => player.epmultUpgrades.neq(0),
+    checkRequirement: () => Currency.eternityPoints.value.add(1).log10().gte(10) && player.epmultUpgrades.eq(0),
     checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
     canLock: true,
     lockEvent: () => `purchase a ${formatX(5)} EP upgrade`,
     description: () => `Boost Tachyon Particle gain based on ${formatX(5)} Eternity Point multiplier`,
-    effect: () => Decimal.max(Decimal.sqrt(Decimal.log10(EternityUpgrade.epMult.effectValue)).div(9), 1).toNumber(),
+    effect: () => player.disablePostReality ? 1 : Decimal.max(Decimal.sqrt(Decimal.log10(EternityUpgrade.epMult.effectValue)).div(9), 1).toNumber(),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -308,7 +308,7 @@ export const realityUpgrades = [
       Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).gte(2800),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Remote Antimatter Galaxy scaling is moved to ${formatInt(1e5)} galaxies`,
-    effect: 1e5
+    effect: () => player.disablePostReality ? 800 : 1e5
   },
   {
     name: "Temporal Transcendence",
@@ -318,7 +318,7 @@ export const realityUpgrades = [
     checkRequirement: () => Currency.timeShards.value.add(1).log10().gte(28000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Time Dimension multiplier based on days spent in this Reality",
-    effect: () => Decimal.pow10(Decimal.pow(Decimal.log10(Time.thisReality.totalDays.plus(1)).times(2).plus(1), 2.2)),
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(Decimal.pow(Decimal.log10(Time.thisReality.totalDays.plus(1)).times(2).plus(1), 2.2)),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -331,8 +331,8 @@ export const realityUpgrades = [
     checkRequirement: () => Time.thisReality.totalMinutes.lt(15),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "Replicanti speed is boosted based on your fastest game-time Reality",
-    effect: () => DC.D15.div(Decimal.clamp(Time.bestReality.totalMinutes, new Decimal(1 / 12), DC.D15)).toNumber(),
-    cap: 180,
+    effect: () => player.disablePostReality ? 1 : DC.D15.div(Decimal.min(Time.bestReality.totalMinutes, DC.D15)).toNumber(),
+    cap: () => Alpha.isDestroyed ? Infinity : 180,
     formatEffect: value => formatX(value, 2, 2)
   },
   {

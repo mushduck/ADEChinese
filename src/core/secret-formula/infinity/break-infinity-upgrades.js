@@ -4,7 +4,7 @@ function rebuyable(config) {
   return {
     rebuyable: true,
     id,
-    cost: () => config.initialCost * Math.pow(config.costIncrease, player.infinityRebuyables[config.id]),
+    cost: () => config.initialCost() * Math.pow(config.costIncrease, player.infinityRebuyables[config.id]),
     maxUpgrades,
     description,
     effect: () => effectFunction(player.infinityRebuyables[config.id]),
@@ -14,9 +14,13 @@ function rebuyable(config) {
     formatEffect: config.formatEffect ||
       (value => {
         const afterECText = config.afterEC ? config.afterEC() : "";
-        return value === config.maxUpgrades
+        return (Alpha.isRunning && Alpha.currentStage >= 6)
+          ? (value === config.maxUpgrades()
+          ? `Currently: ${formatX(20 - value)} ${afterECText}`
+          : `Currently: ${formatX(20 - value)} | Next: ${formatX(20 - value - 1)}`)
+          : (value === config.maxUpgrades()
           ? `Currently: ${formatX(10 - value)} ${afterECText}`
-          : `Currently: ${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`;
+          : `Currently: ${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`);
       }),
     formatCost: value => format(value, 2, 0),
     noLabel,
@@ -27,50 +31,52 @@ function rebuyable(config) {
 export const breakInfinityUpgrades = {
   totalAMMult: {
     id: "totalMult",
-    cost: 1e4,
+    cost: () => 1e4 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on total antimatter produced",
-    effect: () => Decimal.pow(player.records.totalAntimatter.add(1).log10().add(1), 1.5),
+    effect: () => Decimal.pow(player.records.totalEndgameAntimatter.add(1).log10().add(1), 1.5),
     formatEffect: value => formatX(value, 2, 2)
   },
   currentAMMult: {
     id: "currentMult",
-    cost: 5e4,
+    cost: () => 5e4 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on current antimatter",
     effect: () => Decimal.pow(Currency.antimatter.value.add(1).log10().add(1), 1.5),
     formatEffect: value => formatX(value, 2, 2)
   },
   galaxyBoost: {
     id: "postGalaxy",
-    cost: 5e11,
+    cost: () => 5e11 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: () => `All Galaxies are ${formatPercents(0.5)} stronger`,
     effect: 1.5
   },
   infinitiedMult: {
     id: "infinitiedMult",
-    cost: 1e5,
+    cost: () => 1e5 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => Currency.infinitiesTotal.value.add(1).pLog10().times(25).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   achievementMult: {
     id: "achievementMult",
-    cost: 1e6,
+    cost: () => 1e6 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on Achievements completed",
     effect: () => Math.max(Math.pow((Achievements.effectiveCount - 30), 4) / 20, 1),
     formatEffect: value => formatX(value, 2, 2)
   },
   slowestChallengeMult: {
     id: "challengeMult",
-    cost: 5e6,
+    cost: () => 5e6 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on how fast your slowest challenge run is",
-    effect: () => Decimal.clampMin(new Decimal(300).div(Time.worstChallenge.totalMinutes.clampMin(0.001)), 1),
+    effect: () => Alpha.isDestroyed
+      ? new Decimal(300).div(Time.worstChallenge.totalMinutes)
+      : Decimal.clampMin(new Decimal(300).div(Time.worstChallenge.totalMinutes.clampMin(0.001)), 1),
     formatEffect: value => formatX(value, 2, 2),
     hasCap: true,
-    cap: DC.D2E5
+    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.D2E5
   },
   infinitiedGen: {
     id: "infinitiedGeneration",
-    cost: 1e7,
+    cost: () => 1e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Passively generate Infinities based on your fastest Infinity",
     effect: () => player.records.bestInfinity.time,
     formatEffect: value => {
@@ -82,7 +88,7 @@ export const breakInfinityUpgrades = {
         Ra.unlocks.continuousTTBoost.effects.infinity
       );
       infinities = infinities.times(getAdjustedGlyphEffect("infinityinfmult"));
-      const timeStr = Time.bestInfinity.totalMilliseconds.lte(50)
+      const timeStr = Time.bestInfinity.totalMilliseconds.lte(50) && !Alpha.isDestroyed
         ? `${TimeSpan.fromMilliseconds(new Decimal(100)).toStringShort()} (capped)`
         : `${Time.bestInfinity.times(new Decimal(2)).toStringShort()}`;
       return `${quantify("Infinity", infinities)} every ${timeStr}`;
@@ -90,19 +96,19 @@ export const breakInfinityUpgrades = {
   },
   autobuyMaxDimboosts: {
     id: "autobuyMaxDimboosts",
-    cost: 2e7,
+    cost: () => 2e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Unlock the buy max Dimension Boost Autobuyer mode"
   },
   autobuyerSpeed: {
     id: "autoBuyerUpgrade",
-    cost: 1e15,
+    cost: () => 1e15 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Autobuyers unlocked or improved by Normal Challenges work twice as fast"
   },
   tickspeedCostMult: rebuyable({
     id: 0,
-    initialCost: 1e6,
+    initialCost: () => 1e6 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     costIncrease: 5,
-    maxUpgrades: 8,
+    maxUpgrades: () => 8 + (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(0) - 10 : 0),
     description: "Reduce post-infinity Tickspeed Upgrade cost multiplier scaling",
     afterEC: () => (EternityChallenge(11).completions > 0
       ? `After EC11: ${formatX(Player.tickSpeedMultDecrease, 2, 2)}`
@@ -113,9 +119,9 @@ export const breakInfinityUpgrades = {
   }),
   dimCostMult: rebuyable({
     id: 1,
-    initialCost: 1e7,
+    initialCost: () => 1e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     costIncrease: 5e3,
-    maxUpgrades: 7,
+    maxUpgrades: () => 7 + (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(0) - 10 : 0),
     description: "Reduce post-infinity Antimatter Dimension cost multiplier scaling",
     afterEC: () => (EternityChallenge(6).completions > 0
       ? `After EC6: ${formatX(Player.dimensionMultDecrease, 2, 2)}`
@@ -126,9 +132,9 @@ export const breakInfinityUpgrades = {
   }),
   ipGen: rebuyable({
     id: 2,
-    initialCost: 1e7,
+    initialCost: () => 1e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     costIncrease: 10,
-    maxUpgrades: 10,
+    maxUpgrades: () => 10,
     effect: value => Player.bestRunIPPM.times(value / 10),
     description: () => {
       let generation = `Generate ${formatInt(10 * player.infinityRebuyables[2])}%`;

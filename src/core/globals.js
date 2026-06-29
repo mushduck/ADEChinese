@@ -21,6 +21,10 @@ export * from "./endgame";
 export * from "./galactic-power";
 export * from "./expansion-packs";
 export * from "./ethereal";
+export * from "./hypercubes";
+export * from "./large-hadron-collider";
+
+export * from "./elemental";
 
 export * from "./celestials/quotes";
 export * from "./celestials/teresa";
@@ -31,6 +35,7 @@ export * from "./celestials/ra/ra";
 export * from "./celestials/ra/alchemy";
 export * from "./celestials/laitela/laitela";
 export * from "./celestials/laitela/dark-matter-dimension";
+export * from "./celestials/laitela/hadrons";
 export * from "./celestials/laitela/singularity";
 export * from "./celestials/pelle/pelle";
 export * from "./celestials/pelle/strikes";
@@ -67,6 +72,7 @@ export * from "./dimensions/antimatter-dimension";
 export * from "./dimensions/infinity-dimension";
 export * from "./dimensions/time-dimension";
 export * from "./dimensions/celestial-dimension";
+export * from "./dimensions/divine-dimension";
 
 export * from "./time-studies";
 export * from "./endgame-masteries";
@@ -86,7 +92,10 @@ export * from "./time-theorems";
 export * from "./endgame-skills";
 export * from "./reality-upgrades";
 export * from "./imaginary-upgrades";
+export * from "./duality-upgrades";
 export * from "./endgame-upgrades";
+export * from "./divinity-upgrades";
+export * from "./resurgence-upgrades";
 export * from "./perks";
 export * from "./dilation";
 export * from "./black-hole";

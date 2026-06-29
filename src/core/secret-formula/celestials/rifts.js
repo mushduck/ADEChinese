@@ -19,7 +19,7 @@ export const pelleRifts = {
         const goal = chall.goalAtCompletions(chall.gainedCompletionStatus.totalCompletions);
         return totalFill.plus(1).pow(0.1).min(goal.pow(0.15));
       }
-      return totalFill.plus(1).pow(0.33);
+      return totalFill.plus(1).pow(0.33).min(Decimal.pow10(1e150));
     },
     currency: () => Currency.infinityPoints,
     galaxyGeneratorThreshold: 1000,
@@ -106,9 +106,12 @@ export const pelleRifts = {
       const fill = totalFill > 6.5
         ? (totalFill - 6.5) / 7 + 6.5
         : totalFill;
-      return Decimal.pow(6, Decimal.pow(6, Decimal.pow(6, fill / 10 + 0.1)).minus(6))
+      return Decimal.min(Decimal.pow(6, Decimal.pow(6, Decimal.pow(6, Math.min(fill, 10) / 10 + 0.1)).minus(6))
         .div(1e5)
-        .plus(Decimal.pow(10, fill / 10 + 0.1));
+        .plus(Decimal.pow(10, fill / 10 + 0.1))
+        .times(Decimal.pow(6, Decimal.pow(6, Decimal.log10(Math.max(fill - 9, 1)).pow(6)).sub(1))), Decimal.pow10(Decimal.pow(
+        DC.NUMMAX, Decimal.pow(2, Math.min(player.celestials.pelle.divinities, 8)).times(
+        Decimal.pow(1.5, Math.max(player.celestials.pelle.divinities - 8, 0))))));
     },
     currency: () => ({
       get value() {
@@ -150,7 +153,7 @@ export const pelleRifts = {
     strike: () => PelleStrikes.ECs,
     percentage: totalFill => Decimal.pow(totalFill.plus(1).log10(), 0.4).div(4000 ** 0.4).toNumber(),
     percentageToFill: percentage => Decimal.pow(10, percentage ** 2.5 * 4000).minus(1),
-    effect: totalFill => Decimal.pow(totalFill.plus(1).log10(), 0.2).div(4000 ** 0.2).times(58),
+    effect: totalFill => Decimal.pow(totalFill.plus(1).log10(), 0.2).div(4000 ** 0.2).times(58).min(100).times(new Decimal(2.08).times(DC.D1.sub(Decimal.pow(0.8, totalFill.plus(1).log10().plus(1).log10().plus(1).log10().sub(0.7).times(10).max(0)))).add(1)),
     currency: () => Currency.eternityPoints,
     galaxyGeneratorThreshold: 1e10,
     milestones: [

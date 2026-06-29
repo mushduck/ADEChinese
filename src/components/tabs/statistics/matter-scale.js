@@ -3,6 +3,21 @@ export const MatterScale = {
 
   estimate(matter) {
     if (!matter) return ["There is no antimatter yet."];
+    const logMatter = matter.add(1).log10();
+    const planck = new Decimal("4.22419e-105");
+    const planckedLogMatter = logMatter.times(planck);
+    if (matter.gt(DC.E9E15)) {
+      if (planckedLogMatter.gt(this.proton)) {
+        const logScale = this.macroScale(planckedLogMatter);
+        const logAmount = format(planckedLogMatter.dividedBy(logScale.amount), 2, 1);
+        return [`If every digit in your antimatter amount were a planck volume, you would have
+          enough to ${logScale.verb} ${logAmount} ${logScale.name}`];
+      }
+      const logScale = this.microScale(logMatter);
+      return [`If every digit in your antimatter amount
+        were ${format(this.proton.div(logScale.amount).div(logMatter), 2, 1)} ${logScale.name},
+        you would have enough to make a proton.`];
+    }
     if (matter.gt(DC.E100000)) {
       return [
         `If you wrote ${formatInt(3)} numbers a second, it would take you`,
@@ -10,7 +25,6 @@ export const MatterScale = {
         "to write down your antimatter amount."
       ];
     }
-    const planck = new Decimal("4.22419e-105");
     const planckedMatter = matter.times(planck);
     if (planckedMatter.gt(this.proton)) {
       const scale = this.macroScale(planckedMatter);

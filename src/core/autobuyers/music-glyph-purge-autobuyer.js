@@ -19,6 +19,6 @@ export class MusicGlyphPurgeAutobuyerState extends AutobuyerState {
 
   tick() {
     PerkShopUpgrade.fillMusicGlyph.purchase();
-    Glyphs.autoClean(5);
+    Glyphs.autoClean();
   }
 }

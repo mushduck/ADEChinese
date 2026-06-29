@@ -47,9 +47,9 @@ export class EndgameSkillPurchaseType {
     const amount = this.bulkPossible;
     const buyFn = cost => this.currency.purchase(cost);
     // This will sometimes buy one too few for CP/DP, so we just have to buy 1 after.
-    if (bulk && buyFn(this.bulkCost(amount))) {
-      Currency.endgameSkills.add(amount);
-      this.add(amount);
+    if (bulk && buyFn(this.bulkCost(amount - 1))) {
+      Currency.endgameSkills.add(amount - 1);
+      this.add(amount - 1);
       purchased = true;
     }
     if (buyFn(this.cost)) {
@@ -76,6 +76,10 @@ EndgameSkillPurchaseType.gg = new class extends EndgameSkillPurchaseType {
   get currency() { return Currency.galaxyGeneratorGalaxies; }
   get costBase() { return DC.E10; }
   get costIncrement() { return DC.E2; }
+
+  bulkCost(amount) {
+    return this.costIncrement.pow(amount + this.amount).subtract(this.cost);
+  }
 }();
 
 EndgameSkillPurchaseType.cp = new class extends EndgameSkillPurchaseType {
@@ -85,6 +89,10 @@ EndgameSkillPurchaseType.cp = new class extends EndgameSkillPurchaseType {
   get currency() { return Currency.celestialPoints; }
   get costBase() { return DC.D1; }
   get costIncrement() { return DC.E1; }
+
+  bulkCost(amount) {
+    return this.costIncrement.pow(amount + this.amount).subtract(this.cost);
+  }
 }();
 
 EndgameSkillPurchaseType.dp = new class extends EndgameSkillPurchaseType {
@@ -102,7 +110,7 @@ EndgameSkillPurchaseType.dp = new class extends EndgameSkillPurchaseType {
 
 export const EndgameSkills = {
   checkForBuying(auto) {
-    if (CelestialDimension(1).baseAmount > 0) return true;
+    if (CelestialDimension(1).baseAmount.gt(0)) return true;
     if (!auto) Modal.message.show(`You need to buy at least ${formatInt(1)} Celestial Dimension before you can purchase
       Endgame Skills. You also need to be outside Doom to prevent AM overflow.`, { closeEvent: GAME_EVENT.ENDGAME_RESET_AFTER });
     return false;

@@ -68,7 +68,7 @@ export default {
         RM: (effarigMask & (1 << this.effarigBits.RM)) !== 0,
         glyph: (effarigMask & (1 << this.effarigBits.glyph)) !== 0
       };
-      this.noExclude = Ra.unlocks.glyphEffectCount.canBeApplied;
+      this.noExclude = Ra.unlocks.glyphEffectCount.canBeApplied && !player.disablePostReality;
     },
     toggleSelection() {
       AutoGlyphProcessor.types[this.glyphType].specifiedMask ^= 1 << this.effect.bitmaskIndex;

@@ -10,6 +10,7 @@ export class GalaxyAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get isUnlocked() {
+    if (LHC.voidRunning && NullUpgrade.limerick5.isBought) return true;
     if (Pelle.isDisabled("galaxyAutobuyer")) return false;
     return this.canBeUpgraded;
   }

@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       inC1: Boolean,
-      infinities: new Decimal(0),
+      infinities: new Decimal(0)
     };
   },
   computed: {

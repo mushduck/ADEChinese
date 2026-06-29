@@ -11,13 +11,16 @@ export default {
     update() {
       const updateRateMs = player.options.updateRate;
       const ticksPerSecond = 1000 / updateRateMs;
-      const logGainFactorPerTick = Decimal.divide(getGameSpeedupForDisplay().times(updateRateMs).times(
-        (Math.log(player.replicanti.chance + 1))), getReplicantiInterval());
+      const speedFactor = new Decimal(Alpha.isRunning
+        ? getGameSpeedupForDisplay().times(player.options.updateRate).pow(0.1)
+        : getGameSpeedupForDisplay().times(player.options.updateRate));
+      const logGainFactorPerTick = Decimal.divide(speedFactor.times(
+        (Decimal.ln(player.replicanti.chance.add(1)))), getReplicantiInterval());
       const log10GainFactorPerTick = logGainFactorPerTick.dividedBy(Math.LN10);
 
       // The uncapped factor is needed for galaxy speed calculations
-      const log10GainFactorPerTickUncapped = Decimal.divide(getGameSpeedupForDisplay().times(updateRateMs).times(
-        (Math.log(player.replicanti.chance + 1))), getReplicantiInterval(false)).dividedBy(Math.LN10);
+      const log10GainFactorPerTickUncapped = Decimal.divide(speedFactor.times(
+        (Decimal.ln(player.replicanti.chance.add(1)))), getReplicantiInterval(false)).dividedBy(Math.LN10);
 
       const replicantiAmount = Replicanti.amount;
       const isAbove308 = Replicanti.isUncapped && replicantiAmount.log10().gt(LOG10_MAX_VALUE);
@@ -55,7 +58,7 @@ export default {
       const galaxiesPerSecond = log10GainFactorPerTickUncapped.times(ticksPerSecond / LOG10_MAX_VALUE);
       const timeFromZeroRG = galaxies => Decimal.ln((galaxies.add(49.5)).div(49.5)).times(50).toNumber();
       let baseGalaxiesPerSecond, effectiveMaxRG, effectiveCurrentRG;
-      if (RealityUpgrade(6).isBought && !Pelle.isDoomed) {
+      if (RealityUpgrade(6).isBought && !Pelle.isDoomed && !player.disablePostReality) {
         baseGalaxiesPerSecond = galaxiesPerSecond.divide(RealityUpgrade(6).effectValue);
         effectiveMaxRG = new Decimal(timeFromZeroRG(Replicanti.galaxies.max.add(Replicanti.galaxies.extra)) -
           timeFromZeroRG(Replicanti.galaxies.extra));

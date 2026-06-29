@@ -10,7 +10,7 @@ export class BulkSingularityAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return ExpansionPack.laitelaPack.isBought;
+    return ExpansionPack.laitelaPack.isBought && !player.disablePostReality;
   }
 
   get lowerBound() {

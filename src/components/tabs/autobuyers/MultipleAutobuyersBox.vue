@@ -21,6 +21,8 @@ export default {
   data() {
     return {
       continuumActive: false,
+      infinityContinuumUnlocked: false,
+      timeContinuumUnlocked: false,
       anyUnlocked: false,
       displayLabelAsGroup: false,
       parentActive: false,
@@ -49,6 +51,12 @@ export default {
     isADBox() {
       return this.name === Autobuyer.antimatterDimension.groupName;
     },
+    isIDBox() {
+      return this.name === Autobuyer.infinityDimension.groupName;
+    },
+    isTDBox() {
+      return this.name === Autobuyer.timeDimension.groupName;
+    },
     showAutobuyers() {
       // Only display the Antimatter Dimension Autobuyers if the bulk is the same and there are any of them unlocked
       if (this.isADBox) return this.anyUnlocked && this.displayLabelAsGroup;
@@ -58,6 +66,8 @@ export default {
   methods: {
     update() {
       this.continuumActive = Laitela.continuumActive;
+      this.infinityContinuumUnlocked = Alpha.currentStage >= 9 && !Alpha.isRunning;
+      this.timeContinuumUnlocked = Alpha.currentStage >= 17 && !Alpha.isRunning;
       const type = this.type;
       this.anyUnlocked = type.anyUnlocked;
       this.displayLabelAsGroup = (type.allMaxedInterval ?? true) && (type.allUnlimitedBulk ?? true);
@@ -72,7 +82,7 @@ export default {
 
 <template>
   <span
-    v-if="showAutobuyers && !(isADBox && continuumActive)"
+    v-if="showAutobuyers && !(isADBox && continuumActive) && !(isIDBox && continuumActive && infinityContinuumUnlocked) && !(isTDBox && continuumActive && timeContinuumUnlocked)"
     class="c-autobuyer-box-row"
   >
     <AutobuyerGroupToggleLabel
@@ -112,6 +122,22 @@ export default {
     class="c-autobuyer-box-row"
   >
     Continuum replaces your Antimatter Dimension and Tickspeed Autobuyers, as your production multipliers
+    <br>
+    now automatically and continuously scale based on how many purchases you would have had otherwise.
+  </span>
+  <span
+    v-else-if="isIDBox && continuumActive && infinityContinuumUnlocked"
+    class="c-autobuyer-box-row"
+  >
+    Continuum replaces your Infinity Dimension Autobuyers, as your production multipliers
+    <br>
+    now automatically and continuously scale based on how many purchases you would have had otherwise.
+  </span>
+  <span
+    v-else-if="isTDBox && continuumActive && timeContinuumUnlocked"
+    class="c-autobuyer-box-row"
+  >
+    Continuum replaces your Time Dimension Autobuyers, as your production multipliers
     <br>
     now automatically and continuously scale based on how many purchases you would have had otherwise.
   </span>

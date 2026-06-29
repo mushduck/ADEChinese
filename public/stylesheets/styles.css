@@ -107,6 +107,10 @@ html {
   --color-pelle--secondary: #00bcd4;
 
   --color-alpha--base: #00ea00;
+
+  --color-slabdrill--base: #952ba8;
+
+  --color-elemental--base: #800000;
 }
 
 :root .t-metro,
@@ -1001,6 +1005,26 @@ button:focus {
   background: var(--color-endgame);
 }
 
+.o-tab-btn--cd-expansion {
+  color: var(--color-alpha--base);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-alpha--base);
+}
+
+.o-tab-btn--cd-expansion:hover {
+  background: linear-gradient(var(--color-infinity), var(--color-eternity), var(--color-reality), var(--color-celestials));
+}
+
+.o-tab-btn--divinity {
+  color: var(--color-pelle--base);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-pelle--base);
+}
+
+.o-tab-btn--divinity:hover {
+  background: var(--color-pelle--base);
+}
+
 /* #endregion tab buttons */
 
 #loading {
@@ -1027,7 +1051,7 @@ button:focus {
 }
 
 .l-reality-button {
-  width: 35rem;
+  width: 40rem;
   height: 6rem;
 }
 
@@ -1063,6 +1087,14 @@ button:focus {
   animation: a-celstial-reward-glow 3s infinite;
 }
 
+.c-reality-button--alpha {
+  animation: a-alpha-glow 3s infinite;
+}
+
+.c-reality-button--warp {
+  animation: a-warp-glow 3s infinite;
+}
+
 .c-reality-reminder {
   display: flex;
   width: calc(100% - 1rem);
@@ -1078,6 +1110,18 @@ button:focus {
   0% { box-shadow: inset 0 0 4rem var(--color-celestials); }
   50% { box-shadow: inset 0 0 0; }
   100% { box-shadow: inset 0 0 4rem var(--color-celestials); }
+}
+
+@keyframes a-alpha-glow {
+  0% { box-shadow: inset 0 0 4rem white; }
+  50% { box-shadow: inset 0 0 0; }
+  100% { box-shadow: inset 0 0 4rem white; }
+}
+
+@keyframes a-warp-glow {
+  0% { box-shadow: inset 0 0 4rem var(--color-slabdrill--base); }
+  50% { box-shadow: inset 0 0 0; }
+  100% { box-shadow: inset 0 0 4rem var(--color-slabdrill--base); }
 }
 
 .t-s6 .c-reality-button,
@@ -1173,7 +1217,7 @@ button:focus {
 }
 
 .l-endgame-button {
-  width: 35rem;
+  width: 40rem;
   height: 6rem;
 }
 
@@ -2439,6 +2483,41 @@ br {
   cursor: default;
 }
 
+/* #endregion Big Crunch */
+
+/* #region Celestial Crunch */
+
+.o-celestial-infinity-button {
+  font-weight: bold;
+  color: var(--color-celestials);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-celestials);
+}
+
+.o-celestial-infinity-button:hover {
+  color: black;
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+}
+
+.o-celestial-infinity-button span {
+  transition-duration: 0.2s;
+}
+
+.o-celestial-infinity-button:hover span {
+  color: black;
+}
+
+.t-metro .o-celestial-infinity-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.o-celestial-infinity-button--unavailable {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* #endregion Celestial Crunch */
+
 /* #region Eternity */
 
 .o-eternity-button {
@@ -2512,7 +2591,114 @@ br {
 
 /* #endregion Eternity */
 
-/* #endregion Big Crunch */
+/* #region Celestial Eternity */
+
+.o-celestial-eternity-button {
+  font-weight: bold;
+  color: #8051ec;
+  background-color: var(--color-prestige--accent);
+  border-color: #8051ec;
+  cursor: pointer;
+}
+
+.o-celestial-eternity-button:hover {
+  color: black;
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+}
+
+.o-celestial-eternity-button span {
+  transition-duration: 0.2s;
+}
+
+.o-celestial-eternity-button:hover span {
+  color: black;
+}
+
+.t-s1 .o-celestial-eternity-button:hover span {
+  color: var(--color-text);
+}
+
+.t-s1 .o-celestial-eternity-button:hover {
+  color: black;
+  border-color: black;
+}
+
+.t-metro .o-celestial-eternity-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.o-celestial-eternity-button--unavailable {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* #endregion Celestial Eternity */
+
+/* #region Condense */
+
+.o-condense-button {
+  font-weight: bold;
+  color: var(--color-pelle--base);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-pelle--base);
+}
+
+.o-condense-button:hover {
+  color: black;
+  background: linear-gradient(red, yellow, cyan);
+}
+
+.o-condense-button span {
+  transition-duration: 0.2s;
+}
+
+.o-condense-button:hover span {
+  color: black;
+}
+
+.t-metro .o-condense-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.o-condense-button--unavailable {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* #endregion Condense */
+
+/* #region Supernova */
+
+.o-supernova-button {
+  font-weight: bold;
+  color: #a000ff;
+  background-color: var(--color-prestige--accent);
+  border-color: #a000ff;
+}
+
+.o-supernova-button:hover {
+  color: black;
+  background: linear-gradient(cyan, blue, indigo, purple);
+}
+
+.o-supernova-button span {
+  transition-duration: 0.2s;
+}
+
+.o-supernova-button:hover span {
+  color: black;
+}
+
+.t-metro .o-supernova-button {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.o-supernova-button--unavailable {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* #endregion Supernova */
 
 /* #endregion o-prestige-btn */
 
@@ -2588,6 +2774,28 @@ br {
 }
 
 .c-hint-text--endgame-upgrade {
+  font-weight: bold;
+  color: var(--color-text);
+  text-shadow: none;
+}
+
+.l-hint-text--divinity-upgrade {
+  top: -1.7rem;
+  font-size: 1.25rem;
+}
+
+.c-hint-text--divinity-upgrade {
+  font-weight: bold;
+  color: var(--color-text);
+  text-shadow: none;
+}
+
+.l-hint-text--resurgence-upgrade {
+  top: -1.7rem;
+  font-size: 1.25rem;
+}
+
+.c-hint-text--resurgence-upgrade {
   font-weight: bold;
   color: var(--color-text);
   text-shadow: none;
@@ -2673,7 +2881,99 @@ br {
 
 /* #endregion IP Amount */
 
+/* #region CIP Amount */
+
+.c-game-header__cip-amount {
+  font-weight: bold;
+}
+
+.t-dark .c-game-header__cip-amount,
+.t-s6 .c-game-header__cip-amount,
+.t-s10 .c-game-header__cip-amount {
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  background-clip: text;
+  text-shadow: 0 0 0.7rem var(--color-infinity);
+
+  -webkit-text-fill-color: transparent;
+}
+
+.s-base--metro .c-game-header__cip-amount {
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.t-s1 .c-game-header__cip-amount {
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  background-clip: text;
+  text-shadow: 0.1rem 0.1rem 0 black;
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* #endregion CIP Amount */
+
+/* #region VS Amount */
+
+.c-game-header__vs-amount {
+  font-weight: bold;
+}
+
+.t-dark .c-game-header__vs-amount,
+.t-s6 .c-game-header__vs-amount,
+.t-s10 .c-game-header__vs-amount {
+  background: linear-gradient(red, yellow, cyan);
+  background-clip: text;
+  text-shadow: 0 0 0.7rem var(--color-pelle--base);
+
+  -webkit-text-fill-color: transparent;
+}
+
+.s-base--metro .c-game-header__vs-amount {
+  background: linear-gradient(red, yellow, cyan);
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.t-s1 .c-game-header__vs-amount {
+  background: linear-gradient(red, yellow, cyan);
+  background-clip: text;
+  text-shadow: 0.1rem 0.1rem 0 black;
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* #endregion VS Amount */
+
 /* #region EP Amount */
+
+.c-game-header__penteract-available {
+  font-family: Typewriter, serif;
+  color: #c000e0;
+  background: #401060;
+  border-width: var(--var-border-width, 0.2rem) solid;
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+  animation: a-penteract-shift 5s infinite;
+  cursor: pointer;
+}
+
+.s-base--dark .c-game-header__penteract-available {
+  background: #a000c0;
+  animation: a-penteract-shift-dark 5s infinite;
+}
+
+.c-penteract-available:hover {
+  color: #401060;
+  background: var(--color-eternity);
+}
+
+.s-base--dark .c-penteract-available:hover {
+  background: var(--color-eternity);
+}
 
 .l-game-header__eternity-points {
   position: absolute;
@@ -2701,6 +3001,82 @@ br {
 }
 
 /* #endregion EP Amount */
+
+/* #region CEP Amount */
+
+.l-game-header__celestial-eternity-points {
+  position: absolute;
+  right: 75%;
+}
+
+.c-game-header__cep-amount {
+  font-weight: bold;
+}
+
+.t-dark .c-game-header__cep-amount,
+.t-s6 .c-game-header__cep-amount,
+.t-s10 .c-game-header__cep-amount {
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+  background-clip: text;
+  text-shadow: 0 0 0.7rem var(--color-eternity);
+
+  -webkit-text-fill-color: transparent;
+}
+
+.s-base--metro .c-game-header__cep-amount {
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.t-s1 .c-game-header__cep-amount {
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+  background-clip: text;
+  text-shadow: 0.1rem 0.1rem 0 black;
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* #endregion CEP Amount */
+
+/* #region Neb Amount */
+
+.l-game-header__nebulae {
+  position: absolute;
+  right: 75%;
+}
+
+.c-game-header__neb-amount {
+  font-weight: bold;
+}
+
+.t-dark .c-game-header__neb-amount,
+.t-s6 .c-game-header__neb-amount,
+.t-s10 .c-game-header__neb-amount {
+  background: linear-gradient(cyan, blue, indigo, purple);
+  background-clip: text;
+  text-shadow: 0 0 0.7rem var(--color-pelle--base);
+
+  -webkit-text-fill-color: transparent;
+}
+
+.s-base--metro .c-game-header__neb-amount {
+  background: linear-gradient(cyan, blue, indigo, purple);
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.t-s1 .c-game-header__neb-amount {
+  background: linear-gradient(cyan, blue, indigo, purple);
+  background-clip: text;
+  text-shadow: 0.1rem 0.1rem 0 black;
+
+  -webkit-text-fill-color: transparent;
+}
+
+/* #endregion Neb Amount */
 
 /* #region c-game-header__antimatter */
 
@@ -3223,6 +3599,51 @@ br {
 /* #endregion c-celestial-dim-description__accent-unstable */
 
 /* #endregion Celestial Dimensions */
+
+/* #region Divine Dimensions */
+
+/* #region l-divine-dim-tab */
+
+.l-divine-dim-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-text);
+}
+
+/* #endregion l-divine-dim-tab */
+
+/* #region c-divine-dim-description__accent */
+
+.c-divine-dim-description__accent {
+  font-size: 3.5rem;
+  color: black;
+}
+
+.t-metro .c-divine-dim-description__accent,
+.t-s8 .c-divine-dim-description__accent {
+  text-shadow: 0 0 0.1rem rgba(0, 0, 0, 50%), -0.1rem 0.1rem 0.1rem black;
+}
+
+.t-dark .c-divine-dim-description__accent,
+.t-amoled .c-divine-dim-description__accent,
+.t-amoled-metro .c-divine-dim-description__accent,
+.t-s6 .c-divine-dim-description__accent,
+.t-s10 .c-divine-dim-description__accent,
+.t-s11 .c-divine-dim-description__accent {
+  color: var(--color-pelle--base);
+  text-shadow: 0 0 0.7rem var(--color-pelle--base);
+}
+
+.t-metro .c-divine-dim-description__accent,
+.t-dark-metro .c-divine-dim-description__accent,
+.t-s8 .c-divine-dim-description__accent {
+  color: var(--color-pelle--base);
+}
+
+/* #endregion c-divine-dim-description__accent */
+
+/* #endregion Divine Dimensions */
 
 /* #region Options */
 
@@ -5724,7 +6145,7 @@ properly on certain themes. */
 
 /* #endregion o-break-eternity-upgrade-btn */
 
-/* #region o-infinity-upgrade-btn--available */
+/* #region o-break-eternity-upgrade-btn--available */
 
 .o-break-eternity-upgrade-btn--available:hover {
   background-color: #ff3300;
@@ -5955,6 +6376,186 @@ properly on certain themes. */
 
 /* #endregion Break Eternity Upgrades */
 
+/* #region l-null-upgrades-tab */
+
+.l-null-upgrades-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.l-null-upgrades-tab__grid {
+  margin-top: 1rem;
+}
+
+/* #endregion l-null-upgrades-tab */
+
+/* #region l-null-upgrade-grid */
+
+.l-null-upgrade-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.l-null-upgrade-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-null-upgrade-grid__cell {
+  margin: 0.5rem 0.8rem;
+}
+
+/* #endregion l-null-upgrade-grid */
+
+/* #region Null Upgrades */
+
+.l-null-upgrade-btn {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem;
+  padding: 0 0.5rem;
+}
+
+.o-null-upgrade {
+  width: 20rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid white;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.o-null-upgrade--useless {
+  color: black;
+  background-color: var(--color-pelle--base);
+  border-color: black;
+  filter: grayscale(50%);
+}
+
+.o-null-upgrade--available {
+  color: white;
+  background-color: black;
+}
+
+.o-null-upgrade--available:hover {
+  color: var(--color-text);
+  background-color: white;
+}
+
+.o-null-upgrade--unavailable {
+  color: #181818;
+  background-color: #5f5f5f;
+  cursor: default;
+}
+
+.o-null-upgrade--unavailable:hover {
+  background-color: #737373;
+}
+
+.o-null-upgrade--bought {
+  color: black;
+  background-color: white;
+  border-color: black;
+  cursor: default;
+}
+
+.t-metro .o-null-upgrade--available {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.s-base--metro .o-null-upgrade--bought {
+  color: black;
+  background-color: #808080;
+  border-color: black;
+}
+
+.s-base--metro .o-null-upgrade--unavailable {
+  background-color: #9e9e9e;
+  border-color: black;
+}
+
+.s-base--metro .o-null-upgrade--unavailable:hover {
+  background-color: #bdbdbd;
+}
+
+.t-dark .o-null-upgrade--available,
+.t-s6 .o-null-upgrade--available,
+.t-s10 .o-null-upgrade--available {
+  background-color: black;
+}
+
+.t-dark .o-null-upgrade--available:hover,
+.t-s6 .o-null-upgrade--available:hover,
+.t-s10 .o-null-upgrade--available:hover {
+  color: var(--color-text);
+  background-color: white;
+}
+
+.t-dark .o-null-upgrade--unavailable {
+  color: black;
+  background-color: #263238;
+  border-color: #808080;
+}
+
+.t-dark .o-null-upgrade--unavailable:hover {
+  background-color: #37474f;
+}
+
+.t-s6 .o-null-upgrade--unavailable,
+.t-s10 .o-null-upgrade--unavailable {
+  color: grey;
+  background-color: black;
+  border-color: #808080;
+}
+
+.t-s6 .o-null-upgrade--unavailable:hover,
+.t-s10 .o-null-upgrade--unavailable:hover {
+  background-color: #222222;
+}
+
+.t-dark .o-null-upgrade--bought,
+.t-s6 .o-null-upgrade--bought,
+.t-s10 .o-null-upgrade--bought {
+  color: var(--color-text-inverted);
+  background-color: white;
+  border-color: #808080;
+}
+
+.t-s1 .o-null-upgrade--available {
+  background-color: black;
+}
+
+.t-s1 .o-null-upgrade--available:hover {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-null-upgrade--bought {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-null-upgrade--unavailable {
+  color: black;
+  background-color: #4a4a4a;
+  border-color: #639565;
+}
+
+.t-s1 .o-null-upgrade--unavailable:hover {
+  background: #636363;
+}
+
+/* #endregion Null Upgrades */
+
 /* #region Expansion Packs */
 
 .l-expansion-packs-tab {
@@ -6034,6 +6635,467 @@ properly on certain themes. */
 }
 
 /* #endregion Endgame Milestones */
+
+/* #region Stars */
+
+.l-star-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.l-star-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-star-grid__cell {
+  margin: 0.5rem 0.8rem;
+}
+
+.l-star-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.o-star__container {
+  width: 36rem;
+  height: 12rem;
+  font-family: Typewriter, serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+  background-color: #000040;
+  border: 0.1rem solid white;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+}
+
+.o-star__container--red {
+  color: red;
+  border: 0.1rem solid red;
+}
+
+.o-star__container--orange {
+  color: orange;
+  border: 0.1rem solid orange;
+}
+
+.o-star__container--yellow {
+  color: yellow;
+  border: 0.1rem solid yellow;
+}
+
+.o-star__container--green {
+  color: green;
+  border: 0.1rem solid green;
+}
+
+.o-star__container--blue {
+  color: blue;
+  border: 0.1rem solid blue;
+}
+
+.o-star__container--purple {
+  color: purple;
+  border: 0.1rem solid purple;
+}
+
+.o-star__container--white {
+  color: white;
+  border: 0.1rem solid white;
+}
+
+.o-star__container--black {
+  color: black;
+  border: 0.1rem solid black;
+  text-shadow: 0 0 0.5rem white;
+}
+
+.o-star__container--gray {
+  color: gray;
+  border: 0.1rem solid gray;
+}
+
+/* #endregion Stars */
+
+/* #region Break Celestial Infinity */
+
+/* #region l-break-celestial-infinity-tab */
+
+.l-break-celestial-infinity-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.l-break-celestial-infinity-tab__break-btn {
+  margin-top: 2rem;
+}
+
+.l-break-celestial-infinity-tab__grid {
+  margin-top: 1rem;
+}
+
+/* #endregion l-break-celestial-infinity-tab */
+
+/* #region l-break-celestial-infinity-upgrade-grid */
+
+.l-break-celestial-infinity-upgrade-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.l-break-celestial-infinity-upgrade-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-break-celestial-infinity-upgrade-grid__cell {
+  margin: 0.5rem 0.8rem;
+}
+
+/* #endregion l-break-celestial-infinity-upgrade-grid */
+
+/* #endregion Break Celestial Infinity */
+
+/* #region Break Celestial Infinity Upgrades */
+
+.l-break-celestial-infinity-upgrade-btn {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem;
+  padding: 0 0.5rem;
+}
+
+/* #region o-break-celestial-infinity-upgrade-btn */
+
+.o-break-celestial-infinity-upgrade-btn {
+  width: 19rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #1f1f1f;
+  border: 0.1rem solid black;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.t-s6 .o-break-celestial-infinity-upgrade-btn,
+.t-s10 .o-break-celestial-infinity-upgrade-btn {
+  box-shadow: 0 0 0.7rem 0.2rem #111111;
+}
+
+.o-break-celestial-infinity-upgrade-btn:hover {
+  color: var(--color-text-inverted);
+}
+
+/* #endregion o-break-celestial-infinity-upgrade-btn */
+
+/* #region o-break-celestial-infinity-upgrade-btn--available */
+
+.o-break-celestial-infinity-upgrade-btn--available:hover {
+  background-color: #ff3300;
+}
+
+.t-dark .o-break-celestial-infinity-upgrade-btn--available:hover,
+.t-s6 .o-break-celestial-infinity-upgrade-btn--available:hover,
+.t-s10 .o-break-celestial-infinity-upgrade-btn--available:hover {
+  background-color: #d50000;
+}
+
+.s-base--metro .o-break-celestial-infinity-upgrade-btn--available:hover {
+  background-color: #f44336;
+}
+
+/* #endregion o-break-celestial-infinity-upgrade-btn--available */
+
+/* #region o-break-celestial-infinity-upgrade-btn--color-2 */
+
+.o-break-celestial-infinity-upgrade-btn--color-2.o-break-celestial-infinity-upgrade-btn--available:hover {
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+}
+
+.t-dark .o-break-celestial-infinity-upgrade-btn--color-2.o-break-celestial-infinity-upgrade-btn--available:hover,
+.t-s6 .o-break-celestial-infinity-upgrade-btn--color-2.o-break-celestial-infinity-upgrade-btn--available:hover,
+.t-s10 .o-break-celestial-infinity-upgrade-btn--color-2.o-break-celestial-infinity-upgrade-btn--available:hover {
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+}
+
+.s-base--metro .o-break-celestial-infinity-upgrade-btn--color-2.o-break-celestial-infinity-upgrade-btn--available:hover {
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+}
+
+/* #endregion o-break-celestial-infinity-upgrade-btn--color-2 */
+
+/* #region o-break-celestial-infinity-upgrade-btn--unavailable */
+
+.o-break-celestial-infinity-upgrade-btn--unavailable {
+  color: black;
+  background-color: #f7f7f7;
+}
+
+.o-break-celestial-infinity-upgrade-btn--unclickable {
+  cursor: auto;
+}
+
+.o-break-celestial-infinity-upgrade-btn--unavailable:hover {
+  color: var(--color-text);
+  background-color: var(--color-text-inverted);
+  cursor: default;
+}
+
+.t-dark .o-break-celestial-infinity-upgrade-btn--unavailable {
+  background-color: #263238;
+  border-color: black;
+}
+
+.t-dark .o-break-celestial-infinity-upgrade-btn--unavailable:hover {
+  background-color: #37474f;
+}
+
+.s-base--metro .o-break-celestial-infinity-upgrade-btn--unavailable {
+  background-color: #9e9e9e;
+  border-color: #616161;
+}
+
+.s-base--metro .o-break-celestial-infinity-upgrade-btn--unavailable:hover {
+  color: var(--color-text-inverted);
+  background-color: #bdbdbd;
+}
+
+.t-s1 .o-break-celestial-infinity-upgrade-btn--unavailable {
+  background-color: #9a921d;
+  border-color: black;
+}
+
+.t-s1 .o-break-celestial-infinity-upgrade-btn--unavailable:hover {
+  background-color: #c5ba26;
+}
+
+.t-s6 .o-break-celestial-infinity-upgrade-btn--unavailable,
+.t-s10 .o-break-celestial-infinity-upgrade-btn--unavailable {
+  color: grey;
+  background-color: black;
+  border-color: grey;
+}
+
+.t-s6 .o-break-celestial-infinity-upgrade-btn--unavailable:hover,
+.t-s10 .o-break-celestial-infinity-upgrade-btn--unavailable:hover {
+  background-color: #222222;
+}
+
+/* #endregion o-break-celestial-infinity-upgrade-btn--unavailable */
+
+.o-break-celestial-infinity-upgrade {
+  width: 20rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid var(--color-celestials);
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.o-break-celestial-infinity-upgrade--useless {
+  color: black;
+  background-color: var(--color-pelle--base);
+  border-color: black;
+  filter: grayscale(50%);
+}
+
+.o-break-celestial-infinity-upgrade--available {
+  color: var(--color-infinity);
+  background-color: black;
+}
+
+.o-break-celestial-infinity-upgrade--available:hover {
+  color: var(--color-text);
+  background-color: var(--color-infinity);
+}
+
+.o-break-celestial-infinity-upgrade--unavailable {
+  color: #181818;
+  background-color: #5f5f5f;
+  cursor: default;
+}
+
+.o-break-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #737373;
+}
+
+.o-break-celestial-infinity-upgrade--bought {
+  color: black;
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  border-color: black;
+  cursor: default;
+}
+
+.t-metro .o-break-celestial-infinity-upgrade--available {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.s-base--metro .o-break-celestial-infinity-upgrade--bought {
+  color: black;
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  border-color: black;
+}
+
+.s-base--metro .o-break-celestial-infinity-upgrade--unavailable {
+  background-color: #9e9e9e;
+  border-color: black;
+}
+
+.s-base--metro .o-break-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #bdbdbd;
+}
+
+.t-dark .o-break-celestial-infinity-upgrade--available,
+.t-s6 .o-break-celestial-infinity-upgrade--available,
+.t-s10 .o-break-celestial-infinity-upgrade--available {
+  background-color: black;
+}
+
+.t-dark .o-break-celestial-infinity-upgrade--available:hover,
+.t-s6 .o-break-celestial-infinity-upgrade--available:hover,
+.t-s10 .o-break-celestial-infinity-upgrade--available:hover {
+  color: var(--color-text);
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+}
+
+.t-dark .o-break-celestial-infinity-upgrade--unavailable {
+  color: black;
+  background-color: #263238;
+  border-color: var(--color-celestials);
+}
+
+.t-dark .o-break-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #37474f;
+}
+
+.t-s6 .o-break-celestial-infinity-upgrade--unavailable,
+.t-s10 .o-break-celestial-infinity-upgrade--unavailable {
+  color: grey;
+  background-color: black;
+  border-color: var(--color-celestials);
+}
+
+.t-s6 .o-break-celestial-infinity-upgrade--unavailable:hover,
+.t-s10 .o-break-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #222222;
+}
+
+.t-dark .o-break-celestial-infinity-upgrade--bought,
+.t-s6 .o-break-celestial-infinity-upgrade--bought,
+.t-s10 .o-break-celestial-infinity-upgrade--bought {
+  color: var(--color-text-inverted);
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  border-color: var(--color-celestials);
+}
+
+.t-s1 .o-break-celestial-infinity-upgrade--available {
+  background-color: black;
+}
+
+.t-s1 .o-break-celestial-infinity-upgrade--available:hover {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-break-celestial-infinity-upgrade--bought {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-break-celestial-infinity-upgrade--unavailable {
+  color: black;
+  background-color: #4a4a4a;
+  border-color: #639565;
+}
+
+.t-s1 .o-break-celestial-infinity-upgrade--unavailable:hover {
+  background: #636363;
+}
+
+/* #endregion Break Celestial Infinity Upgrades */
+
+/* #region Divinity Milestones */
+
+.l-divinity-milestone-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.l-divinity-milestone-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-divinity-milestone-grid__cell {
+  margin: 0.5rem 0.8rem;
+}
+
+.o-divinity-milestone__goal {
+  color: var(--color-pelle--base);
+  text-align: left;
+  font-size: 2rem;
+}
+
+.o-divinity-milestone__reward {
+  width: 98rem;
+  padding: 2rem;
+  font-family: Typewriter, serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+  text-shadow: 0 0 0.5rem var(--color-pelle--base);
+  border: 0.1rem solid var(--color-pelle--base);
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+}
+
+.o-divinity-milestone__reward--locked {
+  background-color: dimgrey;
+}
+
+.o-divinity-milestone__reward--reached {
+  background: linear-gradient(black, var(--color-pelle--base), black);
+  border-color: black;
+}
+
+.s-base--metro .o-divinity-milestone__reward--locked,
+.t-s1 .o-divinity-milestone__reward--locked {
+  background-color: #9e9e9e;
+  border: none;
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 black;
+}
+
+.t-dark .o-divinity-milestone__reward--locked,
+.t-s6 .o-divinity-milestone__reward--locked,
+.t-s10 .o-divinity-milestone__reward--locked {
+  color: var(--color-pelle--base);
+  background-color: black;
+  border-color: var(--color-pelle--base);
+  animation: a-time-study 7s infinite;
+}
+
+.l-divinity-milestone {
+  display: flex;
+  flex-direction: column;
+}
+
+/* #endregion Divinity Milestones */
 
 /* #region Modals */
 
@@ -9218,7 +10280,422 @@ kbd {
   background: linear-gradient(var(--color-laitela--accent), var(--color-laitela--base));
 }
 
+.c-laitela-hadrons-container {
+  display: flex;
+  flex-direction: column;
+  width: 98rem;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--color-laitela--accent);
+  background: var(--color-laitela--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-laitela--accent);
+  border-radius: var(--var-border-radius, 0.5rem);
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.c-laitela-hadrons-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 98rem;
+  padding: 1rem;
+}
+
+.c-laitela-hadrons-assign {
+  width: 20rem;
+  font-family: Typewriter;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-laitela--accent);
+  background: var(--color-laitela--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-laitela--accent);
+  border-radius: var(--var-border-radius, 0.5rem);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+}
+
+.c-laitela-hadrons-assign--available {
+  cursor: pointer;
+}
+
+.c-laitela-hadrons-assign:hover {
+  color: var(--color-laitela--base);
+  background: var(--color-laitela--accent);
+}
+
 /* #endregion laitela tab */
+
+/* #startregion alpha tab */
+
+.l-alpha-run {
+  display: inline-flex;
+  flex-direction: column;
+  width: 400px;
+  align-items: center;
+  border: var(--var-border-width, 0.2rem) solid var(--color-alpha--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  margin-top: 1rem;
+  margin-left: 3rem;
+  padding: 1rem;
+}
+
+.c-alpha-run-description {
+  font-size: larger;
+  margin: 0.5rem 0;
+  color: var(--color-alpha--base);
+}
+
+.l-alpha-run-button {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  height: 15rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-radius: 50%;
+  margin: 2rem;
+}
+
+.c-alpha-run-button {
+  font-size: 10rem;
+  font-weight: bold;
+  transition-duration: 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.c-alpha-run-button--not-running {
+  z-index: 0;
+  color: black;
+  background-color: var(--color-alpha--base);
+  animation: a-alpha-run-button--not-running-glow 2s ease-in-out infinite alternate;
+}
+
+.c-alpha-run-button--not-running:hover {
+  color: var(--color-alpha--base);
+  background-color: black;
+}
+
+.c-alpha-run-button--not-running--dead {
+  z-index: 0;
+  color: rgba(128, 128, 128, 75%);
+  background-image: url("../images/noise.png");
+  animation: a-alpha-run-button--death-noise 0.4s infinite alternate;
+}
+
+.c-alpha-run-button--not-running--dead:hover {
+  background-color: black;
+}
+
+@keyframes a-alpha-run-button--not-running-glow {
+  from {
+    text-shadow:
+      0 0 1rem black,
+      0 0 2rem black,
+      0 0 3rem #800000,
+      0 0 4rem #800000,
+      0 0 5rem #800000,
+      0 0 6rem #800000,
+      0 0 7rem #800000;
+    box-shadow: 0 0 0.5rem #800000, 0 0 1rem #800000, 0 0 1.5rem #800000;
+  }
+
+  to {
+    text-shadow:
+      0 0 2rem black,
+      0 0 3rem #c00000,
+      0 0 4rem #c00000,
+      0 0 5rem #c00000,
+      0 0 6rem #c00000,
+      0 0 7rem #c00000,
+      0 0 8rem #c00000;
+    box-shadow: 0 0 0.5rem #c00000, 0 0 1rem #c00000, 0 0 1.5rem #c00000, 0 0 2rem #c00000;
+  }
+}
+
+.c-alpha-run-button--running {
+  z-index: 0;
+  background: black;
+  animation: a-alpha-run-button--running-glow 2s infinite alternate;
+}
+
+.c-alpha-run-button--running:hover {
+  background: #200000;
+}
+
+.c-alpha-run-button__inner--running,
+.c-alpha-run-button__inner--not-running {
+  margin-top: -3rem;
+}
+
+.c-alpha-run-button__inner--running {
+  position: relative;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: url("../images/noise.png");
+  animation: a-alpha-run-button--running-noise 15s infinite alternate;
+
+  -webkit-text-fill-color: rgba(0, 255, 0, 50%);
+}
+
+.c-alpha-run-button__inner--running::after {
+  content: attr(button-symbol);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: none;
+  animation: a-alpha-run-button__inner--running-glow 2s infinite alternate;
+}
+
+@keyframes a-alpha-run-button--running-noise {
+  0% {
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  20% {
+    background-position: -50px 0;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  22% {
+    background-position: 100px -10px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 50%);
+  }
+
+  24% {
+    background-position: 0 -150px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  50% {
+    background-position: -50px 0;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  51% {
+    background-position: 100px -10px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 50%);
+  }
+
+  52% {
+    background-position: 0 -150px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  54% {
+    background-position: 50px 0;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  56% {
+    background-position: -100px 10px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 50%);
+  }
+
+  58% {
+    background-position: 0 50px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  90% {
+    background-position: 50px 50px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  91% {
+    background-position: 100px -110px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 50%);
+  }
+
+  92% {
+    background-position: 0 70px;
+
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+
+  100% {
+    -webkit-text-fill-color: rgba(0, 255, 0, 100%);
+  }
+}
+
+@keyframes a-alpha-run-button--death-noise {
+  0% {
+    -webkit-text-fill-color: rgba(128, 128, 128, 75%);
+    background-position: 0 150px;
+  }
+
+  25% {
+    -webkit-text-fill-color: rgba(128, 128, 128, 75%);
+    background-position: 150px 0;
+  }
+
+  50% {
+    -webkit-text-fill-color: rgba(128, 128, 128, 75%);
+    background-position: 0 -150px;
+  }
+
+  75% {
+    -webkit-text-fill-color: rgba(128, 128, 128, 75%);
+    background-position: -150px 0;
+  }
+
+  100% {
+    -webkit-text-fill-color: rgba(128, 128, 128, 75%);
+    background-position: 0 150px;
+  }
+}
+
+@keyframes a-alpha-run-button--running-glow {
+  from {
+    box-shadow:
+      0 0 0.5rem #a00000 inset,
+      0 0 1rem #a00000 inset,
+      0 0 1.5rem #a00000 inset,
+      0 0 1.5rem #a00000,
+      0 0 1.5rem #a00000,
+      0 0 1.5rem #a00000;
+  }
+
+  to {
+    box-shadow:
+      0 0 0.5rem #e00000 inset,
+      0 0 1rem #e00000 inset,
+      0 0 1.5rem #e00000 inset,
+      0 0 1.5rem #e00000,
+      0 0 1.5rem #e00000,
+      0 0 1.5rem #e00000,
+      0 0 2rem #e00000 inset,
+      0 0 2rem #e00000;
+  }
+}
+
+@keyframes a-alpha-run-button__inner--running-glow {
+  from {
+    text-shadow: 0 0 0.5rem #a00000, 0 0 1rem #a00000, 0 0 1.5rem #a00000;
+  }
+
+  to {
+    text-shadow: 0 0 0.5rem #e00000, 0 0 1rem #e00000, 0 0 1.5rem #e00000, 0 0 2rem #e00000;
+  }
+}
+
+.l-alpha-run-button__bg {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+}
+
+.l-alpha-run-button__fg {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0%);
+}
+
+/* #endregion alpha tab */
+
+.l-void-run {
+  display: inline-flex;
+  flex-direction: column;
+  width: 400px;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+.l-void-run-button {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  height: 25rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-radius: 50%;
+  margin: 2rem;
+  cursor: pointer;
+}
+
+.c-void-run-button {
+  font-size: 1rem;
+  font-weight: bold;
+  transition-duration: 0.2s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.c-void-run-button--not-running {
+  z-index: 0;
+  color: white;
+  background-color: black;
+  animation: a-void-glow 5s ease-in-out infinite alternate;
+}
+
+@keyframes a-void-glow {
+  0% { box-shadow: inset 0 0 0.3rem 0 white; }
+  50% { box-shadow: inset 0 0 2rem 0 white; }
+  100% { box-shadow: inset 0 0 0.3rem 0 white; }
+}
+
+.c-void-run-button--running {
+  z-index: 0;
+  color: white;
+  animation: a-void-run-glow 20s ease-in-out infinite alternate;
+}
+
+@keyframes a-void-run-glow {
+  0% {
+    background-color: #000020;
+    box-shadow: inset 0 0 0.3rem 0 white;
+  }
+  12.5% {
+    background-color: #000010;
+    box-shadow: inset 0 0 2rem 0 white;
+  }
+  25% {
+    background-color: black;
+    box-shadow: inset 0 0 0.3rem 0 white;
+  }
+  37.5% {
+    background-color: #100010;
+    box-shadow: inset 0 0 2rem 0 white;
+  }
+  50% {
+    background-color: #200020;
+    box-shadow: inset 0 0 0.3rem 0 white;
+  }
+  62.5% {
+    background-color: #100010;
+    box-shadow: inset 0 0 2rem 0 white;
+  }
+  75% {
+    background-color: black;
+    box-shadow: inset 0 0 0.3rem 0 white;
+  }
+  87.5% {
+    background-color: #000010;
+    box-shadow: inset 0 0 2rem 0 white;
+  }
+  100% {
+    background-color: #000020;
+    box-shadow: inset 0 0 0.3rem 0 white;
+  }
+}
 
 .c-performance-stats {
   width: 25rem;
@@ -9806,6 +11283,209 @@ kbd {
   background-color: var(--color-endgame);
 }
 
+.l-divinity-upgrade-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+
+.l-divinity-upgrade-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-divinity-upgrade-btn {
+  display: flex;
+  flex-direction: column;
+  width: 20.5rem;
+  height: 10rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem;
+  padding: 0 0.5rem;
+}
+
+.c-divinity-upgrade-btn {
+  text-align: center;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  color: var(--color-pelle--base);
+  background-color: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-pelle--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  transition-duration: 0.15s;
+  cursor: pointer;
+}
+
+.c-divinity-upgrade-btn__requirement {
+  font-weight: bold;
+}
+
+.c-divinity-upgrade-btn:hover {
+  color: black;
+  background-color: var(--color-pelle--base);
+}
+
+.c-divinity-upgrade-btn--unavailable {
+  color: var(--color-pelle--base);
+  background-color: #404040;
+  cursor: default;
+}
+
+.c-divinity-upgrade-btn--unavailable:hover {
+  color: var(--color-pelle--base);
+  background-color: #404040;
+}
+
+.c-divinity-upgrade-btn--bought {
+  color: var(--color-pelle--secondary);
+  background-color: var(--color-pelle--base);
+  border-color: #600000;
+  cursor: default;
+}
+
+.c-divinity-upgrade-btn--bought:hover {
+  color: var(--color-pelle--secondary);
+  background-color: var(--color-pelle--base);
+}
+
+.t-dark .c-divinity-upgrade-btn--unavailable {
+  color: var(--color-pelle--base);
+  background-color: #37474f;
+}
+
+.t-s6.c-divinity-upgrade-btn:hover,
+.t-s10.c-divinity-upgrade-btn:hover {
+  background-color: var(--color-pelle--base);
+}
+
+.t-s6.c-divinity-upgrade-btn--unavailable:hover,
+.t-s10.c-divinity-upgrade-btn--unavailable:hover {
+  color: var(--color-pelle--base);
+  background-color: #656565;
+}
+
+.t-s6.c-divinity-upgrade-btn--bought,
+.t-s10.c-divinity-upgrade-btn--bought {
+  color: var(--color-pelle--secondary);
+  background-color: var(--color-pelle--base);
+  border-color: #600000;
+}
+
+.t-s6.c-divinity-upgrade-btn--bought:hover,
+.t-s10.c-divinity-upgrade-btn--bought:hover {
+  color: var(--color-pelle--secondary);
+  background-color: var(--color-pelle--base);
+}
+
+.l-resurgence-upgrade-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+
+.l-resurgence-upgrade-grid__row {
+  display: flex;
+  flex-direction: row;
+}
+
+.l-resurgence-upgrade-btn {
+  display: flex;
+  flex-direction: column;
+  width: 20.5rem;
+  height: 10rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2rem;
+  padding: 0 0.5rem;
+}
+
+.c-resurgence-upgrade-btn {
+  text-align: center;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  color: var(--color-antimatter);
+  background-color: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-antimatter);
+  border-radius: var(--var-border-radius, 0.5rem);
+  transition-duration: 0.15s;
+  cursor: pointer;
+}
+
+.c-resurgence-upgrade-btn__requirement {
+  font-weight: bold;
+}
+
+.c-resurgence-upgrade-btn:hover {
+  color: black;
+  background-color: var(--color-antimatter);
+}
+
+.c-resurgence-upgrade-btn--unavailable {
+  color: var(--color-antimatter);
+  background-color: #404040;
+  cursor: default;
+}
+
+.c-resurgence-upgrade-btn--unavailable:hover {
+  color: var(--color-antimatter);
+  background-color: #404040;
+}
+
+.c-resurgence-upgrade-btn--bought {
+  color: var(--color-elemental--base);
+  border-color: var(--color-antimatter);
+  cursor: default;
+  animation: a-resurgence__antimatter--glow 10s infinite;
+}
+
+.c-resurgence-upgrade-btn--bought:hover {
+  color: var(--color-elemental--base);
+  animation: a-resurgence__antimatter--glow 10s infinite;
+}
+
+.t-dark .c-resurgence-upgrade-btn--unavailable {
+  color: var(--color-antimatter);
+  background-color: #37474f;
+}
+
+.t-s6.c-resurgence-upgrade-btn:hover,
+.t-s10.c-resurgence-upgrade-btn:hover {
+  background-color: var(--color-antimatter);
+}
+
+.t-s6.c-resurgence-upgrade-btn--unavailable:hover,
+.t-s10.c-resurgence-upgrade-btn--unavailable:hover {
+  color: var(--color-antimatter);
+  background-color: #656565;
+}
+
+.t-s6.c-resurgence-upgrade-btn--bought,
+.t-s10.c-resurgence-upgrade-btn--bought {
+  color: var(--color-elemental--base);
+  border-color: var(--color-antimatter);
+  animation: a-resurgence__antimatter--glow 10s infinite;
+}
+
+.t-s6.c-resurgence-upgrade-btn--bought:hover,
+.t-s10.c-resurgence-upgrade-btn--bought:hover {
+  color: var(--color-elemental--base);
+  animation: a-resurgence__antimatter--glow 10s infinite;
+}
+
+@keyframes a-resurgence__antimatter--glow {
+  0% { background-color: #2196f3; }
+  33% { background-color: #673ab7; }
+  66% { background-color: #00bcd4; }
+  100% { background-color: #2196f3; }
+}
+
 @keyframes a-galactic-power-amount-cycle {
   0% {
     color: #ff0000;
@@ -9840,6 +11520,96 @@ kbd {
   100% {
     color: #ff0000;
     text-shadow: #ff0000 0 0 3px;
+  }
+}
+
+@keyframes a-galactic-power-border-cycle {
+  0% {
+    border-color: #ff0000;
+  }
+
+  17% {
+    border-color: #ffff00;
+  }
+
+  33% {
+    border-color: #00ff00;
+  }
+
+  50% {
+    border-color: #00ffff;
+  }
+
+  67% {
+    border-color: #0000ff;
+  }
+
+  83% {
+    border-color: #ff00ff;
+  }
+
+  100% {
+    border-color: #ff0000;
+  }
+}
+
+@keyframes a-galactic-power-color-cycle {
+  0% {
+    color: #ff0000;
+  }
+
+  17% {
+    color: #ffff00;
+  }
+
+  33% {
+    color: #00ff00;
+  }
+
+  50% {
+    color: #00ffff;
+  }
+
+  67% {
+    color: #0000ff;
+  }
+
+  83% {
+    color: #ff00ff;
+  }
+
+  100% {
+    color: #ff0000;
+  }
+}
+
+@keyframes a-galactic-power-background-cycle {
+  0% {
+    background-color: #ff0000;
+  }
+
+  17% {
+    background-color: #ffff00;
+  }
+
+  33% {
+    background-color: #00ff00;
+  }
+
+  50% {
+    background-color: #00ffff;
+  }
+
+  67% {
+    background-color: #0000ff;
+  }
+
+  83% {
+    background-color: #ff00ff;
+  }
+
+  100% {
+    background-color: #ff0000;
   }
 }
 
@@ -10017,6 +11787,660 @@ kbd {
   background: var(--color-pelle--base);
   border: var(--var-border-width, 0.2rem) solid var(--color-pelle--base);
   border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--alpha {
+  color: var(--color-alpha--base);
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-alpha--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-expansion-pack--alpha:hover {
+  color: black;
+  background: var(--color-alpha--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-alpha--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  cursor: pointer;
+}
+
+.o-expansion-pack--alpha--bought {
+  color: black;
+  background: var(--color-alpha--base);
+  border: var(--var-border-width, 0.2rem) solid var(--color-alpha--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-ethereal-button {
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  background-color: var(--color-disabled);
+  border: var(--var-border-width, 0.2rem) solid #0000ff;
+  border-radius: var(--var-border-radius, 0.5rem);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+}
+
+.o-ethereal-button--available {
+  color: #0000ff;
+  background-color: black;
+  cursor: pointer;
+}
+
+.o-ethereal-button--available:hover {
+  color: black;
+  background-color: #0000ff;
+}
+
+.c-ethereal-btn {
+  width: 30rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.o-cool-ethereal-button {
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: black;
+  background-color: var(--color-disabled);
+  border: var(--var-border-width, 0.2rem) solid;
+  border-radius: var(--var-border-radius, 0.5rem);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+  animation: a-galactic-power-border-cycle 12s infinite;
+}
+
+.o-cool-ethereal-button--available {
+  background-color: black;
+  cursor: pointer;
+  animation: a-galactic-power-color-cycle 12s infinite;
+}
+
+.o-cool-ethereal-button--available:hover {
+  color: black;
+  animation: a-galactic-power-background-cycle 12s infinite;
+}
+
+.c-cool-ethereal-btn {
+  width: 30rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
+.c-penteract-button {
+  font-family: Typewriter, serif;
+  color: #c000e0;
+  background: #401060;
+  border: var(--var-border-width, 0.2rem) solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+  animation: a-penteract-shift 5s infinite;
+  cursor: pointer;
+}
+
+.s-base--dark .c-penteract-button {
+  background: #a000c0;
+  animation: a-penteract-shift-dark 5s infinite;
+}
+
+.c-penteract-button:hover {
+  color: #c000e0;
+  background: var(--color-eternity);
+}
+
+.s-base--dark .c-penteract-button:hover {
+  background: var(--color-eternity);
+}
+
+.c-penteract-button--disabled {
+  color: var(--color-eternity);
+  background: #401060;
+  animation: none;
+  cursor: default;
+}
+
+.s-base--dark .c-penteract-button--disabled {
+  color: var(--color-eternity);
+  background: #401060;
+  animation: none;
+  cursor: default;
+}
+
+.c-penteract-button--disabled:hover {
+  color: var(--color-eternity);
+  background: #401060;
+}
+
+.s-base--dark .c-penteract-button--disabled:hover {
+  color: var(--color-eternity);
+  background: #401060;
+}
+
+@keyframes a-penteract-shift {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem var(--color-eternity), -1.5rem -1.5rem 0.5rem var(--color-eternity); }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem var(--color-eternity), -1.5rem 1.5rem 0.5rem var(--color-eternity); }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem var(--color-eternity), 1.5rem 1.5rem 0.5rem var(--color-eternity); }
+}
+
+@keyframes a-penteract-shift-dark {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem var(--color-eternity), -1.5rem -1.5rem 0.5rem var(--color-eternity); }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem var(--color-eternity), -1.5rem 1.5rem 0.5rem var(--color-eternity); }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem var(--color-eternity), 1.5rem 1.5rem 0.5rem var(--color-eternity); }
+}
+
+.o-primary-btn--penteract-toggle {
+  font-size: 1.2rem;
+}
+
+.c-hexeract-button {
+  font-family: Typewriter, serif;
+  color: #808080;
+  background: black;
+  border: var(--var-border-width, 0.2rem) solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+  animation: a-hexeract-shift 5s infinite;
+  cursor: pointer;
+}
+
+.s-base--dark .c-hexeract-button {
+  background: #202020;
+  animation: a-hexeract-shift-dark 5s infinite;
+}
+
+.c-hexeract-button:hover {
+  color: #808080;
+  background: black;
+}
+
+.s-base--dark .c-hexeract-button:hover {
+  background: #202020;
+}
+
+.c-hexeract-button--disabled {
+  color: #606060;
+  background: black;
+  animation: none;
+  cursor: default;
+}
+
+.s-base--dark .c-hexeract-button--disabled {
+  color: #808080;
+  background: #101010;
+  animation: none;
+  cursor: default;
+}
+
+.c-hexeract-button--disabled:hover {
+  color: #606060;
+  background: black;
+}
+
+.s-base--dark .c-hexeract-button--disabled:hover {
+  color: #808080;
+  background: #101010;
+}
+
+@keyframes a-hexeract-shift {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem black, -1.5rem -1.5rem 0.5rem black; }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem black, -1.5rem 1.5rem 0.5rem black; }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem black, 1.5rem 1.5rem 0.5rem black; }
+}
+
+@keyframes a-hexeract-shift-dark {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem #202020, -1.5rem -1.5rem 0.5rem #202020; }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem #202020, -1.5rem 1.5rem 0.5rem #202020; }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem #202020, 1.5rem 1.5rem 0.5rem #202020; }
+}
+
+.o-primary-btn--hexeract-toggle {
+  font-size: 1.2rem;
+}
+
+.c-hepteract-button {
+  font-family: Typewriter, serif;
+  color: #a0a0e0;
+  background: #101060;
+  border: var(--var-border-width, 0.2rem) solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+  animation: a-hepteract-shift 5s infinite;
+  cursor: pointer;
+}
+
+.s-base--dark .c-hepteract-button {
+  background: #8080e0;
+  animation: a-hepteract-shift-dark 5s infinite;
+}
+
+.c-hepteract-button:hover {
+  color: #a0a0e0;
+  background: var(--color-celestials);
+}
+
+.s-base--dark .c-hepteract-button:hover {
+  background: var(--color-celestials);
+}
+
+.c-hepteract-button--disabled {
+  color: var(--color-celestials);
+  background: #101060;
+  animation: none;
+  cursor: default;
+}
+
+.s-base--dark .c-hepteract-button--disabled {
+  color: var(--color-celestials);
+  background: #101060;
+  animation: none;
+  cursor: default;
+}
+
+.c-hepteract-button--disabled:hover {
+  color: var(--color-celestials);
+  background: #101060;
+}
+
+.s-base--dark .c-hepteract-button--disabled:hover {
+  color: var(--color-celestials);
+  background: #101060;
+}
+
+@keyframes a-hepteract-shift {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem var(--color-celestials), -1.5rem -1.5rem 0.5rem var(--color-celestials); }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem var(--color-celestials), -1.5rem 1.5rem 0.5rem var(--color-celestials); }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem var(--color-celestials), 1.5rem 1.5rem 0.5rem var(--color-celestials); }
+}
+
+@keyframes a-hepteract-shift-dark {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem var(--color-celestials), -1.5rem -1.5rem 0.5rem var(--color-celestials); }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem var(--color-celestials), -1.5rem 1.5rem 0.5rem var(--color-celestials); }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem var(--color-celestials), 1.5rem 1.5rem 0.5rem var(--color-celestials); }
+}
+
+.o-primary-btn--hepteract-toggle {
+  font-size: 1.2rem;
+}
+
+.c-octeract-button {
+  font-family: Typewriter, serif;
+  color: #ff3050;
+  background: #801010;
+  border: var(--var-border-width, 0.2rem) solid;
+  border-radius: var(--var-border-radius, 0.4rem);
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  transition-duration: 0.15s;
+  animation: a-octeract-shift 5s infinite;
+  cursor: pointer;
+}
+
+.s-base--dark .c-octeract-button {
+  background: #e02040;
+  animation: a-octeract-shift-dark 5s infinite;
+}
+
+.c-octeract-button:hover {
+  color: #ff3050;
+  background: crimson;
+}
+
+.s-base--dark .c-octeract-button:hover {
+  background: crimson;
+}
+
+.c-octeract-button--disabled {
+  color: crimson;
+  background: #801010;
+  animation: none;
+  cursor: default;
+}
+
+.s-base--dark .c-octeract-button--disabled {
+  color: crimson;
+  background: #801010;
+  animation: none;
+  cursor: default;
+}
+
+.c-octeract-button--disabled:hover {
+  color: crimson;
+  background: #801010;
+}
+
+.s-base--dark .c-octeract-button--disabled:hover {
+  color: crimson;
+  background: #801010;
+}
+
+@keyframes a-octeract-shift {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem crimson, -1.5rem -1.5rem 0.5rem crimson; }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem crimson, -1.5rem 1.5rem 0.5rem crimson; }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem crimson, 1.5rem 1.5rem 0.5rem crimson; }
+}
+
+@keyframes a-octeract-shift-dark {
+  0% { box-shadow: 1.5rem 1.5rem 0.5rem crimson, -1.5rem -1.5rem 0.5rem crimson; }
+  50% { box-shadow: 1.5rem -1.5rem 0.5rem crimson, -1.5rem 1.5rem 0.5rem crimson; }
+  100% { box-shadow: -1.5rem -1.5rem 0.5rem crimson, 1.5rem 1.5rem 0.5rem crimson; }
+}
+
+.o-primary-btn--octeract-toggle {
+  font-size: 1.2rem;
+}
+
+.o-celestial-infinity-upgrade {
+  width: 20rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid var(--color-celestials);
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.o-celestial-infinity-upgrade--available {
+  color: var(--color-infinity);
+  background-color: black;
+}
+
+.o-celestial-infinity-upgrade--available:hover {
+  color: var(--color-text);
+  background-color: var(--color-infinity);
+}
+
+.o-celestial-infinity-upgrade--unavailable {
+  color: #181818;
+  background-color: #5f5f5f;
+  cursor: default;
+}
+
+.o-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #737373;
+}
+
+.o-celestial-infinity-upgrade--bought {
+  color: black;
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  border-color: black;
+  cursor: default;
+}
+
+.t-metro .o-celestial-infinity-upgrade--available {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.s-base--metro .o-celestial-infinity-upgrade--bought {
+  color: black;
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  border-color: black;
+}
+
+.s-base--metro .o-celestial-infinity-upgrade--unavailable {
+  background-color: #9e9e9e;
+  border-color: black;
+}
+
+.s-base--metro .o-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #bdbdbd;
+}
+
+.t-dark .o-celestial-infinity-upgrade--available,
+.t-s6 .o-celestial-infinity-upgrade--available,
+.t-s10 .o-celestial-infinity-upgrade--available {
+  background-color: black;
+}
+
+.t-dark .o-celestial-infinity-upgrade--available:hover,
+.t-s6 .o-celestial-infinity-upgrade--available:hover,
+.t-s10 .o-celestial-infinity-upgrade--available:hover {
+  color: var(--color-text);
+  background-color: var(--color-infinity);
+}
+
+.t-dark .o-celestial-infinity-upgrade--unavailable {
+  color: black;
+  background-color: #263238;
+  border-color: var(--color-celestials);
+}
+
+.t-dark .o-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #37474f;
+}
+
+.t-s6 .o-celestial-infinity-upgrade--unavailable,
+.t-s10 .o-celestial-infinity-upgrade--unavailable {
+  color: grey;
+  background-color: black;
+  border-color: var(--color-celestials);
+}
+
+.t-s6 .o-celestial-infinity-upgrade--unavailable:hover,
+.t-s10 .o-celestial-infinity-upgrade--unavailable:hover {
+  background-color: #222222;
+}
+
+.t-dark .o-celestial-infinity-upgrade--bought,
+.t-s6 .o-celestial-infinity-upgrade--bought,
+.t-s10 .o-celestial-infinity-upgrade--bought {
+  color: var(--color-text-inverted);
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  border-color: black;
+}
+
+.t-s1 .o-celestial-infinity-upgrade--available {
+  background-color: black;
+}
+
+.t-s1 .o-celestial-infinity-upgrade--available:hover {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-celestial-infinity-upgrade--bought {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-celestial-infinity-upgrade--unavailable {
+  color: black;
+  background-color: #4a4a4a;
+  border-color: #639565;
+}
+
+.t-s1 .o-celestial-infinity-upgrade--unavailable:hover {
+  background: #636363;
+}
+
+.o-celestial-eternity-upgrade {
+  width: 20rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid var(--color-celestials);
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+.o-celestial-eternity-upgrade--available {
+  color: var(--color-eternity);
+  background-color: black;
+}
+
+.o-celestial-eternity-upgrade--available:hover {
+  color: var(--color-text);
+  background-color: var(--color-eternity);
+}
+
+.o-celestial-eternity-upgrade--unavailable {
+  color: #181818;
+  background-color: #5f5f5f;
+  cursor: default;
+}
+
+.o-celestial-eternity-upgrade--unavailable:hover {
+  background-color: #737373;
+}
+
+.o-celestial-eternity-upgrade--bought {
+  color: black;
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+  border-color: black;
+  cursor: default;
+}
+
+.t-metro .o-celestial-eternity-upgrade--available {
+  box-shadow: 0.1rem 0.1rem 0.1rem 0 #9e9e9e;
+}
+
+.s-base--metro .o-celestial-eternity-upgrade--bought {
+  color: black;
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+  border-color: black;
+}
+
+.s-base--metro .o-celestial-eternity-upgrade--unavailable {
+  background-color: #9e9e9e;
+  border-color: black;
+}
+
+.s-base--metro .o-celestial-eternity-upgrade--unavailable:hover {
+  background-color: #bdbdbd;
+}
+
+.t-dark .o-celestial-eternity-upgrade--available,
+.t-s6 .o-celestial-eternity-upgrade--available,
+.t-s10 .o-celestial-eternity-upgrade--available {
+  background-color: black;
+}
+
+.t-dark .o-celestial-eternity-upgrade--available:hover,
+.t-s6 .o-celestial-eternity-upgrade--available:hover,
+.t-s10 .o-celestial-eternity-upgrade--available:hover {
+  color: var(--color-text);
+  background-color: var(--color-eternity);
+}
+
+.t-dark .o-celestial-eternity-upgrade--unavailable {
+  color: black;
+  background-color: #263238;
+  border-color: var(--color-celestials);
+}
+
+.t-dark .o-celestial-eternity-upgrade--unavailable:hover {
+  background-color: #37474f;
+}
+
+.t-s6 .o-celestial-eternity-upgrade--unavailable,
+.t-s10 .o-celestial-eternity-upgrade--unavailable {
+  color: grey;
+  background-color: black;
+  border-color: var(--color-celestials);
+}
+
+.t-s6 .o-celestial-eternity-upgrade--unavailable:hover,
+.t-s10 .o-celestial-eternity-upgrade--unavailable:hover {
+  background-color: #222222;
+}
+
+.t-dark .o-celestial-eternity-upgrade--bought,
+.t-s6 .o-celestial-eternity-upgrade--bought,
+.t-s10 .o-celestial-eternity-upgrade--bought {
+  color: var(--color-text-inverted);
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+  border-color: black;
+}
+
+.t-s1 .o-celestial-eternity-upgrade--available {
+  background-color: black;
+}
+
+.t-s1 .o-celestial-eternity-upgrade--available:hover {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-celestial-eternity-upgrade--bought {
+  color: black;
+  background-color: #639565;
+  border-color: black;
+}
+
+.t-s1 .o-celestial-eternity-upgrade--unavailable {
+  color: black;
+  background-color: #4a4a4a;
+  border-color: #639565;
+}
+
+.t-s1 .o-celestial-eternity-upgrade--unavailable:hover {
+  background: #636363;
+}
+
+@keyframes a-power-core {
+  0% { box-shadow: inset 0 0 0.3rem 0 white; }
+  50% { box-shadow: inset 0 0 2rem 0 white; }
+  100% { box-shadow: inset 0 0 0.3rem 0 white; }
+}
+
+@keyframes a-power-core-inverted {
+  0% { box-shadow: inset 0 0 0.3rem 0 black; }
+  50% { box-shadow: inset 0 0 2rem 0 black; }
+  100% { box-shadow: inset 0 0 0.3rem 0 black; }
+}
+
+.o-power-core-upgrade {
+  width: 20rem;
+  height: 9rem;
+  font-family: Typewriter, serif;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0.1rem solid white;
+  border-radius: var(--var-border-radius, 0.4rem);
+  transition-duration: 0.2s;
+  cursor: pointer;
+  animation: a-power-core 5s infinite;
+}
+
+.o-power-core-upgrade--available {
+  color: white;
+  background-color: black;
+}
+
+.o-power-core-upgrade--available:hover {
+  color: black;
+  border: 0.1rem solid black;
+  background-color: white;
+  animation: a-power-core-inverted 5s infinite;
+}
+
+.o-power-core-upgrade--unavailable {
+  color: white;
+  background-color: black;
+  cursor: default;
+}
+
+.o-power-core-upgrade--unavailable:hover {
+  background-color: black;
 }
 
 /* #region reality-tab */
@@ -10453,6 +12877,15 @@ input.o-automator-block-input {
   background: var(--color-celestials);
 }
 
+.c-hide-modal-tab-button--endgame {
+  color: var(--color-endgame);
+  border-color: var(--color-endgame);
+}
+
+.c-hide-modal-tab-button--endgame:hover {
+  background: var(--color-endgame);
+}
+
 /* Prevent any themes overriding font awesome */
 .fa,
 .far,
@@ -10515,6 +12948,18 @@ input.o-automator-block-input {
 
 .c-celestial-nav__drained-rift {
   fill: #111111;
+}
+
+.c-celestial-nav__alpha {
+  fill: #00ff00;
+}
+
+.c-celestial-nav__celestials {
+  fill: #5151ec;
+}
+
+.c-celestial-nav__celestialEternity {
+  fill: #8051ec;
 }
 
 .o-celestial-nav__symbol {

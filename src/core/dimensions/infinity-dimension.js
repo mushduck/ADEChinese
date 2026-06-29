@@ -22,8 +22,10 @@ export function infinityDimensionCommonMultiplier() {
     );
 
   if (Replicanti.areUnlocked && Replicanti.amount.gt(1)) {
-    mult = mult.times(replicantiMult());
+    mult = mult.times(ReplicantiMultipliers.idMult);
   }
+
+  if (LHC.voidRunning) mult = mult.timesEffectOf(NullUpgrade.infinityDimensionMult);
 
   return mult;
 }
@@ -97,7 +99,7 @@ class InfinityDimensionState extends DimensionState {
   }
 
   get canUnlock() {
-    return (Perk.bypassIDAntimatter.canBeApplied || this.antimatterRequirementReached) &&
+    return ((Perk.bypassIDAntimatter.canBeApplied && !player.disablePostReality) || this.antimatterRequirementReached) &&
       this.ipRequirementReached;
   }
 
@@ -129,7 +131,7 @@ class InfinityDimensionState extends DimensionState {
       (Laitela.isRunning && this.tier > Laitela.maxAllowedDimension)) {
       return DC.D0;
     }
-    let production = this.amount;
+    let production = this.totalAmount;
     if (EternityChallenge(11).isRunning) {
       return production;
     }
@@ -148,7 +150,15 @@ class InfinityDimensionState extends DimensionState {
         tier === 4 ? TimeStudy(72) : null,
         tier === 1 ? EternityChallenge(2).reward : null
       );
-    mult = mult.times(Decimal.pow(this.powerMultiplier, Math.floor(this.baseAmount / 10)));
+
+    let purchValue;
+    if (Laitela.continuumActive && !EternityChallenge(8).isRunning && Alpha.currentStage >= 9 && !player.disablePostReality) {
+      purchValue = InfinityDimension(tier).continuumValue;
+    } else {
+      purchValue = Decimal.floor(this.baseAmount.div(10));
+    }
+
+    mult = mult.times(Decimal.pow(this.powerMultiplier, purchValue));
 
 
     if (tier === 1) {
@@ -166,7 +176,7 @@ class InfinityDimensionState extends DimensionState {
     mult = mult.powEffectOf(Ra.unlocks.allDimPowTT);
     mult = mult.powEffectOf(Ra.unlocks.infinityDimPower);
 
-    if (ExpansionPack.pellePack.isBought) mult = mult.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 3).add(1));
+    if (ExpansionPack.pellePack.isBought && !player.disablePostReality) mult = mult.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 1.5).add(1));
 
     if (player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed())) {
       mult = dilatedValueOf(mult);
@@ -186,7 +196,27 @@ class InfinityDimensionState extends DimensionState {
       BreakEternityUpgrade.infinityDimensionPow
     );
 
+    if (tier === 8 && !player.disablePostReality) {
+      mult = mult.pow(AlphaUnlocks.infinityDimensions.effects.buff.effectOrDefault(1));
+    }
+
+    if (tier === 1 && !player.disablePostReality) {
+      mult = mult.pow(AlphaUnlocks.eternityUpgrades.effects.buff.effectOrDefault(1));
+    }
+
+    if (Alpha.isRunning) mult = mult.pow(AlphaUnlocks.eternityUpgrades.effects.nerf.effectOrDefault(1));
+
+    mult = mult.powEffectOf(DualityUpgrade(8));
+
+    if (Replicanti.areUnlocked && ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality) mult = mult.pow(ReplicantiMultipliers.idPow);
+
+    if (ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality) mult = mult.pow(Achievements.powerConv(Achievement(75).effectOrDefault(1)));
+
+    mult = dilateMultiplier(mult, EtherealStars.orange.reward);
+
     if (mult.gte(InfinityDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(InfinityDimensions.OVERFLOW)), 1 / InfinityDimensions.compressionMagnitude).times(Decimal.log10(InfinityDimensions.OVERFLOW)));
+
+    if (mult.gte(InfinityDimensions.OVERFLOW_SQUARED)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(InfinityDimensions.OVERFLOW_SQUARED)), 1 / InfinityDimensions.compressionMag2).times(Decimal.log10(InfinityDimensions.OVERFLOW_SQUARED)));
 
     return mult;
   }
@@ -198,7 +228,7 @@ class InfinityDimensionState extends DimensionState {
       (Laitela.isRunning && tier > Laitela.maxAllowedDimension)) {
       return false;
     }
-    return this.amount.gt(0);
+    return this.totalAmount.gt(0);
   }
 
   get baseCost() {
@@ -219,24 +249,51 @@ class InfinityDimensionState extends DimensionState {
 
   get purchases() {
     // Because each ID purchase gives 10 IDs
-    return this.data.baseAmount / 10;
+    return this.data.baseAmount.div(10);
   }
 
   get purchaseCap() {
     if (Enslaved.isRunning) {
-      return 1;
+      return DC.D1;
     }
-    return InfinityDimensions.capIncrease + (this.tier === 8
-      ? Number.MAX_VALUE
+    return InfinityDimensions.capIncrease.add(this.tier === 8
+      ? DC.BEMAX
       : InfinityDimensions.HARDCAP_PURCHASES);
   }
 
   get isCapped() {
-    return this.purchases >= this.purchaseCap;
+    return new Decimal(this.purchases).gte(this.purchaseCap);
   }
 
   get hardcapIPAmount() {
     return this._baseCost.times(Decimal.pow(this.costMultiplier, this.purchaseCap));
+  }
+
+  get continuumValue() {
+    if (!this.isAvailableForPurchase) return DC.D0;
+    // Nameless limits dim purchases to 1 only
+    // Continuum should be no different
+    if (Enslaved.isRunning) return DC.D1;
+    // It's safe to use dimension.currencyAmount because this is
+    // a dimension-only method (so don't just copy it over to tickspeed).
+    // We need to use dimension.currencyAmount here because of different costs in NC6.
+    return this.getContinuumValue.times(Laitela.matterExtraPurchaseFactor);
+  }
+
+  get getContinuumValue() {
+    return Decimal.min(Decimal.log(Currency.infinityPoints.value.div(this.baseCost), this.costMultiplier), this.purchaseCap);
+  }
+
+  /**
+   * @returns {number}
+   */
+  get continuumAmount() {
+    if (!Laitela.continuumActive || EternityChallenge(8).isRunning || Alpha.currentStage < 9 || player.disablePostReality) return DC.D0;
+    return Decimal.floor(this.continuumValue.times(10));
+  }
+
+  get totalAmount() {
+    return this.amount.max(this.continuumAmount);
   }
 
   resetAmount() {
@@ -246,24 +303,30 @@ class InfinityDimensionState extends DimensionState {
   fullReset() {
     this.cost = new Decimal(this.baseCost);
     this.amount = DC.D0;
-    this.bought = 0;
-    this.baseAmount = 0;
+    this.bought = DC.D0;
+    this.baseAmount = DC.D0;
     this.isUnlocked = false;
   }
 
   unlock() {
     if (this.isUnlocked) return true;
     if (!this.canUnlock) return false;
+    if (Alpha.isRunning && Alpha.currentStage < 10 && this.tier > 4) return false;
     this.isUnlocked = true;
     EventHub.dispatch(GAME_EVENT.INFINITY_DIMENSION_UNLOCKED, this.tier);
     if (this.tier === 1 && !PlayerProgress.eternityUnlocked()) {
       Tab.dimensions.infinity.show();
+    }
+    if (this.tier === 8 && Alpha.isRunning && Alpha.currentStage === 10) {
+      Alpha.advanceLayer();
+      Alpha.quotes.eighthInfinityDimension.show();
     }
     return true;
   }
 
   // Only ever called from manual actions
   buySingle() {
+    if (Laitela.continuumActive && Alpha.currentStage >= 9 && !player.disablePostReality) return;
     if (!this.isUnlocked) return this.unlock();
     if (!this.isAvailableForPurchase) return false;
     if (ImaginaryUpgrade(15).isLockingMechanics) {
@@ -273,12 +336,17 @@ class InfinityDimensionState extends DimensionState {
       ImaginaryUpgrade(15).tryShowWarningModal(lockString);
       return false;
     }
+    if (DualityUpgrade(15).isLockingMechanics) {
+      const lockString = "purchase an Infinity Dimension";
+      DualityUpgrade(15).tryShowWarningModal(lockString);
+      return false;
+    }
 
     Currency.infinityPoints.purchase(this.cost);
     this.cost = Decimal.round(this.cost.times(this.costMultiplier));
     // Because each ID purchase gives 10 IDs
     this.amount = this.amount.plus(10);
-    this.baseAmount += 10;
+    this.baseAmount = this.baseAmount.plus(10);
 
     if (EternityChallenge(8).isRunning) {
       player.eterc8ids -= 1;
@@ -288,6 +356,7 @@ class InfinityDimensionState extends DimensionState {
   }
 
   buyMax(auto) {
+    if (Laitela.continuumActive && Alpha.currentStage >= 9 && !player.disablePostReality) return;
     if (!this.isAvailableForPurchase) return false;
     if (ImaginaryUpgrade(15).isLockingMechanics) {
       const lockString = this.tier === 1
@@ -296,29 +365,34 @@ class InfinityDimensionState extends DimensionState {
       if (!auto) ImaginaryUpgrade(15).tryShowWarningModal(lockString);
       return false;
     }
-
-    let purchasesUntilHardcap = this.purchaseCap - this.purchases;
-    if (EternityChallenge(8).isRunning) {
-      purchasesUntilHardcap = Math.clampMax(purchasesUntilHardcap, player.eterc8ids);
+    if (DualityUpgrade(15).isLockingMechanics) {
+      const lockString = "purchase an Infinity Dimension";
+      DualityUpgrade(15).tryShowWarningModal(lockString);
+      return false;
     }
 
-    const costScaling = new LinearCostScaling(
+    let purchasesUntilHardcap = this.purchaseCap.sub(this.purchases);
+    if (EternityChallenge(8).isRunning) {
+      purchasesUntilHardcap = Decimal.clampMax(purchasesUntilHardcap, player.eterc8ids);
+    }
+
+    const costScaling = new DecimalLinearCostScaling(
       Currency.infinityPoints.value,
       this.cost,
       this.costMultiplier,
       purchasesUntilHardcap
     );
 
-    if (costScaling.purchases <= 0) return false;
+    if (costScaling.purchases.lte(0)) return false;
 
     Currency.infinityPoints.purchase(costScaling.totalCost);
     this.cost = this.cost.times(costScaling.totalCostMultiplier);
     // Because each ID purchase gives 10 IDs
-    this.amount = this.amount.plus(10 * costScaling.purchases);
-    this.baseAmount += 10 * costScaling.purchases;
+    this.amount = this.amount.plus(costScaling.purchases.times(10));
+    this.baseAmount = this.baseAmount.plus(costScaling.purchases.times(10));
 
     if (EternityChallenge(8).isRunning) {
-      player.eterc8ids -= costScaling.purchases;
+      player.eterc8ids -= costScaling.purchases.toNumber();
     }
     return true;
   }
@@ -336,15 +410,28 @@ export const InfinityDimensions = {
    * @type {InfinityDimensionState[]}
    */
   all: InfinityDimension.index.compact(),
-  HARDCAP_PURCHASES: 2000000,
+  get HARDCAP_PURCHASES() {
+    return Alpha.isRunning ? AlphaUnlocks.breakUpgrades.effects.nerf.effectOrDefault(2000000) : 2000000;
+  },
+
   get OVERFLOW() {
     return DC.E1E15.powEffectsOf(EndgameMastery(92));
   },
 
+  get OVERFLOW_SQUARED() {
+    return DC.ENUMMAX;
+  },
+
   get compressionMagnitude() {
-    const extraReduction = ExpansionPack.enslavedPack.isBought ? Math.pow(1 / Math.log10(Tesseracts.effectiveCount + 1), 0.2) : 1;
-    const reduction = Effects.product(EndgameMastery(82), EndgameUpgrade(2)) * extraReduction;
-    return 10 * reduction;
+    const extraReduction = (ExpansionPack.enslavedPack.isBought && !player.disablePostReality) ? Math.pow(1 / Math.log10(Tesseracts.effectiveCount + 1), 0.2) : 1;
+    let reduction = Effects.product(EndgameMastery(82), EndgameUpgrade(2)) * extraReduction;
+    if (!player.disablePostReality) reduction *= AlphaUnlocks.infinityChallenges.effects.buff.effectOrDefault(1);
+    return Math.max(10 * reduction, 2) - Math.max((0.2 - reduction) * 5, 0);
+  },
+
+  get compressionMag2() {
+    let reduction = 1;
+    return Math.max(10 * reduction, 2) - Math.max((0.2 - reduction) * 5, 0);
   },
 
   unlockNext() {
@@ -372,11 +459,11 @@ export const InfinityDimensions = {
   },
 
   get capIncrease() {
-    return Math.floor(Tesseracts.capIncrease());
+    return Decimal.floor(Tesseracts.capIncrease());
   },
 
   get totalDimCap() {
-    return this.HARDCAP_PURCHASES + this.capIncrease;
+    return new Decimal(this.HARDCAP_PURCHASES).add(this.capIncrease);
   },
 
   canBuy() {
@@ -402,6 +489,10 @@ export const InfinityDimensions = {
       InfinityDimension(1).produceCurrency(Currency.infinityPower, diff);
     }
 
+    if (!InfinityDimensions.all.every(d => d.amount.eq(0)) || !InfinityDimensions.all.every(d => d.continuumAmount.eq(0))) {
+      player.requirementChecks.endgame.onlyLowDims = false;
+    }
+
     player.requirementChecks.reality.maxID1 = player.requirementChecks.reality.maxID1
       .clampMin(InfinityDimension(1).amount);
   },
@@ -416,12 +507,13 @@ export const InfinityDimensions = {
 
   // Called from "Max All" UI buttons and nowhere else
   buyMax() {
+    if (Laitela.continuumActive && Alpha.currentStage >= 9 && !player.disablePostReality) return;
     // Try to unlock dimensions
     const unlockedDimensions = this.all.filter(dimension => dimension.unlock());
 
     // Try to buy single from the highest affordable new dimensions
     unlockedDimensions.slice().reverse().forEach(dimension => {
-      if (dimension.purchases === 0) dimension.buySingle();
+      if (dimension.purchases.eq(0)) dimension.buySingle();
     });
 
     // Try to buy max from the lowest dimension (since lower dimensions have bigger multiplier per purchase)
@@ -434,6 +526,7 @@ export const InfinityDimensions = {
       BreakEternityUpgrade.infinityPowerConversion
     );
     const exponent = Effects.product(EndgameMastery(102), Ra.unlocks.spaceTheoremIPowConversion);
-    return Math.pow((7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2, exponent);
+    const divisor = Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfC.effectOrDefault(1) : 1;
+    return Math.pow((7 + getAdjustedGlyphEffect("infinityrate") + PelleUpgrade.infConversion.effectOrDefault(0)) * multiplier * multiplier2, exponent) / divisor;
   }
 };

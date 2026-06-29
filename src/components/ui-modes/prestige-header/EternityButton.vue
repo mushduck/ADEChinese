@@ -25,6 +25,7 @@ export default {
       creditsClosed: false,
       showEPRate: false,
       isDilation: false,
+      penteractAffordable: false,
     };
   },
   computed: {
@@ -158,6 +159,7 @@ export default {
       this.peakEPRate.copyFrom(player.records.thisEternity.bestEPmin);
       this.showEPRate = this.peakEPRate.lte(this.rateThreshold);
       this.creditsClosed = GameEnd.creditsEverClosed;
+      this.penteractAffordable = Penteracts.canBuyPenteract;
     },
     updateChallengeWithRUPG() {
       const ec = EternityChallenge.current;
@@ -168,6 +170,9 @@ export default {
       this.failedRestriction = status.failedRestriction;
       this.hasMoreCompletions = status.hasMoreCompletions;
       this.nextGoalAt.copyFrom(status.nextGoalAt);
+    },
+    switchToHypercubes() {
+      Tab.endgame.hypercubes.show(true);
     }
   },
 };
@@ -186,7 +191,7 @@ const EP_BUTTON_DISPLAY_TYPE = {
 
 <template>
   <button
-    v-if="isVisible"
+    v-if="isVisible && !penteractAffordable"
     :class="buttonClassObject"
     class="o-prestige-button"
     onclick="eternityResetRequest()"
@@ -264,6 +269,17 @@ const EP_BUTTON_DISPLAY_TYPE = {
         </template>
       </template>
     </template>
+  </button>
+
+  <button
+    v-else-if="penteractAffordable"
+    class="o-prestige-button c-game-header__penteract-available"
+    :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
+    @click="switchToHypercubes"
+  >
+    <b>
+      You have enough Eternity Points to buy a Penteract
+    </b>
   </button>
 </template>
 

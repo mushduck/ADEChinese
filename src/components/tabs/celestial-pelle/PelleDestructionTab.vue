@@ -122,101 +122,105 @@ export default {
 </script>
 
 <template>
-  <div class="l-pelle-panel-container">
-    <div class="c-pelle-panel-title">
-      Pelle Achievement Enabling
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PelleAchievementUpgradeVue
-          v-for="achievement in allAchievements"
-          :key="achievement.config.id"
-          :upgrade="achievement"
-        />
-      </div>
-    </div>
-    <div class="c-pelle-panel-title">
-      Pelle Destruction Upgrades
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PelleDestructionUpgradeVue
-          v-for="upgrade in allUpgrades"
-          :key="upgrade.config.id"
-          :upgrade="upgrade"
-        />
-      </div>
-    </div>
-    <div class="c-pelle-panel-title">
-      Pelle Reality Upgrade Enabling
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PelleRealityUpgradeVue
-          v-for="realityUpgrade in allRealityUpgrades"
-          :key="realityUpgrade.config.id"
-          :upgrade="realityUpgrade"
-        />
-      </div>
-    </div>
-    <div class="c-pelle-panel-title">
-      Pelle Imaginary Upgrade Enabling
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PelleImaginaryUpgradeVue
-          v-for="imaginaryUpgrade in allImaginaryUpgrades"
-          :key="imaginaryUpgrade.config.id"
-          :upgrade="imaginaryUpgrade"
-        />
-      </div>
-    </div>
-    <div class="c-pelle-panel-title">
-      Pelle Celestial Reward Enabling
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PelleCelestialUpgradeVue
-          v-for="celestialUpgrade in allCelestialUpgrades"
-          :key="celestialUpgrade.config.id"
-          :upgrade="celestialUpgrade"
-        />
-      </div>
-    </div>
-    <div class="c-pelle-panel-title">
-      Pelle Perk Enabling
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PellePerkUpgradeVue
-          v-for="perkUpgrade in allPerkUpgrades"
-          :key="perkUpgrade.config.id"
-          :upgrade="perkUpgrade"
-        />
-      </div>
-    </div>
-    <div class="c-pelle-panel-title">
-      Pelle Alchemy Enabling
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PelleAlchemyUpgradeVue
-          v-for="alchemyUpgrade in allAlchemyUpgrades"
-          :key="alchemyUpgrade.config.id"
-          :upgrade="alchemyUpgrade"
-        />
-      </div>
-    </div>
-    <div class="c-pelle-panel-title">
-      Pelle Strike Disabling
-    </div>
-    <div class="l-pelle-content-container">
-      <div class="c-pelle-destruction-upgrade-container">
-        <PelleStrikeUpgradeVue
-          v-for="strikeUpgrade in allStrikeUpgrades"
-          :key="strikeUpgrade.config.id"
-          :upgrade="strikeUpgrade"
-        />
+  <div class="l-pelle-destruction-tab">
+    <div class="l-pelle-destruction-container">
+      <div class="l-pelle-panel-container">
+        <div class="c-pelle-panel-title">
+          Pelle Achievement Enabling
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PelleAchievementUpgradeVue
+              v-for="achievement in allAchievements"
+              :key="achievement.config.id"
+              :upgrade="achievement"
+            />
+          </div>
+        </div>
+        <div class="c-pelle-panel-title">
+          Pelle Destruction Upgrades
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PelleDestructionUpgradeVue
+              v-for="upgrade in allUpgrades"
+              :key="upgrade.config.id"
+              :upgrade="upgrade"
+            />
+          </div>
+        </div>
+        <div class="c-pelle-panel-title">
+          Pelle Reality Upgrade Enabling
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PelleRealityUpgradeVue
+              v-for="realityUpgrade in allRealityUpgrades"
+              :key="realityUpgrade.config.id"
+              :upgrade="realityUpgrade"
+            />
+          </div>
+        </div>
+        <div class="c-pelle-panel-title">
+          Pelle Imaginary Upgrade Enabling
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PelleImaginaryUpgradeVue
+              v-for="imaginaryUpgrade in allImaginaryUpgrades"
+              :key="imaginaryUpgrade.config.id"
+              :upgrade="imaginaryUpgrade"
+            />
+          </div>
+        </div>
+        <div class="c-pelle-panel-title">
+          Pelle Celestial Reward Enabling
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PelleCelestialUpgradeVue
+              v-for="celestialUpgrade in allCelestialUpgrades"
+              :key="celestialUpgrade.config.id"
+              :upgrade="celestialUpgrade"
+            />
+          </div>
+        </div>
+        <div class="c-pelle-panel-title">
+          Pelle Perk Enabling
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PellePerkUpgradeVue
+              v-for="perkUpgrade in allPerkUpgrades"
+              :key="perkUpgrade.config.id"
+              :upgrade="perkUpgrade"
+            />
+          </div>
+        </div>
+        <div class="c-pelle-panel-title">
+          Pelle Alchemy Enabling
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PelleAlchemyUpgradeVue
+              v-for="alchemyUpgrade in allAlchemyUpgrades"
+              :key="alchemyUpgrade.config.id"
+              :upgrade="alchemyUpgrade"
+            />
+          </div>
+        </div>
+        <div class="c-pelle-panel-title">
+          Pelle Strike Disabling
+        </div>
+        <div class="l-pelle-content-container">
+          <div class="c-pelle-destruction-upgrade-container">
+            <PelleStrikeUpgradeVue
+              v-for="strikeUpgrade in allStrikeUpgrades"
+              :key="strikeUpgrade.config.id"
+              :upgrade="strikeUpgrade"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -227,6 +231,20 @@ export default {
   display: flex;
   flex-wrap: wrap;
   max-width: 110rem;
+  justify-content: center;
+}
+
+.l-pelle-destruction-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.l-pelle-destruction-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
 }
 </style>

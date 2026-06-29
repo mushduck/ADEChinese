@@ -33,17 +33,21 @@ export class DilationTimeStudyState extends TimeStudyState {
       if (!quiet) {
         Tab.eternity.dilation.show();
       }
-      if (Perk.autounlockDilation1.canBeApplied) {
+      if (Perk.autounlockDilation1.canBeApplied && !player.disablePostReality) {
         for (const id of [4, 5, 6]) player.dilation.upgrades.add(id);
       }
-      if (Perk.autounlockDilation2.canBeApplied) {
+      if (Perk.autounlockDilation2.canBeApplied && !player.disablePostReality) {
         for (const id of [7, 8, 9]) player.dilation.upgrades.add(id);
       }
-      if (!Pelle.isDoomed || PellePerkUpgrade.perkSTP.isBought) Currency.tachyonParticles.bumpTo(Perk.startTP.effectOrDefault(0));
-      if (Ra.unlocks.unlockDilationStartingTP.canBeApplied && !isInCelestialReality() && !Pelle.isDoomed) {
+      if (!player.disablePostReality && (!Pelle.isDoomed || PellePerkUpgrade.perkSTP.canBeApplied)) Currency.tachyonParticles.bumpTo(Perk.startTP.effectOrDefault(0));
+      if (Ra.unlocks.unlockDilationStartingTP.canBeApplied && !isInCelestialReality() && !Pelle.isDoomed && !player.disablePostReality) {
         Currency.tachyonParticles.bumpTo(getTP(Ra.unlocks.unlockDilationStartingTP.effectOrDefault(0), false));
       }
       TabNotification.dilationAfterUnlock.tryTrigger();
+      if (Alpha.isRunning && Alpha.currentStage === 23) {
+        Alpha.advanceLayer();
+        Alpha.quotes.unlockDilation.show();
+      }
     }
     if (this.id === 6) {
       // ID 6 is the reality unlock study
@@ -54,7 +58,7 @@ export class DilationTimeStudyState extends TimeStudyState {
           scaling above ${format("1e6000")}.`, {}, 3);
         EventHub.dispatch(GAME_EVENT.REALITY_FIRST_UNLOCKED);
       }
-      if (!Perk.autounlockReality.isBought) Tab.reality.glyphs.show();
+      if (!Perk.autounlockReality.isBought || player.disablePostReality) Tab.reality.glyphs.show();
     }
 
     player.dilation.studies.push(this.id);

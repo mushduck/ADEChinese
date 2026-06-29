@@ -1,0 +1,378 @@
+<script>
+import CustomizeableTooltip from "@/components/CustomizeableTooltip";
+
+export default {
+  name: "AcceleratorBar",
+  components: {
+    CustomizeableTooltip
+  },
+  props: {
+    accelerator: {
+      type: Object,
+      required: true
+    },
+  },
+  data() {
+    return {
+      isActive: false,
+      isMaxed: false,
+      percentage: 0,
+      selectedHoverMilestone: this.accelerator.milestones[0],
+      // Converts 1 rem to number of px
+      remToPx: parseInt(getComputedStyle(document.documentElement).fontSize, 10),
+      effects: [],
+      selectedMilestoneResourceText: "",
+      selectedMilestoneDescriptionText: "",
+    };
+  },
+  computed: {
+    tooltipArrowStyle() {
+      return {
+        borderTop: "0.55rem solid var(--color-alpha--base)"
+      };
+    }
+  },
+  methods: {
+    update() {
+      const accelerator = this.accelerator;
+      this.effects = accelerator.effects;
+      this.isActive = accelerator.isActive;
+      this.isMaxed = accelerator.isMaxed;
+      this.percentage = accelerator.percentage;
+
+      this.selectedMilestoneResourceText = this.milestoneResourceText(this.selectedHoverMilestone);
+      this.selectedMilestoneDescriptionText = this.milestoneDescriptionText(this.selectedHoverMilestone);
+    },
+    hasMilestone(ms) {
+      return ms.canBeApplied;
+    },
+    milestoneResourceText(milestone) {
+      const accelerator = this.accelerator;
+      return `${formatPercents(milestone.requirement)}
+      (${this.formatAccelerator(accelerator.config.percentageToFill(milestone.requirement))} \
+      ${accelerator.drainResource})`;
+    },
+    milestoneDescriptionText(milestone) {
+      if (typeof milestone.description === "string") return milestone.description;
+      return milestone.description();
+    },
+    // One-off formatting function; needs to format large Decimals and a small number assumed to be an integer percent
+    formatAccelerator(value) {
+      return typeof value === "number" ? `${formatInt(100 * value)}%` : format(value, 2);
+    },
+    toggle() {
+      if (!this.isMaxed) this.accelerator.toggle();
+    },
+    barOverlay() {
+      const overfill = this.percentage > 1;
+      return {
+        "o-accelerator-bar-overfilled": overfill,
+      };
+    },
+    handleMilestoneRequirementTooltipDisplay(event) {
+      const mouseX = event.clientX - this.$refs.acceleratorBar.getBoundingClientRect().x;
+
+      const milestonesCloseTo = this.accelerator.milestones.filter(m => {
+        // Gets distance from the milestone bar in terms of rem
+        // 31.6: the width of the bar is 32 rem, but adjusted to a border with 0.2rem on both sides
+        const dist = Math.abs((m.requirement * 31.6) - mouseX / this.remToPx);
+        if (dist < 1) m.dist = dist;
+        return dist < 1;
+      }).map(m => {
+        const dist = m.dist;
+        delete m.dist;
+        // Temporarily store the distance without recalculation to sort the list by distance
+        // and get the closest item
+        return { dist, m };
+      });
+
+      if (milestonesCloseTo.length) {
+        this.selectedHoverMilestone = milestonesCloseTo.sort((a, b) => a.dist - b.dist)[0].m;
+      }
+    },
+    tooltipContentClass() {
+      const hasMilestone = this.hasMilestone(this.selectedHoverMilestone);
+      return {
+        "c-accelerator-milestone-tooltip": true,
+        "c-accelerator-milestone-tooltip--unlocked": hasMilestone
+      };
+    },
+  }
+};
+</script>
+
+<template>
+  <div
+    ref="acceleratorBar"
+    class="c-accelerator-bar"
+    :class="{
+      'c-accelerator-bar-overfill-container': percentage > 1,
+      'c-accelerator-bar--idle': !isActive && !isMaxed,
+      'c-accelerator-bar--filling': isActive
+    }"
+    @mousemove="handleMilestoneRequirementTooltipDisplay"
+    @click="toggle"
+  >
+    <div class="l-overflow-hidden">
+      <!-- Note: These are separate because permanent and animated fill both use the same positional attributes -->
+      <div :class="barOverlay()" />
+      <div
+        class="o-accelerator-bar-fill"
+        :style="{
+          width: `${Math.clampMax(percentage * 100, 100)}%`,
+        }"
+      />
+      <!-- This bar overlay adds the shadow within the bar so the ugly edges don't show -->
+      <div
+        class="o-accelerator-bar-overlay"
+      />
+      <div
+        v-if="isActive && !isMaxed"
+        class="o-accelerator-bar-active-fill"
+      />
+      <div
+        v-for="(milestone, idx) in accelerator.milestones"
+        :key="'milestone-line-' + idx"
+        class="o-accelerator-bar-milestone-line"
+        :class="{
+          'o-accelerator-bar-milestone-line--unlocked': hasMilestone(milestone)
+        }"
+        :style="{
+          left: `calc(${milestone.requirement * 100}% - 0.25rem)`
+        }"
+      />
+    </div>
+    <div class="o-accelerator-bar-percentage">
+      {{ formatPercents(percentage, 3) }}
+      <span v-if="!isMaxed">({{ isActive ? "Filling" : "Idle" }})</span>
+    </div>
+    <CustomizeableTooltip
+      class="o-accelerator-bar-milestone-hover-container"
+      :tooltip-class="tooltipContentClass()"
+      :tooltip-arrow-style="tooltipArrowStyle"
+      :left="`calc(${selectedHoverMilestone.requirement * 100}% - 0.1rem)`"
+      content-class="o-accelerator-bar-milestone-hover-area"
+    >
+      <template #tooltipContent>
+        {{ selectedMilestoneResourceText }}
+        <br>
+        <br>
+        {{ selectedMilestoneDescriptionText }}
+      </template>
+    </CustomizeableTooltip>
+  </div>
+</template>
+
+<style scoped>
+@keyframes a-accelerator-bar-overfill-pulse {
+  /* #ed143d66 is the base pelle colour except transparent. */
+  0% { box-shadow: 0 0 0.7rem 1rem rgba(237, 20, 61, 40%); }
+  50% { box-shadow: 0 0 1.5rem 0 rgba(237, 20, 61, 40%); }
+  100% { box-shadow: 0 0 0.7rem 1rem rgba(237, 20, 61, 40%); }
+}
+
+@keyframes a-accelerator-bar-overfill-pulse-but-green {
+  0% { box-shadow: 0 0 0.7rem 1rem rgba(124, 183, 39, 53.3%); }
+  50% { box-shadow: 0 0 1.5rem 0 rgba(124, 183, 39, 53.3%); }
+  100% { box-shadow: 0 0 0.7rem 1rem rgba(124, 183, 39, 53.3%); }
+}
+
+/* ACTIVE ACCELERATOR FILLING STYLES */
+@keyframes a-accelerator-bar-filling-sweep {
+  0% {
+    width: 0;
+    left: 0;
+  }
+
+  10% {
+    width: 2rem;
+    left: 0;
+  }
+
+  90% {
+    width: 2rem;
+    left: calc(100% - 2rem);
+  }
+
+  100% {
+    width: 0;
+    left: 100%;
+  }
+}
+
+@keyframes a-accelerator-bar-unfinished-milestone-flash {
+  0% { opacity: 1; }
+  20% { opacity: 1; }
+  50% { opacity: 0.3; }
+  80% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* #region CONTAINER STYLES */
+.c-accelerator-bar {
+  display: flex;
+  width: 32rem;
+  height: 5rem;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #ffffff, #e6e6e6);
+  border: var(--var-border-width, 0.2rem) solid var(--color-alpha--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  margin-bottom: 1rem;
+}
+
+.s-base--metro .c-accelerator-bar {
+  width: 31.9rem;
+  height: 4.8rem;
+}
+
+.s-base--dark .c-accelerator-bar {
+  background: linear-gradient(45deg, #1e1e1e, #262626);
+}
+
+.c-accelerator-bar--filling,
+.c-accelerator-bar--idle {
+  transition: box-shadow 0.5s;
+  cursor: pointer;
+}
+
+.c-accelerator-bar--filling:hover,
+.c-accelerator-bar--idle:hover {
+  box-shadow: 0 0 2rem var(--color-alpha--base);
+}
+
+.l-overflow-hidden {
+  overflow: hidden;
+  width: 32rem;
+  height: 5rem;
+  position: absolute;
+  top: -0.2rem;
+  left: -0.2rem;
+  z-index: 0;
+  border: var(--var-border-width, 0.16rem) solid transparent;
+  border-radius: var(--var-border-radius, 0.5rem);
+}
+
+.o-accelerator-bar-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  box-shadow: inset 0 0 0.3rem 0.1rem #222222;
+}
+
+.c-accelerator-bar--filling .o-accelerator-bar-overlay {
+  box-shadow: inset 0 0 0.3rem 0.1rem var(--color-alpha--base);
+}
+/* #endregion CONTAINER STYLES */
+
+/* #region FILLING STYLES */
+.o-accelerator-bar-fill {
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0.7;
+  background: var(--color-alpha--base);
+}
+/* #endregion FILLING STYLES */
+
+/* #region SPECIAL BAR OVERLAY STYLES */
+.o-accelerator-bar-overfilled {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.5;
+  background: var(--color-pelle--base);
+}
+
+.c-accelerator-bar-overfill-container {
+  animation: a-accelerator-bar-overfill-pulse 1s infinite linear;
+}
+
+.t-s1 .c-accelerator-bar-overfill-container {
+  animation: a-accelerator-bar-overfill-pulse-but-green 1s infinite linear;
+}
+
+.o-accelerator-bar-active-fill {
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.3;
+  background: var(--color-pelle--base);
+  animation: a-accelerator-bar-filling-sweep infinite 2s linear;
+}
+/* #endregion SPECIAL BAR OVERLAY STYLES */
+
+/* #region PERCENTAGE STYLES */
+.o-accelerator-bar-percentage {
+  z-index: 2;
+  font-size: 1.5rem;
+  color: var(--color-text);
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem var(--color-pelle--base));
+
+  /* This keeps the percentage from blocking the hover area */
+  pointer-events: none;
+}
+
+.c-accelerator-bar--idle .l-overflow-hidden,
+.c-accelerator-bar--idle .o-accelerator-bar-percentage {
+  opacity: 0.6;
+}
+/* #endregion PERCENTAGE STYLES */
+
+/* #region MILESTONE STYLES */
+.o-accelerator-bar-milestone-hover-container {
+  height: 100%;
+}
+
+.o-accelerator-bar-milestone-line {
+  width: 0.25rem;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  background: var(--color-pelle--base);
+  animation: a-accelerator-bar-unfinished-milestone-flash infinite 1s linear;
+}
+
+.o-accelerator-bar-milestone-line--unlocked {
+  animation: none;
+}
+/* #endregion MILESTONE STYLES */
+</style>
+
+<style>
+.o-accelerator-bar-milestone-hover-area {
+  width: 2rem;
+  height: 100%;
+}
+
+.c-accelerator-milestone-tooltip {
+  width: 20rem;
+  z-index: 4;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--color-text);
+  background-color: var(--color-base);
+  border: 0.1rem solid var(--color-alpha--base);
+}
+
+.s-base--dark .c-accelerator-milestone-tooltip {
+  background-color: #111111;
+}
+
+.c-accelerator-milestone-tooltip--unlocked {
+  color: black;
+  background-color: var(--color-alpha--base);
+  box-shadow: 0 0 0 0.1rem black;
+}
+
+.s-base--dark .c-accelerator-milestone-tooltip--unlocked {
+  background-color: var(--color-alpha--base);
+}
+</style>

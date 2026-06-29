@@ -9,6 +9,7 @@ function isEND() {
 window.format = function format(value, places = 0, placesUnder1000 = 0) {
   if (isEND()) return "END";
   if (!(value instanceof Decimal)) value = new Decimal(value);
+  if (!Decimal.isFinite(value)) return value.toString();
   if (value.lt("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
   return LNotations.current.formatLDecimal(value, 4);
 };
@@ -79,6 +80,10 @@ window.formatPercents = function formatPercents(value, places) {
   return `${format(value * 100, 2, places)}%`;
 };
 
+window.formatDecimalPercents = function formatDecimalPercents(value, places) {
+  return `${format(value.times(100), 2, places)}%`;
+};
+
 window.formatRarity = function formatRarity(value) {
   // We can, annoyingly, have rounding error here, so even though only rarities
   // are passed in, we can't trust our input to always be some integer divided by 10.
@@ -87,14 +92,15 @@ window.formatRarity = function formatRarity(value) {
 };
 
 // We assume 2/0, 2/2 decimal places to keep parameter count sensible; this is used very rarely
-window.formatMachines = function formatMachines(realPart, imagPart) {
+window.formatMachines = function formatMachines(realPart, imagPart, dualPart) {
   if (isEND()) return "END";
   const parts = [];
   if (Decimal.neq(realPart, 0)) parts.push(format(realPart, 2));
   if (Decimal.neq(imagPart, 0)) parts.push(`${format(imagPart, 2, 2)}i`);
+  if (Decimal.neq(dualPart, 0)) parts.push(`${format(dualPart, 2, 2)}ε`);
   // This function is used for just RM and just iM in a few spots, so we have to push both parts conditionally
   // Nonetheless, we also need to special-case both zero so that it doesn't end up displaying as an empty string
-  if (Decimal.eq(realPart, 0) && Decimal.eq(imagPart, 0)) return format(0);
+  if (Decimal.eq(realPart, 0) && Decimal.eq(imagPart, 0) && Decimal.eq(dualPart, 0)) return format(0);
   return parts.join(" + ");
 };
 
@@ -163,6 +169,12 @@ const PLURAL_HELPER = new Map([
 const pluralDatabase = new Map([
   ["Antimatter", "Antimatter"],
   ["Dilated Time", "Dilated Time"],
+  ["Celestial Matter", "Celestial Matter"],
+  ["Divine Matter", "Divine Matter"],
+  ["Divine Energy", "Divine Energy"],
+  ["Supernova", "Supernovae"],
+  ["Nebula", "Nebulae"],
+  ["Null Matter", "Null Matter"]
 ]);
 
 /**

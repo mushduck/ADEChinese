@@ -79,6 +79,7 @@ class AlchemyResourceState extends GameMechanicState {
   }
 
   get effectValue() {
+    if (player.disablePostReality) return this.config.effect(0);
     // Disable Exponential alchemy effect in V reality.
     if (V.isRunning && this.config.id === 14) return 0;
     return this.config.effect(Pelle.isDisabled("alchemy") && this.isDestroyed ? 0 : this.amount);
@@ -214,7 +215,7 @@ class AlchemyReaction {
   combineReagents() {
     if (!this.isActive || this.reactionYield === 0) return;
     const unpredictabilityEffect = AlchemyResource.unpredictability.effectValue;
-    const times = 1 + poissonDistribution(unpredictabilityEffect / (1 - unpredictabilityEffect));
+    const times = Math.clampMax(1 + poissonDistribution(unpredictabilityEffect / (1 - unpredictabilityEffect)), 50);
     const cap = this._product.cap;
     for (let i = 0; i < times; i++) {
       const reactionYield = this.actualYield;

@@ -25,7 +25,8 @@ export default {
   },
   data() {
     return {
-      ending: false
+      ending: false,
+      dark: false
     };
   },
   computed: {
@@ -36,6 +37,7 @@ export default {
   methods: {
     update() {
       this.ending = GameEnd.endState >= END_STATE_MARKERS.FADE_AWAY && !GameEnd.creditsClosed;
+      this.dark = Alpha.isRunning;
     }
   }
 };
@@ -58,7 +60,7 @@ export default {
         v-else-if="view.modal.current"
         :modal="view.modal.current"
       />
-      <FadeAway v-if="ending" />
+      <FadeAway v-if="ending || dark" />
       <CreditsContainer v-if="ending" />
       <NewGame v-if="ending" />
       <SpectateGame />

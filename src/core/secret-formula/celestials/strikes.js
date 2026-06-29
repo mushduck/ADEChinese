@@ -8,7 +8,7 @@ export const pelleStrikes = {
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.vacuum.name)}
       and get a permanent Infinity Autobuyer`,
     rift: () => PelleRifts.vacuum,
-    isDestroyed: () => PelleStrikeUpgrade.pelleStrike1.isBought
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike1.canBeApplied
   },
   powerGalaxies: {
     id: 2,
@@ -16,7 +16,7 @@ export const pelleStrikes = {
     penaltyDescription: () => `Infinity Dimensions are raised to ${formatPow(0.5, 1, 1)}`,
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.decay.name)}`,
     rift: () => PelleRifts.decay,
-    isDestroyed: () => PelleStrikeUpgrade.pelleStrike2.isBought
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike2.canBeApplied
   },
   eternity: {
     id: 3,
@@ -24,7 +24,7 @@ export const pelleStrikes = {
     penaltyDescription: () => `Replicanti speed slows down even more above ${format(DC.E2000)}`,
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.chaos.name)}`,
     rift: () => PelleRifts.chaos,
-    isDestroyed: () => PelleStrikeUpgrade.pelleStrike3.isBought
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike3.canBeApplied
   },
   ECs: {
     id: 4,
@@ -34,7 +34,7 @@ export const pelleStrikes = {
       of the goal`,
     rewardDescription: () => `Unlock ${wordShift.wordCycle(PelleRifts.recursion.name)}`,
     rift: () => PelleRifts.recursion,
-    isDestroyed: () => PelleStrikeUpgrade.pelleStrike4.isBought
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike4.canBeApplied
   },
   dilation: {
     id: 5,
@@ -43,6 +43,6 @@ export const pelleStrikes = {
     rewardDescription: () => `Keep the Time Dilation study across Armageddon, boost Remnant gain, and unlock
       ${wordShift.wordCycle(PelleRifts.paradox.name)}`,
     rift: () => PelleRifts.paradox,
-    isDestroyed: () => PelleStrikeUpgrade.pelleStrike5.isBought
+    isDestroyed: () => PelleStrikeUpgrade.pelleStrike5.canBeApplied
   }
 };

@@ -122,7 +122,7 @@ export function sacrificeReset() {
   const nextBoost = Sacrifice.nextBoost;
   player.chall8TotalSacrifice = player.chall8TotalSacrifice.times(nextBoost);
   player.sacrificed = player.sacrificed.plus(AntimatterDimension(1).amount.clampMax(Decimal.pow(10, 1e25)).pow(Decimal.max(Decimal.pow(2, Decimal.log10(Decimal.log10(AntimatterDimension(1).amount).div(1e25))), 1)));
-  const isAch118Unlocked = Achievement(118).canBeApplied;
+  const isAch118Unlocked = Achievement(118).canBeApplied && (!player.disablePostReality || (Alpha.isRunning && Alpha.currentStage >= 12) || (LHC.voidRunning && NullUpgrade.limerick1.isBought));
   if (NormalChallenge(8).isRunning) {
     if (!isAch118Unlocked) {
       AntimatterDimensions.reset();

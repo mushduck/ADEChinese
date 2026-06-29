@@ -10,7 +10,7 @@ export class EternityAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return EternityMilestone.autobuyerEternity.isReached;
+    return EternityMilestone.autobuyerEternity.isReached || (LHC.voidRunning && NullUpgrade.limerick5.isBought);
   }
 
   get mode() {
@@ -54,7 +54,7 @@ get increaseWithMult() {
   }
 
   get hasAdditionalModes() {
-    return RealityUpgrade(13).isBought;
+    return !player.disablePostReality && RealityUpgrade(13).isBought;
   }
 
   autoEternitiesAvailable(considerMilestoneReached) {

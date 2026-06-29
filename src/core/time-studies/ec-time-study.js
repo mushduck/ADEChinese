@@ -13,6 +13,7 @@ export class ECTimeStudyState extends TimeStudyState {
 
   purchase(auto) {
     if (GameEnd.creditsEverClosed) return false;
+    if (this.id === 11 && Alpha.isRunning && Alpha.currentStage < 21) return;
     EternityChallenge(this.id).hasUnlocked = true;
     const clickTime = Date.now();
 
@@ -38,6 +39,10 @@ export class ECTimeStudyState extends TimeStudyState {
       player.challenge.eternity.requirementBits |= 1 << this.id;
       Currency.timeTheorems.subtract(this.cost);
       TimeStudyTree.commitToGameState([TimeStudy.eternityChallenge(this.id)]);
+      if (this.id === 11 && Alpha.isRunning && Alpha.currentStage === 21) {
+        Alpha.advanceLayer();
+        Alpha.quotes.eternityChallEleven.show();
+      }
       return true;
     }
     return false;

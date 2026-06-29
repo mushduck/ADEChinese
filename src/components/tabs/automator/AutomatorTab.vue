@@ -56,7 +56,7 @@ export default {
       this.currentChars = AutomatorData.singleScriptCharacters();
       this.totalChars = AutomatorData.totalScriptCharacters();
       this.withinLimit = AutomatorData.isWithinLimit();
-      this.speed = EndgameMastery(21).isBought ? 0.06 : 0.006;
+      this.speed = (EndgameMastery(21).isBought && !player.disablePostReality) ? 0.06 : 0.006;
     }
   }
 };

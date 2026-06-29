@@ -192,7 +192,7 @@ export const alchemyResources = {
     name: "Effarig",
     symbol: "Ϙ",
     isBaseResource: true,
-    effect: amount => Math.pow(10, amount / 1250),
+    effect: amount => Decimal.pow10(amount / 1250),
     tier: 1,
     uiOrder: 1.5,
     unlockedAt: 7,

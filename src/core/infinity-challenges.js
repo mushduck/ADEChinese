@@ -1,7 +1,7 @@
 import { GameMechanicState } from "./game-mechanics";
 
 export function tryCompleteInfinityChallenges() {
-  if (EternityMilestone.autoIC.isReached || PelleDestructionUpgrade.autoICComp.isBought) {
+  if (EternityMilestone.autoIC.isReached || (PelleDestructionUpgrade.autoICComp.canBeApplied && !player.disablePostReality)) {
     const toComplete = InfinityChallenges.all.filter(x => x.isUnlocked && !x.isCompleted);
     for (const challenge of toComplete) challenge.complete();
   }
@@ -29,7 +29,7 @@ class InfinityChallengeState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    return player.records.thisEternity.maxAM.gte(this.unlockAM) || (Achievement(133).isUnlocked && !Pelle.isDoomed) ||
+    return player.records.thisEternity.maxAM.gte(this.unlockAM) || (Achievement(133).isUnlocked && !Pelle.isDoomed && !player.disablePostReality) ||
       (PelleUpgrade.keepInfinityChallenges.canBeApplied && Pelle.cel.records.totalAntimatter.gte(this.unlockAM));
   }
 
@@ -48,6 +48,7 @@ class InfinityChallengeState extends GameMechanicState {
   }
 
   start() {
+    if (this.id === 8 && Alpha.isRunning && Alpha.currentStage < 8) return;
     if (!this.isUnlocked || this.isRunning) return;
     // Forces big crunch reset but ensures IP gain, if any.
     bigCrunchReset(true, true);
@@ -65,6 +66,10 @@ class InfinityChallengeState extends GameMechanicState {
   complete() {
     player.challenge.infinity.completedBits |= 1 << this.id;
     EventHub.dispatch(GAME_EVENT.INFINITY_CHALLENGE_COMPLETED);
+    if (player.challenge.infinity.completedBits === 510 && Alpha.isRunning && Alpha.currentStage === 8) {
+      Alpha.advanceLayer();
+      Alpha.quotes.allInfinityChalls.show();
+    }
   }
 
   get isEffectActive() {

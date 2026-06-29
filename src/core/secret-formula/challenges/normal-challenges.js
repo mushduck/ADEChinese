@@ -16,6 +16,7 @@ export const normalChallenges = [
     name: "1st Antimatter Dimension Autobuyer",
     reward: "Upgradeable 1st Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D0
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ export const normalChallenges = [
     name: "2nd Antimatter Dimension Autobuyer",
     reward: "Upgradeable 2nd Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ export const normalChallenges = [
     name: "3rd Antimatter Dimension",
     reward: "Upgradeable 3rd Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 4,
@@ -48,6 +51,7 @@ export const normalChallenges = [
     name: "4th Antimatter Dimension Autobuyer",
     reward: "Upgradeable 4th Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 5,
@@ -58,6 +62,7 @@ export const normalChallenges = [
     name: "5th Antimatter Dimension Autobuyer",
     reward: "Upgradeable 5th Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 6,
@@ -68,6 +73,7 @@ export const normalChallenges = [
     name: "6th Antimatter Dimension Autobuyer",
     reward: "Upgradeable 6th Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 7,
@@ -79,6 +85,7 @@ export const normalChallenges = [
     name: "7th Antimatter Dimension Autobuyer",
     reward: "Upgradeable 7th Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 8,
@@ -89,6 +96,7 @@ export const normalChallenges = [
     name: "8th Antimatter Dimension Autobuyer",
     reward: "Upgradeable 8th Antimatter Dimension Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 9,
@@ -99,6 +107,7 @@ export const normalChallenges = [
     name: "Tickspeed Autobuyer",
     reward: "Upgradeable Tickspeed Autobuyer",
     lockedAt: DC.D0,
+    alphaLockedAt: DC.D1
   },
   {
     id: 10,
@@ -109,6 +118,7 @@ export const normalChallenges = [
     name: "Automated Dimension Boosts",
     reward: "Dimension Boosts Autobuyer",
     lockedAt: DC.D16,
+    alphaLockedAt: DC.D16
   },
   {
     id: 11,
@@ -119,6 +129,7 @@ export const normalChallenges = [
     name: "Automated Antimatter Galaxies",
     reward: "Antimatter Galaxies Autobuyer",
     lockedAt: DC.D16,
+    alphaLockedAt: DC.D16
   },
   {
     id: 12,
@@ -130,5 +141,6 @@ export const normalChallenges = [
     name: "Automated Big Crunches",
     reward: "Big Crunches Autobuyer",
     lockedAt: DC.D16,
+    alphaLockedAt: DC.D16
   }
 ];

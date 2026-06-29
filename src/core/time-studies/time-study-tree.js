@@ -106,7 +106,7 @@ export class TimeStudyTree {
       ["idle", [123, 133, 143]],
       ["light", [221, 223, 225, 227, 231, 233]],
       ["dark", [222, 224, 226, 228, 232, 234]],
-      ...(Ra.unlocks.unlockHardV.canBeApplied
+      ...((Ra.unlocks.unlockHardV.canBeApplied && !player.disablePostReality)
         ? [["triad", [301, 302, 303, 304].slice(0, Ra.unlocks.unlockHardV.effectOrDefault(0))]]
         : [])
     ]);
@@ -256,7 +256,7 @@ export class TimeStudyTree {
       ? Math.clampMin(config.STCost - stDiscount, 0)
       : 0;
     // Took these out of the checkCosts check as these aren't available early game
-    const maxST = Pelle.isDoomed && !PelleDestructionUpgrade.spaceTheorems.isBought ? 0 : V.spaceTheorems;
+    const maxST = Pelle.isDoomed && !PelleDestructionUpgrade.spaceTheorems.canBeApplied ? 0 : V.spaceTheorems;
     const hasST = this.spentTheorems[1] + stNeeded <= maxST;
     if (checkCosts) {
       const maxTT = Currency.timeTheorems.value.add(GameCache.currentStudyTree.value.spentTheorems[0])

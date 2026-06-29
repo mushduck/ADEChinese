@@ -31,7 +31,7 @@ export default {
   computed: {
     rateText() {
       return this.rate.neq(0)
-        ? ` (+${format(this.rate, 2, 2)}%/s)`
+        ? (this.rate.gte(900) ? ` (+${format(this.rate.div(100).add(1).log10(), 2, 2)} OoMs/s)` : ` (+${format(this.rate, 2, 2)}%/s)`)
         : "";
     },
     showPercentage() {

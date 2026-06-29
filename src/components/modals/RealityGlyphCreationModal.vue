@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     update() {
-      this.isDoomed = Pelle.isDoomed && !PelleAlchemyUpgrade.alchemyReality.isBought;
+      this.isDoomed = Pelle.isDoomed && !PelleAlchemyUpgrade.alchemyReality.canBeApplied;
       this.realityGlyphLevel = AlchemyResource.reality.effectValue;
       const realityEffectConfigs = GlyphEffects.all
         .filter(eff => eff.glyphTypes.includes("reality"))
@@ -34,7 +34,7 @@ export default {
         return;
       }
       Glyphs.addToInventory(GlyphGenerator.realityGlyph(this.realityGlyphLevel));
-      if (!ExpansionPack.effarigPack.isBought) AlchemyResource.reality.amount = 0;
+      if (!ExpansionPack.effarigPack.isBought || player.disablePostReality) AlchemyResource.reality.amount = 0;
       player.reality.glyphs.createdRealityGlyph = true;
       this.emitClose();
     },

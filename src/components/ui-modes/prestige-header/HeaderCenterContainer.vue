@@ -8,6 +8,8 @@ import RealityButton from "./RealityButton";
 
 import EndgameButton from "./EndgameButton";
 
+import DivinityContainer from "./DivinityContainer";
+
 // This component contains antimatter and antimatter rate at the start of the game, as well as some additional
 // information depending on the UI (tickspeed for Classic, game speed for Modern). Everything but antimatter is
 // removed once Reality is unlocked, to make room for the reality button
@@ -19,6 +21,7 @@ export default {
     RealityButton,
     ArmageddonButton,
     EndgameButton,
+    DivinityContainer
   },
   data() {
     return {
@@ -32,6 +35,7 @@ export default {
       celestialPoints: new Decimal(0),
       doomedParticles: new Decimal(0),
       showEndgame: false,
+      showDivine: false,
     };
   },
   methods: {
@@ -48,6 +52,7 @@ export default {
       this.celestialPoints.copyFrom(Currency.celestialPoints);
       this.doomedParticles.copyFrom(Currency.doomedParticles);
       this.showEndgame = PlayerProgress.endgameUnlocked();
+      this.showDivine = DivinityMilestone.divineDimensions.isReached;
     },
   },
 };
@@ -88,6 +93,9 @@ export default {
       You are getting {{ format(antimatterPerSec, 2) }} antimatter per second.
       <br>
       <HeaderTickspeedInfo />
+    </div>
+    <div v-if="showDivine">
+      <DivinityContainer />
     </div>
   </div>
 </template>

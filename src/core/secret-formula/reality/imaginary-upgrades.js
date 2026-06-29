@@ -10,8 +10,14 @@ const rebuyable = props => {
     props.costMult
   );
   const { effect } = props;
-  if (props.isDecimal) props.effect = () => Decimal.pow(effect, player.reality.imaginaryRebuyables[props.id]);
-  else props.effect = () => effect * player.reality.imaginaryRebuyables[props.id];
+  if (props.isDecimal) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.reality.imaginaryRebuyables[props.id]);
+  else props.effect = () => player.disablePostReality ? 0 : (props.id < 6
+    ? (effect + DualityUpgrade(props.id).effectOrDefault(0)) * player.reality.imaginaryRebuyables[props.id]
+    : effect * player.reality.imaginaryRebuyables[props.id]);
+  if (!props.description) props.description = () => props.textTemplate.replace("{value}",
+    DualityUpgrade(props.id).effectValue === 0
+      ? format(effect, 2, 2)
+      : format(effect + DualityUpgrade(props.id).effectOrDefault(0), 2, 2));
   if (!props.formatEffect) props.formatEffect = value => `+${format(value, 2, 2)}`;
   props.formatCost = value => format(value, 2, 0);
   return props;
@@ -23,45 +29,45 @@ export const imaginaryUpgrades = [
     id: 1,
     initialCost: 3,
     costMult: 60,
-    description: () => `Increase Temporal Amplifier multiplier by +${format(0.15, 2, 2)}`,
+    textTemplate: "Increase Temporal Amplifier multiplier by +{value}",
     effect: 0.15,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.temporalIntensifier.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.temporalIntensifier.canBeApplied
   }),
   rebuyable({
     name: "Replicative Intensifier",
     id: 2,
     initialCost: 4,
     costMult: 60,
-    description: () => `Increase Replicative Amplifier multiplier by +${format(0.15, 2, 2)}`,
+    textTemplate: "Increase Replicative Amplifier multiplier by +{value}",
     effect: 0.15,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.replicativeIntensifier.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.replicativeIntensifier.canBeApplied
   }),
   rebuyable({
     name: "Eternal Intensifier",
     id: 3,
     initialCost: 1,
     costMult: 40,
-    description: () => `Increase Eternal Amplifier multiplier by +${format(0.4, 2, 2)}`,
+    textTemplate: "Increase Eternal Amplifier multiplier by +{value}",
     effect: 0.4,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.eternalIntensifier.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.eternalIntensifier.canBeApplied
   }),
   rebuyable({
     name: "Superluminal Intensifier",
     id: 4,
     initialCost: 5,
     costMult: 80,
-    description: () => `Increase Superluminal Amplifier multiplier by +${format(0.15, 2, 2)}`,
+    textTemplate: "Increase Superluminal Amplifier multiplier by +{value}",
     effect: 0.15,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.superluminalIntensifier.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.superluminalIntensifier.canBeApplied
   }),
   rebuyable({
     name: "Boundless Intensifier",
     id: 5,
     initialCost: 1,
     costMult: 30,
-    description: () => `Increase Boundless Amplifier multiplier by +${format(0.6, 2, 2)}`,
+    textTemplate: "Increase Boundless Amplifier multiplier by +{value}",
     effect: 0.6,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.boundlessIntensifier.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.boundlessIntensifier.canBeApplied
   }),
   rebuyable({
     name: "Elliptic Materiality",
@@ -72,7 +78,7 @@ export const imaginaryUpgrades = [
     effect: 1e100,
     formatEffect: value => `${formatX(EndgameMastery(153).isBought ? value.powEffectsOf(EndgameMastery(153)) : value)}`,
     isDecimal: true,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.ellipticMateriality.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.ellipticMateriality.canBeApplied
   }),
   rebuyable({
     name: "Runic Assurance",
@@ -82,7 +88,7 @@ export const imaginaryUpgrades = [
     description: () => `Delay Glyph Instability starting level by ${formatInt(200)}`,
     effect: 200,
     formatEffect: value => `+${formatInt(value)} levels`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.runicAssurance.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.runicAssurance.canBeApplied
   }),
   rebuyable({
     name: "Hyperbolic Apeirogon",
@@ -93,7 +99,7 @@ export const imaginaryUpgrades = [
     effect: DC.E100000,
     formatEffect: value => `${formatX(value)}`,
     isDecimal: true,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.hyperbolicApeirogon.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.hyperbolicApeirogon.canBeApplied
   }),
   rebuyable({
     name: "Cosmic Filament",
@@ -103,7 +109,7 @@ export const imaginaryUpgrades = [
     description: () => `Increase Galaxy strength`,
     effect: 0.03,
     formatEffect: value => `+${formatPercents(value)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.cosmicFilament.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.cosmicFilament.canBeApplied
   }),
   rebuyable({
     name: "Entropic Condensing",
@@ -112,8 +118,8 @@ export const imaginaryUpgrades = [
     costMult: 2000,
     description: () => `Increase Singularity gain`,
     effect: 1,
-    formatEffect: value => `${formatX(EndgameMastery(131).isBought ? Decimal.pow(1 + value, value) : new Decimal(1 + value), 2)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.entropicCondensing.isBought
+    formatEffect: value => `${formatX((EndgameMastery(131).isBought && !player.disablePostReality) ? Decimal.pow(1 + value, value) : new Decimal(1 + value), 2)}`,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.entropicCondensing.canBeApplied
   }),
   {
     name: "Suspicion of Interference",
@@ -125,9 +131,9 @@ export const imaginaryUpgrades = [
     checkRequirement: () => player.celestials.effarig.relicShards.gte(1e90),
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
     description: "Time Dimension power based on total antimatter",
-    effect: () => 1 + Decimal.log10(player.records.totalEndgameAntimatter.add(10).log10()).div(100).toNumber(),
+    effect: () => player.disablePostReality ? 1 : 1 + Decimal.log10(player.records.totalEndgameAntimatter.add(10).log10()).div(100).toNumber(),
     formatEffect: value => `${formatPow(value, 0, 4)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.suspicionOfInterference.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.suspicionOfInterference.canBeApplied
   },
   {
     name: "Consequences of Illusions",
@@ -140,9 +146,9 @@ export const imaginaryUpgrades = [
       gainedGlyphLevel().actualLevel >= 9000,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "Gain free Dimboosts based on Imaginary rebuyable count",
-    effect: () => 2e4 * ImaginaryUpgrades.totalRebuyables,
+    effect: () => player.disablePostReality ? 0 : 2e4 * ImaginaryUpgrades.totalRebuyables,
     formatEffect: value => `${format(value, 1)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.consequencesOfIllusions.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.consequencesOfIllusions.canBeApplied
   },
   {
     name: "Transience of Information",
@@ -156,9 +162,9 @@ export const imaginaryUpgrades = [
       MachineHandler.uncappedRM.times(simulatedRealityCount(false) + 1).gte(Number.MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Increase Imaginary Machine Cap based on Imaginary Upgrades purchased",
-    effect: () => Math.pow(1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2, EndgameMastery(154).effectOrDefault(1)),
+    effect: () => player.disablePostReality ? 1 : Math.pow(1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2, EndgameMastery(154).effectOrDefault(1)),
     formatEffect: value => `${formatX(value, 2, 1)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.transienceOfInformation.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.transienceOfInformation.canBeApplied
   },
   {
     name: "Recollection of Intrusion",
@@ -170,8 +176,8 @@ export const imaginaryUpgrades = [
     checkRequirement: () => EternityChallenge(5).isRunning && Tickspeed.perSecond.log10().gte(7.5e10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Raise all Dimension per-purchase multipliers to ${formatPow(1.5, 0, 1)}`,
-    effect: 1.5,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.recollectionOfIntrusion.isBought
+    effect: () => player.disablePostReality ? 1 : 1.5,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.recollectionOfIntrusion.canBeApplied
   },
   {
     name: "Fabrication of Ideals",
@@ -251,8 +257,8 @@ export const imaginaryUpgrades = [
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Unlock Autobuyers for repeatable Imaginary Upgrades and generate Imaginary Machines
       ${formatInt(10)} times faster`,
-    effect: 10,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.vacuumAcceleration.isBought
+    effect: () => player.disablePostReality ? 1 : 10,
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.vacuumAcceleration.canBeApplied
   },
   {
     name: "Existential Elimination",
@@ -266,9 +272,9 @@ export const imaginaryUpgrades = [
     canLock: true,
     lockEvent: "enable Continuum",
     description: "Annihilation multiplier gain is improved based on Imaginary Machines",
-    effect: () => Decimal.clampMin(Decimal.pow(Decimal.log10(Currency.imaginaryMachines.value.add(1)).sub(10), 3), 1).toNumber(),
+    effect: () => player.disablePostReality ? 1 : Decimal.clampMin(Decimal.pow(Decimal.log10(Currency.imaginaryMachines.value.add(1)).sub(10), 3), 1).toNumber(),
     formatEffect: value => `${formatX(value, 2, 1)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.existentialElimination.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.existentialElimination.canBeApplied
   },
   {
     name: "Total Termination",
@@ -283,8 +289,8 @@ export const imaginaryUpgrades = [
       Currency.antimatter.value.add(1).log10().gte(1.5e11),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `All Glyph Sacrifice totals are increased to ${format(1e100)}`,
-    effect: new Decimal(1e100),
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.totalTermination.isBought
+    effect: () => player.disablePostReality ? DC.D0 : new Decimal(1e100),
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.totalTermination.canBeApplied
   },
   {
     name: "Planar Purification",
@@ -297,9 +303,9 @@ export const imaginaryUpgrades = [
       gainedGlyphLevel().actualLevel >= 20000,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Increase free Dimboost count based on Tesseract count",
-    effect: () => Math.floor(0.25 * Math.pow(Tesseracts.effectiveCount, 2)),
+    effect: () => player.disablePostReality ? 1 : Math.floor(0.25 * Math.pow(Tesseracts.effectiveCount, 2)),
     formatEffect: value => `${formatX(value)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.planarPurification.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.planarPurification.canBeApplied
   },
   {
     name: "Absolute Annulment",
@@ -317,9 +323,9 @@ export const imaginaryUpgrades = [
     canLock: true,
     // Three locking events: uninvert, discharge, and entering (but not auto-completing) EC12
     description: "Increase free Dimboost strength based on Singularity count",
-    effect: () => Decimal.pow(player.celestials.laitela.singularities, 300),
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(player.celestials.laitela.singularities, 300),
     formatEffect: value => `${formatX(value, 2, 1)}`,
-    isDisabledInDoomed: () => !PelleImaginaryUpgrade.absoluteAnnulment.isBought
+    isDisabledInDoomed: () => !PelleImaginaryUpgrade.absoluteAnnulment.canBeApplied
   },
   {
     name: "Omnipresent Obliteration",
@@ -396,7 +402,7 @@ export const imaginaryUpgrades = [
     cost: DC.NUMMAX,
     requirement: () => `Disable all Nerfs and Strikes in Pelle`,
     hasFailed: () => !PelleStrikeUpgrade.pelleStrike1.isAvailableForPurchase,
-    checkRequirement: () => PelleStrikeUpgrade.all.filter(u => u.isBought).length >= 5,
+    checkRequirement: () => PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length >= 5,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => {
       if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";

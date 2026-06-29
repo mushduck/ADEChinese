@@ -4,7 +4,7 @@ export const eternityUpgrades = {
     cost: 5,
     description: () => `Infinity Dimension multiplier based on unspent Eternity Points (x+${formatInt(1)})`,
     effect: () => Currency.eternityPoints.value.plus(1),
-    cap: DC.E1E15,
+    cap: () => (!player.disablePostReality && Alpha.currentStage >= 16 ? DC.BEMAX : DC.E1E15),
     formatEffect: value => formatX(value, 2, 1)
   },
   idMultEternities: {
@@ -32,8 +32,8 @@ export const eternityUpgrades = {
     description: "Infinity Dimension multiplier based on sum of Infinity Challenge times",
     // The cap limits this at a lower value, but we also need an explicit cap here because very old versions have
     // allowed EC12 to make all the challenge records sum to zero (causing a division by zero here)
-    effect: () => DC.D2.pow(new Decimal(30).div(Decimal.clampMin(Time.infinityChallengeSum.totalSeconds, 0.1))),
-    cap: DC.D2P30D0_61,
+    effect: () => DC.D2.pow(new Decimal(30).div(Time.infinityChallengeSum.totalSeconds)),
+    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.D2P30D0_61,
     formatEffect: value => formatX(value, 2, 1)
   },
   tdMultAchs: {
@@ -55,9 +55,11 @@ export const eternityUpgrades = {
     cost: 1e50,
     description: () => (Pelle.isDoomed
       ? "Time Dimensions are multiplied by days played in this Armageddon"
-      : "Time Dimensions are multiplied by days played"
+      : (Alpha.isRunning ? "Time Dimensions are multiplied by real-time days spent in Alpha's Reality"
+         : "Time Dimensions are multiplied by days played")
     ),
-    effect: () => (Pelle.isDoomed ? Time.thisReality.totalDays.add(1) : Decimal.max(Time.totalTimePlayed.totalDays, 1)),
+    effect: () => (Pelle.isDoomed ? Time.thisReality.totalDays.add(1) : (Alpha.isRunning
+      ? Decimal.max(Time.thisRealityRealTime.totalDays, 1) : Decimal.max(Time.totalTimePlayed.totalDays, 1))),
     formatEffect: value => formatX(value, 2, 1)
   }
 };

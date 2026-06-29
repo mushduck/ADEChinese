@@ -35,22 +35,22 @@ export default {
       player.celestials.pelle.collapsed.rifts = !this.isCollapsed;
     },
     sickVisualStrikeText() {
-      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 0) {
+      if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 0) {
         return `Pelle Strike penalties are permanent and remain active even after Armageddon!`;
       }
-      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 1) {
+      if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 1) {
         return this.time % 2500 > 500 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
       }
-      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 2) {
+      if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 2) {
         return this.time % 2500 > 1000 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
       }
-      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 3) {
+      if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 3) {
         return this.time % 2500 > 1500 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
       }
-      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 4) {
+      if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 4) {
         return this.time % 2500 > 2000 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
       }
-      if (PelleStrikeUpgrade.all.filter(u => u.isBought).length === 5) {
+      if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 5) {
         return this.time % 2500 > 2400 ? `We will meet again...` : wordShift.randomCrossWords("We will meet again...");
       }
     }

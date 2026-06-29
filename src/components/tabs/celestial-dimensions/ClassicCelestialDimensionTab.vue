@@ -1,12 +1,18 @@
 <script>
+import CelestialDimensionBoostRow from "./ClassicCelestialDimensionBoostRow";
 import CelestialDimensionRow from "./ClassicCelestialDimensionRow";
+import CelestialGalaxyRow from "./ClassicCelestialGalaxyRow";
+import CelestialTickspeedRow from "./CelestialTickspeedRow";
 import PrimaryButton from "@/components/PrimaryButton";
 
 export default {
   name: "ClassicCelestialDimensionTab",
   components: {
     PrimaryButton,
-    CelestialDimensionRow
+    CelestialDimensionBoostRow,
+    CelestialDimensionRow,
+    CelestialGalaxyRow,
+    CelestialTickspeedRow
   },
   data() {
     return {
@@ -20,6 +26,8 @@ export default {
       creditsClosed: false,
       showLockedDimCostNote: true,
       isEffectActive: false,
+      isExpanded: false,
+      isAnyAutobuyerUnlocked: false,
     };
   },
   methods: {
@@ -33,12 +41,17 @@ export default {
       this.totalDimCap.copyFrom(CelestialDimensions.totalDimCap);
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
+      this.isExpanded = Achievement(221).isUnlocked;
+      this.isAnyAutobuyerUnlocked = Autobuyer.celestialDimension(1).isUnlocked;
     },
     maxAll() {
       CelestialDimensions.buyMax();
     },
     toggleCelestialMatterMultiplier() {
       toggleCelestialMatter();
+    },
+    toggleAllAutobuyers() {
+      toggleAllCelDims();
     }
   }
 };
@@ -58,6 +71,13 @@ export default {
         @click="toggleCelestialMatterMultiplier"
       >
         Toggle Celestial Matter
+      </PrimaryButton>
+      <PrimaryButton
+        v-if="isAnyAutobuyerUnlocked"
+        class="o-primary-btn--subtab-option"
+        @click="toggleAllAutobuyers"
+      >
+        Toggle all autobuyers
       </PrimaryButton>
     </div>
     <div>
@@ -80,12 +100,15 @@ export default {
       All Celestial Dimensions can be purchased until {{ format(totalDimCap, 2, 2) }} Celestial Points.
     </div>
     <div>You are getting {{ format(matterPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+    <CelestialTickspeedRow v-if="isExpanded"/>
     <div class="l-dimensions-container">
       <CelestialDimensionRow
         v-for="tier in 8"
         :key="tier"
         :tier="tier"
       />
+      <CelestialDimensionBoostRow v-if="isExpanded"/>
+      <CelestialGalaxyRow v-if="isExpanded"/>
     </div>
     <div v-if="showLockedDimCostNote">
       Hold shift to see the Celestial Point cost for locked Celestial Dimensions.

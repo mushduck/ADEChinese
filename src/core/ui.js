@@ -60,6 +60,9 @@ Vue.mixin({
     formatPercents(value, places) {
       return formatPercents(value, places);
     },
+    formatDecimalPercents(value, places) {
+      return formatDecimalPercents(value, places);
+    },
     formatRarity(value) {
       return formatRarity(value);
     },
@@ -110,7 +113,7 @@ const ReactivityComplainer = {
       return;
     }
     // If you are not a developer just ignore it. I guess it's used to tell devs there may be lagging when pressing buttons
-    if (obj.__ob__ !== undefined) throw new Error(`[Dev only] Boi you fukked up - ${path} became REACTIVE (oh shite)`);
+    if (obj.__ob__ !== undefined && player.DEV) throw new Error(`Boi you fukked up - ${path} became REACTIVE (oh shite)`);
     for (const key in obj) {
       if (!Object.prototype.hasOwnProperty.call(obj, key)) continue;
       const prop = obj[key];

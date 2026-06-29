@@ -1,3 +1,5 @@
+import { sha512_256 } from "js-sha512";
+
 export const END_STATE_MARKERS = {
   // Tab zalgoification starts as soon as endState > 0
   get GAME_END() {

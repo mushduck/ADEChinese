@@ -7,11 +7,11 @@ const rebuyable = props => {
     props.costMult / 10,
     DC.E309,
     1e3,
-    props.costMult
+    props.initialCost * props.costMult
   );
   const { effect } = props;
-  if (props.isDecimal) props.effect = () => Decimal.pow(effect, player.endgame.rebuyables[props.id]);
-  else props.effect = () => Math.pow(effect, player.endgame.rebuyables[props.id]);
+  if (props.isDecimal) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.endgame.rebuyables[props.id]);
+  else props.effect = () => player.disablePostReality ? 1 : Math.pow(effect, player.endgame.rebuyables[props.id]);
   props.description = () => props.textTemplate.replace("{value}", format(effect, 2, 2));
   props.formatEffect = value => formatX(value, 2, 2);
   props.formatCost = value => format(value, 2, 0);
@@ -96,16 +96,21 @@ export const endgameUpgrades = [
     checkRequirement: () => Time.bestEndgameRealTime.totalMinutes.lt(10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Generate Endgames ${formatInt(10)} times slower than your fastest Endgame (real time)`,
-    effect: () => new Decimal(player.records.bestEndgame.realTime * 10),
+    effect: () => player.disablePostReality ? DC.NUMMAX : new Decimal(player.records.bestEndgame.realTime * 10),
     formatEffect: value => {
       if (new Decimal(value).gte(9999999999)) return "No Endgame generation";
       let endgames = 1;
-      endgames = (ExpansionPack.enslavedPack.isBought
+      endgames *= ((ExpansionPack.enslavedPack.isBought && !player.disablePostReality)
         ? Math.floor(1 + Math.pow(Math.log10(Math.min(Tesseracts.effectiveCount, 1000) * Math.max(Math.log10(Tesseracts.effectiveCount) - 2, 1) + 1), Math.log10(player.endgames + 1)))
         : 1);
-      const timeStr = Time.bestEndgameRealTime.totalMilliseconds.lte(100)
+      endgames *= Math.pow(1.33, Alpha.currentStage);
+      if (DivinityMilestone.firstDivine.isReached && !player.disablePostReality) endgames *= 10;
+      endgames *= DivineDimensions.conversionFormula1.toNumber();
+      const timeStr = Time.bestEndgameRealTime.totalMilliseconds.lte(100) && !Alpha.isDestroyed
         ? `${TimeSpan.fromMilliseconds(new Decimal(1000)).toStringShort()} (capped)`
-        : `${TimeSpan.fromMilliseconds(new Decimal(value)).toStringShort()}`;
+        : (Time.bestEndgameRealTime.totalMilliseconds.lte(33)
+           ? `${TimeSpan.fromMilliseconds(new Decimal(330)).toStringShort()} (capped)`
+           : `${TimeSpan.fromMilliseconds(new Decimal(value)).toStringShort()}`);
       return `${quantify("Endgame", endgames)} every ${timeStr}`;
     }
   },
@@ -117,7 +122,7 @@ export const endgameUpgrades = [
     hasFailed: () => ImaginaryUpgrade(15).isBought,
     checkRequirement: () => !ImaginaryUpgrade(15).isBought && ImaginaryUpgrade(16).isBought && ImaginaryUpgrade(17).isBought &&
       ImaginaryUpgrade(18).isBought && ImaginaryUpgrade(19).isBought && ImaginaryUpgrade(20).isBought,
-    checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     lockEvent: "purchase Fabrication of Ideals",
     description: "You keep all Imaginary Upgrades on Endgame"
@@ -145,7 +150,7 @@ export const endgameUpgrades = [
     description: () =>
       `Delay the Infinity Challenge 8 Reward Hardcap by ${formatPow(9)},
       and multiply all Celestial Dimensions by ${formatX(9)}`,
-    effect: 9
+    effect: () => player.disablePostReality ? 1 : 9
   },
   {
     name: "Unstable Undermining",
@@ -155,7 +160,7 @@ export const endgameUpgrades = [
     checkRequirement: () => GalaxyGenerator.galaxies.gte(1e60),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Reduce the Galaxy Generator Instability Magnitude by ${formatInt(1)}`,
-    effect: 1
+    effect: () => player.disablePostReality ? 0 : 1
   },
   {
     name: "Barrier Breaching",
@@ -178,7 +183,7 @@ export const endgameUpgrades = [
     canLock: true,
     lockEvent: "purchase the 6th Galaxy Generator Upgrade",
     description: () => `Weaken the second Galaxy Generator Instability Magnitude by ${formatPercents(0.1)}`,
-    effect: 0.9
+    effect: () => player.disablePostReality ? 1 : 0.9
   },
   {
     name: "Antimatter Amassment",
@@ -189,8 +194,10 @@ export const endgameUpgrades = [
     checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(1e33) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Gain a power to the Antimatter Exponent based on Imaginary Machines`,
-    effect: () => 1 + (Decimal.pow(Decimal.log10(Decimal.log10(player.reality.imaginaryMachines.add(1)).add(1)), 2).div(200)).toNumber(),
-    formatEffect: value => formatPow(value, 2, 3)
+    effect: () => player.disablePostReality ? 1 : 1 + (Decimal.pow(Decimal.log10(Decimal.log10(
+      player.reality.imaginaryMachines.add(1)).add(1)), 2).min(10).add(Decimal.log10(Decimal.log10(
+      player.reality.imaginaryMachines.add(1)).add(1)).sub(Math.sqrt(10)).max(0)).div(200)).toNumber(),
+    formatEffect: value => formatPow(value, 2, 4)
   },
   {
     name: "Currency Collections",
@@ -200,7 +207,7 @@ export const endgameUpgrades = [
     checkRequirement: () => Currency.galacticPower.gte(1e10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "You can equip a second Currency Path in Endgame Masteries",
-    effect: 2
+    effect: () => player.disablePostReality ? 1 : 2
   },
   {
     name: "Compression Calculations",
@@ -210,7 +217,7 @@ export const endgameUpgrades = [
     checkRequirement: () => Currency.galacticPower.gte(1e20),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "You can equip a second Compression Path in Endgame Masteries",
-    effect: 2
+    effect: () => player.disablePostReality ? 1 : 2
   },
   {
     name: "Money Multiplication",
@@ -221,7 +228,7 @@ export const endgameUpgrades = [
     checkRequirement: () => Currency.galacticPower.gte(1e30) && EndgameUpgrade(16).isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "You can equip a third Currency Path in Endgame Masteries",
-    effect: 3
+    effect: () => player.disablePostReality ? 1 : 3
   },
   {
     name: "Dimensional Distension",
@@ -232,7 +239,7 @@ export const endgameUpgrades = [
     checkRequirement: () => Currency.galacticPower.gte(1e40) && EndgameUpgrade(17).isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "You can equip a third Compression Path in Endgame Masteries",
-    effect: 3
+    effect: () => player.disablePostReality ? 1 : 3
   },
   {
     name: "Omnipotent Opulence",
@@ -243,7 +250,7 @@ export const endgameUpgrades = [
     checkRequirement: () => Currency.galacticPower.gte(1e50) && EndgameUpgrade(18).isBought && EndgameUpgrade(19).isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "You can equip a fourth Compression and Currency Path in Endgame Masteries",
-    effect: 4
+    effect: () => player.disablePostReality ? 1 : 4
   },
   {
     name: "Infinite Improvements",
@@ -264,7 +271,7 @@ export const endgameUpgrades = [
     checkRequirement: () => BreakEternityUpgrade.tgThresholdUncap.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Apply a power to the Tachyon Galaxy Threshold based on Endgames`,
-    effect: () => 1 / Math.log10(player.endgames + 1),
+    effect: () => player.disablePostReality ? 1 : 1 / Math.log10(player.endgames + 1),
     formatEffect: value => formatPow(value, 2, 3)
   },
   {
@@ -276,7 +283,7 @@ export const endgameUpgrades = [
     checkRequirement: () => BreakEternityUpgrade.tesseractMultiplier.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Celestial Points delay the Free Tesseract Softcap",
-    effect: () => Math.pow(1 + Decimal.log10(Decimal.max(Decimal.log10(player.endgame.celestialPoints.add(1)).div(200), 1)).toNumber(), 2),
+    effect: () => player.disablePostReality ? 1 : Math.pow(1 + Decimal.log10(Decimal.max(Decimal.log10(player.endgame.celestialPoints.max(1)).div(200), 1)).toNumber(), 2),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
@@ -288,7 +295,7 @@ export const endgameUpgrades = [
     checkRequirement: () => BreakEternityUpgrade.glyphSacrificeUncap.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "All Glyph Sacrifice Values are increased based on Celestial Matter",
-    effect: () => Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.endgame.celestialMatter.add(1)).add(1)).div(2), 1), 1.5).toNumber(),
+    effect: () => player.disablePostReality ? 1 : Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.endgame.celestialMatter.add(1)).add(1)).div(2), 1), 1.5).toNumber(),
     formatEffect: value => formatPow(value, 2, 3)
   },
   {
@@ -300,7 +307,7 @@ export const endgameUpgrades = [
     checkRequirement: () => BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Glyph Level gains a multiplier based on Antimatter which applies after Instability",
-    effect: () => Decimal.min(Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)).div(100), 1), 0.05), 1.2).toNumber(),
-    formatEffect: value => formatX(value, 2, 2)
+    effect: () => player.disablePostReality ? 1 : Decimal.min(Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)).div(100), 1), 0.05), 1.2).toNumber(),
+    formatEffect: value => formatX(value, 2, 4)
   },
 ];

@@ -17,18 +17,6 @@ class GlyphEffectState {
   }
 }
 
-export const GlyphEffect = {
-  dimBoostPower: new GlyphEffectState("powerdimboost", {
-    adjustApply: value => Math.max(1, value)
-  }),
-  ipMult: new GlyphEffectState("infinityIP", {
-    adjustApply: value => Decimal.max(1, value)
-  }),
-  epMult: new GlyphEffectState("timeEP", {
-    adjustApply: value => Decimal.max(1, value)
-  })
-};
-
 /**
  * This returns just the value, unlike getTotalEffect(), which outputs the softcap status as well
  * This variant is used by GameCache
@@ -100,7 +88,7 @@ export function separateEffectKey(effectKey) {
 export function getGlyphEffectValuesFromBitmask(bitmask, level, baseStrength, type) {
   // If we don't specifically exclude companion glyphs, the first-reality EP record is wrong within Doomed since its
   // value is encoded in the rarity field
-  const strength = (Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.isBought && type !== "companion") ? Pelle.glyphStrength : baseStrength;
+  const strength = (Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.canBeApplied && type !== "companion") ? Pelle.glyphStrength : baseStrength;
   return getGlyphEffectsFromBitmask(bitmask)
     .map(effect => ({
       id: effect.id,
@@ -114,7 +102,7 @@ export function getSingleGlyphEffectFromBitmask(effectName, glyph) {
   if ((glyph.effects & (1 << glyphEffect.bitmaskIndex)) === 0) {
     return undefined;
   }
-  return glyphEffect.effect(getAdjustedGlyphLevel(glyph), (Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.isBought) ? Pelle.glyphStrength : glyph.strength);
+  return glyphEffect.effect(getAdjustedGlyphLevel(glyph), (Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.canBeApplied) ? Pelle.glyphStrength : glyph.strength);
 }
 
 // Note this function is used for glyph bitmasks, news ticker bitmasks, and offline achievements

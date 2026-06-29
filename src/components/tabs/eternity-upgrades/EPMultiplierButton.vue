@@ -39,7 +39,7 @@ export default {
         "o-eternity-upgrade--unavailable": !this.isAffordable
       };
     },
-    isDoomed: () => Pelle.isDoomed && !PelleDestructionUpgrade.x5EPUpgrade.isBought,
+    isDoomed: () => Pelle.isDoomed && !PelleDestructionUpgrade.x5EPUpgrade.canBeApplied,
   },
   watch: {
     isAutobuyerActive(newValue) {

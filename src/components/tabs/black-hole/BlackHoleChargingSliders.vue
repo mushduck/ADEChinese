@@ -44,7 +44,7 @@ export default {
       this.isDisabled = ImaginaryUpgrade(24).isLockingMechanics && Ra.isRunning && maxInversion;
       this.amountSlider = player.celestials.enslaved.pulseAmount * 500;
       this.timeSlider = player.celestials.enslaved.pulseTime;
-      this.areExtraSlidersUnlocked = ExpansionPack.enslavedPack.isBought;
+      this.areExtraSlidersUnlocked = ExpansionPack.enslavedPack.isBought && !player.disablePostReality;
     },
     adjustSliderNegative(value) {
       this.negativeSlider = value;

@@ -35,7 +35,7 @@ export default {
         "o-teresa-shop-button--available": ((this.isAvailableForPurchase && !this.isCapped) ||
           (this.chargesLeft > 0 && !this.isCharged)) && !(this.viewingCharge && this.chargesLeft <= 0),
         "o-teresa-shop-button--capped": (this.isCapped && !this.viewingCharge) || this.isCharged,
-        "o-teresa-shop-button--pelle-disabled": (this.isDoomed && !PelleDestructionUpgrade.teresaShop.isBought) &&
+        "o-teresa-shop-button--pelle-disabled": (this.isDoomed && !PelleDestructionUpgrade.teresaShop.canBeApplied) &&
           (this.upgrade === PerkShopUpgrade.musicGlyph || this.upgrade === PerkShopUpgrade.fillMusicGlyph)
       };
     },

@@ -68,7 +68,7 @@ class RealityUpgradeState extends BitPurchasableMechanicState {
   // Note we don't actually show the modal if we already failed or unlocked it
   tryShowWarningModal(specialLockText) {
     if (this.isPossible && !this.isAvailableForPurchase) {
-      Modal.upgradeLock.show({ upgrade: this, isImaginary: false, isEndgame: false, specialLockText });
+      Modal.upgradeLock.show({ upgrade: this, isImaginary: false, isDual: false, isEndgame: false, specialLockText });
     }
   }
 
@@ -117,6 +117,22 @@ class RebuyableRealityUpgradeState extends RebuyableMechanicState {
 
   set boughtAmount(value) {
     player.reality.rebuyables[this.id] = value;
+  }
+
+  bulkPurchase() {
+    if (!this.isAffordable) return false;
+    this.boughtAmount += getInverseHybridCostScaling(
+      Currency.realityMachines.value,
+      1e30,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 10,
+      DC.E309,
+      1e3,
+      this.config.initialCost * this.config.costMult
+    ).sub(player.reality.rebuyables[this.id]).toNumber();
+    Currency.realityMachines.subtract(this.cost);
+    return true;
   }
 }
 

@@ -85,8 +85,8 @@ export class EndgameMasteryState extends EndgameMasteriesState {
 
   onPurchased() {
     const id = this.id;
-    if (id === 31 && Currency.realities.value < 100) {
-      Currency.realities.value = 100;
+    if (id === 31 && Currency.realities.value.lt(100)) {
+      Currency.realities.value = DC.E2;
     }
     if (id === 32 && Currency.realityMachines.value.lt(1000000)) {
       Currency.realityMachines.value.eq(1000000);

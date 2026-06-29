@@ -28,6 +28,18 @@ export default {
       multDT: new Decimal(),
       hasIPMult: false,
       multIP: new Decimal(),
+      hasDEMult: false,
+      multDE: new Decimal(),
+      hasPow: false,
+      pow: 0,
+      hasTDPow: false,
+      powTD: 0,
+      hasDTPow: false,
+      powDT: 0,
+      hasIPPow: false,
+      powIP: 0,
+      hasDEPow: false,
+      powDE: 0,
       hasRaisedCap: false,
       replicantiCap: new Decimal(),
       capMultText: "",
@@ -50,7 +62,7 @@ export default {
     replicantiChanceSetup() {
       return new ReplicantiUpgradeButtonSetup(
         ReplicantiUpgrade.chance,
-        value => `Replicate chance: ${formatPercents(value)}`,
+        value => `Replicate chance: ${formatDecimalPercents(value)}`,
         cost => `+${formatPercents(0.01)} Costs: ${format(cost)} IP`
       );
     },
@@ -100,19 +112,33 @@ export default {
     boostText() {
       const boostList = [];
       boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.mult, 2, 2)}</span>
-        multiplier on all Infinity Dimensions`);
+        multiplier${this.hasPow ? ` and a
+        <span class="c-replicanti-description__accent">${formatPow(this.pow, 2, 3)}</span> power` : ""}
+        on all Infinity Dimensions`);
       if (this.hasTDMult) {
         boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multTD, 2, 2)}</span>
-          multiplier on all Time Dimensions from a Dilation Upgrade`);
+          multiplier${this.hasTDPow ? ` and a
+          <span class="c-replicanti-description__accent">${formatPow(this.powTD, 2, 3)}</span> power` : ""}
+          on all Time Dimensions from a Dilation Upgrade`);
       }
       if (this.hasDTMult) {
         const additionalEffect = GlyphAlteration.isAdded("replication") ? "and Replicanti speed " : "";
         boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multDT, 2, 2)}</span>
-          multiplier to Dilated Time ${additionalEffect}from Glyphs`);
+          multiplier${this.hasDTPow ? ` and a
+          <span class="c-replicanti-description__accent">${formatPow(this.powDT, 2, 3)}</span> power` : ""}
+          to Dilated Time ${additionalEffect}from Glyphs`);
       }
       if (this.hasIPMult) {
         boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multIP)}</span>
-          multiplier to Infinity Points from Glyph Alchemy`);
+          multiplier${this.hasIPPow ? ` and a
+          <span class="c-replicanti-description__accent">${formatPow(this.powIP, 2, 3)}</span> power` : ""}
+          to Infinity Points from Glyph Alchemy`);
+      }
+      if (this.hasDEMult) {
+        boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multDE)}</span>
+          multiplier${this.hasDEPow ? ` and a
+          <span class="c-replicanti-description__accent">${formatPow(this.powDE, 2, 3)}</span> power` : ""}
+          to Dark Energy from an Alpha Reward`);
       }
       if (boostList.length === 1) return `${boostList[0]}.`;
       if (boostList.length === 2) return `${boostList[0]}<br> and ${boostList[1]}.`;
@@ -140,19 +166,27 @@ export default {
         this.ec8Purchases = player.eterc8repl;
       }
       this.amount.copyFrom(Replicanti.amount);
-      this.mult.copyFrom(replicantiMult());
+      this.mult.copyFrom(ReplicantiMultipliers.idMult);
       this.hasTDMult = DilationUpgrade.tdMultReplicanti.isBought;
-      this.multTD.copyFrom(DilationUpgrade.tdMultReplicanti.effectValue);
-      this.hasDTMult = getAdjustedGlyphEffect("replicationdtgain") !== 0 && !Pelle.isDoomed;
-      this.multDT = Decimal.clampMin(
-        Decimal.log10(Replicanti.amount.add(1)).times(
-          getAdjustedGlyphEffect("replicationdtgain")),
-        1
-      );
-      this.hasIPMult = AlchemyResource.exponential.amount > 0 && !this.isDoomed;
-      this.multIP = Replicanti.amount.powEffectOf(AlchemyResource.exponential);
+      this.multTD.copyFrom(ReplicantiMultipliers.tdMult);
+      this.hasDTMult = getAdjustedGlyphEffect("replicationdtgain").neq(0) && !Pelle.isDoomed;
+      this.multDT.copyFrom(ReplicantiMultipliers.dtMult);
+      this.hasIPMult = !player.disablePostReality && AlchemyResource.exponential.amount > 0 && !this.isDoomed;
+      this.multIP.copyFrom(ReplicantiMultipliers.ipMult);
+      this.hasDEMult = !player.disablePostReality && Alpha.currentStage >= 21;
+      this.multDE.copyFrom(ReplicantiMultipliers.deMult);
+      this.hasPow = ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality;
+      this.pow = ReplicantiMultipliers.idPow;
+      this.hasTDPow = ResurgenceUpgrade.repSurge.isBought && DilationUpgrade.tdMultReplicanti.isBought && !player.disablePostReality;
+      this.powTD = ReplicantiMultipliers.tdPow;
+      this.hasDTPow = ResurgenceUpgrade.repSurge.isBought && getAdjustedGlyphEffect("replicationdtgain").neq(0) && !Pelle.isDoomed && !player.disablePostReality;
+      this.powDT = ReplicantiMultipliers.dtPow;
+      this.hasIPPow = ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality && AlchemyResource.exponential.amount > 0 && !this.isDoomed;
+      this.powIP = ReplicantiMultipliers.ipPow;
+      this.hasDEPow = ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality && Alpha.currentStage >= 21;
+      this.powDE = ReplicantiMultipliers.dePow;
       this.isUncapped = PelleRifts.vacuum.milestones[1].canBeApplied;
-      this.hasRaisedCap = (EffarigUnlock.infinity.isUnlocked && !this.isUncapped) || (Pelle.isDoomed && PelleCelestialUpgrade.replicantiCapIncrease.isBought);
+      this.hasRaisedCap = (EffarigUnlock.infinity.isUnlocked && !this.isUncapped) || (Pelle.isDoomed && PelleCelestialUpgrade.replicantiCapIncrease.canBeApplied);
       this.replicantiCap.copyFrom(replicantiCap());
       if (this.hasRaisedCap) {
         const mult = this.replicantiCap.div(DC.NUMMAX);
@@ -180,7 +214,7 @@ export default {
     calculateEstimate() {
       const updateRateMs = player.options.updateRate;
       const logGainFactorPerTick = Decimal.divide(getGameSpeedupForDisplay().times(updateRateMs).times(
-        (Math.log(player.replicanti.chance + 1))), getReplicantiInterval());
+        (Decimal.ln(player.replicanti.chance.add(1)))), getReplicantiInterval());
       const postScale = Math.log10(ReplicantiGrowth.scaleFactor) / ReplicantiGrowth.scaleLog10;
       const nextMilestone = this.maxReplicanti;
       const coeff = Decimal.divide(updateRateMs / 1000, logGainFactorPerTick.times(postScale));

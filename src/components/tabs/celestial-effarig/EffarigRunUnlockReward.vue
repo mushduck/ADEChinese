@@ -17,7 +17,7 @@ export default {
       return this.unlock.config.description.split("\n").map(x => x.trim());
     },
     symbol: () => GLYPH_SYMBOLS.effarig,
-    isDoomed: () => Pelle.isDoomed && !PelleCelestialUpgrade.effarigRewards.isBought,
+    isDoomed: () => Pelle.isDoomed && !PelleCelestialUpgrade.effarigRewards.canBeApplied,
   },
   methods: {
     update() {

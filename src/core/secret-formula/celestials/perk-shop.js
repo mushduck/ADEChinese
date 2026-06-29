@@ -27,9 +27,9 @@ export const perkShop = {
     increment: 2,
     description: () => PerkShopUpgrade.glyphLevel.viewCharge ? `Multiply pre-instability Glyph level based on highest-ever
       Glyph level` : `Increase pre-instability Glyph levels by ${formatPercents(0.05)}`,
-    effect: () => PerkShopUpgrade.glyphLevel.isCharged
+    effect: () => player.disablePostReality ? 1 : (PerkShopUpgrade.glyphLevel.isCharged
       ? PerkShopUpgrade.glyphLevel.chargedEffect()
-      : PerkShopUpgrade.glyphLevel.preChargedEffect(),
+      : PerkShopUpgrade.glyphLevel.preChargedEffect()),
     preChargedEffect: bought => Math.pow(1.05, bought),
     chargedEffect: () => Math.pow(player.records.bestEndgame.glyphLevel, 0.2),
     formatEffect: value => formatX(value, 2, 2),
@@ -46,9 +46,9 @@ export const perkShop = {
     increment: 2,
     description: () => PerkShopUpgrade.rmMult.viewCharge ? `Multiply Reality Machine gain and cap based on
       Antimatter amount` : `Double Reality Machine gain`,
-    effect: () => PerkShopUpgrade.rmMult.isCharged
+    effect: () => player.disablePostReality ? DC.D1 : (PerkShopUpgrade.rmMult.isCharged
       ? PerkShopUpgrade.rmMult.chargedEffect()
-      : PerkShopUpgrade.rmMult.preChargedEffect(),
+      : PerkShopUpgrade.rmMult.preChargedEffect()),
     preChargedEffect: bought => Decimal.pow(2, bought),
     chargedEffect: () => Decimal.log10(player.antimatter.add(10)),
     formatEffect: value => formatX(value, 2),
@@ -65,9 +65,9 @@ export const perkShop = {
     increment: 2,
     description: () => PerkShopUpgrade.bulkDilation.viewCharge ? `Dilation Autobuyers always buy max.` : `Dilation
       autobuyers buy twice as many Dilation Upgrades at once.`,
-    effect: () => PerkShopUpgrade.bulkDilation.isCharged
+    effect: () => player.disablePostReality ? 1 : (PerkShopUpgrade.bulkDilation.isCharged
       ? PerkShopUpgrade.bulkDilation.chargedEffect()
-      : PerkShopUpgrade.bulkDilation.preChargedEffect(),
+      : PerkShopUpgrade.bulkDilation.preChargedEffect()),
     preChargedEffect: bought => Math.pow(2, bought),
     chargedEffect: () => Math.pow(10, 300),
     formatEffect: value => formatX(value, 2),
@@ -84,9 +84,9 @@ export const perkShop = {
     increment: 2,
     description: () => PerkShopUpgrade.autoSpeed.viewCharge ? `Infinity Dimension, Time Dimension, Dilation, and Replicanti autobuyer
       intervals are Instant.` : `Infinity Dimension, Time Dimension, Dilation, and Replicanti autobuyers are ${formatX(2)} faster.`,
-    effect: () => PerkShopUpgrade.autoSpeed.isCharged
+    effect: () => player.disablePostReality ? 1 : (PerkShopUpgrade.autoSpeed.isCharged
       ? PerkShopUpgrade.autoSpeed.chargedEffect()
-      : PerkShopUpgrade.autoSpeed.preChargedEffect(),
+      : PerkShopUpgrade.autoSpeed.preChargedEffect()),
     preChargedEffect: bought => Math.pow(2, bought),
     chargedEffect: () => Math.pow(10, 300),
     formatEffect: value => formatX(value, 2),

@@ -58,6 +58,10 @@ export function bigCrunchReset(
   }
 
   bigCrunchResetValues(enteringAntimatterChallenge);
+  if (Alpha.isRunning && player.infinities.eq(1) && Alpha.currentStage === 3) {
+    Alpha.advanceLayer();
+    Alpha.quotes.infinity.show();
+  }
   EventHub.dispatch(GAME_EVENT.BIG_CRUNCH_AFTER);
 }
 
@@ -125,11 +129,11 @@ export function bigCrunchResetValues(enteringAntimatterChallenge) {
   secondSoftReset(enteringAntimatterChallenge);
 
   let remainingGalaxies = DC.D0;
-  if (Achievement(95).isUnlocked && (!Pelle.isDoomed || PelleAchievementUpgrade.achievement95.isBought)) {
+  if (Achievement(95).isUnlocked && (!Pelle.isDoomed || PelleAchievementUpgrade.achievement95.canBeApplied) && !player.disablePostReality) {
     Replicanti.amount = currentReplicanti;
     remainingGalaxies = remainingGalaxies.add(Decimal.min(currentReplicantiGalaxies, 1));
   }
-  if (TimeStudy(33).isBought && (!Pelle.isDoomed || PelleDestructionUpgrade.timestudy33.isBought)) {
+  if (TimeStudy(33).isBought && (!Pelle.isDoomed || PelleDestructionUpgrade.timestudy33.canBeApplied)) {
     remainingGalaxies = remainingGalaxies.add(Decimal.floor(currentReplicantiGalaxies.div(2)));
   }
 
@@ -169,7 +173,9 @@ export function secondSoftReset(enteringAntimatterChallenge) {
 
 export function preProductionGenerateIP(diff) {
   if (InfinityUpgrade.ipGen.isBought) {
-    const genPeriod = Time.bestInfinity.totalMilliseconds.clampMin(1e-100).times(10);
+    const genPeriod = Alpha.isRunning
+      ? Time.bestInfinityRealTime.totalMilliseconds.clampMin(1e-100).times(10)
+      : Time.bestInfinity.totalMilliseconds.clampMin(1e-100).times(10);
     let genCount;
     if (new Decimal(diff).gte(DC.E100)) {
       genCount = Decimal.div(diff, genPeriod);

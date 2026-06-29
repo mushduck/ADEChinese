@@ -13,7 +13,7 @@ export const Speedrun = {
   },
   // Used to block the seed-changing modal from opening (other functions assume this is checked beforehand)
   canModifySeed() {
-    return player.realities < 1;
+    return player.realities.lt(1);
   },
   modifySeed(key, seed) {
     player.speedrun.seedSelection = key;

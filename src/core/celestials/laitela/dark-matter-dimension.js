@@ -50,7 +50,7 @@ export class DarkMatterDimensionState extends DimensionState {
   get rawInterval() {
     const perUpgrade = INTERVAL_PER_UPGRADE;
     const tierFactor = Decimal.pow(4, this.tier - 1);
-    const intervalReduction = ExpansionPack.laitelaPack.isBought ? 200 : 0;
+    const intervalReduction = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? 200 : 0;
     return DC.E3.mul(tierFactor).mul(Decimal.pow(perUpgrade, this.data.intervalUpgrades)).mul(
       Decimal.pow(SingularityMilestone.ascensionIntervalScaling.effectOrDefault(new Decimal(1200)).sub(
       intervalReduction), this.ascensions)).mul(SingularityMilestone.darkDimensionIntervalReduction.effectOrDefault(1));
@@ -77,6 +77,10 @@ export class DarkMatterDimensionState extends DimensionState {
     return SingularityMilestone.improvedAscensionDM.effectOrDefault(DC.D0).add(POWER_DM_PER_ASCENSION);
   }
 
+  get powerDEPerAscension() {
+    return Hadrons.darkEnergyAscensionBoost.add(POWER_DE_PER_ASCENSION);
+  }
+
   get powerDM() {
     if (!this.isUnlocked) return DC.D0;
     return Decimal.pow(1.15, this.data.powerDMUpgrades).mul(2).add(1)
@@ -85,33 +89,34 @@ export class DarkMatterDimensionState extends DimensionState {
       .times(this.commonDarkMult)
       .times(Decimal.pow(this.powerDMPerAscension, this.ascensions))
       .timesEffectsOf(SingularityMilestone.darkMatterMult, SingularityMilestone.multFromInfinitied)
-      .times(ExpansionPack.laitelaPack.isBought ? Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)), Decimal.log10(
+      .times((ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)), Decimal.log10(
         player.reality.imaginaryMachines.add(1))) : 1)
       .dividedBy(Decimal.pow(1e4, Decimal.pow(this.tier - 1, 0.5)));
   }
 
   get powerDE() {
-    if (!this.isUnlocked || (Pelle.isDoomed && !PelleDestructionUpgrade.singularityMilestones.isBought)) return DC.D0;
+    if (!this.isUnlocked || (Pelle.isDoomed && !PelleDestructionUpgrade.singularityMilestones.canBeApplied)) return DC.D0;
     const supertier = [1, 1, 1, 1, 1, 5, 12, 54, 252];
     const tierFactor = Decimal.pow(15, (this.tier - 1) * supertier[this.tier]);
     const destabilizeBoost = Laitela.realityRewardDE;
     return this.data.powerDEUpgrades.div(10).add(1)
       .mul(Decimal.pow(1.005, this.data.powerDEUpgrades)).mul(tierFactor).div(1000)
       .times(this.commonDarkMult)
-      .times(Decimal.pow(POWER_DE_PER_ASCENSION, this.ascensions))
-      .times(ExpansionPack.laitelaPack.isBought ? Decimal.pow(Decimal.log10(player.celestials.laitela.singularities.add(1)), 2) : 1)
+      .times(Decimal.pow(this.powerDEPerAscension, this.ascensions))
+      .times((ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? Decimal.pow(Decimal.log10(player.celestials.laitela.singularities.add(1)), 2) : 1)
       .timesEffectsOf(
         SingularityMilestone.darkEnergyMult,
         SingularityMilestone.realityDEMultiplier,
         SingularityMilestone.multFromInfinitied,
         SingularityMilestone.darkEnergyBoost
-      ).mul(destabilizeBoost);
+      ).mul(destabilizeBoost).times(player.disablePostReality ? 1 : AlphaUnlocks.timestudy192.effects.buff.effectOrDefault(1))
+      .pow((!player.disablePostReality && Alpha.currentStage >= 21 && ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality) ? ReplicantiMultipliers.dePow : 1);
   }
 
   get intervalAfterAscension() {
     const purchases = Decimal.affordGeometricSeries(Currency.darkMatter.value, this.rawIntervalCost,
       this.intervalCostIncrease, 0);
-    const intervalReduction = ExpansionPack.laitelaPack.isBought ? 200 : 0;
+    const intervalReduction = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? 200 : 0;
     return Decimal.max(SingularityMilestone.ascensionIntervalScaling.effectOrDefault(new Decimal(1200).sub(intervalReduction))
       .times(this.rawInterval.times(Decimal.pow(INTERVAL_PER_UPGRADE, purchases))), this.intervalPurchaseCap);
   }
@@ -190,31 +195,46 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   buyManyInterval(x) {
-    const cost = this.rawIntervalCost.times(
-      Decimal.pow(this.intervalCostIncrease, x).minus(1)).div(this.intervalCostIncrease.sub(1)).floor();
+    if (Currency.darkMatter.lte(0)) return false;
+    const isBought = this.data.intervalUpgrades;
+    const canBuyTotal = Currency.darkMatter.value.div(INTERVAL_START_COST).div(this.adjustedStartingCost).log(
+      this.intervalCostIncrease).add(1).floor();
+    const gained = new Decimal(x).min(canBuyTotal.sub(isBought)).max(0);
+    const cost = new Decimal(INTERVAL_START_COST).times(this.adjustedStartingCost).times(
+      Decimal.pow(this.intervalCostIncrease, canBuyTotal.sub(1))).floor();
     if (!Currency.darkMatter.purchase(cost)) return false;
     else {
-      this.data.intervalUpgrades = this.data.intervalUpgrades.add(x);
+      this.data.intervalUpgrades = this.data.intervalUpgrades.add(gained);
       return true;
     }
   }
 
   buyManyPowerDM(x) {
-    const cost = this.rawPowerDMCost.times(
-      Decimal.pow(this.powerDMCostIncrease, x).minus(1)).div(this.powerDMCostIncrease.sub(1)).floor();
+    if (Currency.darkMatter.lte(0)) return false;
+    const isBought = this.data.powerDMUpgrades;
+    const canBuyTotal = Currency.darkMatter.value.div(POWER_DM_START_COST).div(this.adjustedStartingCost).log(
+      this.powerDMCostIncrease).add(1).floor();
+    const gained = new Decimal(x).min(canBuyTotal.sub(isBought)).max(0);
+    const cost = new Decimal(POWER_DM_START_COST).times(this.adjustedStartingCost).times(
+      Decimal.pow(this.powerDMCostIncrease, canBuyTotal.sub(1))).floor();
     if (!Currency.darkMatter.purchase(cost)) return false;
     else {
-      this.data.powerDMUpgrades = this.data.powerDMUpgrades.add(x);
+      this.data.powerDMUpgrades = this.data.powerDMUpgrades.add(gained);
       return true;
     }
   }
 
   buyManyPowerDE(x) {
-    const cost = this.rawPowerDECost.times(
-      Decimal.pow(this.powerDECostIncrease, x).minus(1)).div(this.powerDECostIncrease.sub(1)).floor();
+    if (Currency.darkMatter.lte(0)) return false;
+    const isBought = this.data.powerDEUpgrades;
+    const canBuyTotal = Currency.darkMatter.value.div(POWER_DE_START_COST).div(this.adjustedStartingCost).log(
+      this.powerDECostIncrease).add(1).floor();
+    const gained = new Decimal(x).min(canBuyTotal.sub(isBought)).max(0);
+    const cost = new Decimal(POWER_DE_START_COST).times(this.adjustedStartingCost).times(
+      Decimal.pow(this.powerDECostIncrease, canBuyTotal.sub(1))).floor();
     if (!Currency.darkMatter.purchase(cost)) return false;
     else {
-      this.data.powerDEUpgrades = this.data.powerDEUpgrades.add(x);
+      this.data.powerDEUpgrades = this.data.powerDEUpgrades.add(gained);
       return true;
     }
   }
@@ -232,7 +252,7 @@ export class DarkMatterDimensionState extends DimensionState {
   }
 
   get affordableAscensions() {
-    const intervalReduction = ExpansionPack.laitelaPack.isBought ? 200 : 0;
+    const intervalReduction = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? 200 : 0;
     const intervalIncrease = SingularityMilestone.ascensionIntervalScaling.effectOrDefault(new Decimal(1200).sub(intervalReduction));
     const purchasesToMax = Decimal.log(intervalIncrease, DC.D1.div(INTERVAL_PER_UPGRADE));
     const intervalBeyondCap = this.intervalPurchaseCap.div(this.rawInterval);

@@ -12,8 +12,8 @@ export default {
   },
   data() {
     return {
-      achievementPower: 0,
-      achTPEffect: 0,
+      achievementPower: new Decimal(0),
+      achTPEffect: new Decimal(0),
       achCountdown: new Decimal(0),
       totalCountdown: new Decimal(0),
       missingAchievements: 0,
@@ -26,12 +26,15 @@ export default {
       achMultToBH: false,
       achMultToTP: false,
       achMultToTT: false,
-      renderedRowIndices: []
+      renderedRowIndices: [],
+      showPowers: false,
+      achPowers: 0,
+      achPowToTP: 0
     };
   },
   computed: {
     isDoomed: () => Pelle.isDoomed,
-    isDestroyed: () => PelleDestructionUpgrade.achievementMultiplier.isBought,
+    isDestroyed: () => PelleDestructionUpgrade.achievementMultiplier.canBeApplied,
     rows: () => Achievements.allRows,
     renderedRows() {
       return this.rows.filter((_, i) => this.renderedRowIndices.includes(i));
@@ -53,6 +56,23 @@ export default {
       if (this.achMultToTT) boostList.push(`Time Theorem production: ${achievementPower}`);
       return `${boostList.join("<br>")}`;
     },
+    megaBoostText() {
+      const achievementPowers = formatPow(this.achPowers, 2, 3);
+      const achTPPow = formatPow(this.achPowToTP, 2, 3);
+
+      const powersList = [];
+
+      const dimPowList = [];
+      dimPowList.push("Antimatter");
+      if (this.achMultToIDS) dimPowList.push("Infinity");
+      if (this.achMultToTDS) dimPowList.push("Time");
+      powersList.push(`${makeEnumeration(dimPowList)} Dimensions: ${achievementPowers}`);
+
+      if (this.achMultToTP) powersList.push(`Tachyon Particles: ${achTPPow}`);
+      if (this.achMultToBH) powersList.push(`Black Hole Power: ${achievementPowers}`);
+      if (this.achMultToTT) powersList.push(`Time Theorem production: ${achievementPowers}`);
+      return `${powersList.join("<br>")}`;
+    },
   },
   watch: {
     isAutoAchieveActive(newValue) {
@@ -72,8 +92,8 @@ export default {
   methods: {
     update() {
       const gameSpeedupFactor = getGameSpeedupFactor();
-      this.achievementPower = Achievements.power;
-      this.achTPEffect = RealityUpgrade(8).config.effect();
+      this.achievementPower.copyFrom(Achievements.power);
+      this.achTPEffect.copyFrom(RealityUpgrade(8).config.effect());
       this.achCountdown.copyFrom(new Decimal(Achievements.timeToNextAutoAchieve).div(gameSpeedupFactor));
       this.totalCountdown.copyFrom(new Decimal(Achievements.preReality.countWhere(a => !a.isUnlocked) - 1).times(Achievements.period).plus(
         Achievements.timeToNextAutoAchieve).div(gameSpeedupFactor));
@@ -84,9 +104,12 @@ export default {
       this.achMultBreak = BreakInfinityUpgrade.achievementMult.canBeApplied;
       this.achMultToIDS = Achievement(75).isUnlocked;
       this.achMultToTDS = EternityUpgrade.tdMultAchs.isBought;
-      this.achMultToTP = RealityUpgrade(8).isBought && (!Pelle.isDoomed || PelleRealityUpgrade.paradoxicallyAttain.isBought);
-      this.achMultToBH = VUnlocks.achievementBH.canBeApplied || PelleCelestialUpgrade.vMilestones3.isBought;
+      this.achMultToTP = RealityUpgrade(8).isBought && (!Pelle.isDoomed || PelleRealityUpgrade.paradoxicallyAttain.canBeApplied) && !player.disablePostReality;
+      this.achMultToBH = VUnlocks.achievementBH.canBeApplied || PelleCelestialUpgrade.vMilestones3.canBeApplied;
       this.achMultToTT = Ra.unlocks.achievementTTMult.canBeApplied;
+      this.showPowers = ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality;
+      this.achPowers = Achievements.powerConv(Achievements.power);
+      this.achPowToTP = Achievements.powerConv(Decimal.sqrt(Achievements.power));
     },
     startRowRendering() {
       const unlockedRows = [];
@@ -121,8 +144,11 @@ export default {
       return this.renderedRowIndices.includes(row);
     },
     isObscured(row) {
+      if (ImaginaryUpgrade(30).isBought) {
+        return row >= 23;
+      }
       if (PlayerProgress.endgameUnlocked()) {
-        return row >= 19;
+        return row >= 20;
       }
       if (this.isDoomed && !PlayerProgress.endgameUnlocked()) {
         return row >= 18;
@@ -159,6 +185,10 @@ export default {
       <span v-else>
         Achievements provide a multiplier to<SwapAchievementImagesButton />
         <div v-html="boostText" />
+      </span>
+      <span v-if="showPowers">
+        Achievements also provide powers to<SwapAchievementImagesButton />
+        <div v-html="megaBoostText" />
       </span>
     </div>
     <div class="c-achievements-tab__header">

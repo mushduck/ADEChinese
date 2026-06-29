@@ -7,6 +7,10 @@ window.PRESTIGE_EVENT = {
   ETERNITY: 3,
   REALITY: 4,
   ENDGAME: 5,
+  CELESTIAL_INFINITY: 6,
+  CELESTIAL_ETERNITY: 7,
+  CONDENSE: 8,
+  SUPERNOVA: 9
 };
 
 function deepFreeze(obj) {
@@ -65,6 +69,7 @@ window.DC = deepFreeze({
   D18:                  new Decimal("18"),
   D19:                  new Decimal("19"),
   D20:                  new Decimal("20"),
+  D24:                  new Decimal("24"),
   D60:                  new Decimal("60"),
   D80:                  new Decimal("80"),
   D99:                  new Decimal("99"),
@@ -83,6 +88,7 @@ window.DC = deepFreeze({
   C1D1_1245:                Decimal.div(1, 1.1245),
   D2P30D0_61:               Decimal.pow(2, 30 / 0.61),
   C2P30:                    Decimal.pow(2, 30),
+  C2P140:                   Decimal.pow(2, 140),
   C2P1024:                  Decimal.pow(2, 1024),
   C10P16000D3:              Decimal.pow(10, 16000 / 3),
 
@@ -99,10 +105,13 @@ window.DC = deepFreeze({
   E12:                  new Decimal("1e12"),
   E15:                  new Decimal("1e15"),
   E20:                  new Decimal("1e20"),
+  E21:                  new Decimal("1e21"),
   E25:                  new Decimal("1e25"),
+  E28:                  new Decimal("1e28"),
   E29:                  new Decimal("1e29"),
   E30:                  new Decimal("1e30"),
   E31:                  new Decimal("1e31"),
+  E36:                  new Decimal("1e36"),
   E40:                  new Decimal("1e40"),
   E45:                  new Decimal("1e45"),
   E50:                  new Decimal("1e50"),
@@ -140,6 +149,7 @@ window.DC = deepFreeze({
   E616:                 new Decimal("1e616"),
   E650:                 new Decimal("1e650"),
   E750:                 new Decimal("1e750"),
+  E800:                 new Decimal("1e800"),
   E850:                 new Decimal("1e850"),
   E900:                 new Decimal("1e900"),
   E925:                 new Decimal("1e925"),
@@ -150,10 +160,14 @@ window.DC = deepFreeze({
   E1300:                new Decimal("1e1300"),
   E1400:                new Decimal("1e1400"),
   E1500:                new Decimal("1e1500"),
+  E1600:                new Decimal("1e1600"),
+  E1640:                new Decimal("1e1640"),
+  E1650:                new Decimal("1e1650"),
   E1750:                new Decimal("1e1750"),
   E1800:                new Decimal("1e1800"),
   E1900:                new Decimal("1e1900"),
   E2000:                new Decimal("1e2000"),
+  E2200:                new Decimal("1e2200"),
   E2350:                new Decimal("1e2350"),
   E2400:                new Decimal("1e2400"),
   E2500:                new Decimal("1e2500"),
@@ -165,6 +179,7 @@ window.DC = deepFreeze({
   E3000:                new Decimal("1e3000"),
   E3200:                new Decimal("1e3200"),
   E3350:                new Decimal("1e3350"),
+  E3600:                new Decimal("1e3600"),
   E4000:                new Decimal("1e4000"),
   E5000:                new Decimal("1e5000"),
   E6000:                new Decimal("1e6000"),
@@ -239,7 +254,19 @@ window.AUTO_CRUNCH_MODE = {
   X_HIGHEST: 2
 };
 
+window.AUTO_CELESTIAL_CRUNCH_MODE = {
+  AMOUNT: 0,
+  TIME: 1,
+  X_HIGHEST: 2
+};
+
 window.AUTO_ETERNITY_MODE = {
+  AMOUNT: 0,
+  TIME: 1,
+  X_HIGHEST: 2
+};
+
+window.AUTO_CELESTIAL_ETERNITY_MODE = {
   AMOUNT: 0,
   TIME: 1,
   X_HIGHEST: 2
@@ -279,6 +306,34 @@ window.GLYPH_MIME_TYPE = "text/x-ivark-glyph";
 // in order for reality glyph color parsing to work properly in the cosmetic handler
 window.GlyphRarities = [
   {
+    minStrength: 8.5,
+    name: "Perfect",
+    darkColor: "#800000",
+    lightColor: "#800000",
+    darkHighContrast: "#900000",
+    lightHighContrast: "#a00000"
+  }, {
+    minStrength: 6,
+    name: "Superlunary",
+    darkColor: "#c0c040",
+    lightColor: "#c0c040",
+    darkHighContrast: "#e0e060",
+    lightHighContrast: "#ffff80"
+  }, {
+    minStrength: 5.375,
+    name: "Sublime",
+    darkColor: "#20c0a0",
+    lightColor: "#20c0a0",
+    darkHighContrast: "#00e0a0",
+    lightHighContrast: "#00ffc0"
+  }, {
+    minStrength: 4.75,
+    name: "Empyrean",
+    darkColor: "#c03000",
+    lightColor: "#c03000",
+    darkHighContrast: "#e03800",
+    lightHighContrast: "#ff4000"
+  }, {
     minStrength: 4.125,
     name: "Elysian",
     darkColor: "#8020a0",

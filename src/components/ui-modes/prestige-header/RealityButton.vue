@@ -5,10 +5,13 @@ export default {
     return {
       canReality: false,
       showSpecialEffect: false,
+      beatingAlpha: false,
+      readyToWarp: false,
       hasRealityStudy: false,
       machinesGained: new Decimal(),
       projectedRM: new Decimal(),
       newIMCap: new Decimal(),
+      newDMCap: new Decimal(),
       realityTime: 0,
       glyphLevel: 0,
       nextGlyphPercent: 0,
@@ -36,8 +39,11 @@ export default {
       if (this.machinesGained.eq(0) && this.newIMCap.eq(0)) {
         return `(Projected: ${format(this.projectedRM, 2)} RM)`;
       }
-      if (this.newIMCap.neq(0)) {
-        return `(iM Cap: ${formatMachines(0, this.newIMCap)})`;
+      if (this.newIMCap.neq(0) && this.newDMCap.eq(0)) {
+        return `(iM Cap: ${formatMachines(0, this.newIMCap, 0)})`;
+      }
+      if (this.newDMCap.neq(0)) {
+        return `(εM Cap: ${formatMachines(0, 0, this.newDMCap)})`;
       }
       if (this.machinesGained.lt(Number.MAX_VALUE)) {
         return `(${format(this.machinesGained.divide(this.realityTime), 2, 2)} RM/min)`;
@@ -54,11 +60,16 @@ export default {
     shardsGainedText() {
       return quantify("Relic Shard", this.shardsGained, 2);
     },
+    warpMessage() {
+      return false ? "Curse Your Reality" : "Enter Pelle's Domain";
+    },
     classObject() {
       return {
-        "c-reality-button--unlocked": this.canReality,
-        "c-reality-button--locked": !this.canReality,
+        "c-reality-button--unlocked": this.canReality || this.readyToWarp,
+        "c-reality-button--locked": !this.canReality && !this.readyToWarp,
         "c-reality-button--special": this.showSpecialEffect,
+        "c-reality-button--alpha": this.beatingAlpha,
+        "c-reality-button--warp": this.readyToWarp
       };
     }
   },
@@ -74,6 +85,8 @@ export default {
       this.hasRealityStudy = TimeStudy.reality.isBought;
       this.canReality = isRealityAvailable();
       this.showSpecialEffect = this.hasSpecialReward();
+      this.beatingAlpha = Alpha.isRunning && Currency.eternityPoints.value.add(1).log10().gt(4000);
+      this.readyToWarp = CelestialEternityPlusUpgrade.oldStoneSlabAndSteelDrill.isBought;
       if (!this.canReality) {
         this.sGained = new Decimal(0);
         return;
@@ -93,6 +106,7 @@ export default {
       this.projectedRM = MachineHandler.gainedRealityMachines.times(multiplier)
         .clampMax(MachineHandler.hardcapRM);
       this.newIMCap.copyFrom(MachineHandler.projectedIMCap);
+      this.newDMCap.copyFrom(MachineHandler.projectedDMCap);
       this.machinesGained = this.projectedRM.clampMax(MachineHandler.distanceToRMCap);
       this.realityTime = Time.thisRealityRealTime.totalMinutes.toNumber();
       this.glyphLevel = gainedGlyphLevel().actualLevel;
@@ -116,7 +130,11 @@ export default {
         [Teresa.isRunning, teresaReward, teresaThreshold]];
     },
     handleClick() {
-      if (this.canReality) {
+      if (this.readyToWarp) {
+        Modal.message.show(`This feature will be available in v2.0. Thank you for playing Antimatter Dimensions: Endgame!`, {}, 3);
+        //requestRealityWarp();
+      }
+      else if (this.canReality) {
         requestManualReality();
       }
     },
@@ -147,7 +165,10 @@ export default {
       @click="handleClick"
     >
       <div class="l-reality-button__contents">
-        <template v-if="canReality">
+        <template v-if="readyToWarp">
+          <div>{{ warpMessage }}</div>
+        </template>
+        <template v-else-if="canReality">
           <div class="c-reality-button__header">
             Make a new Reality
           </div>
@@ -161,7 +182,7 @@ export default {
           <div>Purchase the study in the Eternity tab to unlock a new Reality</div>
         </template>
         <div
-          v-if="canReality"
+          v-if="canReality && !readyToWarp"
           class="infotooltiptext"
         >
           <div>Other resources gained:</div>

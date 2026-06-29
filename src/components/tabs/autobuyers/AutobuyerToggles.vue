@@ -26,6 +26,10 @@ export default {
         ImaginaryUpgrade(21).tryShowWarningModal();
         return;
       }
+      if (DualityUpgrade(21).isLockingMechanics && !newValue) {
+        DualityUpgrade(21).tryShowWarningModal();
+        return;
+      }
       Laitela.setContinuum(!newValue);
     }
   },

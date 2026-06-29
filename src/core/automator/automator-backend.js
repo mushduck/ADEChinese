@@ -451,8 +451,8 @@ export const AutomatorBackend = {
   },
 
   get currentInterval() {
-    if (EndgameMastery(21).isBought) return Math.clampMin(Math.pow(0.94, Currency.realities.value) * 500, 1);
-    return Math.clampMin(Math.pow(0.994, Currency.realities.value) * 500, 1);
+    if (EndgameMastery(21).isBought && !player.disablePostReality) return Math.clampMin(Math.pow(0.94, Currency.realities.value.toNumber()) * 500, 1);
+    return Math.clampMin(Math.pow(0.994, Currency.realities.value.toNumber()) * 500, 1);
   },
 
   get currentRawText() {

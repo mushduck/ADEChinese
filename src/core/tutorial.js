@@ -22,7 +22,7 @@ const tutorialStates = [
   },
   {
     id: TUTORIAL_STATE.TICKSPEED,
-    condition: () => AntimatterDimension(2).bought > 0
+    condition: () => AntimatterDimension(2).bought.gt(0)
   },
   {
     id: TUTORIAL_STATE.DIMBOOST,
@@ -49,7 +49,7 @@ export const Tutorial = {
   // this will remain visible until a galaxy can be purchased
   emphasizeH2P() {
     const hasFirstBoost = player.tutorialState > TUTORIAL_STATE.DIMBOOST || player.dimensionBoosts.gt(0);
-    return player.records.fullGameCompletions === 0 && !hasFirstBoost;
+    return player.records.fullGameCompletions === 0 && !PlayerProgress.endgameUnlocked() && !hasFirstBoost;
   },
 
   // Turns off the visual effect

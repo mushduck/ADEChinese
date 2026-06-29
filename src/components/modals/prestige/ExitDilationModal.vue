@@ -32,7 +32,7 @@ export default {
       // opened while switching between dilated/regular. The only thing this results in is an incorrect TP gain value
       if (!player.dilation.active) this.emitClose();
       this.tachyonGain.copyFrom(getTachyonGain(true));
-      this.isDoomed = Pelle.isDoomed;
+      this.isDoomed = Pelle.isDoomed && !PelleStrikes.dilation.isDestroyed();
     },
     handleYesClick() {
       if (!player.dilation.active) return;

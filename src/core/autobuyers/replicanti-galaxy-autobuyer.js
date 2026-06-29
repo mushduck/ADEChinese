@@ -10,7 +10,7 @@ export class ReplicantiGalaxyAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return EternityMilestone.autobuyerReplicantiGalaxy.isReached;
+    return EternityMilestone.autobuyerReplicantiGalaxy.isReached || (LHC.voidRunning && NullUpgrade.limerick5.isBought);
   }
 
   get isEnabled() {

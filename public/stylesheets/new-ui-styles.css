@@ -13,6 +13,7 @@
   --color-infinity--bg: #b67f334d;
   --color-eternity--bg: #b341e04d;
   --color-celestials--bg: #5151ec4d;
+  --color-divinity--bg: #ed143d4d;
 }
 
 :root .t-s12 {
@@ -185,6 +186,14 @@ body.t-s12 {
   border-left-color: var(--color-endgame);
 }
 
+.o-tab-btn--cd-expansion::after {
+  border-left-color: var(--color-alpha--base);
+}
+
+.o-tab-btn--divinity::after {
+  border-left-color: var(--color-pelle--base);
+}
+
 .tab-button.shop {
   background-color: #d9bb26;
 }
@@ -256,7 +265,7 @@ body.t-s12 {
 }
 
 .o-subtab__tooltip {
-  width: 20rem;
+  width: 25rem;
   height: 3rem;
   position: absolute;
   bottom: 100%;
@@ -269,7 +278,7 @@ body.t-s12 {
   background: var(--color-base);
   border: 0.1rem solid var(--color-accent);
   border-radius: var(--var-border-radius, 0.4rem);
-  margin-left: -7.7rem;
+  margin-left: -10.2rem;
   transition-duration: 0.2s;
   pointer-events: none;
 }
@@ -347,6 +356,26 @@ body.t-s12 {
 
 .o-tab-btn--endgame .o-subtab__tooltip::after {
   border-top-color: var(--color-endgame);
+}
+
+.o-tab-btn--cd-expansion .o-subtab__tooltip {
+  color: var(--color-alpha--base);
+  background-color: var(--color-prestige--accent);
+  border-color: var(--color-alpha--base);
+}
+
+.o-tab-btn--cd-expansion .o-subtab__tooltip::after {
+  border-top-color: var(--color-alpha--base);
+}
+
+.o-tab-btn--divinity .o-subtab__tooltip {
+  color: var(--color-pelle--base);
+  background: var(--color-prestige--accent);
+  border-color: var(--color-pelle--base);
+}
+
+.o-tab-btn--divinity .o-subtab__tooltip::after {
+  border-top-color: var(--color-pelle--base);
 }
 
 .active {
@@ -484,6 +513,60 @@ body.t-s12 {
 .btn-big-crunch:hover {
   color: black;
   background-color: var(--color-infinity);
+}
+
+.btn-celestial-crunch {
+  z-index: 1;
+  font-family: Typewriter;
+  font-size: 5rem;
+  color: var(--color-celestials);
+  background-color: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-celestials);
+  border-radius: var(--var-border-radius, 0.5rem);
+  padding: 2rem;
+  transition-duration: 0.15s;
+  cursor: pointer;
+}
+
+.btn-celestial-crunch:hover {
+  color: black;
+  background-color: var(--color-celestials);
+}
+
+.btn-divinity {
+  z-index: 1;
+  font-family: Typewriter;
+  font-size: 5rem;
+  color: var(--color-pelle--base);
+  background-color: black;
+  border: var(--var-border-width, 0.2rem) solid var(--color-pelle--base);
+  border-radius: var(--var-border-radius, 0.5rem);
+  padding: 2rem;
+  transition-duration: 0.15s;
+  cursor: pointer;
+}
+
+.btn-divinity:hover {
+  color: black;
+  background-color: var(--color-pelle--base);
+}
+
+.btn-nullify {
+  z-index: 1;
+  font-family: Typewriter;
+  font-size: 5rem;
+  color: white;
+  background-color: black;
+  border: var(--var-border-width, 0.2rem) solid white;
+  border-radius: var(--var-border-radius, 0.5rem);
+  padding: 2rem;
+  transition-duration: 0.15s;
+  cursor: pointer;
+}
+
+.btn-nullify:hover {
+  color: black;
+  background-color: white;
 }
 
 .t-normal .c-game-header__tesseract-available,
@@ -695,6 +778,10 @@ body.t-s12 {
   background-color: var(--color-celestials--bg);
 }
 
+.l-dimension-row-divine-dim:nth-child(even) {
+  background-color: var(--color-divinity--bg);
+}
+
 .c-infinity-dim-description__accent {
   color: var(--color-infinity);
 }
@@ -784,6 +871,33 @@ body.t-s12 {
   height: 4.4rem;
 }
 
+.c-divine-dim-description__accent {
+  color: var(--color-pelle--base);
+}
+
+.c-divine-dim-row:nth-child(even) {
+  background: rgba(237, 20, 61, 30%);
+}
+
+.s-base--metro .c-divine-dim-row:nth-child(even) {
+  background: rgba(237, 20, 61, 30%);
+}
+
+.c-divine-dim-row__multiplier {
+  font-size: 1.4rem;
+}
+
+.o-primary-btn--buy-vd {
+  width: 30rem;
+  height: 4.4rem;
+  margin: 0 0.5rem;
+}
+
+.o-primary-btn--vd-auto {
+  width: 9rem;
+  height: 4.4rem;
+}
+
 .c-modern-dim-tooltip-container {
   position: relative;
 }
@@ -836,6 +950,30 @@ body.t-s12 {
 }
 
 .c-hint-text--reality-upgrade {
+  font-size: 0.95rem;
+}
+
+.l-hint-text--endgame-upgrade {
+  top: -1.3rem;
+}
+
+.c-hint-text--endgame-upgrade {
+  font-size: 0.95rem;
+}
+
+.l-hint-text--divinity-upgrade {
+  top: -1.3rem;
+}
+
+.c-hint-text--divinity-upgrade {
+  font-size: 0.95rem;
+}
+
+.l-hint-text--resurgence-upgrade {
+  top: -1.3rem;
+}
+
+.c-hint-text--resurgence-upgrade {
   font-size: 0.95rem;
 }
 
@@ -906,8 +1044,29 @@ body.t-s12 {
   color: var(--color-infinity);
 }
 
+.c-game-header__cip-amount {
+  background: linear-gradient(var(--color-infinity), var(--color-celestials));
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
 .c-game-header__ep-amount {
   color: var(--color-eternity);
+}
+
+.c-game-header__cep-amount {
+  background: linear-gradient(var(--color-eternity), var(--color-celestials));
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.c-game-header__vs-amount {
+  background: linear-gradient(red, yellow, cyan);
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
 }
 
 .t-normal .c-game-header__antimatter,

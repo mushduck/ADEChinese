@@ -34,10 +34,14 @@ export default {
       showInstability: false,
       showHigherInstability: false,
       showMoreHigherInstability: false,
+      showEvenMoreHigherInstability: false,
+      showStillEvenMoreHigherInstability: false,
       instabilityThreshold: 0,
       hyperInstabilityThreshold: 0,
       extremeInstabilityThreshold: 0,
       immenseInstabilityThreshold: 0,
+      extensiveInstabilityThreshold: 0,
+      prodigiousInstabilityThreshold: 0,
       isInCelestialReality: false,
       canAmplify: false,
       glyphTextColors: true,
@@ -65,10 +69,14 @@ export default {
       this.showInstability = player.records.bestReality.glyphLevel > 800 || player.records.bestEndgame.glyphLevel > 800;
       this.showHigherInstability = player.records.bestEndgame.glyphLevel > 60000;
       this.showMoreHigherInstability = player.records.bestEndgame.glyphLevel > 160000;
-      this.instabilityThreshold = Glyphs.instabilityThreshold;
-      this.hyperInstabilityThreshold = Glyphs.hyperInstabilityThreshold;
-      this.extremeInstabilityThreshold = Glyphs.extremeInstabilityThreshold;
-      this.immenseInstabilityThreshold = Glyphs.immenseInstabilityThreshold;
+      this.showEvenMoreHigherInstability = player.records.bestEndgame.glyphLevel > 800000;
+      this.showStillEvenMoreHigherInstability = player.records.bestEndgame.glyphLevel > 2000000;
+      this.instabilityThreshold = Math.floor(Glyphs.instabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
+      this.hyperInstabilityThreshold = Math.floor(Glyphs.hyperInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
+      this.extremeInstabilityThreshold = Math.floor(Glyphs.extremeInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
+      this.immenseInstabilityThreshold = Math.floor(Glyphs.immenseInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
+      this.extensiveInstabilityThreshold = Math.floor(Glyphs.extensiveInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
+      this.prodigiousInstabilityThreshold = Math.floor(Glyphs.prodigiousInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
       this.isInCelestialReality = isInCelestialReality();
       this.canAmplify = Enslaved.isUnlocked && !this.isInCelestialReality;
       this.autoRestartCelestialRuns = player.options.retryCelestial;
@@ -170,6 +178,12 @@ export default {
           </div>
           <div v-if="showMoreHigherInstability">
             Past level {{ formatInt(immenseInstabilityThreshold) }}, higher Glyph levels become not much more than a dream.
+          </div>
+          <div v-if="showEvenMoreHigherInstability">
+            Beyond level {{ formatInt(extensiveInstabilityThreshold) }}, just pretend higher Glyph levels don't exist.
+          </div>
+          <div v-if="showStillEvenMoreHigherInstability">
+            Upon exceeding level {{ formatInt(prodigiousInstabilityThreshold) }}, your Glyph Levels just die.
           </div>
         </div>
         <SingleGlyphCustomzationPanel />

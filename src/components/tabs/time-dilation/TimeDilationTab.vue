@@ -178,8 +178,6 @@ export default {
     </span>
     <span v-if="viewSoftcap">
       Dilated Time has been softcapped. This effect started at {{ format(softcapStart, 2, 1) }} Dilated Time.
-      <br>
-      Note that you may not immediately encounter the softcap as it applies before the Game Speed effect.
     </span>
     <div class="l-dilation-upgrades-grid">
       <div

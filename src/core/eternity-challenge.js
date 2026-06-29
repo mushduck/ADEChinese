@@ -128,6 +128,9 @@ export class EternityChallengeState extends GameMechanicState {
   }
 
   get initialGoal() {
+    if (Alpha.isRunning && this.config.alphaGoal) {
+      return this.config.alphaGoal;
+    }
     if (Pelle.isDoomed && this.config.pelleGoal && this.config.hasPelleGoal()) {
       return this.config.pelleGoal;
     }
@@ -135,6 +138,9 @@ export class EternityChallengeState extends GameMechanicState {
   }
 
   get goalIncrease() {
+    if (Alpha.isRunning && this.config.alphaGoalIncrease) {
+      return this.config.alphaGoalIncrease;
+    }
     if (Pelle.isDoomed && this.config.pelleGoalIncrease && this.config.hasPelleGoal()) {
       return this.config.pelleGoalIncrease;
     }
@@ -142,6 +148,7 @@ export class EternityChallengeState extends GameMechanicState {
   }
 
   get currentGoal() {
+    if (this.id === 11 && Alpha.isRunning && Alpha.currentStage >= 22) return this.goalAtCompletions(4);
     return this.goalAtCompletions(this.completions);
   }
 
@@ -330,11 +337,11 @@ export const EternityChallenges = {
       const hasUpgradeLock = RealityUpgrade(12).isLockingMechanics ||
         (ImaginaryUpgrade(15).isLockingMechanics && shouldPreventEC7 &&
           !Array.range(1, 6).some(ec => !EternityChallenge(ec).isFullyCompleted));
-      if (!player.reality.autoEC || (Pelle.isDisabled("autoec") && !PellePerkUpgrade.perkPEC1.isBought) || hasUpgradeLock) {
+      if (!player.reality.autoEC || (Pelle.isDisabled("autoec") && (!PellePerkUpgrade.perkPEC1.canBeApplied || player.disablePostReality)) || hasUpgradeLock) {
         player.reality.lastAutoEC = Math.clampMax(player.reality.lastAutoEC, this.interval);
         return;
       }
-      if (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought) {
+      if ((Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality) {
         let next = this.nextChallenge;
         while (next !== undefined) {
           while (!next.isFullyCompleted) {
@@ -360,7 +367,7 @@ export const EternityChallenges = {
     },
 
     get interval() {
-      if (!Perk.autocompleteEC1.canBeApplied && !EndgameMastery(22).isBought) return Infinity;
+      if ((!Perk.autocompleteEC1.canBeApplied && !EndgameMastery(22).isBought) || player.disablePostReality) return Infinity;
       let startingmin = 1e300;
       if (EndgameMastery(22).isBought) startingmin = 60;
       let minutes = new Decimal(Effects.min(
@@ -371,7 +378,7 @@ export const EternityChallenges = {
       ));
       minutes = minutes.div(EndgameMastery(22).effectOrDefault(1));
       minutes = minutes.div(VUnlocks.fastAutoEC.effectOrDefault(1));
-      if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones2.isBought && VUnlocks.fastAutoEC.effectValue.gt(1)) {
+      if (Pelle.isDoomed && PelleCelestialUpgrade.vMilestones2.canBeApplied && VUnlocks.fastAutoEC.effectValue.gt(1)) {
         minutes = minutes.div(VUnlocks.fastAutoEC.effectValue);
       }
       return TimeSpan.fromMinutes(minutes).totalMilliseconds.toNumber();

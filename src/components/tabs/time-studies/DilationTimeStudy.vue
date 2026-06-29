@@ -54,13 +54,13 @@ export default {
     update() {
       if (this.id === 1) {
         this.maxTT.copyFrom(Currency.timeTheorems.max);
-        this.showRequirement = !this.study.isBought && !Perk.bypassECDilation.canBeApplied;
+        this.showRequirement = !this.study.isBought && (!Perk.bypassECDilation.canBeApplied || player.disablePostReality);
       }
       if (this.id === 6) {
         this.showRequirement = !Pelle.isDoomed;
       }
       this.currTT.copyFrom(Currency.timeTheorems.value);
-      this.ttGen.copyFrom(getTTPerSecond().times(getGameSpeedupFactor()));
+      this.ttGen.copyFrom(getTTPerSecond().times(Alpha.isRunning ? 1 : getGameSpeedupFactor()));
     },
     clickHandler() {
       switch (this.id) {

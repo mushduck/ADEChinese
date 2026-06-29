@@ -22,9 +22,9 @@ export default {
       isEnslavedRunning: false,
       isAnyAutobuyerUnlocked: false,
       conversionRate: 0,
-      nextDimCapIncrease: 0,
+      nextDimCapIncrease: new Decimal(0),
       tesseractCost: new Decimal(0),
-      totalDimCap: 0,
+      totalDimCap: new Decimal(0),
       canBuyTesseract: false,
       enslavedCompleted: false,
       boughtTesseracts: 0,
@@ -35,10 +35,15 @@ export default {
       infinityDimCompressionMagnitude: 0,
       infinityDimOverflow: 0,
       infinityDimStart: new Decimal(0),
+      infinityDimCompressionMagnitude2: 0,
+      infinityDimOverflow2: 0,
+      infinityDimStart2: new Decimal(0),
+      hasSecond: false,
       freeTesseractSoftcap: 0,
       freeTesseractHardcap: 0,
       isAutoUnlocked: false,
       isAutoActive: false,
+      isAlphaDestroyed: false,
     };
   },
   computed: {
@@ -73,11 +78,11 @@ export default {
       }
       this.isEnslavedRunning = Enslaved.isRunning;
       this.isAnyAutobuyerUnlocked = Autobuyer.infinityDimension(1).isUnlocked;
-      this.nextDimCapIncrease = Tesseracts.nextTesseractIncrease;
+      this.nextDimCapIncrease.copyFrom(Tesseracts.nextTesseractIncrease);
       this.tesseractCost.copyFrom(Tesseracts.nextCost);
-      this.totalDimCap = InfinityDimensions.totalDimCap;
+      this.totalDimCap.copyFrom(InfinityDimensions.totalDimCap);
       this.canBuyTesseract = Tesseracts.canBuyTesseract;
-      this.enslavedCompleted = Enslaved.isCompleted;
+      this.enslavedCompleted = Enslaved.isCompleted && !player.disablePostReality;
       this.boughtTesseracts = Tesseracts.bought * Tesseracts.totalMult;
       this.extraTesseracts = Tesseracts.extra * Tesseracts.totalMult;
       this.creditsClosed = GameEnd.creditsEverClosed;
@@ -85,11 +90,16 @@ export default {
       this.infinityDimCompressionMagnitude = InfinityDimensions.compressionMagnitude;
       this.infinityDimOverflow = 1 / this.infinityDimCompressionMagnitude;
       this.infinityDimStart = InfinityDimensions.OVERFLOW;
+      this.infinityDimCompressionMagnitude2 = InfinityDimensions.compressionMag2;
+      this.infinityDimOverflow2 = 1 / this.infinityDimCompressionMagnitude2;
+      this.infinityDimStart2 = InfinityDimensions.OVERFLOW_SQUARED;
+      this.hasSecond = Currency.infinityPower.gte(DC.ENUMMAX);
       this.freeTesseractSoftcap = Tesseracts.freeSoftcapStart;
       this.freeTesseractHardcap = this.freeTesseractSoftcap * 2;
       const auto = Autobuyer.tesseract;
       this.isAutoUnlocked = auto.isUnlocked;
       this.isAutoActive = auto.isActive;
+      this.isAlphaDestroyed = Alpha.isDestroyed;
     },
     maxAll() {
       InfinityDimensions.buyMax();
@@ -158,6 +168,18 @@ export default {
         </span>
       </p>
     </div>
+    <div>
+      <p>
+        <span v-if="hasSecond">
+          Your Infinity Dimension Compression^2 Magnitude is
+          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude2, 2, 3) }}</span>,
+          which raises all Infinity Dimension Multipliers to the power of
+          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow2, 2, 3) }}</span>
+          while above
+          <span>{{ formatPostBreak(infinityDimStart2, 2, 1) }}</span>.
+        </span>
+      </p>
+    </div>
     <div
       v-if="enslavedCompleted"
       class="l-infinity-dim-tab__enslaved-reward-container"
@@ -188,9 +210,11 @@ export default {
     </div>
     <div>
       Free Tesseracts are softcapped past {{ format(freeTesseractSoftcap, 2, 2) }}.
-      <br>
-      This softcap causes Tesseracts past {{ format(freeTesseractSoftcap, 2, 2) }} to eternally approach
-      a hardcap of {{ format(freeTesseractHardcap, 2, 2) }} without ever actually reaching it.
+      <div v-if="!isAlphaDestroyed">
+        <br>
+        This softcap causes Tesseracts past {{ format(freeTesseractSoftcap, 2, 2) }} to eternally approach
+        a hardcap of {{ format(freeTesseractHardcap, 2, 2) }} without ever actually reaching it.
+      </div>
     </div>
     <div v-if="isEnslavedRunning">
       All Infinity Dimensions are limited to a single purchase.

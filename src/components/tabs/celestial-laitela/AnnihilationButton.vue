@@ -32,7 +32,7 @@ export default {
       this.matterRequirement = Laitela.annihilationDMRequirement;
       this.darkMatterMultRatio.copyFrom(Laitela.darkMatterMultRatio);
       this.isEnabled = player.auto.annihilation.isActive;
-      this.modeUnlocked = ExpansionPack.laitelaPack.isBought;
+      this.modeUnlocked = ExpansionPack.laitelaPack.isBought && !player.disablePostReality;
       this.annihilationMode = player.auto.annihilation.mode;
       this.isBasic = this.annihilationMode === 0;
     },
@@ -124,4 +124,3 @@ export default {
     </button>
   </div>
 </template>
-

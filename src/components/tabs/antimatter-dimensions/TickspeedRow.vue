@@ -3,8 +3,8 @@ export default {
   name: "TickspeedRow",
   data() {
     return {
-      purchasedTickspeed: 0,
-      freeTickspeed: 0,
+      purchasedTickspeed: new Decimal(0),
+      freeTickspeed: new Decimal(0),
       isVisible: false,
       mult: new Decimal(0),
       cost: new Decimal(0),
@@ -13,7 +13,7 @@ export default {
       gameSpeedMult: new Decimal(1),
       galaxyCount: new Decimal(0),
       isContinuumActive: false,
-      continuumValue: 0,
+      continuumValue: new Decimal(0),
       hasTutorial: false,
       hasRealityButton: false,
       isEC9: false,
@@ -41,15 +41,15 @@ export default {
     upgradeCount() {
       const purchased = this.purchasedTickspeed;
       if (!this.freeTickspeed) return quantifyHybridLarge("Purchased Upgrade", purchased);
-      if (purchased === 0 || this.isContinuumActive) return `${formatHybridLarge(this.freeTickspeed, 3)} Free Upgrades`;
+      if (purchased.eq(0) || this.isContinuumActive) return `${formatHybridLarge(this.freeTickspeed, 3)} Free Upgrades`;
       return `${formatHybridLarge(purchased, 3)} Purchased + ${formatHybridLarge(this.freeTickspeed, 3)} Free`;
     }
   },
   methods: {
     update() {
       this.hasRealityButton = PlayerProgress.realityUnlocked() || TimeStudy.reality.isBought;
-      this.purchasedTickspeed = player.totalTickBought;
-      this.freeTickspeed = FreeTickspeed.amount;
+      this.purchasedTickspeed.copyFrom(player.totalTickBought);
+      this.freeTickspeed.copyFrom(FreeTickspeed.amount);
       this.isEC9 = EternityChallenge(9).isRunning;
       this.isVisible = Tickspeed.isUnlocked || this.isEC9;
       if (!this.isVisible) return;
@@ -60,7 +60,7 @@ export default {
       this.gameSpeedMult.copyFrom(getGameSpeedupForDisplay());
       this.galaxyCount.copyFrom(player.galaxies);
       this.isContinuumActive = Laitela.continuumActive;
-      if (this.isContinuumActive) this.continuumValue = Tickspeed.continuumValue;
+      if (this.isContinuumActive) this.continuumValue.copyFrom(Tickspeed.continuumValue);
       this.hasTutorial = Tutorial.isActive(TUTORIAL_STATE.TICKSPEED);
     },
     buttonClass() {

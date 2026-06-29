@@ -130,7 +130,7 @@ class VUnlockState extends BitUpgradeState {
   }
 
   onUnlock() {
-    GameUI.notify.success(this.description);
+    if (!VUpgrade.auto.isCapped) GameUI.notify.success(this.description);
   }
 }
 
@@ -225,7 +225,8 @@ export const V = {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
       else sum += player.celestials.v.runUnlocks[i] * 2;
     }
-    this.spaceTheorems = sum * (ExpansionPack.vPack.isBought ? 2 : 1) * Ra.unlocks.spaceTheoremBoost.effectOrDefault(1);
+    this.spaceTheorems = player.disablePostReality ? 0 : sum * (ExpansionPack.vPack.isBought ? 2 : 1) *
+      Ra.unlocks.spaceTheoremBoost.effectOrDefault(1) * Effects.product(ResurgenceUpgrade.synergy3);
   },
   reset() {
     player.celestials.v = {
@@ -247,7 +248,7 @@ export const V = {
     return player.celestials.v.run;
   },
   get isFlipped() {
-    return Ra.unlocks.unlockHardV.isUnlocked;
+    return Ra.unlocks.unlockHardV.isUnlocked && !player.disablePostReality;
   },
   get isFullyCompleted() {
     return this.spaceTheorems >= 66;

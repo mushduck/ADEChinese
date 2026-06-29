@@ -9,6 +9,90 @@ export const changelog = [
    * }
    */
   {
+    date: [2026, 6, 29],
+    name: "v1.0.0: The True Darkness Arises",
+    info: `
+The update took 5 hours, but due to Time Dilation one hour is equivalent to a month of real time.
+<br>
+<br>
+<b><i>I really hope you enjoy the update!</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>Alpha</li>
+<li>Celestial Dimension Expansion (all layers)</li>
+<li>Duality</li>
+<li>FOUR new Achievement rows</li>
+<li>Divinity</li>
+<li>Hypercubes</li>
+<li>Effarig's Second Shop</li>
+<li>Effarig's Endgame</li>
+<li>Three types of Hadrons</li>
+<li>Divine Dimensions</li>
+<li>Divinity Upgrades</li>
+<li>Resurgence Upgrades</li>
+<li>The Large Hadron Collider</li>
+<li>The Void</li>
+<li>Ethereal Extension</li>
+<li>Stars</li>
+<li>Star Power</li>
+<li>Condense</li>
+<li>Supernova</li>
+<li>Pelle's Domain</li>
+<li>Honse</li>
+<li>Horse theme (try importing it)</li>
+<li>A bunch of visuals, mainly in the Celestial Navigation menu</li>
+<li>More sidebar resources</li>
+<li>More statistics</li>
+<li>Added quotes. Too many quotes. Way too many-</li>
+<li>Further game balance, as sloppy as it is</li>
+<li>Alpha Crystals</li>
+<li>Several new Glyph Rarities</li>
+<li>Two new layers of Glyph Instability</li>
+<li>A few HTP entires, more coming soon</li>
+<li>A Celestial that finds who asked</li>
+<li>Four more Galaxy Generator Upgrades. Four.</li>
+<li>HOTKEYS MY BELOVED-</li>
+<li>Insert some random shitpost here</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>A progression stat for every Achievement</li>
+<li>Widened the Reality button to fit new texts</li>
+<li>Honses ran away</li>
+<li>Made the Antimatter header bigger after defeating Alpha</li>
+<li>Made DMD display text smaller with too many characters</li>
+<li>Decimalized more stuff (I couldn't tell you what)</li>
+<li>Alpha Crystals are WIP</li>
+<li>Made a universal quote check function</li>
+<li>Refactored several Glyph effects</li>
+<li>Softcapped TS225</li>
+<li>Added GGU2 and DU2 superscalings</li>
+<li>Alerted Peter of the status of the horse's location</li>
+<li>DMD cost calculations</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Overfill</li>
+<li>Implicit conversions</li>
+<li>Time conversions</li>
+<li>Auto EC borking</li>
+<li>Fixed next update not being in 5 hours</li>
+<li>Made costs above e9e15 not consume resource</li>
+<li>Fixed IP/EP/RM logarithm by zero</li>
+<li>Fixed Endgame Upgrade 8 not triggering properly</li>
+<li>Fixed player having free will</li>
+<li>Incorrect Time Dimension and Dark Matter Dimension costs</li>
+<li>Numerous others that I have completely forgotten about</li>
+<li>A bnuch of tpyos reprotuted in teh Dicsord</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2026, 1, 27],
     name: "v0.3.1: The Ethereal Rebalance",
     info: `

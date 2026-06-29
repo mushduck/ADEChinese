@@ -11,6 +11,8 @@ import NormalChallengeStartModal from "@/components/modals/challenges/NormalChal
 import AntimatterGalaxyModal from "@/components/modals/prestige/AntimatterGalaxyModal";
 import ArmageddonModal from "@/components/modals/prestige/ArmageddonModal";
 import BigCrunchModal from "@/components/modals/prestige/BigCrunchModal";
+import CelestialCrunchModal from "@/components/modals/prestige/CelestialCrunchModal";
+import CelestialEternityModal from "@/components/modals/prestige/CelestialEternityModal";
 import DimensionBoostModal from "@/components/modals/prestige/DimensionBoostModal";
 import EnterCelestialsModal from "@/components/modals/prestige/EnterCelestialsModal";
 import EnterDilationModal from "@/components/modals/prestige/EnterDilationModal";
@@ -49,6 +51,7 @@ import SacrificeGlyphModal from "@/components/modals/glyph-management/SacrificeG
 import AutobuyerEditModal from "@/components/modals/AutobuyerEditModal";
 import AutomatorScriptTemplate from "@/components/modals/AutomatorScriptTemplate";
 import AwayProgressModal from "@/components/modals/AwayProgressModal";
+import BreakCelestialInfinityModal from "@/components/modals/BreakCelestialInfinityModal";
 import BreakEternityModal from "@/components/modals/BreakEternityModal";
 import BreakInfinityModal from "@/components/modals/BreakInfinityModal";
 import CatchupModal from "@/components/modals/catchup/CatchupModal";
@@ -210,6 +213,8 @@ Modal.dimensionBoost = new Modal(DimensionBoostModal, 1, GAME_EVENT.DIMBOOST_AFT
 
 Modal.antimatterGalaxy = new Modal(AntimatterGalaxyModal, 1, GAME_EVENT.GALAXY_RESET_AFTER);
 Modal.bigCrunch = new Modal(BigCrunchModal, 1, GAME_EVENT.BIG_CRUNCH_AFTER);
+Modal.celestialCrunch = new Modal(CelestialCrunchModal, 1, GAME_EVENT.CELESTIAL_CRUNCH_AFTER);
+Modal.celestialEternity = new Modal(CelestialEternityModal, 1, GAME_EVENT.CELESTIAL_ETERNITY_AFTER);
 Modal.exitChallenge = new Modal(ExitChallengeModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
 Modal.replicantiGalaxy = new Modal(ReplicantiGalaxyModal, 1, GAME_EVENT.ETERNITY_RESET_AFTER);
 Modal.eternity = new Modal(EternityModal, 1, GAME_EVENT.ETERNITY_RESET_AFTER);
@@ -277,6 +282,7 @@ Modal.masteryString = new Modal(MasteryStringModal);
 Modal.singularityMilestones = new Modal(SingularityMilestonesModal);
 Modal.pelleEffects = new Modal(PelleEffectsModal);
 Modal.sacrifice = new Modal(SacrificeModal, 1, GAME_EVENT.DIMBOOST_AFTER);
+Modal.breakCelestialInfinity = new Modal(BreakCelestialInfinityModal, 1);
 Modal.breakEternity = new Modal(BreakEternityModal, 1);
 Modal.breakInfinity = new Modal(BreakInfinityModal, 1, GAME_EVENT.ETERNITY_RESET_AFTER);
 Modal.respecIAP = new Modal(RespecIAPModal);
@@ -291,7 +297,7 @@ function getSaveInfo(save) {
     totalAntimatter: new Decimal(0),
     infinities: new Decimal(0),
     eternities: new Decimal(0),
-    realities: 0,
+    realities: new Decimal(0),
     infinityPoints: new Decimal(0),
     eternityPoints: new Decimal(0),
     realityMachines: new Decimal(0),
@@ -299,7 +305,7 @@ function getSaveInfo(save) {
     dilatedTime: new Decimal(0),
     bestLevel: 0,
     pelleAM: new Decimal(0),
-    remnants: 0,
+    remnants: new Decimal(0),
     realityShards: new Decimal(0),
     // This is a slight workaround to hide DT/level once Doomed
     pelleLore: 0,
@@ -312,7 +318,7 @@ function getSaveInfo(save) {
   resources.totalAntimatter.copyFrom(new Decimal(save.records?.totalAntimatter));
   resources.infinities.copyFrom(new Decimal(save.infinities));
   resources.eternities.copyFrom(new Decimal(save.eternities));
-  resources.realities = save.realities ?? 0;
+  resources.realities.copyFrom(new Decimal(save.realities));
   resources.infinityPoints.copyFrom(new Decimal(save.infinityPoints));
   resources.eternityPoints.copyFrom(new Decimal(save.eternityPoints));
   resources.realityMachines.copyFrom(new Decimal(save.reality?.realityMachines));
@@ -322,7 +328,7 @@ function getSaveInfo(save) {
   resources.dilatedTime.copyFrom(new Decimal(save.records?.thisReality.maxDT ?? (save.dilation?.dilatedTime ?? 0)));
   resources.bestLevel = save.records?.bestReality.glyphLevel ?? 0;
   resources.pelleAM.copyFrom(new Decimal(save.celestials?.pelle.records.totalAntimatter));
-  resources.remnants = save.celestials?.pelle.remnants ?? 0;
+  resources.remnants.copyFrom(new Decimal(save.celestials?.pelle.remnants));
   resources.realityShards.copyFrom(new Decimal(save.celestials?.pelle.realityShards));
   resources.pelleLore = save.celestials?.pelle.quoteBits ?? 0;
   resources.saveName = save.options?.saveFileName ?? "";
