@@ -251,8 +251,8 @@ export const Endgame = {
     player.reality.glyphs.undo = [];
     player.reality.glyphs.protectedRows = 0;
     Glyphs.deleteAllUnprotected();
-    player.reality.glyphs.protectedRows = rowProtect;
-    Glyphs.unequipAll();
+    player.reality.glyphs.protectedRows = 2;
+    Glyphs.unequipAll(true);
     player.reality.glyphs.protectedRows = 0;
     Glyphs.deleteAllUnprotected();
     player.reality.glyphs.protectedRows = rowProtect;
