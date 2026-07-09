@@ -68,7 +68,7 @@ export class EndgameMasteryState extends EndgameMasteriesState {
     if (this.isBought || !this.isAffordable || !this.canBeBought) return false;
     if (GameEnd.creditsEverClosed) return false;
     player.endgameMasteries.masteries.push(this.id);
-    Currency.endgameSkills.subtract(this.cost);
+    if (!EndgameMastery.permaMasteries.isBought || this.id >= 180) Currency.endgameSkills.subtract(this.cost);
     GameCache.endgameMasteries.invalidate();
     EndgameMasteryTree.commitToGameState([EndgameMastery(this.id)]);
     this.onPurchased();

@@ -215,6 +215,8 @@ export function gainedInfinityPoints() {
     ip = ip.pow(ReplicantiMultipliers.ipPow);
   }
 
+  if (ResurgenceUpgrade.ipSurge.isBought && !player.disablePostReality) ip = ip.min(player.antimatter);
+
   return ip.floor();
 }
 
@@ -242,6 +244,9 @@ function totalEPMult() {
       RealityUpgrade(12)
     ).times(getAdjustedGlyphEffect("timeEP")).times(player.disablePostReality ? 1 : AlphaUnlocks.timestudy61.effects.buff.effectOrDefault(1));
   if (LHC.voidRunning) ep = ep.timesEffectOf(NullUpgrade.eternityPointMult);
+
+  if (ResurgenceUpgrade.epSurge.isBought && !player.disablePostReality) ep = ep.min(player.antimatter);
+
   return ep;
 }
 
@@ -492,6 +497,8 @@ function totalCEPMult() {
 export function gainedCelestialEternityPoints() {
   let cep = DC.D5.pow(player.records.thisCelestialEternity.maxCIP.plus(
     gainedCelestialInfinityPoints()).add(1).log10().div(308).sub(0.7)).times(totalCEPMult());
+
+  cep = cep.min(DC.E4000).times(cep.div(DC.E4000).max(1).pow(0.1));
 
   return cep.floor();
 }
@@ -1786,7 +1793,7 @@ function animateTweens(time) {
   }
   let delta = time - lastFrame;
   lastFrame = time;
-  if (player.dilation.active) {
+  if (player.dilation.active && !Achievement(207).isUnlocked) {
     delta /= Pelle.isDoomed ? 1.5 : 10;
   }
   tweenTime += delta;

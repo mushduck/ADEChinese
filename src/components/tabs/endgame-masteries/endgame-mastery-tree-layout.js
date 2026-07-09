@@ -74,6 +74,12 @@ export class EndgameMasteryTreeLayout {
       normalRow(                               EM(171)                                ),
       normalRow(                    EndgameMastery.endgameUpgrades                    )
     ];
+
+    if (ResurgenceUpgrade.unl1.isBought) {
+      this.rows.push(
+        normalRow(                   EndgameMastery.permaMasteries                    )
+      );
+    }
     /* eslint-enable no-multi-spaces, space-in-parens, func-call-spacing */
 
     /**
@@ -100,8 +106,7 @@ export class EndgameMasteryTreeLayout {
     /**
      * @type {EndgameMasteryConnectionSetup[]}
      */
-    this.connections = EndgameMastery.allConnections
-      .map(c => new EndgameMasteryConnectionSetup(c));
+    this.connections = masteryConnections().map(c => new EndgameMasteryConnectionSetup(c));
 
     this.width = this.rows.map(row => row.width).max();
     const heightNoSpacing = this.rows.map(r => r.layout.itemHeight).sum();

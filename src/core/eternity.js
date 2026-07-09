@@ -375,7 +375,7 @@ class EPMultiplierState extends GameMechanicState {
     let cur = Currency.eternityPoints.value.max(1);
     if (cur.gt(this.costIncreaseThresholds[4]) && (!EndgameMastery(152).isBought || player.disablePostReality)) {
       bulk = Decimal.max(Decimal.floor(Decimal.pow(Decimal.log(this.costIncreaseThresholds[4].div(500), 1e3).sub(1332).add(Decimal.pow(1332, 1.2)), 1 / 1.2)), 1332);
-      tempVal = DC.E3.pow(Decimal.pow(count, 1.2).sub(Decimal.pow(1332, 1.2)).add(1332)).times(500);
+      tempVal = DC.E3.pow(Decimal.pow(bulk, 1.2).sub(Decimal.pow(1332, 1.2)).add(1332)).times(500);
       cur = Decimal.log(tempVal.div(500), 1e30).sub(bulk).max(0);
       return Decimal.floor(Decimal.pow(cur.add(bulk).add(Decimal.pow(1332, 1.2)), 1 / 1.2));
       // eslint-disable-next-line no-else-return

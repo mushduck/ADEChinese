@@ -115,7 +115,7 @@ export default {
     <template #header>
       {{ topLabel }}
     </template>
-    <div class="c-modal-message__text">
+    <div class="c-modal-message__text" :class="{ 'l-alpha-text': number === 7 }">
       {{ message }}
       <br>
       <br>
@@ -168,5 +168,9 @@ export default {
 
 .reality-description {
   padding: 0 2rem;
+}
+
+.l-alpha-text {
+  font-size: 1.2rem;
 }
 </style>

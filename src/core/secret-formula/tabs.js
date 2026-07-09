@@ -670,7 +670,6 @@ export const tabs = [
         name: "Celestial Infinity Upgrades",
         symbol: "<i class='fas fa-infinity'></i>",
         component: "CelestialInfinityUpgradesTab",
-        condition: () => PlayerProgress.celestialInfinityUnlocked() || PlayerProgress.celestialEternityUnlocked(),
         id: 0,
         hidable: true,
       },

@@ -142,7 +142,7 @@ export const resurgenceUpgrades = {
     id: "synergy6",
     cost: new Decimal("1e4000"),
     description: "Celestial Matter boosts Ethereal Power Generation",
-    effect: () => Decimal.pow(Decimal.log10(Decimal.log10(Currency.celestialMatter.value).add(1)).add(1), 7),
+    effect: () => Decimal.pow(Decimal.log10(Decimal.log10(Currency.celestialMatter.value.max(1)).add(1)).add(1), 7),
     formatEffect: value => formatX(value, 2, 2)
   },
   unl1: {

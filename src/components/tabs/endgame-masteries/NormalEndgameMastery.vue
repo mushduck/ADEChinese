@@ -18,9 +18,11 @@ export default {
       required: true
     }
   },
-  data: () => ({
-    showCost: true
-  }),
+  data() {
+    return {
+      showCost: true
+    };
+  },
   computed: {
     mastery() {
       return this.setup.mastery;
@@ -31,6 +33,11 @@ export default {
       const pathEntry = EndgameMasteries.pathList.find(p => p.path === this.setup.path);
       return `${id} ${pathEntry.name}`;
     },
+  },
+  methods: {
+    update() {
+      this.showCost = !EndgameMastery.permaMasteries.isBought || (this.setup.mastery.id >= 180);
+    }
   }
 };
 </script>
