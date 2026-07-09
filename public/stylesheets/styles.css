@@ -6066,6 +6066,66 @@ properly on certain themes. */
 
 /* #endregion Dilation */
 
+/* #region Hadrons */
+
+.o-hadron-light {
+  fill: white;
+  filter: drop-shadow(0 0 0.3rem black);
+}
+
+.o-hadron-dark {
+  fill: black;
+  filter: drop-shadow(0 0 0.3rem white);
+}
+
+.o-hadron-exotic {
+  fill: #00ff00;
+}
+
+/* #endregion Hadrons */
+
+/* #region Stars */
+
+.o-star-red {
+  fill: red;
+}
+
+.o-star-orange {
+  fill: orange;
+}
+
+.o-star-yellow {
+  fill: yellow;
+}
+
+.o-star-green {
+  fill: green;
+}
+
+.o-star-blue {
+  fill: blue;
+}
+
+.o-star-purple {
+  fill: purple;
+}
+
+.o-star-white {
+  fill: white;
+  filter: drop-shadow(0 0 0.3rem black);
+}
+
+.o-star-black {
+  fill: black;
+  filter: drop-shadow(0 0 0.3rem white);
+}
+
+.o-star-gray {
+  fill: gray;
+}
+
+/* #endregion Stars */
+
 /* #region Break Eternity */
 
 /* #region l-break-eternity-tab */

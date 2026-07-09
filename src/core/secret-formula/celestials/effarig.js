@@ -100,6 +100,9 @@ export const effarigUnlocks = {
     description: "Unlock Effarig’s Endgame",
     cost: new Decimal("1e5000"),
     onPurchased: () => {
+      if (Effarig.isRunning) {
+        Effarig.initializeRun();
+      }
       Effarig.quotes.effEndgame.show();
     }
   },

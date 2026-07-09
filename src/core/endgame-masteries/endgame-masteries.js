@@ -101,7 +101,7 @@ export class EndgameMasteriesState extends GameMechanicState {
   }
 
   refund() {
-    Currency.endgameSkills.add(this.cost);
+    if (!EndgameMastery.permaMasteries.isBought || this.id >= 180) Currency.endgameSkills.add(this.cost);
   }
 
   get isAffordable() {

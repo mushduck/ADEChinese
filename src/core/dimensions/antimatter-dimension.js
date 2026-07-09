@@ -690,10 +690,10 @@ class AntimatterDimensionState extends DimensionState {
         production = Decimal.pow10(Decimal.pow10(Decimal.pow(log10, DivinityUpgrade.divineL1U4.effectOrDefault(1) * Accelerators.cosmic.effectValue3)));
       }
       if (ResurgenceUpgrade.ipSurge.isBought && !player.disablePostReality) {
-        production = production.times(gainedInfinityPoints());
+        production = production.times(gainedInfinityPoints().max(1));
       }
       if (ResurgenceUpgrade.epSurge.isBought && !player.disablePostReality) {
-        production = production.times(gainedEternityPoints());
+        production = production.times(gainedEternityPoints().max(1));
       }
       if (production.gt(Decimal.pow10(1e200)) && !Pelle.isDoomed) {
         const log10 = production.log10();

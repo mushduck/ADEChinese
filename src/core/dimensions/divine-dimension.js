@@ -91,7 +91,7 @@ class DivineDimensionState extends DimensionState {
   }
 
   get powerMultiplier() {
-    return new Decimal(DivinityUpgrade.divineL2U8 ? 17 : this._powerMultiplier).timesEffectOf(DivinityUpgrade.divineL3U2);
+    return new Decimal(DivinityUpgrade.divineL2U8.isBought ? 17 : this._powerMultiplier).timesEffectOf(DivinityUpgrade.divineL3U2);
   }
 
   get purchases() {
@@ -275,7 +275,7 @@ function giveCondenseRewards(auto) {
 }
 
 export function resetForDivineStars(nova = false) {
-  if (Currency.divineMatter.lt(DC.NUMMAX)) return;
+  if (Currency.divineMatter.lt(DC.NUMMAX) && !nova) return;
   if (!nova) giveCondenseRewards();
   Endgame.resetNoReward();
   if (!DivinityUpgrade.divineL2U5.isBought || nova) {
@@ -296,7 +296,7 @@ export function resetForDivineStars(nova = false) {
       upgR.push("divineL2U5");
     }
     player.celestials.pelle.divinityUpgrades = new Set(upgR);
-    if (!DivinityUpgrade.divineL5U2.isBought) player.celestials.pelle.divinityRebuyables = [0, 0, 0, 0];
+    if (!DivinityUpgrade.divineL5U2.isBought && nova) player.celestials.pelle.divinityRebuyables = [0, 0, 0, 0];
   }
   DivineDimensions.fullReset();
   player.records.thisCondense.maxVM = DC.E1;

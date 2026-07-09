@@ -69,34 +69,35 @@ export function calcHighestPurchaseableTD(tier, currency) {
   let logMult = Math.log10(TimeDimension(tier)._costMultiplier);
 
   if (tier > 4 && currency.lt(DC.E6000)) {
-    return Decimal.ceil(Decimal.max(0, (logC.sub(logBase)).div(logMult)));
+    return Decimal.floor(Decimal.max(0, (logC.sub(logBase)).div(logMult).add(1)));
   }
 
   if (currency.gte(DC.E6000)) {
     logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * (tier <= 4 ? 2.2 : 1), 1));
-    const preInc = (Decimal.log10(DC.E6000).sub(logBase)).div(logMult);
-    const postInc = Decimal.clampMin(((logC.sub(6000)).div(logMult)).div(TimeDimensions.scalingPast1e6000), 0);
-    return Decimal.ceil(postInc.add(preInc));
+    const preInc = Decimal.floor(Decimal.log10(DC.E6000).sub(logBase).div(logMult)).add(1);
+    const postInc = Decimal.floor(Decimal.clampMin(((logC.sub(TimeDimension(tier).nextCost(preInc).log10())).div(logMult)).div(
+      TimeDimensions.scalingPast1e6000), -1)).add(1);
+    return Decimal.floor(postInc.add(preInc));
   }
 
   if (currency.lt(DC.NUMMAX)) {
-    return Decimal.ceil(Decimal.max(0, ((logC.sub(logBase)).div(logMult)).add(1)));
+    return Decimal.floor(Decimal.max(0, (logC.sub(logBase)).div(logMult).add(1)));
   }
 
   if (currency.lt(DC.E1300)) {
-    const preInc = Decimal.floor((Decimal.log10(DC.NUMMAX).sub(logBase)).div(logMult));
+    const preInc = Decimal.floor((Decimal.log10(DC.NUMMAX).sub(logBase)).div(logMult)).add(1);
     logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
     const decCur = logC.sub(preInc.times(logMult));
-    const postInc = Decimal.ceil(Decimal.clampMin(decCur.div(logMult), 0));
+    const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), -1)).add(1);
     return preInc.add(postInc);
   }
 
   if (currency.lt(DC.E6000)) {
     logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
-    const preInc = Decimal.floor((Decimal.log10(DC.E1300).sub(logBase)).div(logMult));
+    const preInc = Decimal.floor((Decimal.log10(DC.E1300).sub(logBase)).div(logMult)).add(1);
     logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 2.2, 1));
     const decCur = logC.sub(preInc.times(logMult));
-    const postInc = Decimal.ceil(Decimal.clampMin(decCur.div(logMult), 0));
+    const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), -1)).add(1);
     return preInc.add(postInc);
   }
   throw new Error("calcHighestPurchasableTD reached too far in code");

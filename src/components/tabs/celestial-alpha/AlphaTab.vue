@@ -113,7 +113,7 @@ export default {
       </div>
       <div class="l-alpha-run">
         <div class="c-alpha-run-description">
-          <span :class="{ 'o-pelle-disabled': isDoomed }">
+          <span :class="{ 'o-pelle-disabled': isDoomed || isDestroyed }">
             Access Alpha's Reality.
           </span>
         </div>

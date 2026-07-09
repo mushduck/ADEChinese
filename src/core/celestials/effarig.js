@@ -18,6 +18,7 @@ export const Effarig = {
     if (!EffarigUnlock.endgame.isUnlocked && EffarigUnlock.extendRun.isUnlocked) {
       player.disablePostReality = true;
       Endgame.resetNoReward();
+      player.disablePostReality = true;
       disChargeAllPerkUpgrades();
       disChargeAll();
       AutomatorBackend.stop();
