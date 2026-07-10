@@ -17,7 +17,7 @@ export const celestialInfinityUpgrades = {
     cost: 5,
     description: () => `Gain a very small boost to Alpha Decay starting time based on Celestial Infinities`,
     effect: () => Decimal.pow(player.endgame.celDimExpansion.celestialInfinities, 0.5).div(100).min(1).add(
-      DC.D4.times(DC.D1.sub(Decimal.pow(0.8, player.endgame.celDimExpansion.celestialInfinities.log10().sub(4).max(0))))),
+      DC.D4.times(DC.D1.sub(Decimal.pow(0.8, player.endgame.celDimExpansion.celestialInfinities.max(1).log10().sub(4).max(0))))),
     formatEffect: value => `${TimeSpan.fromHours(value).toStringShort()}`
   },
   celDimBoostBuff: {
