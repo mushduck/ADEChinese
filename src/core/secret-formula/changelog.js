@@ -9,6 +9,106 @@ export const changelog = [
    * }
    */
   {
+    date: [2026, 7, 28],
+    name: "v1.1: The Great Ascent",
+    info: `
+I was not expecting a content release on my birthday but ¯|_(ツ)_|¯
+<br>
+<br>
+<b><i>Another big update coming soon...</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>A reward to Achievement 222</li>
+<li>A softcap to my sleep paralysis</li>
+<li>A ton of new Endgame Masteries</li>
+<li>New Singularity Milestones</li>
+<li>New Galactic Powers</li>
+<li>ASCENSION</li>
+<li>TRANSCENSION</li>
+<li>The Overcharge</li>
+<li>A visual display for Hadron effectiveness</li>
+<li>Support for vanilla savefile importing</li>
+<li>The Game Prologue</li>
+<li>The Game Over screen</li>
+<li>A thousand news messages</li>
+<li>Three new large number notations</li>
+<li>Coffee... I need coffee...</li>
+</ul>
+<br>
+<b>Things removed:</b><br>
+<ul>
+<li>Savefile serialization limits</li>
+<li>Transcension was too OP so it gone now</li>
+<li>The bee layer</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>Nerfed VUL5U3 again</li>
+<li>Nerfed VUL1U6</li>
+<li>Softcapped VUL3U5 and VUL4U3</li>
+<li>Softcapped the weight of your mom (it wasn't enough)</li>
+<li>Decimalized Glyph Levels</li>
+<li>Switched to a better version of break_eternity.js</li>
+<li>Switched to a better version of Pacman so I could play Level 256 properly</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Glyph Instability 6 delay applying too early</li>
+<li>Spacetime Warp IV NaNing under certain circumstances</li>
+<li>Fixed Time Study 123 NaNing</li>
+<li>Fixed the game randomly going hdsfjgajfgyursgawvh</li>
+<li>Ocne unpbo a tiem tehthe werwe tioo mayn tpyos, nrwo tehyre gnoe</li>
+</ul>
+<br>
+`
+  },
+  {
+    date: [2026, 7, 9],
+    name: "v1.0.1: Animations and Simulations",
+    info: `
+Graphical design is my specialty.
+<br>
+<br>
+<b><i>Thank you again for playing!</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>Hadrons Animation</li>
+<li>Stars Antimation</li>
+<li>One new Endgame Mastery (more coming later)</li>
+</ul>
+<br>
+<b>Things removed:</b><br>
+<ul>
+<li>Alpha's e300 IP Hell</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>Buffed CIU13</li>
+<li>Nerfed VUL5U3</li>
+<li>Delayed TD Overflow^2 starting with one Divinitied stat</li>
+<li>Made the 7 effect Effarig Glyph reward in Effarig's Expansion Pack always apply</li>
+<li>Made the Enter Celestials modal for Alpha's Reality have smaller font for smaller screens</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Fixed TD/DMD cost functions</li>
+<li>Fixed Achievement 133 not triggering</li>
+<li>Supernova not resetting Divinity Upgrades properly</li>
+<li>Fixed rebuyable x5 EP failing to buy max</li>
+<li>Oh noes! Tpyos agian!</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2026, 6, 29],
     name: "v1.0.0: The True Darkness Arises",
     info: `
