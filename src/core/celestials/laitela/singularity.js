@@ -28,23 +28,31 @@ class SingularityMilestoneState extends GameMechanicState {
   }
 
   get isUnlocked() {
-    return Currency.singularities.gte(this.start);
+    return (!ResurgenceUpgrade.unl2.isBought && this.start.gt(DC.E1000)) ? false : Currency.singularities.gte(this.start);
   }
 
   get increaseThreshold() {
     return this.config.increaseThreshold;
   }
 
+  get majorIncreaseThreshold() {
+    return this.config.majorIncreaseThreshold;
+  }
+
   nerfCompletions(completions) {
     const softcap = this.increaseThreshold;
+    const bigSoftcap = this.majorIncreaseThreshold;
     if (!softcap || (completions.lt(softcap))) return completions;
-    return (completions.sub(softcap)).div(3).add(softcap);
+    if (!bigSoftcap || ((completions.sub(softcap)).div(3).add(softcap).lt(bigSoftcap))) return (completions.sub(softcap)).div(3).add(softcap);
+    return ((completions.sub(softcap)).div(3).add(softcap).sub(bigSoftcap)).cbrt().add(bigSoftcap);
   }
 
   unnerfCompletions(completions) {
     const softcap = this.increaseThreshold;
+    const bigSoftcap = this.majorIncreaseThreshold;
     if (!softcap || (completions.lt(softcap))) return completions;
-    return (completions.sub(softcap)).mul(3).add(softcap);
+    if (!bigSoftcap || ((completions.sub(softcap)).mul(3).add(softcap).lt(bigSoftcap))) return (completions.sub(softcap)).mul(3).add(softcap);
+    return ((completions.sub(bigSoftcap)).cube().add(bigSoftcap).sub(softcap)).mul(3).add(softcap);
   }
 
   get previousGoal() {
@@ -105,7 +113,10 @@ export const SingularityMilestone = mapGameDataToObject(
 );
 
 export const SingularityMilestones = {
-  all: SingularityMilestone.all,
+  get all() {
+    return player.celestials.pelle.resurgenceUpgrades.has("unl2")
+      ? SingularityMilestone.all : SingularityMilestone.all.filter(m => m.start.lte(DC.E1000));
+  },
   lastNotified: player.celestials.laitela.lastCheckedMilestones,
 
   get sorted() {
@@ -220,14 +231,18 @@ export const Singularity = {
   },
 
   get gainPerCapIncrease() {
-    return SingularityMilestone.improvedSingularityCap.effectOrDefault(new Decimal(11)).plusEffectsOf(EndgameMastery(161));
+    return SingularityMilestone.improvedSingularityCap.effectOrDefault(new Decimal(11)).plusEffectsOf(
+      EndgameMastery(161), SingularityMilestone.singCostStepIncrease);
   },
 
   get singularitiesGained() {
-    const entropicCondensing = (EndgameMastery(131).isBought && !player.disablePostReality) ? Decimal.pow(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)).add(1), Decimal.max(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)), 1)) : new Decimal(ImaginaryUpgrade(10).effectOrDefault(0)).add(1);
+    const entropicCondensing = (EndgameMastery(131).isBought && !player.disablePostReality)
+      ? Decimal.pow(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)).add(1), Decimal.max(new Decimal(ImaginaryUpgrade(10).effectOrDefault(1)), 1))
+      : new Decimal(ImaginaryUpgrade(10).effectOrDefault(0)).add(1);
     return Decimal.floor(Decimal.pow(this.gainPerCapIncrease, player.celestials.laitela.singularityCapIncreases).times(
       SingularityMilestone.singularityMult.effectOrDefault(new Decimal(1)).times(entropicCondensing).times(
-      DualityUpgrade(10).effectOrDefault(1)))).times(Hadrons.singularityMultiplier);
+      DualityUpgrade(10).effectOrDefault(1)))).times(Hadrons.singularityMultiplier).powEffectsOf(
+      SingularityMilestone.divinitySingPower, SingularityMilestone.hadronEffect1Improvement);
   },
 
   // Time (in seconds) to go from 0 DE to the condensing requirement

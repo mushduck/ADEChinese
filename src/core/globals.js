@@ -23,8 +23,10 @@ export * from "./expansion-packs";
 export * from "./ethereal";
 export * from "./hypercubes";
 export * from "./large-hadron-collider";
+export * from "./ascension";
 
 export * from "./elemental";
+export * from "./destroyer";
 
 export * from "./celestials/quotes";
 export * from "./celestials/teresa";

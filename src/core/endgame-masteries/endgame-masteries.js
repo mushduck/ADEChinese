@@ -75,7 +75,7 @@ export function buyMasteriesUntil(id) {
   }
 
   // Finish buying the masteries
-  masteryArray.push(...range(161, Math.min(id, 180)));
+  masteryArray.push(...range(161, Math.min(id, 280)));
   return masteryArray;
 }
 

@@ -106,6 +106,14 @@ export class Sacrifice {
 
     return prePowerBoost.clampMin(1).pow(this.sacrificeExponent);
   }
+
+  static get totalPower() {
+    return this.totalBoost.max(10).log10().log10().add(1);
+  }
+
+  static get nextPower() {
+    return this.nextBoost.times(this.totalBoost).max(10).log10().log10().add(1).sub(this.totalPower);
+  }
 }
 
 export function sacrificeReset() {

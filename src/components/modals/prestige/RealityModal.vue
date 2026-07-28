@@ -17,11 +17,11 @@ export default {
       hasChoice: false,
       hasFilter: false,
       glyphs: [],
-      bestLevel: 0,
-      levelDifference: 0,
+      bestLevel: new Decimal(),
+      levelDifference: new Decimal(),
       selectedGlyph: undefined,
       canRefresh: false,
-      level: 0,
+      level: new Decimal(),
       simRealities: new Decimal(0),
       realityMachines: new Decimal(),
       shardsGained: new Decimal(0),
@@ -68,9 +68,9 @@ export default {
     levelStats() {
       // Bit annoying to read due to needing >, <, and =, with = needing a different format.
       return `You will get a level ${formatHybridLarge(this.level, 3)} Glyph on Reality, which is
-        ${this.level === this.bestLevel ? "equal to" : `
+        ${this.level.eq(this.bestLevel) ? "equal to" : `
         ${quantifyHybridLarge("level", this.levelDifference)}
-        ${this.level > this.bestLevel ? "higher" : "lower"} than`} your best.`;
+        ${this.level.gt(this.bestLevel) ? "higher" : "lower"} than`} your best.`;
     },
     confirmationToDisable() {
       return ConfirmationTypes.glyphSelection.isUnlocked() ? "glyphSelection" : undefined;
@@ -89,7 +89,7 @@ export default {
       this.hasChoice = Perk.firstPerk.isEffectActive;
       this.effarigUnlocked = TeresaUnlocks.effarig.canBeApplied;
       this.hasFilter = EffarigUnlock.glyphFilter.isUnlocked;
-      this.level = gainedGlyphLevel().actualLevel;
+      this.level.copyFrom(gainedGlyphLevel().actualLevel);
       this.simRealities.copyFrom(new Decimal(simulatedRealityCount(false)).add(1));
       this.hasSpace = new Decimal(GameCache.glyphInventorySpace.value).gte(this.simRealities);
       const simRMGained = MachineHandler.gainedRealityMachines.times(this.simRealities);
@@ -102,12 +102,12 @@ export default {
         const newGlyph = GlyphSelection.glyphList(
           GlyphSelection.choiceCount, gainedGlyphLevel(), { isChoosingGlyph: false }
         )[i];
-        if (currentGlyph.level === newGlyph.level) continue;
+        if (currentGlyph.level.eq(newGlyph.level)) continue;
         currentGlyph.level = newGlyph.level;
         currentGlyph.effects = newGlyph.effects;
       }
-      this.bestLevel = player.records.bestReality.glyphLevel;
-      this.levelDifference = Math.abs(this.bestLevel - this.level);
+      this.bestLevel.copyFrom(player.records.bestReality.glyphLevel);
+      this.levelDifference.copyFrom(Decimal.abs(this.bestLevel.sub(this.level)));
     },
     glyphClass(index) {
       return {

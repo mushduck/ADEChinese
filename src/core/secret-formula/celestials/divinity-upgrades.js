@@ -56,8 +56,9 @@ export const divinityUpgrades = {
     id: "divineL1U4",
     layer: 1,
     cost: new Decimal(1e50),
-    description: () => `Only in Pelle, raise the Antimatter Exponent’s Exponent to the power of ${format(1.01, 2, 2)}`,
-    effect: 1.01
+    description: () => `Only in Pelle, raise the Antimatter Exponent’s Exponent to the power
+      of ${format(DivinityUpgrade.divineL5U2.isBought ? 1.02 : 1.01, 2, 2)}`,
+    effect: () => DivinityUpgrade.divineL5U2.isBought ? 1.02 : 1.01
   },
   divineL1U5: {
     name: "The Great Revival",
@@ -72,7 +73,8 @@ export const divinityUpgrades = {
     layer: 1,
     cost: new Decimal(1e125),
     description: "Divine Energy boosts Divine Dimensions",
-    effect: () => Decimal.pow(Currency.divineEnergy.value, 0.5).max(1),
+    effect: () => Decimal.pow(Currency.divineEnergy.value.min(DC.E20000), 0.5).pow(
+      Currency.divineEnergy.value.max(1).log10().max(1).log10().sub(3.3).max(1)).max(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   divineL1U7: {
@@ -248,7 +250,8 @@ export const divinityUpgrades = {
     layer: 3,
     cost: new Decimal(1e77),
     description: "Gain a power effect to Divine Dimensions based on Condenses",
-    effect: () => Decimal.log10(player.celestials.pelle.divinity.condenses.div(777).add(1)).div(2).add(1),
+    effect: () => Decimal.log10(player.celestials.pelle.divinity.condenses.min(7000).div(777).add(1)).div(2).add(1).add(
+      Decimal.log10(player.celestials.pelle.divinity.condenses.div(7000).max(1)).div(10)),
     formatEffect: value => formatPow(value, 2, 3)
   },
   divineL4U1: {
@@ -278,7 +281,8 @@ export const divinityUpgrades = {
     layer: 4,
     cost: new Decimal(10),
     description: "Divine Dimensions gain a power effect based on real time spent in this Supernova",
-    effect: () => Time.thisSupernovaRealTime.totalMinutes.div(10).add(1).pow(0.1),
+    effect: () => Time.thisSupernovaRealTime.totalMinutes.min(300).div(10).add(1).pow(0.1).add(
+      Time.thisSupernovaRealTime.totalMinutes.div(300).max(1).log10().div(10)),
     formatEffect: value => formatPow(value, 2, 3)
   },
   divineL4U4: {
@@ -307,7 +311,7 @@ export const divinityUpgrades = {
     id: "divineL5U2",
     layer: 5,
     cost: new Decimal(17000),
-    description: "Keep Layer Three Upgrades on Supernova"
+    description: "Keep Layer Three Upgrades on Supernova and make Artisan of Destruction twice as strong"
   },
   divineL5U3: {
     name: "Potency",

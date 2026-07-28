@@ -7,7 +7,8 @@ export default {
       galaxies: {
         normal: new Decimal(),
         replicanti: new Decimal(),
-        dilation: new Decimal()
+        dilation: new Decimal(),
+        free: new Decimal()
       },
       requirement: {
         tier: 1,
@@ -45,11 +46,15 @@ export default {
         : `Reset your ${makeEnumeration(reset)} to increase the power of Tickspeed upgrades`;
     },
     sumText() {
-      const parts = [Decimal.max(this.galaxies.normal, 0)];
+      const parts = [Decimal.max(this.galaxies.normal, GalacticPowers.galacticAscension.isUnlocked ? 1 : 0)];
       if (this.galaxies.replicanti.gt(0)) parts.push(this.galaxies.replicanti);
       if (this.galaxies.dilation.gt(0)) parts.push(this.galaxies.dilation);
-      const sum = parts.map(this.formatGalaxies).join(" + ");
+      if (this.galaxies.free.gt(0)) parts.push(this.galaxies.free);
+      let sum;
+      if (GalacticPowers.galacticAscension.isUnlocked) sum = parts.map(this.formatGalaxies).join(" × ");
+      if (!GalacticPowers.galacticAscension.isUnlocked) sum = parts.map(this.formatGalaxies).join(" + ");
       if (parts.length >= 2) {
+        if (GalacticPowers.galacticAscension.isUnlocked) return `${sum} = ${this.formatGalaxies(parts.reduce(Decimal.prodReducer))}`;
         return `${sum} = ${this.formatGalaxies(parts.decimalSum())}`;
       }
       return sum;
@@ -96,6 +101,7 @@ export default {
       this.galaxies.normal.copyFrom(player.galaxies.add(GalaxyGenerator.galaxies));
       this.galaxies.replicanti.copyFrom(Replicanti.galaxies.total);
       this.galaxies.dilation.copyFrom(player.dilation.totalTachyonGalaxies);
+      this.galaxies.free.copyFrom(GalacticPower.freeGalaxies);
       const requirement = Galaxy.requirement;
       this.requirement.amount = requirement.amount;
       this.requirement.tier = requirement.tier;

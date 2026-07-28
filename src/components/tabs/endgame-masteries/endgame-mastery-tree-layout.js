@@ -77,7 +77,18 @@ export class EndgameMasteryTreeLayout {
 
     if (ResurgenceUpgrade.unl1.isBought) {
       this.rows.push(
-        normalRow(                   EndgameMastery.permaMasteries                    )
+        normalRow(                   EndgameMastery.permaMasteries                    ),
+        normalRow(                              EM(181)                               ),
+        normalRow(                          EM(191), EM(192)                          ),
+        normalRow(                              EM(201)                               ),
+        normalRow(                     EM(211), EM(212), EM(213)                      ),
+        normalRow(                     EM(221), EM(222), EM(223)                      ),
+        normalRow(                     EM(231), EM(232), EM(233)                      ),
+        normalRow(                              EM(241)                               ),
+        normalRow(                              EM(251)                               ),
+        normalRow(                          EM(261), EM(262)                          ),
+        normalRow(                 EM(271), EM(272), EM(273), EM(274)                 ),
+        normalRow(                   EndgameMastery.timeCompression                   )
       );
     }
     /* eslint-enable no-multi-spaces, space-in-parens, func-call-spacing */

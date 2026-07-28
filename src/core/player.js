@@ -10,6 +10,9 @@ import { GlyphTypes } from "./glyph-effects";
 window.player = {
   username: "[username]",
   disablePostReality: false,
+  hasSeenIntro: false,
+  introTick: 0,
+  introFrozen: true,
   antimatter: DC.E1,
   dimensions: {
     antimatter: Array.range(0, 8).map(() => ({
@@ -488,7 +491,7 @@ window.player = {
       RMSet: [],
       RMmin: DC.D0,
       RMminSet: [],
-      glyphLevel: 0,
+      glyphLevel: DC.D0,
       glyphLevelSet: [],
       bestEP: DC.D0,
       bestEPSet: [],
@@ -508,7 +511,7 @@ window.player = {
       realTime: Number.MAX_VALUE,
       bestCPmin: DC.D0,
       bestDPmin: DC.D0,
-      glyphLevel: 0,
+      glyphLevel: DC.D0,
       galaxies: DC.D0,
     },
     thisCelestialInfinity: {
@@ -599,7 +602,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: DC.D0,
-  version: 104,
+  version: 105,
   infinityPower: DC.D1,
   postC4Tier: 0,
   eternityPoints: DC.D0,
@@ -1448,6 +1451,36 @@ window.player = {
         nullParticles: DC.D0,
         mode: 0
       }
+    },
+    ascension: 0,
+    ascensionTimer: 0,
+    overcharge: {
+      isRunning: false,
+      level: 1,
+      completions: {
+        bi: 0,
+        eter: 0,
+        chall: 0,
+        ts: 0
+      },
+      charged: {
+        infinite: new Set(),
+        eternal: new Set(),
+        complex: new Set(),
+        temporal: new Set()
+      },
+      chargesLeft: {
+        infinite: 0,
+        eternal: 0,
+        complex: 0,
+        temporal: 0
+      },
+      discharge: {
+        infinite: false,
+        eternal: false,
+        complex: false,
+        temporal: false
+      }
     }
   },
   endgameMasteries: {
@@ -1575,6 +1608,7 @@ window.player = {
       exitChallenge: true,
       eternity: true,
       dilation: true,
+      overcharge: true,
       resetReality: true,
       resetEndgame: true,
       glyphReplace: true,

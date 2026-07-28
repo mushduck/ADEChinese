@@ -20,6 +20,7 @@ export const Alpha = {
     Endgame.resetNoReward();
     disChargeAllPerkUpgrades();
     disChargeAll();
+    disChargeAllBreakUpgrades();
     AutomatorBackend.stop();
     clearCelestialRuns();
     player.celestials.alpha.run = true;
@@ -515,14 +516,14 @@ export const Alpha = {
       player.eterc8repl = player.celestials.alpha.records.eterc8repl;
       for (let ts = 0; ts < 305; ts++) {
         if (player.celestials.alpha.records.timestudy.studies.includes(ts)) {
-          player.timestudy.theorem = player.timestudy.theorem.add(TimeStudy(ts).cost);
-          TimeStudy(ts).purchase();
+          player.timestudy.studies.push(ts);
+          GameCache.timeStudies.invalidate();
+          TimeStudyTree.commitToGameState([TimeStudy(ts)]);
         }
       }
       for (let dts = 0; dts < 7; dts++) {
         if (player.celestials.alpha.records.dilation.studies.includes(dts)) {
-          Currency.timeTheorems.add(DilationTimeStudyState.studies[dts].cost);
-          DilationTimeStudyState.studies[dts].purchase();
+          player.dilation.studies.push(dts);
         }
       }
       player.dilation.active = player.celestials.alpha.records.dilation.active;
@@ -541,14 +542,14 @@ export const Alpha = {
       player.dilation.lastEP = player.celestials.alpha.records.dilation.lastEP;
       for (let sts = 0; sts < 305; sts++) {
         if (player.celestials.alpha.records.timestudy.studies.includes(sts) && !TimeStudy(sts).isBought) {
-          player.timestudy.theorem = player.timestudy.theorem.add(TimeStudy(sts).cost);
-          TimeStudy(sts).purchase();
+          player.timestudy.studies.push(sts);
+          GameCache.timeStudies.invalidate();
+          TimeStudyTree.commitToGameState([TimeStudy(sts)]);
         }
       }
       for (let sdts = 0; sdts < 7; sdts++) {
         if (player.celestials.alpha.records.dilation.studies.includes(sdts) && !DilationTimeStudyState.studies[sdts].isBought) {
-          Currency.timeTheorems.add(DilationTimeStudyState.studies[sdts].cost);
-          DilationTimeStudyState.studies[sdts].purchase();
+          player.dilation.studies.push(sdts);
         }
       }
       player.celestials.alpha.records.timestudy.studies = [];

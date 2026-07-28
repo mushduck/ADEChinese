@@ -77,4 +77,15 @@ export const divinityMilestones = {
         Exotic Hadrons are slightly stronger once again`;
     }
   },
+  ascendedSurge: {
+    divinities: 10,
+    get reward() {
+      return ` Delay the sixth Instability threshold by ${formatPercents(0.1)}
+        After uncapping the Galaxy Generator, rifts fill an additional ${formatX(1000)} faster
+        Reduce the time for Hadrons to cap by ${formatPercents(0.75)}
+        Reduce the time for Remnants of Alpha Decay to cap by ${formatPercents(0.5)}
+        Game Speed affects Ethereal Power generation at a severely reduced rate
+        You can now Ascend Cosmic Sectors in bulk`;
+    }
+  }
 };

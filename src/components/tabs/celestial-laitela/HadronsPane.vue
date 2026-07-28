@@ -39,6 +39,31 @@ export default {
     effect5Time() {
       return new Decimal(5).div(Hadrons.speedFactor).times(this.percentageCap).sub(this.hadronTimer);
     },
+    effect1Percent() {
+      let fac = this.hadronTimer.times(100).times(4).times(Hadrons.speedFactor);
+      let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
+    },
+    effect2Percent() {
+      let fac = this.hadronTimer.times(100).times(2).times(Hadrons.speedFactor);
+      let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
+    },
+    effect3Percent() {
+      let fac = this.hadronTimer.times(100).times(Hadrons.speedFactor);
+      let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
+    },
+    effect4Percent() {
+      let fac = this.hadronTimer.times(100).div(2).times(Hadrons.speedFactor);
+      let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
+    },
+    effect5Percent() {
+      let fac = this.hadronTimer.times(100).div(5).times(Hadrons.speedFactor);
+      let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
+    },
     effect1Text() {
       if (this.effect1Time.lte(0)) return `Effect is capped`;
       return `Time to cap: ${TimeSpan.fromHours(this.effect1Time).toStringShort()}`;
@@ -77,6 +102,12 @@ export default {
     buttonText4() {
       if (this.hasExotic) return `Convert all Exotic Hadrons into Hadrons and Dark Hadrons`;
       return `Convert all Dark Hadrons into Hadrons`;
+    },
+    extraH1Text() {
+      if (SingularityMilestone.hadronEffect1Improvement.isReached) {
+        return ` and ${formatPow(SingularityMilestone.hadronEffect1Improvement.effectOrDefault(1), 2, 3)}`;
+      }
+      return "";
     }
   },
   methods: {
@@ -86,7 +117,8 @@ export default {
       this.lightHadrons = hadrons.light;
       this.darkHadrons = hadrons.dark;
       this.exoticHadrons = hadrons.exotic;
-      this.percentageCap = (100 + Math.pow((Accelerators.emptiness.effectValue2 - 1) * 100, 2)) / 100;
+      this.percentageCap = (100 + Math.pow((Accelerators.emptiness.effectValue2 - 1) * 100 +
+        EndgameMastery(251).effectOrDefault(0), 2)) / 100;
       this.hadronTimer.copyFrom(Hadrons.timeFactor.div(100));
       this.effect1.copyFrom(Hadrons.singularityMultiplier);
       this.effect2.copyFrom(Hadrons.darkMatterCapMultiplier);
@@ -194,10 +226,13 @@ export default {
         Hadron Effect 1:
       </div>
       <div>
-        Multiply Singularities by {{ format(effect1, 2, 2) }}
+        Increase Singularities by {{ formatX(effect1, 2, 2) }}{{ extraH1Text }}
       </div>
       <div>
         {{ effect1Text }}
+      </div>
+      <div>
+        Effectiveness: {{ formatDecimalPercents(effect1Percent, 2, 2) }}
       </div>
     </div>
     <div
@@ -213,6 +248,9 @@ export default {
       <div>
         {{ effect2Text }}
       </div>
+      <div>
+        Effectiveness: {{ formatDecimalPercents(effect2Percent, 2, 2) }}
+      </div>
     </div>
     <div
       v-if="hasEffect3"
@@ -226,6 +264,9 @@ export default {
       </div>
       <div>
         {{ effect3Text }}
+      </div>
+      <div>
+        Effectiveness: {{ formatDecimalPercents(effect3Percent, 2, 2) }}
       </div>
     </div>
     <div
@@ -241,6 +282,9 @@ export default {
       <div>
         {{ effect4Text }}
       </div>
+      <div>
+        Effectiveness: {{ formatDecimalPercents(effect4Percent, 2, 2) }}
+      </div>
     </div>
     <div
       v-if="hasDark"
@@ -254,6 +298,9 @@ export default {
       </div>
       <div>
         {{ effect5Text }}
+      </div>
+      <div>
+        Effectiveness: {{ formatDecimalPercents(effect5Percent, 2, 2) }}
       </div>
     </div>
     <div

@@ -15,6 +15,7 @@ export default {
       matterPerSecond: new Decimal(0),
       energyPerSecond: new Decimal(0),
       incomeType: "",
+      dispBoth: false,
       conversionFormula1: new Decimal(0),
       conversionFormula2: 0,
       conversionFormula3: 0,
@@ -44,6 +45,7 @@ export default {
       this.matterPerSecond.copyFrom(DivineDimension(1).productionPerRealSecond);
       this.energyPerSecond.copyFrom(DivineDimensions.energyPerSecond);
       this.incomeType = player.celestials.pelle.divinity.isProducingEnergy ? "Divine Energy" : "Divine Matter";
+      this.dispBoth = DivinityUpgrade.divineL1U10.isBought;
       this.conversionFormula1 = DivineDimensions.conversionFormula1;
       this.conversionFormula2 = DivineDimensions.conversionFormula2;
       this.conversionFormula3 = DivineDimensions.conversionFormula3;
@@ -102,9 +104,13 @@ export default {
       </p>
     </div>
     <div>Divine Matter is capped at {{ format(hardcap, 2, 0) }}.</div>
-    <div>You are getting {{ currencyProd }} {{ incomeType }} per second.</div>
+    <div v-if="!dispBoth">You are getting {{ currencyProd }} {{ incomeType }} per second.</div>
+    <div v-if="dispBoth">
+      <div>You are getting {{ format(matterPerSecond, 2, 0) }} Divine Matter per second.</div>
+      <div>You are getting {{ format(energyPerSecond, 2, 2) }} Divine Energy per second.</div>
+    </div>
     <PrimaryButton
-      v-if="canProduceEnergy"
+      v-if="canProduceEnergy && !dispBoth"
       class="o-primary-btn--subtab-option"
       @click="shiftProd"
     >

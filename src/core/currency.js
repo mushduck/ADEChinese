@@ -537,6 +537,7 @@ Currency.darkEnergy = new class extends DecimalCurrency {
   }
 
   get productionPerSecond() {
+    if (SingularityMilestone.dmdMultBooster.isUnlocked) return DarkMatterDimensions.totalPowerDE;
     return DarkMatterDimensions.all
       .map(d => d.productionPerSecond)
       .decimalSum();
@@ -782,6 +783,15 @@ Currency.divineStars = new class extends DecimalCurrency {
     player.celestials.pelle.divinity.divineStars = newValue;
     player.records.thisSupernova.maxVS = player.records.thisSupernova.maxVS.max(value);
   }
+
+  get startingValue() {
+    return Effects.max(0).toDecimal();
+  }
+
+  reset() {
+    super.reset();
+    player.records.thisSupernova.maxVS = this.startingValue;
+  }
 }();
 
 Currency.starPower = new class extends DecimalCurrency {
@@ -819,5 +829,14 @@ Currency.nebulae = new class extends DecimalCurrency {
   add(amount) {
     super.add(amount);
     player.records.bestSupernova.totalNeb = player.records.bestSupernova.totalNeb.plus(amount);
+  }
+
+  get startingValue() {
+    return Effects.max(0).toDecimal();
+  }
+
+  reset() {
+    super.reset();
+    player.records.bestSupernova.maxNeb = this.startingValue;
   }
 }();

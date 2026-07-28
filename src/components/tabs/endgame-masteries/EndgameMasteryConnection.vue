@@ -41,7 +41,8 @@ export default {
           pathClass = pathClassOf(to) || pathClassOf(from);
           break;
         case ENDGAME_MASTERY_TYPE.PERMANENT:
-          pathClass = "o-endgame-mastery-connection--permanent";
+          if (this.setup.connection.to.id === 3) pathClass = "o-endgame-mastery-connection--time-compression";
+          else pathClass = "o-endgame-mastery-connection--permanent";
           break;
       }
 

@@ -436,6 +436,9 @@ export const migrations = {
     },
     104: player => {
       endgameMigration(player);
+    },
+    105: player => {
+      endgameMigration(player);
     }
   },
 

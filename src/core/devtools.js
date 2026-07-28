@@ -562,3 +562,19 @@ dev.nanFuck = function() {
   player = nanFuckIteration(player, Player.defaultStart);
   GameStorage.save();
 };
+
+dev.skipIntro = function() {
+  player.hasSeenIntro = true;
+  player.introTick = 90000;
+  player.introFrozen = true;
+  player.expanse.elemental.quotes.push(0);
+  player.expanse.elemental.quotes.push(1);
+  player.expanse.elemental.quotes.push(2);
+};
+
+dev.restartIntro = function() {
+  player.hasSeenIntro = false;
+  player.introTick = 0;
+  player.introFrozen = true;
+  player.expanse.elemental.quotes = player.expanse.elemental.quotes.filter(q => q >= 3);
+};

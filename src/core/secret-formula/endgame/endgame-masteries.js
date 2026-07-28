@@ -91,7 +91,7 @@ export const endgameMasteries = [
     requirement: [61],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and peak GL`,
-    effect: () => player.disablePostReality ? 1 : (EffarigUnlock.endgame.canBeApplied ? player.records.bestEndgame.glyphLevel : (1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)) * player.records.bestEndgame.glyphLevel),
+    effect: () => player.disablePostReality ? DC.D1 : (EffarigUnlock.endgame.canBeApplied ? player.records.bestEndgame.glyphLevel : new Decimal(1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)).times(player.records.bestEndgame.glyphLevel)),
     formatEffect: value => formatHybridSmall(value, 3)
   },
   {
@@ -314,5 +314,171 @@ export const endgameMasteries = [
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `Momentum increases ${formatInt(10)} times faster`,
     effect: () => player.disablePostReality ? 1 : 10
+  },
+  {
+    id: 181,
+    cost: 175000,
+    reqType: EM_REQUIREMENT_TYPE.EXPANDED,
+    description: () => `Decrease base Galaxy Generator Instability by ${formatInt(1)} again`,
+    effect: () => player.disablePostReality ? 0 : 1
+  },
+  {
+    id: 191,
+    cost: 50000,
+    requirement: [181],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Your Achievement Multiplier now affects Celestial Dimensions",
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(Decimal.pow(Achievements.power.max(1).log10(), 0.5))
+  },
+  {
+    id: 192,
+    cost: 50000,
+    requirement: [181],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Your Achievement Multiplier now affects Divine Dimensions at a reduced rate",
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(Decimal.pow(Achievements.power.max(1).log10(), 0.25))
+  },
+  {
+    id: 201,
+    cost: 75000,
+    requirement: [191, 192],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Achievement Multiplier now affects Entropy gain at an extremely reduced rate",
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(Achievements.power.max(1).log10(), 2)
+  },
+  {
+    id: 211,
+    cost: 100000,
+    requirement: [201],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Raise Divine Dimensions to ${formatPow(1.3, 1, 1)}`,
+    effect: () => player.disablePostReality ? 1 : 1.3
+  },
+  {
+    id: 212,
+    cost: 100000,
+    requirement: [201],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Raise Celestial Points to ${formatPow(1.2, 1, 1)}`,
+    effect: () => player.disablePostReality ? 1 : 1.2
+  },
+  {
+    id: 213,
+    cost: 100000,
+    requirement: [201],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Raise Dual Machines to ${formatPow(1.1, 1, 1)}`,
+    effect: () => player.disablePostReality ? 1 : 1.1
+  },
+  {
+    id: 221,
+    cost: 150000,
+    requirement: [211],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Multiply Divine Energy gain based on Hadrons",
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(new Decimal(player.celestials.laitela.hadrons.total).pow(1.25))
+  },
+  {
+    id: 222,
+    cost: 150000,
+    requirement: [212],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Raise the Antimatter Exponent in Pelle to ${formatPow(1.2, 1, 1)}`,
+    effect: () => player.disablePostReality ? 1 : 1.2
+  },
+  {
+    id: 223,
+    cost: 150000,
+    requirement: [213],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Multiply Dual Machine gain based on Star Power",
+    effect: () => player.disablePostReality ? 1 : Ethereal.starPower.add(1).log10().pow(10)
+  },
+  {
+    id: 231,
+    cost: 200000,
+    requirement: [221],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Improve the Divine Star formula slightly",
+    effect: () => player.disablePostReality ? 308 : 280
+  },
+  {
+    id: 232,
+    cost: 200000,
+    requirement: [222],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Slightly improve the effect of Achievement 207",
+    effect: () => player.disablePostReality ? 1 : 1.05
+  },
+  {
+    id: 233,
+    cost: 200000,
+    requirement: [223],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Reduce the time it takes for Dual Machines to approach their cap by ${formatX(5)}`,
+    effect: () => player.disablePostReality ? 1 : 5
+  },
+  {
+    id: 241,
+    cost: 300000,
+    requirement: [231, 232, 233],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Ethereal Power gain is multiplied based on total Endgame Skills",
+    effect: () => player.disablePostReality ? 1 : player.endgameMasteries.maxSkills.pow(2)
+  },
+  {
+    id: 251,
+    cost: 500000,
+    requirement: [241],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Increase the Hadron effectiveness cap by ${formatPercents(1)}`,
+    effect: () => player.disablePostReality ? 0 : 100
+  },
+  {
+    id: 261,
+    cost: 750000,
+    requirement: [251],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Raise the Celestial Matter Conversion Exponent to ${formatPow(1.25, 2, 2)}`,
+    effect: () => player.disablePostReality ? 1 : 1.25
+  },
+  {
+    id: 262,
+    cost: 750000,
+    requirement: [251],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Delay the start of all Dark Matter caps by ${formatPow(2)}`,
+    effect: () => player.disablePostReality ? 1 : 2
+  },
+  {
+    id: 271,
+    cost: 1000000,
+    requirement: [261],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: "Remove the Dilated Time Softcap"
+  },
+  {
+    id: 272,
+    cost: 1000000,
+    requirement: [261],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Weaken the harsh Replicanti softcap`,
+    effect: () => player.disablePostReality ? 10 : 2
+  },
+  {
+    id: 273,
+    cost: 1000000,
+    requirement: [262],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `Eternity Challenge 12's reward is ${formatX(10)} stronger`,
+    effect: () => player.disablePostReality ? 1 : 10
+  },
+  {
+    id: 274,
+    cost: 1000000,
+    requirement: [262],
+    reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
+    description: () => `All Glyph Instability thresholds are ${formatX(2)} weaker`,
+    effect: () => player.disablePostReality ? 1 : 2
   }
 ];

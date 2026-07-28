@@ -205,6 +205,27 @@
   100% { box-shadow: inset 0.5rem  0       2rem; }
 }
 
+.o-endgame-mastery-time-compression--available {
+  color: black;
+  background-color: #64ddad;
+  border-color: #64ddad;
+  animation: a-endgame-mastery-permanent 10s infinite;
+}
+
+.o-endgame-mastery-time-compression--available:hover {
+  color: white;
+  background-color: #64ddad;
+  animation: a-endgame-mastery-time-compression 10s infinite;
+}
+
+@keyframes a-endgame-mastery-time-compression {
+  0% { box-shadow: inset 0.5rem  0       2rem; }
+  25% { box-shadow: inset 0       0.5rem  2rem; }
+  50% { box-shadow: inset -0.5rem 0       2rem; }
+  75% { box-shadow: inset 0       -0.5rem 2rem; }
+  100% { box-shadow: inset 0.5rem  0       2rem; }
+}
+
 .o-endgame-mastery-normal--unavailable {
   background-color: #9e9e9e;
 }
@@ -250,6 +271,10 @@
 
 .o-endgame-mastery-permanent--unavailable {
   background-color: #a8a894;
+}
+
+.o-endgame-mastery-time-compression--unavailable {
+  background-color: #94a8a0;
 }
 
 .o-endgame-mastery-normal--bought {
@@ -309,6 +334,12 @@
 .o-endgame-mastery-permanent--bought {
   color: black;
   background: linear-gradient(var(--color-endgame), var(--color-pelle--base));
+  border-color: black;
+}
+
+.o-endgame-mastery-time-compression--bought {
+  color: black;
+  background: linear-gradient(#64ddad, #0000ff);
   border-color: black;
 }
 
@@ -405,6 +436,10 @@
   stroke: #a0a037;
 }
 
+.o-endgame-mastery-connection--time-compression {
+  stroke: #37a080;
+}
+
 .o-endgame-mastery-connection--bought {
   stroke: black;
 }
@@ -447,4 +482,8 @@
 
 .o-endgame-mastery-connection--bought.o-endgame-mastery-connection--permanent {
   stroke: var(--color-endgame);
+}
+
+.o-endgame-mastery-connection--bought.o-endgame-mastery-connection--time-compression {
+  stroke: #64ddad;
 }

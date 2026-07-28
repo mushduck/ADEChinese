@@ -179,7 +179,7 @@ class AlchemyReaction {
     let maxReagent = Glyphs.levelCap;
     for (const reagent of this._reagents) {
       const afterReaction = reagent.resource.amount - reagent.cost * this.actualYield;
-      maxReagent = Math.min(maxReagent, afterReaction);
+      maxReagent = Decimal.min(maxReagent, afterReaction).toNumber();
     }
     return maxReagent;
   }

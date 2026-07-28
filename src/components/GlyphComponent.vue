@@ -349,7 +349,7 @@ export default {
       sacrificeReward: 0,
       uncappedRefineReward: 0,
       refineReward: 0,
-      displayLevel: 0,
+      displayLevel: new Decimal(),
       // We use this to not create a ton of tooltip components as soon as the glyph tab loads.
       tooltipLoaded: false,
       logTotalSacrifice: 0,
@@ -551,7 +551,7 @@ export default {
       switch (options.glyphInfoType) {
         case typeEnum.LEVEL:
           this.updateDisplayLevel();
-          return formatHybridLarge(this.displayLevel === 0 ? this.glyph.level : this.displayLevel, 3);
+          return formatHybridLarge(new Decimal(this.displayLevel).eq(0) ? this.glyph.level : this.displayLevel, 3);
         case typeEnum.RARITY:
           return formatRarity(strengthToRarity(Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.canBeApplied ? Pelle.glyphStrength : this.glyph.strength));
         case typeEnum.SAC_VALUE:
@@ -619,7 +619,7 @@ export default {
     },
     updateDisplayLevel() {
       if (this.ignoreModifiedLevel) {
-        this.displayLevel = 0;
+        this.displayLevel = DC.D0;
         return;
       }
       // We have to consider some odd interactions in order to properly show level. The getAdjustedGlyphLevel() function
@@ -636,8 +636,8 @@ export default {
       if (this.isActiveGlyph) this.displayLevel = getAdjustedGlyphLevel(this.glyph);
       else if (this.isInventoryGlyph) this.displayLevel = getAdjustedGlyphLevel(this.glyph, 0);
       else {
-        this.displayLevel = this.glyph.level +
-          (BASIC_GLYPH_TYPES.includes(this.glyph.type) ? this.realityGlyphBoost : 0);
+        this.displayLevel = this.glyph.level.add(
+          (BASIC_GLYPH_TYPES.includes(this.glyph.type) ? this.realityGlyphBoost : 0));
       }
     },
     hideTooltip() {

@@ -227,17 +227,18 @@ export const infinityUpgrades = {
   ipMult: {
     id: "ipMult",
     cost: () => InfinityUpgrade.ipMult.cost,
-    checkRequirement: () => Achievement(41).isUnlocked,
-    costCap: () => Alpha.isRunning ? Decimal.pow10(AlphaUnlocks.infinityChallenges.effects.nerf.effectOrDefault(Decimal.log10((BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality) ? DC.BEMAX : DC.E6E6).sub(1))).times(10) : ((BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality) ? DC.BEMAX : DC.E6E6),
-    costIncreaseThreshold: () => (EndgameUpgrade(21).isBought && !player.disablePostReality) ? Decimal.pow10(1e125) : DC.E3E6,
-    description: () => `Multiply Infinity Points from all sources by ${formatX(2)}`,
+    checkRequirement: () => Achievement(41).isUnlocked || Ascensions.ipA.isUnlocked,
+    costCap: () => Ascensions.ipA.isUnlocked ? DC.BEMAX : (Alpha.isRunning ? Decimal.pow10(AlphaUnlocks.infinityChallenges.effects.nerf.effectOrDefault(Decimal.log10((BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality) ? DC.BEMAX : DC.E6E6).sub(1))).times(10) : ((BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality) ? DC.BEMAX : DC.E6E6)),
+    costIncreaseThreshold: () => Ascensions.ipA.isUnlocked ? DC.BEMAX : ((EndgameUpgrade(21).isBought && !player.disablePostReality) ? Decimal.pow10(1e125) : DC.E3E6),
+    description: () => Ascensions.ipA.isUnlocked ? `Increase the exponent of Infinity Points by +${formatPow(0.01, 2, 2)}` : `Multiply Infinity Points from all sources by ${formatX(2)}`,
     // Normally the multiplier caps at e993k or so with 3300000 purchases, but if the cost is capped then we just give
     // an extra e7k to make the multiplier look nice
-    effect: () => (player.IPMultPurchases.gte(3300000) && (!BreakEternityUpgrade.doubleIPUncap.isBought || player.disablePostReality) ? DC.E1E6 : Decimal.round(DC.D2.pow(player.IPMultPurchases))),
+    effect: () => Ascensions.ipA.isUnlocked ? player.IPMultPurchases.div(100).add(1) : ((player.IPMultPurchases.gte(3300000) && (!BreakEternityUpgrade.doubleIPUncap.isBought || player.disablePostReality) ? DC.E1E6 : Decimal.round(DC.D2.pow(player.IPMultPurchases)))),
     cap: () => {
+      if (Ascensions.ipA.isUnlocked) return DC.BEMAX;
       const normcap = (BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality) ? DC.BEMAX : DC.E1E6;
       return Alpha.isRunning ? Decimal.pow(2, AlphaUnlocks.infinityChallenges.effects.nerf.effectOrDefault(Decimal.log2(Effarig.eternityCap ?? normcap))) : (Effarig.eternityCap ?? normcap);
     },
-    formatEffect: value => formatX(value, 2, 2),
+    formatEffect: value => `${Ascensions.ipA.isUnlocked ? formatPow(value, 2, 2) : formatX(value, 2, 2)}`,
   }
 };

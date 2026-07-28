@@ -100,7 +100,9 @@ export const v = {
       description: value => `Have ${formatInt(value)} total Galaxies from all types.`,
       values: [4000, 4300, 4600, 4900, 5200, 5500],
       condition: () => V.isRunning,
-      currentValue: () => Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies),
+      currentValue: () => GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
+        player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) : Replicanti.galaxies.total.add(player.galaxies).add(
+        player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies),
       formatRecord: x => formatHybridLarge(x, 3),
       shardReduction: tiers => Math.floor(300 * tiers),
       maxShardReduction: goal => goal - 4000,

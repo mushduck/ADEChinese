@@ -1,7 +1,25 @@
-import { RebuyableMechanicState, SetPurchasableMechanicState } from "./game-mechanics";
+import { GameMechanicState, RebuyableMechanicState, SetPurchasableMechanicState } from "./game-mechanics";
 import { SpeedrunMilestones } from "./speedrun";
 
+class ChargedBreakInfinityUpgradeState extends GameMechanicState {
+  constructor(config, upgrade) {
+    super(config);
+    this._upgrade = upgrade;
+  }
+
+  get isEffectActive() {
+    return this._upgrade.isBought && this._upgrade.isCharged;
+  }
+}
+
 export class BreakInfinityUpgradeState extends SetPurchasableMechanicState {
+  constructor(config) {
+    super(config);
+    if (config.charged) {
+      this._chargedEffect = new ChargedBreakInfinityUpgradeState(config.charged, this);
+    }
+  }
+
   get currency() {
     return Currency.infinityPoints;
   }
@@ -18,6 +36,50 @@ export class BreakInfinityUpgradeState extends SetPurchasableMechanicState {
     if (Alpha.isRunning && !player.break) return false;
     if (this.id === "autoBuyerUpgrade" && Alpha.isRunning && Alpha.currentStage < 7) return false;
     return true;
+  }
+
+  get isEffectActive() {
+    return this.isBought && !this.isCharged;
+  }
+
+  get chargedEffect() {
+    return this._chargedEffect;
+  }
+
+  purchase() {
+    if (super.purchase()) {
+      EventHub.dispatch(GAME_EVENT.BREAK_INFINITY_UPGRADE_BOUGHT);
+      return true;
+    }
+    if (this.canCharge) {
+      this.charge();
+      EventHub.dispatch(GAME_EVENT.BREAK_INFINITY_UPGRADE_CHARGED);
+      return true;
+    }
+    return false;
+  }
+
+  get hasChargeEffect() {
+    return this.config.charged !== undefined && Ascensions.ocA.isUnlocked;
+  }
+
+  get isCharged() {
+    return player.endgame.overcharge.charged.infinite.has(this.id);
+  }
+
+  get canCharge() {
+    return this.isBought &&
+      this.hasChargeEffect &&
+      !this.isCharged &&
+      player.endgame.overcharge.chargesLeft.infinite !== 0;
+  }
+
+  charge() {
+    player.endgame.overcharge.charged.infinite.add(this.id);
+  }
+
+  disCharge() {
+    player.endgame.overcharge.charged.infinite.delete(this.id);
   }
 
   onPurchased() {
@@ -71,6 +133,27 @@ class RebuyableBreakInfinityUpgradeState extends RebuyableMechanicState {
       Alpha.quotes.allBreakUpgrades.show();
     }
   }
+}
+
+export function disChargeAllBreakUpgrades() {
+  const upgrades = [
+    BreakInfinityUpgrade.totalAMMult,
+    BreakInfinityUpgrade.currentAMMult,
+    BreakInfinityUpgrade.galaxyBoost,
+    BreakInfinityUpgrade.infinitiedMult,
+    BreakInfinityUpgrade.achievementMult,
+    BreakInfinityUpgrade.slowestChallengeMult,
+    BreakInfinityUpgrade.infinitiedGen,
+    BreakInfinityUpgrade.autobuyMaxDimboosts,
+    BreakInfinityUpgrade.autobuyerSpeed
+  ];
+  for (const upgrade of upgrades) {
+    if (upgrade.isCharged) {
+      upgrade.disCharge();
+    }
+  }
+  player.endgame.overcharge.discharge.infinite = false;
+  EventHub.dispatch(GAME_EVENT.BREAK_INFINITY_UPGRADES_DISCHARGED);
 }
 
 export const BreakInfinityUpgrade = mapGameDataToObject(

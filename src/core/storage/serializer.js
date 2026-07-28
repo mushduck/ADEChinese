@@ -122,6 +122,9 @@ export const GameSaveSerializer = {
   // old automator scripts (where this function is also used) are very unlikely
   // to start with our magic string because it is longer than a few characters.
   decodeText(text, type) {
+    if (text.startsWith("AntimatterDimensionsSavefileFormat")) {
+      text = text.replace("AntimatterDimensionsSavefileFormat", "AntimatterDimensionsEndgameSavefileFormat");
+    }
     if (text.startsWith(this.startingString[type])) {
       const len = this.startingString[type].length;
       const version = text.slice(len, len + 3);

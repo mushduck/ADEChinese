@@ -35,7 +35,7 @@ export default {
   data() {
     return {
       glyphs: [],
-      gainedLevel: 0,
+      gainedLevel: new Decimal(),
       canSacrifice: false,
       realityGlyphBoost: 0,
     };
@@ -61,7 +61,7 @@ export default {
         ? GlyphSelection.glyphList(GlyphSelection.choiceCount, gainedGlyphLevel(), { isChoosingGlyph: false })
         : this.glyphSet.filter(x => x);
       this.sortGlyphs();
-      this.gainedLevel = gainedGlyphLevel().actualLevel;
+      this.gainedLevel.copyFrom(gainedGlyphLevel().actualLevel);
       let totalRealityGlyphBoost = 0;
       for (let r = 0; r < getActiveGlyphEffects().length; r++) {
         if (getActiveGlyphEffects()[r].id === "realityglyphlevel") totalRealityGlyphBoost += getActiveGlyphEffects()[r].value.value;

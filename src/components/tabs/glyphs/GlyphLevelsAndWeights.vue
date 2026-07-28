@@ -121,7 +121,7 @@ export default {
       this.perkShopVisible = glyphFactors.perkShop !== 1;
       this.rowVisible = glyphFactors.rowFactor > 0;
       this.achievementVisible = glyphFactors.achievementFactor > 0;
-      if (glyphFactors.scalePenalty !== 1) {
+      if (glyphFactors.scalePenalty.neq(1)) {
         this.penaltyVisible = true;
         this.lastInstability = Date.now();
       } else if (this.penaltyVisible) {
@@ -156,13 +156,13 @@ export default {
     formatFactor(x) {
       // Not applied to + perks since it's always whole; for factors < 1, the slice makes the
       // factor be fixed point.
-      return Notations.current.isPainful || x > 1000
+      return Notations.current.isPainful || new Decimal(x).gt(1000)
         ? format(x, 2, 2)
         : x.toPrecision(5).slice(0, 6);
     },
     formatLevel(x) {
-      return x > 1000
-        ? formatHybridLarge(Math.floor(x), 3)
+      return x.gt(1000)
+        ? formatHybridLarge(Decimal.floor(x), 3)
         : format(x, 2, 4);
     },
     makeRowStyle(r) {

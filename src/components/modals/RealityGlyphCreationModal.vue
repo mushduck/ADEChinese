@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       isDoomed: false,
-      realityGlyphLevel: 0,
+      realityGlyphLevel: new Decimal(0),
       // This contains an array where each entry is an array looking like [4000, "realitygalaxies"]
       possibleEffects: [],
     };
@@ -19,7 +19,7 @@ export default {
   methods: {
     update() {
       this.isDoomed = Pelle.isDoomed && !PelleAlchemyUpgrade.alchemyReality.canBeApplied;
-      this.realityGlyphLevel = AlchemyResource.reality.effectValue;
+      this.realityGlyphLevel.copyFrom(new Decimal(AlchemyResource.reality.effectValue));
       const realityEffectConfigs = GlyphEffects.all
         .filter(eff => eff.glyphTypes.includes("reality"))
         .sort((a, b) => a.bitmaskIndex - b.bitmaskIndex);
@@ -39,7 +39,7 @@ export default {
       this.emitClose();
     },
     formatGlyphEffect(effect) {
-      if (this.realityGlyphLevel < effect[0]) return `(Requires Glyph level ${formatInt(effect[0])})`;
+      if (this.realityGlyphLevel.lt(effect[0])) return `(Requires Glyph level ${formatInt(effect[0])})`;
       const config = GlyphEffects[effect[1]];
       const value = config.effect(this.realityGlyphLevel, rarityToStrength(100 + Ra.unlocks.realityGlyphRarity.effectOrDefault(0)));
       const effectTemplate = config.singleDesc;
@@ -81,7 +81,7 @@ export default {
         You cannot create Reality Glyphs while Doomed
       </PrimaryButton>
       <PrimaryButton
-        v-else-if="realityGlyphLevel !== 0"
+        v-else-if="realityGlyphLevel.neq(0)"
         @click="createRealityGlyph"
       >
         Create a Reality Glyph!

@@ -64,9 +64,9 @@ export class RealityAutobuyerState extends AutobuyerState {
       const checkModes = [AUTO_REALITY_MODE.GLYPH, AUTO_REALITY_MODE.EITHER, AUTO_REALITY_MODE.BOTH];
 
     
-      const targetLevel = Math.min(this.glyph, Glyphs.levelCap);
+      const targetLevel = Decimal.min(this.glyph, Glyphs.levelCap);
       const levelToCheck = checkModes.includes(this.mode)
-        ? { actualLevel: targetLevel, rawLevel: 1 }
+        ? { actualLevel: targetLevel, rawLevel: DC.D1 }
         : gainedLevel;
 
       const choices = GlyphSelection.glyphList(GlyphSelection.choiceCount, levelToCheck, { isChoosingGlyph: false });
@@ -84,8 +84,8 @@ export class RealityAutobuyerState extends AutobuyerState {
 
     const rmProc = MachineHandler.gainedRealityMachines.times(ampFactor).gte(this.rm);
 
-    const glyphTarget = Math.min(this.glyph, Glyphs.levelCap);
-    const glyphProc = gainedGlyphLevel().actualLevel >= glyphTarget;
+    const glyphTarget = Decimal.min(this.glyph, Glyphs.levelCap);
+    const glyphProc = gainedGlyphLevel().actualLevel.gte(glyphTarget);
 
     switch (this.mode) {
       case AUTO_REALITY_MODE.RM:          proc = rmProc; break;

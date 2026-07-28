@@ -126,7 +126,7 @@ export const resurgenceUpgrades = {
     id: "synergy4",
     cost: new Decimal("1e2700"),
     description: "Time Theorems boost Galaxy Strength",
-    effect: () => Decimal.pow(Decimal.log10(Decimal.log10(player.timestudy.theorem).add(1)), 3).add(1),
+    effect: () => Decimal.pow(Decimal.log10(Decimal.log10(player.timestudy.theorem.max(1)).add(1)), 3).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
   synergy5: {
@@ -148,25 +148,25 @@ export const resurgenceUpgrades = {
   unl1: {
     name: "Graduation",
     id: "unl1",
-    cost: new Decimal("1e5000"),
+    cost: new Decimal("1e7000"),
     description: "Unlock more Endgame Masteries"
   },
   unl2: {
     name: "Nihility",
     id: "unl2",
-    cost: new Decimal("1e8000"),
+    cost: new Decimal("1e12000"),
     description: "Unlock more Singularity Milestones"
   },
   unl3: {
     name: "Nebula",
     id: "unl3",
-    cost: new Decimal("1e13000"),
+    cost: new Decimal("1e20000"),
     description: "Unlock more Galactic Powers"
   },
   unl4: {
     name: "Resurrect",
     id: "unl4",
-    cost: new Decimal("1e20000"),
+    cost: new Decimal("1e33000"),
     description: "Unlock Ascension"
   }
 };

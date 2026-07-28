@@ -329,7 +329,7 @@ class EPMultiplierState extends GameMechanicState {
   constructor() {
     super({});
     this.cachedCost = new Lazy(() => this.costAfterCount(player.epmultUpgrades));
-    this.cachedEffectValue = new Lazy(() => DC.D5.pow(player.epmultUpgrades));
+    this.cachedEffectValue = new Lazy(() => Ascensions.epA.isUnlocked ? player.epmultUpgrades.div(100).add(1) : DC.D5.pow(player.epmultUpgrades));
   }
 
   get isAffordable() {
@@ -373,6 +373,9 @@ class EPMultiplierState extends GameMechanicState {
     let tempVal = DC.D0;
     let bulk = DC.D1;
     let cur = Currency.eternityPoints.value.max(1);
+    if (Ascensions.epA.isUnlocked) {
+      return Decimal.floor(cur.max(2).log10().log10()).add(1);
+    }
     if (cur.gt(this.costIncreaseThresholds[4]) && (!EndgameMastery(152).isBought || player.disablePostReality)) {
       bulk = Decimal.max(Decimal.floor(Decimal.pow(Decimal.log(this.costIncreaseThresholds[4].div(500), 1e3).sub(1332).add(Decimal.pow(1332, 1.2)), 1 / 1.2)), 1332);
       tempVal = DC.E3.pow(Decimal.pow(bulk, 1.2).sub(Decimal.pow(1332, 1.2)).add(1332)).times(500);
@@ -456,6 +459,9 @@ class EPMultiplierState extends GameMechanicState {
   }
 
   costAfterCount(count) {
+    if (Ascensions.epA.isUnlocked) {
+      return Decimal.pow10(Decimal.pow10(count));
+    }
     const costThresholds = EternityUpgrade.epMult.costIncreaseThresholds;
     const multPerUpgrade = [50, 100, 500, 1000];
     for (let i = 0; i < costThresholds.length - 1; i++) {

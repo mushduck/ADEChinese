@@ -129,7 +129,7 @@ export const dualityUpgrades = [
     ${formatInt(0)}`,
     hasFailed: () => !Object.values(player.celestials.effarig.glyphWeights).every(w => w === 0),
     checkRequirement: () => Object.values(player.celestials.effarig.glyphWeights).every(w => w === 0) &&
-      gainedGlyphLevel().actualLevel >= 102500,
+      gainedGlyphLevel().actualLevel.gte(102500),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "Raise free Dimboost gain to a power based on repeatable Duality Upgrade purchases",
     effect: () => player.disablePostReality ? 1 : 1 + Math.log10(DualityUpgrades.totalRebuyables) * 1.5,
@@ -198,8 +198,9 @@ export const dualityUpgrades = [
     formatCost: x => format(x, 1),
     requirement: () => `Have ${format(2.4e9, 1)} total Galaxies outside Pelle`,
     hasFailed: () => Pelle.isDoomed,
-    checkRequirement: () => Replicanti.galaxies.total.add(player.galaxies).add(
-      player.dilation.totalTachyonGalaxies).gte(2.4e9) && !Pelle.isDoomed,
+    checkRequirement: () => GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
+    player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)).gte(2.4e9) : Replicanti.galaxies.total.add(player.galaxies).add(
+      player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).gte(2.4e9) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Unlock a 4th Hadron effect",
   },
@@ -267,7 +268,7 @@ export const dualityUpgrades = [
     hasFailed: () => !Ra.isRunning ||
       player.requirementChecks.reality.maxGlyphs > -15,
     checkRequirement: () => Ra.isRunning &&
-      player.requirementChecks.reality.maxGlyphs <= -15 && gainedGlyphLevel().actualLevel >= 385000,
+      player.requirementChecks.reality.maxGlyphs <= -15 && gainedGlyphLevel().actualLevel.gte(385000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "Tesseracts increase Galaxy strength",
     effect: () => player.disablePostReality ? 1 : Tesseracts.effectiveCount / 100,

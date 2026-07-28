@@ -46,7 +46,7 @@ export const GalaxyGenerator = {
 
   get galGenInstability() {
     const extraReduction = (ExpansionPack.pellePack.isBought && !player.disablePostReality) ? 1 : 0;
-    const reduction = Effects.sum(EndgameMastery(122), Achievement(206), EndgameUpgrade(12)) + extraReduction;
+    const reduction = Effects.sum(EndgameMastery(122), Achievement(206), EndgameUpgrade(12), EndgameMastery(181)) + extraReduction;
     let powReduction = 1;
     if (EndgameMilestone.instabilityReduction.isReached && !player.disablePostReality) powReduction = Math.pow(1 / Math.log10(Currency.endgames.value + 1), 0.1);
     return Math.pow(10 - reduction, powReduction);
@@ -172,7 +172,7 @@ export const GalaxyGenerator = {
     );
 
     if (!this.capRift) {
-      PelleRifts.all.forEach(r => r.reducedTo = new Decimal(diff).div(player.disablePostReality ? 1e5 : (DivinityMilestone.finalRebirth.isReached ? 10 : (DivinityMilestone.celestialSurge.isReached ? 1e3 : (DivinityMilestone.pelleQoL.isReached ? 1e4 : 1e5)))).times(3).add(r.reducedTo).clampMax(Alpha.isDestroyed ? Infinity : 2).toNumber());
+      PelleRifts.all.forEach(r => r.reducedTo = new Decimal(diff).div(player.disablePostReality ? 1e5 : (DivinityMilestone.ascendedSurge.isReached ? 0.01 : (DivinityMilestone.finalRebirth.isReached ? 10 : (DivinityMilestone.celestialSurge.isReached ? 1e3 : (DivinityMilestone.pelleQoL.isReached ? 1e4 : 1e5))))).times(3).add(r.reducedTo).clampMax(Alpha.isDestroyed ? Infinity : 2).toNumber());
       if (PelleRifts.vacuum.milestones[0].canBeApplied && !this.hasReturnedGlyphSlot) {
         Glyphs.refreshActive();
         EventHub.dispatch(GAME_EVENT.GLYPHS_EQUIPPED_CHANGED);

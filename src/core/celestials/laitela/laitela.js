@@ -50,7 +50,9 @@ export const Laitela = {
     if ((Pelle.isDoomed && !PelleDestructionUpgrade.continuumBuff.canBeApplied) || player.disablePostReality) return 1;
     return (Decimal.pow(Decimal.pow(new Decimal(Decimal.log10(Currency.darkMatter.max.add(1))).div(50), 0.4).times(0.5).add(1).times(
       SingularityMilestone.continuumMult.effectOrDefault(new Decimal(0)).add(1)).times(
-      DualityUpgrade(11).effectOrDefault(1)).times(Hadrons.continuumMultiplier), DualityUpgrade(14).effectOrDefault(1))).toNumber();
+      DualityUpgrade(11).effectOrDefault(1)).times(Hadrons.continuumMultiplier).timesEffectOf(
+      SingularityMilestone.singContinuumBoost), DualityUpgrade(14).effectOrDefault(1))).times(
+      BreakInfinityUpgrade.autobuyerSpeed.chargedEffect.effectOrDefault(1)).toNumber();
   },
   get hadronizes() {
     return this.celestial.hadronizes;
@@ -70,21 +72,23 @@ export const Laitela = {
   get entropyGainPerSecond() {
     const maxSpeed = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? 1000 : 100;
     const hadronizeBump = this.hadronizes > 0 ? 1e12 : 1;
-    const hadronizeAntimatter = Decimal.pow(1000, this.hadronizes).times(hadronizeBump).times(1e11)
-      .div(Hadrons.entropyFormulaBoost).div(Decimal.log10(player.records.bestEndgame.galaxies.max(1)))
-      .div(Accelerators.potency.effectValue2).div(
+    const extraHadronizeBoost = DC.D1.times(Hadrons.entropyFormulaBoost).times(Decimal.log10(player.records.bestEndgame.galaxies.max(1)))
+      .times(Accelerators.potency.effectValue2).times(
       DivinityMilestone.finalRebirth.isReached && !player.disablePostReality ? Time.thisEndgameRealTime.totalMinutes.pow(3).add(1) : 1)
-      .dividedByEffectOf(ResurgenceUpgrade.entropySurge);
+      .timesEffectsOf(ResurgenceUpgrade.entropySurge, EndgameMastery(201), SingularityMilestone.continuumEntropyMult).pow(
+      Achievements.powerConv(EndgameMastery(201).effectOrDefault(1)));
+    const hadronizeAntimatter = Decimal.pow(1000, this.hadronizes).times(hadronizeBump).times(1e11).div(extraHadronizeBoost);
     return Decimal.clamp(Decimal.pow(new Decimal(Currency.antimatter.value.add(1).log10()).div(
       hadronizeAntimatter), 2), 0, maxSpeed).div(200);
   },
   get antimatterNeededToDestabilize() {
     const hadrBump = this.hadronizes > 0 ? 1e12 : 1;
-    const hadrAM = Decimal.pow(1000, this.hadronizes).times(hadrBump).times(1e11)
-      .div(Hadrons.entropyFormulaBoost).div(Decimal.log10(player.records.bestEndgame.galaxies.max(1)))
-      .div(Accelerators.potency.effectValue2).div(
+    const extraHadrBoost = DC.D1.times(Hadrons.entropyFormulaBoost).times(Decimal.log10(player.records.bestEndgame.galaxies.max(1)))
+      .times(Accelerators.potency.effectValue2).times(
       DivinityMilestone.finalRebirth.isReached && !player.disablePostReality ? Time.thisEndgameRealTime.totalMinutes.pow(3).add(1) : 1)
-      .dividedByEffectOf(ResurgenceUpgrade.entropySurge);
+      .timesEffectsOf(ResurgenceUpgrade.entropySurge, EndgameMastery(201), SingularityMilestone.continuumEntropyMult).pow(
+      Achievements.powerConv(EndgameMastery(201).effectOrDefault(1)));
+    const hadrAM = Decimal.pow(1000, this.hadronizes).times(hadrBump).times(1e11).div(extraHadrBoost);
     const currRoot = (this.maxAllowedDimension === 0 ? DC.BEMAX : 8 / this.maxAllowedDimension);
     return Decimal.pow10(hadrAM).pow(Decimal.sqrt(20/3)).pow(currRoot);
   },
@@ -101,10 +105,10 @@ export const Laitela = {
     return (this.celestial.darkMatterMult.add(this.darkMatterMultGain)).div(this.celestial.darkMatterMult);
   },
   get darkMatterSoftcap1() {
-    return DC.E10000.times(EtherealStars.white.reward);
+    return DC.E10000.times(EtherealStars.white.reward).powEffectOf(EndgameMastery(262));
   },
   get darkMatterSoftcap2() {
-    return DC.E100000.times(EtherealStars.white.reward);
+    return DC.E100000.times(EtherealStars.white.reward).powEffectOf(EndgameMastery(262));
   },
   get darkMatterCap() {
     let baseCap = DC.NUMMAX;
@@ -114,7 +118,7 @@ export const Laitela = {
     if (ImaginaryUpgrade(29).isBought) baseCap = DC.E100000;
     const realityReward = (ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? this.realityReward : 1;
     return baseCap.times(EndgameUpgrade(4).effectOrDefault(1)).times(realityReward).times(
-      Hadrons.darkMatterCapMultiplier).times(EtherealStars.white.reward);
+      Hadrons.darkMatterCapMultiplier).times(EtherealStars.white.reward).powEffectOf(EndgameMastery(262));
   },
   get annihilationUnlocked() {
     return ImaginaryUpgrade(19).isBought;

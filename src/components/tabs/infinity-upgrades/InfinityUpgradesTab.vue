@@ -96,7 +96,8 @@ export default {
       this.eternityUnlocked = PlayerProgress.current.isEternityUnlocked;
       this.bottomRowUnlocked = Achievement(41).isUnlocked;
       this.isUncapped = BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality;
-      this.isSoftcapApplicable = !EndgameUpgrade(21).isBought || player.disablePostReality || player.infinityPoints.gte("e1e125");
+      this.isSoftcapApplicable = !EndgameUpgrade(21).isBought || player.disablePostReality ||
+        (player.infinityPoints.gte("e1e125") && !Ascensions.ipA.isUnlocked);
     },
     btnClassObject(column) {
       const classObject = {

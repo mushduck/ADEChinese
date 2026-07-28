@@ -10,6 +10,8 @@ export default {
     return {
       currentMultiplier: new Decimal(),
       nextMultiplier: new Decimal(),
+      currentPower: new Decimal(),
+      nextPower: new Decimal()
     };
   },
   computed: {
@@ -24,6 +26,8 @@ export default {
         amount of 1st Antimatter Dimensions sacrificed. It will take time to regain production.`;
     },
     multiplierText() {
+      if (Ascensions.sacA.isUnlocked) return `Power is currently ${formatPow(this.currentPower, 2, 3)} and will increase to
+        ${formatPow(this.nextPower, 2, 3)} on Dimensional Sacrifice.`;
       return `Multiplier is currently ${formatX(this.currentMultiplier, 2, 2)} and will increase to
         ${formatX(this.nextMultiplier, 2, 2)} on Dimensional Sacrifice.`;
     },
@@ -32,6 +36,8 @@ export default {
     update() {
       this.currentMultiplier.copyFrom(Sacrifice.totalBoost);
       this.nextMultiplier.copyFrom(Sacrifice.nextBoost.times(Sacrifice.totalBoost));
+      this.currentPower.copyFrom(Sacrifice.totalPower);
+      this.nextPower.copyFrom(Sacrifice.nextPower.add(Sacrifice.totalPower));
     },
     handleYesClick() {
       sacrificeReset();

@@ -71,11 +71,11 @@ export const GlyphSelection = {
 
   update(level) {
     if (this.realityProps === undefined) return;
-    if (level.rawLevel > this.realityProps.gainedGlyphLevel.rawLevel) {
+    if (level.rawLevel.gt(this.realityProps.gainedGlyphLevel.rawLevel)) {
       this.realityProps.gainedGlyphLevel.rawLevel = level.rawLevel;
       for (const glyph of this.glyphs) glyph.rawLevel = level.rawLevel;
     }
-    if (level.actualLevel > this.realityProps.gainedGlyphLevel.actualLevel) {
+    if (level.actualLevel.gt(this.realityProps.gainedGlyphLevel.actualLevel)) {
       this.realityProps.gainedGlyphLevel.actualLevel = level.actualLevel;
       for (const glyph of this.glyphs) {
         glyph.level = level.actualLevel;
@@ -288,9 +288,9 @@ function updateRealityRecords(realityProps) {
     player.records.bestReality.RMmin = thisRunRMmin;
     player.records.bestReality.RMminSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
   }
-  if (player.records.bestReality.glyphLevel < realityProps.gainedGlyphLevel.actualLevel) {
+  if (player.records.bestReality.glyphLevel.lt(realityProps.gainedGlyphLevel.actualLevel)) {
     player.records.bestReality.glyphLevel = realityProps.gainedGlyphLevel.actualLevel;
-    if (player.records.bestReality.glyphLevel > player.records.bestEndgame.glyphLevel) {
+    if (player.records.bestReality.glyphLevel.gt(player.records.bestEndgame.glyphLevel)) {
       player.records.bestEndgame.glyphLevel = player.records.bestReality.glyphLevel;
     }
     player.records.bestReality.glyphLevelSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));

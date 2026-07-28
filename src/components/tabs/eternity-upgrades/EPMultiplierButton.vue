@@ -40,6 +40,14 @@ export default {
       };
     },
     isDoomed: () => Pelle.isDoomed && !PelleDestructionUpgrade.x5EPUpgrade.canBeApplied,
+    epEffectText() {
+      if (Ascensions.epA.isUnlocked) return `Increase the exponent of Eternity Points by +${formatPow(1.01, 2, 2)}`;
+      return `Multiply Eternity Points from all sources by ${formatX(5)}`;
+    },
+    totalEPEffectText() {
+      if (Ascensions.epA.isUnlocked) return `Currently: ${formatPow(this.multiplier, 2, 2)}`;
+      return `Currently: ${formatX(this.multiplier, 2, 0)}`;
+    }
   },
   watch: {
     isAutobuyerActive(newValue) {
@@ -70,9 +78,9 @@ export default {
       @click="purchaseUpgrade"
     >
       <div :class="{ 'o-pelle-disabled': isDoomed }">
-        Multiply Eternity Points from all sources by {{ formatX(5) }}
+        {{ epEffectText }}
         <br>
-        Currently: {{ formatX(multiplier, 2, 0) }}
+        {{ totalEPEffectText }}
       </div>
       <br>
       Cost: {{ quantify("Eternity Point", cost, 2, 0) }}

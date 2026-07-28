@@ -178,9 +178,9 @@ export function getDilationGainPerSecond() {
     if (ResurgenceUpgrade.curr2Surge.isBought && !player.disablePostReality && !Pelle.isDoomed) {
       dtRate = dtRate.pow(player.dilation.dilatedTime.max(1e10).log10().log10());
     }
-    if (dtRate.gte(DilationSoftcapStart.PRIMARY_THRESHOLD)) {
-      dtRate = Decimal.pow(10, (((Decimal.log10(dtRate).sub(Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))).div(10)).add(
-        Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))));
+    if (dtRate.gte(DilationSoftcapStart.PRIMARY_THRESHOLD())) {
+      dtRate = Decimal.pow(10, (((Decimal.log10(dtRate).sub(Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD()))).div(10)).add(
+        Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD()))));
     }
     return dtRate;
   }
@@ -207,9 +207,9 @@ export function getDilationGainPerSecond() {
   if (ResurgenceUpgrade.curr2Surge.isBought && !player.disablePostReality && !Pelle.isDoomed) {
     dtRate = dtRate.pow(player.dilation.dilatedTime.max(1e10).log10().log10());
   }
-  if (dtRate.gte(DilationSoftcapStart.PRIMARY_THRESHOLD)) {
-    dtRate = Decimal.pow(10, (((Decimal.log10(dtRate).sub(Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))).div(10)).add(
-      Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD))));
+  if (dtRate.gte(DilationSoftcapStart.PRIMARY_THRESHOLD())) {
+    dtRate = Decimal.pow(10, (((Decimal.log10(dtRate).sub(Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD()))).div(10)).add(
+      Decimal.log10(DilationSoftcapStart.PRIMARY_THRESHOLD()))));
   }
   return dtRate;
 }
@@ -408,5 +408,5 @@ export const DilationUpgradeScaling = {
 };
 
 export const DilationSoftcapStart = {
-  PRIMARY_THRESHOLD: DC.E20000
+  PRIMARY_THRESHOLD: () => EndgameMastery(271).isBought ? new Decimal(Infinity) : DC.E20000
 };

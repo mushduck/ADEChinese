@@ -110,6 +110,10 @@ export function getDimensionFinalMultiplierUncached(tier) {
 
   multiplier = dilateMultiplier(multiplier, EtherealStars.red.reward);
 
+  if (player.endgame.overcharge.isRunning) {
+    multiplier = dilateMultiplier(multiplier, Math.pow(0.72, player.endgame.overcharge.level));
+  }
+
   return multiplier;
 }
 
@@ -123,7 +127,7 @@ function applyNDMultipliers(mult, tier) {
     buy10Value = Decimal.floor(AntimatterDimension(tier).bought.div(10));
   }
 
-  multiplier = multiplier.times(Decimal.pow(AntimatterDimensions.buyTenMultiplier, buy10Value));
+  if (!Ascensions.b10mA.isUnlocked) multiplier = multiplier.times(Decimal.pow(AntimatterDimensions.buyTenMultiplier, buy10Value));
   multiplier = multiplier.times(DimBoost.multiplierToNDTier(tier));
 
   let infinitiedMult = DC.D1.timesEffectsOf(
@@ -143,10 +147,10 @@ function applyNDMultipliers(mult, tier) {
         Achievement(31),
         Achievement(68),
         Achievement(71),
-        TimeStudy(234)
+        !Ascensions.sacA.isUnlocked ? TimeStudy(234) : null
       );
   }
-  if (tier === 8) {
+  if (tier === 8 && !Ascensions.sacA.isUnlocked) {
     multiplier = multiplier.times(Sacrifice.totalBoost);
   }
 
@@ -160,8 +164,8 @@ function applyNDMultipliers(mult, tier) {
     tier === 8 ? Achievement(23) : null,
     tier < 8 ? Achievement(34) : null,
     tier <= 4 ? Achievement(64) : null,
-    tier < 8 ? TimeStudy(71) : null,
-    tier === 8 ? TimeStudy(214) : null,
+    (tier < 8 && !Ascensions.sacA.isUnlocked) ? TimeStudy(71) : null,
+    (tier === 8 && !Ascensions.sacA.isUnlocked) ? TimeStudy(214) : null,
     tier > 1 && tier < 8 ? InfinityChallenge(8).reward : null
   );
   if (Achievement(43).isUnlocked) {
@@ -196,7 +200,12 @@ function applyNDPowers(mult, tier) {
       Achievement(183),
       PelleRifts.paradox,
       SingularityMilestone.dimensionPow,
-      Ra.unlocks.allDimPowTT
+      Ra.unlocks.allDimPowTT,
+      BreakInfinityUpgrade.totalAMMult.chargedEffect,
+      BreakInfinityUpgrade.currentAMMult.chargedEffect,
+      BreakInfinityUpgrade.infinitiedMult.chargedEffect,
+      BreakInfinityUpgrade.achievementMult.chargedEffect,
+      BreakInfinityUpgrade.slowestChallengeMult.chargedEffect
     );
 
   if (ExpansionPack.pellePack.isBought && !player.disablePostReality) multiplier = multiplier.pow(Decimal.pow(Decimal.log10(player.records.bestEndgame.galaxies).div(100), 1.5).add(1));
@@ -211,6 +220,28 @@ function applyNDPowers(mult, tier) {
     multiplier = multiplier.pow(0.5);
   }
 
+  if (Ascensions.dbA.isUnlocked) multiplier = multiplier.pow(DimBoost.powerToND);
+
+  if (Ascensions.b10mA.isUnlocked) {
+    let OoMValue;
+    if (Laitela.continuumActive) {
+      OoMValue = AntimatterDimension(tier).continuumValue.max(1).log10();
+    } else {
+      OoMValue = Decimal.floor(AntimatterDimension(tier).bought.div(10)).max(1).log10();
+    }
+
+    multiplier = multiplier.pow(AntimatterDimensions.buyOoMPower.times(OoMValue).add(1));
+  }
+
+  if (Ascensions.sacA.isUnlocked && tier === 8) {
+    multiplier = multiplier.pow(Sacrifice.totalPower);
+  }
+
+  if (tier < 8 && Ascensions.sacA.isUnlocked) multiplier = multiplier.powEffectOf(TimeStudy(71));
+
+  if (tier === 8 && Ascensions.sacA.isUnlocked) multiplier = multiplier.powEffectOf(TimeStudy(214));
+
+  if (tier === 1 && Ascensions.sacA.isUnlocked) multiplier = multiplier.powEffectOf(TimeStudy(234));
 
   return multiplier;
 }
@@ -670,7 +701,7 @@ class AntimatterDimensionState extends DimensionState {
         const eg = Currency.endgames.value;
         const endgameMult = Pelle.isDoomed ? 1 + (Math.log10(Math.min(eg, 1e6) * Math.max(Math.log2(eg + 1) - Math.log2(5e5), 1) + 1) / 80) : 1 + (Math.log10(Math.min(eg, 1e6) * Math.max(Math.log2(eg + 1) - Math.log2(5e5), 1) + 1) / 200);
         const endgameMultValue = (EndgameMilestone.endgameAntimatter.isReached && !player.disablePostReality) ? endgameMult : 1;
-        const pelleOnly = Pelle.isDoomed ? DivineDimensions.conversionFormula2 * Accelerators.cosmic.effectValue2 : 1;
+        const pelleOnly = Pelle.isDoomed ? DivineDimensions.conversionFormula2 * Accelerators.cosmic.effectValue2 * EndgameMastery(222).effectOrDefault(1) * SingularityMilestone.singAMDoomDilation.effectOrDefault(1) : 1;
         production = Decimal.pow10(Decimal.pow(log10, getAdjustedGlyphEffect("effarigantimatter") * Effects.product(EndgameMastery(101), EndgameUpgrade(15), SingularityMilestone.antimatterExponentPower, Achievement(233)) * endgameMultValue * EtherealStars.black.reward.toNumber() * pelleOnly));
       }
       if (production.gt(Decimal.pow10(1e150)) && Pelle.isDoomed && player.celestials.pelle.divinities < 1) {
@@ -695,13 +726,21 @@ class AntimatterDimensionState extends DimensionState {
       if (ResurgenceUpgrade.epSurge.isBought && !player.disablePostReality) {
         production = production.times(gainedEternityPoints().max(1));
       }
-      if (production.gt(Decimal.pow10(1e200)) && !Pelle.isDoomed) {
+      if (production.gt(Decimal.pow10(1e200)) && !Pelle.isDoomed && !player.endgame.overcharge.isRunning) {
         const log10 = production.log10();
         production = Decimal.pow10(Decimal.pow(log10.div(1e200), 1 / Accelerators.emptiness.effectValue3).times(1e200));
+      }
+      if (production.gt(Decimal.pow10(1e260)) && !Pelle.isDoomed && !player.endgame.overcharge.isRunning) {
+        const log10 = production.log10();
+        production = Decimal.pow10(Decimal.pow(log10.div(1e260), 0.01).times(1e260));
       }
       if (production.gt(10) && LHC.nullifiedVoidRunning) {
         const log10 = production.log10();
         production = Decimal.pow10(Decimal.pow(log10, 0.01));
+      }
+      if (production.gt(1) && player.endgame.overcharge.isRunning) {
+        const slog = production.slog();
+        production = Decimal.tetrate(10, slog.times(0.75).toNumber());
       }
     }
     production = production.min(this.cappedProductionInNormalChallenges);
@@ -753,6 +792,10 @@ export const AntimatterDimensions = {
     mult = mult.pow(SingularityMilestone.perPurchaseDimMult.effectOrDefault(1));
 
     return mult;
+  },
+
+  get buyOoMPower() {
+    return this.buyTenMultiplier.max(10).log10().log10().div(100);
   },
 
   tick(diff) {

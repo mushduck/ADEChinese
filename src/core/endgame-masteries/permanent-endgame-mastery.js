@@ -23,7 +23,9 @@ export class PermanentEndgameMasteryState extends EndgameMasteriesState {
   }
 
   get totalEndgameSkillRequirement() {
-    return this.id === 2 ? 150000 : 100;
+    if (this.id === 3) return 15000000;
+    if (this.id === 2) return 150000;
+    return 100;
   }
 
   purchase(quiet = false) {
@@ -61,6 +63,8 @@ export function PermanentEndgameMastery(id) {
 EndgameMastery.endgameUpgrades = PermanentEndgameMasteryState.masteries[1];
 
 EndgameMastery.permaMasteries = PermanentEndgameMasteryState.masteries[2];
+
+EndgameMastery.timeCompression = PermanentEndgameMasteryState.masteries[3];
 
 EndgameMastery.boughtEndgameUpgradesEM = function() {
   return player.endgameMasteries.permanentMasteries.map(id => PermanentEndgameMasteryState.masteries[id]);

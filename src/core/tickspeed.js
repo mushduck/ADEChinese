@@ -20,7 +20,12 @@ export function effectiveBaseGalaxies() {
   if (!player.disablePostReality && Alpha.currentStage >= 3) replicantiGalaxies = replicantiGalaxies.times(alternation);
   let freeGalaxies = player.dilation.totalTachyonGalaxies;
   freeGalaxies = freeGalaxies.times(alternation);
-  return Decimal.max(galaxies.add(generatedGalaxies).add(replicantiGalaxies).add(freeGalaxies), 0);
+  let extraGalaxies = GalacticPower.freeGalaxies;
+  if (!player.disablePostReality && Alpha.currentStage >= 3) extraGalaxies = extraGalaxies.times(alternation);
+  return GalacticPowers.galacticAscension.isUnlocked ?
+    Decimal.max(galaxies.max(1).times(generatedGalaxies.max(1)).times(replicantiGalaxies.max(1)).times(
+    freeGalaxies.max(1)).times(extraGalaxies.max(1)), 0) : Decimal.max(galaxies.add(generatedGalaxies).add(
+    replicantiGalaxies).add(freeGalaxies).add(extraGalaxies), 0);
 }
 
 export function getTickSpeedMultiplier() {
@@ -39,7 +44,8 @@ export function getTickSpeedMultiplier() {
     EndgameMastery(52),
     InfinityChallenge(5).reward,
     PelleUpgrade.galaxyPower,
-    PelleRifts.decay.milestones[1]
+    PelleRifts.decay.milestones[1],
+    BreakInfinityUpgrade.galaxyBoost.chargedEffect
   );
   if (galaxies.lt(3)) {
     // Magic numbers are to retain balancing from before while displaying
@@ -153,10 +159,14 @@ export const Tickspeed = {
   },
 
   get current() {
-    const tickspeed = Effarig.isRunning
+    let tickspeed = Effarig.isRunning
       ? Effarig.tickspeed
       : this.baseValue.powEffectOf(DilationUpgrade.tickspeedPower);
-    return player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed()) ? dilatedValueOf(tickspeed) : tickspeed;
+    tickspeed = (player.dilation.active || (PelleStrikes.dilation.hasStrike && !PelleStrikes.dilation.isDestroyed())) ? dilatedValueOf(tickspeed) : tickspeed;
+    if (player.endgame.overcharge.isRunning) {
+      tickspeed = dilateMultiplier(tickspeed, Math.pow(0.72, player.endgame.overcharge.level));
+    }
+    return tickspeed;
   },
 
   get cost() {

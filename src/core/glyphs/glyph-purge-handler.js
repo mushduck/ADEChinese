@@ -46,7 +46,7 @@ export const GlyphSacrificeHandler = {
     if (!this.canSacrifice || (Pelle.isDoomed && !PelleRealityUpgrade.scourToEmpower.canBeApplied)) return new Decimal(0);
     if (glyph.type === "reality") return new Decimal(glyph.level).times(0.01).times(Achievement(171).effectOrDefault(1));
     const pre10kFactor = Decimal.pow(Decimal.clampMax(glyph.level, 10000).add(10), 2.5);
-    const post10kFactor = Decimal.clampMin(glyph.level - 10000, 0).div(100).add(1);
+    const post10kFactor = Decimal.clampMin(new Decimal(glyph.level).sub(10000), 0).div(100).add(1);
     const power = player.disablePostReality ? 1 : Effects.product(
         Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost,
         EndgameUpgrade(24),
@@ -77,7 +77,8 @@ export const GlyphSacrificeHandler = {
   },
   // Scaling function to make refinement value ramp up with higher glyph levels
   levelRefinementValue(level) {
-    return Math.max(Math.min(Math.pow(level, 3) / 1e8, 25000), (ExpansionPack.effarigPack.isBought && !player.disablePostReality) ? level / 3 : 1);
+    return Decimal.max(Decimal.min(Decimal.pow(level, 3).div(1e8), 25000), (ExpansionPack.effarigPack.isBought &&
+      !player.disablePostReality) ? new Decimal(level).div(3) : DC.D1).toNumber();
   },
   // Refined glyphs give this proportion of their maximum attainable value from their level
   glyphRefinementEfficiency: 0.05,

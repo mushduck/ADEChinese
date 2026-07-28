@@ -284,7 +284,7 @@ class TimeDimensionState extends DimensionState {
     let mult = GameCache.timeDimensionCommonMultiplier.value
       .timesEffectsOf(
         tier === 1 ? TimeStudy(11) : null,
-        tier === 3 ? TimeStudy(73) : null,
+        (tier === 3 && !Ascensions.sacA.isUnlocked) ? TimeStudy(73) : null,
         tier === 4 ? TimeStudy(227) : null
       );
 
@@ -321,6 +321,8 @@ class TimeDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
+    if (tier === 3 && Ascensions.sacA.isUnlocked) mult = mult.powEffectOf(TimeStudy(73));
+
     mult = mult.powEffectsOf(
       BreakEternityUpgrade.infinityDimensionPow
     );
@@ -336,6 +338,10 @@ class TimeDimensionState extends DimensionState {
     if (ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality) mult = mult.pow(Achievements.powerConv(EternityUpgrade.tdMultAchs.effectOrDefault(1)));
 
     mult = dilateMultiplier(mult, EtherealStars.purple.reward);
+
+    if (player.endgame.overcharge.isRunning) {
+      mult = dilateMultiplier(mult, Math.pow(0.72, player.endgame.overcharge.level));
+    }
 
     if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(TimeDimensions.OVERFLOW)), 1 / TimeDimensions.compressionMagnitude).times(Decimal.log10(TimeDimensions.OVERFLOW)));
 
@@ -481,7 +487,7 @@ export const TimeDimensions = {
 
   get OVERFLOW_SQUARED() {
     return Pelle.isDoomed ?
-      Decimal.pow10(Decimal.pow(DC.NUMMAX, Decimal.pow(2, Math.max(player.celestials.pelle.divinities, 1)))) : DC.ENUMMAX;
+      Decimal.pow10(Decimal.pow(DC.NUMMAX, Decimal.pow(2, Decimal.clamp(player.celestials.pelle.divinities, 0, 8)).times(Math.max(2 - player.celestials.pelle.divinities / 2, 1)).times(Decimal.pow(1.5, Decimal.max(player.celestials.pelle.divinities - 8, 0))))) : DC.ENUMMAX;
   },
 
   get compressionMagnitude() {

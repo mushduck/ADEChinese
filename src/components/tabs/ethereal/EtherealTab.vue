@@ -25,7 +25,8 @@ export default {
       starPowerPerSecond: new Decimal(),
       starBoost: new Decimal(),
       nextGeneration: new Decimal(),
-      allGenerationsUnlocked: false
+      allGenerationsUnlocked: false,
+      starGen: []
     };
   },
   computed: {
@@ -84,7 +85,7 @@ export default {
       let starName = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray"];
       for (let t = 0; t < 9; t++) {
         if (Ethereal.starGeneration(t).neq(0)) {
-          arr.push(`Star Power is currently generating ${formatDecimalPercents(Ethereal.starGeneration(t), 2)} of pending ${starName[t]} Stars per second`);
+          arr.push(`Star Power is currently generating ${formatDecimalPercents(this.starGen[t], 2)} of pending ${starName[t]} Stars per second`);
         }
       }
       return arr;
@@ -110,6 +111,10 @@ export default {
       this.starBoost.copyFrom(Ethereal.allStarBoost);
       this.nextGeneration.copyFrom(!Ethereal.nextGeneration ? new Decimal(Infinity) : Ethereal.nextGeneration);
       this.allGenerationsUnlocked = !this.nextGeneration;
+      this.starGen = [];
+      for (let t = 0; t < 9; t++) {
+        this.starGen.push(Ethereal.starGeneration(t));
+      }
     },
     extendEthereal() {
       return player.endgame.ethereal.isExtended = true;

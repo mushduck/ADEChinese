@@ -196,6 +196,9 @@ export class EndgameMasteryTree {
       case EM_REQUIREMENT_TYPE.CURRENCY_PATH:
         reqSatisfied = config.requirement.every(r => check(r)) && this.currCurrPathCount < this.allowedCurrPathCount;
         break;
+      case EM_REQUIREMENT_TYPE.EXPANDED:
+        reqSatisfied = EndgameMastery.permaMasteries.isBought;
+        break;
       default:
         throw Error(`Unrecognized EM requirement type: ${this.reqType}`);
     }

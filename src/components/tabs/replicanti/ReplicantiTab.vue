@@ -135,7 +135,7 @@ export default {
           to Infinity Points from Glyph Alchemy`);
       }
       if (this.hasDEMult) {
-        boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multDE)}</span>
+        boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multDE, 2, 2)}</span>
           multiplier${this.hasDEPow ? ` and a
           <span class="c-replicanti-description__accent">${formatPow(this.powDE, 2, 3)}</span> power` : ""}
           to Dark Energy from an Alpha Reward`);

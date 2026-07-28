@@ -31,7 +31,7 @@ export const perkShop = {
       ? PerkShopUpgrade.glyphLevel.chargedEffect()
       : PerkShopUpgrade.glyphLevel.preChargedEffect()),
     preChargedEffect: bought => Math.pow(1.05, bought),
-    chargedEffect: () => Math.pow(player.records.bestEndgame.glyphLevel, 0.2),
+    chargedEffect: () => Decimal.pow(player.records.bestEndgame.glyphLevel, 0.2).toNumber(),
     formatEffect: value => formatX(value, 2, 2),
     formatCost: value => format(value, 2),
     costCap: () => (Ra.unlocks.perkShopIncrease.canBeApplied ? 1048576 : 2048),

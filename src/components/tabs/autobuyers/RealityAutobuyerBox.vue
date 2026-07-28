@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       mode: AUTO_REALITY_MODE.RM,
-      levelCap: 0,
+      levelCap: new Decimal(),
       isOverCap: false,
       hasAlternateInputs: false,
     };
@@ -45,8 +45,8 @@ export default {
   methods: {
     update() {
       this.mode = this.autobuyer.mode;
-      this.levelCap = Glyphs.levelCap;
-      this.isOverCap = this.autobuyer.glyph > this.levelCap;
+      this.levelCap.copyFrom(Glyphs.levelCap);
+      this.isOverCap = new Decimal(this.autobuyer.glyph).gt(this.levelCap);
       // The container only has room for 2 textboxes, so we switch what they go to based on the current mode
       this.hasAlternateInputs = Autobuyer.reality.mode > AUTO_REALITY_MODE.BOTH;
     },

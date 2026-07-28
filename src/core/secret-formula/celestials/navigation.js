@@ -572,7 +572,7 @@ export const celestialNavigation = {
   "enslaved-unlock-glyph-level": {
     visible: () => EffarigUnlock.eternity.isUnlocked,
     complete: () => (EndgameUpgrade(6).isBought ? player.records.bestEndgame.glyphLevel :
-      player.records.bestReality.glyphLevel) / 5000,
+      player.records.bestReality.glyphLevel).div(5000).toNumber(),
     drawOrder: -1,
     node: {
       clickAction: () => Tab.celestials.enslaved.show(true),
@@ -592,8 +592,8 @@ export const celestialNavigation = {
           const goal = 5000;
           return [
             "Break a chain",
-            `Reach Glyph level ${formatInt(Math.min((EndgameUpgrade(6).isBought ? player.records.bestEndgame.glyphLevel :
-              player.records.bestReality.glyphLevel), goal))}/${formatInt(goal)}`
+            `Reach Glyph level ${formatInt(Decimal.min((EndgameUpgrade(6).isBought ? player.records.bestEndgame.glyphLevel :
+              player.records.bestReality.glyphLevel), goal).toNumber())}/${formatInt(goal)}`
           ];
         },
         angle: -45,
@@ -1673,7 +1673,10 @@ export const celestialNavigation = {
       const upgrade = DarkMatterDimension(4).unlockUpgrade;
       if (upgrade.canBeBought || upgrade.isBought) return 1;
       if (upgrade.isAvailableForPurchase) return upgrade.currency.value / upgrade.cost;
-      return (Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies)).div(80000).toNumber();
+      return (GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
+        player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) :
+        Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(
+        GalacticPower.freeGalaxies)).div(80000).toNumber();
     },
     node: {
       clickAction: () => Tab.celestials.laitela.show(true),
@@ -1703,7 +1706,9 @@ export const celestialNavigation = {
             / ${format(upgrade.cost, 1)}`
           ];
 
-          const allGalaxies = Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies);
+          const allGalaxies = GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(
+            player.galaxies.max(1)).times(player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) :
+            Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies);
           return [
             dmdText,
             `Have ${format(80000)} total Galaxies`,
