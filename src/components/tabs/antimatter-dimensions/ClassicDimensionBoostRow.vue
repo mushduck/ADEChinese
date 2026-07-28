@@ -20,6 +20,7 @@ export default {
       creditsClosed: false,
       requirementText: null,
       hasTutorial: false,
+      hasSurge: false
     };
   },
   computed: {
@@ -30,7 +31,7 @@ export default {
     boostCountText() {
       if (this.requirementText) return this.requirementText;
       const parts = [this.purchasedBoosts];
-      if (this.imaginaryBoosts.neq(0)) {
+      if (this.imaginaryBoosts.neq(0) && !Ascensions.dbA.isUnlocked) {
         parts.push(this.imaginaryBoosts);
       }
       const sum = parts.map(formatDimboostParts).join(" + ");
@@ -45,6 +46,13 @@ export default {
         "tutorial--glow": this.isBuyable && this.hasTutorial,
         "o-pelle-disabled-pointer": this.creditsClosed
       };
+    },
+    dimBoostName() {
+      if (Ascensions.dbA.isUnlocked) return "Dimension Surge";
+      return "Dimension Boost";
+    },
+    imaginaryText() {
+      return `(${formatHybridLarge(this.imaginaryBoosts, 3)} free Dimension Boosts, which do not provide a power effect)`;
     }
   },
   methods: {
@@ -60,6 +68,7 @@ export default {
       this.creditsClosed = GameEnd.creditsClosed;
       if (this.isDoomed) this.requirementText = formatHybridLarge(this.purchasedBoosts, 3);
       this.hasTutorial = Tutorial.isActive(TUTORIAL_STATE.DIMBOOST);
+      this.hasSurge = Ascensions.dbA.isUnlocked;
     },
     dimensionBoost(bulk) {
       if (!DimBoost.requirement.isSatisfied || !DimBoost.canBeBought) return;
@@ -72,8 +81,9 @@ export default {
 <template>
   <div class="c-dimension-row c-antimatter-dim-row c-antimatter-prestige-row">
     <div class="l-dim-row__prestige-text c-dim-row__label c-dim-row__label--amount">
-      Dimension Boost ({{ boostCountText }}):
+      {{ dimBoostName }} ({{ boostCountText }}):
       requires {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }} Dimensions
+      <span v-if="hasSurge">{{ imaginaryText }}</span>
     </div>
     <PrimaryButton
       :enabled="isBuyable"

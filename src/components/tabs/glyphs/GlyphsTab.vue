@@ -36,12 +36,12 @@ export default {
       showMoreHigherInstability: false,
       showEvenMoreHigherInstability: false,
       showStillEvenMoreHigherInstability: false,
-      instabilityThreshold: 0,
-      hyperInstabilityThreshold: 0,
-      extremeInstabilityThreshold: 0,
-      immenseInstabilityThreshold: 0,
-      extensiveInstabilityThreshold: 0,
-      prodigiousInstabilityThreshold: 0,
+      instabilityThreshold: new Decimal(),
+      hyperInstabilityThreshold: new Decimal(),
+      extremeInstabilityThreshold: new Decimal(),
+      immenseInstabilityThreshold: new Decimal(),
+      extensiveInstabilityThreshold: new Decimal(),
+      prodigiousInstabilityThreshold: new Decimal(),
       isInCelestialReality: false,
       canAmplify: false,
       glyphTextColors: true,
@@ -66,17 +66,17 @@ export default {
   methods: {
     update() {
       this.resetRealityDisplayed = PlayerProgress.realityUnlocked();
-      this.showInstability = player.records.bestReality.glyphLevel > 800 || player.records.bestEndgame.glyphLevel > 800;
-      this.showHigherInstability = player.records.bestEndgame.glyphLevel > 60000;
-      this.showMoreHigherInstability = player.records.bestEndgame.glyphLevel > 160000;
-      this.showEvenMoreHigherInstability = player.records.bestEndgame.glyphLevel > 800000;
-      this.showStillEvenMoreHigherInstability = player.records.bestEndgame.glyphLevel > 2000000;
-      this.instabilityThreshold = Math.floor(Glyphs.instabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
-      this.hyperInstabilityThreshold = Math.floor(Glyphs.hyperInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
-      this.extremeInstabilityThreshold = Math.floor(Glyphs.extremeInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
-      this.immenseInstabilityThreshold = Math.floor(Glyphs.immenseInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
-      this.extensiveInstabilityThreshold = Math.floor(Glyphs.extensiveInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
-      this.prodigiousInstabilityThreshold = Math.floor(Glyphs.prodigiousInstabilityThreshold * Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff));
+      this.showInstability = player.records.bestReality.glyphLevel.gt(800) || player.records.bestEndgame.glyphLevel.gt(800);
+      this.showHigherInstability = player.records.bestEndgame.glyphLevel.gt(60000);
+      this.showMoreHigherInstability = player.records.bestEndgame.glyphLevel.gt(160000);
+      this.showEvenMoreHigherInstability = player.records.bestEndgame.glyphLevel.gt(800000);
+      this.showStillEvenMoreHigherInstability = player.records.bestEndgame.glyphLevel.gt(2000000);
+      this.instabilityThreshold.copyFrom(Decimal.floor(Glyphs.instabilityThreshold.times(Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff))));
+      this.hyperInstabilityThreshold.copyFrom(Decimal.floor(Glyphs.hyperInstabilityThreshold.times(Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff))));
+      this.extremeInstabilityThreshold.copyFrom(Decimal.floor(Glyphs.extremeInstabilityThreshold.times(Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff))));
+      this.immenseInstabilityThreshold.copyFrom(Decimal.floor(Glyphs.immenseInstabilityThreshold.times(Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff))));
+      this.extensiveInstabilityThreshold.copyFrom(Decimal.floor(Glyphs.extensiveInstabilityThreshold.times(Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff))));
+      this.prodigiousInstabilityThreshold.copyFrom(Decimal.floor(Glyphs.prodigiousInstabilityThreshold.times(Effects.product(EndgameUpgrade(25), Ra.unlocks.glyphLevelBuff))));
       this.isInCelestialReality = isInCelestialReality();
       this.canAmplify = Enslaved.isUnlocked && !this.isInCelestialReality;
       this.autoRestartCelestialRuns = player.options.retryCelestial;
@@ -85,7 +85,7 @@ export default {
       this.sacrificeUnlocked = GlyphSacrificeHandler.canSacrifice;
       this.sacrificeDisplayed = player.reality.showGlyphSacrifice;
       if (!Enslaved.isRunning) return;
-      const haveBoost = Glyphs.activeWithoutCompanion.find(e => e.level < Enslaved.glyphLevelMin) !== undefined;
+      const haveBoost = Glyphs.activeWithoutCompanion.find(e => e.level.lt(Enslaved.glyphLevelMin)) !== undefined;
       if (haveBoost) {
         this.enslavedHint = "done... what little... I can... with Glyphs...";
       }

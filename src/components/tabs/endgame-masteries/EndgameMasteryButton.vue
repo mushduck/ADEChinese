@@ -63,6 +63,7 @@ export default {
             default: return "o-endgame-mastery-normal";
           }
         case ENDGAME_MASTERY_TYPE.PERMANENT:
+          if (this.mastery.id === 3) return "o-endgame-mastery-time-compression";
           return "o-endgame-mastery-permanent";
       }
       return "";
@@ -85,17 +86,19 @@ export default {
       return { ...this.mastery.config, formatCost: value => (value >= 1e6 ? format(value) : formatInt(value)) };
     },
     showDefaultCostDisplay() {
-      const costCond = this.showCost;
+      const showCostOverride = !EndgameMastery.permaMasteries.isBought || (this.mastery.id >= 180);
+      const costCond = this.showCost && showCostOverride;
       return !this.setup.isSmall && costCond;
     },
     customCostStr() {
+      const showCostOverride = !EndgameMastery.permaMasteries.isBought || (this.mastery.id >= 180);
       const esStr = this.setup.isSmall
         ? `${formatInt(this.config.cost)} ES`
         : quantifyInt("Endgame Skill", this.config.cost);
 
       const costs = [];
       if (this.config.cost) costs.push(esStr);
-      return costs.join(" + ");
+      return showCostOverride ? "Free" : costs.join(" + ");
     },
   },
   methods: {

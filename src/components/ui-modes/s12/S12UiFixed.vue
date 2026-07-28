@@ -6,6 +6,8 @@ import FadeAway from "@/components/tabs/celestial-pelle/FadeAway";
 import ModalProgressBar from "@/components/modals/ModalProgressBar";
 import NewGame from "@/components/tabs/celestial-pelle/NewGame";
 import PopupModal from "@/components/modals/PopupModal";
+import Prologue from "@/components/ui-modes/Prologue";
+import ScreenOverlay from "@/components/ui-modes/ScreenOverlay";
 import SpectateGame from "@/components/SpectateGame";
 
 import S12Taskbar from "./S12Taskbar";
@@ -18,6 +20,8 @@ export default {
     CelestialQuoteModal,
     CelestialQuoteHistoryDisplay,
     FadeAway,
+    ScreenOverlay,
+    Prologue,
     CreditsContainer,
     SpectateGame,
     NewGame,
@@ -26,7 +30,8 @@ export default {
   data() {
     return {
       ending: false,
-      dark: false
+      dark: false,
+      intro: false
     };
   },
   computed: {
@@ -38,6 +43,7 @@ export default {
     update() {
       this.ending = GameEnd.endState >= END_STATE_MARKERS.FADE_AWAY && !GameEnd.creditsClosed;
       this.dark = Alpha.isRunning;
+      this.intro = !player.hasSeenIntro;
     }
   }
 };
@@ -60,7 +66,9 @@ export default {
         v-else-if="view.modal.current"
         :modal="view.modal.current"
       />
-      <FadeAway v-if="ending || dark" />
+      <FadeAway v-if="ending || dark || intro" />
+      <ScreenOverlay />
+      <Prologue />
       <CreditsContainer v-if="ending" />
       <NewGame v-if="ending" />
       <SpectateGame />

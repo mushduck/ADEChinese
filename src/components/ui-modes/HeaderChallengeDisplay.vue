@@ -123,7 +123,7 @@ export default {
       this.infinityUnlocked = PlayerProgress.infinityUnlocked();
       this.activityTokens = this.parts.map(part => part.activityToken());
       // Dilation in Pelle can't be left once entered, but we still want to allow leaving more nested challenges
-      this.showExit = this.inPelle && player.dilation.active
+      this.showExit = this.inPelle
         ? this.activeChallengeNames.length > 1
         : this.activeChallengeNames.length !== 0;
       this.exitText = this.exitDisplay();

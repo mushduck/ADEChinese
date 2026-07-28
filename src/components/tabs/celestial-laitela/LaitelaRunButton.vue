@@ -41,7 +41,7 @@ export default {
       this.realityReward.copyFrom(Laitela.realityReward);
       this.isRunning = Laitela.isRunning;
       this.singularitiesUnlocked = Currency.singularities.gt(0);
-      this.bestSet = Glyphs.copyForRecords(player.records.bestReality.laitelaSet);
+      this.bestSet = cloneDeep(Glyphs.copyForRecords(player.records.bestReality.laitelaSet));
       this.tierNotCompleted = this.realityTime === 3600 || (this.realityTime === 300 && this.maxDimTier < 8);
       this.hadronizeUnlocked = ExpansionPack.laitelaPack.isBought && !player.disablePostReality;
       this.darkEnergyBoost.copyFrom(Laitela.realityRewardDE);

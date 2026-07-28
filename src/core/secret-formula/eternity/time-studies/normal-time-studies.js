@@ -101,7 +101,9 @@ export const normalTimeStudies = [
     requirement: [31],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `All Galaxies give a ${formatX(DC.D1_2, 1, 1)} multiplier to Infinity Points gained`,
-    effect: () => DC.D1_2.pow(Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies)),
+    effect: () => DC.D1_2.pow(GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(
+      player.galaxies.max(1)).times(player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) :
+      Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies)),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -143,9 +145,9 @@ export const normalTimeStudies = [
     requirement: [61, () => Perk.studyECRequirement.isBought || !EternityChallenge(12).isUnlocked],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects all other Antimatter Dimensions with reduced effect",
-    effect: () => Sacrifice.totalBoost.pow(0.25).clampMin(1),
-    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E210000,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(4).add(1) : Sacrifice.totalBoost.pow(0.25).clampMin(1),
+    cap: () => Ascensions.sacA.isUnlocked ? DC.BEMAX : (Alpha.isDestroyed ? DC.BEMAX : DC.E210000),
+    formatEffect: value => Ascensions.sacA.isUnlocked ? formatPow(value, 2, 3) : formatX(value, 2, 1)
   },
   {
     id: 72,
@@ -155,9 +157,9 @@ export const normalTimeStudies = [
         (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects 4th Infinity Dimension with greatly reduced effect",
-    effect: () => Sacrifice.totalBoost.pow(0.04).clampMin(1),
-    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E30000,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(25).add(1) : Sacrifice.totalBoost.pow(0.04).clampMin(1),
+    cap: () => Ascensions.sacA.isUnlocked ? DC.BEMAX : (Alpha.isDestroyed ? DC.BEMAX : DC.E30000),
+    formatEffect: value => Ascensions.sacA.isUnlocked ? formatPow(value, 2, 3) : formatX(value, 2, 1)
   },
   {
     id: 73,
@@ -165,9 +167,9 @@ export const normalTimeStudies = [
     requirement: [61, () => Perk.studyECRequirement.isBought || !EternityChallenge(11).isUnlocked],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "Dimensional Sacrifice affects 3rd Time Dimension with greatly reduced effect",
-    effect: () => Sacrifice.totalBoost.pow(0.005).clampMin(1),
-    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E1300,
-    formatEffect: value => formatX(value, 2, 1)
+    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(200).add(1) : Sacrifice.totalBoost.pow(0.005).clampMin(1),
+    cap: () => Ascensions.sacA.isUnlocked ? DC.BEMAX : (Alpha.isDestroyed ? DC.BEMAX : DC.E1300),
+    formatEffect: value => Ascensions.sacA.isUnlocked ? formatPow(value, 2, 3) : formatX(value, 2, 1)
   },
   {
     id: 81,
@@ -514,13 +516,14 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Dimensional Sacrifice boosts the 8th Antimatter Dimension even more",
     effect: () => {
+      if (Ascensions.sacA.isUnlocked) return Sacrifice.totalPower.sub(1).times(21.5).add(1);
       const totalBoost = Sacrifice.totalBoost;
       const firstPart = totalBoost.pow(18).clampMaxExponent(Alpha.isDestroyed ? Infinity : 300000);
       const secondPart = totalBoost.pow(3.5).clampMaxExponent(Alpha.isDestroyed ? Infinity : 700000);
       return firstPart.times(secondPart);
     },
-    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E1E6,
-    formatEffect: value => formatX(value, 2, 1)
+    cap: () => Ascensions.sacA.isUnlocked ? DC.BEMAX : (Alpha.isDestroyed ? DC.BEMAX : DC.E1E6),
+    formatEffect: value => Ascensions.sacA.isUnlocked ? formatPow(value, 2, 3) : formatX(value, 2, 1)
   },
   {
     id: 221,
@@ -654,7 +657,7 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [233],
     description: "Dimensional Sacrifice applies to 1st Antimatter Dimension",
-    effect: () => Sacrifice.totalBoost,
+    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower : Sacrifice.totalBoost,
   },
   // Note: These last 4 entries are the triad studies
   {

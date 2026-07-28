@@ -16,7 +16,7 @@ export class GalacticPowerState {
   }
 
   get isUnlocked() {
-    return Currency.galacticPower.gte(this.unlockGP);
+    return Currency.galacticPower.gte(this.unlockGP) && (ResurgenceUpgrade.unl3.isBought ? true : this.id <= 8);
   }
 }
 
@@ -32,15 +32,22 @@ export const GalacticPower = {
     return SingularityMilestone.galacticPower.isUnlocked || Currency.galacticPower.gt(0);
   },
   get nextPower() {
-    return GalacticPowers.all.find(x => !x.isUnlocked);
+    const power = GalacticPowers.all.find(x => !x.isUnlocked);
+    return (power.id > 8 && !ResurgenceUpgrade.unl3.isBought) ? undefined : power;
   },
   get nextPowerUnlockGP() {
     return this.nextPower?.unlockGP;
+  },
+  get freeGalaxies() {
+    return GalacticPowers.freeGalaxies.isUnlocked ? GalacticPowers.freeGalaxies.reward : DC.D0;
   }
 };
 
 export function getGalacticPowerGainPerSecond() {
-  const allGalaxies = Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies);
+  let allGalaxies = Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies)
+    .add(GalacticPower.freeGalaxies);
+  if (GalacticPowers.galacticAscension.isUnlocked) allGalaxies = Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
+    player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1));
   const galaxyFactor = Decimal.max(allGalaxies.div(100000), 1);
   const celMatterFactor = Decimal.max(Decimal.pow(Decimal.log10(player.endgame.celestialMatter.add(1)).div(10), 4), 1);
   const imaginaryFactor = Decimal.max(Decimal.pow(Decimal.log10(player.reality.imaginaryMachines.add(1)), 2.5), 1);

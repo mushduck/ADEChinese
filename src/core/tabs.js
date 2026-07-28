@@ -151,6 +151,8 @@ class TabState {
     if (!this._currentSubtab.isUnlocked) this.resetToUnlocked();
     if (!this._currentSubtab.isAvailable) this.resetToAvailable();
 
+    if (!Tab[this.key].isUnlocked || !Tab[this.key].subtabs[this._currentSubtab.id].isUnlocked) return;
+
     ui.view.tab = this.key;
     ui.view.subtab = this._currentSubtab.key;
     const tabNotificationKey = this.key + this._currentSubtab.key;
@@ -209,6 +211,7 @@ export const Tabs = (function() {
       Tab.endgame,
       Tab.cdexpansion,
       Tab.divinity,
+      Tab.universes,
       Tab.shop
     ],
     newUI: [
@@ -222,6 +225,7 @@ export const Tabs = (function() {
       Tab.endgame,
       Tab.cdexpansion,
       Tab.divinity,
+      Tab.universes,
       Tab.achievements,
       Tab.statistics,
       Tab.options,

@@ -9,6 +9,7 @@ export default {
   data() {
     return {
       divinityCount: 0,
+      showNewFeature: false
     };
   },
   computed: {
@@ -24,6 +25,7 @@ export default {
   methods: {
     update() {
       this.divinityCount = Math.floor(Currency.divinities.value);
+      this.showNewFeature = this.divinityCount >= 10 && this.divinityCount < 13;
     },
     getMilestone(row, column) {
       return () => this.milestones[(row - 1) + column - 1];
@@ -46,6 +48,9 @@ export default {
         :get-milestone="getMilestone(row, column)"
         class="l-divinity-milestone-grid__cell"
       />
+    </div>
+    <div v-if="showNewFeature">
+      <span class="o-divinity-amount">Reach {{ formatInt(13) }} Divinities to unlock Universes.</span>
     </div>
   </div>
 </template>

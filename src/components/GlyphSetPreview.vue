@@ -90,7 +90,7 @@ export default {
       // There should only be one reality glyph; this picks one pseudo-randomly if multiple are cheated/glitched in
       const realityGlyph = this.glyphs.filter(g => g.type === "reality")[0];
       this.realityGlyphBoost = realityGlyph
-        ? GlyphEffects.realityglyphlevel.effect(realityGlyph.level)
+        ? GlyphEffects.realityglyphlevel.effect(realityGlyph.level, realityGlyph.strength)
         : 0;
     },
     showModal() {

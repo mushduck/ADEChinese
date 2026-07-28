@@ -282,6 +282,7 @@ export function enterTheVoid() {
   Endgame.resetNoReward();
   disChargeAllPerkUpgrades();
   disChargeAll();
+  disChargeAllBreakUpgrades();
   AutomatorBackend.stop();
   clearCelestialRuns();
   player.endgame.largeHadronCollider.void.isRunning = true;

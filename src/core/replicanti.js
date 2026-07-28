@@ -5,7 +5,7 @@ export const ReplicantiGrowth = {
     return Math.log10(Number.MAX_VALUE);
   },
   get scaleFactor() {
-    if (Replicanti.amount.gte(DC.E9E15)) return 10;
+    if (Replicanti.amount.gte(DC.E9E15)) return EndgameMastery(272).effectOrDefault(10);
     if (PelleStrikes.eternity.hasStrike && !PelleStrikes.eternity.isDestroyed() && Replicanti.amount.gte(DC.E2000)) return 10;
     if (Pelle.isDoomed) return 2;
     if (Alpha.isRunning) return AlphaUnlocks.timestudy192.effects.nerf.effectOrDefault(1.2);
@@ -43,7 +43,7 @@ export const ReplicantiMultipliers = {
     return replicantiMultToPower(this.ipMult);
   },
   get deMult() {
-    return Decimal.pow(Decimal.log2(Replicanti.amount.add(1)), 10).add(1);
+    return SingularityMilestone.replDESingBoost.effectOrDefault(Decimal.pow(Decimal.log2(Replicanti.amount.add(1)), 10).add(1));
   },
   get dePow() {
     return replicantiMultToPower(this.deMult);
@@ -613,8 +613,8 @@ export const ReplicantiUpgrade = {
       const logBase = new Decimal(170);
       const logBaseIncrease = EternityChallenge(6).isRunning ? DC.D2 : new Decimal(25);
       const logCostScaling = EternityChallenge(6).isRunning ? DC.D2 : DC.D5;
-      const distantReplicatedGalaxyStart = GlyphSacrifice.replication.effectValue.add(100);
-      const remoteReplicatedGalaxyStart = GlyphSacrifice.replication.effectValue.add(1000);
+      const distantReplicatedGalaxyStart = GlyphSacrifice.replication.effectValue.add(100).timesEffectOf(BreakEternityUpgrade.replicantiGalaxyPower);
+      const remoteReplicatedGalaxyStart = GlyphSacrifice.replication.effectValue.add(1000).timesEffectOf(BreakEternityUpgrade.replicantiGalaxyPower);
       const contingentReplicatedGalaxyStart = DC.E6;
       const logDistantScaling = new Decimal(50);
       const logRemoteScaling = DC.D5;

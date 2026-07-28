@@ -17,33 +17,33 @@ export const endgameMilestones = {
          : (player.endgames < 2 ? "(You have not yet reached this milestone)" : "(Currently has no effect)")));
     }
   },
-  galGenAnimation: {
+  fasterGalaxies: {
     endgames: 5,
+    reward: "Unlock a new Galaxy Generator Upgrade"
+  },
+  galGenAnimation: {
+    endgames: 10,
     reward: () => {
-      return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(5)} Endgames, capping after ${formatInt(100)} Endgames ` + 
-        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 5
-         ? (player.endgames >= 100 && !Alpha.isDestroyed ? "(Capped: " : "(Currently: ") + (Alpha.isDestroyed ? "Instant)" : `${formatX(Math.pow(1.2, Math.floor(Math.min(Currency.endgames.value, 100) / 5)), 2, 2)})`)
+      return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(10)} Endgames, capping after ${formatInt(200)} Endgames ` + 
+        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 10
+         ? (player.endgames >= 200 && !Alpha.isDestroyed ? "(Capped: " : "(Currently: ") + (Alpha.isDestroyed ? "Instant)" : `${formatX(Math.pow(1.2, Math.floor(Math.min(Currency.endgames.value, 200) / 10)), 2, 2)})`)
          : "(You have not yet reached this milestone)"));
     }
-  },
-  fasterGalaxies: {
-    endgames: 10,
-    reward: "Unlock a new Galaxy Generator Upgrade"
   },
   remnantFormula: {
     endgames: 15,
     reward: "Improve the Remnant Formula (see Remnant Gain Factors in the Pelle subtab)"
   },
-  gameSpeedUncap: {
+  celestialEarlyUnlock: {
     endgames: 25,
     reward: () => {
-      return `Remove the ${format(1e300, 2, 2)} Game Speed Hardcap`;
+      return `Start Endgames with the first ${formatInt(6)} Celestials unlocked`;
     }
   },
-  celestialEarlyUnlock: {
+  gameSpeedUncap: {
     endgames: 50,
     reward: () => {
-      return `Start Endgames with the first ${formatInt(6)} Celestials unlocked`;
+      return `Remove the ${format(1e300, 2, 2)} Game Speed Hardcap`;
     }
   },
   realityShardDTBoost: {

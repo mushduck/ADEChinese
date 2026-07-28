@@ -158,7 +158,7 @@ const CEP_BUTTON_DISPLAY_TYPE = {
         Celestial Eternity for <span :style="amountStyle">{{ format(gainedCEP, 2, 2) }}</span> CEP
       </template>
       <br>
-      You should explore a bit and look at new content before clicking me!
+      Someone waits for you. Do not keep them waiting.
     </template>
   </button>
 </template>

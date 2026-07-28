@@ -3,7 +3,7 @@ import { DimensionState } from "./dimension";
 
 export function celestialDimensionCommonMultiplier() {
   let mult = DC.D1;
-  mult = mult.timesEffectsOf(EndgameUpgrade(11), CelestialEternityUpgrade.largeCDMult);
+  mult = mult.timesEffectsOf(EndgameUpgrade(11), CelestialEternityUpgrade.largeCDMult, EndgameMastery(191));
   mult = mult.times(Ethereal.sectorBoost);
   return mult;
 }
@@ -111,6 +111,7 @@ class CelestialDimensionState extends DimensionState {
     mult = mult.times(CelestialDimBoost.multiplierToCDTier());
     mult = mult.timesEffectOf(CelestialInfinityUpgrade.antimatterCelestialDimBuff);
     mult = mult.powEffectOf(ResurgenceUpgrade.synergy2);
+    mult = mult.pow(Achievements.powerConv(EndgameMastery(191).effectOrDefault(1)));
     return mult;
   }
 
@@ -323,7 +324,8 @@ export const CelestialDimensions = {
   get alphaDecaySpeed() {
     if (player.disablePostReality) return DC.D1;
     return new Decimal(1 - DivineDimensions.conversionFormula3).times(DivinityMilestone.divineDimensions.isReached ? 0.8 : 1).timesEffectOf(
-      DivinityUpgrade.divineL1U2).times(DivinityMilestone.pelleQoL.isReached ? 0.5 : 1).times(DivinityMilestone.finalRebirth.isReached ? 0.75 : 1);
+      DivinityUpgrade.divineL1U2).times(DivinityMilestone.pelleQoL.isReached ? 0.5 : 1).times(DivinityMilestone.finalRebirth.isReached ? 0.75 : 1).times(
+      DivinityMilestone.ascendedSurge.isReached ? 0.5 : 1);
   },
 
   get alphaDecayRemnant() {
@@ -336,7 +338,7 @@ export const CelestialDimensions = {
     let base = CelestialInfinityUpgrade.celestialMatterConversionBuff.effectOrDefault(2);
     if (Pelle.isDoomed) base /= 10;
     let exponent = 1;
-    if (base > 1) exponent *= Effects.product(EndgameMastery(104), Ra.unlocks.celestialDimensionConversionPower);
+    if (base > 1) exponent *= Effects.product(EndgameMastery(104), Ra.unlocks.celestialDimensionConversionPower, EndgameMastery(261));
     base *= Effects.product(Achievement(208), Achievement(224), CelestialEternityUpgrade.conversionFormulaImprovement);
     base *= EtherealStars.yellow.reward.toNumber();
     return Math.pow(base, exponent) * (Alpha.isRunning ? Alpha.celestialMatterConversionNerf : 1);
@@ -346,7 +348,8 @@ export const CelestialDimensions = {
 export function getCelestialTickSpeedMultiplier() {
   const base = new Decimal(1.05);
   const eachGalaxy = new Decimal(CelestialInfinityUpgrade.celGalaxyBuff.effectOrDefault(1.02)).sub(1).timesEffectOf(
-    CelestialBreakInfinityUpgrade.celGalaxyBuff).add(1);
+    CelestialBreakInfinityUpgrade.celGalaxyBuff).times(
+    GalacticPowers.celestialGalaxyEmpowerment.isUnlocked ? GalacticPowers.celestialGalaxyEmpowerment.reward : 1).add(1);
   const galaxies = player.endgame.celDimExpansion.galaxies;
   return base.times(eachGalaxy.pow(galaxies));
 }
@@ -890,7 +893,7 @@ class CIPMultiplierState extends GameMechanicState {
   constructor() {
     super({});
     this.cachedCost = new Lazy(() => this.costAfterCount(player.endgame.celDimExpansion.cipMultUpgrades));
-    this.cachedEffectValue = new Lazy(() => DC.D2.pow(player.endgame.celDimExpansion.cipMultUpgrades));
+    this.cachedEffectValue = new Lazy(() => Decimal.round(DC.D2.pow(player.endgame.celDimExpansion.cipMultUpgrades)));
   }
 
   get isAffordable() {

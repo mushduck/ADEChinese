@@ -92,7 +92,7 @@ export default {
       if (!this.isDisabled && this.isImprovedByTS31) this.ts31Effect = Decimal.pow(upgrade.config.effect(), 100);
       if (upgrade.id !== "challengeMult") return;
       this.showWorstChallenge = upgrade.effectValue !== upgrade.cap &&
-        player.challenge.normal.bestTimes.reduce(Decimal.sumReducer).lt(DC.BEMAX);
+        player.challenge.normal.bestTimes.reduce(Decimal.sumReducer).lt(DC.BEMAX) && !upgrade.isCharged && !this.showChargedEffect;
       const worstChallengeTime = GameCache.worstChallengeTime.value;
       const worstChallengeIndex = 2 + player.challenge.normal.bestTimes.indexOf(worstChallengeTime);
       this.worstChallengeString = `(Challenge ${worstChallengeIndex}: ${timeDisplayShort(new Decimal(worstChallengeTime))})`;

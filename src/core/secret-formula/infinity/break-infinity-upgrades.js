@@ -34,34 +34,62 @@ export const breakInfinityUpgrades = {
     cost: () => 1e4 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on total antimatter produced",
     effect: () => Decimal.pow(player.records.totalEndgameAntimatter.add(1).log10().add(1), 1.5),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: "Antimatter Dimensions gain a power based on total Antimatter and Teresa level",
+      effect: () => Decimal.pow(player.records.totalEndgameAntimatter.add(1).log10().add(1).log10().times(
+        Ra.pets.teresa.level).add(1), 0.2).toNumber(),
+      formatEffect: value => formatPow(value, 4, 4)
+    }
   },
   currentAMMult: {
     id: "currentMult",
     cost: () => 5e4 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on current antimatter",
     effect: () => Decimal.pow(Currency.antimatter.value.add(1).log10().add(1), 1.5),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: "Antimatter Dimensions gain a power based on current Antimatter and Teresa level",
+      effect: () => Decimal.pow(Currency.antimatter.value.add(1).log10().add(1).log10().times(
+        Ra.pets.teresa.level).add(1), 0.2).toNumber(),
+      formatEffect: value => formatPow(value, 4, 4)
+    }
   },
   galaxyBoost: {
     id: "postGalaxy",
     cost: () => 5e11 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: () => `All Galaxies are ${formatPercents(0.5)} stronger`,
-    effect: 1.5
+    effect: 1.5,
+    charged: {
+      description: "All Galaxies are stronger based on Teresa level",
+      effect: () => Decimal.pow(Ra.pets.teresa.level, 2).add(50).div(100).add(1).toNumber(),
+      formatEffect: value => `${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)}`
+    }
   },
   infinitiedMult: {
     id: "infinitiedMult",
     cost: () => 1e5 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => Currency.infinitiesTotal.value.add(1).pLog10().times(25).add(1),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: "Antimatter Dimensions gain a power based on Infinities and Teresa level",
+      effect: () => Decimal.pow(Currency.infinitiesTotal.value.add(1).log10().add(1).log10().times(
+        Ra.pets.teresa.level).add(1), 0.5).toNumber(),
+      formatEffect: value => formatPow(value, 4, 4)
+    }
   },
   achievementMult: {
     id: "achievementMult",
     cost: () => 1e6 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     description: "Antimatter Dimensions gain a multiplier based on Achievements completed",
     effect: () => Math.max(Math.pow((Achievements.effectiveCount - 30), 4) / 20, 1),
-    formatEffect: value => formatX(value, 2, 2)
+    formatEffect: value => formatX(value, 2, 2),
+    charged: {
+      description: "Antimatter Dimensions gain a power based on Achievements completed and Teresa level",
+      effect: () => Math.pow(Achievements.effectiveCount * Ra.pets.teresa.level + 1, 0.25),
+      formatEffect: value => formatPow(value, 4, 4)
+    }
   },
   slowestChallengeMult: {
     id: "challengeMult",
@@ -72,7 +100,12 @@ export const breakInfinityUpgrades = {
       : Decimal.clampMin(new Decimal(300).div(Time.worstChallenge.totalMinutes.clampMin(0.001)), 1),
     formatEffect: value => formatX(value, 2, 2),
     hasCap: true,
-    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.D2E5
+    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.D2E5,
+    charged: {
+      description: "Antimatter Dimensions gain a power based on Hadronizes and Teresa level",
+      effect: () => Decimal.pow(Laitela.hadronizes * Ra.pets.teresa.level + 1, 0.25),
+      formatEffect: value => formatPow(value, 4, 4)
+    }
   },
   infinitiedGen: {
     id: "infinitiedGeneration",
@@ -92,17 +125,32 @@ export const breakInfinityUpgrades = {
         ? `${TimeSpan.fromMilliseconds(new Decimal(100)).toStringShort()} (capped)`
         : `${Time.bestInfinity.times(new Decimal(2)).toStringShort()}`;
       return `${quantify("Infinity", infinities)} every ${timeStr}`;
+    },
+    charged: {
+      description: "Infinities gain a power based on Teresa level",
+      effect: () => Math.pow(Ra.pets.teresa.level + 1, 1.5),
+      formatEffect: value => formatPow(value, 4, 4)
     }
   },
   autobuyMaxDimboosts: {
     id: "autobuyMaxDimboosts",
     cost: () => 2e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "Unlock the buy max Dimension Boost Autobuyer mode"
+    description: "Unlock the buy max Dimension Boost Autobuyer mode",
+    charged: {
+      description: "Dimension Surges are stronger based on Teresa Level",
+      effect: () => Math.pow(Ra.pets.teresa.level + 1, 0.5),
+      formatEffect: value => `${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)}`
+    }
   },
   autobuyerSpeed: {
     id: "autoBuyerUpgrade",
     cost: () => 1e15 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "Autobuyers unlocked or improved by Normal Challenges work twice as fast"
+    description: "Autobuyers unlocked or improved by Normal Challenges work twice as fast",
+    charged: {
+      description: "Multiply Continuum purchases based on Teresa Level",
+      effect: () => Math.pow(Ra.pets.teresa.level + 1, 2),
+      formatEffect: value => formatX(value, 2, 2)
+    }
   },
   tickspeedCostMult: rebuyable({
     id: 0,

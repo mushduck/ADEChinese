@@ -76,10 +76,13 @@ class QuoteLine {
   constructor(line, parent) {
     this._parent = parent;
     this._showCelestialName = line.showCelestialName ?? true;
+    this._celestialName = line.celestialName
+      ? (typeof line.celestialName === "function" ? line.celestialName() : line.celestialName)
+      : false;
 
-    this._celestialArray = line.background
+    this._celestialArray = typeof line.background === "string" ? [[line.background, 1]] : (line.background
       ? () => blendCel(line.background)
-      : [[parent.celestial, 1]];
+      : [[parent.celestial, 1]]);
 
     const replacementMatch = /\$(\d+)/gu;
 
@@ -88,7 +91,8 @@ class QuoteLine {
     this._line = typeof line === "string"
       ? () => line.replaceAll(usernameReplacementMatch, player.username)
       // This matches each digit after a $ and replaces it with the wordCycle of an array with the digit it matched.
-      : () => line.text.replaceAll(replacementMatch, (_, i) => wordShift.wordCycle(line[i]));
+      : () => line.text.replaceAll(replacementMatch, (_, i) => wordShift.wordCycle(line[i])).replaceAll(
+        usernameReplacementMatch, player.username);
   }
 
   get line() {
@@ -101,6 +105,11 @@ class QuoteLine {
 
   get celestialSymbols() {
     if (Celestials[this.celestials[0][0]] === undefined) {
+      if (this.celestials[0][0] === "destroyer") {
+        let y = [];
+        y.push(Destroyer.symbol);
+        return y;
+      }
       let s = [];
       s.push(Elemental.symbol);
       return s;
@@ -113,6 +122,11 @@ class QuoteLine {
   }
 
   get celestialName() {
+    if (this._celestialName) {
+      if (this._celestialName === "elemental") return Elemental.displayName;
+      if (this._celestialName === "destroyer") return Destroyer.displayName;
+      return Celestials[this._celestialName.toLowerCase()].displayName;
+    }
     if (Celestials[this._parent.celestial] === undefined) return Elemental.displayName;
     return Celestials[this._parent.celestial].displayName;
   }

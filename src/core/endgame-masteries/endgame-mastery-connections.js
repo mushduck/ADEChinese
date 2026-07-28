@@ -97,7 +97,48 @@ export function masteryConnections() {
     [EM(171), PEM(1)]
   ];
   if (player.celestials.pelle.resurgenceUpgrades.has("unl1")) {
-    connections.push([PEM(1), PEM(2)]);
+    connections.push(
+      [PEM(1), PEM(2)],
+
+      [PEM(2), EM(181)],
+
+      [EM(181), EM(191)],
+      [EM(181), EM(192)],
+
+      [EM(191), EM(201)],
+      [EM(192), EM(201)],
+
+      [EM(201), EM(211)],
+      [EM(201), EM(212)],
+      [EM(201), EM(213)],
+
+      [EM(211), EM(221)],
+      [EM(212), EM(222)],
+      [EM(213), EM(223)],
+
+      [EM(221), EM(231)],
+      [EM(222), EM(232)],
+      [EM(223), EM(233)],
+
+      [EM(231), EM(241)],
+      [EM(232), EM(241)],
+      [EM(233), EM(241)],
+
+      [EM(241), EM(251)],
+
+      [EM(251), EM(261)],
+      [EM(251), EM(262)],
+
+      [EM(261), EM(271)],
+      [EM(261), EM(272)],
+      [EM(262), EM(273)],
+      [EM(262), EM(274)],
+
+      [EM(271), PEM(3)],
+      [EM(272), PEM(3)],
+      [EM(273), PEM(3)],
+      [EM(274), PEM(3)]
+    );
   }
   connections = connections.map(props => new EndgameMasteryConnection(props[0], props[1], props[2]));
 

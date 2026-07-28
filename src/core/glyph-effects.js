@@ -134,8 +134,8 @@ class GlyphEffectConfig {
    * @returns {boolean}
    */
   checkBiggerIsBetter() {
-    const baseEffect = new Decimal(this.effect(1, 1.01));
-    const biggerEffect = new Decimal(this.effect(100, 2));
+    const baseEffect = new Decimal(this.effect(DC.D1, 1.01));
+    const biggerEffect = new Decimal(this.effect(DC.E2, 2));
     return biggerEffect.gt(baseEffect);
   }
 

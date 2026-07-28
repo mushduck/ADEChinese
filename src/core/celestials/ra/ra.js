@@ -391,7 +391,7 @@ export const Ra = {
   },
   get alchemyResourceCap() {
     return (ExpansionPack.effarigPack.isBought && !player.disablePostReality)
-      ? Math.max(25000, (player.records.bestEndgame.glyphLevel / 3) * Ra.unlocks.alchemyCapIncrease.effectOrDefault(1))
+      ? Decimal.max(25000, player.records.bestEndgame.glyphLevel.div(3).times(Ra.unlocks.alchemyCapIncrease.effectOrDefault(1))).toNumber()
       : 25000 * Ra.unlocks.alchemyCapIncrease.effectOrDefault(1);
   },
   get momentumValue() {

@@ -654,6 +654,15 @@ export const tabs = [
         id: 10,
         hidable: true,
       },
+      {
+        key: "ascension",
+        name: "Ascension",
+        symbol: "⤴",
+        component: "AscensionTab",
+        condition: () => Ascension.isUnlocked,
+        id: 11,
+        hidable: true,
+      }
     ],
   },
   {
@@ -736,6 +745,25 @@ export const tabs = [
         component: "ResurgenceUpgradesTab",
         condition: () => ResurgenceUpgrades.isUnlocked,
         id: 2,
+        hidable: true,
+      },
+    ],
+  },
+  {
+    key: "universes",
+    name: "Universes",
+    hideAt: 2.4,
+    UIClass: "o-tab-btn--universes",
+    id: 14,
+    condition: () => player.celestials.pelle.divinities >= 13,
+    hidable: true,
+    subtabs: [
+      {
+        key: "transient",
+        name: "Transient Universe",
+        symbol: "NYI",
+        component: "TransientUniverseTab",
+        id: 0,
         hidable: true,
       },
     ],

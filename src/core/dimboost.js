@@ -37,11 +37,19 @@ export class DimBoost {
     return boost;
   }
 
+  static get exponentialPower() {
+    return this.power.max(10).log10().log10().div(100).times(BreakInfinityUpgrade.autobuyMaxDimboosts.chargedEffect.effectOrDefault(1));
+  }
+
   static multiplierToNDTier(tier) {
     const normalBoostMult = DimBoost.power.pow(this.purchasedBoosts.add(1).sub(tier)).clampMin(1);
     const imaginaryBoostMult = DimBoost.power.times(ImaginaryUpgrade(24).effectOrDefault(1))
       .pow(this.imaginaryBoosts).clampMin(1);
     return normalBoostMult.times(imaginaryBoostMult);
+  }
+
+  static get powerToND() {
+    return this.purchasedBoosts.times(this.exponentialPower).add(1);
   }
 
   static get maxDimensionsUnlockable() {
@@ -98,6 +106,25 @@ export class DimBoost {
   static bulkRequirement(bulk) {
     const targetResets = DimBoost.purchasedBoosts.add(bulk);
     const tier = Decimal.min(targetResets.add(3), this.maxDimensionsUnlockable).toNumber();
+    if (Ascensions.dbA.isUnlocked) {
+      let dis = Effects.sum(
+        TimeStudy(211),
+        TimeStudy(222)
+      );
+      if (!player.disablePostReality) dis += AlphaUnlocks.fifthDimboost.effects.buff.effectOrDefault(0);
+      let logBase;
+      if (tier === 6 && NormalChallenge(10).isRunning) {
+        logBase = DC.D20.sub(dis);
+      } else if (tier === 8) {
+        logBase = DC.D15.sub(dis);
+      }
+      else logBase = DC.D15;
+      logBase = logBase.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
+      let naturalBase = (8 / tier) * 15;
+      let logarithm = Decimal.pow10(logBase.div(naturalBase));
+      if (targetResets.lt(5)) return new DimBoostRequirement(tier, logarithm);
+      return new DimBoostRequirement(tier, Decimal.pow(logarithm, targetResets.sub(4)));
+    }
     let amount = DC.D20;
     let discount = Effects.sum(
       TimeStudy(211),
@@ -175,11 +202,12 @@ export class DimBoost {
     let dimensionRange = `to the 1st Dimension`;
     if (boosts.gt(0)) dimensionRange = `to Dimensions 1-${Decimal.min(boosts.add(1), 8)}`;
     if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `to all Dimensions`;
+    const formattedPowText = Ascensions.dbA.isUnlocked ? `and a +${formatPow(DimBoost.exponentialPower, 2, 3)} power to all Dimensions` : "";
 
     let boostEffects;
     if (NormalChallenge(8).isRunning) boostEffects = newUnlock;
-    else if (newUnlock === "") boostEffects = `${formattedMultText} ${dimensionRange}`;
-    else boostEffects = `${newUnlock} and ${formattedMultText} ${dimensionRange}`;
+    else if (newUnlock === "") boostEffects = `${formattedMultText} ${dimensionRange} ${formattedPowText}`;
+    else boostEffects = `${newUnlock} and ${formattedMultText} ${dimensionRange} ${formattedPowText}`;
 
     if (boostEffects === "") return "Dimension Boosts are currently useless";
     const areDimensionsKept = (Perk.antimatterNoReset.isBought || Achievement(111).canBeApplied) &&
@@ -224,6 +252,30 @@ export class DimBoost {
     }
 
     const tier = DimBoost.maxDimensionsUnlockable;
+    const ad = AntimatterDimension(tier).totalAmount;
+    let calcBoosts;
+    if (Ascensions.dbA.isUnlocked) {
+      let dis = Effects.sum(
+        TimeStudy(211),
+        TimeStudy(222)
+      );
+      if (!player.disablePostReality) dis += AlphaUnlocks.fifthDimboost.effects.buff.effectOrDefault(0);
+      let logBase;
+      if (tier === 6) {
+        logBase = DC.D20.sub(dis);
+      } else if (tier === 8) {
+        logBase = DC.D15.sub(dis);
+      }
+      logBase = logBase.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
+      let naturalBase = (8 / tier) * 15;
+      let logarithm = Decimal.pow10(logBase.div(naturalBase));
+      calcBoosts = ad.max(1).log(logarithm);
+      calcBoosts = calcBoosts.add(NormalChallenge(10).isRunning ? 2 : 4);
+      if (calcBoosts.floor().lte(DimBoost.purchasedBoosts)) return DC.D0;
+      calcBoosts = calcBoosts.sub(DimBoost.purchasedBoosts);
+      const boosts = Decimal.min(DC.BEMAX, calcBoosts.floor());
+      return boosts;
+    }
     let amount = DC.D20;
     let discount = Effects.sum(
       TimeStudy(211),
@@ -244,8 +296,6 @@ export class DimBoost {
     multiplierPerDB = multiplierPerDB.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
     amount = amount.times(InfinityUpgrade.resetBoost.chargedEffect.effectOrDefault(1));
   
-    const ad = AntimatterDimension(tier).totalAmount;
-    let calcBoosts;
     calcBoosts = ad.sub(amount).div(multiplierPerDB);
   
   

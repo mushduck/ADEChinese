@@ -86,7 +86,7 @@ export default {
     },
     darkEnergyText() {
       const de = this.powerDE.mul(this.hoverOverAscension ? POWER_DE_PER_ASCENSION : 1);
-      const str = `DE +${format(de, 2, 4)}`;
+      const str = SingularityMilestone.dmdMultBooster.isUnlocked && this.tier !== 1 ? `DE ${formatX(de, 2, 4)}` : `DE +${format(de, 2, 4)}`;
       const line1 = this.hoverOverAscension ? `<b>${str}</b>` : str;
       const ascMult = POWER_DE_PER_ASCENSION.mul(this.interval).div(this.intervalAfterAscension);
       const line2 = this.hoverOverAscension

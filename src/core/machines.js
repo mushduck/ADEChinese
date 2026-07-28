@@ -144,7 +144,8 @@ export const MachineHandler = {
       this.uncappedRM.add(1)).add(1)).add(1)).sub(1.8).times(4).min(0.6), 0)).add(Decimal.clampMin(
       Decimal.log10(Decimal.log10(Decimal.log10(this.uncappedRM.add(1)).add(1)).add(1)).sub(1.95).times(2), 0))).times(
       DivinityMilestone.firstDivine.isReached && !player.disablePostReality ? 1.1 : 1).times(
-      DivineDimensions.conversionFormula2).timesEffectOf(ResurgenceUpgrade.machineSurge));
+      DivineDimensions.conversionFormula2).timesEffectOf(ResurgenceUpgrade.machineSurge, EndgameMastery(213))).timesEffectOf(
+      EndgameMastery(223));
   },
 
   get currentDMCap() {
@@ -167,7 +168,8 @@ export const MachineHandler = {
 
   // Time in seconds to reduce the missing amount by a factor of two
   get scaleTimeForDM() {
-    return (600 / DualityUpgrade(20).effectOrDefault(1)) / (DivinityUpgrade.divineL1U10.isBought ? 2 : 1);
+    return ((600 / DualityUpgrade(20).effectOrDefault(1)) / (DivinityUpgrade.divineL1U10.isBought ? 2 : 1)) /
+      EndgameMastery(233).effectOrDefault(1);
   },
 
   gainedDualMachines(diff) {

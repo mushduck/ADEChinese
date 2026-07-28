@@ -167,7 +167,7 @@ export const endgameUpgrades = [
     id: 13,
     cost: new Decimal(1e78),
     requirement: () => `Reach a Glyph Level of ${formatInt(76543)}`,
-    checkRequirement: () => player.records.bestEndgame.glyphLevel >= 76543,
+    checkRequirement: () => player.records.bestEndgame.glyphLevel.gte(76543),
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
     description: "Weaken the third Glyph Level Instability"
   },

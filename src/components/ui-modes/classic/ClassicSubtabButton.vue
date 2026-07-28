@@ -31,7 +31,8 @@ export default {
         "o-tab-btn--celestial": this.parentName === "Celestials",
         "o-tab-btn--endgame": this.parentName === "Endgame",
         "o-tab-btn--cd-expansion": this.parentName === "CD Expansion",
-        "o-tab-btn--divinity": this.parentName === "Divinity"
+        "o-tab-btn--divinity": this.parentName === "Divinity",
+        "o-tab-btn--universes": this.parentName === "Universes"
       };
     },
   },

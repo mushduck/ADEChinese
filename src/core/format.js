@@ -11,7 +11,7 @@ window.format = function format(value, places = 0, placesUnder1000 = 0) {
   if (!(value instanceof Decimal)) value = new Decimal(value);
   if (!Decimal.isFinite(value)) return value.toString();
   if (value.lt("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
-  return LNotations.current.formatLDecimal(value, 4);
+  return LNotations.current.formatLDecimal(value, 3);
 };
 
 window.formatInt = function formatInt(value) {
@@ -60,7 +60,7 @@ window.formatPostBreak = function formatPostBreak(value, places, placesUnder1000
   }
 
   if (decimal.layer >= 2) {
-    return lNotation.formatLDecimal(decimal, 4);
+    return lNotation.formatLDecimal(decimal, 3);
   }
 
   return decimal.sign < 0

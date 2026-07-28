@@ -233,7 +233,7 @@ export const eternityChallenges = [
     failedRestriction: "(Too slow for more)",
     reward: {
       description: "Infinity Dimension cost multipliers are reduced",
-      effect: completions => 1 - completions * 0.008,
+      effect: completions => 1 - (completions * 0.008 * EndgameMastery(273).effectOrDefault(1)),
       formatEffect: value => `x${formatPow(value, 3, 3)}`
     }
   }

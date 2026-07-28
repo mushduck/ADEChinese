@@ -147,7 +147,7 @@ class InfinityDimensionState extends DimensionState {
     let mult = GameCache.infinityDimensionCommonMultiplier.value
       .timesEffectsOf(
         tier === 1 ? Achievement(94) : null,
-        tier === 4 ? TimeStudy(72) : null,
+        (tier === 4 && !Ascensions.sacA.isUnlocked) ? TimeStudy(72) : null,
         tier === 1 ? EternityChallenge(2).reward : null
       );
 
@@ -192,6 +192,8 @@ class InfinityDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
+    if (tier === 4 && Ascensions.sacA.isUnlocked) mult = mult.powEffectOf(TimeStudy(72));
+
     mult = mult.powEffectsOf(
       BreakEternityUpgrade.infinityDimensionPow
     );
@@ -213,6 +215,10 @@ class InfinityDimensionState extends DimensionState {
     if (ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality) mult = mult.pow(Achievements.powerConv(Achievement(75).effectOrDefault(1)));
 
     mult = dilateMultiplier(mult, EtherealStars.orange.reward);
+
+    if (player.endgame.overcharge.isRunning) {
+      mult = dilateMultiplier(mult, Math.pow(0.72, player.endgame.overcharge.level));
+    }
 
     if (mult.gte(InfinityDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(InfinityDimensions.OVERFLOW)), 1 / InfinityDimensions.compressionMagnitude).times(Decimal.log10(InfinityDimensions.OVERFLOW)));
 

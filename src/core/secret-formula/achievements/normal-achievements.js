@@ -1407,22 +1407,22 @@ export const normalAchievements = [
     id: 165,
     name: "Perfectly balanced",
     get description() { return `Get a level ${formatInt(5000)} Glyph with all Glyph level factors equally weighted.`; },
-    checkRequirement: () => gainedGlyphLevel().actualLevel >= 5000 &&
+    checkRequirement: () => gainedGlyphLevel().actualLevel.gte(5000) &&
       ["repl", "dt", "eternities"].every(
         i => player.celestials.effarig.glyphWeights[i] === player.celestials.effarig.glyphWeights.ep),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     reward: "Unlock optimal automatic Glyph level factor adjustment.",
-    progress: () => Achievement(165).isUnlocked ? DC.D1 : (!["repl", "dt", "eternities"].every(i => player.celestials.effarig.glyphWeights[i] === player.celestials.effarig.glyphWeights.ep) ? DC.DM1 : Decimal.clamp(new Decimal(gainedGlyphLevel().actualLevel).div(5000), 0, 1))
+    progress: () => Achievement(165).isUnlocked ? DC.D1 : (!["repl", "dt", "eternities"].every(i => player.celestials.effarig.glyphWeights[i] === player.celestials.effarig.glyphWeights.ep) ? DC.DM1 : Decimal.clamp(gainedGlyphLevel().actualLevel.div(5000), 0, 1))
   },
   {
     id: 166,
     name: "Nicenice.",
     get description() { return `Get a Glyph with level ending in ${formatInt(6969)}.`; },
-    checkRequirement: () => (gainedGlyphLevel().actualLevel % 10000) === 6969,
+    checkRequirement: () => Decimal.modulo(gainedGlyphLevel().actualLevel, 10000).eq(6969),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     get reward() { return `+${formatInt(69)} to Glyph level.`; },
     effect: () => player.disablePostReality ? 0 : 69,
-    progress: () => Achievement(166).isUnlocked ? DC.D1 : (gainedGlyphLevel().actualLevel <= 6969 ? Decimal.clamp(new Decimal(gainedGlyphLevel().actualLevel).div(6969), 0, 1) : Decimal.clamp(new Decimal((gainedGlyphLevel().actualLevel - 6969) % 10000).div(10000), 0, 1))
+    progress: () => Achievement(166).isUnlocked ? DC.D1 : (gainedGlyphLevel().actualLevel.lte(6969) ? Decimal.clamp(gainedGlyphLevel().actualLevel.div(6969), 0, 1) : Decimal.clamp(Decimal.mod(gainedGlyphLevel().actualLevel.sub(6969), 10000).div(10000), 0, 1))
   },
   {
     id: 167,
@@ -1655,7 +1655,7 @@ export const normalAchievements = [
     id: 197,
     name: "Wait. That's illegal.",
     get description() { return `Own a Reality Glyph of level ${formatInt(25001)} or higher.` },
-    checkRequirement: () => Glyphs.inventoryList.filter(g => g.type === 'reality' && g.level >= 25001).length > 0,
+    checkRequirement: () => Glyphs.inventoryList.filter(g => g.type === 'reality' && g.level.gte(25001)).length > 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(197).isUnlocked ? DC.D1 : Decimal.clamp(player.records.totalAntimatter.add(1).log10().add(1).log10().div(100).min(0.5).add(new Decimal(player.records.bestReality.glyphLevel).div(150006).min(0.5)), 0, 1)
   },
@@ -1726,7 +1726,7 @@ export const normalAchievements = [
       return `Decrease Galaxy Generator Instability by ${formatInt(2)}.`;
     },
     effect: () => player.disablePostReality ? 0 : 2,
-    progress: () => Achievement(206).isUnlocked ? DC.D1 : Decimal.clamp(Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalaxyGenerator.galaxies).add(1).log10().div(150).min(0.5).add(Currency.imaginaryMachines.value.add(1).log10().div(400).min(0.5)), 0, 1)
+    progress: () => Achievement(206).isUnlocked ? DC.D1 : Decimal.clamp((GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) : Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies)).add(1).log10().div(150).min(0.5).add(Currency.imaginaryMachines.value.add(1).log10().div(400).min(0.5)), 0, 1)
   },
   {
     id: 207,
@@ -1847,6 +1847,10 @@ export const normalAchievements = [
     get description () { return `Have more Tachyon Particles than Dilated Time, with both exceeding ${format("1e5000", 2)}.` },
     checkRequirement: () => Currency.tachyonParticles.value.gt(Currency.dilatedTime.value) && Currency.dilatedTime.value.gt("1e5000"),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Momentum increases ${formatX(10)} faster.`;
+    },
+    effect: () => player.disablePostReality ? 1 : 10,
     progress: () => Achievement(222).isUnlocked ? DC.D1 : Decimal.clamp(Currency.dilatedTime.value.add(1).log10().div(10000).min(0.5).add(Currency.dilatedTime.value.lte("1e5000") ? DC.D0 : Currency.tachyonParticles.value.add(1).log10().div(Currency.dilatedTime.value.add(1).log10().times(2)).min(0.5)), 0, 1)
   },
   {

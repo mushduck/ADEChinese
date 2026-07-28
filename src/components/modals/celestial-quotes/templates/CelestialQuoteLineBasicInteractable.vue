@@ -79,6 +79,15 @@ export default {
       }
     },
     close() {
+      if (ui.$viewModel.quotes.current === Quotes.elemental.intro1) {
+        player.introFrozen = false;
+      }
+      if (ui.$viewModel.quotes.current === Quotes.elemental.intro2) {
+        player.introFrozen = false;
+      }
+      if (ui.$viewModel.quotes.current === Quotes.elemental.intro3) {
+        player.introFrozen = false;
+      }
       if (!this.isFocused) return;
       this.index = 0;
       Quote.advanceQueue();

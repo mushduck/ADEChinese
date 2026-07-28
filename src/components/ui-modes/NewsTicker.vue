@@ -92,7 +92,8 @@ export default {
       line.innerHTML = text;
 
       line.style["transition-duration"] = "0ms";
-      if (this.currentNews?.id === "a244" || this.currentNews?.id === "ai63") {
+      if (this.currentNews?.id === "a244" || this.currentNews?.id === "ai63" ||
+        (this.currentNews?.id === "ae570" && this.currentNews?.text === "weeeeeeeeeeee")) {
         line.style.transform = "translateX(-100%)";
       } else {
         line.style.transform = "translateX(0)";
@@ -109,7 +110,8 @@ export default {
       const scrollDuration = (this.$refs.ticker.clientWidth + line.clientWidth) / SCROLL_SPEED;
 
       line.style["transition-duration"] = `${scrollDuration}s`;
-      if (this.currentNews && this.currentNews.id === "a244") {
+      if (this.currentNews && this.currentNews.id === "a244" ||
+        (this.currentNews?.id === "ae570" && this.currentNews?.text === "weeeeeeeeeeee")) {
         line.style.transform = "translateX(0)";
       } else {
         line.style.transform = "translateX(-100%)";

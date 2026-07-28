@@ -3,7 +3,7 @@ import { DimensionState } from "./dimension";
 export function divineDimensionCommonMultiplier() {
   let mult = DC.D1;
   mult = mult.timesEffectsOf(DivinityUpgrade.divineL1U3, DivinityUpgrade.divineL1U6, DivinityUpgrade.divineL2U1,
-    DivinityUpgrade.divineL2U9);
+    DivinityUpgrade.divineL2U9, EndgameMastery(192));
   mult = mult.times(DivinityMilestone.hadronEmpowerment.isReached ? 77 : 1);
   mult = mult.times(Accelerators.potency.effectValue3);
   mult = mult.times(Decimal.pow(7, Decimal.log10(player.celestials.pelle.divinity.divineStars.add(1).min(DC.NUMMAX))).powEffectOf(
@@ -71,8 +71,9 @@ class DivineDimensionState extends DimensionState {
     if (DivinityMilestone.pelleQoL.isReached && !player.disablePostReality) mult = mult.pow(1.05);
     mult = mult.pow(Accelerators.emptiness._milestones[1].effectOrDefault(1));
     mult = mult.powEffectsOf(DivinityUpgrade.divineL2U7, DivinityUpgrade.divineL3U5, DivinityUpgrade.divineL4U1.effects.matter,
-      DivinityUpgrade.divineL4U3, DivinityUpgrade.divineL5U3);
+      DivinityUpgrade.divineL4U3, DivinityUpgrade.divineL5U3, EndgameMastery(211), SingularityMilestone.singDivDimPower);
     if (DivinityMilestone.finalRebirth.isReached && !player.disablePostReality) mult = mult.pow(1.05);
+    mult = mult.pow(Achievements.powerConv(EndgameMastery(192).effectOrDefault(1)));
     return mult;
   }
 
@@ -170,7 +171,7 @@ export const DivineDimensions = {
 
   get energyPerSecond() {
     const divineEnergyMults = DC.D1.timesEffectsOf(
-      DivinityUpgrade.divineL1U7, DivinityUpgrade.divineL2U2, DivinityUpgrade.divineL4U1.effects.energy).times(
+      DivinityUpgrade.divineL1U7, DivinityUpgrade.divineL2U2, DivinityUpgrade.divineL4U1.effects.energy, EndgameMastery(221)).times(
       DivinityMilestone.hadronEmpowerment.isReached ? 77 : 1).times(Accelerators.potency.effectValue3);
     const baseEffect = DivinityUpgrade.divineL2U4.isBought ? player.records.totalDivineMatter :
       DivineDimension(1).productionPerSecond.max(1);

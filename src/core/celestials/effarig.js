@@ -21,6 +21,7 @@ export const Effarig = {
       player.disablePostReality = true;
       disChargeAllPerkUpgrades();
       disChargeAll();
+      disChargeAllBreakUpgrades();
       AutomatorBackend.stop();
     }
     clearCelestialRuns();
@@ -75,17 +76,17 @@ export const Effarig = {
   get glyphLevelCap() {
     switch (this.currentStage) {
       case EFFARIG_STAGES.INFINITY:
-        return 100;
+        return new Decimal(100);
       case EFFARIG_STAGES.ETERNITY:
-        return 1500;
+        return new Decimal(1500);
       case EFFARIG_STAGES.REALITY:
-        return 2000;
+        return new Decimal(2000);
       case EFFARIG_STAGES.ENDGAME:
-        return Math.floor(Time.thisEndgameRealTime.totalMilliseconds.toNumber()) * Math.pow(2, Time.thisEndgameRealTime.totalHours.toNumber());
+        return Decimal.floor(Time.thisEndgameRealTime.totalMilliseconds).times(Decimal.pow(2, Time.thisEndgameRealTime.totalHours));
       default:
         return EffarigUnlock.extendRun.isUnlocked
-          ? Math.floor(Time.thisEndgameRealTime.totalMilliseconds.toNumber()) * Math.pow(2, Time.thisEndgameRealTime.totalHours.toNumber())
-          : 2000;
+          ? Decimal.floor(Time.thisEndgameRealTime.totalMilliseconds).times(Decimal.pow(2, Time.thisEndgameRealTime.totalHours))
+          : new Decimal(2000);
     }
   },
   get glyphEffectAmount() {

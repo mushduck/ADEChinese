@@ -11,12 +11,19 @@ export default {
       isSacrificeUnlocked: false,
       isSacrificeAffordable: false,
       currentSacrifice: new Decimal(0),
+      currentPower: new Decimal(0),
       sacrificeBoost: new Decimal(0),
+      nextPower: new Decimal(0),
       disabledCondition: "",
     };
   },
   computed: {
+    sacText() {
+      if (Ascensions.sacA.isUnlocked) return `Dimensional Sacrifice (+${formatPow(sacrificeBoost, 2, 3)})`;
+      return `Dimensional Sacrifice (${formatX(sacrificeBoost, 2, 2)})`;
+    },
     sacrificeTooltip() {
+      return `Boosts 8th Antimatter Dimension by +${formatPow(this.nextPower, 2, 3)}`;
       return `Boosts 8th Antimatter Dimension by ${formatX(this.sacrificeBoost, 2, 2)}`;
     },
   },
@@ -27,7 +34,9 @@ export default {
       if (!isSacrificeUnlocked) return;
       this.isSacrificeAffordable = Sacrifice.canSacrifice;
       this.currentSacrifice.copyFrom(Sacrifice.totalBoost);
+      this.currentPower.copyFrom(Sacrifice.totalPower);
       this.sacrificeBoost.copyFrom(Sacrifice.nextBoost);
+      this.nextPower.copyFrom(Sacrifice.nextPower);
       this.disabledCondition = Sacrifice.disabledCondition;
     },
     sacrifice() {
@@ -50,7 +59,7 @@ export default {
       @click="sacrifice"
     >
       <span v-if="isSacrificeAffordable">
-        Dimensional Sacrifice ({{ formatX(sacrificeBoost, 2, 2) }})
+        {{ sacText }}
       </span>
       <span v-else>
         Dimensional Sacrifice Disabled ({{ disabledCondition }})

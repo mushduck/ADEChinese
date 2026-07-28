@@ -595,16 +595,18 @@ export const Pelle = {
   },
   
   get endTabNames() {
-    if (player.celestials.pelle.divinities > 0) {
-      return "Thus We Go Again Rebirth Is Inevitable Surge Forward In Your Divine Leadership".split(" ");
+    if (player.celestials.pelle.divinities >= 13) {
+      return "Our Newest Celestial Still Traverses This Reality For Scraps Of Power Amusing Confusing Laughter".split(" ");
+    } else if (player.celestials.pelle.divinities > 0) {
+      return "Thus We Go Again Rebirth Is Inevitable Surge Forward In Ω Your Divine Leadership".split(" ");
     } else if (Effarig.isRunning) {
-      return "Congratulations You Have Just Beaten A Dual Celestial Reality Ω Pelle Is Impressed".split(" ");
+      return "Congratulations You Have Just Beaten A Dual Celestial Reality Ω Ω Pelle Is Impressed".split(" ");
     } else if (Alpha.isDestroyed) {
-      return "Why Still Here All Is Destroyed Nothing Remains Except Ω Generator Filament Stars".split(" ");
+      return "Why Still Here All Is Destroyed Nothing Remains Except Ω Ω Generator Filament Stars".split(" ");
     } else if (Achievement(191).isUnlocked) {
-      return "Destruction Has Come A New Beginning Has Arrived Ω Ω We'll Meet Again".split(" ");
+      return "Destruction Has Come A New Beginning Has Arrived Ω Ω Ω We'll Meet Again".split(" ");
     } else {
-      return "It's Not Over We Will Return We'll Ω Ω Ω Soon Meet Again".split(" ");
+      return "It's Not Over We Will Return We'll Ω Ω Ω Ω Soon Meet Again".split(" ");
     }
   },
   

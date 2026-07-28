@@ -14,12 +14,12 @@ export const ENSLAVED_UNLOCKS = {
     id: 1,
     price: TimeSpan.fromYears(new Decimal(1e40)).totalMilliseconds,
     secondaryRequirement() {
-      const hasLevelRequirement = player.records.bestReality.glyphLevel >= 5000;
+      const hasLevelRequirement = player.records.bestReality.glyphLevel.gte(5000);
       const hasRarityRequirement = strengthToRarity(player.records.bestReality.glyphStrength) >= 100;
       return hasLevelRequirement && hasRarityRequirement;
     },
     description() {
-      const hasLevelRequirement = player.records.bestReality.glyphLevel >= 5000;
+      const hasLevelRequirement = player.records.bestReality.glyphLevel.gte(5000);
       const hasRarityRequirement = strengthToRarity(player.records.bestReality.glyphStrength) >= 100;
       return `Unlock The Nameless Ones' Reality (requires ${hasLevelRequirement ? "[✓]" : "[✗]"} a level
       ${formatInt(5000)} Glyph and ${hasRarityRequirement ? "[✓]" : "[✗]"} a ${formatRarity(100)} rarity Glyph)`;
@@ -59,7 +59,8 @@ export const Enslaved = {
   },
   get canModifyGameTimeStorage() {
     return Enslaved.isUnlocked && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.canBeApplied) &&
-      !BlackHoles.arePaused && !EternityChallenge(12).isRunning && !Enslaved.isRunning && !Laitela.isRunning;
+      !BlackHoles.arePaused && !EternityChallenge(12).isRunning && !Enslaved.isRunning && !Laitela.isRunning &&
+      !player.endgame.overcharge.isRunning;
   },
   get canModifyRealTimeStorage() {
     return Enslaved.isUnlocked && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.canBeApplied);
@@ -109,7 +110,7 @@ export const Enslaved = {
     return diffMs - used;
   },
   canRelease(auto) {
-    return !Enslaved.isStoringRealTime && !EternityChallenge(12).isRunning && !Laitela.isRunning &&
+    return !Enslaved.isStoringRealTime && !EternityChallenge(12).isRunning && !Laitela.isRunning && !player.endgame.overcharge.isRunning &&
       !(Enslaved.isRunning && auto) && (!Pelle.isDoomed || PelleDestructionUpgrade.blackHole.canBeApplied);
   },
   // "autoRelease" should only be true when called with the Ra upgrade

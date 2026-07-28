@@ -25,6 +25,7 @@ export default {
       if (this.notEmpty) this.hasSeenModal = true;
       this.input = "";
       player.options.hasSeenUsernameModal = this.hasSeenModal;
+      if (player.options.hasSeenUsernameModal) player.introFrozen = false;
     },
   },
 };

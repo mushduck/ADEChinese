@@ -107,12 +107,18 @@ export function getEtherealPowerGainPerSecond() {
     Achievement(216).effectOrDefault(1)).times(alphaBoost).times(EtherealStars.blue.reward).times(
     DivineDimensions.conversionFormula1).times(DivinityMilestone.hadronEmpowerment.isReached ? 10 : 1).timesEffectOf(
     DivinityUpgrade.divineL2U3).times(DivinityMilestone.celestialSurge.isReached ? 1000 : 1).timesEffectsOf(
-    ResurgenceUpgrade.ethSurge, ResurgenceUpgrade.synergy6);
+    ResurgenceUpgrade.ethSurge, ResurgenceUpgrade.synergy6, EndgameMastery(241), SingularityMilestone.singEthPowerBoost).times(
+    DivinityMilestone.ascendedSurge.isReached ? getGameSpeedupForDisplay().max(10).log10() : 1);
 }
 
 export function tryAdvanceSector() {
   if (Currency.etherealPower.lt(Ethereal.sectorThreshold)) return;
-  player.endgame.ethereal.sector++;
+  if (DivinityMilestone.ascendedSurge.isReached) {
+    const highestPossibleSector = Decimal.floor(Currency.etherealPower.value.ln().div(
+      Decimal.lambertw(Currency.etherealPower.value.ln()))).add(1);
+    player.endgame.ethereal.sector += highestPossibleSector.sub(player.endgame.ethereal.sector).toNumber();
+  }
+  else player.endgame.ethereal.sector++;
 }
 
 export function resetForStar(id) {

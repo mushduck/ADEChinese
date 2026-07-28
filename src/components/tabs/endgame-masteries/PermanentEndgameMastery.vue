@@ -37,12 +37,16 @@ export default {
         return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.permaMasteries.totalEndgameSkillRequirement)}
           total Endgame Skills`;
       }
+      if (this.id === 3) {
+        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.timeCompression.totalEndgameSkillRequirement)}
+          total Endgame Skills`;
+      }
       return "";
     },
   },
   methods: {
     update() {
-      if (this.id <= 2) {
+      if (this.id <= 3) {
         this.maxES.copyFrom(Currency.endgameSkills.max);
         this.showRequirement = !this.mastery.isBought;
       }
@@ -53,6 +57,8 @@ export default {
         case 1:
           return () => Tab.endgame.upgrades.show();
         case 2:
+          return () => Tab.endgame.masteries.show();
+        case 3:
           return () => Tab.endgame.masteries.show();
         default:
           throw new Error("Unrecognized Permanent Mastery was clicked");

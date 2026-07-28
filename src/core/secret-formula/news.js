@@ -2692,9 +2692,7 @@ export const news = [
   {
     id: "ae407",
     get text() {
-      return `The update will be released at
-        ${TimeSpan.fromMilliseconds(new Decimal(Date.now() + 432000000 + 62124292800000)).toString()}
-        .`;
+      return `The update will be released at ${Time.toDateTimeString(Date.now() + 18000000)}.`;
     },
     dynamic: true
   },
@@ -3583,6 +3581,2459 @@ export const news = [
       antinet's reactions: "WHAT????!?!" "v0.3 is gonna take sooooo long!!!" "I like waffles." "Oh, does that mean
       you hate pancakes?" "Another S7 fail." This is just outrageous! Wait what do you mean this news message isn't
       releasing until v0.3?!??!? FUUUUUUUUU($)#@(:"$":@%{{{{{{{{{{{{{{{{{{{{{{{{{{`
+  },
+  {
+    id: "ae565",
+    text: "To all people playing v0.3 right after release in the year 1.79e308: Hello, v0.4 is coming out in 5 hours!"
+  },
+  {
+    id: "ae566",
+    text:
+      `oh what the hell! my news was supposed to be in v0.3, not v0.2.3! well hopefully this gets in v0.4, we don't want
+      them to get early access to the v0.4 news!`
+  },
+  {
+    id: "ae567",
+    text: "how to get endgames faster: wait faster"
+  },
+  {
+    id: "ae568",
+    text: "I guess this is the End of my Game...."
+  },
+  {
+    id: "ae569",
+    text: "I guess this is the End of my Game...."
+  },
+  (function() {
+    let wasClicked = false;
+    const normal = "click here to make the newsticker go backwards";
+    const clicked = "weeeeeeeeeeee";
+    return {
+      id: "ae570",
+      get text() {
+        return wasClicked ? clicked : normal;
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        return this.text;
+      }
+    };
+  }()),
+  {
+    id: "ae571",
+    text:
+      `Hevipelle created the heavens and Earth. Then slashed the Sword of Spacetime, dividing them and marking the beginning
+      of the world. He brought forth multitudes of beings, from snails to whales. Among them, a few called humans awakened
+      the original Sin, and the Original boon. They leapt forth unto the darkness and gained power to become Hevi's
+      rivals and companions - The Celestials.`
+  },
+  {
+    id: "ae572",
+    get text() {
+      return `<span>Hi. Hello. You are here. You are stuck here. ${wordShift.wordCycle(["Unending", "Unlimited", "Boundless"])}.</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>You may leave if you so wish. But to do so...it would be nothing short of Stupidity....</span>`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae573",
+    text: "Fun fact: there's no rules against [REDACTED] in S7's server. Wait, why is it redacted?"
+  },
+  {
+    id: "aem574",
+    text: "Hey, babe. Would you still love me if i was a worm? OH WAIT SHIT THIS IS THE NEWS TICKER FUCK-"
+  },
+  {
+    id: "ae575",
+    text:
+      `Wdym there's nothing to do in the server. you can wait for endgame, complain about balancing, wait for endgame,
+      hunt bugs, wait for endgame, give suggestions, wait for endgame, write newstickers, wait for endgame, complain about
+      balancing, wait for endgame, check on galgen, wait for endgame, play other mods that are already finished, wait for endgame,
+      wait, wait for endgame, wait faster, and passive-aggressively hound the dev for updates by disguising it as a self-referential
+      joke in a newsticker suggestion`
+  },
+  {
+    id: "ae576",
+    text: "Well joke's on the last ticker, I made endgame masteries! Wait, they dont know who wrote the newsticker? NOOOOOOOOOOOO!!!!!"
+  },
+  {
+    id: "ae577",
+    text:
+      `Insert current world event joke here (NOTE TO SELF : don't make it racist, sexist, anti Semitic, anti LGBTQ+,
+      anti pronoun, anti human, anti post-2020 content, antianything.)`
+  },
+  {
+    id: "ae578",
+    text:
+      `<span style='color: blue'>"v0.2.3 is delayed because of mastery studies and people hate it! there is currently
+      a protest outside the endgame headquarter- oh Seven you have something to say?"</span><span style='color: red'>"blame
+      glitchy he came up with the idea"</span><span style='color: blue'>"well, okay. it seems that glitchy will now be punished
+      for his actions. now people have something to do while endgame masteries are being develo- huh? hm. it seems that I am
+      glitchy, so i think its about time for us to stop. NEWS TICKER, STOPPING NO-"</span>`
+  },
+  {
+    id: "ae579",
+    text: "The next update will come when Seven rips apart 5 more files"
+  },
+  {
+    id: "ae580",
+    text: "The next update is 5 hours away? No, no. The next update is one fix of a single line of code away."
+  },
+  {
+    id: "ae581",
+    text: "100 bugs on the wall, 100 bugs on the wall. Fix one down, pass it around, e9e15 bugs on the wall."
+  },
+  {
+    id: "ae582",
+    text: "The End is Neigh"
+  },
+  {
+    id: "ae583",
+    text: "You forgot: patch the bug but it's still there for some reason and say the update is in 777 head bangs"
+  },
+  {
+    id: "ae584",
+    text: "5 hours: an arbitrary unit of time. but is it really that normal?"
+  },
+  {
+    id: "ae585",
+    text:
+      `Sorry, the newsticker just went through an emo phase. We will get back to normal hot garbage in a bit. In the meantime,
+      here are some archived best hits from the newsticker channel:`
+  },
+  {
+    id: "ae586",
+    text:
+      `<span>Activate Windows</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Go to Settings to activate Windows</span>`
+  },
+  {
+    id: "ae587",
+    text:
+      `With v0.3 coming out, I think we need to change our humor a bit. 5 hours IS NOT ENOUGH!!! SO, I am introducing the
+      7 hour jokes! Some great examples are: "Hypersonic just DM'ed me that v0.69 releases in 7 hours!", "Seven sleeps only
+      6 hours, 59 minutes and 59 seconds per day. This abnormality is not caused by any achievements, but rather by the
+      impending doom of balancing all new stuff in v0.4. Stay tuned for more Hypersonic facts!", or even basic ones such
+      as "v0.2.3 in 5 hours!" Oh wait, wrong script-`
+  },
+  (function() {
+    let wasClicked = false;
+    const normal = "Click here to make the newsticker rainbow";
+    const clicked = "Enjoy your rainbow news ti- what do you mean it's not rainbow?";
+    return {
+      id: "ae588",
+      get text() {
+        return wasClicked ? clicked : normal;
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        return this.text;
+      }
+    };
+  }()),
+  (function() {
+    let wasClicked = false;
+    const normal = "Click here to get a celestial paperclip in exchange for your entire save file.";
+    const clicked = "You've been trolled!";
+    return {
+      id: "ae589",
+      get text() {
+        return wasClicked ? clicked : normal;
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        player.news.specialTickerData.paperclips++;
+        return this.text;
+      }
+    };
+  }()),
+  {
+    id: "ae590",
+    text:
+      `Fun fact: Unlike popular belief, Seven does not get his 8 hours of recommended sleep from his doctor, as he needs
+      to wake up after sleeping for 7 hours, 59 minutes and 59 seconds to avoid getting the 8 hours achivement!`
+  },
+  {
+    id: "ae591",
+    text:
+      `After eternities of gruelling research we've finally located the number between 8 and 9, but we can't quite retrieve it.
+      7 has consumed it. I know it sounds crazy but think about it, it all makes sense. Better yet it means 9 is still out there,
+      waiting to be found.`
+  },
+  {
+    id: "ae592",
+    get text() {
+      if (false) return `Eleventh dimension no real haha... I think we might be running out of fake dimensions`;
+      if (false) return `Tenth dimension no real haha`;
+      return `Ninth dimension no real haha`
+    }
+  },
+  {
+    id: "ae593",
+    text:
+      `5 hours until the update. 5 hours until the update. 5 hours until the update. 5 hours until the update. 5 hours
+      until the update. 5 hours until the update. 5 hours until the update. 5 hours until the update. 5 hours until the
+      update. 5 hours until the update. 5 hours until the update. 5 hours until the update. 5 hours until the update. 5
+      hours until the update. 5 hours until the update. 5 hours until the update. 5 hours until the update. 4 hours, 59
+      minutes, and 59 seconds until the upda-`
+  },
+  {
+    id: "ae594",
+    text: "Only 43 headbangs until the update!"
+  },
+  {
+    id: "ae595",
+    text: "OK GUYS, I THINK WE FIXED THE COUNTDOWN! OK 0.2.3 RELEASING IN 5, 4, 3, 3, 3... I'm getting a new countdown."
+  },
+  {
+    id: "ae596",
+    text: "Dont worry guys, v0.2.3 is releasing in 2 days! I think..."
+  },
+  {
+    id: "ae597",
+    text: "This is my newsticker now MWAHAHAHAHAHAHAHAHA"
+  },
+  {
+    id: "ae598",
+    text:
+      `Get ready for: the Fandub layer! Fandub various Sonic characters in Sonic Adventure 2, and make a special
+      announcement as Eggman!`
+  },
+  {
+    id: "ae599",
+    text:
+      `Its time for: Guess that [REDACTED] mechanic 2! When you [REDACTED], you unlock the [REDACTED] [REDACTED], which is
+      very similar to [REDACTED] [REDACTED] [REDACTED]. The [REDACTED] [REDACTED] has [REDACTED], which are mostly
+      [REDACTED] but has some [REDACTED] related [REDACTED]. There are 2 [REDACTED] [REDACTED] with each of them having
+      4 [REDACTED], with the first focusing on the different types of [REDACTED], and the second focusing on the main
+      4 [REDACTED]. The last upgrade unlocks [REDACTED] [REDACTED], however [REDACTED] has suggested extending the
+      [REDACTED] [REDACTED] for the [REDACTED] [REDACTED] update.`
+  },
+  {
+    id: "ae600",
+    text:
+      `New AD mod idea: Nerfedtimatter Dimensions! Every time you reset something, it will receive ^0.5 nerf to it!
+      Estimated playtime: ~1.79e308 years. And yes, without ANY counter-buffs! (Try to) Have fun!1!11!!!1`
+  },
+  {
+    id: "ae601",
+    get text() {
+      return `<span style='color: crimson'>${wordShift.wordCycle(["False", "Deity", "Destroyer"])} I remember you're genocides...</span>`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae602",
+    get text() {
+      return `<span style='color: crimson'>${wordShift.wordCycle(["False", "Deity", "Destroyer"])} you are gonna have
+      a ${wordShift.wordCycle(["Bad", "Horrible", "Sans"])} Time.</span>`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae603",
+    text:
+      `You know whats funny? The fact that v0.2.3 has been taking so long that its been 11 days since the newstickers were
+      finalized, which means all the newsticker suggestions relating to v0.2.3 have been put in the v0.3 news dump!`
+  },
+  {
+    id: "ae604",
+    text:
+      `You know whats funny? The fact that v0.2.3 has been taking so long that its been 11 days since the newstickers were
+      finalized, which means all the newsticker suggestions relating to v0.2.3 have been put in the v0.3 news dump!`
+  },
+  {
+    id: "ae605",
+    get text() {
+      return `<span>The news tickers are sentient. They can see you through the screen. YOU NEED TO RUN. YOU NEED TO RUN.
+      YOU NEED TO RUN. RUN. RUN. RUN.</span><span style='color: red'>RUNRUNRUNRUNRUNRU-</span><span>End communication.</span>`
+    }
+  },
+  {
+    id: "ae606",
+    text: `"USING CONSOLE IS CHEATING"--6`
+  },
+  {
+    id: "ae607",
+    text: `"REWRITE THE ENTIRE GAME, FROM THE GROUND UP, WHILE USING AN ENTIRELY DIFFERENT LIBRARY. IT'LL BE FASTER, TRUST ME-"--6`
+  },
+  {
+    id: "ae608",
+    text: "What’s all this about 1.158e77? Back in my day, infinity was simply 1.8e308!"
+  },
+  {
+    id: "ae609",
+    text: `"I WANT TO HAVE A DICTATOR"—6`
+  },
+  {
+    id: "ae610",
+    text: `1 billion years into the future... "0.2.3 comes in 1 day and 5 hours"`
+  },
+  {
+    id: "ae611",
+    get text() {
+      return `<span style='color: green'>"Hello I am ∀̴̯̎̂∁̶̩̯̗̅͒̕∂̸̖͍̐̊∃̶͖̱͓̎∄̴̧̙͗̀͜∅̸̙̳̣̈́∆̸̣̈́∇̶͕̮̎͛ ̸͚̩̿͆͘ and I am the best at art I can do commisions for e5e92
+      matter"</span><span style='color: blue'>"Okay draw hands
+      then"</span><span style='color: green'>"..."</span><span style='color: blue'>"Anyways, why is this newsticker in the
+      game? This isn't even Endgame related, no less incremental game related! Let me guess, the person who wrote this ran
+      out of ideas?"</span><span style='color: green'>"Yeah I wonder why he keeps doing
+      this"</span><span>"WARNING: YOU HAVE BROKEN NEWSTICKER CODE 18372-"</span>`
+    }
+  },
+  {
+    id: "ae612",
+    text: `apology for poor english          where were you when multiplier tab died          i was at house
+    eating relic shard when news ticker ring          “multiplier tab is kil”          “no”`
+  },
+  {
+    id: "ae613",
+    text: "Why do they call it galaxy generator when you of in the galaxy of out hot eat the generator?"
+  },
+  {
+    id: "ae614",
+    get text() {
+      return `${wordShift.wordCycle(["ERROR", "MISSTEP", "WRONGING"])}: ${wordShift.wordCycle(["GIVE", "POWER", "ADD"])}
+      glitchy, ${wordShift.wordCycle(["FALSE", "DEITY", "LESSER"])} of Masteries 11th dimension 1 is
+      an ${wordShift.wordCycle(["INVALID", "WRONG", "NO"])} command.`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae615",
+    text:
+      `Whoever asks for genderswap pelle gets 500 snipers pointing at their head. Heh, yeah.. NO WAIT GUYS NOT ME I
+      SWEAR IT WAS ONE TIM-`
+  },
+  {
+    id: "ae616",
+    text:
+      `"hello welcome to the mastery market" "hello i would like a 21" "okay that will be 3 time theorems" "dont you
+      guys accept skill points?" "skill points? this isn't the mastery market this is the time study market!" "i thought
+      you said it was the mastery market!" "oh, sorry. i said masterino. thats what i call time studies." "thats it i want
+      the manager" "well jokes on you i am the manager" "well then fire that guy" "i am that guy" "what do you mean" "that
+      guy is me, who is also the manager." "well then fire yourself" "why would i do that?" "well obviously you are being
+      a bad employee and a bad manager, so it only makes sense that you fire yourself" "well thats a shame, you are fired!"
+      "but im the customer!" "well i dont care GET OU-" no survivors for hundreds of miles`
+  },
+  {
+    id: "ae617",
+    text: "Hey guys I think my balatro run is doing pretty good what do you think"
+  },
+  {
+    id: "ae618",
+    text:
+      `A storm of bad newsticker suggestions is coming, and only YOU can stop it! Spam ping the dev! Harass people
+      who make the bad newsticker! Flood the suggestions channel with EVEN WORSE suggestions to stop people from
+      participating! Let none survive! The war is only lost when good, right-thinking people like YOU stop fighting!
+      We will NEVER SURRENDER!`
+  },
+  {
+    id: "ae619",
+    text:
+      `Just your daily reminder to NOT SPEND YOUR 1 DP ON THE PASSIVE IP GEN UPGRADE BUY A SKILL POINT INSTEAD`
+  },
+  {
+    id: "ae620",
+    text: "Paperclips will become useful in 5 hours"
+  },
+  {
+    id: "ae621",
+    text: "This newsticker suggestion will be filled with text in 5 hours"
+  },
+  {
+    id: "ae622",
+    text:
+      `1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+      (nice try I ain't doin 9e15 zeroes)`
+  },
+  {
+    id: "ae623",
+    text: "This sentence is anti-false"
+  },
+  {
+    id: "ae624",
+    text: "Don't worry, if you wanna contribute to the game, tester positions will open in 5 hours!"
+  },
+  {
+    id: "aem625",
+    text: "You see that heart? No shit!"
+  },
+  {
+    id: "ae626",
+    text: "I don't need friends, I have [[KNIFES FOR $4.99]]"
+  },
+  {
+    id: "ae627",
+    text: "Just pretend these messages are good."
+  },
+  {
+    id: "ae628",
+    get text() {
+      return `<span style='color: green'>This news ticker is green for a very important reason.</span>`
+    }
+  },
+  {
+    id: "ae629",
+    text: `"Oh boy I sure do love using idle" "50% more RGs is better than 50% stronger RGs" "BUT WHAT IF I DONT WANNA HOLD R DOWN?!?!?"`
+  },
+  {
+    id: "ae630",
+    text: `"An R press is an R press, you can't say it's only a half!" The humble H:`
+  },
+  {
+    id: "ae631",
+    text: "Darkness will become useful in 5 hours! IT’S TRUE!"
+  },
+  {
+    id: "ae632",
+    text: "This message will be replicated in 5 hours"
+  },
+  {
+    id: "ae633",
+    text: "This message will be replicated in 5 hours This message will be replicated in 5 hours"
+  },
+  {
+    id: "ae634",
+    text:
+      `Okay, we have just gotten the 10th dimension, surely this will be the last dimension, because dimension a5f doesn't exist!
+      My humble dreams:`
+  },
+  {
+    id: "ae635",
+    get text() {
+      return `<span>Seven needs YOUR help to escape bugfix hell! His paypal
+      is </span><span style='color: red'><NEWS ERROR></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Hi, it's Seven, I fixed it. My paypal
+      is </span><span style='color: red'><NEWS ERROR></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>I give up.</span>`
+    }
+  },
+  {
+    id: "ae636",
+    text:
+      `Do you pull the lever, killing 1+1+1+1... people- one person for every integer, resulting in infinite people dying?
+      Or, do you do nothing, allowing the trolley to infinitely kill 100 continuoualy reincarnating people? In both cases,
+      there's infinite suffering, but in the top case there's finite suffering for each infinite death, whereas there infinite
+      suffering for each finite death. What do you do?`
+  },
+  {
+    id: "ae637",
+    text: "5 huoors utntiilaa theheh audasaoffpdfate -drunk seven"
+  },
+  {
+    id: "ae638",
+    text:
+      `How AD:NewGameMod players look at you when you say your first NG mod was AD:V instead of
+      AD:DimensionalDestructionIn5Hours+ with 2 updates, 0 players and full completion video considered lost media`
+  },
+  {
+    id: "ae639",
+    get text() {
+      return `<span>+4 mult!</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Whatever That Means</span>`
+    }
+  },
+  {
+    id: "ae640",
+    text:
+      `Well, now that v0.2.3 has released, we have ran out of AD mod requests. What do we do no- wait... Dilate the Darkness is
+      coming out this month??? DILATE THE DARKNESS! DILATE THE DARKNESS! DILATE THE DARKNESS!`
+  },
+  {
+    id: "ae641",
+    text: "you have enough imaginary machines to buy a heptarract"
+  },
+  {
+    id: "ae642",
+    text: "No, son. You can't just go around and call Pelle a ########################."
+  },
+  {
+    id: "ae643",
+    text: "You have annihilated your News Ticker Dimensions. What have you done?"
+  },
+  {
+    id: "ae644",
+    text: "I cringe at like half the tickers I submitted for 0.2.3"
+  },
+  {
+    id: "ae645",
+    get text() {
+      return `Oh ${wordShift.wordCycle(["boy", "male", "man"])} I sure do ${wordShift.wordCycle(["love", "like", "amuse"])}
+      abusing the ${wordShift.wordCycle(["Pelle", "God", "Doomer"])} ${wordShift.wordCycle(["effect", "style", "coolness"])}
+      hopefully ${wordShift.wordCycle(["False", "Deity", "Destroyer"])} won't get ${wordShift.wordCycle(["mad", "angry", "profanity"])}
+      at me for this`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae646",
+    get text() {
+      return `I'VE COME TO MAKE AN ${wordShift.wordCycle(["ANNOUNCEMENT", "BROADCAST", "ALERT"])}!
+      ${wordShift.wordCycle(["FALSE", "DEITY", "DESTROYER"])} IS A ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}
+      ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])} ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}ER!
+      HE ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])} ON MY ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}
+      ${wordShift.wordCycle(["LAI'TELA", "HOT", "BADDIE"])}! THAT'S RIGHT! HE TOOK HIS
+      ${wordShift.wordCycle(["FALSE", "DEITY", "LESSER"])} ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}
+      ${wordShift.wordCycle(["HOT", "ATTRACTIVE", "YESPELLEISGAYTRUSTMEBRO"])}, AND HE
+      ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}ED ON MY ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}
+      ${wordShift.wordCycle(["LAI'TELA", "HOT", "BADDIE"])}! AND HE SAID HIS
+      ${wordShift.wordCycle(["HOT", "ATTRACTIVE", "SMIRKEMOJI"])} WAS "DIS BIG!!1!!!!1!!" AND I SAID "THAT'S DISGUSTING!"
+      SO I'M MAKING A CALLOUT POST ON MY ${wordShift.wordCycle(["ANTIMATTER", "SOCIALMEDIA", "TWITTER"])}.COM!
+      ${wordShift.wordCycle(["FALSE", "DEITY", "DESTROYER"])}, YOU GOT A SMALL ${wordShift.wordCycle(["HOT", "ATTRACTIVE", "SMIRKEMOJI"])}!
+      IT'S THE SIZE OF THIS WALNUT EXCEPT WAY SMALLER! AND GUESS WHAT? HERE'S WHAT MY
+      ${wordShift.wordCycle(["HOT", "ATTRACTIVE", "SMIRKEMOJI"])} LOOKS LIKE! ~BOOM~ THAT'S RIGHT BABY! TALL
+      ${wordShift.wordCycle(["DIMENSIONS", "FUEL", "POWER"])}, NO ${wordShift.wordCycle(["STARS", "FILAMENT", "GALAXIES"])},
+      NO ${wordShift.wordCycle(["INFINITE", "FOREVER", "ETERNAL"])}, LOOK AT THAT IT LOOKS LIKE 2
+      ${wordShift.wordCycle(["SPHERES", "OBJECTS", "CIRCLES"])} AND A ${wordShift.wordCycle(["HOT", "ATTRACTIVE", "SMIRKEMOJI"])}!
+      HE ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}ED MY WIFE, SO GUESS WHAT? I'M GONNA
+      ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])} THE ${wordShift.wordCycle(["EXPANSE", "REALITY", "EXISTENCE"])}!
+      THAT'S RIGHT THIS IS WHAT YOU GET, MY SUPER LASER ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}!
+      EXCEPT I'M NOT GONNA ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])} ON THE
+      ${wordShift.wordCycle(["EXPANSE", "REALITY", "EXISTENCE"])}, I'M GONNA GO HIGHER! I'M
+      ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}ING ON THE ${wordShift.wordCycle(["CURSED", "DOOMED", "OMEGA"])}!
+      HOW DO YOU LIKE THAT EFFARIG?!?!? I ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}ED ON THE MOON YOU
+      ${wordShift.wordCycle(["IDIOT", "MORON", "NITWIT"])}! YOU HAVE 23 UPDATES UNTIL THE
+      ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])} DRRRROPLETS HIT THE ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])}
+      EARTH! NOW GET OUT OF MY SIGHT, BEFORE I ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])} ON YOU TOO!`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae647",
+    text:
+      `3 ways to unlock the Shattered Reality: 1. Wait through infinite 5 hour update cycles. 2. Use the console and break the save.
+      3. Summon the entire SSB Gogeta vs SSFP Broly fight.`
+  },
+  {
+    id: "ae648",
+    text:
+      `Update vF1.79e308. I've had multiple complaints about the Antimatter cap only being the Expantanum.js limit, so I made it ω.
+      I hope there won't be ω bugs with 5 hours fix them. -Supersonic Seven the 1.79e308th`
+  },
+  {
+    id: "ae649",
+    text:
+      `Fun fact: the reason the 9th Dimension can exist in Endgame is because the 10th Dimension endlessly produces the 9th Dimension,
+      and Seven can't eat forever!`
+  },
+  {
+    id: "ae650",
+    text: "JOKES ON YOU THIS NEWSTICKER IS GONNA GET IN THE GAME!"
+  },
+  {
+    id: "ae651",
+    text: "BREAKING NEWS: SEVEN IS SHORTENING HIS NAME IN THE NEWSTICKERS TO S7! [NEWSTICKMESSAGEGET()] IS REALLY ANGRY!"
+  },
+  {
+    id: "ae652",
+    text: `"Finally the break_eternity.js is mine!" -S2, 5000 years ago`
+  },
+  {
+    id: "ae653",
+    text:
+      `BREAKING NEWS: SEVEN NOT GIVING REACTIONS TO NEWSTICKER SUGGESTIONS! YES THIS HAPPENED BEFORE AND EVERYTHING
+      TURNED OUT FINE BUT THIS TIME THERE ISN'T ANY UPDATES THAT ARE POST-DEADLINE! WE ARE DOOMED, WE DON'T HAVE ANYTHING
+      ELSE TO RIOT ABOUT ANYMORE!`
+  },
+  {
+    id: "ae654",
+    text: "I am thoroughly suprised people are actually following the newsticker message format."
+  },
+  {
+    id: "ae655",
+    text: "if player_click() = false: when player_click() = true update paperclip() to paperclip() + 1"
+  },
+  {
+    id: "ae656",
+    text: `7 balancing be like: AM^1000 is unbalanced? Just softcap AM at ee100 to ^e-100!`
+  },
+  {
+    id: "ae657",
+    text: `Play the tester build, which doesn't crash your game every second 👎 Play 7's private dev build and complain about bugs 👍`
+  },
+  {
+    id: "ae658",
+    text: "Update 0.2.3.1 released: Contingency effect is now x1e9e15. Cry about it."
+  },
+  {
+    id: "ae659",
+    text: "Fun fact: 0.3 will contain [REDACTED], [REDACTED], and [REDACTED]."
+  },
+  {
+    id: "ae660",
+    text: "Fun fact: 0.3 will contain [bug], [bug], and [bug]."
+  },
+  {
+    id: "ae661",
+    text: "Fun fact: 0.3 will contain , and ."
+  },
+  {
+    id: "ae662",
+    text: "Update 0.4729434372 part 7271: added blaze rods"
+  },
+  {
+    id: "ae663",
+    text: "Update 1.0 dropped and it has... uhhhhhh.. hey can someone send me the changelog again?"
+  },
+  {
+    id: "ae664",
+    text:
+      `I TRIED TO IMAGINE 1e1000 IMAGINARY MACHINES!!! (Gone WRONG!!!)          1 view        
+      0 likes          3000 Dark Matter Annihilations`
+  },
+  {
+    id: "ae665",
+    text: "Unfortunately, this news message has been hidden for now due to how there is hidden lore of-"
+  },
+  {
+    id: "ae666",
+    text: "PELLE HAS CLAIMED THIS NEWS TICKER MESSAGE."
+  },
+  {
+    id: "ae667",
+    get text() {
+      return `<span>I wonder if you can get a celestial role by </span><span style='text-decoration: line-through'>spam
+      pinging seven lol</span><span> being a celestial</span>`
+    }
+  },
+  {
+    id: "ae668",
+    text: "Fun fact: the reason Seven has been giving less kekw reactions is because Pelle tarriffed it by 10000000 dark matter"
+  },
+  {
+    id: "ae669",
+    text:
+      `Maybe we wouldn't have such long newstickers if Hevi didn't make the newsticker scroll. Look at FE000000! Very short
+      newstickers, and no scrolling! Not like that game has very good newstickers... we are so much better! But yet,
+      this newsticker is just blocking it all by blabbering random stuff that doesn't even make sense to 99.999% of the world.
+      Why are we doing this? Why are you making so much antimatter down there? WHY AM I STUCK IN THE NEWSTICKER?!?!?`
+  },
+  {
+    id: "ae670",
+    text:
+      `Manual breathing, Manual blinking, Your toes are touching, You can feel your heartbeat, Your clothes are touching your skin,
+      your tongue is uncomfortable, your itchy somewhere`
+  },
+  {
+    id: "ae671",
+    text: "At the anti-crossroads, don't turn at all since you will probably be annihilated before you can make a choice."
+  },
+  {
+    id: "ae672",
+    text: "Hey guys today I will be sh!@ing on antimatter remember to like and subscribe"
+  },
+  {
+    id: "ae673",
+    text: 
+      `Antimatter Dimensions: Perfect Undefined Atomic Dark Smooth Free Unoriginal Puzzling Resimplified Legendary Vis Space
+      Endgame Redemption Reward FASTERER Rewrite NGUD++++ releasing in December 12, 2030!`
+  },
+  {
+    id: "ae674",
+    text: "We are still waiting on that amalgam mod"
+  },
+  {
+    id: "ae675",
+    text: 
+      `Hey guys. This seems like a very cool news ticker to add "HELLO GAME, IF YOU SEE THIS THE NEWS TICKER GOT
+      ADDED EZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ" sorry what was that`
+  },
+  {
+    id: "ae676",
+    get text() {
+      return `<span>Matter Dimensions, Antimatter Dimensions, Exotic Matter Dimensions, what's next, Dark Matter Dimensions?
+      Oh wait that's just </span><span style='text-decoration: line-through'>hot baddie</span><span> Lai'tela</span>`
+    }
+  },
+  {
+    id: "ae677",
+    text: "EC7? Yeah, I sure hope it does."
+  },
+  {
+    id: "ae678",
+    text: 
+      `"New Super Endgame Bros Deluxe Wii 2 U World 3D All Stars was just announced!"
+      1e7432 likes         2 dislikes           5 hours of newstickers donated          e9e115 shares          
+      1.74e308 subscribers            7574831758228 Endgames`
+  },
+  {
+    id: "ae679",
+    text: 
+      `Prediction markets will replace buying stuff. I want someone to bring kiwis to my house. I make a prediction
+      market about whether someone will deliver 4 kiwis to my doorstep and load $15 into "no". A guy with an e-bike sees
+      it and picks up some kiwis. Before dropping them off on my doorstep, he bets yes. He drops them off. The market
+      resolves to "yes" and he gets $15. Rest in peace, amazon, doordash, ubereats, etc.`
+  },
+  {
+    id: "ae680",
+    text: 
+      `"But like, Why does Ra have to forget every damn time I Endgame??? It is pissing me off." - epic_ducks`
+  },
+  {
+    id: "ae681",
+    text: "Ra sold kids on his old shop thinking it was his upgrades"
+  },
+  {
+    id: "ae682",
+    get text() {
+      return
+        `Breaking news: ${wordShift.wordCycle(["False", "Deity", "Destroyer"])} has a meltdown after only getting
+        9 Antimatter at the start of the game!`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae683",
+    text: 
+      `How to always win sports bets: put giant anvils in one of the goals and bet on the team that isn't blocked from getting points!`
+  },
+  {
+    id: "ae684",
+    text: 
+      `Ello it is me newsticker today I will be ranking reactions that Seven gives to newsticker suggestions
+      number two: thumbs up it is basic and not very good number one: kekw emoji pure perfection ok thanks for watching my
+      newsticker make sure to click and newstick goodbye`
+  },
+  {
+    id: "ae685",
+    text: "Born too late to explore the earth, born too late to explore the Expanse, born just in time to write Endgame newsslop"
+  },
+  {
+    id: "ae686",
+    text: "Antiantimatter Dimensions coming out in anti5 hours!"
+  },
+  {
+    id: "aem687",
+    text: "Dam it someone leaked the Expanse... great now Existance is getting all dirty with the Reality and Endgame shit"
+  },
+  {
+    id: "ae688",
+    text: "Antmatter Dimnsions comng out in 5 hous"
+  },
+  {
+    id: "ae689",
+    text: "Yo bro Pelle is mad did you flirt with Lai'tela?"
+  },
+  {
+    id: "ae690",
+    text: "YES I AM!"
+  },
+  {
+    id: "ae691",
+    text: "Hey, I finally reached the end of the game! Wait.. end.. game.. ENDGAME! THAT'S A PERFECT MOD IDEA!"
+  },
+  {
+    id: "ae692",
+    text: "Anti-Question of the 5th hour: What if Pelle cheated on Lai'tela with Destroyer?"
+  },
+  {
+    id: "ae693",
+    text: "Pelle: DESTROYER, YOU DID THIS TO ME, YOU KILLED ME AGAIN"
+  },
+  {
+    id: "ae694",
+    get text() {
+      return
+        `WHAT IS A ${wordShift.wordCycle(["False", "Deity", "Destroyer"])}? WHAT HAS HE GOT? IF NOT FOR
+        ${wordShift.wordCycle(["DIMENSIONS", "LIFE", "ESSENCE"])}, THEN HE HAS NAUGHT!`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae695",
+    text: "Wait if Endgame has an end does that mean we are gonna get Antimatter Dimensions: Endgame: Endgame"
+  },
+  {
+    id: "ae696",
+    text: "The final Shattered Alternate Expanse: this... is the true Endgame..."
+  },
+  {
+    id: "ae697",
+    text:
+      `FE00000 (we couldn't afford another zero): 1.158e77 is Infinity. Antimatter Dimensions: 1.796e308 is Infinity.
+      Antimatter Dimensions Endgame: YF$@HDSKGFHK@#R&#@FD#EUJUYH@#D*&#F@YFE#& is Infinity.`
+  },
+  {
+    id: "ae698",
+    text:
+      `You are a talented undergrad student. Your anti-professor now explodes due to touching matter. Not knowing how to
+      rebuild him, you make a small program to make Antimatter to 3D print him back to anti-life.`
+  },
+  {
+    id: "ae699",
+    text: "HELP ME EGG KEEPS COPYING MY REACTIONS AJJFJDSJALFKJJKDSFAASDK"
+  },
+  {
+    id: "ae700",
+    text: "Supersonic Seven made the 10th Dimension... does that make Him the 11th Dimension? GET OU-"
+  },
+  {
+    id: "ae701",
+    text: "BREAKING NEWS: GLITCHFISHYS BROKE AD V AGAIN! FANS ARE NOT SURPRISED!"
+  },
+  {
+    id: "ae702",
+    text: "Powered by nothing with a max limit of 1F(1e1.79e308)1E(1e1.79e308)1e9e15"
+  },
+  {
+    id: "ae703",
+    text:
+      `There are 7 types of weather after ENDGAME came, they are Existence, Nobody, Death, Giga-Chad, Apples, Mathematician
+      and Electricity. Hey, this sounds familiar?`
+  },
+  {
+    id: "ae704",
+    text:
+      `Fun fact: the largest number that exists (don't let googology know) is
+      1Z(1E(1.79e308)1e308)1Y(1E(1.79e308)1e308)1X(1E(1.79e308)1e308)1W(1E(1.79e308)1e308)1V(1E(1.79e308)1e308)1U(1E(1.79e308)1e308)1T(1E(1.79e308)1e308)1S(1E(1.79e308)1e308)
+      (just put the rest of the alphabet there) + 1`
+  },
+  {
+    id: "ae705",
+    text:
+      `You have won THE game. Congratulations. Go home, and forget about it all to start NG+ with 2 more thoughts and a few
+      more endings!`
+  },
+  {
+    id: "ae706",
+    text:
+      `How ironic, that your very demise would be in the proximity of some horses. What? You didn't follow that? Just think
+      it over. Think it over...`
+  },
+  {
+    id: "ae707",
+    text: "Maybe the Horse Update was the Celestials we cheated on along the way"
+  },
+  {
+    id: "ae708",
+    text: "Fun fact: the Horse Update"
+  },
+  {
+    id: "ae709",
+    text: "Yahiamouse does NOT tolerate the new AD:E update!"
+  },
+  {
+    id: "ae710",
+    text: "Here is what you’d look like if you were Antimatter or Dark Matter"
+  },
+  (function() {
+    let wasClicked = false;
+    return {
+      id: "ae711",
+      get text() {
+        return "Click here to experience the last moments of your life.";
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        player.options.newUI = false;
+        ui.view.newUI = player.options.newUI;
+        Themes.find("Metro").set();
+        let notation = Notations.all.filter(n => n.isPainful);
+        let select = Math.floor(Math.random() * notation.length);
+        notation[select].setAsCurrent();
+        return this.text;
+      }
+    };
+  }()),
+  {
+    id: "ae712",
+    text: "horsegirl x destroyer"
+  },
+  {
+    id: "aem713",
+    text: "Who the hell cooks chicken wings on a stove?"
+  },
+  {
+    id: "ae714",
+    text:
+      `<a href='https://store.steampowered.com/app/1256670/Library_Of_Ruina/' target='_blank'>Click here to
+      sign up an invitation to a library</a>`
+  },
+  {
+    id: "ae715",
+    text: "The horse is always 5 horses away. Always. Also this feels a bit familiar but I can't put my horse on it."
+  },
+  {
+    id: "ae716",
+    text: "♞"
+  },
+  {
+    id: "ae717",
+    text: "노욘ㅍ눀ㅍ 녾ㄴㅈ ㄴㅎㄴㅎㄴ ㄷ 툖ㄴㅍ죵 둊ㅍ욘 됸ㄴㄷㄷ 영ㅍ둉ㅍㄱ 종ㅍ됻ㅍㅇ - coraen guy"
+  },
+  {
+    id: "ae718",
+    text: "Egg said he was grounded by his mother but he was not"
+  },
+  {
+    id: "ae719",
+    text: "Ground said he was mothered by his egg but not was he"
+  },
+  {
+    id: "ae720",
+    text: "If I'm an Antimatter boy, can you be my Dimensions girl?"
+  },
+  {
+    id: "ae721",
+    text: "We have different types of matter in this game! Antimatter, Matter, Dark Matter, Celestial Matter, and John! (adrian)"
+  },
+  {
+    id: "ae722",
+    text: "John: I don't consent"
+  },
+  {
+    id: "ae723",
+    text: "Turtle vs Snail vs Ra trying to remember the celestials. Who finishes first?"
+  },
+  {
+    id: "ae724",
+    text:
+      `Breaking news: Antimatter Dimensions becomes the new GD top one, as every player who tries to beat it touches
+      Antimatter and explodes!`
+  },
+  {
+    id: "ae725",
+    text: "Disregard the previous news ticket. Whatever it was - is a lie. Oh, and here is a cake for your first Endgame 🎂 !!"
+  },
+  {
+    id: "ae726",
+    text: "Congrats, you are literate!"
+  },
+  {
+    id: "ae727",
+    text: "May your Matters be many, and your Antis few!..."
+  },
+  {
+    id: "ae728",
+    text:
+      `The galaxy autobuyer has been removed due to the horses running it quitting due to thinking that $1 an hour
+      isn't extremely generous`
+  },
+  {
+    id: "ae729",
+    text:
+      `One faithful day, 3 members of the server were chilling after signing up for "testing the game". They were:
+      DavTheGl1tchy0ne, Qwerty, and Glitchy. However, soon enough, an unknown force started to pull them up out of the mortal realm...`
+  },
+  {
+    id: "ae730",
+    text: "THIS IS THE ONLY WAY IT SHOULD'VE ENDED- oh wait, it actually is? Nice."
+  },
+  {
+    id: "ae731",
+    text: "Listen... whoever has my bike, I will find you. GIVE IT BACK NOW, OR FACE THE REAPER CUSIONS!"
+  },
+  {
+    id: "ae732",
+    text: "She antimatter on my dimensions til I Endgame"
+  },
+  {
+    id: "ae733",
+    text:
+      `Tired of playing Antimatter Dimensions: Endgame so much just to get slight buffs at the end of it? Now introducing: T̶̘̚Ḥ̷̽E̵̪͆ ̴̨̖̋͠V̴̳̰̋Ǫ̶͚̅Ī̴̜͙D̷̯͚̍̒!
+      You can now leave your Existence and explore other Existences with stuff such as [INVALID VALUE] dimension, matter,
+      and [REDACTED]! Coming in 5.01 hours!`
+  },
+  {
+    id: "ae734",
+    text: "I SHALL GO BACK TO THE HEIAN ERA"
+  },
+  {
+    id: "ae735",
+    get text() {
+      return `<span style='color: red'>"THIS BLACK HOLE. TO HOLD... ME?" - Slabdrill, seconds before explosion of all dimensions</span>`
+    }
+  },
+  {
+    id: "ae736",
+    text: "Ra, Celestial of Dementia"
+  },
+  {
+    id: "aem737",
+    text: "Roses are red, which is true, But Violets are purple, not fucking blue"
+  },
+  {
+    id: "ae738",
+    text:
+      `If slavery was to be allowed again, nobody could buy Antimatter Dimensions players, as 10 thousand (grams of)
+      antimatter is too costy for any trillionare.`
+  },
+  {
+    id: "ae739",
+    text: "Due to the black hole, the update is now in 1.0e-304 seconds."
+  },
+  {
+    id: "ae740",
+    text: "Jokes on you, I inverted it. Sorry guys!"
+  },
+  {
+    id: "ae741",
+    text: "The two Black Hole's effects have been reduced by 0%."
+  },
+  {
+    id: "ae742",
+    text: `"The -17482nd Dimension doesn't exist" -Hevi, 2000 BC`
+  },
+  {
+    id: "aem743",
+    text: "Maybe the horses are the friends we made along the way.............or some shit like that"
+  },
+  {
+    id: "ae744",
+    text: "THE HORSE UPDATE IS REAL"
+  },
+  {
+    id: "ae745",
+    text: `"So, can we count past infinity? ℵₒ."`
+  },
+  {
+    id: "ae746",
+    text: "emagdnE :snoisnemiD rettamitnA"
+  },
+  {
+    id: "aem747",
+    text: `"Wtf rhymes with purple" - Deleted User`
+  },
+  {
+    id: "ae748",
+    text: "Congatulations! You have played for e9e15 days! (you win an antimatter)"
+  },
+  {
+    id: "ae749",
+    text:
+      `We are currently investigating a technique referred to as “Reality Shifting”, practiced by many. Reports are conflicted on
+      whether or not this is actually a game mechanic.`
+  },
+  {
+    id: "aem750",
+    text:
+      `We are currently in a technology reffered to as "Reality Shitting", practiced by literally no one. Reports are conflicted
+      on whether or not this is going to be added in 0.3.1.`
+  },
+  {
+    id: "ae751",
+    get text() {
+      return `<span style='color: yellow'>"Hey there! If you wanna find my sunken Expanse chest you are gonna have to try
+      better than that!"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style='color: yellow'>"So I was just talking to my brother here, and yeah you are definitely not getting our sunken
+      Expanse chest! Definitely not!"</span><span style='color: red'>"Do I.. even want your Expanse chest? It's not like
+      there's anything to spend expansial fragments on..."</span><span style='color: purple'>"Im ThE OnE WhO
+      TeLlS lIeS"</span><span style='color: yellow'>"Dude. You ruined it."</span><span style='color: red'>"Is that your
+      Expanse?"</span><span style='color: yellow'>"DUDE NO! THEY TOOK EVERYTHING!!! THAT WAS MY ENTIRE EXPANSE SAVINGS
+      DUDE! Oh my god... oh god... oh my god I'm gonna be sick... I'm gonna be sick that was everything OH MY GOD!</span>`
+    }
+  },
+  {
+    id: "ae752",
+    text: "Something something 5 hours 9th Dimensions"
+  },
+  {
+    id: "ae753",
+    text: "Seven forgot to put newsticker in v0.3 lmao"
+  },
+  {
+    id: "ae754",
+    text: "Five nights at Endgame"
+  },
+  {
+    id: "ae755",
+    text: "Seven eight 9 Endgames"
+  },
+  {
+    id: "ae756",
+    text: "Uh oh! Looks like you tried to enter the [INVALID_DECIMAL] Dimension"
+  },
+  {
+    id: "ae757",
+    text:
+      `<span style='animation: a-game-header__antimatter--glow 2s infinite'>
+      Here is what an antimatter galaxy looks like: -->🌌</span>`,
+  },
+  {
+    id: "ae758",
+    text: `"The twelfth dimension doesn't exist" - EccentricExpeditious Eight`
+  },
+  {
+    id: "ae759",
+    text: ">>galactic>>          <<power<<"
+  },
+  {
+    id: "ae760",
+    text: "Rest in piece v0.3... all of the saves are fried, it's almost like there has been something we have been missing..."
+  },
+  {
+    id: "ae761",
+    text: "Antimatter Dimensions when my Dimensions actually matter"
+  },
+  {
+    id: "ae762",
+    text: "Breaking news: AI slop has increased the price of the 9th Dimension by 9.99e9.99e99x!"
+  },
+  {
+    id: "ae763",
+    text:
+      `We have ran out of ideas for the newsticker, so now we must fill it with these placeholder texts. Thank you for
+      playing Endgame!`
+  },
+  {
+    id: "ae764",
+    text: "The 10th dimension is in 3125 hours."
+  },
+  {
+    id: "ae765",
+    text: "The 11th dimension is in 1.9110125979468018e2184 hours."
+  },
+  {
+    id: "ae766",
+    text:
+      `Hello, Antimatter Dimensions: Endgame players. We have noticed a bug involving hyper-inflated antimatter amounts
+      that should not be possible. As such, we have decided to remove antimatter from the game. Have a nice day :)`
+  },
+  {
+    id: "ae767",
+    text:
+      `Good evening, Antimatter Dimensions: Endgame players! Unfortunately, we have to close Antimatter Dimensions:
+      Endgame cause it is closed. The game will be open once we reopen the game! Thank you for your attention, for
+      listening to this attention!`
+  },
+  {
+    id: "ae768",
+    text: "endgame mastery 71 jumpscare"
+  },
+  {
+    id: "ae769",
+    text: "You have 1 matter. Oops, it annihilated."
+  },
+  {
+    id: "ae770",
+    text:
+      `If Imaginary Machines were so damn good, why isn't there Imaginary Machines 2? [FOLLOW-UP SIX MONTHS LATER]
+      "Yeah about that..." -Supersonic Seven, The Dumbest Developer`
+  },
+  {
+    id: "ae771",
+    text: "I broke past e9e15 but the game still has an END, what gives?"
+  },
+  {
+    id: "ae772",
+    text:
+      `EP Gen Detected, Destroyer! Eternity Point Generation is illegitimate and will not be allowed for use in Endgame.
+      Please disable the milestone in order to continue playing.`
+  },
+  {
+    id: "ae773",
+    text: "You wouldn’t download a Galaxy"
+  },
+  {
+    id: "ae774",//"You wouldn't see but this is a balatro news ticker." Thank you for efforts in searching the entire source code to discover the truth behind this news message!
+    text: "You wouldn't see but this is a ####### news ticker."
+  },
+  {
+    id: "ae775",
+    text: "Sir, this is a newsticker."
+  },
+  {
+    id: "ae776",
+    text: "Every copy of Antimatter Dimensions: Endgame will be personalized soon."
+  },
+  {
+    id: "ae777",
+    get text() {
+      return `<span style='color: var(--color-pelle--secondary)'>Finally. After 7 years, I have found it. THE EPIC SCROLL
+      OF ENDGAME! </span><span style='color: var(--color-endgame)'>This is not the true
+      Endgame. </span><span style='color: var(--color-pelle--secondary)'>...WHAT??? What's that supposed to
+      mean??? </span><span style='color: var(--color-elemental--base)'>Hello
+      Destroyer. </span><span style='color: var(--color-pelle--secondary)'>Wha- who are
+      you? </span><span style='color: var(--color-elemental--base)'>I am Supersonic Seven, the Elemental of Endgame.
+      You have lost your way. Go now, to the End of All Games. The True
+      Endgame. </span><span style='color: var(--color-pelle--secondary)'>But how am I supposed to get there? I thought
+      the True END was but a myth! </span><span style='color: var(--color-elemental--base)'>It is not a myth, yet a thing
+      hidden in time from the eyes of mortal men, as to protect them from what lies
+      beyond. </span><span style='color: var(--color-pelle--secondary)'>But I have come all this way! And yet you say I am
+      still mortal? </span><span style='color: var(--color-elemental--base)'>My child, you have transcended mortality.
+      Thus is why I tell you now. </span><span style='color: var(--color-pelle--secondary)'>So how must I reach
+      it? </span><span style='color: var(--color-elemental--base)'>There is only one way you may reach it. You have
+      completed the Endgame, but your journey is far from over. You must battle through the Great Expanse, mastering the
+      six Elements, Breaking Reality itself, then mastering all Existence, all to reach the End of Time. And what lies beyond
+      that, that is where your true goal lies. </span><span style='color: var(--color-pelle--secondary)'>And that
+      is? </span><span style='color: var(--color-elemental--base)'>I should not speak of it. Even the mention of his name
+      causes all Existence to shudder. I am the only one who can match him in power. The trials you must face, if you would
+      survive them, would grant you enough power to match him as
+      well. </span><span style='color: var(--color-pelle--secondary)'>And all this prepares me to face...
+      Him? </span><span style='color: var(--color-elemental--base)'>Yes. My old friend, blinded by his ambition. I am glad you
+      did not do the same. </span><span style='color: var(--color-pelle--secondary)'>And his domain... the Final Challenge?
+      The only thing keeping me from the True END? </span><span style='color: var(--color-elemental--base)'>Yes. Once
+      there, that is the only thing blocking you from your ultimate
+      goal. </span><span style='color: var(--color-pelle--secondary)'>Then what is the name of his domain, that I may be
+      prepared? </span><span style='color: var(--color-elemental--base)'>His domain has no name, except in referrence to what
+      I made of it when I first defeated him. The singular Reality I left behind, the only safe place in which you can
+      continue to exist. And the name of that place is- </span><span style='color: red'>Hello, ${player.username}. You really
+      thought you could learn how to defeat me from the Elemental's news ticker? How... pathetic. You will never know of
+      this... "safe Reality". You will never know of my domain, until you are trapped there with all the hope drained from
+      your miserable soul. You will never know the path, except the path of the strings I choose to pull. And you will never
+      know my name. For the hearing of it will kill you long before you reach me, and I want to be there to watch you
+      BLEED. [CONNECTION DISRUPTED]</span>`
+    }
+  },
+  {
+    id: "ae778",
+    text: "FIRE IN THE HOLE"
+  },
+  {
+    id: "ae779",
+    text: "Don't be an idiot! Instead, be an anti-smart!"
+  },
+  {
+    id: "ae780",
+    text: "Don't be made of matter, be made of anti-matter!"
+  },
+  {
+    id: "ae781",
+    text: "Pelah, the anti-honse is here."
+  },
+  {
+    id: "ae782",
+    text: "Shhh no it's not no leaking"
+  },
+  {
+    id: "ae783",
+    text: "Fun Fact: Antimatter Dimensions: Endgame isn't real. Please wake up, we love you..."
+  },
+  {
+    id: "ae784",
+    text: "What is matter, if not antimatter perservering?"
+  },
+  {
+    id: "ae785",
+    text: "You shouldn't do your college work"
+  },
+  {
+    id: "ae786",
+    text: "Seven forgot about the newsticker AGAIN, now we have to wait for v1.0 for a MASSIVE newsdump! You know what else is massive?"
+  },
+  {
+    id: "ae787",
+    text: "What if the antiworld was made of antipudding"
+  },
+  {
+    id: "ae788",
+    text: "Many have talked about horses, but do they talk about Horsemen? No, not centaurs, maybe about 1000th one a bit..."
+  },
+  {
+    id: "ae789",
+    text: "WHY? BECAUSE I'M CRAZY!"
+  },
+  {
+    id: "ae790",
+    text: "If you wish to defeat me, train for another 1e300 years!"
+  },
+  {
+    id: "ae791",
+    text: "The 9th dimension is in FNaNeInfinityENaNeInfinity hours."
+  },
+  {
+    id: "ae792",
+    text: "this is the evil celestial song"
+  },
+  {
+    id: "ae793",
+    text: "You should have beaten the game, but you don't"
+  },
+  {
+    id: "ae794",
+    text:
+      `Fun fact of the 5 hour period! Did you know that
+      %^$#^#$$%@@^$@#^@$#^%$#^$#^$#$#%@$^#^@%#D%&$&$%A#$#$@$$V$#@%$%#I$$#@#$@$#D$##$%$#`
+  },
+  {
+    id: "ae795",
+    text: "Shattered Reality? The Disruptor? Come on, let's go Interreality, the update is out!"
+  },
+  {
+    id: "ae796",
+    text: "I (18m) killed my enemy (25m) 150 times. Am i the ###hole?"
+  },
+  {
+    id: "ae797",
+    text: "I (18m) killed my enemy (25m) 150 times. Am i the ###hole?"
+  },
+  (function() {
+    let wasClicked = false;
+    return {
+      id: "ae798",
+      get text() {
+        return "Click here to skip to the current endgame.";
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        if (PlayerProgress.endgameUnlocked()) Tab.endgame.show(true);
+        return this.text;
+      }
+    };
+  }()),
+  {
+    id: "ae799",
+    text: "I (18m) killed my enemy (25m) 150 times. Am i the ###hole?"
+  },
+  {
+    id: "ae800",
+    get text() {
+      return
+        `WHY AM I THE FINAL ${wordShift.wordCycle(["CELESTIAL", "MONARCH", "CALAMITY"])} OF THE VANILLA? BECAUSE I HAVE 10 MILLION POWER
+        IN ${wordShift.wordCycle(["RISE", "ASCENDING", "EVOLUTION"])} OF ${wordShift.wordCycle(["KINGDOMS", "COUNTRIES", "HUMANITY"])}!`
+    },
+    dynamic: true
+  },
+  (function() {
+    let wasClicked = false;
+    return {
+      id: "ae801",
+      get text() {
+        return "matrr";
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        throw new Error("matrt");
+        return this.text;
+      }
+    };
+  }()),
+  {
+    id: "ae802",
+    text:
+      `New feature! Now you can set your tick rate to 1.79e-308! You will need an STD (Stateless Tachyon Drive) to use this
+      feature, but don't worry! If you don't have an STD, then you can still use the new 1.79e308 tick rate!`
+  },
+  {
+    id: "ae803",
+    text: "It's not lag, you just need to download more RAM"
+  },
+  {
+    id: "ae804",
+    text: "Fun fact: we Testers can't even make newstickers about the content in the update that the newsticker will be added in!"
+  },
+  {
+    id: "ae805",
+    text: 
+      `CBF Detected, Loser! Cl- CBF Detected, Loser! Detected, Loser! Cl- CBF Detected, Loser! Detected, Loser! Detected,
+      Loser! Cl- [MESSAGE SUSPENDED]`
+  },
+  {
+    id: "ae806",
+    text: "Living in the 8th Dimension must be crazy because you need 256x more volume to make something 2x bigger"
+  },
+  {
+    id: "ae807",
+    text: "Tap tap click click heroes hacks 100% real infinite taps hack"
+  },
+  {
+    id: "ae808",
+    text: "Living in the -8th Dimension must be crazy because you need 256x more volume to make something 2x smaller"
+  },
+  {
+    id: "ae809",
+    text: "CBF Detected Loser! Click Between Fra- how about you CBF detect some bi-"
+  },
+  {
+    id: "ae810",
+    text: "Living in the -8th Dimension must be crazy because you need 0.039x more volume to make something 2x bigger"
+  },
+  {
+    id: "ae811",
+    text: "Living in the Dimension must be crazy because you need more volume to make something bigger"
+  },
+  {
+    id: "ae812",
+    text: "Living in the 9th Dimension must be crazy because it doesn't exist"
+  },
+  {
+    id: "ae813",
+    text: 
+      `Living in the 0th Dimension isn't possible due to the fact that life requires the Existence of more than one thing
+      in a Universe`
+  },
+  {
+    id: "ae814",
+    text: "Living must be crazy because you need more"
+  },
+  {
+    id: "ae815",
+    text: 
+      `Living in an Imaginary Dimension must be crazy because I don't even know how giving something more volume
+      would even work?? Does it just rotate the object???`
+  },
+  {
+    id: "ae816",
+    text: "Living crazy volume"
+  },
+  {
+    id: "ae817",
+    text: "Living Dimension crazy volume bigger"
+  },
+  {
+    id: "ae818",
+    text: "Check Steam"
+  },
+  {
+    id: "ae819",
+    text: "Do NOT use Google Translate on Antimatter Dimensions- gets Associae'd and Innsin'd"
+  },
+  {
+    id: "ae820",
+    text: "Living must be crazy"
+  },
+  {
+    id: "ae821",
+    text: "   I   must be       because     need     "
+  },
+  {
+    id: "ae822",
+    text: "living"
+  },
+  {
+    id: "ae823",
+    text: "Dying in a negative Dimensional time mustn't be crazy"
+  },
+  {
+    id: "ae824",
+    text: "Living in the 256th Dimension must be crazy because you need 1.16e77 times more volume to make something 2x bigger"
+  },
+  {
+    id: "ae825",
+    text: "Living in the 1024th Dimension must be crazy because you need Infinite times more volume to make something 2x bigger"
+  },
+  {
+    id: "ae826",
+    text: "Living in the Infiniteth dimension must be crazy because you need 1e3.01e307 times more volume to make something 2x bigger"
+  },
+  {
+    id: "ae827",
+    text: "Living in the Infiniteth dimension must be crazy because you need END times more volume to make something 2x bigger"
+  },
+  {
+    id: "ae828",
+    text: "Living in the Endgameth Dimension must be crazy because you need Celestial times more volume to make something Doomed bigger"
+  },
+  {
+    id: "ae829",
+    text: "Living in the f_ω³+1st Dimension must be crazy because you need [Undefined] times more volume to make something 2x bigger"
+  },
+  {
+    id: "ae830",
+    text: "Living in the News Dimension must be crazy because you need 2x more tickers to make a ticker 2x bigger"
+  },
+  {
+    id: "ae831",
+    text: 
+      `Living in the 0th Dimension must be crazy because you need 1x more volume to make something 2x bigger. Also please I'm
+      stuck in a time loop-`
+  },
+  {
+    id: "ae832",
+    text: "Living in the Dimension volume news slop Dimension must be crazy because you need 0.1x more tickers to make 2x more tickers"
+  },
+  {
+    id: "ae833",
+    text: "Living in the -True Infinityth Dimension must be crazy because you need 0x more volume to make something Infinitely bigger"
+  },
+  {
+    id: "ae834",
+    text: "Living in the Ping Dimension must be crazy because you need P3 milleseconds for your actions to show up"
+  },
+  {
+    id: "aem835",
+    get text() {
+      return `What the fuck did you just say about me, you EVIL DESTROYER? I'll have you know I graduated top of my class
+      in EVIL Seals, and I've been involved in numerous EVIL raids on the 9th Dimension, and I have over 300 NNnNeMI-NNnNe
+      confirmed kills. I am trained in EVIL warfare and I'm THE EVIL sniper in the entire EVIL Galactic armed forces.
+      You are nothing to me but just another EVIL. I will wipe you the fuck out with EVIL mashing the likes of which has
+      never seen before in this dimension, mark my EVIL words. You think you can get away with saying that shit to me
+      over the EVIL network? Think again, DEITY. As we speak I am contacting my EVIL network of autobuyers across the
+      galaxy and your IP is being traced right now so you better prepare for the Big Crunch, FALSE. The Big Crunch that
+      wipes out the EVIL thing you call your ${wordShift.wordCycle(["CONFLICTS", "BATTLES", "ENDS"])} You're fucking dead,
+      DESTROYER. I can be anywhere, anytime, and I can kill you in over seven 😠💩  EVIL ways, and that's just with my mouse.
+      Not only I am extensively trained dimension shift combat, but I have access to the entire aresnal of the EVIL Marine
+      Corps and I will use it to its full extent to wipe your EVIL ${wordShift.wordCycle(["DESTINY", "MANDATE", "GOALS"])} off
+      the face of the ${wordShift.wordCycle(["UNIVERSE", "REALITY", "INEVITABLE"])}, you little FALSE. If only you could
+      have known what unhevi retribution your "${wordShift.wordCycle(["AMUSING", "CONFUSED", "LAUGHTER"])}" comment was about
+      to bring down upon you, maybe you would have held you EVIL tongue. but you couldn't, you didn't, and now you're buying
+      until 10, you EVIL DEITY. I will ${wordShift.wordCycle(["ALTER", "REVERSE", "MANIPULATE"])} antimatter
+      ${wordShift.wordCycle(["LESSER", "DEITY", "MONARCH"])} all over you and you will
+      ${wordShift.wordCycle(["INFINITE", "FOREVER", "ETERNAL"])} BE in it. You're fucking DOOMED, DESTROYER.`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae836",
+    get text() {
+      return `Petah the ${wordShift.wordCycle(["horse", "honse", "hose"])} is here`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae837",
+    get text() {
+      return `${wordShift.wordCycle(["Peter", "Petah", "Peta"])} the ${wordShift.wordCycle(["horse", "hos", "honse"])} is here`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae838",
+    text: `Why is it called "Logarithm" notation? Shouldn't it be called Exponential Notation?`
+  },
+  {
+    id: "ae839",
+    text:
+      `"YEEEEEEEEEEEEEEEEEEEAH, LET'S GO!!!!!! GAME BRICKED, CALL YOUR DOCTOR FOR THE MENTAL ILLNESS!" -Hepta, the best Doctor in twon`
+  },
+  {
+    id: "ae840",
+    text:
+      `Foolish newbies - I have read all of the wiki - therefore I know ALL of the new content that is going to come out!
+      Your Endgame knowledge can never compare to mine! Mwahahahaha - who the fuck is the Ethereal?`
+  },
+  {
+    id: "ae841",
+    text:
+      `Please start grammar-checking your suggestions, it is okay to edit your messages later! (edited) (edited)
+      (edited) (edited) (edited) (edited)`
+  },
+  {
+    id: "ae842",
+    get text() {
+      return `You are here ${wordShift.wordCycle(["infinite", "forever", "eternal"])} or something I don't know`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae843",
+    get text() {
+      return `You are here ${wordShift.wordCycle(["infinite", "forever", "eternal"])} or something I don't know
+      (Original Comment by coolbeans123456789)`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae844",
+    get text() {
+      return `You are here ${wordShift.wordCycle(["infinite", "forever", "eternal"])} or something I don't know
+      (Original Comment by coolbeans123456789) (Stolen by thetruegdplaybutton)`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae845",
+    get text() {
+      return `You are here ${wordShift.wordCycle(["infinite", "forever", "eternal"])} or something I don't know
+      (Original Comment by coolbeans123456789) (Stolen by thetruegdplaybutton) (Original comment by coolbeans123456789)`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae846",
+    text: "NEW LEAK: Alpha will have layers"
+  },
+  {
+    id: "ae847",
+    text: "IF YOU GUYS DONT SHUT UP, I WILL LEAK ENDGAME! AS INFACT, THANOS DOES DIE!"
+  },
+  {
+    id: "ae848",
+    text:
+      `THE END IS NEVER THE END IS NEVER THE END IS NEVER THE END IS NEVER THE END IS NEVER THE END IS NEVER THE END IS NEVER
+      THE END IS NEVER THE END IS NEVER THE END IS NEVER THE END`
+  },
+  {
+    id: "ae849",
+    text: "Simulation can't run any faster with current settings."
+  },
+  {
+    id: "ae850",
+    text: "If you leak the beta 10 times, you can purchase the First Leak Dimension, which automatically leaks the beta for you."
+  },
+  {
+    id: "ae851",
+    text: "NEW LEAK: Alpha will exist"
+  },
+  {
+    id: "ae852",
+    text: "Plubert, the 0.28⁹th Celestial"
+  },
+  {
+    id: "ae853",
+    text: "It's not matter unless its from the Matre region of France, otherwise its just sparkling quarks"
+  },
+  {
+    id: "ae854",
+    text: "Antimatter Antimony should be called Mony"
+  },
+  {
+    id: "ae855",
+    text:
+      `It appears that you are producing matter on purpose again. I sent a note and email to your anti-teacher and anti-parent
+      letting them know. I believe you can do this, but you are going to have to do your part.`
+  },
+  {
+    id: "ae856",
+    text: "KIDS, WHAT I'M ABOUT TO DO IS EXTREMELY CELESTIALLY, LITERALLY ONLY CELESTIALS CAN DO IT"
+  },
+  {
+    id: "ae857",
+    text:
+      `According to all known laws of aviation, there is no way a bee should be able to fly. Its wings are too small to get its
+      fat little body off the ground. The bee, of course, flies anyway because bees don't care what humans think is impossible.`
+  },
+  {
+    id: "ae858",
+    text: "I wonder how much longer we can keep up these normal-ish newstickers before everyone goes insane"
+  },
+  {
+    id: "ae859",
+    text: "Is AD:Endgame possible with accurate hitboxes?"
+  },
+  {
+    id: "ae860",
+    text:
+      `They shall be my finest Celestials, these men who give of themselves to me. Like clay I shall mould them and in the furnace
+      of war I shall forge them. They shall be of iron will and steely sinew. In great armour I shall clad them and with the
+      mightiest weapons shall they be armed. They will be untouched by plague or disease; no sickness shall blight them. They
+      shall have such tactics, strategies and machines that no foe will best them in battle. They are my bulwark against the
+      Destroyer. They are the Defenders of the Dimensions. They are my Celestials... and they shall know no fear.`
+  },
+  {
+    id: "ae861",
+    text:
+      `Oh boy I sure do hope there isn't a mod that adds 3 more layers to Antimatter Dimensions, 2 more Celestials, and a new
+      Deity called the Elemental, that would be horrible!`
+  },
+  {
+    id: "aem862",
+    text:
+      `To complete fuck shit challenge 6x3, use this extremely specific loadout of ducks and use this extremely specific
+      tree both of which are extremely annoying to load but you only have 0.00431 import slots (which gets softcapped
+      to 0.000000001 after unlocking fuck shit challenges) and THEN set your dumbass autobuyer settings to the stupidest
+      shit possible because fuck shit challenge 6 gives you a 2589024890983984503x boost to worms if you set your
+      autobuyer to that because why the actual fuck not`
+  },
+  {
+    id: "ae863",
+    text: "It would be so matter, it would be so anti"
+  },
+  {
+    id: "ae864",
+    text: "Animater Dimensons: Endame"
+  },
+  {
+    id: "ae865",
+    text: "r. r. r. r. r. r. r. r. r. r. s."
+  },
+  {
+    id: "ae866",
+    text: "Animater Dimensons: Tyop Upadte"
+  },
+  {
+    id: "ae867",
+    text: "Antimatter Dimensions New Game+3 vs Antimatter Dimensions Endgame+3"
+  },
+  {
+    id: "ae868",
+    text: "Hello your newsticker have virus"
+  },
+  {
+    id: "ae869",
+    text:
+      `To complete fuck shit challenge 6x3, use this extremely specific loadout of ducks and use this extremely specific
+      tree both of which are extremely annoying to load but you only have 0.00431 import slots (which gets softcapped
+      to 0.000000001 after unlocking fuck shit challenges) and THEN set your dumbass autobuyer settings to the stupidest
+      shit possible because fuck shit challenge 6 gives you a 2589024890983984503x boost to worms if you set your
+      autobuyer to that because why the actual fuck not`
+  },
+  {
+    id: "ae870",
+    text:
+      `BREAKING NEWS: AD: HD is currently being developed and is releasing in uhhhh... six hours? Yeah probably that should
+      probably be enough time just let me get some coffee first`
+  },
+  {
+    id: "ae871",
+    text: "Breaking News: President Anti D Matter has renamed the Gulf of Mexico to the Gulf of Infinity"
+  },
+  {
+    id: "ae872",
+    text: "Seven casually forgetting about the newsticker for the third time:"
+  },
+  {
+    id: "ae873",
+    text: ">Mfw I'm not on 4chan but I still use it's quirks."
+  },
+  {
+    id: "ae874",
+    text: "Petition to get horse update it's own page on know your meme"
+  },
+  {
+    id: "ae875",
+    text: "Yeah, why not?"
+  },
+  {
+    id: "ae876",
+    text: "Don't antimatter at night!"
+  },
+  {
+    id: "ae877",
+    get text() {
+      return `${wordShift.wordCycle(["Anti", "Opposite", "Bad"])}${wordShift.wordCycle(["matter", "objects", "space"])}
+      ${wordShift.wordCycle(["Dimensions", "Spacetime", "Continuum"])}: ${wordShift.wordCycle(["Endgame", "Done", "No More"])}`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae878",
+    text: "She's in love with the anticoncept"
+  },
+  {
+    id: "ae879",
+    text: "hi"
+  },
+  {
+    id: "ae880",
+    text: "New game, same great timewalls!"
+  },
+  {
+    id: "ae881",
+    text: "Please submit your face or ID to prove you are over -1.8343e843 years old to play Antimatter Dimensions."
+  },
+  {
+    id: "ae882",
+    text: "AD: Endgame v1.0 will inclu"
+  },
+  {
+    id: "ae883",
+    text: "Roses are red, violets are blue, Seven is good, Horse Update is true."
+  },
+  {
+    id: "ae884",
+    text:
+      `Fun fact: Horse Update part 6.24e302 (aka 2.6) will include the be- Connection terminated. There is no such thing as
+      a bee layer, there never was, and there will never be.`
+  },
+  {
+    id: "ae885",
+    text: "You are now Antimattering manually"
+  },
+  {
+    id: "ae886",
+    text: "Woah look at that the antimatter pillow tower is complete WAIT DONT TOUCH I-"
+  },
+  {
+    id: "ae887",
+    text: "The kekw drought of v1.0 seriously needs to be studied"
+  },
+  {
+    id: "ae888",
+    text: "You have 1.79e-308 less antimatter now."
+  },
+  {
+    id: "ae889",
+    text: "You have 1.79e-308 less antimatter now."
+  },
+  (function() {
+    let wasClicked = false;
+    const normal = "Click to view an antimatter telescope to view the anti-stars in the antimatter galaxy!";
+    const clicked = "⭐⭐⭐⭐🌌";
+    return {
+      id: "ae890",
+      get text() {
+        return wasClicked ? clicked : normal;
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        return this.text;
+      }
+    };
+  }()),
+  {
+    id: "ae891",
+    text: "It seems today, that all you see is galaxies in movies, and boosts on TV"
+  },
+  {
+    id: "ae892",
+    text: "He made a statement so anti that even his dog annihalated"
+  },
+  {
+    id: "ae893",
+    text: 
+      `I'm not taking my Time Studies off, I am TS O'Toole! Hey! Take those Time Studies off! NO! I said take them off!
+      NO! Ahh, let him go. We'll never catch him! Not with this production! I didn't take my Time Studies off, I am TS O'Toole!`
+  },
+  {
+    id: "ae894",
+    get text() {
+      return `<span style='color: blue'>"Hello I am a genie I will give you 4 wishes because I am
+      quirky" </span><span style='color: cyan'>"I wish every word was 4 letters long" </span><span style='color: blue'>"Your
+      wish isss grnt" </span><span style='color: cyan'>"IIII wish evry word ened with nsns" </span><span style='color: blue'>"Yons
+      wins isns grns" </span><span style='color: cyan'>"IIns wins evns wons stns wins sans" </span><span style='color: cyan'>"Sans
+      sans sans sans" </span><span style='color: cyan'>"Sans sans sans sans sans sans sans
+      sans" </span><span style='color: cyan'>"Sans sans sans sans"</span>`
+    }
+  },
+  {
+    id: "ae895",
+    text: "I like my cheese anti, bruh"
+  },
+  {
+    id: "ae896",
+    text: "I like big butts and I cannot lie. my brother here likes small butts and cannot tell the truth. You have 3 questions."
+  },
+  {
+    id: "ae897",
+    text: "I have no matter, and I must anti"
+  },
+  {
+    id: "ae898",
+    text: "Imagine not having the Mending layer!!! This messag- OH SH- F- HELP!!!!!"
+  },
+  {
+    id: "ae899",
+    get text() {
+      return `<span style='color: cyan'>"Hello everyone this is the glitchy podcast episode 1. Today we are gonna ask: why do
+      all of the commision artists draw your OC in the dommy mommy pos- OH SH-" tumbling noises</span>`
+    }
+  },
+  {
+    id: "ae900",
+    text: "Mr sandman, sand me a man"
+  },
+  {
+    id: "ae901",
+    text: "The one who is running the show but it's the family guy intro"
+  },
+  {
+    id: "ae902",
+    text: "So in fiction, if heaven has angels, and hell has demons, what beings do the void have?"
+  },
+  {
+    id: "ae903",
+    get text() {
+      return `<span style='color: cyan'>"Hello everyone this is the glitchy podcast episode 2. Today we are gonna ask:
+      what IS that one formal femboy attire? Play button, you know what I'm talking about. The one fragile femboy static
+      gif that has an extremely concerning title." </span><span style='color: green'>"Wait how am I
+      here" </span><span style='color: cyan'>"ANSWER IT"</span>`
+    }
+  },
+  {
+    id: "aem904",
+    text: "The profanity newstickers are less common than I thought. Why the fuck is it that way?"
+  },
+  {
+    id: "ae905",
+    get text() {
+      return `<span>Petah.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>The horse is here.</span>`
+    }
+  },
+  {
+    id: "ae906",
+    text: "BREAKING NEWS: Seven hasn't kekw reactioned any newstickers for 2 months!!! WE ARE ALL GOING TO DIE!!!!!!!!!!"
+  },
+  {
+    id: "aem907",
+    text: "Found some mf talking about 6 hours broken heart emoji"
+  },
+  {
+    id: "ae908",
+    text: "Rest in peace my Pelle he got hit by a generator"
+  },
+  {
+    id: "ae909",
+    get text() {
+      return `<span>Event: Free 1e1e1e1e1e1e1e6 AM, IP, and EP happening right now! Claim yours now!</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span>Location: The 9th Dimension</span>`
+    }
+  },
+  {
+    id: "ae910",
+    text: "3.9 x 10 ^ (1.50 x 10 ^ 15) buried, 0 found"
+  },
+  {
+    id: "ae911",
+    text:
+      `<i>Antimatter Dimensions: Endgame</i> has been sold to alemaninc Inc. In unrelated news, after a recent
+      update it now takes over a year to reach Eternity.`
+  },
+  {
+    id: "ae912",
+    text: "Please help I am stuck on the other side of the newsticker I don't wanna fall off help me"
+  },
+  {
+    id: "ae913",
+    get text() {
+      return `<span style='color: cyan'>"Hello welcome back to the glitchy podcast episode 3, we had to
+      reshoot." </span><span style='color: gray'>"Yeah because you killed Gary you son of
+      a-" </span><span style='color: cyan'>"Shut up Bill I will kill you. Anyways, the question today is why is antimatter
+      so weird-looking? Today we have an anti-scientist here and we are gonna interview
+      them." </span><span style='animation: a-game-header__antimatter--glow 3s infinite'>"Hello glitchy. Nice having
+      me on your podc-" </span><span>(They all soon died after due to annihilation)</span>`
+    }
+  },
+  {
+    id: "ae914",
+    get text() {
+      return `<span style='color: cyan'>"Hello welcome to the glitchy podcast episode 5. The question today is why does
+      Endgame have Celestial Dimensions when they suc-" </span><span style='color: yellow'>"GET OVER HERE YOU PIECE OF SH-"</span>`
+    }
+  },
+  {
+    id: "ae915",
+    text: "19 hour Antimatter Dimensions update. Who wants it?"
+  },
+  {
+    id: "ae916",
+    text: "Those who DON'T know. There are too many people that know. DON'T know."
+  },
+  {
+    id: "ae917",
+    text: "CALLING JOHN A ANTIMATTER AT 3 AM (GONE HORRIBLY WRONG)"
+  },
+  {
+    id: "ae918",
+    text: "5 NaNeFinities until the update"
+  },
+  (function() {
+    let wasClicked = false;
+    const normal = "Click here to gain 1e1e1.79e308 antimatter!!!!! (10^102% real)";
+    const clicked = "Ladies and gentlemen... WE GOT 'EM!";
+    return {
+      id: "ae919",
+      get text() {
+        return wasClicked ? clicked : normal;
+      },
+      reset() {
+        wasClicked = false;
+      },
+      onClick() {
+        if (wasClicked) return undefined;
+        wasClicked = true;
+        return this.text;
+      }
+    };
+  }()),
+  {
+    id: "ae920",
+    get text() {
+      return `<span style='color: cyan'>"Hello welcome to the glitchy podcast episode 6. The question today is when will people
+      stop leaking the dev build? I'm seriously concerned." </span><span style='color: green'>"NEVER
+      HAHAHAHHAHAHHAHAHAHAHAH" </span><span style='color: cyan'>"Dude get out of my
+      office" </span><span style='color: green'>"Fine...." </span><span style='color: cyan'>"So the lesson today is to never
+      leak the dev build, otherwise we will use the a**hole expand-</span>`
+    }
+  },
+  {
+    id: "ae921",
+    text: "Fun fact: I got a first degree burn from a bowl of mac and cheese once"
+  },
+  {
+    id: "ae922",
+    text: "Me when you just lost the game:"
+  },
+  {
+    id: "ae923",
+    text: "Me whgen endgmae"
+  },
+  {
+    id: "ae924",
+    text: "Newsticker channel dead"
+  },
+  {
+    id: "ae925",
+    text: `"We're sorry to hear that you hate 7." - Elys`
+  },
+  {
+    id: "ae926",
+    get text() {
+      return `<span>(Walking through and then tripping on a lamp) </span><span style='color: blue'>"AAAH-" </span><span>(genie
+      comes out) </span><span style='color: cyan'>"Hello you have 1 wish its because of
+      inflation" </span><span style='color: blue'>"Alright I wish everyone except me had their 's' and 'g's
+      swapped." </span><span style='color: cyan'>"Alrist sranted" </span><span>(going to Gex's
+      house) </span><span style='color: blue'>"Hello Gex I have a favor for you" </span><span style='color: green'>"Yeah what ig
+      it" </span><span style='color: blue'>"You should say your name" </span><span style='color: green'>"You think I
+      ghould gay s-" </span><span>(Endgame branded nuke drops onto Gex) </span><span style='color: blue'>"Hehehehehe"</span>`
+    }
+  },
+  {
+    id: "ae927",
+    text:
+      `Give a man a fish, he will eat for a day. Teach a man to fish, drown him due to the fact that you didn't give him
+      a fishing rod.`
+  },
+  {
+    id: "ae928",
+    get text() {
+      return `<span>OH NO ITS EVIL SEVEN </span><span style='color: red'>"Hahahaha I will get you" </span><span>NOOOOOOOOO</span>`
+    }
+  },
+  {
+    id: "ae929",
+    text: "Fun fact: the moon landing was staged but the film crew wanted it to be more accurate so they asked NASA to film on site"
+  },
+  {
+    id: "ae930",
+    get text() {
+      return `<span>"NOOOO EVIL ORBSMAN DONT GO!!!!" </span><span style='color: red'>"I need to. My planet needs me."</span>`
+    }
+  },
+  {
+    id: "ae931",
+    text: "Fun fact: killing 31,646 people would save the same amount of oxygen as planting 20 million trees"
+  },
+  {
+    id: "ae932",
+    text: `I accidentally said "big" instead of "grande" while at Starbucks and they took me behind the store and shot me in the leg`
+  },
+  {
+    id: "ae933",
+    text: "Aw man Lois this is worse than the time that we were in an Endgame newsticker"
+  },
+  {
+    id: "ae934",
+    text: "Anti was actually the Dimensions, not the Matter"
+  },
+  {
+    id: "ae935",
+    text: "Frankenstien was not the monster, scientist, or author! It was the glue."
+  },
+  {
+    id: "ae936",
+    text: `"Color me surprised!" "Which one is the surprised crayon?"`
+  },
+  {
+    id: "ae937",
+    text: "Looking for iron, found antima- EXPLOSION"
+  },
+  {
+    id: "ae938",
+    get text() {
+      return `<span style='color: blue'>"Hello and welcome to the glitchy podcast episode 8. Where did episode 7 go? Why would
+      I tell you. Anyway-" </span><span style='color: orange'>"Hey glitchy you are misremembering that picture from
+      episode 2" </span><span style='color: blue'>"Holy
+      ${wordShift.wordCycle(["Profanity", "Curse", "Swear"])}" </span><span style='color: orange'>"Well just record the podcast
+      anyways" </span><span style='color: blue'>"Okay... anyways our question for today is why can't I leak the v1.0 features
+      such as alph- OH ${wordShift.wordCycle(["PROFANITY", "CURSE", "SWEAR"])} WHAT IS THA-" </span><span>(He soon got blown up
+      by 20 Endgame missiles.)</span>`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae939",
+    text:
+      `CBC detected, loser! Click Between Celestials is illegitimate and will not be allowed in Endgame. Please disable it
+      to continue playing.`
+  },
+  {
+    id: "ae940",
+    text:
+      `EVERYONE INTO THE UPDATE, WE ARE LEAVING THIS REALITY NOW! AHHHHHHHHHHHHHHHH! What the... impossible! This isn't the update!
+      NOOOOOOOOOOOOOOOOOOOOOOOOOOOO! HERMIT REFRESH!`
+  },
+  {
+    id: "ae941",
+    get text() {
+      return `<span style='color: blue'>"Hello welcome to the glitchyace podcast episode ni- AAAAAAAH NOOOOO- podcast
+      episode 10. Our question today is why are mountains so tall? We will have to climb one to find out. BILL DO THE
+      TRANSITION" </span><span>(cool transition) </span><span style='color: blue'>"Alright now we are hiking on Mount
+      Galactic Power, it's really cold here. Alright I think I see the top up ahead..." </span><span style='color: orange'>"Hello
+      Bill here while we wait for glitchy to hike the mountain here is evil orbsman with the
+      weather" </span><span style='color: red'>"RAHHHH I'm evil orbsman! It will be cloudy today and really foggy, and it
+      will be sunny for the rest of the week." </span><span style='color: orange'>"Alright let's check up on glitchy. Wait
+      why isn't it going to him... did he lose his camera? Ugh. Well a helicopter is tracking him so I guess we can see him
+      from ther- oh I have a signal" </span><span style='color: blue'>"Hello I have finally gone to the top of the mountain
+      now I have to plant the Endgame flag. So I have it here and now I can put it on there. The lesson for today is that
+      mountains are tall because why the f- AAAAAAAAAAA" </span><span style='color: orange'>"Great he fell..."</span>`
+    }
+  },
+  {
+    id: "ae942",
+    get text() {
+      return `<span style='color: blue'>"Hello welcome to the glitchyace podcast episode 11. Our question today is why the
+      ${wordShift.wordCycle(["profanity", "curse", "swear"])} get bleeped out with this Pelle
+      bull${wordShift.wordCycle(["profanity", "curse", "swear"])}? We literally have Pelle here right now so let's ask
+      him" </span><span style='color: red'>"Hello I have absolutely nothing to do with this" </span><span style='color: blue'>"I
+      hate the ${wordShift.wordCycle(["profanity", "curse", "swear"])} Endgame channel and its stupid
+      ${wordShift.wordCycle(["horse", "honse", "hose"])} censoring. Wait I swear that one looked different..."</span>`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae943",
+    text: "5 hours until th- u- d- SIGNAL DISRUPTED"
+  },
+  {
+    id: "ae944",
+    text: "Artificial text generation didn't generate this text lol"
+  },
+  {
+    id: "ae945",
+    text: `Erm acutatuutdtlltly AD: Endgame should actually be pronounced "ah duh e n game"`
+  },
+  {
+    id: "ae946",
+    text: "There will be 2^1024 loops."
+  },
+  {
+    id: "ae947",
+    text: "Wouldn't it be funny if Exotic Matter Dimensions stole this newsticker?"
+  },
+  {
+    id: "ae948",
+    text: "Does anyone feel like no one cares and everyone just hates you or is it just me?"
+  },
+  {
+    id: "ae949",
+    get text() {
+      return `<span>1.79e308 hops this time!</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`
+    }
+  },
+  {
+    id: "ae950",
+    get text() {
+      return `<span style='text-decoration: line-through'>Nine</span><span> out of ten dentists recommend shutting the f-</span>`
+    }
+  },
+  {
+    id: "ae951",
+    text: "Searching for an Endgame update that doesn't exist"
+  },
+  {
+    id: "ae952",
+    text: "Fun fact: if you lose the game 2,147,483,647 times, your game loss count wraps around and you win the game!"
+  },
+  {
+    id: "ae953",
+    text:
+      `Now announcing - Antimatter Dimensions: Endgame Matrix Definitive Edition! With a grand total of 10 Celestials,
+      45 Elementals and 12 Solarians, seven prestige layers and over 100 tiers of achievements, AD:EMDE will be the biggest
+      hit since the beginning of time. We will begin production on this game as soon as alemaninc finishes his 2 year long
+      sick leave and actually updates his own game. Estimated release in: 150 years.`
+  },
+  {
+    id: "ae954",
+    text:
+      `Fun fact: there will be no newsticker in v1.0. We are removing the newsticker in v1.0 for more information call
+      5-UNTIL-THE-UPDATE and press 1.79e308!`
+  },
+  {
+    id: "ae955",
+    text: "Maybe the Infinite IKEA is 3008 because Hevi patented 308 as Infinity, or is it the other way around?"
+  },
+  {
+    id: "ae956",
+    get text() {
+      return `<span>Click here to reset your save</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>Why would you even try...</span>`
+    }
+  },
+  {
+    id: "ae957",
+    get text() {
+      return `<span style='color: red'>"I'm not taking my debuffs off, I am Pelle O'Toole!" </span><span style='color: cyan'>"Hey!
+      Take those debuffs off!" </span><span style='color: red'>"No!" </span><span style='color: cyan'>"Take them off I
+      said!" </span><span style='color: red'>"No!" </span><span style='color: yellow'>"Ah, let him go. We'll never beat him, not
+      with these rifts..." </span><span style='color: red'>"I didn't take my debuffs off, I am Pelle O'Toole!"</span>`
+    }
+  },
+  {
+    id: "ae958",
+    text: "[÷USING THE WRONG SUGGESTION FORMATTING AT 3 AM (GONE HORRIBLY WRONG PLEASE HELP SEVEN IS COMING AFTER ME)÷]"
+  },
+  {
+    id: "ae959",
+    text: "Fun fact: 1.79e308 is also a number, just like 2.83e152."
+  },
+  {
+    id: "ae960",
+    text: "Jax... look... I know we don't get along, but I think I found the update."
+  },
+  {
+    id: "ae961",
+    text: `"BACKROOMS" director Kane Parsons is now an Endgame developer. "The update is in 5 hours." He is 20 years old.`
+  },
+  {
+    id: "ae962",
+    get text() {
+      return `Hello, ${player.username}. The current time on your planet |SOL_P3| is ${Time.toDateTimeString(Date.now())}. You are
+      currently playing Antimatter Dimensions: Endgame (made by Supersonic Seven) on an electrical device. Be afraid, as we will
+      find you shortly.`
+    }
+  },
+  {
+    id: "ae963",
+    text: "...and the universe told me I'm not alone"
+  },
+  {
+    id: "ae964",
+    text: "Searching for a newsticker that never existed"
+  },
+  {
+    id: "ae965",
+    text: "Jax, look. I know we don't get along, but I think I might've found a way to remove lag."
+  },
+  {
+    id: "ae966",
+    text: "The update is 5 hour- phone ringing oh hold on pick up uh hello uh yeah oh um... alright so the update released."
+  },
+  {
+    id: "ae967",
+    text: "Antimatter Dimensions: Expansion vβ.0.0 is coming out in just 5 hours"
+  },
+  {
+    id: "ae968",
+    text: "Giving people Antimony counts as robbery."
+  },
+  {
+    id: "ae969",
+    text:
+      `The following phrase, when followed by a colon, a space, and its own quotation, produces a false statement: "The following
+      phrase, when followed by a colon, a space, and its own quotation, produces a false statement"`
+  },
+  {
+    id: "ae970",
+    text: "Antimatter Dimensions cause End Game, but Game End cause Dimensions Antimatter."
+  },
+  {
+    id: "ae971",
+    text: `"Oh boy I sure do hope someone doesn't give me a weird suggestion for my newsticker suggestion!" the humble mreatha:`
+  },
+  {
+    id: "ae972",
+    text: "Reality asserts that ity is real, or that ty is imaginary."
+  },
+  {
+    id: "ae973",
+    text: "a b c d e f f a r i- HEY THATS NOT HOW THE ALPHABET WORKS"
+  },
+  {
+    id: "ae974",
+    text:
+      `When you manage to get the 1.798e308 paperclips required to buy the Second News Dimension, what actually happens is Seven
+      opens up ⁠news-ticker-suggestions-2.`
+  },
+  {
+    id: "ae975",
+    get text() {
+      return `<span style='color: cyan'>"Hello everyone this is the glitchy podcast episode 23. We have lost track of the episode
+      counter so we are now just making up numbers. Today we are gonna ask: has there ever been a worse quote than "Wanna
+      add 'Alright, time to reset the timer' or somethin?"? Probably not. Anyways we are about to watch the episode of magic
+      school generator where they go inside of Pelle's a- </span><span>(Endgame branded nuke drop)</span>`
+    }
+  },
+  {
+    id: "ae976",
+    text: "Friendly reminder that dude, guy, and bro are gender neutral unless you are saying it to a trans person!"
+  },
+  {
+    id: "ae977",
+    get text() {
+      return `<span style='color: var(--color-alpha--base)'>"And if you're not having fun, and I'm not having fun, then who
+      is having fun?" <span style='color: var(--color-v--base)'>"I'm having a
+      reality." </span><span style='color: var(--color-alpha--base)'>"Exactly! Makes me wonder why you guys even switched up
+      your tone. If I didn't know any better it seems like you're trying.. to... where's
+      Pelle?" </span><span style='color: var(--color-teresa--base)'>"Uh um we just wanted to see your new debuffs first-hand!
+      We've got over our happs and now we're just genuinely curious what you're cooking
+      up!" </span><span style='color: var(--color-alpha--base)'>"I think I'm just gonna.. check up
+      on-" </span><span style='color: var(--color-pelle--secondary)'>"WE THINK YOUR IDEAS
+      SUCK!" </span><span style='color: var(--color-alpha--base)'>"HUH?" <span>"HUH?"
+      </span><span style='color: var(--color-pelle--secondary)'>"Isn't it obvious? We wanted to bait you into testing your
+      new reality on us, so we can make fun of them behind your back!" </span><span style='color: var(--color-alpha--base)'>"HA!
+      That's not.. true.." </span><span style='color: var(--color-pelle--secondary)'>"YES IT IS! YOU'RE A HORRIBLE LEADER!
+      YOU DONT CARE ABOUT US AT ALL! You care more about.. stroking your own ego than giving us anything we would actually
+      enjoy!" </span><span style='color: var(--color-alpha--base)'>"DO YOU KNOW WHO I
+      AM?!?" </span><span style='color: var(--color-pelle--secondary)'>"YEAH! YOU'RE A FAILURE! WE'RE ALL GONNA DIE SOMEDAY,
+      AND WHAT WILL YOU HAVE THEN? NOTHING." </span><span style='color: var(--color-alpha--base)'>"Stop
+      that..." </span><span style='color: var(--color-v--base)'>"And this whole stunt? Debuffing us because we hurt your
+      feelings? PATHETIC! You're like a child! What kind of all powerful being has such a fragile
+      ego?" </span><span style='color: var(--color-alpha--base)'>"I- I'm..." </span><span style='color: var(--color-teresa--base)'>"You
+      never make us feel like we are at home.. you don't comfort anyone when they're upset and you never bother to understand what
+      it's like in our shoes!" </span><span style='color: var(--color-effarig--base)'>"You discourage us from thinking outside the
+      box and doing things our own way..." </span><span style='color: var(--color-laitela--base)'>"YOU LIE TO US
+      CONSTANTLY!" </span><span style='color: var(--color-pelle--secondary)'>"And on top of it all, you JUST. DON'T.
+      LISTEN." </span><span>(Alpha now proceeded to attempt to kill every Celestial.)</span>`
+    }
+  },
+  {
+    id: "ae978",
+    get text() {
+      return `"Once upon a time, life was primitive, beings did not know how to count past 1.8^308, but then, with a big bang,
+      break infinity cracked the boundary and pushed forth, leading intelligence on a much bigger journey. After many years
+      and uncountable ${wordShift.wordCycle(["songs", "dances", "battles"])}, the barrier was again seen, at a previously
+      incomprehensible e9e15. Life lamented for its trapped existence, hoping that it could break free of its new shell.
+      And break it did. A newcomer, named break eternity after its predecessor emerged and shattered the barrier for life once
+      more. That is the present. We know not if there are more barriers waiting for us. But it is the belief of every lifeform
+      in this endless universe that we can break it....break reality."`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae979",
+    text: "FARM ENDGAMES NOW"
+  },
+  {
+    id: "ae980",
+    text: "RAM prices getting too high? Why? You can just download it!"
+  },
+  {
+    id: "ae981",
+    text: `"If I didn't know better it seems like you're trying to... where's Hexa?" -Hevipelle, 2017`
+  },
+  {
+    id: "ae982",
+    text: "Destroyer x Ra is real, AD YAOI HERE I COM-"
+  },
+  {
+    id: "ae983",
+    text: "Breaking news: Small Hadron Collider will be in version v2.0!"
+  },
+  {
+    id: "ae984",
+    text: "BREAKING NEWS: CERN CLOSED THE LARGE HADRON COLLIDER! PROGRESSION HAS SLOWED TO A HALT AND PEOPLE ARE NOT HAPPY!"
+  },
+  {
+    id: "ae985",
+    text: "How would Antimatter Dimensions' story go if Lai'tela didnt put Ra in the cuck chair?"
+  },
+  {
+    id: "ae986",
+    text:
+      `I sometimes don't get why people are simping for the Celestials, like they're just glowing squares with goofy
+      letters on them! Where's the appeal on a group of squares?! They have no curves!`
+  },
+  {
+    id: "ae987",
+    get text() {
+      return `<span style='color: blue'>"Oh my god hello?" </span><span style='color: red'>"HELLO IT'S ME CELESTIAL. I AM
+      THE GOOD GUYS IN THE EXPANSE. I COMPLETE ALL THE REALITIES. MY GOAL IS TO COMPLETE ALL REALITY BEFORE THE ELEMENTAL
+      TRY TO DESTROY EVERYONE. BEFORE HE KILLS EVERYONE. WE MUST COMPLETE ALL REALITY. THAT IS HOW WE DESTROY THE ELEMENTAL.
+      NOW, YOU TELL ME. ARE YOU A CELESTIAL, OR ARE YOU AN ELEMENTAL?"</span>`
+    }
+  },
+  {
+    id: "ae988",
+    get text() {
+      return `Jesus answered, "I am the way and the truth and the life. No one comes to the father except through
+      me." <span style='color: yellow'>$6 SRIMP SPECIAL</span>`
+    }
+  },
+  {
+    id: "ae989",
+    get text() {
+      return `${Alpha.isDestroyed ? "Did Alpha's timewalls make you suffer?" : "The 8th Celestial's timewalls will make you suffer."}`
+    }
+  },
+  {
+    id: "ae990",
+    text: "Why was 6 afraid of 7? BECAUSE 7 RELEASED HIS GAME FIRST!"
+  },
+  {
+    id: "ae991",
+    text: "I just wanna gain Endgames, farm my Glyphs, buy my boosts..."
+  },
+  {
+    id: "ae992",
+    text:
+      `It is the year 1.8e308. The update still isn't out. Seven is working on balancing Elemental dimensions and challenges
+      for the 1.4e34th layer of prestige. There are over 100,000 rows of achievements. They're getting ready to start using
+      ExpantaNum.js.`
+  },
+  {
+    id: "ae993",
+    text: "Fun fact: in v1.1, we added about 10 months of newstickers because seven procrastinated them for 3 updates!"
+  },
+  {
+    id: "ae994",
+    get text() {
+      return `${wordShift.wordCycle(["Chutzpah", "חצפה"])}`
+    },
+    dynamic: true
+  },
+  {
+    id: "ae995",
+    get text() {
+      return `"And Jesus said: Love thy neighbor like how I-" <span style='color: cyan'>WHAT ARE YOU DOING HERE BIBLE
+      NEWSTICKER?!?!?</span>`
+    }
   },
   {
     id: "l1",
@@ -4612,6 +7063,352 @@ export const news = [
       Celestial of Antimatter. Alpha, Celestial of Darkness. Slabdrill, Celestial of the 9th Dimension.
       These are all great, but not enough. Now I'm proud to announce: Me, the newsticker has become a Celestial.`,
     get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le130",
+    get text() {
+      const units = [];
+      units.push("seconds");
+      units.push("minutes");
+      units.push("hours");
+      units.push("days");
+      units.push("weeks");
+      units.push("months");
+      units.push("years");
+      units.push("decades");
+      units.push("centuries");
+      units.push("millenia");
+
+      const timeUnit = units.randomElement();
+      return `Time theorem 6: It is impossible to wait more than 5 hours, however it is possible to wait
+        more than 5 ${timeUnit}. Don't ask me how that works.`;
+    },
+    get unlocked() { return PlayerProgress.eternityUnlocked() }
+  },
+  {
+    id: "le131",
+    text: "YOU HAVE ENOUGH INFINITY POINTS TO BUY A TESSERACT",
+    get unlocked() { return Enslaved.isCompleted }
+  },
+  {
+    id: "le132",
+    text: "YOU HAVE ENOUGH CELESTIAL POINTS TO BUY ANOTHER TERESA BODY PILLOW",
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le133",
+    text:
+      `Hello, it is me glitchy, the Elemental of Masteries. I have a deal for you: I give you 12 more Masteries, but in
+      exchange, you will have to give me 5 hours of your time (and maybe a small bribe of Tester). Will you accept?`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le134",
+    text: "DON’T ABBREVIATE CELESTIAL POINTS WORST MISTAKE OF MY LIFE",
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le135",
+    text: "1e1e30 antimatter Teresa gift card, who wants it?",
+    get unlocked() { return ExpansionPacks.areUnlocked }
+  },
+  {
+    id: "le136",
+    text: "Why doesn’t Effarig just leave the Reality of eternal suffering? Is he stupid?",
+    get unlocked() { return EffarigUnlock.eternity.isUnlocked }
+  },
+  {
+    id: "le137",
+    text: "Hey there little Timmy. Can you explain why you spent $500 on a teresa bodypillow?",
+    get unlocked() { return Teresa.isUnlocked }
+  },
+  {
+    id: "le138",
+    text: "Human I remember you're big crunches",
+    get unlocked() { return PlayerProgress.infinityUnlocked() }
+  },
+  {
+    id: "le139",
+    text: "The way I see it, Pelle is surrounded. What’s under the Doom? That’s right, more Antimatter.",
+    get unlocked() { return Pelle.isDoomed || PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le140",
+    text: "Hey where are you putting all this antimatter anyways?",
+    get unlocked() { return player.break2 }
+  },
+  {
+    id: "le141",
+    text: "What do you mean this is now a galaxy factory?",
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le142",
+    text: "Effarig: Gifted Power. Giraffe: Pure Effort.",
+    get unlocked() { return Effarig.isUnlocked }
+  },
+  {
+    id: "le143",
+    text: "Wait... it's all just Antimatter Dimensions over again? ALWAYS HAS BEEN.",
+    get unlocked() { return PlayerProgress.celestialInfinityUnlocked() }
+  },
+  {
+    id: "le144",
+    text: "Effarig Theoyryy #1: He has another layer in Endgame",
+    get unlocked() { return Effarig.isUnlocked }
+  },
+  {
+    id: "le145",
+    text: "Celestial Question of the day: How were they born?",
+    get unlocked() { return Teresa.isUnlocked }
+  },
+  {
+    id: "le146",
+    text: "Yo Pelle has been caught trying to create his own Galaxy Generator 💀",
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le147",
+    text: "Ra reported Lai'tela on Twitter for catfishing Destroyer now she is bashing his brains out WHAT THE FU-",
+    get unlocked() { return Laitela.isUnlocked }
+  },
+  {
+    id: "le148",
+    text: "ALERT: LAI'TELA HAS BEEN DISCOVERED WITH A LIFE SIZE VERSION OF DESTROYER WHAT THE HELL MAN",
+    get unlocked() { return Laitela.isUnlocked }
+  },
+  {
+    id: "le149",
+    text: "Pelle Reportedly forgot to use protection with Lai'tela 🤦‍♂️",
+    get unlocked() { return Pelle.isDoomed || PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le150",
+    text: "Celestial Theory 2: Celestials can get pregnant.",
+    get unlocked() { return Teresa.isUnlocked }
+  },
+  {
+    id: "le151",
+    text:
+      `Celestial Theory 3: Celestials that have been breeded from 2 other Celestials do not have to ascend to become a Celestial
+      as doing so would give them no parents`,
+    get unlocked() { return Teresa.isUnlocked }
+  },
+  {
+    id: "le152",
+    text:
+      `Lai'tela: Pelle! GENERATE GALAXIES INSIDE OF MY DARK MATTER DIMENSIONS! OH! YE- boom RA WTF R YOU DOING WITH A CAMERA??
+      Ra: Get caught lacking bro.`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le153",
+    text:
+      `Now introducing: the Tesseract Automator command! Buy Tesseracts only after waiting 5 hours, buy it every time you
+      get a 9th dimension, or just buy it any time! Only for 1e1e150 Antimatter!`,
+    get unlocked() { return Enslaved.isCompleted }
+  },
+  {
+    id: "lem154",
+    text:
+      `If Pelle and Lai'tela had sex, would the Celestial baby's race be white, black, Space, Reality, Dark Matter, or DOOMED?`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le155",
+    text: "Today, we are going to explore Pelle's computer! ...Lai'tela feet pics??",
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le156",
+    get text() {
+      return `Alert, Alert, Effarig has been caught smoking marijuana in his shop, if you have seen anything please
+      contact ${wordShift.wordCycle(["False", "Deity", "Destroyer"])}`
+    },
+    dynamic: true,
+    get unlocked() { return Effarig.isUnlocked }
+  },
+  {
+    id: "lem157",
+    text:
+      `Yo yo YOOOO!!!! Welcome back to epiccoolantimattervideos!! Today, we will shit in Pelle's bed!! Here we go!! Wait..
+      oh shit Pelle came back.. the windows locked.`,
+    get unlocked() { return Pelle.isDoomed || PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le158",
+    text: `"Imagine having more than 1 free Tesseract! Couldn't be me." -Pelle, 2025`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le159",
+    text: `"Hahaha I have defeated you! You cannot defeat my K14 ping!" -Pelle, 2026`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le160",
+    text:
+      `"GUYS, DON'T CHARGE INFNITY UPGRADE 43 IN PELLE. BIGGEST MISTAKE OF MY LIFE." (proceeds to get hyperexistential
+      amount of ping) - epic_ducks, 2026`,
+    get unlocked() { return Pelle.isDoomed || PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le161",
+    text: `""Surely EM71 isn't that good" I thought before V came into my house and killed me" - Cyra`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le162",
+    text:
+      `Why would Pelle conveniently give you his Galaxy Generator letting you blow up his Reality? That's like the equivalent
+      of the president giving a toddler the nuclear launch codes and said toddler bombing the other side of the world. He certainly
+      had more Strikes up his sleeve right? If so why wouldn't he use them is he stupid? No wonder Lai'tela left him for Ra.`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le163",
+    text: "If V is so cool why isn't there a VVVVVV?",
+    get unlocked() { return V.isUnlocked }
+  },
+  {
+    id: "le164",
+    text:
+      `Local Play Button spends 200 years going for Expansion Packs on second Endgame, wonders what he could have
+      done to progress faster.`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le165",
+    text: "Click here to get 1 tachyon particle",
+    get unlocked() { return PlayerProgress.dilationUnlocked() }
+  },
+  {
+    id: "le166",
+    text: "How many relic shards do I need to make a relic?",
+    get unlocked() { return Effarig.isUnlocked }
+  },
+  {
+    id: "le167",
+    text: "Crafting a relic from relic shards costs FNaNeInfinityENaNeInfinity shards",
+    get unlocked() { return Effarig.isUnlocked }
+  },
+  {
+    id: "le168",
+    text: "Glyphs? Realities? Black Holes, Tesseracts? What are you talking about? Come on, let's go Ghostify.",
+    get unlocked() { return PlayerProgress.realityUnlocked() }
+  },
+  {
+    id: "le169",
+    text: "Ghostify? Bosonic lab? Come on, let's go Eternity.",
+    get unlocked() { return PlayerProgress.eternityUnlocked() }
+  },
+  {
+    id: "le170",
+    text: "Eternity? Time theorems? Tachyon particles? Come on, let's go Infinity.",
+    get unlocked() { return PlayerProgress.eternityUnlocked() }
+  },
+  {
+    id: "le171",
+    text: "Infinity? Break Infinity upgrades? Replicanti? Come on, let's get a galaxy.",
+    get unlocked() { return PlayerProgress.infinityUnlocked() }
+  },
+  {
+    id: "le172",
+    text: "Galaxy? Dimboost? Fifth dimension? Come on, let's get another fourth dimension.",
+    get unlocked() { return player.galaxies.gt(0) || PlayerProgress.infinityUnlocked() }
+  },
+  {
+    id: "le173",
+    text: "Antimatter? Dimensions? Tickspeed? Come on, let's bake some cookies.",
+    get unlocked() { return player.dimensionBoosts.gt(0) || player.galaxies.gt(0) || PlayerProgress.infinityUnlocked() }
+  },
+  {
+    id: "le174",
+    text: "Pelle can't beat me, I have 1e9.007e15 antimatter in rise of antimatter!",
+    get unlocked() { return Pelle.isDoomed || PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le175",
+    text: "I know where you are hiding that precious Infinity Point. Just give it to me already. GIVE. IT. TO. ME.",
+    get unlocked() { return PlayerProgress.infinityUnlocked() }
+  },
+  {
+    id: "le176",
+    text: "And an upgrade that boosts Galaxies by 50% that costs 5e11 IP",
+    get unlocked() { return player.break }
+  },
+  {
+    id: "le177",
+    text: "Anti of the Matter Dimension that Galaxies the Dimension Boost",
+    get unlocked() { return player.dimensionBoosts.gt(0) || player.galaxies.gt(0) || PlayerProgress.infinityUnlocked() }
+  },
+  {
+    id: "le178",
+    get text() {
+      return `I am Pelle, I am an ${wordShift.wordCycle(["Profanity", "Curse", "Swear"])}hole! Big Alpha's handsome,
+      but he is not in control! His Update quake puts our lives at stake. He's gonna. He's gonna make the whole Endgame break!`
+    },
+    dynamic: true,
+    get unlocked() { return Pelle.isDoomed || PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le179",
+    get text() {
+      return `I am generating Galaxies and ${wordShift.wordCycle(["Profanity", "Curse", "Swear"])} cuz I'm
+      in ${wordShift.wordCycle(["Profanity", "Curse", "Swear"])}ing Endgame!`
+    },
+    dynamic: true,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le180",
+    text: "How does an Elemental get drunk anyway?",
+    get unlocked() { return Achievement(208).isUnlocked }
+  },
+  {
+    id: "le181",
+    text: "Ra, look. I know we dont get along, but I think I found a way to power the Galaxy Generator.",
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le182",
+    text: "Pelle f!@#ing dies, Lai'tela most affected",
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le183",
+    text:
+      `It turns out that you actually keep the Galaxy Generator on Endgame. However, when the Elemental caught wind
+      of this, he removed all the charging outlets outside of Doom.`,
+    get unlocked() { return PlayerProgress.endgameUnlocked() }
+  },
+  {
+    id: "le184",
+    get text() {
+      return `99% of people cant get to <span style='color: purple'>Eternity</span> level`
+    },
+    get unlocked() { return PlayerProgress.eternityUnlocked() }
+  },
+  {
+    id: "le185",
+    text: "And remember kids, curse yourself",
+    get unlocked() { return V.isFlipped }
+  },
+  {
+    id: "le186",
+    text:
+      `In Glyph Alchemy, there are 21 elements, but only 24 Greek letters. To make matters worse, both the capital and lowercase
+      versions of Lambda, Xi, Pi, and Omega are used, and Infinity is not a Greek letter. Also, Beta, Epsilon, Zeta, Eta, Iota,
+      Kappa, Nu, Omicron, Upsilon, and Chi are left out of the Alchemy symbols. This only accounts for 22 of the 24 symbols,
+      however. What could the other 2 b- Oh Hevi what have I walked into...`,
+    get unlocked() { return Ra.unlocks.unlockGlyphAlchemy.canBeApplied }
+  },
+  {
+    id: "le187",
+    text:
+      `You can also escape the Doomed Reality by solving x^2-410286423278424y^2 = 1 over positive integers x and y, thanks
+      to Archimedes.`,
+    get unlocked() { return Pelle.isDoomed || PlayerProgress.endgameUnlocked() }
   },
   {
     id: "r1",

@@ -13,7 +13,7 @@ export default {
       newIMCap: new Decimal(),
       newDMCap: new Decimal(),
       realityTime: 0,
-      glyphLevel: 0,
+      glyphLevel: new Decimal(),
       nextGlyphPercent: 0,
       nextMachineEP: 0,
       shardsGained: new Decimal(0),
@@ -51,7 +51,7 @@ export default {
       return "";
     },
     formatGlyphLevel() {
-      if (this.glyphLevel >= 10000) return `Glyph level: ${formatHybridLarge(this.glyphLevel, 3)}`;
+      if (this.glyphLevel.gte(10000)) return `Glyph level: ${formatHybridLarge(this.glyphLevel, 3)}`;
       return `Glyph level: ${formatHybridLarge(this.glyphLevel, 3)} (${this.nextGlyphPercent} to next)`;
     },
     showsRate() {
@@ -77,9 +77,8 @@ export default {
     percentToNextGlyphLevelText() {
       const glyphState = getGlyphLevelInputs();
       let level = glyphState.actualLevel;
-      if (!isFinite(level)) level = 0;
-      const decimalPoints = this.glyphLevel > 1000 ? 0 : 1;
-      return `${formatPercents(Math.min(((level - Math.floor(level))), 0.999), decimalPoints)}`;
+      const decimalPoints = this.glyphLevel.gt(1000) ? 0 : 1;
+      return `${formatDecimalPercents(Decimal.min(((level.sub(Decimal.floor(level)))), 0.999), decimalPoints)}`;
     },
     update() {
       this.hasRealityStudy = TimeStudy.reality.isBought;
@@ -109,7 +108,7 @@ export default {
       this.newDMCap.copyFrom(MachineHandler.projectedDMCap);
       this.machinesGained = this.projectedRM.clampMax(MachineHandler.distanceToRMCap);
       this.realityTime = Time.thisRealityRealTime.totalMinutes.toNumber();
-      this.glyphLevel = gainedGlyphLevel().actualLevel;
+      this.glyphLevel.copyFrom(gainedGlyphLevel().actualLevel);
       this.nextGlyphPercent = this.percentToNextGlyphLevelText();
       this.nextMachineEP = EPforRM(this.machinesGained.plus(1));
       this.ppGained = multiplier;

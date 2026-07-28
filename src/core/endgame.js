@@ -94,6 +94,9 @@ export const Endgame = {
     if (Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME) {
       player.disablePostReality = false;
     }
+    if (player.endgame.overcharge.discharge.infinite) {
+      disChargeAllBreakUpgrades();
+    }
     this.resetStuff();
 
     // Add Glyphs after other Glyphs are purged
@@ -104,8 +107,8 @@ export const Endgame = {
       if (EffarigUnlock.endgame.canBeApplied) {
         Glyphs.addToInventory(GlyphGenerator.endgameGlyph("effarig"));
         Glyphs.addToInventory(GlyphGenerator.endgameGlyph("effarig"));
-        Glyphs.addToInventory(GlyphGenerator.realityGlyph(AlchemyResource.reality.effectValue));
-        Glyphs.addToInventory(GlyphGenerator.realityGlyph(AlchemyResource.reality.effectValue));
+        Glyphs.addToInventory(GlyphGenerator.realityGlyph(new Decimal(AlchemyResource.reality.effectValue)));
+        Glyphs.addToInventory(GlyphGenerator.realityGlyph(new Decimal(AlchemyResource.reality.effectValue)));
       }
     }
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
@@ -167,6 +170,9 @@ export const Endgame = {
       }
       Effarig.quotes.beatEndgame.show();
     }
+    if (player.endgame.overcharge.discharge.infinite) {
+      disChargeAllBreakUpgrades();
+    }
     this.resetStuff();
 
     // Add Glyphs after other Glyphs are purged
@@ -177,8 +183,8 @@ export const Endgame = {
       if (EffarigUnlock.endgame.canBeApplied) {
         Glyphs.addToInventory(GlyphGenerator.endgameGlyph("effarig"));
         Glyphs.addToInventory(GlyphGenerator.endgameGlyph("effarig"));
-        Glyphs.addToInventory(GlyphGenerator.realityGlyph(AlchemyResource.reality.effectValue));
-        Glyphs.addToInventory(GlyphGenerator.realityGlyph(AlchemyResource.reality.effectValue));
+        Glyphs.addToInventory(GlyphGenerator.realityGlyph(new Decimal(AlchemyResource.reality.effectValue)));
+        Glyphs.addToInventory(GlyphGenerator.realityGlyph(new Decimal(AlchemyResource.reality.effectValue)));
       }
     }
     EventHub.dispatch(GAME_EVENT.ENDGAME_RESET_AFTER);
@@ -227,7 +233,7 @@ export const Endgame = {
     }
     player.tutorialState = 0;
     player.tutorialActive = true;
-    player.options.confirmations.glyphSelection = true;
+    if (player.endgames <= 50) player.options.confirmations.glyphSelection = true;
     ui.view.newUI = player.options.newUI;
     ui.view.news = player.options.news.enabled;
     Themes.find(Theme.currentName()).set();
@@ -255,6 +261,9 @@ export const Endgame = {
     Glyphs.unequipAll(true);
     player.reality.glyphs.protectedRows = 0;
     Glyphs.deleteAllUnprotected();
+    for (let allglyph = 0; allglyph < Glyphs.inventoryList.length; allglyph++) {
+      if (Glyphs.inventoryList[allglyph].type !== "companion") Glyphs.removeFromInventory(Glyphs.inventoryList[allglyph]);
+    }
     player.reality.glyphs.protectedRows = rowProtect;
     if (!ExpansionPack.effarigPack.isBought) {
       player.reality.glyphs.createdRealityGlyph = false;
@@ -676,9 +685,7 @@ export const Endgame = {
     player.partInfinitied = 0;
     player.dimensionBoosts = DC.D0;
     player.galaxies = DC.D0;
-    if (player.eternities.lte(1)) {
-      player.break = false;
-    }
+    player.break = false;
     resetTickspeed();
     AntimatterDimensions.reset();
     Currency.antimatter.reset();
@@ -740,7 +747,7 @@ export const Endgame = {
     player.records.bestReality.RMSet = [];
     player.records.bestReality.RMmin = DC.D0;
     player.records.bestReality.RMminSet = [];
-    player.records.bestReality.glyphLevel = 0;
+    player.records.bestReality.glyphLevel = DC.D0;
     player.records.bestReality.glyphLevelSet = [];
     player.records.bestReality.bestEP = DC.D0;
     player.records.bestReality.bestEPSet = [];
@@ -772,6 +779,7 @@ export const Endgame = {
     if (EternityMilestone.keepAutobuyers.isReached) {
       NormalChallenges.completeAll();
     }
+    if ((RealityUpgrade(10).isBought || EndgameMastery(42).isBought) && !player.disablePostReality) applyRUPG10();
     AutomatorBackend.restart();
   }
 };

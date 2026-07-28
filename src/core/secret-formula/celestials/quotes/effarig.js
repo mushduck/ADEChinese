@@ -98,7 +98,7 @@ export const effarigQuotes = {
   },
   glyphLevel1: {
     id: 10,
-    requirement: () => player.records.bestEndgame.glyphLevel >= 1e5,
+    requirement: () => player.records.bestEndgame.glyphLevel.gte(1e5),
     lines: [
       "Six-digit Glyph levels, huh?",
       "You're breaking more walls than I can build.",
@@ -113,7 +113,7 @@ export const effarigQuotes = {
   },
   glyphLevel2: {
     id: 11,
-    requirement: () => player.records.bestEndgame.glyphLevel >= 2e5,
+    requirement: () => player.records.bestEndgame.glyphLevel.gte(2e5),
     lines: [
       "Woah. Slow down there, buckaroo.",
       "One more power burst, and you'd have Glyph Levels in the millions.",
@@ -128,7 +128,7 @@ export const effarigQuotes = {
   },
   glyphLevel3: {
     id: 12,
-    requirement: () => player.records.bestEndgame.glyphLevel >= 1e6,
+    requirement: () => player.records.bestEndgame.glyphLevel.gte(1e6),
     lines: [
       "Well, you did it anyway.",
       "One million Glyph Levels.",

@@ -152,8 +152,8 @@ export const GlyphGenerator = {
       idx: null,
       type: "cursed",
       strength: str,
-      level: 6666,
-      rawLevel: 6666,
+      level: new Decimal(6666),
+      rawLevel: new Decimal(6666),
       effects: effectBitmask,
     };
   },
@@ -165,7 +165,7 @@ export const GlyphGenerator = {
     effectList.push(GlyphEffects.timespeed);
     let bitmask = 0;
     for (const effect of effectList) bitmask |= 1 << effect.bitmaskIndex;
-    const glyphLevel = Math.max(player.records.bestReality.glyphLevel, 5000);
+    const glyphLevel = Decimal.max(player.records.bestReality.glyphLevel, 5000);
     const rarity = EffarigUnlock.glyphGenerationBoost.isUnlocked ? rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
       GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300)) : 3.5;
     return {
@@ -184,7 +184,7 @@ export const GlyphGenerator = {
     if (type !== "effarig" && type !== "reality") effectList.push(GlyphEffects.timespeed);
     let bitmask = 0;
     for (const effect of effectList) bitmask |= 1 << effect.bitmaskIndex;
-    const glyphLevel = Effects.max(1, EndgameMastery(71));
+    const glyphLevel = new Decimal(EndgameMastery(71).effectOrDefault(1));
     const rarity = EffarigUnlock.glyphGenerationBoost.isUnlocked ? rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
       GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300)) : 3.5;
     return {
@@ -203,7 +203,7 @@ export const GlyphGenerator = {
     effectList.push(GlyphEffects.timespeed);
     let bitmask = 0;
     for (const effect of effectList) bitmask |= 1 << effect.bitmaskIndex;
-    const glyphLevel = 1e9;
+    const glyphLevel = DC.E9;
     const rarity = EffarigUnlock.glyphGenerationBoost.isUnlocked ? rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
       GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300)) : 3.5;
     return {
@@ -227,8 +227,8 @@ export const GlyphGenerator = {
       idx: null,
       type: "companion",
       strength: str,
-      level: 1,
-      rawLevel: 1,
+      level: new Decimal(1),
+      rawLevel: new Decimal(1),
       effects: effectBitmask,
     };
   },
@@ -237,7 +237,7 @@ export const GlyphGenerator = {
     const rng = new GlyphGenerator.MusicGlyphRNG();
     const glyph =
       this.randomGlyph({ actualLevel: (ResurgenceUpgrade.glyphSurge.isBought && !player.disablePostReality
-        ? player.records.bestEndgame.glyphLevel - 1 : Math.floor(player.records.bestReality.glyphLevel * 0.8)), rawLevel: 1 }, rng);
+        ? player.records.bestEndgame.glyphLevel.sub(1) : Decimal.floor(player.records.bestReality.glyphLevel.times(0.8))), rawLevel: 1 }, rng);
     rng.finalize();
     glyph.cosmetic = "music";
     glyph.fixedCosmetic = "music";
@@ -286,10 +286,10 @@ export const GlyphGenerator = {
     if (type !== "effarig" && Ra.unlocks.glyphEffectCount.canBeApplied && !player.disablePostReality) return 4;
     if (type === "effarig" && ExpansionPack.effarigPack.isBought && Ra.unlocks.glyphEffectCount.canBeApplied && !player.disablePostReality) return 7;
     const maxEffects = (Ra.unlocks.glyphEffectCount.canBeApplied && !player.disablePostReality) ? 7 : 4;
-    let num = Math.min(
+    let num = Decimal.min(
       maxEffects,
-      Math.floor(Math.pow(random1, 1 - (Math.pow(level * strength, 0.5)) / 100) * 1.5 + 1)
-    );
+      Decimal.floor(Decimal.pow(random1, DC.D1.sub(Decimal.pow(level.times(strength), 0.5).div(100))).times(1.5).add(1))
+    ).toNumber();
     // If we do decide to add anything else that boosts chance of an extra effect, keeping the code like this
     // makes it easier to do (add it to the Effects.max).
     if (RealityUpgrade(17).isBought && random2 < Effects.max(0, RealityUpgrade(17))) {
@@ -300,7 +300,7 @@ export const GlyphGenerator = {
 
   // Populate a list of reality glyph effects based on level
   generateRealityEffects(level) {
-    const numberOfEffects = realityGlyphEffectLevelThresholds.filter(lv => lv <= level).length;
+    const numberOfEffects = realityGlyphEffectLevelThresholds.filter(lv => new Decimal(lv).lte(level)).length;
     const sortedRealityEffects = GlyphEffects.all
       .filter(eff => eff.glyphTypes.includes("reality"))
       .sort((a, b) => a.bitmaskIndex - b.bitmaskIndex)

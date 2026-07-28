@@ -2,6 +2,7 @@
 import AlchemyTab from "./alchemy/AlchemyTab";
 import AlphaTab from "./celestial-alpha/AlphaTab";
 import AntimatterDimensionsTab from "./antimatter-dimensions/AntimatterDimensionsTab";
+import AscensionTab from "./ascension/AscensionTab";
 import AutobuyersTab from "./autobuyers/AutobuyersTab";
 import AutomatorTab from "./automator/AutomatorTab";
 import BlackHoleTab from "./black-hole/BlackHoleTab";
@@ -63,6 +64,7 @@ import TeresaTab from "./celestial-teresa/TeresaTab";
 import TimeDilationTab from "./time-dilation/TimeDilationTab";
 import TimeDimensionsTab from "./time-dimensions/TimeDimensionsTab";
 import TimeStudiesTab from "./time-studies/TimeStudiesTab";
+import TransientUniverseTab from "./transient-universe/TransientUniverseTab";
 import VTab from "./celestial-v/VTab";
 
 const TabComponents = {
@@ -122,6 +124,7 @@ const TabComponents = {
   EtherealTab,
   HypercubesTab,
   LargeHadronColliderTab,
+  AscensionTab,
   CelestialInfinityUpgradesTab,
   CelestialBreakInfinityTab,
   CelestialEternityUpgradesTab,
@@ -129,6 +132,7 @@ const TabComponents = {
   DivinityMilestonesTab,
   DivinityUpgradesTab,
   ResurgenceUpgradesTab,
+  TransientUniverseTab,
   ShopTab,
   MultiplierBreakdownTab
 };

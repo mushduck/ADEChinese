@@ -143,12 +143,18 @@ export function celestialBreakInfinity() {
 }
 
 export function gainedInfinityPoints() {
-  const div = Effects.min(
+  let positiveIPPowers = DC.D1;
+  if ((Pelle.isDoomed && PelleCelestialUpgrade.raTeresa3.canBeApplied) || GlyphAlteration.isAdded("infinity")) positiveIPPowers = positiveIPPowers.times(getSecondaryGlyphEffect("infinityIP"));
+  if (EndgameMastery(141).isBought) positiveIPPowers = positiveIPPowers.timesEffectsOf(EndgameMastery(141));
+  if (!player.disablePostReality) positiveIPPowers = positiveIPPowers.times(AlphaUnlocks.infinity.effects.buff.effectOrDefault(1));
+  if (AlchemyResource.exponential.amount > 0 && ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality) positiveIPPowers = positiveIPPowers.times(ReplicantiMultipliers.ipPow);
+  if (Ascensions.ipA.isUnlocked) positiveIPPowers = positiveIPPowers.timesEffectOf(InfinityUpgrade.ipMult);
+  const div = new Decimal(Effects.min(
     308,
     Achievement(103),
     TimeStudy(111),
     EndgameMastery(151)
-  );
+  )).max(positiveIPPowers.times(2)).toNumber();
   if (Pelle.isDisabled("IPMults")) {
     let ip = Decimal.pow10(player.records.thisInfinity.maxAM.add(1).log10().div(div).sub(0.75))
       .timesEffectsOf(PelleRifts.vacuum)
@@ -171,6 +177,7 @@ export function gainedInfinityPoints() {
     if (EndgameMastery(141).isBought) ip = ip.powEffectsOf(EndgameMastery(141));
     if (!player.disablePostReality) ip = ip.pow(AlphaUnlocks.infinity.effects.buff.effectOrDefault(1));
     if (AlchemyResource.exponential.amount > 0 && ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality) ip = ip.pow(ReplicantiMultipliers.ipPow);
+    if (Ascensions.ipA.isUnlocked) ip = ip.powEffectOf(InfinityUpgrade.ipMult);
     return ip.floor();
   }
   let ip = player.break
@@ -215,6 +222,8 @@ export function gainedInfinityPoints() {
     ip = ip.pow(ReplicantiMultipliers.ipPow);
   }
 
+  if (Ascensions.ipA.isUnlocked) ip = ip.powEffectOf(InfinityUpgrade.ipMult);
+
   if (ResurgenceUpgrade.ipSurge.isBought && !player.disablePostReality) ip = ip.min(player.antimatter);
 
   return ip.floor();
@@ -223,7 +232,7 @@ export function gainedInfinityPoints() {
 function totalEPMult() {
   if (Pelle.isDisabled("EPMults")) {
     let ep = Pelle.specialGlyphEffect.time.timesEffectOf(PelleRifts.vacuum.milestones[2]);
-    if (PelleDestructionUpgrade.x5EPUpgrade.canBeApplied) ep = ep.timesEffectOf(EternityUpgrade.epMult);
+    if (PelleDestructionUpgrade.x5EPUpgrade.canBeApplied && !Ascensions.epA.isUnlocked) ep = ep.timesEffectOf(EternityUpgrade.epMult);
     if (PelleDestructionUpgrade.timestudy61.canBeApplied) ep = ep.timesEffectOf(TimeStudy(61));
     if (PelleDestructionUpgrade.timestudy122.canBeApplied) ep = ep.timesEffectOf(TimeStudy(122));
     if (PelleDestructionUpgrade.timestudy121.canBeApplied) ep = ep.timesEffectOf(TimeStudy(121));
@@ -236,23 +245,28 @@ function totalEPMult() {
   let ep = getAdjustedGlyphEffect("cursedEP")
     .times(ShopPurchase.EPPurchases.currentMult)
     .timesEffectsOf(
-      EternityUpgrade.epMult,
       TimeStudy(61),
       TimeStudy(122),
       TimeStudy(121),
       TimeStudy(123),
       RealityUpgrade(12)
     ).times(getAdjustedGlyphEffect("timeEP")).times(player.disablePostReality ? 1 : AlphaUnlocks.timestudy61.effects.buff.effectOrDefault(1));
+  if (!Ascensions.epA.isUnlocked) ep = ep.timesEffectOf(EternityUpgrade.epMult);
   if (LHC.voidRunning) ep = ep.timesEffectOf(NullUpgrade.eternityPointMult);
-
-  if (ResurgenceUpgrade.epSurge.isBought && !player.disablePostReality) ep = ep.min(player.antimatter);
 
   return ep;
 }
 
 export function gainedEternityPoints() {
+  let positiveEPPowers = DC.D1;
+  if (GlyphAlteration.isAdded("time")) positiveEPPowers = positiveEPPowers.times(getSecondaryGlyphEffect("timeEP"));
+  if (EndgameMastery(142).isBought) positiveEPPowers = positiveEPPowers.timesEffectsOf(EndgameMastery(142));
+  positiveEPPowers = positiveEPPowers.timesEffectOf(Ra.unlocks.eternityPointPower);
+  positiveEPPowers = positiveEPPowers.timesEffectOf(Achievement(232));
+  if (Ascensions.epA.isUnlocked) positiveEPPowers = positiveEPPowers.timesEffectOf(EternityUpgrade.epMult);
+  const div = new Decimal(308 - PelleRifts.recursion.effectValue.toNumber()).max(positiveEPPowers.times(2)).toNumber();
   let ep = DC.D5.pow(player.records.thisEternity.maxIP.plus(
-    gainedInfinityPoints()).add(1).log10().div(308 - PelleRifts.recursion.effectValue.toNumber()).sub(0.7)).times(totalEPMult());
+    gainedInfinityPoints()).add(1).log10().div(div).sub(0.7)).times(totalEPMult());
 
   if (Teresa.isRunning) {
     ep = ep.pow(0.55);
@@ -274,7 +288,11 @@ export function gainedEternityPoints() {
   if (Alpha.isRunning) ep = ep.pow(AlphaUnlocks.eternityChallenge10.effects.nerf.effectOrDefault(1));
   if (Alpha.isRunning) ep = ep.pow(AlphaUnlocks.timeDimension8.effects.nerf.effectOrDefault(1));
 
+  if (Ascensions.epA.isUnlocked) ep = ep.powEffectOf(EternityUpgrade.epMult);
+
   if (Alpha.isRunning && Alpha.currentStage < 27) ep = ep.min(DC.E3350);
+
+  if (ResurgenceUpgrade.epSurge.isBought && !player.disablePostReality) ep = ep.min(player.antimatter);
 
   return ep.floor();
 }
@@ -286,10 +304,8 @@ export function requiredIPForEP(epAmount) {
 
 export function gainedGlyphLevel() {
   const glyphState = getGlyphLevelInputs();
-  let rawLevel = Math.floor(glyphState.rawLevel);
-  if (!isFinite(rawLevel)) rawLevel = 0;
-  let actualLevel = Math.floor(glyphState.actualLevel);
-  if (!isFinite(actualLevel)) actualLevel = 0;
+  let rawLevel = Decimal.floor(glyphState.rawLevel);
+  let actualLevel = Decimal.floor(glyphState.actualLevel);
   return {
     rawLevel,
     actualLevel
@@ -452,6 +468,7 @@ export function gainedInfinities() {
     if (PelleDestructionUpgrade.singularityMilestones.canBeApplied) pelleInfs = pelleInfs.powEffectOf(SingularityMilestone.infinitiedPow);
     if (!player.disablePostReality) pelleInfs = pelleInfs.pow(AlphaUnlocks.eternityChallenge10.effects.buff.effectOrDefault(1));
     if (ResurgenceUpgrade.curr1Surge.isBought && !player.disablePostReality) pelleInfs = pelleInfs.pow(player.infinities.max(1e10).log10().log10());
+    pelleInfs = pelleInfs.pow(BreakInfinityUpgrade.infinitiedGen.chargedEffect.effectOrDefault(1));
     return pelleInfs;
   }
   let infGain = Effects.max(
@@ -473,6 +490,7 @@ export function gainedInfinities() {
   infGain = infGain.powEffectOf(SingularityMilestone.infinitiedPow);
   if (!player.disablePostReality) infGain = infGain.pow(AlphaUnlocks.eternityChallenge10.effects.buff.effectOrDefault(1));
   if (ResurgenceUpgrade.curr1Surge.isBought && !player.disablePostReality) infGain = infGain.pow(player.infinities.max(1e10).log10().log10());
+  infGain = infGain.pow(BreakInfinityUpgrade.infinitiedGen.chargedEffect.effectOrDefault(1));
   return infGain;
 }
 
@@ -499,6 +517,8 @@ export function gainedCelestialEternityPoints() {
     gainedCelestialInfinityPoints()).add(1).log10().div(308).sub(0.7)).times(totalCEPMult());
 
   cep = cep.min(DC.E4000).times(cep.div(DC.E4000).max(1).pow(0.1));
+  cep = cep.min(DC.E5000).times(cep.div(DC.E5000).max(1).pow(0.1));
+  cep = cep.min(DC.E6000);
 
   return cep.floor();
 }
@@ -508,7 +528,7 @@ export function gainedCondenses() {
 }
 
 export function gainedDivineStars() {
-  const div = 308;
+  const div = EndgameMastery(231).effectOrDefault(308);
   let divs = Decimal.pow10(player.records.thisCondense.maxVM.add(1).log10().div(div).sub(0.75));
   divs = divs.timesEffectOf(DivinityUpgrade.divineL4U1.effects.stars);
   return divs.floor();
@@ -521,6 +541,8 @@ function totalNebMult() {
 export function gainedNebulae() {
   let neb = DC.D5.pow(player.records.thisSupernova.maxVS.plus(
     gainedDivineStars()).add(1).log10().div(308).sub(0.7)).times(totalNebMult());
+
+  neb = neb.min(DC.E100).times(neb.div(DC.E100).max(1).pow(0.1));
 
   return neb.floor();
 }
@@ -564,7 +586,7 @@ export function getGameSpeedupFactor(effectsToConsider, _applyMaxThisEndgame, bl
   }
 
   if (effects.includes(GAME_SPEED_EFFECT.FIXED_SPEED)) {
-    if (EternityChallenge(12).isRunning) {
+    if (EternityChallenge(12).isRunning || player.endgame.overcharge.isRunning) {
       return new Decimal(1 / 1000);
     }
   }
@@ -664,7 +686,7 @@ export function realTimeMechanics(realDiff) {
   // This is in order to prevent players from using time inside of Ra's reality for amplification as well
   Ra.memoryTick(realDiff, !Enslaved.isStoringRealTime);
   if (AlchemyResource.momentum.isUnlocked) {
-    player.celestials.ra.momentumTime += realDiff * Achievement(175).effectOrDefault(1) * EndgameMastery(171).effectOrDefault(1);
+    player.celestials.ra.momentumTime += realDiff * Effects.product(Achievement(175), EndgameMastery(171), Achievement(222));
   }
 
   GameCache.celestialDimensionCommonMultiplier.invalidate();
@@ -700,6 +722,55 @@ export function gameLoop(passedDiff, options = {}) {
 
   EventHub.dispatch(GAME_EVENT.GAME_TICK_BEFORE);
 
+  const thisUpdate = Date.now();
+  const passDiff = passedDiff === undefined
+    ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7) : passedDiff;
+  let diff = new Decimal(passDiff);
+  const realDiff = diff === undefined
+    ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7)
+    : new Decimal(diff).toNumber();
+
+  if (!player.introFrozen) player.introTick += realDiff;
+  if (!player.hasSeenIntro && player.introTick === 0) {
+    Quote.clearQueue();
+  }
+
+  if (player.introTick > 10000 && player.introTick < 15000) {
+    player.introFrozen = true;
+    player.introTick = 15000;
+    Quotes.elemental.intro1.show();
+  }
+
+  if (player.introTick > 30000 && player.introTick < 35000) {
+    player.introFrozen = true;
+    player.introTick = 35000;
+    Quotes.elemental.intro2.show();
+  }
+
+  if (player.introTick > 40000 && player.introTick < 45000) {
+    player.introFrozen = true;
+    player.introTick = 45000;
+    Quotes.elemental.intro3.show();
+  }
+
+  if (player.introTick > 60000 && player.introTick < 90000) {
+    player.introFrozen = true;
+    player.introTick = 90000;
+    player.hasSeenIntro = true;
+  }
+
+  if (player.introTick === 15000 && player.introFrozen && !ui.$viewModel.quotes.current) {
+    Quote.addToQueue(Quotes.elemental.intro1);
+  }
+
+  if (player.introTick === 35000 && player.introFrozen && !ui.$viewModel.quotes.current) {
+    Quote.addToQueue(Quotes.elemental.intro2);
+  }
+
+  if (player.introTick === 45000 && player.introFrozen && !ui.$viewModel.quotes.current) {
+    Quote.addToQueue(Quotes.elemental.intro3);
+  }
+
   // In certain cases we want to allow the player to interact with the game's settings and tabs, but prevent any actual
   // resource generation from happening - in these cases, we have to make sure this all comes before the hibernation
   // check or else it'll attempt to run the game anyway
@@ -708,13 +779,6 @@ export function gameLoop(passedDiff, options = {}) {
     return;
   }
 
-  const thisUpdate = Date.now();
-  const passDiff = passedDiff === undefined
-    ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7) : passedDiff;
-  let diff = new Decimal(passDiff);
-  const realDiff = diff === undefined
-    ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7)
-    : new Decimal(diff).toNumber();
   if (!GameStorage.ignoreBackupTimer) player.backupTimer += realDiff;
 
   // For single ticks longer than a minute from the GameInterval loop, we assume that the device has gone to sleep or
@@ -723,7 +787,7 @@ export function gameLoop(passedDiff, options = {}) {
   // result in a ~1 second tick rate for browsers.
   // Note that we have to explicitly call all the real-time mechanics with the existing value of realDiff, because
   // simply letting it run through simulateTime seems to result in it using zero
-  if (player.options.hibernationCatchup && passDiff === undefined && realDiff > 6e4) {
+  if (player.options.hibernationCatchup && passDiff === undefined && realDiff > 6e4 && player.hasSeenIntro) {
     GameIntervals.gameLoop.stop();
     simulateTime(realDiff / 1000, true);
     realTimeMechanics(realDiff);
@@ -765,7 +829,7 @@ export function gameLoop(passedDiff, options = {}) {
   GameCache.totalCIPMult.invalidate();
 
   const blackHoleDiff = realDiff;
-  const fixedSpeedActive = EternityChallenge(12).isRunning;
+  const fixedSpeedActive = EternityChallenge(12).isRunning || player.endgame.overcharge.isRunning;
   if (!Enslaved.isReleaseTick && !fixedSpeedActive) {
     let speedFactor;
     if (options.blackHoleSpeedup === undefined) {
@@ -812,7 +876,7 @@ export function gameLoop(passedDiff, options = {}) {
     player.records.thisInfinity.realTime += realDiff;
     player.records.thisInfinity.time = player.records.thisInfinity.time.add(diff);
     player.records.thisEternity.realTime += realDiff;
-    if (Enslaved.isRunning && Enslaved.feltEternity && !EternityChallenge(12).isRunning) {
+    if (Enslaved.isRunning && Enslaved.feltEternity && !EternityChallenge(12).isRunning && !player.endgame.overcharge.isRunning) {
       player.records.thisEternity.time = player.records.thisEternity.time.add(new Decimal(diff).times(Currency.eternities.value.clampMax(1e66).plus(1)));
     } else {
       player.records.thisEternity.time = player.records.thisEternity.time.add(diff);
@@ -1055,17 +1119,20 @@ export function gameLoop(passedDiff, options = {}) {
   const darkMatterThreshold1 = Laitela.darkMatterSoftcap1;
   if (darkMatterProd.gt(darkMatterThreshold1)) {
     darkMatterProd = Decimal.min(darkMatterProd, darkMatterThreshold1).times(
-      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold1), 1), new Decimal(0.75).pow(Hexeracts.softcapReduction())));
+      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold1), 1), new Decimal(0.75).pow(
+      Hexeracts.softcapReduction()).pow(1 - SingularityMilestone.weakenDMSoftcaps.effectOrDefault(0))));
   }
   const darkMatterThreshold2 = Laitela.darkMatterSoftcap2;
   if (darkMatterProd.gt(darkMatterThreshold2)) {
     darkMatterProd = Decimal.min(darkMatterProd, darkMatterThreshold2).times(
-      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold2), 1), new Decimal(0.25).pow(Hexeracts.softcapReduction())));
+      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold2), 1), new Decimal(0.25).pow(
+      Hexeracts.softcapReduction()).pow(1 - SingularityMilestone.weakenDMSoftcaps.effectOrDefault(0))));
   }
   const darkMatterThreshold3 = Laitela.darkMatterCap;
   if (darkMatterProd.gt(darkMatterThreshold3)) {
     darkMatterProd = Decimal.min(darkMatterProd, darkMatterThreshold3).times(
-      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold3), 1), new Decimal(0.1)));
+      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold3), 1), new Decimal(0.1).pow(
+      1 - SingularityMilestone.weakenDMSoftcaps.effectOrDefault(0))));
   }
   player.celestials.laitela.darkMatter = Alpha.isDestroyed ? new Decimal(darkMatterProd) : Decimal.min(darkMatterProd, Laitela.darkMatterCap);
   player.celestials.laitela.maxDarkMatter = Decimal.max(player.celestials.laitela.darkMatter, player.celestials.laitela.maxDarkMatter);
@@ -1097,10 +1164,16 @@ export function gameLoop(passedDiff, options = {}) {
     Decimal.max(player.records.totalAntimatterOutsideDoom, 1)), player.records.bestAntimatterExponentOutsideDoom);
 
   player.records.thisReality.galaxies = Decimal.max(player.records.thisReality.galaxies, Replicanti.galaxies.total.add(
-    player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalaxyGenerator.galaxies));
+    player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).add(GalaxyGenerator.galaxies));
+  if (GalacticPowers.galacticAscension.isUnlocked) player.records.thisReality.galaxies = Decimal.max(
+    player.records.thisReality.galaxies, Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
+    player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)));
 
   player.records.bestEndgame.galaxies = Decimal.max(player.records.bestEndgame.galaxies, Replicanti.galaxies.total.add(
-    player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalaxyGenerator.galaxies));
+    player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).add(GalaxyGenerator.galaxies));
+  if (GalacticPowers.galacticAscension.isUnlocked) player.records.bestEndgame.galaxies = Decimal.max(
+    player.records.bestEndgame.galaxies, Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
+    player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)));
 
   if (Enslaved.canTickHintTimer) {
     player.celestials.enslaved.hintUnlockProgress += Enslaved.isRunning ? realDiff : (realDiff * 0.4);
@@ -1121,6 +1194,12 @@ export function gameLoop(passedDiff, options = {}) {
   GameEnd.gameLoop(realDiff);
   LHC.gameLoop(realDiff);
   tryAdvanceSector();
+  player.endgame.ascensionTimer += realDiff;
+  tryAscend();
+  player.endgame.overcharge.chargesLeft.infinite = player.endgame.overcharge.completions.bi - player.endgame.overcharge.charged.infinite.size;
+  player.endgame.overcharge.chargesLeft.eternal = player.endgame.overcharge.completions.eter - player.endgame.overcharge.charged.eternal.size;
+  player.endgame.overcharge.chargesLeft.complex = player.endgame.overcharge.completions.chall - player.endgame.overcharge.charged.complex.size;
+  player.endgame.overcharge.chargesLeft.temporal = player.endgame.overcharge.completions.ts - player.endgame.overcharge.charged.temporal.size;
   quoteCheck();
 
   if (!Enslaved.canAmplify) {
@@ -1195,10 +1274,10 @@ function updatePrestigeRates() {
     player.records.thisCondense.bestVSminVal = gainedDivineStars();
   }
 
-  const currentNebmin = gainedSupernovae().dividedBy(Decimal.clampMin(0.0005, Time.thisSupernovaRealTime.totalMinutes));
+  const currentNebmin = gainedNebulae().dividedBy(Decimal.clampMin(0.0005, Time.thisSupernovaRealTime.totalMinutes));
   if (currentNebmin.gt(player.records.thisSupernova.bestNebmin) && Currency.divineStars.gte(DC.NUMMAX)) {
     player.records.thisSupernova.bestNebmin = currentNebmin;
-    player.records.thisSupernova.bestNebminVal = gainedSupernovae();
+    player.records.thisSupernova.bestNebminVal = gainedNebulae();
   }
 }
 
@@ -1287,7 +1366,7 @@ function passivePrestigeGen(realDiff) {
       // infinities and eternities gained overall will be the same
       // for two ticks as for one tick of twice the length.
       infGen = infGen.plus(gainedInfinities().times(
-        Currency.eternities.value.minus(eternitiedGain.div(2).floor())).times(Time.deltaTime));
+        Currency.eternities.gte(DC.E9E15) ? Currency.eternities.value : Currency.eternities.value.minus(eternitiedGain.div(2).floor())).times(Time.deltaTime));
     }
     infGen = infGen.plus(player.partInfinitied);
     Currency.infinities.add(infGen.floor());
@@ -1495,7 +1574,8 @@ export function gainedCelestialPoints() {
     cp = cp.times(Decimal.max(9e15 * (1e100 ** (0.5 ** player.celestials.pelle.divinities)), player.celestials.pelle.records.totalEndgameAntimatter.add(1).log10()).div(9e15 * (1e100 ** (0.5 ** player.celestials.pelle.divinities))));
   }
   cp = Alpha.isDestroyed ? cp : Decimal.max(Decimal.min(cp, DC.NUMMAX.sub(player.endgame.celestialPoints)), 0);
-  cp = Decimal.pow(cp, Decimal.pow(2, player.celestials.pelle.divinities));
+  cp = Decimal.pow(cp, Decimal.pow(2 * EndgameMastery(232).effectOrDefault(1), player.celestials.pelle.divinities));
+  cp = cp.powEffectsOf(EndgameMastery(212));
   return cp.floor();
 }
 
@@ -1570,10 +1650,6 @@ function afterSimulation(seconds, playerBefore) {
   }
 
   GameUI.notify.showBlackHoles = true;
-
-  if (!player.options.hasSeenUsernameModal) {
-    Modal.username.show();
-  }
 }
 
 export function simulateTime(seconds, real, fast) {

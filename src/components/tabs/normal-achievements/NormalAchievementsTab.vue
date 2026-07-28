@@ -14,6 +14,9 @@ export default {
     return {
       achievementPower: new Decimal(0),
       achTPEffect: new Decimal(0),
+      achCDEffect: new Decimal(0),
+      achVDEffect: new Decimal(0),
+      achEnEffect: new Decimal(0),
       achCountdown: new Decimal(0),
       totalCountdown: new Decimal(0),
       missingAchievements: 0,
@@ -23,13 +26,19 @@ export default {
       achMultBreak: false,
       achMultToIDS: false,
       achMultToTDS: false,
+      achMultToCDS: false,
+      achMultToVDS: false,
       achMultToBH: false,
       achMultToTP: false,
       achMultToTT: false,
+      achMultToEnt: false,
       renderedRowIndices: [],
       showPowers: false,
       achPowers: 0,
-      achPowToTP: 0
+      achPowToTP: 0,
+      achPowToCD: 0,
+      achPowToVD: 0,
+      achPowToEn: 0
     };
   },
   computed: {
@@ -42,6 +51,9 @@ export default {
     boostText() {
       const achievementPower = formatX(this.achievementPower, 2, 3);
       const achTPEffect = formatX(this.achTPEffect, 2, 3);
+      const achCDEffect = formatX(this.achCDEffect, 2, 3);
+      const achVDEffect = formatX(this.achVDEffect, 2, 3);
+      const achEnEffect = formatX(this.achEnEffect, 2, 3);
 
       const boostList = [];
 
@@ -50,15 +62,21 @@ export default {
       if (this.achMultToIDS) dimMultList.push("Infinity");
       if (this.achMultToTDS) dimMultList.push("Time");
       boostList.push(`${makeEnumeration(dimMultList)} Dimensions: ${achievementPower}`);
+      if (this.achMultToCDS) boostList.push(`Celestial Dimensions: ${achCDEffect}`);
+      if (this.achMultToVDS) boostList.push(`Divine Dimensions: ${achVDEffect}`);
 
       if (this.achMultToTP) boostList.push(`Tachyon Particles: ${achTPEffect}`);
       if (this.achMultToBH) boostList.push(`Black Hole Power: ${achievementPower}`);
       if (this.achMultToTT) boostList.push(`Time Theorem production: ${achievementPower}`);
+      if (this.achMultToEnt) boostList.push(`Entropy Generation: ${achEnEffect}`);
       return `${boostList.join("<br>")}`;
     },
     megaBoostText() {
       const achievementPowers = formatPow(this.achPowers, 2, 3);
       const achTPPow = formatPow(this.achPowToTP, 2, 3);
+      const achCDPow = formatPow(this.achPowToCD, 2, 3);
+      const achVDPow = formatPow(this.achPowToVD, 2, 3);
+      const achEnPow = formatPow(this.achPowToEn, 2, 3);
 
       const powersList = [];
 
@@ -67,10 +85,13 @@ export default {
       if (this.achMultToIDS) dimPowList.push("Infinity");
       if (this.achMultToTDS) dimPowList.push("Time");
       powersList.push(`${makeEnumeration(dimPowList)} Dimensions: ${achievementPowers}`);
+      if (this.achMultToCDS) powersList.push(`Celestial Dimensions: ${achCDPow}`);
+      if (this.achMultToVDS) powersList.push(`Divine Dimensions: ${achVDPow}`);
 
       if (this.achMultToTP) powersList.push(`Tachyon Particles: ${achTPPow}`);
       if (this.achMultToBH) powersList.push(`Black Hole Power: ${achievementPowers}`);
       if (this.achMultToTT) powersList.push(`Time Theorem production: ${achievementPowers}`);
+      if (this.achMultToEnt) powersList.push(`Entropy Generation: ${achEnPow}`);
       return `${powersList.join("<br>")}`;
     },
   },
@@ -94,6 +115,9 @@ export default {
       const gameSpeedupFactor = getGameSpeedupFactor();
       this.achievementPower.copyFrom(Achievements.power);
       this.achTPEffect.copyFrom(RealityUpgrade(8).config.effect());
+      this.achCDEffect.copyFrom(EndgameMastery(191).effectOrDefault(DC.D1));
+      this.achVDEffect.copyFrom(EndgameMastery(192).effectOrDefault(DC.D1));
+      this.achEnEffect.copyFrom(EndgameMastery(201).effectOrDefault(DC.D1));
       this.achCountdown.copyFrom(new Decimal(Achievements.timeToNextAutoAchieve).div(gameSpeedupFactor));
       this.totalCountdown.copyFrom(new Decimal(Achievements.preReality.countWhere(a => !a.isUnlocked) - 1).times(Achievements.period).plus(
         Achievements.timeToNextAutoAchieve).div(gameSpeedupFactor));
@@ -104,12 +128,18 @@ export default {
       this.achMultBreak = BreakInfinityUpgrade.achievementMult.canBeApplied;
       this.achMultToIDS = Achievement(75).isUnlocked;
       this.achMultToTDS = EternityUpgrade.tdMultAchs.isBought;
+      this.achMultToCDS = EndgameMastery(191).isBought;
+      this.achMultToVDS = EndgameMastery(192).isBought;
       this.achMultToTP = RealityUpgrade(8).isBought && (!Pelle.isDoomed || PelleRealityUpgrade.paradoxicallyAttain.canBeApplied) && !player.disablePostReality;
       this.achMultToBH = VUnlocks.achievementBH.canBeApplied || PelleCelestialUpgrade.vMilestones3.canBeApplied;
       this.achMultToTT = Ra.unlocks.achievementTTMult.canBeApplied;
+      this.achMultToEnt = EndgameMastery(201).isBought;
       this.showPowers = ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality;
       this.achPowers = Achievements.powerConv(Achievements.power);
-      this.achPowToTP = Achievements.powerConv(Decimal.sqrt(Achievements.power));
+      this.achPowToTP = Achievements.powerConv(RealityUpgrade(8).config.effect());
+      this.achPowToCD = Achievements.powerConv(EndgameMastery(191).effectOrDefault(DC.D1));
+      this.achPowToVD = Achievements.powerConv(EndgameMastery(192).effectOrDefault(DC.D1));
+      this.achPowToEn = Achievements.powerConv(EndgameMastery(201).effectOrDefault(DC.D1));
     },
     startRowRendering() {
       const unlockedRows = [];

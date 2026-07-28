@@ -124,7 +124,8 @@ export class Galaxy {
   }
 
   static get costMult() {
-    return Effects.min(NormalChallenge(10).isRunning ? 90 : 60, TimeStudy(42));
+    return Effects.min(NormalChallenge(10).isRunning ? 90 : 60, TimeStudy(42)) *
+      (GalacticPowers.galaxyScaling.isUnlocked ? GalacticPowers.galaxyScaling.reward : 1);
   }
 
   static get baseCost() {

@@ -48,8 +48,8 @@ export default {
     nextAtDisplay() {
       const first = this.nextPack?.id === "teresaPack";
       const next = ExpansionPacks.nextPackUnlockAM;
-      const alpha = DivinityMilestone.hadronEmpowerment.isBought && this.nextPack?.id === "alphaPack";
-      const alphaLock = !DivinityMilestone.hadronEmpowerment.isBought && this.nextPack?.id === "alphaPack";
+      const alpha = DivinityMilestone.hadronEmpowerment.isReached && this.nextPack?.id === "alphaPack";
+      const alphaLock = !DivinityMilestone.hadronEmpowerment.isReached && this.nextPack?.id === "alphaPack";
 
       if (first) return `The first Expansion Pack unlocks at ${format(next)} Antimatter.`;
       if (alpha && !Pelle.isDoomed) return `Reach ${format(next)} Antimatter to unlock a new Expansion Pack.`;

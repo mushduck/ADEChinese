@@ -13,9 +13,12 @@ export default {
   data() {
     return {
       hasAccelerator: false,
+      canSeeEntropy1: false,
+      canSeeEntropy2: false,
       hadronSpeed: 0,
       accelPower: 1,
       amSoftcap: new Decimal(),
+      amSoftcap2: new Decimal(),
       amHardcap: new Decimal(),
       isRunning: false,
       highestAntimatter: new Decimal(),
@@ -53,9 +56,12 @@ export default {
   methods: {
     update() {
       this.hasAccelerator = Accelerators.all.some(a => a.isUnlocked);
+      this.canSeeEntropy1 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e200));
+      this.canSeeEntropy2 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e260)) && !Pelle.isDoomed;
       this.hadronSpeed = LHC.hadronSpeed;
       this.accelPower = LHC.acceleratorSpeed * 100000;
       this.amSoftcap.copyFrom(Pelle.isDoomed ? DC.E9E15 : Decimal.pow10(1e200));
+      this.amSoftcap2.copyFrom(Decimal.pow10(1e260));
       this.amHardcap.copyFrom(Pelle.isDoomed ? DC.ENUMMAX : LHC.breakingPoint);
       this.isRunning = LHC.voidRunning || LHC.nullifiedVoidRunning;
       this.highestAntimatter.copyFrom(player.endgame.largeHadronCollider.void.highestAntimatter);
@@ -114,9 +120,18 @@ export default {
       >
         Reach {{ format(Decimal.pow10(1e200), 2, 2) }} Antimatter
       </div>
-      <div class="c-large-hadron-collider-entropy">
+      <div
+        class="c-large-hadron-collider-entropy"
+        v-if="canSeeEntropy1"
+      >
         Excess Entropy in the universe has caused your Antimatter to decay past {{ format(amSoftcap, 2, 2) }},
         and has restricted it from exceeding {{ format(amHardcap, 2, 2) }}.
+      </div>
+      <div
+        class="c-large-hadron-collider-entropy"
+        v-if="canSeeEntropy2"
+      >
+        The Antimatter decay is significantly stronger past {{ format(amSoftcap2, 2, 2) }}.
       </div>
     </div>
     <br>

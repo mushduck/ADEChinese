@@ -9,7 +9,9 @@ import ModalProgressBar from "@/components/modals/ModalProgressBar";
 import ModernSidebar from "@/components/ui-modes/modern/ModernSidebar";
 import NewGame from "@/components/tabs/celestial-pelle/NewGame";
 import PopupModal from "@/components/modals/PopupModal";
+import Prologue from "@/components/ui-modes/Prologue";
 import SaveTimer from "@/components/SaveTimer";
+import ScreenOverlay from "@/components/ui-modes/ScreenOverlay";
 import SpectateGame from "@/components/SpectateGame";
 import SpeedrunStatus from "@/components/SpeedrunStatus";
 import TimeTheoremShop from "@/components/tabs/time-studies/tt-shop/TimeTheoremShop";
@@ -28,6 +30,8 @@ export default {
     CelestialQuoteModal,
     CelestialQuoteHistoryDisplay,
     FadeAway,
+    ScreenOverlay,
+    Prologue,
     CreditsContainer,
     SpectateGame,
     NewGame
@@ -35,7 +39,8 @@ export default {
   data() {
     return {
       ending: false,
-      dark: false
+      dark: false,
+      intro: false
     };
   },
   computed: {
@@ -52,6 +57,7 @@ export default {
     update() {
       this.ending = GameEnd.endState >= END_STATE_MARKERS.FADE_AWAY && !GameEnd.creditsClosed;
       this.dark = Alpha.isRunning;
+      this.intro = !player.hasSeenIntro;
     }
   }
 };
@@ -98,7 +104,9 @@ export default {
         :modal="view.modal.current"
       />
       <ModalProgressBar v-if="view.modal.progressBar" />
-      <FadeAway v-if="ending || dark" />
+      <ScreenOverlay />
+      <Prologue />
+      <FadeAway v-if="ending || dark || intro" />
       <CreditsContainer v-if="ending" />
       <NewGame v-if="ending" />
       <SpectateGame />

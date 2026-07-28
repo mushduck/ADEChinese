@@ -10,6 +10,7 @@ export default {
   },
   data() {
     return {
+      areSoftcapsApplicable: false,
       hasSeenFinalSoftcap: false
     };
   },
@@ -32,7 +33,8 @@ export default {
   },
   methods: {
     update() {
-      this.hasSeenFinalSoftcap = player.eternityPoints.gte("e1e125");
+      this.areSoftcapsApplicable = !Ascensions.epA.isUnlocked;
+      this.hasSeenFinalSoftcap = player.eternityPoints.gte("e1e125") && !Ascensions.epA.isUnlocked;
     },
     formatPostBreak
   }
@@ -54,15 +56,15 @@ export default {
       />
     </div>
     <EPMultiplierButton />
-    <div>
+    <div v-if="areSoftcapsApplicable">
       The cost for the {{ formatX(5) }} multiplier jumps at {{ format(costIncreases[0]) }},
       {{ formatPostBreak(costIncreases[1], 2) }}, and {{ formatPostBreak(costIncreases[2]) }} Eternity Points.
       <br>
       The cost increases super-exponentially after {{ formatPostBreak(costIncreases[3]) }} Eternity Points.
-      <div v-if="hasSeenFinalSoftcap">
-        <br>
-        The cost increases greatly beyond {{ formatPostBreak(costIncreases[4]) }} Eternity Points.
-      </div>
+    </div>
+    <div v-if="hasSeenFinalSoftcap">
+      <br>
+      The cost increases greatly beyond {{ formatPostBreak(costIncreases[4]) }} Eternity Points.
     </div>
   </div>
 </template>

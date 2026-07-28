@@ -47,6 +47,8 @@ export class EndgameMasteryState extends EndgameMasteriesState {
       case EM_REQUIREMENT_TYPE.CURRENCY_PATH:
         return this.config.requirement.every(r => check(r)) && currTree &&
           currTree.currCurrPathCount < currTree.allowedCurrPathCount;
+      case EM_REQUIREMENT_TYPE.EXPANDED:
+        return EndgameMastery.permaMasteries.isBought;
       default:
         throw Error(`Unrecognized EM requirement type: ${this.reqType}`);
     }
@@ -104,6 +106,7 @@ export class EndgameMasteryState extends EndgameMasteriesState {
       Achievement(142).unlock();
       Achievement(144).unlock();
       Achievement(147).unlock();
+      applyRUPG10();
     }
     if (id === 61) {
       for (const achievement of Achievements.preEndgame) {

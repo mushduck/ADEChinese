@@ -1,4 +1,5 @@
 import { accelerators } from "./accelerators";
+import { ascensions } from "./ascensions";
 import { breakEternityUpgrades } from "./break-eternity-upgrades";
 import { endgameMasteries } from "./endgame-masteries";
 import { permanentEndgameMasteries } from "./permanent-endgame-masteries";
@@ -29,5 +30,6 @@ export const endgame = {
     celestialEternityPlusUpgrades: celestialEternityPlusUpgrades
   },
   accelerators: accelerators,
-  nullUpgrades: nullUpgrades
+  nullUpgrades: nullUpgrades,
+  ascensions: ascensions
 };

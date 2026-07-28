@@ -4,13 +4,29 @@ export default {
   data() {
     return {
       opacity: 0,
-      isDarker: false
+      isDarker: false,
+      hasSeenIntro: false,
+      forceStars: false,
+      forceDark: false
     };
+  },
+  computed: {
+    classObject() {
+      return {
+        "c-background-overlay": !this.forceStars && !this.forceDark,
+        "c-background-overlay--force-stars": this.forceStars,
+        "c-background-overlay--force-dark": this.forceDark
+      };
+    }
   },
   methods: {
     update() {
       this.isDarker = Alpha.isRunning;
-      this.opacity = this.isDarker ? (player.options.brightAlpha ? 0.2 : 0.5) : (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2;
+      this.hasSeenIntro = player.hasSeenIntro;
+      this.opacity = !this.hasSeenIntro ? 1.1 :
+        (this.isDarker ? (player.options.brightAlpha ? 0.2 : 0.5) : (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2);
+      this.forceStars = player.introTick > 35000 && player.introTick <= 45000;
+      this.forceDark = player.introTick > 45000 && player.introTick <= 60000;
     }
   }
 };
@@ -18,7 +34,7 @@ export default {
 
 <template>
   <div
-    class="c-background-overlay"
+    :class="classObject"
     :style="{
       opacity,
       pointerEvents: opacity > 1 ? 'auto' : 'none'
@@ -133,5 +149,29 @@ export default {
   background-position-x: 50%;
   background-position-y: 50%;
   background-size: 150%;
+}
+
+.c-background-overlay--force-stars {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  background-color: #ffffff;
+  background: black;
+  background-image: url("../../../../public/images/stars-bg.png");
+  background-position: center;
+  background-size: 100%;
+}
+
+.c-background-overlay--force-dark {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  background-color: black;
 }
 </style>

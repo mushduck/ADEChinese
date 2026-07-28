@@ -19,6 +19,7 @@ import EnterDilationModal from "@/components/modals/prestige/EnterDilationModal"
 import EternityModal from "@/components/modals/prestige/EternityModal";
 import ExitChallengeModal from "@/components/modals/prestige/ExitChallengeModal";
 import ExitDilationModal from "@/components/modals/prestige/ExitDilationModal";
+import EnterOverchargeModal from "@/components/modals/prestige/EnterOverchargeModal";
 import HardResetModal from "@/components/modals/prestige/HardResetModal";
 import RealityModal from "@/components/modals/prestige/RealityModal";
 import ReplicantiGalaxyModal from "@/components/modals/prestige/ReplicantiGalaxyModal";
@@ -220,6 +221,7 @@ Modal.replicantiGalaxy = new Modal(ReplicantiGalaxyModal, 1, GAME_EVENT.ETERNITY
 Modal.eternity = new Modal(EternityModal, 1, GAME_EVENT.ETERNITY_RESET_AFTER);
 Modal.enterDilation = new Modal(EnterDilationModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
 Modal.exitDilation = new Modal(ExitDilationModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
+Modal.enterOvercharge = new Modal(EnterOverchargeModal, 1, GAME_EVENT.ENDGAME_RESET_AFTER);
 Modal.reality = new Modal(RealityModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
 Modal.resetReality = new Modal(ResetRealityModal, 1, GAME_EVENT.REALITY_RESET_AFTER);
 Modal.resetEndgame = new Modal(ResetEndgameModal, 1, GAME_EVENT.ENDGAME_RESET_AFTER);
@@ -303,7 +305,7 @@ function getSaveInfo(save) {
     realityMachines: new Decimal(0),
     imaginaryMachines: new Decimal(0),
     dilatedTime: new Decimal(0),
-    bestLevel: 0,
+    bestLevel: new Decimal(0),
     pelleAM: new Decimal(0),
     remnants: new Decimal(0),
     realityShards: new Decimal(0),
@@ -326,7 +328,7 @@ function getSaveInfo(save) {
   // Use max DT instead of current DT because spending it can cause it to drop and trigger the conflict modal
   // unnecessarily. We only use current DT as a fallback (eg. loading a save from pre-reality versions)
   resources.dilatedTime.copyFrom(new Decimal(save.records?.thisReality.maxDT ?? (save.dilation?.dilatedTime ?? 0)));
-  resources.bestLevel = save.records?.bestReality.glyphLevel ?? 0;
+  resources.bestLevel.copyFrom(new Decimal(save.records?.bestReality.glyphLevel));
   resources.pelleAM.copyFrom(new Decimal(save.celestials?.pelle.records.totalAntimatter));
   resources.remnants.copyFrom(new Decimal(save.celestials?.pelle.remnants));
   resources.realityShards.copyFrom(new Decimal(save.celestials?.pelle.realityShards));

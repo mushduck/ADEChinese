@@ -119,7 +119,7 @@ export const ra = {
     effarigXP: {
       id: 9,
       reward: "All Memory Chunks produce more Memories based on highest Glyph level",
-      effect: () => player.disablePostReality ? 1 : 1 + player.records.bestReality.glyphLevel / 7000,
+      effect: () => player.disablePostReality ? 1 : player.records.bestReality.glyphLevel.div(7000).add(1).toNumber(),
       pet: "effarig",
       level: 5,
       displayIcon: `<span class="fas fa-clone"></span>`
