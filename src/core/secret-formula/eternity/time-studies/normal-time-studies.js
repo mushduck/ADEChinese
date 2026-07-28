@@ -310,7 +310,7 @@ export const normalTimeStudies = [
         ? TimeSpan.fromMinutes(DC.D0)
         : TimeSpan.fromMinutes(new Decimal(Perk.studyIdleEP.effectOrDefault(0))));
       const totalSeconds = Alpha.isRunning ? Time.thisEternityRealTime.totalSeconds : Time.thisEternity.plus(perkEffect).totalSeconds;
-      return Decimal.sqrt(new Decimal(1.39).times(totalSeconds));
+      return Decimal.pow(new Decimal(1.39).times(totalSeconds), 0.5);
     },
     formatEffect: value => formatX(value, 1, 1)
   },
