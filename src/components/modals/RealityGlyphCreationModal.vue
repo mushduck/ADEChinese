@@ -19,7 +19,7 @@ export default {
   methods: {
     update() {
       this.isDoomed = Pelle.isDoomed && !PelleAlchemyUpgrade.alchemyReality.canBeApplied;
-      this.realityGlyphLevel.copyFrom(new Decimal(AlchemyResource.reality.effectValue));
+      this.realityGlyphLevel.copyFrom(Decimal.floor(AlchemyResource.reality.amount));
       const realityEffectConfigs = GlyphEffects.all
         .filter(eff => eff.glyphTypes.includes("reality"))
         .sort((a, b) => a.bitmaskIndex - b.bitmaskIndex);
@@ -33,7 +33,7 @@ export default {
           { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
         return;
       }
-      Glyphs.addToInventory(GlyphGenerator.realityGlyph(this.realityGlyphLevel));
+      Glyphs.addToInventory(GlyphGenerator.realityGlyph(Decimal.floor(AlchemyResource.reality.amount)));
       if (!ExpansionPack.effarigPack.isBought || player.disablePostReality) AlchemyResource.reality.amount = 0;
       player.reality.glyphs.createdRealityGlyph = true;
       this.emitClose();
