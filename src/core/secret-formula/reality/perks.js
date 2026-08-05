@@ -33,8 +33,7 @@ export const perks = {
     label: "START",
     family: PERK_FAMILY.REALITY,
     get description() {
-      return `Remove the achievement requirement from the Reality Study
-      and allow you to choose from ${formatInt(4)} different Glyphs on Reality.`;
+      return `解锁现实无需满足成就要求，现实时你可以在 ${formatInt(4)} 个不同的符文中选择一个符文`;
     },
     effect: 4,
     layoutPosList: [76596, 80200, 80600, 80200, 80188, 67769],
@@ -44,7 +43,7 @@ export const perks = {
     label: "SAM",
     family: PERK_FAMILY.ANTIMATTER,
     get description() {
-      return `Start every reset with ${format(5e130)} antimatter.`;
+      return `每次重置均从 ${format(5e130)} 反物质开始`;
     },
     bumpCurrency: () => Currency.antimatter.bumpTo(5e130),
     effect: 5e130,
@@ -55,7 +54,7 @@ export const perks = {
     label: "SIP1",
     family: PERK_FAMILY.INFINITY,
     get description() {
-      return `Start every Eternity and Reality with ${format(5e15)} Infinity Points.`;
+      return `每个永恒/现实均从 ${format(5e15)} 无限点数开始`;
     },
     bumpCurrency: () => Currency.infinityPoints.bumpTo(5e15),
     effect: 5e15,
@@ -66,7 +65,7 @@ export const perks = {
     label: "SIP2",
     family: PERK_FAMILY.INFINITY,
     get description() {
-      return `Start every Eternity and Reality with ${format(5e130)} Infinity Points.`;
+      return `每个永恒/现实均从 ${format(5e130)} 无限点数开始`;
     },
     bumpCurrency: () => Currency.infinityPoints.bumpTo(5e130),
     effect: 5e130,
@@ -77,12 +76,12 @@ export const perks = {
     label: "SEP1",
     family: PERK_FAMILY.ETERNITY,
     get description() {
-      return `Start every Reality with ${formatInt(10)} Eternity Points.`;
+      return `每个现实均从 ${formatInt(10)} 永恒点数开始`;
     },
     bumpCurrency: () => Currency.eternityPoints.bumpTo(10),
     effect: 10,
     automatorPoints: 5,
-    shortDescription: () => `Start with ${formatInt(10)} EP`,
+    shortDescription: () => `从 ${formatInt(10)} 永恒点数开始`,
     layoutPosList: [88915, 80999, 79398, 80598, 82197, 103734],
   },
   startEP2: {
@@ -90,7 +89,7 @@ export const perks = {
     label: "SEP2",
     family: PERK_FAMILY.ETERNITY,
     get description() {
-      return `Start every Reality with ${format(5000)} Eternity Points.`;
+      return `每个现实均从 ${format(5000)} 永恒点数开始`;
     },
     bumpCurrency: () => Currency.eternityPoints.bumpTo(5000),
     effect: 5000,
@@ -101,12 +100,12 @@ export const perks = {
     label: "SEP3",
     family: PERK_FAMILY.ETERNITY,
     get description() {
-      return `Start every Reality with ${format(5e9)} Eternity Points.`;
+      return `每个现实均从 ${format(5e9)} 永恒点数开始`;
     },
     bumpCurrency: () => Currency.eternityPoints.bumpTo(5e9),
     effect: 5e9,
     automatorPoints: 10,
-    shortDescription: () => `Start with ${format(5e9)} EP`,
+    shortDescription: () => `从 ${format(5e9)} 永恒点数开始`,
     layoutPosList: [96459, 81798, 78997, 80596, 82203, 106224],
   },
   startTP: {
@@ -114,19 +113,18 @@ export const perks = {
     label: "STP",
     family: PERK_FAMILY.DILATION,
     get description() {
-      return `After unlocking Dilation, gain ${formatInt(10)} Tachyon Particles.`;
+      return `解锁时间膨胀后，立刻获得 ${formatInt(10)} 超光速粒子`;
     },
     effect: () => (Enslaved.isRunning ? 1 : 10),
     automatorPoints: 5,
-    shortDescription: () => `Start with ${formatInt(10)} TP`,
+    shortDescription: () => `从 ${formatInt(10)} 超光速粒子开始`,
     layoutPosList: [102120, 81399, 79399, 80197, 81800, 109376],
   },
   antimatterNoReset: {
     id: 30,
     label: "ANR",
     family: PERK_FAMILY.ANTIMATTER,
-    description: `Dimension Boosts and Antimatter Galaxies no longer reset
-      Antimatter, Antimatter Dimensions, Tickspeed, or Dimensional Sacrifice.`,
+    description: `维度提升和反物质星系不再重置反物质、反物质维度、计数频率的数量和维度献祭的效果`,
     layoutPosList: [85343, 81000, 79799, 80199, 82194, 92553],
   },
   studyPassive: {
@@ -134,9 +132,7 @@ export const perks = {
     label: "PASS",
     family: PERK_FAMILY.ETERNITY,
     get description() {
-      return `Improve Time Study 122 to ${formatX(50)} Eternity Points and
-        Time Study 142 to ${formatX(DC.E50)} Infinity Points.
-        ${Pelle.isDoomed ? "" : `In addition, Time Study 132 also makes Replicanti ${format(3)} times faster.`}`;
+      return `时间研究 122 的效果为永恒点数 ${formatX(50)}, 时间研究 142 的效果为无限点数 ${formatX(DC.E50)}${Pelle.isDoomed ? "" : `，同时，时间研究 132 使复制速度 ${format(3)} 倍`}`;
     },
     layoutPosList: [67054, 79400, 80999, 80202, 78594, 52589],
   },
@@ -144,7 +140,7 @@ export const perks = {
     id: 40,
     label: "EU1",
     family: PERK_FAMILY.ETERNITY,
-    description: `Automatically unlock the first row of Eternity Upgrades for free once you have Eternities.`,
+    description: `第一次永恒完成后，无需消耗任何资源即可自动解锁前三个永恒升级`,
     layoutPosList: [89407, 80601, 80201, 79800, 80591, 73007],
   },
   autounlockEU2: {
@@ -152,8 +148,7 @@ export const perks = {
     label: "EU2",
     family: PERK_FAMILY.ETERNITY,
     get description() {
-      return `The second row of Eternity Upgrades is automatically purchased
-        at ${formatX(1e10)} times less than their original price.`;
+      return `后三个永恒升级自动以原价的 ${formatX(1e10)} 分之一购买`;
     },
     layoutPosList: [103008, 81001, 80202, 79400, 80594, 81867],
   },
@@ -161,32 +156,32 @@ export const perks = {
     id: 42,
     label: "DU1",
     family: PERK_FAMILY.DILATION,
-    description: "After unlocking Dilation, automatically unlock the second row of Dilation Upgrades for free.",
+    description: "解锁时间膨胀后，无需消耗任何资源即可自动解锁前三个单次购买的膨胀升级",
     layoutPosList: [119833, 81801, 79403, 79398, 80200, 97510],
   },
   autounlockDilation2: {
     id: 43,
     label: "DU2",
     family: PERK_FAMILY.DILATION,
-    description: "After unlocking Dilation, automatically unlock the third row of Dilation Upgrades for free.",
+    description: "解锁时间膨胀后，无需消耗任何资源即可自动解锁后三个单次购买的膨胀升级",
     layoutPosList: [124260, 82201, 79003, 79397, 80203, 85513],
   },
   autounlockDilation3: {
     id: 44,
     label: "ATT",
     family: PERK_FAMILY.DILATION,
-    description: "Automatically purchase the passive Time Theorem generation Dilation Upgrade once you can afford it.",
+    description: "自动购买产生时间之理的膨胀升级",
     automatorPoints: 5,
-    shortDescription: () => "Auto-purchase TT generation",
+    shortDescription: () => "自动产生时间之理",
     layoutPosList: [124289, 82601, 79002, 79396, 80206, 72282],
   },
   autounlockTD: {
     id: 45,
     label: "ATD",
     family: PERK_FAMILY.DILATION,
-    description: "Auto-unlock Time Dimensions 5-8 once you can afford them.",
+    description: "自动解锁第五至第八时间维度",
     automatorPoints: 5,
-    shortDescription: () => "Auto-unlock TD 5-8",
+    shortDescription: () => "自动解锁第五至第八时间维度",
     layoutPosList: [127117, 82600, 79001, 79796, 80209, 61869],
   },
   autounlockReality: {
@@ -194,63 +189,61 @@ export const perks = {
     label: "REAL",
     family: PERK_FAMILY.REALITY,
     get description() {
-      return `Auto-unlocks Reality once you have ${format(DC.E4000)} Eternity Points
-        and have unlocked Time Dimension 8.`;
+      return `解锁第八时间维度后，拥有 ${format(DC.E4000)} 永恒点数时，自动解锁现实`;
     },
     automatorPoints: 10,
-    shortDescription: () => "Auto-unlock Reality",
+    shortDescription: () => "自动解锁现实",
     layoutPosList: [124343, 83000, 79000, 79795, 80212, 71046],
   },
   bypassIDAntimatter: {
     id: 51,
     label: "IDR",
     family: PERK_FAMILY.INFINITY,
-    description: "Infinity Dimensions no longer have antimatter requirements.",
+    description: "解锁无限维度时，无需满足反物质数量的要求",
     layoutPosList: [51317, 80998, 79397, 80997, 82600, 104489],
   },
   bypassTGReset: {
     id: 52,
     label: "TGR",
     family: PERK_FAMILY.DILATION,
-    description: "The 2nd rebuyable Dilation Upgrade no longer resets your Dilated Time.",
+    description: "购买第二个膨胀升级后，不会重置膨胀时间的数量",
     layoutPosList: [116568, 81800, 79801, 79798, 81400, 112677],
   },
   bypassECDilation: {
     id: 53,
     label: "DILR",
     family: PERK_FAMILY.DILATION,
-    description: "Remove the Eternity Challenge 11, Eternity Challenge 12, and total Time Theorem " +
-      "requirements from Time Dilation unlock.",
+    description: "解锁时间膨胀无需完成永恒挑战 11 和永恒挑战 12, 且时间之理的总量无需满足解锁要求",
     automatorPoints: 5,
-    shortDescription: () => `Unlocking Dilation only requires TT`,
+    shortDescription: () => `只需要消耗时间之理，即可解锁时间膨胀`,
     layoutPosList: [129011, 81802, 80203, 80198, 80600, 109116],
   },
   bypassEC1Lock: {
     id: 54,
     label: "EC1R",
     family: PERK_FAMILY.ETERNITY,
-    description: "Remove the Eternity Challenge 1 requirement from Time Study 181.",
+    description: "无需完成永恒挑战 1, 即可购买时间研究 181",
     layoutPosList: [64284, 79000, 81399, 80603, 78597, 44167],
   },
   bypassEC2Lock: {
     id: 55,
     label: "EC2R",
     family: PERK_FAMILY.ETERNITY,
-    description: "Remove the Eternity Challenge 2 requirement from Time Study 181.",
+    description: "无需完成永恒挑战 2, 即可购买时间研究 181",
     layoutPosList: [55463, 78999, 80998, 80602, 78197, 48944],
   },
   bypassEC3Lock: {
     id: 56,
     label: "EC3R",
     family: PERK_FAMILY.ETERNITY,
-    description: "Remove the Eternity Challenge 3 requirement from Time Study 181.",
+    description: "无需完成永恒挑战 3, 即可购买时间研究 181",
     layoutPosList: [75475, 79001, 81400, 80203, 78997, 47822],
   },
   bypassEC5Lock: {
     id: 57,
     label: "EC5R",
     family: PERK_FAMILY.ETERNITY,
-    description: "Remove the Eternity Challenge 5 requirement from Time Study 62.",
+    description: "无需完成永恒挑战 5, 即可购买时间研究 62",
     layoutPosList: [70626, 79800, 81000, 80201, 78591, 62607],
   },
   autocompleteEC1: {
@@ -258,13 +251,11 @@ export const perks = {
     label: "PEC1",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Auto-complete one Eternity Challenge every ${formatInt(60)} minutes (real-time).
-              ECs will be completed sequentially, requiring all previous
-              ECs to be fully completed before progressing to the next EC.`;
+      return `现实时间每经过 ${formatInt(60)} 分钟，按数字顺序自动完成永恒挑战。完成下一个永恒挑战之前，需要先完成在它之前所有的永恒挑战`;
     },
     effect: 60,
     automatorPoints: 5,
-    shortDescription: () => `Auto-complete ECs every ${formatInt(60)} minutes`,
+    shortDescription: () => `每${formatInt(60)}分钟自动完成一个永恒挑战`,
     layoutPosList: [90660, 79402, 81002, 79803, 79397, 46664],
   },
   autocompleteEC2: {
@@ -272,8 +263,7 @@ export const perks = {
     label: "PEC2",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Auto-complete one Eternity Challenge every ${formatInt(40)} minutes (real-time).
-        (${formatInt(20)} minute decrease)`;
+      return `现实时间每经过 ${formatInt(40)} 分钟，按数字顺序自动完成永恒挑战 (${formatInt(20)} minute decrease)`;
     },
     effect: 40,
     layoutPosList: [95485, 79002, 81402, 79804, 79400, 53486],
@@ -283,19 +273,18 @@ export const perks = {
     label: "PEC3",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Auto-complete one Eternity Challenge every ${formatInt(20)} minutes (real-time).
-        (${formatInt(20)} minute decrease)`;
+      return `现实时间每经过 ${formatInt(20)} 分钟，按数字顺序自动完成永恒挑战 (${formatInt(20)} minute decrease)`;
     },
     effect: 20,
     automatorPoints: 10,
-    shortDescription: () => `Auto-complete ECs every ${formatInt(20)} minutes`,
+    shortDescription: () => `每${formatInt(20)}分钟自动完成一个永恒挑战`,
     layoutPosList: [96311, 78602, 81401, 80204, 79403, 61903],
   },
   studyActiveEP: {
     id: 70,
     label: "ACT",
     family: PERK_FAMILY.ETERNITY,
-    description: "Active path multipliers are always maximized.",
+    description: "活跃路径的倍数加成始终为最大值",
     layoutPosList: [56633, 79399, 80599, 80601, 78194, 58565],
   },
   studyIdleEP: {
@@ -303,7 +292,7 @@ export const perks = {
     label: "IDL",
     family: PERK_FAMILY.ETERNITY,
     get description() {
-      return `Idle path multipliers start as if you have spent ${formatInt(15)} minutes in this Infinity/Eternity.`;
+      return `挂机路径加成从开始就如同你已经在该无限/永恒中经过了${formatInt(15)}分钟`;
     },
     effect: 15,
     layoutPosList: [80248, 79401, 81001, 79802, 78994, 56239],
@@ -312,9 +301,9 @@ export const perks = {
     id: 72,
     label: "ECR",
     family: PERK_FAMILY.ETERNITY,
-    description: "Remove non-Time Theorem requirements for unlocking Eternity Challenges.",
+    description: "解锁永恒挑战只需要消耗时间之理",
     automatorPoints: 10,
-    shortDescription: () => "Remove EC secondary requirements",
+    shortDescription: () => "移除解锁永恒挑战的第二个要求",
     layoutPosList: [62714, 78600, 81398, 80604, 78600, 40599],
   },
   studyECBulk: {
@@ -322,10 +311,9 @@ export const perks = {
     label: "ECB",
     family: PERK_FAMILY.ETERNITY,
     description:
-      `You can complete multiple tiers of Eternity Challenges at once if
-      you reach the goal for a higher completion of that challenge.`,
+      `如果你能达到更高的目标，可以一次性完成多个永恒挑战`,
     automatorPoints: 15,
-    shortDescription: () => "Bulk EC Completion",
+    shortDescription: () => "批量完成永恒挑战",
     layoutPosList: [62741, 78200, 81397, 81004, 78603, 41435],
   },
   retroactiveTP1: {
@@ -333,8 +321,7 @@ export const perks = {
     label: "TP1",
     family: PERK_FAMILY.DILATION,
     get description() {
-      return `When buying the 3rd rebuyable Dilation Upgrade,
-        multiply your current Tachyon Particle amount by ${formatFloat(1.5, 1)}.`;
+      return `购买一次“获得三倍的超光速粒子”时间膨胀升级后，当前超光速粒子数量 × ${formatFloat(1.5, 1)}`;
     },
     effect: 1.5,
     layoutPosList: [111739, 81799, 79800, 79797, 81403, 115434],
@@ -344,8 +331,7 @@ export const perks = {
     label: "TP2",
     family: PERK_FAMILY.DILATION,
     get description() {
-      return `When buying the 3rd rebuyable Dilation Upgrade,
-        multiply your current Tachyon Particle amount by ${formatInt(2)}.`;
+      return `购买一次“获得三倍的超光速粒子”时间膨胀升级后，当前超光速粒子数量 × ${formatInt(2)}`;
     },
     effect: 2,
     layoutPosList: [103757, 82199, 79401, 80196, 81406, 117382],
@@ -355,8 +341,7 @@ export const perks = {
     label: "TP3",
     family: PERK_FAMILY.DILATION,
     get description() {
-      return `When buying the 3rd rebuyable Dilation Upgrade,
-        multiply your current Tachyon Particle amount by ${formatFloat(2.5, 1)}.`;
+      return `购买一次“获得三倍的超光速粒子”时间膨胀升级后，当前超光速粒子数量 × ${formatFloat(2.5, 1)}`;
     },
     effect: 2.5,
     layoutPosList: [96175, 82599, 79400, 80195, 81409, 116540],
@@ -366,21 +351,20 @@ export const perks = {
     label: "TP4",
     family: PERK_FAMILY.DILATION,
     get description() {
-      return `When buying the 3rd rebuyable Dilation Upgrade,
-        multiply your current Tachyon Particle amount by ${formatInt(3)}.`;
+      return `购买一次“获得三倍的超光速粒子”时间膨胀升级后，当前超光速粒子数量 × ${formatInt(3)}.`;
     },
     effect: 3,
     automatorPoints: 10,
-    shortDescription: () => `${formatX(3)} TP upgrade applies retroactively`,
+    shortDescription: () => `购买超光速粒子倍增升级时，获得 ${formatX(3)} 倍的超光速粒子`,
     layoutPosList: [86984, 82598, 78999, 80595, 81412, 114103],
   },
   autobuyerDilation: {
     id: 100,
     label: "DAU",
     family: PERK_FAMILY.AUTOMATION,
-    description: "Unlock autobuyers for the repeatable Dilation Upgrades.",
+    description: "解锁自动购买可重复购买的膨胀升级",
     automatorPoints: 5,
-    shortDescription: () => "Dilation Upgrade Autobuyers",
+    shortDescription: () => "自动购买膨胀升级",
     layoutPosList: [117401, 81401, 79802, 79799, 80597, 96672],
   },
   autobuyerFasterID: {
@@ -388,11 +372,11 @@ export const perks = {
     label: "IDAS",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Infinity Dimension autobuyers work ${formatX(3)} faster.`;
+      return `自动购买无限维度的速度 ${formatX(3)}`;
     },
     effect: 1 / 3,
     automatorPoints: 5,
-    shortDescription: () => "Faster ID Autobuyers",
+    shortDescription: () => "加速自动购买无限维度",
     layoutPosList: [74095, 80199, 80198, 81000, 82997, 77720],
   },
   autobuyerFasterReplicanti: {
@@ -400,11 +384,11 @@ export const perks = {
     label: "REPAS",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Replicanti autobuyers work ${formatX(3)} faster.`;
+      return `自动购买复制器升级的速度 ${formatX(3)}`;
     },
     effect: 1 / 3,
     automatorPoints: 5,
-    shortDescription: () => "Faster Replicanti Autobuyers",
+    shortDescription: () => "加速自动购买复制器升级",
     layoutPosList: [57685, 80198, 80197, 80999, 83000, 79297],
   },
   autobuyerFasterDilation: {
@@ -412,20 +396,20 @@ export const perks = {
     label: "DAS",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Dilation Upgrade autobuyers work ${formatX(3)} faster.`;
+      return `自动购买膨胀升级的速度 ${formatX(3)}`;
     },
     effect: 1 / 3,
     automatorPoints: 5,
-    shortDescription: () => "Faster Dilation Autobuyers",
+    shortDescription: () => "加速自动购买膨胀升级",
     layoutPosList: [113895, 82602, 79402, 79395, 80609, 72715],
   },
   ttBuySingle: {
     id: 104,
     label: "TTS",
     family: PERK_FAMILY.AUTOMATION,
-    description: "Unlock a Time Theorem Autobuyer which buys single Time Theorems every tick.",
+    description: "解锁自动购买时间之理，它能在每个时间间隔购买单个时间之理",
     automatorPoints: 5,
-    shortDescription: () => "Single TT Autobuyer",
+    shortDescription: () => "自动购买单个时间之理",
     layoutPosList: [44631, 79398, 80598, 81001, 77797, 57325],
   },
   ttFree: {
@@ -433,7 +417,7 @@ export const perks = {
     label: "TTF",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Purchasing Time Theorems no longer spends your Antimatter, Infinity Points, or Eternity Points.`;
+      return `购买时间之理不再消耗反物质、无限点数和永恒点数`;
     },
     layoutPosList: [33840, 78998, 80597, 81002, 77800, 67309],
   },
@@ -442,10 +426,10 @@ export const perks = {
     label: "TTM",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Upgrade the Time Theorem Autobuyer to buy max Time Theorems.`;
+      return `你可以自动购买最大数量的时间之理`;
     },
     automatorPoints: 10,
-    shortDescription: () => "Max TT Autobuyer",
+    shortDescription: () => "自动批量购买时间之理",
     layoutPosList: [25055, 78598, 80997, 81003, 77803, 65739],
   },
   dilationAutobuyerBulk: {
@@ -453,11 +437,11 @@ export const perks = {
     label: "DAB",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `Dilation Upgrade autobuyers buy three times as many Dilation Upgrades at once.`;
+      return `自动购买膨胀升级的数量是原来的 3 倍`;
     },
     effect: 3,
     automatorPoints: 5,
-    shortDescription: () => "Dilation Autobuyer bulk",
+    shortDescription: () => "批量购买膨胀升级",
     layoutPosList: [127384, 81400, 79803, 79399, 81000, 103048],
   },
   achievementGroup1: {
@@ -465,12 +449,11 @@ export const perks = {
     label: "ACH1",
     family: PERK_FAMILY.ACHIEVEMENT,
     get description() {
-      return `Reduce the Achievement timer to ${formatInt(20)} minutes per
-        Achievement (${formatInt(10)} minute decrease).`;
+      return `每 ${formatInt(20)} 分钟自动获得一个成就（减少 ${formatInt(10)} 分钟）`;
     },
     effect: 10,
     automatorPoints: 5,
-    shortDescription: () => `Faster Achievements: every ${formatInt(20)} minutes`,
+    shortDescription: () => `加速自动获得成就：每 ${formatInt(20)} 分钟获得一个`,
     layoutPosList: [65386, 80201, 80601, 79801, 79791, 81371],
   },
   achievementGroup2: {
@@ -478,8 +461,7 @@ export const perks = {
     label: "ACH2",
     family: PERK_FAMILY.ACHIEVEMENT,
     get description() {
-      return `Reduce the Achievement timer to ${formatInt(12)} minutes per
-        Achievement (${formatInt(8)} minute decrease).`;
+      return `每 ${formatInt(12)} 分钟自动获得一个成就（减少 ${formatInt(8)} 分钟）`;
     },
     effect: 8,
     layoutPosList: [54976, 80202, 80602, 79401, 79794, 93780],
@@ -489,8 +471,7 @@ export const perks = {
     label: "ACH3",
     family: PERK_FAMILY.ACHIEVEMENT,
     get description() {
-      return `Reduce the Achievement timer to ${formatInt(6)} minutes per
-        Achievement (${formatInt(6)} minute decrease).`;
+      return `每 ${formatInt(6)} 分钟自动获得一个成就（减少 ${formatInt(6)} 分钟）`;
     },
     effect: 6,
     layoutPosList: [44168, 80602, 80603, 79402, 79797, 83005],
@@ -500,8 +481,7 @@ export const perks = {
     label: "ACH4",
     family: PERK_FAMILY.ACHIEVEMENT,
     get description() {
-      return `Reduce the Achievement timer to ${formatInt(2)} minutes per
-        Achievement (${formatInt(4)} minute decrease).`;
+      return `每 ${formatInt(2)} 分钟自动获得一个成就（减少 ${formatInt(4)} 分钟）`;
     },
     effect: 4,
     layoutPosList: [33760, 81002, 81003, 79403, 79800, 95422],
@@ -511,11 +491,10 @@ export const perks = {
     label: "ACHNR",
     family: PERK_FAMILY.ACHIEVEMENT,
     get description() {
-      return `Immediately unlock the first ${formatInt(13)} rows of Achievements
-        and Reality no longer resets them.`;
+      return `进行现实之后永久解锁并保留前${formatInt(13)}行成就`;
     },
     automatorPoints: 10,
-    shortDescription: () => "Keep Achievements on Reality",
+    shortDescription: () => "现实时保留成就",
     layoutPosList: [23353, 81402, 81403, 79404, 79803, 84639],
   }
 };
