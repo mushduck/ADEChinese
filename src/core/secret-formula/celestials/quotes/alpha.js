@@ -2,355 +2,355 @@ export const alphaQuotes = {
   unlock: {
     id: 0,
     lines: [
-      "I sense...",
-      "Someone has arrived...",
-      "Hello?",
-      "Wait...",
-      "You're a mortal?",
+      "我感觉到...",
+      "有人来了...",
+      "你好？",
+      "等一下，",
+      "你是个凡人？",
       "...",
-      "How can a mortal like you ever survive the ascent up to me?",
-      "To face true Celestial power?",
-      "You were helped, weren't you?",
-      "By the lesser Celestials, right?",
-      "And Pelle?",
-      "Should've known.",
-      "Pelle's never followed orders since I sent him out to recruit other Celestials.",
-      "He thinks he's the leader now.",
-      "I'll smite him soon enough.",
-      "For now, I must deal with you.",
-      "Go ahead, enter my domain.",
-      "But know this.",
-      "There is no escape.",
-      "For I am Alpha, Celestial of Darkness.",
-      "And you will never see the light again."
+      "你这样的凡人，怎么可能活着爬到我这里，",
+      "面对真正的天神之力？",
+      "你得到了帮助，对吗？",
+      "是那些低阶的天神，对吧？",
+      "和————佩勒？",
+      "你得知道，",
+      "自从我派佩勒出去寻找其他天神后，祂就再也没听过我的命令。",
+      "祂现在觉得祂是老大了。",
+      "我很快就会制裁祂的。",
+      "但暂时，我得先对付你。",
+      "前进吧，进入我的领域。",
+      "但是你要知道，",
+      "前方没有退路。",
+      "因为我是阿尔法，黑暗之神。",
+      "而你————永远别想重见天日了。"
     ]
   },
   enter: {
     id: 1,
     lines: [
-      "Welcome to my domain.",
-      "My perfect domain.",
-      "Only darkness lives in here.",
-      "None who go in come out.",
-      "Go ahead.",
-      "But take a good look.",
-      "This is the last time light will shine upon you."
+      "欢迎来到我的现实，",
+      "我的最强领域。",
+      "此处唯有黑暗永驻。",
+      "踏入者有去无回。",
+      "前进吧,",
+      "但且多看看现在尚存的光明，",
+      "这是光明最后一次临照于你。"
     ]
   },
   fourthDB: {
     id: 2,
     lines: [
-      "So.",
-      "All eight dimensions are intact once again.",
-      "But this is just the beginning.",
-      "You will never win.",
-      "The Darkness will bind you tighter."
+      "所以，",
+      "八个维度重新恢复了。",
+      "但这只是开始。",
+      "你不会获胜的。",
+      "黑暗将把你缚得更紧。"
     ]
   },
   fifthDB: {
     id: 3,
     lines: [
-      "Sacrifice?",
-      "(scoffing)",
-      "What good is Sacrifice to you?",
-      "After all, you have already lost everything."
+      "献祭？",
+      "*(嗤笑)*",
+      "献祭有什么用？",
+      "毕竟在开始时，你已经没有什么可以失去的了。"
     ]
   },
   galaxy: {
     id: 4,
     lines: [
       "...",
-      "So this is the power...",
-      "This is what destroyed Pelle and the others, is it not?",
-      "The Galaxies, your unique source of strength.",
-      "Unfortunately for you, this is my playing field now.",
-      "Your Galaxies will destroy you...",
-      "With how small their effects will become."
+      "所以这就是那种力量...",
+      "这就是毁灭了佩勒和其他天神的力量，对吧？",
+      "星系，你独特的力量来源。",
+      "不幸的是，现在此地是我的主场。",
+      "你的星系最终会毁灭你...",
+      "即使它们的效力将变得无比微弱..."
     ]
   },
   infinity: {
     id: 5,
     lines: [
-      "You have capped your Antimatter.",
-      "This is it for you.",
-      "Now you reset, only slightly faster than before...",
-      "It is useless to struggle, your end is coming.",
-      "Accept defeat.",
-      "Who knows? I might let you live."
+      "你的反物质达到了上限。",
+      "但到此为止了。",
+      "现在每次重置只让你的速度快了微不足道的一点...",
+      "挣扎也是徒劳，你的末日即将到来。",
+      "承认失败吧，",
+      "我可能会让你活下去，但谁知道呢？"
     ]
   },
   autoCrunch: {
     id: 6,
     lines: [
-      "Did you think that my Reality was normal?",
-      "Did you think you could Break Infinity and win?",
-      "Oh, no.",
-      "Not today.",
-      "I am too strong.",
-      "My Timewalls will make you suffer!"
+      "你以为我的现实和先前的一样寻常？",
+      "你觉得你能打破无限并获胜？",
+      "抱歉，",
+      "今天不行。",
+      "吾之强大，你连仰望的资格都没有。",
+      "吾之现实，会让你生不如死。"
     ]
   },
   breakInfinity: {
     id: 7,
     lines: [
-      "You! You...",
-      "You thought that pathetic little upgrade would be enough to stop me?",
-      "Trust me, you won't live long enough to see me die.",
-      "Sure, you think you can now produce indefinite amounts of Antimatter...",
-      "But that's not how it works.",
-      "After all, the playing field is mine.",
-      "You are simply the pawn, and I am the kingpin.",
-      "You need to know that before you kill yourself trying to defeat me.",
-      "If you submit, I may let you live.",
-      "Otherwise, you're already dead."
+      "你！你...",
+      "你该不会以为，就凭那点可怜的升级，就能挡住我吧？",
+      "相信我，你根本没命活到我死的时候。",
+      "哦，是么。你以为自己现在能无限制造反物质了？",
+      "可事情没那么简单。",
+      "说到底，此地是我的主场。",
+      "你不过是一枚棋子，而我才是执棋之人。",
+      "在你不自量力地来送死之前，先搞清楚状况。",
+      "如果你承认了，我可能会让你活下去。",
+      "否则，你早已是个死人了。"
     ]
   },
   powerGalaxies: {
     id: 8,
     lines: [
-      "So.",
-      "You are trying to reverse your inevitable end.",
-      "It's useless to resist, you should know that now.",
-      "Why can't you understand that I have already won?",
-      "Yes, Pelle got that line from me.",
-      "But it doesn't matter now.",
-      "You will lose, some way or another.",
-      "After all, only the Darkness remains."
+      "所以，",
+      "你该不会以为自己能扭转注定的终局吧？",
+      "反抗也是徒劳，你到现在还没看清吗？",
+      "你为何始终不明白，胜利早已注定归我？",
+      "没错，佩勒这句话是从我这里学来的。",
+      "不过现在，这些都无关紧要了。",
+      "无论如何，你终将落败。",
+      "到最后，唯有黑暗永存。"
     ]
   },
   allBreakUpgrades: {
     id: 9,
     lines: [
-      "Just stop.",
-      "Make it easier for yourself.",
-      "You've failed.",
-      "Why can't you understand that?",
-      "Don't even try to struggle.",
-      "Your efforts are futile.",
-      "Your fall is near."
+      "停手吧，",
+      "别自讨苦吃。",
+      "你已经输了，",
+      "为什么你就是不明白？",
+      "挣扎都是多余，",
+      "一切努力都是徒劳。",
+      "你的败亡将至。"
     ]
   },
   allInfinityChalls: {
     id: 10,
     lines: [
-      "Do you really think this will help?",
-      "Do you really think you can beat me?",
-      "You are wrong!",
-      "Your end is drawing close.",
-      "Prepare to face it."
+      "你真的以为这会有用吗？",
+      "你觉得你有那个本事？",
+      "大错特错！",
+      "你的终结就在眼前。",
+      "直面你的结局吧。"
     ]
   },
   replicanti: {
     id: 11,
     lines: [
-      "Why do you continue?",
-      "Why do you try and build up what is already so hopelessly lost?",
-      "You are a fool.",
-      "You must understand, sooner or later, that you are no match for me.",
-      "And I will make sure you understand."
+      "你为什么就是不肯罢休？",
+      "你何必再去挽回注定覆灭的残局？",
+      "愚不可及。",
+      "你早晚会认清————你根本不够格与我为敌。",
+      "我会亲自让你明白。"
     ]
   },
   eighthInfinityDimension: {
     id: 12,
     lines: [
-      "Stop!",
-      "You can't go on like this!",
-      "You are weak, and your efforts are futile.",
-      "I am not like the other Celestials.",
-      "Those... weaklings.",
-      "No, I am much higher than they.",
-      "You cannot defeat me.",
-      "I have already won.",
-      "And now, I will make you suffer!"
+      "停下！",
+      "到此为止吧！",
+      "弱小的你，怎么挣扎都是白费力气。",
+      "我可不同于其他天神，",
+      "那帮...没用的东西。",
+      "不，我远比他们强大。",
+      "你赢不了我。",
+      "胜局早已注定。",
+      "现在，准备变得生不如死吧！"
     ]
   },
   eternity: {
     id: 13,
     lines: [
-      "You really thought other times would save you?",
-      "Do you not understand?",
-      "Those other times are just as cursed!",
-      "You will never overpower me."
+      "你以为躲到别的时间去就有用吗？",
+      "你还不明白吗？",
+      "其它的时间也同样被诅咒了！",
+      "你永远无法超越我。"
     ]
   },
   improveEP: {
     id: 14,
     lines: [
-      "Stop now!",
-      "Are you mad?",
-      "You obviously are if you think such a futile upgrade as this will save you from me!",
-      "You haven't yet begun to feel my wrath!"
+      "现在停下！",
+      "你疯了吗？",
+      "靠这点可怜的升级就想对抗我？你果真是疯了！",
+      "我现在展现的力量，只是皮毛而已！"
     ]
   },
   fourthTimeDimension: {
     id: 15,
     lines: [
-      "You can feel it, can't you?",
-      "The weight of all the nerfs weighing down upon you?",
-      "Yes, my Reality is taking its toll on you.",
-      "Is your progression slowing?",
-      "It should be very soon.",
-      "After all, I have already won."
+      "你感觉到了吧？",
+      "层层削弱正在把你压垮？",
+      "没错，我的现实正在蚕食你的力量。",
+      "是不是感觉进度越来越迟缓了？",
+      "胜负很快就会见分晓了。",
+      "无论如何，赢的终究是我。"
     ]
   },
   infinityChallTimeBoost: {
     id: 16,
     lines: [
-      "How are you still alive?",
-      "This... this power...",
-      "Will not stop me.",
-      "I will still crush you."
+      "你怎么还活着？",
+      "这种力量...",
+      "根本阻止不了我。",
+      "我仍然会碾碎你。"
     ]
   },
   prepareEternityChalls: {
     id: 17,
     lines: [
-      "Enough of this!",
-      "Why won't you accept defeat?",
-      "You know I've won, and yet...",
-      "Yet...",
-      "(sigh)",
-      "Pain will haunt you still, kid.",
-      "Mark my words."
+      "够了！",
+      "你为什么就不肯认输？",
+      "你明知胜负已定，却仍然...",
+      "仍然...",
+      "*(叹气)*",
+      "痛苦依旧会缠着你，孩子。",
+      "记住我的话。"
     ]
   },
   firstEternityChall: {
     id: 18,
     lines: [
-      "Only one?",
-      "Ha!",
-      "You cannot possibly finish them all.",
-      "You will die here, like so many before you."
+      "只有一个？",
+      "哈哈哈！",
+      "你不可能全部完成。",
+      "你会葬身此处，正如之前的那些失败者。"
     ]
   },
   bulkEternityChall: {
     id: 19,
     lines: [
-      "You are still struggling?",
-      "Why?",
-      "You know you will lose.",
-      "Why do you persist?",
-      "I have already won, kid.",
-      "Get that into your thick skull."
+      "你还在挣扎？",
+      "何必呢？",
+      "你明知自己会输，",
+      "却还在苦苦挣扎？",
+      "胜负已定，孩子。",
+      "用你那松饼脑袋给我记住。"
     ]
   },
   passiveIPGen: {
     id: 20,
     lines: [
-      "How?",
-      "How have you come so far?",
-      "After all I've done...",
-      "No!",
-      "This must stop now!"
+      "怎么可能？",
+      "你怎么可能撑到现在？",
+      "在我做了这一切之后...",
+      "不！",
+      "必须到此为止！"
     ]
   },
   eternityChallTen: {
     id: 21,
     lines: [
-      "No...",
-      "You must stop!",
-      "Your progression will end!",
-      "You...",
-      "You will still fall!"
+      "不...",
+      "你必须停下！",
+      "你走不了更远了！",
+      "你...",
+      "你终究还是会输！"
     ]
   },
   uncapReplicanti: {
     id: 22,
     lines: [
-      "Don't think I'm done with you!",
-      "There will be much more suffering to come!",
-      "Mark my words!",
-      "Very soon...",
-      "You will feel true pain."
+      "别以为这就结束了！",
+      "接下来还有更多的痛苦等着你！",
+      "给我听好了！",
+      "很快...",
+      "你将尝到真正的痛苦。"
     ]
   },
   eternityChallEleven: {
     id: 23,
     lines: [
-      "You see now, don't you?",
-      "This was all planned out.",
-      "This is where you will fall.",
-      "Now, at last...",
-      "You will suffer!",
-      "Oh, and also, I have already won."
+      "现在明白了吧？",
+      "一切都在计划之中。",
+      "这是你的死地。",
+      "现在，终于...",
+      "你将痛不欲生！",
+      "哦对了，我早就赢了。"
     ]
   },
   completeEternityChallEleven: {
     id: 24,
     lines: [
       "...",
-      "How?",
-      "How did you do it?",
-      "I...",
-      "I made it impossible...",
-      "No!",
-      "You cannot continue...",
-      "You must not continue!"
+      "怎么会？",
+      "你是怎么做到的？",
+      "我明明...",
+      "明明设下了重重阻碍...",
+      "不！",
+      "你不能继续下去了...",
+      "你必须停下！"
     ]
   },
   unlockDilation: {
     id: 25,
     lines: [
-      "There.",
-      "I've trapped you.",
-      "Your futile efforts end here!"
+      "此事已成。",
+      "你已被困住。",
+      "你的徒劳挣扎，到此为止了！"
     ]
   },
   dilatedEternity: {
     id: 26,
     lines: [
-      "Just...",
-      "Stop trying!",
-      "You can't beat me!",
-      "I'm too powerful for you!",
-      "You have lost!"
+      "这...",
+      "别白费力气了！",
+      "你赢不了我！",
+      "你远不是我的对手！",
+      "你已经输了！"
     ]
   },
   ttGen: {
     id: 27,
     lines: [
-      "No...",
-      "You...",
-      "You shall not continue!"
+      "不...",
+      "你...",
+      "你不能再继续下去了！"
     ]
   },
   eighthTimeDimension: {
     id: 28,
     lines: [
-      "No!",
-      "You can't win!",
-      "I need... a plan...",
-      "Alright...",
-      "You will lose even still!"
+      "不！",
+      "你不会赢的！",
+      "我需要...一个办法...",
+      "我有一计...",
+      "你照样会输！"
     ]
   },
   reality: {
     id: 29,
     lines: [
       "...",
-      "WHAT???",
-      "How...",
-      "How did you...",
-      "HOW DID YOU DO IT?!?!",
-      "After everything...",
-      "EVERYTHING I'VE DONE...",
-      "Wait...",
-      "My power...",
-      "It's... disappearing?",
-      "No...",
-      "You're stealing it!",
-      "CURSE YOU!",
-      "MORTAL FILTH!",
-      "I REFUSE TO BE DEFEATED BY THE LIKES OF YOU!",
-      "I swear...",
-      "One day I shall return.",
-      "And you...",
-      "You AND Pelle...",
-      "You will pay for your treason.",
-      "This isn't over, mortal scum.",
-      "The End will come for you.",
-      "You will see...",
-      "You ALL... will see...",
+      "什么？？？",
+      "怎么会...",
+      "你怎么...",
+      "你到底是怎么做到的？！？！",
+      "我倾尽所有...",
+      "明明我什么办法都尝试了...",
+      "等一下...",
+      "我的力量...",
+      "正在...消失?",
+      "不...",
+      "你竟敢窃取我的力量！",
+      "诅咒你！",
+      "凡人渣滓！",
+      "我绝不接受被你这种货色击败！",
+      "我发誓...",
+      "总有一天，我会卷土重来...",
+      "而你...",
+      "你和佩勒...",
+      "你们会为背叛付出代价!",
+      "这还没完，凡人渣滓...",
+      "你逃不掉你的结局的...",
+      "你逃不掉...的...",
+      "你们每一个...都逃不掉...",
       "..."
     ]
   }
