@@ -2,55 +2,55 @@ export const effarigQuotes = {
   initial: {
     id: 0,
     lines: [
-      "Welcome to my humble abode.",
-      "I am Effarig, and I govern Glyphs.",
-      "I am different from Teresa; not as simplistic as you think.",
-      "I use the shards of Glyphs to enforce my will.",
-      "I collect them for the bounty of this realm.",
-      "What are you waiting for? Get started.",
+      "欢迎来到我小小的居所。",
+      "我是管理符文的鹿颈长。",
+      "我和特蕾莎不一样，我不像你想的那样简单。",
+      "我使用符文之碎片来践行我的意志。",
+      "我为了丰富这个领域而收集它们。",
+      "你还在等什么？开始吧。",
     ]
   },
   unlockWeights: {
     id: 1,
     lines: [
-      "Do you like my little shop? It is not much, but it is mine."
+      "你喜欢我的小店吗？这里的东西不多，但这是我开的。"
     ]
   },
   unlockGlyphFilter: {
     id: 2,
     lines: [
-      "This purchase will help you out."
+      "此次购入定能帮到许多。"
     ]
   },
   unlockSetSaves: {
     id: 3,
     lines: [
-      "Is that too much? I think it is too much."
+      "这太多了吗？我觉得有点太多了。"
     ]
   },
   unlockRun: {
     id: 4,
     lines: [
-      "You bought out my entire stock... well, at least I am rich now.",
-      "The heart of my Reality is suffering. Each Layer is harder than the last.",
-      "I hope you never complete it.",
+      "你把我的库存买光了…行吧，起码我有钱了。",
+      "我的现实的核心是受难“每一层都比上一层更加困难。",
+      "我希望你永远不能完成它。",
     ]
   },
   completeInfinity: {
     id: 5,
     lines: [
-      { text: "You have completed Effarig's Infinity.", showCelestialName: false },
-      "This is the first threshold. It only gets worse from here.",
-      "None but me know enough about my domain to get further.",
+      { text: "你已完成鹿颈长的无限阶段。", showCelestialName: false },
+      "这只是第一层，后面会更糟糕。",
+      "除了我之外，无人能在我的领域更进一步。",
     ]
   },
   completeEternity: {
     id: 6,
     lines: [
-      { text: "You have completed Effarig's Eternity.", showCelestialName: false },
-      "This is the limit. I do not want you to proceed past this point.",
-      "You will not finish this in your lifetime.",
-      "I will just wait here until you give up.",
+      { text: "你已完成鹿颈长的永恒阶段。", showCelestialName: false },
+      "到此为止。我不想让你比这更进一步了。",
+      "这是你这辈子都完成不了的。",
+      "我就在这等着，直到你放弃。",
     ]
   },
   completeReality: {

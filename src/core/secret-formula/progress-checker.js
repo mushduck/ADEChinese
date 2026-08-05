@@ -22,62 +22,62 @@ export const progressStages = [
    */
   {
     id: PROGRESS_STAGE.PRE_INFINITY,
-    name: "Antimatter Production",
+    name: "生产反物质",
     hasReached: () => true,
-    suggestedResource: "Antimatter",
+    suggestedResource: "反物质",
     // Galaxies are worth 1/3 each, boosts break ties within galaxies, and antimatter breaks ties within boosts
     subProgressValue: save => 0.33 * save.galaxies + 0.02 * save.dimensionBoosts +
       new Decimal(save.antimatter).log10().toNumber() / 16000,
   },
   {
     id: PROGRESS_STAGE.EARLY_INFINITY,
-    name: "Infinity",
+    name: "无限",
     hasReached: save => new Decimal(save.infinities).gt(0),
-    suggestedResource: "Infinity Points",
+    suggestedResource: "无限点数",
     // Half from infinity count, half from crunch autobuyer state
     subProgressValue: save => Math.clampMax(new Decimal(save.infinities).toNumber(), 500) / 1000 +
       Math.log10(150000 / player.auto.bigCrunch.interval) / 6.35,
   },
   {
     id: PROGRESS_STAGE.BREAK_INFINITY,
-    name: "Broken Infinity",
+    name: "打破无限",
     hasReached: save => save.auto.bigCrunch.interval <= 100,
     suggestedResource: "Infinity Points",
     subProgressValue: save => Math.sqrt(new Decimal(save.infinityPoints).log10().toNumber() / 145),
   },
   {
     id: PROGRESS_STAGE.REPLICANTI,
-    name: "Replicanti",
+    name: "复制器",
     hasReached: save => save.replicanti.unl,
     suggestedResource: "Infinity Points",
     subProgressValue: save => Math.sqrt((new Decimal(save.infinityPoints).log10().toNumber() - 140) / 170),
   },
   {
     id: PROGRESS_STAGE.EARLY_ETERNITY,
-    name: "Eternity",
+    name: "永恒",
     hasReached: save => new Decimal(save.eternities).gt(0),
-    suggestedResource: "Eternity Points and Eternity count",
+    suggestedResource: "永恒点数和永恒次数",
     subProgressValue: save => new Decimal(save.eternities).clampMax(1e5).toNumber() / 1e5,
   },
   {
     id: PROGRESS_STAGE.ETERNITY_CHALLENGES,
-    name: "Eternity Challenges",
+    name: "永恒挑战",
     hasReached: save => save.eternityChalls.eterc1 > 0,
-    suggestedResource: "Eternity Challenge Completions and Eternity Points",
+    suggestedResource: "永恒挑战完成次数和永恒点数",
     // Half from ECs, half from EP (up to e1300)
     subProgressValue: save => 0.008 * Object.values(save.eternityChalls).reduce((sum, c) => sum + c, 0) +
       new Decimal(save.eternityPoints).log10().toNumber() / 2500,
   },
   {
     id: PROGRESS_STAGE.EARLY_DILATION,
-    name: "Time Dilation",
+    name: "时间膨胀",
     hasReached: save => new Decimal(save.dilation.dilatedTime).gt(0),
     suggestedResource: "Dilated Time",
     subProgressValue: save => new Decimal(save.dilation.dilatedTime).log10().toNumber() / 15,
   },
   {
     id: PROGRESS_STAGE.LATE_ETERNITY,
-    name: "Late Eternity",
+    name: "永恒后期",
     hasReached: save => new Decimal(save.dilation.dilatedTime).gt(1e15),
     suggestedResource: () => (new Decimal(player.eternityPoints).log10().toNumber() > 4000
       ? "Eternity Points and/or Dilated Time. Alternatively, you can unlock and perform your first Reality"

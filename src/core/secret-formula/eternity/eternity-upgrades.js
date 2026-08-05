@@ -40,14 +40,14 @@ export const eternityUpgrades = {
   tdMultAchs: {
     id: 4,
     cost: 1e16,
-    description: "Your Achievement bonus affects Time Dimensions",
+    description: "你的成就提供的倍数加成作用于时间维度",
     effect: () => Achievements.power,
     formatEffect: value => formatX(value, 2, 1)
   },
   tdMultTheorems: {
     id: 5,
     cost: 1e40,
-    description: "Time Dimensions are multiplied by your unspent Time Theorems",
+    description: "时间维度获得等同于你未使用的时间之理的数目的倍数加成",
     effect: () => Decimal.max(Currency.timeTheorems.value, 1),
     formatEffect: value => formatX(value, 2, 1)
   },

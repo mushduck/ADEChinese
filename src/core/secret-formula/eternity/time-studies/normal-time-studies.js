@@ -111,8 +111,7 @@ export const normalTimeStudies = [
     cost: 6,
     requirement: [32],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Antimatter Galaxy requirement increases by ${formatInt(52)}
-      8th Dimensions instead of ${formatInt(60)}`,
+    description: () => `反物质星系增长需求的第八维度数量从 ${formatInt(60)} 个降至 ${formatInt(52)} 个`,
     effect: 52
   },
   {

@@ -1,38 +1,38 @@
 export const confirmationTypes = [
   {
-    name: "Dimension Boost",
+    name: "维度提升",
     option: "dimensionBoost",
     isUnlocked: () => PlayerProgress.infinityUnlocked() || player.galaxies.gt(0) || player.dimensionBoosts.gt(0),
   }, {
-    name: "Antimatter Galaxy",
+    name: "反物质星系",
     option: "antimatterGalaxy",
     isUnlocked: () => PlayerProgress.infinityUnlocked() || player.galaxies.gt(0),
   }, {
-    name: "Sacrifice",
+    name: "维度献祭",
     option: "sacrifice",
     isUnlocked: () => Sacrifice.isVisible,
   }, {
-    name: "Big Crunch",
+    name: "大坍缩",
     option: "bigCrunch",
     isUnlocked: () => player.break || PlayerProgress.eternityUnlocked(),
   }, {
-    name: "Challenges",
+    name: "挑战",
     option: "challenges",
     isUnlocked: () => PlayerProgress.infinityUnlocked(),
   }, {
-    name: "Exit Challenges",
+    name: "退出挑战",
     option: "exitChallenge",
     isUnlocked: () => PlayerProgress.infinityUnlocked(),
   }, {
-    name: "Replicanti Galaxy",
+    name: "复制器星系",
     option: "replicantiGalaxy",
     isUnlocked: () => PlayerProgress.eternityUnlocked() || player.replicanti.unl,
   }, {
-    name: "Eternity",
+    name: "永恒",
     option: "eternity",
     isUnlocked: () => PlayerProgress.eternityUnlocked(),
   }, {
-    name: "Dilation",
+    name: "时间膨胀",
     option: "dilation",
     isUnlocked: () => PlayerProgress.realityUnlocked() || !Currency.tachyonParticles.eq(0),
   }, {

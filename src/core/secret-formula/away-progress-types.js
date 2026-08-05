@@ -99,7 +99,7 @@ export const awayProgressTypes = [
     showOption: false,
   }, {
     name: "enslavedMemories",
-    forcedName: "Nameless Memories",
+    forcedName: "无名氏记忆",
     awayOption: "celestialMemories",
     reference: ["celestials", "ra", "pets", "enslaved", "memories"],
     isUnlocked: () => Ra.pets.enslaved.isUnlocked && !Ra.pets.enslaved.isCapped,

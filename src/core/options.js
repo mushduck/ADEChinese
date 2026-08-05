@@ -84,7 +84,7 @@ export function tryImportSecret(data) {
       return true;
     case 3:
       if (player.records.fullGameCompletions > 0 || DEV) Speedrun.unlock();
-      else GameUI.notify.error("Complete the game at least once first!", 15000);
+      else GameUI.notify.error("首先，你需要通关一次游戏！", 15000);
       return true;
     default:
       return false;

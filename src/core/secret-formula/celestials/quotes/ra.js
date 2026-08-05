@@ -2,115 +2,115 @@ export const raQuotes = {
   unlock: {
     id: 0,
     lines: [
-      "A... visitor?",
-      "I am here! I am the one you are looking for... I think...",
-      "What even was I again?",
-      "Oh right, the Celestial of Memories.",
+      "一…一个访客？",
+      "我在这儿呢！我就是你要找的存在…我想是的…",
+      "我又是谁？",
+      "哦想起来了，我是记忆之神。",
     ]
   },
   realityEnter: {
     id: 1,
     lines: [
-      "I have not seen the others in so long...",
-      "Can you help me remember them?",
-      "I could give you powers in exchange.",
+      "我好长时间没见过别人了…",
+      "你能让我想起他们吗？",
+      "我能给你力量作为交换。",
     ]
   },
   teresaStart: {
     id: 2,
     requirement: () => Ra.pets.teresa.level >= 2,
     lines: [
-      "Te... re... sa...",
-      "I think I remember.",
+      "特…蕾…莎…",
+      "我好像想起来了。",
     ]
   },
   teresaLate: {
     id: 3,
     requirement: () => Ra.pets.teresa.level >= 15,
     lines: [
-      "Teresa dealt with machines, I believe.",
-      "I remember visiting Teresa’s shop a few times.",
-      "Wait, someone else had a shop too, right?",
+      "在我的印象中，特蕾莎是管机器的。",
+      "祂的商店我去过几次。",
+      "等等，好像谁也有个商店，对吧？",
     ]
   },
   effarigStart: {
     id: 4,
     requirement: () => Ra.pets.effarig.level >= 2,
     lines: [
-      "Eff... a... rig",
-      "I remember Effarig being friendly.",
+      "鹿…颈…长",
+      "我记得鹿颈长很友好。",
     ]
   },
   effarigLate: {
     id: 5,
     requirement: () => Ra.pets.effarig.level >= 15,
     lines: [
-      "Effarig was very particular?",
-      "And I also remember a frightening Reality...",
-      "It was about... suffering?",
+      "鹿颈长很挑剔吗？",
+      "而且我想到一个可怕的现实…",
+      "那是关于…受难的？",
     ]
   },
   enslavedStart: {
     id: 6,
     requirement: () => Ra.pets.enslaved.level >= 2,
     lines: [
-      "I cannot remember this one completely...",
+      "我完全记不起祂了……",
     ]
   },
   enslavedLate: {
     id: 7,
     requirement: () => Ra.pets.enslaved.level >= 15,
     lines: [
-      "I am starting to remember...",
-      "Why I am here...",
-      "Why I am alone...",
-      "Help me.",
+      "我开始回忆起来了…",
+      "我为什么在这儿…",
+      "我为什么孤身一人…",
+      "救救我。",
     ]
   },
   vStart: {
     id: 8,
     requirement: () => Ra.pets.v.level >= 2,
     lines: [
-      "Had I met this one?",
-      "So lonely, yet willingly so...",
+      "我见过祂吗？",
+      "如此的孤单，然而乐意如此…",
     ]
   },
   vLate: {
     id: 9,
     requirement: () => Ra.pets.v.level >= 15,
     lines: [
-      "I think I met V once...",
-      "I can remember the achievements.",
+      "我好像见过祂一次…",
+      "我想起那些成就了。",
     ]
   },
   remembrance: {
     id: 10,
     requirement: () => Ra.remembrance.isUnlocked,
     lines: [
-      "I remembered something!",
-      "Watch this!",
-      "Remembrance!",
-      "I can focus even harder on remembering them now!",
+      "我记起来什么了！",
+      "看看这个！",
+      "追思！",
+      "我现在可以更专注于回忆祂们了！",
     ]
   },
   midMemories: {
     id: 11,
     requirement: () => Ra.totalPetLevel >= 50,
     lines: [
-      "Realities are my homes, yet I cannot make my own Reality.",
-      "I can only copy the ones of my friends.",
-      "But... why am I hearing voices?",
-      "Are they asking for help?",
+      "现实是我的家，但我不能创造我自己的现实。",
+      "我只能复制朋友们的现实。",
+      "但…为什么我开始听到低语？",
+      "祂们在寻求帮助吗？",
     ]
   },
   lateMemories: {
     id: 12,
     requirement: () => Ra.totalPetLevel >= 80,
     lines: [
-      "I think they are telling me to stop.",
-      "You... whatever you are?",
-      "What is happening?",
-      "Am I doing something wrong?",
+      "我认为祂们在告诉我停下。",
+      "你…你是什么存在？",
+      "发生了什么？",
+      "我做错了什么？！",
     ]
   },
   maxLevels: {

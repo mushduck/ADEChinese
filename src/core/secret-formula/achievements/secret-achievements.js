@@ -1,35 +1,34 @@
 export const secretAchievements = [
   {
     id: 11,
-    name: "The first one's always free",
-    description: "Click on this Achievement."
+    name: "第一个成就永远那么简单。",
+    description: "点击这个成就。"
   },
   {
     id: 12,
-    name: "Just in case",
-    get description() { return `Save ${formatInt(100)} times without refreshing.`; }
+    name: "以防万一",
+    get description() { return `手动存档 ${formatInt(100)} 次。`; }
   },
   {
     id: 13,
-    name: "It pays to have respect",
-    description: "Pay respects."
+    name: "这是值得尊重的。",
+    description: "敬礼！"
   },
   {
     id: 14,
-    name: "So do I",
-    description: "Say something naughty."
+    name: "俺也一样！",
+    description: "说点淘气话。"
   },
   {
     id: 15,
-    name: "Do a barrel roll!",
-    description: "Do a barrel roll.",
+    name: "做一个桶滚！",
+    description: "做一个桶滚。",
   },
   {
     id: 16,
-    name: "Do you enjoy pain?",
+    name: "你享受痛苦吗？",
     get description() {
-      return `Use a "painful" notation for ${formatInt(10)} real-time minutes
-      after doing an Eternity.`;
+      return `一次永恒之后，使用一种“痛苦”的记数法在线游玩 ${formatInt(10)} 分钟。`;
     },
     checkRequirement: () => AchievementTimers.pain
       .check(PlayerProgress.eternityUnlocked() && Notations.current.isPainful, 600),

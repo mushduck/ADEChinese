@@ -1,14 +1,14 @@
 export const tabs = [
   {
     key: "dimensions",
-    name: "Dimensions",
+    name: "维度",
     hideAt: 2.9,
     id: 0,
     hidable: true,
     subtabs: [
       {
         key: "antimatter",
-        name: "Antimatter Dimensions",
+        name: "反物质维度",
         symbol: "Ω",
         component: "AntimatterDimensionsTab",
         id: 0,
@@ -16,7 +16,7 @@ export const tabs = [
       },
       {
         key: "infinity",
-        name: "Infinity Dimensions",
+        name: "无限维度",
         hideAt: 2.7,
         symbol: "∞",
         component: "InfinityDimensionsTab",

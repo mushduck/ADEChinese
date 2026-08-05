@@ -28,7 +28,7 @@ export const alchemyResources = {
   },
   "time": {
     id: ALCHEMY_RESOURCE.TIME,
-    name: "Time",
+    name: "时间",
     symbol: "Δ",
     isBaseResource: true,
     effect: amount => 1 + amount / 125000,

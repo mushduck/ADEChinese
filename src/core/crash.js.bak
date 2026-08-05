@@ -1,0 +1,51 @@
+import { DEV } from "@/env";
+
+window.NotImplementedError = class NotImplementedError extends Error {
+  constructor() {
+    super("The method is not implemented.");
+    this.name = "NotImplementedError";
+  }
+};
+
+window.GlobalErrorHandler = {
+  handled: false,
+  cleanStart: false,
+  onerror(event) {
+    if (this.handled) return;
+    this.handled = true;
+    if (!this.cleanStart) {
+      document.getElementById("loading").style.display = "none";
+      requestAnimationFrame(() => this.crash(event));
+      return;
+    }
+    if (!player.DEV) this.stopGame();
+    this.crash(event);
+  },
+  stopGame() {
+    GameKeyboard.disable();
+    GameIntervals.stop();
+    function clearHandles(set, clear) {
+      // eslint-disable-next-line no-empty-function
+      let id = set(() => {}, 9999);
+      while (id--) {
+        clear(id);
+      }
+    }
+    clearHandles(setInterval, clearInterval);
+    clearHandles(setTimeout, clearTimeout);
+    clearHandles(requestAnimationFrame, cancelAnimationFrame);
+  },
+  crash(message) {
+    if (window.GameUI !== undefined && GameUI.initialized) {
+      Modal.message.show(`Huh. Looks like whatever you just did crashed the game. All good, just send this message to me, Supersonic Seven, in the Discord, along with whatever you did to trigger it:
+      "${message}".<br>Thanks for playing AD: Endgame! We'll fix your issue as soon as we can!`, {}, 3);
+    }
+    // eslint-disable-next-line no-debugger
+    debugger;
+  }
+};
+
+window.onerror = (event, source) => {
+  if (!source.endsWith(".js")) return;
+  GlobalErrorHandler.onerror(event);
+};

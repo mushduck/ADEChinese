@@ -6,7 +6,7 @@ export class DarkMatterDimensionAutobuyerState extends IntervaledAutobuyerState 
   }
 
   get name() {
-    return `Dark Matter Dimensions`;
+    return `暗物质维度`;
   }
 
   get isUnlocked() {

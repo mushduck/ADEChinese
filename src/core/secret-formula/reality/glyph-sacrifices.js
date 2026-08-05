@@ -26,7 +26,7 @@ export const glyphSacrifice = {
       const capped = Decimal.clampMax(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
       return new Decimal(Decimal.log10(Decimal.pow(capped, 0.2).div(100).add(1))).add(1);
     },
-    description: amount => `${formatX(amount, 2, 2)} bigger multiplier when buying 8th Infinity Dimension`,
+    description: amount => `购买第八无限维度的倍率加成 ${formatX(amount, 2, 2)}`,
     cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
   },
   "time": {
@@ -37,7 +37,7 @@ export const glyphSacrifice = {
       const capped = Decimal.clampMax(sac, GlyphSacrificeHandler.maxSacrificeForEffects);
       return Decimal.pow(Decimal.pow(capped, 0.2).div(100).add(1), 2);
     },
-    description: amount => `${formatX(amount, 2, 2)} bigger multiplier when buying 8th Time Dimension`,
+    description: amount => `购买第八时间维度的倍率加成 ${formatX(amount, 2, 2)}`,
     cap: () => GlyphSacrificeHandler.maxSacrificeForEffects
   },
   "replication": {

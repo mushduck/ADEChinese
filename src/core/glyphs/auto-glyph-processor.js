@@ -171,19 +171,19 @@ export const AutoGlyphProcessor = {
   filterModeName(id) {
     switch (id) {
       case AUTO_GLYPH_SCORE.LOWEST_SACRIFICE:
-        return "Lowest Total Glyph Sacrifice";
+        return "最低献祭";
       case AUTO_GLYPH_SCORE.EFFECT_COUNT:
-        return "Number of Effects";
+        return "词条数量";
       case AUTO_GLYPH_SCORE.RARITY_THRESHOLD:
-        return "Rarity Threshold";
+        return "稀有度阈值";
       case AUTO_GLYPH_SCORE.SPECIFIED_EFFECT:
-        return "Specified Effect";
+        return "特定词条";
       case AUTO_GLYPH_SCORE.EFFECT_SCORE:
-        return "Effect Score";
+        return "词条分数";
       case AUTO_GLYPH_SCORE.LOWEST_ALCHEMY:
-        return "Lowest Alchemy Resource";
+        return "最少炼金资源";
       case AUTO_GLYPH_SCORE.ALCHEMY_VALUE:
-        return "Refinement Value";
+        return "精炼值";
       default:
         return "Invalid Glyph filter mode";
     }
@@ -191,11 +191,11 @@ export const AutoGlyphProcessor = {
   trashModeDesc(id) {
     switch (id) {
       case AUTO_GLYPH_REJECT.SACRIFICE:
-        return "Always sacrifice";
+        return "总是献祭";
       case AUTO_GLYPH_REJECT.REFINE:
-        return "Always refine";
+        return "总是精炼";
       case AUTO_GLYPH_REJECT.REFINE_TO_CAP:
-        return "Refine to cap, then sacrifice";
+        return "精炼至上限，然后献祭";
       default:
         return "Invalid Glyph trash mode";
     }
@@ -248,25 +248,25 @@ function getGlyphLevelSources() {
   const eterBase = new Decimal(RealityUpgrade(18).effectOrDefault(1));
   return {
     ep: {
-      name: "EP",
+      name: "永恒点数",
       value: epBase,
       coeff: epCoeff,
       exp: new Decimal(0.5),
     },
     repl: {
-      name: "Replicanti",
+      name: "复制器",
       value: replBase,
       coeff: replCoeff,
       exp: replPow,
     },
     dt: {
-      name: "DT",
+      name: "膨胀时间",
       value: dtBase,
       coeff: dtCoeff,
       exp: dtPow,
     },
     eternities: {
-      name: "Eternities",
+      name: "永恒次数",
       value: eterBase,
       // These are copied from Reality Upgrade 18's gameDB entry
       coeff: new Decimal(0.45),

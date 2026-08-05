@@ -2,39 +2,22 @@ export const MatterScale = {
   proton: new Decimal("2.82e-45"),
 
   estimate(matter) {
-    if (!matter) return ["There is no antimatter yet."];
-    const logMatter = matter.add(1).log10();
-    const planck = new Decimal("4.22419e-105");
-    const planckedLogMatter = logMatter.times(planck);
-    if (matter.gt(DC.E9E15)) {
-      if (planckedLogMatter.gt(this.proton)) {
-        const logScale = this.macroScale(planckedLogMatter);
-        const logAmount = format(planckedLogMatter.dividedBy(logScale.amount), 2, 1);
-        return [`If every digit in your antimatter amount were a planck volume, you would have
-          enough to ${logScale.verb} ${logAmount} ${logScale.name}`];
-      }
-      const logScale = this.microScale(logMatter);
-      return [`If every digit in your antimatter amount
-        were ${format(this.proton.div(logScale.amount).div(logMatter), 2, 1)} ${logScale.name},
-        you would have enough to make a proton.`];
-    }
+    if (!matter) return ["没有反物质"];
     if (matter.gt(DC.E100000)) {
       return [
-        `If you wrote ${formatInt(3)} numbers a second, it would take you`,
-        TimeSpan.fromSeconds(matter.log10().div(3)).toString(),
-        "to write down your antimatter amount."
+        `如果你每秒写 ${formatInt(3)} 个数字，你将需要`,
+        TimeSpan.fromSeconds(matter.log10() / 3).toString(),
+        "来写下你的反物质数量。"
       ];
     }
     const planckedMatter = matter.times(planck);
     if (planckedMatter.gt(this.proton)) {
       const scale = this.macroScale(planckedMatter);
       const amount = format(planckedMatter.dividedBy(scale.amount), 2, 1);
-      return [`If every antimatter were a planck volume, you would have
-        enough to ${scale.verb} ${amount} ${scale.name}`];
+      return [`如果每个反物质占据 1 普朗克体积，你拥有的反物质足以${scale.verb} ${amount} ${scale.name}`];
     }
     const scale = this.microScale(matter);
-    return [`If every antimatter were ${format(this.proton.div(scale.amount).div(matter), 2, 1)} ${scale.name},
-      you would have enough to make a proton.`];
+    return [`如果每个反物质是 ${format(this.proton.div(scale.amount).div(matter), 2, 1)} ${scale.name}，那么你就有足够的反物质制作一个质子。`];
   },
 
   microScale(matter) {
@@ -66,42 +49,42 @@ export const MatterScale = {
   },
 
   microObjects: [
-    { amount: new Decimal("1e-54"), name: "attometers cubed" },
-    { amount: new Decimal("1e-63"), name: "zeptometers cubed" },
-    { amount: new Decimal("1e-72"), name: "yoctometers cubed" },
-    { amount: new Decimal("4.22419e-105"), name: "planck volumes" }
+    { amount: new Decimal("1e-54"), name: "立方阿米" },
+    { amount: new Decimal("1e-63"), name: "立方泽米" },
+    { amount: new Decimal("1e-72"), name: "立方尧米" },
+    { amount: new Decimal("4.22419e-105"), name: "普朗克体积" }
   ],
 
   macroObjects: [
-    { amount: new Decimal("2.82e-45"), name: "protons", verb: "make" },
-    { amount: new Decimal("1e-42"), name: "nuclei", verb: "make" },
-    { amount: new Decimal("7.23e-30"), name: "Hydrogen atoms", verb: "make" },
-    { amount: new Decimal("5e-21"), name: "viruses", verb: "make" },
-    { amount: new Decimal("9e-17"), name: "red blood cells", verb: "make" },
-    { amount: new Decimal("6.2e-11"), name: "grains of sand", verb: "make" },
-    { amount: new Decimal("5e-8"), name: "grains of rice", verb: "make" },
-    { amount: new Decimal("3.555e-6"), name: "teaspoons", verb: "fill" },
-    { amount: new Decimal("7.5e-4"), name: "wine bottles", verb: "fill" },
-    { amount: DC.D1, name: "fridge-freezers", verb: "fill" },
-    { amount: new Decimal("2.5e3"), name: "Olympic-sized swimming pools", verb: "fill" },
-    { amount: new Decimal("2.6006e6"), name: "Great Pyramids of Giza", verb: "make" },
-    { amount: new Decimal("3.3e8"), name: "Great Walls of China", verb: "make" },
-    { amount: new Decimal("5e12"), name: "large asteroids", verb: "make" },
-    { amount: new Decimal("4.5e17"), name: "dwarf planets", verb: "make" },
-    { amount: new Decimal("1.08e21"), name: "Earths", verb: "make" },
-    { amount: new Decimal("1.53e24"), name: "Jupiters", verb: "make" },
-    { amount: new Decimal("1.41e27"), name: "Suns", verb: "make" },
-    { amount: new Decimal("5e32"), name: "red giants", verb: "make" },
-    { amount: new Decimal("8e36"), name: "hypergiant stars", verb: "make" },
-    { amount: new Decimal("1.7e45"), name: "nebulas", verb: "make" },
-    { amount: new Decimal("1.7e48"), name: "Oort clouds", verb: "make" },
-    { amount: new Decimal("3.3e55"), name: "Local Bubbles", verb: "make" },
-    { amount: new Decimal("3.3e61"), name: "galaxies", verb: "make" },
-    { amount: new Decimal("5e68"), name: "Local Groups", verb: "make" },
-    { amount: new Decimal("1e73"), name: "Sculptor Voids", verb: "make" },
-    { amount: new Decimal("3.4e80"), name: "observable universes", verb: "make" },
-    { amount: new Decimal("1e113"), name: "Dimensions", verb: "make" },
-    { amount: DC.C2P1024, name: "Infinity Dimensions", verb: "make" },
-    { amount: new Decimal("1e65000"), name: "Time Dimensions", verb: "make" }
+    { amount: new Decimal("2.82e-45"), name: "个质子", verb: "制造" },
+    { amount: new Decimal("1e-42"), name: "个原子核", verb: "制造" },
+    { amount: new Decimal("7.23e-30"), name: "个氢原子", verb: "制造" },
+    { amount: new Decimal("5e-21"), name: "个病毒", verb: "制造" },
+    { amount: new Decimal("9e-17"), name: "个红细胞", verb: "制造" },
+    { amount: new Decimal("6.2e-11"), name: "个沙粒", verb: "制造" },
+    { amount: new Decimal("5e-8"), name: "米粒", verb: "制造" },
+    { amount: new Decimal("3.555e-6"), name: "个茶匙", verb: "填充" },
+    { amount: new Decimal("7.5e-4"), name: "瓶酒", verb: "填充" },
+    { amount: DC.D1, name: "个冰箱", verb: "填充" },
+    { amount: new Decimal("2.5e3"), name: "个奥运会游泳池", verb: "填充" },
+    { amount: new Decimal("2.6006e6"), name: "个吉萨金字塔", verb: "制造" },
+    { amount: new Decimal("3.3e8"), name: "个万里长城", verb: "制造" },
+    { amount: new Decimal("5e12"), name: "个大型小行星", verb: "制造" },
+    { amount: new Decimal("4.5e17"), name: "个矮行星", verb: "制造" },
+    { amount: new Decimal("1.08e21"), name: "个地球", verb: "制造" },
+    { amount: new Decimal("1.53e24"), name: "个木星", verb: "制造" },
+    { amount: new Decimal("1.41e27"), name: "个太阳", verb: "制造" },
+    { amount: new Decimal("5e32"), name: "个红巨星", verb: "制造" },
+    { amount: new Decimal("8e36"), name: "个超巨星", verb: "制造" },
+    { amount: new Decimal("1.7e45"), name: "个星云", verb: "制造" },
+    { amount: new Decimal("1.7e48"), name: "个奥尔特云", verb: "制造" },
+    { amount: new Decimal("3.3e55"), name: "个本地泡", verb: "制造" },
+    { amount: new Decimal("3.3e61"), name: "星系", verb: "制造" },
+    { amount: new Decimal("5e68"), name: "个本星系群", verb: "制造" },
+    { amount: new Decimal("1e73"), name: "个玉夫座空隙", verb: "制造" },
+    { amount: new Decimal("3.4e80"), name: "个可观测宇宙", verb: "制造" },
+    { amount: new Decimal("1e113"), name: "个反物质维度", verb: "制造" },
+    { amount: DC.C2P1024, name: "个无限维度", verb: "制造" },
+    { amount: new Decimal("1e65000"), name: "个时间维度", verb: "制造" }
   ]
 };

@@ -4,10 +4,10 @@ import { MultiplierTabIcons } from "./icons";
 // See index.js for documentation
 export const gamespeed = {
   total: {
-    name: "Game speed",
+    name: "游戏速度",
     displayOverride: () => {
-      if (Enslaved.isStoringRealTime) return `Set to ${format(0)} (storing real time)`;
-      if (EternityChallenge(12).isRunning) return `${formatX(1)}/${formatInt(1000)} (fixed)`;
+      if (Enslaved.isStoringRealTime) return `已设置为 ${format(0)}（正在存储现实时间）`;
+      if (EternityChallenge(12).isRunning) return `${formatX(1)}/${formatInt(1000)}（固定值）`;
       const curr = getGameSpeedupFactor();
 
       const bh = MultiplierTabHelper.blackHoleSpeeds();
@@ -17,7 +17,7 @@ export const gamespeed = {
       const avgSpeed = Enslaved.isAutoReleasing
         ? getGameSpeedupForDisplay()
         : curr / currBH * avgBH;
-      const avgString = ` (current) | ${formatX(avgSpeed, 2, 2)} (average)`;
+      const avgString = ` （当前） | ${formatX(avgSpeed, 2, 2)} （平均）`;
       return `${formatX(curr, 2, 2)}${curr === avgSpeed ? "" : avgString}`;
     },
     multValue: () => getGameSpeedupForDisplay(),
@@ -27,33 +27,33 @@ export const gamespeed = {
     overlay: ["Δ", `<i class="fas fa-clock" />`, `<i class="fas fa-circle" />`],
   },
   glyph: {
-    name: "Equipped Glyphs",
+    name: "已装备的符文",
     multValue: () => getAdjustedGlyphEffect("timespeed"),
     powValue: () => getAdjustedGlyphEffect("effarigblackhole"),
     isActive: () => PlayerProgress.realityUnlocked() && !EternityChallenge(12).isRunning,
     icon: MultiplierTabIcons.GENERIC_GLYPH,
   },
   blackHoleCurr: {
-    name: "Current Black Hole Speedup",
+    name: "当前黑洞加速",
     multValue: () => MultiplierTabHelper.blackHoleSpeeds().current,
     isActive: () => BlackHole(1).isUnlocked && !BlackHoles.arePaused && !EternityChallenge(12).isRunning,
     icon: MultiplierTabIcons.BLACK_HOLE,
   },
   blackHoleAvg: {
-    name: "Average Black Hole Speedup",
+    name: "平均黑洞加速",
     multValue: () => MultiplierTabHelper.blackHoleSpeeds().average,
     isActive: () => BlackHole(1).isUnlocked && !BlackHoles.arePaused && !EternityChallenge(12).isRunning,
     icon: MultiplierTabIcons.BLACK_HOLE,
   },
   achievementMult: {
-    name: "30 V-Achievement Milestone - Achievement Multiplier",
+    name: "30 个薇成就里程碑——成就加成",
     multValue: () => Math.pow(VUnlocks.achievementBH.effectOrDefault(1),
       BlackHoles.list.countWhere(bh => bh.isUnlocked)),
     isActive: () => !BlackHoles.arePaused && VUnlocks.achievementBH.canBeApplied && !EternityChallenge(12).isRunning,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
   pulsing: {
-    name: "Auto-Discharging Stored Time",
+    name: "自动存储释放时间",
     multValue: () => (Enslaved.isAutoReleasing
       ? Math.max(Enslaved.autoReleaseSpeed / getGameSpeedupFactor(), 1)
       : getGameSpeedupFactor()),
@@ -61,39 +61,39 @@ export const gamespeed = {
     icon: MultiplierTabIcons.BH_PULSE,
   },
   singularity: {
-    name: "Singularity Milestone - Game speed based on Singularities",
+    name: "奇点里程碑——基于奇点的游戏速度",
     multValue: () => SingularityMilestone.gamespeedFromSingularities.effectOrDefault(1),
     isActive: () => SingularityMilestone.gamespeedFromSingularities.canBeApplied && !EternityChallenge(12).isRunning,
     icon: MultiplierTabIcons.SINGULARITY,
   },
   pelle: {
-    name: "Pelle Upgrade - Repeatable Game speed",
+    name: "佩勒升级——可重复购买的游戏速度升级",
     multValue: () => PelleUpgrade.timeSpeedMult.effectValue.toNumber(),
     isActive: () => Pelle.isDoomed && !EternityChallenge(12).isRunning,
     icon: MultiplierTabIcons.PELLE,
   },
 
   ec12: {
-    name: "Eternity Challenge 12",
+    name: "永恒挑战 12",
     multValue: () => 0.001 / getGameSpeedupForDisplay(),
     isActive: () => EternityChallenge(12).isRunning,
     icon: MultiplierTabIcons.CHALLENGE("eternity"),
   },
   chargingBH: {
-    name: "Black Hole Charging",
+    name: "黑洞充能",
     // The 0 in multValue is irrelevant; if this upgrade isn't available, the subtab is hidden by 1x total effect
     multValue: () => (Ra.unlocks.autoPulseTime.canBeApplied ? 0.01 : 0),
     isActive: () => Enslaved.isStoringGameTime,
     icon: MultiplierTabIcons.BLACK_HOLE,
   },
   invertedBH: {
-    name: "Inverted Black Hole",
+    name: "反转黑洞",
     multValue: () => player.blackHoleNegative,
     isActive: () => BlackHoles.areNegative,
     icon: MultiplierTabIcons.CHALLENGE("eternity"),
   },
   nerfLaitela: {
-    name: "Lai'tela's Reality",
+    name: "莱特拉的现实",
     powValue: () => Math.clampMax(Time.thisRealityRealTime.totalMinutes / 10, 1),
     isActive: () => Laitela.isRunning,
     icon: MultiplierTabIcons.GENERIC_LAITELA,

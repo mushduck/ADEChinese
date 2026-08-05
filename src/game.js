@@ -328,8 +328,8 @@ export function ratePerMinute(amount, time) {
 // eslint-disable-next-line max-params
 export function addInfinityTime(time, realTime, ip, infinities) {
   let challenge = "";
-  if (player.challenge.normal.current) challenge = `Normal Challenge ${player.challenge.normal.current}`;
-  if (player.challenge.infinity.current) challenge = `Infinity Challenge ${player.challenge.infinity.current}`;
+  if (player.challenge.normal.current) challenge = `普通挑战 ${player.challenge.normal.current}`;
+  if (player.challenge.infinity.current) challenge = `无限挑战 ${player.challenge.infinity.current}`;
   player.records.recentInfinities.pop();
   player.records.recentInfinities.unshift([time, realTime, ip, infinities, challenge]);
   GameCache.bestRunIPPM.invalidate();
@@ -357,9 +357,9 @@ export function addEternityTime(time, realTime, ep, eternities) {
   if (player.challenge.eternity.current) {
     const currEC = player.challenge.eternity.current;
     const ec = EternityChallenge(currEC);
-    const challText = player.dilation.active ? "Dilated EC" : "Eternity Challenge";
+    const challText = player.dilation.active ? "膨胀的永恒挑战" : "永恒挑战";
     challenge = `${challText} ${currEC} (${formatInt(ec.completions)}/${formatInt(ec.maxCompletions)})`;
-  } else if (player.dilation.active) challenge = "Time Dilation";
+  } else if (player.dilation.active) challenge = "时间膨胀";
   // If we call this function outside of dilation, it uses the existing AM and produces an erroneous number
   const gainedTP = player.dilation.active ? getTachyonGain() : DC.D0;
   player.records.recentEternities.pop();
@@ -1413,37 +1413,26 @@ function laitelaRealityTick(realDiff) {
         }
       }
     }
-    if (Laitela.realityReward.gt(oldInfo.realityReward)) {
-      completionText += `<br><br>Dark Matter Multiplier: ${formatX(oldInfo.realityReward, 2, 2)}
-      ➜ ${formatX(Laitela.realityReward, 2, 2)}`;
+    if (Laitela.realityReward > oldInfo.realityReward) {
+      completionText += `<br><br>暗物质倍率：${formatX(oldInfo.realityReward, 2, 2)} ➜ ${formatX(Laitela.realityReward, 2, 2)}`;
       if (oldInfo.fastestCompletion === 3600 || oldInfo.fastestCompletion === 300 && oldInfo.difficultyTier > 0) {
         if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
           // First attempt - destabilising
-          completionText += `<br>Best Completion Time: None ➜ Destabilized
-          <br>Highest Active Dimension: ${formatInt(8 - oldInfo.difficultyTier)} ➜
-          ${formatInt(8 - laitelaInfo.difficultyTier)}`;
+          completionText += `<br>最佳完成时间：无 ➜ 已达到不稳定<br>可用的最高维度：${formatInt(8 - oldInfo.difficultyTier)} ➜ ${formatInt(8 - laitelaInfo.difficultyTier)}`;
         } else {
           // First attempt - not destabilising
-          completionText += `<br>Best Completion Time: None ➜
-            ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()}
-            <br>Highest Active Dimension: ${formatInt(8 - laitelaInfo.difficultyTier)}`;
+          completionText += `<br>最佳完成时间：无 ➜ ${TimeSpan.fromSeconds(laitelaInfo.fastestCompletion).toStringShort()}<br>可用的最高维度：${formatInt(8 - laitelaInfo.difficultyTier)}`;
         }
       } else if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
         // Second+ attempt - destabilising
-        completionText += `<br>Best Completion Time: ${TimeSpan.fromSeconds(new Decimal(oldInfo.fastestCompletion)).toStringShort()}
-          ➜ Destabilized
-          <br>Highest Active Dimension: ${formatInt(8 - oldInfo.difficultyTier)} ➜
-          ${formatInt(8 - laitelaInfo.difficultyTier)}`;
+        completionText += `<br>最佳完成时间：${TimeSpan.fromSeconds(oldInfo.fastestCompletion).toStringShort()} ➜ 已达到不稳定<br>可用的最高维度：${formatInt(8 - oldInfo.difficultyTier)} ➜ ${formatInt(8 - laitelaInfo.difficultyTier)}`;
       } else {
         // Second+ attempt - not destabilising
-        completionText += `<br>Best Completion Time: ${TimeSpan.fromSeconds(new Decimal(oldInfo.fastestCompletion)).toStringShort()}
-        ➜ ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()}
-        <br>Highest Active Dimension: ${formatInt(8 - oldInfo.difficultyTier)}`;
+        completionText += `<br>最佳完成时间：${TimeSpan.fromSeconds(oldInfo.fastestCompletion).toStringShort()} ➜ ${TimeSpan.fromSeconds(laitelaInfo.fastestCompletion).toStringShort()}<br>可用的最高维度：${formatInt(8 - oldInfo.difficultyTier)}`;
       }
       player.records.bestReality.laitelaSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
     } else {
-      completionText += ` You need to destabilize in faster than
-        ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()} to improve your multiplier.`;
+      completionText += ` 你需要在 ${TimeSpan.fromSeconds(laitelaInfo.fastestCompletion).toStringShort()} 内达到不稳定，才能提高暗物质的倍率加成。`;
     }
     if (Laitela.isFullyDestabilized) SpeedrunMilestones(24).tryComplete();
     Modal.message.show(completionText, {}, 2);
@@ -1452,10 +1441,7 @@ function laitelaRealityTick(realDiff) {
 
 function laitelaBeatText(disabledDim) {
   switch (disabledDim) {
-    case 1: return `<br><br>Lai'tela's Reality will now completely disable production from all Dimensions.
-        The Reality can still be entered, but further destabilization is no longer possible.
-        For completely destabilizing the Reality, you also get an additional ${formatX(Math.pow(8, Laitela.hadronizes + 1))}
-        to Dark Energy gain.`;
+    case 1: return `<br><br>在莱特拉的现实中，所有种类的所有维度都不产生任何东西。你仍然可以进入祂的现实，但你无法继续让祂的现实出现不稳定。祂的现实已完全不稳定，暗能量的产量额外 ${formatX(8)}`;
     case 2: return `<br><br>Lai'tela's Reality will now disable production from all 2nd Dimensions during
       future runs, but the reward will be ${formatInt(100)} times stronger than before. Completely destabilizing
       the Reality for the final Dimension will give you an additional ${formatX(Math.pow(8, Laitela.hadronizes + 1))}
@@ -1756,19 +1742,15 @@ export function simulateTime(seconds, real, fast) {
         asyncEntry: doneSoFar => {
           GameIntervals.stop();
           ui.$viewModel.modal.progressBar = {
-            label: "Offline Progress Simulation",
-            info: () => `The game is being run at a lower accuracy in order to quickly calculate the resources you
-              gained while you were away. See the How To Play entry on "Offline Progress" for technical details. If
-              you are impatient and want to get back to the game sooner, you can click the "Speed up" button to
-              simulate the rest of the time with half as many ticks (down to a minimum of ${formatInt(500)} ticks
-              remaining). The "SKIP" button will instead use all the remaining offline time in ${formatInt(10)}
-              ticks.`,
-            progressName: "Ticks",
+            label: "离线进度模拟",
+            info: () => `游戏正以较低精度运行，以便快速计算你离线期间获得的资源。技术细节请参见“离线进度”的游戏帮助条目。
+若你希望更快返回游戏，可点击“加速”按钮，此时系统将以剩余时间间隔数的一半（最低不少于 ${formatInt(500)} 个）快速模拟剩余进度。点击“跳过”按钮则会将全部剩余离线时间压缩至 ${formatInt(10)} 个时间间隔完成计算。`,
+            progressName: "时间间隔",
             current: doneSoFar,
             max: ticks,
             startTime: Date.now(),
             buttons: [{
-              text: "Speed up",
+              text: "加速",
               condition: (current, max) => max - current > 500,
               click: () => {
                 const newRemaining = Math.clampMin(Math.floor(progress.remaining / 2), 500);
@@ -1782,7 +1764,7 @@ export function simulateTime(seconds, real, fast) {
               }
             },
             {
-              text: "SKIP",
+              text: "跳过",
               condition: (current, max) => max - current > 10,
               click: () => {
                 // We jump to 10 from the end (condition guarantees there are at least 10 left).

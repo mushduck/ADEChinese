@@ -5,10 +5,7 @@ export const Speedrun = {
   officialFixedSeed: 69420,
   unlock() {
     if (player.speedrun.isUnlocked) return;
-    Modal.message.show(`You have unlocked Speedrun Mode! This allows you to start a new save file with some slight
-      changes which can be helpful if you're trying to complete the game as quickly as possible. The option to
-      start a Speedrun Save is now available in the Options tab, under Saving. Choosing to start a Speedrun Save
-      will provide you with another modal with more in-depth information.`, {}, 3);
+    Modal.message.show(`你已解锁速通模式！你可以创建一个速通存档，该存档会修改小部分游戏内容，这些改动能有助于你尽快通关游戏。你可以在选项页面中的存档项目下创建速通存档。速通存档将为你增加一个新窗口，它能为你提供更多和更深入的统计信息。`, {}, 3);
     player.speedrun.isUnlocked = true;
   },
   // Used to block the seed-changing modal from opening (other functions assume this is checked beforehand)

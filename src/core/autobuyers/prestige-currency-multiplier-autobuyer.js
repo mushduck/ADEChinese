@@ -6,7 +6,7 @@ export class IPMultAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Infinity Point Multiplier`;
+    return `无限点数倍增`;
   }
 
   get isUnlocked() {

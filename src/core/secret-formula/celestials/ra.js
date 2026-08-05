@@ -2,7 +2,8 @@ export const ra = {
   pets: {
     teresa: {
       id: "teresa",
-      name: "Teresa",
+      key: "Teresa",
+      name: "特蕾莎",
       color: "#8596ea",
       chunkGain: "Eternity Points",
       memoryGain: "current RM",

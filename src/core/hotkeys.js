@@ -27,13 +27,13 @@ import { GameKeyboard } from "./keyboard";
 
 export const shortcuts = [
   {
-    name: "Toggle Autobuyers",
+    name: "切换自动购买器",
     keys: ["a"],
     type: "bindHotkey",
     function: () => keyboardToggleAutobuyers(),
     visible: true
   }, {
-    name: "Buy one Tickspeed",
+    name: "就买一个计数频率",
     keys: ["shift", "t"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? buyCelestialTickSpeed() : buyTickSpeed(),
@@ -57,7 +57,7 @@ export const shortcuts = [
     function: () => sacrificeBtnClick(),
     visible: true
   }, {
-    name: "Dimension Boost",
+    name: "维度提升",
     keys: ["d"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialDimensionBoost(true) : manualRequestDimensionBoost(true),

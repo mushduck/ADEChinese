@@ -67,9 +67,7 @@ export const automatorTemplates = {
   scripts: [
     {
       name: "Climb EP",
-      description: `This script performs repeated Eternities, attempting to re-purchase a Time Study Tree every
-        Eternity. Autobuyer settings must be supplied for the Infinity and Eternity Autobuyers. The script will
-        repeat until a final Eternity Point value is reached.`,
+      description: `该脚本将反复进行永恒操作，每次永恒时尝试重新购买时间研究树。需配置无限自动购买器和永恒自动购买器。脚本将持续循环，直至达到最终永恒点数目标值。`,
       inputs: [
         { name: "treeStudies", type: "tree", prompt: "Or directly enter your time studies" },
         { name: "treeNowait", type: "nowait", prompt: "Missing Study behavior" },

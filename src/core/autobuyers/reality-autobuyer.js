@@ -5,7 +5,7 @@ export class RealityAutobuyerState extends AutobuyerState {
     return player.auto.reality;
   }
 
-  get name() { return `Reality`; }
+  get name() { return `现实`; }
   get isUnlocked() { return RealityUpgrade(25).isBought; }
   get canTick() { return super.canTick && !GlyphSelection.active; }
 

@@ -6,7 +6,7 @@ export class BlackHolePowerAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Black Hole ${this.id} Power`;
+    return `黑洞 ${this.id} 强度`;
   }
 
   get isUnlocked() {
@@ -23,7 +23,7 @@ export class BlackHolePowerAutobuyerState extends AutobuyerState {
   }
 
   static get entryCount() { return 2; }
-  static get autobuyerGroupName() { return "Black Hole Power"; }
+  static get autobuyerGroupName() { return "黑洞强度"; }
   static get isActive() { return player.auto.blackHolePower.isActive; }
   static set isActive(value) { player.auto.blackHolePower.isActive = value; }
 }

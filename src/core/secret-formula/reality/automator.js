@@ -2,22 +2,20 @@ import { automatorTemplates } from "../script-templates";
 
 export const automator = {
   categoryNames: [
-    "Time Studies",
-    "Event Triggers",
-    "Alter Settings",
-    "Information",
-    "Script Flow",
+    "时间研究",
+    "事件触发",
+    "修改设置",
+    "信息",
+    "脚本流",
   ],
   commands: [
     {
       id: 0,
       isUnlocked: () => true,
-      keyword: "STUDIES RESPEC",
+      keyword: "重置时间研究",
       category: 0,
       syntax: `<b>studies respec</b>`,
-      description: `This command turns on the respec option, which will respec your Time Studies on the next manual or
-        automatic Eternity. Note that this does not actually perform an Eternity on its own; make sure your Autobuyer
-        is on or you manually run the ETERNITY command (although ETERNITY has its own built-in respec option).`,
+      description: `这条指令会打开重置时间研究的选项，从而在下次永恒的时候重置时间研究。注意它不会进行一次永恒，请确保你的自动购买器开启或者你手动运行永恒指令（尽管永恒之理支持带上重置研究的选项）。`,
       examples: [
         `studies respec`,
       ]

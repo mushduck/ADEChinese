@@ -17,19 +17,19 @@ export class ScriptTemplate {
     this.lines = [];
     this.warnings = [];
     switch (templateName) {
-      case "Climb EP":
+      case "刷永恒点数":
         this.templateClimbEP(params);
         break;
-      case "Grind Eternities":
+      case "刷永恒次数":
         this.templateGrindEternities(params);
         break;
-      case "Grind Infinities":
+      case "刷无限次数":
         this.templateGrindInfinities(params);
         break;
-      case "Complete Eternity Challenge":
+      case "完成永恒挑战":
         this.templateDoEC(params);
         break;
-      case "Unlock Dilation":
+      case "解锁膨胀":
         this.templateUnlockDilation(params);
         break;
       default:

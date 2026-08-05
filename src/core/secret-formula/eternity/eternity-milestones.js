@@ -1,26 +1,26 @@
 export const eternityMilestones = {
   autobuyerIPMult: {
     eternities: 1,
-    reward: "Unlock the Infinity Point multiplier autobuyer",
+    reward: "解锁自动购买无限点数倍增器",
     pelleUseless: true
   },
   keepAutobuyers: {
     eternities: 2,
-    reward: "You start Eternity with all Normal Challenges complete, all normal autobuyers, and infinity broken"
+    reward: "开始永恒时，已经完成所有普通挑战、解锁打破无限、保留自动购买器"
   },
   autobuyerReplicantiGalaxy: {
     eternities: 3,
-    reward: "Unlock the Replicanti Galaxy Autobuyer"
+    reward: "解锁自动购买复制器星系"
   },
   keepInfinityUpgrades: {
     eternities: 4,
-    reward: "You start Eternity with all Infinity Upgrades",
+    reward: "开始永恒时拥有所有无限升级",
     givenByPelle: () => PelleUpgrade.keepInfinityUpgrades.isBought,
     pelleUseless: true
   },
   bigCrunchModes: {
     eternities: 5,
-    reward: "Unlock more Big Crunch Autobuyer options"
+    reward: "解锁更多自动大坍缩选项"
   },
   autoEP: {
     eternities: 6,
@@ -30,11 +30,9 @@ export const eternityMilestones = {
         EternityMilestone.autoEternities.isReached).gt(0);
       const em1000 = getInfinitiedMilestoneReward(TimeSpan.fromHours(new Decimal(1)).totalMilliseconds,
         EternityMilestone.autoInfinities.isReached).gt(0);
-      if (!player.options.offlineProgress) return `This milestone would give offline EP generation, but offline progress
-        is currently disabled`;
-      const effectText = (em200 || em1000) ? "Inactive" : `Currently ${format(EPmin, 2, 2)} EP/min`;
-      return `While offline, gain ${formatPercents(0.25)} of your best Eternity Points per minute from previous
-        Eternities (${effectText})`;
+      if (!player.options.offlineProgress) return `此里程碑将在离线时产生永恒点数，但目前已禁用离线进度`;
+      const effectText = (em200 || em1000) ? "已禁用" : `当前：${format(EPmin, 2, 2)} 永恒点数/分钟`;
+      return `离线时，获得你之前最佳永恒点数/分钟的 ${formatPercents(0.25)}（${effectText}）`;
     },
     activeCondition: () => (player.options.offlineProgress
       ? `Active as long as neither of the other offline milestones

@@ -3,7 +3,7 @@ export const teresa = {
     run: {
       id: 0,
       price: 1e14,
-      description: "Unlock Teresa's Reality.",
+      description: "解锁特蕾莎的现实",
       onUnlock: () => Teresa.quotes.unlockReality.show(),
     },
     epGen: {
@@ -15,13 +15,13 @@ export const teresa = {
     effarig: {
       id: 3,
       price: 1e24,
-      description: "Unlock Effarig, Celestial of Ancient Relics.",
+      description: "解锁鹿颈长，古代遗迹之神",
       onUnlock: () => Teresa.quotes.effarig.show(),
     },
     shop: {
       id: 2,
       price: 1e21,
-      description: "Unlock Teresa's Perk Point Shop.",
+      description: "解锁复兴商店",
     },
     undo: {
       id: 4,

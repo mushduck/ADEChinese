@@ -6,7 +6,7 @@ export class TickspeedAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get name() {
-    return `Tickspeed`;
+    return `计数频率`;
   }
 
   get isUnlocked() {

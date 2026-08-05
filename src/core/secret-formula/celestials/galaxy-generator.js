@@ -22,7 +22,7 @@ export const pelleGalaxyGeneratorUpgrades = {
     effect: x => Decimal.pow(x * 2, DivinityMilestone.firstDivine.isReached && !player.disablePostReality ? 2 : 1),
     formatEffect: x => `${format(x, 2, 2)}/s`,
     currency: () => Currency.galaxyGeneratorGalaxies,
-    currencyLabel: "Galaxy"
+    currencyLabel: "星系"
   }),
   multiplicative: rebuyable({
     id: "galaxyGeneratorMultiplicative",

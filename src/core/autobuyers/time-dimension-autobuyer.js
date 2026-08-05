@@ -10,7 +10,7 @@ export class TimeDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get fullName() {
-    return `${this.name} Time Dimension`;
+    return `${this.name}时间维度`;
   }
 
   get data() {

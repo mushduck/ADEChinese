@@ -8,7 +8,7 @@ export const ENSLAVED_UNLOCKS = {
     id: 0,
     price: TimeSpan.fromYears(new Decimal(1e35)).totalMilliseconds,
     secondaryRequirement: () => true,
-    description: () => `Increase the softcap to Tickspeed upgrades from Time Dimensions by ${formatInt(1e5)}`,
+    description: () => `时间维度中获得计数频率升级数量的软上限延迟 ${formatInt(1e5)}`,
   },
   RUN: {
     id: 1,
@@ -21,8 +21,7 @@ export const ENSLAVED_UNLOCKS = {
     description() {
       const hasLevelRequirement = player.records.bestReality.glyphLevel.gte(5000);
       const hasRarityRequirement = strengthToRarity(player.records.bestReality.glyphStrength) >= 100;
-      return `Unlock The Nameless Ones' Reality (requires ${hasLevelRequirement ? "[✓]" : "[✗]"} a level
-      ${formatInt(5000)} Glyph and ${hasRarityRequirement ? "[✓]" : "[✗]"} a ${formatRarity(100)} rarity Glyph)`;
+      return `解锁无名氏的现实（要求：一个等级为 ${formatInt(5000)} 的符文 ${hasLevelRequirement ? "[✓]" : "[✗]"} 和一个稀有度为 ${formatRarity(100)} 的符文 ${hasRarityRequirement ? "[✓]" : "[✗]"} ）`;
     }
   }
 };
