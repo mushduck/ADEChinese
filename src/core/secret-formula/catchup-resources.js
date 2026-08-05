@@ -1,33 +1,28 @@
 export const catchupResources = [
   {
-    name: "Antimatter Dimensions",
+    name: "反物质维度",
     id: 0,
     requiredStage: PROGRESS_STAGE.PRE_INFINITY,
-    description: `Every Antimatter Dimension continuously produces Dimensions of the next tier down. The lowest
-      Antimatter Dimension produces antimatter.`
+    description: `每个反物质维度持续生产前一级的维度，最低级的反物质维度生产反物质。`
   },
   {
-    name: "Tickspeed Upgrades",
+    name: "计数频率",
     id: 1,
     openH2pEntry: "Tickspeed",
     requiredStage: PROGRESS_STAGE.PRE_INFINITY,
-    description: `Tickspeed Upgrades make Antimatter Dimensions produce other Antimatter Dimensions or antimatter
-      as if time were passing faster.`
+    description: `计数频率升级使反物质维度生产其他反物质维度或反物质时，如同时间加速流逝。`
   },
   {
-    name: "Autobuyers",
+    name: "自动购买器",
     id: 2,
     requiredStage: PROGRESS_STAGE.PRE_INFINITY,
-    description: `Autobuyers are a built-in feature to the game which purchases upgrades for your Antimatter
-      Dimensions automatically when you can afford them.`
+    description: `自动购买器是游戏内置机制，在可购买时自动为反物质维度购买升级。`
   },
   {
-    name: "Dimension Boosts",
+    name: "维度提升",
     id: 3,
     requiredStage: PROGRESS_STAGE.PRE_INFINITY,
-    description: `Dimension Boosts are gained by resetting all your Antimatter Dimensions and tickspeed after
-      reaching a certain amount of the highest available Antimatter Dimension. They provide a multiplier to your
-      Antimatter Dimensions.`
+    description: `维度提升通过重置所有反物质维度和计数频率获得，当最高可用反物质维度达到特定数量时触发。维度提升将为你的反物质维度提供倍数加成。`
   },
   {
     name: "Antimatter Galaxies",

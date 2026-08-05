@@ -89,7 +89,7 @@ export const progressStages = [
   },
   {
     id: PROGRESS_STAGE.EARLY_REALITY,
-    name: "Reality",
+    name: "现实",
     hasReached: save => new Decimal(save.realities).gt(0),
     // For the first few realities, we give a bit of extra suggestion just in case the player ended up taking a break
     // and returned in the middle of a reality while they're still relatively slow
@@ -104,28 +104,28 @@ export const progressStages = [
   },
   {
     id: PROGRESS_STAGE.TERESA,
-    name: "Teresa (1st Celestial)",
+    name: "特蕾莎（第一天神）",
     hasReached: save => save.celestials?.teresa?.quoteBits > 0 || save.celestials?.teresa?.quotes.length > 0,
     suggestedResource: "Reality Machines",
     subProgressValue: save => Decimal.log10(save.celestials.teresa.pouredAmount.plus(1)).toNumber() / 21,
   },
   {
     id: PROGRESS_STAGE.EFFARIG,
-    name: "Effarig (2nd Celestial)",
+    name: "鹿颈长（第二天神）",
     hasReached: save => save.celestials?.effarig?.quoteBits > 0 || save.celestials?.effarig?.quotes.length > 0,
     suggestedResource: "Reality Machines and Relic Shards",
     subProgressValue: save => Decimal.log10(new Decimal(save.celestials.effarig.relicShards).add(1)).toNumber() / 14,
   },
   {
     id: PROGRESS_STAGE.ENSLAVED,
-    name: "The Nameless Ones (3rd Celestial)",
+    name: "无名氏（第三天神）",
     hasReached: save => save.celestials?.enslaved?.quoteBits > 0 || save.celestials?.enslaved?.quotes.length > 0,
     suggestedResource: "Reality Machines and Glyph Level",
     subProgressValue: save => Math.sqrt((new Decimal(save.reality.realityMachines).log10().toNumber() - 30) / 30),
   },
   {
     id: PROGRESS_STAGE.V,
-    name: "V (4th Celestial)",
+    name: "薇（第四天神）",
     hasReached: save => save.celestials?.v?.quoteBits > 0 || save.celestials?.v?.quotes.length > 0,
     suggestedResource: "Number of V-Achievements",
     subProgressValue: save => 0.0277 * Object.values(save.celestials.v.runUnlocks)
@@ -133,28 +133,28 @@ export const progressStages = [
   },
   {
     id: PROGRESS_STAGE.RA,
-    name: "Ra (5th Celestial)",
+    name: "太阳神（第五天神）",
     hasReached: save => save.celestials?.ra?.quoteBits > 0 || save.celestials?.ra?.quotes.length > 0,
     suggestedResource: "Celestial Memories",
     subProgressValue: save => Object.values(save.celestials.ra.pets).reduce((sum, pet) => sum + pet.level, 0) / 100,
   },
   {
     id: PROGRESS_STAGE.IMAGINARY_MACHINES,
-    name: "Imaginary Machines",
+    name: "虚幻机器",
     hasReached: save => new Decimal(save.reality?.iMCap).gt(0),
     suggestedResource: "Imaginary Machines",
     subProgressValue: save => Decimal.log10(new Decimal(save.reality.iMCap).add(1)).toNumber() / 9,
   },
   {
     id: PROGRESS_STAGE.LAITELA,
-    name: "Lai'tela (6th Celestial)",
+    name: "莱特拉（第六天神）",
     hasReached: save => save.celestials?.laitela?.quoteBits > 0 || save.celestials?.laitela?.quotes.length > 0,
     suggestedResource: "Dark Matter and Singularities",
     subProgressValue: save => new Decimal(save.celestials.laitela.darkMatter).log10().toNumber() / 308.25,
   },
   {
     id: PROGRESS_STAGE.PELLE,
-    name: "Pelle (7th Celestial)",
+    name: "佩勒（第七天神）",
     hasReached: save => save.celestials?.pelle?.doomed || save.celestials?.pelle?.quotes.length > 0,
     suggestedResource: "Remnants",
     subProgressValue: save => Decimal.log10(new Decimal(save.celestials.pelle.remnants).add(1)).toNumber() / 9,
