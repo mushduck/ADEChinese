@@ -9,7 +9,7 @@ export const teresa = {
     epGen: {
       id: 1,
       price: 1e18,
-      description: "Unlock passive Eternity Point generation.",
+      description: "自动获得永恒点数",
       isDisabledInDoomed: () => !PelleCelestialUpgrade.passiveEPGen.canBeApplied
     },
     effarig: {
@@ -26,13 +26,13 @@ export const teresa = {
     undo: {
       id: 4,
       price: 1e10,
-      description: "Unlock \"Undo\" of equipping a Glyph.",
+      description: "解锁“撤销”已装备符文的功能",
       isDisabledInDoomed: () => !PelleCelestialUpgrade.undoGlyph.canBeApplied
     },
     startEU: {
       id: 5,
       price: 1e6,
-      description: "You start Reality with all Eternity Upgrades unlocked.",
+      description: "开始现实时解锁所有永恒升级",
       isDisabledInDoomed: () => !PelleCelestialUpgrade.allEternityUpgrades.canBeApplied,
       onUnlock: () => {
         for (const id of [1, 2, 3, 4, 5, 6]) player.eternityUpgrades.add(id);

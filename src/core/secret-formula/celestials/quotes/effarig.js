@@ -56,155 +56,155 @@ export const effarigQuotes = {
   completeReality: {
     id: 7,
     lines: [
-      { text: "You have completed Effarig's Reality.", showCelestialName: false },
-      "So this is the diabolical power... what frightened the others...",
-      "Do you think this was worth it? Trampling on what I have done?",
-      "And for what purpose? You could have joined, we could have cooperated.",
-      "But no. It is over. Leave while I cling onto what is left.",
+      { text: "你已完成鹿颈长的现实阶段。", showCelestialName: false },
+      "所以这就是那恶魔般的力量…这肯定令祂者胆寒…",
+      "你认为这值得吗？为我的所作所为而悲伤？",
+      "你又是为了什么？你本来可以加入，我们本来可以合作。",
+      "但，并不是。已经结束了。你走吧，留我一人独守剩下的残骸。",
     ]
   },
   expansionPacks: {
     id: 8,
     lines: [
-      "Oh, hey Teresa.",
-      "Do you know where we are?",
-      "Guess not.",
-      "Hold on, that's the guy who keeps destroying my home!",
-      "What does Pelle call him...",
-      "Destroyer?",
-      "Did you bring me here?",
-      "Why are you glowing with power?",
-      "Wait...",
-      "How did the Nameless break out of their prison?"
+      "噢，嗨，特蕾莎。",
+      "你知道我们现在在哪吗？",
+      "看来不知道。",
+      "等等，这家伙就是一直拆我家的那个！",
+      "佩勒叫他什么来着...",
+      "毁灭之源？",
+      "是你把我带到这里的吗？",
+      "你为什么浑身散发出力量？",
+      "等一下...",
+      "无名氏们是怎么从囚禁中被释放的？"
     ]
   },
   effarigPack: {
     id: 9,
     requirement: () => ExpansionPack.effarigPack.isBought,
     lines: [
-      "Found what you were looking for?",
-      "I tried to hide it from those who might abuse it's potential.",
-      "I shouldn't expect much from you after what you did...",
-      "But I suppose you had a purpose in it.",
-      "I'll save you the trouble by giving you the rewards automatically.",
-      "You won't destroy my home any more now, will you?",
-      "Sorry for getting mad, I should've known you were a chill guy on the inside.",
-      "Maybe we can still be friends.",
-      "Hey, don't let the power get to your head.",
-      "Sure it's a lot, but I expect you can handle it.",
-      "And if your Glyphs ever start to suck, well, you know who to call.",
-      "See you around."
+      "找到你要找的东西了吗？",
+      "我本想把它们藏起来，以免那些可能的滥用者发现。",
+      "鉴于你之前干过的事，我本不该对你抱太大期望...",
+      "不过我想你这么做肯定是有原因的。",
+      "为了省去你的麻烦，我直接把奖励给你。",
+      "你现在不会再毁掉我的家了吧？",
+      "抱歉刚才发火了，我早该知道你骨子里其实是个很随和的人。",
+      "也许我们还能做朋友。",
+      "嘿，别被力量冲昏了头脑。",
+      "虽然数量不少，但我相信你能应付得来。",
+      "如果你的符文哪天出问题了，嗯，你知道该找谁。",
+      "回头见。"
     ]
   },
   glyphLevel1: {
     id: 10,
     requirement: () => player.records.bestEndgame.glyphLevel.gte(1e5),
     lines: [
-      "Six-digit Glyph levels, huh?",
-      "You're breaking more walls than I can build.",
-      "I suppose this is having decent effects on your Alchemy resources.",
-      "I helped Ra make those you know.",
-      "I was most proud of the Reality Glyph.",
-      "I even put Teresa's symbol on it...",
-      "Don't ask. I won't answer.",
-      "Anyway, enjoy the climb.",
-      "And look out for yourself."
+      "六位数的符文等级，哼哼？",
+      "你跨越的高墙比我设立的还多。",
+      "我想这应该对你的炼金资源有不错的效果吧。",
+      "你知道的，那些可是我帮太阳神制作的。",
+      "我最自豪的是现实符文。",
+      "我甚至还在上面刻了特蕾莎的符号...",
+      "别问，我不会回答的。",
+      "总之，好好享受这段变强之旅吧。",
+      "还有，自己多加小心。"
     ]
   },
   glyphLevel2: {
     id: 11,
     requirement: () => player.records.bestEndgame.glyphLevel.gte(2e5),
     lines: [
-      "Woah. Slow down there, buckaroo.",
-      "One more power burst, and you'd have Glyph Levels in the millions.",
-      "The Elemental and I didn't plan for that...",
-      "He just told me to put another Glyph Level softcap here, so that's what I'm gonna have to do.",
-      "Hey, don't feel too bad.",
-      "You'd get those million-level Glyphs soon enough.",
-      "Between you and me, it's really just the Alchemy boost that would get you.",
-      "Anyway, I'll let you get back to your grind.",
-      "See you around, mate."
+      "哇哦。慢点儿，伙计。",
+      "再推一把，你的符文等级就要达到数百万了。",
+      "源初之神和我都没意料到...",
+      "祂刚让我在这里再设一个符文等级的软上限，所以我只能这么做了。",
+      "嘿，别太难过。",
+      "你很快就能拿到那些百万级的符文了。",
+      "说实在的，真正关键的其实是炼金资源的加成。",
+      "不管怎样，我就不打扰你继续刷级了。",
+      "回头见，伙计。"
     ]
   },
   glyphLevel3: {
     id: 12,
     requirement: () => player.records.bestEndgame.glyphLevel.gte(1e6),
     lines: [
-      "Well, you did it anyway.",
-      "One million Glyph Levels.",
-      "I see it took you a lot to get here.",
-      "I'm gonna have to start working on some harsher softcaps, you're beating the existing ones too easily.",
-      "Can't let you inflate into oblivion.",
-      "I mean, do you really need Glyphs with levels above one million?",
-      "Alright, you can get back to grinding."
+      "嘛，你终于还是做到了。",
+      "一百万符文等级。",
+      "看来你花了不少功夫才走到这一步。",
+      "我得开始设计一些更强的软上限了，你突破现有的上限太轻松了。",
+      "不能让你的符文等级一直无限制地飙升。",
+      "我的意思是，你真的需要等级超过一百万的符文吗？",
+      "好吧，你可以回去继续刷级了。"
     ]
   },
   secondShop: {
     id: 13,
     requirement: () => Achievement(227).isUnlocked,
     lines: [
-      "You found my other shop.",
-      "As you can see, many of my premium relics are very powerful.",
-      "So I had to lock it behind something that would take much strength to get through.",
-      "And yet, you succeed anyway.",
-      "Not like I'm surprised though, I was actually expecting your arrival after you hit the level one million Glyphs.",
-      "So, welcome in.",
-      "Take a look around, and let me know if you find anything that catches your interest."
+      "你找到我的另一个商店了。",
+      "如你所见，我的许多高级遗物都极为强大。",
+      "所以我只好把它锁在一道需要强大力量才能突破的屏障之后。",
+      "然而，你还是成功了。",
+      "不过我并不惊讶，其实在你突破一百万级符文后，我就预料到你会来了。",
+      "那么，欢迎光临。",
+      "四处看看吧，如果发现什么感兴趣的东西，请告诉我。"
     ]
   },
   keepRelicShard: {
     id: 14,
     lines: [
-      "This purchase will help you a lot.",
-      "You will no longer have to deal with your Relic Shards resetting.",
-      "This will help you attain the rest of my stocks."
+      "这次购买对你大有帮助。",
+      "你再也不用担心遗迹碎片被重置了。",
+      "这将帮助你获得我剩下的库存。"
     ]
   },
   betterGeneration: {
     id: 15,
     lines: [
-      "This purchase is pretty handy.",
-      "It prevents you from immediately needing to Reality to reach higher Rarities.",
-      "Purely QoL of course, but then again most of my items are."
+      "这次购买挺实用的。",
+      "它能让你不必通过进行现实来获取更高稀有度的符文。",
+      "当然，这纯粹是为了提升游戏体验。不过话说回来，我的商品大部分都是这样。"
     ]
   },
   maxMomentum: {
     id: 16,
     lines: [
-      "This purchase is a lifesaver.",
-      "It saves hours of grinding for every Endgame.",
-      "Speaking of which, have you met the Elemental yet?."
+      "这次购买真是救命稻草。",
+      "每次终局都能省下好多刷符文等级的时间。",
+      "说到这个，你见过源初之神了吗？"
     ]
   },
   moreRarityCap: {
     id: 17,
     lines: [
-      "This purchase is dangerous.",
-      "One of the few that is not purely QoL.",
-      "Use it wisely."
+      "这次购买很危险。",
+      "这是为数不多并非纯粹提升游戏体验的商品。",
+      "请理智使用它。"
     ]
   },
   effEndgame: {
     id: 18,
     lines: [
       "...",
-      "You weren't supposed to find that.",
-      "Mate, just... be careful. If you destroy my home again I swear-"
+      "你本不该发现那个的。",
+      "伙计，悠着点...你要是再毁了我的家，我发誓……"
     ]
   },
   beatEndgame: {
     id: 19,
     lines: [
-      "A Dual Reality?",
-      "Yes, now I remember...",
-      "I got Pelle to reinforce that layer.",
-      "And somehow you still beat it?",
-      "Well at least my home is still intact.",
-      "Partially.",
-      "Look, I like having you around, but you're dangerous.",
-      "So here, take the rest of my stock and go on your way.",
-      "Perhaps we'll meet again someday.",
-      "See you around, %name."
+      "两个现实？",
+      "呃，现在我想起来了...",
+      "我让佩勒把祂的现实给加强了。",
+      "可你居然还是获胜了。",
+      "至少我家还完好无损...",
+      "部分完好无损。",
+      "听着，我很喜欢你待在我身边，但你很危险。",
+      "所以，拿走我剩下的存货，然后离开吧。",
+      "也许有一天我们还会再见。",
+      "回头见，%name。"
     ]
   }
 };

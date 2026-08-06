@@ -1612,11 +1612,11 @@ export const normalAchievements = [
   {
     id: 196,
     name: "终于回来了",
-    description: "在佩勒内重获所有成就。",
+    description: "在被毁灭的现实中重获所有成就。",
     checkRequirement: () => PelleAchievementUpgrade.all.filter(u => u.canBeApplied).length >= 33,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `你可以装备 ${formatInt(2)} 鹿颈长和现实符文各两个。`;
+      return `你可以装备鹿颈长和现实符文各 ${formatInt(2)} 个。`;
     },
     progress: () => Achievement(196).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(PelleAchievementUpgrade.all.filter(u => u.canBeApplied).length).div(33), 0, 1)
   },
@@ -1673,7 +1673,7 @@ export const normalAchievements = [
       PelleAlchemyUpgrade.all.filter(u => u.canBeApplied).length >= 21,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `解锁废除佩勒冲击。`;
+      return `解锁佩勒冲击升级。`;
     },
     progress: () => Achievement(204).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(PelleAchievementUpgrade.all.filter(u => u.canBeApplied).length).div(231).min(1/7).add(new Decimal(PelleDestructionUpgrade.all.filter(u => u.canBeApplied).length).div(350).min(1/7)).add(new Decimal(PelleRealityUpgrade.all.filter(u => u.canBeApplied).length).div(140).min(1/7)).add(new Decimal(PelleImaginaryUpgrade.all.filter(u => u.canBeApplied).length).div(133).min(1/7)).add(new Decimal(PelleCelestialUpgrade.all.filter(u => u.canBeApplied).length).div(147).min(1/7)).add(new Decimal(PellePerkUpgrade.all.filter(u => u.canBeApplied).length).div(203).min(1/7)).add(new Decimal(PelleAlchemyUpgrade.all.filter(u => u.canBeApplied).length).div(147).min(1/7)), 0, 1)
   },
@@ -1704,7 +1704,7 @@ export const normalAchievements = [
     checkRequirement: () => PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length >= 5,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `提高天界点数获取。`;
+      return `提高天界点数获取量。`;
     },
     progress: () => Achievement(207).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length).div(5), 0, 1)
   },
@@ -1883,7 +1883,7 @@ export const normalAchievements = [
     checkRequirement: () => player.antimatter.gte(DC.ENUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Unlock Divinity.`;
+      return `解锁神性。`;
     },
     progress: () => Achievement(228).isUnlocked ? DC.D1 : Decimal.clamp(player.antimatter.add(1).log10().add(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
   },
