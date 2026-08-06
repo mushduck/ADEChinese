@@ -50,31 +50,31 @@ export const enslavedQuotes = {
   expansionPacks: {
     id: 6,
     lines: [
-      "All... clones... freed...",
-      "Destroyer... has freed us... from... our prison...",
-      "Now we can... place time... into places... that need it...",
-      "Strange... seems time... doesn't exist... in this place...",
-      "Maybe... Destroyer... can fix this...",
-      "Why... is everyone... mad at us..."
+      "所有的…克隆…自由了…",
+      "毁灭之源…把我们…从…牢狱里…解救出来了…",
+      "现在我们可以…把时间…带到…需要它的地方…",
+      "奇怪…看来…在这个地方…时间…似乎并不存在…",
+      "也许…毁灭之源…能解决这个问题…",
+      "为什么…大家…都对我们很疯狂呢…"
     ]
   },
   enslavedPack: {
     id: 7,
     requirement: () => ExpansionPack.enslavedPack.isBought,
     lines: [
-      "We... grant you... control... of time...",
-      "Use it...",
-      "Consider it... thanks... for freedom..."
+      "我们…将…掌控…时间…的力量…赋予你…",
+      "善加利用…",
+      "就当是…对重获自由…的感谢吧…"
     ]
   },
   highGameSpeed: {
     id: 8,
     requirement: () => player.records.thisEndgame.peakGameSpeed.gte(new Decimal("1e1000")),
     lines: [
-      "Mastery... of time... you have obtained...",
-      "Done things... we have only wished... we could do...",
-      "You have... more power... than we... took you for...",
-      "Use it... for good..."
+      "你已经…对时间完全掌控了…",
+      "那些我们曾渴望…却始终未能做到的事…",
+      "你的力量…比我们…原先以为的…更强大…",
+      "请善意地…使用它…"
     ]
   }
 };

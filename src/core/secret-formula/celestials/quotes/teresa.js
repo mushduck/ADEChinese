@@ -24,58 +24,58 @@ export const teresaQuotes = {
   effarig: {
     id: 3,
     lines: [
-      "You are still no match for us.",
-      "I hope the others succeed where I have failed."
+      "你仍然远不及我们。",
+      "我希望祂者会在我失败的地方取得成功。"
     ]
   },
   expansionPacks: {
     id: 4,
     lines: [
-      "What the-",
-      "Where am I?",
-      "Wait-",
-      "YOU?!?!",
-      "You were the one who defeated me...",
-      "How many times?",
-      "I can't remember...",
-      "You all are here too?"
+      "什么——",
+      "我身处何地？",
+      "等等——",
+      "是你？！？！",
+      "是你打败了我……",
+      "多少次了？",
+      "我记不清了……",
+      "你们也在这里吗？"
     ]
   },
   teresaPack: {
     id: 5,
     requirement: () => ExpansionPack.teresaPack.isBought,
     lines: [
-      "Oh, hi Destroyer.",
-      "Looks like you found my secret shop.",
-      "Look, I have a question.",
-      "Why are you trying to defeat us?",
-      "Are we just... an obstacle to you?",
-      "Or is it something else...",
-      "It doesn't have to be that way, you know.",
-      "Of course, I probably can't change your mind.",
-      "Just don't hurt the others.",
-      "They're my friends, you know?",
-      "I suppose I should just let you get back to... whatever you're doing nowadays.",
-      "See you later I guess."
+      "哦，嗨，毁灭之源。",
+      "看来你找到我的秘密商店了。",
+      "听着，我有件事想问。",
+      "你为什么执着于打败我们？",
+      "我们对你来说……只是阻碍吗？",
+      "还是另有原因……",
+      "其实不必这样，你知道的。",
+      "当然，我大概也改变不了你的想法。",
+      "只是别伤害其他人。",
+      "祂们是我的朋友，你知道的？",
+      "我想我还是该让你回去……做你现在正在做的事吧。",
+      "那，回头见吧。"
     ]
   },
   fullCharge: {
     id: 6,
     requirement: () => Teresa.totalCharges >= 5,
     lines: [
-      "Well, that's the last of them.",
-      "I suppose progression will be easier now that you don't have to decide which upgrades to charge.",
-      "Well, this will probably be the last time to visit my shop.",
-      "It's good to have you around without all the... you know...",
-      "Destruction.",
-      "But I guess that's your thing, huh?",
-      "Amassing power, besting all of us...",
-      "Pelle won't tell you this, but he's getting worried.",
-      "Worried that you're going to defeat him.",
-      "Of course, he's the strongest of us by far... but even he has his limits.",
-      "I suppose I may have unintentionally helped you with bringing his downfall...",
-      "Just don't kill him okay?",
-      "Be careful."
+      "嗯，这最后一批升级也充能了。",
+      "既然不用再纠结该给哪些升级充能了，接下来的推进应该会更轻松吧。",
+      "嗯，这大概是我最后一次光顾我的店了吧。",
+      "你现在在我身边真好，而且没有那些...你知道的...",
+      "破坏。",
+      "不过，这大概就是你的风格吧？",
+      "积聚力量，超越我们所有人...",
+      "佩勒不会跟你明说，但其实祂已经开始担心了。",
+      "担心你会打败祂。",
+      "当然，祂确实是我们当中最强的...但即便是祂也有极限。",
+      "我想我可能无意中助了你一臂之力，促成了祂的失败...",
+      "但别杀了他，好吗？",
+      "小心点。"
     ]
   }
 };

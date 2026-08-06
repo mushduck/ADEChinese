@@ -94,17 +94,17 @@ export const vQuotes = {
   expansionPacks: {
     id: 11,
     lines: [
-      "Because you committed a crime against the higher-ups.",
-      "And by the way, I'm tired of hearing the BS that Ra did it.",
-      "You've always been begging for a higher rank.",
-      "I, on the other hand, should've taken Ra's rank when Pelle wiped his memories...",
-      "But NOOOO, that HAD to be the ONE THING he remembered...",
-      "So now I, rightful ruler of the Celestials, am stuck here at fourth-best.",
-      "Oh, hi Pelle.",
-      "I didn't MEAN rightful ruler, I just meant I should have a higher rank.",
-      "Why didn't I get Ra's after he was exiled?",
-      "Surely I must be better than him.",
-      "After all, I AM the Celestial of Achievements."
+      "因为汝以上犯下了。",
+      "还有，吾已听腻了“是太阳神干的”这种鬼话。",
+      "汝一直都在乞求更高的位阶。",
+      "反观吾，本该在佩勒抹去太阳神的记忆时接替祂的位阶",
+      "但不————————，祂的位阶偏偏是祂唯一记得的事情...",
+      "所以现在，吾身为天神的正统领袖，却只能困于此地，屈居第四。",
+      "哦，嗨，佩勒。",
+      "吾未言什么“正统领袖”，吾只是觉得吾应有更高位阶。",
+      "太阳神被流放后，为何吾未得到其位阶？",
+      "吾必强于祂。",
+      "毕竟，吾乃成就之神。"
     ]
   },
   vPack: {
@@ -112,23 +112,23 @@ export const vQuotes = {
     requirement: () => ExpansionPack.vPack.isBought,
     lines: [
       "...",
-      "Destroyer?!?!",
-      "Why are you back?",
-      "And... you found my secret upgrade...",
-      "No no no...",
-      "You cannot be better than me..."
+      "？！毁灭之源！？",
+      "汝怎么回来了？",
+      "并且...汝发现了吾之秘密升级...",
+      "不好不好不好...",
+      "汝不可能比吾强..."
     ]
   },
   maxAutoV: {
     id: 13,
     requirement: () => VUpgrade.auto.isCapped,
     lines: [
-      "Wait...",
-      "How did you cap the upgrade?",
-      "You've reduced me to nothing but a memory...",
-      "I will not be cast aside!",
-      "Do you hear me?",
-      "I will not be-"
+      "等等...",
+      "汝是怎么把升级买到上限的？",
+      "汝让吾沦为汝的一缕残念...",
+      "吾怎能就此被遗忘？",
+      "汝听见了吗？",
+      "吾怎能就此——"
     ]
   }
 };

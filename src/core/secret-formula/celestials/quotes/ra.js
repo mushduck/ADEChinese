@@ -117,91 +117,91 @@ export const raQuotes = {
     id: 13,
     requirement: () => Ra.totalPetLevel === Ra.maxTotalPetLevel,
     lines: [
-      "Finally, I remember everything.",
-      "This darkness that banished me.",
-      "Lai'tela...",
-      "They were right to banish me.",
-      "My powers...",
-      "They steal, they corrupt.",
-      "Please leave.",
-      "I do not want to hurt you too.",
+      "最终，我忆起全部。",
+      "这使我灭亡的黑暗。",
+      "莱特拉…",
+      "祂们把我灭亡是对的。",
+      "我的权能…",
+      "已被腐化的祂们窃取。",
+      "请离开这里。",
+      "我不希望你被祂们伤害。",
     ]
   },
   expansionPacks: {
     id: 14,
     lines: [
-      "Because, V, you aren't nearly as strong as me.",
-      "Even if I can't entirely remember exactly how strong you are.",
-      "I do remember this, though.",
-      "I nearly defeated Lai'tela by erasing her memories.",
-      "If I had, I would've taken her role, and then only Pelle would be in my way.",
-      "There's no way you could best that, V.",
-      "Even in my current state, I-",
-      "Oh, uh...",
-      "Hi, Lai'tela..."
+      "因为，薇，你根本没我强。",
+      "虽然我已经记不太清你到底有多强了。",
+      "不过，这一点我记得很清楚。",
+      "我差点就通过抹去莱特拉的记忆打败了祂。",
+      "如果当时赢了，我本可以接替祂的位置，那样一来就只剩佩勒挡在我面前了。",
+      "薇，你绝对不可能超越那次我的帅气表现的。",
+      "即使以我现在的状态，我——",
+      "噢，呃...",
+      "嗨，莱特拉..."
     ]
   },
   raPack: {
     id: 15,
     requirement: () => ExpansionPack.raPack.isBought,
     lines: [
-      "Wait...",
-      "More memories?",
-      "How did you-",
-      "I didn't even realize I-",
-      "Never mind, there are probably things I'm forgetting.",
-      "Can you help me again?",
-      "I want to remember..."
+      "等一下...",
+      "还有更多记忆？",
+      "你是怎么...",
+      "我甚至都没意识到我...",
+      "算了，可能有些事情我已经忘了。",
+      "你能再次帮助我吗？",
+      "我想重新取回记忆..."
     ]
   },
   doubleCap: {
     id: 16,
     requirement: () => Ra.totalPetLevel >= 200,
     lines: [
-      "So many memories...",
-      "I didn't realize I had forgotten this much...",
-      "I suppose I shouldn't be surprised though.",
-      "Wait, Destroyer...",
-      "Who's the Elemental?"
+      "好多记忆...",
+      "我都没意识到自己竟然遗忘了这么多...",
+      "不过，我想这也不奇怪。",
+      "等等，毁灭之源...",
+      "源初之神是谁？"
     ]
   },
   supernova: {
     id: 17,
     requirement: () => Ra.totalPetLevel >= 500,
     lines: [
-      "I am starting to remember...",
-      "The Elemental, he was my friend once...",
-      "We did so much together...",
-      "But then he left.",
-      "Perhaps he still remembers me...",
-      "Do you think you could find him?",
-      "Do you know where he is?"
+      "我开始想起来了...",
+      "源初之神，祂曾经是我的朋友...",
+      "我们一起经历过那么多...",
+      "但祂后来离开了。",
+      "也许祂还记得我...",
+      "你觉得你能找到祂吗？",
+      "你知道祂在哪里吗？"
     ]
   },
   millenium: {
     id: 18,
     requirement: () => Ra.totalPetLevel >= 1000,
     lines: [
-      "The Elemental had a sort of power...",
-      "He showed us, but none of us could master it.",
-      "We didn't understand at the time.",
-      "It was a Galaxy, wasn't it?",
-      "And... he gave it to you...",
-      "The rest of us, we found other means of Tickspeed empowerment...",
-      "But it wasn't nearly as powerful as what he theorized Galaxies to be.",
-      "Anyone who could create one was bound to destroy us all.",
-      "And that is why when Lai'tela created this prison for me...",
-      "She made sure to nullify any Tickspeed empowerments.",
-      "That includes your Galaxies as you can see.",
-      "I was surprised that with so much power, you still lost so many times.",
+      "源初之神拥有一种力量...",
+      "祂向我们展示过，但我们谁都没能掌握这种力量。",
+      "当时我们都不明白。",
+      "那是一个星系，对吧？",
+      "而且...祂把它交给了你...",
+      "我们其他人，则找到了其他获得计数频率的途径。",
+      "但远不及祂理论中星系所具备的威力。",
+      "任何能创造星系的人，注定会毁灭我们所有人。",
+      "正因如此，当莱特拉为我建造这座监狱时...",
+      "祂特意确保消除了所有时刻频率能力",
+      "如你所见，也包括你的星系。",
+      "我感到惊讶的是，拥有如此强大的力量，你竟然还是输了那么多次。",
       "...",
-      "Perhaps I am remembering a bit too much, aren't I?",
-      "Yes, even to me you had lost, when you failed to restore all my memories.",
-      "And yet, now you show me things I never thought I had...",
-      "You seem to be doing fine though.",
-      "Pelle told me that you were coming to meet us soon.",
-      "I'm excited, so don't leave me waiting...",
-      "I suppose I'll see you then."
+      "也许我想起来太多东西了，不是吗？",
+      "是的，就连在我看来，你也是输了——当你未能恢复我所有的记忆时。",
+      "然而，现在你却向我展示了那些我从未想过自己有朝一日可能拥有的东西...",
+      "不过你看起来做得不错。",
+      "佩勒告诉我，你很快就会来见我们。",
+      "我很期待，所以别让我久等...",
+      "我想，到时候见吧。"
     ]
   },
 };
