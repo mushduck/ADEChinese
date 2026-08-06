@@ -25,8 +25,7 @@ export const perkShop = {
     id: 0,
     initialCost: 1,
     increment: 2,
-    description: () => PerkShopUpgrade.glyphLevel.viewCharge ? `Multiply pre-instability Glyph level based on highest-ever
-      Glyph level` : `Increase pre-instability Glyph levels by ${formatPercents(0.05)}`,
+    description: () => PerkShopUpgrade.glyphLevel.viewCharge ? `基于最高符文等级推迟符文不稳定性出现时机` : `出现不稳定的符文等级增加 ${formatPercents(0.05)} 。`,
     effect: () => player.disablePostReality ? 1 : (PerkShopUpgrade.glyphLevel.isCharged
       ? PerkShopUpgrade.glyphLevel.chargedEffect()
       : PerkShopUpgrade.glyphLevel.preChargedEffect()),
@@ -44,8 +43,7 @@ export const perkShop = {
     id: 1,
     initialCost: 1,
     increment: 2,
-    description: () => PerkShopUpgrade.rmMult.viewCharge ? `Multiply Reality Machine gain and cap based on
-      Antimatter amount` : `Double Reality Machine gain`,
+    description: () => PerkShopUpgrade.rmMult.viewCharge ? `基于反物质数量提高现实机器获取` : `获得双倍的现实机器`,
     effect: () => player.disablePostReality ? DC.D1 : (PerkShopUpgrade.rmMult.isCharged
       ? PerkShopUpgrade.rmMult.chargedEffect()
       : PerkShopUpgrade.rmMult.preChargedEffect()),
@@ -63,8 +61,7 @@ export const perkShop = {
     id: 2,
     initialCost: 100,
     increment: 2,
-    description: () => PerkShopUpgrade.bulkDilation.viewCharge ? `Dilation Autobuyers always buy max.` : `Dilation
-      autobuyers buy twice as many Dilation Upgrades at once.`,
+    description: () => PerkShopUpgrade.bulkDilation.viewCharge ? `自动购买最大的膨胀升级` : `自动购买双倍的膨胀升级`,
     effect: () => player.disablePostReality ? 1 : (PerkShopUpgrade.bulkDilation.isCharged
       ? PerkShopUpgrade.bulkDilation.chargedEffect()
       : PerkShopUpgrade.bulkDilation.preChargedEffect()),
@@ -82,8 +79,7 @@ export const perkShop = {
     id: 3,
     initialCost: 1000,
     increment: 2,
-    description: () => PerkShopUpgrade.autoSpeed.viewCharge ? `Infinity Dimension, Time Dimension, Dilation, and Replicanti autobuyer
-      intervals are Instant.` : `Infinity Dimension, Time Dimension, Dilation, and Replicanti autobuyers are ${formatX(2)} faster.`,
+    description: () => PerkShopUpgrade.autoSpeed.viewCharge ? `自动购买无限维度、时间维度、膨胀升级和复制器升级立即购买` : `自动购买无限维度、时间维度、膨胀升级和复制器升级的速度加快 ${formatX(2)} `,
     effect: () => player.disablePostReality ? 1 : (PerkShopUpgrade.autoSpeed.isCharged
       ? PerkShopUpgrade.autoSpeed.chargedEffect()
       : PerkShopUpgrade.autoSpeed.preChargedEffect()),
@@ -99,8 +95,7 @@ export const perkShop = {
   }),
   musicGlyph: rebuyable({
     id: 4,
-    description: () => PerkShopUpgrade.musicGlyph.viewCharge ? `Unlock an Autobuyer to automatically purchase and purge Music
-      Glyphs.` : `Receive a Music Glyph of a random type that is ${formatPercents(0.8)} of your highest level. (Try clicking it!)`,
+    description: () => PerkShopUpgrade.musicGlyph.viewCharge ? `解锁自动创造和献祭音乐符文` : `获得一个随机类型的音乐符文，其等级为你最高符文等级的 ${formatPercents(0.8)} 。（试试点击它！）`,
     cost: () => 1,
     formatCost: value => formatInt(value),
     costCap: () => Number.MAX_VALUE,
@@ -110,7 +105,7 @@ export const perkShop = {
   // Only appears with the perk shop increase upgrade
   fillMusicGlyph: rebuyable({
     id: 5,
-    description: () => `Fill all empty slots in your inventory with Music Glyphs`,
+    description: () => `用音乐符文填满符文仓库`,
     cost: () => Math.clampMin(GameCache.glyphInventorySpace.value, 1),
     otherReq: () => GameCache.glyphInventorySpace.value > 0,
     formatCost: value => formatInt(value),
@@ -123,7 +118,7 @@ export const perkShop = {
     id: 6,
     initialCost: 1e10,
     increment: 1e10,
-    description: () => `Unlock a new Charged Perk Upgrade`,
+    description: () => `解锁一个新的复兴商店充能升级`,
     effect: bought => Math.floor(bought),
     formatEffect: value => formatInt(value),
     formatCost: value => format(value, 2),
