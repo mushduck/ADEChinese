@@ -59,7 +59,7 @@ const usurper =      ['怠惰之王', '流浪者', '时间之神'];
 const pride =        ['傲慢之王', '妄语者', '成就之神'];
 const forgotten =    ['诡诈之王', '篡夺者', '遗忘之神'];
 const paramount =    ['混沌之王', '裁决者', '维度之神'];
-const weak =         ['贫弱之徒', '自封之神', '昔日君王'];
+const weak =         ['贫弱之王', '自封神祇', '昔日君王'];
 /* eslint-enable no-multi-spaces */
 
 export const pelleQuotes = {
@@ -790,9 +790,9 @@ export const pelleQuotes = {
       { text: "还是说，$1亲自告诉了你？", 1: paramount },
       { text: "所以你可能会问，既然$1无辜，我等为何还要囚禁祂们？", 1: usurper },
       { text: "即便是我等中最强者，也有$1的事物。", 1: frightened },
-      "我已设定你的下一个现实目标，并会带你来到这里。",
-      { text: "我和$1会期待你的到来。", 1: deities },
-      "哦对了，我终于想起我给Alpha起过的名字了。",
+      "我设定了你的下一个现实目标，并将带你前往。",
+      { text: "我和$1期待你的到来。", 1: deities },
+      "哦对，我终于想起我给阿尔法起过的名字了。",
       { text: "$1。", 1: weak },
       { text: "$1", 1: confusing },
       "尽快前来吧。"

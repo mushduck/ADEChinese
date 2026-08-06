@@ -45,7 +45,7 @@ export const teresaQuotes = {
     id: 5,
     requirement: () => ExpansionPack.teresaPack.isBought,
     lines: [
-      "哦，嗨，毁灭之源。",
+      "哦，嗨，毁灭者。",
       "看来你找到我的秘密商店了。",
       "听着，我有件事想问。",
       "你为什么执着于打败我们？",
