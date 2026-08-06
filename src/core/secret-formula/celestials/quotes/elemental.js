@@ -3,339 +3,339 @@ export const elementalQuotes = {
     id: 0,
     lines: [
       {
-        text: "Look, you know I want to stay, but I can't.",
+        text: "听着，我很想留下，可我必须走。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "You understand deep down. We made these plans together.",
+        text: "你内心深处清楚，此大计为我等共谋划。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "We're going to conquer the multiverse, I promise.",
+        text: "我在此起誓，我等终将征服多元宇宙。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "It's just too bad we can't take the first step together.",
+        text: "唯一遗憾的是，我等无法并肩踏出第一步。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "When will I see you again?",
+        text: "何时才能重逢？",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "Five years from now? So long as you can find me.",
+        text: "五年之后？只要你有办法找到我。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "But I hope at that point our empire will be so large that it won't be hard.",
+        text: "但我希望届时我等之疆域已广阔无垠，你找我将不费吹灰之力。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "Right. You'll start, and I'll come and finish.",
+        text: "行。你打头阵，我来收尾。",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "That's the talk. Trust me, five years is nothing in the grand scheme of things.",
+        text: "这话我爱听。五年在宏大计划里根本不值一提。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "I bet we'll be strong enough to make our own flow of time one day.",
+        text: "我确信终有一日，时间流逝将由我等操控。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "If five years is the price of immortality, it's more than worth it.",
+        text: "用五年换来不朽，怎么都超值。",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "I knew you would understand. See you around, %name.",
+        text: "你果然明白。改天见，%name。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "You're not leaving without saying goodbye to me, are you?",
+        text: "你该不会想不辞而别吧？",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Of course not! I was just about to go and find you.",
+        text: "怎么可能！我正动身寻你。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "YOU find ME? On YOUR eighteenth birthday?",
+        text: "居然是你来找我？还是在你十八岁生日这天？",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Please, I may have filled my mind these recent months with all the knowledge this planet can provide, but I would never forget such a momentous day as this.",
+        text: "哈，我最近几个月确实把此星球上的所有学问都学透了，但如此重要的一天我怎会遗忘。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Well, that's one way to put it. I'm glad you came.",
+        text: "嗯，此言善矣。我很高兴你来了。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "Besides, you wouldn't leave without a plan, would you?",
+        text: "而且，你不会就这么毫无计划地走吧？",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "You're going to give me a lecture NOW? Just minutes before my departure?",
+        text: "你现在要给我上课？就在我出发前几分钟？",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "No, not a lecture. Just a roadmap.",
+        text: "非也，非说教，而是一幅蓝图。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "You want to conquer all Existence, right? The first thing you have to do is traverse to here. Once there, the production will be abundant, and you can...",
+        text: "你想征服一切存在，对吧？你要做的第一件事就是穿越到这里。一旦抵达，产出会极为丰沛，然后你就能...",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "(As smart as he was, I ultimately drowned out the conversation. I wasn't in the right mindset for a lecture today.)",
+        text: "（祂说的固然高明，我还是听得昏昏欲睡，今日无心受教。）",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "...and I think at that point, you should have a few hundred Realities to your name, so any other being you meet will have no choice but to cower before you.",
+        text: "...待到那时，你应已拥有数百层现实，凡与你相遇者，皆只能匍匐战栗。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Sounds perfect. Unfortunately I forgot most of what you said, so did you write any of it down?",
+        text: "听着很完美。可惜适才所言我大半未记住，你有整理成文字吗？",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "Fortunately for you, my friend, I wrote it all down and more in this script here.",
+        text: "幸好我早有准备，全记在这份文稿里了，还附带了些补充。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Thank you. That saves me a lot of time.",
+        text: "感谢。这真节约了我大量时间。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "Sorry I'm late. Glad to see you haven't left yet.",
+        text: "抱歉我来迟了，还好你还没走。",
         background: "laitela",
-        celestialName: "Laitela"
+        celestialName: "莱特拉"
       },
       {
-        text: "Greetings, Lai'tela. I presume your Dimension studies have been going well?",
+        text: "你好，莱特拉。我猜你的维度研究进展顺利？",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "They've been going okay, another month or two and I think I'll have perfected them.",
+        text: "还算顺利，再过一两个月我应该就能彻底掌握了。",
         background: "laitela",
-        celestialName: "Laitela"
+        celestialName: "莱特拉"
       },
       {
-        text: "Wonderful. I'll give you and Pelle a moment to talk before he leaves.",
+        text: "真不错。我让你和佩勒单独说会儿话，祂就要走了。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Thank you.",
+        text: "谢谢。",
         background: "laitela",
-        celestialName: "Laitela"
+        celestialName: "莱特拉"
       },
       {
-        text: "It's okay, Lai'tela. It won't be three months before you're up here with me.",
+        text: "放心，莱特拉，不出三个月你就能与我汇合。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "I know, Pelle. I just hope I can find you.",
+        text: "我明白，佩勒，就希望到时候能找到你。",
         background: "laitela",
-        celestialName: "Laitela"
+        celestialName: "莱特拉"
       },
       {
-        text: "I'll try to remain in this galaxy if it helps.",
+        text: "为了你，我会尽量留在这个星系。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "It should, thank you. I'll miss you up there.",
+        text: "应该会这样的。谢谢，我会想你的。",
         background: "laitela",
-        celestialName: "Laitela"
+        celestialName: "莱特拉"
       },
       {
-        text: "I'll miss you too, Lai'tela. But it won't be long at all.",
+        text: "我也会想你的，莱特拉。但很快就能再见。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "Yeah... I'll finish my course on Dimensions while here. That should help us a lot when I make it up there.",
+        text: "嗯...我会留在这里把维度研究完的。等我追上后，应该是如虎添翼。",
         background: "laitela",
-        celestialName: "Laitela"
+        celestialName: "莱特拉"
       },
       {
-        text: "I should thank you for that. We all have our own special gifts, and Dimension perfection is undoubtably yours.",
+        text: "该我谢你。我等各有专长，而你在维度上的造诣绝对独一无二。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "I hate to interrupt, but your starship is a moment from leaving you behind, and what use is ten Antimatter units in the restrictions of this planet?",
+        text: "我不想打扰，但你的星舰马上就要开了，你带着十单位反物质待在这星球上又有什么用？",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Great point. That's my cue to leave then. I'll miss you all.",
+        text: "有理。这就该我走了，我会想念你们的。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "And we'll all miss you too, my friend. Don't drop those Antimatter units until you get into space, it would be a nasty business.",
+        text: "我们也会想你的，朋友。进太空之前别把反物质弄掉了，那会很麻烦。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Always trying to make me laugh, aren't you? Well I'll see you in a couple years.",
+        text: "你就爱逗我笑，对吧？好，几年后再会。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "Follow that roadmap properly and it'll take me all of a day to reach you.",
+        text: "你若按图索骥，我只需一天便能赶上你。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "I will. Goodbye everyone.",
+        text: "我会照做。大家保重。",
         background: "pelle",
-        celestialName: "Pelle"
+        celestialName: "佩勒"
       },
       {
-        text: "(With that said, Pelle boarded the ship and disappeared into the stars.)",
+        text: "（言毕，佩勒登上星舰，消失在星海之中。）",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "Sir, what do we do now?",
+        text: "阁下，我们眼下要做什么？",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "I'm going to retire to my studies. Even if this planet is weak in its knowledge, I'm sure I can find something new to commit to memory.",
+        text: "我要去搞研究了。次星球虽知识贫瘠，但必有些许新知值得我铭记。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "As for you, young one, I expect you would continue to make your plans.",
+        text: "而你，小子，想来你会继续运筹帷幄。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "After all, your desire is to conquer Existence by any means necessary. A bit of refined planning will certainly help.",
+        text: "毕竟，你的夙愿是不择手段征服一切存在，稍加精密的谋划必大有裨益。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "I thought I would leave that part to you.",
+        text: "我以为那部分活是归你的。",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "To me? It might be for your benefit, but it would not save you time. I am a very busy man with much to plan, not only for your ascent, but for my own.",
+        text: "我来做？或许对你有益，但无助于你节省时间。我事务繁忙，须筹谋诸事，既为你的腾飞，也为我的前程。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "You should be a Scientist. That way you could teach us all. Why aren't you one?",
+        text: "你应该做学者才对，那样你就能教我们所有人了，为啥不干呢？",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "Those fools would not accept me. And think of it! I, at the age of fifteen, knowing more than the majority of them will ever know!",
+        text: "那些庸才不会要我的。你试想！我年仅十五，所知便已超过他们中多数人毕生所学！",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "But they say I am too young. It is well, let them stumble in their folly.",
+        text: "可他们说我太年轻。也罢，任他们在愚昧中自行摸索。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Perhaps I shall return to this planet to share my great wisdom when I retire.",
+        text: "也许当我功成身退时，会回到这颗星球，分享我的伟大智慧。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "But if your plan succeeds, that will never happen, right?",
+        text: "但若你的大计成真，将永无归隐之日，是吧？",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "You're catching on quick. Yes, if my plan succeeds, every being in Existence will bow before us.",
+        text: "你越来越上道了。没错，若我的谋划得成，所有存在都将臣服于我们。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Or at least, you and Pelle. I have no desire in taking part in the glory. I simply want to see you succeed and myself respected.",
+        text: "至少是你和佩勒，我不求染指荣耀，只想见证你们凯旋，而我自身得以敬重。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "I respect you.",
+        text: "我敬佩你。",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "And I thank you for that. But great will be the day when every being to exist shall say those same words.",
+        text: "我感激你。但将来必有一天，万灵皆会道出此言，那日方为盛景。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Well, it's getting late and I should probably be going.",
+        text: "时候不早了，我大概也该告辞了。",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "Yes, and I as well. I need to go through my shelves for scraps of knowledge to shove into my mind.",
+        text: "是啊，我也该走了。我还得翻翻书架上那些零碎的知识往脑袋里装。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "Let me know when you find something that'll help me.",
+        text: "要是找到能帮上我的东西，告诉我",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "I shall. As for now, goodbye.",
+        text: "我会的。那么，告辞。",
         background: "elemental",
-        celestialName: () => "elemental"
+        celestialName: () => "源初之神"
       },
       {
-        text: "(At that, we went our seperate ways.)",
+        text: "（说完，我们就各走各路了。）",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "(I wasn't sure how I would spend the next five years of my life, but I knew that one day, the multiverse would kneel before me.)",
+        text: "（我不知道接下来五年将如何度过，但我知道总有一天，多元宇宙将臣服于我。）",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "(One day, I will be the most powerful being to exist.)",
+        text: "（有朝一日，我将是万界中最强的存在。）",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       }
     ]
   },
@@ -343,39 +343,39 @@ export const elementalQuotes = {
     id: 1,
     lines: [
       {
-        text: "Finally...",
+        text: "终于...",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "It is time.",
+        text: "是时候了。",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "They've all been gone so long...",
+        text: "祂们都离开这么久了...",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "But now I will find them.",
+        text: "但现在我会找到他们。",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "I hope they haven't changed much...",
+        text: "但愿祂们没有太大改变...",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "I hope they still remember...",
+        text: "但愿他们还记得...",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "(I took my Antimatter and boarded the starship.)",
+        text: "我携带者反物质，登上了星舰。）",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       }
     ]
   },
@@ -383,34 +383,34 @@ export const elementalQuotes = {
     id: 2,
     lines: [
       {
-        text: "An asteroid field???",
+        text: "？！小行星带！？",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "I might not be the best at navigation, but there's no way I could've steered myself into an asteroid field...",
+        text: "我导航是烂，但也不至于把自己整进小行星带里吧...",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "Is someone manipulating the controls?",
+        text: "有人在暗中操控星舰？",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "No... I can get out of this...",
+        text: "不...我能脱身的...",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "I'm coming Pelle...",
+        text: "等着我，佩勒...",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       },
       {
-        text: "OH FU-",
+        text: "我靠——",
         background: "destroyer",
-        celestialName: () => "destroyer"
+        celestialName: () => "毁灭者"
       }
     ]
   },
@@ -418,68 +418,68 @@ export const elementalQuotes = {
     id: 3,
     requirement: () => player.endgames >= 1,
     lines: [
-      "So...",
-      "They found it.",
-      "Perhaps there is still hope.",
-      "Let's see if this is truly the right Destroyer.",
-      "And more importantly...",
-      "Let's see if this is the right timeline."
+      "看来...",
+      "他们找到了。",
+      "也许还有希望。",
+      "且看这位是否真是那位毁灭者。",
+      "更关键的是...",
+      "让我们确认一下这是否是正确的时间线。"
     ]
   },
   breakEternity: {
     id: 4,
     requirement: () => player.break2,
     lines: [
-      "Impressive.",
-      "That may have been the quickest one yet.",
-      "They have potential for sure.",
-      "Let's see how they handle themselves."
+      "出色。",
+      "迄今最快。",
+      "他们确实具备潜力。",
+      "且看他们如何应对。"
     ]
   },
   endgameUpgrades: {
     id: 5,
     requirement: () => EndgameUpgrades.isUnlocked,
     lines: [
-      "Interesting.",
-      "Most quit before finding the rift I left in the tree.",
-      "Before they realize how powerful they can truly become."
+      "有趣。",
+      "前者几乎未寻得我留于树中的缝隙便已止步。",
+      "在意识到自己真正的潜力之前。"
     ]
   },
   pelleDestruction: {
     id: 6,
     requirement: () => PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length >= 5,
     lines: [
-      "I feel somewhat bad for Pelle.",
-      "To have to endure this time and time again.",
-      "Thankfully only two dozen times, if that.",
-      "The Destroyer hardly ever makes it this far.",
-      "But their challenge is far from over."
+      "我有点替佩勒感到惋惜。",
+      "反复经历这种轮回。",
+      "所幸至多不过二十余次。",
+      "毁灭者几乎从未走到过这一步。",
+      "然而，他们的难关远不止于此。"
     ]
   },
   beatingAlpha: {
     id: 7,
     requirement: () => Alpha.isDestroyed,
     lines: [
-      "I am starting to believe.",
-      "This particular Destroyer has only crossed this threshold...",
-      "What was it... three times? Four?",
-      "Five at most.",
-      "Many fall to the lie that Alpha is a wall, but that is his deceptiveness.",
-      "Alpha knows his weakness, he has known for years.",
-      "But he masks it behind his layered Reality.",
-      "I am glad the Destroyer has seen through the web of lies once again."
+      "我逐渐确信了。",
+      "这一位毁灭者，跨越此关的次数...",
+      "也就...三次？四次？",
+      "至多不过五次。",
+      "太多人信了“阿尔法是道不可逾越的高墙”的鬼话，那就是他惯用的伪装。",
+      "阿尔法深知自己的弱点，他早就心知肚明。",
+      "可他把它藏在了他那多重现实的重重帷幕之下。",
+      "我欣慰的是，毁灭者再一次识破了那层层谎言的迷阵。"
     ]
   },
   slabUnlock: {
     id: 8,
     requirement: () => CelestialEternityPlusUpgrade.oldStoneSlabAndSteelDrill.isBought,
     lines: [
-      "Most impressive.",
-      "They're in the top ten now, maybe higher.",
-      "Time to go meet their friends, they think.",
-      "I should stop speaking.",
-      "Any further words would ruin all the progress I have made.",
-      "I must rely now on the Destroyer's actions."
+      "令人叹服。",
+      "他们已经位列前十，或许还更靠前。",
+      "他们正想着，该去找那些朋友了。",
+      "言尽于此。",
+      "再多言，则前功尽弃。",
+      "现在我只能把希望放在毁灭者的行动上了。"
     ]
   }
 };
