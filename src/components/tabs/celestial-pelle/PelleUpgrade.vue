@@ -48,7 +48,7 @@ export default {
     },
     effectText() {
       if (!this.config.formatEffect) return false;
-      const prefix = this.isCapped ? "Capped:" : "Currently:";
+      const prefix = this.isCapped ? "已达到上限：" : "当前：";
       const formattedEffect = x => this.config.formatEffect(this.config.effect(x));
       const value = formattedEffect(this.purchases);
       const next = (!this.isCapped && this.hovering)
@@ -58,14 +58,14 @@ export default {
     },
     timeEstimate() {
       if (!this.hasTimeEstimate || !this.hasRemnants) return null;
-      if (this.notAffordable) return "Never affordable due to Generated Galaxy cap";
+      if (this.notAffordable) return "因生成星系上限而始终无法购买。";
       return this.currentTimeEstimate;
     },
     hasTimeEstimate() {
       return !(this.canBuy ||
         this.isBought ||
         this.isCapped ||
-        (this.galaxyGenerator && !(this.config.currencyLabel === "Galaxy" || this.config.currencyLabel === "Reality Shard"))
+        (this.galaxyGenerator && !(this.config.currencyLabel === "星系" || this.config.currencyLabel === "现实碎片"))
       );
     },
     shouldEstimateImprovement() {
