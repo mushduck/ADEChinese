@@ -87,7 +87,7 @@ export const AutoGlyphProcessor = {
         const refinementGain = GlyphSacrificeHandler.glyphRefinementGain(glyph);
         return resource.isUnlocked && refinementGain > 0
           ? new Decimal(-resource.amount)
-          : new Decimal(Number.NEGATIVE_INFINITY);
+          : new Decimal(-Infinity);
       }
       case AUTO_GLYPH_SCORE.ALCHEMY_VALUE:
         return AlchemyResource[glyph.type].isUnlocked
@@ -130,7 +130,7 @@ export const AutoGlyphProcessor = {
     const glyphScore = glyph => {
       const filter = this.filterValue(glyph);
       const threshold = this.thresholdValue(glyph);
-      return threshold === new Decimal(Number.MAX_VALUE) ? filter : filter.sub(threshold);
+      return Decimal.gte(threshold, Number.MAX_VALUE) ? filter : Decimal.sub(filter, threshold);
     };
 
     return glyphs
@@ -318,7 +318,7 @@ export function getGlyphLevelInputs() {
   adjustFactor(sources.eternities, weights.eternities / 100);
   const shardFactor = Ra.unlocks.relicShardGlyphLevelBoost.effectOrDefault(0);
   let baseLevel = new Decimal(sources.ep.value).times(sources.repl.value).times(sources.dt.value).times(sources.eternities.value).times(
-    staticFactors.perkShop + shardFactor);
+    staticFactors.perkShop).add(shardFactor);
 
   const singularityEffect = SingularityMilestone.glyphLevelFromSingularities.effectOrDefault(1);
   baseLevel = baseLevel.times(singularityEffect);
