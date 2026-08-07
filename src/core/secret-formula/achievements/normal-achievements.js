@@ -1952,7 +1952,7 @@ export const normalAchievements = [
     get description() { return `太阳神的记忆总共达到 ${formatInt(500)} 级。` },
     checkRequirement: () => Ra.totalPetLevel >= 500,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    get reward() { return `记忆获取速度翻 ${formatX(500)} 倍。`; },
+    get reward() { return `记忆获取速度${formatX(500)}`; },
     effect: () => player.disablePostReality ? 1 : 500,
     progress: () => Achievement(236).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(Ra.totalPetLevel).div(500), 0, 1)
   },

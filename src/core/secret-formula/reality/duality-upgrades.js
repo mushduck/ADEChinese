@@ -17,7 +17,6 @@ const rebuyable = props => {
   props.formatCost = value => format(value, 2, 0);
   return props;
 };
-//尘铸灵枢，诗动肺腑，若生疑心，从其所虑，终归尘土
 export const dualityUpgrades = [
   rebuyable({
     name: "时间飞升器",
