@@ -29,12 +29,12 @@ export const dilationUpgrades = {
     capIncreaseAt: () => Decimal.floor(Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).sub(3)).toNumber(),
     description: () =>
       ((SingularityMilestone.dilatedTimeFromSingularities.canBeApplied || Achievement(187).canBeApplied)
-        ? `${formatX(2 * Effects.product(
+        ? `获得 ${formatX(2 * Effects.product(
           SingularityMilestone.dilatedTimeFromSingularities,
           Achievement(187),
           BreakEternityUpgrade.dilatedTimeMultiplier
-        ), 2, 2)} Dilated Time gain`
-        : "Double Dilated Time gain"),
+        ), 2, 2)} 倍膨胀时间`
+        : "获得的膨胀时间加倍"),
     effect: bought => {
       const base = 2 * Effects.product(
         SingularityMilestone.dilatedTimeFromSingularities,
@@ -60,15 +60,15 @@ export const dilationUpgrades = {
     superExponent: () => 100000,
     description: () =>
       ((Perk.bypassTGReset.isBought && !player.disablePostReality) && (!Pelle.isDoomed || PellePerkUpgrade.perkTGR.canBeApplied)
-        ? "Reset Tachyon Galaxies, but lower their threshold"
-        : "Reset Dilated Time and Tachyon Galaxies, but lower their threshold"),
+        ? "重置超光速粒子星系的数量，降低它们的阈值"
+        : "重置膨胀时间和超光速粒子星系的数量，降低它们的阈值"),
     // The 38th purchase is at 1e80, and is the last purchase.
     effect: bought => (bought < 38 || (BreakEternityUpgrade.tgThresholdUncap.isBought && !player.disablePostReality) ? Decimal.pow(0.8, bought) : DC.D0),
     formatEffect: effect => {
       if (effect.eq(0)) return `${formatX(getTachyonGalaxyMultForDisplay(effect), 4, 4)}`;
       const nextEffect = effect.eq(Decimal.pow(0.8, 37)) && (!BreakEternityUpgrade.tgThresholdUncap.isBought || player.disablePostReality) ? DC.D0 : effect.times(0.8);
       return `${formatX(getTachyonGalaxyMultForDisplay(effect), 4, 4)} ➜
-        Next: ${formatX(getTachyonGalaxyMultForDisplay(nextEffect), 4, 4)}`;
+        下一级：${formatX(getTachyonGalaxyMultForDisplay(nextEffect), 4, 4)}`;
     },
     formatCost: value => format(value, 2),
     purchaseCap: () => (BreakEternityUpgrade.tgThresholdUncap.isBought && !player.disablePostReality) ? Number.MAX_VALUE : 38
@@ -79,10 +79,9 @@ export const dilationUpgrades = {
     increment: 20,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(Math.log10(20))).sub(Math.log10(5e5) / Math.log10(20))).toNumber(),
     description: () => {
-      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return `Multiply the amount of Tachyon Particles gained by ${formatInt(1)}`;
-      if (Enslaved.isRunning) return `Multiply the amount of Tachyon Particles gained
-      by ${Math.pow(3, Enslaved.tachyonNerf).toFixed(2)}`;
-      return "Triple the amount of Tachyon Particles gained";
+      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return `获得 ${formatInt(1)} 倍超光速粒子`;
+      if (Enslaved.isRunning) return `获得 ${Math.pow(3, Enslaved.tachyonNerf).toFixed(2)} 倍超光速粒子`;
+      return "获得三倍的超光速粒子";
     },
     effect: bought => {
       if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return DC.D1.pow(bought);
@@ -91,13 +90,13 @@ export const dilationUpgrades = {
     formatEffect: value => formatX(value, 2),
     formatCost: value => format(value, 2),
     purchaseCap: () => Number.MAX_VALUE
-  }),
+  }), 
   doubleGalaxies: {
     id: 4,
     cost: 5e6,
     description: () => (Alpha.isDestroyed
-      ? `Gain twice as many Tachyon Galaxies`
-      : `Gain twice as many Tachyon Galaxies, up to ${formatInt(500)} base Galaxies`),
+      ? `获得双倍的超光速粒子星系`
+      : `获得双倍的超光速粒子星系，最大数量为 ${formatInt(500)} 个基础星系`),
     effect: 2
   },
   tdMultReplicanti: {
@@ -112,8 +111,7 @@ export const dilationUpgrades = {
           multiplier = ratio.toFixed(2);
         }
       }
-      return `Time Dimensions are affected by Replicanti multiplier ${formatPow(multiplier, 1, 3)}, reduced
-        effect above ${formatX(DC.E9000)}`;
+      return `时间维度获得复制器倍率 ${formatPow(multiplier, 1, 3)} 的加成，这个加成超过 ${formatX(DC.E9000)} 后减弱`;
     },
     effect: () => {
       let rep10 = replicantiMult().pLog10().times(0.1);
@@ -125,14 +123,14 @@ export const dilationUpgrades = {
   ndMultDT: {
     id: 6,
     cost: 5e7,
-    description: "Antimatter Dimension multiplier based on Dilated Time, unaffected by Time Dilation",
+    description: "基于膨胀时间的数量给予反物质维度倍数加成，此倍数不受时间膨胀的影响",
     effect: () => Currency.dilatedTime.value.pow(308).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   ipMultDT: {
     id: 7,
     cost: 2e12,
-    description: "Gain a multiplier to Infinity Points based on Dilated Time",
+    description: "无限点数获得基于膨胀时间的倍数加成",
     effect: () => Currency.dilatedTime.value.pow(1000).clampMin(1),
     formatEffect: value => formatX(value, 2, 1),
     cap: () => Effarig.eternityCap
@@ -140,18 +138,18 @@ export const dilationUpgrades = {
   timeStudySplit: {
     id: 8,
     cost: 1e10,
-    description: "You can buy all three Time Study paths from the Dimension Split"
+    description: "你可以在时间研究树的维度分叉上选择所有路径"
   },
   dilationPenalty: {
     id: 9,
     cost: 1e11,
-    description: () => `Reduce the Dilation penalty (${formatPow(1.05, 2, 2)} after reduction)`,
+    description: () => `减弱时间膨胀的减益效果 (当前：${formatPow(1.05, 2, 2)})`,
     effect: 1.05,
   },
   ttGenerator: {
     id: 10,
     cost: 1e15,
-    description: "Generate Time Theorems based on Tachyon Particles",
+    description: "超光速粒子产生时间之理",
     effect: () => Currency.tachyonParticles.value.div(20000).times(
       Alpha.isRunning ? AlphaUnlocks.timeTheoremGeneration.effects.nerf.effectOrDefault(1) : 1),
     formatEffect: value => `${format(value, 2, 1)}/sec`
@@ -162,7 +160,7 @@ export const dilationUpgrades = {
     increment: 100,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(2)).sub(6)).toNumber(),
     pelleOnly: true,
-    description: () => `${formatX(5)} Dilated Time gain`,
+    description: () => `获得的膨胀时间 ${formatX(5)}`,
     effect: bought => Decimal.pow(5, bought),
     formatEffect: value => formatX(value, 2),
     formatCost: value => format(value, 2),
@@ -174,7 +172,7 @@ export const dilationUpgrades = {
     increment: 1000,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(3)).sub(4)).toNumber(),
     pelleOnly: true,
-    description: "Multiply Tachyon Galaxies gained, applies after TG doubling upgrade",
+    description: "成倍增加获得的超光速粒子星系，在超光速粒子星系翻倍升级后生效",
     effect: bought => bought + 1,
     formatEffect: value => `${formatX(value, 2)} ➜ ${formatX(value + 1, 2)}`,
     formatCost: value => format(value, 2),
@@ -186,7 +184,7 @@ export const dilationUpgrades = {
     increment: 1e4,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(4)).sub(3)).toNumber(),
     pelleOnly: true,
-    description: "Gain a power to Tickspeed",
+    description: "增强计数频率",
     effect: bought => 1 + bought * 0.03,
     formatEffect: value => `${formatPow(value, 2, 2)} ➜ ${formatPow(value + 0.03, 2, 2)}`,
     formatCost: value => format(value, 2),
@@ -196,14 +194,14 @@ export const dilationUpgrades = {
     id: 14,
     cost: 1e45,
     pelleOnly: true,
-    description: "Apply a cube root to the Tachyon Galaxy threshold",
+    description: "超光速粒子星系阈值是原来的立方根",
     effect: 1 / 3
   },
   flatDilationMult: {
     id: 15,
     cost: 1e55,
     pelleOnly: true,
-    description: () => `Gain more Dilated Time based on current EP`,
+    description: () => `基于当前永恒点数获得更多膨胀时间`,
     effect: () => Decimal.pow(1e9, Decimal.min(Decimal.pow(Decimal.max(player.eternityPoints.add(1).log10().sub(1500), 0).div(2500), 1.2), 1).times(Alpha.isDestroyed ? player.eternityPoints.add(1).log10().sub(4000).max(1).log10().max(1) : 1)),
     formatEffect: value => formatX(value, 2, 2)
   },
