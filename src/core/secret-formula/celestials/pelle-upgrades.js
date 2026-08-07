@@ -20,7 +20,7 @@ const rebuyable = config => {
 export const pelleUpgrades = {
   antimatterDimensionMult: rebuyable({
     id: "antimatterDimensionMult",
-    description: "Gain a multiplier to Antimatter Dimensions",
+    description: "提高反物质维度倍率",
     cost: [10, 250, 41, 10],
     effect: x => Pelle.antimatterDimensionMult(x),
     formatEffect: x => formatX(x, 2, 2),

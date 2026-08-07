@@ -39,8 +39,7 @@ export const pelleStrikes = {
     id: 5,
     requirementDescription: "膨胀时间",
     penaltyDescription: "时间膨胀永久生效",
-    rewardDescription: () => `末日后保留解锁时间膨胀的时间研究，并解锁
-      ${wordShift.wordCycle(PelleRifts.paradox.name)}`,
+    rewardDescription: () => `末日后保留解锁时间膨胀的时间研究，并解锁${wordShift.wordCycle(PelleRifts.paradox.name)}`,
     rift: () => PelleRifts.paradox,
     isDestroyed: () => PelleStrikeUpgrade.pelleStrike5.canBeApplied
   }
