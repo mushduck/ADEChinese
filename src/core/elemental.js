@@ -4,9 +4,9 @@ import wordShift from "./word-shift";
 
 export const Elemental = {
   get displayName() {
-    return false ? "The Elemental" : wordShift.randomCrossWords("The Elemental");
+    return false ? "源初之神" : wordShift.randomCrossWords("源初之神");
   },
-  possessiveName: "The Elemental's",
+  possessiveName: "源初之神",
   get isUnlocked() {
     return false;
   },

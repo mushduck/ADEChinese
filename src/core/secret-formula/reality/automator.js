@@ -27,7 +27,7 @@ export const automator = {
       category: 0,
       syntax: `<b>studies</b> [nowait] <b>load id</b> <u>selector</u><br>
         <b>studies</b> [nowait] <b>load name</b> <u>name</u>`,
-      description: `Loads a Time Study preset, as if you had clicked on the button in the Time Study tab.`,
+      description: `加载时间研究预设，就像你点击了时间研究页面的时间研究预设按钮一样。`,
       sections: [
         {
           name: "INPUTS",

@@ -12,13 +12,13 @@ export class Sacrifice {
   }
 
   static get disabledCondition() {
-    if (NormalChallenge(10).isRunning) return "8th Dimensions are disabled";
-    if (EternityChallenge(3).isRunning) return "Eternity Challenge 3";
-    if (DimBoost.purchasedBoosts.lt(5)) return `Requires ${formatInt(5)} Dimension Boosts`;
-    if (AntimatterDimension(8).totalAmount.eq(0)) return "No 8th Antimatter Dimensions";
-    if (this.nextBoost.lte(1)) return `${formatX(1)} multiplier`;
-    if (Player.isInAntimatterChallenge) return "Challenge goal reached";
-    return "Need to Crunch";
+    if (NormalChallenge(10).isRunning) return "第八维度已禁用";
+    if (EternityChallenge(3).isRunning) return "永恒挑战3";
+    if (DimBoost.purchasedBoosts.lt(5)) return `需要${formatInt(5)}个维度提升`;
+    if (AntimatterDimension(8).totalAmount.eq(0)) return "没有第八维度";
+    if (this.nextBoost.lte(1)) return `${formatX(1)}倍`;
+    if (Player.isInAntimatterChallenge) return "挑战目标已达成";
+    return "需要大坍缩";
   }
 
   static getSacrificeDescription(changes) {

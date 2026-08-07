@@ -145,7 +145,7 @@ export function requestManualReality() {
     return;
   }
   if (GameCache.glyphInventorySpace.value === 0) {
-    Modal.message.show("No available inventory space; free up space by shift-clicking Glyphs to get rid of them.",
+    Modal.message.show("你的符文仓库没有可用空间；按住Shift键点击符文将其移除以腾出空间",
       { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
     return;
   }
@@ -332,11 +332,9 @@ function giveRealityRewards(realityProps) {
     const current = Teresa.runRewardMultiplier;
     const newMultiplier = Teresa.rewardMultiplier(player.antimatter);
     const isHigher = newMultiplier.gt(current);
-    const modalText = `You have completed Teresa's Reality! ${isHigher
-      ? `Since you gained more Antimatter, you increased your
-      Glyph Sacrifice multiplier from ${format(current, 2, 2)} to ${format(newMultiplier, 2, 2)}`
-      : `You did not gain more Antimatter during this run, so the Glyph Sacrifice multiplier
-      from Teresa did not increase`}.`;
+    const modalText = `你已完成特蕾莎的现实！${isHigher
+      ? `由于你获得了更多的反物质，符文献祭倍数从${format(current, 2, 2)}增加到${format(newMultiplier, 2, 2)}`
+      : `你在这次运行中没有获得更多的反物质，所以来自特蕾莎的符文献祭倍数没有增加。`}.`;
     Modal.message.show(modalText, {}, 2);
     if (Currency.antimatter.gt(player.celestials.teresa.bestRunAM)) {
       player.celestials.teresa.bestRunAM = Currency.antimatter.value;

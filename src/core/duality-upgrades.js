@@ -78,7 +78,7 @@ class DualityUpgradeState extends BitPurchasableMechanicState {
   tryUnlock() {
     if (!MachineHandler.isDMUnlocked || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.reality.dualityUpgReqs |= (1 << this.id);
-    GameUI.notify.reality(`You've unlocked an Duality Upgrade: ${this.config.name}`);
+    GameUI.notify.reality(`你解锁了新的重构升级：${this.config.name}`);
     this.hasPlayerLock = false;
   }
 

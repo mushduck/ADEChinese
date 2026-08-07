@@ -107,7 +107,7 @@ export const shortcuts = [
     type: "bindHotkey",
     function: () => {
       player.respec = !player.respec;
-      GameUI.notify.info(`Time Study respec is now ${player.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`重置时间研究已${player.respec ? "启用" : "禁用"}`);
     },
     visible: () => PlayerProgress.eternityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
@@ -128,7 +128,7 @@ export const shortcuts = [
     type: "bindHotkey",
     function: () => {
       player.reality.respec = !player.reality.respec;
-      GameUI.notify.info(`Glyph respec is now ${player.reality.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`卸下符文已${player.reality.respec ? "启用" : "禁用"}`);
     },
     visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
@@ -180,7 +180,7 @@ export const shortcuts = [
     function: () => {
       if (!Pelle.isDoomed) return;
       player.reality.respec = !player.reality.respec;
-      GameUI.notify.info(`Glyph respec is now ${player.reality.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`卸下符文已${player.reality.respec ? "启用" : "禁用"}`);
     },
     visible: () => Pelle.isDoomed || PlayerProgress.endgameUnlocked()
   }, {
@@ -216,7 +216,7 @@ export const shortcuts = [
     type: "bindHotkey",
     function: () => {
       player.endgame.respec = !player.endgame.respec;
-      GameUI.notify.info(`Endgame Mastery respec is now ${player.endgame.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`重置终局专精已${player.endgame.respec ? "启动" : "禁用"}`);
     },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
@@ -226,7 +226,7 @@ export const shortcuts = [
     function: () => {
       if (!Alpha.isDestroyedForDisplay) return;
       player.options.simpleHotkeysCelestialMode = !player.options.simpleHotkeysCelestialMode;
-      GameUI.notify.info(`Simple Hotkey Celestial commands are now ${player.options.simpleHotkeysCelestialMode ? "active" : "inactive"}`);
+      GameUI.notify.info(`天界维度快捷键已${player.options.simpleHotkeysCelestialMode ? "启用" : "禁用"}`);
     },
     visible: () => Alpha.isDestroyedForDisplay
   }, {
@@ -459,21 +459,21 @@ function toggleAutobuyer(buyer) {
   // Autobuyer.tickspeed.isUnlocked is false without NC9, but we still want the simpler one to be togglable via hotkey
   const isSimpleTickspeed = buyer === Autobuyer.tickspeed && buyer.isBought;
   if (buyer.disabledByContinuum) {
-    GameUI.notify.info("Continuum is enabled, you cannot alter this autobuyer");
+    GameUI.notify.info("连续统已启用，你无法修改此自动购买器");
   } else if (buyer.isUnlocked || isSimpleTickspeed) {
     buyer.toggle();
-    GameUI.notify.info(`${buyer.name} Autobuyer toggled ${(buyer.isActive) ? "on" : "off"}`);
+    GameUI.notify.info(`${buyer.name}自动购买器已${(buyer.isActive) ? "启用" : "禁用"}`);
   }
   return false;
 }
 
 function toggleBuySingles(buyer) {
   if (buyer.disabledByContinuum) {
-    GameUI.notify.info("Continuum is enabled, you cannot alter this autobuyer");
+    GameUI.notify.info("连续统已启用，你无法修改此自动购买器");
   } else if (buyer.isUnlocked && buyer.toggleMode !== null) {
     buyer.toggleMode();
-    const bulkName = (buyer.name === "Tickspeed" || buyer.hasUnlimitedBulk) ? "max" : "10";
-    GameUI.notify.info(`${buyer.name} Autobuyer set to buy ${(buyer.mode === 1) ? "singles" : bulkName}`);
+    const bulkName = (buyer.name === "Tickspeed" || buyer.hasUnlimitedBulk) ? "最大" : "10个";
+    GameUI.notify.info(`${buyer.name}自动购买器调整为购买${(buyer.mode === 1) ? "单个" : bulkName}`);
   }
   return false;
 }
@@ -481,7 +481,7 @@ function toggleBuySingles(buyer) {
 function keyboardToggleAutobuyers() {
   if (Tab.automation.isUnlocked) {
     Autobuyers.toggle();
-    GameUI.notify.info(`Autobuyers ${player.auto.autobuyersOn ? "resumed" : "paused"}`);
+    GameUI.notify.info(`自动购买器已${player.auto.autobuyersOn ? "重启" : "暂停"}`);
   }
 }
 
@@ -498,7 +498,7 @@ function keyboardToggleContinuum() {
   // This is a toggle despite the lack of !, because player.auto.disableContinuum
   // is negated compared to whether continuum is on.
   Laitela.setContinuum(player.auto.disableContinuum);
-  GameUI.notify.info(`${(player.auto.disableContinuum) ? "Disabled" : "Enabled"} Continuum`);
+  GameUI.notify.info(`已${(player.auto.disableContinuum) ? "禁用" : "启用"}连续统`);
 }
 
 function keyboardAutomatorToggle() {
@@ -514,22 +514,22 @@ function keyboardAutomatorToggle() {
       AutomatorBackend.restart();
       AutomatorBackend.start(visibleIndex);
       if (AutomatorData.currentErrors().length === 0) {
-        GameUI.notify.automator(`Starting script "${AutomatorBackend.scriptName}"`);
+        GameUI.notify.automator(`开始运行脚本"${AutomatorBackend.scriptName}"`);
       } else {
-        GameUI.notify.error(`Cannot start script "${AutomatorBackend.scriptName}" (has errors)`);
+        GameUI.notify.error(`无法运行脚本"${AutomatorBackend.scriptName}" (有异常)`);
       }
       return;
     }
-    const action = AutomatorBackend.isRunning ? "Resuming" : "Pausing";
+    const action = AutomatorBackend.isRunning ? "重启" : "暂停";
     const linenum = AutomatorBackend.currentLineNumber;
-    GameUI.notify.automator(`${action} script "${AutomatorBackend.scriptName}" at line ${linenum}`);
+    GameUI.notify.automator(`${action}脚本"${AutomatorBackend.scriptName}"于第${linenum}行`);
   }
 }
 
 function keyboardAutomatorRestart() {
   if (Player.automatorUnlocked) {
-    const action = AutomatorBackend.isOn ? "Restarting" : "Starting";
-    GameUI.notify.automator(`${action} script "${AutomatorBackend.scriptName}"`);
+    const action = AutomatorBackend.isOn ? "重新运行" : "开始";
+    GameUI.notify.automator(`${action}脚本"${AutomatorBackend.scriptName}"`);
 
     AutomatorBackend.restart();
     AutomatorBackend.start();

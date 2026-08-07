@@ -75,7 +75,7 @@ export const sidebarResources = [
   },
   {
     id: 10,
-    optionName: "Relic Shards",
+    optionName: "遗迹碎片",
     isAvailable: () => TeresaUnlocks.effarig.isUnlocked || PlayerProgress.endgameUnlocked(),
     value: () => new Decimal(Currency.relicShards.value),
     formatValue: x => format(x, 2),
@@ -83,7 +83,7 @@ export const sidebarResources = [
   },
   {
     id: 11,
-    optionName: "Imaginary Machines",
+    optionName: "虚幻机器",
     isAvailable: () => MachineHandler.isIMUnlocked || PlayerProgress.endgameUnlocked(),
     value: () => new Decimal(Currency.imaginaryMachines.value),
     formatValue: x => format(x, 2),
@@ -91,7 +91,7 @@ export const sidebarResources = [
   },
   {
     id: 12,
-    optionName: "All Machines",
+    optionName: "所有机器",
     resourceName: "Machines",
     isAvailable: () => MachineHandler.isIMUnlocked || PlayerProgress.endgameUnlocked(),
     // This is a dummy value to prevent vue errors
@@ -101,7 +101,7 @@ export const sidebarResources = [
   },
   {
     id: 13,
-    optionName: "Dark Matter",
+    optionName: "暗物质",
     isAvailable: () => Laitela.isUnlocked || PlayerProgress.endgameUnlocked(),
     value: () => Currency.darkMatter,
     formatValue: x => format(x, 2),
@@ -109,7 +109,7 @@ export const sidebarResources = [
   },
   {
     id: 14,
-    optionName: "Dark Energy",
+    optionName: "暗能量",
     isAvailable: () => Laitela.isUnlocked || PlayerProgress.endgameUnlocked(),
     value: () => new Decimal(Currency.darkEnergy.value),
     formatValue: x => format(x, 2, 2),
@@ -117,7 +117,7 @@ export const sidebarResources = [
   },
   {
     id: 15,
-    optionName: "Singularities",
+    optionName: "奇点",
     isAvailable: () => Laitela.isUnlocked || PlayerProgress.endgameUnlocked(),
     value: () => new Decimal(Currency.singularities.value),
     formatValue: x => format(x, 2),
@@ -125,7 +125,7 @@ export const sidebarResources = [
   },
   {
     id: 16,
-    optionName: "Reality Shards",
+    optionName: "现实碎片",
     isAvailable: () => Pelle.isDoomed || PlayerProgress.endgameUnlocked(),
     value: () => Currency.realityShards,
     formatValue: x => format(x, 2),
@@ -133,7 +133,7 @@ export const sidebarResources = [
   },
   {
     id: 17,
-    optionName: "Celestial Points",
+    optionName: "天界点数",
     isAvailable: () => PlayerProgress.endgameUnlocked(),
     value: () => Currency.celestialPoints,
     formatValue: x => format(x, 2),
@@ -141,7 +141,7 @@ export const sidebarResources = [
   },
   {
     id: 18,
-    optionName: "Doomed Particles",
+    optionName: "毁灭粒子",
     isAvailable: () => PlayerProgress.endgameUnlocked(),
     value: () => Currency.doomedParticles,
     formatValue: x => format(x, 2),
@@ -149,7 +149,7 @@ export const sidebarResources = [
   },
   {
     id: 19,
-    optionName: "Celestial Matter",
+    optionName: "天界物质",
     isAvailable: () => Currency.celestialMatter.gt(0),
     value: () => Currency.celestialMatter,
     formatValue: x => format(x, 2, 2),
@@ -157,7 +157,7 @@ export const sidebarResources = [
   },
   {
     id: 20,
-    optionName: "Total Endgame Skills",
+    optionName: "终局能力总量",
     isAvailable: () => Currency.endgameSkills.max.gt(0),
     value: () => Currency.endgameSkills.max,
     formatValue: x => format(x, 2),
@@ -165,7 +165,7 @@ export const sidebarResources = [
   },
   {
     id: 21,
-    optionName: "Galactic Power",
+    optionName: "星系之力",
     isAvailable: () => Currency.galacticPower.gt(0),
     value: () => Currency.galacticPower,
     formatValue: x => format(x, 2, 2),
@@ -173,7 +173,7 @@ export const sidebarResources = [
   },
   {
     id: 22,
-    optionName: "Ethereal Power",
+    optionName: "缥缈之力",
     isAvailable: () => Currency.etherealPower.gt(0),
     value: () => Currency.etherealPower,
     formatValue: x => format(x, 2, 2),
@@ -181,7 +181,7 @@ export const sidebarResources = [
   },
   {
     id: 23,
-    optionName: "Cosmic Sector",
+    optionName: "宇宙扇区",
     isAvailable: () => Currency.etherealPower.gt(1),
     value: () => new Decimal(player.endgame.ethereal.sector),
     formatValue: x => format(x, 2),
@@ -189,7 +189,7 @@ export const sidebarResources = [
   },
   {
     id: 24,
-    optionName: "Hadronizes",
+    optionName: "强子化次数",
     isAvailable: () => player.celestials.laitela.hadronizes > 0,
     value: () => new Decimal(player.celestials.laitela.hadronizes),
     formatValue: x => format(x, 2),
@@ -197,7 +197,7 @@ export const sidebarResources = [
   },
   {
     id: 25,
-    optionName: "Dual Machines",
+    optionName: "重构机器",
     isAvailable: () => MachineHandler.isDMUnlocked,
     value: () => Currency.dualMachines.value,
     formatValue: x => format(x, 2, 2),
@@ -205,7 +205,7 @@ export const sidebarResources = [
   },
   {
     id: 26,
-    optionName: "Hadrons",
+    optionName: "强子",
     isAvailable: () => DualityUpgrade(15).isBought,
     value: () => new Decimal(player.celestials.laitela.hadrons.light),
     formatValue: x => format(x, 2),
@@ -213,7 +213,7 @@ export const sidebarResources = [
   },
   {
     id: 27,
-    optionName: "Dark Hadrons",
+    optionName: "暗强子",
     isAvailable: () => DualityUpgrade(19).isBought,
     value: () => new Decimal(player.celestials.laitela.hadrons.dark),
     formatValue: x => format(x, 2),
@@ -221,7 +221,7 @@ export const sidebarResources = [
   },
   {
     id: 28,
-    optionName: "Celestial Infinity Points",
+    optionName: "天界无限点数",
     isAvailable: () => PlayerProgress.celestialInfinityUnlocked(),
     value: () => Currency.celestialInfinityPoints.value,
     formatValue: x => format(x, 2),
@@ -229,7 +229,7 @@ export const sidebarResources = [
   },
   {
     id: 29,
-    optionName: "Divinities",
+    optionName: "神性次数",
     isAvailable: () => player.celestials.pelle.divinities >= 1,
     value: () => new Decimal(player.celestials.pelle.divinities),
     formatValue: x => format(x, 2),
@@ -237,7 +237,7 @@ export const sidebarResources = [
   },
   {
     id: 30,
-    optionName: "Divine Matter",
+    optionName: "神性物质",
     isAvailable: () => DivinityMilestone.divineDimensions.isReached,
     value: () => Currency.divineMatter.value,
     formatValue: x => format(x, 2, 2),
@@ -245,7 +245,7 @@ export const sidebarResources = [
   },
   {
     id: 31,
-    optionName: "Celestial Eternity Points",
+    optionName: "天界永恒点数",
     isAvailable: () => PlayerProgress.celestialEternityUnlocked(),
     value: () => Currency.celestialEternityPoints.value,
     formatValue: x => format(x, 2),
@@ -253,7 +253,7 @@ export const sidebarResources = [
   },
   {
     id: 32,
-    optionName: "Exotic Hadrons",
+    optionName: "奇迹强子",
     isAvailable: () => DivinityMilestone.hadronEmpowerment.isReached,
     value: () => new Decimal(player.celestials.laitela.hadrons.exotic),
     formatValue: x => format(x, 2),
@@ -261,7 +261,7 @@ export const sidebarResources = [
   },
   {
     id: 33,
-    optionName: "Divine Stars",
+    optionName: "星辰",
     isAvailable: () => PlayerProgress.condenseUnlocked(),
     value: () => Currency.divineStars.value,
     formatValue: x => format(x, 2),
@@ -269,7 +269,7 @@ export const sidebarResources = [
   },
   {
     id: 34,
-    optionName: "Star Power",
+    optionName: "星辰之力",
     isAvailable: () => player.endgame.ethereal.isStarPowerUnlocked,
     value: () => Currency.starPower.value,
     formatValue: x => format(x, 2),
@@ -277,7 +277,7 @@ export const sidebarResources = [
   },
   {
     id: 35,
-    optionName: "Nebulae",
+    optionName: "星云",
     isAvailable: () => PlayerProgress.supernovaUnlocked(),
     value: () => Currency.nebulae.value,
     formatValue: x => format(x, 2),

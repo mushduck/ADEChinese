@@ -4,7 +4,7 @@ export const normalAchievements = [
     name: "从零开始",
     description: "购买第一维度。",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    reward: "成就为第一维度提供的倍数为原来的平方。}",
+    reward: "成就为第一维度提供的倍数为原来的平方。",
     effect: () => Achievements.power,
     progress: () => Achievement(11).isUnlocked ? DC.D1 : Decimal.clamp(player.antimatter.max(1).log10(), 0, 1)
   },
@@ -46,7 +46,7 @@ export const normalAchievements = [
   },
   {
     id: 16,
-    name: "We couldn't afford 9",
+    name: "6 不是 9",
     get description() {
       return Enslaved.isRunning
         ? "购买一个第六维度（这并没有什么特殊作用）"
@@ -102,7 +102,7 @@ export const normalAchievements = [
     name: "九九归一",
     get description() { return `正好有 ${formatInt(99)} 个第八维度。`; },
     checkRequirement: () => AntimatterDimension(8).amount.eq(99),
-    get reward() { return `8th Antimatter Dimensions are ${formatPercents(0.1)} stronger.`; },
+    get reward() { return `第八维度增强${formatPercents(0.1)}。`; },
     effect: 1.1,
     progress: () => Achievement(23).isUnlocked ? DC.D1 : Decimal.clamp(AntimatterDimension(8).amount.div(99), 0, 1)
   },
@@ -140,7 +140,7 @@ export const normalAchievements = [
   },
   {
     id: 28,
-    name: "There's no point in doing that...",
+    name: "徒劳无功",
     get description() {
       return `当你有超过 ${format(DC.E150)} 个第一维度时，购买一个第一维度。`;
     },
@@ -212,7 +212,7 @@ export const normalAchievements = [
     },
     checkRequirement: () => player.galaxies.eq(1),
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
-    get reward() { return `其实计数频率提升 ${format(1.02, 2, 2)} 倍。`; },
+    get reward() { return `起始计数频率提升 ${format(1.02, 2, 2)} 倍。`; },
     effect: 1 / 1.02,
     progress: () => Achievement(36).isUnlocked ? DC.D1 : (player.galaxies.neq(1) ? DC.DM1 : Decimal.clamp(player.antimatter.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1))
   },
@@ -369,7 +369,7 @@ export const normalAchievements = [
   },
   {
     id: 54,
-    name: "That's FASTER!",
+    name: "健步如飞",
     get description() { return `在 ${formatInt(10)} 分钟内达到无限。`; },
     checkRequirement: () => Time.thisInfinityRealTime.totalMinutes.toNumber() <= 10,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
@@ -445,7 +445,7 @@ export const normalAchievements = [
   },
   {
     id: 62,
-    name: "Oh, hey... You're still here?",
+    name: "哦，你… 你还在这里吗？?",
     get description() { return `达到 ${format(DC.E8)} 无限点数/分钟。`; },
     checkRequirement: () => Player.bestRunIPPM.add(1).log10().gte(8),
     checkEvent: GAME_EVENT.BIG_CRUNCH_AFTER,
@@ -1715,7 +1715,7 @@ export const normalAchievements = [
     checkRequirement: () => Currency.imaginaryMachines.value.gte(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `基于未被诅咒的天界物质数量，给予天界物质转换指数很小的倍数。`;
+      return `基于稳定天界物质数量，给予天界物质转换指数很小的倍数。`;
     },
     effect: () => player.disablePostReality ? 1 : Decimal.pow(Decimal.log10(Currency.unnerfedCelestialMatter.value.add(1).log10().add(1)).add(1), 0.1).toNumber(),
     formatEffect: value => `${formatX(value, 2, 3)}`,

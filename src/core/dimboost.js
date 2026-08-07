@@ -193,28 +193,28 @@ export class DimBoost {
 
     let newUnlock = "";
     if (!allNDUnlocked && boosts.lt(DimBoost.maxDimensionsUnlockable - 4)) {
-      newUnlock = `unlock the ${formatInt(boosts.add(5))}th Dimension`;
+      newUnlock = `解锁第${formatInt(boosts.add(5))}维度`;
     } else if (boosts.eq(4) && !NormalChallenge(10).isRunning && !EternityChallenge(3).isRunning) {
-      newUnlock = "unlock Sacrifice";
+      newUnlock = "解锁维度献祭";
     }
 
-    const formattedMultText = `give a ${formatX(DimBoost.power, 2, 1)} multiplier `;
-    let dimensionRange = `to the 1st Dimension`;
-    if (boosts.gt(0)) dimensionRange = `to Dimensions 1-${Decimal.min(boosts.add(1), 8)}`;
-    if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `to all Dimensions`;
-    const formattedPowText = Ascensions.dbA.isUnlocked ? `and a +${formatPow(DimBoost.exponentialPower, 2, 3)} power to all Dimensions` : "";
+    const formattedMultText = `提供${formatX(DimBoost.power, 2, 1)}的加成`;
+    let dimensionRange = `为第一维度`;
+    if (boosts.gt(0)) dimensionRange = `为第1至${Decimal.min(boosts.add(1), 8)}维度`;
+    if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `为所有维度`;
+    const formattedPowText = Ascensions.dbA.isUnlocked ? `且增加${formatPow(DimBoost.exponentialPower, 2, 3)}反物质维度指数` : "";
 
     let boostEffects;
     if (NormalChallenge(8).isRunning) boostEffects = newUnlock;
-    else if (newUnlock === "") boostEffects = `${formattedMultText} ${dimensionRange} ${formattedPowText}`;
-    else boostEffects = `${newUnlock} and ${formattedMultText} ${dimensionRange} ${formattedPowText}`;
+    else if (newUnlock === "") boostEffects = ` ${dimensionRange}${formattedMultText}${formattedPowText}`;
+    else boostEffects = `${newUnlock}且${dimensionRange}${formattedMultText}${formattedPowText} `;
 
-    if (boostEffects === "") return "Dimension Boosts are currently useless";
+    if (boostEffects === "") return "维度提升目前无效";
     const areDimensionsKept = (Perk.antimatterNoReset.isBought || Achievement(111).canBeApplied) &&
       (!player.disablePostReality || (LHC.voidRunning && player.endgame.largeHadronCollider.void.nullified) || (Alpha.isRunning && Alpha.currentStage >= 12) || (LHC.voidRunning && NullUpgrade.limerick1.isBought)) &&
       ((!Pelle.isDoomed || PelleAchievementUpgrade.achievement111.canBeApplied) || PelleUpgrade.dimBoostResetsNothing.isBought);
     if (areDimensionsKept) return boostEffects[0].toUpperCase() + boostEffects.substring(1);
-    return `Reset your Dimensions to ${boostEffects}`;
+    return `重置维度，${boostEffects}`;
   }
 
   static get purchasedBoosts() {
