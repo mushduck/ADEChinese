@@ -337,8 +337,8 @@ class InfinityDimensionState extends DimensionState {
     if (!this.isAvailableForPurchase) return false;
     if (ImaginaryUpgrade(15).isLockingMechanics) {
       const lockString = this.tier === 1
-        ? "purchase a 1st Infinity Dimension"
-        : "purchase a Dimension which will produce 1st IDs";
+        ? "购买一个第一无限维度"
+        : "购买一个将生产第一无限维度的维度";
       ImaginaryUpgrade(15).tryShowWarningModal(lockString);
       return false;
     }
@@ -366,8 +366,8 @@ class InfinityDimensionState extends DimensionState {
     if (!this.isAvailableForPurchase) return false;
     if (ImaginaryUpgrade(15).isLockingMechanics) {
       const lockString = this.tier === 1
-        ? "purchase a 1st Infinity Dimension"
-        : "purchase a Dimension which will produce 1st IDs";
+        ? "购买一个第一无限维度"
+        : "购买一个将生产第一无限维度的维度";
       if (!auto) ImaginaryUpgrade(15).tryShowWarningModal(lockString);
       return false;
     }
