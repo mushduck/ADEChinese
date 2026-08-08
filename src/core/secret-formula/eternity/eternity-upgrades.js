@@ -2,7 +2,7 @@ export const eternityUpgrades = {
   idMultEP: {
     id: 1,
     cost: 5,
-    description: () => `Infinity Dimension multiplier based on unspent Eternity Points (x+${formatInt(1)})`,
+    description: () => `基于未使用永恒点数 (x+${formatInt(1)}) 的无限维度倍数加成`,
     effect: () => Currency.eternityPoints.value.plus(1),
     cap: () => (!player.disablePostReality && Alpha.currentStage >= 16 ? DC.BEMAX : DC.E1E15),
     formatEffect: value => formatX(value, 2, 1)
@@ -10,8 +10,8 @@ export const eternityUpgrades = {
   idMultEternities: {
     id: 2,
     cost: 10,
-    description: () => `Infinity Dimension multiplier based on Eternities
-      ((x/${formatInt(200)})^log4(${formatInt(2)}x), softcap at ${format(1e5)} Eternities)`,
+    description: () => `无限维度获得基于永恒次数的加成
+      ((x/${formatInt(200)})^log4(${formatInt(2)}x)，超过 ${format(1e5)} 时增速变慢)`,
     effect() {
       const log4 = Math.log4;
       const eterPreCap = Currency.eternities.value.clampMax(1e5).toNumber();
@@ -29,7 +29,7 @@ export const eternityUpgrades = {
   idMultICRecords: {
     id: 3,
     cost: 5e4,
-    description: "Infinity Dimension multiplier based on sum of Infinity Challenge times",
+    description: "基于无限挑战时间纪录的总和，获得无限维度的提升",
     // The cap limits this at a lower value, but we also need an explicit cap here because very old versions have
     // allowed EC12 to make all the challenge records sum to zero (causing a division by zero here)
     effect: () => DC.D2.pow(new Decimal(30).div(Time.infinityChallengeSum.totalSeconds.max(1e-6))).pow(
@@ -55,9 +55,9 @@ export const eternityUpgrades = {
     id: 6,
     cost: 1e50,
     description: () => (Pelle.isDoomed
-      ? "Time Dimensions are multiplied by days played in this Armageddon"
-      : (Alpha.isRunning ? "Time Dimensions are multiplied by real-time days spent in Alpha's Reality"
-         : "Time Dimensions are multiplied by days played")
+      ? "时间维度获得等于游戏天数的倍数加成"
+      : (Alpha.isRunning ? "时间维度获得等于在阿尔法的现实耗费的真实天数的倍数加成"
+         : "时间维度获得等于游戏天数的倍数加成")
     ),
     effect: () => (Pelle.isDoomed ? Time.thisReality.totalDays.add(1) : (Alpha.isRunning
       ? Decimal.max(Time.thisRealityRealTime.totalDays, 1) : Decimal.max(Time.totalTimePlayed.totalDays, 1))),
