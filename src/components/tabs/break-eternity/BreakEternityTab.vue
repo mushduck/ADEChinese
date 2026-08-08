@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     update() {
-      this.isUnlocked = PlayerProgress.endgameUnlocked() && player.antimatter.gte(DC.E9E15);
+      this.isUnlocked = (PlayerProgress.endgameUnlocked() && player.antimatter.gte(DC.E9E15)) || player.break2;
       this.antimatterReq = DC.E9E15;
     },
     btnClassObject(column) {
