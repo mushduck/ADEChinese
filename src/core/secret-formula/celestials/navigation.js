@@ -1632,7 +1632,7 @@ export const celestialNavigation = {
       forceLegend: () => Pelle.isUnlocked && !Pelle.hasGalaxyGenerator,
       legend: {
         text: complete => {
-          if (complete >= 1) return Pelle.isDoomed ? "被毁灭的现实" : "毁灭你的现实";
+          if (complete >= 1) return Pelle.isDoomed ? "被毁灭的现实" : "被毁灭的现实";
           const achievements = [Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked)),
             Achievements.prePelleRows.length];
           const alchemy = [AlchemyResources.all.countWhere(r => r.amount >= 25000), AlchemyResources.all.length];
@@ -1861,12 +1861,12 @@ export const celestialNavigation = {
         text: complete => {
           if (complete === 1) {
             return [
-              "诅咒你的现实" 
+              "被诅咒的现实" 
             ];
           }
           if (false && complete === 0.999) {
             return [
-              "诅咒你的现实" 
+              "被诅咒的现实" 
             ];
           }
           if (true && complete === 0.999) {
