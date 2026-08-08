@@ -29,7 +29,7 @@ export class EPMultAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Eternity Point Multiplier`;
+    return `永恒点数倍增`;
   }
 
   get isUnlocked() {
@@ -58,7 +58,7 @@ export class CIPMultAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Celestial Infinity Point Multiplier`;
+    return `天界无限点数倍增`;
   }
 
   get isUnlocked() {

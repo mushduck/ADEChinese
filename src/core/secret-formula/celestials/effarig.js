@@ -1,7 +1,7 @@
 export const effarigUnlocks = {
   adjuster: {
     id: 0,
-    description: "Adjustable Glyph level factor weights",
+    description: "可调节符文等级因子的权重",
     cost: 1e7,
     onPurchased: () => {
       Effarig.quotes.unlockWeights.show();
@@ -11,7 +11,7 @@ export const effarigUnlocks = {
   },
   glyphFilter: {
     id: 1,
-    description: "Glyph Filtering",
+    description: "符文筛选",
     cost: 2e8,
     onPurchased: () => {
       Effarig.quotes.unlockGlyphFilter.show();
@@ -20,7 +20,7 @@ export const effarigUnlocks = {
   },
   setSaves: {
     id: 2,
-    description: "Glyph Presets",
+    description: "保存符文配置",
     cost: 3e9,
     onPurchased: () => {
       Effarig.quotes.unlockSetSaves.show();
@@ -29,7 +29,7 @@ export const effarigUnlocks = {
   },
   run: {
     id: 3,
-    description: "Effarig's Reality",
+    description: "鹿颈长的现实",
     cost: 5e11,
     onPurchased: () => {
       Effarig.quotes.unlockRun.show();
@@ -37,33 +37,33 @@ export const effarigUnlocks = {
   },
   infinity: {
     id: 4,
-    label: "Infinity",
+    label: "无限",
     get description() {
-      return ` Replicanti cap is multiplied by a value based on Infinities
-        Infinities increase your max Replicanti Galaxies
-        Base Infinity Point gain is capped at ${format(DC.E200)} in Effarig's Reality
-        Each type of Infinity Point multiplier is capped at ${format(DC.E50)} in Effarig's Reality`;
+      return `无限次数提升复制器上限
+      无限次数增加你的复制器星系上限
+      在鹿颈长的现实中基础无限点获取上限为 ${format(DC.E200)}
+      在鹿颈长的现实中每种类型的无限点倍率上限为 ${format(DC.E50)}`;
     },
   },
   eternity: {
     id: 5,
-    label: "Eternity",
+    label: "永恒",
     get description() {
-      return ` Eternities generates Infinities
-        Infinity Points are no longer limited in any way in Effarig's Reality
-        You have unlocked The Nameless Ones`;
+      return `永恒次数生成无限次数
+      在鹿颈长的现实中无限点数不再有任何限制
+      解锁无名氏`;
     },
   },
   reality: {
     id: 6,
-    label: "Reality",
+    label: "现实",
     get description() {
-      return " You have unlocked Effarig Glyphs (You may equip at most one and some effects are mutually exclusive)";
+      return "解锁鹿颈长符文（完成成就196前你只能装备一个鹿颈长符文）";
     },
   },
   maintainRS: {
     id: 7,
-    description: "Keep Relic Shards on Endgame",
+    description: "终局后保留遗迹碎片",
     cost: new Decimal("1e4300"),
     onPurchased: () => {
       Effarig.quotes.keepRelicShard.show();
@@ -72,7 +72,8 @@ export const effarigUnlocks = {
   glyphGenerationBoost: {
     id: 8,
     get description() {
-      return `Effarig Level ${formatInt(100)} affects Glyphs generated on Doom and Endgame`;
+      return `太阳神的鹿颈长等级100级奖励${formatInt(100)}
+      同时影响佩勒和终局初始符文`;
     },
     cost: new Decimal("1e4400"),
     onPurchased: () => {
@@ -81,7 +82,7 @@ export const effarigUnlocks = {
   },
   maxMomentum: {
     id: 9,
-    description: "Momentum is always maxed",
+    description: "动量的效果永远为最大值",
     cost: new Decimal("1e4550"),
     onPurchased: () => {
       Effarig.quotes.maxMomentum.show();
@@ -89,7 +90,7 @@ export const effarigUnlocks = {
   },
   maxRarityBoost: {
     id: 10,
-    description: "Relic Shards boost Glyph Rarity cap at a reduced rate",
+    description: "遗迹碎片以衰减倍率提高符文稀有度上限",
     cost: new Decimal("1e4750"),
     onPurchased: () => {
       Effarig.quotes.moreRarityCap.show();
@@ -97,7 +98,7 @@ export const effarigUnlocks = {
   },
   extendRun: {
     id: 11,
-    description: "Unlock Effarig’s Endgame",
+    description: "解锁鹿颈长的终局",
     cost: new Decimal("1e5000"),
     onPurchased: () => {
       if (Effarig.isRunning) {
@@ -108,14 +109,14 @@ export const effarigUnlocks = {
   },
   endgame: {
     id: 12,
-    label: "Endgame",
+    label: "终局",
     get description() {
-      return ` Every Glyph effect is improved
-        The RM Multiplier Effarig Glyph effect now boosts the RM cap
-        The Glyph Instability Delay Effarig Glyph effect now delays the first ${formatInt(4)} levels of Instability instead of the first ${formatInt(2)}
-        The Effarig Glyph Sacrifice effect is uncapped and values over ${formatPercents(1)} will boost the Glyph Rarity cap
-        Endgame Mastery ${formatInt(71)} now generates at your all-time highest Glyph Level and also generates ${formatInt(2)} Effarig Glyphs
-        Automatically generate ${formatInt(2)} Reality Glyphs on Endgame`;
+      return ` 增强所有符文效果；
+      鹿颈长符文的现实机器倍率词条额外提高现实机器上限；
+      鹿颈长符文的符文不稳定性推迟倍率词条现在推迟前 ${formatInt(4)} 重符文等级软上限；
+      鹿颈长符文的符文献祭效果超过 ${formatPercents(1)} 的部分将提高符文登记稀有度上限；
+      终局专精${formatInt(71)}现将基于你历史最高符文等级生成符文，并额外生成${formatInt(2)}个鹿颈长符文；
+      终局时自动生成${formatInt(2)}个现实符文`;
     },
   },
 };

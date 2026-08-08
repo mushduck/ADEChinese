@@ -37,7 +37,7 @@ export class DilationUpgradeAutobuyerState extends IntervaledAutobuyerState {
   }
 
   static get entryCount() { return 3; }
-  static get autobuyerGroupName() { return "Dilation Upgrade"; }
+  static get autobuyerGroupName() { return "膨胀升级"; }
   static get isActive() { return player.auto.dilationUpgrades.isActive; }
   static set isActive(value) { player.auto.dilationUpgrades.isActive = value; }
 }
