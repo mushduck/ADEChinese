@@ -67,7 +67,7 @@ export const celestialBreakInfinityUpgrades = {
     initialCost: 4e5,
     costIncrease: 100,
     maxUpgrades: 7,
-    description: "降低天界无限后天界维度提升升级的价格增长倍率",
+    description: "降低天界无限后天界维度提升的价格增长倍率",
     noLabel: true,
     onPurchased: () => GameCache.celestialDimensionMultDecrease.invalidate()
   }),
