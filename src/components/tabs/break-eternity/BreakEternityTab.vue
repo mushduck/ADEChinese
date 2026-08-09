@@ -83,11 +83,17 @@ export default {
       </div>
     </div>
     <div>
-      All Break Eternity Upgrades can only be purchased with Antimatter gained outside Pelle.
+      所有打破永恒升级只能在被毁灭的现实之外购买。
+    </div>
+    <div class="break-eternity-hint">
+      （这一页升级名字就是那么直接）
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.break-eternity-hint {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
 </style>

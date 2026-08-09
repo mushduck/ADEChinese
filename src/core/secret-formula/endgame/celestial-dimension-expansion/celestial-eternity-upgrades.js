@@ -66,7 +66,7 @@ export const celestialEternityUpgrades = {
   x2CIPAuto: {
     id: "x2CIPAuto",
     cost: 1e10,
-    description: () => `解锁 ${formatX(2)} 天界无限点数升级自动购买器`
+    description: () => `解锁天界无限点数倍增升级自动购买器`
   },
   betterCelCrunchAuto: {
     id: "betterCelCrunchAuto",
