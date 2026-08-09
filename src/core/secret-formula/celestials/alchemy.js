@@ -234,15 +234,12 @@ export const alchemyResources = {
     name: "动量",
     symbol: "μ",
     isBaseResource: false,
-    effect: amount => {
-      const rawValue = 0.3 + 1.7 * Math.sqrt(amount / 25000);
-      return Achievement(175).isUnlocked ? rawValue : Math.min(rawValue, 1);
-    },
+    effect: amount => 1 + amount / 100000,
     tier: 3,
     uiOrder: 3,
     unlockedAt: 15,
     description: "为所有维度提供随时间永久增长的加成",
-    formatEffect: value => `所有维度 ${formatPow(Ra.momentumValue, 4, 4)}，解锁该资源后每小时增加 ${format(0.01 * Effects.product(Achievement(175), EndgameMastery(171), Achievement(222)), 3, 3)}，最高可达 ${formatPow(value, 4, 4)}`,
+    formatEffect: value => `喵喵喵所有维度 ${formatPow(Ra.momentumValue, 4, 4)}，解锁该资源后每小时增加 ${format(0.01 * Effects.product(Achievement(175), EndgameMastery(171), Achievement(222)), 3, 3)}，最高可达 ${formatPow(value, 4, 4)}`,
     reagents: [
       {
         resource: ALCHEMY_RESOURCE.EFFARIG,
