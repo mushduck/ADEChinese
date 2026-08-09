@@ -1,93 +1,73 @@
 export const expansionPacks = {
   teresaPack: {
-    name: "Teresa's Expansion Pack",
+    name: "特蕾莎扩展包",
     id: "teresaPack",
     symbol: "Ϟ",
     description: () =>
-      `Uncap Teresa's Canister. Teresa's Canister now affects the Reality Machine cap as well as Reality Machine gain.
-      Unlock Charged Perk Upgrades in the Teresa Tab. Automatically pour RM into Teresa.`,
+      `移除进贡现实机器上限；基于进贡的现实机器提高现实机器上限和现实机器获取量；在特蕾莎标签页解锁充能复兴商店升级；解锁自动进贡现实机器。`,
     cost: Decimal.pow(10, 1e30),
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   effarigPack: {
-    name: "Effarig's Expansion Pack",
+    name: "鹿颈长扩展包",
     id: "effarigPack",
     symbol: "Ϙ",
     description: () =>
-      `Multiply Relic Shard gain by the logarithm of your Antimatter amount. The Effarig Level ${formatInt(10)} reward in Ra
-      is improved so that Effarig Glyphs are always generated with ${formatInt(7)} effects. Increase Glyph Alchemy caps to one-third
-      of your all-time maximum Glyph Level. Alchemy resources are kept on Endgame, and making a Reality Glyph no longer spends
-      Reality resources. Effarig's Shop starts completed. Layers of Effarig's Reality will automatically complete at one-tenth the
-      time of your fastest Endgame.`,
+      `遗迹碎片获取量乘以当前反物质指数；太阳神中鹿颈长的记忆达到 ${formatInt(10)} 级时，鹿颈长符文总是拥有 ${formatInt(7)} 个词条；提升符文炼金资源的上限至最高符文等级的三分之一；终局后保留炼金资源，且创造现实符文不再消耗炼金资源；开始终局时解锁目前阶段鹿颈长商店全部内容；基于最快终局用时的十分之一自动完成鹿颈长的每一层现实。`,
     cost: Decimal.pow(10, 1e50),
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   enslavedPack: {
-    name: "The Nameless Ones' Expansion Pack",
+    name: "无名氏扩展包",
     id: "enslavedPack",
     symbol: "\uf0c1",
     description: () =>
-      `Charging your Black Hole always only takes ${formatPercents(0.99)} of your total Game Speed. Unlock optimizers for
-      adjusting the amount of your stored time you desire to discharge as well as the interval at which you want to discharge
-      your Stored Time. Double the strength of all Effective Tesseracts. Tesseracts multiply Endgames as well as reducing the Infinity
-      Dimension Compression Magnitude slightly. Start Endgames with the Nameless Ones completed. Unlock an autobuyer for Tesseracts.`,
+      `充能黑洞总是消耗 ${formatPercents(0.99)} 的游戏速度；解锁多样化黑洞充能，用于调整黑洞时间释放量以及释放间隔；有效超立方体的效力翻倍；终局次数获取量乘以超立方体数量，且基于超立方体数量略微降低无限维度的软上限强度；开始终局时自动完成无名氏的现实；解锁超立方体自动购买器。`,
     cost: Decimal.pow(10, 1e70),
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   vPack: {
-    name: "V's Expansion Pack",
+    name: "薇扩展包",
     id: "vPack",
     symbol: "⌬",
     description: () =>
-      `Start with V's Reality unlocked. Automatically unlock one V-Achievement every ${TimeSpan.fromSeconds(new Decimal(60))},
-      which can be reduced by spending Celestial Points. This includes Hard V-Achievements. Double all gained Space Theorems.`,
+      `开始终局时自动完成薇的现实；每 ${TimeSpan.fromSeconds(new Decimal(60))} 自动解锁一个薇成就（包括困难的薇成就），可花费天界点数减少间隔；空间之理获取量翻倍。`,
     cost: Decimal.pow(10, 1e90),
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   raPack: {
-    name: "Ra's Expansion Pack",
+    name: "太阳神扩展包",
     id: "raPack",
     symbol: "\uf185",
     description: () =>
-      `Ra is kept on Endgame. Raise the level cap of all Celestials to the double-logarithm of your record Antimatter amount.
-      Unlock ${formatInt(7)} new effects for each Celestial which can be obtained by increasing the level of each Celestial.
-      Multiply Memory and Memory Chunk gain by ${formatX(10)}.`,
+      `在终局后保留太阳神记忆；基于反物质第二指数的最高值提升所有天神的记忆等级上限；每位天神解锁另外 ${formatInt(7)} 个记忆等级奖励。记忆和记忆块的获取量 ${formatX(10)}。`,
     cost: Decimal.pow(10, 1e110),
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   laitelaPack: {
-    name: "Lai'tela's Expansion Pack",
+    name: "莱特拉扩展包",
     id: "laitelaPack",
     symbol: "ᛝ",
     description: () =>
-      `Unlock an autobuyer that will increase/decrease the bulk Singularity level based on an inputted time for each. While in
-      Lai'tela's Reality, Game Speed returns to normal twice as fast. Square the Annihilation to ${formatInt(8)}th DMD multiplier
-      if Annihilation multiplier currently affects the ${formatInt(8)}th DMD. Reduce the DMD Interval increase on Ascension
-      by ${formatInt(200)}. Multiply Dark Matter gain by the double-logarithm of your Antimatter amount or the logarithm of
-      your Imaginary Machine amount, whichever is bigger. Start Endgames with ${formatInt(10)} Singularities. Multiply Dark Energy
-      gain by the logarithm of your Singularity amount squared. Raise the Annihilation effect to a power based on Dark Matter.
-      Improve the Annihilation autobuyer. Unlock the ability to Hadronize Lai'tela's Reality. The reward for destabilizing Lai'tela's
-      Reality now affects the Dark Matter Cap as well. The maximum gain of Entropy per second is multiplied by ${formatInt(10)}.`,
+      `解锁自动调整凝聚奇点用时；莱特拉的现实中游戏时间恢复速度翻倍；湮灭乘数对第八暗物质维度的效果是原来的平方（若湮灭乘数影响第八暗物质维度）；暗物质维度飞升时增长的生产时间间隔除以 ${formatInt(200)}；暗物质获取量乘以 当前反物质的第二指数 和 当前虚幻机器数量指数 的最大值；终局后自动获得 ${formatInt(10)} 奇点；暗能量获取量乘以奇点指数的平方；基于暗物质数量提升暗物质湮灭的指数；解锁多样化自动湮灭；解锁强子化莱特拉的现实；使莱特拉的现实失稳后提升暗物质的上限；熵的最大索取速度 × ${formatInt(10)}。`,
     cost: Decimal.pow(10, 1e130),
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   pellePack: {
-    name: "Pelle's Expansion Pack",
+    name: "佩勒扩展包",
     id: "pellePack",
     symbol: "♅",
     description: () =>
-      `Reduce the Galaxy Generator Instability Magnitude by ${formatInt(1)}, raise the first three types of Dimensions to
-      a power based on your all-time record Galaxy amount, and unlock autobuyers for the repeatable Galaxy Generator upgrades.`,
+      `星系生成器不稳定性减少 ${formatInt(1)}；基于星系数量最大值为前三种维度提供指数加成；解锁可重复购买的星系生成器升级的自动购买器。`,
     cost: Decimal.pow(10, 1e150),
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   alphaPack: {
-    name: "Alpha's Expansion Pack",
+    name: "阿尔法扩展包",
     id: "alphaPack",
     symbol: "α",
     description: () =>
-      `Unlock the Large Hadron Collider, which can accelerate your Hadrons to exponentially gain more Antimatter. This will also
-      unlock The Void, which is a feature that functions similarly to Time Dilation and boosts Accelerator production.`,
+      `解锁the Large Hadron Collider，加速你的强子以提高反物质指数；同时解锁 The Void，类似时间膨胀，但可以提升 Collider 产量。`,
     cost: Decimal.pow(10, 1e200),
     formatCost: value => formatPostBreak(value, 2, 0)
   }
