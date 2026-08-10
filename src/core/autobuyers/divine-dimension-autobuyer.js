@@ -14,7 +14,7 @@ export class DivineDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get fullName() {
-    return `${this.name} Divine Dimension`;
+    return `第 ${this.name} 神性维度`;
   }
 
   get data() {

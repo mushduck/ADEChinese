@@ -153,7 +153,7 @@ export const dualityUpgrades = [
     hasFailed: () => false,
     checkRequirement: () => Tickspeed.perSecond.log10().gte("1e666"),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `提高连续统购买倍率至${formatPow(1.2, 0, 1)}`,
+    description: () => `连续统购买倍率${formatPow(1.2, 0, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.2
   },
   {

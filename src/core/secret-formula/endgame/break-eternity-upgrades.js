@@ -144,7 +144,7 @@ export const breakEternityUpgrades = {
     name: "无限强化",
     id: "doubleIPUncap",
     cost: Decimal.pow(10, 1e30),
-    description: "去除无限点数倍增升级购买上限"
+    description: "去除无限点数倍增升级购买硬上限"
   },
   tgThresholdUncap: {
     name: "星系增长",

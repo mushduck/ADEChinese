@@ -14,7 +14,7 @@ export class InfinityDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get fullName() {
-    return `${this.name} Infinity Dimension`;
+    return `第 ${this.name} 无限维度`;
   }
 
   get data() {

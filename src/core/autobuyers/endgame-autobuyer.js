@@ -6,7 +6,7 @@ export class EndgameAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Endgame`;
+    return `终局`;
   }
 
   get isUnlocked() {

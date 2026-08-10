@@ -6,7 +6,7 @@ export class MusicGlyphPurgeAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Create and Purge Music Glyphs`;
+    return `创造和献祭音乐符文`;
   }
 
   get isUnlocked() {

@@ -6,7 +6,7 @@ export class TesseractAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Tesseract`;
+    return `超立方体`;
   }
 
   get isUnlocked() {
