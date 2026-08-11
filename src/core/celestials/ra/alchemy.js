@@ -104,7 +104,7 @@ class BasicAlchemyResourceState extends AlchemyResourceState {
     super(config);
     // The names are capitalized, so we need to convert them to lower case
     // in order to access highestRefinementValue values which are not capitalized.
-    this._name = config.name.toLowerCase();
+    this._name = config.key;
   }
 
   get highestRefinementValue() {

@@ -1,8 +1,9 @@
 export const alchemyResources = {
   // T1 resources (Non-Effarig "base" resources)
   "power": {
+    key: "power",
     id: ALCHEMY_RESOURCE.POWER,
-    name: "Power",
+    name: "力量",
     symbol: "Ω",
     isBaseResource: true,
     effect: amount => 1 + amount / 125000,
@@ -14,8 +15,9 @@ export const alchemyResources = {
     destroyed: () => !PelleAlchemyUpgrade.alchemyPower.isBought
   },
   "infinity": {
+    key: "infinity",
     id: ALCHEMY_RESOURCE.INFINITY,
-    name: "Infinity",
+    name: "无限",
     symbol: "∞",
     isBaseResource: true,
     effect: amount => 1 + amount / 125000,
@@ -27,8 +29,9 @@ export const alchemyResources = {
     destroyed: () => !PelleAlchemyUpgrade.alchemyInfinity.isBought
   },
   "time": {
+    key: "time",
     id: ALCHEMY_RESOURCE.TIME,
-    name: "Time",
+    name: "时间",
     symbol: "Δ",
     isBaseResource: true,
     effect: amount => 1 + amount / 125000,
@@ -40,8 +43,9 @@ export const alchemyResources = {
     destroyed: () => !PelleAlchemyUpgrade.alchemyTime.isBought
   },
   "replication": {
+    key: "replication",
     id: ALCHEMY_RESOURCE.REPLICATION,
-    name: "Replication",
+    name: "复制",
     symbol: "Ξ",
     isBaseResource: true,
     effect: amount => Decimal.pow10(amount / 500),
@@ -53,8 +57,9 @@ export const alchemyResources = {
     destroyed: () => !PelleAlchemyUpgrade.alchemyReplication.isBought
   },
   "dilation": {
+    key: "dilation",
     id: ALCHEMY_RESOURCE.DILATION,
-    name: "Dilation",
+    name: "膨胀",
     symbol: "Ψ",
     isBaseResource: true,
     effect: amount => Decimal.pow10(amount / 1000),
@@ -68,100 +73,81 @@ export const alchemyResources = {
 
   // T2 resources (combinations of pairs of T1 resources)
   "cardinality": {
+    key: "cardinality",
     id: ALCHEMY_RESOURCE.CARDINALITY,
-    name: "Cardinality",
+    name: "基数",
     symbol: "α",
     isBaseResource: false,
     effect: amount => 1 + 0.2 / (1 + amount / 12500),
     tier: 2,
     uiOrder: 3,
     unlockedAt: 8,
-    description: "减少超过上限时的复制器减速",
+    get description() { return `减少每 ${format(Decimal.NUMBER_MAX_VALUE, 2)} 复制器的减速`; },
     formatEffect: value => `复制器间隔增加速度减慢 ${formatX(1.2, 1, 1)} ➜ ${formatX(value, 4, 4)} 每 ${format(Number.MAX_VALUE, 2)}`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.TIME,
-        amount: 8
-      },
-      {
-        resource: ALCHEMY_RESOURCE.REPLICATION,
-        amount: 7
-      }
+      { resource: ALCHEMY_RESOURCE.TIME, amount: 8 },
+      { resource: ALCHEMY_RESOURCE.REPLICATION, amount: 7 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyCardinality.isBought
   },
   "eternity": {
+    key: "eternity",
     id: ALCHEMY_RESOURCE.ETERNITY,
-    name: "Eternity",
+    name: "永恒",
     symbol: "τ",
     isBaseResource: false,
     effect: amount => 1 + amount / 12500,
     tier: 2,
     uiOrder: 2,
     unlockedAt: 9,
-    description: "为永恒生成提供加成",
-    formatEffect: value => `永恒次数生成 ${formatPow(value, 4, 4)}`,
+    description: "增加永恒次数加成",
+    formatEffect: value => `永恒次数生成乘以${formatPow(value, 4, 4)}倍`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.TIME,
-        amount: 11
-      },
-      {
-        resource: ALCHEMY_RESOURCE.INFINITY,
-        amount: 4
-      }
+      { resource: ALCHEMY_RESOURCE.TIME, amount: 11 },
+      { resource: ALCHEMY_RESOURCE.INFINITY, amount: 4 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyEternity.isBought
   },
   "dimensionality": {
+    key: "dimensionality",
     id: ALCHEMY_RESOURCE.DIMENSIONALITY,
-    name: "Dimensionality",
+    name: "维度",
     symbol: "ρ",
     isBaseResource: false,
     effect: amount => Decimal.pow10(6 * amount),
     tier: 2,
     uiOrder: 1,
     unlockedAt: 10,
-    description: "为所有维度提供巨大加成",
+    description: "为所有维度提供加成",
     formatEffect: value => `所有维度 ${formatX(value)}`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.POWER,
-        amount: 10
-      },
-      {
-        resource: ALCHEMY_RESOURCE.INFINITY,
-        amount: 5
-      }
+      { resource: ALCHEMY_RESOURCE.POWER, amount: 10 },
+      { resource: ALCHEMY_RESOURCE.INFINITY, amount: 5 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyDimensionality.isBought
   },
   "inflation": {
+    key: "inflation",
     id: ALCHEMY_RESOURCE.INFLATION,
-    name: "Inflation",
+    name: "暴胀",
     symbol: "λ",
     isBaseResource: false,
     effect: amount => Decimal.pow10(6e9 - 3e5 * amount),
     tier: 2,
     uiOrder: 5,
     unlockedAt: 11,
-    description: "为极大倍率提供额外加成",
+    description: "增加超过阈值的倍率效果",
     formatEffect: value => `所有在 ${format(value)} 以上的反物质维度倍率 ${formatPow(1.05, 2, 2)}`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.POWER,
-        amount: 9
-      },
-      {
-        resource: ALCHEMY_RESOURCE.DILATION,
-        amount: 6
-      }
+      { resource: ALCHEMY_RESOURCE.POWER, amount: 9 },
+      { resource: ALCHEMY_RESOURCE.DILATION, amount: 6 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyInflation.isBought
   },
   "alternation": {
+    key: "alternation",
     id: ALCHEMY_RESOURCE.ALTERNATION,
-    name: "Alternation",
+    name: "交变",
     symbol: "ω",
     isBaseResource: false,
     effect: amount => amount / 125000,
@@ -171,22 +157,17 @@ export const alchemyResources = {
     description: "基于复制器增加超光速粒子星系的强度",
     formatEffect: value => `每 ${format(DC.E1E6)} 复制器，超光速粒子星系强度增加 ${formatPercents(value, 2, 2)}`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.REPLICATION,
-        amount: 5
-      },
-      {
-        resource: ALCHEMY_RESOURCE.DILATION,
-        amount: 10
-      }
+      { resource: ALCHEMY_RESOURCE.REPLICATION, amount: 5 },
+      { resource: ALCHEMY_RESOURCE.DILATION, amount: 10 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyAlternation.isBought
   },
 
   // T3 resources (Effarig and conbinations of T1/T2 with Effarig)
   "effarig": {
+    key: "effarig",
     id: ALCHEMY_RESOURCE.EFFARIG,
-    name: "Effarig",
+    name: "鹿颈长",
     symbol: "Ϙ",
     isBaseResource: true,
     effect: amount => Decimal.pow10(amount / 1250),
@@ -198,8 +179,9 @@ export const alchemyResources = {
     destroyed: () => !PelleAlchemyUpgrade.alchemyEffarig.isBought
   },
   "synergism": {
+    key: "synergism",
     id: ALCHEMY_RESOURCE.SYNERGISM,
-    name: "Synergism",
+    name: "协同",
     symbol: "π",
     isBaseResource: false,
     effect: amount => {
@@ -209,81 +191,60 @@ export const alchemyResources = {
     tier: 3,
     uiOrder: 2,
     unlockedAt: 13,
-    description: "增加炼金反应的产出",
+    description: "增加炼金反应的效率",
     formatEffect(value) {
-      return `符文炼金效率 ${formatPercents(0.3)} ➜ ${formatPercents(value, 2, 2)} ${(!Achievement(175).isUnlocked && value >= 1) ? " (Capped)" : ""}`;
+      return `符文炼金效率 ${formatPercents(0.3)} ➜ ${formatPercents(value, 2, 2)} ${(!Achievement(175).isUnlocked && value >= 1) ? "（已达到上限）" : ""}`;
     },
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.EFFARIG,
-        amount: 3
-      },
-      {
-        resource: ALCHEMY_RESOURCE.REPLICATION,
-        amount: 16
-      },
-      {
-        resource: ALCHEMY_RESOURCE.INFINITY,
-        amount: 14
-      }
+      { resource: ALCHEMY_RESOURCE.EFFARIG, amount: 3 },
+      { resource: ALCHEMY_RESOURCE.REPLICATION, amount: 16 },
+      { resource: ALCHEMY_RESOURCE.INFINITY, amount: 14 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemySynergism.isBought
   },
   "momentum": {
+    key: "momentum",
     id: ALCHEMY_RESOURCE.MOMENTUM,
-    name: "Momentum",
+    name: "动量",
     symbol: "μ",
     isBaseResource: false,
     effect: amount => 1 + amount / 100000,
     tier: 3,
     uiOrder: 3,
     unlockedAt: 15,
-    description: "为所有维度提供随时间永久增长的加成",
+    description: "提供基于解锁本资源以来所有维度加成",
     formatEffect: value => `所有维度 ${formatPow(Ra.momentumValue, 4, 4)}，解锁该资源后每小时增加 ${format(0.01 * Effects.product(Achievement(175), EndgameMastery(171), Achievement(222)), 3, 3)}，最高可达 ${formatPow(value, 4, 4)}`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.EFFARIG,
-        amount: 11
-      },
-      {
-        resource: ALCHEMY_RESOURCE.POWER,
-        amount: 4
-      },
-      {
-        resource: ALCHEMY_RESOURCE.TIME,
-        amount: 20
-      }
+      { resource: ALCHEMY_RESOURCE.EFFARIG, amount: 11 },
+      { resource: ALCHEMY_RESOURCE.POWER, amount: 4 },
+      { resource: ALCHEMY_RESOURCE.TIME, amount: 20 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyMomentum.isBought
   },
   "decoherence": {
+    key: "decoherence",
     id: ALCHEMY_RESOURCE.DECOHERENCE,
-    name: "Decoherence",
+    name: "退相干",
     symbol: "ξ",
     isBaseResource: false,
     effect: amount => 0.2 * Math.sqrt(amount / 25000),
     tier: 3,
     uiOrder: 4,
     unlockedAt: 14,
-    description: "精炼时给予所有基础炼金资源",
+    description: "使精炼按照比例提供所有基础炼金资源",
     formatEffect: value => `精炼的符文也提供所有其他基础资源的 ${formatPercents(value, 2)}`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.EFFARIG,
-        amount: 13
-      },
-      {
-        resource: ALCHEMY_RESOURCE.ALTERNATION,
-        amount: 8
-      }
+      { resource: ALCHEMY_RESOURCE.EFFARIG, amount: 13 },
+      { resource: ALCHEMY_RESOURCE.ALTERNATION, amount: 8 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyDecoherence.isBought
   },
 
   // T4 resources (resources which feed directly into the final resource)
   "exponential": {
+    key: "exponential",
     id: ALCHEMY_RESOURCE.EXPONENTIAL,
-    name: "Exponential",
+    name: "增幅秘术",
     symbol: "Γ",
     isBaseResource: false,
     effect: amount => 10 * Math.pow(amount / 10000, 3),
@@ -291,22 +252,17 @@ export const alchemyResources = {
     uiOrder: 2,
     unlockedAt: 18,
     description: "基于复制器加成无限点数",
-    formatEffect: value => `无限点数获得复制器的 ${formatPow(value, 2, 3)} 次方加成`,
+    formatEffect: value => `无限点数获得复制器的${formatPow(value, 2, 3)}次方加成`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.INFLATION,
-        amount: 18
-      },
-      {
-        resource: ALCHEMY_RESOURCE.SYNERGISM,
-        amount: 3
-      }
+      { resource: ALCHEMY_RESOURCE.INFLATION, amount: 18 },
+      { resource: ALCHEMY_RESOURCE.SYNERGISM, amount: 3 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyExponential.isBought
   },
   "force": {
+    key: "force",
     id: ALCHEMY_RESOURCE.FORCE,
-    name: "Force",
+    name: "神秘力场",
     symbol: "Φ",
     isBaseResource: false,
     effect: amount => 10 * amount,
@@ -314,22 +270,17 @@ export const alchemyResources = {
     uiOrder: 2,
     unlockedAt: 17,
     description: "基于现实机器加成反物质维度",
-    formatEffect: value => `反物质维度获得现实机器的 ${formatPow(value, 2, 2)} 次方加成`,
+    formatEffect: value => `反物质维度获得现实机器的${formatPow(value, 2, 2)}次方加成`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.DIMENSIONALITY,
-        amount: 7
-      },
-      {
-        resource: ALCHEMY_RESOURCE.MOMENTUM,
-        amount: 8
-      }
+      { resource: ALCHEMY_RESOURCE.DIMENSIONALITY, amount: 7 },
+      { resource: ALCHEMY_RESOURCE.MOMENTUM, amount: 8 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyForce.isBought
   },
   "uncountability": {
+    key: "uncountability",
     id: ALCHEMY_RESOURCE.UNCOUNTABILITY,
-    name: "Uncountability",
+    name: "无尽奥秘",
     symbol: "Θ",
     isBaseResource: false,
     effect: amount => 1600 * Math.sqrt(amount / 6250),
@@ -339,22 +290,14 @@ export const alchemyResources = {
     description: "自动获得现实次数和复兴点数",
     formatEffect: value => `每秒获得 ${format(value, 2, 2)} 现实次数和复兴点数`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.INFINITY,
-        amount: 20
-      },
-      {
-        resource: ALCHEMY_RESOURCE.EFFARIG,
-        amount: 6
-      },
-      {
-        resource: ALCHEMY_RESOURCE.CARDINALITY,
-        amount: 16
-      }
+      { resource: ALCHEMY_RESOURCE.INFINITY, amount: 20 },
+      { resource: ALCHEMY_RESOURCE.EFFARIG, amount: 6 },
+      { resource: ALCHEMY_RESOURCE.CARDINALITY, amount: 16 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyUncountability.isBought
   },
   "boundless": {
+    key: "boundless",
     id: ALCHEMY_RESOURCE.BOUNDLESS,
     name: "Boundless",
     symbol: "Π",
@@ -366,20 +309,15 @@ export const alchemyResources = {
     description: "增强超立方体",
     formatEffect: value => `超立方体的效果增强 ${formatPercents(value, 2, 2)}`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.ETERNITY,
-        amount: 13
-      },
-      {
-        resource: ALCHEMY_RESOURCE.INFLATION,
-        amount: 18
-      }
+      { resource: ALCHEMY_RESOURCE.ETERNITY, amount: 13 },
+      { resource: ALCHEMY_RESOURCE.INFLATION, amount: 18 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyBoundless.isBought
   },
   "multiversal": {
+    key: "multiversal",
     id: ALCHEMY_RESOURCE.MULTIVERSAL,
-    name: "Multiversal",
+    name: "诸界奥义",
     symbol: "Σ",
     isBaseResource: false,
     effect: amount => 32 * Math.pow(amount / 20000, 2),
@@ -389,20 +327,15 @@ export const alchemyResources = {
     description: "使每次现实模拟更多次现实",
     formatEffect: value => `每次现实模拟 ${format(value, 2, 3)} 次额外的现实，给出与扩增相同的所有奖励`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.ALTERNATION,
-        amount: 16
-      },
-      {
-        resource: ALCHEMY_RESOURCE.DECOHERENCE,
-        amount: 3
-      }
+      { resource: ALCHEMY_RESOURCE.ALTERNATION, amount: 16 },
+      { resource: ALCHEMY_RESOURCE.DECOHERENCE, amount: 3 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyMultiversal.isBought
   },
   "unpredictability": {
+    key: "unpredictability",
     id: ALCHEMY_RESOURCE.UNPREDICTABILITY,
-    name: "Unpredictability",
+    name: "未知预言",
     symbol: "Λ",
     isBaseResource: false,
     effect: amount => amount / (8333.33 + amount),
@@ -412,26 +345,18 @@ export const alchemyResources = {
     description: "使每个炼金反应有概率发生两次",
     formatEffect: value => `任何炼金反应有 ${formatPercents(value, 2, 2)} 的几率再次触发`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.EFFARIG,
-        amount: 15
-      },
-      {
-        resource: ALCHEMY_RESOURCE.DECOHERENCE,
-        amount: 3
-      },
-      {
-        resource: ALCHEMY_RESOURCE.SYNERGISM,
-        amount: 10
-      }
+      { resource: ALCHEMY_RESOURCE.EFFARIG, amount: 15 },
+      { resource: ALCHEMY_RESOURCE.DECOHERENCE, amount: 3 },
+      { resource: ALCHEMY_RESOURCE.SYNERGISM, amount: 10 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyUnpredictability.isBought
   },
 
   // T5 (Reality)
   "reality": {
+    key: "reality",
     id: ALCHEMY_RESOURCE.REALITY,
-    name: "Reality",
+    name: "现实",
     symbol: "Ϟ",
     isBaseResource: false,
     effect: amount => Math.floor(amount),
@@ -440,30 +365,12 @@ export const alchemyResources = {
     description: "可消耗以创造现实符文",
     formatEffect: value => `消耗所有的炼金资源“现实”，创造一个等级为 ${formatHybridLarge(value, 3)} 的现实符文`,
     reagents: [
-      {
-        resource: ALCHEMY_RESOURCE.EXPONENTIAL,
-        amount: 1
-      },
-      {
-        resource: ALCHEMY_RESOURCE.FORCE,
-        amount: 1
-      },
-      {
-        resource: ALCHEMY_RESOURCE.UNCOUNTABILITY,
-        amount: 1
-      },
-      {
-        resource: ALCHEMY_RESOURCE.BOUNDLESS,
-        amount: 1
-      },
-      {
-        resource: ALCHEMY_RESOURCE.MULTIVERSAL,
-        amount: 1
-      },
-      {
-        resource: ALCHEMY_RESOURCE.UNPREDICTABILITY,
-        amount: 1
-      }
+      { resource: ALCHEMY_RESOURCE.EXPONENTIAL, amount: 1 },
+      { resource: ALCHEMY_RESOURCE.FORCE, amount: 1 },
+      { resource: ALCHEMY_RESOURCE.UNCOUNTABILITY, amount: 1 },
+      { resource: ALCHEMY_RESOURCE.BOUNDLESS, amount: 1 },
+      { resource: ALCHEMY_RESOURCE.MULTIVERSAL, amount: 1 },
+      { resource: ALCHEMY_RESOURCE.UNPREDICTABILITY, amount: 1 }
     ],
     destroyed: () => !PelleAlchemyUpgrade.alchemyReality.isBought
   },
