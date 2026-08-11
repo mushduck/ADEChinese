@@ -16,68 +16,71 @@ export default {
     <ModalCloseButton @click="emitClose" />
     <div class="l-h2p-header">
       <div class="c-h2p-title">
-        About the game
+        关于游戏
       </div>
     </div>
     <div class="c-info-body">
-      Antimatter Dimensions is an Idle Incremental game created by Finnish developer Hevipelle. Originating as a solo
-      project in 2016, it was expanded upon by a large team of developers and testers from then on. In 2024, American
-      developer Supersonic Seven beat the vanilla game and decided to mod it for additional content and improved lore.
-      The first public release of Antimatter Dimensions: Endgame was issued by Supersonic Seven in 2025, and since
-      then has been updating the game whenever possible.
+      《反物质维度》是由芬兰开发者 Hevipelle 创作的放置增量游戏，最初是 2016 年的个人项目，后由大型开发测试团队共同完善。
       <br>
       <br>
-      The game has unfolding gameplay and multiple prestige layers. The "How to Play" button contains useful
-      information about progressing.
+      游戏采用渐进式分层玩法，包含多重声望系统。“游戏帮助”按钮提供进度攻略指南。
+      <br>
+      <br>
+      《反物质维度：终局》的首个公开版本由Supersonic Seven于2025年发布，至今仍持续更新。
+      本模组的英文原版是<a href="https://supersonic-seven.github.io/AntimatterDimensionsEndgameUpdate/">Antimatter Dimensions : Endgame Update</a>。
+      这个汉化版的原版部分大部分采用了安卓版翻译，此后模组内容全部由松茸不吃柯尔鸭(qq:3151643233)汉化。目前该版本完成了终局内容前的翻译，并且持续更新。
+      <br>
+      <br>
+      特别感谢安卓版翻译者对反物质维度中文社区做出的贡献。
     </div>
     <div class="l-socials">
       <InformationModalButton
-        name="GitHub repository"
+        name="GitHub 仓库"
         icon="fa-brands fa-github"
         link="https://github.com/IvarK/AntimatterDimensionsSourceCode"
       />
       <InformationModalButton
-        name="Endgame repository"
+        name="模组 GitHub 仓库"
         icon="fa-brands fa-github"
         link="https://github.com/Supersonic-Seven/AntimatterDimensionsEndgameUpdate"
       />
       <InformationModalButton
-        name="r/AntimatterDimensions"
+        name="Reddit 社区"
         icon="fa-brands fa-reddit-alien"
         link="https://www.reddit.com/r/AntimatterDimensions/"
       />
       <InformationModalButton
-        name="r/EndgameAntimatterDims"
+        name="模组 Reddit 社区"
         icon="fa-brands fa-reddit-alien"
         link="https://www.reddit.com/r/EndgameAntimatterDims/"
       />
       <InformationModalButton
-        name="Antimatter Dimensions Discord Server"
+        name="Discord 服务器"
         icon="fa-brands fa-discord"
         link="https://discord.gg/ST9NaXa"
       />
       <InformationModalButton
-        name="Antimatter Dimensions: Endgame Discord Server"
+        name="模组 Discord 服务器"
         icon="fa-brands fa-discord"
         link="https://discord.gg/yuxrGFcJXc"
       />
       <InformationModalButton
-        name="Antimatter Dimensions on Google Play"
+        name="Google Play 商店"
         icon="fa-brands fa-google-play"
         link="https://play.google.com/store/apps/details?id=kajfosz.antimatterdimensions"
       />
       <InformationModalButton
-        name="Antimatter Dimensions on Steam"
+        name="Steam 平台"
         icon="fa-brands fa-steam"
         link="https://store.steampowered.com/app/1399720/Antimatter_Dimensions/"
       />
       <InformationModalButton
-        name="Credits"
+        name="开发团队"
         icon="fa-solid fa-users"
         show-modal="credits"
       />
       <InformationModalButton
-        name="Game Changelog"
+        name="更新日志"
         icon="fa-solid fa-file-lines"
         show-modal="changelog"
       />

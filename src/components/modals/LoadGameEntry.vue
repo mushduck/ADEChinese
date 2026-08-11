@@ -42,9 +42,9 @@ export default {
 
 <template>
   <div class="l-modal-options__save-record">
-    <h3>Save #{{ saveId + 1 }}:<span v-if="isSelected"> (selected)</span></h3>
-    <span v-if="fileName">File name: {{ fileName }}</span>
-    <span>Antimatter: {{ formatAntimatter(antimatter) }}</span>
+    <h3>存档 #{{ saveId + 1 }}：<span v-if="isSelected">（已选定）</span></h3>
+    <span v-if="fileName">文件名称：{{ fileName }}</span>
+    <span>反物质：{{ formatAntimatter(antimatter) }}</span>
     <PrimaryButton
       class="o-primary-btn--width-medium"
       @click="load"
