@@ -227,27 +227,27 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="showAlchemyHowTo"
       >
-        Click for alchemy info
+        点击查看炼金详情
       </PrimaryButton>
       <PrimaryButton
         v-if="!isDoomed"
         class="o-primary-btn--subtab-option"
         @click="toggleAllReactions"
       >
-        {{ allReactionsDisabled ? "Enable" : "Disable" }} all reactions
+        {{ allReactionsDisabled ? "启用" : "禁用" }}所有反应
       </PrimaryButton>
       <PrimaryButton
         v-if="realityCreationVisible"
         :class="realityGlyphCreationClass"
         onclick="Modal.realityGlyph.show()"
       >
-        View Reality Glyph creation
+        查看你能创造的现实符文
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="resetAlchemy"
       >
-        Force-reset all Alchemy resources
+        重置所有炼金资源
       </PrimaryButton>
     </div>
     <AlchemyResourceInfo
@@ -255,12 +255,11 @@ export default {
       :resource="infoResource"
     />
     <br>
-    Glyphs can now be refined using your Glyph filter in the Glyphs tab.
+    在符文页面中，你可以精炼符文。
     <br>
-    When refining a Glyph, it will only give you resources up to a cap
-    of {{ formatX(capFactor) }} its highest refinement value.
+    精炼符文时，符文将基于其最大精炼值的 {{ formatX(capFactor) }} 提供炼金资源。
     <span v-if="reactionsAvailable">
-      Reactions trigger once every time you Reality, unaffected by amplification from stored real time.
+      每进行一次现实，发生一次反应，不受利用储存的现实时间进行现实扩增的影响。
     </span>
     <div
       class="l-alchemy-circle"
