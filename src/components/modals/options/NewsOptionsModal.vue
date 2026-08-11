@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     newsOnOffLabel() {
-      return `News: ${this.enabled ? "On" : "Off"}`;
+     return `新闻：${this.enabled ? "开启" : "关闭"}`;
     },
     sliderPropsRepeatBuffer() {
       return {
@@ -152,7 +152,7 @@ export default {
 <template>
   <ModalWrapperOptions>
     <template #header>
-      News Options
+      新闻选项
     </template>
     <PrimaryButton
       class="o-primary-btn o-primary-btn--option-wide"
@@ -161,7 +161,7 @@ export default {
       {{ newsOnOffLabel }}
     </PrimaryButton>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatInt(parseInt(repeatBuffer)) }} message repeat buffer</b>
+      <b>{{ formatInt(parseInt(repeatBuffer)) }} 消息重复缓冲</b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsRepeatBuffer"
@@ -170,7 +170,7 @@ export default {
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatPercents(parseFloat(AIChance)) }} AI messages</b>
+      <b>{{ formatPercents(parseFloat(AIChance)) }} AI消息比例</b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsAIChance"
@@ -179,7 +179,7 @@ export default {
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatPercents(parseFloat(ENDChance)) }} Endgame messages</b>
+      <b>{{ formatPercents(parseFloat(ENDChance)) }} 终局更新内容</b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsENDChance"
@@ -188,7 +188,7 @@ export default {
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatPercents(parseFloat(StoryChance)) }} Life's and Midnight's Story </b>
+      <b>{{ formatPercents(parseFloat(StoryChance)) }} 人生探讨与深邃♂黑暗幻想 </b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsStoryChance"
@@ -197,7 +197,7 @@ export default {
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatPercents(parseFloat(MatureChance)) }} Mature Messages </b>
+      <b>{{ formatPercents(parseFloat(MatureChance)) }} 成人内容 </b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsMatureChance"
@@ -206,7 +206,7 @@ export default {
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatPercents(parseFloat(speed)) }} scroll speed</b>
+      <b>{{ formatPercents(parseFloat(speed)) }} 滚动速度</b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsSpeed"
