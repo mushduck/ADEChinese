@@ -84,7 +84,7 @@ export const endgameUpgrades = [
     requirement: () => `游戏时间达到 ${formatPostBreak("1e666")} 年`,
     checkRequirement: () => Time.totalTimePlayed.totalYears.gt(Decimal.pow(10, 666)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "在天神现实外若激发天界物质，则提升游戏速度至本次终局的最大游戏速度"
+    description: "在天神现实外激发天界物质时提升游戏速度至本次终局的最大游戏速度"
   },
   {
     name: "终局回馈",
