@@ -40,55 +40,55 @@ export const confirmationTypes = [
     option: "overcharge",
     isUnlocked: () => Ascensions.ocA.isUnlocked,
   }, {
-    name: "Reset Reality",
+    name: "重置现实",
     option: "resetReality",
     isUnlocked: () => PlayerProgress.realityUnlocked(),
   }, {
-    name: "Glyph Replace",
+    name: "符文替换",
     option: "glyphReplace",
     isUnlocked: () => PlayerProgress.realityUnlocked(),
   }, {
-    name: "Glyph Sacrifice",
+    name: "符文献祭",
     option: "glyphSacrifice",
     isUnlocked: () => GlyphSacrificeHandler.canSacrifice,
   }, {
-    name: "Glyph Purge",
+    name: "净化符文仓库",
     option: "autoClean",
     isUnlocked: () => GlyphSacrificeHandler.canSacrifice,
   }, {
-    name: "Sacrifice All Glyphs",
+    name: "献祭所有符文",
     option: "sacrificeAll",
     isUnlocked: () => GlyphSacrificeHandler.canSacrifice,
   }, {
-    name: "Glyph Selection",
+    name: "符文选择",
     option: "glyphSelection",
     isUnlocked: () => Autobuyer.reality.isUnlocked,
   }, {
-    name: "Glyph Undo",
+    name: "符文撤销",
     option: "glyphUndo",
     isUnlocked: () => TeresaUnlocks.undo.canBeApplied,
   }, {
-    name: "Switch Automator Editor",
+    name: "选择自动机编辑器",
     option: "switchAutomatorMode",
     isUnlocked: () => Player.automatorUnlocked,
   }, {
-    name: "Delete Glyph Preset",
+    name: "删除符文预设",
     option: "deleteGlyphSetSave",
     isUnlocked: () => EffarigUnlock.setSaves.isUnlocked,
   }, {
-    name: "Glyph Refine",
+    name: "符文精炼",
     option: "glyphRefine",
     isUnlocked: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
   }, {
-    name: "Armageddon",
+    name: "末日",
     option: "armageddon",
     isUnlocked: () => Pelle.isDoomed,
   }, {
-    name: "Reset Endgame",
+    name: "重置终局",
     option: "resetEndgame",
     isUnlocked: () => PlayerProgress.endgameUnlocked(),
   }, {
-    name: "Respec Shop Purchases",
+    name: "重置内购",
     option: "respecIAP",
     isUnlocked: () => Cloud.isAvailable
   }
