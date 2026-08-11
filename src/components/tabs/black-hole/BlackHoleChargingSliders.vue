@@ -25,12 +25,11 @@ export default {
   computed: {
     infoTooltip() {
       return this.isLaitela
-        ? "The physics of this Reality do not allow Black Hole Inversion"
-        : "Black Hole must be paused to activate Inversion";
+        ? "本次现实的机制不允许启用黑洞"
+        : "需要两个永久启动的黑洞，且它们都在暂停状态";
     },
     reqLockText() {
-      return `Inversion strength cannot be modified due to Lock for
-        "${ImaginaryUpgrade(24).name}"`;
+      return `由于“${ImaginaryUpgrade(24).name}”的锁定，反转强度不能被修改。`;
     }
   },
   methods: {
@@ -100,8 +99,8 @@ export default {
       class="l-black-hole-sliders"
     >
       <b>
-        Inverted Black Hole divides game speed by {{ format(negativeBHDivisor, 2, 2) }}.
-        (Currently {{ isInverted ? "active" : "inactive" }}<span
+        反转黑洞后，游戏速度变为原来的 1/{{ format(negativeBHDivisor, 2, 2) }}。
+        （ 当前{{ isInverted ? "已启动" : "冷却中" }}<span
           v-if="negativeSlider !== 0 && !isInverted"
           :ach-tooltip="infoTooltip"
         >
@@ -121,8 +120,7 @@ export default {
         {{ reqLockText }}
       </div>
       <br>
-      Inverting the Black Hole only affects its own speedup, no other upgrades or effects, although
-      it will also indirectly affect the Effarig Game speed power effect.
+      反转黑洞仅影响其自身的加速效果，不影响其他升级或效果，但会间接作用于鹿颈长的游戏速度指数的效果。
     </div>
     <br>
     <div
@@ -130,7 +128,7 @@ export default {
       class="l-black-hole-sliders"
     >
       <b>
-        Black Holes will auto-release {{ formatPercents(amountSlider / 500, 2, 1) }} of Stored Game Time per second if Pulse is on.
+        若脉冲启用，黑洞每秒将自动释放 {{ formatPercents(amountSlider / 500, 2, 1) }} 的存储游戏时间。
       </b>
       <SliderComponent
         v-if="areExtraSlidersUnlocked"
@@ -140,7 +138,7 @@ export default {
       />
       <br>
       <b>
-        Black Holes currently release Stored Game Time every {{ formatInt(timeSlider) }} ticks of Pulse is on.
+        若脉冲启用，黑洞每个脉冲间隔（{{ formatInt(timeSlider) }} 秒）将释放一次存储游戏时间。
       </b>
       <SliderComponent
         v-if="areExtraSlidersUnlocked"

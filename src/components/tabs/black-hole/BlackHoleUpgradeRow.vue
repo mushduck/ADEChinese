@@ -27,24 +27,24 @@ export default {
     intervalConfig() {
       return {
         upgrade: this.blackHole.intervalUpgrade,
-        description: () => `Reduce ${this.blackHoleDescription}'s inactive time by ${formatPercents(0.2)}`,
-        effectTitle: "Current interval",
+        description: () => `Reduce ${this.blackHoleDescription}的冷却时间减少 ${formatPercents(0.2)}`,
+        effectTitle: "当前间隔",
         formatEffect: () => `${TimeSpan.fromSeconds(new Decimal(this.blackHole.rawInterval)).toStringShort(false)}`
       };
     },
     powerConfig() {
       return {
         upgrade: this.blackHole.powerUpgrade,
-        description: () => `Make ${this.blackHoleDescription} ${formatPercents(0.35)} stronger`,
-        effectTitle: "Current power",
+        description: () => `使${this.blackHoleDescription}增强 ${formatPercents(0.35)}`,
+        effectTitle: "当前强度",
         formatEffect: value => `${formatX(value, 2, 2)}`
       };
     },
     durationConfig() {
       return {
         upgrade: this.blackHole.durationUpgrade,
-        description: () => `Extend ${this.blackHoleDescription}'s duration by ${formatPercents(0.3)}`,
-        effectTitle: "Current duration",
+        description: () => `${this.blackHoleDescription}的持续时间延长 ${formatPercents(0.3)}`,
+        effectTitle: "当前持续时间",
         formatEffect: () => `${TimeSpan.fromSeconds(new Decimal(this.blackHole.duration)).toStringShort(false)}`
       };
     }
