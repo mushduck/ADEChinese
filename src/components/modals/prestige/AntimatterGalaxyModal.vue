@@ -22,32 +22,32 @@ export default {
   },
   computed: {
     topLabel() {
-      if (this.bulk) return `You are about to purchase ${quantifyInt("Antimatter Galaxy", this.newGalaxies)}`;
-      return `You are about to purchase an Antimatter Galaxy`;
+      if (this.bulk) return `你将购买 ${formatInt(this.newGalaxies)} 个反物质星系`;
+      return `你将购买一个反物质星系`;
     },
     message() {
       const resetResouces = [];
-      if (Pelle.isDoomed) resetResouces.push("Antimatter", "Antimatter Dimensions", "Tickspeed");
-      if (!this.perkANRBought) resetResouces.push("Antimatter Dimensions", "Tickspeed");
-      if (!this.keepDimBoost) resetResouces.push("Dimension Boosts");
-      if (!this.keepAntimatter && !this.perkANRBought) resetResouces.push("Antimatter");
+      if (Pelle.isDoomed) resetResouces.push("反物质", "反物质维度", "计数频率提升");
+      if (!this.perkANRBought) resetResouces.push("反物质维度", "计数频率提升");
+      if (!this.keepDimBoost) resetResouces.push("维度提升");
+      if (!this.keepAntimatter && !this.perkANRBought) resetResouces.push("反物质");
       const resetList = makeEnumeration(resetResouces);
       let tickspeedFixed = "";
       if (InfinityChallenge(3).isRunning) {
-        tickspeedFixed = `Infinity Challenge ${InfinityChallenge(3).id}`;
+        tickspeedFixed = `无限挑战 ${InfinityChallenge(3).id}`;
       } else if (Ra.isRunning) {
-        tickspeedFixed = `${Ra.displayName}'s Reality`;
+        tickspeedFixed = `${Ra.displayName}的现实`;
       }
       const tickspeedInfo = (tickspeedFixed === "")
-        ? "you will receive a small boost to Tickspeed Upgrades."
-        : `you will not receive a boost to Tickspeed Upgrades, because you are in ${tickspeedFixed}.`;
+        ? "计数频率升级将获得小幅提升。"
+        : `计数频率升级不会获得加成，因为你当前处于${tickspeedFixed}中。`;
       const message = (resetList === "")
-        ? `This will reset nothing, and ${tickspeedInfo}`
-        : `This will reset your ${resetList}. However, ${tickspeedInfo}`;
+        ? `这将不会重置任何东西，${connectionWord}${tickspeedInfo}`
+        : `这将重置${resetList}。${connectionWord}，${tickspeedInfo}`;
 
-      if (this.bulk) return `Are you sure you want to purchase
-      ${quantifyInt("Antimatter Galaxy", this.newGalaxies)}? ${message}`;
-      return `Are you sure you want to purchase an Antimatter Galaxy? ${message}`;
+      if (this.bulk) return `你确定要购买
+      ${quantifyInt("Antimatter Galaxy", this.newGalaxies)} 个反物质星系吗？ ${message}`;
+      return `你确定要购买一个反物质星系吗？ ${message}`;
     }
   },
   created() {
