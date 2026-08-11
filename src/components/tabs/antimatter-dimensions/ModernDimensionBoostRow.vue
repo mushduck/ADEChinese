@@ -44,11 +44,11 @@ export default {
       };
     },
     dimBoostName() {
-      if (Ascensions.dbA.isUnlocked) return "Dimension Surge";
-      return "Dimension Boost";
+      if (Ascensions.dbA.isUnlocked) return "维度擢升";
+      return "维度提升";
     },
     imaginaryText() {
-      return `(${formatHybridLarge(this.imaginaryBoosts, 3)} free Dimension Boosts, which do not provide a power effect)`;
+      return `(${formatHybridLarge(this.imaginaryBoosts, 3)}免费维度提升, 不提供指数增益)`;
     }
   },
   methods: {
@@ -77,7 +77,7 @@ export default {
 <template>
   <div class="reset-container dimboost">
     <h4>{{ dimBoostName }} ({{ boostCountText }})</h4>
-    <span>Requires: {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }} Antimatter D</span>
+    <span>需要: {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }}反物质维度</span>
     <span v-if="hasSurge">{{ imaginaryText }}</span>
     <button
       :class="classObject"

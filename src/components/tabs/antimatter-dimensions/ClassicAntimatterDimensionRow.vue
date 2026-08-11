@@ -39,7 +39,7 @@ export default {
   computed: {
     isDoomed: () => Pelle.isDoomed,
     name() {
-      return `${AntimatterDimension(this.tier).shortDisplayName} Antimatter Dimension`;
+      return `${AntimatterDimension(this.tier).shortDisplayName}反物质维度`;
     },
     amountText() {
       if (this.formattedAmount) return this.formattedAmount;
@@ -47,17 +47,17 @@ export default {
       return `${amount} (${formatInt(this.boughtBefore10)})`;
     },
     singleText() {
-      if (this.isCapped) return "Capped";
-      const prefix = this.showCostTitle(this.singleCost) ? "Cost: " : "";
-      const suffix = this.isCostsAD ? `${this.costUnit}` : "AM";
+      if (this.isCapped) return "已达到上限";
+      const prefix = this.showCostTitle(this.singleCost) ? "价格：" : "";
+      const suffix = this.isCostsAD ? `${this.costUnit}` : "反物质";
       return `${prefix} ${format(this.singleCost)} ${suffix}`;
     },
     until10Text() {
-      if (this.isCapped) return "Shattered by Nameless";
-      if (this.isContinuumActive) return `Continuum: ${this.continuumString}`;
+      if (this.isCapped) return "已被无名氏粉碎";
+      if (this.isContinuumActive) return `连续统：${this.continuumString}`;
 
-      const prefix = `Until ${formatInt(10)},${this.showCostTitle(this.until10Cost) ? " Cost" : ""}`;
-      const suffix = this.isCostsAD ? `${this.costUnit}` : "AM";
+      const prefix = `买到 ${formatInt(10)} 个，${this.showCostTitle(this.until10Cost) ? "价格" : ""}`;
+      const suffix = this.isCostsAD ? `${this.costUnit}` : "反物质";
       return `${prefix} ${format(this.until10Cost)} ${suffix}`;
     },
     continuumString() {
@@ -67,9 +67,9 @@ export default {
       return this.isShown || this.isUnlocked || this.amount.gt(0);
     },
     boughtTooltip() {
-      if (this.isCapped) return `Nameless prevents the purchase of more than ${format(1)} 8th Antimatter Dimension`;
-      if (this.isContinuumActive) return "Continuum produces all your Antimatter Dimensions";
-      return `Purchased ${quantifyHybridLarge("time", this.bought)}`;
+      if (this.isCapped) return `无名氏阻止你购买超过 ${formatInt(1)} 个第八维`;
+      if (this.isContinuumActive) return "连续统生产所有反物质维度";
+      return `已购买 ${formatInt(this.bought)} 次`;
     },
     costUnit() {
       return `${AntimatterDimension(this.tier - 2).shortDisplayName} AD`;

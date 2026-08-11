@@ -48,11 +48,11 @@ export default {
       };
     },
     dimBoostName() {
-      if (Ascensions.dbA.isUnlocked) return "Dimension Surge";
-      return "Dimension Boost";
+      if (Ascensions.dbA.isUnlocked) return "维度擢升";
+      return "维度提升";
     },
     imaginaryText() {
-      return `(${formatHybridLarge(this.imaginaryBoosts, 3)} free Dimension Boosts, which do not provide a power effect)`;
+      return `(${formatHybridLarge(this.imaginaryBoosts, 3)} `;
     }
   },
   methods: {
@@ -82,7 +82,7 @@ export default {
   <div class="c-dimension-row c-antimatter-dim-row c-antimatter-prestige-row">
     <div class="l-dim-row__prestige-text c-dim-row__label c-dim-row__label--amount">
       {{ dimBoostName }} ({{ boostCountText }}):
-      requires {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }} Dimensions
+      需要 {{ formatInt(requirement.amount) }} {{ dimName }}维度
       <span v-if="hasSurge">{{ imaginaryText }}</span>
     </div>
     <PrimaryButton

@@ -135,9 +135,9 @@ export const breakInfinityUpgrades = {
   autobuyMaxDimboosts: {
     id: "autobuyMaxDimboosts",
     cost: () => 2e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "解锁自动购买最大维度提升",
+    description: "解锁自动购买最大维度擢升",
     charged: {
-      description: "基于特蕾莎等级提高维度提升强度", 
+      description: "基于特蕾莎等级提高维度擢升强度", 
       effect: () => Math.pow(Ra.pets.teresa.level + 1, 0.5),
       formatEffect: value => `${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)}`
     }

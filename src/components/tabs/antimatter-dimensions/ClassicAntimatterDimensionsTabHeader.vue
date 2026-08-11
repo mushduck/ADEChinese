@@ -19,12 +19,12 @@ export default {
   },
   computed: {
     sacText() {
-      if (Ascensions.sacA.isUnlocked) return `Dimensional Sacrifice (+${formatPow(sacrificeBoost, 2, 3)})`;
-      return `Dimensional Sacrifice (${formatX(sacrificeBoost, 2, 2)})`;
+      if (Ascensions.sacA.isUnlocked) return `献祭指数 (+${formatPow(sacrificeBoost, 2, 3)})`;
+      return `献祭倍率 (${formatX(sacrificeBoost, 2, 2)})`;
     },
     sacrificeTooltip() {
-      return `Boosts 8th Antimatter Dimension by +${formatPow(this.nextPower, 2, 3)}`;
-      return `Boosts 8th Antimatter Dimension by ${formatX(this.sacrificeBoost, 2, 2)}`;
+      return `第八维度指数 +${formatPow(this.nextPower, 2, 3)}`;
+      return `第八维度强度 ${formatX(this.sacrificeBoost, 2, 2)}`;
     },
   },
   methods: {
@@ -62,14 +62,14 @@ export default {
         {{ sacText }}
       </span>
       <span v-else>
-        Dimensional Sacrifice Disabled ({{ disabledCondition }})
+        维度献祭已禁用 ({{ disabledCondition }})
       </span>
     </PrimaryButton>
     <PrimaryButton
       class="o-primary-btn--buy-max"
       @click="maxAll"
     >
-      Max all (M)
+      购买最大数量（M）
     </PrimaryButton>
   </div>
 </template>

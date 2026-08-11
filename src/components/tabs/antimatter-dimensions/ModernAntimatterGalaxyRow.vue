@@ -37,13 +37,13 @@ export default {
       const reset = [];
       if (!Achievement(111).isUnlocked ||
         (player.disablePostReality && !(Alpha.isRunning && Alpha.currentStage >= 12) &&
-        !(LHC.voidRunning && NullUpgrade.limerick1.isBought))) reset.push("Dimensions");
+        !(LHC.voidRunning && NullUpgrade.limerick1.isBought))) reset.push("维度");
       if (!Achievement(143).isUnlocked ||
         (player.disablePostReality && !(Alpha.isRunning && Alpha.currentStage >= 20) &&
-        !(LHC.voidRunning && NullUpgrade.limerick2.isBought))) reset.push("Dimension Boosts");
+        !(LHC.voidRunning && NullUpgrade.limerick2.isBought))) reset.push("维度提升 Boosts");
       return reset.length === 0
-        ? `Increase the power of Tickspeed upgrades`
-        : `Reset your ${makeEnumeration(reset)} to increase the power of Tickspeed upgrades`;
+        ? `增强计数频率升级的效果`
+        : `重置${makeEnumeration(reset)}的数量，增强计数频率升级的效果`;
     },
     sumText() {
       const parts = [Decimal.max(this.galaxies.normal, GalacticPowers.galacticAscension.isUnlocked ? 1 : 0)];
@@ -61,9 +61,9 @@ export default {
     },
     typeName() {
       switch (this.type) {
-        case GALAXY_TYPE.NORMAL: return "Antimatter Galaxies";
-        case GALAXY_TYPE.DISTANT: return "Distant Antimatter Galaxies";
-        case GALAXY_TYPE.REMOTE: return "Remote Antimatter Galaxies";
+        case GALAXY_TYPE.NORMAL: return "反物质星系";
+        case GALAXY_TYPE.DISTANT: return "遥远星系";
+        case GALAXY_TYPE.REMOTE: return "极远星系";
       }
       return undefined;
     },
@@ -73,14 +73,14 @@ export default {
     costScalingText() {
       switch (this.type) {
         case GALAXY_TYPE.DISTANT:
-          return `Each Galaxy is more expensive past ${quantifyHybridLarge("Galaxy", this.distantStart)}`;
+          return `${quantifyInt("Galaxy", this.distantStart)} 个星系后星系价格大幅增长`;
         case GALAXY_TYPE.REMOTE: {
           const scalings = [
-            { type: "distant", function: "quadratic", amount: this.distantStart },
-            { type: "remote", function: "exponential", amount: this.remoteStart }
+            { type: "遥远", function: "二次方", amount: this.distantStart },
+            { type: "极远", function: "指数", amount: this.remoteStart }
           ];
-          return `Increased Galaxy cost scaling: ${scalings.sort((a, b) => a.amount - b.amount)
-            .map(scaling => `${scaling.function} scaling past ${this.formatGalaxies(scaling.amount)} (${scaling.type})`)
+          return `星系价格增速: ${scalings.sort((a, b) => a.amount - b.amount)
+            .map(scaling => `${scaling.function}增长（超过 ${this.formatGalaxies(scaling.amount)} 个${scaling.type}星系）`)
             .join(", ").capitalize()}`;
         }
       }
@@ -133,7 +133,7 @@ export default {
 <template>
   <div class="reset-container galaxy">
     <h4>{{ typeName }} ({{ sumText }})</h4>
-    <span>Requires: {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }} Antimatter D</span>
+    <span>需要 {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }}维度</span>
     <span v-if="hasIncreasedScaling">{{ costScalingText }}</span>
     <button
       :class="classObject"

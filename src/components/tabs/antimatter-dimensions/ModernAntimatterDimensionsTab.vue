@@ -39,14 +39,14 @@ export default {
   computed: {
     sacrificeTooltip() {
       if (this.isFullyAutomated) {
-        return "Sacrifice autobuyer is enabled and Achievement 118 is unlocked, so Sacrifice is now fully automated";
+        return "自动献祭已开启且拥有成就 118，因此献祭将完全自动化";
       }
-      if (Ascensions.sacA.isUnlocked) return `Boosts 8th Antimatter Dimension by +${formatPow(this.sacrificePower, 2, 3)}`;
-      return `Boosts 8th Antimatter Dimension by ${formatX(this.sacrificeBoost, 2, 2)}`;
+      if (Ascensions.sacA.isUnlocked) return `为第八维度提供 ${formatPow(this.sacrificePower, 2, 3)} 的指数加成`;
+      return `为第八维度提供 ${formatX(this.sacrificeBoost, 2, 2)} 的倍率加成`;
     },
     sacText() {
-      if (Ascensions.sacA.isUnlocked) return `Dimensional Sacrifice (${formatPow(this.sacrificePower, 2, 3)})`;
-      return `Dimensional Sacrifice (${formatX(this.sacrificeBoost, 2, 2)})`;
+      if (Ascensions.sacA.isUnlocked) return `献祭效力 (${formatPow(this.sacrificePower, 2, 3)})`;
+      return `献祭效力 (${formatX(this.sacrificeBoost, 2, 2)})`;
     }
   },
   methods: {
@@ -81,8 +81,8 @@ export default {
       }
     },
     getUntil10Display() {
-      if (this.isContinuumActive) return "Continuum";
-      return this.buyUntil10 ? "Until 10" : "Buy 1";
+      if (this.isContinuumActive) return "连续统";
+      return this.buyUntil10 ? "购买 10 个" : "购买 1 个";
     },
     update() {
       this.hasDimensionBoosts = player.dimensionBoosts.gt(0);
@@ -98,8 +98,8 @@ export default {
       this.buyOoMPow.copyFrom(AntimatterDimensions.buyOoMPower);
 
       this.multiplierText = Ascensions.b10mA.isUnlocked
-        ? `Buy OoM purchase power: +${formatPow(this.buyOoMPow, 2, 3)}`
-        : `Buy 10 Dimension purchase multiplier: ${formatX(this.buy10Mult, 2, 2)}`;
+        ? `购买10个维度的加成指数: +${formatPow(this.buyOoMPow, 2, 3)}`
+        : `购买10个维度的加成倍数: ${formatX(this.buy10Mult, 2, 2)}`;
       if (!isSacrificeUnlocked) return;
       this.isFullyAutomated = Autobuyer.sacrifice.isActive && Achievement(118).canBeApplied &&
         (!player.disablePostReality || (Alpha.isRunning && Alpha.currentStage >= 12) ||
@@ -112,8 +112,8 @@ export default {
       this.disabledCondition = Sacrifice.disabledCondition;
       const sacText = this.isSacrificeUnlocked
         ? (Ascensions.sacA.isUnlocked
-          ? ` | Dimensional Sacrifice power: ${formatPow(this.currentPower, 2, 3)}`
-          : ` | Dimensional Sacrifice multiplier: ${formatX(this.currentSacrifice, 2, 2)}`)
+          ? ` | 献祭指数: ${formatPow(this.currentPower, 2, 3)}`
+          : ` | 献祭倍率: ${formatX(this.currentSacrifice, 2, 2)}`)
         : "";
       this.multiplierText += sacText;
     }
@@ -139,7 +139,7 @@ export default {
       >
         <span v-if="isSacrificeAffordable">{{ sacText }}</span>
         <span v-else-if="isFullyAutomated && disabledCondition !== ''">
-          Dimensional Sacrifice is Automated (Achievement 118)
+          维度献祭已自动化（成就 118）
         </span>
         <span v-else>Dimensional Sacrifice Disabled ({{ disabledCondition }})</span>
       </PrimaryButton>
@@ -147,7 +147,7 @@ export default {
         class="o-primary-btn l-button-container"
         @click="maxAll"
       >
-        Max All (M)
+        购买最大数量（M）
       </button>
     </div>
     <span>{{ multiplierText }}</span>
@@ -166,9 +166,9 @@ export default {
         class="o-primary-btn--quick-reset"
         onclick="softReset(-1, true, true)"
       >
-        Perform a Dimension Boost reset
-        <span v-if="hasDimensionBoosts"> but lose a Dimension Boost</span>
-        <span v-else> for no gain</span>
+        进行一次维度提升重置，
+        <span v-if="hasDimensionBoosts">但失去一个维度提升</span>
+        <span v-else>但无任何加成</span>
       </PrimaryButton>
       <AntimatterGalaxyRow />
     </div>
