@@ -24,13 +24,13 @@ export default {
       v-if="treeStatus.firstPaths"
       class="l-modal-import-tree__tree-info-line"
     >
-      Compression Split: {{ treeStatus.firstPaths }}
+      维度路径：{{ treeStatus.firstPaths }}
     </div>
     <div
       v-if="treeStatus.secondPaths"
       class="l-modal-import-tree__tree-info-line"
     >
-      Currency Split: {{ treeStatus.secondPaths }}
+      资源路径：{{ treeStatus.secondPaths }}
     </div>
   </div>
 </template>
