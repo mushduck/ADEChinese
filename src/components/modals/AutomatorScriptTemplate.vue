@@ -124,14 +124,14 @@ export default {
     copyAndClose() {
       if (this.isBlock) {
         const newTemplateBlock = {
-          name: `Template: ${this.name}`,
+          name: `模板：${this.name}`,
           blocks: blockifyTextAutomator(this.templateScript.script).blocks
         };
         AutomatorData.blockTemplates.push(newTemplateBlock);
-        GameUI.notify.info("Custom template block created");
+        GameUI.notify.info("已创建模板");
       } else {
         copyToClipboard(this.templateScript.script);
-        GameUI.notify.info("Template copied to clipboard");
+        GameUI.notify.info("已将模板复制到剪贴板");
       }
       this.emitClose();
     }
@@ -148,9 +148,9 @@ export default {
       {{ description }}
     </div>
     <div class="c-automator-template-inputs">
-      <b>Required Information:</b>
+      <b>所需信息：</b>
       <br>
-      Use a preset Study Tree:
+      使用研究树预设：
       <button
         v-for="(preset, presetNumber) in presets"
         :key="preset.name"
@@ -163,7 +163,7 @@ export default {
         class="o-primary-btn o-load-preset-button-margin"
         @click="loadCurrent"
       >
-        <i>Current Tree</i>
+        <i>当前研究树</i>
       </button>
       <div
         v-for="input in inputs"
@@ -203,7 +203,7 @@ export default {
         </div>
       </div>
       <div v-else>
-        (If something seems wrong with the template inputs, it will show up here)
+        （模板出现的错误会在这里显示）
       </div>
       <br>
       <br>
@@ -213,13 +213,13 @@ export default {
       class="o-primary-btn"
       @click="copyAndClose"
     >
-      {{ isBlock ? "Create custom template block" : "Copy this template to your clipboard" }} and close this modal
+      {{ isBlock ? "创建模板" : "复制模板到剪贴板" }}并关闭此弹窗
     </button>
     <button
       v-else
       class="o-primary-btn o-primary-btn--disabled"
     >
-      Cannot generate template (You have {{ quantifyInt("invalid input", invalidInputCount) }})
+      不可创建模板 (有 {{ quantifyInt("个错误的输入", invalidInputCount) }})
     </button>
   </ModalWrapper>
 </template>

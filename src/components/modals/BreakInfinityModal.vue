@@ -31,7 +31,7 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are Breaking Infinity
+      你正在打破无限
     </template>
     <div class="c-modal-message__text">
       <span
@@ -42,7 +42,7 @@ export default {
       </span>
     </div>
     <template #confirm-text>
-      Break
+      打破
     </template>
   </ModalWrapperChoice>
 </template>

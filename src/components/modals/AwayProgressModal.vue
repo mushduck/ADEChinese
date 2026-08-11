@@ -37,9 +37,9 @@ export default {
     headerText() {
       const timeDisplay = TimeSpan.fromSeconds(new Decimal(this.seconds)).toString();
       if (this.nothingHappened || !this.somethingHappened) {
-        return `While you were away for ${timeDisplay}... Nothing happened.`;
+        return `在你离开的 ${timeDisplay} 里...什么事都没有发生。`;
       }
-      return `While you were away for ${timeDisplay}: `;
+      return `在你离开的 ${timeDisplay} 里：`;
     },
   },
   mounted() {
@@ -69,7 +69,7 @@ export default {
         @something-happened="somethingHappened = true"
       />
     </div>
-    <span v-if="!nothingHappened && somethingHappened">Note: Click an entry to hide it in the future.</span>
+    <span v-if="!nothingHappened && somethingHappened">注：点击条目可将其永久隐藏。</span>
   </ModalWrapper>
 </template>
 

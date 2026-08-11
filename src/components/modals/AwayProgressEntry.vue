@@ -69,7 +69,7 @@ export default {
     },
     formatBlackHoleActivations() {
       const activations = this.after - this.before;
-      return quantifyHybridSmall("time", activations);
+      return quantifyHybridSmall("次", activations);
     },
     isVeryLarge() {
       return this.isBlackHole
@@ -108,16 +108,15 @@ export default {
     @click="hideEntry"
   >
     <span v-if="isBlackHole">
-      Your
+      你的
       <b>{{ formattedName }}</b>
-      activated
+      已经启动了
       {{ formatBlackHoleActivations }}
     </span>
     <span v-else>
       <b>{{ formattedName }}</b>
-      <i v-if="isVeryLarge"> exponent</i>
-      increased from
-      {{ formatBefore }} to {{ formatAfter }}
+      <i v-if="isVeryLarge">的指数</i>
+      从 {{ formatBefore }} 增加到 {{ formatAfter }}
     </span>
   </div>
 </template>

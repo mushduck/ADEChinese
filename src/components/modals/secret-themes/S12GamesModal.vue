@@ -26,7 +26,7 @@ export default {
 <template>
   <ModalWrapper class="c-modal-s12-games">
     <div class="c-modal__title">
-      Games
+      游戏
     </div>
     <S12GameEntries />
     <div class="c-modal-s12-games__magnified-display">
