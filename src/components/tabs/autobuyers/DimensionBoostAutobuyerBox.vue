@@ -53,7 +53,7 @@ export default {
     :autobuyer="autobuyer"
     :is-modal="isModal"
     :show-interval="!isBuyMaxUnlocked"
-    name="Automatic Dimension Boosts"
+    name="自动进行维度提升"
   >
     <template
       v-if="!hasMaxedInterval"
@@ -69,7 +69,7 @@ export default {
         class="c-autobuyer-box__small-text"
       >
         <br>
-        Activates every X seconds:
+        X 秒后进行：
       </div>
       <AutobuyerInput
         :autobuyer="autobuyer"
@@ -89,7 +89,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Limit Dimension Boosts to:
+        限制维度提升至：
       </label>
       <AutobuyerInput
         :autobuyer="autobuyer"
@@ -107,12 +107,10 @@ export default {
           class="o-clickable"
         >
         <span v-if="isBuyMaxUnlocked">
-          Only Dimboost to unlock new<br>
-          Dimensions until X Galaxies:
+          X 个星系之前，仅在需要解锁<br>新维度时购买维度提升：
         </span>
         <span v-else>
-          Galaxies required to always<br>
-          Dimboost, ignoring the limit:
+          大于 X 星系后<br>始终进行维度提升：
         </span>
       </label>
       <AutobuyerInput

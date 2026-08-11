@@ -48,21 +48,21 @@ export default {
     modeProps(mode) {
       switch (mode) {
         case AUTO_CELESTIAL_ETERNITY_MODE.AMOUNT: return {
-          title: "Celestial Eternity at X CEP",
+          title: "获得 X 天界永恒点数时进行天界永恒",
           input: {
             property: "amount",
             type: "decimal"
           },
         };
         case AUTO_CELESTIAL_ETERNITY_MODE.TIME: return {
-          title: "Seconds between Celestial Eternities",
+          title: "每 X 秒自动天界永恒",
           input: {
             property: "time",
             type: "float"
           },
         };
         case AUTO_CELESTIAL_ETERNITY_MODE.X_HIGHEST: return {
-          title: "X times highest CEP",
+          title: "最高天界永恒点数的 X 倍：",
           input: {
             property: "xHighest",
             type: "decimal"
@@ -83,7 +83,7 @@ export default {
     :autobuyer="autobuyer"
     :show-interval="true"
     :is-modal="isModal"
-    name="Automatic Celestial Eternity"
+    name="自动天界永恒"
   >
     <template #intervalSlot>
       <ExpandingControlBox
@@ -92,7 +92,7 @@ export default {
       >
         <template #header>
           <div class="o-primary-btn c-autobuyer-box__mode-select c-autobuyer-box__mode-select-header">
-            ▼ Current Setting: ▼
+            ▼ 当前设置：  ▼
             <br>
             {{ modeName(mode) }}
           </div>
@@ -125,7 +125,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Dynamic amount
+        动态数量
       </label>
     </template>
   </AutobuyerBox>

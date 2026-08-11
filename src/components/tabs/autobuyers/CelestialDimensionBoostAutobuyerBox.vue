@@ -49,7 +49,7 @@ export default {
     :autobuyer="autobuyer"
     :is-modal="isModal"
     :show-interval="!isBuyMaxUnlocked"
-    name="Automatic Celestial Dimension Boosts"
+    name="自动进行天界维度提升"
   >
     <template
       v-if="isBuyMaxUnlocked"
@@ -59,7 +59,7 @@ export default {
         class="c-autobuyer-box__small-text"
       >
         <br>
-        Activates every X seconds:
+        X 秒后进行：
       </div>
       <AutobuyerInput
         :autobuyer="autobuyer"
@@ -79,7 +79,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Limit Celestial Dimension Boosts to:
+        限制天界维度提升至：
       </label>
       <AutobuyerInput
         :autobuyer="autobuyer"
@@ -97,12 +97,10 @@ export default {
           class="o-clickable"
         >
         <span v-if="isBuyMaxUnlocked">
-          Do not buy Celestial Dimboosts<br>
-          until X Celestial Galaxies:
+          X 个天界星系之前，仅在需要解锁<br>新维度时购买天界维度提升：
         </span>
         <span v-else>
-          Celestial Galaxies required to always<br>
-          Celestial Dimboost, ignoring the limit:
+          大于 X 天界星系后<br>始终进行天界维度提升：
         </span>
       </label>
       <AutobuyerInput

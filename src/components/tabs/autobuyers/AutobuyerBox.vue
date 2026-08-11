@@ -95,11 +95,11 @@ export default {
       switch (this.currMode) {
         case AUTO_ETERNITY_MODE.TIME:
           return this.nextTime > 0
-            ? `Will trigger in ${TimeSpan.fromSeconds(new Decimal(this.nextTime)).toStringShort()}`
-            : "Will trigger ASAP";
+            ? `将在 ${TimeSpan.fromSeconds(new Decimal(this.nextTime)).toStringShort()} 后触发`
+            : "即时触发";
         case AUTO_ETERNITY_MODE.X_HIGHEST:
         default:
-          return `Will trigger at ${format(this.nextValue, 2)} ${this.autobuyer.name === "Infinity" ? "IP" : "EP"}`;
+          return `将在 ${format(this.nextValue, 2)} ${this.autobuyer.name === "Infinity" ? "无限点数" : "永恒点数"} 时触发`;
       }
     }
   },
@@ -188,7 +188,7 @@ export default {
   >
     {{ name }}
     <br>
-    Requirement: {{ format(antimatterCost) }} Total Antimatter {{ showEternity }}
+    要求: 总反物质达到 {{ format(antimatterCost) }} {{ showEternity }}
   </div>
 </template>
 

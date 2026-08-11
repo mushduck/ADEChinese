@@ -48,21 +48,21 @@ export default {
     modeProps(mode) {
       switch (mode) {
         case AUTO_CELESTIAL_CRUNCH_MODE.AMOUNT: return {
-          title: "Celestial Crunch at X CIP",
+          title: "天界大坍缩后获得 X 天界无限点数",
           input: {
             property: "amount",
             type: "decimal"
           },
         };
         case AUTO_CELESTIAL_CRUNCH_MODE.TIME: return {
-          title: "Seconds between Celestial Crunches",
+          title: "每 X 秒自动天界大坍缩",
           input: {
             property: "time",
             type: "float"
           },
         };
         case AUTO_CELESTIAL_CRUNCH_MODE.X_HIGHEST: return {
-          title: "X times highest CIP",
+          title: "最高天界无限点数的 X 倍",
           input: {
             property: "xHighest",
             type: "decimal"
@@ -125,7 +125,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Dynamic amount
+        动态数量
       </label>
     </template>
   </AutobuyerBox>

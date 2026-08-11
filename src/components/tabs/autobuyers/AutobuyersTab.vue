@@ -53,7 +53,7 @@ export default {
       return PlayerProgress.seenAlteredSpeed();
     },
     gameTickLength() {
-      return `${formatInt(player.options.updateRate)} ms`;
+      return `${formatInt(player.options.updateRate)} 毫秒`;
     }
   },
   methods: {
@@ -83,20 +83,20 @@ export default {
     <AutobuyerToggles />
     <OpenModalHotkeysButton />
     <div v-if="hasSeenGamespeedAlteringEffects">
-      Autobuyer intervals and time-based settings are always <b>real time</b> and therefore
+      自动购买器间隔与时间相关设置始终采用<b>现实时间</b>计算，因此
       <br>
-      unaffected by anything which may alter how fast the game itself is running.
+      不受任何可能改变游戏运行速度的因素影响。
       <br>
       <br>
     </div>
     <div v-if="!hasInfinity">
-      Challenges for upgrading autobuyers are unlocked by reaching Infinity.
+      解锁自动购买器升级的挑战需在达成无限状态后开启。
     </div>
-    <b>Autobuyers with no displayed bulk have unlimited bulk by default.</b>
+    <b>未显示数量限制的自动购买器默认拥有无限数量处理能力。</b>
     <b>
-      Antimatter Dimension Autobuyers can have their bulk upgraded once interval is below {{ formatInt(100) }} ms.
+      反物质维度自动购买器的批量操作升级需在触发间隔低于 {{ formatInt(100) }} 毫秒时解锁。
     </b>
-    <b v-if="hasInstant">Autobuyers with "Instant" interval will trigger every game tick ({{ gameTickLength }}).</b>
+    <b v-if="hasInstant">间隔为“立即”的自动购买器将在每个游戏时刻（{{ gameTickLength }}）触发。</b>
     <EndgameAutobuyerBox class="c-endgame-pos" />
     <RealityAutobuyerBox class="c-reality-pos" />
     <CelestialEternityAutobuyerBox class="c-celestial-eternity-pos" />

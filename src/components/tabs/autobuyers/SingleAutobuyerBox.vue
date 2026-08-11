@@ -65,13 +65,13 @@ export default {
         v-if="isHiddenSacrifice"
         class="c-autobuyer-box__small-text"
       >
-        Automatic (Achievement 118)
+        即时自动进行 (成就118)
       </b>
       <span
         v-else-if="autobuyer.hasInput"
         class="c-autobuyer-box__small-text"
       >
-        Multiplier:
+        倍数：
         <button
           v-if="isAnnihilation"
           class="c-annihilation-autobuyer-mode-button"

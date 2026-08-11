@@ -52,35 +52,35 @@ export default {
     modeProps(mode) {
       switch (mode) {
         case AUTO_ENDGAME_MODE.AMOUNTCP: return {
-          title: "Endgame at X CP",
+          title: "获得 X 天界点数时进行终局",
           input: {
             property: "amount",
             type: "decimal"
           },
         };
         case AUTO_ENDGAME_MODE.AMOUNTDP: return {
-          title: "Endgame at X DP",
+          title: "获得 X 毁灭粒子时进行终局",
           input: {
             property: "amount",
             type: "decimal"
           },
         };
         case AUTO_ENDGAME_MODE.TIME: return {
-          title: "Seconds between Endgames",
+          title: "每 X 秒自动终局",
           input: {
             property: "time",
             type: "float"
           },
         };
         case AUTO_ENDGAME_MODE.X_HIGHEST_CP: return {
-          title: "X times highest CP",
+          title: "最高天界点数的 X 倍：",
           input: {
             property: "xHighest",
             type: "decimal"
           },
         };
         case AUTO_ENDGAME_MODE.X_HIGHEST_DP: return {
-          title: "X times highest DP",
+          title: "最高毁灭粒子的 X 倍：",
           input: {
             property: "xHighest",
             type: "decimal"
@@ -100,7 +100,7 @@ export default {
   <AutobuyerBox
     :autobuyer="autobuyer"
     :is-modal="isModal"
-    name="Automatic Endgame"
+    name="自动终局"
   >
     <template #intervalSlot>
       <ExpandingControlBox
@@ -109,7 +109,7 @@ export default {
       >
         <template #header>
           <div class="o-primary-btn c-autobuyer-box__mode-select c-autobuyer-box__mode-select-header">
-            ▼ Current Setting: ▼
+            ▼ 当前设置： ▼
             <br>
             {{ modeName(mode) }}
           </div>
@@ -143,7 +143,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Dynamic amount
+        动态数量
       </label>
     </template>
   </AutobuyerBox>
