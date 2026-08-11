@@ -9,10 +9,8 @@ export default {
   computed: {
     message() {
       const infinity = formatPostBreak(Number.MAX_VALUE, 2);
-      return `Breaking Celestial Infinity will allow you to gain Celestial Matter past ${infinity}.
-        Celestial Dimensions and Celestial Tickspeed Upgrades will scale in cost faster after ${infinity} Celestial Matter.
-        You will gain additional Celestial Infinity Points on Celestial Crunch based on Celestial Matter produced over ${infinity}.\
-        It will also unlock Celestial Break Infinity Upgrades.`.split("\n");
+      return `打破天界无限将使你获得超过 ${infinity} 的天界物质。在 ${infinity} 天界物质后，天界维度和天界计数频率升级的成本将加速增长。
+        天界大坍缩将基于超过 ${infinity} 的天界物质获得额外的天界无限点数，同时解锁打破天界无限升级。`.split("\n");
     },
   },
   methods: {
@@ -29,7 +27,7 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are Breaking Celestial Infinity
+      你正在打破天界无限
     </template>
     <div class="c-modal-message__text">
       <span
@@ -40,7 +38,7 @@ export default {
       </span>
     </div>
     <template #confirm-text>
-      Break
+      打破
     </template>
   </ModalWrapperChoice>
 </template>
