@@ -24,9 +24,7 @@ export default {
       return Glyphs.findByInventoryIndex(this.idx);
     },
     message() {
-      return `Do you really want to sacrifice this Glyph? Your total power of sacrificed ${this.glyph.type}
-      Glyphs will increase from ${format(this.currentGlyphSacrifice, 2, 2)} to
-      ${format(this.currentGlyphSacrifice.add(this.gain), 2, 2)}.`;
+      return `你真的要献祭这个符文吗？你献祭的${this.glyph.type}符文总值将从 ${format(this.currentGlyphSacrifice, 2, 2)} 提升至 ${format(this.currentGlyphSacrifice + this.gain, 2, 2)}。`;
     }
   },
   methods: {
@@ -43,7 +41,7 @@ export default {
         // the sac will break things so this is the best I could do. - Scar
 
         this.emitClose();
-        Modal.message.show("The selected Glyph changed position or was otherwise changed!");
+        Modal.message.show("选中的符文改变了位置或发生了其他变化。");
       }
     },
     handleYesClick() {
@@ -60,7 +58,7 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are about to sacrifice a Glyph
+      你将要献祭一个符文。
     </template>
     <div class="c-modal-message__text">
       {{ message }}
