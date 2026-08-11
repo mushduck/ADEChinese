@@ -14,7 +14,7 @@ export default {
 <template>
   <ModalWrapperOptions>
     <template #header>
-      Save Selection
+      存档选择：
     </template>
     <LoadGameEntry
       v-for="id in 3"

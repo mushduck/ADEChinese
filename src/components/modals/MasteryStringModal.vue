@@ -82,8 +82,8 @@ export default {
       return combinedTree;
     },
     modalTitle() {
-      if (this.deleting) return `Deleting Mastery Preset "${this.name}"`;
-      return this.isImporting ? "Input your tree" : `Editing Mastery Preset "${this.name}"`;
+      if (this.deleting) return `删除终局专精预设"${this.name}"`;
+      return this.isImporting ? "导入终局专精树" : `编辑终局专精预设“${this.name}”`;
     },
     invalidMessage() {
       if (!this.inputIsValidTree || this.importedTree.invalidMasteries.length === 0) return null;
@@ -102,7 +102,7 @@ export default {
             break;
         }
       }
-      return `Your import string has invalid mastery IDs: ${coloredString.replaceAll("#", "").replaceAll(",", ", ")}
+      return `无效的终局专精 ID：${coloredString.replaceAll("#", "").replaceAll(",", ", ")}
         <br><br>`;
     },
     truncatedInput() {
@@ -127,8 +127,8 @@ export default {
       return secretStrings.includes(sha512_256(this.input.toLowerCase()));
     },
     confirmText() {
-      if (this.deleting) return "Delete";
-      return this.isImporting ? "Import" : "Save";
+      if (this.deleting) return "删除";
+      return this.isImporting ? "导入" : "保存";
     }
   },
   watch: {
@@ -179,16 +179,16 @@ export default {
     savePreset() {
       if (this.inputIsValid) {
         player.endgameMasteries.presets[this.id].masteries = this.input;
-        GameUI.notify.endgame(`Mastery Tree ${this.name} successfully edited.`);
+        GameUI.notify.endgame(`专精树 ${this.name} 已成功编辑`);
         this.emitClose();
       }
     },
     deletePreset() {
       const name = player.endgameMasteries.presets[this.id].name;
-      const presetName = name ? `Mastery preset "${name}"` : "Mastery preset";
+      const presetName = name ? `终局专精预设"${name}"` : "终局专精预设";
       player.endgameMasteries.presets[this.id].masteries = "";
       player.endgameMasteries.presets[this.id].name = "";
-      GameUI.notify.endgame(`${presetName} deleted from slot ${this.id + 1}`);
+      GameUI.notify.endgame(`${presetName} 已从槽位 ${this.id + 1} 中删除`);
     },
     masteryString(mastery) {
       return `${mastery.id}`;
@@ -240,17 +240,17 @@ export default {
           />
           <MasteryTreeInfo
             v-if="deleting && importedTree.hasInfo"
-            header-text="Mastery Preset contains:"
+            header-text="终局专精预设包含："
             :tree-status="importedTree"
           />
           <MasteryTreeInfo
             v-if="!deleting && !isImporting && importedTree.hasInfo"
-            header-text="Status after loading with <b>no masteries</b>:"
+            header-text="加载后状态（<b>无终局专精</b>）："
             :tree-status="importedTree"
           />
           <MasteryTreeInfo
             v-if="!deleting && combinedTree.hasInfo"
-            header-text="Status after loading with <b>current tree</b>:"
+            header-text="加载后状态（<b>当前终局专精</b>）："
             :tree-status="combinedTree"
           />
         </template>
@@ -271,7 +271,7 @@ export default {
       <br>
       <PrimaryButton
         v-if="!deleting"
-        v-tooltip="'This will format the mastery preset text, for example, changing \'a,b,c|d\' to \'a, b, c | d\'.'"
+        v-tooltip="'此操作将格式化专精预设文本，例如：将 \'a,b,c|d\' 转换为 \'a, b, c | d\'。.'"
         @click="convertInputShorthands"
       >
         Format Preset Text
@@ -280,7 +280,7 @@ export default {
     <span v-if="isImporting">
       <br>
       <div
-        v-tooltip="canEndgame ? '' : 'You are currently unable to endgame, so this will only do a normal load.'"
+        v-tooltip="canEndgame ? '' : '你当前无法进行终局，因此将仅执行常规加载。'"
         class="c-modal__confirmation-toggle"
         @click="respecAndLoad = !respecAndLoad"
       >
@@ -296,7 +296,7 @@ export default {
           />
         </div>
         <span class="c-modal__confirmation-toggle__text">
-          Also respec tree and endgame
+          同时重置终局专精树并终局
           <span
             v-if="!canEndgame"
             class="c-modal__confirmation-toggle__warning"

@@ -49,7 +49,7 @@ export default {
       class="o-primary-btn--width-medium"
       @click="load"
     >
-      Load
+      加载
     </PrimaryButton>
   </div>
 </template>
