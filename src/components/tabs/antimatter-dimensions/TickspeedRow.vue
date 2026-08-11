@@ -27,22 +27,21 @@ export default {
       };
     },
     multiplierDisplay() {
-      if (InfinityChallenge(3).isRunning) return `Multiply all Antimatter Dimensions by
-        ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)}`;
+      if (InfinityChallenge(3).isRunning) return `所有反物质维度获得 ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)} 加成`;
       const tickmult = this.mult;
-      return `${formatX(tickmult.reciprocal(), 2, 3)} faster / upgrade.`;
+      return `${formatX(tickmult.reciprocal(), 2, 3)} 加成 / 升级。`;
     },
     tickspeedDisplay() {
-      return `Tickspeed: ${format(this.tickspeed, 2, 3)} / sec`;
+      return `计数频率：${format(this.tickspeed, 2, 3)} / 秒`;
     },
     continuumString() {
       return formatHybridFloat(this.continuumValue, 2);
     },
     upgradeCount() {
       const purchased = this.purchasedTickspeed;
-      if (!this.freeTickspeed) return quantifyHybridLarge("Purchased Upgrade", purchased);
-      if (purchased.eq(0) || this.isContinuumActive) return `${formatHybridLarge(this.freeTickspeed, 3)} Free Upgrades`;
-      return `${formatHybridLarge(purchased, 3)} Purchased + ${formatHybridLarge(this.freeTickspeed, 3)} Free`;
+      if (!this.freeTickspeed) return `已购买 ${quantifyHybridLarge("个", purchased)}`;
+      if (purchased.eq(0) || this.isContinuumActive) return `${formatHybridLarge(this.freeTickspeed, 3)} 个免费升级`;
+      return `购买的 ${formatHybridLarge(purchased, 3)} 个 + 免费的 ${formatHybridLarge(this.freeTickspeed, 3)} 个`;
     }
   },
   methods: {
@@ -85,13 +84,13 @@ export default {
         onclick="buyTickSpeed()"
       >
         <span v-if="isContinuumActive">
-          Tickspeed Continuum: {{ continuumString }}
+          计数频率连续统:  {{ continuumString }}
         </span>
         <span v-else-if="isEC9">
-          Tickspeed Unpurchasable (EC 9)
+          不可购买计数频率（永恒挑战 9）
         </span>
         <span v-else>
-          Tickspeed Cost: {{ format(cost) }}
+          计数频率价格: {{ format(cost) }}
         </span>
         <div
           v-if="hasTutorial"
@@ -104,7 +103,7 @@ export default {
         :class="{ 'o-primary-btn--disabled': !isAffordable && !isContinuumActive }"
         onclick="buyMaxTickSpeed()"
       >
-        Buy Max
+        购买最大数量
       </button>
     </div>
     <div
