@@ -13,7 +13,7 @@ export default {
     };
   },
   computed: {
-    resetTerm() { return this.isDoomed ? "Armageddon" : "Reality"; },
+    resetTerm() { return this.isDoomed ? "末日" : "现实"; },
   },
   methods: {
     update() {
@@ -34,26 +34,21 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are about to reset your {{ resetTerm }}
+      你即将重置{{ resetTerm }}
     </template>
     <div class="c-modal-message__text">
-      This will reset you to the start of your {{ resetTerm }},
-      giving you no rewards from your progress in your current {{ resetTerm }}.
-      <br>
-      <br>
-      Are you sure you want to do this?
+      此操作将重置本次{{ resetTerm }}，并且你不会从当前{{ resetTerm }}的进度中获得任何奖励。\n\n你确定要重置吗？
       <div
         v-if="canReality"
         class="c-has-rewards"
       >
         <br>
-        You can currently complete a Reality for all its normal rewards, which you will not receive if you
-        Reset here. To get rewards, use the "Make a new Reality" button.
+        当前可完成现实以获取全部常规奖励，若在此重置则无法获得这些奖励。请使用“创建新的现实”按钮获取收益。
       </div>
       <br>
     </div>
     <template #confirm-text>
-      Reset
+      重置
     </template>
   </ModalWrapperChoice>
 </template>

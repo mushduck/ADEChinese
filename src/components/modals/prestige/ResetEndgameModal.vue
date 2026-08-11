@@ -23,7 +23,7 @@ export default {
     };
   },
   computed: {
-    resetTerm() { return "Endgame"; },
+    resetTerm() { return "终局"; },
   },
   methods: {
     update() {
@@ -44,21 +44,19 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are about to reset your {{ resetTerm }}
+      你即将重置{{ resetTerm }}
     </template>
     <div class="c-modal-message__text">
-      This will reset you to the start of your {{ resetTerm }},
-      giving you no rewards from your progress in your current {{ resetTerm }}.
+      此操作将重置本次{{ resetTerm }}，并且你不会从当前{{ resetTerm }}的进度中获得任何奖励。
       <br>
       <br>
-      Are you sure you want to do this?
+      你确定要重置吗？
       <br>
-      Currently, you are {{ endgameState }}. Based on the current state of your Endgame,
-      it is suggested that you {{ suggestion }}.
+      当前你的终局 {{ endgameState }}。根据当前的终局状态，建议你{{ suggestion }}。
       <br>
     </div>
     <template #confirm-text>
-      Reset
+      重置
     </template>
   </ModalWrapperChoice>
 </template>

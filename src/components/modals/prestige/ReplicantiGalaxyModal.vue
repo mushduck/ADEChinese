@@ -15,17 +15,13 @@ export default {
   },
   computed: {
     topLabel() {
-      return `You are about to purchase ${quantifyHybridLarge("Replicanti Galaxy", this.canBeBought)}`;
+      return `你将要购买 ${quantifyHybridLarge("个复制器星系", this.canBeBought)}`;
     },
     message() {
       const reductionString = this.divideReplicanti
-        ? `divide your Replicanti by ${format(Number.MAX_VALUE, 2, 2)} for each Replicanti Galaxy purchased
-          (${format(this.replicanti, 2, 2)} to
-          ${format(this.replicanti.divide(DC.NUMMAX.pow(this.canBeBought)), 2, 2)})`
-        : `reset your Replicanti to ${formatInt(1)}`;
-      return `A Replicanti Galaxy boosts Tickspeed the same way an Antimatter Galaxy does. However, it does not
-        increase the cost of Antimatter Galaxies, nor is it affected by multipliers to Antimatter Galaxies specifically.
-        It will ${reductionString}.`;
+        ? `每购买一个复制器星系，需将复制器除以 ${format(Number.MAX_VALUE, 2, 2)}（${format(this.replicanti, 2, 2)} → ${format(this.replicanti.divide(Decimal.NUMBER_MAX_VALUE.pow(this.canBeBought)), 2, 2)}）`
+        : `将复制器重置为 ${formatInt(1)}`;
+      return `复制器星系对计数频率的提升效果与反物质星系相同，但不会增加反物质星系价格，也不受反物质星系专属倍率影响。这将 ${reductionString}.`;
     }
   },
   methods: {
