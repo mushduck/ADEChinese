@@ -16,14 +16,14 @@ export default {
   },
   computed: {
     gainText() {
-      if (this.tachyonGain.lte(0)) return `not gain anything`;
-      return `gain ${quantify("Tachyon Particle", this.tachyonGain, 2, 1)}`;
+      if (this.tachyonGain.lte(0)) return `获得不到任何东西`;
+      return `获得 ${quantify("个超光速粒子", this.tachyonGain, 2, 1)}`;
     },
     isInEC() {
       return Player.anyChallenge instanceof EternityChallengeState;
     },
     confirmText() {
-      return this.isDoomed ? "Okay" : "Exit";
+      return this.isDoomed ? "嗯呐" : "退出";
     }
   },
   methods: {
@@ -54,24 +54,24 @@ export default {
   >
     <template #header>
       <span v-if="isDoomed">
-        You cannot exit Dilation while Doomed
+        你不能退出被毁灭的膨胀
       </span>
       <span v-else>
-        You are about to exit Dilation
+        你将退出时间膨胀
       </span>
     </template>
     <div class="c-modal-message__text">
       <span v-if="isDoomed">
-        Dilation is permanent. You will {{ gainText }} and reset your current Eternity.
+        时间膨胀永久生效，你将 {{ gainText }} 并重置本次永恒。
       </span>
       <span v-else>
-        If you exit Dilation now, you will {{ gainText }}.
+        如果你现在就退出膨胀，那么你将 {{ gainText }}。
       </span>
       <div v-if="isInEC">
-        You will also exit your current Eternity Challenge as well.
+        这也将退出当前的永恒挑战。
       </div>
       <br>
-      Are you sure you want to proceed?
+      你确定要这么做了吗？
     </div>
     <template #confirm-text>
       {{ confirmText }}
