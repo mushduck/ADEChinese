@@ -7,9 +7,9 @@ import { MultiplierTabIcons } from "./icons";
 export const TD = {
   total: {
     name: dim => {
-      if (dim) return `TD ${dim} Multiplier`;
-      if (EternityChallenge(7).isRunning) return "ID8 Production";
-      return "Time Shard Production";
+      if (dim) return `第 ${dim} 时间维度加成`;
+      if (EternityChallenge(7).isRunning) return "第八无限维度产量";
+      return "时间碎片产量";
     },
     displayOverride: dim => (dim
       ? formatX(TimeDimension(dim).multiplier, 2)
@@ -35,7 +35,7 @@ export const TD = {
     icon: dim => MultiplierTabIcons.DIMENSION("TD", dim),
   },
   purchase: {
-    name: dim => (dim ? `Purchased TD ${dim}` : "Purchases"),
+    name: dim => (dim ? `第 ${dim} 时间维度的购买加成` : "购买加成"),
     multValue: dim => {
       const getMult = td => {
         const d = TimeDimension(td);
@@ -52,7 +52,7 @@ export const TD = {
     icon: dim => MultiplierTabIcons.PURCHASE("TD", dim),
   },
   highestDim: {
-    name: () => `Amount of highest Dimension`,
+    name: () => `最高维度的数量`,
     displayOverride: () => {
       const dim = MultiplierTabHelper.activeDimCount("TD");
       return `TD ${dim}, ${formatInt(TimeDimension(dim).amount)}`;
@@ -63,7 +63,7 @@ export const TD = {
   },
 
   basePurchase: {
-    name: "Base purchases",
+    name: "基础购买加成",
     multValue: dim => {
       const getMult = td => Decimal.pow(4,
         td === 8 ? Math.clampMax(TimeDimension(td).bought, 1e8) : TimeDimension(td).bought);
@@ -79,7 +79,7 @@ export const TD = {
     icon: dim => MultiplierTabIcons.PURCHASE("TD", dim),
   },
   timeGlyphSacrifice: {
-    name: "Time Glyph Sacrifice",
+    name: "时间符文献祭",
     multValue: () => (TimeDimension(8).isProducing
       ? Decimal.pow(GlyphSacrifice.time.effectValue, Math.clampMax(TimeDimension(8).bought, 1e8))
       : DC.D1),
@@ -87,21 +87,21 @@ export const TD = {
     icon: MultiplierTabIcons.SACRIFICE("time"),
   },
   powPurchase: {
-    name: "Imaginary Upgrade - Recollection of Intrusion",
+    name: "虚幻升级——入侵之忆",
     powValue: () => ImaginaryUpgrade(14).effectOrDefault(1),
     isActive: () => ImaginaryUpgrade(14).canBeApplied,
     icon: MultiplierTabIcons.UPGRADE("imaginary"),
   },
 
   achievementMult: {
-    name: "Eternity Upgrade - Achievement Multiplier",
+    name: "永恒升级——成就加成",
     multValue: dim => Decimal.pow(EternityUpgrade.tdMultAchs.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
     isActive: () => EternityUpgrade.tdMultAchs.canBeApplied && !Pelle.isDoomed,
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
   achievement: {
-    name: "Achievement Rewards",
+    name: "成就奖励",
     multValue: dim => {
       const baseMult = DC.D1.timesEffectsOf(Achievement(105), Achievement(128));
       return Decimal.pow(baseMult, dim ? 1 : MultiplierTabHelper.activeDimCount("TD"));
@@ -110,7 +110,7 @@ export const TD = {
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
   timeStudy: {
-    name: dim => (dim ? `Time Studies (TD ${dim})` : "Time Studies"),
+    name: dim => (dim ? `时间研究（第 ${dim} 维）` : "时间研究"),
     multValue: dim => {
       const allMult = DC.D1.timesEffectsOf(
         TimeStudy(93),
@@ -140,7 +140,7 @@ export const TD = {
     icon: MultiplierTabIcons.TIME_STUDY
   },
   eternityUpgrade: {
-    name: dim => (dim ? `Other Eternity Upgrades (TD ${dim})` : "Other Eternity Upgrades"),
+    name: dim => (dim ? `其他永恒升级（第 ${dim} 维）` : "其他永恒升级"),
     multValue: dim => {
       const allMult = DC.D1.timesEffectsOf(
         EternityUpgrade.tdMultTheorems,
@@ -153,14 +153,14 @@ export const TD = {
   },
 
   eu1: {
-    name: () => "Unspent Time Theorems",
+    name: () => "未花费的时间之理",
     multValue: dim => Decimal.pow(EternityUpgrade.tdMultTheorems.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
     isActive: () => EternityUpgrade.tdMultTheorems.canBeApplied,
     icon: MultiplierTabIcons.UPGRADE("eternity"),
   },
   eu2: {
-    name: () => "Days played",
+    name: () => "游玩的天数",
     multValue: dim => Decimal.pow(EternityUpgrade.tdMultRealTime.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
     isActive: () => EternityUpgrade.tdMultRealTime.canBeApplied,
@@ -168,7 +168,7 @@ export const TD = {
   },
 
   eternityChallenge: {
-    name: dim => (dim ? `Eternity Challenges (TD ${dim})` : "Eternity Challenges"),
+    name: dim => (dim ? `永恒挑战（第 ${dim} 维）` : "Eternity Challenges"),
     multValue: dim => {
       let allMult = DC.D1.timesEffectsOf(
         EternityChallenge(1).reward,
@@ -185,7 +185,7 @@ export const TD = {
     icon: MultiplierTabIcons.CHALLENGE("eternity")
   },
   tickspeed: {
-    name: () => "Tickspeed (EC7)",
+    name: () => "计数频率（永恒挑战 7）",
     displayOverride: () => {
       const tickRate = Tickspeed.perSecond;
       const activeDims = MultiplierTabHelper.activeDimCount("TD");
@@ -198,7 +198,7 @@ export const TD = {
     icon: MultiplierTabIcons.TICKSPEED,
   },
   dilationUpgrade: {
-    name: "Dilation Upgrade - Replicanti Multiplier",
+    name: "膨胀升级——复制器加成",
     multValue: dim => {
       const mult = Replicanti.areUnlocked && Replicanti.amount.gt(1)
         ? DilationUpgrade.tdMultReplicanti.effectValue
@@ -209,20 +209,20 @@ export const TD = {
     icon: MultiplierTabIcons.UPGRADE("dilation"),
   },
   realityUpgrade: {
-    name: "Reality Upgrade - Temporal Transcendence",
+    name: "现实升级——超越时光",
     multValue: dim => Decimal.pow(RealityUpgrade(22).effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
     isActive: () => !Pelle.isDoomed && RealityUpgrade(22).canBeApplied,
     icon: MultiplierTabIcons.UPGRADE("reality"),
   },
   glyph: {
-    name: "Glyph Effects",
+    name: "符文效果",
     powValue: () => getAdjustedGlyphEffect("timepow") * getAdjustedGlyphEffect("effarigdimensions"),
     isActive: () => PlayerProgress.realityUnlocked(),
     icon: MultiplierTabIcons.GENERIC_GLYPH
   },
   alchemy: {
-    name: "Glyph Alchemy",
+    name: "符文炼金",
     multValue: dim => Decimal.pow(AlchemyResource.dimensionality.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
     powValue: () => AlchemyResource.time.effectOrDefault(1) * Ra.momentumValue,
@@ -230,13 +230,13 @@ export const TD = {
     icon: MultiplierTabIcons.ALCHEMY,
   },
   imaginaryUpgrade: {
-    name: "Imaginary Upgrade - Suspicion of Interference",
+    name: "虚幻升级——干涉之嫌",
     powValue: () => ImaginaryUpgrade(11).effectOrDefault(1),
     isActive: () => ImaginaryUpgrade(11).canBeApplied,
     icon: MultiplierTabIcons.UPGRADE("imaginary"),
   },
   pelle: {
-    name: "Pelle Rift Effects",
+    name: "佩勒裂痕效果",
     multValue: dim => Decimal.pow(PelleRifts.chaos.effectOrDefault(1),
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
     powValue: () => PelleRifts.paradox.effectOrDefault(DC.D1).toNumber(),
@@ -244,7 +244,7 @@ export const TD = {
     icon: MultiplierTabIcons.PELLE,
   },
   iap: {
-    name: "Shop Tab Purchases",
+    name: "内购",
     multValue: dim => Decimal.pow(ShopPurchase.allDimPurchases.currentMult,
       dim ? 1 : MultiplierTabHelper.activeDimCount("TD")),
     isActive: () => ShopPurchaseData.totalSTD > 0,
@@ -252,13 +252,13 @@ export const TD = {
   },
 
   nerfV: {
-    name: "V's Reality",
+    name: "薇的现实",
     powValue: () => 0.5,
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,
   },
   nerfCursed: {
-    name: "Cursed Glyphs",
+    name: "诅咒符文",
     powValue: () => getAdjustedGlyphEffect("curseddimensions"),
     isActive: () => getAdjustedGlyphEffect("curseddimensions") !== 1,
     icon: MultiplierTabIcons.SPECIFIC_GLYPH("cursed"),

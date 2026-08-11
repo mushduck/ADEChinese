@@ -5,10 +5,10 @@ import { MultiplierTabIcons } from "./icons";
 // See index.js for documentation
 export const EP = {
   total: {
-    name: "Total EP Gained on Eternity",
+    name: "永恒后获得的永恒点数总量",
     displayOverride: () => (Player.canEternity
       ? format(gainedEternityPoints(), 2, 2)
-      : "Cannot Eternity"),
+      : "无法永恒"),
     // This effectively hides everything if the player can't actually gain any
     multValue: () => (Player.canEternity ? gainedEternityPoints() : 1),
     isActive: () => PlayerProgress.eternityUnlocked() || Player.canEternity,
@@ -17,7 +17,7 @@ export const EP = {
     overlay: ["Δ", "<i class='fa-solid fa-layer-group' />"],
   },
   base: {
-    name: "Base Eternity Points",
+    name: "基础永恒点数",
     isBase: true,
     fakeValue: DC.D5,
     multValue: () => DC.D5.pow(player.records.thisEternity.maxIP.plus(
@@ -26,7 +26,7 @@ export const EP = {
     icon: MultiplierTabIcons.CONVERT_FROM("IP"),
   },
   IP: {
-    name: "Eternity Points from Infinity Points",
+    name: "来自无限点数的永恒点数",
     displayOverride: () => `${format(player.records.thisEternity.maxIP.plus(gainedInfinityPoints()), 2, 2)} IP`,
     // Just needs to match the value in base and be larger than 1
     multValue: DC.D5,
@@ -34,7 +34,7 @@ export const EP = {
     icon: MultiplierTabIcons.SPECIFIC_GLYPH("infinity"),
   },
   divisor: {
-    name: "Pelle - EP Formula Improvement",
+    name: "佩勒——改善永恒点数公式",
     displayOverride: () => {
       const div = 308 - PelleRifts.recursion.effectValue.toNumber();
       return `log(IP)/${formatInt(308)} ➜ log(IP)/${format(div, 2, 2)}`;
@@ -44,13 +44,13 @@ export const EP = {
     icon: MultiplierTabIcons.DIVISOR("EP"),
   },
   eternityUpgrade: {
-    name: () => `Eternity Upgrade - Repeatable ${formatX(5)} EP`,
+    name: () => `永恒升级——可重复购买的 ${formatX(5)} 永恒点数倍增`,
     multValue: () => EternityUpgrade.epMult.effectOrDefault(1),
     isActive: () => PlayerProgress.eternityUnlocked() && !Pelle.isDoomed,
     icon: MultiplierTabIcons.UPGRADE("eternity"),
   },
   timeStudy: {
-    name: "Time Studies",
+    name: "时间研究",
     multValue: () => DC.D1.timesEffectsOf(
       TimeStudy(61),
       TimeStudy(121),
@@ -61,7 +61,7 @@ export const EP = {
     icon: MultiplierTabIcons.TIME_STUDY,
   },
   glyph: {
-    name: "Equipped Glyphs",
+    name: "已装备的符文",
     multValue: () => DC.D1
       .timesEffectsOf(Pelle.isDoomed ? null : GlyphEffect.epMult)
       .times(Pelle.specialGlyphEffect.time),
@@ -70,32 +70,32 @@ export const EP = {
     icon: MultiplierTabIcons.GENERIC_GLYPH,
   },
   realityUpgrade: {
-    name: "Reality Upgrade - The Knowing Existence",
+    name: "现实升级——先验存在",
     multValue: () => RealityUpgrade(12).effectOrDefault(1),
     isActive: () => RealityUpgrade(12).canBeApplied && !Pelle.isDoomed,
     icon: MultiplierTabIcons.UPGRADE("reality"),
   },
   pelle: {
-    name: "Pelle Strike - Vacuum Rift",
+    name: "佩勒冲击——空洞裂痕",
     multValue: () => PelleRifts.vacuum.milestones[2].effectOrDefault(1),
     isActive: () => PelleRifts.vacuum.milestones[2].canBeApplied,
     icon: MultiplierTabIcons.PELLE,
   },
   iap: {
-    name: "Shop Tab Purchases",
+    name: "内购",
     multValue: () => ShopPurchase.EPPurchases.currentMult,
     isActive: () => ShopPurchaseData.totalSTD > 0,
     icon: MultiplierTabIcons.IAP,
   },
 
   nerfTeresa: {
-    name: "Teresa's Reality",
+    name: "特蕾莎的现实",
     powValue: () => 0.55,
     isActive: () => Teresa.isRunning,
     icon: MultiplierTabIcons.GENERIC_TERESA,
   },
   nerfV: {
-    name: "V's Reality",
+    name: "薇的现实",
     powValue: () => 0.5,
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,

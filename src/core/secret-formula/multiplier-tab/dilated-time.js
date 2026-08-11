@@ -9,7 +9,7 @@ import { MultiplierTabIcons } from "./icons";
 // after the first ever dilation unlock on the 0th reality
 export const DT = {
   total: {
-    name: "Dilated Time gain",
+    name: "膨胀时间获取量",
     displayOverride: () => `${format(getDilationGainPerSecond().times(getGameSpeedupForDisplay()), 2, 2)}/sec`,
     multValue: () => getDilationGainPerSecond().times(getGameSpeedupForDisplay()),
     isActive: () => PlayerProgress.realityUnlocked() ||
@@ -19,14 +19,14 @@ export const DT = {
     overlay: ["Ψ"],
   },
   achievement: {
-    name: "Achievements",
+    name: "成就",
     multValue: () => Achievement(132).effectOrDefault(1) * Achievement(137).effectOrDefault(1),
     isActive: () => (Achievement(132).canBeApplied || Achievement(137).canBeApplied) &&
       getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
   dilation: {
-    name: "Repeatable Dilation Upgrades",
+    name: "可重复购买的膨胀升级",
     multValue: () => DC.D1.timesEffectsOf(
       DilationUpgrade.dtGain,
       DilationUpgrade.dtGainPelle,
@@ -40,13 +40,13 @@ export const DT = {
     icon: MultiplierTabIcons.UPGRADE("dilation"),
   },
   amplifierDT: {
-    name: "Reality Upgrade - Temporal Amplifier",
+    name: "现实升级——时间放大器",
     multValue: () => RealityUpgrade(1).effectOrDefault(1),
     isActive: () => RealityUpgrade(1).canBeApplied && getDilationGainPerSecond().neq(0) && !Pelle.isDoomed,
     icon: MultiplierTabIcons.UPGRADE("reality"),
   },
   glyph: {
-    name: "Glyph Effects",
+    name: "符文效果",
     multValue: () => {
       const dtMult = getAdjustedGlyphEffect("dilationDT").times(Pelle.specialGlyphEffect.dilation);
       const repliDT = Replicanti.areUnlocked
@@ -58,44 +58,44 @@ export const DT = {
     icon: MultiplierTabIcons.GENERIC_GLYPH
   },
   ra1: {
-    name: "Ra Upgrade - Multiplier based on TT",
+    name: "太阳神升级——基于时间之理的加成",
     multValue: () => DC.D1.timesEffectsOf(Ra.unlocks.continuousTTBoost.effects.dilatedTime),
     isActive: () => Ra.unlocks.autoTP.canBeApplied && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.GENERIC_RA,
   },
   ra2: {
-    name: "Ra Upgrade - Multiplier based on peak game speed",
+    name: "太阳神升级——基于游戏速度峰值的加成",
     multValue: () => DC.D1.timesEffectsOf(Ra.unlocks.peakGamespeedDT),
     isActive: () => Ra.unlocks.autoTP.canBeApplied && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.GENERIC_RA,
   },
   alchemy: {
-    name: "Glyph Alchemy",
+    name: "符文炼金",
     multValue: () => AlchemyResource.dilation.effectOrDefault(1),
     isActive: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.ALCHEMY,
   },
   iap: {
-    name: "Shop Tab Purchases",
+    name: "内购",
     multValue: () => new Decimal(ShopPurchase.dilatedTimePurchases.currentMult ** (Pelle.isDoomed ? 0.5 : 1)),
     isActive: () => ShopPurchaseData.totalSTD > 0 && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.IAP,
   },
 
   nerfV: {
-    name: "V's Reality",
+    name: "薇的现实",
     powValue: () => 0.5,
     isActive: () => V.isRunning && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.GENERIC_V,
   },
   nerfPelle: {
-    name: "Doomed Reality",
+    name: "被毁灭的现实",
     multValue: 1e-5,
     isActive: () => Pelle.isDoomed && getDilationGainPerSecond().neq(0),
     icon: MultiplierTabIcons.PELLE,
   },
   gamespeed: {
-    name: "Current Game speed",
+    name: "当前游戏速度",
     multValue: () => getGameSpeedupForDisplay(),
     isActive: () => getGameSpeedupForDisplay() > 1 && getDilationGainPerSecond().neq(0),
     ignoresNerfPowers: true,
