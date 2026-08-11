@@ -94,11 +94,11 @@ export default {
 <template>
   <ModalWrapper>
     <template #header>
-      Cracks in The Nameless Ones' Reality
+      无名氏的现实中的裂缝
     </template>
     <div class="c-enslaved-hint-modal c-modal--short">
       <div>
-        This Reality seems to be resisting your efforts to complete it. So far you have done the following:
+        这个现实似乎在抵抗你为了能完成它所付出的努力。你已经完成了这些事情：
       </div>
       <br>
       <div
@@ -127,14 +127,11 @@ export default {
         <br>
       </div>
       <div v-if="realityHintsLeft + glyphHintsLeft > 0">
-        You can spend some time looking for some more cracks in the Reality, but every hint you spend Stored Time on
-        will increase the Stored Time needed for the next by a factor of {{ formatInt(3) }}. This cost bump will
-        gradually go away over {{ formatInt(24) }} hours and figuring out what the hint means will immediately
-        divide the cost by {{ formatInt(2) }}. The cost can't be reduced below {{ format(1e40) }} years.
+        你可以花些时间寻找现实中的更多裂缝，但每个提示花费的存储时间将使下一次所需的存储时间增加{{ formatInt(3) }}倍。这个价格增加将在{{ formatInt(24) }}小时内逐渐消失，弄清提示的含义将立即将价格除以{{ formatInt(2) }}。价格不能降到低于{{ format(1e40) }}年。
         <br><br>
-        The next hint will cost {{ hintCost }} of Stored Time. You currently have {{ formattedStored }}.
+        下一个提示将花费{{ hintCost }}的存储时间。你目前有{{ formattedStored }}。
         <span v-if="currentStored < nextHintCost">
-          You will reach this if you charge your Black Hole for {{ timeEstimate }}.
+          如果你为黑洞充能{{ timeEstimate }}，将获得此提示。
         </span>
         <br><br>
         <PrimaryButton
@@ -142,7 +139,7 @@ export default {
           class="l-enslaved-hint-button"
           @click="giveRealityHint(realityHintsLeft)"
         >
-          Get a hint about the Reality itself ({{ formatInt(realityHintsLeft) }} left)
+          获得一个关于这个现实本身的提示（还有 {{ formatInt(realityHintsLeft) }} 个）
         </PrimaryButton>
         <br>
         <PrimaryButton
@@ -150,11 +147,11 @@ export default {
           class="l-enslaved-hint-button"
           @click="giveGlyphHint(glyphHintsLeft)"
         >
-          Get a hint on what Glyphs to use ({{ formatInt(glyphHintsLeft) }} left)
+          获得一个关于符文配置的提示（还有 {{ formatInt(glyphHintsLeft) }} 个）
         </PrimaryButton>
       </div>
       <div v-else>
-        <b>There are no more hints left!</b>
+        <b>没有更多的提示了。</b>
       </div>
     </div>
   </ModalWrapper>

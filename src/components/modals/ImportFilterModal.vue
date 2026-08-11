@@ -99,9 +99,9 @@ export default {
     :show-confirm="false"
   >
     <template #header>
-      Import Glyph filter settings
+      导入符文筛选设置
     </template>
-    Note: Importing Glyph filter options will overwrite settings
+    注意：除当前选择的模式外，导入的符文筛选设置将覆盖所有模式的设置。
     <br>
     in all filter modes, not just the currently-selected one.
     <input
@@ -115,11 +115,11 @@ export default {
     <div class="c-modal-import__save-info">
       <div v-if="!input" />
       <div v-else-if="inputIsValid">
-        <b>Selection mode:</b> {{ selectStr }}
+        <b>选择模式：</b> {{ selectStr }}
         <br>
-        <b>Effect Count ("Number of Effects"):</b> {{ basicCountStr }}
+        <b>效果数量：</b> {{ basicCountStr }}
         <br>
-        <b>Rejected Glyphs:</b> {{ trashStr }}
+        <b>不符合的符文：</b> {{ trashStr }}
         <br>
         <u><b>Type-specific Settings</b></u> <span :ach-tooltip="settingTooltipText">
           <i class="fas fa-question-circle" />
@@ -135,7 +135,7 @@ export default {
         />
       </div>
       <div v-else>
-        Not a valid Glyph filter string
+        导入的符文筛选无效
       </div>
     </div>
 
@@ -144,7 +144,7 @@ export default {
       class="o-primary-btn--width-medium c-modal-message__okay-btn c-modal__confirm-btn"
       @click="importFilter"
     >
-      Import
+      导入
     </PrimaryButton>
   </ModalWrapperChoice>
 </template>

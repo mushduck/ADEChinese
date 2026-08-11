@@ -41,7 +41,7 @@ export default {
     <ModalCloseButton @click="emitClose" />
     <div class="l-changelog-header">
       <div class="c-changelog-title">
-        Changelog
+        更新日志
       </div>
     </div>
     <div class="l-changelog-container">

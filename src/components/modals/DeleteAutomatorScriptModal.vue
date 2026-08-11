@@ -39,13 +39,13 @@ export default {
 <template>
   <ModalWrapperChoice @confirm="handleYesClick">
     <template #header>
-      Delete this script
+      删除该脚本
     </template>
     <div class="c-modal-message__text">
-      Please confirm your desire to delete this Automator script.
+      请确认你是真的要删除这个自动机脚本。
     </div>
     <template #confirm-text>
-      Delete
+      删除
     </template>
   </ModalWrapperChoice>
 </template>
