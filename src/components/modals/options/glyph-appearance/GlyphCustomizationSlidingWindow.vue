@@ -35,7 +35,7 @@ export default {
       return this.glyphId !== -1;
     },
     attrString() {
-      return this.isSymbol ? "symbol" : "color";
+      return this.isSymbol ? "符号" : "颜色";
     },
     typeObject() {
       return CosmeticGlyphTypes;
@@ -213,7 +213,7 @@ export default {
       v-else
       class="c-no-options"
     >
-      You have no custom options for changing Glyph {{ attrString }}s.
+      你还没有解锁修改符文{{ attrStringChinese }}的选项。
     </div>
   </div>
 </template>
