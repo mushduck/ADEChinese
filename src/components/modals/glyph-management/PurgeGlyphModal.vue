@@ -17,22 +17,18 @@ export default {
       return this.harsh ? 1 : 5;
     },
     extraMessage() {
-      if (this.glyphsDeleted === 0) return `This will Purge no Glyphs.`;
-      if (this.glyphsDeleted === this.glyphsTotal) return `This will Purge all your Glyphs.`;
-      return `${this.harsh ? `Harsh Purging` : `Purging`} will delete
+      if (this.glyphsDeleted === 0) return `这将不会净化任何符文。`;
+      if (this.glyphsDeleted === this.glyphsTotal) return `这将净化全部符文。`;
+      return `${this.harsh ? `强力` : ``}净化将移除
         ${formatInt(this.glyphsDeleted)}/${formatInt(this.glyphsTotal)}
-      of your Glyphs.`;
+      个符文。`;
     },
     explanation() {
-      if (this.harsh) return `Harsh Purging deletes Glyphs that are strictly worse than any other Glyph in your
-        inventory. For example, if a Glyph has all the same effects as another Glyph, but the values
-        of ALL of the effects are worse, then it will be deleted.`;
-      return `Purging deletes Glyphs that are strictly worse than other Glyphs, while keeping enough to equip a full
-        set with those effects. This behaves like Harsh Purge, except that regular Purge will not delete any given
-        Glyph unless it finds five Glyphs which are better (instead of only one).`;
+      if (this.harsh) return `强力净化将删除仓库中全面劣于其他符文的符文。例如：若某符文的所有词条与另一符文完全相同，但全部词条数值均更低，则将被删除。`;
+      return `普通净化将删除全面劣于其他符文的符文，但会保留足够装备整套效果的符文。其机制类似强力净化，区别在于：普通净化需找到五个更优符文（而非仅一个）才会删除目标符文。`;
     },
     topLabel() {
-      return `You are about to ${this.harsh ? `Harsh Purge` : `Purge`} your Glyphs`;
+      return `你将要${this.harsh ? `强力` : ``}净化符文`;
     },
 
     // These two don't need to be reactive since the modal force-closes itself whenever glyphs change
@@ -60,8 +56,7 @@ export default {
       {{ topLabel }}
     </template>
     <div class="c-modal-message__text">
-      This could delete Glyphs in your inventory that are good enough that you might want to use them
-      later. Purging will Purge Glyphs based on your Purge mode. Are you sure you want to do this?
+      此操作可能移除仓库中未来可能用到的优质符文。净化将根据你设定的净化模式执行。你确定要继续吗？
       <br>
       <br>
       {{ explanation }}
