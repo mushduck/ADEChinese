@@ -69,8 +69,8 @@ export default {
       return ALCHEMY_BASIC_GLYPH_TYPES.filter(t => !GlyphTypes.locked.map(e => e.id).includes(t));
     },
     settingTooltipText() {
-      return `Mouseover each box for more details. ✔ and ✘ symbols denote an effect
-        selected/unselected for Specified Effect mode.`;
+      return `将鼠标悬停在每个方框上可查看更多详细信息。✔ 和 ✘ 符号表示在“指定效果”模式下，
+        该效果已被选中/未被选中。`;
     }
   },
   mounted() {
@@ -81,7 +81,7 @@ export default {
       this.currentSettings = JSON.parse(JSON.stringify(player.reality.glyphs.filter));
     },
     changedValue(oldVal, newVal, applyFn) {
-      if (oldVal === newVal) return "(No change)";
+      if (oldVal === newVal) return "（无变化）";
       return `${applyFn(oldVal)} ➜ ${applyFn(newVal)}`;
     },
     importFilter() {
