@@ -62,7 +62,7 @@ export default {
 <template>
   <div class="l-break-eternity-tab">
     <div v-if="!isUnlocked">
-      Reach {{ format(antimatterReq, 2, 1) }} with at least one Endgame to unlock Break Eternity
+      达到 {{ format(antimatterReq, 2, 1) }} 反物质且至少进行一次终局以打破永恒
     </div>
     <BreakEternityButton class="l-break-eternity-tab__break-btn" />
     <div

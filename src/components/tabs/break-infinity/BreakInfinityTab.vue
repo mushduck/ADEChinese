@@ -80,8 +80,7 @@ export default {
 <template>
   <div class="l-break-infinity-tab">
     <div v-if="!isUnlocked">
-      Reduce the interval of Automatic Big Crunch Autobuyer to
-      {{ format(0.1, 1, 1) }} seconds to unlock Break Infinity.
+      自动大坍缩的时间间隔需要达到 {{ format(0.1, 1, 1) }} 秒才能打破无限
     </div>
     <div
       v-if="chargeUnlocked"
@@ -91,15 +90,15 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        Respec Charged Break Infinity Upgrades on next Endgame
+        终局后重置打破无限充能升级
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
-      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Break Infinity Upgrades.
-      Charged Break Infinity Upgrades have their effect altered.
+      你已充能 {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} 个打破无限升级。
+      充能的打破无限升级效果会发生改变。
       <br>
-      Hold shift to show Charged Break Infinity Upgrades.
-      <span> You can freely respec your choices on Endgame.</span>
+      按住 Shift 键可显示未充能的打破无限升级。
+      <span> 你可以在终局后自由重置选择。</span>
     </div>
     <BreakInfinityButton class="l-break-infinity-tab__break-btn" />
     <div

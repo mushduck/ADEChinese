@@ -19,7 +19,7 @@ export default {
       };
     },
     text() {
-      return this.isBroken ? "ETERNITY IS BROKEN" : "BREAK ETERNITY";
+      return this.isBroken ? "已打破永恒" : "打破永恒";
     }
   },
   methods: {
