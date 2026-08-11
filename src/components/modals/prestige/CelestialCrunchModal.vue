@@ -21,23 +21,23 @@ export default {
     },
     message() {
       const info = this.isFirstCelInfinity ? this.firstCelInfinityInfo : ``;
-      return `Upon Celestial Infinity, all Celestial Dimensions, Celestial Dimension Boosts, and Celestial Galaxies are reset. ${info}`;
+      return `天界无限后，所有天界维度、天界维度提升和天界星系都将被重置。${info}`;
     },
     firstCelInfinityInfo() {
-      return `In return, you gain an Celestial Infinity Point (CIP). This allows you to buy multiple upgrades that you can
-        find in the Celestial Infinity tab. You will also gain one Celestial Infinity, which is the stat shown in the Statistics tab.`;
+      return `作为回报，你将获得一个天界无限点数（缩写：CIP）。它可用于购买多个升级，你可以
+在“天界无限”标签页中找到这些升级。你还将获得一个天界无限次数，它会在“统计数据”标签页中显示。`;
     },
     cipGainInfo() {
-      return `You will gain ${quantify("Celestial Infinity", this.gainedCelestialInfinities, 2, 0)}
-        and ${quantify("Celestial Infinity Point", this.gainedCelestialInfinityPoints, 2, 0)}.`;
+      return `你将获得 ${quantify("无限次数", this.gainedCelestialInfinities, 2, 0)}
+        和 ${quantify("天界无限点数", this.gainedCelestialInfinityPoints, 2, 0)}.`;
     },
     startingResources() {
       const gainedResources = [];
-      if (this.startingCM.gte(0)) gainedResources.push(`${quantify("Celestial Matter", this.startingCM, 2, 1)}`);
-      if (this.startingBoosts.gt(0)) gainedResources.push(`${quantify("Celestial Dimension Boost", this.startingBoosts)}`);
-      if (this.willStartWithGalaxy) gainedResources.push(`${quantify("Celestial Galaxy", 1)}`);
+      if (this.startingCM.gte(0)) gainedResources.push(`${quantify("天界物质", this.startingCM, 2, 1)}`);
+      if (this.startingBoosts.gt(0)) gainedResources.push(`${quantify("天界维度提升", this.startingBoosts)}`);
+      if (this.willStartWithGalaxy) gainedResources.push(`${quantify("天界星系", 1)}`);
 
-      return `You will start your next Celestial Infinity with ${makeEnumeration(gainedResources)}.`;
+      return `你将会以 ${makeEnumeration(gainedResources)} 开始下一次无限。`;
     }
   },
   methods: {
@@ -58,7 +58,7 @@ export default {
 
 <template>
   <ResetModal
-    header="You are about to Celestial Crunch"
+    header="你将要进行无限"
     :message="message"
     :gained-resources="cipGainInfo"
     :starting-resources="startingResources"

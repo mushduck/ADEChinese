@@ -28,7 +28,7 @@ export default {
 在“无限”标签页中找到这些升级。你还将获得一个无限次数，它会在“统计数据”标签页中显示。`;
     },
     ipGainInfo() {
-      return `你将获得 ${format(this.gainedInfinities, 2, 0)} 无限次数和 ${format(this.gainedInfinityPoints, 2, 0)} 永恒点数。`;
+      return `你将获得 ${format(this.gainedInfinities, 2, 0)} 无限次数和 ${format(this.gainedInfinityPoints, 2, 0)} 无限点数。`;
     },
     startingResources() {
       const gainedResources = [];
