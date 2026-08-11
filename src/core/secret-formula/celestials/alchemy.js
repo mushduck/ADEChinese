@@ -2,7 +2,7 @@ export const alchemyResources = {
   // T1 resources (Non-Effarig "base" resources)
   "power": {
     id: ALCHEMY_RESOURCE.POWER,
-    name: "力量",
+    name: "Power",
     symbol: "Ω",
     isBaseResource: true,
     effect: amount => 1 + amount / 125000,
@@ -15,7 +15,7 @@ export const alchemyResources = {
   },
   "infinity": {
     id: ALCHEMY_RESOURCE.INFINITY,
-    name: "无限",
+    name: "Infinity",
     symbol: "∞",
     isBaseResource: true,
     effect: amount => 1 + amount / 125000,
@@ -28,7 +28,7 @@ export const alchemyResources = {
   },
   "time": {
     id: ALCHEMY_RESOURCE.TIME,
-    name: "时间",
+    name: "Time",
     symbol: "Δ",
     isBaseResource: true,
     effect: amount => 1 + amount / 125000,
@@ -41,7 +41,7 @@ export const alchemyResources = {
   },
   "replication": {
     id: ALCHEMY_RESOURCE.REPLICATION,
-    name: "复制",
+    name: "Replication",
     symbol: "Ξ",
     isBaseResource: true,
     effect: amount => Decimal.pow10(amount / 500),
@@ -54,7 +54,7 @@ export const alchemyResources = {
   },
   "dilation": {
     id: ALCHEMY_RESOURCE.DILATION,
-    name: "时间膨胀",
+    name: "Dilation",
     symbol: "Ψ",
     isBaseResource: true,
     effect: amount => Decimal.pow10(amount / 1000),
@@ -69,7 +69,7 @@ export const alchemyResources = {
   // T2 resources (combinations of pairs of T1 resources)
   "cardinality": {
     id: ALCHEMY_RESOURCE.CARDINALITY,
-    name: "基数",
+    name: "Cardinality",
     symbol: "α",
     isBaseResource: false,
     effect: amount => 1 + 0.2 / (1 + amount / 12500),
@@ -92,7 +92,7 @@ export const alchemyResources = {
   },
   "eternity": {
     id: ALCHEMY_RESOURCE.ETERNITY,
-    name: "永恒",
+    name: "Eternity",
     symbol: "τ",
     isBaseResource: false,
     effect: amount => 1 + amount / 12500,
@@ -115,7 +115,7 @@ export const alchemyResources = {
   },
   "dimensionality": {
     id: ALCHEMY_RESOURCE.DIMENSIONALITY,
-    name: "维度",
+    name: "Dimensionality",
     symbol: "ρ",
     isBaseResource: false,
     effect: amount => Decimal.pow10(6 * amount),
@@ -138,7 +138,7 @@ export const alchemyResources = {
   },
   "inflation": {
     id: ALCHEMY_RESOURCE.INFLATION,
-    name: "暴胀",
+    name: "Inflation",
     symbol: "λ",
     isBaseResource: false,
     effect: amount => Decimal.pow10(6e9 - 3e5 * amount),
@@ -161,7 +161,7 @@ export const alchemyResources = {
   },
   "alternation": {
     id: ALCHEMY_RESOURCE.ALTERNATION,
-    name: "交变",
+    name: "Alternation",
     symbol: "ω",
     isBaseResource: false,
     effect: amount => amount / 125000,
@@ -186,7 +186,7 @@ export const alchemyResources = {
   // T3 resources (Effarig and conbinations of T1/T2 with Effarig)
   "effarig": {
     id: ALCHEMY_RESOURCE.EFFARIG,
-    name: "鹿颈长",
+    name: "Effarig",
     symbol: "Ϙ",
     isBaseResource: true,
     effect: amount => Decimal.pow10(amount / 1250),
@@ -199,7 +199,7 @@ export const alchemyResources = {
   },
   "synergism": {
     id: ALCHEMY_RESOURCE.SYNERGISM,
-    name: "协同",
+    name: "Synergism",
     symbol: "π",
     isBaseResource: false,
     effect: amount => {
@@ -231,7 +231,7 @@ export const alchemyResources = {
   },
   "momentum": {
     id: ALCHEMY_RESOURCE.MOMENTUM,
-    name: "动量",
+    name: "Momentum",
     symbol: "μ",
     isBaseResource: false,
     effect: amount => 1 + amount / 100000,
@@ -239,7 +239,7 @@ export const alchemyResources = {
     uiOrder: 3,
     unlockedAt: 15,
     description: "为所有维度提供随时间永久增长的加成",
-    formatEffect: value => `喵喵喵所有维度 ${formatPow(Ra.momentumValue, 4, 4)}，解锁该资源后每小时增加 ${format(0.01 * Effects.product(Achievement(175), EndgameMastery(171), Achievement(222)), 3, 3)}，最高可达 ${formatPow(value, 4, 4)}`,
+    formatEffect: value => `所有维度 ${formatPow(Ra.momentumValue, 4, 4)}，解锁该资源后每小时增加 ${format(0.01 * Effects.product(Achievement(175), EndgameMastery(171), Achievement(222)), 3, 3)}，最高可达 ${formatPow(value, 4, 4)}`,
     reagents: [
       {
         resource: ALCHEMY_RESOURCE.EFFARIG,
@@ -258,7 +258,7 @@ export const alchemyResources = {
   },
   "decoherence": {
     id: ALCHEMY_RESOURCE.DECOHERENCE,
-    name: "退相干",
+    name: "Decoherence",
     symbol: "ξ",
     isBaseResource: false,
     effect: amount => 0.2 * Math.sqrt(amount / 25000),
@@ -283,7 +283,7 @@ export const alchemyResources = {
   // T4 resources (resources which feed directly into the final resource)
   "exponential": {
     id: ALCHEMY_RESOURCE.EXPONENTIAL,
-    name: "增幅秘术",
+    name: "Exponential",
     symbol: "Γ",
     isBaseResource: false,
     effect: amount => 10 * Math.pow(amount / 10000, 3),
@@ -306,7 +306,7 @@ export const alchemyResources = {
   },
   "force": {
     id: ALCHEMY_RESOURCE.FORCE,
-    name: "神秘力场",
+    name: "Force",
     symbol: "Φ",
     isBaseResource: false,
     effect: amount => 10 * amount,
@@ -329,7 +329,7 @@ export const alchemyResources = {
   },
   "uncountability": {
     id: ALCHEMY_RESOURCE.UNCOUNTABILITY,
-    name: "无尽奥秘",
+    name: "Uncountability",
     symbol: "Θ",
     isBaseResource: false,
     effect: amount => 1600 * Math.sqrt(amount / 6250),
@@ -356,7 +356,7 @@ export const alchemyResources = {
   },
   "boundless": {
     id: ALCHEMY_RESOURCE.BOUNDLESS,
-    name: "无限虚空",
+    name: "Boundless",
     symbol: "Π",
     isBaseResource: false,
     effect: amount => amount / 62500,
@@ -379,7 +379,7 @@ export const alchemyResources = {
   },
   "multiversal": {
     id: ALCHEMY_RESOURCE.MULTIVERSAL,
-    name: "诸界奥义",
+    name: "Multiversal",
     symbol: "Σ",
     isBaseResource: false,
     effect: amount => 32 * Math.pow(amount / 20000, 2),
@@ -402,7 +402,7 @@ export const alchemyResources = {
   },
   "unpredictability": {
     id: ALCHEMY_RESOURCE.UNPREDICTABILITY,
-    name: "未知预言",
+    name: "Unpredictability",
     symbol: "Λ",
     isBaseResource: false,
     effect: amount => amount / (8333.33 + amount),
@@ -431,7 +431,7 @@ export const alchemyResources = {
   // T5 (Reality)
   "reality": {
     id: ALCHEMY_RESOURCE.REALITY,
-    name: "现实",
+    name: "Reality",
     symbol: "Ϟ",
     isBaseResource: false,
     effect: amount => Math.floor(amount),
