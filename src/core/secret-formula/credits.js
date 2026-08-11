@@ -1,27 +1,28 @@
 export const credits = {
   // Must be placed in the order it is desired they appear in the credits
   roles: {
-    1: "Creator",
-    2: "Creator (Endgame)",
-    3: "Technical Architect",
-    4: "Lead Developer",
-    5: "Android Developer",
-    6: "Steam Developer",
-    7: "Library Developer",
-    8: "Developer",
-    9: "Endgame Developer",
-    10: "Lead Design Consultant",
-    11: "Design Consultant",
-    12: "Writer",
-    13: "Achievement Artist",
-    14: "Visual Artist",
-    15: "Modal Maker, Lady Taker, Pie Baker",
-    16: "Lurker Tester",
-    17: "Web Tester",
-    18: "Endgame Web Tester",
-    19: "Android Tester",
-    20: "Endgame Mobile Tester",
-    21: "Other Contributor",
+    1: "作者",
+    2: "模组作者",
+    3: "技术工程师",
+    4: "领衔开发者",
+    5: "移动端开发者",
+    6: "Steam 版开发者",
+    7: "库开发者",
+    8: "开发者",
+    9: "模组开发者",
+    10: "首席设计顾问",
+    11: "设计顾问",
+    12: "编剧",
+    13: "成就图标设计",
+    14: "视觉制作者",
+    15: "弹窗设计师、带妹师、厨师",
+    16: "地下测试者",
+    17: "网页版测试者",
+    18: "模组网页端测试者",
+    19: "安卓版测试者",
+    20: "模组移动端测试者",
+    21: "其它贡献者",
+    22: "汉化者"
   },
 
   // Each person must have a name and at least one role (the index of the desired role in roles). They can also have a
@@ -35,6 +36,10 @@ export const credits = {
       name: "Supersonic Seven",
       name2: "Benjamin Rockholz",
       roles: 2
+    },{
+      name: "松茸不吃柯尔鸭",
+      name2: "mushduck(qq:3151643233)",
+      roles: 22
     }, {
       name: "Razenpok",
       name2: "Andrei Andreev",
