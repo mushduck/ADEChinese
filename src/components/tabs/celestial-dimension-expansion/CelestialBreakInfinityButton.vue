@@ -20,7 +20,7 @@ export default {
     },
     text() {
       return this.isUnlocked
-        ? (this.isBroken ? "CELESTIAL INFINITY IS BROKEN".split("\n") : "BREAK CELESTIAL INFINITY".split("\n"))
+        ? (this.isBroken ? "已打破天界无限".split("\n") : "打破天界无限".split("\n"))
         : `PURCHASE CELESTIAL BREAK INFINITY\n\nCOSTS: ${formatInt(10000)} CIP`.split("\n");
     }
   },

@@ -48,18 +48,18 @@ export default {
       @click="purchaseUpgrade"
     >
       <div>
-        Multiply Celestial Eternity Points from all sources by {{ formatX(5) }}
+        将所有来源的天界永恒点数 {{ formatX(5) }}
         <br>
-        Currently: {{ formatX(multiplier, 2, 0) }}
+        当前: {{ formatX(multiplier, 2, 0) }}
       </div>
       <br>
-      Cost: {{ quantify("Celestial Eternity Point", cost, 2, 0) }}
+      价格: {{ quantify("Celestial Eternity Point", cost, 2, 0) }}
     </button>
     <PrimaryButton
       class="l--spoon-btn-group__little-spoon o-primary-btn--small-spoon"
       @click="upgrade.buyMax(false)"
     >
-      Max Cel Eternity Point mult
+      购买最大倍增升级
     </PrimaryButton>
   </div>
 </template>
