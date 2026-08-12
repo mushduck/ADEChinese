@@ -40,26 +40,26 @@ export default {
       return ui.view.shiftDown;
     },
     name() {
-      return `${CelestialDimension(this.tier).shortDisplayName} Celestial Dimension`;
+      return `第 ${CelestialDimension(this.tier).shortDisplayName} 天界维度`;
     },
     costDisplay() {
       if (this.isUnlocked || this.shiftDown) {
-        if (this.isCapped) return "Capped";
-        return this.showCostTitle ? `Cost: ${format(this.cost)} CP` : `${format(this.cost)} CP`;
+        if (this.isCapped) return "已达到上限";
+        return this.showCostTitle ? `价格: ${format(this.cost)} 天界点数` : `${format(this.cost)} 天界点数`;
       }
 
       if (this.canUnlock) {
-        return "Unlock";
+        return "解锁";
       }
 
-      return `Reach ${format(CelestialDimension(this.tier).cpRequirement)} CP`;
+      return `达到 ${format(CelestialDimension(this.tier).cpRequirement)} 天界点数`;
     },
     hasLongText() {
       return this.costDisplay.length > 20;
     },
     capTooltip() {
-      if (this.isCapped) return `Cap reached at ${format(this.capCP)} CP`;
-      return `Purchased ${quantifyHybridLarge("time", this.purchases)}`;
+      if (this.isCapped) return `已达到上限: ${format(this.capCP)} 天界点数`;
+      return `购买 ${quantifyHybridLarge("个", this.purchases)}`;
     },
     showRow() {
       return this.isUnlocked || this.canUnlock || this.amount.gt(0) ||
@@ -141,7 +141,7 @@ export default {
         class="o-primary-btn--cd-auto"
         @click="buyMaxCelestialDimension"
       >
-        Buy Max
+        购买最大
       </PrimaryButton>
     </div>
   </div>

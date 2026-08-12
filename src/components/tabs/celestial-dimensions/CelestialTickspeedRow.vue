@@ -21,10 +21,10 @@ export default {
     },
     multiplierDisplay() {
       const tickmult = this.mult;
-      return `${formatX(tickmult, 2, 3)} faster / upgrade.`;
+      return `每个升级将天界计数频率速度${formatX(tickmult, 2, 3)}`;
     },
     celestialTickspeedDisplay() {
-      return `Celestial Tickspeed: ${format(this.celestialTickspeed, 2, 3)} / sec`;
+      return `天界计数频率: ${format(this.celestialTickspeed, 2, 3)} / 秒`;
     },
     upgradeCount() {
       const purchased = this.purchasedCelestialTickspeed;
@@ -62,7 +62,7 @@ export default {
         onclick="buyCelestialTickSpeed()"
       >
         <span>
-          Celestial Tickspeed Cost: {{ format(cost) }}
+          天界计数频率价格: {{ format(cost) }}
         </span>
       </button>
       <button
@@ -70,7 +70,7 @@ export default {
         :class="{ 'o-primary-btn--disabled': !isAffordable }"
         onclick="buyMaxCelestialTickSpeed()"
       >
-        Buy Max
+        购买最大
       </button>
     </div>
     <div class="celestial-tickspeed-labels">

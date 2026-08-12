@@ -86,34 +86,35 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        Max all
+        购买最大数量
       </PrimaryButton>
       <PrimaryButton
         v-if="isAnyAutobuyerUnlocked && !isEC8Running"
         class="o-primary-btn--subtab-option"
         @click="toggleAllAutobuyers"
       >
-        Toggle all autobuyers
+        自动购买器状态切换
       </PrimaryButton>
     </div>
     <div>
       <p>
-        You have
+        你拥有
         <span class="c-infinity-dim-description__accent">{{ format(infinityPower, 2, 1) }}</span>
-        Infinity Power,
+        无限之力。
         <br>
         <span v-if="!isEC9Running">
-          increased by
+          增加
           <span class="c-infinity-dim-description__accent">{{ formatPow(conversionRate, 2, 3) }}</span>
         </span>
         <span v-else>
-          translated
+          转化
         </span>
-        to a
+        为
+        <span v-if="!isEC9Running">反物质维度</span>
+        <span v-else>时间维度(永恒挑战 9)</span>
+        提供
         <span class="c-infinity-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
-        multiplier on all
-        <span v-if="!isEC9Running">Antimatter Dimensions.</span>
-        <span v-else>Time Dimensions due to Eternity Challenge 9.</span>
+        的加成。
       </p>
     </div>
     <div
@@ -129,25 +130,24 @@ export default {
         @click="buyTesseract"
       >
         <p>
-          Buy a Tesseract ({{ tesseractCountString }})
+          购买一个超立方体 ({{ tesseractCountString }})
         </p>
-        <p>Increase Infinity Dimension caps by {{ format(nextDimCapIncrease, 2) }}</p>
-        <p><b>Costs: {{ format(tesseractCost) }} IP</b></p>
+        <p>无限维度的数量上限增加 {{ format(nextDimCapIncrease, 2) }}</p>
+        <p><b>价格：{{ format(tesseractCost) }} 无限点数</b></p>
       </button>
     </div>
     <div v-if="isEnslavedRunning">
-      All Infinity Dimensions are limited to a single purchase.
+      所有无限维度都只能购买一次。
     </div>
     <div v-else>
-      All Infinity Dimensions except for the 8th are limited to a maximum of {{ format(totalDimCap, 2) }}
-      purchases each.
+      除第八无限维度外，所有无限维度均限最多购买 {{ format(totalDimCap, 2) }} 次。
     </div>
-    <div>You are getting {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+    <div>你每秒能得到 {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} 无限之力。</div>
     <b
       v-if="isEC8Running"
       class="l-infinity-dim-tab__ec8-purchases"
     >
-      You have {{ quantifyInt("purchase", EC8PurchasesLeft) }} left within Eternity Challenge 8.
+      你还能买 {{ quantifyInt("purchase", EC8PurchasesLeft) }} 次(永恒挑战 8)。
     </b>
     <div class="l-dimensions-container">
       <InfinityDimensionRow
@@ -157,7 +157,7 @@ export default {
       />
     </div>
     <div v-if="showLockedDimCostNote">
-      Hold shift to see the Infinity Point cost for locked Infinity Dimensions.
+      按住 Shift 键可查看被锁定无限维度的无限点数价格。
     </div>
   </div>
 </template>

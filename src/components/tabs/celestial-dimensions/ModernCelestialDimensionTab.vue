@@ -117,94 +117,90 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        Max all
+        全部最大
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="toggleCelestialMatterMultiplier"
       >
-        Toggle Celestial Matter
+        切换激发天界物质
       </PrimaryButton>
       <PrimaryButton
         v-if="isAnyAutobuyerUnlocked"
         class="o-primary-btn--subtab-option"
         @click="toggleAllAutobuyers"
       >
-        Toggle all autobuyers
+        切换所有自动购买器
       </PrimaryButton>
     </div>
     <div v-if="!canCrunch || isBroken">
       <div>
         <p>
           <span v-if="hasEternities">
-            You have <span class="c-celestial-eternity-text">{{ format(eternityPoints, 2) }}</span>
-            {{ pluralize("Celestial Eternity Point", eternityPoints) }}.
+            你拥有 <span class="c-celestial-eternity-text">{{ format(eternityPoints, 2) }}</span>
+            {{ pluralize("天界永恒点数", eternityPoints) }}.
           </span>
           <br>
           <span v-if="hasInfinities">
-            You have <span class="c-celestial-infinity-text">{{ format(infinityPoints, 2) }}</span>
-            {{ pluralize("Celestial Infinity Point", infinityPoints) }}.
+            你拥有 <span class="c-celestial-infinity-text">{{ format(infinityPoints, 2) }}</span>
+            {{ pluralize("天界无限点数", infinityPoints) }}.
           </span>
           <br>
-          You have
+          你拥有
           <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
-          <span v-if="unstable"> Unstable</span> <span v-if="isOverflowing">Overflowing</span>
-          <span v-if="isCorrupted"> Corrupted</span> Celestial Matter,
+          <span v-if="isCorrupted"> 被诅咒的</span> <span v-if="unstable"> 不稳定</span>天界物质<span v-if="isOverflowing">（已溢出）</span>,
           <br>
           <span>
-            increased by
+            增加
             <span :class="instabilityClassObject()">{{ formatPow(conversionExponent, 2, 3) }}</span>
           </span>
-          to a
+          为
+          <span>游戏速度</span>
+          提供
           <span :class="instabilityClassObject()">
-            {{ formatX(dimMultiplier, 2, 1) }}<span v-if="!isEffectActive"> (Disabled)</span>
+            {{ formatX(dimMultiplier, 2, 1) }}<span v-if="!isEffectActive">(已禁用)</span>
           </span>
-          multiplier to
-          <span>Game Speed.</span>
+          的加成。
           <div v-if="unstable">
-            You <i>would</i> have <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
-            Celestial Matter, but you don't.
+            你 <i>本可以</i> 拥有 <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
+            天界物质，但事与愿违。
             <br>
-            This is because at <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
-            Celestial Matter was softcapped.
+            这是因为在超过 <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> 天界物质后，你的天界物质被一层软上限限制了。
+            <br>当前，超过一层软上限的天界物质数量将
+            <span :class="instabilityClassObject()">^{{ format(1 / softcapPow, 2, 3) }}</span>。
             <br>
-            Currently, Celestial Matter above this amount is being raised to the power of
-            <span :class="instabilityClassObject()">{{ format(1 / softcapPow, 2, 3) }}</span>.
-            <br>
-            The softcap to Celestial Matter is solely based on your Celestial Matter Softcap Magnitude, which is currently
-            <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>.
+            现在天界物质的一层软上限强度完全取决于你的天界物质一层软上限指数, 当前为
+            <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>。
           </div>
           <div v-if="isOverflowing">
-            After <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> Celestial Matter, your
-            Celestial Matter was softcapped <i>again</i>.
+            在超过 <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> 天界物质后，你的天界物质将溢出，受<i>二层</i>软上限限制。
             <br>
-            Currently, Celestial Matter and the Celestial Matter Softcap start above this amount is being raised to the power of
-            <span :class="instabilityClassObject()">{{ format(1 / overflowMag, 2, 3) }}</span>.
+            当前，你的天界物质和天界物质一层软上限起始值都溢出了，溢出的天界物质数量将
+            <span :class="instabilityClassObject()">^{{ format(1 / overflowMag, 2, 3) }}</span>。
             <br>
-            The Celestial Matter Overflow is solely based on your Celestial Matter Overflow Magnitude, which is currently
-            <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>.
+            现在溢出的天界物质的二层软上限强度完全取决于你的天界物质二层软上限指数, 当前为
+            <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>。
           </div>
           <div v-if="isCorrupted">
-            After <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> Celestial Matter, your
-            Celestial Matter was softcapped <i>once again</i>.
+            在超过 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> 天界物质后，你的天界物质将被诅咒，受<i>三层</i>软上限限制。
             <br>
-            Currently, Celestial Matter above this amount is being raised to the power of
-            <span :class="instabilityClassObject()">{{ format(1 / massOverflowMag, 2, 3) }}</span>.
+            当前，超过三层软上限的天界物质数量将
+            <span :class="instabilityClassObject()">^{{ format(1 / massOverflowMag, 2, 3) }}</span>。
             <br>
-            The Celestial Matter Corruption is solely based on your Celestial Matter Corruption Magnitude, which is currently
-            <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>.
+            现在被诅咒的天界物质的三层软上限强度完全取决于你的天界物质三层软上限指数, 当前为
+            <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>。
           </div>
         </p>
       </div>
       <div v-if="hasRemnant">
-        Remnants of Alpha Decay are raising all Celestial Dimensions to the power of
-        <span class="c-celestial-dim-description__accent-unstable">{{ format(alphaDecayRemnant, 2, 3) }}</span>,
-        which increases to a cap of {{ formatInt(1) }} over {{ timeToCapText }} this Celestial Infinity.
+        阿尔法留下的诅咒将使你所有的天界维度倍率
+        <span class="c-celestial-dim-description__accent-unstable">^{{ format(alphaDecayRemnant, 2, 3) }}</span>,
+        该诅咒指数将于 {{ timeToCapText }} 后逐渐恢复到 {{ formatInt(1) }} ，进行天界无限后重置。
       </div>
       <div>
-        All Celestial Dimensions can be purchased until {{ format(totalDimCap, 2, 2) }} Celestial Points.
+        所有的天界维度只能在价格到达 {{ format(totalDimCap, 2, 2) }} 天界点数前购买。
       </div>
-      <div>You are getting {{ format(matterPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+      <div>你每秒获得 {{ format(matterPerSecond, 2, 0) }} {{ incomeType }}。</div>
     </div>
     <div v-if="canCrunch && !isBroken">
       <br>
@@ -214,7 +210,7 @@ export default {
         }"
         @click="celestialCrunch"
       >
-        Celestial Crunch
+        天界大坍缩
       </button>
       <br>
       <br>
@@ -235,7 +231,7 @@ export default {
       <CelestialGalaxyRow v-if="isExpanded"/>
     </div>
     <div v-if="showLockedDimCostNote">
-      Hold shift to see the Celestial Point cost for locked Celestial Dimensions.
+      按住 Shift 键以查看被锁定的天界维度价格
     </div>
   </div>
 </template>

@@ -64,42 +64,43 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        Max all
+        全部最大
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="toggleCelestialMatterMultiplier"
       >
-        Toggle Celestial Matter
+        切换激发天界物质
       </PrimaryButton>
       <PrimaryButton
         v-if="isAnyAutobuyerUnlocked"
         class="o-primary-btn--subtab-option"
         @click="toggleAllAutobuyers"
       >
-        Toggle all autobuyers
+        切换所有自动购买器
       </PrimaryButton>
     </div>
     <div>
       <p>
-        You have
+        你拥有
         <span class="c-celestial-dim-description__accent">{{ format(celestialMatter, 2, 1) }}</span>
-        Celestial Matter <span v-if="!isEffectActive">(Disabled)</span>,
+        天界物质<span v-if="!isEffectActive">(已禁用)</span>。
         <br>
         <span>
-          increased by
+          增加
           <span class="c-celestial-dim-description__accent">{{ formatPow(conversionExponent, 2, 3) }}</span>
         </span>
-        to a
+        为
+        <span>游戏速度</span>
+        提供
         <span class="c-celestial-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
-        multiplier to
-        <span>Game Speed.</span>
+        的加成。
       </p>
     </div>
     <div>
-      All Celestial Dimensions can be purchased until {{ format(totalDimCap, 2, 2) }} Celestial Points.
+      所有天界维度可在天界点数达到 {{ format(totalDimCap, 2, 2) }} 前购买。
     </div>
-    <div>You are getting {{ format(matterPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+    <div>你每秒获得 {{ format(matterPerSecond, 2, 0) }} {{ incomeType }} 天界物质。</div>
     <CelestialTickspeedRow v-if="isExpanded"/>
     <div class="l-dimensions-container">
       <CelestialDimensionRow
@@ -111,7 +112,7 @@ export default {
       <CelestialGalaxyRow v-if="isExpanded"/>
     </div>
     <div v-if="showLockedDimCostNote">
-      Hold shift to see the Celestial Point cost for locked Celestial Dimensions.
+      按住 Shift 键以查看被锁定的天界维度价格
     </div>
   </div>
 </template>

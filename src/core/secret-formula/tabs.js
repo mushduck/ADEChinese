@@ -587,7 +587,7 @@ export const tabs = [
       },
       {
         key: "expansion-packs",
-        name: "扩展包",
+        name: "天神扩展包",
         symbol: "<i class='fas fa-expand-arrows-alt'></i>",
         component: "ExpansionPacksTab",
         id: 3,

@@ -27,11 +27,11 @@ export default {
     buttonText() {
       if (this.lockText !== null) return this.lockText;
       const reset = [];
-      if (true) reset.push("Celestial Dimensions");
-      if (true) reset.push("Celestial Dimension Boosts");
+      if (true) reset.push("天界维度");
+      if (true) reset.push("天界维度提升");
       return reset.length === 0
-        ? `Increase the power of Celestial Tickspeed upgrades`
-        : `Reset your ${makeEnumeration(reset)} to increase the power of Celestial Tickspeed upgrades`;
+        ? `增强天界计数频率升级的效果`
+        : `重置${makeEnumeration(reset)}的数量，增强天界计数频率升级的效果`;
     },
     sumText() {
       const parts = [Decimal.max(this.galaxies.celestial, 0)];
@@ -40,9 +40,9 @@ export default {
     },
     typeName() {
       switch (this.type) {
-        case CELESTIAL_GALAXY_TYPE.NORMAL: return "Celestial Galaxies";
-        case CELESTIAL_GALAXY_TYPE.DISTANT: return "Distant Celestial Galaxies";
-        case CELESTIAL_GALAXY_TYPE.REMOTE: return "Remote Celestial Galaxies";
+        case GALAXY_TYPE.NORMAL: return "天界星系";
+        case GALAXY_TYPE.DISTANT: return "遥远天界星系";
+        case GALAXY_TYPE.REMOTE: return "极远天界星系";
       }
       return undefined;
     },
@@ -52,14 +52,14 @@ export default {
     costScalingText() {
       switch (this.type) {
         case CELESTIAL_GALAXY_TYPE.DISTANT:
-          return `Each Celestial Galaxy is more expensive past ${quantifyHybridLarge("Galaxy", this.distantStart)}`;
+          return `${quantifyHybridLarge("Galaxy", this.distantStart)} 个天界星系后天界星系价格大幅增长`;
         case CELESTIAL_GALAXY_TYPE.REMOTE: {
           const scalings = [
-            { type: "distant", function: "quadratic", amount: this.distantStart },
-            { type: "remote", function: "exponential", amount: this.remoteStart }
+            { type: "遥远", function: "二次方", amount: this.distantStart },
+            { type: "极远", function: "指数", amount: this.remoteStart }
           ];
-          return `Increased Celestial Galaxy cost scaling: ${scalings.sort((a, b) => a.amount - b.amount)
-            .map(scaling => `${scaling.function} scaling past ${this.formatCelestialGalaxies(scaling.amount)} (${scaling.type})`)
+          return `天界星系价格增速: ${scalings.sort((a, b) => a.amount - b.amount)
+            .map(scaling => `${scaling.function}增长（超过 ${this.formatCelestialGalaxies(scaling.amount)} 个${scaling.type}天界星系)`)
             .join(", ").capitalize()}`;
         }
       }
@@ -106,7 +106,7 @@ export default {
 <template>
   <div class="reset-container galaxy">
     <h4>{{ typeName }} ({{ sumText }})</h4>
-    <span>Requires: {{ formatHybridLarge(requirement.amount, 3) }} Cel Matter</span>
+    <span>需要 {{ formatHybridLarge(requirement.amount, 3) }} 天界物质</span>
     <span v-if="hasIncreasedScaling">{{ costScalingText }}</span>
     <button
       :class="classObject"
