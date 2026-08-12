@@ -30,16 +30,13 @@ export default {
     },
     requirement() {
       if (this.id === 1) {
-        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.endgameUpgrades.totalEndgameSkillRequirement)}
-          total Endgame Skills`;
+        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.endgameUpgrades.totalEndgameSkillRequirement)} 总终局能力`;
       }
       if (this.id === 2) {
-        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.permaMasteries.totalEndgameSkillRequirement)}
-          total Endgame Skills`;
+        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.permaMasteries.totalEndgameSkillRequirement)} 总终局能力`;
       }
       if (this.id === 3) {
-        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.timeCompression.totalEndgameSkillRequirement)}
-          total Endgame Skills`;
+        return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.timeCompression.totalEndgameSkillRequirement)} 总终局能力`;
       }
       return "";
     },
