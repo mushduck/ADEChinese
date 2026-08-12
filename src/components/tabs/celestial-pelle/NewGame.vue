@@ -40,40 +40,37 @@ export default {
     :style="style"
   >
     <h2>
-      Are you sure you want to Endgame? Endgame will reset the entire game, but keep Record Antimatter, Automator Scripts, Study Presets, Secret Themes,
-      Normal/Secret Achievements (only Rows 19+ for Normal Achievements), Options, and Companion Glyphs.
+      重置整个游戏，保留自动机脚本、研究预设、隐藏主题、隐藏成就、选项设置和同伴符文。
     </h2>
-    <h3>You can use the button in the top-right to view the game as it is right now.</h3>
+    <h3>你可以使用右上角的按钮，查看此时的游戏。</h3>
     <div class="c-new-game-button-container">
       <button
         class="c-new-game-button"
         @click="startNewGame"
       >
-        Enter The Endgame
+        再玩一遍？
       </button>
     </div>
     <br>
     <h3 v-if="hasMoreCosmetics">
-      For completing the vanilla game, you also unlock a new cosmetic set of your choice for Glyphs. These are freely
-      modifiable once you reach Reality again, but are purely visual and offer no gameplay bonuses.
+      通关游戏之后，你可以选择一组符文皮肤。当你再次进行现实之后，你可以用已解锁的符文皮肤，自由地改变符文的外观。符文皮肤不会为游戏提供加成。
       <br>
       <button
         class="c-new-game-button"
         @click="openSelectionModal"
       >
-        Choose Cosmetic Set
+        选择一组符文皮肤
       </button>
       <br>
       <br>
-      Selected Set: {{ selectedSetName }}
+      选中的皮肤：{{ selectedSetName }}
     </h3>
     <h3 v-else>
-      You have unlocked all Glyph cosmetic sets!
+      你已解锁所有符文皮肤！
     </h3>
     <br>
     <h3>
-      You can also import "speedrun" to start the game again with additional tracking for speedrunning purposes, however,
-      this may reset progress up to Endgame.
+      你也可以导入“speedrun”，以进入带有统计追踪信息的速通模式，重新开始游戏。
     </h3>
   </div>
 </template>

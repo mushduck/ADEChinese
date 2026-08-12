@@ -126,7 +126,7 @@ export default {
     <div class="l-pelle-destruction-container">
       <div class="l-pelle-panel-container">
         <div class="c-pelle-panel-title">
-          Pelle Achievement Enabling
+          恢复被佩勒禁用的成就
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">
@@ -138,7 +138,7 @@ export default {
           </div>
         </div>
         <div class="c-pelle-panel-title">
-          Pelle Destruction Upgrades
+          消除佩勒削弱
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">
@@ -150,7 +150,7 @@ export default {
           </div>
         </div>
         <div class="c-pelle-panel-title">
-          Pelle Reality Upgrade Enabling
+          恢复被佩勒禁用的现实升级
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">
@@ -162,7 +162,7 @@ export default {
           </div>
         </div>
         <div class="c-pelle-panel-title">
-          Pelle Imaginary Upgrade Enabling
+          恢复被佩勒禁用的虚幻升级
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">
@@ -174,7 +174,7 @@ export default {
           </div>
         </div>
         <div class="c-pelle-panel-title">
-          Pelle Celestial Reward Enabling
+          恢复被佩勒禁用的天神奖励
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">
@@ -186,7 +186,7 @@ export default {
           </div>
         </div>
         <div class="c-pelle-panel-title">
-          Pelle Perk Enabling
+          恢复被佩勒禁用的复兴树
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">
@@ -198,7 +198,7 @@ export default {
           </div>
         </div>
         <div class="c-pelle-panel-title">
-          Pelle Alchemy Enabling
+          恢复被佩勒禁用的炼金资源
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">
@@ -210,7 +210,7 @@ export default {
           </div>
         </div>
         <div class="c-pelle-panel-title">
-          Pelle Strike Disabling
+          消除佩勒冲击
         </div>
         <div class="l-pelle-content-container">
           <div class="c-pelle-destruction-upgrade-container">

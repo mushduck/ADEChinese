@@ -73,7 +73,7 @@ export default {
           class="o-pelle-button"
           @click="showModal"
         >
-          Show effects in Doomed Reality
+          显示被毁灭的现实中的效果
         </button>
       </div>
       <br>
@@ -86,7 +86,7 @@ export default {
       class="pelle-doom-button"
       @click="enterDoomModal"
     >
-      Doom<br>Your<br>Reality
+      毁灭你的现实
       <div class="pelle-icon-container">
         <span class="pelle-icon">{{ symbol }}</span>
       </div>
@@ -95,13 +95,12 @@ export default {
       v-else
       class="pelle-unlock-requirements"
     >
-      You must have {{ formatInt(totalRows) }} rows of Achievements
-      and all of your Glyph Alchemy Resources capped to unlock Pelle, Celestial of Antimatter.
+      你需要拥有前 {{ formatInt(totalRows) }} 行的所有成就，同时所有的炼金资源达到上限才能解锁反物质之神，佩勒。
       <br>
       <br>
-      {{ formatInt(completedRows) }} / {{ formatInt(totalRows) }} Achievement rows completed
+      已完成前{{ formatInt(completedRows) }} / {{ formatInt(totalRows) }} 行的所有成就
       <br>
-      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} capped Alchemy Resources
+      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} 个炼金资源达到上限。 
     </div>
   </div>
 </template>

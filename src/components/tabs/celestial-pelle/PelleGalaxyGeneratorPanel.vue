@@ -118,30 +118,28 @@ export default {
     >
       <div v-if="isUnlocked">
         <div>
-          You have a total of
+          你总共拥有
           <span class="c-galaxies-amount">{{ galaxyText }}</span>
-          Galaxies.
+          个星系。 
           <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/s</span>
           <div v-if="isInstabilityShown">
-            Your Galaxy Generator Instability Magnitude is
-            <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>,
-            which is dividing Galaxies above {{ format(instabilityStart, 2, 1) }} by
-            <span class="c-galaxies-amount">{{ format(generationReduction, 2, 1) }}</span>.
+          你的星系生成器不稳定性为
+            <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>，将数量超过{{ format(instabilityStart, 2, 1) }}的星系产量除以
+            <span class="c-galaxies-amount">{{ format(generationReduction, 2, 1) }}</span>。
           </div>
           <br>
           <div v-if="isSecondInstabilityShown">
             <span class="c-danger-text">
-              Your Galaxy Generator has produced too many Galaxies, and is starting to break down.
-              This started at {{ format(harshInstabilityStart, 2, 1) }} Galaxies.
+              你的星系生成器生成了太多的星系，现已开始损坏。
+              损坏开始于 {{ format(harshInstabilityStart, 2, 1) }} 星系。
               <br>
-              This effect is currently raising your Galaxy Generator Instability Magnitude by
-              <span class="c-galaxies-amount">{{ formatPow(harshGalGenInstability, 2, 3) }}</span>,
-              making it effectively equal to
-              <span class="c-galaxies-amount">{{ format(effectiveInstability, 2, 1) }}</span>.
+              损坏效果将星系生成器不稳定性
+              <span class="c-galaxies-amount">{{ formatPow(harshGalGenInstability, 2, 3) }}</span>，
+              让其实际值增加到
+              <span class="c-galaxies-amount">{{ format(effectiveInstability, 2, 1) }}</span>。
               <br>
-              Therefore, whereas your Galaxy production would normally be divided by the number above,
-              it is instead being divided by
-              <span class="c-galaxies-amount">{{ format(trueGenerationReduction, 2, 1) }}</span>.
+              因此，星系产量实际被除以了
+              <span class="c-galaxies-amount">{{ format(trueGenerationReduction, 2, 1) }}</span>。
             </span>
           </div>
         </div>
@@ -167,20 +165,20 @@ export default {
                 v-if="!sacrificeActive"
                 class="c-big-text"
               >
-                Sacrifice your {{ capRiftName }}
+                献祭你的{{ capRiftName }}
               </span>
               <span
                 v-else
                 class="c-big-text"
               >
-                Getting rid of all that {{ capRiftName }}...
+                除去所有的{{ capRiftName }}...
               </span>
             </div>
             <div
               v-else
               class="c-increase-cap-text c-medium-text"
             >
-              {{ format(generatedGalaxies, 2) }} / {{ format(cap, 2) }} Galaxies generated
+              已生成 {{ format(generatedGalaxies, 2) }} / {{ format(cap, 2) }} 星系
             </div>
           </button>
         </div>
@@ -198,13 +196,13 @@ export default {
         class="c-generator-unlock-button"
         @click="unlock"
       >
-        Unlock the Galaxy Generator
+        解锁星系生成器
       </button>
       <button
         v-if="!isDilated && !isFinalized"
         class="c-generator-locked-button"
       >
-        You must be inside Dilation to unlock the Galaxy Generator
+        进入时间膨胀以解锁星系生成器
       </button>
     </div>
   </div>

@@ -104,7 +104,7 @@ export default {
               {{ riftName() }}
             </h2>
             <div class="c-pelle-rift-rift-info-container">
-              Drains {{ drainResource() }} to fill.
+              消耗 {{ drainResource() }} 填充。
               <span
                 v-if="specialRift"
                 :ach-tooltip="infoTooltip"
@@ -113,10 +113,10 @@ export default {
               </span>
               <br>
               <template v-if="!isMaxed">
-                Current Amount: {{ formatRift(resource) }}
+                当前数量：{{ formatRift(resource) }}
               </template>
               <br>
-              Total Filled: {{ formatRift(rift.totalFill) }}
+              已填充：{{ formatRift(rift.totalFill) }}
             </div>
           </div>
         </div>

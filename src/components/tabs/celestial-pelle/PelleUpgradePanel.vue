@@ -70,7 +70,7 @@ export default {
         class="c-collapse-icon-clickable"
         @click="toggleCollapse"
       />
-      Pelle Upgrades
+      佩勒升级
     </div>
     <div
       v-if="!isCollapsed"
@@ -89,10 +89,10 @@ export default {
         </div>
         <div class="c-armageddon-resources-container">
           <div>
-            You have <span class="c-remnants-amount">{{ format(remnants, 2) }}</span> Remnants.
+            你拥有 <span class="c-remnants-amount">{{ format(remnants, 2) }}</span> 遗物。
           </div>
           <div>
-            You have <span class="c-remnants-amount">{{ format(realityShards, 2) }}</span> Reality Shards.
+            你拥有 <span class="c-remnants-amount">{{ format(realityShards, 2) }}</span> 现实碎片。
             <span class="c-remnants-amount">+{{ format(shardRate, 2, 2) }}/s</span>
           </div>
         </div>
@@ -109,7 +109,7 @@ export default {
         class="o-pelle-button"
         @click="toggleBought"
       >
-        {{ showBought ? "Showing bought upgrades" : "Bought upgrades hidden" }}
+        {{ showBought ? "显示已购买的升级" : "隐藏已购买的升级" }}
       </button>
       <div
         v-if="allUpgrades.length"
@@ -129,7 +129,7 @@ export default {
         />
       </div>
       <div v-else>
-        No upgrades to show!
+        已解锁全部升级！
       </div>
     </div>
   </div>

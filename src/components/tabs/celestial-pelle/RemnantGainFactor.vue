@@ -53,36 +53,36 @@ export default {
   <div class="c-remnant-factors-container">
     <ExpandingControlBox
       container-class="c-remnant-factors"
-      label="Remnant Gain Factors"
+      label="遗物数量因子"
       :style="{ opacity }"
     >
       <template #dropdown>
         <div class="c-remnant-factors-text">
-          Best AM: {{ format(best.am, 2, 2) }}<br>
-          Best IP: {{ format(best.ip, 2, 2) }}<br>
-          Best EP: {{ format(best.ep, 2, 2) }}<br><br>
+          反物质最大值：{{ format(best.am, 2, 2) }}<br>
+          无限点数最大值：{{ format(best.ip, 2, 2) }}<br>
+          永恒点数最大值：{{ format(best.ep, 2, 2) }}<br><br>
           <div class="l-remnant-factors-row">
             <div class="l-remnant-factors-col l-remnant-factors-col--first">
               <div class="l-remnant-factors-item">
-                log10(log10(am){{ dilationMult[0] > 1 ? `*${dilationMult[0]}` : "" }}{{ milestoneMult[0] > 1 ? `*${milestoneMult[0]}` : "" }} + 2)
+                log10(log10(反物质){{ dilationMult[0] > 1 ? `*${dilationMult[0]}` : "" }}{{ milestoneMult[0] > 1 ? `*${milestoneMult[0]}` : "" }} + 2)
               </div>
               <div class="l-remnant-factors-item">
-                log10(log10(ip){{ dilationMult[1] > 1 ? `*${dilationMult[1]}` : "" }}{{ milestoneMult[1] > 1 ? `*${milestoneMult[1]}` : "" }} + 2)
+                log10(log10(无限点数){{ dilationMult[1] > 1 ? `*${dilationMult[1]}` : "" }}{{ milestoneMult[1] > 1 ? `*${milestoneMult[1]}` : "" }} + 2)
               </div>
               <div class="l-remnant-factors-item">
-                log10(log10(ep){{ dilationMult[2] > 1 ? `*${dilationMult[2]}` : "" }}{{ milestoneMult[2] > 1 ? `*${milestoneMult[2]}` : "" }} + 2)
+                log10(log10(永恒点数){{ dilationMult[2] > 1 ? `*${dilationMult[2]}` : "" }}{{ milestoneMult[2] > 1 ? `*${milestoneMult[2]}` : "" }} + 2)
               </div>
               <div class="l-remnant-factors-item">
-                Static divisor
+                固定除数
               </div>
               <div class="l-remnant-factors-item">
-                Static power
+                固定指数
               </div>
               <div class="l-remnant-factors-item">
-                Existing Remnants
+                现有遗物
               </div>
               <div class="l-remnant-factors-item">
-                Final amount
+                最终数量
               </div>
             </div>
             <div class="l-remnant-factors-col">

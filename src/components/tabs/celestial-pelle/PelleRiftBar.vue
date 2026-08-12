@@ -159,7 +159,7 @@ export default {
     </div>
     <div class="o-pelle-rift-bar-percentage">
       {{ formatPercents(percentage, 3) }}
-      <span v-if="!isMaxed">({{ isActive ? "Filling" : "Idle" }})</span>
+      <span v-if="!isMaxed">({{ isActive ? "正在填充" : "待机" }})</span>
     </div>
     <CustomizeableTooltip
       class="o-pelle-rift-bar-milestone-hover-container"
