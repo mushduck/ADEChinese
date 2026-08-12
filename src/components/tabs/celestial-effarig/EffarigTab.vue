@@ -98,7 +98,7 @@ export default {
     },
     startRun() {
       if (this.isDoomed) return;
-      Modal.celestials.show({ name: "Effarig's", number: 1 });
+      Modal.celestials.show({ name: "鹿颈长", number: 1 });
     },
     createCursedGlyph() {
       Glyphs.giveCursedGlyph();
@@ -113,43 +113,35 @@ export default {
     <div class="l-effarig-shop-and-run">
       <div class="l-effarig-shop">
         <div class="c-effarig-relics">
-          You have {{ quantify("Relic Shard", relicShards, 2, 0) }}.
+          你拥有 {{ quantify("遗迹碎片", relicShards, 2, 0) }}。
           <br>
           <span v-if="relicShardRarityAlwaysMax">
-            The rarity of new Glyphs is being increased by +{{ formatPercents(shardRarityBoost, 2) }}.
+            即将获得的符文稀有度 +{{ formatPercents(shardRarityBoost, 2) }}.
           </span>
           <span v-else>
-            Each new Glyph will have its rarity increased
-            <br>
-            by a random value between +{{ formatPercents(0) }} and +{{ formatPercents(shardRarityBoost, 2) }}.
+            即将获得的符文稀有度将在 {{ formatPercents(0) }} 和 {{ formatPercents(shardRarityBoost, 2) }} 之间随机增加
           </span>
           <span v-if="shardPower > 1">
             <br>
-            Glyph Sacrifice gain is also being raised to {{ formatPow(shardPower, 0, 2) }}.
+            符文献祭加成提升至 {{ formatPow(shardPower, 0, 2) }}
           </span>
           <span v-if="shardMaxRarityIncrease > 0">
             <br>
-            The Glyph Rarity cap is also being increased by +{{ formatPercents(shardMaxRarityIncrease, 2) }}.
+            符文稀有度上限同时增加 {{ formatPercents(shardMaxRarityIncrease, 2) }}.
           </span>
         </div>
         <div class="c-effarig-relic-description">
-          You will gain {{ quantify("Relic Shard", shardsGained, 2) }} next Reality
-          ({{ format(currentShardsRate, 2) }}/min).
+          你将在下次现实中获得 {{ quantify("遗迹碎片", shardsGained, 2) }} ({{ format(currentShardsRate, 2) }}/分钟)。
           <span v-if="amplification !== 0">
             <br>
-            Due to amplification of your current Reality,
+            由于当前现实的扩增作用，
             <br>
-            you will actually gain a total of
-            {{ quantify("Relic Shard", amplifiedShards, 2) }} ({{ format(amplifiedShardsRate, 2) }}/min).
+            实际将获得总计 {{ quantify("遗迹碎片", amplifiedShards, 2) }} ({{ format(amplifiedShardsRate, 2) }}/分钟).
           </span>
         </div>
         <div class="c-effarig-relic-description">
           <br>
-          More Eternity Points slightly increases Relic Shards
-          <br>
-          gained. More distinct Glyph effects significantly
-          <br>
-          increases Relic Shards gained.
+          更多的永恒点数会略微增加获得的遗迹碎片数量。更多不同的符文效果会显著增加获得的遗迹碎片数量。
         </div>
         <EffarigUnlockButton
           v-for="(unlock, i) in shopUnlocks"
@@ -165,7 +157,7 @@ export default {
           class="c-effarig-shop-button c-effarig-shop-button--available"
           @click="createCursedGlyph"
         >
-          Get a Cursed Glyph...
+          获得一个诅咒符文……
         </button>
       </div>
       <div
@@ -174,7 +166,7 @@ export default {
       >
         <div class="c-effarig-run-description">
           <span :class="{ 'o-pelle-disabled': isDoomed }">
-            Enter Effarig's Reality.
+            进入鹿颈长的现实。
           </span>
         </div>
         <div
