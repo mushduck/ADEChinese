@@ -16,8 +16,7 @@ export default {
   },
   computed: {
     upgrades: () => DualityUpgrades.all,
-    lockTooltip: () => `Requirement locks only prevent manual and automated actions. Any related upgrades
-      will not be disabled and may still cause requirements to be failed.`,
+    lockTooltip: () => `锁定升级要求仅会阻止手动和自动操作，不会禁用任何相关的升级，要求仍可能失败。`,
   },
   methods: {
     update() {
@@ -36,25 +35,23 @@ export default {
 <template>
   <div class="l-reality-upgrade-grid">
     <div class="c-cap-text">
-      Your Machine cap is <span class="c-reality-tab__reality-machines">{{ capStr }}</span>.
+      你的机器上限为 <span class="c-reality-tab__reality-machines">{{ capStr }}</span>。
     </div>
     <div class="c-info-text">
-      You have reached the limits of Reality and cannot hold more than {{ format(capIM) }} Imaginary Machines.
+      你已达到现实的极限，无法持有超过 {{ format(capIM) }} 的虚幻机器。
       <br>
-      Machines gained in excess of {{ format(baseIMCap) }} will raise the maximum amount of Dual Machines
-      you can have.
+      重构机器的最大数量基于虚幻机器数量超过 {{ format(baseIMCap) }} 的部分而提高。
       <br>
-      Dual Machines are gained passively over time up to the cap, but gain slows down exponentially
-      as you approach the cap.
+      超过 {{ format(baseRMCap) }} 的虚幻机器将提高你可以拥有的重构机器的上限。
       <br>
-      Every {{ formatInt(scaleTime) }} seconds the difference in εM between your current amount and the cap
-      will be cut in half.
+      重构机器会随时间被动获得，直到达到上限，但随着接近上限，获得速度呈指数级减慢。
+      <br>
+      每 {{ formatInt(scaleTime) }} 秒，你的当前数量与上限之间的重构机器差额将减半。
       <br>
       <br>
-      The first two rows of upgrades can be purchased endlessly and the rest of the upgrades are one-time upgrades
-      with requirements.
+      前两组升级可以无限购买，其余的升级是一次性升级，除了需要重构机器外，还需要解锁条件。
       <br>
-      Upgrades here have the same gameplay and visual behavior as Imaginary Upgrades, but cost Dual Machines instead.
+      重构升级的视觉效果与虚幻升级标签中的升级相同。
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>

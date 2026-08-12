@@ -26,30 +26,31 @@ export default {
 <template>
   <div class="l-reality-upgrade-grid">
     <div class="c-reality-upgrade-infotext">
-      Mouseover <i class="fas fa-question-circle" /> icons for additional information.
+      将鼠标悬停在 <i class="fas fa-question-circle" /> 图标上以查看更多信息。
       <br>
-      The first row of upgrades can be purchased endlessly for increasing costs
+      第一组升级可以以递增的成本无限购买，
       <span :ach-tooltip="costScalingTooltip">
         <i class="fas fa-question-circle" />
       </span>
-      and the rest are single-purchase.
+      其余的升级是一次性升级。
       <br>
-      Single-purchase upgrades also have requirements which, once completed, permanently unlock the ability
-      to purchase the upgrades at any point.
+      其余的升级是一次性升级，除了需要现实机器外，还需要解锁条件。
+      <br>
+      一旦完成这些要求，你可以在任何时候永久解锁这些升级。方格背景的升级在此现实中无法解锁，而条纹背景的升级在此现实中仍然可以解锁。
       <span :ach-tooltip="possibleTooltip">
         <i class="fas fa-question-circle" />
       </span>
       <br>
-      Locked upgrades show their requirement and effect by default; unlocked ones show
-      their effect, current bonus, and cost. Hold shift to swap this behavior.
+      锁定的升级会显示其需求和默认描述，解锁后显示其效果、当前加成以及价格，按住Shift键可切换至该状态。
       <br>
-      You can shift-click upgrades with <i class="fas fa-lock-open" /> to make the game prevent you
-      from doing anything this Reality which would cause you to fail their unlock condition.
+      你可以用Shift点击某些升级来启用锁定条件，以防止游戏在此现实中进行任何会导致你未能满足其解锁条件的操作。
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>
       <br>
-      Every completed row of purchased upgrades increases your Glyph level by {{ formatInt(1) }}.
+      每购买一组完整的现实升级，将多获得 {{ formatInt(1) }} 级符文等级。
+      <br>
+      （购买第一组现实升级的这一效果仅应用一次）
     </div>
     <div
       v-for="row in 5"

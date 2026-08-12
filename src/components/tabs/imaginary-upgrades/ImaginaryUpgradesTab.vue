@@ -36,25 +36,21 @@ export default {
 <template>
   <div class="l-reality-upgrade-grid">
     <div class="c-cap-text">
-      Your Machine cap is <span class="c-reality-tab__reality-machines">{{ capStr }}</span>.
+      你的机器上限为 <span class="c-reality-tab__reality-machines">{{ capStr }}</span>。
     </div>
     <div class="c-info-text">
-      You have reached the limits of Reality and cannot hold more than {{ format(capRM) }} Reality Machines.
+      你已达到现实的极限，无法持有超过 {{ format(capRM) }} 的现实机器。
       <br>
-      Machines gained in excess of {{ format(baseRMCap) }} will raise the maximum amount of Imaginary Machines
-      you can have.
+      超过 {{ format(baseRMCap) }} 的机器将提高你可以拥有的虚幻机器的上限。
       <br>
-      Imaginary Machines are gained passively over time up to the cap, but gain slows down exponentially
-      as you approach the cap.
+      虚幻机器会随时间被动获得，直到达到上限，但随着接近上限，获得速度呈指数级减慢。
       <br>
-      Every {{ formatInt(scaleTime) }} seconds the difference in iM between your current amount and the cap
-      will be cut in half.
+      每 {{ formatInt(scaleTime) }} 秒，你的当前数量与上限之间的虚幻机器差额将减半。
       <br>
       <br>
-      The first two rows of upgrades can be purchased endlessly and the rest of the upgrades are one-time upgrades
-      with requirements.
+      前两组升级可以无限购买，其余的升级是一次性升级，除了需要虚幻机器外，还需要解锁条件。
       <br>
-      Upgrades here have the same gameplay and visual behavior as Reality Upgrades, but cost Imaginary Machines instead.
+      虚幻升级的视觉效果与现实升级标签中的升级相同。
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>
