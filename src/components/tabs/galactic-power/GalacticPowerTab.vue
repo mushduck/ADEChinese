@@ -25,10 +25,10 @@ export default {
       const first = this.nextPow?.id === 1;
       const next = GalacticPower.nextPowerUnlockGP;
 
-      if (first) return `The first Galactic Power unlocks at ${format(next)} Galactic Power.`;
+      if (first) return `达到 ${format(next)} 星系之力以解锁第一星系之力升级`;
       return next === undefined
-        ? "All Galactic Powers unlocked"
-        : `Next Galactic Power unlocks at ${format(next)} Galactic Power.`;
+        ? "已解锁所有星系之力升级"
+        : `达到 ${format(next)} 星系之力以解锁下一个星系之力升级`;
     },
     galacticPowerAmountStyle() {
       return {
@@ -57,20 +57,20 @@ export default {
 <template>
   <div class="l-endgame-milestone-grid">
     <div>
-      <span class="c-galactic-power-description-text">You have </span>
+      <span class="c-galactic-power-description-text">你拥有 </span>
       <span :style="galacticPowerAmountStyle">{{ format(galacticPower, 2, 2) }}</span>
-      <span class="c-galactic-power-description-text"> Galactic Power. </span>
-      <span :style="galacticPowerAmountStyle">+{{ format(galacticPowerPerSecond, 2, 2) }}/s</span>
+      <span class="c-galactic-power-description-text"> 星系之力。 </span>
+      <span :style="galacticPowerAmountStyle">+{{ format(galacticPowerPerSecond, 2, 2) }}/秒</span>
     </div>
     <div>
       <span class="c-galactic-power-description-text">
-        Galactic Power income is significantly based on total Galaxies,
-        but is also increased based on current Celestial Matter and Imaginary Machine amounts.
+        星系之力的增速主要基于星系总数，也基于当前的天界物质和虚幻机器的数量。
+
       </span>
     </div>
     <div v-if="isDoomed">
       <span class="c-galactic-power-description-text">
-        Pelle has restricted you from producing Galactic Power while Doomed!
+        在被毁灭的现实中，佩勒限制了星系之力的生产。
       </span>
     </div>
     <div

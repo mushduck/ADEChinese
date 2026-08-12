@@ -136,7 +136,7 @@ export default {
         <span class="c-normal-ethereal-text">你拥有 </span>
         <span class="c-really-cool-ethereal-text">{{ etherealPowerDisplay }}</span>
         <span class="c-normal-ethereal-text"> 缥缈之力。</span>
-        <span class="c-really-cool-ethereal-text">+{{ format(etherealPowerPerSecond, 3, 3) }}/s</span>
+        <span class="c-really-cool-ethereal-text">+{{ format(etherealPowerPerSecond, 3, 3) }}/秒</span>
       </div>
       <div>
         <span class="c-normal-ethereal-text">
