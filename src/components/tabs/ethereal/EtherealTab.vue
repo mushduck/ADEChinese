@@ -37,7 +37,7 @@ export default {
       return `${formatHybridLarge(this.etherealPower, 3)}`;
     },
     extraPowerDisplay() {
-      return `It is also based on Galactic Power amounts above ${format(DC.NUMMAX, 2, 2)}.`;
+      return `和超出 ${format(DC.NUMMAX, 2, 2)} 的星系之力而提高。`;
     },
     etherealClassObject() {
       return {
@@ -140,7 +140,7 @@ export default {
       </div>
       <div>
         <span class="c-normal-ethereal-text">
-          Ethereal Power income is based on Celestial Points, Singularities, and Reality Machine amounts.
+          缥缈之力的获取量基于天界点数、奇点和现实机器的数量
         </span>
         <span
           v-if="isBetter"
@@ -150,19 +150,18 @@ export default {
         </span>
       </div>
       <div>
-        <span class="c-normal-ethereal-text">Your Cosmic Sector is </span>
+        <span class="c-normal-ethereal-text">你拥有 </span>
         <span class="c-really-cool-ethereal-text">{{ formatInt(cosmicSector) }}</span>
-        <span class="c-normal-ethereal-text">, which is currently multiplying all Celestial Dimensions and delaying
-        the Celestial Matter Softcap by </span>
-        <span class="c-really-cool-ethereal-text">{{ formatX(sectorBoost, 3) }}</span><span class="c-normal-ethereal-text">.</span>
+        <span class="c-normal-ethereal-text"> 个宇宙扇区，为天界维度和天界物质软上限阈值提供</span>
+        <span class="c-really-cool-ethereal-text">{{ formatX(sectorBoost, 3) }}</span><span class="c-normal-ethereal-text">的倍率。</span>
       </div>
       <div>
-        <span class="c-normal-ethereal-text">You will ascend into the next Cosmic Sector at </span>
+        <span class="c-normal-ethereal-text">下一个宇宙扇区需要 </span>
         <span
           class="c-really-cool-ethereal-text"
           :ach-tooltip="etherealPowerTimeEstimate"
         >{{ formatHybridLarge(nextSectorAt, 3) }}</span>
-        <span class="c-normal-ethereal-text"> Ethereal Power.</span>
+        <span class="c-normal-ethereal-text"> 缥缈之力。</span>
       </div>
     </div>
     <br>
@@ -171,14 +170,14 @@ export default {
       class="l-ethereal-extension-unlock"
     >
       <div v-if="!canExtend">
-        <span class="c-normal-ethereal-text">Reach {{ format(1e25, 2, 2) }} Ethereal Power to Extend the Ethereal.</span>
+        <span class="c-normal-ethereal-text">达到 {{ format(1e25, 2, 2) }} 缥缈之力以超越缥缈。</span>
       </div>
       <div v-if="canExtend">
         <button
           :class="etherealClassObject"
           @click="extendEthereal"
         >
-          Extend the Ethereal
+          超越缥缈
         </button>
       </div>
     </div>
