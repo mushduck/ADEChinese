@@ -37,7 +37,7 @@ export default {
   },
   computed: {
     name() {
-      return `${DarkMatterDimension(this.tier).shortDisplayName} Dark Matter Dimension`;
+      return `${DarkMatterDimension(this.tier).shortDisplayName}暗物质维度`;
     },
     ascensionText() {
       return `(⯅${formatInt(this.ascension)})`;
@@ -69,35 +69,35 @@ export default {
       const line1 = this.hoverOverAscension ? `<b>${str}</b>` : str;
 
       let line2;
-      if (this.isIntervalCapped) line2 = this.hoverOverAscension ? "On ascend ➜" : "Ascend!";
-      else line2 = `Cost: ${this.formatDMCost(this.intervalCost)} DM`;
+      if (this.isIntervalCapped) line2 = this.hoverOverAscension ? "飞升时 ➜" : "飞升！";
+      else line2 = `价格：${this.formatDMCost(this.intervalCost)} 暗物质`;
       return ` ${line1}<br>${line2}`;
     },
     darkMatterText() {
       const dm = this.powerDM.times(this.hoverOverAscension ? this.powerDMPerAscension : 1);
-      const str = `DM ${formatX(dm, 2, 2)}`;
+      const str = `暗物质 ${formatX(dm, 2, 2)}`;
       const line1 = this.hoverOverAscension ? `<b>${str}</b>` : str;
 
       const ascMult = this.powerDMPerAscension.mul(this.interval).div(this.intervalAfterAscension);
       const line2 = this.hoverOverAscension
-        ? `${formatX(ascMult, 2, 2)} / sec`
-        : `Cost: ${this.formatDMCost(this.powerDMCost)} DM`;
+        ? `${formatX(ascMult, 2, 2)} / 秒`
+        : `价格：${this.formatDMCost(this.powerDMCost)} 暗物质`;
       return `${line1}<br>${line2}`;
     },
     darkEnergyText() {
       const de = this.powerDE.mul(this.hoverOverAscension ? POWER_DE_PER_ASCENSION : 1);
-      const str = SingularityMilestone.dmdMultBooster.isUnlocked && this.tier !== 1 ? `DE ${formatX(de, 2, 4)}` : `DE +${format(de, 2, 4)}`;
+      const str = SingularityMilestone.dmdMultBooster.isUnlocked && this.tier !== 1 ? `DE ${formatX(de, 2, 4)}` : `暗能量 +${format(de, 2, 4)}`;
       const line1 = this.hoverOverAscension ? `<b>${str}</b>` : str;
       const ascMult = POWER_DE_PER_ASCENSION.mul(this.interval).div(this.intervalAfterAscension);
       const line2 = this.hoverOverAscension
-        ? `${formatX(ascMult, 2, 2)} / sec`
-        : `Cost: ${this.formatDMCost(this.powerDECost)} DM`;
+        ? `${formatX(ascMult, 2, 2)} / 秒`
+        : `价格: ${this.formatDMCost(this.powerDECost)} 暗物质`;
       return `${line1}<br>${line2}`;
     },
     ascensionTooltip() {
-      return `Interval is capped at ${formatInt(DarkMatterDimension(this.tier).intervalPurchaseCap)}ms.
-        Ascension multiplies interval by ${formatInt(this.intervalAscensionBump)},
-        DM by ${formatHybridSmall(this.powerDMPerAscension, 3)}, and DE by ${formatInt(POWER_DE_PER_ASCENSION)}.`;
+      return `间隔已达到上限： ${formatInt(DarkMatterDimension(this.tier).intervalPurchaseCap)} 毫秒。
+        飞升后间隔乘以 ${formatInt(this.intervalAscensionBump)}，
+        暗物质产量乘以 ${formatHybridSmall(this.powerDMPerAscension, 3)}，并且暗能量乘以 ${formatInt(POWER_DE_PER_ASCENSION)}。`;
     }
   },
   methods: {
@@ -176,8 +176,8 @@ export default {
       {{ name }}<span v-if="hasAscended"> {{ ascensionText }}</span>: {{ format(amount, 2) }}
     </div>
     <div>
-      Average gain: {{ format(productionPerSecond, 2, 2) }}/s
-      (+{{ formatPercents(percentPerSecond, 2, 2) }}/s)
+      平均增速：{{ format(productionPerSecond, 2, 2) }}/秒
+      (+{{ formatPercents(percentPerSecond, 2, 2) }}/秒)
     </div>
     <div class="c-dark-matter-dimension-buttons">
       <button
@@ -208,13 +208,13 @@ export default {
       </button>
     </div>
     <div v-if="interval.gt(200)">
-      Tick: {{ formatInt(timer) }} ms ({{ formatPercents(timerPercent, 1) }})
+      时刻：{{ formatInt(timer) }} 毫秒 ({{ formatPercents(timerPercent, 1) }})
     </div>
     <div v-else>
-      {{ format(interval.div(1000).recip(), 2, 2) }} ticks / sec
+      {{ format(interval.div(1000).recip(), 2, 2) }} 时刻 / 秒
     </div>
     <div>
-      Dark Energy: {{ format(darkEnergyPerSecond, 2, 4) }}/s ({{ formatPercents(portionDE, 1) }} of total)
+      暗能量：{{ format(darkEnergyPerSecond, 2, 4) }}/秒（总量的 {{ formatPercents(portionDE, 1) }}）
     </div>
   </div>
 </template>

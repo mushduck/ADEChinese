@@ -106,54 +106,54 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="showLaitelaHowTo()"
       >
-        Click for Lai'tela info
+        点击以查看莱特拉详情
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        Max all Dark Matter Dimensions
+        最大化暗物质维度
       </PrimaryButton>
     </div>
     <div class="o-laitela-matter-amount">
-      You have
+      你拥有
       <span :style="styleObject">{{ format(darkMatter, 2) }}</span>
-      Dark Matter<span v-if="isDMCapped"> (capped)</span>.
-      <span v-if="!isDMCapped">(Average: {{ format(darkMatterGain, 2, 2) }}/s)</span>
+      暗物质<span v-if="isDMCapped">（已达到上限）</span>。
+      <span v-if="!isDMCapped">(平均：{{ format(darkMatterGain, 2, 2) }}/秒)</span>
     </div>
     <div class="o-laitela-matter-amount">
-      Your maximum Dark Matter ever is
-      <span :style="styleObject">{{ format(maxDarkMatter, 2) }}</span><span v-if="!isDoomed">,
-        giving {{ formatContinuumPercentage() }} more purchases from Continuum</span>.
+      你最多获得过
+      <span :style="styleObject">{{ format(maxDarkMatter, 2) }}</span><span v-if="!isDoomed">暗物质，
+        提供 {{ formatContinuumPercentage() }} 连续统加成。</span>
     </div>
     <div class="o-laitela-matter-amount">
-      Dark Matter Dimensions are unaffected by storing real time.
+      暗物质维度不受存储现实时间的影响。
     </div>
     <div
       v-if="maxDarkMatter.gte(softcap1)"
       class="o-laitela-matter-amount"
     >
-      Dark Matter is softcapped past {{ format(softcap1, 2) }}.
+      暗物质数量在 {{ format(softcap1, 2) }} 后达到软上限。
     </div>
     <div
       v-if="maxDarkMatter.gte(softcap2)"
       class="o-laitela-matter-amount"
     >
-      Dark Matter is further softcapped past {{ format(softcap2, 2) }}.
+      暗物质数量在 {{ format(softcap2, 2) }} 后达到二重软上限。
     </div>
     <div
       v-if="endgameUnlocked"
       class="o-laitela-matter-amount"
     >
-      Dark Matter is <span v-if="isUncapped">harshly softcapped</span><span v-if="!isUncapped">hardcapped</span> at
-      {{ format(darkMatterCap, 2) }}.
+      暗物质数量在 {{ format(darkMatterCap, 2) }} 后达到<span v-if="isUncapped">三重软上限</span><span v-if="!isUncapped">硬上限</span>。
+      .
     </div>
     <h2
       v-if="!singularitiesUnlocked"
       class="c-laitela-singularity-container"
     >
-      Unlock Singularities in {{ singularityWaitTime }}.
-      ({{ format(darkEnergy, 2, 2) }}/{{ format(singularityCap, 2) }} Dark Energy)
+      {{ singularityWaitTime }} 后解锁奇点。
+      ({{ format(darkEnergy, 2, 2) }}/{{ format(singularityCap, 2) }} 暗能量）
     </h2>
     <SingularityPane v-if="singularitiesUnlocked" />
     <HadronsPane v-if="hadronsUnlocked" />
