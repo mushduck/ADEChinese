@@ -82,14 +82,13 @@ export default {
       const effarigAlchemyResource = AlchemyResources.all.filter(res => res.unlockedAt === this.level + 1)[0];
       switch (this.pet.name) {
         case "Teresa":
-          return "You can charge an additional Infinity Upgrade";
+          return "可充能的无限升级加 1";
         case "Effarig":
-          return `Unlock the ${effarigAlchemyResource.name} resource in Glyph Alchemy, which
-          ${effarigAlchemyResource.description}`;
+          return `解锁符文炼金的 ${effarigAlchemyResource.name} 资源，${effarigAlchemyResource.description}`;
         case "Enslaved":
-          return `${formatX(20)} to stored game time, and you can store an additional hour of real time`;
+          return `储存的游戏内时间 ${formatX(20)}, 你还能额外多储存一个小时的现实时间`;
         case "V":
-          return "You can purchase an additional Triad Study";
+          return "解锁一个新的三体研究";
         default:
           return "false";
       }
@@ -130,7 +129,7 @@ export default {
       <span class="fas fa-arrow-up" />
       <div class="c-ra-pet-upgrade__tooltip">
         <div class="c-ra-pet-upgrade__tooltip__name">
-          Level {{ pet.name }} to {{ formatInt(level + 1) }}
+          {{ pet.name }} 的等级提升至 {{ formatInt(level + 1) }}
         </div>
         <div class="c-ra-pet-upgrade__tooltip__description">
           {{ reward }}
@@ -142,7 +141,7 @@ export default {
           </div>
         </div>
         <div class="c-ra-pet-upgrade__tooltip__footer">
-          Cost: {{ quantify("Memory", requiredMemories, 2, 2) }}
+          价格：{{ quantify("记忆", requiredMemories, 2, 2) }}
           <span v-if="memories.lte(requiredMemories)">{{ nextLevelEstimate }}</span>
         </div>
       </div>
