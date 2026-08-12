@@ -14,8 +14,7 @@ export default {
   },
   computed: {
     questionMarkTooltip() {
-      return `Protected slots are unaffected by anything which may move or purge Glyphs.
-        New Glyphs will never be inserted into these slots.`;
+      return `受保护的槽位不受任何可能移动或净化符文操作的影响，且新符文永远不会插入这些槽位。`;
     }
   },
   watch: {
@@ -62,30 +61,30 @@ export default {
       >
         ?
       </div>
-      Protected Slots: ({{ quantifyInt("row", protectedRows) }})
+      保护格：({{ quantifyInt("行", protectedRows) }})
     </div>
     <button
       :class="addRowButtonClass()"
       @click="addRow"
     >
-      Add a protected row
+      添加保护行
       <div
         v-if="isProtectedRowsMax()"
         class="c-glyph-inventory-option__tooltip"
       >
-        One row is permanently un-protected for new Glyphs
+        必须存在一个非保护行用于放置新的符文
       </div>
     </button>
     <button
       :class="removeRowButtonClass()"
       @click="removeRow"
     >
-      Remove a protected row
+      移除保护行
     </button>
     <ToggleButton
       v-model="moveGlyphs"
       class="c-glyph-inventory-option"
-      label="Move Glyphs on changing row count:"
+      label="增减保护格数量的同时移动符文："
     />
   </div>
 </template>

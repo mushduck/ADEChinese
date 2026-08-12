@@ -87,7 +87,7 @@ export default {
         >
           ?
         </div>
-        <b> Threshold score</b> (rarity % + effect scores)
+        <b>阈值分数</b>（稀有度 % + 词条分数之和）
       </div>
       <input
         ref="scoreThreshold"
