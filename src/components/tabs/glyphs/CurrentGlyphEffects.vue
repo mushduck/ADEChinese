@@ -42,8 +42,7 @@ export default {
         `<span style="color: ${GlyphAppearanceHandler.getBorderColor("effarig")};">Effarig</span>`);
       if (this.hasReality) uniqueGlyphs.push(
         `<span style="animation: a-reality-glyph-description-cycle 10s infinite;">Reality</span>`);
-      return `You cannot have more than ${formatInt(this.maxSpecialGlyphs)} ${uniqueGlyphs.join(" or ")}
-        ${this.maxSpecialGlyphs !== 1 ? "Glyphs" : "Glyph"} equipped${uniqueGlyphs.length > 1 ? " each." : "."}`;
+      return `你不能${uniqueGlyphs.length > 1 ? "分别" : ""}装备超过一个 ${uniqueGlyphs.join(" 或 ")}。`;
     },
     noEffects() {
       return !this.effects.length;
@@ -54,9 +53,9 @@ export default {
     pelleGlyphText() {
       return Pelle.isDoomed
         ? (!PelleDestructionUpgrade.glyphRarity.canBeApplied
-           ? `Glyph Rarity is set to ${formatPercents(strengthToRarity(Pelle.glyphStrength))} and `
-           : "")
-          + `Level is capped at ${formatInt(Pelle.glyphMaxLevel)}`
+          ? `符文稀有度固定为 ${formatPercents(strengthToRarity(Pelle.glyphStrength))}，`
+          : "")
+          + `符文等级的上限为 ${formatInt(Pelle.glyphMaxLevel)}`
         : "";
     },
     showChaosText() {
@@ -103,7 +102,7 @@ export default {
       {{ pelleGlyphText }}
     </div>
     <div class="c-current-glyph-effects__header">
-      Currently active Glyph effects:
+      已装备符文的加成效果：
     </div>
     <GlyphSetName :glyph-set="glyphSet" />
     <br v-if="isSoftcapActive || hasEffarig || hasReality">
@@ -112,12 +111,11 @@ export default {
       v-if="isSoftcapActive"
       class="l-current-glyph-effects__capped-header"
     >
-      <span class="c-current-glyph-effects__effect--capped">Italic</span> effects have been slightly reduced
-      due to a softcap
+      <span class="c-current-glyph-effects__effect--capped">Italic</span> effects have 表示的加成，表示该项加成已达到软上限
     </div>
     <br>
     <div v-if="noEffects">
-      None (equip Glyphs to get their effects)
+      无（装备符文才能应用符文的加成效果）
     </div>
     <CurrentGlyphEffect
       v-for="effect in effects"

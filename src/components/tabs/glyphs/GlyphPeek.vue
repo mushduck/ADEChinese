@@ -38,7 +38,7 @@ export default {
     },
     showModal() {
       Modal.glyphShowcasePanel.show({
-        name: "Potential Glyphs for this Reality",
+        name: "本次现实时可选择的符文",
         glyphSet: this.glyphs,
         closeEvent: GAME_EVENT.REALITY_RESET_AFTER,
         isGlyphSelection: true,
@@ -61,19 +61,19 @@ export default {
     >
       <GlyphSetPreview
         :show-name="false"
-        :text="'Upcoming Glyph selection:'"
+        :text="'本次现实时可选择的符文：'"
         :glyphs="glyphs"
         :ignore-modified-level="true"
         :show-sacrifice="canSacrifice"
         :flip-tooltip="true"
         :sort="false"
       />
-      (Click to bring up details)
+      （点击此文本显示详细信息）
     </div>
     <div v-else>
-      Purchase the Reality study to see
+      在永恒标签中购买现实研究以查看
       <br>
-      this Reality's Glyph choices
+      本次现实的符文选择
     </div>
   </div>
 </template>

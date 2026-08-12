@@ -352,7 +352,7 @@ function roundPreservingSum(data) {
         :style="rowStyle('perk shop')"
         class="l-glyph-levels-and-weights__factor"
       >
-        Teresa's Perk shop
+        复兴点商店
       </div>
       <div
         :style="rowStyle('perk shop')"
@@ -392,7 +392,7 @@ function roundPreservingSum(data) {
         :style="rowStyle('singularities')"
         class="l-glyph-levels-and-weights__factor"
       >
-        Singularities
+        奇点
       </div>
       <div
         :style="rowStyle('singularities')"
@@ -412,7 +412,7 @@ function roundPreservingSum(data) {
         :style="rowStyle('instability')"
         class="l-glyph-levels-and-weights__factor"
       >
-        Instability
+        不稳定性
       </div>
       <div
         :style="rowStyle('instability')"
@@ -432,7 +432,7 @@ function roundPreservingSum(data) {
         :style="rowStyle('upgrade rows')"
         class="l-glyph-levels-and-weights__factor"
       >
-        Upgrade Rows
+        现实升级行数
       </div>
       <div
         :style="rowStyle('upgrade rows')"
@@ -452,7 +452,7 @@ function roundPreservingSum(data) {
         :style="rowStyle('achievements')"
         class="l-glyph-levels-and-weights__factor"
       >
-        Achievements
+        成就
       </div>
       <div
         :style="rowStyle('achievements')"
@@ -471,7 +471,7 @@ function roundPreservingSum(data) {
       :style="rowStyle('level')"
       class="l-glyph-levels-and-weights__factor"
     >
-      Final Level
+      最终等级
     </div>
     <div
       :style="rowStyle('level')"
@@ -483,13 +483,13 @@ function roundPreservingSum(data) {
       :style="rowStyle('info')"
       class="l-glyph-levels-and-weights__factor l-glyph-level-and-weights-note"
     >
-      Note: All resources here are log10 of their actual values.
+      注意：此处所有资源值均为实际值的 log10。
     </div>
     <div
       :style="rowStyle('info2')"
       class="l-glyph-levels-and-weights__factor l-glyph-level-and-weights-note"
     >
-      EP, Replicanti, and DT use their highest values this Reality.
+      永恒点数、复制器和膨胀时间使用本轮现实中达到的最高值。
     </div>
     <template v-if="adjustVisible">
       <div
@@ -497,13 +497,13 @@ function roundPreservingSum(data) {
         class="l-glyph-levels-and-weights__adjust-outline"
       />
       <div class="l-glyph-levels-and-weights__adjust-label">
-        Adjust weights
+        调整权重
         <div class="l-glyph-levels-and-weights__reset-btn-outer">
           <div
             :class="resetWeightsButtonClass()"
             @click="resetWeights"
           >
-            Reset
+            重置
           </div>
         </div>
       </div>
@@ -512,7 +512,7 @@ function roundPreservingSum(data) {
           v-if="showAutoAdjustWeights"
           v-model="isAutoAdjustWeightsOn"
           class="c-glyph-levels-and-weights__auto-btn"
-          label="Auto adjustment:"
+          label="自动调整："
         />
       </div>
       <div

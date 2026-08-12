@@ -19,30 +19,29 @@ export default {
   },
   computed: {
     suggestions() {
-      const arr = [];
       if (this.purchasableTS > 0) {
-        arr.push(`Purchase more Time Studies (${formatInt(this.purchasableTS)} available)`);
+        arr.push(`购买更多时间研究（可购买 ${formatInt(this.purchasableTS)} 个）`);
       }
       if (this.missingAchievements > 0) {
-        arr.push(`Complete the rest of your Achievements (${formatInt(this.missingAchievements)} left)`);
+        arr.push(`完成剩余的成就 （剩余 ${formatInt(this.missingAchievements)} 个）`);
       }
       if (this.unpurchasedDilationUpgrades > 0) {
-        arr.push(`Purchase the remaining Dilation Upgrades (${formatInt(this.unpurchasedDilationUpgrades)} left)`);
+        arr.push(`购买剩余的膨胀升级 （剩余 ${formatInt(this.unpurchasedDilationUpgrades)} 个）`);
       }
-      if (this.currLog10EP.gt(this.cheapestLog10TD.times(1.3)) && !(Laitela.continuumActive && Alpha.currentStage >= 17)) {
-        arr.push(`Purchase more TDs (cheapest: ${format(Decimal.pow10(this.cheapestLog10TD))} EP)`);
+      if (this.currLog10EP > 1.3 * this.cheapestLog10TD) {
+        arr.push(`购买更多时间维度（最小价格：${format(Decimal.pow10(this.cheapestLog10TD))} 永恒点数）`);
       }
-      if (this.currLog10EP.gt(this.multEPLog10Cost.times(1.3))) {
-        arr.push(`Purchase more ${formatX(5)} EP (cost: ${format(Decimal.pow10(this.multEPLog10Cost))} EP)`);
+      if (this.currLog10EP > 1.3 * this.multEPLog10Cost) {
+        arr.push(`购买更多 ${formatX(5)} 永恒点数倍增（价格：${format(Decimal.pow10(this.multEPLog10Cost))} 永恒点数）`);
       }
       if (this.ecCount < 60) {
-        arr.push(`Finish the rest of your ECs (Done: ${formatInt(this.ecCount)}/${formatInt(60)})`);
+        arr.push(`完成剩余的永恒挑战（已完成：${formatInt(this.ecCount)}/${formatInt(60)}）`);
       }
       if (!this.hasDilated) {
-        arr.push("Perform a Dilated Eternity");
+        arr.push("时间膨胀一次");
       }
       if (this.availableCharges > 0) {
-        arr.push(`Charge more Infinity Upgrades (${formatInt(this.availableCharges)} available)`);
+        arr.push(`充能更多的无限升级 （可充能 ${formatInt(this.availableCharges)} 个）`);
       }
       return arr;
     },
@@ -59,7 +58,7 @@ export default {
       };
     },
     clickText() {
-      return `(click to ${this.isExpanded ? "collapse" : "expand"})`;
+      return `（点击以${this.isExpanded ? "收起" : "展开"}）`;
     },
     realityReminderClass() {
       return {
@@ -108,15 +107,14 @@ export default {
     @click="clicked"
   >
     <span v-if="!canReality">
-      You still need to unlock Reality in the Time Study Tree.
+      你仍然需要在时间研究标签页解锁现实。
     </span>
     <span v-else-if="suggestions.length === 0">
-      Ready to Reality! You have unlocked every available upgrade within this Reality.
+      已准备现实！你已解锁本次现实中所有可用的升级！
     </span>
     <span v-else>
       <i :class="dropDownIconClass" />
-      You have {{ quantifyInt("thing", suggestions.length) }}
-      you may want to do before Reality. {{ clickText }}
+      你可能需要在现实前完成 {{ formatInt(suggestions.length) }} 件事情。 {{ clickText }}
       <div
         v-if="isExpanded"
         class="l-suggestions"

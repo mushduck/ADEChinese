@@ -87,7 +87,7 @@ export default {
       if (!Enslaved.isRunning) return;
       const haveBoost = Glyphs.activeWithoutCompanion.find(e => e.level.lt(Enslaved.glyphLevelMin)) !== undefined;
       if (haveBoost) {
-        this.enslavedHint = "done... what little... I can... with Glyphs...";
+        this.enslavedHint = "完成...以符文...所能做的...微乎其微...";
       }
     },
     toggleAutoRestartCelestial() {
@@ -157,7 +157,7 @@ export default {
             for="autoRestart"
             class="o-clickable"
           >
-            Repeat this Celestial's Reality
+            进行现实后重新进入该天神的挑战
           </label>
         </div>
 
@@ -167,29 +167,30 @@ export default {
 
         <div v-if="showInstability">
           <br>
-          Glyphs are becoming unstable.
+          符文变得不稳定。
           <br>
-          Glyph levels higher than {{ formatInt(instabilityThreshold) }} are harder to reach.
           <br>
-          This effect is even stronger above level {{ formatInt(hyperInstabilityThreshold) }}.
+          达到高于 {{ formatInt(instabilityThreshold) }} 级的更加困难。
+          <br>
+          在超过 {{ formatInt(hyperInstabilityThreshold) }} 级时，这种效果更为显著。
           <br>
           <div v-if="showHigherInstability">
-            Above level {{ formatInt(extremeInstabilityThreshold) }}, higher Glyph levels are nearly impossible to reach.
+            高于 {{ formatInt(extremeInstabilityThreshold) }} 级时, 更高符文等级几乎无法企及。
           </div>
           <div v-if="showMoreHigherInstability">
-            Past level {{ formatInt(immenseInstabilityThreshold) }}, higher Glyph levels become not much more than a dream.
+            跨越 {{ formatInt(immenseInstabilityThreshold) }} 级时，继续提升将举步维艰。
           </div>
           <div v-if="showEvenMoreHigherInstability">
-            Beyond level {{ formatInt(extensiveInstabilityThreshold) }}, just pretend higher Glyph levels don't exist.
+            超越 {{ formatInt(extensiveInstabilityThreshold) }} 级时，升级减缓将急剧加剧。
           </div>
           <div v-if="showStillEvenMoreHigherInstability">
-            Upon exceeding level {{ formatInt(prodigiousInstabilityThreshold) }}, your Glyph Levels just die.
+            一旦触及 {{ formatInt(prodigiousInstabilityThreshold) }} 级，增长便几乎宣告终结。
           </div>
         </div>
         <SingleGlyphCustomzationPanel />
         <ExpandingControlBox
           width-source="content"
-          label="Glyph Level Factors"
+          label="符文等级因子"
           container-class="c-glyph-level-factors-dropdown-header"
           class="l-glyph-level-factors"
         >
@@ -228,13 +229,13 @@ export default {
                 :class="glyphInfoClass(!sacrificeDisplayed)"
                 @click="setInfoState(false)"
               >
-                Current Glyph effects
+                当前符文效果
               </button>
               <button
                 :class="glyphInfoClass(sacrificeDisplayed)"
                 @click="setInfoState(true)"
               >
-                Glyph Sacrifice totals
+                符文献祭总述
               </button>
             </div>
             <SacrificedGlyphs v-if="sacrificeUnlocked && sacrificeDisplayed" />

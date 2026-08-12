@@ -21,10 +21,10 @@ export default {
     types: () => GLYPH_TYPES.filter(type => type !== "cursed" && type !== "companion"),
     lastMachines() {
       return this.lastMachinesTeresa.gte(DC.E20000)
-        ? `${quantify("Dual Machine", this.lastMachinesTeresa.dividedBy(DC.E20000), 2)}`
+        ? `${quantify("重构机器", this.lastMachinesTeresa.dividedBy(DC.E20000), 2)}`
         : (this.lastMachinesTeresa.lt(DC.E10000)
-          ? `${quantify("Reality Machine", this.lastMachinesTeresa, 2)}`
-          : `${quantify("Imaginary Machine", this.lastMachinesTeresa.dividedBy(DC.E10000), 2)}`);
+          ? `${quantify("现实机器", this.lastMachinesTeresa, 2)}`
+          : `${quantify("虚幻机器", this.lastMachinesTeresa.dividedBy(DC.E10000), 2)}`);
     },
     dropDownIconClass() {
       return this.hideAlteration ? "far fa-plus-square" : "far fa-minus-square";
@@ -43,7 +43,7 @@ export default {
     },
     cosmeticTypes: () => CosmeticGlyphTypes,
     addStyle() {
-      return { color: GlyphAlteration.baseAdditionColor() };
+      return { color: GlyphAlteraztion.baseAdditionColor() };
     },
     empowerStyle() {
       return { color: GlyphAlteration.baseEmpowermentColor() };
@@ -121,11 +121,11 @@ export default {
         v-if="isDoomed"
         class="pelle-current-glyph-effects"
       >
-        You cannot sacrifice Glyphs while Doomed.
+        你不能在被毁灭的现实中献祭符文。
       </span>
       <span v-else>
-        <div>Drag Glyphs here or shift-click to Sacrifice.</div>
-        <div>The confirmation can be disabled in Options or by holding Ctrl.</div>
+        <div>拖拽符文至此处或按住Shift键点击献祭。</div>
+        <div>确认提示可在设置或按住Ctrl键禁用</div>
       </span>
     </div>
     <div v-if="hasAlteration">
@@ -134,37 +134,37 @@ export default {
         @click="toggleAlteration"
       >
         <i :class="dropDownIconClass" />
-        <b> Altered Glyphs</b>
+        <b>异变符文</b>
       </span>
       <br>
       <div v-if="hideAlteration">
-        (Details hidden, click to unhide)
+        （已隐藏详情，点击以打开）
       </div>
       <div v-else>
-        Glyph types will have one of their effects improved<br>
-        when their Glyph type's total sacrifice value is above:
+        当某种符文类型的总献祭值高于以下数值时，
+        该符文类型的某个效果将得到提升：
         <br><br>
         <b>
-          <span :style="addStyle">{{ format(addThreshold) }} - an additional secondary effect</span>
+          <span :style="addStyle">{{ format(addThreshold) }} - 一些符文词条获得附加效果t</span>
           <br>
-          <span :style="empowerStyle">{{ format(empowerThreshold) }} - formula drastically improved</span>
+          <span :style="empowerStyle">{{ format(empowerThreshold) }} - 大幅度改善一些符文词条的效果公式</span>
           <br>
-          <span :style="boostStyle">{{ format(boostThreshold) }} - a boost depending on Glyph Sacrifice</span>
+          <span :style="boostStyle">{{ format(boostThreshold) }} - 基于符文献祭，提供额外加成</span>
         </b>
         <br><br>
-        All effects from Glyph Sacrifice can no longer be increased once they reach {{ format(maxSacrifice) }}.
+        当符文献祭效果达到 {{ format(maxSacrifice) }} 后，所有效果将无法继续提升。
       </div>
     </div>
     <br>
     <div class="c-sacrificed-glyphs__header">
-      Glyph Sacrifice Boosts:
+      符文献祭加成：
     </div>
     <div v-if="anySacrifices && !isDoomed">
       <div v-if="teresaMult.gt(1)">
-        Glyph sacrifice values are multiplied by {{ formatX(teresaMult, 2, 2) }};
-        Teresa was last done at {{ lastMachines }}.
+        符文献祭值乘以 {{ formatX(teresaMult, 2, 2) }}；
+        上次以 {{ lastMachines }} 完成特蕾莎。
         <span v-if="hasSeenRealityGlyph">
-          Reality Glyphs are unaffected by this multiplier and have no altered effects.
+          现实符文不受该效果的影响，并且没有异变效果。
         </span>
       </div>
       <template v-for="type in types">
@@ -179,10 +179,10 @@ export default {
       v-else-if="isDoomed"
       class="pelle-current-glyph-effects"
     >
-      All boosts from Glyph Sacrifice are disabled while Doomed, including changes to effects due to Altered Glyphs.
+      在毁灭的现实中，符文献祭提供的所有加成均被禁用，包括变异符文带来的效果变化。
     </div>
     <div v-else>
-      You haven't Sacrificed any Glyphs yet!
+      你还没有献祭任何符文！
     </div>
   </div>
 </template>
