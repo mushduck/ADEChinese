@@ -34,19 +34,19 @@ export default {
   computed: {
     sidebarDB: () => GameDatabase.sidebarResources,
     themeLabel() {
-      return `Theme: ${Themes.find(this.theme).displayName()}`;
+      return `主题：${Themes.find(this.theme).displayName()}`;
     },
     notationLabel() {
-      return `Notation: ${this.notation}`;
+      return `记数法：${this.notation}`;
     },
     postNotationLabel() {
-      return `Large Notation: ${this.lnotation}`;
+      return `大写字母：${this.lnotation}`;
     },
     sidebarLabel() {
-      return `Sidebar (Modern UI): ${this.sidebarResource}`;
+      return `侧边栏（现代 UI）: ${this.sidebarResource}`;
     },
     UILabel() {
-      return `UI: ${this.$viewModel.newUI ? "Modern" : "Classic"}`;
+      return `UI: ${this.$viewModel.newUI ? "现代" : "经典"}`;
     }
   },
   watch: {
@@ -61,7 +61,7 @@ export default {
       this.notation = options.notation;
       this.lnotation = options.lnotation;
       this.sidebarResource = player.options.sidebarResourceID === 0
-        ? "Latest Resource"
+        ? "最新资源"
         : this.sidebarDB.find(e => e.id === player.options.sidebarResourceID).optionName;
       this.headerTextColored = options.headerTextColored;
     },
@@ -84,7 +84,7 @@ export default {
           class="o-primary-btn--option"
           onclick="Modal.newsOptions.show();"
         >
-          Open News Options
+          打开新闻选项
         </OptionsButton>
       </div>
       <div class="l-options-grid__row">
@@ -110,7 +110,7 @@ export default {
           class="o-primary-btn--option"
           onclick="Modal.notation.show();"
         >
-          Open Exponent Notation Options
+          打开指数型记数法选项
         </OptionsButton>
       </div>
       <div class="l-options-grid__row">
@@ -118,19 +118,19 @@ export default {
           class="o-primary-btn--option"
           onclick="Modal.animationOptions.show();"
         >
-          Open Animation Options
+          打开动画选项
         </OptionsButton>
         <OptionsButton
           class="o-primary-btn--option"
           onclick="Modal.infoDisplayOptions.show()"
         >
-          Open Info Display Options
+          打开信息显示选项
         </OptionsButton>
         <OptionsButton
           class="o-primary-btn--option"
           onclick="Modal.awayProgressOptions.show()"
         >
-          Open Away Progress Options
+          打开离线资源选项
         </OptionsButton>
       </div>
       <div class="l-options-grid__row">
@@ -138,12 +138,12 @@ export default {
           class="o-primary-btn--option"
           onclick="Modal.hiddenTabs.show()"
         >
-          Modify Visible Tabs
+          修改可见标签页
         </OptionsButton>
         <PrimaryToggleButton
           v-model="headerTextColored"
           class="o-primary-btn--option l-options-grid__button"
-          label="Relative prestige gain text coloring:"
+          label="高亮重置资源数值："
         />
         <ExpandingControlBox
           v-if="$viewModel.newUI"
