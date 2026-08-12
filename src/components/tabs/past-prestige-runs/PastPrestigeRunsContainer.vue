@@ -51,7 +51,7 @@ export default {
     },
     points() {
       const rawText = this.layer.currency;
-      return rawText === "RM" && this.hasIM ? "iM Cap" : rawText;
+      return rawText === "现实机器" && this.hasIM ? "虚幻机器上限" : rawText;
     },
     condition() {
       return this.layer.condition();
@@ -80,7 +80,7 @@ export default {
       this.hasIM = MachineHandler.currentIMCap.gt(0);
 
       // We have 4 different "useful" stat pairings we could display, but this ends up being pretty boilerplatey
-      const names = [this.points, `${this.points} Rate`, this.plural, `${this.singular} Rate`];
+      const names = [this.points, `${this.points}增长率`, this.plural, `${this.singular}增长率`];
       switch (this.resourceType) {
         case RECENT_PRESTIGE_RESOURCE.ABSOLUTE_GAIN:
           this.selectedResources = [0, 2];
@@ -121,9 +121,9 @@ export default {
     },
     infoArray(run, index) {
       let name;
-      if (index === 0) name = "Last";
-      else if (index === 10) name = "Average";
-      else name = `${formatInt(index + 1)} ago`;
+      if (index === 0) name = "上一次";
+      else if (index === 10) name = "平均";
+      else name = `${formatInt(index + 1)} 次之前`;
 
       const cells = [name, this.gameTime(run)];
       if (this.hasRealTime) cells.push(this.realTime(run));
@@ -145,10 +145,10 @@ export default {
       return cells;
     },
     infoCol() {
-      const cells = ["Run", this.hasRealTime ? "Game Time" : "Time in Run"];
-      if (this.hasRealTime) cells.push("Real Time");
+      const cells = ["Run", this.hasRealTime ? "游戏时间" : "Time in Run"];
+      if (this.hasRealTime) cells.push("现实时间");
       cells.push(...this.resourceTitles);
-      if (this.hasChallenges) cells.push("Challenge");
+      if (this.hasChallenges) cells.push("挑战");
 
       for (let index = 0; index < this.layer.extra?.length && cells.length <= this.longestRow; index++) {
         if (!this.layer.showExtra[index]()) continue;
@@ -165,14 +165,14 @@ export default {
       return timeDisplayShort(new Decimal(run[1]));
     },
     prestigeCurrencyGain(run) {
-      if (this.hasIM && this.layer.name === "Reality") return `${format(run[7], 2)} iM`;
+      if (this.hasIM && this.layer.name === "现实") return `${format(run[7], 2)} 虚幻机器`;
       return `${format(run[2], 2)} ${this.points}`;
     },
     prestigeCountGain(run) {
       return quantify(this.singular, run[3]);
     },
     prestigeCurrencyRate(run) {
-      if (this.hasIM && this.layer.name === "Reality") return "N/A";
+      if (this.hasIM && this.layer.name === "现实") return "N/A";
       return this.rateText(run, run[2]);
     },
     prestigeCountRate(run) {
@@ -182,8 +182,8 @@ export default {
       const time = run[1];
       const rpm = ratePerMinute(amount, time);
       return Decimal.lt(rpm, 1)
-        ? `${format(Decimal.mul(rpm, 60), 2, 2)} per hour`
-        : `${format(rpm, 2, 2)} per min`;
+        ? `${format(Decimal.mul(rpm, 60), 2, 2)} 每小时`
+        : `${format(rpm, 2, 2)} 每分钟`;
     },
     challengeText(run) {
       // Special-case Nameless reality in order to keep this column small and not force a linebreak
@@ -203,11 +203,11 @@ export default {
         case 3:
         case 4:
           // Prestige currency is long, but the reality table can be shorter due to smaller numbers
-          width = this.layer.name === "Reality" ? "15rem" : "20rem";
+          width = this.layer.name === "现实" ? "15rem" : "20rem";
           break;
         case 5:
           // Challenges can potentially be very long, but this is glyph level in the reality table
-          width = this.layer.name === "Reality" ? "10rem" : "20rem";
+          width = this.layer.name === "现实" ? "10rem" : "20rem";
           break;
         default:
           width = "13rem";
@@ -236,7 +236,7 @@ export default {
         <i :class="dropDownIconClass" />
       </span>
       <span>
-        <h3>Last {{ formatInt(10) }} {{ plural }}:</h3>
+        <h3>最近 {{ formatInt(10) }} 次{{ plural }}：</h3>
       </span>
     </div>
     <div v-show="shown">
@@ -258,11 +258,10 @@ export default {
           class="c-empty-row"
         >
           <i v-if="index === 10">
-            An average cannot be calculated with no {{ plural }}.
+            无可用{{ plural }}时无法计算平均值。
           </i>
           <i v-else>
-            You have not done {{ formatInt(index + 1) }}
-            {{ index === 0 ? singular : plural }} yet.
+            尚未完成第 {{ formatInt(index + 1) }} 次{{ index === 0 ? singular : plural }}。
           </i>
         </span>
         <span

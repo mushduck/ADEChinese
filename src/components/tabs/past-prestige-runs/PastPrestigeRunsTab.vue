@@ -10,32 +10,32 @@ export default {
     return {
       layers: {
         reality: {
-          name: "Reality",
-          plural: "Realities",
-          currency: "RM",
+          name: "现实",
+          plural: "现实次数",
+          currency: "现实机器",
           condition: () => PlayerProgress.realityUnlocked(),
           getRuns: () => player.records.recentRealities,
-          extra: ["Glyph Level", "Relic Shards"],
+          extra: ["符文等级", "遗迹碎片"],
           showExtra: [() => true, () => TeresaUnlocks.effarig.canBeApplied],
           formatExtra: [x => formatInt(x), x => format(x, 2)],
           allowRate: [false, true],
-          rateString: ["", "Relic Shard Rate"],
+          rateString: ["", "遗迹碎片获得率"],
         },
         eternity: {
-          name: "Eternity",
-          plural: "Eternities",
-          currency: "EP",
+          name: "永恒",
+          plural: "永恒次数",
+          currency: "永恒点数",
           condition: () => PlayerProgress.eternityUnlocked(),
           getRuns: () => player.records.recentEternities,
-          extra: ["Tachyon Particles"],
+          extra: ["超光速粒子"],
           showExtra: [() => PlayerProgress.dilationUnlocked()],
           formatExtra: [x => format(x, 2)],
           allowRate: [false],
         },
         infinity: {
-          name: "Infinity",
-          plural: "Infinities",
-          currency: "IP",
+          name: "无限",
+          plural: "无限次数",
+          currency: "无限点数",
           condition: () => PlayerProgress.infinityUnlocked(),
           getRuns: () => player.records.recentInfinities,
         },
@@ -47,13 +47,13 @@ export default {
     resourceText() {
       switch (this.resourceType) {
         case RECENT_PRESTIGE_RESOURCE.ABSOLUTE_GAIN:
-          return "total resource gain";
+          return "总资源获得";
         case RECENT_PRESTIGE_RESOURCE.RATE:
-          return "resource gain rate";
+          return "资源获得率";
         case RECENT_PRESTIGE_RESOURCE.CURRENCY:
-          return "prestige currency";
+          return "重置资源";
         case RECENT_PRESTIGE_RESOURCE.PRESTIGE_COUNT:
-          return "prestige count";
+          return "重置次数";
         default:
           throw new Error("Unrecognized Statistics tab resource type");
       }
@@ -78,7 +78,7 @@ export default {
         class="o-primary-btn o-primary-btn--subtab-option"
         @click="cycleButton()"
       >
-        Showing {{ resourceText }}
+        显示 {{ resourceText }}
       </button>
     </div>
     <PastPrestigeRunsContainer
