@@ -77,14 +77,14 @@ export default {
     },
     buttonText() {
       if (this.overrideLabel.length) return this.overrideLabel;
-      if (this.isRunning) return "Running";
+      if (this.isRunning) return "进行中";
       if (this.isCompleted) {
-        if (this.isUnlocked) return "Redo";
-        return "Completed";
+        if (this.isUnlocked) return "重试";
+        return "已完成";
       }
-      if (this.isUnlocked) return "Start";
-      if (this.canBeUnlocked) return "Unlock";
-      return "Locked";
+      if (this.isUnlocked) return "进入";
+      if (this.canBeUnlocked) return "解锁";
+      return "已锁定";
     }
   }
 };
