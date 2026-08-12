@@ -94,10 +94,10 @@ export default {
     },
     exportMasteryTree() {
       if (player.endgameMasteries.masteries.length === 0) {
-        GameUI.notify.error("You cannot export an empty Endgame Mastery Tree!");
+        GameUI.notify.error("你不能导出空的终局专精树。");
       } else {
         copyToClipboard(GameCache.currentMasteryTree.value.exportString);
-        GameUI.notify.info("Exported current Endgame Masteries to your clipboard");
+        GameUI.notify.info("当前终局专精树已导出到剪贴板");
       }
     }
   }

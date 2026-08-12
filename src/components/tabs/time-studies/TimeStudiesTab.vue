@@ -124,10 +124,10 @@ export default {
     },
     exportStudyTree() {
       if (player.timestudy.studies.length === 0) {
-        GameUI.notify.error("You cannot export an empty Time Study Tree!");
+        GameUI.notify.error("你不能导出空的时间研究树。");
       } else {
         copyToClipboard(GameCache.currentStudyTree.value.exportString);
-        GameUI.notify.info("Exported current Time Studies to your clipboard");
+        GameUI.notify.info("当前时间研究树已导出到剪贴板");
       }
     }
   }
@@ -141,19 +141,19 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="exportStudyTree"
       >
-        Export tree
+        导出时间研究树
       </PrimaryButton>
       <PrimaryButton
         :class="respecClassObject"
         @click="respec = !respec"
       >
-        Respec Time Studies on next Eternity
+        下次永恒后重置时间研究树
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         onclick="Modal.studyString.show({ id: -1 })"
       >
-        Import tree
+        导入时间研究树
       </PrimaryButton>
     </div>
     <div

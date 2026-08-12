@@ -52,8 +52,8 @@ export default {
     save() {
       this.hideContextMenu();
       this.preset.masteries = GameCache.currentMasteryTree.value.exportString;
-      const presetName = this.name ? `Mastery preset "${this.name}"` : "Mastery preset";
-      GameUI.notify.endgame(`${presetName} saved in slot ${this.saveslot}`);
+      const presetName = this.name ? `终局专精树以"${this.name}"的名称"` : "终局专精树";
+      GameUI.notify.endgame(`${presetName}保存到槽位 ${this.saveslot}`);
     },
     load() {
       this.hideContextMenu();
@@ -65,10 +65,10 @@ export default {
         combinedTree.attemptBuyArray(combinedTree.parseMasteryImport(this.preset.masteries), true);
         EndgameMasteryTree.commitToGameState(combinedTree.purchasedMasteries, false);
 
-        const presetName = this.name ? `Mastery preset "${this.name}"` : "Mastery preset";
+        const presetName = this.name ? `预设终局专精树“${this.name}”` : "预设终局专精树";
         GameUI.notify.endgame(`${presetName} loaded from slot ${this.saveslot}`);
       } else {
-        Modal.message.show("This Endgame Mastery list currently contains no Endgame Masteries.");
+        Modal.message.show("该预设终局专精树目前没有终局专精");
       }
     },
     respecAndLoad() {
@@ -82,13 +82,13 @@ export default {
     deletePreset() {
       this.hideContextMenu();
       if (this.preset.masteries) Modal.masteryString.show({ id: this.saveslot - 1, deleting: true });
-      else Modal.message.show("This Endgame Mastery list currently contains no Endgame Masteries.");
+      else Modal.message.show("该预设终局专精树目前没有终局专精");
     },
     handleExport() {
       this.hideContextMenu();
       copyToClipboard(this.preset.masteries);
-      const presetName = this.name ? `Mastery preset "${this.name}"` : "Mastery preset";
-      GameUI.notify.endgame(`${presetName} exported from slot ${this.saveslot} to your clipboard`);
+      const presetName = this.name ? `研究预设 "${this.name}"` : "研究预设";
+      GameUI.notify.endgame(`来自槽 ${this.saveslot} 的 ${presetName} 已导出至剪贴板`);
     },
     edit() {
       Modal.masteryString.show({ id: this.saveslot - 1 });
@@ -110,7 +110,7 @@ export default {
     </template>
     <template #menu>
       <div class="l-es-save-load-btn__menu c-es-save-load-btn__menu">
-        <span ach-tooltip="Set a custom name (up to 4 ASCII characters)">
+        <span ach-tooltip="自定义名称（上限4个ASCII字符）">
           <input
             type="text"
             size="4"
@@ -125,26 +125,26 @@ export default {
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="edit"
         >
-          Edit
+          编辑
         </div>
         <div
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="handleExport"
         >
-          Export
+          导出
         </div>
         <div
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="save"
         >
-          Save
+          保存
         </div>
         <div class="l-es-save-load-btn__menu-item">
           <div
             class="c-es-save-load-btn__menu-item"
             @click="load"
           >
-            Load
+            加载
           </div>
           <div class="c-es-save-load-btn__menu-item__hover-options">
             <div
@@ -154,7 +154,7 @@ export default {
               }"
               @click="respecAndLoad"
             >
-              Respec and Load
+              重置并加载
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default {
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="deletePreset"
         >
-          Delete
+          删除
         </div>
       </div>
     </template>

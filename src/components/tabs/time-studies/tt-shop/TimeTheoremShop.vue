@@ -52,16 +52,16 @@ export default {
     },
     TTgenRateText() {
       if (this.theoremGeneration.lt(1 / 3600)) {
-        return `one TT every ${TimeSpan.fromSeconds(
-          this.theoremGeneration.reciprocal()).toStringShort(false)}`;
+        return `你每 ${TimeSpan.fromSeconds(
+          this.theoremGeneration.reciprocal()).toStringShort(false)} 获得一个时间之理。`;
       }
       if (this.theoremGeneration.lt(0.1)) {
-        return `${format(this.theoremGeneration.times(3600), 2, 2)} TT/hour`;
+        return `你每小时获得 ${format(this.theoremGeneration.times(3600), 2, 2)} 时间之理。`;
       }
-      return `${format(this.theoremGeneration, 2, 2)} TT/sec`;
+      return `你每秒获得 ${format(this.theoremGeneration, 2, 2)} 时间之理。`;
     },
     totalTimeTheoremText() {
-      return `${quantify("total Time Theorem", this.totalTimeTheorems, 2, 2, this.formatTimeTheoremType)}`;
+      return `你拥有 ${quantify("时间之理`;", this.totalTimeTheorems, 2, 2, this.formatTimeTheoremType)}.`;
     },
     minimizeArrowStyle() {
       return {
@@ -70,7 +70,7 @@ export default {
       };
     },
     saveLoadText() {
-      return this.$viewModel.shiftDown ? "Save:" : "Load:";
+      return this.$viewModel.shiftDown ? "保存：" : "加载：";
     },
     shopBottomRowHeightStyle() {
       return {
@@ -91,19 +91,19 @@ export default {
       player.timestudy.shopMinimized = !player.timestudy.shopMinimized;
     },
     formatAM(am) {
-      return `${format(am)} AM`;
+      return `${format(am)} 反物质`;
     },
     buyWithAM() {
       TimeTheorems.buyOne(false, "am");
     },
     formatIP(ip) {
-      return `${format(ip)} IP`;
+      return `${format(ip)} 无限点数`;
     },
     buyWithIP() {
       TimeTheorems.buyOne(false, "ip");
     },
     formatEP(ep) {
-      return `${format(ep, 2, 0)} EP`;
+      return `${format(ep, 2, 0)} 永恒点数`;
     },
     buyWithEP() {
       TimeTheorems.buyOne(false, "ep");
@@ -155,11 +155,11 @@ export default {
         </button>
         <p class="timetheorems">
           <span class="c-tt-amount">
-            {{ quantify("Time Theorem", theoremAmount, 2, 0, formatTimeTheoremType) }}
+            {{ quantify("时间之理", theoremAmount, 2, 0, formatTimeTheoremType) }}
           </span>
           <span v-if="showST">
             <br>
-            {{ quantifyInt("Space Theorem", STamount) }}
+            {{ quantifyInt("空间之理", STamount) }}
           </span>
         </p>
         <div class="l-load-tree-area">
@@ -175,8 +175,7 @@ export default {
             <span
               v-if="hasTTGen"
               class="checkbox-margin"
-              ach-tooltip="This shows TT generation by default and total TT if you hold shift.
-                Check this box to swap this behavior."
+              ach-tooltip="默认显示时间之理生成量，按住Shift键则显示总时间之理。勾选此框可交换此行为。"
             >
               <input
                 v-model="invertTTgenDisplay"
@@ -187,10 +186,10 @@ export default {
               >
             </span>
             <span v-if="showTTGen">
-              You are gaining {{ TTgenRateText }}.
+              {{ TTgenRateText }}
             </span>
             <span v-else>
-              You have {{ totalTimeTheoremText }}.
+              你拥有 {{ totalTimeTheoremText }}。
             </span>
           </div>
         </div>
@@ -224,7 +223,7 @@ export default {
             class="o-tt-top-row-button c-tt-buy-button c-tt-buy-button--unlocked"
             @click="buyMaxTheorems"
           >
-            Buy max
+            购买最大数量
           </button>
           <PrimaryToggleButton
             v-if="!minimized && hasTTAutobuyer"
