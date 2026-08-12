@@ -39,10 +39,10 @@ export default {
         const timeToThousand = coeff.times(nextMilestone.divide(replicantiAmount).pow(postScale).minus(1));
         // The calculation seems to choke and return zero if the time is too large, probably because of rounding issues
         const timeEstimateText = timeToThousand.eq(0)
-          ? "an extremely long time"
+          ? "一段极其长的时间"
           : `${TimeSpan.fromSeconds(timeToThousand)}`;
-        this.remainingTimeText = `You are gaining ${formatX(gainFactorPerSecond, 2, 1)} Replicanti per second` +
-          ` (${timeEstimateText} until ${format(nextMilestone)})`;
+        this.remainingTimeText = `你每秒获得 ${formatX(gainFactorPerSecond, 2, 1)} 复制器` +
+          ` (${timeEstimateText} 后达到 ${format(nextMilestone)})`;
       } else {
         this.remainingTimeText = "";
       }
@@ -73,32 +73,30 @@ export default {
 
       if (this.remainingTimeText === "") {
         if (remainingTime.eq(0)) {
-          this.remainingTimeText = `At Infinite Replicanti (normally takes
-            ${TimeSpan.fromSeconds(secondsPerGalaxy)})`;
+          this.remainingTimeText = `无限复制器（需要
+            ${TimeSpan.fromSeconds(secondsPerGalaxy)}）`;
         } else if (replicantiAmount.lt(100)) {
           // Because of discrete replication, we add "Approximately" at very low amounts
-          this.remainingTimeText = `Approximately ${TimeSpan.fromSeconds(new Decimal(remainingTime))} remaining
-            until Infinite Replicanti`;
+          this.remainingTimeText = `距离无限复制器还需大约 ${TimeSpan.fromSeconds(new Decimal(remainingTime))} `;
         } else {
-          this.remainingTimeText = `${TimeSpan.fromSeconds(new Decimal(remainingTime))} remaining until Infinite Replicanti`;
+          this.remainingTimeText = `距离无限复制器还有 ${TimeSpan.fromSeconds(new Decimal(remainingTime))}`;
         }
       }
 
       // If the player can get RG, this text is redundant with text below. It denotes total time from 1 to e308
       if (Replicanti.galaxies.max.eq(0) && !isAbove308) {
-        this.remainingTimeText += ` (${TimeSpan.fromSeconds(new Decimal(totalTime))} total)`;
+        this.remainingTimeText += `（总计需${TimeSpan.fromSeconds(new Decimal(totalTime))}）`;
       }
 
 
       if (Replicanti.galaxies.max.gt(0)) {
         // If the player has max RGs, don't display the "You are gaining blah" text
         if (player.replicanti.galaxies.eq(Replicanti.galaxies.max)) {
-          this.galaxyText = "You have reached the maximum amount of Replicanti Galaxies";
+          this.galaxyText = "你已达到最大复制器星系数量";
         } else {
-          this.galaxyText = `You are gaining a Replicanti Galaxy every
-            ${TimeSpan.fromSeconds(secondsPerGalaxy)}`;
+          this.galaxyText = `你每过 ${TimeSpan.fromSeconds(secondsPerGalaxy)} 秒能获得一个复制器星系。`;
           if (galaxiesPerSecond.gte(1)) {
-            this.galaxyText = `You are gaining ${quantify("Replicanti Galaxy", galaxiesPerSecond, 2, 1)} per second`;
+            this.galaxyText = `你每秒获得 ${quantify("Replicanti Galaxy", galaxiesPerSecond, 2, 1)} 复制器星系。`;
           }
           // Take the total time from zero replicanti to max RG + e308 replicanti and then subtract away the time which
           // has already elapsed. The time elapsed is calculated from your current RG total (including the current one)
@@ -121,8 +119,7 @@ export default {
             pendingTime += leftPercentAfterGalaxy * secondsPerGalaxy.toNumber();
           }
           const thisGalaxyTime = pending.gt(0) ? pendingTime : secondsPerGalaxy.sub(remainingTime).toNumber();
-          this.galaxyText += ` (all Replicanti Galaxies within
-            ${TimeSpan.fromSeconds(Decimal.clampMin(new Decimal(allGalaxyTime - thisGalaxyTime), 0))})`;
+          this.galaxyText += `（复制器星系于 ${TimeSpan.fromSeconds(Decimal.clampMin(new Decimal(allGalaxyTime - thisGalaxyTime), 0))} 后达到最大数量）`;
         }
       } else {
         this.galaxyText = ``;

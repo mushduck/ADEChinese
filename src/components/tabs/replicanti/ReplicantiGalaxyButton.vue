@@ -22,14 +22,14 @@ export default {
   computed: {
     resetActionDisplay() {
       return this.isDivideUnlocked && !Pelle.isDoomed
-        ? `Divide Replicanti by ${format(Number.MAX_VALUE, 1, 1)}`
-        : "Reset Replicanti amount";
+        ? `复制器数量除以 ${format(Number.MAX_VALUE, 1, 1)}`
+        : "重置复制器数量";
     },
     galaxyCountDisplay() {
       const bought = this.boughtGalaxies;
       const extra = this.extraGalaxies;
       const galaxyCount = extra.gt(0) ? `${formatHybridLarge(bought, 3)}+${formatHybridLarge(extra, 3)}` : formatHybridLarge(bought, 3);
-      return `Currently: ${galaxyCount}`;
+      return `当前：${galaxyCount}`;
     },
     autobuyer() {
       return Autobuyer.replicantiGalaxy;
@@ -37,7 +37,7 @@ export default {
     autobuyerTextDisplay() {
       const auto = this.isAutoActive;
       const disabled = !this.isAutoEnabled;
-      return `Auto Galaxy ${auto ? "ON" : "OFF"}${disabled ? " (disabled)" : ""}`;
+      return `自动购买星系：${auto ? "开启" : "关闭"}${disabled ? "（已禁用）" : ""}`;
     },
   },
   methods: {
@@ -70,7 +70,7 @@ export default {
       class="o-primary-btn--replicanti-galaxy"
       @click="handleClick"
     >
-      {{ resetActionDisplay }} for a Replicanti Galaxy
+      {{ resetActionDisplay }}以获得一个复制器星系
       <br>
       {{ galaxyCountDisplay }}
     </PrimaryButton>

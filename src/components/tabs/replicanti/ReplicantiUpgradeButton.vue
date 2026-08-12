@@ -78,7 +78,7 @@ export class ReplicantiUpgradeButtonSetup {
     <PrimaryToggleButton
       v-if="isAutoUnlocked && !isEC8Running"
       v-model="isAutobuyerOn"
-      label="Auto:"
+      label="自动："
       class="l--spoon-btn-group__little-spoon o-primary-btn--replicanti-upgrade-toggle"
     />
   </div>

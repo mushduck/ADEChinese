@@ -62,8 +62,8 @@ export default {
     replicantiChanceSetup() {
       return new ReplicantiUpgradeButtonSetup(
         ReplicantiUpgrade.chance,
-        value => `Replicate chance: ${formatDecimalPercents(value)}`,
-        cost => `+${formatPercents(0.01)} Costs: ${format(cost)} IP`
+        value => `复制概率：${formatDecimalPercents(value)}`,
+        cost => `+${formatPercents(0.01)} 价格：${format(cost)} 无限点数`
       );
     },
     replicantiIntervalSetup() {
@@ -79,16 +79,16 @@ export default {
           // Checking isCapped() prevents text overflow when formatted as "__ ➜ __"
           return TimeSpan.fromMilliseconds(new Decimal(intervalNum)).toStringShort(false);
         }
-        if (actualInterval.lt(0.01)) return `< ${format(0.01, 2, 2)}ms`;
+        if (actualInterval.lt(0.01)) return `< ${format(0.01, 2, 2)}毫秒`;
         if (actualInterval.gt(1000))
-          return `${format(actualInterval.div(1000), 2, 2)}s`;
-        return `${format(actualInterval, 2, 2)}ms`;
+          return `${format(actualInterval.div(1000), 2, 2)}秒`;
+        return `${format(actualInterval, 2, 2)}毫秒`;
       }
       return new ReplicantiUpgradeButtonSetup(
         upgrade,
-        value => `Interval: ${formatInterval(value)}`,
+        value => `复制间隔：${formatInterval(value)}`,
         cost =>
-          `➜ ${formatInterval(upgrade.nextValue)} Costs: ${format(cost)} IP`
+          `➜ ${formatInterval(upgrade.nextValue)} 价格：${format(cost)} 无限点数`
       );
     },
     maxGalaxySetup() {
@@ -96,7 +96,7 @@ export default {
       return new ReplicantiUpgradeButtonSetup(
         upgrade,
         value => {
-          let description = `Max Replicanti Galaxies: `;
+          let description = `复制器星系上限：`;
           const extra = upgrade.extra;
           if (extra.gt(0)) {
             const total = value.add(extra);
@@ -106,49 +106,34 @@ export default {
           }
           return description;
         },
-        cost => `+${formatInt(1)} Costs: ${format(cost)} IP`
+        cost => `+${formatInt(1)} 价格：${format(cost)} 无限点数`
       );
     },
     boostText() {
       const boostList = [];
-      boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.mult, 2, 2)}</span>
-        multiplier${this.hasPow ? ` and a
-        <span class="c-replicanti-description__accent">${formatPow(this.pow, 2, 3)}</span> power` : ""}
-        on all Infinity Dimensions`);
+      boostList.push(`无限维度效果提升 <span class="c-replicanti-description__accent">${formatX(this.mult, 2, 2)}</span>${this.hasPow ? `，指数 <span class="c-replicanti-description__accent">${formatPow(this.pow, 2, 3)}</span>` : ""}`);
       if (this.hasTDMult) {
-        boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multTD, 2, 2)}</span>
-          multiplier${this.hasTDPow ? ` and a
-          <span class="c-replicanti-description__accent">${formatPow(this.powTD, 2, 3)}</span> power` : ""}
-          on all Time Dimensions from a Dilation Upgrade`);
+        boostList.push(`来自膨胀升级的时间维度效果提升 <span class="c-replicanti-description__accent">${formatX(this.multTD, 2, 2)}</span>${this.hasTDPow ? `，指数 <span class="c-replicanti-description__accent">${formatPow(this.powTD, 2, 3)}</span>` : ""}`);
       }
       if (this.hasDTMult) {
-        const additionalEffect = GlyphAlteration.isAdded("replication") ? "and Replicanti speed " : "";
-        boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multDT, 2, 2)}</span>
-          multiplier${this.hasDTPow ? ` and a
-          <span class="c-replicanti-description__accent">${formatPow(this.powDT, 2, 3)}</span> power` : ""}
-          to Dilated Time ${additionalEffect}from Glyphs`);
+        const additionalEffect = GlyphAlteration.isAdded("replication") ? "和复制速度" : "";
+        boostList.push(`从已装备的符文中获得 <span class="c-replicanti-description__accent">${formatX(this.multDT, 2, 2)}</span> 倍的膨胀时间${this.hasDTPow ? `，指数 <span class="c-replicanti-description__accent">${formatPow(this.powDT, 2, 3)}</span>` : ""}${additionalEffect}`);
       }
       if (this.hasIPMult) {
-        boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multIP)}</span>
-          multiplier${this.hasIPPow ? ` and a
-          <span class="c-replicanti-description__accent">${formatPow(this.powIP, 2, 3)}</span> power` : ""}
-          to Infinity Points from Glyph Alchemy`);
+        boostList.push(`从符文炼金中获得 <span class="c-replicanti-description__accent">${formatX(this.multIP)}</span> 倍的无限点数${this.hasIPPow ? `，指数 <span class="c-replicanti-description__accent">${formatPow(this.powIP, 2, 3)}</span>` : ""}`);
       }
       if (this.hasDEMult) {
-        boostList.push(`a <span class="c-replicanti-description__accent">${formatX(this.multDE, 2, 2)}</span>
-          multiplier${this.hasDEPow ? ` and a
-          <span class="c-replicanti-description__accent">${formatPow(this.powDE, 2, 3)}</span> power` : ""}
-          to Dark Energy from an Alpha Reward`);
+        boostList.push(`从阿尔法奖励中获得 <span class="c-replicanti-description__accent">${formatX(this.multDE, 2, 2)}</span> 的暗能量倍率${this.hasDEPow ? `，<span class="c-replicanti-description__accent">${formatPow(this.powDE, 2, 3)}</span> 的暗能量倍率指数` : ""}`);
       }
-      if (boostList.length === 1) return `${boostList[0]}.`;
-      if (boostList.length === 2) return `${boostList[0]}<br> and ${boostList[1]}.`;
-      return `${boostList.slice(0, -1).join(",<br>")},<br> and ${boostList[boostList.length - 1]}.`;
+      if (boostList.length === 1) return `${boostList[0]}。`;
+      if (boostList.length === 2) return `${boostList[0]}<br>以及${boostList[1]}。`;
+      return `${boostList.slice(0, -1).join("，<br>")}，<br>以及${boostList[boostList.length - 1]}。`;
     },
     hasMaxText: () => PlayerProgress.realityUnlocked() && !Pelle.isDoomed,
     toMaxTooltip() {
       if (this.amount.lte(this.replicantiCap)) return null;
       return this.estimateToMax.lt(0.01)
-        ? "Currently Increasing"
+        ? "Currently Increasing" /* TODO */
         : TimeSpan.fromSeconds(this.estimateToMax).toStringShort();
     }
   },
@@ -191,7 +176,7 @@ export default {
       if (this.hasRaisedCap) {
         const mult = this.replicantiCap.div(DC.NUMMAX);
         this.capMultText = TimeStudy(31).canBeApplied
-          ? `Base: ${formatX(mult.pow(1 / TimeStudy(31).effectValue), 2)}; after TS31: ${formatX(mult, 2)}`
+          ? `基础值：${formatX(mult.pow(1 / TimeStudy(31).effectValue), 2)}；时间研究 31 之后：${formatX(mult, 2)}`
           : formatX(mult, 2);
       }
       this.distantRG = ReplicantiUpgrade.galaxies.distantRGStart;
@@ -233,33 +218,33 @@ export default {
       class="o-primary-btn--replicanti-unlock"
       onclick="Replicanti.unlock();"
     >
-      Unlock Replicanti
+      解锁复制器
       <br>
-      Cost: {{ format(unlockCost) }} IP
+      价格：{{ format(unlockCost) }} 无限点数
     </PrimaryButton>
     <template v-else>
       <div
         v-if="isDoomed"
         class="modified-cap"
       >
-        Your Replicanti cap has been removed due to the second {{ scrambledText }} milestone.
+        由于第二个 {{ scrambledText }} 里程碑，已移除复制器上限。
       </div>
       <div
         v-else-if="hasRaisedCap"
         class="modified-cap"
       >
-        Completion of Effarig's Infinity is giving you the following rewards:
+        完成鹿颈长的现实的无限阶段提供了以下奖励：
         <br>
-        Your Replicanti cap without TS192 is now {{ format(replicantiCap, 2) }}
-        ({{ capMultText }})
+        在没有时间研究192的情况下，你的复制器上限已提升至 {{ format(replicantiCap, 2) }}
+        ({{ capMultText }})。
         <br>
-        {{ quantifyHybridLarge("extra Replicanti Galaxy", effarigInfinityBonusRG) }}
-        (Next Replicanti Galaxy at {{ format(nextEffarigRGThreshold, 2) }} cap)
+        获得{{ quantifyHybridLarge("额外的复制器星系", effarigInfinityBonusRG) }}
+        (下一个复制器星系将在 {{ format(nextEffarigRGThreshold, 2) }} 出现)
       </div>
       <p class="c-replicanti-description">
-        You have
+        你拥有
         <span class="c-replicanti-description__accent">{{ format(amount, 2, 0) }}</span>
-        Replicanti, translated to
+        复制器，将
         <br>
         <span v-html="boostText" />
       </p>
@@ -267,7 +252,7 @@ export default {
         v-if="hasMaxText"
         class="c-replicanti-description"
       >
-        Your maximum Replicanti reached this Reality is
+        此次现实中最大的复制器数量是
         <span
           v-tooltip="toMaxTooltip"
           class="max-accent"
@@ -275,7 +260,7 @@ export default {
       </div>
       <br>
       <div v-if="isInEC8">
-        You have {{ quantifyInt("purchase", ec8Purchases) }} left within Eternity Challenge 8.
+        你还能买{{ quantifyInt("次", ec8Purchases) }}(永恒挑战 8)。
       </div>
       <div class="l-replicanti-upgrade-row">
         <ReplicantiUpgradeButton :setup="replicantiChanceSetup" />
@@ -283,19 +268,19 @@ export default {
         <ReplicantiUpgradeButton :setup="maxGalaxySetup" />
       </div>
       <div>
-        The Max Replicanti Galaxy upgrade can be purchased endlessly, but costs increase
+        最大复制器上限可以无限制地购买，但是其价格
         <br>
-        more rapidly above {{ formatInt(distantRG) }} Replicanti Galaxies
-        and even more so above {{ formatInt(remoteRG) }} Replicanti Galaxies.
+        会在超过 {{ formatInt(distantRG) }} 复制器星系时大幅增加，
+        超过 {{ formatInt(remoteRG) }} 复制器星系后会更加剧烈。
       </div>
       <br>
       <div
         v-if="isContingent"
         class="contingency-text"
       >
-        Your Replicanti Galaxies have become Contingent. This is because they are taking up too much space in the Universe.
+        你的复制器星系在宇宙中占据了过多的空间，其数量已到达临界值。
         <br>
-        This effect started at {{ formatInt(contingentRG) }} Replicanti Galaxies, and will continue until the End of Time.
+        该效应始于 {{ formatInt(contingentRG) }} 个复制器星系，并将持续至永远。
       </div>
       <br><br>
       <ReplicantiGainText />
