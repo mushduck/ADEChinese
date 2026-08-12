@@ -32,8 +32,6 @@ export default {
       <span :ach-tooltip="costScalingTooltip">
         <i class="fas fa-question-circle" />
       </span>
-      其余的升级是一次性升级。
-      <br>
       其余的升级是一次性升级，除了需要现实机器外，还需要解锁条件。
       <br>
       一旦完成这些要求，你可以在任何时候永久解锁这些升级。方格背景的升级在此现实中无法解锁，而条纹背景的升级在此现实中仍然可以解锁。

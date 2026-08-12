@@ -57,14 +57,13 @@ export default {
     </div>
     <EPMultiplierButton />
     <div v-if="areSoftcapsApplicable">
-      The cost for the {{ formatX(5) }} multiplier jumps at {{ format(costIncreases[0]) }},
-      {{ formatPostBreak(costIncreases[1], 2) }}, and {{ formatPostBreak(costIncreases[2]) }} Eternity Points.
+      {{ formatX(5) }} 永恒点数升级的价格在 {{ format(costIncreases[0]) }}，{{ formatPostBreak(costIncreases[1], 2) }}，和{{ formatPostBreak(costIncreases[2]) }} 永恒点数时加速增长。
       <br>
-      The cost increases super-exponentially after {{ formatPostBreak(costIncreases[3]) }} Eternity Points.
+      永恒点数超过 {{ formatPostBreak(costIncreases[3]) }} 后，价格呈超指数增长。
     </div>
     <div v-if="hasSeenFinalSoftcap">
       <br>
-      The cost increases greatly beyond {{ formatPostBreak(costIncreases[4]) }} Eternity Points.
+      永恒点数超过 {{ formatPostBreak(costIncreases[4]) }} 后，价格将再次加速增长。
     </div>
   </div>
 </template>

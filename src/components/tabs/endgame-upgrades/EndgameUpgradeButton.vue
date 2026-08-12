@@ -91,7 +91,7 @@ export default {
           <br>
           <DescriptionDisplay
             :config="requirementConfig"
-            label="Requirement:"
+            label="要求："
             class="c-endgame-upgrade-btn__requirement"
           />
         </template>
@@ -104,7 +104,7 @@ export default {
             v-if="!isBought"
             :config="config"
             br
-            name="Celestial Point"
+            name="天界点数"
           />
         </template>
       </span>

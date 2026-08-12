@@ -146,7 +146,6 @@ export default {
       class="o-laitela-matter-amount"
     >
       暗物质数量在 {{ format(darkMatterCap, 2) }} 后达到<span v-if="isUncapped">三重软上限</span><span v-if="!isUncapped">硬上限</span>。
-      .
     </div>
     <h2
       v-if="!singularitiesUnlocked"

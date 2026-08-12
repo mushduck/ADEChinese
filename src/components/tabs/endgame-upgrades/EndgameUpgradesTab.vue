@@ -26,25 +26,20 @@ export default {
 <template>
   <div class="l-endgame-upgrade-grid">
     <div class="c-endgame-upgrade-infotext">
-      Mouseover <i class="fas fa-question-circle" /> icons for additional information.
+      将鼠标悬停在 <i class="fas fa-question-circle" /> 图标上以查看更多信息。
       <br>
-      The first row of upgrades can be purchased endlessly for increasing costs
+      第一组升级可以以递增的成本无限购买，
       <span :ach-tooltip="costScalingTooltip">
         <i class="fas fa-question-circle" />
       </span>
-      and the rest are single-purchase.
-      <br>
-      Single-purchase upgrades also have requirements which, once completed, permanently unlock the ability
-      to purchase the upgrades at any point.
+      其余的升级是一次性升级，需要解锁条件。但一旦满足解锁条件，便可随时购买。
       <span :ach-tooltip="possibleTooltip">
         <i class="fas fa-question-circle" />
       </span>
       <br>
-      Locked upgrades show their requirement and effect by default; unlocked ones show
-      their effect, current bonus, and cost. Hold shift to swap this behavior.
+      锁定的升级会显示其需求和默认描述，解锁后显示其效果、当前加成以及价格，按住Shift键可切换至该状态。
       <br>
-      You can shift-click upgrades with <i class="fas fa-lock-open" /> to make the game prevent you
-      from doing anything this Endgame which would cause you to fail their unlock condition.
+      你可以用Shift点击某些升级来启用锁定条件，以防止游戏在此现实中进行任何会导致你未能满足其解锁条件的操作。
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>

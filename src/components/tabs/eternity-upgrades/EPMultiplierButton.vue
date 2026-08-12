@@ -42,11 +42,11 @@ export default {
     isDoomed: () => Pelle.isDoomed && !PelleDestructionUpgrade.x5EPUpgrade.canBeApplied,
     epEffectText() {
       if (Ascensions.epA.isUnlocked) return `Increase the exponent of Eternity Points by +${formatPow(1.01, 2, 2)}`;
-      return `Multiply Eternity Points from all sources by ${formatX(5)}`;
+      return `将所有来源的永恒点数乘以 ${formatX(5)}`;
     },
     totalEPEffectText() {
-      if (Ascensions.epA.isUnlocked) return `Currently: ${formatPow(this.multiplier, 2, 2)}`;
-      return `Currently: ${formatX(this.multiplier, 2, 0)}`;
+      if (Ascensions.epA.isUnlocked) return `当前：${formatPow(this.multiplier, 2, 2)}`;
+      return `当前：${formatX(this.multiplier, 2, 0)}`;
     }
   },
   watch: {
@@ -83,18 +83,18 @@ export default {
         {{ totalEPEffectText }}
       </div>
       <br>
-      Cost: {{ quantify("Eternity Point", cost, 2, 0) }}
+      价格:{{ quantify("永恒点数", cost, 2, 0) }}
     </button>
     <PrimaryButton
       class="l--spoon-btn-group__little-spoon o-primary-btn--small-spoon"
       @click="upgrade.buyMax(false)"
     >
-      Max Eternity Point mult
+      购买最大数量
     </PrimaryButton>
     <PrimaryToggleButton
       v-if="isAutoUnlocked"
       v-model="isAutobuyerActive"
-      label="Autobuy EP mult"
+      label="自动购买永恒点数倍增："
       class="l--spoon-btn-group__little-spoon o-primary-btn--small-spoon"
     />
   </div>
