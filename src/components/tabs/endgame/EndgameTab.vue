@@ -14,18 +14,18 @@ export default {
   },
   methods: {
     update() {
-      this.stage = false ? "Celestial Plus" : "Endgame";
-      if (this.stage === "Endgame") {
+      this.stage = false ? "天神扩展" : "终局";
+      if (this.stage === "终局") {
         if (false) this.chapter = 3;
         else if (Alpha.isUnlocked) this.chapter = 2;
         else this.chapter = 1;
       }
-      if (this.stage === "Endgame" && this.chapter === 1) {
+      if (this.stage === "终局" && this.chapter === 1) {
         this.percentage = Math.max(this.percentage, player.reality.imaginaryMachines.max(1).log10().pow(0.5).div(
           DC.NUMMAX.log10().pow(0.5)).div(2).min(0.5).add(
           player.endgame.doomedParticles.max(1).log10().pow(0.5).div(20).min(0.5)).toNumber());
       }
-      if (this.stage === "Endgame" && this.chapter === 2) {
+      if (this.stage === "终局" && this.chapter === 2) {
         this.percentage = Math.max(this.percentage, new Decimal(player.celestials.alpha.stage).div(84).min(1/3).add(
           player.endgame.celDimExpansion.celestialInfinityPoints.max(1).log10().pow(0.5).div(
           DC.NUMMAX.log10().pow(0.5)).div(3).min(1/3)).add(
@@ -43,14 +43,14 @@ export default {
       <br>
       <div>
       <b>
-        Endgame
+        终局
       </b>
       </div>
       <br>
       <div>
-        You are currently playing Antimatter Dimensions: The {{ stage }} Update, Chapter {{ chapter }}.
+        你正在游玩《反物质维度：{{ stage }} 更新》，章节 {{ chapter }} 。
         <br>
-        Percentage to next chapter: {{ formatPercents(percentage, 2, 2) }}
+        下一章解锁进度：{{ formatPercents(percentage, 2, 2) }}
       </div>
     </div>
     <br>

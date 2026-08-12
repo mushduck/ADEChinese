@@ -9,7 +9,7 @@ export default {
   },
   computed: {
     resetText() {
-      return "Start this Endgame over";
+      return "重启本次终局";
     },
   },
   methods: {

@@ -51,12 +51,12 @@ export default {
       const alpha = DivinityMilestone.hadronEmpowerment.isReached && this.nextPack?.id === "alphaPack";
       const alphaLock = !DivinityMilestone.hadronEmpowerment.isReached && this.nextPack?.id === "alphaPack";
 
-      if (first) return `The first Expansion Pack unlocks at ${format(next)} Antimatter.`;
-      if (alpha && !Pelle.isDoomed) return `Reach ${format(next)} Antimatter to unlock a new Expansion Pack.`;
-      if (alpha && Pelle.isDoomed) return `The next Expansion Pack restricts you from buying it while Doomed!`;
+      if (first) return `第一个天神扩展包于 ${format(next)} 反物质解锁。`;
+      if (alpha && !Pelle.isDoomed) return `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
+      if (alpha && Pelle.isDoomed) return `下一个天神扩展包必须在被毁灭的现实中购买。`;
       return (next === undefined || alphaLock)
-        ? "All Expansion Packs unlocked"
-        : `Next Expansion Pack unlocks at ${format(next)} Antimatter.`;
+        ? "已解锁全部天神扩展包"
+        : `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
     },
     classObject() {
       return {

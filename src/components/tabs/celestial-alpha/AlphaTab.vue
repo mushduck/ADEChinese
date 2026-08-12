@@ -60,7 +60,7 @@ export default {
     },
     startRun() {
       if (this.isDoomed) return;
-      Modal.celestials.show({ name: "Alpha's", number: 7 });
+      Modal.celestials.show({ name: "阿尔法", number: 7 });
     }
   }
 };
