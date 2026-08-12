@@ -87,10 +87,10 @@ export default {
       };
     },
     autoText() {
-      return this.autoPour ? "Auto ON" : "Auto OFF";
+      return this.autoPour ? "自动进贡：开" : "自动进贡：关";
     },
     pourText() {
-      return this.isPouredAmountCapped ? "Filled" : "Pour RM";
+      return this.isPouredAmountCapped ? "已填充满" : "进贡现实机器";
     },
     runDescription() {
       return GameDatabase.celestials.descriptions[0].effects();
@@ -99,8 +99,8 @@ export default {
       return this.lastMachines.gte(DC.E20000)
         ? `${quantify("Dual Machine", this.lastMachines.dividedBy(DC.E20000), 2)}`
         : (this.lastMachines.lt(DC.E10000)
-          ? `${quantify("Reality Machine", this.lastMachines, 2)}`
-          : `${quantify("Imaginary Machine", this.lastMachines.dividedBy(DC.E10000), 2)}`);
+          ? `${quantify("现实机器", this.lastMachines, 2)}`
+          : `${quantify("虚幻机器", this.lastMachines.dividedBy(DC.E10000), 2)}`);
     },
     unlockInfoTooltipArrowStyle() {
       return {
@@ -116,7 +116,7 @@ export default {
       };
     },
     chargeDisplay() {
-      return `Charge Upgrades: ${this.chargeView ? "ON" : "OFF"}`;
+      return `充能复兴升级：${this.chargeView ? "开" : "关"}`;
     },
     shouldDisplayPourLimit() {
       return this.pouredAmountCap.lt(DC.BEMAX);
@@ -170,7 +170,7 @@ export default {
     },
     startRun() {
       if (this.isDoomed) return;
-      Modal.celestials.show({ name: "Teresa's", number: 0 });
+      Modal.celestials.show({ name: "特蕾莎", number: 0 });
     },
     unlockDescriptionHeight(unlockInfo) {
       const maxPrice = TeresaUnlocks[Teresa.lastUnlock].price;
@@ -204,17 +204,17 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        Respec Charged Perk Upgrades on next Endgame
+        终局后重置充能复兴升级
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
-      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Perk Upgrades.
-      Charged Perk Upgrades have their effect altered.
+      你已充能 {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} 项复兴升级。
+      对复兴升级充能将改变其效果。
       <br>
-      Hold shift to show Charged Perk Upgrades. You can freely respec your choices on Endgame.
+      按住 Shift 键可显示充能复兴升级。终局后可以自由重置选择。
     </div>
     <div>
-      You have {{ quantify("Reality Machine", rm, 2, 2) }}.
+      你拥有 {{ quantify("现实机器", rm, 2, 2) }}。
     </div>
     <div class="l-mechanics-container">
       <div
@@ -223,7 +223,7 @@ export default {
       >
         <div class="c-teresa-unlock c-teresa-run-button">
           <span :class="{ 'o-pelle-disabled': isDoomed }">
-            Start Teresa's Reality.
+            开启特蕾莎的现实。
           </span>
           <div
             :class="runButtonClassObject"
@@ -234,13 +234,13 @@ export default {
           {{ runDescription }}
           <br><br>
           <div>
-            This Reality can be repeated for a stronger reward based on the antimatter gained within it.
+            该现实可以重复完成，基于在现实中拥有的反物质获得更强大的奖励。
             <br><br>
             <span v-if="showRunReward">
-              Your record antimatter in Teresa's Reality is {{ format(bestAM, 2) }},
-              achieved with {{ lastMachinesString }}.
+              在特蕾莎的现实中，反物质数量的最大值：{{ format(bestAM, 2) }}，
+              并获取了 {{ lastMachinesString }} 现实机器。
               <br><br>
-              Glyph Set used:
+              使用的符文：
               <GlyphSetPreview
                 text="Teresa's Best Glyph Set"
                 :text-hidden="true"
@@ -249,7 +249,7 @@ export default {
               />
             </span>
             <span v-else>
-              You have not completed Teresa's Reality yet.
+              你还没有完成特蕾莎的现实。
             </span>
           </div>
         </div>
@@ -257,14 +257,14 @@ export default {
           v-if="showRunReward"
           class="c-teresa-unlock"
         >
-          Teresa Reality reward: Glyph Sacrifice power {{ formatX(runReward, 2, 2) }}
+          特蕾莎的现实奖励：符文献祭加成 {{ formatX(runReward, 2, 2) }}
         </div>
         <div
           v-if="hasEPGen"
           class="c-teresa-unlock"
         >
           <span :class="{ 'o-pelle-disabled': isEPGenDoomed }">
-            Every second, you gain {{ formatPercents(0.01) }} of your peaked Eternity Points per minute this Reality.
+            每秒钟，你获得本次现实永恒点数峰值的 {{ formatPercents(0.01) }}。
           </span>
         </div>
       </div>
@@ -296,14 +296,14 @@ export default {
             :style="{ height: percentage}"
           >
             <div class="c-rm-store-label">
-              {{ formatX(rmMult, 2, 2) }} RM gain
+              现实机器 {{ formatX(rmMult, 2, 2) }}
               <br>
               {{ format(pouredAmount, 2, 2) }}
               <span v-if="shouldDisplayPourLimit">
                 / {{ format(pouredAmountCap, 2, 2) }}
               </span>
               <span v-else>
-                RM
+                现实机器
               </span>
             </div>
           </div>
@@ -337,7 +337,7 @@ export default {
         class="c-teresa-shop"
       >
         <span class="o-teresa-pp">
-          You have {{ quantify("Perk Point", perkPoints, 2, 0) }}.
+          你拥有 {{ quantify("复兴点数", perkPoints, 2, 0) }}。
         </span>
         <PerkShopUpgradeButton
           v-for="upgrade in upgrades"
@@ -351,7 +351,7 @@ export default {
         >
           {{ chargeDisplay }}
         </PrimaryButton>
-        You can now modify the appearance of your Glyphs to look like Music Glyphs.
+        你现在可以将符文的外观修改为音乐符文。
       </div>
       <div
         v-else
