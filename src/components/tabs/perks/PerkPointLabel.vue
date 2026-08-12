@@ -19,8 +19,8 @@ export default {
       return PerkLayouts[this.treeLayout].buttonText;
     },
     physicsText() {
-      const enableStr = (this.physicsOverride ?? this.physicsEnabled) ? "Enabled" : "Disabled";
-      return `${enableStr}${this.physicsOverride === undefined ? "" : " (fixed)"}`;
+      const enableStr = (this.physicsOverride ?? this.physicsEnabled) ? "已启用" : "已禁用";
+      return `${enableStr}${this.physicsOverride === undefined ? "" : "（固定）"}`;
     }
   },
   created() {
@@ -70,37 +70,37 @@ export default {
 
 <template>
   <div class="c-perk-tab__header">
-    You have <span class="c-perk-tab__perk-points">{{ format(pp, 2) }}</span> {{ pluralize("Perk Point", pp) }}.
+    你拥有 <span class="c-perk-tab__perk-points">{{ format(pp, 2) }}</span> {{ pluralize("复兴点数", pp) }}。
     <br>
-    Perk choices are permanent and cannot be respecced.
+    复兴树的选择是永久性的，不能重置。
     <br>
-    Diamond-shaped perks also give Automator Points.
+    菱形的复兴节点也会提供自动点数。
     <br>
     <div class="perk-settings">
       <PrimaryButton
         class="o-primary-btn c-button-perk-layout"
         @click="cycleLayout"
       >
-        Perk Layout: {{ layoutText }}
+        复兴树布局：{{ layoutText }}
       </PrimaryButton>
       <PrimaryButton
         :class="physicsClassObject()"
         @click="togglePhysics"
       >
-        Physics: {{ physicsText }}
+        物理效果：{{ physicsText }}
       </PrimaryButton>
       <br>
       <PrimaryButton
         class="o-primary-btn"
         @click="centerTree"
       >
-        Center Tree on START
+        基于 START 居中复兴树
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn"
         @click="straightenEdges"
       >
-        Straighten Edges
+        矫直边缘
       </PrimaryButton>
     </div>
   </div>

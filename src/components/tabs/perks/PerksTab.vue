@@ -85,37 +85,37 @@ function positionNumToVector(num) {
 // Specification for different starting layouts
 export const PerkLayouts = [
   {
-    buttonText: "Default Untangled",
+    buttonText: "默认",
     position: config => positionNumToVector(config.layoutPosList[0]),
   },
   {
-    buttonText: "Random Positions",
+    buttonText: "随机位置",
     position: () => new Vector(2000 * Math.random() - 1000, 1200 * Math.random() - 600),
   },
   {
     // This is the perks laid out in the same way that they're laid out in the Android version
-    buttonText: "Android Layout",
+    buttonText: "安卓版布局",
     position: config => globalScale(positionNumToVector(config.layoutPosList[1]), 20, 1.5),
     centerOffset: new Vector(0, 120),
     forcePhysics: false,
     straightEdges: true,
   },
   {
-    buttonText: "Square",
+    buttonText: "方形",
     position: config => globalScale(positionNumToVector(config.layoutPosList[2]), 27.5),
     centerOffset: new Vector(0, 0),
     forcePhysics: false,
     straightEdges: true,
   },
   {
-    buttonText: "Horizontal Grid",
+    buttonText: "水平网格",
     position: config => globalScale(positionNumToVector(config.layoutPosList[3]), 32.5),
     centerOffset: new Vector(-60, 0),
     forcePhysics: false,
     straightEdges: true,
   },
   {
-    buttonText: "Distance from START",
+    buttonText: "距起点的距离",
     position: config => globalScale(positionNumToVector(config.layoutPosList[4]), 17.5),
     centerOffset: new Vector(0, 0),
     forcePhysics: false,
@@ -211,7 +211,7 @@ export const PerkNetwork = {
           `<span style='text-decoration: line-through;'>${perk.config.description}</span>`
         )
         : `${perk.config.description} ${perk.config.automatorPoints && !isDisabled(perk)
-          ? `(+${formatInt(perk.config.automatorPoints)} AP)`
+          ? `(+${formatInt(perk.config.automatorPoints)} 自动点数）)`
           : ""}`
       ),
       x: selectPos(perk.config).x,
