@@ -1,0 +1,13 @@
+src/components/modals/MasteryTreeInfo.vue
+src/components/modals/MessageModal.vue
+src/components/modals/ModalConfirmationCheck.vue
+src/components/modals/ModalProgressBar.vue
+src/components/modals/ModalWrapperChoice.vue
+src/components/modals/ModifySeedModal.vue
+src/components/modals/PelleEffectsModal.vue
+src/components/modals/RealityGlyphCreationModal.vue
+src/components/modals/ReplaceGlyphModal.vue
+src/components/modals/SacrificeModal.vue
+src/components/modals/SingularityMilestonesModal.vue
+src/components/modals/SpeedrunModeModal.vue
+src/components/modals/StudyTreeInfo.vue
