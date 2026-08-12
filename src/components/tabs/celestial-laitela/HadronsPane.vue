@@ -291,7 +291,7 @@ export default {
       class="c-laitela-hadrons-row"
     >
       <div>
-        Dark 强子效果:
+        暗强子效果:
       </div>
       <div>
         连续统购买倍率 × {{ format(effect5, 2, 2) }}
