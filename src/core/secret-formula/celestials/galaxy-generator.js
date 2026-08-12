@@ -69,7 +69,7 @@ export const pelleGalaxyGeneratorUpgrades = {
     effect: x => Decimal.pow(2 ** (DivinityMilestone.firstDivine.isReached && !player.disablePostReality ? 2 : 1), x),
     formatEffect: x => formatX(x, 2),
     currency: () => Currency.realityShards,
-    currencyLabel: "现实碎片Reality Shard"
+    currencyLabel: "现实碎片"
   }),
   DTMult: rebuyable({
     id: "galaxyGeneratorDTMult",
@@ -101,7 +101,7 @@ export const pelleGalaxyGeneratorUpgrades = {
     effect: x => 1 + x / 200,
     formatEffect: x => formatPow(x, 2, 3),
     currency: () => Currency.galaxyGeneratorGalaxies,
-    currencyLabel: "Galaxy"
+    currencyLabel: "星系"
   }),
   superExponential: rebuyable({
     id: "galaxyGeneratorSuperExponential",
