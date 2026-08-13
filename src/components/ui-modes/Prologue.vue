@@ -73,7 +73,7 @@ export default {
     >
       <span class="l-intro-text">2113 年 5 月 2 日</span>
       <br>
-      <span class="l-intro-text" :style="{ opacity: opac1 }">LOCATION: ANTI-709B</span>
+      <span class="l-intro-text" :style="{ opacity: opac1 }">坐标：ANTI-709B</span>
     </div>
     <div
       v-if="!introFrozen && introTick > 20000 && introTick < 30000"
