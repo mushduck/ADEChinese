@@ -234,20 +234,20 @@ class BlackHoleState {
 
   // The logic to determine what state the black hole is in for displaying is nontrivial and used in multiple places
   get displayState() {
-    if (Pelle.isDisabled("blackhole") && !PelleDestructionUpgrade.blackHole.canBeApplied) return `<i class="fas fa-ban"></i> Disabled`;
-    if (Pelle.isDoomed && PelleDestructionUpgrade.blackHole.canBeApplied) return `♅ Doomed`;
+    if (Pelle.isDisabled("blackhole") && !PelleDestructionUpgrade.blackHole.canBeApplied) return `<i class="fas fa-ban"></i> 已禁用`;
+    if (Pelle.isDoomed && PelleDestructionUpgrade.blackHole.canBeApplied) return `♅ 已被佩勒毁灭`;
     if (Enslaved.isAutoReleasing) {
-      if (Enslaved.autoReleaseTick < 3) return `<i class="fas fa-compress-arrows-alt u-fa-padding"></i> Pulsing`;
-      return `<i class="fas fa-expand-arrows-alt u-fa-padding"></i> Pulsing`;
+      if (Enslaved.autoReleaseTick < 3) return `<i class="fas fa-compress-arrows-alt u-fa-padding"></i> 正在脉冲`;
+      return `<i class="fas fa-expand-arrows-alt u-fa-padding"></i> 正在脉冲`;
     }
-    if (Enslaved.isStoringGameTime) return `<i class="fas fa-compress-arrows-alt"></i> Charging`;
-    if (BlackHoles.areNegative) return `<i class="fas fa-caret-left"></i> Inverted`;
-    if (BlackHoles.arePaused) return `<i class="fas fa-pause"></i> Paused`;
-    if (this.isPermanent) return `<i class="fas fa-infinity"></i> Permanent`;
+    if (Enslaved.isStoringGameTime) return `<i class="fas fa-compress-arrows-alt"></i> 充能`;
+    if (BlackHoles.areNegative) return `<i class="fas fa-caret-left"></i> 反转`;
+    if (BlackHoles.arePaused) return `<i class="fas fa-pause"></i> 暂停`;
+    if (this.isPermanent) return `<i class="fas fa-infinity"></i> 永久启动`;
 
     const timeString = TimeSpan.fromSeconds(new Decimal(this.timeToNextStateChange)).toStringShort(true);
-    if (this.isActive) return `<i class="fas fa-play"></i> Active (${timeString})`;
-    return `<i class="fas fa-redo"></i> Inactive (${timeString})`;
+    if (this.isActive) return `<i class="fas fa-play"></i> 启动 (${timeString})`;
+    return `<i class="fas fa-redo"></i> 冷却中 (${timeString})`;
   }
 
   get isActive() {
@@ -295,7 +295,7 @@ class BlackHoleState {
         this._data.phase -= this.duration;
         this._data.active = false;
         if (GameUI.notify.showBlackHoles) {
-          GameUI.notify.blackHole(`${this.description(true)} duration ended.`);
+          GameUI.notify.blackHole(`${this.description(true)} 的启动时间已结束。`);
         }
       }
     } else if (this.phase >= this.interval) {
@@ -303,7 +303,7 @@ class BlackHoleState {
       this._data.activations++;
       this._data.active = true;
       if (GameUI.notify.showBlackHoles) {
-        GameUI.notify.blackHole(`${this.description(true)} has activated!`);
+        GameUI.notify.blackHole(`${this.description(true)} 已启动！`);
       }
     }
   }
@@ -395,19 +395,19 @@ export const BlackHoles = {
     if (!BlackHoles.areUnlocked) return;
     const maxInversion = player.requirementChecks.reality.slowestBH <= 1e-300;
     if (ImaginaryUpgrade(24).isLockingMechanics && Ra.isRunning && maxInversion) {
-      if (!automatic) ImaginaryUpgrade(24).tryShowWarningModal("uninvert your Black Hole");
+      if (!automatic) ImaginaryUpgrade(24).tryShowWarningModal("解除黑洞反转");
       return;
     }
     if (player.blackHolePause) player.requirementChecks.reality.slowestBH = 1;
     player.blackHolePause = !player.blackHolePause;
     player.blackHolePauseTime = player.records.realTimePlayed;
-    const blackHoleString = RealityUpgrade(20).isBought ? "Black Holes" : "Black Hole";
+    const blackHoleString = RealityUpgrade(20).isBought ? "黑洞" : "黑洞";
     // If black holes are going unpaused -> paused, use "inverted" or "paused" depending o
     // whether the player's using negative BH (i.e. BH inversion); if going paused -> unpaused,
     // use "unpaused".
     // eslint-disable-next-line no-nested-ternary
-    const pauseType = player.blackHolePause ? (BlackHoles.areNegative ? "inverted" : "paused") : "unpaused";
-    const automaticString = automatic ? "automatically " : "";
+    const pauseType = player.blackHolePause ? (BlackHoles.areNegative ? "反转" : "暂停") : "恢复";
+    const automaticString = automatic ? "自动 " : "";
     GameUI.notify.blackHole(`${blackHoleString} ${automaticString}${pauseType}`);
   },
 

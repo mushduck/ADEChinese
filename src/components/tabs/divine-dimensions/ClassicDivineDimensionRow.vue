@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     name() {
-      return `${DivineDimension(this.tier).shortDisplayName} Divine Dimension`;
+      return `${DivineDimension(this.tier).shortDisplayName} 神性维度`;
     },
     costDisplay() {
       return this.showCostTitle ? `Cost: ${format(this.cost)} VM` : `${format(this.cost)} VM`;
