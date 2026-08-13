@@ -47,23 +47,23 @@ export default {
       v-if="introFrozen && introTick === 0"
     >
       <div class="l-intro-options-spacing">
-        <span class="l-intro-options-text">Are you new to the Realm of Existence?</span>
+        <span class="l-intro-options-text">你是刚来到存在之境的新人吗？</span>
         <br>
         <PrimaryButton
           class="o-primary-btn--subtab-option"
           @click="startGame"
         >
-          Start New Game
+          开始新的游戏
         </PrimaryButton>
       </div>
       <div class="l-intro-options-spacing">
-        <span class="l-intro-options-text">Or have you simply lost your way?</span>
+        <span class="l-intro-options-text">还是说你只是迷了路？</span>
         <br>
         <PrimaryButton
           class="o-primary-btn--subtab-option"
           @click="importSave"
         >
-          Import Save
+          导入存档
         </PrimaryButton>
       </div>
     </div>
@@ -71,7 +71,7 @@ export default {
       v-if="!introFrozen && introTick > 0 && introTick < 10000"
       class="l-prologue-text"
     >
-      <span class="l-intro-text">MAY 2ND 2113</span>
+      <span class="l-intro-text">2113 年 5 月 2 日</span>
       <br>
       <span class="l-intro-text" :style="{ opacity: opac1 }">LOCATION: ANTI-709B</span>
     </div>
@@ -79,18 +79,18 @@ export default {
       v-if="!introFrozen && introTick > 20000 && introTick < 30000"
       class="l-prologue-text--alternate"
     >
-      <span class="l-intro-text--alternate">FIVE</span>
-      <span class="l-intro-text--alternate" :style="{ opacity: opac2 }">YEARS</span>
-      <span class="l-intro-text--alternate" :style="{ opacity: opac3 }">LATER</span>
+      <span class="l-intro-text--alternate">五</span>
+      <span class="l-intro-text--alternate" :style="{ opacity: opac2 }">年</span>
+      <span class="l-intro-text--alternate" :style="{ opacity: opac3 }">后</span>
     </div>
     <div
       v-if="!introFrozen && introTick > 50000 && introTick < 60000"
       class="l-prologue-text--alternate"
     >
       <div>
-        <span class="l-logo-color-one">ANTI</span><span class="l-logo-color-two">MATTER </span><span class="l-intro-text"> DIMENSIONS</span>
+        <span class="l-logo-color-one">反</span><span class="l-logo-color-two">物质</span><span class="l-intro-text">维度</span>
         <br>
-        <span class="l-logo-color-three" :style="{ opacity: opac4 }">ENDGAME</span>
+        <span class="l-logo-color-three" :style="{ opacity: opac4 }">终局</span>
       </div>
     </div>
   </div>

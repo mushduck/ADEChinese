@@ -22,8 +22,8 @@ export default {
   },
   computed: {
     enslavedText() {
-      return `${Enslaved.displayName} are helping you look for cracks in their Reality -
-        they can give you some advice in ${this.enslavedTimer}`;
+      return `${Enslaved.displayName}正在祂们的现实中寻找裂缝来帮助你
+      祂们将在 ${this.enslavedTimer} 后进行提示。`;
     },
     alphaText() {
       if (this.alphaDecayTimer.lte(0)) return `Alpha Decay is capped`;
@@ -74,11 +74,11 @@ export default {
       this.isChallengePowerVisible = isChallengePowerVisible;
       if (isChallengePowerVisible) {
         const powerArray = [];
-        if (isC2Running) powerArray.push(`Production: ${formatPercents(player.chall2Pow, 2, 2)}`);
-        if (isC3Running) powerArray.push(`First dimension: ${formatX(player.chall3Pow, 3, 4)}`);
-        if (isIC6Running) powerArray.push(`Matter: Antimatter Dimensions /
+        if (isC2Running) powerArray.push(`产量：${formatPercents(player.chall2Pow, 2, 2)}`);
+        if (isC3Running) powerArray.push(`第一维：${formatX(player.chall3Pow, 3, 4)}`);
+        if (isIC6Running) powerArray.push(`物质：反物质维度 /
           ${format(new Decimal(1).timesEffectOf(InfinityChallenge(6)), 2, 2)}`);
-        if (isIC8Running) powerArray.push(`Production: /
+        if (isIC8Running) powerArray.push(`产量：/
           ${format(new Decimal(1).timesEffectOf(InfinityChallenge(8)).reciprocal(), 2, 2)}`);
         this.challengePower = powerArray.join(", ");
       }
@@ -96,15 +96,15 @@ export default {
       {{ enslavedText }}
     </div>
     <div v-if="isInEffarig">
-      Game speed and multipliers are Dilated {{ effarigMultNerfText }}
+      游戏速度和倍率加成是原来的{{ effarigMultNerfText }}
       <br>
-      Tickspeed is Dilated {{ effarigTickNerfText }}
+      计数频率是原来的{{ effarigTickNerfText }}
     </div>
     <div v-if="isInLaitela">
-      Entropy: {{ laitelaEntropy }} ({{ laitelaTimer }})
+      熵：{{ laitelaEntropy }} ({{ laitelaTimer }})
     </div>
     <div v-if="isInMatterChallenge">
-      There is {{ format(matter, 2, 1) }} matter.
+      你有 {{ format(matter, 2, 1) }} 物质。
     </div>
     <div v-if="isChallengePowerVisible">
       {{ challengePower }}
