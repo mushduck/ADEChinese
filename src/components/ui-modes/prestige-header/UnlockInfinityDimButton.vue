@@ -12,16 +12,16 @@ export default {
   },
   computed: {
     text() {
-      const dimensionText = `a new ${this.hasIPUnlock ? "type of Dimension" : "Infinity Dimension"}.`;
+      const dimensionText = `${this.hasIPUnlock ? "一种新的维度" : "下一个无限维度"}`;
       if (this.canUnlock) {
-        return `Unlock ${dimensionText}`;
+        return `解锁 ${dimensionText}`;
       }
       const amDisplay = format(this.amRequirement);
       const ipDisplay = format(this.ipRequirement);
       if (this.hasIPUnlock) {
-        return `Reach ${ipDisplay} Infinity Points and ${amDisplay} antimatter to unlock ${dimensionText}`;
+        return `达到 ${ipDisplay} 无限点数和 ${amDisplay} 反物质以解锁 ${dimensionText}`;
       }
-      return `Reach ${amDisplay} antimatter to unlock ${dimensionText}`;
+      return `达到 ${amDisplay} 反物质以解锁 ${dimensionText}`;
     },
     buttonClassObject() {
       return {

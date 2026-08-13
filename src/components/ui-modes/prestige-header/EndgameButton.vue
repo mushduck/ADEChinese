@@ -55,19 +55,19 @@ export default {
       <div class="l-endgame-button__contents">
         <template v-if="canEndgame">
           <div class="c-endgame-button__header">
-            Enter the Endgame
+            进行一次终局
           </div>
           <div>{{ formatCPGain }}</div>
           <div>{{ formatDPGain }}</div>
         </template>
         <template v-else>
-          <div>Reach {{ format("1e9000000000000000") }} Antimatter to unlock the ability to Enter the Endgame</div>
+          <div>达到 {{ format("1e9000000000000000") }} 反物质以进行终局</div>
         </template>
         <div
           v-if="canEndgame"
           class="infotooltiptext"
         >
-          <div>Another End, and a New Beginning...</div>
+          <div>终焉之末，新生之始……</div>
         </div>
       </div>
     </button>

@@ -200,53 +200,53 @@ const EP_BUTTON_DISPLAY_TYPE = {
   >
     <!-- Cannot Eternity -->
     <template v-if="type === -1">
-      Reach {{ format(eternityGoal, 2, 2) }}
+      达到 {{ format(eternityGoal, 2, 2) }}
       <br>
-      Infinity Points
+      无限点数
     </template>
 
     <!-- First time -->
     <template v-else-if="type === 0">
-      Other times await... I need to become Eternal
+      时间之外在等着我……我将永生。
     </template>
 
     <!-- Normal -->
     <template v-else-if="type === 1">
-      Eternity for
+      获得
       <span :style="amountStyle">{{ format(gainedEP, 2) }}</span>
-      <span v-if="showEPRate"> EP</span>
-      <span v-else> Eternity {{ pluralize("Point", gainedEP) }}</span>
+      <span v-if="showEPRate">永恒点数</span>
+      <span v-else>永恒{{ pluralize("点数", gainedEP) }}</span>
       <br>
       <template v-if="showEPRate">
-        Current: {{ format(currentEPRate, 2, 2) }} EP/min
+        当前：{{ format(currentEPRate, 2, 2) }} 永恒点数/分
         <br>
-        Peak: {{ format(peakEPRate, 2, 2) }} EP/min
+        峰值：{{ format(peakEPRate, 2, 2) }} 永恒点数/分
         <br>
-        at {{ format(peakEPRateVal, 2, 2) }} EP
+        峰值时获得 {{ format(peakEPRateVal, 2, 2) }} 永恒点数
       </template>
     </template>
 
     <!-- Challenge -->
     <template v-else-if="type === 2 || (type === 6 && !canEternity)">
-      Other challenges await... I need to become Eternal
+      下一个挑战在等着我………我将永生。
     </template>
 
     <!-- Dilation -->
     <template v-else-if="type === 3">
-      Eternity for <span :style="tachyonAmountStyle">{{ format(gainedTachyons, 2, 1) }}</span>
+      获得 <span :style="tachyonAmountStyle">{{ format(gainedTachyons, 2, 1) }}</span>
       {{ pluralize("Tachyon Particle", gainedTachyons) }}
     </template>
 
     <!-- New content available -->
     <template v-else-if="type === 4 || type === 5">
       <template v-if="type === 4">
-        Eternity for <span :style="amountStyle">{{ format(gainedEP, 2, 2) }}</span> EP
+        获得 <span :style="amountStyle">{{ format(gainedEP, 2, 2) }}</span> 永恒点数
       </template>
       <template v-else>
-        Eternity for <span :style="tachyonAmountStyle">{{ format(gainedTachyons, 2, 1) }}</span> TP
+        获得 <span :style="tachyonAmountStyle">{{ format(gainedTachyons, 2, 1) }}</span> 超光速粒子
       </template>
       <br>
-      You should explore a bit and look at new content before clicking me!
+      在点击前，你该到处看看新内容！
     </template>
 
     <!-- Challenge with multiple completions -->
@@ -254,18 +254,18 @@ const EP_BUTTON_DISPLAY_TYPE = {
       Other challenges await...
       <template v-if="fullyCompleted">
         <br>
-        (This challenge is already fully completed)
+        （这个挑战已全部完成）
       </template>
       <template v-else>
         <br>
-        {{ quantifyInt("completion", gainedCompletions) }} on Eternity
+        永恒以完成 {{ quantifyInt("completion", gainedCompletions) }} 次挑战
         <template v-if="failedRestriction">
           <br>
           {{ failedRestriction }}
         </template>
         <template v-else-if="hasMoreCompletions">
           <br>
-          Next goal at {{ format(nextGoalAt) }} IP
+          下一个目标：{{ format(nextGoalAt) }} 无限点数
         </template>
       </template>
     </template>
@@ -278,7 +278,7 @@ const EP_BUTTON_DISPLAY_TYPE = {
     @click="switchToHypercubes"
   >
     <b>
-      You have enough Eternity Points to buy a Penteract
+      你有充足的永恒点数来购买一个超五方体
     </b>
   </button>
 </template>

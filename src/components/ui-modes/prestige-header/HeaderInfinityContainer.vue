@@ -45,9 +45,9 @@ export default {
       class="c-prestige-button-container"
     >
       <div class="c-infinity-points">
-        You have
+        你拥有
         <span class="c-game-header__ip-amount">{{ format(infinityPoints, 2) }}</span>
-        {{ pluralize("Infinity Point", infinityPoints) }}.
+        {{ pluralize("无限点数", infinityPoints) }}。
         <span
           v-if="isTesseractUnlocked"
           v-html="tesseractText"
@@ -60,9 +60,9 @@ export default {
       class="c-prestige-button-container"
     >
       <div class="c-infinity-points">
-        You have
+        你拥有
         <span class="c-game-header__cip-amount">{{ format(celInfinityPoints, 2) }}</span>
-        {{ pluralize("Celestial Infinity Point", celInfinityPoints) }}.
+        {{ pluralize("天界无限点数", celInfinityPoints) }}。
       </div>
       <CelestialCrunchButton />
     </div>

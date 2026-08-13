@@ -66,11 +66,11 @@ export default {
     <div
       v-if="showEndgame"
     >
-      You have <span class="cp-text">{{ format(celestialPoints, 2) }}</span> {{ pluralize("Celestial Point", celestialPoints) }}.
-      You have <span class="dp-text">{{ format(doomedParticles, 2) }}</span> {{ pluralize("Doomed Particle", doomedParticles) }}.
+      你拥有 <span class="cp-text">{{ format(celestialPoints, 2) }}</span> {{ pluralize("天界点数", celestialPoints) }}.
+      你拥有 <span class="dp-text">{{ format(doomedParticles, 2) }}</span> {{ pluralize("毁灭粒子", doomedParticles) }}.
     <br>
     </div>
-    <span>You have <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> antimatter.</span>
+    <span>你拥有 <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> 反物质。</span>
     <div
       v-if="hasRealityButton"
       class="c-reality-container"
@@ -90,7 +90,7 @@ export default {
       />
     </div>
     <div v-else>
-      You are getting {{ format(antimatterPerSec, 2) }} antimatter per second.
+      你每秒获得 {{ format(antimatterPerSec, 2) }} 反物质。
       <br>
       <HeaderTickspeedInfo />
     </div>

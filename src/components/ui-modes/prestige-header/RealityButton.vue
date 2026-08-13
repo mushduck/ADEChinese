@@ -26,42 +26,42 @@ export default {
   },
   computed: {
     formatMachinesGained() {
-      if (this.machinesGained.gt(0)) return `Machines gained: ${format(this.machinesGained, 2)}`;
-      return "No Machines gained";
+      if (this.machinesGained.gt(0)) return `获得的现实机器数量：${format(this.machinesGained, 2)}`;
+      return "现实机器已达上限";
     },
     formatMachineStats() {
       if (!PlayerProgress.realityUnlocked() && this.nextMachineEP.gt("1e8000")) {
-        return `(Capped this Reality!)`;
+        return `（已达到本次现实的上限！）`;
       }
       if (this.machinesGained.gt(0) && this.machinesGained.lt(100)) {
-        return `(Next at ${format(this.nextMachineEP, 2)} EP)`;
+        return `（下一个需 ${format(this.nextMachineEP, 2)} 永恒点数）`;
       }
       if (this.machinesGained.eq(0) && this.newIMCap.eq(0)) {
-        return `(Projected: ${format(this.projectedRM, 2)} RM)`;
+        return `（预计获得 ${format(this.projectedRM, 2)} 现实机器）`;
       }
       if (this.newIMCap.neq(0) && this.newDMCap.eq(0)) {
-        return `(iM Cap: ${formatMachines(0, this.newIMCap, 0)})`;
+        return `（虚幻机器上限：${formatMachines(0, this.newIMCap)}）`;
       }
       if (this.newDMCap.neq(0)) {
-        return `(εM Cap: ${formatMachines(0, 0, this.newDMCap)})`;
+        return `（重构机器上限：${formatMachines(0, 0, this.newDMCap)}）`;
       }
       if (this.machinesGained.lt(Number.MAX_VALUE)) {
-        return `(${format(this.machinesGained.divide(this.realityTime), 2, 2)} RM/min)`;
+        return `（${format(this.machinesGained.divide(this.realityTime), 2, 2)} 现实机器/分钟）`;
       }
       return "";
     },
     formatGlyphLevel() {
-      if (this.glyphLevel.gte(10000)) return `Glyph level: ${formatHybridLarge(this.glyphLevel, 3)}`;
-      return `Glyph level: ${formatHybridLarge(this.glyphLevel, 3)} (${this.nextGlyphPercent} to next)`;
+      if (this.glyphLevel.gte(10000)) return `符文等级：${formatHybridLarge(this.glyphLevel, 3)}`;
+      return `符文等级：${formatHybridLarge(this.glyphLevel, 3)}（下一级进度：${this.nextGlyphPercent}）`;
     },
     showsRate() {
       return this.currentsRate;
     },
     shardsGainedText() {
-      return quantify("Relic Shard", this.shardsGained, 2);
+      return quantify("遗迹碎片", this.shardsGained, 2);
     },
     warpMessage() {
-      return false ? "Curse Your Reality" : "Enter Pelle's Domain";
+      return false ? "诅咒你的现实" : "进入佩勒的领域";
     },
     classObject() {
       return {
@@ -118,19 +118,19 @@ export default {
       this.bestShardRateVal.copyFrom(player.records.thisReality.bestRSminVal.times(multiplier));
 
       const teresaReward = this.formatScalingMultiplierText(
-        "Glyph Sacrifice",
+        "符文献祭",
         Teresa.runRewardMultiplier,
         Decimal.max(Teresa.runRewardMultiplier, Teresa.rewardMultiplier(Currency.antimatter.value)));
       const teresaThreshold = this.formatThresholdText(
         Teresa.rewardMultiplier(Currency.antimatter.value).gt(Teresa.runRewardMultiplier),
         player.celestials.teresa.bestRunAM,
-        "antimatter");
+        "反物质");
       this.celestialRunText = [
         [Teresa.isRunning, teresaReward, teresaThreshold]];
     },
     handleClick() {
       if (this.readyToWarp) {
-        Modal.message.show(`This feature will be available in v2.0. Thank you for playing Antimatter Dimensions: Endgame!`, {}, 3);
+        Modal.message.show(`这个特性在 v2.0 版本才会更新哦，感谢游玩《反物质维度：终局》的松茸不吃柯尔鸭个人汉化版本！`, {}, 3);
         //requestRealityWarp();
       }
       else if (this.canReality) {
@@ -142,7 +142,7 @@ export default {
     },
     formatThresholdText(condition, threshold, resourceName) {
       if (condition) return "";
-      return `(${format(threshold, 2, 2)} ${resourceName} to improve)`;
+      return `（${format(threshold, 2, 2)} ${resourceName} 以提升）`;
     },
     // Make the button have a visual animation if Realitying will give a reward
     hasSpecialReward() {
@@ -169,27 +169,27 @@ export default {
         </template>
         <template v-else-if="canReality">
           <div class="c-reality-button__header">
-            Make a new Reality
+            开始一次新的现实
           </div>
           <div>{{ formatMachinesGained }} {{ formatMachineStats }}</div>
           <div>{{ formatGlyphLevel }}</div>
         </template>
         <template v-else-if="hasRealityStudy">
-          <div>Get {{ format("1e4000") }} Eternity Points to unlock a new Reality</div>
+          <div>达到 {{ format("1e4000") }} 永恒点数以进行现实</div>
         </template>
         <template v-else>
-          <div>Purchase the study in the Eternity tab to unlock a new Reality</div>
+          <div>购买解锁现实的时间研究以解锁现实</div>
         </template>
         <div
           v-if="canReality && !readyToWarp"
           class="infotooltiptext"
         >
-          <div>Other resources gained:</div>
-          <div>{{ quantifyHybridLarge("Perk Point", ppGained) }}</div>
+          <div>获得的其他资源：</div>
+          <div>{{ quantifyHybridLarge("复兴点数", ppGained) }}</div>
           <div v-if="shardsGained.neq(0)">
-            {{ shardsGainedText }} ({{ format(currentShardsRate, 2) }}/min)
+            {{ shardsGainedText }} ({{ format(currentShardsRate, 2) }}/分钟)
             <br>
-            Peak: {{ format(bestShardRate, 2) }}/min at {{ format(bestShardRateVal, 2) }} RS
+            在 {{ format(bestShardRateVal, 2) }} 遗迹碎片时达到峰值：{{ format(bestShardRate, 2) }}/分钟
           </div>
           <div
             v-for="(celestialInfo, i) in celestialRunText"

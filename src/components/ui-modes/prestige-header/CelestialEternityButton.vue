@@ -125,40 +125,39 @@ const CEP_BUTTON_DISPLAY_TYPE = {
   >
     <!-- Cannot Eternity -->
     <template v-if="type === -1">
-      Reach {{ format(celestialEternityGoal, 2, 2) }}
+      达到 {{ format(celestialEternityGoal, 2, 2) }}
       <br>
-      Celestial Infinity Points
+      天界无限点数
     </template>
 
     <!-- First time -->
     <template v-else-if="type === 0">
-      Divine timelines await... I need to become Celestially Eternal
+      时间之外的登神之路在等着我……我将在天界永生
     </template>
 
     <!-- Normal -->
     <template v-else-if="type === 1">
-      <span v-if="showCEPRate">Cel Eternity for </span>
-      <span v-else>Celestial Eternity for </span>
+      获得
       <span :style="amountStyle">{{ format(gainedCEP, 2) }}</span>
-      <span v-if="showCEPRate"> CEP</span>
-      <span v-else> Celestial Eternity {{ pluralize("Point", gainedCEP) }}</span>
+      <span v-if="showCEPRate">天界永恒点数</span>
+      <span v-else> 天界永恒{{ pluralize("点数", gainedCEP) }}</span>
       <br>
       <template v-if="showCEPRate">
-        Current: {{ format(currentCEPRate, 2, 2) }} CEP/min
+        当前：{{ format(currentCEPRate, 2, 2) }} 天界永恒点数/分
         <br>
-        Peak: {{ format(peakCEPRate, 2, 2) }} CEP/min
+        峰值：{{ format(peakCEPRate, 2, 2) }} 天界永恒点数/分
         <br>
-        at {{ format(peakCEPRateVal, 2, 2) }} CEP
+        峰值时获得 {{ format(peakCEPRateVal, 2, 2) }} 天界永恒点数
       </template>
     </template>
 
     <!-- New content available -->
     <template v-else-if="type === 2">
       <template>
-        Celestial Eternity for <span :style="amountStyle">{{ format(gainedCEP, 2, 2) }}</span> CEP
+        获得 <span :style="amountStyle">{{ format(gainedCEP, 2, 2) }}</span> 天界永恒点数
       </template>
       <br>
-      Someone waits for you. Do not keep them waiting.
+      有一些存在正在等待你……别让祂们久等……
     </template>
   </button>
 </template>

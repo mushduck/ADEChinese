@@ -104,28 +104,27 @@ export default {
   >
     <!-- Cannot Crunch -->
     <template v-if="!canCrunch">
-      Reach {{ format(infinityGoal, 2, 2) }}
+      达到 {{ format(infinityGoal, 2, 2) }}
       <br>
-      Celestial Matter
+      天界物质
     </template>
 
     <!-- Can Crunch -->
     <template v-else>
       <div v-if="!showCIPRate" />
       <b>
-        <span v-if="showCIPRate">Cel Crunch for </span>
-        <span v-else>Celestial Crunch for </span>
+        获得
         <span :style="amountStyle">{{ format(gainedCIP, 2) }}</span>
-        <span v-if="showCIPRate"> CIP</span>
-        <span v-else> Celestial {{ pluralize("Point", gainedCIP) }} of Infinity</span>
+        <span v-if="showCIPRate"> 天界点数</span>
+        <span v-else> 天界无限{{ pluralize("点数", gainedCIP) }}</span>
       </b>
       <template v-if="showCIPRate">
         <br>
-        Current: {{ format(currentCIPRate, 2) }} CIP/min
+        当前：{{ format(currentCIPRate, 2) }} 天界无限点数/分
         <br>
-        Peak: {{ format(peakCIPRate, 2) }} CIP/min
+        峰值：{{ format(peakCIPRate, 2) }} 天界无限点数/分
         <br>
-        at {{ format(peakCIPRateVal, 2) }} CIP
+        峰值时获得 {{ format(peakCIPRateVal, 2) }} 天界无限点数
       </template>
       <div v-else />
     </template>
