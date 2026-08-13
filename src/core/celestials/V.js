@@ -185,8 +185,8 @@ export const VUpgrade = mapGameDataToObject(
 );
 
 export const V = {
-  displayName: "V",
-  possessiveName: "V's",
+  displayName: "薇",
+  possessiveName: "薇的",
   spaceTheorems: 0,
   checkForUnlocks() {
     for (const unl of VUnlocks.all) {

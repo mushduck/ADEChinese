@@ -3,7 +3,7 @@ export const Destroyer = {
     return `${player.username}`;
   },
   get possessiveName() {
-    return `${player.username}'s`;
+    return `${player.username}的`;
   },
   symbol: "♆"
 };

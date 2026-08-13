@@ -54,7 +54,7 @@ const disabledMechanicUnlocks = {
 export const Pelle = {
   symbol: "♅",
   // Suppress the randomness for this form
-  possessiveName: "Pelle's",
+  possessiveName: "佩勒的",
 
   // This is called upon initial Dooming and after every Armageddon when using the modal
   initializeRun() {
@@ -181,7 +181,7 @@ export const Pelle = {
   },
 
   get displayName() {
-    return Date.now() % 4000 > 500 ? "Pelle" : wordShift.randomCrossWords("Pelle");
+    return Date.now() % 4000 > 500 ? "佩勒" : wordShift.randomCrossWords("佩勒");
   },
 
   get isUnlocked() {

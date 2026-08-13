@@ -20,45 +20,44 @@ export const Celestials = {
 
 GameDatabase.celestials.descriptions = [
   {
-    name: "Teresa",
+    name: "特蕾莎",
     effects() {
-      return `Glyph Time Theorem generation is disabled.
-      You gain less Infinity Points and Eternity Points (x^${format(0.55, 2, 2)}).`;
+      return `符文无法生产时间之理。
+      获得更少的无限点数和永恒点数 (x^${format(0.55, 2, 2)}).`;
     },
   },
   {
-    name: "Effarig",
+    name: "鹿颈长",
     effects() {
-      return `All Dimension multipliers, game speed, and tickspeed are severely lowered, like Dilation.
-      Infinity Power reduces the production and game speed penalties and Time Shards reduce the tickspeed penalty.
-      Glyph levels are temporarily capped to ${formatInt(Effarig.glyphLevelCap)}, rarity is unaffected.`;
+      return `所有维度的倍率、游戏速度和计数频率都受到类似时间膨胀的削弱。
+      无限之力可以降低产量和游戏速度的削弱程度，时间碎片可以减少计数频率的削弱程度。
+      符文等级暂时限制为 ${formatInt(Effarig.glyphLevelCap)}，稀有度不受影响。`;
     },
     description() {
-      return `You will exit Effarig's Reality when you complete a Layer of it for the first time.`;
+      return `当你第一次完成一个层级时，直接退出鹿颈长的现实。`;
     }
   },
   {
-    name: "The Nameless Ones",
+    name: "无名氏",
     effects() {
-      return `Glyph levels are boosted to a minimum of ${formatInt(5000)}.
-      Infinity, Time, and 8th Antimatter Dimension purchases are limited to ${formatInt(1)} each.
-      Antimatter Dimension multipliers are always Dilated (the Glyph effect still only applies in actual Dilation).
-      Time Study 192 (uncapped Replicanti) is locked.
-      The Black Hole is disabled.
-      Tachyon Particle production and Dilated Time production are severely reduced.
-      Time Theorem generation from Dilation Glyphs is disabled.
-      Certain challenge goals are increased.
-      Stored game time is discharged at a reduced effectiveness (exponent^${format(0.55, 2, 2)}).`;
+      return `符文等级提升到至少 ${formatInt(5000)}。
+      无限、时间和第八反物质维度都只能购买 ${formatInt(1)} 个。
+      反物质的倍数受到类似时间膨胀的削弱，膨胀符文的“提升时间膨胀中的反物质指数”效果依然在时间膨胀中生效。
+      无法购买时间研究 192 （复制器的项目存在上限）
+      禁用黑洞。
+      大幅减少超光速粒子和膨胀时间的产量。
+      膨胀符文无法生产时间之理。
+      某些挑战目标有所增加。
+      使用储存的游戏时间（释放黑洞）时，其指数变为原来的 ${format(0.55, 2, 2)} 次方。`;
     }
   },
   {
     name: "V",
     effects() {
-      const vEffect = `All Dimension multipliers, Eternity Point gain, Infinity Point gain, and Dilated Time gain\
-      per second are square-rooted. 
-      The Replicanti interval is squared.`;
+      const vEffect = `所有的维度倍率、永恒点数、无限点数和膨胀时间的产量，都是原来的平方根。
+      复制器的复制间隔是原来的平方。`;
       const vEffectAdditional = `
-      The Exponential Glyph Alchemy effect is disabled.`;
+      禁用符文炼金中“指数”的效果。`;
 
       return Ra.unlocks.unlockGlyphAlchemy.canBeApplied
         ? vEffect + vEffectAdditional
@@ -68,8 +67,8 @@ GameDatabase.celestials.descriptions = [
   {
     name: "Ra",
     effects() {
-      return `You only have ${formatInt(4)} Dimension Boosts and can not gain any more.
-      The Tickspeed purchase multiplier is fixed at ${formatX(1.1245, 0, 3)}.`;
+      return `你最多只有 ${formatInt(4)} 个维度提升。
+      计数频率倍率固定为 ${formatX(1.1245, 0, 3)}。`;
     },
   },
   {
@@ -79,69 +78,47 @@ GameDatabase.celestials.descriptions = [
       const highestActive = 8 - Laitela.difficultyTier;
       switch (highestActive) {
         case 0:
-          disabledDims = "all Dimensions";
+          disabledDims = "所有维度";
           break;
         case 1:
-          disabledDims = "2nd and higher Dimensions";
+          disabledDims = "第二维度及其以上的维度";
           break;
         case 2:
-          disabledDims = "3rd and higher Dimensions";
+          disabledDims = "第三维度及其以上的维度";
           break;
         case 7:
-          disabledDims = "8th Dimensions";
+          disabledDims = "第八维度";
           break;
         default:
-          disabledDims = `${highestActive + 1}th and higher Dimensions`;
+          disabledDims = `${highestActive + 1}维度及其以上的维度`;
           break;
       }
       const disabledText = highestActive === 8
         ? ""
-        : `Production from ${disabledDims} is disabled.`;
+        : `禁用${disabledDims}的生产。`;
 
-      return `Infinity Point and Eternity Point gain are Dilated.
-      Game speed is reduced to ${formatInt(1)} and gradually comes back over ${formatInt(10)} minutes.
-      Black Hole storing, discharging, pulsing, and inversion are all disabled.
+      return `无限点数和永恒点数受到类似时间膨胀的削弱。
+      游戏速度降低至 ${formatInt(1)}, 在 ${formatInt(10)} 分钟内逐渐复原。
+      禁用黑洞的充能、释放、脉冲、反转。
       ${disabledText}`;
     },
     description() {
-      return `Antimatter generates entropy inside of this Reality.\
-      At ${formatPercents(1)} entropy, the Reality becomes destabilized\
-      and you gain a reward based on how quickly you reached ${formatPercents(1)}.
-      Destabilizing the Reality in less than ${formatInt(30)} seconds makes it become significantly more difficult,\
-      in exchange for giving a much stronger reward.\
-      Doing this ${formatInt(8)} times will also give a ${formatX(Math.pow(8, Laitela.hadronizes + 1))} to Dark Energy gain.`;
+      return `在这个现实中，反物质产生熵。熵达到 ${formatPercents(1)} 时，该现实将出现不稳定。你将基于达到 ${formatPercents(1)} 的用时，获得暗物质维度加成。如果你能在 ${formatInt(30)} 秒内令该现实出现不稳定，该现实的难度将大幅提升，不过你能获得更强大的加成。该现实出现不稳定 ${formatInt(8)} 次后，暗能量的产量 ${formatX(Math.pow(8, Laitela.hadronizes + 1))}。`;
     }
   },
   {
     name: "Pelle",
     effects() {
-      return `Your Reality will become Doomed. This will have various effects on gameplay.`;
+      return `你的现实将被毁灭，这会对游戏玩法产生各种影响。`;
     }
   },
   {
     name: "Alpha",
     effects() {
-      return `All rewards, effects, upgrades, enhancements, buffs, nerfs, and features unlocked or gained after reaching Reality\
-      for the first time are disabled, except Celestial Dimensions and Cosmic Sector, both of which are severely nerfed.
-      The Celestial Matter Conversion Exponent will be reduced to ${formatInt(0)} and you will\
-      gain ${formatPercents(Alpha.alphaDecayByHour, 2)} per real-time hour in Alpha's Reality, up to a cap\
-      of ${formatInt(24)} hours, which can be increased slightly by completing stages of Alpha's Reality.
-      Various external resources, such as Cosmic Sector, will boost Alpha Decay as if you have spent more time\
-      inside Alpha's Reality. Your current Alpha Decay Speed factor is ${formatX(Alpha.totalSpeedBoost, 2, 2)}.\
-      You start layers of Alpha's Reality with ${formatPercents(Alpha.cosmicSectorMinBoost, 2, 2)} of the total\
-      time to max already spent. Cosmic Sector boosts Alpha Decay starting and capped values\
-      by ${format(Alpha.cosmicSectorExtraBoost, 2, 2)} hours. This does not reduce the time for Alpha Decay to cap,\
-      instead it makes Alpha Decay more effective.
-      Your Cosmic Sector Reward will be rooted by your current Cosmic Sector, which is a static nerf and cannot be increased\
-      through progression in Alpha.
-      Most game-time based features are now real-time based.
-      The Achievement Multiplier and many Achievements have been destroyed.
-      Gain a small nerf to Antimatter Dimensions based on Antimatter.`;
+      return `ㅤㅤ极大削弱天界维度和宇宙扇区，除此之外禁用所有在首次达到现实后解锁或获得的所有奖励、效果、升级、增强、增益、削弱和特性。在阿尔法的现实中降低天界物质激发指数至 ${formatInt(0)}，每小时（真实时间）恢复 ${formatPercents(Alpha.alphaDecayByHour, 2)}，称之为阿尔法衰变。ㅤㅤㅤㅤㅤㅤㅤ阿尔法衰变的上限为 ${formatInt(24)} 小时，并基于阿尔法的现实层级降低。在外部获得例如宇宙扇区的资源将加速阿尔法衰变，等效于在阿尔法的现实中投入更多时间。你当前的阿尔法衰变速度因子为 ${formatX(Alpha.totalSpeedBoost, 2, 2)}。你开始阿尔法的现实层级时，已花费的总最大时间比例为 ${formatPercents(Alpha.cosmicSectorMinBoost, 2, 2)}。宇宙扇区将阿尔法衰变的起始值和上限值提高 ${format(Alpha.cosmicSectorExtraBoost, 2, 2)} 小时。这不会缩短阿尔法衰变达到上限所需的时间，而是使阿尔法衰变在前期速度更快、后期速度变慢。ㅤㅤㅤㅤㅤ基于当前的宇宙扇区数量指数削弱宇宙扇区奖励效力，这是一个半永久削弱，在摧毁阿尔法的现实前无法恢复。大多数基于游戏时间的加成更改为基于真实时间。禁用成就倍率和大部分成就奖。基于反物质数量略微削弱反物质维度。`;
     },
     description() {
-      return `You will exit Alpha's Reality when you complete a Layer of it for the first time.
-      For every layer of Alpha's Reality completed, you will gain a buff which applies outside Alpha,\
-      and a nerf which applies inside Alpha.`;
+      return `ㅤㅤㅤㅤㅤㅤㅤㅤㅤ每个阿尔法的现实层级被击穿时，你将自动退出阿尔法的现实。每完成一层阿尔法的现实，你将获得一个在阿尔法的现实外部生效的增益，以及一个在阿尔法的现实内部生效的削弱。`;
     }
   }
 ];

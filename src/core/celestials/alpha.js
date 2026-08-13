@@ -4,8 +4,8 @@ import { GameDatabase } from "../secret-formula/game-database";
 import { Quotes } from "./quotes";
 
 export const Alpha = {
-  displayName: "Alpha",
-  possessiveName: "Alpha's",
+  displayName: "阿尔法",
+  possessiveName: "阿尔法的",
   get isUnlocked() {
     return ImaginaryUpgrade(30).isBought;
   },
@@ -1072,9 +1072,9 @@ export const Alpha = {
             "Perform a Dilated Eternity", "Begin Generation of Time Theorems", "Purchase the 8th Time Dimension", "Reach Reality"];
   },
   get shortStageNames() {
-    return ["4th Dimboost", "5th Dimboost", "1st Galaxy", "Infinity", "NC12", "Break Infinity", "5e11 BIU", "All BIU", "All ICs",
-            "Replicanti", "ID8", "Eternity", "TS61", "TD4", "Eternity Upgrade 3", "115 Total TT", "ECx1", "ECx5", "TS181", "EC10x1",
-            "TS192", "EC11", "EC11x5", "Dilation", "Dilated Eternity", "TT Generation", "TD8", "Reality"];
+    return ["4个维度提升", "5个维度提升", "1个星系", "无限", "普通挑战12", "打破无限", "星系升级", "所有打破无限升级", "所有无限挑战",
+            "复制器", "第八无限维度", "永恒", "时间研究61", "第四时间维度", "永恒升级3", "115时间之理", "1个永恒挑战", "5个相同永恒挑战", "时间研究181", "永恒挑战10",
+            "时间研究191", "永恒挑战11×1", "永恒挑战11×5", "时间膨胀", "时间膨胀中永恒", "生产时间之理", "第八时间维度", "现实"];
   },
   get currentStageName() {
     return this.stageNames[this.currentStage];

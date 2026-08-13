@@ -256,7 +256,7 @@ export default {
         <span
           v-tooltip="toMaxTooltip"
           class="max-accent"
-        >{{ format(maxReplicanti, 2) }}</span>.
+        >{{ format(maxReplicanti, 2) }}</span>。
       </div>
       <br>
       <div v-if="isInEC8">

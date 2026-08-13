@@ -17,7 +17,7 @@ export default {
       return this.celestial === "laitela" ? `var(--color-laitela--accent)` : `var(--color-${this.celestial}--base)`;
     },
     possessiveForm() {
-      return Celestials[this.celestial].possessiveName;
+      return Celestials[this.celestial].displayName; //这里改了possessiveForm为display
     }
   },
   methods: {
