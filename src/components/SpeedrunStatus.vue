@@ -22,24 +22,24 @@ export default {
   },
   computed: {
     statusText() {
-      if (this.isComplete) return `<span style="color: var(--color-good)">Finished!</span>`;
+      if (this.isComplete) return `<span style="color: var(--color-good)">已完成！</span>`;
       return this.hasStarted
-        ? `<span style="color: var(--color-good)">Running!</span>`
-        : `<span style="color: var(--color-bad)">Not Started Yet</span>`;
+        ? `<span style="color: var(--color-good)">正在进行！</span>`
+        : `<span style="color: var(--color-bad)">未开始</span>`;
     },
     segmentText() {
-      return this.isSegmented ? "Segmented Speedrun (imported save)" : "Single-segment Speedrun (no save import)";
+      return this.isSegmented ? "分段速通（导出和导入存档）" : "单段速通（无存档导出导入）";
     },
     iapText() {
-      return this.usedSTD ? "IAPs have been used" : "No IAPs Used";
+      return this.usedSTD ? "已使用应用内购" : "不使用应用内购";
     },
     offlineText() {
       const stateText = this.offlineProgress
         ? `<span style="color: var(--color-good)">Enabled</span>`
         : `<span style="color: var(--color-bad)">Disabled</span>`;
       const fractionText = this.offlineFraction === 0
-        ? "(No offline time used)"
-        : `(${formatPercents(this.offlineFraction, 2)} time spent offline)`;
+        ? "未使用离线进度"
+        : `离线进度用时 (${formatPercents(this.offlineFraction, 2)}`;
       return `${stateText} ${fractionText}`;
     },
     collapseIcon() {
@@ -73,14 +73,14 @@ export default {
     },
     milestoneName(id) {
       const db = GameDatabase.speedrunMilestones;
-      return id === 0 ? "None" : db.find(m => m.id === id).name;
+      return id === 0 ? "无" : db.find(m => m.id === id).name;
     },
     changeName() {
       if (this.hasStarted) return;
       Modal.changeName.show();
     },
     collapseText() {
-      return this.isCollapsed ? "Expand" : `Click to collapse Speedrun info`;
+      return this.isCollapsed ? "展开" : `点击以收起速通信息`;
     },
     toggleCollapse() {
       player.speedrun.hideInfo = !this.isCollapsed;
@@ -99,13 +99,13 @@ export default {
     class="c-speedrun-status"
   >
     <div v-if="!isCollapsed">
-      <b>Speedrun Status (<span v-html="statusText" />)</b>
+      <b>速通状态 (<span v-html="statusText" />)</b>
       <br>
       <span
         :class="{ 'c-speedrun-status--can-change': !hasStarted }"
         @click="changeName"
       >
-        Player Name: {{ saveName }}
+        玩家名：{{ saveName }}
       </span>
       <br>
       <i>{{ segmentText }}</i>
@@ -117,11 +117,11 @@ export default {
         @click="openSeedModal()"
       >{{ seedText }}</span>
       <br>
-      Total real playtime since start: {{ timePlayedStr }}
+      自开始以来所经历的真实时间：{{ timePlayedStr }}
       <br>
-      Offline Progress: <span v-html="offlineText" />
+      离线进度：<span v-html="offlineText" />
       <br>
-      Most Recent Milestone: {{ milestoneName(mostRecent) }} <span v-if="mostRecent">({{ timeSince }} ago)</span>
+      最近的速通里程碑：{{ milestoneName(mostRecent) }} <span v-if="mostRecent">({{ timeSince }} ago)</span>
       <br>
     </div>
     <div

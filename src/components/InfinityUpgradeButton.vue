@@ -95,7 +95,7 @@ export default {
         player.challenge.normal.bestTimes.reduce(Decimal.sumReducer).lt(DC.BEMAX) && !upgrade.isCharged && !this.showChargedEffect;
       const worstChallengeTime = GameCache.worstChallengeTime.value;
       const worstChallengeIndex = 2 + player.challenge.normal.bestTimes.indexOf(worstChallengeTime);
-      this.worstChallengeString = `(Challenge ${worstChallengeIndex}: ${timeDisplayShort(new Decimal(worstChallengeTime))})`;
+      this.worstChallengeString = `（挑战 ${worstChallengeIndex}: ${timeDisplayShort(new Decimal(worstChallengeTime))})`;
     }
   }
 };
@@ -123,14 +123,14 @@ export default {
       />
       <template v-if="!isDisabled && isImprovedByTS31">
         <br>
-        After TS31: {{ formatX(ts31Effect, 2, 2) }}
+        时间研究 31 之后：{{ formatX(ts31Effect, 2, 2) }}
       </template>
     </span>
     <CostDisplay
       v-if="!isBought"
       br
       :config="config"
-      name="Infinity Point"
+      name="无限点数"
     />
     <slot />
   </button>

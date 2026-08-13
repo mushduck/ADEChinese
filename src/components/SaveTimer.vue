@@ -16,7 +16,7 @@ export default {
       const localStr = timeDisplayShort(new Decimal(this.currentTime - this.lastLocalSave));
       const cloudStr = timeDisplayShort(new Decimal(this.currentTime - this.lastCloudSave));
       return this.cloudSaveEnabled
-        ? `${localStr} (local) | ${cloudStr} (cloud)`
+        ? `${localStr} （本地） | ${cloudStr} （云端）`
         : localStr;
     },
   },
@@ -42,8 +42,8 @@ export default {
     class="o-save-timer"
     @click="save"
   >
-    <b v-if="saveDisabled">There is nothing left to save.</b>
-    <span v-else>Time since last save: {{ timeString }}</span>
+    <b v-if="saveDisabled">存档已禁用</b>
+    <span v-else>距离上次存档：{{ timeString }}</span>
   </div>
 </template>
 
