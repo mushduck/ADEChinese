@@ -125,61 +125,59 @@ export default {
     };
   },
   computed: {
-    // These are here to avoid extra spaces in-game pre-reality and to get around codefactor 120-char limits in the
-    // HTML template due to the fact that adding a linebreak also adds a space
     infinityCountString() {
       const num = this.infinity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Infinity", num.floor())}`
-        : "no Infinities";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("无限次数", num.floor())}`
+        : "无无限次数";
     },
     eternityCountString() {
       const num = this.eternity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Eternity", num.floor())}`
-        : "no Eternities";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("永恒次数", num.floor())}`
+        : "无永恒次数";
     },
     realityCountString() {
       const num = new Decimal(this.reality.count);
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Reality", num.floor())}`
-        : "no Realities";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("现实次数", num.floor())}`
+        : "无现实次数";
     },
     endgameCountString() {
       const num = new Decimal(this.endgame.count);
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Endgame", num.floor())}`
-        : "no Endgames";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("终局次数", num.floor())}`
+        : "无终局次数";
     },
     celestialInfinityCountString() {
       const num = this.celestialInfinity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Celestial Infinity", num.floor())}`
-        : "no Celestial Infinities";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("天界无限次数", num.floor())}`
+        : "无天界无限次数";
     },
     celestialEternityCountString() {
       const num = this.celestialEternity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Celestial Eternity", num.floor())}`
-        : "no Celestial Eternities";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("天界永恒次数", num.floor())}`
+        : "无天界永恒次数";
     },
     divinityCountString() {
       const num = new Decimal(this.divinity.count);
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Divinity", num.floor())}`
-        : "no Divinities";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("神性次数", num.floor())}`
+        : "无神性次数";
     },
     condenseCountString() {
       const num = this.condense.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Condense", num.floor())}`
-        : "no Condenses";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("凝聚次数", num.floor())}`
+        : "无凝聚次数";
     },
     supernovaCountString() {
       const num = this.supernova.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("Supernova", num.floor())}`
-        : "no Supernovae";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("超新星次数", num.floor())}`
+        : "无超新星次数";
     },
     fullGameCompletions() {
       return player.records.fullGameCompletions;
@@ -377,78 +375,75 @@ export default {
   <div class="c-stats-tab">
     <div>
       <PrimaryButton onclick="Modal.catchup.show(0)">
-        View Content Summary
+        查看内容摘要
       </PrimaryButton>
       <div class="c-stats-tab-title c-stats-tab-general">
-        General
+        概况
       </div>
       <div class="c-stats-tab-general">
-        <div>You have made a total of {{ format(totalAntimatter, 2, 1) }} antimatter.</div>
+        <div>你总共制造了 {{ format(totalAntimatter, 2, 1) }} 个反物质。</div>
         <div v-if="divinity.isUnlocked">
-          You have made a total of {{ format(bestDoomedAntimatterThisDivinity, 2, 1) }} antimatter in Doom this Divinity.
+          在本次神性中，你在被毁灭的现实内总共制造了 {{ format(bestDoomedAntimatterThisDivinity, 2, 1) }} 个反物质。
         </div>
         <div v-if="endgame.isUnlocked">
-          You have made a total of {{ format(totalAntimatterOutsideDoom, 2, 1) }} antimatter outside Doom.
+          你在被毁灭的现实外总共制造了 {{ format(totalAntimatterOutsideDoom, 2, 1) }} 个反物质。
         </div>
         <div v-if="endgame.isUnlocked">
-          You have made a total of {{ format(endgame.totalEndgameAntimatter, 2, 1) }} antimatter this Endgame.
+          在本次终局中，你总共制造了 {{ format(endgame.totalEndgameAntimatter, 2, 1) }} 个反物质。
         </div>
         <div v-if="reality.isUnlocked" :class="{ 'c-stats-tab-doomed' : isDoomed }">
-          You have made a total of {{ format(reality.totalRealityAntimatter, 2, 1) }} antimatter
-          this {{ isDoomed ? "Armageddon" : "Reality" }}.
+          在本次{{ isDoomed ? "末日" : "现实" }}中，你总共制造了 {{ format(reality.totalRealityAntimatter, 2, 1) }} 个反物质。
         </div>
         <div v-if="eternity.isUnlocked">
-          You have made a total of {{ format(eternity.totalEternityAntimatter, 2, 1) }} antimatter this Eternity.
+          在本次永恒中，你总共制造了 {{ format(eternity.totalEternityAntimatter, 2, 1) }} 个反物质。
         </div>
         <div v-if="infinity.isUnlocked">
-          You have made a total of {{ format(infinity.totalInfinityAntimatter, 2, 1) }} antimatter this Infinity.
+          在本次无限中，你总共制造了 {{ format(infinity.totalInfinityAntimatter, 2, 1) }} 个反物质。
         </div>
         <div v-if="endgame.isUnlocked" class="c-stats-tab-celestials">
-          You have made a total of {{ format(totalCelMatter, 2, 1) }} Celestial Matter.
+          你总共制造了 {{ format(totalCelMatter, 2, 1) }} 天界物质。
         </div>
         <div v-if="celestialEternity.isUnlocked" class="c-stats-tab-celestials">
-          You have made a total of {{ format(celestialEternity.totalCelestialEternityCelMatter, 2, 1) }} Celestial Matter
-          this Celestial Eternity.
+          在本次天界永恒中，你总共制造了 {{ format(celestialEternity.totalCelestialEternityCelMatter, 2, 1) }} 天界物质。
         </div>
         <div v-if="celestialInfinity.isUnlocked" class="c-stats-tab-celestials">
-          You have made a total of {{ format(celestialInfinity.totalCelestialInfinityCelMatter, 2, 1) }} Celestial Matter
-          this Celestial Infinity.
+          在本次天界无限中，你总共制造了 {{ format(celestialInfinity.totalCelestialInfinityCelMatter, 2, 1) }} 天界物质。
         </div>
         <div v-if="hasSeenDivineDims" class="c-stats-tab-divinity">
-          You have made a total of {{ format(totalDivineMatter, 2, 1) }} Divine Matter.
+          你总共制造了 {{ format(totalDivineMatter, 2, 1) }} 神性物质。
         </div>
         <div v-if="supernova.isUnlocked" class="c-stats-tab-divinity">
-          You have made a total of {{ format(supernova.totalSupernovaDivineMatter, 2, 1) }} Divine Matter this Supernova.
+          在本次超新星中，你总共制造了 {{ format(supernova.totalSupernovaDivineMatter, 2, 1) }} 神性物质。
         </div>
         <div v-if="condense.isUnlocked" class="c-stats-tab-divinity">
-          You have made a total of {{ format(condense.totalCondenseDivineMatter, 2, 1) }} Divine Matter this Condense.
+          在本次凝聚中，你总共制造了 {{ format(condense.totalCondenseDivineMatter, 2, 1) }} 神性物质。
         </div>
-        <div>You have played for {{ realTimePlayed }}. (real time)</div>
+        <div>你已经游玩了 {{ realTimePlayed }}。（现实时间）</div>
         <div v-if="reality.isUnlocked">
-          Your existence has spanned {{ reality.totalTimePlayed }} of time. (game time)
+          游戏中的你经历了 {{ reality.totalTimePlayed }} 的游戏内时间。
         </div>
         <div>
-          Your save was created on {{ startDate }} ({{ saveAge }} ago)
+          你的存档创建于 {{ startDate }}（{{ saveAge }}之前）。
         </div>
         <br>
         <div>
-          You have seen {{ quantifyHybridSmall("news message", totalNews) }} in total.
+          你总共阅读了 {{ quantifyHybridSmall("条新闻消息", totalNews) }}。
         </div>
         <div>
-          You have seen {{ quantifyInt("unique news message", uniqueNews) }}.
+          你已发现 {{ quantifyInt("条不同的新闻消息", uniqueNews) }}。
         </div>
         <div>
-          You have unlocked {{ quantifyInt("Secret Achievement", secretAchievementCount) }}.
+          你已解锁 {{ quantifyInt("个隐藏成就", secretAchievementCount) }}。
         </div>
         <div v-if="paperclips">
-          You have {{ quantifyInt("useless paperclip", paperclips) }}.
+          你拥有 {{ quantifyInt("个无用回形针", paperclips) }}。
         </div>
         <div v-if="fullGameCompletions">
           <br>
           <b>
-            You have completed the entire game {{ quantifyInt("time", fullGameCompletions) }}.
+            你已通关游戏 {{ quantifyInt("次", fullGameCompletions) }}。
             <br>
-            You have played for {{ fullTimePlayed }} across all playthroughs.
+            你在所有周目中总计游玩了 {{ fullTimePlayed }}。
           </b>
         </div>
       </div>
@@ -472,31 +467,31 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-infinity">
-        Infinity
+        无限
       </div>
       <div>
-        You have {{ infinityCountString }}<span v-if="eternity.isUnlocked"> this Eternity</span>.
+        你的无限次数为 {{ infinityCountString }}<span v-if="eternity.isUnlocked">（本次永恒）</span>。
       </div>
       <div v-if="infinity.banked.gt(0)">
-        You have {{ formatDecimalAmount(infinity.banked.floor()) }}
-        {{ pluralize("Banked Infinity", infinity.banked.floor()) }}.
+        你拥有 {{ formatDecimalAmount(infinity.banked.floor()) }}
+        {{ pluralize("储存的无限次数", infinity.banked.floor()) }}。
       </div>
       <div v-if="infinity.hasBest">
-        Your fastest Infinity was {{ infinity.best.toStringShort() }}.
+        你最快的无限用时为 {{ infinity.best.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Infinity<span v-if="eternity.isUnlocked"> this Eternity</span>.
+        你<span v-if="eternity.isUnlocked">在本次永恒中</span>没有最快的无限用时。
       </div>
       <div>
-        You have spent {{ infinity.this.toStringShort() }} in this Infinity.
+        你在本次无限中已花费 {{ infinity.this.toStringShort() }}。
         <span v-if="reality.isUnlocked">
-          ({{ infinity.thisReal.toStringShort() }} real time)
+          （{{ infinity.thisReal.toStringShort() }} 现实时间）
         </span>
       </div>
       <div>
-        Your best Infinity Points per minute
-        <span v-if="eternity.count.gt(0)">this Eternity </span>
-        is {{ format(infinity.bestRate, 2, 2) }}.
+        你获得无限点数的最快速度
+        <span v-if="eternity.count.gt(0)">（本次永恒）</span>
+        为每分钟 {{ format(infinity.bestRate, 2, 2) }}。
       </div>
       <br>
     </div>
@@ -505,39 +500,39 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-eternity">
-        Eternity
+        永恒
       </div>
       <div>
-        You have {{ eternityCountString }}<span v-if="reality.isUnlocked"> this
-        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "Armageddon" : "Reality" }}</span></span>.
+        你的永恒次数为 {{ eternityCountString }}<span v-if="reality.isUnlocked">（本次
+        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>）</span>。
       </div>
       <div v-if="infinity.projectedBanked.gt(0)">
-        You will gain {{ formatDecimalAmount(infinity.projectedBanked.floor()) }}
-        {{ pluralize("Banked Infinity", infinity.projectedBanked.floor()) }} on Eternity
-        ({{ formatDecimalAmount(infinity.bankRate) }} per minute).
+        永恒后你将增加 {{ formatDecimalAmount(infinity.projectedBanked.floor()) }}
+        {{ pluralize("储存的无限次数", infinity.projectedBanked.floor()) }}
+        （每分钟 {{ formatDecimalAmount(infinity.bankRate) }}）。
       </div>
       <div v-else-if="infinity.banked.gt(0)">
-        You will gain no Banked Infinities on Eternity.
+        永恒后你将不会获得储存的无限次数。
       </div>
       <div v-if="eternity.hasBest">
-        Your fastest Eternity was {{ eternity.best.toStringShort() }}.
+        你最快的永恒用时为 {{ eternity.best.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Eternity<span v-if="reality.isUnlocked"> this
-        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "Armageddon" : "Reality" }}</span></span>.
+        你<span v-if="reality.isUnlocked">在本次
+        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>中</span>没有最快的永恒用时。
       </div>
       <div>
-        You have spent {{ eternity.this.toStringShort() }} in this Eternity.
+        你在本次永恒中已花费 {{ eternity.this.toStringShort() }}。
         <span v-if="reality.isUnlocked">
-          ({{ eternity.thisReal.toStringShort() }} real time)
+          （{{ eternity.thisReal.toStringShort() }} 现实时间）
         </span>
       </div>
       <div>
-        Your best Eternity Points per minute
-        <span v-if="reality.isUnlocked">this
-        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "Armageddon" : "Reality" }}</span>
+        你获得永恒点数的最快速度
+        <span v-if="reality.isUnlocked">（本次
+        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>）
         </span>
-        is {{ format(eternity.bestRate, 2, 2) }}.
+        为每分钟 {{ format(eternity.bestRate, 2, 2) }}。
       </div>
       <br>
     </div>
@@ -546,38 +541,37 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div :class="realityClassObject()">
-        {{ isDoomed ? "Doomed Reality" : "Reality" }}
+        {{ isDoomed ? "被毁灭的现实" : "现实" }}
       </div>
       <div>
-        You have {{ realityCountString }}<span v-if="endgame.isUnlocked"> this Endgame</span>.
+        你的现实次数为 {{ realityCountString }}<span v-if="endgame.isUnlocked">（本次终局）</span>。
       </div>
       <div v-if="reality.hasBest">
-        Your fastest game-time Reality was {{ reality.best.toStringShort() }}.
-        Your fastest real-time Reality was {{ reality.bestReal.toStringShort() }}.
+        你最快的游戏时间现实用时为 {{ reality.best.toStringShort() }}。
+        你最快的现实时间现实用时为 {{ reality.bestReal.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Reality<span v-if="endgame.isUnlocked"> this Endgame</span>.
+        你<span v-if="endgame.isUnlocked">在本次终局中</span>没有最快的现实用时。
       </div>
       <div :class="{ 'c-stats-tab-doomed' : isDoomed }">
-        You have spent {{ reality.this.toStringShort() }}
-        in this {{ isDoomed ? "Armageddon" : "Reality" }}.
-        ({{ reality.thisReal.toStringShort() }} real time)
+        你在本次{{ isDoomed ? "末日" : "现实" }}中已花费 {{ reality.this.toStringShort() }}。
+        （{{ reality.thisReal.toStringShort() }} 现实时间）
       </div>
       <div
         v-if="isDoomed"
         class="c-stats-tab-doomed"
       >
-        You have been Doomed for {{ realTimeDoomed.toStringShort() }}, real time.
+        从毁灭你的现实至今，你经历了 {{ realTimeDoomed.toStringShort() }} 的现实时间。
       </div>
       <div>
-        Your best Reality Machines per minute 
-        <span v-if="endgame.isUnlocked">this Endgame </span>
-        is {{ format(reality.bestRate, 2, 2) }}.
+        你获得现实机器的最快速度
+        <span v-if="endgame.isUnlocked">（本次终局）</span>
+        为每分钟 {{ format(reality.bestRate, 2, 2) }}。
       </div>
       <div>
-        Your best Glyph rarity
-        <span v-if="endgame.isUnlocked">this Endgame </span>
-        is {{ formatRarity(reality.bestRarity) }}.</div>
+        你的最高符文稀有度
+        <span v-if="endgame.isUnlocked">（本次终局）</span>
+        为 {{ formatRarity(reality.bestRarity) }}。</div>
       <br>
     </div>
     <div
@@ -585,30 +579,29 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-endgame">
-        Endgame
+        终局
       </div>
       <div>
-        You have {{ endgameCountString }}.
+        你的终局次数为 {{ endgameCountString }}。
       </div>
       <div v-if="endgame.hasBest">
-        Your fastest game-time Endgame was {{ endgame.best.toStringShort() }}.
-        Your fastest real-time Endgame was {{ endgame.bestReal.toStringShort() }}.
+        你最快的游戏时间终局用时为 {{ endgame.best.toStringShort() }}。
+        你最快的现实时间终局用时为 {{ endgame.bestReal.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Endgame.
+        你没有最快的终局用时。
       </div>
       <div>
-        You have spent {{ endgame.this.toStringShort() }}
-        in this Endgame.
-        ({{ endgame.thisReal.toStringShort() }} real time)
+        你在本次终局中已花费 {{ endgame.this.toStringShort() }}。
+        （{{ endgame.thisReal.toStringShort() }} 现实时间）
       </div>
       <div>
-        Your best Celestial Points per minute 
-        is {{ format(endgame.bestRateCP, 2, 2) }}.
+        你获得天界点数的最快速度
+        为每分钟 {{ format(endgame.bestRateCP, 2, 2) }}。
       </div>
       <div>
-        Your best Doomed Particles per minute 
-        is {{ format(endgame.bestRateDP, 2, 2) }}.
+        你获得毁灭粒子的最快速度
+        为每分钟 {{ format(endgame.bestRateDP, 2, 2) }}。
       </div>
       <br>
     </div>
@@ -617,25 +610,25 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-celestial-infinity">
-        Celestial Infinity
+        天界无限
       </div>
       <div>
-        You have {{ celestialInfinityCountString }}<span v-if="celestialEternity.isUnlocked"> this Celestial Eternity</span>.
+        你的天界无限次数为 {{ celestialInfinityCountString }}<span v-if="celestialEternity.isUnlocked">（本次天界永恒）</span>。
       </div>
       <div v-if="celestialInfinity.hasBest">
-        Your fastest game-time Celestial Infinity was {{ celestialInfinity.best.toStringShort() }}.
-        Your fastest real-time Celestial Infinity was {{ celestialInfinity.bestReal.toStringShort() }}.
+        你最快的游戏时间天界无限用时为 {{ celestialInfinity.best.toStringShort() }}。
+        你最快的现实时间天界无限用时为 {{ celestialInfinity.bestReal.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Celestial Infinity<span v-if="celestialEternity.isUnlocked"> this Celestial Eternity</span>.
+        你<span v-if="celestialEternity.isUnlocked">在本次天界永恒中</span>没有最快的天界无限用时。
       </div>
       <div>
-        You have spent {{ celestialInfinity.this.toStringShort() }} in this Celestial Infinity.
-        ({{ celestialInfinity.thisReal.toStringShort() }} real time)
+        你在本次天界无限中已花费 {{ celestialInfinity.this.toStringShort() }}。
+        （{{ celestialInfinity.thisReal.toStringShort() }} 现实时间）
       </div>
       <div>
-        Your best Celestial Infinity Points per minute<span v-if="celestialEternity.isUnlocked"> this Celestial Eternity</span>
-        is {{ format(celestialInfinity.bestRate, 2, 2) }}.
+        你获得天界无限点数的最快速度<span v-if="celestialEternity.isUnlocked">（本次天界永恒）</span>
+        为每分钟 {{ format(celestialInfinity.bestRate, 2, 2) }}。
       </div>
       <br>
     </div>
@@ -644,25 +637,25 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-celestial-eternity">
-        Celestial Eternity
+        天界永恒
       </div>
       <div>
-        You have {{ celestialEternityCountString }}.
+        你的天界永恒次数为 {{ celestialEternityCountString }}。
       </div>
       <div v-if="celestialEternity.hasBest">
-        Your fastest game-time Celestial Eternity was {{ celestialEternity.best.toStringShort() }}.
-        Your fastest real-time Celestial Eternity was {{ celestialEternity.bestReal.toStringShort() }}.
+        你最快的游戏时间天界永恒用时为 {{ celestialEternity.best.toStringShort() }}。
+        你最快的现实时间天界永恒用时为 {{ celestialEternity.bestReal.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Celestial Eternity.
+        你没有最快的天界永恒用时。
       </div>
       <div>
-        You have spent {{ celestialEternity.this.toStringShort() }} in this Celestial Eternity.
-        ({{ celestialEternity.thisReal.toStringShort() }} real time)
+        你在本次天界永恒中已花费 {{ celestialEternity.this.toStringShort() }}。
+        （{{ celestialEternity.thisReal.toStringShort() }} 现实时间）
       </div>
       <div>
-        Your best Celestial Eternity Points per minute
-        is {{ format(celestialEternity.bestRate, 2, 2) }}.
+        你获得天界永恒点数的最快速度
+        为每分钟 {{ format(celestialEternity.bestRate, 2, 2) }}。
       </div>
       <br>
     </div>
@@ -671,10 +664,10 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-divinity">
-        Divinity
+        神性
       </div>
       <div>
-        You have {{ divinityCountString }}.
+        你的神性次数为 {{ divinityCountString }}。
       </div>
       <br>
     </div>
@@ -683,25 +676,25 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-condense">
-        Condense
+        凝聚
       </div>
       <div>
-        You have {{ condenseCountString }}<span v-if="supernova.isUnlocked"> this Supernova</span>.
+        你的凝聚次数为 {{ condenseCountString }}<span v-if="supernova.isUnlocked">（本次超新星）</span>。
       </div>
       <div v-if="condense.hasBest">
-        Your fastest game-time Condense was {{ condense.best.toStringShort() }}.
-        Your fastest real-time Condense was {{ condense.bestReal.toStringShort() }}.
+        你最快的游戏时间凝聚用时为 {{ condense.best.toStringShort() }}。
+        你最快的现实时间凝聚用时为 {{ condense.bestReal.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Condense<span v-if="supernova.isUnlocked"> this Supernova</span>.
+        你<span v-if="supernova.isUnlocked">在本次超新星中</span>没有最快的凝聚用时。
       </div>
       <div>
-        You have spent {{ condense.this.toStringShort() }} in this Condense.
-        ({{ condense.thisReal.toStringShort() }} real time)
+        你在本次凝聚中已花费 {{ condense.this.toStringShort() }}。
+        （{{ condense.thisReal.toStringShort() }} 现实时间）
       </div>
       <div>
-        Your best Divine Stars per minute<span v-if="supernova.isUnlocked"> this Supernova</span>
-        is {{ format(condense.bestRate, 2, 2) }}.
+        你获得神性星辰的最快速度<span v-if="supernova.isUnlocked">（本次超新星）</span>
+        为每分钟 {{ format(condense.bestRate, 2, 2) }}。
       </div>
       <br>
     </div>
@@ -710,25 +703,25 @@ export default {
       class="c-stats-tab-subheader c-stats-tab-general"
     >
       <div class="c-stats-tab-title c-stats-tab-supernova">
-        Supernova
+        超新星
       </div>
       <div>
-        You have {{ supernovaCountString }}.
+        你的超新星次数为 {{ supernovaCountString }}。
       </div>
       <div v-if="supernova.hasBest">
-        Your fastest game-time Supernova was {{ supernova.best.toStringShort() }}.
-        Your fastest real-time Supernova was {{ supernova.bestReal.toStringShort() }}.
+        你最快的游戏时间超新星用时为 {{ supernova.best.toStringShort() }}。
+        你最快的现实时间超新星用时为 {{ supernova.bestReal.toStringShort() }}。
       </div>
       <div v-else>
-        You have no fastest Supernova.
+        你没有最快的超新星用时。
       </div>
       <div>
-        You have spent {{ supernova.this.toStringShort() }} in this Supernova.
-        ({{ supernova.thisReal.toStringShort() }} real time)
+        你在本次超新星中已花费 {{ supernova.this.toStringShort() }}。
+        （{{ supernova.thisReal.toStringShort() }} 现实时间）
       </div>
       <div>
-        Your best Nebulae per minute
-        is {{ format(supernova.bestRate, 2, 2) }}.
+        你获得星云的最快速度
+        为每分钟 {{ format(supernova.bestRate, 2, 2) }}。
       </div>
       <br>
     </div>

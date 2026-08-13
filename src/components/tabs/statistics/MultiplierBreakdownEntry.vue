@@ -343,7 +343,7 @@ export default {
       const formatFn = resource.isBase
         ? x => format(x, 2, 2)
         : x => formatX(x, 2, 2);
-      return `Dilation Effect: Exponent${formatPow(this.dilationExponent, 2, 3)}
+      return `膨胀效果：指数${formatPow(this.dilationExponent, 2, 3)}
         (${formatFn(beforeMult, 2, 2)} ➜ ${formatFn(afterMult, 2, 2)})`;
     },
     isRecent(date) {
@@ -384,14 +384,14 @@ export default {
           <PrimaryToggleButton
             v-if="hasSeenPowers && allowPowerToggle"
             v-model="replacePowers"
-            v-tooltip="'Change Display for Power effects'"
+            v-tooltip="'切换指数加成的显示方式'"
             off="^N"
             on="×N"
             class="o-primary-btn c-change-display-btn"
           />
           <i
             v-if="groups.length > 1"
-            v-tooltip="'Change Multiplier Grouping'"
+            v-tooltip="'切换加成分组'"
             class="o-primary-btn c-change-display-btn fas fa-arrows-rotate"
             @click="changeGroup"
           />
@@ -401,7 +401,7 @@ export default {
         v-if="isEmpty"
         class="c-no-effect"
       >
-        No Active Effects
+        无生效的效果
         <br>
         <br>
         {{ disabledText }}
@@ -442,15 +442,10 @@ export default {
         class="c-no-effect"
       >
         <div>
-          "Base AD Production" is the amount of Antimatter that you would be producing with your current AD upgrades
-          as if you had waited a fixed amount of time ({{ formatInt(10) }}-{{ formatInt(40) }} seconds depending on
-          your AD count) after a Sacrifice. This may misrepresent your actual production if your ADs have been
-          producing for a while, but the relative mismatch will become smaller as you progress further in the game
-          and numbers become larger.
+          "基础维度产量"是指：假设你在献祭后等待固定时长（根据反物质维度数量，通常为 {{ formatInt(10) }} 到 {{ formatInt(40) }} 秒），在现有维度条件下可产生的反物质量。若维度已持续生产较长时间，该值可能与实际产量存在偏差，但随着游戏进程推进和数值增长，相对误差将逐渐减小。
         </div>
         <div v-if="inNC12">
-          The breakdown in this tab within Normal Challenge 12 may be inaccurate for some entries, and might count
-          extra multipliers which apply to all Antimatter Dimensions rather than just the ones which are displayed.
+          在普通挑战12中，此标签页的分解数据可能部分不准确，且会计入全局反物质维度加成（而非仅显示维度的专属加成）。
         </div>
       </div>
     </div>

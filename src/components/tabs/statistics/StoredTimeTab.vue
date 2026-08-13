@@ -16,19 +16,19 @@ export default {
       return TimeSpan.fromSeconds(new Decimal(this.storedTime)).toStringShort();
     },
     oneMinuteDisp() {
-      return `Spend ${TimeSpan.fromMinutes(1).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromMinutes(1).toStringShort()}`;
     },
     tenMinutesDisp() {
-      return `Spend ${TimeSpan.fromMinutes(10).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromMinutes(10).toStringShort()}`;
     },
     oneHourDisp() {
-      return `Spend ${TimeSpan.fromHours(1).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromHours(1).toStringShort()}`;
     },
     fiveHoursDisp() {
-      return `Spend ${TimeSpan.fromHours(5).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromHours(5).toStringShort()}`;
     },
     allDisp() {
-      return `Spend all Stored Time`;
+      return `尽可能跳跃`;
     },
     classObj1() {
       return {
@@ -103,7 +103,7 @@ export default {
   <div>
     <div class="normal-text">
       <br>
-      <span>You have </span><span class="special-text">{{ timeDisplay }}</span><span> Stored Time.</span>
+      <span>你可以跳跃 </span><span class="special-text">{{ timeDisplay }}</span><span> 的时间。</span>
     </div>
     <div class="c-subtab-option-container">
       <PrimaryButton
