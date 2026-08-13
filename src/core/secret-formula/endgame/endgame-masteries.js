@@ -191,7 +191,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [94],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Increase the CM conversion exponent by ${formatPercents(0.1)}`,
+    description: () => `天界物质激发指数提高 ${formatPercents(0.1)}`,
     effect: () => player.disablePostReality ? 1 : 1.1
   },
   {
