@@ -162,7 +162,7 @@ export default {
         <span v-if="isEndgameUnlocked">
           你的无限维度压缩因子为
           <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude, 2, 3) }}</span>，
-          在无限维度倍率高于<span>{{ formatPostBreak(infinityDimStart, 2, 1) }}</span>时，将倍率<span class="c-infinity-dim-compression-description__accent">^{{ format(infinityDimOverflow, 2, 3) }}。</span>
+          在无限维度倍率高于<span>{{ formatPostBreak(infinityDimStart, 2, 1) }}</span>时，将倍率<span class="c-infinity-dim-compression-description__accent">^{{ format(infinityDimOverflow, 2, 3) }}</span>。
         </span>
       </p>
     </div>
@@ -170,8 +170,8 @@ export default {
       <p>
         <span v-if="hasSecond">
           你的无限维度二重压缩因子为
-          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude2, 2, 3) }}</span>,
-          在无限维度倍率高于<span>{{ formatPostBreak(infinityDimStart2, 2, 1) }}</span>时，将倍率<span class="c-infinity-dim-compression-description__accent">^{{ format(infinityDimOverflow2, 2, 3) }}。</span>
+          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude2, 2, 3) }}</span>，
+          在无限维度倍率高于<span>{{ formatPostBreak(infinityDimStart2, 2, 1) }}</span>时，将倍率<span class="c-infinity-dim-compression-description__accent">^{{ format(infinityDimOverflow2, 2, 3) }}</span>。
         </span>
       </p>
     </div>
@@ -231,7 +231,7 @@ export default {
       />
     </div>
     <div v-if="showLockedDimCostNote">
-      按住 Shift 键可查看被锁定无限维度的无限点数价格。
+      按住 Shift 键可查看被锁定无限维度的价格。
     </div>
   </div>
 </template>

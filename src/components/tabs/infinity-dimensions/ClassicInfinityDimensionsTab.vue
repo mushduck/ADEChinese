@@ -157,7 +157,7 @@ export default {
       />
     </div>
     <div v-if="showLockedDimCostNote">
-      按住 Shift 键可查看被锁定无限维度的无限点数价格。
+      按住 Shift 键可查看被锁定无限维度的价格。
     </div>
   </div>
 </template>

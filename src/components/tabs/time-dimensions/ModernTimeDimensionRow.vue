@@ -46,7 +46,7 @@ export default {
       return ui.view.shiftDown;
     },
     name() {
-      return `${TimeDimension(this.tier).shortDisplayName} Time Dimension`;
+      return `${TimeDimension(this.tier).shortDisplayName}时间维度`;
     },
     buttonContents() {
       if (this.showTTCost) {
@@ -56,20 +56,20 @@ export default {
     },
     tooltipContents() {
       if (this.showTTCost) return `${this.formattedEPCost}<br>${this.timeEstimate}`;
-      if (this.isCapped) return `Nameless prevents the purchase of more than ${format(1)} Time Dimension`;
+      if (this.isCapped) return `无名氏阻止你购买超过 ${format(1)} 个时间维度`;
       if (this.isContinuumActive) return "Continuum produces all your Time Dimensions";
-      return `Purchased ${quantifyHybridLarge("time", this.bought)}`;
+      return `已购买${quantifyHybridLarge("次", this.bought)}`;
     },
     showRow() {
       return this.realityUnlocked || this.isUnlocked || this.requirementReached;
     },
     formattedTTCost() {
-      return `Unlock: ${format(this.ttCost)} TT`;
+      return `解锁： ${format(this.ttCost)} 时间之理`;
     },
     formattedEPCost() {
-      if (this.isCapped) return "Capped";
-      if (this.isContinuumActive) return `Continuum: ${this.continuumString}`;
-      return `${this.showCostTitle ? "Cost: " : ""}${format(this.cost, 2)} EP`;
+      if (this.isCapped) return "已达到上限";
+      if (this.isContinuumActive) return `连续统：${this.continuumString}`;
+      return `${this.showCostTitle ? "价格：" : ""}${format(this.cost, 2)} 永恒点数`;
     },
     continuumString() {
       return formatHybridFloat(this.continuumValue, 2);
@@ -175,7 +175,7 @@ export default {
         v-if="areAutobuyersUnlocked"
         v-model="isAutobuyerOn"
         class="o-primary-btn--buy-td-auto"
-        label="Auto:"
+        label="自动："
       />
       <PrimaryButton
         v-else
@@ -183,7 +183,7 @@ export default {
         :class="maxButtonClass()"
         @click="buyMaxTimeDimension"
       >
-        Buy Max
+        购买最大数量
       </PrimaryButton>
     </div>
   </div>

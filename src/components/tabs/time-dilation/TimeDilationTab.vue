@@ -73,7 +73,7 @@ export default {
       return DilationUpgrade.ttGenerator;
     },
     baseGalaxyText() {
-      return `${formatHybridLarge(this.baseGalaxies, 3)} Base`;
+      return `${formatHybridLarge(this.baseGalaxies, 3)} 基础值`;
     },
     hasMaxText: () => PlayerProgress.realityUnlocked() && !Pelle.isDoomed,
     allRebuyables() {
@@ -135,9 +135,9 @@ export default {
 <template>
   <div class="l-dilation-tab">
     <span>
-      You have
+      你拥有
       <span class="c-dilation-tab__tachyons">{{ format(tachyons, 2, 1) }}</span>
-      {{ pluralize("Tachyon Particle", tachyons) }}.
+      {{ pluralize("膨胀时间", tachyons) }}。
     </span>
     <div
       @mouseover="isHovering = true"
@@ -146,38 +146,38 @@ export default {
       <DilationButton />
     </div>
     <span>
-      You have
+      你拥有
       <span class="c-dilation-tab__dilated-time">{{ format(dilatedTime, 2, 1) }}</span>
-      Dilated Time.
+      膨胀时间。
       <span class="c-dilation-tab__dilated-time-income">{{ dilatedTimeGainText }}/s</span>
     </span>
     <span>
-      Next
+      下
       <span v-if="tachyonGalaxyGain > 1">{{ formatHybridLarge(tachyonGalaxyGain, 3) }}</span>
-      {{ pluralize("Tachyon Galaxy", tachyonGalaxyGain) }} at
+      个{{ pluralize("超光速粒子星系", tachyonGalaxyGain) }}将于
       <span
         class="c-dilation-tab__galaxy-threshold"
         :ach-tooltip="galaxyTimeEstimate"
       >{{ format(galaxyThreshold, 2, 1) }}</span>
-      Dilated Time, gained total of
+      膨胀时间时获得，你已获得
       <span
         class="c-dilation-tab__galaxies"
         :ach-tooltip="baseGalaxyText"
       >{{ formatHybridLarge(totalGalaxies, 3) }}</span>
-      {{ pluralize("Tachyon Galaxy", totalGalaxies) }}
+      {{ pluralize("超光速粒子星系", totalGalaxies) }}。
     </span>
     <span v-if="hasMaxText">
-      Your maximum Dilated Time reached this Reality is
+      此次现实中膨胀时间的最大值是
       <span
         v-tooltip="toMaxTooltip"
         class="max-accent"
       >{{ format(maxDT, 2, 1) }}</span>.
     </span>
     <span v-if="isEndgameUnlocked">
-      Past {{ format(scaleStart, 2, 1) }} Dilated Time, all rebuyable Dilation Upgrades will scale faster.
+      膨胀时间数量超过 {{ format(scaleStart, 2, 1) }} 后，所有可购买的膨胀升级价格增速进一步增长。
     </span>
     <span v-if="viewSoftcap">
-      Dilated Time has been softcapped. This effect started at {{ format(softcapStart, 2, 1) }} Dilated Time.
+      膨胀时间数量超过 {{ format(softcapStart, 2, 1) }} 后，膨胀时间数量将被软上限限制。
     </span>
     <div class="l-dilation-upgrades-grid">
       <div

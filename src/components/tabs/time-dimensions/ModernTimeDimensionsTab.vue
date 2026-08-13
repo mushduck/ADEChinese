@@ -42,7 +42,7 @@ export default {
       this.timeShards.copyFrom(Currency.timeShards);
       this.upgradeThreshold.copyFrom(FreeTickspeed.fromShards(Currency.timeShards.value).nextShards);
       this.shardsPerSecond.copyFrom(TimeDimension(1).productionPerSecond);
-      this.incomeType = EternityChallenge(7).isRunning ? "Eighth Infinity Dimensions" : "Time Shards";
+      this.incomeType = EternityChallenge(7).isRunning ? "第八无限维度" : "时间碎片";
       this.areAutobuyersUnlocked = Autobuyer.timeDimension(1).isUnlocked;
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
       this.timeDimCompressionMagnitude = TimeDimensions.compressionMagnitude;
@@ -72,58 +72,52 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        Max all
+        购买最大数量
       </PrimaryButton>
       <PrimaryButton
         v-if="areAutobuyersUnlocked"
         class="o-primary-btn--subtab-option"
         @click="toggleAllAutobuyers"
       >
-        Toggle all autobuyers
+        自动购买器状态切换
       </PrimaryButton>
     </div>
     <div>
       <p>
-        You have gained
-        <span class="c-time-dim-description__accent">{{ formatHybridLarge(totalUpgrades, 3) }}</span> Tickspeed upgrades from
-        <span class="c-time-dim-description__accent">{{ format(timeShards, 2, 1) }}</span> Time Shards.
+        你已从
+        <span class="c-time-dim-description__accent">{{ formatHybridLarge(totalUpgrades, 3) }}</span>时间碎片中获得
+        <span class="c-time-dim-description__accent">{{ format(timeShards, 2, 1) }}</span>计数频率升级。
       </p>
       <p>
-        Next Tickspeed upgrade at
-        <span class="c-time-dim-description__accent">{{ format(upgradeThreshold, 2, 1) }}</span>, increasing by
-        <span class="c-time-dim-description__accent">{{ formatX(multPerTickspeed, 2, 2) }}</span> per
-        Tickspeed upgrade gained.
+        下次计数频率提升需要
+        <span class="c-time-dim-description__accent">{{ format(upgradeThreshold, 2, 1) }}</span>，每获得一个计数频率升级增加
+        <span class="c-time-dim-description__accent">{{ formatX(multPerTickspeed, 2, 2) }}</span>。
       </p>
     </div>
     <div>
       <p>
         <span v-if="isEndgameUnlocked">
-          Your Time Dimension Compression Magnitude is
-          <span class="c-time-dim-compression-description__accent">{{ format(timeDimCompressionMagnitude, 2, 3) }}</span>,
-          which raises all Time Dimension Multipliers to the power of
-          <span class="c-time-dim-compression-description__accent">{{ format(timeDimOverflow, 2, 3) }}</span>
-          while above
-          <span>{{ formatPostBreak(timeDimStart, 2, 1) }}</span>.
+          你的时间维度压缩因子为
+          <span class="c-time-dim-compression-description__accent">{{ format(timeDimCompressionMagnitude, 2, 3) }}</span>，
+          在时间维度倍率高于<span>{{ formatPostBreak(timeDimStart, 2, 1) }}</span>时，将倍率<span class="c-time-dim-compression-description__accent">^{{ format(timeDimOverflow, 2, 3) }}</span>。
+          .
         </span>
       </p>
     </div>
     <div>
       <p>
         <span v-if="hasSecond">
-          Your Time Dimension Compression^2 Magnitude is
-          <span class="c-time-dim-compression-description__accent">{{ format(timeDimCompressionMagnitude2, 2, 3) }}</span>,
-          which raises all Time Dimension Multipliers to the power of
-          <span class="c-time-dim-compression-description__accent">{{ format(timeDimOverflow2, 2, 3) }}</span>
-          while above
-          <span>{{ formatPostBreak(timeDimStart2, 2, 1) }}</span>.
+          你的时间维度二重压缩因子为
+          <span class="c-time-dim-compression-description__accent">{{ format(timeDimCompressionMagnitude2, 2, 3) }}</span>，
+          在时间维度倍率高于<span>{{ formatPostBreak(timeDimStart2, 2, 1) }}</span>时，
+          将倍率<span class="c-time-dim-compression-description__accent">^{{ format(timeDimOverflow2, 2, 3) }}</span>。
         </span>
       </p>
     </div>
     <div>
-      The amount each additional upgrade requires will start
-      increasing above {{ formatHybridLarge(tickspeedSoftcap, 3) }} Tickspeed upgrades.
+      计数频率所需的时间碎片会在 {{ formatHybridLarge(tickspeedSoftcap, 3) }} 个升级后增加。
     </div>
-    <div>You are getting {{ format(shardsPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+    <div>你每秒获得 {{ format(shardsPerSecond, 2, 0) }} 个{{ incomeType }}。</div>
     <div class="l-dimensions-container">
       <NewTimeDimensionRow
         v-for="tier in 8"
@@ -133,16 +127,15 @@ export default {
       />
     </div>
     <div>
-      Time Dimension costs jump at {{ format(costIncreases[0], 2, 2) }} and
-      {{ format(costIncreases[1]) }} Eternity Points,
+      时间维度的价格倍率在 {{ format(costIncreases[0], 2, 2) }} 和 {{ format(costIncreases[1]) }} 永恒点数时增加。
       <br>
-      and costs increase much faster after {{ format(costIncreases[2]) }} Eternity Points.
+      {{ format(costIncreases[2]) }} 永恒点数后，进一步提高时间维度的价格倍率。
       <br>
       <div v-if="showLockedDimCostNote">
-        Hold shift to see the Eternity Point cost for locked Time Dimensions.
+        按住Shift键可查看被锁定的永恒维度的价格。
       </div>
       <div v-if="hasCap">
-        Any 8th Time Dimensions purchased above {{ format(1e8) }} will not further increase the multiplier.
+        第八时间维度购买超过 {{ formatInt(1e8) }} 次后将不再增加倍率。
       </div>
     </div>
   </div>
