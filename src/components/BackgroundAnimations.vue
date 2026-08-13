@@ -24,11 +24,11 @@ export default {
     update() {
       this.blob = Theme.currentName() === "S11";
       this.animateHadrons = player.options.animations.hadrons &&
-        Tabs.current[this.$viewModel.subtab].name === "Large Hadron Collider";
+        Tabs.current[this.$viewModel.subtab].name === "强子对撞器";
       this.animateStars = player.options.animations.stars &&
-        Tabs.current[this.$viewModel.subtab].name === "The Ethereal";
+        Tabs.current[this.$viewModel.subtab].name === "缥缈";
       this.animateTachyons = player.options.animations.tachyonParticles &&
-        Tabs.current[this.$viewModel.subtab].name === "Time Dilation";
+        Tabs.current[this.$viewModel.subtab].name === "时间膨胀";
     }
   },
 };

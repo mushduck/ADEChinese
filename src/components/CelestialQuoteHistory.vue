@@ -40,7 +40,7 @@ export default {
     }"
     @click="show"
   >
-    {{ possessiveForm }} Quotes
+    {{ possessiveForm }}语录
   </button>
 </template>
 

@@ -29,7 +29,7 @@ export default {
       v-if="!isModal"
       class="c-credits-header"
     >
-      Antimatter Dimensions
+      反物质维度
     </h1>
 
     <div
@@ -55,7 +55,7 @@ export default {
 
     <br><br><br><br><br><br><br><br><br>
     <h1 class="c-credits-header">
-      Thank you so much for playing!
+      感谢游玩！
     </h1>
   </div>
 </template>
