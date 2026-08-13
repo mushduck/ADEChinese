@@ -100,7 +100,6 @@ export default {
           你的时间维度压缩因子为
           <span class="c-time-dim-compression-description__accent">{{ format(timeDimCompressionMagnitude, 2, 3) }}</span>，
           在时间维度倍率高于<span>{{ formatPostBreak(timeDimStart, 2, 1) }}</span>时，将倍率<span class="c-time-dim-compression-description__accent">^{{ format(timeDimOverflow, 2, 3) }}</span>。
-          .
         </span>
       </p>
     </div>

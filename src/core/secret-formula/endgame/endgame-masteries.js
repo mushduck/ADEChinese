@@ -107,7 +107,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `无限维度的软上限强度降低${formatPercents(0.05)}`,
+    description: () => `无限维度压缩因子降低${formatPercents(0.05)}`,
     effect: () => player.disablePostReality ? 1 : 0.95
   },
   {
@@ -115,7 +115,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `时间维度的软上限强度降低${formatPercents(0.05)}`,
+    description: () => `时间维度压缩因子降低${formatPercents(0.05)}`,
     effect: () => player.disablePostReality? 1 : 0.95
   },
   {
@@ -123,7 +123,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `天界物质的软上限强度降低${formatPercents(0.1)}`,
+    description: () => `天界物质压缩因子降低${formatPercents(0.1)}`,
     effect: () => player.disablePostReality ? 1 : 0.9
   },
   {
@@ -140,7 +140,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [82],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "基于终局次数推迟无限维度软上限",
+    description: "基于终局次数推迟无限维度压缩因子出现",
     effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
@@ -149,7 +149,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [83],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "基于终局次数推迟时间维度软上限",
+    description: "基于终局次数推迟时间维度压缩因子出现",
     effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
