@@ -57,12 +57,12 @@ export default {
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
     },
     pauseButtonText() {
-      if (BlackHoles.arePaused && player.blackHoleNegative < 1) return "Uninvert BH";
-      if (BlackHoles.arePaused) return "Unpause BH";
+      if (BlackHoles.arePaused && player.blackHoleNegative < 1) return "恢复黑洞";
+      if (BlackHoles.arePaused) return "解除暂停";
       const accel = BlackHoles.unpauseAccelerationFactor;
-      if (accel !== 1) return `${formatPercents(accel, 1)} speed`;
-      if (player.blackHoleNegative < 1) return "Invert BH";
-      return "Pause BH";
+      if (accel !== 1) return `速度：${formatPercents(accel, 1)}`;
+      if (player.blackHoleNegative < 1) return "反转黑洞";
+      return "暂停黑洞";
     },
     timeDisplayShort(ms) {
       return timeDisplayShort(ms);
@@ -98,10 +98,10 @@ export default {
           onclick="Enslaved.toggleStoreBlackHole()"
         >
           <span v-if="isCharging">
-            Stop Charging
+            停止充能
           </span>
           <span v-else>
-            Charge
+            充能
           </span>
         </PrimaryButton>
       </span>
@@ -130,7 +130,7 @@ export default {
         <PrimaryToggleButton
           v-model="isAutoReleasing"
           class="o-primary-btn--buy-max c-primary-btn--black-hole-header"
-          label="Pulse:"
+          label="脉冲："
         />
       </span>
     </span>
@@ -139,7 +139,7 @@ export default {
         class="o-toggle-btn c-primary-btn--black-hole-header"
         @click="toggleCelestialMatterMultiplier"
       >
-        Toggle Celestial Matter
+        切换天界物质激发状态
       </PrimaryButton>
     </span>
   </span>
