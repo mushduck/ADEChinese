@@ -23,7 +23,7 @@ export class DualityUpgradeAutobuyerState extends AutobuyerState {
   }
 
   static get entryCount() { return 10; }
-  static get autobuyerGroupName() { return "Duality Upgrade"; }
+  static get autobuyerGroupName() { return "重构升级"; }
   static get isActive() { return player.auto.dualityUpgrades.isActive; }
   static set isActive(value) { player.auto.dualityUpgrades.isActive = value; }
 }

@@ -47,7 +47,7 @@ export class DivineDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   static get entryCount() { return 8; }
-  static get autobuyerGroupName() { return "Divine Dimension"; }
+  static get autobuyerGroupName() { return "神性维度"; }
   static get isActive() { return player.auto.divineDims.isActive; }
   static set isActive(value) { player.auto.divineDims.isActive = value; }
 }

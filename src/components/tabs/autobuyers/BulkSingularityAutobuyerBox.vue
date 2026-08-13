@@ -46,7 +46,7 @@ export default {
   <AutobuyerBox
     :autobuyer="autobuyer"
     :is-modal="isModal"
-    name="Automatic Bulk Singularity"
+    name="自动凝聚奇点"
   >
     <template #intervalSlot>
       <label

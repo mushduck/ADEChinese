@@ -38,7 +38,7 @@ export class PelleDilationUpgradeAutobuyerState extends IntervaledAutobuyerState
   }
 
   static get entryCount() { return 3; }
-  static get autobuyerGroupName() { return "Pelle Dilation Upgrade"; }
+  static get autobuyerGroupName() { return "佩勒膨胀升级"; }
   static get isActive() { return player.auto.pelleDilationUpgrades.isActive; }
   static set isActive(value) { player.auto.pelleDilationUpgrades.isActive = value; }
 }

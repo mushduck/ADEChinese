@@ -83,7 +83,7 @@ export default {
     :autobuyer="autobuyer"
     :show-interval="true"
     :is-modal="isModal"
-    name="Automatic Celestial Crunch"
+    name="自动天界大坍缩"
   >
     <template #intervalSlot>
       <ExpandingControlBox

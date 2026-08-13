@@ -23,7 +23,7 @@ export class ImaginaryUpgradeAutobuyerState extends AutobuyerState {
   }
 
   static get entryCount() { return 10; }
-  static get autobuyerGroupName() { return "Imaginary Upgrade"; }
+  static get autobuyerGroupName() { return "虚幻升级"; }
   static get isActive() { return player.auto.imaginaryUpgrades.isActive; }
   static set isActive(value) { player.auto.imaginaryUpgrades.isActive = value; }
 }

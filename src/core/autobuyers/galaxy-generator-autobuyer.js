@@ -10,7 +10,7 @@ export class GalaxyGeneratorAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get name() {
-    return ["Base Galaxy Multiplier", "Multiplicative Galaxy Multiplier", "Antimatter Multiplier", "Infinity Point Multiplier", "Eternity Point Multiplier", "Reality Shard Multiplier", "Dilated Time Multiplier", "Remnant Power", "Galaxy Power", "Galaxy Dilation"][this.id - 1];
+    return ["星系产量基数", "星系产量倍率", "反物质倍率", "无限点数倍率", "永恒点数倍率", "现实碎片倍率", "膨胀时间倍率", "遗物指数", "星系低指数", "星系高指数"][this.id - 1];
   }
 
   get interval() {
@@ -46,7 +46,7 @@ export class GalaxyGeneratorAutobuyerState extends IntervaledAutobuyerState {
   }
 
   static get entryCount() { return 10; }
-  static get autobuyerGroupName() { return "Galaxy Generator Upgrade"; }
+  static get autobuyerGroupName() { return "星系生成器升级"; }
   static get isActive() { return player.auto.galaxyGenerator.isActive; }
   static set isActive(value) { player.auto.galaxyGenerator.isActive = value; }
 }

@@ -12,8 +12,8 @@ function rebuyable(config) {
     formatEffect: config.formatEffect ||
       (value => {
         return (value === config.maxUpgrades
-          ? `Currently: ${formatX(10 - value)}`
-          : `Currently: ${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`);
+          ? `当前：${formatX(10 - value)}`
+          : `当前：${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`);
       }),
     formatCost: value => format(value, 2, 0),
     noLabel,
