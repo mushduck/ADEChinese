@@ -14,7 +14,7 @@ export const endgameMasteries = [
     requirement: [11],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `自动机速度
-                        从每次现实提高${formatPercents(0.06)}加速至${formatPercents(0.006, 1, 1)}`
+                        从每次现实提高${formatPercents(0.006, 1, 1)}加速至${formatPercents(0.06)}`
   },
   {
     id: 22,

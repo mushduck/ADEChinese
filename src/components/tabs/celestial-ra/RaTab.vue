@@ -58,11 +58,26 @@ export default {
       }
     ],
     petStyle() {
-      return {
-        color: (this.petWithRemembrance === "")
-          ? "white"
-          : this.pets.find(pet => pet.pet.name === this.petWithRemembrance).pet.color,
-      };
+      if (this.petWithRemembrance === "") {
+        return { color: "white" };
+      }
+
+      const found = this.pets.find(
+        pet =>
+          pet.pet.key === this.petWithRemembrance ||
+          pet.pet.name === this.petWithRemembrance
+      );
+
+      if (!found) {
+        console.warn("petStyle 找不到 pet", {
+          petWithRemembrance: this.petWithRemembrance,
+          keys: this.pets.map(p => p.pet.key),
+          names: this.pets.map(p => p.pet.name)
+        });
+        return { color: "white" };
+      }
+
+      return { color: found.pet.color };
     },
     runButtonClassObject() {
       return {

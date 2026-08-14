@@ -24,8 +24,8 @@ class RaUnlockState extends GameMechanicState {
   get requirementText() {
     const pet = this.pet.name;
     return this.level === 1
-      ? `Unlock ${pet}`
-      : `Get ${pet} to level ${this.level}`;
+      ? `解锁 ${pet}`
+      : `将 ${pet} 的等级提升至 ${this.level}`;
   }
 
   get reward() {
