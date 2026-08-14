@@ -106,16 +106,28 @@ export default {
       };
     },
     description() {
-      const glyphName = `${this.type.capitalize()}`;
+      //const glyphName = `${this.type.capitalize()}`;
       switch (this.type) {
         case "companion":
           return "同伴符文";
         case "cursed":
           return "诅咒符文";
         case "reality":
-          return `纯洁的 ${glyphName}`;
-        default:
-          return `${this.rarityInfo.name}的${glyphName}`;
+          return `纯洁的现实符文`;
+        case "power":
+          return `${this.rarityInfo.name}的力量符文`
+        case "infinity":
+          return `${this.rarityInfo.name}的无限符文`
+        case "replicanti":
+          return `${this.rarityInfo.name}的复制符文`
+        case "time":
+          return `${this.rarityInfo.name}的时间符文`
+        case "dilation":
+          return `${this.rarityInfo.name}的膨胀符文`
+        case "effarig":
+          return `${this.rarityInfo.name}的鹿颈长符文`
+        //default:
+          //return `${this.rarityInfo.name}的${glyphName}`;
       }
     },
     isLevelCapped() {

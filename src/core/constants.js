@@ -308,6 +308,7 @@ window.GLYPH_MIME_TYPE = "text/x-ivark-glyph";
 window.GlyphRarities = [
   {
     minStrength: 8.5,
+    key: "Perfect",
     name: "纯元",
     darkColor: "#800000",
     lightColor: "#800000",
@@ -315,6 +316,7 @@ window.GlyphRarities = [
     lightHighContrast: "#a00000"
   }, {
     minStrength: 6,
+    key: "Superlunary",
     name: "超越",
     darkColor: "#c0c040",
     lightColor: "#c0c040",
@@ -322,6 +324,7 @@ window.GlyphRarities = [
     lightHighContrast: "#ffff80"
   }, {
     minStrength: 5.375,
+    key: "Sublime",
     name: "不朽",
     darkColor: "#20c0a0",
     lightColor: "#20c0a0",
@@ -329,6 +332,7 @@ window.GlyphRarities = [
     lightHighContrast: "#00ffc0"
   }, {
     minStrength: 4.75,
+    key: "Elysian",
     name: "至高",
     darkColor: "#c03000",
     lightColor: "#c03000",
@@ -336,6 +340,7 @@ window.GlyphRarities = [
     lightHighContrast: "#ff4000"
   }, {
     minStrength: 4.125,
+    key: "Empyrean",
     name: "极乐",
     darkColor: "#8020a0",
     lightColor: "#8020a0",
@@ -343,6 +348,7 @@ window.GlyphRarities = [
     lightHighContrast: "#800080"
   }, {
     minStrength: 3.5,
+    key: "Celestial",
     name: "超神",
     darkColor: "#3d3dec",
     lightColor: "#9696ff",
@@ -350,6 +356,7 @@ window.GlyphRarities = [
     lightHighContrast: "#c0c000"
   }, {
     minStrength: 3.25,
+    key: "Transcendent",
     name: "卓越",
     darkColor: "#03ffec",
     lightColor: "#00c3c3",
@@ -357,6 +364,7 @@ window.GlyphRarities = [
     lightHighContrast: "#00c0c0"
   }, {
     minStrength: 3,
+    key: "Mythical",
     name: "传说",
     darkColor: "#d50000",
     lightColor: "#d50000",
@@ -364,6 +372,7 @@ window.GlyphRarities = [
     lightHighContrast: "#ff0000"
   }, {
     minStrength: 2.75,
+    key: "Legendary",
     name: "传奇",
     darkColor: "#ff9800",
     lightColor: "#d68100",
@@ -371,6 +380,7 @@ window.GlyphRarities = [
     lightHighContrast: "#ff8000"
   }, {
     minStrength: 2.5,
+    key: "Epic",
     name: "史诗",
     darkColor: "#9c27b0",
     lightColor: "#9c27b0",
@@ -378,6 +388,7 @@ window.GlyphRarities = [
     lightHighContrast: "#ff00ff"
   }, {
     minStrength: 2,
+    key: "Rare",
     name: "稀有",
     darkColor: "#5096f3",
     lightColor: "#0d40ff",
@@ -385,6 +396,7 @@ window.GlyphRarities = [
     lightHighContrast: "#0000ff"
   }, {
     minStrength: 1.5,
+    key: "Uncommon",
     name: "罕见",
     darkColor: "#43a047",
     lightColor: "#1e8622",
@@ -392,6 +404,7 @@ window.GlyphRarities = [
     lightHighContrast: "#00b000"
   }, {
     minStrength: 1,
+    key: "Common",
     name: "普通",
     darkColor: "#ffffff",
     lightColor: "#000000",
