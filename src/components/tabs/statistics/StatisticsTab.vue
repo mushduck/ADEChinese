@@ -128,56 +128,56 @@ export default {
     infinityCountString() {
       const num = this.infinity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("无限次数", num.floor())}`
-        : "无无限次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     eternityCountString() {
       const num = this.eternity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("永恒次数", num.floor())}`
-        : "无永恒次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     realityCountString() {
       const num = new Decimal(this.reality.count);
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("现实次数", num.floor())}`
-        : "无现实次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     endgameCountString() {
       const num = new Decimal(this.endgame.count);
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("终局次数", num.floor())}`
-        : "无终局次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     celestialInfinityCountString() {
       const num = this.celestialInfinity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("天界无限次数", num.floor())}`
-        : "无天界无限次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     celestialEternityCountString() {
       const num = this.celestialEternity.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("天界永恒次数", num.floor())}`
-        : "无天界永恒次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     divinityCountString() {
       const num = new Decimal(this.divinity.count);
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("神性次数", num.floor())}`
-        : "无神性次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     condenseCountString() {
       const num = this.condense.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("凝聚次数", num.floor())}`
-        : "无凝聚次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     supernovaCountString() {
       const num = this.supernova.count;
       return num.gt(0)
-        ? `${this.formatDecimalAmount(num)} ${pluralize("超新星次数", num.floor())}`
-        : "无超新星次数";
+        ? `${this.formatDecimalAmount(num)} ${pluralize("", num.floor())}`
+        : "0";
     },
     fullGameCompletions() {
       return player.records.fullGameCompletions;
