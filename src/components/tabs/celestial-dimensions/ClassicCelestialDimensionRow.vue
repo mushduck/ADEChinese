@@ -40,7 +40,7 @@ export default {
       return ui.view.shiftDown;
     },
     name() {
-      return `第 ${CelestialDimension(this.tier).shortDisplayName} 天界维度`;
+      return `${CelestialDimension(this.tier).shortDisplayName}天界维度`;
     },
     costDisplay() {
       if (this.isUnlocked || this.shiftDown) {

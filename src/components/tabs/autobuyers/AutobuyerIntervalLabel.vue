@@ -31,11 +31,11 @@ export default {
     intervalText() {
       // We want to special-case auto-crunch because break infinity relies on getting its interval below 0.1s, which
       // may otherwise render as "Instant" with slow update rates
-      if (this.interval < player.options.updateRate && this.autobuyer.name !== "Infinity") return "Instant";
-      return `${format(TimeSpan.fromMilliseconds(new Decimal(this.interval)).totalSeconds, 2, 2)} seconds`;
+      if (this.interval < player.options.updateRate && this.autobuyer.name !== "Infinity") return "立即";
+      return `${format(TimeSpan.fromMilliseconds(new Decimal(this.interval)).totalSeconds, 2, 2)} 秒`;
     },
     bulkText() {
-      return `Current bulk: ${Number.isFinite(this.bulk) ? formatX(this.bulk, 2) : "Unlimited"}`;
+      return `当前批量：${Number.isFinite(this.bulk) ? formatX(this.bulk, 2) : "无上限"}`;
     },
   },
   methods: {
@@ -51,7 +51,7 @@ export default {
 
 <template>
   <div class="c-autobuyer-box__small-text">
-    Current interval: {{ intervalText }}
+    当前时间间隔：{{ intervalText }}
     <span v-if="isShowingBulk">
       <br>
       {{ bulkText }}
