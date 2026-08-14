@@ -13,6 +13,7 @@ export const ra = {
     },
     effarig: {
       id: "effarig",
+      key: "Effarig",
       name: "鹿颈长",
       color: "#ea8585",
       chunkGain: "遗迹碎片总量",
@@ -23,6 +24,7 @@ export const ra = {
     },
     enslaved: {
       id: "enslaved",
+      key: "Enslaved",
       name: "无名氏",
       color: "#f1aa7f",
       chunkGain: "时间碎片",
@@ -33,6 +35,7 @@ export const ra = {
     },
     v: {
       id: "v",
+      key: "V",
       name: "薇",
       color: "#ead584",
       chunkGain: "无限之力",
