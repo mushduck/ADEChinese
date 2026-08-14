@@ -43,7 +43,7 @@ export default {
     },
     cosmeticTypes: () => CosmeticGlyphTypes,
     addStyle() {
-      return { color: GlyphAlteraztion.baseAdditionColor() };
+      return { color: GlyphAlteration.baseAdditionColor() };
     },
     empowerStyle() {
       return { color: GlyphAlteration.baseEmpowermentColor() };
@@ -141,11 +141,11 @@ export default {
         （已隐藏详情，点击以打开）
       </div>
       <div v-else>
-        当某种符文类型的总献祭值高于以下数值时，
-        该符文类型的某个效果将得到提升：
+        当某种符文类型的总献祭值高于以下数值时
+该符文类型的某个效果将得到提升：
         <br><br>
         <b>
-          <span :style="addStyle">{{ format(addThreshold) }} - 一些符文词条获得附加效果t</span>
+          <span :style="addStyle">{{ format(addThreshold) }} - 一些符文词条获得附加效果</span>
           <br>
           <span :style="empowerStyle">{{ format(empowerThreshold) }} - 大幅度改善一些符文词条的效果公式</span>
           <br>
@@ -161,8 +161,8 @@ export default {
     </div>
     <div v-if="anySacrifices && !isDoomed">
       <div v-if="teresaMult.gt(1)">
-        符文献祭值乘以 {{ formatX(teresaMult, 2, 2) }}；
-        上次以 {{ lastMachines }} 完成特蕾莎。
+        符文献祭值 {{ formatX(teresaMult, 2, 2) }};
+        上次以 {{ lastMachines }} 完成特蕾莎的现实。
         <span v-if="hasSeenRealityGlyph">
           现实符文不受该效果的影响，并且没有异变效果。
         </span>
