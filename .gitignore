@@ -8,3 +8,6 @@ node_modules
 .DS_Store
 *.bak
 node_modules/
+node_modules/
+dist/
+*.bak
