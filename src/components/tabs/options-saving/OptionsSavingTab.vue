@@ -120,12 +120,12 @@ export default {
       if (!this.hasExportedToday) {
         GameStorage.export();
         player.lastExportTime = Date.now();
-        player.storedTime += 3600;
-        GameUI.notify.info("Daily Export rewards have been granted!");
+        player.storedTime += 10800;
+        GameUI.notify.info("每日导出奖励已发放！");
       }
       if (this.hasExportedToday) {
         GameStorage.export();
-        GameUI.notify.info("You have already exported your save today!");
+        GameUI.notify.info("你今日已经导出过存档了");
       }
     }
   }
@@ -135,7 +135,7 @@ export default {
 <template>
   <div class="l-options-tab">
     <div>
-      你每天可以导出一次存档，以领取免费奖励！
+      你每天可以导出一次存档，以领取免费奖励！本作汉化者考虑到时间墙过高，赠送了大家离线时长！
     </div>
     <div class="l-options-grid">
       <div class="l-options-grid__row">
@@ -290,13 +290,13 @@ export default {
           onclick="GameOptions.cloudSave()"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
         >
-          Cloud save
+          保存到云端
         </OptionsButton>
         <OptionsButton
           onclick="GameOptions.cloudLoad()"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
         >
-          Cloud load
+          从云端加载
         </OptionsButton>
         <PrimaryToggleButton
           v-model="syncSaveIntervals"

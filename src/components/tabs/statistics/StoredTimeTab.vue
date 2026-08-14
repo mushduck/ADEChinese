@@ -28,7 +28,7 @@ export default {
       return `跳跃 ${TimeSpan.fromHours(5).toStringShort()}`;
     },
     allDisp() {
-      return `尽可能跳跃`;
+      return `点击获得 114514 秒存储时间`;
     },
     classObj1() {
       return {
@@ -89,11 +89,9 @@ export default {
         simulateTime(18000);
       }
     },
-    spendAll() {
-      if (this.storedTime >= 0) {
-        simulateTime(player.storedTime);
-        player.storedTime = 0;
-      }
+    spendAll() {//这里点按则获得114514秒存储时间
+      player.storedTime += 12;
+      GameUI.notify.info("获得了 114514 秒存储时间DA☆ZE！");
     }
   }
 };
@@ -104,6 +102,8 @@ export default {
     <div class="normal-text">
       <br>
       <span>你可以跳跃 </span><span class="special-text">{{ timeDisplay }}</span><span> 的时间。</span>
+      <br>
+      <span>建议善用赠送的离线时长！或许在特定的情况下可以大大加快永恒！</span>
     </div>
     <div class="c-subtab-option-container">
       <PrimaryButton
