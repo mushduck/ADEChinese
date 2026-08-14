@@ -70,7 +70,7 @@ export default {
     },
     tesseractAutobuyerTextDisplay() {
       const auto = this.isTesseractAutoActive;
-      return `Auto Tesseract ${auto ? "ON" : "OFF"}`;
+      return `自动购买超立方体：${auto ? "开" : "关"}`;
     },
     penteractCountString() {
       const extra = this.extraPenteracts > 0 ? ` + ${format(this.extraPenteracts, 2, 2)}` : "";
@@ -89,16 +89,16 @@ export default {
       return `${formatHybridSmall(this.boughtOcteracts, 3)}${extra}`;
     },
     penteractLockString() {
-      if (this.penteractsUnlocked) return `Buy a Penteract (${this.penteractCountString})`;
-      else return `Purchase Duality Upgrade 25 to unlock Penteracts`;
+      if (this.penteractsUnlocked) return `购买一个超五方体 (${this.penteractCountString})`;
+      else return `购买重构升级 25以解锁超五方体`;
     },
     hexeractLockString() {
-      if (this.hexeractsUnlocked) return `Buy a Hexeract (${this.hexeractCountString})`;
-      else return `Hadronize Lai'tela ${formatInt(40)} times to unlock Hexeracts`;
+      if (this.hexeractsUnlocked) return `购买一个超六方体 (${this.hexeractCountString})`;
+      else return `强子化莱特拉的现实 ${formatInt(40)} 次以解锁超六方体`;
     },
     hepteractLockString() {
-      if (this.hepteractsUnlocked) return `Buy a Hepteract (${this.hepteractCountString})`;
-      else return `Perform a Celestial Eternity to unlock Hepteracts`;
+      if (this.hepteractsUnlocked) return `购买一个超七方体 (${this.hepteractCountString})`;
+      else return `进行一次天界永恒以解锁超七方体`;
     },
   },
   methods: {
@@ -171,13 +171,13 @@ export default {
       this.update();
     },
     octeractLockString() {
-      if (this.octeractsUnlocked) return `Buy a Octeract (${this.octeractCountString})`;
+      if (this.octeractsUnlocked) return `购买一个超八方体 (${this.octeractCountString})`;
       //somewhat ugly method to make it continuously update
-      else return this.time >= 0 ? `Reach ${wordShift.randomCrossWords("Expanse Transfer")} to unlock Octeracts` : `Reach ${wordShift.randomCrossWords("Expanse Transfer")} to unlock Octeracts`;
+      else return this.time >= 0 ? `进行一次${wordShift.randomCrossWords("维度延拓")}以解锁超八方体` : `进行一次${wordShift.randomCrossWords("维度延拓")}以解锁超八方体`;
     },
     octeractResourceString() {
       if (false) return `Expansial Fragments`;
-      else return this.time >= 0 ? `${wordShift.randomCrossWords("Expansial Fragments")}` : `${wordShift.randomCrossWords("Expansial Fragments")}`;
+      else return this.time >= 0 ? `${wordShift.randomCrossWords("延拓碎片")}` : `${wordShift.randomCrossWords("延拓碎片")}`;
     },
   }
 };
@@ -196,11 +196,11 @@ export default {
           @click="buyTesseract"
         >
           <p>
-            Buy a Tesseract ({{ tesseractCountString }})
+            购买一个超立方体 ({{ tesseractCountString }})
           </p>
-          <p>Increase Infinity Dimension caps by {{ format(nextInfinityDimCapIncrease, 2) }}</p>
-          <p><b>Costs: {{ format(tesseractCost) }} IP</b></p>
-          <p>Total Tesseract effect: {{ format(totalInfinityDimCap, 2) }}</p>
+          <p>无限维度的数量上限增加 {{ format(nextInfinityDimCapIncrease, 2) }}</p>
+          <p><b>价格: {{ format(tesseractCost) }} 无限点数</b></p>
+          <p>总超立方体效果: 增加 {{ format(totalInfinityDimCap, 2) }}</p>
         </button>
         <br>
         <PrimaryToggleButton
@@ -224,9 +224,9 @@ export default {
           <p>
             {{ penteractLockString }}
           </p>
-          <p>Reduce Time Dimension threshold softcap by {{ formatDecimalPercents(nextFreeTickspeedReduction, 2, 2) }}</p>
-          <p><b>Costs: {{ format(penteractCost) }} EP</b></p>
-          <p>Total Penteract effect: {{ formatPow(totalFreeTickspeedReduction, 2, 4) }}</p>
+          <p>时间维度的软上限阈值降低 {{ formatDecimalPercents(nextFreeTickspeedReduction, 2, 2) }}</p>
+          <p><b>价格: {{ format(penteractCost) }} 永恒点数</b></p>
+          <p>总超五方体效果: 增加 {{ formatPow(totalFreeTickspeedReduction, 2, 4) }}</p>
         </button>
       </div>
       <div class="l-hypercubes-btn">
@@ -241,9 +241,9 @@ export default {
           <p>
             {{ hexeractLockString }}
           </p>
-          <p>Reduce Dark Matter Dimension threshold softcaps by {{ formatDecimalPercents(nextDarkMatterSoftcapReduction, 2, 2) }}</p>
-          <p><b>Costs: {{ format(hexeractCost) }} DM</b></p>
-          <p>Total Hexeract effect: {{ formatPow(totalDarkMatterSoftcapReduction, 2, 4) }}</p>
+          <p>暗物质维度的软上限阈值降低 {{ formatDecimalPercents(nextDarkMatterSoftcapReduction, 2, 2) }}</p>
+          <p><b>价格: {{ format(hexeractCost) }} 暗物质</b></p>
+          <p>总超六方体效果: 增加 {{ formatPow(totalDarkMatterSoftcapReduction, 2, 4) }}</p>
         </button>
       </div>
     </div>
@@ -260,9 +260,9 @@ export default {
           <p>
             {{ hepteractLockString }}
           </p>
-          <p>Reduce Celestial Dimension Softcap power by {{ formatDecimalPercents(nextCelestialDimSoftcapReduction, 2, 2) }}</p>
-          <p><b>Costs: {{ format(hepteractCost) }} CP</b></p>
-          <p>Total Hepteract effect: {{ formatPow(totalCelestialDimSoftcapReduction, 2, 4) }}</p>
+          <p>天界维度的软上限强度降低 {{ formatDecimalPercents(nextCelestialDimSoftcapReduction, 2, 2) }}</p>
+          <p><b>价格: {{ format(hepteractCost) }} 天界点数</b></p>
+          <p>总超七方体效果: 增加 {{ formatPow(totalCelestialDimSoftcapReduction, 2, 4) }}</p>
         </button>
       </div>
       <div class="l-hypercubes-btn">
@@ -277,9 +277,9 @@ export default {
           <p>
             {{ octeractLockString() }}
           </p>
-          <p>Increase the strength of all cubes by {{ formatPercents(nextTotalCubeBoost, 2, 2) }}</p>
-          <p><b>Costs: {{ format(octeractCost) }} {{ octeractResourceString() }}</b></p>
-          <p>Total Octeract effect: {{ formatX(totalCubeBoost, 2, 2) }}</p>
+          <p>所有超多方体效力提升 {{ formatPercents(nextTotalCubeBoost, 2, 2) }}</p>
+          <p><b>价格: {{ format(octeractCost) }} {{ octeractResourceString() }}</b></p>
+          <p>总超八方体效果: {{ formatX(totalCubeBoost, 2, 2) }}</p>
         </button>
       </div>
     </div>
