@@ -186,15 +186,7 @@ const pluralDatabase = new Map([
  *                    plural form of the input {word}. If the {amount} is singular, return {word}
  */
 window.pluralize = function pluralize(word, amount, plural) {
-  if (word === undefined || amount === undefined) throw "Arguments must be defined";
-
-  if (isSingular(amount)) return word;
-  const existingPlural = plural ?? pluralDatabase.get(word);
-  if (existingPlural !== undefined) return existingPlural;
-
-  const newWord = generatePlural(word);
-  pluralDatabase.set(word, newWord);
-  return newWord;
+  return word;  //不用复数
 };
 
 /**

@@ -308,91 +308,91 @@ window.GLYPH_MIME_TYPE = "text/x-ivark-glyph";
 window.GlyphRarities = [
   {
     minStrength: 8.5,
-    name: "Perfect",
+    name: "纯元",
     darkColor: "#800000",
     lightColor: "#800000",
     darkHighContrast: "#900000",
     lightHighContrast: "#a00000"
   }, {
     minStrength: 6,
-    name: "Superlunary",
+    name: "超越",
     darkColor: "#c0c040",
     lightColor: "#c0c040",
     darkHighContrast: "#e0e060",
     lightHighContrast: "#ffff80"
   }, {
     minStrength: 5.375,
-    name: "Sublime",
+    name: "不朽",
     darkColor: "#20c0a0",
     lightColor: "#20c0a0",
     darkHighContrast: "#00e0a0",
     lightHighContrast: "#00ffc0"
   }, {
     minStrength: 4.75,
-    name: "Empyrean",
+    name: "至高",
     darkColor: "#c03000",
     lightColor: "#c03000",
     darkHighContrast: "#e03800",
     lightHighContrast: "#ff4000"
   }, {
     minStrength: 4.125,
-    name: "Elysian",
+    name: "极乐",
     darkColor: "#8020a0",
     lightColor: "#8020a0",
     darkHighContrast: "#a000a0",
     lightHighContrast: "#800080"
   }, {
     minStrength: 3.5,
-    name: "Celestial",
+    name: "超神",
     darkColor: "#3d3dec",
     lightColor: "#9696ff",
     darkHighContrast: "#ffff00",
     lightHighContrast: "#c0c000"
   }, {
     minStrength: 3.25,
-    name: "Transcendent",
+    name: "卓越",
     darkColor: "#03ffec",
     lightColor: "#00c3c3",
     darkHighContrast: "#00ffff",
     lightHighContrast: "#00c0c0"
   }, {
     minStrength: 3,
-    name: "Mythical",
+    name: "传说",
     darkColor: "#d50000",
     lightColor: "#d50000",
     darkHighContrast: "#c00000",
     lightHighContrast: "#ff0000"
   }, {
     minStrength: 2.75,
-    name: "Legendary",
+    name: "传奇",
     darkColor: "#ff9800",
     lightColor: "#d68100",
     darkHighContrast: "#ff8000",
     lightHighContrast: "#ff8000"
   }, {
     minStrength: 2.5,
-    name: "Epic",
+    name: "史诗",
     darkColor: "#9c27b0",
     lightColor: "#9c27b0",
     darkHighContrast: "#ff00ff",
     lightHighContrast: "#ff00ff"
   }, {
     minStrength: 2,
-    name: "Rare",
+    name: "稀有",
     darkColor: "#5096f3",
     lightColor: "#0d40ff",
     darkHighContrast: "#6060ff",
     lightHighContrast: "#0000ff"
   }, {
     minStrength: 1.5,
-    name: "Uncommon",
+    name: "罕见",
     darkColor: "#43a047",
     lightColor: "#1e8622",
     darkHighContrast: "#00ff00",
     lightHighContrast: "#00b000"
   }, {
     minStrength: 1,
-    name: "Common",
+    name: "普通",
     darkColor: "#ffffff",
     lightColor: "#000000",
     darkHighContrast: "#ffffff",

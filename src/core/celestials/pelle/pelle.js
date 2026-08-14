@@ -451,28 +451,25 @@ export const Pelle = {
   getSpecialGlyphEffectDescription(type, count = 1, onlyReturnUseful = false) {
     switch (type) {
       case "infinity":
-        return `Infinity Point gain ${formatX(this.calculatePelleInfinity(count), 2)} (based on current IP)`;
+        return `无限点数获取量 ${formatX(this.calculatePelleInfinity(count), 2)}（基于当前无限点数）`;
       case "time":
-        return `Eternity Point gain ${formatX(this.calculatePelleTime(count), 2)}
-          (based on current EP)`;
+        return `永恒点数获取量 ${formatX(this.calculatePelleTime(count), 2)}（基于当前永恒点数）`;
       case "replication":
-        return `Replication speed ${formatX(this.calculatePelleReplication(count), 2)}
-        (based on ${wordShift.wordCycle(PelleRifts.vacuum.name)})`;
+        return `复制速度 ${formatX(this.calculatePelleReplication(count), 2)}（基于当前 ${wordShift.wordCycle(PelleRifts.vacuum.name)}）`;
       case "dilation":
-        return `Dilated Time gain ${formatX(this.calculatePelleDilation(count), 2)}
-          (based on Tachyon Galaxies)`;
+        return `膨胀时间获取量 ${formatX(this.calculatePelleDilation(count), 2)}（基于当前无限点数）`;
       case "power":
-        return `Galaxies are ${formatPercents(this.calculatePellePower(count) - 1)} stronger`;
+        return `星系强度 + ${formatPercents(this.calculatePellePower(count) - 1)}`;
       case "companion":
-        return `You feel ${formatPercents(0.34)} better`;
+        return `自信心提升 ${formatPercents(0.34)}`;
       // Undefined means that there is no glyph equipped, needs to be here since this function is used in
       // both Current Glyph Effects and Glyph Tooltip
       case undefined:
-        return onlyReturnUseful ? null : "No Glyph equipped!";
+        return onlyReturnUseful ? null : "未装备符文！";
       default:
         if (onlyReturnUseful) return null;
-        if (this.isGlyphTypeDisabled(type)) return "You cannot equip this Glyph while Doomed!";
-        return "This Glyph has no Pelle-exclusive effect! That sucks.";
+        if (this.isGlyphTypeDisabled(type)) return "你不能再被毁灭的现实中装备此符文！";
+        return "这个符文没有佩勒专属效果！真糟糕。";
     }
   },
 
@@ -609,7 +606,9 @@ export const Pelle = {
       return "It's Not Over We Will Return We'll Ω Ω Ω Ω Soon Meet Again".split(" ");
     }
   },
-  
+  /*return "吾等 新神 仍 穿游 此 现实 捡拾 力量 残屑 荒谬 嗤笑 回响".split(" ");
+    } else if (player.celestials.pelle.divinities > 0) {
+      return "故 承蒙 Ω 君之 神性 统御 吾等 前行 至 终局 复生 已是 定局".split(" ");*/
   quotes: Quotes.pelle,
   
   isGlyphTypeDisabled(type, alwaysInDoom = false) {

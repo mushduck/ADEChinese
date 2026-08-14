@@ -11,10 +11,10 @@ export default {
   },
   computed: {
     formatCPGain() {
-      return `Celestial Points gained: ${format(this.gainedCP, 2)}`;
+      return `获得天界点数：${format(this.gainedCP, 2)}`;
     },
     formatDPGain() {
-      return `Doomed Particles gained: ${format(this.gainedDP, 2)}`;
+      return `获得毁灭粒子：${format(this.gainedDP, 2)}`;
     },
     classObject() {
       return {
