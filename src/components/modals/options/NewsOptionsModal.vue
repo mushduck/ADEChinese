@@ -170,7 +170,7 @@ export default {
       />
     </div>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatPercents(parseFloat(AIChance)) }} AI消息比例</b>
+      <b>{{ formatPercents(parseFloat(AIChance)) }} 汉化专属二次元励志语录</b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsAIChance"

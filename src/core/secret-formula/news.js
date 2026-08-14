@@ -7424,244 +7424,246 @@ export const news = [
     text: 'Die Zahlen gehen hoooch'
   },
   /* eslint-disable max-len */
+  //我把新闻全改成了自己的😋
   {
     id: "ai1",
-    text: "If you are the game, then you can use the cheat to unlock a secret achievement...but it costs e1100 antimatter!?!"
+    text: "你指尖跃动的电光, 是我此生不变的信仰."
   },
   {
     id: "ai2",
-    text: "\"Hm, I don't know how to fix this.\" - Someone who has not unlocked the achievement btw"
+    text: "你发梢流淌的烈焰, 是我此生不变的爱恋."
   },
   {
     id: "ai3",
-    text: "I thought the game was supposed to have a hard reset after eternity, but then I got randomized to start my first game with no save file \uD83D\uDE26",
+    text: "樱花满地集于我心, 楪舞纷飞祈愿相随.",
     get unlocked() { return PlayerProgress.eternityUnlocked(); }
   },
   {
     id: "ai4",
-    text: "I thought the update was 5 hours ago... I guess we'll have to put it back in 5 hours"
+    text: "为王的诞生, 献上罪与泪编织成的罪恶王冠."
   },
   {
     id: "ai5",
-    get text() { return `Local man finds ${format(Number.MAX_VALUE, 2)} Planck volumes in his freezer.`; }
+    text: "音无结弦之时, 悦动天使之心；立于浮华之世，奏响天籁之音."
   },
   {
     id: "ai6",
-    text: "ahah bad ticker suggestion"
+    text: "知道雪为什么是白色的吗? 因为它早已忘记自己曾经是什么颜色了. "
   },
   {
     id: "ai7",
-    text: "I see you playing this game with an empty stomach and you're gonna start playing this game with an empty wallet."
+    text: "世界是美丽的, 就算充满悲伤和泪水. 也请睁开你的双眼, 去做你想要做的事情, 成为你想要成为的人, 去找到你的朋友. 不必焦躁, 慢慢地去长大."
   },
   {
     id: "ai8",
-    text: "just start... clicking. dont even think about wasting time. just do it."
+    text: "不知者无罪. 但是, 知而无为, 就是一种不可否认的罪孽."
   },
   {
     id: "ai9",
-    text: "the idea that the 9th dimension creates the 8th dimension is crazy"
+    text: "人们要是没有回忆就活不下去, 但是只有回忆的话也活不下去. 梦总是有会醒来的时候, 不会醒的梦总有一天会变成悲伤."
   },
   {
     id: "ai10",
-    text: "...does that mean the [REDACTED] dimension produces the [REDACTED] dimension?"
+    text: "这个世界上没有奇迹, 有的只是偶然和必然, 以及是谁在做些什么. 一直期望着能出现奇迹的人们是不会发生奇迹, 只有想要用自己的双手创造奇迹的人们, 救赎之手才会伸向他们."
   },
   {
     id: "ai11",
-    text: "\"click here to buy a stack of paperclips\" (when clicked you get Rickroll)",
+    text: "\"点击这条新闻变猫娘\"",
     onClick() { window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); }
   },
   {
     id: "ai12",
-    text: "In my spare time I read the short stories by T. H. White."
+    text: "\"点击这条新闻和汉化者进行神♂秘交流\"",
+    onClick() { window.open("https://space.bilibili.com/1413730402"); }
   },
   {
     id: "ai13",
-    text: "Holy crap, that's pretty wild"
+    text: "人生就像爬楼梯, 一旦存有疑问, 向上的脚步就变得沉重起来. 所以，什么都不要想，一步一步地攀登."
   },
   {
     id: "ai14",
-    text: "Extinction is not a real thing. You can't wear the same hat 24/7."
+    text: "不要再以为自己有一双翅膀，可以使你一生无忧无愁。请记住，我们没有翅膀，有的只是两条腿以及脚下那条坎坷的道路……"
   },
   {
     id: "ai15",
-    text: "If you can read this you've escaped from the game."
+    text: "该做的,不该做的,能做的,不能做的,傻的,聪明的,只有我们两人会的,我们在一起经历了无数事.但唯独没有好好说过再见."
   },
   {
     id: "ai16",
-    text: "\"The hat trick I would love to see it\" - Noah Feldman"
+    text: "生者,生者,路化冰河.人生没有四季,唯有那寒冬的荒野,那渗出的血和泪,倘若不将它拭去,就会冻结成冰."
   },
   {
     id: "ai17",
-    text: "look at hevi fight riotously on the discord server"
+    text: "樱花不论看几次都以同样的方式绽放, 然后以同样的方式散落. "
   },
   {
     id: "ai18",
-    text: "I just stole the \"Anti\" flag from a biker gang and I am packing it with dynamite, dynamite, dynamite, dynamite..."
+    text: "美梦正是对明天抱有希望的证据。"
   },
   {
     id: "ai19",
-    text: "No matter how much antimatter you have, the matter will always outweigh the anti-matter."
+    text: "当我看月亮，月晕中发丝的香气是你。当我看夕阳，夕阳下从背后抱住我的是你。"
   },
   {
     id: "ai20",
-    text: "Franklin sealed the Omega squared. Now you can seal the Omega any way you want."
+    text: "当冬天到来，身边最触手可及的温暖是你。当夏天降临，吻里有着冰咖啡味道的还是你。"
   },
   {
     id: "ai21",
-    text: "Is this the real 9th Dimension?"
+    text: "不会飞的翅膀也是有意义的，因为那是她曾经飞翔过的证明。"
   },
   {
     id: "ai22",
-    text: "Click here to exit the game"
+    text: "即使失去了一切，只要停下脚步看一下四周，一定会有某个人在你看得见的地方。请别伤心、不要绝望，无论如何也请别忘记，自己决不是孤单一人。"
   },
   {
     id: "ai23",
-    text: "This news ticker will now only AIR in the 9th dimension"
+    text: "人生在外一定会遭遇到各种各样的事物，但等到恰当的时机，又会像潮汐一样承载着各种各样的收获回到我们身边，像大海一样有着宽广的温柔。"
   },
   {
     id: "ai24",
-    text: "The 9th dimension doesn't exist because it was suppressed by the 9th dimension."
+    text: "守护着自己所爱的人生活着，仅仅如此，那就应该很幸福了吧。"
   },
   {
     id: "ai25",
-    text: "To matter or to antimatter, that is the question."
+    text: "我对普通的人类没有兴趣。你们当中要是有外星人、未来人、异世界人以及超能力者的话，就尽管来找我吧！"
   },
   {
     id: "ai26",
-    text: "After 8 years of production and unstable universes, Chaosium will cease to exist in 5 hours."
+    text: "人类的赞歌是勇气的赞歌，人类的伟大是勇气的伟大。"
   },
   {
     id: "ai27",
-    text: "Half of the problems in the 9th dimension don't even make sense. What are they even doing with all of that energy anyway?"
+    text: "媚肉之香的味道, 是阴谋中深藏的爱情."
   },
   {
     id: "ai28",
-    text: "Wait, there's a nin--"
+    text: "苦痛之后达圣殿堂, 苦痛之后到达乐园."
   },
   {
     id: "ai29",
-    text: "Somewhere, a madman and his army of Trimps are tampering with Matter Dimensions."
+    text: "You are the cause of my euphoria. 欢欣之意, 皆由你."
   },
   {
     id: "ai30",
-    text: "Why is there so many attached to this number? It doesn't make sense."
+    text: "这一次再也不会松开你的手了, 即便是浪迹到天涯海角."
   },
   {
     id: "ai31",
-    text: "The news ticker is in the anti-news-ticker"
+    text: "Vivo50吃肯德基疯狂星期四！"
   },
   {
     id: "ai32",
-    text: "the 9th dimension doesn't exist because we are using nonary"
+    text: "喵喵喵！"
   },
   {
     id: "ai33",
-    text: "BREAKING NEWS: New research has shown that not one, not two, but three people can be said to have felt the same emotion as me when they read that as a ticker suggestion."
+    text: "大佬们成就143怎么完成啊？反客为主怎么完成啊？为什么我的自动机导入不了啊？成就感逐渐消失是什么啊？自动机常量在哪改？永恒挑战已完成之后进不了怎么办？"
   },
   {
     id: "ai34",
-    text: "Here's an explanation of my 'problematic mood' - it's explained in the news ticker!"
+    text: "大佬们星神游龙怎么召唤？"
   },
   {
     id: "ai35",
-    text: "Local crazy person tries selling anti-cookies"
+    text: "17 张牌你能秒我？你能秒杀我？"
   },
   {
     id: "ai36",
-    text: "Welcome to Antimatter Dimensions: Source, the free to play sequel to the cult classic AD:GO."
+    text: "有哪些优秀的百合同人作品？"
   },
   {
     id: "ai37",
-    text: "A new hand touches your antimatter!"
+    text: "最快永恒时间为什么是0毫秒？"
   },
   {
     id: "ai38",
-    text: "Who are we, anyways?"
+    text: "反物质维度交流qq群：611146621"
   },
   {
     id: "ai39",
-    text: "We are the people who actually matter"
+    text: "世界上有着数不胜数的或是美好, 或是未知的事物存在. 我想去看看那些更为宽广的世界."
   },
   {
     id: "ai40",
-    text: "Matter?  Not even a hint."
+    text: "闪闪发光的世界, 是如此美丽而光亮. 两人要在那样的世界之中携手共进."
   },
   {
     id: "ai41",
-    text: "I am the news guy, I make news. You don't read this? Well you'll just have to wait until you look in the mirror."
+    text: "那是曾与你接下的约定, 我绝不会忘记."
   },
   {
     id: "ai42",
-    text: "\"BOO!\" (news ticker moves 90 degrees)"
+    text: "你我犹如隔镜视物, 所见无非虚幻迷朦."
   },
   {
     id: "ai43",
-    text: "BUY A JAR OF STICKERS, HIGH QUALITY STICKERS, GREAT QUALITY STICKERS!"
+    text: "虚拟体验也好, 梦也罢, 这个世上的信息, 既现实也虚幻; 无论如何, 人一生所能接触的事物也只是沧海一粟罢了."
   },
   {
     id: "ai44",
-    text: "I made news, you read it."
+    text: "生活在别人的梦想里, 和死了有什么区别？"
   },
   {
     id: "ai45",
-    text: "I like news."
+    text: "人是向死而生的…有形的东西总有一天会坏掉, 有生命的东西总有一天会死去…活到现在的意义…只有到了快死的时候才会明白。"
   },
   {
     id: "ai46",
-    text: "I don't make news."
+    text: "正如要有林林总总部分才能组成一个完整的人, 而其中每一部分又要有千差万别, 才得以构成迥然不同之人。"
   },
   {
     id: "ai47",
-    text: "YOU MAKE NEWS AND I GET THE [REDACTED] NEWS"
+    text: "所谓心伤, 生于何处, 也只能消于何处."
   },
   {
     id: "ai48",
-    text: "The term \"Anti-infinity\" is a verb and cannot be a noun. Learn about its usage here."
+    text: "鸟儿, 为了挣脱到蛋的外壳而奋战. 蛋就是世界, 如果想要活下去, 除了破坏这个世界以外, 别无他法."
   },
   {
     id: "ai49",
-    text: "And now, for the shopping list!"
+    text: "我们都是胆小鬼, 沉浸在爱里的话, 会更胆怯."
   },
   {
     id: "ai50",
-    text: "The 9th dimension is clearly real! It's just not in our dimension."
+    text: "今天的你也笨笨的呢～ 今天的你也废废的呢～"
   },
   {
     id: "ai51",
-    text: "I tried searching on google for the phrase \"9th dimension,\" and I'm okay with saying that, because it describes a very real thing."
+    text: "希望你能找到——我. 真正的、我."
   },
   {
     id: "ai52",
-    text: "You have no power here."
+    text: "即使生命如此短暂，我也要在这世上留下精彩的足迹……"
   },
   {
     id: "ai53",
-    text: "Some people had to settle for 10 dimensions because they couldn't break infinity. Big Crunch turned out to be just a short space in time."
+    text: "稗田阿求今年多少岁了？"
   },
   {
     id: "ai54",
-    text: "There once was a young man in a strange land, and he dreamed of a universe filled with possibilities. One day, he asked his mother \"What's Expansion like?\" Her reply was \"Expansion times back then were unbalanced, and I said that's why you can't have equal amounts of matter and antimatter."
+    text: "永远的世界是侘的世界。"
   },
   {
     id: "ai55",
-    text: "Market research firm tries to explain why some commodities don't perform as expected. Market research firm herself can't figure out why."
+    text: "牧羊人并不是引导人类前进的存在, 而是陪伴在身旁, 辅佐人类前进."
   },
   {
     id: "ai56",
-    text: "Bid your antimatter today!"
+    text: "两人一同迈步, 如果两个人的话, 光芒就会照进这个世界."
   },
   {
     id: "ai57",
-    text: "I am Alpha Centauri, Prime 001. My research has found that if you are alive in the 9th dimension, evil has taken over your dimension and is attempting to enact its plan to take over your mind and reverse time. You must do everything in your power to stop this plan from being implemented, now."
+    text: "帮助这个小姑娘买到牛奶, 努力成为第一个不会让她失望的好搭档吧."
   },
   {
     id: "ai58",
-    text: "Stand by and unlock the 9th dimension for a secret achievement."
+    text: "多谢关心, 我感觉自己像是一根一英里长的雪糕."
   },
   {
     id: "ai59",
-    text: "I fix bugs in 5 hours"
-  },
+    text: "五小时后更新！"
+  },/*
   {
     id: "ai60",
     text: "If you're reading this, that means you can read this."
@@ -11457,7 +11459,7 @@ export const news = [
     highlighting the ease of identification. There also are other indicators—most important of all being
     em-dashes (—), curly quotation marks (“”), and negative parallelism (“It's not just X, it's Y!”).
     Let me know if you'd like any other explanations of AI indicators in speech!`
-  },
+  },*/
   {
     id: "fe1",
     text: "Fun Fact: Planning for Antimatter Dimensions: Endgame began in December of 2023."

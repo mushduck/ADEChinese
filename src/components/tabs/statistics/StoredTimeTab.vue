@@ -90,7 +90,7 @@ export default {
       }
     },
     spendAll() {//这里点按则获得114514秒存储时间
-      player.storedTime += 12;
+      player.storedTime += 114514;
       GameUI.notify.info("获得了 114514 秒存储时间DA☆ZE！");
     }
   }
