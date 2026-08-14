@@ -70,7 +70,7 @@ export default {
     },
     tesseractAutobuyerTextDisplay() {
       const auto = this.isTesseractAutoActive;
-      return `自动购买超立方体 ${auto ? "开" : "关"}`;
+      return `自动购买超立方体：${auto ? "开" : "关"}`;
     },
     penteractCountString() {
       const extra = this.extraPenteracts > 0 ? ` + ${format(this.extraPenteracts, 2, 2)}` : "";
@@ -90,10 +90,10 @@ export default {
     },
     penteractLockString() {
       if (this.penteractsUnlocked) return `购买一个超五方体 (${this.penteractCountString})`;
-      else return `购买重构升级 25 以解锁超五方体`;
+      else return `购买重构升级 25以解锁超五方体`;
     },
     hexeractLockString() {
-      if (this.hexeractsUnlocked) return `购买一个超五方体 (${this.hexeractCountString})`;
+      if (this.hexeractsUnlocked) return `购买一个超六方体 (${this.hexeractCountString})`;
       else return `强子化莱特拉的现实 ${formatInt(40)} 次以解锁超六方体`;
     },
     hepteractLockString() {
@@ -173,10 +173,10 @@ export default {
     octeractLockString() {
       if (this.octeractsUnlocked) return `购买一个超八方体 (${this.octeractCountString})`;
       //somewhat ugly method to make it continuously update
-      else return this.time >= 0 ? `进行${wordShift.randomCrossWords("维度延拓")}以解锁超八方体` : `进行${wordShift.randomCrossWords("维度延拓")} to unlock Octeracts`;
+      else return this.time >= 0 ? `进行一次${wordShift.randomCrossWords("维度延拓")}以解锁超八方体` : `进行一次${wordShift.randomCrossWords("维度延拓")}以解锁超八方体`;
     },
     octeractResourceString() {
-      if (false) return `延拓碎片`;
+      if (false) return `Expansial Fragments`;
       else return this.time >= 0 ? `${wordShift.randomCrossWords("延拓碎片")}` : `${wordShift.randomCrossWords("延拓碎片")}`;
     },
   }
@@ -198,9 +198,9 @@ export default {
           <p>
             购买一个超立方体 ({{ tesseractCountString }})
           </p>
-          <p>无限维度的购买上限提高 {{ format(nextInfinityDimCapIncrease, 2) }}</p>
-          <p><b>价格：{{ format(tesseractCost) }} 无限点数</b></p>
-          <p>总超立方体效果：提高 {{ format(totalInfinityDimCap, 2) }}</p>
+          <p>无限维度的数量上限增加 {{ format(nextInfinityDimCapIncrease, 2) }}</p>
+          <p><b>价格: {{ format(tesseractCost) }} 无限点数</b></p>
+          <p>总超立方体效果: 增加 {{ format(totalInfinityDimCap, 2) }}</p>
         </button>
         <br>
         <PrimaryToggleButton
@@ -224,9 +224,9 @@ export default {
           <p>
             {{ penteractLockString }}
           </p>
-          <p>时间维度的软上限降低 {{ formatDecimalPercents(nextFreeTickspeedReduction, 2, 2) }}</p>
-          <p><b>价格：{{ format(penteractCost) }} 永恒点数</b></p>
-          <p>总超五方体效果：降低 {{ formatPow(totalFreeTickspeedReduction, 2, 4) }}</p>
+          <p>时间维度的软上限阈值降低 {{ formatDecimalPercents(nextFreeTickspeedReduction, 2, 2) }}</p>
+          <p><b>价格: {{ format(penteractCost) }} 永恒点数</b></p>
+          <p>总超五方体效果: 增加 {{ formatPow(totalFreeTickspeedReduction, 2, 4) }}</p>
         </button>
       </div>
       <div class="l-hypercubes-btn">
@@ -241,9 +241,9 @@ export default {
           <p>
             {{ hexeractLockString }}
           </p>
-          <p>暗物质维度的软上限降低 {{ formatDecimalPercents(nextDarkMatterSoftcapReduction, 2, 2) }}</p>
-          <p><b>价格：{{ format(hexeractCost) }} 暗物质</b></p>
-          <p>总超六方体效果：降低 {{ formatPow(totalDarkMatterSoftcapReduction, 2, 4) }}</p>
+          <p>暗物质维度的软上限阈值降低 {{ formatDecimalPercents(nextDarkMatterSoftcapReduction, 2, 2) }}</p>
+          <p><b>价格: {{ format(hexeractCost) }} 暗物质</b></p>
+          <p>总超六方体效果: 增加 {{ formatPow(totalDarkMatterSoftcapReduction, 2, 4) }}</p>
         </button>
       </div>
     </div>
@@ -260,9 +260,9 @@ export default {
           <p>
             {{ hepteractLockString }}
           </p>
-          <p>天界维度维度的软上限降低 {{ formatDecimalPercents(nextCelestialDimSoftcapReduction, 2, 2) }}</p>
-          <p><b>价格：{{ format(hepteractCost) }} 天界点数</b></p>
-          <p>总超七方体效果：降低 {{ formatPow(totalCelestialDimSoftcapReduction, 2, 4) }}</p>
+          <p>天界维度的软上限强度降低 {{ formatDecimalPercents(nextCelestialDimSoftcapReduction, 2, 2) }}</p>
+          <p><b>价格: {{ format(hepteractCost) }} 天界点数</b></p>
+          <p>总超七方体效果: 增加 {{ formatPow(totalCelestialDimSoftcapReduction, 2, 4) }}</p>
         </button>
       </div>
       <div class="l-hypercubes-btn">
@@ -277,9 +277,9 @@ export default {
           <p>
             {{ octeractLockString() }}
           </p>
-          <p>所有超多方体的效力提高 {{ formatPercents(nextTotalCubeBoost, 2, 2) }}</p>
-          <p><b>价格：{{ format(octeractCost) }} {{ octeractResourceString() }}</b></p>
-          <p>总超八方体效果：提高 {{ formatX(totalCubeBoost, 2, 2) }}</p>
+          <p>所有超多方体效力提升 {{ formatPercents(nextTotalCubeBoost, 2, 2) }}</p>
+          <p><b>价格: {{ format(octeractCost) }} {{ octeractResourceString() }}</b></p>
+          <p>总超八方体效果: {{ formatX(totalCubeBoost, 2, 2) }}</p>
         </button>
       </div>
     </div>
