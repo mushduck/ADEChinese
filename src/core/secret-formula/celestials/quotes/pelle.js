@@ -487,7 +487,7 @@ export const pelleQuotes = {
       { text: "每一场你所掩藏的$1，皆已过眼云烟。", 1: battles },
       "...",
       "等等，",
-      { text: "你是那个上次摧毁了我的现实的 $1 ！", 1: destroyer },
+      { text: "你是那个上次摧毁了我的现实的$1！", 1: destroyer },
       { text: "$1.", 1: anger },
       "你竟敢回来！",
       { text: "$1.", 1: exhaustion },
@@ -495,7 +495,7 @@ export const pelleQuotes = {
       "往事已成云烟。",
       "我已比上次更加强大。",
       "我之胜利，早已注定。",
-      { text: "今日，你将 $1。", 1: lose }
+      { text: "今日，你将$1。", 1: lose }
     ],
   },
   disable: {
@@ -550,7 +550,7 @@ export const pelleQuotes = {
       "你...",
       "你变聪明了。",
       "但还不够聪明。",
-      { text: "不过，如果你打算一直回来，我就得停止给予我的 $1 了。", 1: introduction },
+      { text: "不过，如果你打算一直回来，我就得停止给予我的$1了。", 1: introduction },
       "这只会越来越乏味。",
       "但我知道，这次我会阻止你。",
       "毕竟———我之胜利，早已注定。"
@@ -564,9 +564,9 @@ export const pelleQuotes = {
       "你是怎么活到现在的？",
       "你已逃离我的现实多少次了？",
       "又有何所求？",
-      { text: "仅是为了完成你的 $1？", 1: mandate },
+      { text: "仅是为了完成你的$1？", 1: mandate },
       { text: "$1", 1: exhaustion },
-      { text: "我需要一些新的 $1 来打击你。", 1: debuffs }
+      { text: "我需要一些新的$1来打击你。", 1: debuffs }
     ],
   },
   expansionPacks: {
