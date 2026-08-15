@@ -39,7 +39,7 @@ export default {
         scalingUpgradeVisible: () => AlchemyResources.all.filter(r => r.isUnlocked).length > 0,
         scalingUpgradeText: () => {
           const resources = AlchemyResources.all.filter(r => r.isUnlocked).length;
-          return `你已解锁 ${quantifyInt("个炼金资源。", resources)}.`;
+          return `你已解锁 ${quantifyInt("个炼金资源。", resources)}`;
         },
       },
       {
