@@ -96,7 +96,7 @@ export default {
         } else {
           this.galaxyText = `你每过 ${TimeSpan.fromSeconds(secondsPerGalaxy)} 秒能获得一个复制器星系。`;
           if (galaxiesPerSecond.gte(1)) {
-            this.galaxyText = `你每秒获得 ${quantify("Replicanti Galaxy", galaxiesPerSecond, 2, 1)} 复制器星系。`;
+            this.galaxyText = `你每秒获得 ${quantify("复制器星系", galaxiesPerSecond, 2, 1)}。`;
           }
           // Take the total time from zero replicanti to max RG + e308 replicanti and then subtract away the time which
           // has already elapsed. The time elapsed is calculated from your current RG total (including the current one)
