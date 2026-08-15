@@ -60,7 +60,7 @@ export const eternityChallenges = [
     checkRestriction: restriction => Currency.infinities.lte(restriction),
     formatRestriction: restriction => (restriction === 0
       ? "无无限次数"
-      : `在 ${quantifyInt("Infinity", restriction)} 或更少次无限中`),
+      : `在 1 次或更少次无限中`),
     failedRestriction: "(你的无限次数超过上限)",
     reward: {
       description: "基于未消费的无限点数获得无限维度的加成。",
