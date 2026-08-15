@@ -9,16 +9,14 @@ export default {
   data() {
     return {
       storedTime: 0,
-      // 新增：自定义时间的数值和单位
       customTimeValue: 1,
-      customTimeUnit: 'min' // 默认单位为分钟
+      customTimeUnit: 'min'
     };
   },
   computed: {
     timeDisplay() {
       return TimeSpan.fromSeconds(new Decimal(this.storedTime)).toStringShort();
     },
-    // 将自定义时间统一换算为“秒”
     customTimeInSeconds() {
       const val = Number(this.customTimeValue) || 0;
       if (this.customTimeUnit === 'sec') return val;
@@ -26,7 +24,6 @@ export default {
       if (this.customTimeUnit === 'hour') return val * 3600;
       return 0;
     },
-    // 自定义按钮的禁用状态
     customClassObj() {
       return {
         "o-primary-btn": true,
@@ -83,7 +80,6 @@ export default {
     update() {
       this.storedTime = player.storedTime;
     },
-    // 新增：执行自定义时间跳跃
     spendCustomTime() {
       const seconds = this.customTimeInSeconds;
       if (seconds <= 0) {
@@ -126,7 +122,7 @@ export default {
         player.storedTime += 114514;
         GameUI.notify.info("获得了 114514 秒存储时间DA☆ZE！");
       } else {
-        GameUI.notify.info("先把存储时间用得差不多了再续杯哦！");
+        GameUI.notify.info(`先把存储时间用得差不多了再续杯哦！`);
       }
     }
   }
@@ -210,7 +206,6 @@ export default {
   color: var(--color-dilation);
 }
 
-/* 新增：自定义时间输入区域的样式 */
 .custom-time-container {
   display: flex;
   align-items: center;
@@ -240,7 +235,6 @@ export default {
   cursor: pointer;
 }
 
-/* 移除数字输入框的上下小箭头（可选，为了美观） */
 .custom-time-input::-webkit-inner-spin-button, 
 .custom-time-input::-webkit-outer-spin-button { 
   -webkit-appearance: none; 

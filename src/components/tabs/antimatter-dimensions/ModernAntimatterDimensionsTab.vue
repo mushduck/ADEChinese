@@ -141,7 +141,7 @@ export default {
         <span v-else-if="isFullyAutomated && disabledCondition !== ''">
           维度献祭已自动化（成就 118）
         </span>
-        <span v-else>Dimensional Sacrifice Disabled ({{ disabledCondition }})</span>
+        <span v-else>维度献祭已禁用 ({{ disabledCondition }})</span>
       </PrimaryButton>
       <button
         class="o-primary-btn l-button-container"
