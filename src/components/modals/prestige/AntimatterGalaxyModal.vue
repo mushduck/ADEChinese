@@ -27,10 +27,10 @@ export default {
     },
     message() {
       const resetResouces = [];
-      if (Pelle.isDoomed) resetResouces.push("Antimatter", "Antimatter Dimensions", "Tickspeed");
-      if (!this.perkANRBought) resetResouces.push("Antimatter Dimensions", "Tickspeed");
-      if (!this.keepDimBoost) resetResouces.push("Dimension Boosts");
-      if (!this.keepAntimatter && !this.perkANRBought) resetResouces.push("Antimatter");
+      if (Pelle.isDoomed) resetResouces.push("反物质", "反物质维度", "计数频率");
+      if (!this.perkANRBought) resetResouces.push("反物质维度", "计数频率");
+      if (!this.keepDimBoost) resetResouces.push("维度提升");
+      if (!this.keepAntimatter && !this.perkANRBought) resetResouces.push("反物质");
       const resetList = makeEnumeration(resetResouces);
       let tickspeedFixed = "";
       if (InfinityChallenge(3).isRunning) {
