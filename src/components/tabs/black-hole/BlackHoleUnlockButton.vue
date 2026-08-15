@@ -33,7 +33,7 @@ export default {
   >
     解锁黑洞
     <br>
-    Cost: {{ formatInt(100) }} 现实机器
+    价格: {{ formatInt(100) }} 现实机器
   </button>
 </template>
 

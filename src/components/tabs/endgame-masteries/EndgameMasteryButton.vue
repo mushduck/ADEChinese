@@ -155,7 +155,7 @@ export class EndgameMasterySetup {
       name="终局能力"
     />
     <div v-else>
-      Cost: {{ customCostStr }}
+      价格: {{ customCostStr }}
     </div>
   </button>
 </template>

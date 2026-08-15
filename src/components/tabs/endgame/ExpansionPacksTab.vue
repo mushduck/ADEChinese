@@ -90,9 +90,9 @@ export default {
       :class="classObject"
       onclick="ExpansionPacks.unlock();"
     >
-      Unlock Expansion Packs
+      解锁天神扩展包
       <br>
-      Cost: {{ format(unlockCost, 2, 3) }} Galaxies
+      价格: {{ format(unlockCost, 2, 3) }} 星系
     </PrimaryButton>
     <div v-if="isUnlocked">
       <div
