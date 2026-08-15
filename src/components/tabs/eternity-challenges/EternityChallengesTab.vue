@@ -35,7 +35,7 @@ export default {
     nextECText() {
       return this.untilNextEC.totalMilliseconds === 0 && !this.autoEC
         ? "重新启用自动完成永恒挑战时"
-        : 现实时间经过 `${this.untilNextEC} 后`;
+        : `现实时间经过 ${this.untilNextEC} 后`;
     },
     allECText() {
       return this.untilAllEC.totalMilliseconds === 0 && !this.autoEC
