@@ -83,7 +83,7 @@ export default {
     },
     showEternity() {
       return PlayerProgress.eternityUnlocked()
-        ? "this Eternity"
+        ? "在本次永恒"
         : "";
     },
     isShowingStateInfo() {
