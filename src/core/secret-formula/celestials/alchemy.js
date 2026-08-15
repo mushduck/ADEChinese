@@ -299,7 +299,7 @@ export const alchemyResources = {
   "boundless": {
     key: "boundless",
     id: ALCHEMY_RESOURCE.BOUNDLESS,
-    name: "Boundless",
+    name: "无限虚空",
     symbol: "Π",
     isBaseResource: false,
     effect: amount => amount / 62500,
