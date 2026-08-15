@@ -1514,7 +1514,7 @@ window.player = {
     news: {
       enabled: true,
       repeatBuffer: 40,
-      AIChance: 100,
+      AIChance: 1,
       ENDChance: 0,
       StoryChance: 0,
       MatureChance: 0,
