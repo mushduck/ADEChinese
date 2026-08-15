@@ -1413,7 +1413,7 @@ function laitelaRealityTick(realDiff) {
         }
       }
     }
-    if (Laitela.realityReward > oldInfo.realityReward) {
+    if (Laitela.realityReward.gt(oldInfo.realityReward)) {
       completionText += `<br><br>暗物质倍率：${formatX(oldInfo.realityReward, 2, 2)} ➜ ${formatX(Laitela.realityReward, 2, 2)}`;
       if (oldInfo.fastestCompletion === 3600 || oldInfo.fastestCompletion === 300 && oldInfo.difficultyTier > 0) {
         if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
