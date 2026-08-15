@@ -138,7 +138,7 @@ export const elementalQuotes = {
         celestialName: "Laitela"
       },
       {
-        text: "你好，莱特拉。我猜你的维度研究进展顺利？",
+        text: "你好，莱特拉。你的维度研究进展可顺利？",
         background: "elemental",
         celestialName: () => "elemental"
       },
@@ -288,7 +288,7 @@ export const elementalQuotes = {
         celestialName: () => "elemental"
       },
       {
-        text: "至少是你和佩勒，我不求染指荣耀，只想见证你们凯旋，而我自身得以敬重。",
+        text: "至少你和佩勒的荣耀，我不求染指，只想见证你们凯旋，而我自身得以敬重。",
         background: "elemental",
         celestialName: () => "elemental"
       },
