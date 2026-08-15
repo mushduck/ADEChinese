@@ -7715,7 +7715,7 @@ export const news = [
   {
     id: "ai72",
     text: "最后呢, 在这片沙漠之中, 至少我能知道还会有一个, 珍爱这朵花儿的人, 有一个就足够了."
-  },/*
+  },
   {
     id: "ai73",
     text: "那既非生, 也非死, 既非天国亦非地狱, 只是, 既是极致, 又是终结之物. 那那便是……终之空."
@@ -7818,7 +7818,7 @@ export const news = [
   },
   {
     id: "ai98",
-    get text(): return `那道视线，是谁的？你是我。我是你。不存在我。不存在你。我不是我。我是我。我是妄想的存在。我确实存在。我是${player.username}。`
+    text: `那道视线，是谁的？你是我。我是你。不存在我。不存在你。我不是我。我是我。我是妄想的存在。我确实存在。我是${player.username}。`
   },
   (function() {
     let wasClicked = false;
@@ -7841,112 +7841,111 @@ export const news = [
   }()),
   {
     id: "ai100",
-    text: "I get all my news from this Discord, not 5 hours of my life"
+    text: "如果连一个少女的小小祈愿都实现不了, 那我的存在还有什么意义."
   },
   {
     id: "ai101",
-    text: "meow"
+    text: "喵喵喵喵！"
   },
   {
     id: "ai102",
-    text: "You are now manually blinking."
+    text: "我最后的愿望, 是想看一看窗外的世界, 想在蓝天下自由自在地奔跑, 见一见这个星球的最后一面."
   },
   {
     id: "ai103",
-    text: "Sorry, your mic is playing Antimatter Dimensions."
+    text: "死是很可怕的……但是, 我无法选择因为害怕死亡而放弃活着."
   },
   {
     id: "ai104",
-    text: "Sorry, your reality has disconnected from the 9th dimension."
+    text: "唯有那份炫目, 未曾忘却."
   },
   {
     id: "ai105",
-    text: "Apparently I am the bad guy in this video. I'm the one who did nothing."
+    text: "无论何时, 我都会记得夏天的蓝."
   },
   {
     id: "ai106",
-    text: "There are multiple ways to win this game. You can either type in your coordinates directly into the game, or you can type them into google which produces a different result. If you are getting the \"same exact thing\" result, your computer must be malfunctioning. Test results indicate that your computer is malfunctioning and you should check your firmware for vulnerabilities. You can also try turning off the news and re-running the game, but doing this only makes the \"the weather is X\" joke. Waiting six hours for a news message is NOT a news message."
+    text: "有一天, 察觉到自己一无所有. 发现本以为堆满着幸福的口袋, 其实空无一物. 因为我没为在口袋里塞些什么而努力, 所以是理所当然的. 而我, 却连这种事都想不明白. 因为我的人生至今散漫并且没有意义. 然而某天, 我觉查到自己白白浪费了许多时间. 我跟谁都能说的上话. 无论是怎样的人. 可是我没有好朋友. 一个都没有. 这究竟意味着什么, 我从未思考过. 我的人生, 一直平淡乏味. 曾经的青梅竹马神户小鸟, 才是唯一可毫无顾忌聊天的朋友. 没错. ……朋友, 曾经是. （……重新来一次） （而且, 要做得更好） 深切的愿望. 但是, 这十分困难. 所有人都为了它而辛苦. 没人能够无所事事却变得幸福. 只能一步一步的靠自己的力量向幸福迈进. 幸福究竟是什么呢. 跟青春相似的东西吗？那青春又是何物？ 「是耀眼的东西吧. 」小鸟这样说. 「……天知道, 根本没有仔细想过」吉野丢下这句话. 很久以前, 有人说过那是「人生走钢丝」. 三个人的意见, 我认为都是正确的. 耀眼、未知、并且令人恐惧的东西. 这问题很难, 因为没有限定的答案. 但我决定要踏上寻找它的旅途. 只是, 时间无情地流逝. 夏去秋至, 时间如水. 转眼间, 已经高中二年级了. 焦急了. 如今我手中依然空无一物. 而我却依然找不到任何应该做的事. 仅仅没有目标的徘徊着……"
   },
   {
     id: "ai107",
-    text: "The weather is actually a thing. Scientists have confirmed that there is a correlation between the amount of Antimatter in the earth and the amount of weather. The earth is indeed a magnet, but scientists now hypothesize that as the earth warms up, the magnetic reconnection will accelerate, and this could cause a domino effect to cascade throughout the world, eventually leading to uncontrolled nuclear winter and spontaneous antimatter implosion."
+    text: `一个人的话是孤独, 两个人在一起的话是妥协, 但是三个人的话…有３个人的话, 就可以相互称作是“大家”了. 这个, 肯定就能被称为是人际圈子了. 我希望能够成为, “大家”之一. 因为, 那对于想在什么地方找到自己归属的人来说…是一种救赎啊. 所以人才想要归属于什么地方, 想要成为别人的家人, 想要成为团体中的一员. 每个人都是为了成为某个组织的成员, 而生活着的.`
   },
   {
     id: "ai108",
-    text: "The tenth dimension is not a real thing. Stop telling people that."
+    text: "明天会吹拂着明天的风."
   },
   {
     id: "ai109",
-    text: "Don't tell Hevi it's not a real thing"
+    text: "如果能许愿, 就算未来会迎来灭亡, 我最后看到的东西, 请一定不要是女孩子的眼泪."
   },
   {
     id: "ai110",
-    text: "i dont know how to fix this"
+    text: "虽然灯塔已经失去了光明, 但是只要有你的那首歌在, 就一定能将那些人再次导向此方."
   },
   {
     id: "ai111",
-    text: "This update is not for you!"
+    text: "就算我们知道了彼此总有一天会分别, 现在的时光, 也绝不是没有意义的."
   },
   {
     id: "ai112",
-    get text() { return `This is the last time, to buy items, you must pay a small fee of ${format(Number.MAX_VALUE, 2)} real money.`; }
-  },
-  {
-    id: "ai113",
-    text: "What is Antimatter? Long ago, gods lived in harmony. Then, everything changed when the apocalypse broke out. Chaos reigns, and even higher dimensions are being built. This is your fate. Build the Antimatter Dimensions. Amen."
-  },
-  {
-    id: "ai114",
     text: "Water under the bridge?"
   },
   {
+    id: "ai113",
+    text: "人就是这样, 总会选择宽阔平坦的康庄大道走去. 然而, 看起来好走的路并不一定能通向真正的幸福. 当然, 选择难走的路, 也不一定会有收获. 然而, 和只能获得些廉价货的康庄大道相比, 相对艰险的小路上往往能找到别处所没有的宝物啊."
+  },
+  {
+    id: "ai114",
+    text: "就像夏天永不会结束那样，我也会将那个女孩，永远地刻在记忆里。"
+  },
+  {
     id: "ai115",
-    text: "I wonder if anyone has posted about this before me?"
+    text: "与怪物战斗的人，须要小心自己也变成怪物。当你注视着深渊，深渊也在注视着你。"
   },
   {
     id: "ai116",
-    text: "This post has been shared many times. Who knows how many?"
+    text: "任何活着的事物都注定会消亡。永远困在这无尽的螺旋的生死的轮回中。尽管如此…生命正因为挣扎于此轮回，才得以存在。"
   },
   {
     id: "ai117",
-    text: "Good night!"
+    text: "活着，就是在爱和恨之间，在伸出手或是握紧拳头之间做出选择。"
   },
   {
     id: "ai118",
-    text: "I made a timeline of my replicanti battles, which can be found here."
+    text: "当世界陷入黑暗，有些人有勇气将它引领出来。你就是那种人。"
   },
   {
     id: "ai119",
-    text: "\"Quantumum Battle Royale coming in 5 hours!\" (Rumor: 5 hours)"
+    text: "面对深渊……但别让它吞噬了你。"
   },
   {
     id: "ai120",
-    text: "Rumor says Nords will start producing replicanti in five hours."
+    text: "我不会去乞求微笑、去爱、或昂首挺胸的权利。"
   },
   {
     id: "ai121",
-    text: "I am an Nordsweeper, stealing their jobs to support the replicanti factories"
+    text: "我们总是有选择的权利。唯一没有选择的事情就是是否要做出那个选择。"
   },
   {
     id: "ai122",
-    text: "Used to be, AD was the best game. Nowadays, it's all crapp."
+    text: "如果让我选择一个人，一起被困在沙漠，肯定不会选你，绝对不会。因为你是个混蛋，彻头彻尾的混蛋。很多人比你更应该活下去，但就算如此……我也不想让你死。混蛋。请别忘了我…"
   },
   {
     id: "ai123",
-    text: "You better stop looking at these news ticker suggestions, before your fingers dry up."
+    text: "时间流逝, 物是人非, 就好像涌动的河流, 永无终焉. 幼稚的心智将变得高尚, 青年的爱慕将变得深刻. 清澈之水折射着成长."
   },
   {
     id: "ai124",
-    text: "Antimatter Dimensions *Loses* bee movie."
+    text: "这是一个生动的世界, 每个人都不是为他人而生, 每个人都有自己的生活, 即使是百年前的勇者, 也在无尽的冒险中慢慢回忆, 直到找到自己的使命."
   },
   {
     id: "ai125",
-    text: "Oh, god, there's replicanti in my peas.",
-    get unlocked() { return PlayerProgress.replicantiUnlocked(); }
+    text: "勇气, 力量, 智慧. 围绕在这片遥远的海拉尔大陆上闪耀着众神的三角力量. 轮回, 转生, 宿命. 一次次书写着属于勇者的冒险故事.",
   },
   {
     id: "ai126",
-    text: "Oh, god, I'm stepping on a replicanti."
+    text: "并不需要什么永远, 就算只是刹那间, 只要能彼此相依就已足够."
   },
   {
     id: "ai127",
@@ -7954,112 +7953,112 @@ export const news = [
   },
   {
     id: "ai128",
-    text: "Welcome to /r/AskReddit about submarines. - accurate as of January 8th, 2017"
+    text: "未来不是早已被决定好的, 而是由我们每一个人的意志所选择的."
   },
   {
     id: "ai129",
-    text: "Antimatter being researched by the government. Is it safe to say that this news ticker is fake?"
+    text: "就算月亮隐匿了皎洁, 星星的光芒也依旧温暖."
   },
   {
     id: "ai130",
-    text: "Does the news show at Infinite Antimatter?"
+    text: "前方道路绵延无尽, 我不会因此停下脚步, 只要沿着这条路便终有一天能够抵达."
   },
   {
     id: "ai131",
-    text: "Have you saved your game? Yes. Have you quit your game? Nothin' wrong with this save. just keep holding that key."
+    text: "我们所期望的未来, 就由我们来开辟吧."
   },
   {
     id: "ai132",
-    text: "i clicked too fast...my fps dropped"
+    text: "你不是送行者吗, 去送送她啊."
   },
   {
     id: "ai133",
-    text: "I found out that the year is 20XX. I was going to make a news ticker but then I realized that it's just a ticker."
+    text: "我喜欢妮娅, 还有大家."
   },
   {
     id: "ai134",
-    text: "\"One of these days I'll get bored of reading news for a while\" - old man"
+    text: "解开它, 试试的话也许能行, 但是, 不尝试的话就绝对办不到."
   },
   {
     id: "ai135",
-    text: "'Tis the season for new antiques! Get your first ever LOOK at these unique objects, before they're gone!' Sold out!"
+    text: "没有冒险的人生是无聊透顶的, 至少也要有些事能在人心上掀起些波澜."
   },
   {
     id: "ai136",
-    text: "3 things that antimatter, 1 more thing to infinity"
+    text: "由我来接受所有的罪恶, 由我来承受所有的痛苦, 只为自己的宿命而战."
   },
   {
     id: "ai137",
-    text: "Buy the paperclip emojis now at https://aarextiaokhiao.github.io/blob/master/docs/en.json"
+    text: "即使你与机遇失之交臂被暗影覆盖, 坠入名为绝望的深渊之时, 我都会成为那照亮你的唯一光明."
   },
   {
     id: "ai138",
-    text: "click here to unlock the next update"
+    text: "然而当你无计可施, 驻足不前之时, 当失去可能性, 黑暗将你覆盖, 快要被绝望淹没之时, 就让我成为你的照明灯吧."
   },
   {
     id: "ai139",
-    text: "(If you want you can make this only show when the news actually loads)"
+    text: "当经历了背叛亲离, 生死一线, 失而复得, 才明白不再逃避."
   },
   {
     id: "ai140",
-    text: "Malicious men are trying to make antimatter money, but their attempt is getting in the 9th dimension. What do you think about that?"
+    text: "我愿为你戴上罪之王冠, 即使背负上所有的罪恶与孤独, 绝不让你受伤."
   },
   {
     id: "ai141",
-    text: "Hey Siri, grind antimatter galaxies"
+    text: "就算是对我抱有敌意的人, 也是被某个人深爱着而降生在这个世界上的."
   },
   {
     id: "ai142",
-    text: "Have you saved your game? If so, then you can continue playing without"
+    text: "我的愿望是, 将一位少女拥入怀中, 而拯救世界, 只不过是顺带罢了."
   },
   {
     id: "ai143",
-    text: "It's like Getting your first arcane point. You know, like in the old ad where you're like \"I get this ad, I should make this ad"
+    text: "我是怪物也无所谓. 即使是假的感情, 我也要保护集. 因为我就是我. 哪怕是假的, 但是对我来说那就是唯一的真实！"
   },
   {
     id: "ai144",
-    text: "Ooga Booga"
+    text: "有两条路可以走, 一条是沉默着被世界淘汰; 另一条是适应时间, 改变自己."
   },
   {
     id: "ai145",
-    text: "Boo has his own webpage! You might even call it \"Boo's Dandy\"\">https://en.m.wikipedia.org/wiki/Olli%27_Web#Main_page>"
+    text: "我们替被淘汰之人唱送葬歌, 所以才叫做葬仪社. 这个名字代表我们永远是送葬的一方, 表示我们会一直活下去."
   },
   {
     id: "ai146",
-    text: "Meeseeks and nerds clash in epic GG war"
+    text: "不要放手, 紧紧握住我的手, 说过两人要一起继续, 握紧的手很温暖, 很温柔."
   },
   {
     id: "ai147",
-    text: "My final test has come out! It was a simple math problem, just the two greatest chess GM's ever! Guess what happened? Both got annihilated!"
+    text: "即使再怎么勉强、再怎么不自量力、再怎么厚颜无耻，也要用自己的双手，保护最珍惜的东西。"
   },
   {
     id: "ai148",
-    text: "Oh wow, that's 67.3%, which is actually OK, because it's logarithmic"
+    text: "就让我用这只手，将你那无聊的幻想杀得片甲不留。"
   },
   {
     id: "ai149",
-    text: "\"Aleph_Time\" is that logarithmic scale joke?"
+    text: "这个世界上，大概不会留下任何你曾经存在过的证据吧。但是，不用担心。如果你希望在世界某处留下足迹，就由我来当那道爪痕吧。"
   },
   {
     id: "ai150",
-    text: "Hello everyone, my name is Anti-Dio. I produce antimatter through a process you all know as \"antimatter decomposition\" you may recall this from my test report earlier this month I tested wether or not my ranch produces antimatter or not... everything was fine until that point, when I added a dash of lag to the equation, and it became a vicious cycle accelerating the rate at which antimatter is produced, which in turn accelerates the rate at which you all die. I've saved this by using a unique combination of genetic engineering and big data mining, I'm hoping to one day pull the trigger on a mechanimatter device that creates dimensions behind closed doors, but for now, this has all been a race to the bottom of which system producethiks, and in the end, we'll take a bite out of your (read error: allowed) pie. Goodbye."
+    text: "确实，这个世界冰冷，残酷，被无数的恶意充斥。但是，救赎也一样存在。凭借自己的意识伸出双手的话。咬紧牙关继续前进的话。在不远的前方，必定有光存在。这束不灭的光线不被夺走，世界也就不会陷入绝望。"
   },
   {
     id: "aim151",
-    text: "\"I propose that we form a phylogenetic tree of anti-history, just like tree of life. Everyone would be credited with originating from the ancestor of that anti-tree.\" -Dio, toast of eternal damnation"
+    text: "当面对两难的抉择时，不妨丢一枚硬币吧，并非是要靠那二分之一的机运来帮你做出抉择！而是因为当硬币被抛上空中，开始旋转的那一瞬间你会突然明白，自己想要的！"
   },
   {
     id: "ai152",
-    text: "historian: I love how each generation looks back on an earlier generation and think, \"Those generations were really bad\""
+    text: "遵循自己坚信的正义，采取正确的行动，这是心得。"
   },
   {
     id: "ai153",
-    text: "\"My parents went to anti-university\" - my grandparents"
+    text: "一个人，不会因为所在位置的不同，灵魂就因此而受到玷污。"
   },
   {
     id: "ai154",
-    text: "Only anti-jokes are funny"
-  },
+    text: "AKIOI！"
+  },/*
   {
     id: "ai155",
     text: "Infinity machine breaks Infinity"
