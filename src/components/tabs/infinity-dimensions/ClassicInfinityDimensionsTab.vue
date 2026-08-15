@@ -49,7 +49,7 @@ export default {
         this.dimMultiplier.copyFrom(this.infinityPower.pow(this.conversionRate).max(1));
       }
       this.powerPerSecond.copyFrom(InfinityDimension(1).productionPerRealSecond);
-      this.incomeType = EternityChallenge(7).isRunning ? "Seventh Dimensions" : "Infinity Power";
+      this.incomeType = EternityChallenge(7).isRunning ? "第七反物质维度" : "无限之力";
       this.isEC8Running = EternityChallenge(8).isRunning;
       if (this.isEC8Running) {
         this.EC8PurchasesLeft = player.eterc8ids;
@@ -142,7 +142,7 @@ export default {
     <div v-else>
       除第八无限维度外，所有无限维度均限最多购买 {{ format(totalDimCap, 2) }} 次。
     </div>
-    <div>你每秒能得到 {{ format(powerPerSecond, 2, 0) }} {{ incomeType }} 无限之力。</div>
+    <div>你每秒能得到 {{ format(powerPerSecond, 2, 0) }} {{ incomeType }}。</div>
     <b
       v-if="isEC8Running"
       class="l-infinity-dim-tab__ec8-purchases"
