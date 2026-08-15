@@ -167,7 +167,7 @@ export default {
         <br>
       </div>
       <br>
-      每 <span v-if="hasAutoSingularity">（自动）</span>凝聚：
+      <span v-if="hasAutoSingularity">（自动）</span>凝聚间隔：
       {{ baseSingularityTime }}
       <span v-if="hasAutoSingularity && autoSingularityFactor !== 1">
         (+{{ additionalSingularityTime }})
