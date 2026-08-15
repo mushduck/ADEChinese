@@ -742,7 +742,7 @@ export const devMigrations = {
         player.options.news = {
           enabled: player.options.news,
           repeatBuffer: 40,
-          AIChance: 0,
+          AIChance: 100,
           speed: 1
         };
       }

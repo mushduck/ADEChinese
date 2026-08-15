@@ -18,7 +18,8 @@ export default {
     this.recentTickers = [];
   },
   mounted() {
-    document.addEventListener("visibilitychange", () => this.restart.bind(this));
+    //我改的
+    document.addEventListener("visibilitychange", () => this.restart());
     this.restart();
   },
   beforeDestroy() {

@@ -7436,7 +7436,6 @@ export const news = [
   {
     id: "ai3",
     text: "樱花满地集于我心, 楪舞纷飞祈愿相随.",
-    get unlocked() { return PlayerProgress.eternityUnlocked(); }
   },
   {
     id: "ai4",
@@ -7818,7 +7817,9 @@ export const news = [
   },
   {
     id: "ai98",
-    text: `那道视线，是谁的？你是我。我是你。不存在我。不存在你。我不是我。我是我。我是妄想的存在。我确实存在。我是${player.username}。`
+    get text() {
+      return `那道视线，是谁的？你是我。我是你。不存在我。不存在你。我不是我。我是我。我是妄想的存在。我确实存在。我是${player.username}。`
+    }
   },
   (function() {
     let wasClicked = false;
