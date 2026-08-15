@@ -32,7 +32,7 @@ export default {
       {
         pet: Ra.pets.teresa,
         scalingUpgradeVisible: () => Ra.unlocks.chargedInfinityUpgrades.isUnlocked,
-        scalingUpgradeText: () => `你可以充能 ${quantifyInt("个无限升级。", Ra.totalCharges)}.`,
+        scalingUpgradeText: () => `你可以充能 ${quantifyInt("个无限升级。", Ra.totalCharges)}`,
       },
       {
         pet: Ra.pets.effarig,
@@ -53,7 +53,7 @@ export default {
         scalingUpgradeVisible: () => Ra.unlocks.unlockHardV.isUnlocked,
         scalingUpgradeText: () => {
           const triadCount = Ra.unlocks.unlockHardV.effectOrDefault(0);
-          return `你已解锁了 ${quantifyInt("个三体研究。", triadCount)}.`;
+          return `你已解锁了 ${quantifyInt("个三体研究。", triadCount)}`;
         },
       }
     ],
