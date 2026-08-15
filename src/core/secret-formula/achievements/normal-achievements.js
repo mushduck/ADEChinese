@@ -62,7 +62,7 @@ export const normalAchievements = [
     name: "幸运的 7",
     description: "购买第七维度。",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `第七维度增强 ${formatInt(7)} 倍`; },
+    get reward() { return `第七维度增强 ${formatInt(7)} 倍。`; },
     effect: 7,
     progress: () => Achievement(17).isUnlocked ? DC.D1 : Decimal.clamp(DimBoost.purchasedBoosts.div(6).min(0.5).add(player.antimatter.max(1).log10().div(36).min(0.5)), 0, 1)
   },
@@ -412,7 +412,7 @@ export const normalAchievements = [
     checkRequirement: () => NormalChallenge(8).isOnlyActiveChallenge && Time.thisInfinityRealTime.totalMinutes.toNumber() <= 3,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     get reward() {
-      return `提升维度献祭的效果。.
+      return `提升维度献祭的效果。
       ${Sacrifice.getSacrificeDescription({ "Achievement32": true, "Achievement57": false, "Achievement88": false })} ➜
       ${Sacrifice.getSacrificeDescription({ "Achievement32": true, "Achievement57": true, "Achievement88": false })}`;
     },
@@ -594,7 +594,7 @@ export const normalAchievements = [
     checkRequirement: () => Currency.infinityPower.value.add(1).log10().gte(6),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `所有无限维度获得基于当前无限点数的倍率。.`;
+      return `所有无限维度获得基于当前无限点数的倍率。`;
     },
     effect: () => Currency.infinityPoints.value.add(1).log10().clampMin(1),
     progress: () => Achievement(77).isUnlocked ? DC.D1 : Decimal.clamp(Currency.infinityPower.value.add(1).log10().div(6), 0, 1)
@@ -1794,7 +1794,7 @@ export const normalAchievements = [
   {
     id: 218,
     name: "...只是为了吃苦吗？",
-    get description() { return `在无名氏的现实内达到 ${formatPostBreak("ee50")} 反物质。.` },
+    get description() { return `在无名氏的现实内达到 ${formatPostBreak("ee50")} 反物质。` },
     checkRequirement: () => Currency.antimatter.value.gte("ee50") && Enslaved.isRunning,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(218).isUnlocked ? DC.D1 : (!Enslaved.isRunning ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().add(1).log10().div(50), 0, 1))
