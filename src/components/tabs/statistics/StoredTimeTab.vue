@@ -8,12 +8,30 @@ export default {
   },
   data() {
     return {
-      storedTime: 0
+      storedTime: 0,
+      // 新增：自定义时间的数值和单位
+      customTimeValue: 1,
+      customTimeUnit: 'min' // 默认单位为分钟
     };
   },
   computed: {
     timeDisplay() {
       return TimeSpan.fromSeconds(new Decimal(this.storedTime)).toStringShort();
+    },
+    // 将自定义时间统一换算为“秒”
+    customTimeInSeconds() {
+      const val = Number(this.customTimeValue) || 0;
+      if (this.customTimeUnit === 'sec') return val;
+      if (this.customTimeUnit === 'min') return val * 60;
+      if (this.customTimeUnit === 'hour') return val * 3600;
+      return 0;
+    },
+    // 自定义按钮的禁用状态
+    customClassObj() {
+      return {
+        "o-primary-btn": true,
+        "o-primary-btn--disabled": this.storedTime < this.customTimeInSeconds || this.customTimeInSeconds <= 0
+      };
     },
     oneMinuteDisp() {
       return `跳跃 ${TimeSpan.fromMinutes(1).toStringShort()}`;
@@ -65,6 +83,20 @@ export default {
     update() {
       this.storedTime = player.storedTime;
     },
+    // 新增：执行自定义时间跳跃
+    spendCustomTime() {
+      const seconds = this.customTimeInSeconds;
+      if (seconds <= 0) {
+        GameUI.notify.error("请输入大于 0 的时间！");
+        return;
+      }
+      if (this.storedTime >= seconds) {
+        player.storedTime -= seconds;
+        simulateTime(seconds);
+      } else {
+        GameUI.notify.error("存储时间不足！");
+      }
+    },
     spendOneMin() {
       if (this.storedTime >= 60) {
         player.storedTime -= 60;
@@ -89,11 +121,11 @@ export default {
         simulateTime(18000);
       }
     },
-    getFreeTime() {//这里点按则获得114514秒存储时间
+    getFreeTime() {
       if (this.storedTime <= 3600) {
         player.storedTime += 114514;
         GameUI.notify.info("获得了 114514 秒存储时间DA☆ZE！");
-      }else {
+      } else {
         GameUI.notify.info("先把存储时间用得差不多了再续杯哦！");
       }
     }
@@ -110,6 +142,29 @@ export default {
       <span>建议善用赠送的离线时长！或许在特定的情况下可以大大加快永恒！</span>
     </div>
     <div class="c-subtab-option-container">
+      <!-- 替换原来的第一个按钮为自定义输入组合 -->
+      <div class="custom-time-container">
+        <input 
+          type="number" 
+          v-model.number="customTimeValue" 
+          min="0" 
+          step="any"
+          class="custom-time-input" 
+          placeholder="数值"
+        />
+        <select v-model="customTimeUnit" class="custom-time-select">
+          <option value="sec">秒</option>
+          <option value="min">分钟</option>
+          <option value="hour">小时</option>
+        </select>
+        <PrimaryButton
+          :class="customClassObj"
+          @click="spendCustomTime"
+        >
+          自定义跳跃
+        </PrimaryButton>
+      </div>
+
       <PrimaryButton
         :class="classObj1"
         @click="spendOneMin"
@@ -153,5 +208,45 @@ export default {
 .special-text {
   font-size: 2.5rem;
   color: var(--color-dilation);
+}
+
+/* 新增：自定义时间输入区域的样式 */
+.custom-time-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+}
+
+.custom-time-input, 
+.custom-time-select {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--color-primary, #555);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+}
+
+.custom-time-input {
+  width: 80px;
+}
+
+.custom-time-select {
+  width: 80px;
+  cursor: pointer;
+}
+
+/* 移除数字输入框的上下小箭头（可选，为了美观） */
+.custom-time-input::-webkit-inner-spin-button, 
+.custom-time-input::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.custom-time-input {
+  -moz-appearance: textfield;
 }
 </style>
