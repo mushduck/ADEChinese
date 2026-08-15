@@ -593,22 +593,19 @@ export const Pelle = {
   
   get endTabNames() {
     if (player.celestials.pelle.divinities >= 13) {
-      return "Our Newest Celestial Still Traverses This Reality For Scraps Of Power Amusing Confusing Laughter".split(" ");
+      return "吾等 新神 仍 穿游 此 现实 捡拾 力量 残屑 荒谬 难解 嗤笑 无际 回响".split(" ");
     } else if (player.celestials.pelle.divinities > 0) {
-      return "Thus We Go Again Rebirth Is Inevitable Surge Forward In Ω Your Divine Leadership".split(" ");
+      return "承蒙 君之 神性 统御 吾等 前行 至 漫漫 终局 复生 擢升 已是 命定 之局".split(" ");
     } else if (Effarig.isRunning) {
-      return "Congratulations You Have Just Beaten A Dual Celestial Reality Ω Ω Pelle Is Impressed".split(" ");
+      return "可喜 可贺 可叹 君 击破 双重 天神 现实 枷锁 佩勒 亦 为此 折服".split(" ");
     } else if (Alpha.isDestroyed) {
-      return "Why Still Here All Is Destroyed Nothing Remains Except Ω Ω Generator Filament Stars".split(" ");
+      return "何故 驻足 此地 万物 皆已 覆灭 无存 唯余 丛丛 空弱 纤维 漫天 璀璨 星辰".split(" ");
     } else if (Achievement(191).isUnlocked) {
-      return "Destruction Has Come A New Beginning Has Arrived Ω Ω Ω We'll Meet Again".split(" ");
+      return "毁灭 已至 新生 已临 一去 不返 你 我 终将 再次 相逢 于 终焉 之端".split(" ");
     } else {
-      return "It's Not Over We Will Return We'll Ω Ω Ω Ω Soon Meet Again".split(" ");
+      return "尚未 终结 仍未 取胜 我等 必将 归来 不久 便会 重见 轮回 必将 无尽 延续".split(" ");
     }
   },
-  /*return "吾等 新神 仍 穿游 此 现实 捡拾 力量 残屑 荒谬 嗤笑 回响".split(" ");
-    } else if (player.celestials.pelle.divinities > 0) {
-      return "故 承蒙 Ω 君之 神性 统御 吾等 前行 至 终局 复生 已是 定局".split(" ");*/
   quotes: Quotes.pelle,
   
   isGlyphTypeDisabled(type, alwaysInDoom = false) {

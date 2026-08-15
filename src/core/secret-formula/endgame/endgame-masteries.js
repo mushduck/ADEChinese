@@ -4,9 +4,9 @@ export const endgameMasteries = [
     cost: 1,
     requirement: [],
     reqType: EM_REQUIREMENT_TYPE.ALL,
-    description: () => `每分钟生成等同于终局次数的复兴点`,
+    description: () => `每分钟生成等同于终局次数的复兴点数`,
     effect: () => player.disablePostReality ? 0 : player.endgames,
-    formatEffect: value => `${formatHybridSmall(value, 3)}/min`
+    formatEffect: value => `${formatHybridSmall(value, 3)}/分钟`
   },
   {
     id: 21,
