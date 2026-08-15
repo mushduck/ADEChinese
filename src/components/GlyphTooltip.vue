@@ -115,19 +115,19 @@ export default {
         case "reality":
           return `纯洁的现实符文`;
         case "power":
-          return `${this.rarityInfo.name}的力量符文`
+          return `${this.rarityInfo.name}的力量符文`;
         case "infinity":
-          return `${this.rarityInfo.name}的无限符文`
-        case "replicanti":
-          return `${this.rarityInfo.name}的复制符文`
+          return `${this.rarityInfo.name}的无限符文`;
+        case "replication":
+          return `${this.rarityInfo.name}的复制符文`;
         case "time":
-          return `${this.rarityInfo.name}的时间符文`
+          return `${this.rarityInfo.name}的时间符文`;
         case "dilation":
-          return `${this.rarityInfo.name}的膨胀符文`
+          return `${this.rarityInfo.name}的膨胀符文`;
         case "effarig":
-          return `${this.rarityInfo.name}的鹿颈长符文`
+          return `${this.rarityInfo.name}的鹿颈长符文`;
         //default:
-          //return `${this.rarityInfo.name}的${glyphName}`;
+          //return `${this.rarityInfo.name}的复制符文`;
       }
     },
     isLevelCapped() {
