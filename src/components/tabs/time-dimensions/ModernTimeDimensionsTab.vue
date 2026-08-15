@@ -85,8 +85,8 @@ export default {
     <div>
       <p>
         你已从
-        <span class="c-time-dim-description__accent">{{ formatHybridLarge(totalUpgrades, 3) }}</span>时间碎片中获得
-        <span class="c-time-dim-description__accent">{{ format(timeShards, 2, 1) }}</span>计数频率升级。
+        <span class="c-time-dim-description__accent">{{ format(timeShards, 2, 1) }}</span>时间碎片中获得
+        <span class="c-time-dim-description__accent">{{ formatHybridLarge(totalUpgrades, 3) }}</span>计数频率升级。
       </p>
       <p>
         下次计数频率提升需要
