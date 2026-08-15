@@ -480,11 +480,11 @@ export class CelestialDimBoost {
   static get unlockedByBoost() {
     if (CelestialDimBoost.lockText !== null) return CelestialDimBoost.lockText;
 
-    const boostEffects = `give a ${formatX(CelestialDimBoost.power, 2, 1)} multiplier to all Dimensions`;
+    const boostEffects = `为所有维度提供${formatX(CelestialDimBoost.power, 2, 1)}的加成`;
 
     const areDimensionsKept = false;
     if (areDimensionsKept) return boostEffects[0].toUpperCase() + boostEffects.substring(1);
-    return `Reset your Dimensions to ${boostEffects}`;
+    return `重置所有天界维度，${boostEffects}`;
   }
 
   static get purchasedBoosts() {
