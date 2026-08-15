@@ -39,10 +39,10 @@ export default {
       if (!this.hasEffarig && !this.hasReality) return "";
       const uniqueGlyphs = [];
       if (this.hasEffarig) uniqueGlyphs.push(
-        `<span style="color: ${GlyphAppearanceHandler.getBorderColor("effarig")};">Effarig</span>`);
+        `<span style="color: ${GlyphAppearanceHandler.getBorderColor("effarig")};">鹿颈长</span>`);
       if (this.hasReality) uniqueGlyphs.push(
-        `<span style="animation: a-reality-glyph-description-cycle 10s infinite;">Reality</span>`);
-      return `你不能${uniqueGlyphs.length > 1 ? "分别" : ""}装备超过一个 ${uniqueGlyphs.join(" 或 ")}。`;
+        `<span style="animation: a-reality-glyph-description-cycle 10s infinite;">现实</span>`);
+      return `你不能${uniqueGlyphs.length > 1 ? "分别" : ""}装备超过 ${formatInt(this.maxSpecialGlyphs)} 个 ${uniqueGlyphs.join(" 或 ")} 符文。`;
     },
     noEffects() {
       return !this.effects.length;
@@ -111,7 +111,7 @@ export default {
       v-if="isSoftcapActive"
       class="l-current-glyph-effects__capped-header"
     >
-      <span class="c-current-glyph-effects__effect--capped">Italic</span> effects have 表示的加成，表示该项加成已达到软上限
+      用<span class="c-current-glyph-effects__effect--capped">斜体</span>字体表示的加成，表示该项加成已达到软上限
     </div>
     <br>
     <div v-if="noEffects">
