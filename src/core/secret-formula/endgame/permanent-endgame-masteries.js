@@ -1,7 +1,7 @@
 export const permanentEndgameMasteries = [
   {
     id: 1,
-    description: "Unlock Endgame Upgrades",
+    description: "解锁终局升级",
     cost: 20,
     requirement: () => {
       const esRequirement = Currency.endgameSkills.max.gte(EndgameMastery.endgameUpgrades.totalEndgameSkillRequirement);
@@ -11,7 +11,7 @@ export const permanentEndgameMasteries = [
   },
   {
     id: 2,
-    description: "Make all above non-permanent Endgame Masteries free",
+    description: "使上述所有可以在终局后重置的终局专精无需任何资源即可购买",
     cost: 100,
     requirement: () => {
       const esRequirement = Currency.endgameSkills.max.gte(EndgameMastery.permaMasteries.totalEndgameSkillRequirement);
