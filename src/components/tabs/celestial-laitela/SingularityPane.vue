@@ -173,7 +173,7 @@ export default {
         (+{{ additionalSingularityTime }})
       </span>
       <br>
-      <span v-if="hasAutoSingularity && autoSingularityFactor !== 1">Manual </span>
+      <span v-if="hasAutoSingularity && autoSingularityFactor !== 1">手动 </span>
       奇点凝聚速度：{{ manualSingularityRate }}
       <br>
       <span v-if="hasAutoSingularity && autoSingularityFactor !== 1">
