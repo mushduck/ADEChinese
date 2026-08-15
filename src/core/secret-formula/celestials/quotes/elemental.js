@@ -263,7 +263,7 @@ export const elementalQuotes = {
         celestialName: () => "destroyer"
       },
       {
-        text: "那些庸才不会要我的。你试想！我年仅十五，所知便已超过他们中多数人毕生所学！",
+        text: "那些庸才不会承认我的。你试想！我年仅十五，所知便已超过他们中多数人毕生所学！",
         background: "elemental",
         celestialName: () => "elemental"
       },
@@ -313,7 +313,7 @@ export const elementalQuotes = {
         celestialName: () => "elemental"
       },
       {
-        text: "要是找到能帮上我的东西，告诉我",
+        text: "要是找到能帮上我的东西，告诉我。",
         background: "destroyer",
         celestialName: () => "destroyer"
       },
@@ -358,7 +358,7 @@ export const elementalQuotes = {
         celestialName: () => "destroyer"
       },
       {
-        text: "但现在我会找到他们。",
+        text: "但现在我会找到祂们。",
         background: "destroyer",
         celestialName: () => "destroyer"
       },
