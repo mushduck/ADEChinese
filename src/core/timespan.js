@@ -221,7 +221,7 @@ window.TimeSpan = class TimeSpan {
       addComponent(value, name);
     }
     function addComponent(value, name) {
-      parts.push(value.eq(1) ? `${formatInt(value)} ${name}` : `${formatInt(value)} ${name}s`);
+      parts.push(value.eq(1) ? `${formatInt(value)} ${name}` : `${formatInt(value)} ${name}`);
     }
     addCheckedComponent(this.years, "年");
     addCheckedComponent(this.days, "天");
@@ -230,7 +230,7 @@ window.TimeSpan = class TimeSpan {
     addCheckedComponent(this.seconds, "秒");
     // Join with commas and 'and' in the end.
     if (parts.length === 0) return `${formatInt(0)} 秒`;
-    return [parts.slice(0, -1).join(", "), parts.slice(-1)[0]].join(parts.length < 2 ? "" : " and ");
+    return [parts.slice(0, -1).join(", "), parts.slice(-1)[0]].join(parts.length < 2 ? "" : "");
   }
 
   /**
