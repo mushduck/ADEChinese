@@ -1062,19 +1062,19 @@ export const Alpha = {
     return player.celestials.alpha.stage;
   },
   get stageNames() {
-    return ["Reach the 4th Dimension Boost", "Reach the 5th Dimension Boost", "Reach the 1st Antimatter Galaxy", "Reach Infinity",
-            "Complete Normal Challenge 12", "Break Infinity", "Purchase the 5e11 Break Infinity Upgrade",
-            "Purchase All Break Infinity Upgrades", "Complete All Infinity Challenges", "Unlock Replicanti",
-            "Purchase the 8th Infinity Dimension", "Reach Eternity", "Purchase Time Study 61", "Purchase the 4th Time Dimension",
-            "Purchase the 3rd Eternity Upgrade", "Reach 115 Total Time Theorems", "Complete any Eternity Challenge Once",
-            "Complete any Eternity Challenge Five Times", "Purchase Time Study 181", "Complete Eternity Challenge 10 Once",
-            "Purchase Time Study 192", "Unlock Eternity Challenge 11", "Complete Eternity Challenge 11", "Unlock Time Dilation",
-            "Perform a Dilated Eternity", "Begin Generation of Time Theorems", "Purchase the 8th Time Dimension", "Reach Reality"];
+    return ["达到 4 个维度提升", "达到 5 个维度提升", "达到 1 个反物质", "达到无限",
+            "完成普通挑战 12", "打破无限", "购买 5e11 无限点数星系升级",
+            "购买所有打破无限升级", "完成所有无限挑战", "解锁复制器",
+            "购买第八无限维度", "达到永恒", "购买时间研究 61", "购买第四时间维度",
+            "购买永恒升级 3", "达到 115 时间之理", "完成任意永恒挑战 1 次",
+            "完成同一永恒挑战 5 次", "购买时间研究 181", "完成永恒挑战 10 一次",
+            "购买时间研究 192", "解锁永恒挑战 11", "完成永恒挑战 11", "解锁时间膨胀",
+            "在时间膨胀中达到永恒", "开始生产时间之理", "购买第八时间维度", "达到现实"];
   },
   get shortStageNames() {
     return ["4个维度提升", "5个维度提升", "1个星系", "无限", "普通挑战12", "打破无限", "星系升级", "所有打破无限升级", "所有无限挑战",
             "复制器", "第八无限维度", "永恒", "时间研究61", "第四时间维度", "永恒升级3", "115时间之理", "1个永恒挑战", "5个相同永恒挑战", "时间研究181", "永恒挑战10",
-            "时间研究191", "永恒挑战11×1", "永恒挑战11×5", "时间膨胀", "时间膨胀中永恒", "生产时间之理", "第八时间维度", "现实"];
+            "时间研究192", "解锁永恒挑战11", "永恒挑战11×5", "解锁时间膨胀", "时间膨胀中永恒", "生产时间之理", "第八时间维度", "现实"];
   },
   get currentStageName() {
     return this.stageNames[this.currentStage];
