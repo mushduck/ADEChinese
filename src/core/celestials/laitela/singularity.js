@@ -304,8 +304,8 @@ EventHub.logic.on(GAME_EVENT.GAME_LOAD, () => SingularityMilestones.lastNotified
 EventHub.logic.on(GAME_EVENT.SINGULARITY_RESET_AFTER, () => {
   const newMilestones = SingularityMilestones.unnotifiedMilestones.length;
   if (newMilestones === 0) return;
-  if (newMilestones === 1) GameUI.notify.blackHole(`You reached a Singularity milestone!`);
-  else if (newMilestones > 100) GameUI.notify.blackHole(`You reached over 100 Singularity milestones!`);
-  else GameUI.notify.blackHole(`You reached ${formatInt(newMilestones)} Singularity milestones!`);
+  if (newMilestones === 1) GameUI.notify.blackHole(`你解锁了一个奇点里程碑！`);
+  else if (newMilestones > 100) GameUI.notify.blackHole(`你解锁了超过一百个奇点里程碑！`);
+  else GameUI.notify.blackHole(`你解锁了 ${formatInt(newMilestones)} 个奇点里程碑！`);
   SingularityMilestones.lastNotified = Currency.singularities.value;
 });

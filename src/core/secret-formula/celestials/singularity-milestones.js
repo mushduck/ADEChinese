@@ -128,7 +128,7 @@ export const singularityMilestones = {
     limit: 8,
     description: "所有暗物质维度自动购买速度",
     effect: completions => [30, 20, 15, 10, 5, 3, 2, 1, 0][completions.toNumber()],
-    effectFormat: x => (x === 0 ? "Instant" : `${formatInt(x)}s`),
+    effectFormat: x => (x === 0 ? "立即" : `${formatInt(x)}秒`),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   realityDEMultiplier: {
@@ -257,7 +257,7 @@ export const singularityMilestones = {
     description: "若湮灭可用，则湮灭时基于湮灭倍率生产最高维的暗物质维度（至少第三维）",
     effect: () => (DarkMatterDimension(8).amount.gt(1) && (ExpansionPack.laitelaPack.isBought && !player.disablePostReality)
       ? Decimal.pow(Laitela.darkMatterMult, 2) : Laitela.darkMatterMult),
-    effectFormat: x => `${format(x, 2, 1)}/s`,
+    effectFormat: x => `${format(x, 2, 1)}/秒`,
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   darkFromDM4: {
@@ -275,7 +275,7 @@ export const singularityMilestones = {
     limit: 1,
     description: "解锁自动湮灭",
     effect: completions => completions,
-    effectFormat: x => (x === 1 ? "Unlocked" : "Locked"),
+    effectFormat: x => (x === 1 ? "已解锁" : "已锁定"),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   theoremPowerFromSingularities: {
