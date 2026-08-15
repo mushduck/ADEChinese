@@ -31,7 +31,7 @@ export default {
     },
     text() {
       if (this.currentEternityChallengeId === 4) {
-        return 无限了 `${formatInt(this.currentResource)} / ${formatInt(this.maximumResource)} 次`;
+        return `无限了 ${formatInt(this.currentResource)} / ${formatInt(this.maximumResource)} 次`;
       }
       // We're always either in EC4 or EC12 when displaying this text.
       return `花费了 ${TimeSpan.fromSeconds(this.currentResource).toString()} /
