@@ -22,15 +22,15 @@ export default {
   },
   computed: {
     topLabel() {
-      if (this.bulk) return `你将购买 ${formatInt(this.newGalaxies)} 个反物质星系`;
+      if (this.bulk) return `你将购买 ${quantifyInt("个反物质星系", this.newGalaxies)}`;
       return `你将购买一个反物质星系`;
     },
     message() {
       const resetResouces = [];
-      if (Pelle.isDoomed) resetResouces.push("反物质", "反物质维度", "计数频率提升");
-      if (!this.perkANRBought) resetResouces.push("反物质维度", "计数频率提升");
-      if (!this.keepDimBoost) resetResouces.push("维度提升");
-      if (!this.keepAntimatter && !this.perkANRBought) resetResouces.push("反物质");
+      if (Pelle.isDoomed) resetResouces.push("Antimatter", "Antimatter Dimensions", "Tickspeed");
+      if (!this.perkANRBought) resetResouces.push("Antimatter Dimensions", "Tickspeed");
+      if (!this.keepDimBoost) resetResouces.push("Dimension Boosts");
+      if (!this.keepAntimatter && !this.perkANRBought) resetResouces.push("Antimatter");
       const resetList = makeEnumeration(resetResouces);
       let tickspeedFixed = "";
       if (InfinityChallenge(3).isRunning) {
@@ -42,12 +42,12 @@ export default {
         ? "计数频率升级将获得小幅提升。"
         : `计数频率升级不会获得加成，因为你当前处于${tickspeedFixed}中。`;
       const message = (resetList === "")
-        ? `这将不会重置任何东西，${connectionWord}${tickspeedInfo}`
-        : `这将重置${resetList}。${connectionWord}，${tickspeedInfo}`;
+        ? `这将不会重置任何东西，并且${tickspeedInfo}`
+        : `这将重置${resetList}，然而${tickspeedInfo}`;
 
       if (this.bulk) return `你确定要购买
-      ${quantifyInt("Antimatter Galaxy", this.newGalaxies)} 个反物质星系吗？ ${message}`;
-      return `你确定要购买一个反物质星系吗？ ${message}`;
+      ${quantifyInt("个反物质星系", this.newGalaxies)}吗？${message}`;
+      return `你确定要购买一个反物质星系吗？${message}`;
     }
   },
   created() {
