@@ -135,7 +135,7 @@ export const elementalQuotes = {
       {
         text: "抱歉我来迟了，还好你还没走。",
         background: "laitela",
-        celestialName: "Lai'tela"
+        celestialName: "Laitela"
       },
       {
         text: "你好，莱特拉。我猜你的维度研究进展顺利？",
@@ -145,7 +145,7 @@ export const elementalQuotes = {
       {
         text: "还算顺利，再过一两个月我应该就能彻底掌握了。",
         background: "laitela",
-        celestialName: "Lai'tela"
+        celestialName: "Laitela"
       },
       {
         text: "真不错。我让你和佩勒单独说会儿话，祂就要走了。",
@@ -155,7 +155,7 @@ export const elementalQuotes = {
       {
         text: "谢谢。",
         background: "laitela",
-        celestialName: "Lai'tela"
+        celestialName: "Laitela"
       },
       {
         text: "放心，莱特拉，不出三个月你就能与我汇合。",
@@ -165,7 +165,7 @@ export const elementalQuotes = {
       {
         text: "我明白，佩勒，就希望到时候能找到你。",
         background: "laitela",
-        celestialName: "Lai'tela"
+        celestialName: "Laitela"
       },
       {
         text: "为了你，我会尽量留在这个星系。",
@@ -175,7 +175,7 @@ export const elementalQuotes = {
       {
         text: "应该会这样的。谢谢，我会想你的。",
         background: "laitela",
-        celestialName: "Lai'tela"
+        celestialName: "Laitela"
       },
       {
         text: "我也会想你的，莱特拉。但很快就能再见。",
@@ -185,7 +185,7 @@ export const elementalQuotes = {
       {
         text: "嗯...我会留在这里把维度研究完的。等我追上后，应该是如虎添翼。",
         background: "laitela",
-        celestialName: "Lai'tela"
+        celestialName: "Laitela"
       },
       {
         text: "该我谢你。我等各有专长，而你在维度上的造诣绝对独一无二。",
