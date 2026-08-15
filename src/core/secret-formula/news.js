@@ -7570,7 +7570,7 @@ export const news = [
   },
   {
     id: "ai36",
-    text: "有哪些优秀的百合同人作品？"
+    text: "有哪些优秀的百合同人作品推荐？"
   },
   {
     id: "ai37",
@@ -7663,15 +7663,15 @@ export const news = [
   {
     id: "ai59",
     text: "五小时后更新！"
-  },/*
+  },
   {
     id: "ai60",
-    text: "If you're reading this, that means you can read this."
+    text: `"如果夏天让你做梦的话，就把我带向前方."`
   },
   {
     id: "ai61",
-    text: "Uhh... Hi. Could you tell me your name?"
-  },
+    text: "喵喵喵!"
+  },/*
   {
     id: "ai62",
     text: "Uh, no. This is too big for a QR code."

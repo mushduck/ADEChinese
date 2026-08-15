@@ -110,7 +110,7 @@ export default {
         class="c-collapse-icon-clickable"
         @click="toggleCollapse"
       />
-      Galaxy Generator
+      星系生成器
     </div>
     <div
       v-if="!isCollapsed"
