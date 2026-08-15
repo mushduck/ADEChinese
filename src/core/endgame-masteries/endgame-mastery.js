@@ -3,14 +3,14 @@ import { EndgameMasteriesState } from "./endgame-masteries";
 export const EndgameMasteries = {};
 
 EndgameMasteries.pathList = [
-  { path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "AD Compression" },
-  { path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "ID Compression" },
-  { path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "TD Compression" },
-  { path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "CD Compression" },
-  { path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "IP" },
-  { path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "EP" },
-  { path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "RM" },
-  { path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "iM" },
+  { path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "反物质维度" },
+  { path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "无限维度" },
+  { path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "时间维度" },
+  { path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "天界维度" },
+  { path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "无限点数" },
+  { path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "永恒点数" },
+  { path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "现实机器" },
+  { path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "虚幻机器" },
 ];
 
 EndgameMasteries.paths = EndgameMasteries.pathList.mapToObject(e => e.path, e => e.masteries);
