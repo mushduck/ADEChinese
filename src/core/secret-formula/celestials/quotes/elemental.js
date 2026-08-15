@@ -103,7 +103,7 @@ export const elementalQuotes = {
         celestialName: () => "elemental"
       },
       {
-        text: "你想征服一切存在，对吧？你要做的第一件事就是穿越到这里。一旦抵达，产出会极为丰沛，然后你就能...",
+        text: "你想征服一切存在，对吧？你要做的第一件事就是抵达这里。此地产出极为丰沛，然后你就能...",
         background: "elemental",
         celestialName: () => "elemental"
       },
@@ -178,12 +178,12 @@ export const elementalQuotes = {
         celestialName: "Laitela"
       },
       {
-        text: "我也会想你的，莱特拉。但很快就能再见。",
+        text: "我也会想你的，莱特拉。但我们很快就能再见。",
         background: "pelle",
         celestialName: "Pelle"
       },
       {
-        text: "嗯...我会留在这里把维度研究完的。等我追上后，应该是如虎添翼。",
+        text: "嗯...我会留在这里把维度研究完的。等我追上后，应是如虎添翼。",
         background: "laitela",
         celestialName: "Laitela"
       },
@@ -233,7 +233,7 @@ export const elementalQuotes = {
         celestialName: () => "destroyer"
       },
       {
-        text: "我要去搞研究了。次星球虽知识贫瘠，但必有些许新知值得我铭记。",
+        text: "我要去搞研究了。此星球虽知识贫瘠，但必有些许新知值得我铭记。",
         background: "elemental",
         celestialName: () => "elemental"
       },
@@ -368,7 +368,7 @@ export const elementalQuotes = {
         celestialName: () => "destroyer"
       },
       {
-        text: "但愿他们还记得...",
+        text: "但愿祂们还记得我...",
         background: "destroyer",
         celestialName: () => "destroyer"
       },
@@ -442,7 +442,7 @@ export const elementalQuotes = {
     lines: [
       "有趣。",
       "前者几乎未寻得我留于树中的缝隙便已止步。",
-      "在发觉自己真正的潜力之前。"
+      "在发掘出自己真正的潜力之前。"
     ]
   },
   pelleDestruction: {
@@ -465,7 +465,7 @@ export const elementalQuotes = {
       "也就...三次？四次？",
       "至多不过五次。",
       "太多人信了“阿尔法是道不可逾越的高墙”的鬼话，那就是祂惯用的伪装。",
-      "阿尔法深知自己的弱点，他早就心知肚明。",
+      "阿尔法深知自己的弱点。",
       "可祂把它藏在了祂那多重现实的重重帷幕之下。",
       "我欣慰的是，毁灭者再一次识破了那层层谎言的迷阵。"
     ]
