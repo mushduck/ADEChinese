@@ -111,19 +111,19 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="exportMasteryTree"
       >
-        Export tree
+        导出终局专精树
       </PrimaryButton>
       <PrimaryButton
         :class="respecClassObject"
         @click="respec = !respec"
       >
-        Respec Endgame Masteries on next Endgame
+        下次终局时重置终局专精树
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         onclick="Modal.masteryString.show({ id: -1 })"
       >
-        Import tree
+        导入终局专精树
       </PrimaryButton>
     </div>
     <div
