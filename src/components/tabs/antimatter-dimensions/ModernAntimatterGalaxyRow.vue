@@ -40,7 +40,7 @@ export default {
         !(LHC.voidRunning && NullUpgrade.limerick1.isBought))) reset.push("维度");
       if (!Achievement(143).isUnlocked ||
         (player.disablePostReality && !(Alpha.isRunning && Alpha.currentStage >= 20) &&
-        !(LHC.voidRunning && NullUpgrade.limerick2.isBought))) reset.push("维度提升 Boosts");
+        !(LHC.voidRunning && NullUpgrade.limerick2.isBought))) reset.push("维度提升");
       return reset.length === 0
         ? `增强计数频率升级的效果`
         : `重置${makeEnumeration(reset)}的数量，增强计数频率升级的效果`;
