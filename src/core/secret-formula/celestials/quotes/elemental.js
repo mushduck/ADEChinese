@@ -193,7 +193,7 @@ export const elementalQuotes = {
         celestialName: "Pelle"
       },
       {
-        text: "我不想打扰，但你的星舰马上就要开了，你带着十单位反物质待在这星球上又有什么用？",
+        text: "我不想打扰，但你的星舰马上就要开了，你带着十个反物质待在这星球上又有什么用？",
         background: "elemental",
         celestialName: () => "elemental"
       },
