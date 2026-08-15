@@ -37,7 +37,7 @@ export default {
       this.conversionExponent = CelestialDimensions.conversionExponent;
       this.dimMultiplier.copyFrom(this.celestialMatter.pow(this.conversionExponent).max(1));
       this.matterPerSecond.copyFrom(CelestialDimension(1).productionPerRealSecond);
-      this.incomeType = "Celestial Matter";
+      this.incomeType = "天界物质";
       this.totalDimCap.copyFrom(CelestialDimensions.totalDimCap);
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
@@ -100,7 +100,7 @@ export default {
     <div>
       所有天界维度可在天界点数达到 {{ format(totalDimCap, 2, 2) }} 前购买。
     </div>
-    <div>你每秒获得 {{ format(matterPerSecond, 2, 0) }} {{ incomeType }} 天界物质。</div>
+    <div>你每秒获得 {{ format(matterPerSecond, 2, 0) }} {{ incomeType }}。</div>
     <CelestialTickspeedRow v-if="isExpanded"/>
     <div class="l-dimensions-container">
       <CelestialDimensionRow
