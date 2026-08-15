@@ -47,10 +47,12 @@ export default {
     },
     formatStageNum() {
       const a = this.alphaStage + 1;
+      /*这些都不需要
       if (a % 10 === 1 && Math.floor(a / 10) !== 1) return `${a}st`;
       if (a % 10 === 2 && Math.floor(a / 10) !== 1) return `${a}nd`;
       if (a % 10 === 3 && Math.floor(a / 10) !== 1) return `${a}rd`;
-      return `${a}th`;
+      */
+      return `${a}`;
     },
     extraLine() {
       switch (this.number) {

@@ -32,12 +32,12 @@ export default {
         };
       }
       return [
-        celestialReality(Teresa, "Teresa's", "teresa"),
-        celestialReality(Effarig, "Effarig's", "effarig"),
-        celestialReality(Enslaved, "The Nameless Ones'", "enslaved"),
-        celestialReality(V, "V's", "v"),
-        celestialReality(Ra, "Ra's", "ra"),
-        celestialReality(Laitela, "Lai'tela's", "laitela"),
+        celestialReality(Teresa, "特蕾莎", "teresa"),
+        celestialReality(Effarig, "鹿颈长", "effarig"),
+        celestialReality(Enslaved, "无名氏", "enslaved"),
+        celestialReality(V, "薇", "v"),
+        celestialReality(Ra, "太阳神", "ra"),
+        celestialReality(Laitela, "莱特拉", "laitela"),
         {
           name: () => "被毁灭的现实",
           isActive: token => token,
