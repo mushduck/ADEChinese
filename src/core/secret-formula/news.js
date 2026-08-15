@@ -7821,25 +7821,6 @@ export const news = [
       return `那道视线，是谁的？你是我。我是你。不存在我。不存在你。我不是我。我是我。我是妄想的存在。我确实存在。我是${player.username}。`
     }
   },
-  (function() {
-    let wasClicked = false;
-    const normal = "Now holding Infinity!";
-    const clicked = "<#351477791457542144>";
-    return {
-      id: "ai99",
-      get text() {
-        return wasClicked ? clicked : normal;
-      },
-      reset() {
-        wasClicked = false;
-      },
-      onClick() {
-        if (wasClicked) return undefined;
-        wasClicked = true;
-        return this.text;
-      }
-    };
-  }()),
   {
     id: "ai100",
     text: "如果连一个少女的小小祈愿都实现不了, 那我的存在还有什么意义."
@@ -8059,23 +8040,43 @@ export const news = [
   {
     id: "ai154",
     text: "AKIOI！"
-  },/*
+  },
   {
     id: "ai155",
-    text: "Infinity machine breaks Infinity"
+    text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
+    onClick() {
+      const sound = new Audio("/audio/ciallo.mp3");
+      sound.volume = 0.8; 
+      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+    }
   },
   {
     id: "ai156",
-    text: "Okay boomer, you get your first taste of antimalware with this one."
+    text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
+    onClick() {
+      const sound = new Audio("/audio/ciallo.mp3");
+      sound.volume = 0.8; 
+      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+    }
   },
   {
     id: "ai157",
-    text: "This program cannot access confidential information, such as the IP addresses of the Tamazight Vaults."
+    text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
+    onClick() {
+      const sound = new Audio("/audio/ciallo.mp3");
+      sound.volume = 0.8; 
+      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+    }
   },
   {
     id: "ai158",
-    text: "Game Development is fun, right? That's why so many hobbyists make games, and why so few professionals make games."
-  },
+    text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
+    onClick() {
+      const sound = new Audio("/audio/ciallo.mp3");
+      sound.volume = 0.8; 
+      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+    }
+  },/*
   {
     id: "ai159",
     text: "I was the first to notice that the 'news' ticker on my mobile notification is always 30 seconds behind the 'entertainment' ticker. This is most definitely not a bug or a feature, and will be fixed in 5 hours."
