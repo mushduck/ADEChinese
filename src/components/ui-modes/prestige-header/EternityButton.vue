@@ -251,14 +251,14 @@ const EP_BUTTON_DISPLAY_TYPE = {
 
     <!-- Challenge with multiple completions -->
     <template v-else-if="type === 6">
-      Other challenges await...
+      下一个挑战在等着我...
       <template v-if="fullyCompleted">
         <br>
         （这个挑战已全部完成）
       </template>
       <template v-else>
         <br>
-        永恒以完成 {{ quantifyInt("completion", gainedCompletions) }} 次挑战
+        永恒以完成 {{ quantifyInt("次挑战", gainedCompletions) }}
         <template v-if="failedRestriction">
           <br>
           {{ failedRestriction }}
