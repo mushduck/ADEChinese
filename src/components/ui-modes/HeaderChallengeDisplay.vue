@@ -206,7 +206,7 @@ export default {
       if (this.resetCelestial && this.inEndgame) return "重启终局";
       if (this.inEndgame) return "退出终局";
       if (this.resetCelestial) return "重启现实";
-      return "Exit Reality";
+      return "退出天神现实";
     },
     textClassObject() {
       return {

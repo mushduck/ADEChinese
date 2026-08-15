@@ -74,6 +74,10 @@ class RaPetState extends GameMechanicState {
     return this.config.name;
   }
 
+  get key() {
+    return this.config.key;
+  }
+
   get chunkGain() {
     return this.config.chunkGain;
   }
@@ -279,8 +283,8 @@ export const Ra = {
     for (const pet of Ra.pets.all) {
       if (pet.memoryProductionMultiplier !== 1) boostList.push(pet.memoryGain);
     }
-    if (Achievement(168).isUnlocked) boostList.push("Achievement 168");
-    if (Ra.unlocks.continuousTTBoost.canBeApplied) boostList.push("current TT");
+    if (Achievement(168).isUnlocked) boostList.push("成就 168");
+    if (Ra.unlocks.continuousTTBoost.canBeApplied) boostList.push("当前时间之理");
 
     if (boostList.length === 1) return `${boostList[0]}`;
     if (boostList.length === 2) return `${boostList[0]} and ${boostList[1]}`;

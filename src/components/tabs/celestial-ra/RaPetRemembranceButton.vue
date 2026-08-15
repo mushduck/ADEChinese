@@ -36,7 +36,7 @@ export default {
       this.hasRemembrance = pet.hasRemembrance;
     },
     toggleRemembrance() {
-      Ra.petWithRemembrance = Ra.petWithRemembrance === this.pet.name ? "" : this.pet.name;
+      Ra.petWithRemembrance = Ra.petWithRemembrance === this.pet.key ? "" : this.pet.key;
     }
   },
 };
