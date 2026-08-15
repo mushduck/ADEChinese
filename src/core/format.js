@@ -7,7 +7,7 @@ function isEND() {
 }
 
 window.format = function format(value, places = 0, placesUnder1000 = 0) {
-  if (isEND()) return "终局";
+  if (isEND()) return "END";
   if (!(value instanceof Decimal)) value = new Decimal(value);
   if (!Decimal.isFinite(value)) return value.toString();
   if (value.lt("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
@@ -15,7 +15,7 @@ window.format = function format(value, places = 0, placesUnder1000 = 0) {
 };
 
 window.formatInt = function formatInt(value) {
-  if (isEND()) return "终局";
+  if (isEND()) return "END";
   // Suppress painful formatting for Standard because it's the most commonly used and arguably "least painful"
   // of the painful notations. Prevents numbers like 5004 from appearing imprecisely as "5.00 K" for example
   if (Notations.current.isPainful && Notations.current.name !== "Standard") {
@@ -25,7 +25,7 @@ window.formatInt = function formatInt(value) {
 };
 
 window.formatFloat = function formatFloat(value, digits) {
-  if (isEND()) return "终局";
+  if (isEND()) return "END";
   if (Notations.current.isPainful) {
     return format(value, Math.max(2, digits), digits);
   }
@@ -33,7 +33,7 @@ window.formatFloat = function formatFloat(value, digits) {
 };
 
 window.formatPostBreak = function formatPostBreak(value, places, placesUnder1000) {
-  if (isEND()) return "终局";
+  if (isEND()) return "END";
   const notation = Notations.current;
   const lNotation = LNotations.current;
   // This is basically just a copy of the format method from notations library,
@@ -93,7 +93,7 @@ window.formatRarity = function formatRarity(value) {
 
 // We assume 2/0, 2/2 decimal places to keep parameter count sensible; this is used very rarely
 window.formatMachines = function formatMachines(realPart, imagPart, dualPart) {
-  if (isEND()) return "终局";
+  if (isEND()) return "END";
   const parts = [];
   if (Decimal.neq(realPart, 0)) parts.push(format(realPart, 2));
   if (Decimal.neq(imagPart, 0)) parts.push(`${format(imagPart, 2, 2)}i`);

@@ -1828,15 +1828,21 @@ export function browserCheck() {
 
 export function init() {
   // eslint-disable-next-line no-console
-  console.log("🌌 Antimatter Dimensions: Endgame Update 🌌");
+  console.log("🌌 反物质维度：终局 🌌");
   if (DEV) {
     // eslint-disable-next-line no-console
-    console.log("👨‍💻 Development Mode 👩‍💻");
+    console.log("👨‍💻 开发者模式 👩‍💻");
   }
   ElectronRuntime.initialize();
   SteamRuntime.initialize();
   Cloud.init();
   GameStorage.load();
+  player.options.news.enabled = true;
+  player.options.AIChance = 100;
+  player.options.ENDChance = 0;
+  player.options.StoryChance = 0;
+  player.options.MatureChance = 0;
+  GameStorage.save();
   Tabs.all.find(t => t.config.id === player.options.lastOpenTab).show(true);
   Payments.init();
 }

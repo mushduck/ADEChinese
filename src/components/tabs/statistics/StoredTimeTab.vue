@@ -28,7 +28,7 @@ export default {
       return `跳跃 ${TimeSpan.fromHours(5).toStringShort()}`;
     },
     allDisp() {
-      return `点击获得 114514 秒存储时间`;
+      return `114514 秒存储时间点击即送`;
     },
     classObj1() {
       return {
@@ -89,9 +89,13 @@ export default {
         simulateTime(18000);
       }
     },
-    spendAll() {//这里点按则获得114514秒存储时间
-      player.storedTime += 114514;
-      GameUI.notify.info("获得了 114514 秒存储时间DA☆ZE！");
+    getFreeTime() {//这里点按则获得114514秒存储时间
+      if (this.storedTime <= 3600) {
+        player.storedTime += 114514;
+        GameUI.notify.info("获得了 114514 秒存储时间DA☆ZE！");
+      }else {
+        GameUI.notify.info("先把存储时间用得差不多了再续杯哦！");
+      }
     }
   }
 };
@@ -132,7 +136,7 @@ export default {
       </PrimaryButton>
       <PrimaryButton
         :class="classObj5"
-        @click="spendAll"
+        @click="getFreeTime"
       >
         {{ allDisp }}
       </PrimaryButton>
