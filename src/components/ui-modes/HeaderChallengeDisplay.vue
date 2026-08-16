@@ -44,7 +44,7 @@ export default {
           activityToken: () => Pelle.isDoomed,
           tabName: () => "pelle",
         },
-        celestialReality(Alpha, "Alpha's", "alpha"),
+        celestialReality(Alpha, "阿尔法", "alpha"),
         {
           name: () => "鹿颈长的终局",
           isActive: token => token,

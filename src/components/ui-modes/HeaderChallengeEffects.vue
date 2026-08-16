@@ -26,8 +26,8 @@ export default {
       祂们将在 ${this.enslavedTimer} 后进行提示。`;
     },
     alphaText() {
-      if (this.alphaDecayTimer.lte(0)) return `Alpha Decay is capped`;
-      return `Alpha Decay will cap in ${this.alphaDecayTimeToMax}`;
+      if (this.alphaDecayTimer.lte(0)) return `阿尔法衰变已到达上限`;
+      return `阿尔法衰变将在 ${this.alphaDecayTimeToMax} 内到达上限`;
     },
   },
   methods: {
