@@ -165,29 +165,29 @@ export default {
             你 <i>本可以</i> 拥有 <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
             天界物质，但事与愿违。
             <br>
-            这是因为在超过 <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> 天界物质后，你的天界物质被一层软上限限制了。
-            <br>当前，超过一层软上限的天界物质数量将
+            这是因为在超过 <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> 天界物质后，你的天界物质被一重软上限限制了。
+            <br>当前，超过一重软上限的天界物质数量将
             <span :class="instabilityClassObject()">^{{ format(1 / softcapPow, 2, 3) }}</span>。
             <br>
-            现在天界物质的一层软上限强度完全取决于你的天界物质一层软上限指数, 当前为
+            现在天界物质的一重软上限强度完全取决于你的天界物质一重软上限指数, 当前为
             <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>。
           </div>
           <div v-if="isOverflowing">
-            在超过 <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> 天界物质后，你的天界物质将溢出，受<i>二层</i>软上限限制。
+            在超过 <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> 天界物质后，你的天界物质将溢出，受<i>二重</i>软上限限制。
             <br>
-            当前，你的天界物质和天界物质一层软上限起始值都溢出了，溢出的天界物质数量将
+            当前，你的天界物质和天界物质一重软上限起始值都溢出了，溢出的天界物质数量将
             <span :class="instabilityClassObject()">^{{ format(1 / overflowMag, 2, 3) }}</span>。
             <br>
-            现在溢出的天界物质的二层软上限强度完全取决于你的天界物质二层软上限指数, 当前为
+            现在溢出的天界物质的二重软上限强度完全取决于你的天界物质二重软上限指数, 当前为
             <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>。
           </div>
           <div v-if="isCorrupted">
-            在超过 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> 天界物质后，你的天界物质将被诅咒，受<i>三层</i>软上限限制。
+            在超过 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> 天界物质后，你的天界物质将被诅咒，受<i>三重</i>软上限限制。
             <br>
-            当前，超过三层软上限的天界物质数量将
+            当前，超过三重软上限的天界物质数量将
             <span :class="instabilityClassObject()">^{{ format(1 / massOverflowMag, 2, 3) }}</span>。
             <br>
-            现在被诅咒的天界物质的三层软上限强度完全取决于你的天界物质三层软上限指数, 当前为
+            现在被诅咒的天界物质的三重软上限强度完全取决于你的天界物质三重软上限指数, 当前为
             <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>。
           </div>
         </p>
