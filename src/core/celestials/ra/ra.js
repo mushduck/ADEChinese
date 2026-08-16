@@ -310,7 +310,7 @@ export const Ra = {
     if (a.eq(0)) estimate = c.neg().div(b);
     else if (a.neq(0)) estimate = (Decimal.sqrt(Decimal.pow(b, 2).sub(a.times(c).times(4))).sub(b)).div(a.times(2));
     if (Decimal.isFinite(estimate)) {
-      return `in ${TimeSpan.fromSeconds(estimate).toStringShort()}`;
+      return `还需要 ${TimeSpan.fromSeconds(estimate).toStringShort()}`;
     }
     return "";
   },
