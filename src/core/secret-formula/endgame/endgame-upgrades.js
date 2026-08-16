@@ -34,7 +34,7 @@ export const endgameUpgrades = [
     id: 2,
     initialCost: 1e42,
     costMult: 300,
-    textTemplate: "将无限维度软上限强度除以{value}",
+    textTemplate: "将无限维度压缩因子软上限减益乘以{value}",
     effect: 0.99
   }),
   rebuyable({
@@ -42,7 +42,7 @@ export const endgameUpgrades = [
     id: 3,
     initialCost: 1e44,
     costMult: 150,
-    textTemplate: "将时间维度软上限强度除以{value}",
+    textTemplate: "将时间维度压缩因子软上限减益乘以{value}",
     effect: 0.99
   }),
   rebuyable({
