@@ -107,8 +107,8 @@ export default {
         : `${TimeSpan.fromMilliseconds(new Decimal(this.achievementTime)).toStringShort()} 后获得`;
     },
     achieveProgress() {
-      if (this.achievementProgress.lt(0)) return "Progress: Failed";
-      return `Progress: ${formatDecimalPercents(this.achievementProgress, 2, 2)}`;
+      if (this.achievementProgress.lt(0)) return "进度: 已失败";
+      return `进度: ${formatDecimalPercents(this.achievementProgress, 2, 2)}`;
     }
   },
   beforeDestroy() {

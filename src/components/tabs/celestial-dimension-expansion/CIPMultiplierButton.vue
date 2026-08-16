@@ -62,7 +62,7 @@ export default {
         当前: {{ formatX(multiplier, 2, 0) }}
       </div>
       <br>
-      价格: {{ quantify("Celestial Infinity Point", cost, 2, 0) }}
+      价格: {{ quantify("天界无限点数", cost, 2, 0) }}
     </button>
     <PrimaryButton
       class="l--spoon-btn-group__little-spoon o-primary-btn--small-spoon"

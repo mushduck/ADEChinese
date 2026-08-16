@@ -375,7 +375,7 @@ export const singularityMilestones = {
     limit: 1,
     description: "解锁星系之力",
     effect: completions => completions.toNumber(),
-    effectFormat: x => (x === 1 ? "Unlocked" : "Locked"),
+    effectFormat: x => (x === 1 ? "已解锁" : "未解锁"),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_MAIN,
   },
   perPurchaseDimMult: {

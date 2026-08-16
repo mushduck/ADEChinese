@@ -66,23 +66,23 @@ export default {
     },
     effect1Text() {
       if (this.effect1Time.lte(0)) return `效果达到上限`;
-      return `Time to cap: ${TimeSpan.fromHours(this.effect1Time).toStringShort()}`;
+      return `达到上限时间: ${TimeSpan.fromHours(this.effect1Time).toStringShort()}`;
     },
     effect2Text() {
       if (this.effect2Time.lte(0)) return `效果达到上限`;
-      return `Time to cap: ${TimeSpan.fromHours(this.effect2Time).toStringShort()}`;
+      return `达到上限时间: ${TimeSpan.fromHours(this.effect2Time).toStringShort()}`;
     },
     effect3Text() {
       if (this.effect3Time.lte(0)) return `效果达到上限`;
-      return `Time to cap: ${TimeSpan.fromHours(this.effect3Time).toStringShort()}`;
+      return `达到上限时间: ${TimeSpan.fromHours(this.effect3Time).toStringShort()}`;
     },
     effect4Text() {
       if (this.effect4Time.lte(0)) return `效果达到上限`;
-      return `Time to cap: ${TimeSpan.fromHours(this.effect4Time).toStringShort()}`;
+      return `达到上限时间: ${TimeSpan.fromHours(this.effect4Time).toStringShort()}`;
     },
     effect5Text() {
       if (this.effect5Time.lte(0)) return `效果达到上限`;
-      return `Time to cap: ${TimeSpan.fromHours(this.effect5Time).toStringShort()}`;
+      return `达到上限时间: ${TimeSpan.fromHours(this.effect5Time).toStringShort()}`;
     },
     hadronTime() {
       return TimeSpan.fromHours(this.hadronTimer).toStringShort();
