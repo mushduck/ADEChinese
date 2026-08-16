@@ -70,7 +70,7 @@ export default {
         BlackHole(2).duration / BlackHole(2).cycleLength];
       this.detailedBH2 = this.bh2Status();
 
-      if (player.blackHoleNegative < 1 && !this.isLaitela) this.stateChange = this.isPaused ? "Uninvert" : "Invert";
+      if (player.blackHoleNegative < 1 && !this.isLaitela) this.stateChange = this.isPaused ? "解除反转" : "反转";
       else this.stateChange = this.isPaused ? "解除暂停" : "暂停";
     },
     bh2Status() {
