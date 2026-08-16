@@ -223,7 +223,7 @@ export default {
                   你可以多获得 {{ formatPercents(0.5) }} 的记忆块。
                 </div>
                 <div class="c-ra-pet-upgrade__tooltip__footer">
-                  价格：{{ quantify("Memory", chunkUpgradeCost, 2, 2) }}
+                  价格：{{ quantify("记忆", chunkUpgradeCost, 2, 2) }}
                   <span v-if="memories.lte(chunkUpgradeCost)">
                     {{ nextMemoryChunkUpgradeEstimate }}
                   </span>
