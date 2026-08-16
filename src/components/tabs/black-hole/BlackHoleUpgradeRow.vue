@@ -27,7 +27,7 @@ export default {
     intervalConfig() {
       return {
         upgrade: this.blackHole.intervalUpgrade,
-        description: () => `Reduce ${this.blackHoleDescription}的冷却时间减少 ${formatPercents(0.2)}`,
+        description: () => `${this.blackHoleDescription}的冷却时间减少 ${formatPercents(0.2)}`,
         effectTitle: "当前间隔",
         formatEffect: () => `${TimeSpan.fromSeconds(new Decimal(this.blackHole.rawInterval)).toStringShort(false)}`
       };
