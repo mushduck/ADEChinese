@@ -94,7 +94,7 @@ export const endgameUpgrades = [
     hasFailed: () => Time.thisEndgameRealTime.totalMinutes.gte(10),
     checkRequirement: () => Time.bestEndgameRealTime.totalMinutes.lt(10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `以最快终局耗费的现实时间的 ${formatInt(10)} 生成终局次数`,
+    description: () => `以最快终局 ${formatInt(10)}% 的真实速度生成终局次数`,
     effect: () => player.disablePostReality ? DC.NUMMAX : new Decimal(player.records.bestEndgame.realTime * 10),
     formatEffect: value => {
       if (new Decimal(value).gte(9999999999)) return "无终局次数生成";
