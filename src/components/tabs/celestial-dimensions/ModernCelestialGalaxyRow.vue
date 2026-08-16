@@ -52,14 +52,14 @@ export default {
     costScalingText() {
       switch (this.type) {
         case CELESTIAL_GALAXY_TYPE.DISTANT:
-          return `${quantifyHybridLarge("Galaxy", this.distantStart)} 个天界星系后天界星系价格大幅增长`;
+          return `${quantifyHybridLarge("个天界星系", this.distantStart)}后天界星系价格大幅增长`;
         case CELESTIAL_GALAXY_TYPE.REMOTE: {
           const scalings = [
             { type: "遥远", function: "二次方", amount: this.distantStart },
             { type: "极远", function: "指数", amount: this.remoteStart }
           ];
           return `天界星系价格增速: ${scalings.sort((a, b) => a.amount - b.amount)
-            .map(scaling => `${scaling.function}增长（超过 ${this.formatCelestialGalaxies(scaling.amount)} 个${scaling.type}天界星系)`)
+            .map(scaling => `超过 ${this.formatCelestialGalaxies(scaling.amount)} 个${scaling.type}天界星系后呈${scaling.function}增长`)
             .join(", ").capitalize()}`;
         }
       }

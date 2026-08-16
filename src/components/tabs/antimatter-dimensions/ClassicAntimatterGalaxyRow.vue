@@ -78,14 +78,14 @@ export default {
     costScalingText() {
       switch (this.type) {
         case GALAXY_TYPE.DISTANT:
-          return `${quantifyInt("Galaxy", this.distantStart)} 个星系后星系价格大幅增长`;
+          return `${quantifyInt("个星系", this.distantStart)}后星系价格大幅增长`;
         case GALAXY_TYPE.REMOTE: {
           const scalings = [
             { type: "遥远", function: "二次方", amount: this.distantStart },
             { type: "极远", function: "指数", amount: this.remoteStart }
           ];
           return `星系价格增速: ${scalings.sort((a, b) => a.amount - b.amount)
-            .map(scaling => `${scaling.function}增长（超过 ${this.formatGalaxies(scaling.amount)} 个${scaling.type}星系）`)
+            .map(scaling => `超过 ${this.formatGalaxies(scaling.amount)} 个${scaling.type}星系后呈${scaling.function}增长`)
             .join(", ").capitalize()}`;
         }
       }
