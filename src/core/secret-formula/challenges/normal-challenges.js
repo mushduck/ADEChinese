@@ -66,8 +66,7 @@ export const normalChallenges = [
     id: 6,
     legacyId: 10,
     isQuickResettable: false,
-    description: () => `购买反物质维度时不消耗反物质，`+
-      "而是按另外的价格消耗其上 ${formatInt(2)} 层的反物质维度。模组中降低反物质维度价格。",
+    description: () => `购买反物质维度时不消耗反物质，而是按另外的价格消耗其上 ${formatInt(2)} 层的反物质维度。模组中降低反物质维度价格。`,
     name: "第六",
     reward: "升级第六维度自动购买间隔的能力",
     lockedAt: DC.D0,
