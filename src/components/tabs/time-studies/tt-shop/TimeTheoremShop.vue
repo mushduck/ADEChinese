@@ -61,7 +61,7 @@ export default {
       return `你每秒获得 ${format(this.theoremGeneration, 2, 2)} 时间之理。`;
     },
     totalTimeTheoremText() {
-      return `你拥有 ${quantify("时间之理`;", this.totalTimeTheorems, 2, 2, this.formatTimeTheoremType)}.`;
+      return `你拥有 ${quantify("时间之理", this.totalTimeTheorems, 2, 2, this.formatTimeTheoremType)}。`;
     },
     minimizeArrowStyle() {
       return {
@@ -189,7 +189,7 @@ export default {
               {{ TTgenRateText }}
             </span>
             <span v-else>
-              你拥有 {{ totalTimeTheoremText }}。
+              {{ totalTimeTheoremText }}
             </span>
           </div>
         </div>
