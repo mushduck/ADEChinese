@@ -8045,7 +8045,8 @@ export const news = [
     id: "ai155",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const sound = new Audio("/audio/ciallo.mp3");
+      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
+      const sound = new Audio(audioPath);
       sound.volume = 0.8; 
       sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
     }
@@ -8054,7 +8055,8 @@ export const news = [
     id: "ai156",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const sound = new Audio("/audio/ciallo.mp3");
+      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
+      const sound = new Audio(audioPath);
       sound.volume = 0.8; 
       sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
     }
@@ -8063,7 +8065,8 @@ export const news = [
     id: "ai157",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const sound = new Audio("/audio/ciallo.mp3");
+      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
+      const sound = new Audio(audioPath);
       sound.volume = 0.8; 
       sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
     }
@@ -8072,7 +8075,8 @@ export const news = [
     id: "ai158",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const sound = new Audio("/audio/ciallo.mp3");
+      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
+      const sound = new Audio(audioPath);
       sound.volume = 0.8; 
       sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
     }
