@@ -65,7 +65,7 @@ export default {
       return unlock ?? false;
     },
     showNextScalingUpgrade() {
-      switch (this.pet.name) {
+      switch (this.pet.key) {
         case "Teresa":
           return Math.min(12, Math.floor(this.level / 2)) !== Math.min(12, Math.floor((this.level + 1) / 2));
         case "Effarig":
@@ -80,7 +80,7 @@ export default {
     },
     nextScalingUpgrade() {
       const effarigAlchemyResource = AlchemyResources.all.filter(res => res.unlockedAt === this.level + 1)[0];
-      switch (this.pet.name) {
+      switch (this.pet.key) {
         case "Teresa":
           return "可充能的无限升级加 1";
         case "Effarig":
