@@ -1412,7 +1412,7 @@ function laitelaRealityTick(realDiff) {
 
   // Setting entropy to -1 on completion prevents the modal from showing up repeatedly
   if (laitelaInfo.entropy.gte(1)) {
-    let completionText = `Lai'tela's Reality has been destabilized after ${Time.thisRealityRealTime.toStringShort()}.`;
+    let completionText = `莱特拉的现实在 ${Time.thisRealityRealTime.toStringShort()} 内出现了不稳定`;
     laitelaInfo.entropy = new Decimal(-1);
     const oldInfo = {
       fastestCompletion: laitelaInfo.fastestCompletion,
@@ -1461,18 +1461,10 @@ function laitelaRealityTick(realDiff) {
 function laitelaBeatText(disabledDim) {
   switch (disabledDim) {
     case 1: return `<br><br>在莱特拉的现实中，所有种类的所有维度都不产生任何东西。你仍然可以进入祂的现实，但你无法继续让祂的现实出现不稳定。祂的现实已完全不稳定，暗能量的产量额外 ${formatX(8)}`;
-    case 2: return `<br><br>Lai'tela's Reality will now disable production from all 2nd Dimensions during
-      future runs, but the reward will be ${formatInt(100)} times stronger than before. Completely destabilizing
-      the Reality for the final Dimension will give you an additional ${formatX(Math.pow(8, Laitela.hadronizes + 1))}
-      to Dark Energy gain.`;
-    case 3: return `<br><br>Lai'tela's Reality will now disable production from all 3rd Dimensions during
-        future runs, but the reward will be ${formatInt(100)} times stronger than before.`;
-    case 8: return `<br><br>Lai'tela's Reality will now disable production from all 8th Dimensions during
-        future runs, but the reward will be ${formatInt(100)} times stronger than before. This boost can be
-        repeated for each remaining Dimension by reaching destabilization within ${formatInt(30)} seconds again.`;
-    default: return `<br><br>Lai'tela's Reality will now disable production from all
-        ${disabledDim}th Dimensions during future runs, but the reward will be
-        ${formatInt(100)} times stronger than before.`;
+    case 2: return `<br><br>之后莱特拉的现实中将禁用所有种类的第二维度生产，但奖励提高 ${formatInt(100)} 倍。禁用莱特拉的现实中的所有维度后，暗能量获取量额外增加 ${formatX(Math.pow(8, Laitela.hadronizes + 1))}。`;
+    case 3: return `<br><br>之后莱特拉的现实中将禁用所有种类的第三维度生产，但奖励提高 ${formatInt(100)} 倍。`;
+    case 8: return `<br><br>之后莱特拉的现实中将禁用所有种类的第三维度生产，但奖励提高 ${formatInt(100)} 倍。若能在 ${formatInt(30)} 秒内再次让莱特拉的现实出现不稳定，则可以重复禁用第一维度至第八维度，奖励也继续发放。`;
+    default: return `<br><br>之后莱特拉的现实中将禁用所有种类的第${disabledDim}维度生产，但奖励提高 ${formatInt(100)} 倍。`;
   }
 }
 

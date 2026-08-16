@@ -234,7 +234,7 @@ const EP_BUTTON_DISPLAY_TYPE = {
     <!-- Dilation -->
     <template v-else-if="type === 3">
       获得 <span :style="tachyonAmountStyle">{{ format(gainedTachyons, 2, 1) }}</span>
-      {{ pluralize("Tachyon Particle", gainedTachyons) }}
+      {{ pluralize("超光速粒子", gainedTachyons) }}
     </template>
 
     <!-- New content available -->
