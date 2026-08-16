@@ -229,7 +229,7 @@ export default {
             v-if="!minimized && hasTTAutobuyer"
             v-model="isAutobuyerOn"
             class="o-tt-autobuyer-button c-tt-buy-button c-tt-buy-button--unlocked"
-            label="Auto:"
+            label="自动："
           />
         </div>
       </div>

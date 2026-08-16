@@ -136,7 +136,7 @@ export default {
         v-if="isAutobuyerUnlocked"
         v-model="isAutobuyerOn"
         class="o-primary-btn--cd-auto"
-        label="Auto:"
+        label="自动："
       />
       <PrimaryButton
         v-else
