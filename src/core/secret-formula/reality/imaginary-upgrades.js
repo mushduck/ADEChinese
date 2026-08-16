@@ -189,8 +189,8 @@ export const imaginaryUpgrades = [
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     description: () => `${
-      Pelle.isDoomed ? "Unlock" : "将反物质维度转化成连续统，解锁维度之神莱特拉"
-    } Lai'tela, Celestial of Dimensions`,
+      Pelle.isDoomed ? "未解锁" : "将反物质维度转化成连续统，解锁维度之神，莱特拉"
+    }`,
   },
   {
     name: "无质动量",

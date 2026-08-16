@@ -1,5 +1,5 @@
 const specialInfinityGlyphDisabledEffectText = () => (PelleRifts.chaos.milestones[1].canBeApplied && !PelleDestructionUpgrade.pelleGlyphEffects.canBeApplied
-  ? "The Pelle-Specific effect from Infinity Glyphs is also disabled."
+  ? "同时禁用无限符文的佩勒特殊词条"
   : "");
 
 export const eternityChallenges = [
