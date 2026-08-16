@@ -89,7 +89,7 @@ export const breakEternityUpgrades = {
     effect: value => value * 10000,
     description: () => "推迟遥远星系/极远星系出现",
     isDisabled: effect => effect.eq(0),
-    formatEffect: value => `${formatInt(value)} Galaxies`,
+    formatEffect: value => `${formatInt(value)} 星系`,
     noLabel: false
   }),
   infinityPowerConversion: rebuyable({
