@@ -40,7 +40,7 @@ export default {
     :style="style"
   >
     <h2>
-      重置整个游戏，保留自动机脚本、研究预设、隐藏主题、隐藏成就、选项设置和同伴符文。
+      你想进入新的终局吗？进行终局将重置整个游戏，但保留自动机脚本、研究预设、隐藏主题、隐藏成就、第19行及以后的普通成就、选项设置和同伴符文。
     </h2>
     <h3>你可以使用右上角的按钮，查看此时的游戏。</h3>
     <div class="c-new-game-button-container">
@@ -48,7 +48,7 @@ export default {
         class="c-new-game-button"
         @click="startNewGame"
       >
-        再玩一遍？
+        进入终局？
       </button>
     </div>
     <br>

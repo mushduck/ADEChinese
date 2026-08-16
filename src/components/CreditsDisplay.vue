@@ -29,7 +29,7 @@ export default {
       v-if="!isModal"
       class="c-credits-header"
     >
-      反物质维度
+      反物质维度：终局
     </h1>
 
     <div

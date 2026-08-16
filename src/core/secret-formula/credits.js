@@ -1,7 +1,7 @@
 export const credits = {
   // Must be placed in the order it is desired they appear in the credits
   roles: {
-    1: "作者",
+    1: "原版作者",
     2: "模组作者",
     3: "技术工程师",
     4: "领衔开发者",
