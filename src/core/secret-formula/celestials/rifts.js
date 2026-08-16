@@ -6,7 +6,7 @@ export const pelleRifts = {
     key: "vacuum",
     name: ["空洞", "虚无", "寂灭"],
     drainResource: "无限点数",
-    baseEffect: x => `IP gain ${formatX(x, 2, 2)}`,
+    baseEffect: x => `无限点数获取量 ${formatX(x, 2, 2)}`,
     additionalEffects: () => [PelleRifts.vacuum.milestones[2]],
     strike: () => PelleStrikes.infinity,
     percentage: totalFill => Decimal.pow(Decimal.log10(totalFill.plus(1).log10().times(10).add(1)), 2.5).div(100).toNumber(),
@@ -40,7 +40,7 @@ export const pelleRifts = {
         requirement: 0.4,
         description: () => `${wordShift.wordCycle(PelleRifts.vacuum.name)} 也能提升获得永恒点数的数量`,
         effect: () => Decimal.pow(4, PelleRifts.vacuum.totalFill.add(1).log10().div(2).div(308).add(3)),
-        formatEffect: x => `EP gain ${formatX(x, 2, 2)}`
+        formatEffect: x => `永恒点数获取量 ${formatX(x, 2, 2)}`
       },
     ],
     galaxyGeneratorText: "留给星系的空间不够了，你必须填充 $value"
