@@ -468,8 +468,8 @@ export const Pelle = {
         return onlyReturnUseful ? null : "未装备符文！";
       default:
         if (onlyReturnUseful) return null;
-        if (this.isGlyphTypeDisabled(type)) return "你不能再被毁灭的现实中装备此符文！";
-        return "这个符文没有佩勒专属效果！真糟糕。";
+        if (this.isGlyphTypeDisabled(type)) return "你不能在被毁灭的现实中装备此符文！";
+        return "这个符文没有佩勒专属效果！真糟糕qwq。";
     }
   },
 
