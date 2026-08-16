@@ -137,7 +137,7 @@ export default {
     <span>
       你拥有
       <span class="c-dilation-tab__tachyons">{{ format(tachyons, 2, 1) }}</span>
-      {{ pluralize("膨胀时间", tachyons) }}。
+      {{ pluralize("超光速粒子", tachyons) }}。
     </span>
     <div
       @mouseover="isHovering = true"
@@ -152,9 +152,7 @@ export default {
       <span class="c-dilation-tab__dilated-time-income">{{ dilatedTimeGainText }}/s</span>
     </span>
     <span>
-      下
-      <span v-if="tachyonGalaxyGain > 1">{{ formatHybridLarge(tachyonGalaxyGain, 3) }}</span>
-      个{{ pluralize("超光速粒子星系", tachyonGalaxyGain) }}将于
+      下<span v-if="tachyonGalaxyGain > 1">{{ formatHybridLarge(tachyonGalaxyGain, 3) }}</span>个{{ pluralize("超光速粒子星系", tachyonGalaxyGain) }}将于
       <span
         class="c-dilation-tab__galaxy-threshold"
         :ach-tooltip="galaxyTimeEstimate"
