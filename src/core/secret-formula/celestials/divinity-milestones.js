@@ -70,7 +70,7 @@ export const divinityMilestones = {
       return ` 推迟符文不稳定性第六软上限出现。
         虚无时基于本次终局中经过的真实时间增强反物质维度。
         献祭所有裂痕后，裂痕填充速度 ${formatX(100)}。
-        神性维度产量 ^ ${formatPow(1.05, 2, 2)}。
+        神性维度产量 ${formatPow(1.05, 2, 2)}。
         将所有类型的强子效果到达上限所需的时间降低 ${formatPercents(0.5)}。
         将阿尔法诅咒到达上限所需的时间降低 ${formatPercents(0.25)}。
         基于本次终局中经过的真实时间提高熵产量倍率。
