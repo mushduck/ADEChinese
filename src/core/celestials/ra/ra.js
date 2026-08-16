@@ -288,7 +288,7 @@ export const Ra = {
 
     if (boostList.length === 1) return `${boostList[0]}`;
     if (boostList.length === 2) return `${boostList[0]} and ${boostList[1]}`;
-    return `${boostList.slice(0, -1).join(", ")}, and ${boostList[boostList.length - 1]}`;
+    return `${boostList.slice(0, -1).join(", ")}和${boostList[boostList.length - 1]}`;
   },
   // This is the exp required ON "level" in order to reach "level + 1"
   requiredMemoriesForLevel(level) {
