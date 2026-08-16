@@ -22,19 +22,19 @@ export default {
       if (GameEnd.creditsClosed) return;
       if (this.isDoomed) {
         if (confirms.resetEndgame) Modal.resetEndgame.show({
-          endgameState: "in a Doomed Reality",
-          suggestion: "just wait it out"
+          endgameState: "在被毁灭的现实中",
+          suggestion: "耐心等待"
         });
         else Endgame.resetNoReward();
       } else if (this.canEndgame) {
         if (confirms.resetEndgame) Modal.resetEndgame.show({
-          endgameState: "able to Endgame",
-          suggestion: "just Endgame with rewards rather than with nothing"
+          endgameState: "可以进行一次终局",
+          suggestion: "进行终局以获得收益，好过啥也没拿到"
         });
         else Endgame.resetNoReward();
       } else if (confirms.resetEndgame) Modal.resetEndgame.show({
-        endgameState: "outside Doom",
-        suggestion: "reset if you really want to"
+        endgameState: "在被毁灭的现实外",
+        suggestion: "做你想做的事"
       });
       else Endgame.resetNoReward();
     },

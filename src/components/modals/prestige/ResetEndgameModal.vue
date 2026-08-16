@@ -52,7 +52,7 @@ export default {
       <br>
       你确定要重置吗？
       <br>
-      当前你的终局 {{ endgameState }}。根据当前的终局状态，建议你{{ suggestion }}。
+      当前你 {{ endgameState }}。根据当前的终局状态，建议你{{ suggestion }}。
       <br>
     </div>
     <template #confirm-text>

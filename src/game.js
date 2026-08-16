@@ -17,6 +17,25 @@ if (GlobalErrorHandler.handled) {
 }
 GlobalErrorHandler.cleanStart = true;
 
+function applyNewsOptionsMigration() {
+  if (!window.player || !player.options) return;
+  if (typeof player.options.news !== 'object' || player.options.news.enabled === undefined) {
+    player.options.news = {
+      enabled: true,
+      repeatBuffer: 40,
+      AIChance: 1,           
+      ENDChance: 0,          
+      StoryChance: 0,        
+      MatureChance: 0,       
+      speed: 1,
+      includeAnimated: false 
+    };
+    if (typeof GameStorage?.save === "function") {
+      GameStorage.save();
+    }
+  }
+}
+
 export function playerInfinityUpgradesOnReset() {
 
   const infinityUpgrades = new Set(
@@ -1838,10 +1857,11 @@ export function init() {
   Cloud.init();
   GameStorage.load();
   player.options.news.enabled = true;
-  player.options.AIChance = 100;
-  player.options.ENDChance = 0;
-  player.options.StoryChance = 0;
-  player.options.MatureChance = 0;
+  player.options.news.AIChance = 1;
+  player.options.news.ENDChance = 0;
+  player.options.news.StoryChance = 0;
+  player.options.news.MatureChance = 0;
+  applyNewsOptionsMigration();
   GameStorage.save();
   Tabs.all.find(t => t.config.id === player.options.lastOpenTab).show(true);
   Payments.init();

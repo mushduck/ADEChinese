@@ -41,11 +41,13 @@ export default {
       this.subtabVisibilities = this.tab.subtabs.map(x => x.isAvailable);
       this.showSubtabs = this.isAvailable && this.subtabVisibilities.length >= 1;
       this.hasNotification = this.tab.hasNotification;
+
       if (this.tabPosition < Pelle.endTabNames.length) {
+        const stage = Math.clamp(GameEnd.endState - (this.tab.id % 4) / 10, 0, 1);
         this.tabName = Pelle.transitionText(
           this.tab.name,
           Pelle.endTabNames[this.tabPosition],
-          Math.clamp(GameEnd.endState - (this.tab.id % 4) / 10, 0, 1)
+          stage
         );
       } else {
         this.tabName = this.tab.name;
@@ -166,5 +168,13 @@ export default {
   border-top-right-radius: var(--var-border-radius, 0.5rem);
   border-bottom-right-radius: var(--var-border-radius, 0.5rem);
   transition: border-radius 0s;
+}
+
+@keyframes zalgo-jitter {
+  0%, 100% { transform: translate(0, 0) skewX(0deg); }
+  20% { transform: translate(0.5px, -0.5px) skewX(1deg); }
+  40% { transform: translate(-0.5px, 0.5px) skewX(-1deg); }
+  60% { transform: translate(0.5px, 0.5px) skewX(0.5deg); }
+  80% { transform: translate(-0.5px, -0.5px) skewX(-0.5deg); }
 }
 </style>

@@ -138,7 +138,6 @@ export default {
       <span>建议善用赠送的离线时长！或许在特定的情况下可以大大加快永恒！</span>
     </div>
     <div class="c-subtab-option-container">
-      <!-- 替换原来的第一个按钮为自定义输入组合 -->
       <div class="custom-time-container">
         <input 
           type="number" 
