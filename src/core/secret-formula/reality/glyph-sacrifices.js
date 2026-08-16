@@ -12,7 +12,7 @@ export const glyphSacrifice = {
       const sacCap = GlyphSacrificeHandler.maxSacrificeForEffects;
       const nextDistantGalaxy = Decimal.pow(10, Decimal.pow((amount.add(1)).div(750), new Decimal(1 / 1.2)).times(100)).sub(1);
       const nextGalaxyText = amount.lt(750)
-        ? ` (（下一个需要 ${format(nextDistantGalaxy, 2, 2)})`
+        ? `(下一个需要 ${format(nextDistantGalaxy, 2, 2)})`
         : "";
       return `遥远星系的价格增长推迟 ${formatHybridLarge(amount, 3)} 星系${nextGalaxyText}`;
     },
@@ -53,7 +53,7 @@ export const glyphSacrifice = {
       const sacCap = GlyphSacrificeHandler.maxSacrificeForEffects;
       const nextDistantGalaxy = Decimal.pow(10, Decimal.pow((amount.add(1)).div(1500), new Decimal(1 / 1.2)).times(100)).sub(1);
       const nextGalaxyText = amount.lt(1500)
-        ? ` (下一个于 ${format(nextDistantGalaxy, 2, 2)} 出现)`
+        ? ` (下一个需要 ${format(nextDistantGalaxy, 2, 2)})`
         : "";
       return `复制器星系的价格增长推迟${formatHybridLarge(amount, 3)} 星系 ${nextGalaxyText}`;
     },
