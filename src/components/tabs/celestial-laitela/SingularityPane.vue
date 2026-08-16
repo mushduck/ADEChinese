@@ -28,7 +28,7 @@ export default {
       const formText = this.singularitiesGained.eq(1) ? "凝聚所有暗能量以得到一个奇点"
         : `凝聚所有暗能量以得到 ${quantify("个奇点", this.singularitiesGained, 2)}`;
       if (this.canPerformSingularity) {
-        return `Condense ${formText}`;
+        return `${formText}`;
       }
       return `达到 ${format(this.singularityCap)} 暗能量以${formText}`;
     },
