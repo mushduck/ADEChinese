@@ -131,7 +131,7 @@ export default {
         储存现实时间时，不会产生记忆块，但记忆块仍然生产记忆。
         <span v-if="memoriesPerChunk.gt(1)">
           <br>
-          该项提升基于{{ memoryBoosts }}.
+          该项提升基于{{ memoryBoosts }}。
         </span>
       </div>
       <div v-else>
