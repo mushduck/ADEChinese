@@ -12,7 +12,7 @@ export const automator = {
     {
       id: 0,
       isUnlocked: () => true,
-      keyword: "重置时间研究",
+      keyword: "STUDIES RESPEC",
       category: 0,
       syntax: `<b>studies respec</b>`,
       description: `这条指令会打开重置时间研究的选项，从而在下次永恒的时候重置时间研究。注意它不会进行一次永恒，请确保你的自动购买器开启或者你手动运行永恒指令（尽管永恒之理支持带上重置研究的选项）。`,
