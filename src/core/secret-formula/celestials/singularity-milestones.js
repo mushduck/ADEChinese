@@ -164,7 +164,7 @@ export const singularityMilestones = {
     limit: 4,
     description: "自动购买暗物质维度",
     effect: completions => completions.toNumber(),
-    effectFormat: x => ((x === 0) ? "No new autobuyers" : `自动购买到第${x + 4}暗物质维度`),
+    effectFormat: x => ((x === 0) ? "无法自动购买" : `自动购买到第${x + 4}暗物质维度`),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   darkDimAscension5to8: {
@@ -173,7 +173,7 @@ export const singularityMilestones = {
     limit: 4,
     description: "暗物质维度自动飞升",
     effect: completions => completions.toNumber(),
-    effectFormat: x => ((x === 0) ? "No new autobuyers" : `自动飞升到第${x + 4}暗物质维度`),
+    effectFormat: x => ((x === 0) ? "无法自动购买" : `自动飞升到第${x + 4}暗物质维度`),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   weakenDMSoftcaps: {
