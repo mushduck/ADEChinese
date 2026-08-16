@@ -121,7 +121,7 @@ export default {
         : quantifyInt("Time Theorem", this.config.cost);
       const stStr = this.setup.isSmall
         ? `${formatInt(this.STCost)} 空间之理`
-        : quantifyInt("Space Theorem", this.STCost);
+        : quantifyInt("空间之理", this.STCost);
 
       const costs = [];
       if (this.config.cost) costs.push(ttStr);
