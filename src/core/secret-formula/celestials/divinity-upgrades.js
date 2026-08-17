@@ -16,7 +16,7 @@ function rebuyable(config) {
       (value => {
         return (value === config.maxUpgrades
           ? `当前: ${formatX(10 - value)}`
-          : `当前: ${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`);
+          : `当前: ${formatX(10 - value)} | 下一级: ${formatX(10 - value - 1)}`);
       }),
     formatCost: value => formatPostBreak(value, 2, 0),
     noLabel,
@@ -26,7 +26,7 @@ function rebuyable(config) {
 
 export const divinityUpgrades = {
   divineL1U1: {
-    name: "Celestial Storage",
+    name: "天界之藏",
     id: "divineL1U1",
     layer: 1,
     cost: new Decimal(10000),
@@ -35,7 +35,7 @@ export const divinityUpgrades = {
     formatEffect: value => formatX(value, 2, 2)
   },
   divineL1U2: {
-    name: "Accelerated Reconstruction",
+    name: "瞬速重构",
     id: "divineL1U2",
     layer: 1,
     cost: new Decimal(1e9),
@@ -43,7 +43,7 @@ export const divinityUpgrades = {
     effect: 0.9
   },
   divineL1U3: {
-    name: "Divine Momentum",
+    name: "神性动量",
     id: "divineL1U3",
     layer: 1,
     cost: new Decimal(1e20),
@@ -52,7 +52,7 @@ export const divinityUpgrades = {
     formatEffect: value => formatX(value, 2, 2)
   },
   divineL1U4: {
-    name: "Artisan of Destruction",
+    name: "寂灭造物",
     id: "divineL1U4",
     layer: 1,
     cost: new Decimal(1e50),
@@ -61,14 +61,14 @@ export const divinityUpgrades = {
     effect: () => DivinityUpgrade.divineL5U2.isBought ? 1.02 : 1.01
   },
   divineL1U5: {
-    name: "The Great Revival",
+    name: "重铸纪元",
     id: "divineL1U5",
     layer: 1,
     cost: new Decimal(1e100),
     description: "Unlock Divine Energy and Resurgence Upgrades"
   },
   divineL1U6: {
-    name: "Wavelength",
+    name: "湮暝谐鸣",
     id: "divineL1U6",
     layer: 1,
     cost: new Decimal(1e125),
@@ -78,7 +78,7 @@ export const divinityUpgrades = {
     formatEffect: value => formatX(value, 2, 2)
   },
   divineL1U7: {
-    name: "Lucky Seven",
+    name: "幸运七字",
     id: "divineL1U7",
     layer: 1,
     cost: new Decimal(1e160),
@@ -86,7 +86,7 @@ export const divinityUpgrades = {
     effect: 7
   },
   divineL1U8: {
-    name: "Renewed Energy",
+    name: "新生律动",
     id: "divineL1U8",
     layer: 1,
     cost: new Decimal(1e200),
@@ -94,14 +94,14 @@ export const divinityUpgrades = {
     effect: 0.1
   },
   divineL1U9: {
-    name: "The Immortal Flow",
+    name: "永恒涌流",
     id: "divineL1U9",
     layer: 1,
     cost: new Decimal(1e250),
     description: "Producing Divine Energy no longer halts Divine Dimension production"
   },
   divineL1U10: {
-    name: "In Over My Head",
+    name: "临界遮断",
     id: "divineL1U10",
     layer: 1,
     cost: new Decimal(1e300),
@@ -109,7 +109,7 @@ export const divinityUpgrades = {
     effect: 0.5
   },
   divineL2U1: {
-    name: "Stellar Compound",
+    name: "星构之聚",
     id: "divineL2U1",
     layer: 2,
     cost: new Decimal(1),
@@ -119,7 +119,7 @@ export const divinityUpgrades = {
     formatEffect: value => formatX(value, 2, 2)
   },
   divineL2U2: {
-    name: "Solar Flares",
+    name: "焚日天启",
     id: "divineL2U2",
     layer: 2,
     cost: new Decimal(7),
@@ -128,7 +128,7 @@ export const divinityUpgrades = {
     formatEffect: value => formatX(value, 2)
   },
   divineL2U3: {
-    name: "Postmortal",
+    name: "来生半途",
     id: "divineL2U3",
     layer: 2,
     cost: new Decimal(17),
@@ -137,21 +137,21 @@ export const divinityUpgrades = {
     formatEffect: value => formatX(value, 2, 2)
   },
   divineL2U4: {
-    name: "Electrify",
+    name: "极点电伏",
     id: "divineL2U4",
     layer: 2,
     cost: new Decimal(77),
     description: "Divine Energy base gain is now based on your highest-ever Divine Matter"
   },
   divineL2U5: {
-    name: "Cannot Afford Loss",
+    name: "履冰临渊",
     id: "divineL2U5",
     layer: 2,
     cost: new Decimal(277),
     description: "Keep all Layer One Divine Upgrades on Condense"
   },
   divineL2U6: {
-    name: "Headstart",
+    name: "先制之机",
     id: "divineL2U6",
     layer: 2,
     cost: new Decimal(777),
@@ -159,7 +159,7 @@ export const divinityUpgrades = {
     effect: 5e36
   },
   divineL2U7: {
-    name: "Gravitate",
+    name: "神谕接引",
     id: "divineL2U7",
     layer: 2,
     cost: new Decimal(2777),
@@ -167,14 +167,14 @@ export const divinityUpgrades = {
     effect: 1.1
   },
   divineL2U8: {
-    name: "Liftoff",
+    name: "解脱终曲",
     id: "divineL2U8",
     layer: 2,
     cost: new Decimal(7777),
     description: () => `The Divine Dimension Per-Purchase Multiplier is increased to ${formatX(17)}`
   },
   divineL2U9: {
-    name: "Ascension",
+    name: "扬升破晓",
     id: "divineL2U9",
     layer: 2,
     cost: new Decimal(77777),
@@ -183,7 +183,7 @@ export const divinityUpgrades = {
     formatEffect: value => formatX(value, 2, 2)
   },
   divineL2U10: {
-    name: "Completion",
+    name: "归一至臻",
     id: "divineL2U10",
     layer: 2,
     cost: new Decimal(1777777),
@@ -191,7 +191,7 @@ export const divinityUpgrades = {
       is always produced at a ${formatPercents(1)} rate with no penalty`
   },
   divineL3U1: rebuyable({
-    name: "Entropy Reduction",
+    name: "熵增湮灭",
     id: 0,
     layer: 3,
     initialCost: 1e7,
@@ -202,7 +202,7 @@ export const divinityUpgrades = {
     onPurchased: () => GameCache.divineDimensionMultDecrease.invalidate()
   }),
   divineL3U2: rebuyable({
-    name: "Divine Excellence",
+    name: "渎神擢升",
     id: 1,
     layer: 3,
     initialCost: 1e8,
@@ -214,7 +214,7 @@ export const divinityUpgrades = {
     noLabel: false
   }),
   divineL3U3: rebuyable({
-    name: "Stellar Supercharger",
+    name: "星漩超荷",
     id: 2,
     layer: 3,
     initialCost: 1e10,
