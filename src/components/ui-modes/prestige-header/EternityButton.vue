@@ -214,8 +214,8 @@ const EP_BUTTON_DISPLAY_TYPE = {
     <template v-else-if="type === 1">
       获得
       <span :style="amountStyle">{{ format(gainedEP, 2) }}</span>
-      <span v-if="showEPRate">永恒点数</span>
-      <span v-else>永恒{{ pluralize("点数", gainedEP) }}</span>
+      <span v-if="showEPRate"> 永恒点数</span>
+      <span v-else> 永恒{{ pluralize("点数", gainedEP) }}</span>
       <br>
       <template v-if="showEPRate">
         当前：{{ format(currentEPRate, 2, 2) }} 永恒点数/分
