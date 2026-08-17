@@ -57,9 +57,6 @@ export default {
 
 //我改的，神性部分鬼看的清字
 <style scoped>
-@property --ms-txt-hi  { syntax: "<color>"; inherits: false; initial-value: #ff9c9c; }
-@property --ms-txt-mid { syntax: "<color>"; inherits: false; initial-value: #ff5a5a; }
-@property --ms-txt-lo  { syntax: "<color>"; inherits: false; initial-value: #8a1a1a; }
 @property --milestone-cross {
   syntax: "<number>";
   initial-value: 0;
@@ -223,43 +220,33 @@ export default {
   }
 }
 .l-divinity-milestone-grid__cell ::v-deep *:not(:has(*)):not(.o-divinity-milestone__goal) {
-  background-image: linear-gradient(120deg,
-    var(--ms-txt-hi) 0%,
-    var(--ms-txt-mid) 45%,
-    var(--ms-txt-lo) 100%);
+  background-image: linear-gradient(180deg, #ff9090 0%, #ff4040 55%, #d01515 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  -webkit-text-stroke: 0.06rem #2b0000;
   font-weight: bold;
-  filter:
-    drop-shadow(0 0 0.12rem rgba(255, 215, 215, 0.6))
-    drop-shadow(0 0.08rem 0.25rem rgba(0, 0, 0, 0.9));
+  animation: a-milestone-text-breathe 2.4s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
 }
 
-.l-divinity-milestone-grid__cell ::v-deep .o-divinity-milestone__reward *:not(:has(*)):not(.o-divinity-milestone__goal) {
-  animation: a-milestone-textcolor 12s linear infinite;
-  animation-delay: 3s;
-}
-
-.o-divinity-milestone__reward .c-divinity-reward-description:nth-child(2) { animation-delay: -10.3s; }
-.o-divinity-milestone__reward .c-divinity-reward-description:nth-child(3) { animation-delay: -8.6s; }
-.o-divinity-milestone__reward .c-divinity-reward-description:nth-child(4) { animation-delay: -6.9s; }
-.o-divinity-milestone__reward .c-divinity-reward-description:nth-child(5) { animation-delay: -5.2s; }
-.o-divinity-milestone__reward .c-divinity-reward-description:nth-child(6) { animation-delay: -3.5s; }
-.o-divinity-milestone__reward .c-divinity-reward-description:nth-child(7) { animation-delay: -1.7s; }
-
-@keyframes a-milestone-textcolor {
+@keyframes a-milestone-text-breathe {
   0%, 100% {
-    --ms-txt-hi: #a00707;
-    --ms-txt-mid: #de0000;
-    --ms-txt-lo: #750000;
+    filter:
+      drop-shadow(0.08rem 0 0 #000)
+      drop-shadow(-0.08rem 0 0 #000)
+      drop-shadow(0 0.08rem 0 #000)
+      drop-shadow(0 -0.08rem 0 #000)
+      drop-shadow(0 0 0.15rem #000);
   }
   50% {
-    --ms-txt-hi: #c00000;
-    --ms-txt-mid: #800000;
-    --ms-txt-lo: #400000;
+    filter:
+      drop-shadow(0.16rem 0 0 #000)
+      drop-shadow(-0.16rem 0 0 #000)
+      drop-shadow(0 0.16rem 0 #000)
+      drop-shadow(0 -0.16rem 0 #000)
+      drop-shadow(0 0 0.6rem #000);
   }
 }
 
