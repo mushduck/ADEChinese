@@ -161,7 +161,7 @@ export default {
       {{ newsOnOffLabel }}
     </PrimaryButton>
     <div class="o-primary-btn o-primary-btn--option-wide o-primary-btn--slider">
-      <b>{{ formatInt(parseInt(repeatBuffer)) }} 消息重复缓冲</b>
+      <b>{{ formatInt(parseInt(repeatBuffer)) }} 条消息内不重复</b>
       <SliderComponent
         class="o-primary-btn--slider__slider"
         v-bind="sliderPropsRepeatBuffer"
@@ -217,7 +217,7 @@ export default {
     <ModalOptionsToggleButton
       v-model="includeAnimated"
       class="o-primary-btn o-primary-btn--option-wide"
-      text="Animation Effects:"
+      text="动画效果"
     />
   </ModalWrapperOptions>
 </template>
