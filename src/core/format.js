@@ -66,9 +66,9 @@ window.format = function format(value, places = 0, placesUnder1000 = 0) {
     } else {
       fmtResult = LNotations.current.formatLDecimal(valueBeforeFmt, 3);
     }
-  } else {
+  // } else {
     // 啥也不是的话不用说了直接扔错误
-    throw "传入的 value 的类型既不是 number，也不是 Decimal！";
+    // throw "传入的 value 的类型既不是 number，也不是 Decimal！";
   }
 
   // 如果是“无限”相关的词就直接返回翻译
