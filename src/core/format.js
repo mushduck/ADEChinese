@@ -7,11 +7,90 @@ function isEND() {
 }
 
 window.format = function format(value, places = 0, placesUnder1000 = 0) {
-  if (isEND()) return "END";
-  if (!(value instanceof Decimal)) value = new Decimal(value);
-  if (!Decimal.isFinite(value)) return (value.toString() === "Infinity" ? "无限" : value.toString());
-  if (value.lt("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
-  return LNotations.current.formatLDecimal(value, 3);
+  // 原代码跟石一样，我直接重写了，如果合并了记得删这行注释
+  // 这里假定 value 的类型是 number | string | Decimal（表示 value 的类型是 number、string 和 Decimal 其中之一）
+  // 用人话讲，value 要么是 number，要么是 string，要么是 Decimal 类的实例
+  // ……我先注释掉原代码，毕竟这玩意在 202 个文件里被使用了一千多次，改炸了就坏菜了
+  // - docccccccccccc (doctypehtml)
+
+  // 格式化前的数据先存到这个变量
+  let valueBeforeFmt = value;
+
+  // 格式化的结果
+  let fmtResult = "";
+
+  // 如果 isEND() 为真，就把结果设置成字符串 "END"
+  if (isEND()) fmtResult = "END";
+
+  if (typeof valueBeforeFmt === "number") {
+    // 数字类型的话就做成 Decimal 类的实例
+    if (Number.isNaN(valueBeforeFmt)) {
+      // 要是 number 的时候还是 NaN 就直接返回字符串 "NaN"
+      return "NaN";
+    }
+
+    if (valueBeforeFmt === Infinity) {
+      // 要是 number 的时候还是正的无限就直接返回字符串 "无限"
+      return "无限";
+    }
+
+    if (valueBeforeFmt === -Infinity) {
+      // 要是 number 的时候还是负的无限就直接返回字符串 "负无限"，以防万一
+      return "负无限";
+    }
+
+    valueBeforeFmt = new Decimal(valueBeforeFmt);
+  }
+
+  if (typeof valueBeforeFmt === "string") {
+    // 原游戏中如果传入字符串的话也会尽力格式化，这里加上以尽可能实现与原函数逻辑一致
+    valueBeforeFmt = new Decimal(valueBeforeFmt);
+  }
+
+  if (valueBeforeFmt instanceof Decimal) {
+    // 是 Decimal 类的实例的话就正常进行逻辑
+
+    if (!Decimal.isFinite(valueBeforeFmt)) {
+      // Infinity 和 NaN 都会走这里
+      fmtResult = valueBeforeFmt.toString();
+    }
+
+    // 如果 new Decimal(Infinity) 的话它的 mag 和 layer 都是 Infinity
+    // 原游戏里如果 format(new Decimal(Infinity)) 的话就返回字符串 "Infinity"
+    if (valueBeforeFmt.mag === Infinity && valueBeforeFmt.layer === Infinity) {
+      return valueBeforeFmt.sign === 1 ? "无限" : "负无限";
+    }
+
+    if (valueBeforeFmt.lt("e9e15")) {
+      fmtResult = Notations.current.format(valueBeforeFmt, places, placesUnder1000, 3);
+    } else {
+      fmtResult = LNotations.current.formatLDecimal(valueBeforeFmt, 3);
+    }
+  // } else {
+    // 啥也不是的话不用说了直接扔错误
+    // throw "传入的 value 的类型既不是 number，也不是 Decimal！";
+  }
+
+  // 如果是“无限”相关的词就直接返回翻译
+  if (fmtResult === "Infinity" || fmtResult === "Infinite") {
+    return "无限";
+  }
+
+  if (fmtResult === "-Infinite") {
+    return "负无限";
+  }
+
+  // 否则返回结果
+  return fmtResult;
+
+  /*
+   * 原来的代码如下：
+   * if (isEND()) return "END";
+   * if (!(value instanceof Decimal)) value = new Decimal(value);
+   * if (!Decimal.isFinite(value)) return (value.toString() === "Infinity" ? "无限" : value.toString());
+   * if (value.lt("e9e15")) return Notations.current.format(value, places, placesUnder1000, 3);
+   * return LNotations.current.formatLDecimal(value, 3);
+   */
 };
 
 window.formatInt = function formatInt(value) {
