@@ -372,7 +372,7 @@ function roundPreservingSum(data) {
         :style="rowStyle('shards')"
         class="l-glyph-levels-and-weights__factor"
       >
-        {{ formatInt(100) }}×Shards{{ formatPow(2) }}
+        {{ formatInt(100) }}×时间碎片{{ formatPow(2) }}
       </div>
       <div
         :style="rowStyle('shards')"
