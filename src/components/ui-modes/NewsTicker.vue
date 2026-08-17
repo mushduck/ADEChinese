@@ -93,7 +93,7 @@ export default {
       line.innerHTML = text;
 
       line.style["transition-duration"] = "0ms";
-      if (this.currentNews?.id === "a244" || this.currentNews?.id === "ai63" ||
+      if (this.currentNews?.id === "a244" ||
         (this.currentNews?.id === "ae570" && this.currentNews?.text === "weeeeeeeeeeee")) {
         line.style.transform = "translateX(-100%)";
       } else {
@@ -107,7 +107,7 @@ export default {
       const line = this.$refs.line;
 
       // SCROLL_SPEED is in pixels per second
-      const SCROLL_SPEED = player.options.news.speed * 100;
+      const SCROLL_SPEED = player.options.news.speed * 200;
       const scrollDuration = (this.$refs.ticker.clientWidth + line.clientWidth) / SCROLL_SPEED;
 
       line.style["transition-duration"] = `${scrollDuration}s`;
