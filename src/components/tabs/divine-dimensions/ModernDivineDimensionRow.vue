@@ -31,16 +31,16 @@ export default {
   },
   computed: {
     name() {
-      return `${DivineDimension(this.tier).shortDisplayName} 神性维度`;
+      return `${DivineDimension(this.tier).shortDisplayName}神性维度`;
     },
     costDisplay() {
-      return this.showCostTitle ? `Cost: ${format(this.cost)} VM` : `${format(this.cost)} VM`;
+      return this.showCostTitle ? `价格：${format(this.cost)} 神性物质` : `${format(this.cost)} 神性物质`;
     },
     hasLongText() {
       return this.costDisplay.length > 20;
     },
     purchaseTooltip() {
-      return `Purchased ${quantifyHybridLarge("time", this.purchases)}`;
+      return `购买 ${quantifyHybridLarge("次", this.purchases)}`;
     },
     showCostTitle() {
       return this.cost.log10().lt(1e5);
@@ -108,7 +108,7 @@ export default {
         class="o-primary-btn--vd-auto"
         @click="buyMaxDivineDimension"
       >
-        Buy Max
+        购买最大
       </PrimaryButton>
     </div>
   </div>

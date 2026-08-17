@@ -29,8 +29,8 @@ export default {
   computed: {
     changeProdDisplay() {
       return this.isProducingEnergy
-        ? "Produce Divine Matter"
-        : "Produce Divine Energy";
+        ? "生产神性物质"
+        : "生产神性能量";
     },
     currencyProd() {
       return this.isProducingEnergy
@@ -44,7 +44,7 @@ export default {
       this.divineEnergy.copyFrom(Currency.divineEnergy);
       this.matterPerSecond.copyFrom(DivineDimension(1).productionPerRealSecond);
       this.energyPerSecond.copyFrom(DivineDimensions.energyPerSecond);
-      this.incomeType = player.celestials.pelle.divinity.isProducingEnergy ? "Divine Energy" : "Divine Matter";
+      this.incomeType = player.celestials.pelle.divinity.isProducingEnergy ? "神性能量" : "神性物质";
       this.dispBoth = DivinityUpgrade.divineL2U10.isBought;
       this.conversionFormula1 = DivineDimensions.conversionFormula1;
       this.conversionFormula2 = DivineDimensions.conversionFormula2;
@@ -75,39 +75,40 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        Max all
+        全部最大
       </PrimaryButton>
       <PrimaryButton
         v-if="isAnyAutobuyerUnlocked"
         class="o-primary-btn--subtab-option"
         @click="toggleAllAutobuyers"
       >
-        Toggle all autobuyers
+        切换所有自动购买器
       </PrimaryButton>
     </div>
     <div v-if="canProduceEnergy">
-      You have <span class="c-divine-dim-description__accent">{{ format(divineEnergy, 2, 1) }}</span> Divine Energy.
+      你拥有 <span class="c-divine-dim-description__accent">{{ format(divineEnergy, 2, 1) }}</span> 神性能量。
     </div>
     <div>
       <p>
-        You have
+        你拥有
         <span class="c-celestial-dim-description__accent">{{ format(divineMatter, 2, 1) }}</span>
-        Divine Matter,
+        神性物质，
         <br>
-        translated to a
+        为终局次数和缥缈之力提供
         <span class="c-divine-dim-description__accent">{{ formatX(conversionFormula1, 2, 2) }}</span>
-        multiplier to Endgame and Ethereal Power gain, a
+        的加成；
+        为所有机器获取和被毁灭的现实中的反物质指数提供
         <span class="c-divine-dim-description__accent">{{ formatPow(conversionFormula2, 2, 3) }}</span>
-        to Antimatter Exponent while Doomed and all Machines, and a
-        <span class="c-divine-dim-description__accent">{{ formatPercents(conversionFormula3, 2, 2) }}</span>
-        reduction to Hadron and Remnants of Alpha Decay cap times.
+        的加成；
+        将所有类型的强子效果到达上限和阿尔法诅咒消散的速度增加
+        <span class="c-divine-dim-description__accent">{{ formatPercents(conversionFormula3, 2, 2) }}</span>。
       </p>
     </div>
-    <div>Divine Matter is capped at {{ format(hardcap, 2, 0) }}.</div>
-    <div v-if="!dispBoth">You are getting {{ currencyProd }} {{ incomeType }} per second.</div>
+    <div>当前神性物质的上限是 {{ format(hardcap, 2, 0) }}。</div>
+    <div v-if="!dispBoth">你每秒获得 {{ currencyProd }} {{ incomeType }}。</div>
     <div v-if="dispBoth">
-      <div>You are getting {{ format(matterPerSecond, 2, 0) }} Divine Matter per second.</div>
-      <div>You are getting {{ format(energyPerSecond, 2, 2) }} Divine Energy per second.</div>
+      <div>你每秒获得 {{ format(matterPerSecond, 2, 0) }} 神性物质。</div>
+      <div>你每秒获得 {{ format(energyPerSecond, 2, 2) }} 神性能量。</div>
     </div>
     <PrimaryButton
       v-if="canProduceEnergy && !dispBoth"
