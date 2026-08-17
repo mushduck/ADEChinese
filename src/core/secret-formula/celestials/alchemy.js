@@ -83,7 +83,7 @@ export const alchemyResources = {
     uiOrder: 3,
     unlockedAt: 8,
     get description() { return `减少每 ${format(Decimal.NUMBER_MAX_VALUE, 2)} 复制器的减速`; },
-    formatEffect: value => `复制器间隔增加速度减慢 ${formatX(1.2, 1, 1)} ➜ ${formatX(value, 4, 4)} 每 ${format(Number.MAX_VALUE, 2)}`,
+    formatEffect: value => `每 ${format(Number.MAX_VALUE, 2)} 复制器，每个复制间隔升级成本增长 ${formatX(1.2, 1, 1)} ➜ ${formatX(value, 4, 4)} `,
     reagents: [
       { resource: ALCHEMY_RESOURCE.TIME, amount: 8 },
       { resource: ALCHEMY_RESOURCE.REPLICATION, amount: 7 }
@@ -101,7 +101,7 @@ export const alchemyResources = {
     uiOrder: 2,
     unlockedAt: 9,
     description: "增加永恒次数加成",
-    formatEffect: value => `永恒次数生成乘以${formatPow(value, 4, 4)}倍`,
+    formatEffect: value => `永恒次数生成 ${formatPow(value, 4, 4)}`,
     reagents: [
       { resource: ALCHEMY_RESOURCE.TIME, amount: 11 },
       { resource: ALCHEMY_RESOURCE.INFINITY, amount: 4 }
@@ -252,7 +252,7 @@ export const alchemyResources = {
     uiOrder: 2,
     unlockedAt: 18,
     description: "基于复制器加成无限点数",
-    formatEffect: value => `无限点数获得复制器的${formatPow(value, 2, 3)}次方加成`,
+    formatEffect: value => `无限点数获得等同于复制器数量${formatPow(value, 2, 3)}的倍率`,
     reagents: [
       { resource: ALCHEMY_RESOURCE.INFLATION, amount: 18 },
       { resource: ALCHEMY_RESOURCE.SYNERGISM, amount: 3 }
@@ -270,7 +270,7 @@ export const alchemyResources = {
     uiOrder: 2,
     unlockedAt: 17,
     description: "基于现实机器加成反物质维度",
-    formatEffect: value => `反物质维度获得现实机器的${formatPow(value, 2, 2)}次方加成`,
+    formatEffect: value => `反物质维度获得等同于现实机器数量${formatPow(value, 2, 2)}的倍率`,
     reagents: [
       { resource: ALCHEMY_RESOURCE.DIMENSIONALITY, amount: 7 },
       { resource: ALCHEMY_RESOURCE.MOMENTUM, amount: 8 }
