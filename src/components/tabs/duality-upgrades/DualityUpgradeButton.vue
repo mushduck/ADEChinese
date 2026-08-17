@@ -78,7 +78,7 @@ export default {
       if (this.canBeBought || !this.isAvailableForPurchase || this.isBought) return "";
       const time = MachineHandler.estimateDMTimer(this.upgrade.cost);
       if (isFinite(new Decimal(time).toNumber())) return TimeSpan.fromSeconds(new Decimal(time)).toString();
-      return "Never affordable";
+      return "永远无法购买";
     },
     toggleLock(upgrade) {
       if (this.isRebuyable) return;
