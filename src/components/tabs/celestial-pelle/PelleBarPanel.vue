@@ -77,7 +77,6 @@ export default {
       <br v-else>
       填充裂痕时，每秒消耗对应资源的 {{ formatPercents(decayRate) }}。未填充裂痕时，裂痕的效果仍然生效，效果的强度基于已填充的资源总量。
       <br>
-      佩勒冲击的削弱永久存在，不受末日重置影响！
       <b class="o-strike-warning">{{ sickVisualStrikeText() }}</b>
       <div class="c-pelle-bar-container">
         <PelleRift

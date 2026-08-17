@@ -118,7 +118,7 @@ export default {
     customCostStr() {
       const ttStr = this.setup.isSmall
         ? `${formatInt(this.config.cost)} 时间之理`
-        : quantifyInt("Time Theorem", this.config.cost);
+        : quantifyInt("时间之理", this.config.cost);
       const stStr = this.setup.isSmall
         ? `${formatInt(this.STCost)} 空间之理`
         : quantifyInt("空间之理", this.STCost);

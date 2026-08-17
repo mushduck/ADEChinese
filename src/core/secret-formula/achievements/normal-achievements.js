@@ -626,7 +626,7 @@ export const normalAchievements = [
   {
     id: 82,
     name: "梅开二度",
-    get description() { return `完成 %1$s 个无限挑战。`; },
+    get description() { return `完成 ${formatInt(8)} 个无限挑战。`; },
     checkRequirement: () => InfinityChallenges.completed.length === 8,
     checkEvent: [GAME_EVENT.INFINITY_CHALLENGE_COMPLETED, GAME_EVENT.REALITY_RESET_AFTER],
     progress: () => Achievement(82).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(InfinityChallenges.all.countWhere(c => c.isCompleted)).div(8), 0, 1)
