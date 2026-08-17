@@ -1078,7 +1078,7 @@ button:focus {
   height: 100%;
   position: absolute;
   z-index: 999;
-  background: url("../images/loading.png") no-repeat;
+  background: url("../images/loading-Chinese.png") no-repeat;
   background-color: black;
   background-position-x: 50%;
   background-position-y: 50%;
