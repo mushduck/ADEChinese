@@ -7425,7 +7425,7 @@ export const news = [
   },
   /* eslint-disable max-len */
   //我把新闻全改成了自己的😋
-  {
+  /*{
     id: "ai1",
     text: "你指尖跃动的电光, 是我此生不变的信仰."
   },
@@ -8040,45 +8040,33 @@ export const news = [
   {
     id: "ai154",
     text: "AKIOI！"
-  },
+  },*/
   {
     id: "ai155",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
-      const sound = new Audio(audioPath);
-      sound.volume = 0.8; 
-      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+      new Audio(`audio/ciallo.mp3`).play();
     }
   },
   {
     id: "ai156",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
-      const sound = new Audio(audioPath);
-      sound.volume = 0.8; 
-      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+      new Audio(`audio/ciallo.mp3`).play();
     }
   },
   {
     id: "ai157",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
-      const sound = new Audio(audioPath);
-      sound.volume = 0.8; 
-      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+      new Audio(`audio/ciallo.mp3`).play();
     }
   },
   {
     id: "ai158",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      const audioPath = (process.env.BASE_URL || '/') + 'audio/ciallo.mp3';
-      const sound = new Audio(audioPath);
-      sound.volume = 0.8; 
-      sound.play().catch(err => console.warn("音频播放被浏览器拦截:", err));
+      new Audio(`audio/ciallo.mp3`).play();
     }
   },/*
   {
