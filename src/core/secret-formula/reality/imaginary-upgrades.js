@@ -257,7 +257,7 @@ export const imaginaryUpgrades = [
     name: "消解存在",
     id: 21,
     cost: new Decimal(1e13),
-    requirement: () => `单次现实全程禁用连续统时，达到 ${format("1e7400000000000")} 反物质`,
+    requirement: () => `解锁连续统后，单次现实全程禁用连续统时，达到 ${format("1e7400000000000")} 反物质`,
     hasFailed: () => !player.requirementChecks.reality.noContinuum,
     checkRequirement: () => player.requirementChecks.reality.noContinuum &&
       Currency.antimatter.value.add(1).log10().gte(7.4e12),

@@ -111,7 +111,7 @@ export default {
   >
     <!-- Cannot Crunch -->
     <template v-if="!canCrunch">
-      达到 {{ format(infinityGoal, 2, 2) }}
+      达到 {{ format(infinityGoal, 2, 2) }} 反物质
     </template>
 
     <!-- Can Crunch in challenge -->

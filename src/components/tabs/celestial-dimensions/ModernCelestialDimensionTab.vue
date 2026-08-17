@@ -148,7 +148,7 @@ export default {
           <br>
           你拥有
           <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
-          <span v-if="isCorrupted"> 被诅咒的</span> <span v-if="unstable"> 不稳定</span>天界物质<span v-if="isOverflowing">（已溢出）</span>,
+          <span v-if="isCorrupted"> 腐化的</span> <span v-if="unstable"> 不稳定</span>天界物质<span v-if="isOverflowing">（已溢出）</span>,
           <br>
           <span>
             增加
@@ -182,12 +182,12 @@ export default {
             <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>。
           </div>
           <div v-if="isCorrupted">
-            在超过 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> 天界物质后，你的天界物质将被诅咒，受<i>三重</i>软上限限制。
+            在超过 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> 天界物质后，你的天界物质将被腐化，受<i>三重</i>软上限限制。
             <br>
             当前，超过三重软上限的天界物质数量将
             <span :class="instabilityClassObject()">^{{ format(1 / massOverflowMag, 2, 3) }}</span>。
             <br>
-            现在被诅咒的天界物质的三重软上限强度完全取决于你的天界物质三重软上限指数, 当前为
+            现在腐化天界物质的三重软上限强度完全取决于你的天界物质三重软上限指数, 当前为
             <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>。
           </div>
         </p>

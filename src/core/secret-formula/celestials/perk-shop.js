@@ -79,7 +79,7 @@ export const perkShop = {
     id: 3,
     initialCost: 1000,
     increment: 2,
-    description: () => PerkShopUpgrade.autoSpeed.viewCharge ? `自动购买无限维度、时间维度、膨胀升级和复制器升级立即购买` : `自动购买无限维度、时间维度、膨胀升级和复制器升级的速度加快 ${formatX(2)} `,
+    description: () => PerkShopUpgrade.autoSpeed.viewCharge ? `无限维度、时间维度、膨胀升级和复制器升级自动购买器加强为立刻购买` : `自动购买无限维度、时间维度、膨胀升级和复制器升级的速度加快 ${formatX(2)} `,
     effect: () => player.disablePostReality ? 1 : (PerkShopUpgrade.autoSpeed.isCharged
       ? PerkShopUpgrade.autoSpeed.chargedEffect()
       : PerkShopUpgrade.autoSpeed.preChargedEffect()),
