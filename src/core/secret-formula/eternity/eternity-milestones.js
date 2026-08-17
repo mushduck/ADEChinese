@@ -35,8 +35,7 @@ export const eternityMilestones = {
       return `离线时，获得你之前最佳永恒点数/分钟的 ${formatPercents(0.25)}（${effectText}）`;
     },
     activeCondition: () => (player.options.offlineProgress
-      ? `Active as long as neither of the other offline milestones
-        (${formatInt(200)} or ${formatInt(1000)}) are also active`
+      ? `仅在 ${formatInt(200)} 和 ${formatInt(1000)} 永恒里程碑都未生效时生效`
       : ""),
   },
   autoIC: {
@@ -184,7 +183,7 @@ export const eternityMilestones = {
         player.eternities.gte(1000));
       // eslint-disable-next-line prefer-template
       return `离线时，根据本次永恒中无限次数/小时最大值的 ${formatPercents(0.5)} 获得无限次数` +
-        (infinities.gt(0) ? `(Currently ${format(infinities, 2, 2)}/hour)` : "(Inactive)");
+        (infinities.gt(0) ? `(Currently ${format(infinities, 2, 2)}/hour)` : "(已禁用)");
     },
     activeCondition: () => (player.options.offlineProgress
       ? `当在任一普通挑战或任一无限挑战以外，且不在进行永恒挑战 4 或永恒挑战 12 中，启用自动大坍缩，并将其设置为小于等于 ${formatInt(5)} 秒自动进行大坍缩时，离线时才能产生无限次数。`

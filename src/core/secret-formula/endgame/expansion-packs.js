@@ -67,7 +67,7 @@ export const expansionPacks = {
     id: "alphaPack",
     symbol: "α",
     description: () =>
-      `解锁强子对撞器，可以加速你的强子以提高反物质指数；同时解锁虚无，类似时间膨胀但可以提升对撞器的产量。`,
+      `解锁强子加速器，可以加速你的强子以提高反物质指数；同时解锁虚无，类似时间膨胀但可以提升加速器的产量。`,
     cost: Decimal.pow(10, 1e200),
     formatCost: value => formatPostBreak(value, 2, 0)
   }

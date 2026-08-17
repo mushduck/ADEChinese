@@ -647,7 +647,7 @@ export const tabs = [
       },
       {
         key: "collider",
-        name: "强子对撞器",
+        name: "强子加速器",
         symbol: "<i class='fas fa-atom'></i>",
         component: "LargeHadronColliderTab",
         condition: () => ExpansionPack.alphaPack.isBought,

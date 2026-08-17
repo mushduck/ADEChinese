@@ -24,7 +24,7 @@ export default {
     update() {
       this.blob = Theme.currentName() === "S11";
       this.animateHadrons = player.options.animations.hadrons &&
-        Tabs.current[this.$viewModel.subtab].name === "强子对撞器";
+        Tabs.current[this.$viewModel.subtab].name === "强子加速器";
       this.animateStars = player.options.animations.stars &&
         Tabs.current[this.$viewModel.subtab].name === "缥缈";
       this.animateTachyons = player.options.animations.tachyonParticles &&
