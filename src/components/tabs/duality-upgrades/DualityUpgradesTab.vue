@@ -40,8 +40,6 @@ export default {
     <div class="c-info-text">
       你已达到现实的极限，无法持有超过 {{ format(capIM) }} 的虚幻机器。
       <br>
-      重构机器的最大数量基于虚幻机器数量超过 {{ format(baseIMCap) }} 的部分而提高。
-      <br>
       超过 {{ format(baseRMCap) }} 的虚幻机器将提高你可以拥有的重构机器的上限。
       <br>
       重构机器会随时间被动获得，直到达到上限，但随着接近上限，获得速度呈指数级减慢。
