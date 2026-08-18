@@ -75,7 +75,7 @@ export const dualityUpgrades = [
     costMult: 750,
     description: () => `将符文等级的前${formatInt(4)}层软上限推迟${formatInt(2000)}级`,
     effect: 2000,
-    formatEffect: value => `+${formatInt(value)} levels`
+    formatEffect: value => `+${formatInt(value)} 级`
   }),
   rebuyable({
     name: "极构四方",
