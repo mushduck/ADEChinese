@@ -72,7 +72,7 @@ export default {
           activityToken: () => player.challenge.infinity.current
         },
         {
-          name: token => `普通挑战 ${NormalChallenge(token).config.name}`,
+          name: token => `${NormalChallenge(token).config.name}普通挑战中`,
           isActive: token => token > 0,
           activityToken: () => player.challenge.normal.current
         },
@@ -192,7 +192,7 @@ export default {
       }
 
       // Normal challenges are matched with an end-of-string metacharacter
-      if (fullName.match("挑战$")) Tab.challenges.normal.show(true);
+      if (fullName.match("普通挑战")) Tab.challenges.normal.show(true);
       else if (fullName.match("无限挑战")) Tab.challenges.infinity.show(true);
       else if (fullName.match("永恒挑战")) Tab.challenges.eternity.show(true);
       else if (player.dilation.active) Tab.eternity.dilation.show(true);

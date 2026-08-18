@@ -15,7 +15,7 @@ export const celestialInfinityUpgrades = {
   alphaDecayStartBoost: {
     id: "alphaDecayStartBoost",
     cost: 5,
-    description: () => `基于天界无限次数略微提高阿尔法诅咒的持续时间`,
+    description: () => `基于天界无限次数略微降低阿尔法诅咒的持续时间`,
     effect: () => Decimal.pow(player.endgame.celDimExpansion.celestialInfinities, 0.5).div(100).min(1).add(
       DC.D4.times(DC.D1.sub(Decimal.pow(0.8, player.endgame.celDimExpansion.celestialInfinities.max(1).log10().sub(4).max(0))))),
     formatEffect: value => `${TimeSpan.fromHours(value).toStringShort()}`
