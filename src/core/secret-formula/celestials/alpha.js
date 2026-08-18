@@ -162,7 +162,7 @@ export const alphaUnlocks = {
   ecCompletion1: {
     id: 16,
     requirement: 17,
-    nerfDescription: () => `在永恒挑战中无限点数获取量 ${formatPow(0.65, 2, 3)}，不与上条埃尔法削弱叠加`,
+    nerfDescription: () => `在永恒挑战中无限点数获取量 ${formatPow(0.65, 2, 3)}，不与上条阿尔法削弱叠加`,
     buffDescription: () => `时间维度压缩因子降低 ${formatPercents(0.25, 2)}，将时间维度转化为连续统`,
     effects: {
       nerf: 0.65,
@@ -172,7 +172,7 @@ export const alphaUnlocks = {
   ecCompletion5: {
     id: 17,
     requirement: 18,
-    nerfDescription: () => `在永恒挑战中无限点数获取量 ${formatPow(0.55, 2, 3)}，不与上条埃尔法削弱叠加，但在永恒挑战 ${formatInt(1)}内阿尔法对对无限点数的削弱失效`,
+    nerfDescription: () => `在永恒挑战中无限点数获取量 ${formatPow(0.55, 2, 3)}，不与上条阿尔法削弱叠加，但在永恒挑战 ${formatInt(1)}内阿尔法对对无限点数的削弱失效`,
     buffDescription: () => `所有对时间维度倍率的加成效力 ${formatPow(5)}`,
     effects: {
       nerf: 0.55,
