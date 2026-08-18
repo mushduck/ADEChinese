@@ -440,7 +440,7 @@ export const pelleDestructionUpgrades = {
   },
   destroyedGlyphEffects: {
     id: 39,
-    description: "重获基本符文的倍禁用词条",
+    description: "重获基本符文的被禁用词条",
     cost: 1e42,
     formatCost,
   },
