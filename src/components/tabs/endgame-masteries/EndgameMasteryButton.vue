@@ -94,7 +94,7 @@ export default {
       const showCostOverride = !EndgameMastery.permaMasteries.isBought || (this.mastery.id >= 180);
       const esStr = this.setup.isSmall
         ? `${formatInt(this.config.cost)} 终局能力`
-        : quantifyInt("终局能力Endgame Skill", this.config.cost);
+        : quantifyInt("终局能力", this.config.cost);
 
       const costs = [];
       if (this.config.cost) costs.push(esStr);

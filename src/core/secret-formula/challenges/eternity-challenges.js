@@ -59,7 +59,7 @@ export const eternityChallenges = [
     restriction: completions => Math.max(16 - 4 * completions, 0),
     checkRestriction: restriction => Currency.infinities.lte(restriction),
     formatRestriction: restriction => (restriction === 0
-      ? "无无限次数"
+      ? "在不进行无限中"
       : `在 1 次或更少次无限中`),
     failedRestriction: "(你的无限次数超过上限)",
     reward: {
