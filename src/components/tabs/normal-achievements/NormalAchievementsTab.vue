@@ -81,7 +81,7 @@ export default {
       const powersList = [];
 
       const dimPowList = [];
-      dimPowList.push("Antimatter");
+      dimPowList.push("反物质");
       if (this.achMultToIDS) dimPowList.push("无限");
       if (this.achMultToTDS) dimPowList.push("时间");
       powersList.push(`${makeEnumeration(dimPowList)}维度：${achievementPowers}`);
