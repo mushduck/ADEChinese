@@ -72,7 +72,7 @@ export default {
       解锁隐藏成就
       <br>
       <br>
-      （再次点击可隐藏）
+      （不许隐藏这个时间研究）
     </span>
   </button>
 </template>

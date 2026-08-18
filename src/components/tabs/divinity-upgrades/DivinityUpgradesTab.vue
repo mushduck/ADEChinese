@@ -109,10 +109,10 @@ export default {
 <template>
   <div class="l-divinity-upgrade-grid">
     <div v-if="hasBonus">
-      Power Grab is currently providing
-      a <span class="c-divinity-effects">{{ formatX(bonus1, 2) }}</span> to Divine Energy,
-      a <span class="c-divinity-effects">{{ formatPow(bonus2, 2, 3) }}</span> to all Divine Dimensions,
-      and a <span class="c-divinity-effects">{{ formatX(bonus3, 2) }}</span> to Divine Stars.
+      神性升级“权能攫取”效果：
+      神性能量获取量<span class="c-divinity-effects">{{ formatX(bonus1, 2) }}</span>，
+      神性维度产量<span class="c-divinity-effects">{{ formatPow(bonus2, 2, 3) }}</span>，
+      神性之星获取量<span class="c-divinity-effects">{{ formatX(bonus3, 2) }}</span>。
     </div>
     <div v-if="has1">
       <div class="c-divinity-header">
