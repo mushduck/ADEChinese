@@ -35,6 +35,9 @@ export default {
       return this.glyphId !== -1;
     },
     attrString() {
+      return this.isSymbol ? "symbol" : "color";
+    },
+    attrStringChinese() {
       return this.isSymbol ? "符号" : "颜色";
     },
     typeObject() {
