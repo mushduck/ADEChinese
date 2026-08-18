@@ -157,7 +157,7 @@ export default {
             for="autoRestart"
             class="o-clickable"
           >
-            进行现实后重新进入该天神的挑战
+            进行现实后重新进入该天神的现实
           </label>
         </div>
 

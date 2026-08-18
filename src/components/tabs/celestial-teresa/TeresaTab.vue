@@ -97,7 +97,7 @@ export default {
     },
     lastMachinesString() {
       return this.lastMachines.gte(DC.E20000)
-        ? `${quantify("Dual Machine", this.lastMachines.dividedBy(DC.E20000), 2)}`
+        ? `${quantify("重构机器", this.lastMachines.dividedBy(DC.E20000), 2)}`
         : (this.lastMachines.lt(DC.E10000)
           ? `${quantify("现实机器", this.lastMachines, 2)}`
           : `${quantify("虚幻机器", this.lastMachines.dividedBy(DC.E10000), 2)}`);
@@ -238,7 +238,7 @@ export default {
             <br><br>
             <span v-if="showRunReward">
               在特蕾莎的现实中，反物质数量的最大值：{{ format(bestAM, 2) }}，
-              并获取了 {{ lastMachinesString }} 现实机器。
+              并获取了 {{ lastMachinesString }}。
               <br><br>
               使用的符文：
               <GlyphSetPreview
