@@ -72,7 +72,7 @@ export const effarigUnlocks = {
   glyphGenerationBoost: {
     id: 8,
     get description() {
-      return `太阳神的鹿颈长等级100级奖励${formatInt(100)}
+      return `太阳神的鹿颈长 ${formatInt(100)} 级奖励
       同时影响佩勒和终局初始符文`;
     },
     cost: new Decimal("1e4400"),

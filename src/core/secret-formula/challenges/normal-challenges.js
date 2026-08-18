@@ -134,7 +134,7 @@ export const normalChallenges = [
     isQuickResettable: false,
     description: () => `每个反物质维度生产比其低 ${formatInt(1)} -> ${formatInt(2)} 层的反物质维度，
       第一 -> 第一、二反物质维度以更快的速度生产反物质。
-      模组中为了弥补这一不足，第二、四、六维度被强化。`,
+      模组中为了弥补这一不足，强化了第二、四、六维度`,
     name: "自动大坍缩",
     reward: "自动大坍缩",
     lockedAt: DC.D16,

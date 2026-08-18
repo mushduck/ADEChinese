@@ -720,7 +720,7 @@ export default {
         （{{ supernova.thisReal.toStringShort() }} 现实时间）
       </div>
       <div>
-        你获得星云的最快速度
+        你获得终结之星的最快速度
         为每分钟 {{ format(supernova.bestRate, 2, 2) }}。
       </div>
       <br>

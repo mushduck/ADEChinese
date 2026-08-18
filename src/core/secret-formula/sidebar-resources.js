@@ -277,7 +277,7 @@ export const sidebarResources = [
   },
   {
     id: 35,
-    optionName: "星云",
+    optionName: "终结之星",
     isAvailable: () => PlayerProgress.supernovaUnlocked(),
     value: () => Currency.nebulae.value,
     formatValue: x => format(x, 2),
