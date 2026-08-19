@@ -62,7 +62,7 @@ export default {
       return Math.ceil(this.stars.length / 3);
     },
     nextStarText() {
-      if (this.allStarsUnlocked) return `All stars have been unlocked`;
+      if (this.allStarsUnlocked) return `已解锁所有类型的星辰`;
       return `The next star unlocks at ${format(this.nextStarReq, 2, 2)} Dual Machines`;
     },
     etherealPowerTimeEstimate() {
@@ -82,10 +82,10 @@ export default {
     },
     starTexts() {
       let arr = [];
-      let starName = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray"];
+      let starName = ["绯红", "橘焰", "缃黄", "苍绿", "蔚蓝", "绛紫", "皎白", "漆黑", "湮灰"];
       for (let t = 0; t < 9; t++) {
         if (Ethereal.starGeneration(t).neq(0)) {
-          arr.push(`Star Power is currently generating ${formatDecimalPercents(this.starGen[t], 2)} of pending ${starName[t]} Stars per second`);
+          arr.push(`星流之力现每秒生成凝聚时所能得到的${starName[t]}之星的 ${formatDecimalPercents(this.starGen[t], 2)}。`);
         }
       }
       return arr;
@@ -220,7 +220,7 @@ export default {
           :class="etherealCoolClassObject"
           @click="unlockStarPower"
         >
-          Unlock Star Power
+          解锁星流之力
         </button>
       </div>
     </div>
@@ -229,14 +229,14 @@ export default {
       class="l-star-grid"
     >
       <div>
-        <span class="c-stellar-glow">You have </span>
+        <span class="c-stellar-glow">你拥有 </span>
         <span class="c-cooler-stellar-glow">{{ starPowerDisplay }}</span>
-        <span class="c-stellar-glow"> Star Power. </span>
-        <span class="c-cooler-stellar-glow">+{{ format(starPowerPerSecond, 3, 3) }}/s</span>
+        <span class="c-stellar-glow"> 星流之力。 </span>
+        <span class="c-cooler-stellar-glow">+{{ format(starPowerPerSecond, 3, 3) }}/秒</span>
       </div>
       <div>
-        <span class="c-stellar-glow">Your Star Power is currently multiplying the gain of all Star types by </span>
-        <span class="c-cooler-stellar-glow">{{ formatX(starBoost, 3, 3) }}</span><span class="c-stellar-glow">.</span>
+        <span class="c-stellar-glow">为所有类型的星辰产量提供 </span>
+        <span class="c-cooler-stellar-glow">{{ formatX(starBoost, 3, 3) }}</span><span class="c-stellar-glow"> 的倍率。</span>
       </div>
       <br>
       <span

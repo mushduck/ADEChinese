@@ -38,8 +38,8 @@ export default {
       return Currency.etherealPower.value.gte(this.config.resetReq);
     },
     resetText() {
-      if (!this.canReset) return `Reach ${format(this.config.resetReq, 2, 2)} Ethereal Power`;
-      return `Condense Ethereal Power for ${format(this.pending, 2, 2)} ${this.name} Stars`;
+      if (!this.canReset) return `达到 ${format(this.config.resetReq, 2, 2)} 缥缈之力`;
+      return `将所有缥缈之力凝聚为 ${format(this.pending, 2, 2)} ${this.name}之星`;
     },
     rewardClassObject() {
       return {
@@ -83,11 +83,11 @@ export default {
       @mouseleave="isHovering = false"
     >
       <span>
-        You have <span v-if="showPending && canReset">▲</span>{{ format(displayedAmount, 2, 2) }} {{ name }} Stars
+        你拥有 <span v-if="showPending && canReset">▲</span>{{ format(displayedAmount, 2, 2) }} {{ name }}之星。
       </span>
       <br>
       <span>
-        Effect: <span v-if="showPending && canReset">▲</span>{{ description }}
+        效果：<span v-if="showPending && canReset">▲</span>{{ description }}
       </span>
       <br>
       <br>
