@@ -30,8 +30,8 @@ export default {
       return this.upgrade.config;
     },
     costText() {
-      if (this.cost.gte(DC.NUMMAX)) return `Cost: ${Notations.current.infinite} Null Matter`;
-      return `Cost: ${format(this.cost, 2)} Null Matter`;
+      if (this.cost.gte(DC.NUMMAX)) return `价格：无限 虚物质`;
+      return `价格：${format(this.cost, 2)} 虚物质`;
     },
     classObject() {
       return {

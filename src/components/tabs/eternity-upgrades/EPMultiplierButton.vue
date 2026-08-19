@@ -41,7 +41,7 @@ export default {
     },
     isDoomed: () => Pelle.isDoomed && !PelleDestructionUpgrade.x5EPUpgrade.canBeApplied,
     epEffectText() {
-      if (Ascensions.epA.isUnlocked) return `Increase the exponent of Eternity Points by +${formatPow(1.01, 2, 2)}`;
+      if (Ascensions.epA.isUnlocked) return `将所有来源的永恒点数指数 +${formatPow(1.01, 2, 2)}`;
       return `将所有来源的永恒点数乘以 ${formatX(5)}`;
     },
     totalEPEffectText() {

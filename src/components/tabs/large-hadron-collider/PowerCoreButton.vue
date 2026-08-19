@@ -46,18 +46,18 @@ export default {
       @click="purchaseUpgrade"
     >
       <div>
-        Gain a Power Core
+        创造一个能源核心
         <br>
-        Current multiplier to Accelerator Speed: {{ formatX(multiplier, 2, 0) }}
+        当前加速器功率倍率：{{ formatX(multiplier, 2, 0) }}
       </div>
       <br>
-      Cost: {{ quantify("Total Hadron", cost, 2, 0) }}
+      需要：{{ quantify("总强子数量", cost, 2, 0) }}
     </button>
     <PrimaryButton
       class="l--spoon-btn-group__little-spoon o-primary-btn--small-spoon"
       @click="upgrade.buyMax(false)"
     >
-      Buy max Power Cores
+      购买最大能源核心
     </PrimaryButton>
   </div>
 </template>

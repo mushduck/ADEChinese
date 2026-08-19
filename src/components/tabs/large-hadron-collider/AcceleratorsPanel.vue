@@ -26,7 +26,7 @@ export default {
       this.decayRate = LHC.acceleratorSpeed;
       this.time = Date.now();
       this.nextAcceleratorReq.copyFrom(LHC.nextAccelerator ? LHC.nextAccelerator.config.unlockReq() : Decimal.pow10("1e1000"));
-      this.nextAcceleratorCurrency = LHC.nextAccelerator ? LHC.nextAccelerator.config.drainResource : "Antimatter";
+      this.nextAcceleratorCurrency = LHC.nextAccelerator ? LHC.nextAccelerator.config.drainResource : "反物质";
     }
   }
 };
@@ -35,16 +35,16 @@ export default {
 <template>
   <div class="l-accelerator-panel-container">
     <div class="c-accelerator-panel-title">
-      Accelerators
+      强子加速器
     </div>
     <div
       class="l-accelerator-content-container"
     >
-      Accelerators can be activated by clicking on their bars.
-      <span>You cannot activate more than one Accelerator at once.</span>
-      When active, Accelerators fill at a rate of {{ formatPercents(decayRate, 3) }} per second.
+      点击条状槽以激活加速器，
+      <span>同时只能激活一个加速器。</span>
+      激活时，加速器以每秒 {{ formatPercents(decayRate, 3) }} 的速度充能。
       <br>
-      Accelerator effects apply even when not activated, and are based on the current fill percentage.
+      加速器效果在未激活时依然生效，效果基于当前的充能进度。
       <div class="c-accelerator-bar-container">
         <Accelerator
           v-for="accelerator in accelerators"
@@ -55,7 +55,7 @@ export default {
     </div>
     <PowerCoreButton />
     <div class="c-accelerator-panel-description">
-      The next Accelerator will unlock at {{ format(nextAcceleratorReq, 2, 2) }} {{ nextAcceleratorCurrency }}
+      下一个加速器在达到 {{ format(nextAcceleratorReq, 2, 2) }} {{ nextAcceleratorCurrency }} 时解锁
     </div>
   </div>
 </template>

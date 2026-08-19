@@ -32,17 +32,17 @@ export default {
   },
   computed: {
     hadronSpeedText() {
-      if (this.hadronSpeed === 0) return `Your Hadrons are stationary`;
-      if (this.hadronSpeed >= 1000) return `Your Hadrons are moving at ${formatHybridLarge(this.hadronSpeed, 3)} m/s`;
-      return `Your Hadrons are moving at ${format(this.hadronSpeed, 3, 3)} m/s`;
+      if (this.hadronSpeed === 0) return `你的强子处于静止状态`;
+      if (this.hadronSpeed >= 1000) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒`;
+      return `你的强子被加速到了 ${format(this.hadronSpeed, 3, 3)} 米每秒`;
     },
     modeDisplay() {
       return this.voidMode === 0
-        ? "Void Mode: Normal"
-        : "Void Mode: Nullified";
+        ? "[虚无状态：稳态]"
+        : "[虚无状态：归零]";
     },
     voidText() {
-      return this.isRunning ? "[Exit the Void.]" : "[Enter the Void.]";
+      return this.isRunning ? "离开虚无" : "进入虚无";
     },
     runButtonOuterClass() {
       return {
@@ -75,7 +75,7 @@ export default {
       this.nullParticlesPerSecond.copyFrom(!LHC.nullifiedVoidRunning ? DC.D0 : getNullParticleGainPerSecond());
     },
     formatNullAmount(amount) {
-      return amount.gte(DC.NUMMAX) ? Notations.current.infinite : format(amount, 2, 2);
+      return amount.gte(DC.NUMMAX) ? "无限" : format(amount, 2, 2);
     },
     glitchAnim() {
       let flux = Math.random() / (this.voidMode === 1 ? 2 : 4);
@@ -111,38 +111,38 @@ export default {
       >
         {{ hadronSpeedText }}
         <br>
-        The Large Hadron Collider is currently consuming {{ formatInt(accelPower) }} GWh of power
+        当前强子加速器功率为 {{ formatInt(accelPower) }} GWh
       </div>
       <AcceleratorsPanel v-if="hasAccelerator" />
       <div
         v-if="!hasAccelerator"
         class="c-large-hadron-collider-description"
       >
-        Reach {{ format(Decimal.pow10(1e200), 2, 2) }} Antimatter
+        达到 {{ format(Decimal.pow10(1e200), 2, 2) }} 反物质
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy1"
       >
-        Excess Entropy in the universe has caused your Antimatter to decay past {{ format(amSoftcap, 2, 2) }},
-        and has restricted it from exceeding {{ format(amHardcap, 2, 2) }}.
+        宇宙中的过剩熵增令你的反物质产生了衰变。反物质数量在 {{ format(amSoftcap, 2, 2) }} 后达到软上限，
+        在 {{ format(amHardcap, 2, 2) }} 时达到硬上限。
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy2"
       >
-        The Antimatter decay is significantly stronger past {{ format(amSoftcap2, 2, 2) }}.
+        反物质衰变在达到 {{ format(amSoftcap2, 2, 2) }} 反物质后进一步增强。
       </div>
     </div>
     <br>
     <br>
     <div v-if="highestAntimatter.gt(10)">
-      <span class="c-void-antimatter-amount">[Your highest Antimatter inside The Void is {{ format(highestAntimatter, 2, 1) }}.]</span>
+      <span class="c-void-antimatter-amount">[你在虚无中达到的最高反物质数量为 {{ format(highestAntimatter, 2, 1) }}。]</span>
       <br>
-      <span class="c-null">[You have {{ formatNullAmount(nullMatter) }} Null Matter. +{{ formatNullAmount(nullPerSecond) }}/s]</span>
+      <span class="c-null">[你拥有 {{ formatNullAmount(nullMatter) }} 虚物质，+{{ formatNullAmount(nullPerSecond) }}/秒]</span>
     </div>
     <div v-if="nullified">
-      <span class="c-null">[You have {{ format(nullParticles, 2, 2) }} Null Particles. +{{ format(nullParticlesPerSecond, 2, 2) }}/s]</span>
+      <span class="c-null">[你拥有 {{ format(nullParticles, 2, 2) }} 虚粒子。+{{ format(nullParticlesPerSecond, 2, 2) }}/秒]</span>
     </div>
     <div class="l-void-run">
       <div
@@ -165,18 +165,18 @@ export default {
       {{ modeDisplay }}
     </PrimaryButton>
     <div v-if="voidMode === 0">
-      Entering The Void will force an Endgame reset and disable all Reality and beyond mechanics.
+      进入稳态虚无将强制进行一次终局，并禁用现实及所有上层机制。
       <br>
-      Your Antimatter will slowly decay and you will gain Null Matter from the decayed Antimatter.
+      在稳态虚无中反物质将缓慢衰变为虚物质。
       <span v-if="nullified">
         <br>
         Since you Nullified the Multiverse, the ANR Perk and Passive EP Generation are reenabled inside The Void.
       </span>
     </div>
     <div v-if="voidMode === 1">
-      Entering The Void in Nullified Mode will force an Endgame reset and Dilate your Antimatter by {{ format(0.01, 2, 2) }}.
+      进入归零虚无将强制进行一次终局，并将反物质稀释至 {{ format(0.01, 2, 2) }}。
       <br>
-      You will generate Null Particles based on your Antimatter, which empower Antimatter Dimensions while inside The Void in normal mode.
+      在归零虚无中反物质将缓慢转变为虚粒子，为虚物质获取提供指数加成。
     </div>
     <NullUpgradesTabComponent />
   </div>
