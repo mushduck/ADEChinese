@@ -21,10 +21,10 @@ export default {
   },
   computed: {
     hintCost() {
-      return `${quantify("year", TimeSpan.fromMilliseconds(new Decimal(this.nextHintCost)).totalYears, 2)}`;
+      return `${quantify("年", TimeSpan.fromMilliseconds(new Decimal(this.nextHintCost)).totalYears, 2)}`;
     },
     formattedStored() {
-      return `${quantify("year", TimeSpan.fromMilliseconds(new Decimal(this.currentStored)).totalYears, 2)}`;
+      return `${quantify("年", TimeSpan.fromMilliseconds(new Decimal(this.currentStored)).totalYears, 2)}`;
     },
     hasProgress(id) {
       return this.progressEntries.some(entry => entry.id === id);
@@ -108,11 +108,11 @@ export default {
         <div v-if="!entry[0]">
           <span v-if="entry[1].hasHint && !entry[1].hasProgress">
             <i class="c-icon-wrapper fas fa-question-circle" />
-            <b>You have not figured out what this hint means yet.</b>
+            <b>你还没搞明白这个提示意味着什么。</b>
           </span>
           <span v-else>
             <i class="c-icon-wrapper fa-solid fa-house-crack" />
-            <b>You have exposed a crack in the Reality:</b>
+            <b>无名氏的现实中出现了一个裂缝！</b>
           </span>
           <br>
           - {{ entry[1].hintInfo }}
@@ -120,7 +120,7 @@ export default {
           - {{ entry[1].hasProgress ? entry[1].completedInfo : "?????" }}
         </div>
         <div v-else>
-          <i class="fa-solid fa-shapes" /> <b>Glyph hint:</b>
+          <i class="fa-solid fa-shapes" /> <b>符文提示：</b>
           <br>
           {{ entry[1] }}
         </div>
