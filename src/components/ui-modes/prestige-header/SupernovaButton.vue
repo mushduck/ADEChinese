@@ -104,27 +104,27 @@ export default {
   >
     <!-- Cannot Supernova -->
     <template v-if="!canSupernova">
-      Reach {{ format(supernovaGoal, 2, 2) }}
+      达到 {{ format(supernovaGoal, 2, 2) }}
       <br>
-      Divine Stars
+      神性之星
     </template>
 
     <!-- Can Supernova -->
     <template v-else>
       <div v-if="!showNebRate" />
       <b>
-        Supernova for
+        超新星以获得
         <span :style="amountStyle">{{ format(gainedNeb, 2) }}</span>
-        <span v-if="showNebRate"> Neb</span>
+        <span v-if="showNebRate"> 终结之星</span>
         <span v-else> {{ pluralize("Nebula", gainedNeb) }}</span>
       </b>
       <template v-if="showNebRate">
         <br>
-        Current: {{ format(currentNebRate, 2) }} Neb/min
+        当前：{{ format(currentNebRate, 2) }} 终结之星/分
         <br>
-        Peak: {{ format(peakNebRate, 2) }} Neb/min
+        峰值：{{ format(peakNebRate, 2) }} 终结之星/分
         <br>
-        at {{ format(peakNebRateVal, 2) }} Neb
+        峰值时获得 {{ format(peakNebRateVal, 2) }} 终结之星
       </template>
       <div v-else />
     </template>
