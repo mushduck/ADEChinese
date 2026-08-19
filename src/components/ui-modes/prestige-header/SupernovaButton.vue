@@ -116,7 +116,7 @@ export default {
         超新星以获得
         <span :style="amountStyle">{{ format(gainedNeb, 2) }}</span>
         <span v-if="showNebRate"> 终结之星</span>
-        <span v-else> {{ pluralize("Nebula", gainedNeb) }}</span>
+        <span v-else> {{ pluralize("终结之星", gainedNeb) }}</span>
       </b>
       <template v-if="showNebRate">
         <br>

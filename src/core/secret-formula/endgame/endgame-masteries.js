@@ -400,7 +400,7 @@ export const endgameMasteries = [
     cost: 200000,
     requirement: [221],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Improve the Divine Star formula slightly",
+    description: "略微优化神性之星公式",
     effect: () => player.disablePostReality ? 308 : 280
   },
   {
@@ -440,7 +440,7 @@ export const endgameMasteries = [
     cost: 750000,
     requirement: [251],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `天界物质激发指数 ^ ${formatPow(1.25, 2, 2)}`,
+    description: () => `天界物质激发指数 ${formatPow(1.25, 2, 2)}`,
     effect: () => player.disablePostReality ? 1 : 1.25
   },
   {
@@ -448,7 +448,7 @@ export const endgameMasteries = [
     cost: 750000,
     requirement: [251],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `所有暗物质上限推迟 ^ ${formatPow(2)}分之一`,
+    description: () => `所有暗物质上限推迟 ${formatPow(2)}`,
     effect: () => player.disablePostReality ? 1 : 2
   },
   {
