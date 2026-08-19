@@ -428,7 +428,7 @@ export const singularityMilestones = {
     start: Decimal.pow10(1e9),
     repeat: new Decimal(0),
     limit: 1,
-    description: "第二只第八暗物质维度为基础暗能量生产提供倍数，而不是简单叠加",
+    description: "第二至第八暗物质维度为基础暗能量生产提供倍数，而不是简单叠加",
     effect: completions => completions.toNumber(),
     effectFormat: x => (x === 1 ? "Unlocked" : "Locked"),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
