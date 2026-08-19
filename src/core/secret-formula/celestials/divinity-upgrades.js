@@ -301,7 +301,7 @@ export const divinityUpgrades = {
     id: "divineL5U1",
     layer: 5,
     cost: new Decimal(700),
-    description: () => "Completion’s effect now applies through Supernova"
+    description: () => "神性升级“归一至臻”的效果现在对超新星也生效"
   },
   divineL5U2: {
     name: "携序天赐",
