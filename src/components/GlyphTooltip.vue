@@ -126,8 +126,6 @@ export default {
           return `${this.rarityInfo.name}的膨胀符文`;
         case "effarig":
           return `${this.rarityInfo.name}的鹿颈长符文`;
-        //default:
-          //return `${this.rarityInfo.name}的复制符文`;
       }
     },
     isLevelCapped() {

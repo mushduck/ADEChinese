@@ -23,8 +23,30 @@ export default {
     glyph() {
       return Glyphs.findByInventoryIndex(this.idx);
     },
+    ChineseName() {
+      switch (this.glyph.type) {
+        case "companion":
+          return "同伴";
+        case "cursed":
+          return "诅咒";
+        case "reality":
+          return `现实`;
+        case "power":
+          return `力量`;
+        case "infinity":
+          return `无限`;
+        case "replication":
+          return `复制`;
+        case "time":
+          return `时间`;
+        case "dilation":
+          return `膨胀`;
+        case "effarig":
+          return `鹿颈长`;
+      }
+    },
     message() {
-      return `你真的要献祭这个符文吗？你献祭的${this.glyph.type}符文总值将从 ${format(this.currentGlyphSacrifice, 2, 2)} 提升至 ${format(this.currentGlyphSacrifice + this.gain, 2, 2)}。`;
+      return `你真的要献祭这个符文吗？你献祭的${this.ChineseName}符文总值将从 ${format(this.currentGlyphSacrifice, 2, 2)} 提升至 ${format(this.currentGlyphSacrifice.add(this.gain), 2, 2)}.`;
     }
   },
   methods: {
