@@ -32,7 +32,7 @@ export default {
       return this.config.description(this.reward);
     },
     name() {
-      return this.config.name.capitalize();
+      return this.config.ChineseName;
     },
     canReset() {
       return Currency.etherealPower.value.gte(this.config.resetReq);

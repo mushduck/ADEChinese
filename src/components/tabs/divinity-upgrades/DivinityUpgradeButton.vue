@@ -73,7 +73,7 @@ export default {
             v-if="!isBought"
             :config="config"
             br
-            :name="isThird ? 'Nebula' : (isSecond ? '神性之星' : '神性物质')"
+            :name="isThird ? '终结之星' : (isSecond ? '神性之星' : '神性物质')"
           />
         </template>
       </span>

@@ -63,22 +63,22 @@ export default {
     },
     nextStarText() {
       if (this.allStarsUnlocked) return `已解锁所有类型的星辰`;
-      return `The next star unlocks at ${format(this.nextStarReq, 2, 2)} Dual Machines`;
+      return `下一种星辰需要达到 ${format(this.nextStarReq, 2, 2)} 重构机器`;
     },
     etherealPowerTimeEstimate() {
       return TimeSpan.fromSeconds(Decimal.sub(this.nextSectorAt, this.etherealPower)
         .div(this.etherealPowerPerSecond)).toTimeEstimate();
     },
     starPowerReqText() {
-      return `Reach a Stellar Product of ${format(DC.NUMMAX, 2, 2)} to unlock Star Power.`;
+      return `所有星辰数量的乘积达到 ${format(DC.NUMMAX, 2, 2)} 以解锁星流之力`;
     },
     starPowerDisplay() {
       if (this.starPower.lt(1000)) return `${format(this.starPower, 2, 2)}`;
       return `${formatHybridLarge(this.starPower, 3)}`;
     },
     nextGenerationText() {
-      if (this.allGenerationsUnlocked) return `All Star Power rewards have been unlocked`;
-      return `You will get a new Star Power reward at ${format(this.nextGeneration, 2, 2)} Star Power`;
+      if (this.allGenerationsUnlocked) return `已解锁所有星流之力效果`;
+      return `达到 ${format(this.nextGeneration, 2, 2)} 星流之力以解锁下一个效果`;
     },
     starTexts() {
       let arr = [];
@@ -186,8 +186,8 @@ export default {
       class="l-star-grid"
     >
       <div>
-        <span class="c-stellar-glow">Your Stellar Product is </span>
-        <span class="c-cooler-stellar-glow">{{ format(stellarProd, 2, 2) }}</span><span class="c-stellar-glow">.</span>
+        <span class="c-stellar-glow">你所有星辰数量的乘积为 </span>
+        <span class="c-cooler-stellar-glow">{{ format(stellarProd, 2, 2) }}</span><span class="c-stellar-glow">。</span>
       </div>
       <br>
       <div
