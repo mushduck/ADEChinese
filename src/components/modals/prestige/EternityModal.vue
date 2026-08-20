@@ -26,7 +26,7 @@ export default {
     },
     startWithIP() {
       return this.startingIP.gt(0)
-        ? `下次永恒开始时你将拥有 ${quantify("Infinity Point", this.startingIP, 2)} 个无限点数。`
+        ? `下次永恒开始时你将拥有 ${quantify("个无限点数", this.startingIP, 2)}。`
         : ``;
     },
     eternityChallenge() {

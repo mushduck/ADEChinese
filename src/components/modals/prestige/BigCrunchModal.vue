@@ -34,7 +34,7 @@ export default {
       const gainedResources = [];
       if (this.startingAM.gte(10)) gainedResources.push(`${quantify("反物质", this.startingAM, 2, 1)}`);
       if (this.startingBoosts.gt(0)) gainedResources.push(`${quantify("个维度提升", this.startingBoosts)}`);
-      if (this.willStartWithGalaxy) gainedResources.push(`${quantify("Galaxy", 1)}`);
+      if (this.willStartWithGalaxy) gainedResources.push(`${quantify("星系", 1)}`);
 
       return `你将会以 ${makeEnumeration(gainedResources)} 开始下一次无限。`;
     }
