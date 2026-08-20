@@ -263,7 +263,7 @@ export const perks = {
     label: "PEC2",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `现实时间每经过 ${formatInt(40)} 分钟，按数字顺序自动完成永恒挑战 (${formatInt(20)} minute decrease)`;
+      return `现实时间每经过 ${formatInt(40)} 分钟，按数字顺序自动完成永恒挑战 (减少 ${formatInt(20)} 分钟)`;
     },
     effect: 40,
     layoutPosList: [95485, 79002, 81402, 79804, 79400, 53486],
@@ -273,7 +273,7 @@ export const perks = {
     label: "PEC3",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `现实时间每经过 ${formatInt(20)} 分钟，按数字顺序自动完成永恒挑战 (${formatInt(20)} minute decrease)`;
+      return `现实时间每经过 ${formatInt(20)} 分钟，按数字顺序自动完成永恒挑战 (减少 ${formatInt(20)} 分钟)`;
     },
     effect: 20,
     automatorPoints: 10,

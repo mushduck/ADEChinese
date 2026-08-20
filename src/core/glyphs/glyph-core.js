@@ -391,11 +391,9 @@ export const Glyphs = {
     const stillEquipped = player.reality.glyphs.active.length;
     const fastReality = player.records.recentRealities[0][1] < 3000;
     if (stillEquipped && !fastReality) {
-      const target = player.options.respecIntoProtected ? "Protected slots" : "Main Inventory";
+      const target = player.options.respecIntoProtected ? "保护格" : "主仓库";
       const hasOther = this.findFreeIndex(!player.options.respecIntoProtected) !== -1;
-      setTimeout(() => Modal.message.show(`${quantifyInt("Glyph", stillEquipped)} could not be unequipped due to lack
-        of space. Free up some space in your ${target}${hasOther ? " or switch where you are unequipping to" : ""}
-        in order to unequip ${stillEquipped === 1 ? "it" : "them"}.`, { closeEvent: GAME_EVENT.GLYPHS_CHANGED }),
+            setTimeout(() => Modal.message.show(`${formatInt(stillEquipped)} 个符文因仓库空间不足而无法卸下。清理${target}的空间${hasOther ? "或选择保留的地方" : ""}以卸下${stillEquipped === 1 ? "它" : "它们"}。`, { closeEvent: GAME_EVENT.GLYPHS_CHANGED }),
       50);
     }
 
@@ -913,7 +911,7 @@ export function getAdjustedGlyphLevel(glyph, realityGlyphBoost = Glyphs.levelBoo
 
 export function respecGlyphs() {
   if (!Glyphs.unequipAll()) {
-    Modal.message.show("Some of your Glyphs could not be unequipped due to lack of inventory space.",
+    Modal.message.show("因仓库空间不足，无法卸下部分符文。",
       { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
   }
   player.reality.respec = false;
