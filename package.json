@@ -1,5 +1,5 @@
 {
-  "name": "反物质维度：终局",
+  "name": "ADEChinese",
   "version": "1.0.0",
   "description": "《反物质维度：终局》的桌面端",
   "author": "松茸不吃柯尔鸭",
@@ -73,7 +73,8 @@
     },
     "files": [
       "dist/**/*",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "electron-main.js"
     ],
     "win": {
       "target": "nsis",
