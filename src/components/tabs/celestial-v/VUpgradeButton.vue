@@ -59,7 +59,7 @@ export default {
       <CostDisplay
         v-if="!isCapped"
         :config="upgrade.config"
-        name="Celestial Point"
+        name="天界点数"
       />
     </button>
   </div>

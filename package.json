@@ -1,12 +1,15 @@
 {
   "private": true,
+  "main": "electron-main.js",
   "scripts": {
     "serve": "node build/check-npm.js && vue-cli-service serve",
     "build:master": "node build/pre-build.js && vue-cli-service build --mode master && node build/post-build.js",
     "build:release": "node build/pre-build.js && vue-cli-service build && node build/post-build.js",
     "build:steam-development": "node build/pre-build.js && vue-cli-service build --mode steam-development",
     "build:steam-release": "node build/pre-build.js && vue-cli-service build --mode steam-release",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "electron:dev": "cross-env ELECTRON_START_URL=http://localhost:8080 electron .",
+    "electron:build": "npm run build && electron-builder"
   },
   "dependencies": {
     "@antimatter-dimensions/notations": "^3.1.0",
@@ -43,6 +46,9 @@
     "@vue/cli-plugin-eslint": "^5.0.0-rc.0",
     "@vue/cli-service": "^5.0.0-rc.0",
     "browserslist-useragent-regexp": "^3.0.2",
+    "cross-env": "^10.1.0",
+    "electron": "^43.4.1",
+    "electron-builder": "^26.15.3",
     "eslint": "^7.20.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.26.0",
@@ -54,5 +60,20 @@
     "stylelint-order": "^5.0.0",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^5.64.0"
+  },
+  "build": {
+    "appId": "com.mushduck.ADEChinese",
+    "productName": "反物质维度：终局",
+    "directories": {
+      "output": "dist_electron"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/favicon.ico"
+    }
   }
 }
