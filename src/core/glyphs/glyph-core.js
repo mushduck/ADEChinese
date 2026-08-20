@@ -332,7 +332,17 @@ export const Glyphs = {
     }
 
     if (specialGlyphEquippedAfterChange > maxSpecialGlyph) {
-      Modal.message.show(`You may only have ${formatInt(maxSpecialGlyph)} ${glyph.type.capitalize()} Glyph equipped!`,
+      //我知道这非常丑陋，但是就这样吧
+      let ChineseName = "";
+      switch (glyph.type) {
+        case "reality":
+          ChineseName = "现实";
+          break;
+        case "effarig":
+          ChineseName = "鹿颈长";
+          break;
+      }
+      Modal.message.show(`你只能同时装备 ${formatInt(maxSpecialGlyph)} 个${ChineseName}符文`,
         { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
       return;
     }

@@ -116,7 +116,7 @@ export const alphaUnlocks = {
     id: 11,
     requirement: 12,
     nerfDescription: () => `时间维度的购买倍率降低至 ${formatX(2)}`,
-    buffDescription: () => `购买第八时间维度超过 {{ formatInt(1e8) }} 次后不再不增加倍率。`,
+    buffDescription: () => `购买第八时间维度超过 ${formatInt(1e8)} 次后不再不增加倍率。`,
     effects: {
       nerf: 2
     }

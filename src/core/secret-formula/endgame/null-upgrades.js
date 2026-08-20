@@ -20,7 +20,7 @@ function rebuyable(config) {
 
 export const nullUpgrades = {
   antimatterDimensionMult: rebuyable({
-    name: "Empty Energy",
+    name: "虚化之源",
     id: 0,
     initialCost: 100,
     costIncrease: 10,
@@ -32,7 +32,7 @@ export const nullUpgrades = {
     noLabel: false
   }),
   infinityPointMult: rebuyable({
-    name: "Vacant Vastness",
+    name: "无际虚空",
     id: 1,
     initialCost: 10000,
     costIncrease: 100,

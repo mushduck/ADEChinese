@@ -74,10 +74,10 @@ export default {
       return !this.isRecent(this.lastNotEmptyAt);
     },
     disabledText() {
-      if (!this.resource.isBase) return `Total effect inactive, disabled, or reduced to ${formatX(1)}`;
+      if (!this.resource.isBase) return `最终效果无效、已禁用或降低到 ${formatX(1)}`;
       return Decimal.eq(this.resource.mult, 0)
-        ? `You cannot gain this resource (prestige requirement not reached)`
-        : `You have no multipliers for this resource (will gain ${format(1)} on prestige)`;
+        ? `无法获取此资源（未满足重置要求）`
+        : `当前无资源加成（重置时将获得 ${format(1)}）`;
     },
     // IC4 is the first time the player sees a power-based effect, not counting how infinity power is handled.
     // This doesn't need to be reactive because completing IC4 for the first time forces a tab switch
