@@ -66,16 +66,14 @@ export const Pelle = {
     EventHub.dispatch(GAME_EVENT.DOOM_REALITY_BEFORE);
     if (!Glyphs.unequipAll()) {
       Modal.hideAll();
-      Modal.message.show(`Dooming your Reality will unequip your Glyphs. Some of your
-        Glyphs could not be unequipped due to lack of inventory space.`, 1);
+      Modal.message.show(`毁灭现实将卸下所有符文。部分符文因仓库空间不足未能卸下。`, 1);
       return;
     }
     // Keep glyphs equal to max slot in Pelle.
     Glyphs.autoClean(Glyphs.activeSlotCountInPelle(true));
     if (Glyphs.freeInventorySpace < 5) {
       Modal.hideAll();
-      Modal.message.show(`You must have enough empty unprotected Glyph slots for
-        ${formatInt(5)} additional Glyphs in order to Doom your Reality.`, 1);
+      Modal.message.show(`要毁灭现实，你必须拥有足够未受保护的符文槽位以容纳额外 ${formatInt(5)} 个符文。`, 1);
       return;
     }
     for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.doomedGlyph(type));
@@ -469,7 +467,7 @@ export const Pelle = {
       default:
         if (onlyReturnUseful) return null;
         if (this.isGlyphTypeDisabled(type)) return "你不能在被毁灭的现实中装备此符文！";
-        return "这个符文没有佩勒专属效果！真糟糕qwq。";
+        return "这个符文没有佩勒专属效果！真糟糕。";
     }
   },
 
