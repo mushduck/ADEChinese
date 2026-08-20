@@ -184,12 +184,12 @@ export default {
       <ModalOptionsToggleButton
         v-if="etherealExtended"
         v-model="stars"
-        text="Stars:"
+        text="星辰："
       />
       <ModalOptionsToggleButton
         v-if="lhcUnlocked"
         v-model="hadrons"
-        text="Hadrons:"
+        text="强子加速："
       />
     </div>
   </ModalWrapperOptions>
