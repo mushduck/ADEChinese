@@ -862,7 +862,7 @@ export default {
       v-if="isNew"
       class="l-corner-icon l-new-glyph"
     >
-      New!
+      最新！
     </div>
     <div
       v-else-if="isUnequipped"
