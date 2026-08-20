@@ -82,10 +82,10 @@ export default {
       return this.infiniteEnergy;
     },
     currEnergyName() {
-      if (this.currentLevel === 4) return "Temporal Energy";
-      if (this.currentLevel === 3) return "Complex Energy";
-      if (this.currentLevel === 2) return "Eternal Energy";
-      return "Infinite Energy";
+      if (this.currentLevel === 4) return "时间能量";
+      if (this.currentLevel === 3) return "复构能量";
+      if (this.currentLevel === 2) return "永恒能量";
+      return "无限能量";
     }
   },
   methods: {

@@ -73,7 +73,6 @@
     },
     "files": [
       "dist/**/*",
-      "node_modules/**/*",
       "electron-main.js"
     ],
     "win": {
