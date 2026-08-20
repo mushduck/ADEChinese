@@ -75,7 +75,7 @@ export const normalAchievements = [
         : "购买第八维度。";
     },
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
-    get reward() { return `所有维度增强 ${formatPercents(0.9)} 。`; },
+    get reward() { return `所有维度增强 90° (π ÷ 2 - 1 ≈ 57%) 。`; },
     effect: 1.57,
     progress: () => Achievement(18).isUnlocked ? DC.D1 : Decimal.clamp(DimBoost.purchasedBoosts.div(8).min(0.5).add(player.antimatter.max(1).log10().div(48).min(0.5)), 0, 1)
   },
