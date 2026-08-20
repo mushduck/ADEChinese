@@ -40,7 +40,7 @@ export default {
       return `记数法：${this.notation}`;
     },
     postNotationLabel() {
-      return `大写字母：${this.lnotation}`;
+      return `大数计数法：${this.lnotation}`;
     },
     sidebarLabel() {
       return `侧边栏（现代 UI）: ${this.sidebarResource}`;
