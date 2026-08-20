@@ -97,7 +97,7 @@ export const divinityUpgrades = {
     id: "divineL1U9",
     layer: 1,
     cost: new Decimal(1e250),
-    description: "高维的神性维度生产神性能量时同时也生产下一维的神性维度"
+    description: "高维的神性维度在生产神性能量时也生产下一维的神性维度"
   },
   divineL1U10: {
     name: "临界遮断",
