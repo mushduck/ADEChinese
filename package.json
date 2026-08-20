@@ -77,7 +77,7 @@
       "electron-main.js"
     ],
     "win": {
-      "target": "nsis",
+      "target": "portable",
       "icon": "icon.ico"
     }
   }
