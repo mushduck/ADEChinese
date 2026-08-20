@@ -124,6 +124,12 @@ export default {
       } else {
         GameUI.notify.info(`先把存储时间用得差不多了再续杯哦！`);
       }
+    },
+    fixEternityBug() {
+      player.records.bestEternity.realTime = 25;
+      player.records.bestEternity.time.mag = 15;
+      player.records.bestEternity.time.layer = 1;
+      GameUI.notify.info(`已修复`);
     }
   }
 };
@@ -138,6 +144,15 @@ export default {
       <span>建议善用赠送的离线时长！或许在特定的情况下可以大大加快永恒！</span>
     </div>
     <div class="c-subtab-option-container">
+      <div class="independent-btn-wrapper">
+        <PrimaryButton
+          class="o-primary-btn"
+          @click="fixEternityBug"
+        >
+          点我修复最快永恒时间为0的问题（无限维度失效）
+          不要在正常情况使用我
+        </PrimaryButton>
+      </div>
       <div class="custom-time-container">
         <input 
           type="number" 
@@ -244,5 +259,13 @@ export default {
 .custom-time-input {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+.independent-btn-wrapper {
+  width: 100%;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 </style>
