@@ -237,7 +237,7 @@ effect: () => player.disablePostReality ? 1 : Achievements.power,
 // Base rate is 60 ECs at 20 minutes each
 format: x => ((Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality
 ? "即时（已拥有太阳神升级）"
-: `${TimeSpan.fromMinutes(new Decimal(60).times(20).div(x)).toStringShort()}全部完成时为`),
+: `全部完成时为 ${TimeSpan.fromMinutes(new Decimal(60).times(20).div(x)).toStringShort()}`),
 requirement: () => V.spaceTheorems >= 10,
 pelleDisabled: () => !PelleCelestialUpgrade.vMilestones2.canBeApplied
 },

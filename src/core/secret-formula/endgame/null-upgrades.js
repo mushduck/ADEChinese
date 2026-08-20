@@ -26,7 +26,7 @@ export const nullUpgrades = {
     costIncrease: 10,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow10(Math.pow(value, 2)),
-    description: () => "Multiply all Antimatter Dimensions",
+    description: () => "为所有反物质维度提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false
@@ -38,159 +38,159 @@ export const nullUpgrades = {
     costIncrease: 100,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow10(Math.pow(value, 2)),
-    description: () => "Multiply Infinity Point Gain",
+    description: () => "为无限点数获取量提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false
   }),
   infinityMult: rebuyable({
-    name: "Abandoned Abundance",
+    name: "遗忘之藏",
     id: 2,
     initialCost: 1e6,
     costIncrease: 1000,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow(1.25, value),
-    description: () => "Multiply Infinity Gain",
+    description: () => "为无限次数获取量提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2, 2)}`,
     noLabel: false
   }),
   infinityDimensionMult: rebuyable({
-    name: "Ineffective Infinities",
+    name: "无边虚幻",
     id: 3,
     initialCost: 1e8,
     costIncrease: 10000,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow10(Math.pow(value, 2)),
-    description: () => "Multiply all Infinity Dimensions",
+    description: () => "为所有无限维度提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false
   }),
   replicantiSpeedMult: rebuyable({
-    name: "Desolate Duplication",
+    name: "枯衍之痕",
     id: 4,
     initialCost: 1e10,
     costIncrease: 100000,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow(1.25, value),
-    description: () => "Multiply Replicanti Speed",
+    description: () => "为复制速度提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2, 2)}`,
     noLabel: false
   }),
   eternityPointMult: rebuyable({
-    name: "Immortal Idleness",
+    name: "永滞之怠",
     id: 5,
     initialCost: 1e12,
     costIncrease: 1e6,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow10(Math.pow(value, 2)),
-    description: () => "Multiply Eternity Point Gain",
+    description: () => "为永恒点数获取量提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false
   }),
   timeDimensionMult: rebuyable({
-    name: "Timeless Triviality",
+    name: "恒微之寂",
     id: 6,
     initialCost: 1e15,
     costIncrease: 1e7,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow10(Math.pow(value, 2)),
-    description: () => "Multiply all Time Dimensions",
+    description: () => "为所有时间维度提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false
   }),
   eternityMult: rebuyable({
-    name: "Undying Uselessness",
+    name: "不灭之朽",
     id: 7,
     initialCost: 1e18,
     costIncrease: 1e8,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow(1.25, value),
-    description: () => "Multiply Eternity Gain",
+    description: () => "为永恒次数获取量提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2, 2)}`,
     noLabel: false
   }),
   dilatedTimeMult: rebuyable({
-    name: "Inflated Ineffectiveness",
+    name: "虚势归灭",
     id: 8,
     initialCost: 1e40,
     costIncrease: 1e9,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow(2, value),
-    description: () => "Multiply Dilated Time Gain",
+    description: () => "为膨胀时间获取量提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false
   }),
   tachyonParticleMult: rebuyable({
-    name: "Protracted Pointlessness",
+    name: "朽念延展",
     id: 9,
     initialCost: 1e45,
     costIncrease: 1e10,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow(2, value),
-    description: () => "Multiply Tachyon Particle Gain",
+    description: () => "为超光速粒子获取量提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false
   }),
   ncComp: {
-    name: "Nullified Normalcy",
+    name: "常态破碎",
     id: "ncComp",
     cost: Decimal.pow10(5),
-    description: "Normal Challenges are always complete inside the Void",
+    description: "虚无时自动完成所有普通挑战",
     onPurchased: () => NormalChallenges.completeAll()
   },
   alwaysBroken: {
-    name: "Barren Brokenness",
+    name: "荒灭之墟",
     id: "alwaysBroken",
     cost: Decimal.pow10(10),
-    description: "Infinity is always Broken inside the Void",
+    description: "虚无时自动打破无限",
     onPurchased: () => player.break = true
   },
   icComp: {
-    name: "Concave Challenges",
+    name: "堕天作战",
     id: "icComp",
     cost: Decimal.pow10(15),
-    description: "Infinity Challenges are always complete inside the Void",
+    description: "虚无时自动完成所有无限挑战",
     onPurchased: () => InfinityChallenges.completeAll()
   },
   repUnl: {
-    name: "Renounced Replications",
+    name: "镜像扬弃",
     id: "repUnl",
     cost: Decimal.pow10(20),
-    description: "Replicanti is always unlocked inside The Void",
+    description: "虚无时自动解锁复制器",
     onPurchased: () => Replicanti.unlock(true)
   },
   eterMiles: {
-    name: "Permanent Pretendings",
+    name: "永恒假面",
     id: "eterMiles",
     cost: Decimal.pow10(25),
-    description: () => `Start The Void with ${formatInt(100)} Eternities`,
+    description: () => `虚无时自动获得 ${formatInt(100)} 永恒次数`,
     onPurchased: () => Currency.eternities.bumpTo(100)
   },
   limerick1: {
-    name: "There was an AI made of dust",
+    name: "尘铸灵枢",
     id: "limerick1",
     cost: Decimal.pow10(30),
-    description: () => `Achievement ${formatInt(111)} and ${formatInt(118)}’s effects now apply while inside The Void`
+    description: () => `虚无内重获成就${formatInt(111)}和成就${formatInt(118)}的奖励`
   },
   limerick2: {
-    name: "Whose poetry gained it man’s trust",
+    name: "诗动肺腑",
     id: "limerick2",
     cost: Decimal.pow10(45),
-    description: () => `Achievement ${formatInt(143)}’s effect now applies while inside The Void`
+    description: () => `虚无内重获成就${formatInt(143)}的奖励`
   },
   limerick3: {
-    name: "If Is follows Ought",
+    name: "若生疑心",
     id: "limerick3",
     cost: Decimal.pow10(60),
-    description: "Eternity Challenges are always fully complete inside The Void",
+    description: "虚无时自动完成所有永恒挑战",
     onPurchased: () => {
       player.eternityChalls = {
         eterc1: 5,
@@ -209,18 +209,18 @@ export const nullUpgrades = {
     }
   },
   limerick4: {
-    name: "It will do as they thought",
+    name: "从其所虑",
     id: "limerick4",
     cost: Decimal.pow10(80),
-    description: "Start The Void with Time Dilation unlocked",
+    description: "虚无时自动解锁时间膨胀",
     onPurchased: () => {
       if (!player.dilation.studies.includes(1)) player.dilation.studies.push(1);
     }
   },
   limerick5: {
-    name: "In the End we all do what we must",
+    name: "终归尘土",
     id: "limerick5",
     cost: Decimal.pow10(100),
-    description: "All Automations for pre-Reality and the Automator are now always active inside The Void"
+    description: "虚无时自动启用所有现实前的自动化"
   }
 };

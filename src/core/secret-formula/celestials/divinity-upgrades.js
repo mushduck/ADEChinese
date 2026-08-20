@@ -315,7 +315,7 @@ export const divinityUpgrades = {
     id: "divineL5U3",
     layer: 5,
     cost: new Decimal(7e5),
-    description: "基于当前终局之星数量为神性维度提供额外指数加成",
+    description: "基于当前终结之星数量为神性维度提供额外指数加成",
     effect: () => Decimal.log10(Decimal.log10(player.celestials.pelle.divinity.nebulae.add(10))).add(1),
     formatEffect: value => formatPow(value, 2, 3)
   },
