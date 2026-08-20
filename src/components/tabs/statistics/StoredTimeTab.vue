@@ -72,7 +72,7 @@ export default {
     classObj5() {
       return {
         "o-primary-btn": true,
-        "o-primary-btn--disabled": this.storedTime <= 0
+        "o-primary-btn--disabled": this.storedTime > 3600
       };
     },
   },
@@ -236,10 +236,13 @@ export default {
 
 .custom-time-input::-webkit-inner-spin-button, 
 .custom-time-input::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
+  -webkit-appearance: none;
+  appearance: none; 
   margin: 0; 
 }
+
 .custom-time-input {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 </style>
