@@ -145,8 +145,8 @@ export default {
       return cells;
     },
     infoCol() {
-      const cells = ["Run", this.hasRealTime ? "游戏时间" : "Time in Run"];
-      if (this.hasRealTime) cells.push("现实时间");
+      const cells = ["编号", this.hasRealTime ? "游戏时间" : "真实时间"];
+      if (this.hasRealTime) cells.push("真实时间");
       cells.push(...this.resourceTitles);
       if (this.hasChallenges) cells.push("挑战");
 

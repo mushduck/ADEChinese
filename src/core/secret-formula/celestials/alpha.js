@@ -221,7 +221,7 @@ export const alphaUnlocks = {
   ec11Bulk: {
     id: 22,
     requirement: 23,
-    nerfDescription: () => `解锁时间膨胀需要耗费多 ${formatInt(10000)} 倍的时间之理，但是移除“第四时间维度倍率永远为 ${formatX(1)}”的阿尔法削弱，并降低下一个免费计数频率升级的价格增长倍率至 ${format(1.2, 2, 2)}`,
+    nerfDescription: () => `解锁时间膨胀需要耗费 ${formatInt(10000)} 时间之理，但是移除“第四时间维度倍率永远为 ${formatX(1)}”的阿尔法削弱，并降低下一个免费计数频率升级的价格增长倍率至 ${format(1.2, 2, 2)}`,
     buffDescription: () => `打破无限后计数频率提升的价格增长降低 ${format(0.075, 3, 3)}`,
     effects: {
       nerfA: 10000,
