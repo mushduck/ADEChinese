@@ -268,7 +268,7 @@ export default {
         <ReplicantiUpgradeButton :setup="maxGalaxySetup" />
       </div>
       <div>
-        最大复制器上限可以无限制地购买，但是其价格
+        最大复制器星系上限升级可以无限购买，但是其价格
         <br>
         会在超过 {{ formatInt(distantRG) }} 复制器星系时大幅增加，
         超过 {{ formatInt(remoteRG) }} 复制器星系后会更加剧烈。
