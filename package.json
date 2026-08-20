@@ -1,4 +1,8 @@
 {
+  "name": "反物质维度：终局",
+  "version": "1.0.0",
+  "description": "《反物质维度：终局》的桌面端",
+  "author": "松茸不吃柯尔鸭",
   "private": true,
   "main": "electron-main.js",
   "scripts": {
@@ -9,7 +13,7 @@
     "build:steam-release": "node build/pre-build.js && vue-cli-service build --mode steam-release",
     "lint": "vue-cli-service lint",
     "electron:dev": "cross-env ELECTRON_START_URL=http://localhost:8080 electron .",
-    "electron:build": "npm run build && electron-builder"
+    "electron:build": "npm run build:release && electron-builder"
   },
   "dependencies": {
     "@antimatter-dimensions/notations": "^3.1.0",
@@ -73,7 +77,7 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "public/favicon.ico"
+      "icon": "icon.ico"
     }
   }
 }
