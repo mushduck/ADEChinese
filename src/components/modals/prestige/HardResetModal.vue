@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     willHardReset() {
-      return this.input === "花开花落，尽归尘土。缘起缘灭，曲终人散。";
+      return this.input === "如果这样的话，会一直看不到明天的哦？就算那样也不错。";
     },
     hasExtraNG() {
       return player.records.fullGameCompletions > 0;
@@ -47,7 +47,7 @@ export default {
     <div class="c-modal-message__text">
       请确认是否硬重置本存档槽位。
       <span class="c-modal-hard-reset-danger">删除存档不会解锁任何隐藏内容。</span>
-      输入“花开花落，尽归尘土。缘起缘灭，曲终人散。”以确认。
+      输入“如果这样的话，会一直看不到明天的哦？就算那样也不错。”以确认。
       <div class="c-modal-hard-reset-danger">
         这将清除你的存档！
         <span v-if="hasExtraNG">

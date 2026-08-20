@@ -28,7 +28,7 @@ export default {
       <br>
       《反物质维度：终局》的首个公开版本由Supersonic Seven于2025年发布，至今仍持续更新。
       本模组的英文原版是<a href="https://supersonic-seven.github.io/AntimatterDimensionsEndgameUpdate/">Antimatter Dimensions : Endgame Update</a>。
-      这个汉化版的原版部分大部分采用了安卓版翻译，此后模组内容全部由松茸不吃柯尔鸭(qq:3151643233)汉化。目前该版本完成了神性内容前的翻译，并且持续更新。
+      这个汉化版的原版部分大部分采用了安卓版翻译，此后模组内容全部由松茸不吃柯尔鸭(qq:3151643233)汉化。作者将持续更新。
       <br>
       <br>
       特别感谢安卓版翻译者对反物质维度中文社区做出的贡献。
