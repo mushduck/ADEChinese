@@ -143,9 +143,9 @@ export default {
       const toExport = AutomatorBackend.exportCurrentScriptContents();
       if (toExport) {
         copyToClipboard(toExport);
-        GameUI.notify.automator("Exported current Automator script to your clipboard");
+        GameUI.notify.automator("当前自动机脚本已导出至剪贴板。");
       } else {
-        GameUI.notify.error("Could not export blank Automator script!");
+        GameUI.notify.error("你不能导出空白的自动机脚本。");
       }
     },
     importScript() {

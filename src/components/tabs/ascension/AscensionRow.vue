@@ -43,7 +43,7 @@ export default {
       扬升 {{ id }}:
       {{ name }}
       <br>
-      效果: {{ description }}.
+      效果：{{ description }}。
     </div>
   </div>
 </template>

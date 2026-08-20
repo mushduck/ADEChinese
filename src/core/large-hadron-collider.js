@@ -132,7 +132,7 @@ class AcceleratorState extends GameMechanicState {
 
   toggle() {
     const active = Accelerators.all.filter(a => a.isActive).length;
-    if (!this.isActive && active === 1) GameUI.notify.error(`You can only have 1 Accelerator active at the same time!`);
+    if (!this.isActive && active === 1) GameUI.notify.error(`你同时只能激活一个强子加速器`);
     else this.accelerator.active = !this.accelerator.active;
   }
 

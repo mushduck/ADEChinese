@@ -19,43 +19,43 @@ export const AutoBackupSlots = [
   {
     id: 1,
     type: BACKUP_SLOT_TYPE.ONLINE,
-    intervalStr: () => `${formatInt(1)} minute`,
+    intervalStr: () => `${formatInt(1)} 分钟`,
     interval: 60,
   },
   {
     id: 2,
     type: BACKUP_SLOT_TYPE.ONLINE,
-    intervalStr: () => `${formatInt(5)} minutes`,
+    intervalStr: () => `${formatInt(5)} 分钟`,
     interval: 5 * 60,
   },
   {
     id: 3,
     type: BACKUP_SLOT_TYPE.ONLINE,
-    intervalStr: () => `${formatInt(20)} minutes`,
+    intervalStr: () => `${formatInt(20)} 分钟`,
     interval: 20 * 60,
   },
   {
     id: 4,
     type: BACKUP_SLOT_TYPE.ONLINE,
-    intervalStr: () => `${formatInt(1)} hour`,
+    intervalStr: () => `${formatInt(1)} 小时`,
     interval: 3600,
   },
   {
     id: 5,
     type: BACKUP_SLOT_TYPE.OFFLINE,
-    intervalStr: () => `${formatInt(10)} minutes`,
+    intervalStr: () => `${formatInt(10)} 分钟`,
     interval: 10 * 60,
   },
   {
     id: 6,
     type: BACKUP_SLOT_TYPE.OFFLINE,
-    intervalStr: () => `${formatInt(1)} hour`,
+    intervalStr: () => `${formatInt(1)} 小时`,
     interval: 3600,
   },
   {
     id: 7,
     type: BACKUP_SLOT_TYPE.OFFLINE,
-    intervalStr: () => `${formatInt(5)} hours`,
+    intervalStr: () => `${formatInt(5)} 小时`,
     interval: 5 * 3600,
   },
   {
@@ -148,7 +148,7 @@ export const GameStorage = {
     Tabs.all.find(t => t.id === player.options.lastOpenTab).show(false);
     Modal.hideAll();
     Cloud.resetTempState();
-    GameUI.notify.info("Game loaded");
+    GameUI.notify.info("存档已加载");
     Achievements.updateSteamStatus();
   },
 
@@ -158,7 +158,7 @@ export const GameStorage = {
     }
     const newPlayer = GameSaveSerializer.deserialize(saveData);
     if (this.checkPlayerObject(newPlayer) !== "") {
-      Modal.message.show("Could not load the save (format unrecognized or invalid).");
+      Modal.message.show("无法加载存档（格式无法识别或无效）。");
       return;
     }
     this.oldBackupTimer = player.backupTimer;
@@ -177,7 +177,7 @@ export const GameStorage = {
     // You can doom your reality even if you haven't unlocked infinity yet if you import while the Pelle tab
     // is showing
     Tab.options.subtabs[0].show();
-    GameUI.notify.info("Game imported");
+    GameUI.notify.info("已导入存档");
     Achievements.updateSteamStatus();
   },
 
@@ -203,10 +203,10 @@ export const GameStorage = {
   checkPlayerObject(save) {
     // Sometimes save is the output of GameSaveSerializer.deserialize, and if that function fails then it will result
     // in the input parameter here being undefined
-    if (save === undefined || save === null) return "Save decoding failed (invalid format)";
+    if (save === undefined || save === null) return "存档解码失败（格式无效）";
     // Right now all we do is check for the existence of an antimatter prop, but if we wanted to do further save
     // verification then here's where we'd do it
-    if (save.money === undefined && save.antimatter === undefined) return "Save does not have antimatter property";
+    if (save.money === undefined && save.antimatter === undefined) return "存档中没有“antimatter”属性";
 
     // Recursively check for any NaN props and add any we find to an array
     const invalidProps = [];
@@ -238,7 +238,7 @@ export const GameStorage = {
     checkNaN(save, "player");
 
     if (invalidProps.length === 0 || player.DEV) return "";
-    return `${quantify("NaN player property", invalidProps.length)} found:
+    return `找到 ${quantify("个 NaN 的存档数据：", invalidProps.length)}
       ${invalidProps.join(", ")}`;
   },
 
@@ -261,7 +261,7 @@ export const GameStorage = {
       saves: this.saves
     };
     localStorage.setItem(this.localStorageKey, GameSaveSerializer.serialize(root));
-    if (!silent) GameUI.notify.info("Game saved");
+    if (!silent) GameUI.notify.info("游戏已存档");
   },
 
   // Saves a backup, updates save timers (this is called before nextBackup is updated), and then saves the timers too.
@@ -348,7 +348,7 @@ export const GameStorage = {
 
   export() {
     copyToClipboard(this.exportModifiedSave());
-    GameUI.notify.info("Exported current savefile to your clipboard");
+    GameUI.notify.info("已将当前存档导出到剪贴板");
   },
 
   get exportDateString() {
@@ -368,7 +368,7 @@ export const GameStorage = {
     download(
       `AD Save, Slot ${GameStorage.currentSlot + 1}${saveFileName} #${player.options.exportedFileCount} \
 (${this.exportDateString}).txt`, save);
-    GameUI.notify.info("Successfully downloaded current save file to your computer");
+    GameUI.notify.info("成功将文件下载到你的设备上");
   },
 
   exportBackupsAsFile() {
@@ -382,7 +382,7 @@ export const GameStorage = {
     download(
       `AD Save Backups, Slot ${GameStorage.currentSlot + 1} #${player.options.exportedFileCount} \
 (${this.exportDateString}).txt`, GameSaveSerializer.serialize(backupData));
-    GameUI.notify.info("Successfully downloaded save file backups to your computer");
+    GameUI.notify.info("存档备份文件已成功下载至你的电脑");
   },
 
   importBackupsFromFile(importText) {
@@ -399,7 +399,7 @@ export const GameStorage = {
       };
     }
     this.resetBackupTimer();
-    GameUI.notify.info("Successfully imported save file backups from file");
+    GameUI.notify.info("存档备份文件已成功从文件导入。");
   },
 
   // There are a couple props which may need to export with different values, so we handle that here
@@ -428,7 +428,7 @@ export const GameStorage = {
     if (playerObject === Player.defaultStart || checkString !== "") {
       if (DEV && checkString !== "") {
         // eslint-disable-next-line no-console
-        console.log(`Savefile was invalid and has been reset - ${checkString}`);
+        console.log(`存档文件无效并已重置——${checkString}`);
       }
       player = deepmergeAll([{}, Player.defaultStart]);
       player.records.gameCreatedTime = Date.now();

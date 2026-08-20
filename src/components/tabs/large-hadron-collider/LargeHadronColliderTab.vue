@@ -170,7 +170,7 @@ export default {
       在稳态虚无中反物质将缓慢衰变为虚物质。
       <span v-if="nullified">
         <br>
-        Since you Nullified the Multiverse, the ANR Perk and Passive EP Generation are reenabled inside The Void.
+        <!-- Since you Nullified the Multiverse, !-->在虚无中重获复兴树 ANR 节点和每秒自动获得永恒时所能获得永恒点数的 1%。
       </span>
     </div>
     <div v-if="voidMode === 1">
