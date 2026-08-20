@@ -66,7 +66,7 @@ export default {
         EndgameMasteryTree.commitToGameState(combinedTree.purchasedMasteries, false);
 
         const presetName = this.name ? `预设终局专精树“${this.name}”` : "预设终局专精树";
-        GameUI.notify.endgame(`${presetName} loaded from slot ${this.saveslot}`);
+        GameUI.notify.endgame(`${presetName}保存到槽位 ${this.saveslot}`);
       } else {
         Modal.message.show("该预设终局专精树目前没有终局专精");
       }

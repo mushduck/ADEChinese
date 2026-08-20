@@ -39,35 +39,35 @@ export default {
         celestialReality(Ra, "太阳神", "ra"),
         celestialReality(Laitela, "莱特拉", "laitela"),
         {
-          name: () => "被毁灭的现实",
+          name: () => "被毁灭的现实中",
           isActive: token => token,
           activityToken: () => Pelle.isDoomed,
           tabName: () => "pelle",
         },
         celestialReality(Alpha, "阿尔法", "alpha"),
         {
-          name: () => "鹿颈长的终局",
+          name: () => "鹿颈长的终局中",
           isActive: token => token,
           activityToken: () => Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME,
           tabName: () => "effarig",
         },
         {
-          name: () => `The Void${LHC.nullifiedVoidRunning ? " (Nullified)" : ""}`,
+          name: () => `${LHC.nullifiedVoidRunning ? "归零" : "稳态"}虚无中`,
           isActive: token => token,
           activityToken: () => LHC.voidRunning || LHC.nullifiedVoidRunning
         },
         {
-          name: () => "时间膨胀",
+          name: () => "时间膨胀中",
           isActive: token => token,
           activityToken: () => player.dilation.active
         },
         {
-          name: token => `永恒挑战 ${token}`,
+          name: token => `永恒挑战 ${token}中`,
           isActive: token => token > 0,
           activityToken: () => player.challenge.eternity.current
         },
         {
-          name: token => `无限挑战 ${token}`,
+          name: token => `无限挑战 ${token}中`,
           isActive: token => token > 0,
           activityToken: () => player.challenge.infinity.current
         },
@@ -202,7 +202,7 @@ export default {
     exitDisplay() {
       if (Player.isInAnyChallenge) return player.options.retryChallenge ? "重试挑战" : "放弃挑战";
       if (player.dilation.active) return "退出膨胀";
-      if (LHC.voidRunning || LHC.nullifiedVoidRunning) return "Exit The Void";
+      if (LHC.voidRunning || LHC.nullifiedVoidRunning) return "离开虚无";
       if (this.resetCelestial && this.inEndgame) return "重启终局";
       if (this.inEndgame) return "退出终局";
       if (this.resetCelestial) return "重启现实";

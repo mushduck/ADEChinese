@@ -162,7 +162,7 @@ export const Enslaved = {
     AutomatorData.recalculateErrors();
     if (AutomatorBackend.state.mode === AUTOMATOR_MODE.RUN && AutomatorData.currentErrors().length) {
       AutomatorBackend.stop();
-      GameUI.notify.error("This Reality forbids Black Holes! (Automator stopped)");
+      GameUI.notify.error("这个现实禁止使用黑洞（自动机已停止）");
     }
 
     this.quotes.startRun.show();

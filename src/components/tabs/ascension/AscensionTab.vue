@@ -41,13 +41,13 @@ export default {
       const first = this.nextAscension?.id === 0;
       const next = this.nextAscension;
 
-      if (first) return `You will reach the first Ascension in ${TimeSpan.fromMilliseconds(this.timeToNextAscension)}.`;
+      if (first) return `你将在 ${TimeSpan.fromMilliseconds(this.timeToNextAscension)} 后达到第一次扬升`;
       return next === undefined
-        ? "There are no more Ascensions to be reached!"
-        : `You will reach the next Ascension in ${TimeSpan.fromMilliseconds(this.timeToNextAscension)}.`;
+        ? "扬升已至尽头..."
+        : `你将在 ${TimeSpan.fromMilliseconds(this.timeToNextAscension)} 后达到下一次扬升`;
     },
     nextHintDisplay() {
-      return `The next Ascension is the ${this.nextAscension?.config.name}.`;
+      return `下一次扬升将解锁${this.nextAscension?.config.name}。`;
     },
     runButtonOuterClass() {
       return {
@@ -72,8 +72,8 @@ export default {
     },
     symbol() {
       return this.isRunning
-        ? `Exit the Overcharge Gain ${formatInt(this.pending)} ${this.currEnergyName} (Next at ${format(this.nextAt, 2)} Eternity Points)`
-        : "Enter the Overcharge";
+        ? `退出激能以获得 ${formatInt(this.pending)} ${this.currEnergyName}（下一个${this.currEnergyName}将在 ${format(this.nextAt, 2)} 永恒点数时获得）`
+        : "进入激能";
     },
     currEnergy() {
       if (this.currentLevel === 4) return this.temporalEnergy;
@@ -142,17 +142,17 @@ export default {
     <div class="l-endgame-milestone-grid">
       <div>
         <span class="c-ascension-description-text">
-          You have {{ format(divineEnergy, 2, 2) }} Divine Energy. +{{ format(divineEnergyPerSecond, 2, 2) }}/s
+          你拥有 {{ format(divineEnergy, 2, 2) }} 神性能量，+{{ format(divineEnergyPerSecond, 2, 2) }}/秒
         </span>
       </div>
       <div>
         <span class="c-ascension-description-text">
-          The time to reach the next Ascension will lower based on your Divine Energy amount.
+          到达下一扬升的时间将基于神性能量而缩短，
         </span>
       </div>
       <div>
         <span class="c-ascension-description-text">
-          Your current Ascension is {{ formatInt(ascension) }}.
+          你已经扬升了 {{ formatInt(ascension) }} 次。
         </span>
       </div>
       <div
@@ -214,16 +214,16 @@ export default {
     </div>
     <br>
     <div v-if="highestUnlockedLevel >= 1">
-      <span class="c-ascension-description-text">You have {{ infiniteEnergy }} Infinite Energy.</span>
+      <span class="c-ascension-description-text">你拥有 {{ infiniteEnergy }} 无限能量。</span>
     </div>
     <div v-if="highestUnlockedLevel >= 2">
-      <span class="c-ascension-description-text">You have {{ eternalEnergy }} Eternal Energy.</span>
+      <span class="c-ascension-description-text">你拥有 {{ eternalEnergy }} 永恒能量。</span>
     </div>
     <div v-if="highestUnlockedLevel >= 3">
-      <span class="c-ascension-description-text">You have {{ complexEnergy }} Complex Energy.</span>
+      <span class="c-ascension-description-text">你拥有 {{ complexEnergy }} 复构能量。</span>
     </div>
     <div v-if="highestUnlockedLevel >= 4">
-      <span class="c-ascension-description-text">You have {{ temporalEnergy }} Temporal Energy.</span>
+      <span class="c-ascension-description-text">你拥有 {{ temporalEnergy }} 时间能量。</span>
     </div>
   </div>
 </template>

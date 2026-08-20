@@ -115,10 +115,10 @@ Theme.tryUnlock = function(name) {
   Theme.set(prefix);
   SecretAchievement(25).unlock();
   if (!isAlreadyUnlocked) {
-    GameUI.notify.success(`You have unlocked the ${name.capitalize()} theme!`, 5000);
+    GameUI.notify.success(`你解锁了主题 ${name.capitalize()}！`, 5000);
     if (Theme.current().isAnimated) {
-      setTimeout(Modal.message.show(`This secret theme has animations. If they are giving you performance issues,
-        you can turn them off in the Options/Visual tab to reduce lag.`), 100);
+      setTimeout(Modal.message.show(`此隐藏主题包含动画效果。如果这些动画导致性能问题，
+        您可以在选项-视觉效果选项卡中将其关闭，以减少卡顿。`), 100);
     }
   }
   return true;

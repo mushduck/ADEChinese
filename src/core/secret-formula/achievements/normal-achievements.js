@@ -1710,7 +1710,7 @@ export const normalAchievements = [
   },
   {
     id: 208,
-    name: "...仍未被遗忘",
+    name: "...但别忘了",
     get description() { return `达到 ${format(DC.NUMMAX, 1, 0)} 虚幻机器。` },
     checkRequirement: () => Currency.imaginaryMachines.value.gte(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -1723,7 +1723,7 @@ export const normalAchievements = [
   },
   {
     id: 211,
-    name: "错误？",
+    name: "犯错了？",
     get description() { return `进入阿尔法的现实。` },
     checkRequirement: () => Alpha.isRunning,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -1743,7 +1743,7 @@ export const normalAchievements = [
   },
   {
     id: 213,
-    name: "永远不会放弃",
+    name: "永远不放弃",
     get description() { return `在阿尔法的现实中达到永恒。` },
     checkRequirement: () => Alpha.isRunning,
     checkEvent: GAME_EVENT.ETERNITY_RESET_BEFORE,
@@ -1793,7 +1793,7 @@ export const normalAchievements = [
   },
   {
     id: 218,
-    name: "...只是为了吃苦吗？",
+    name: "...只是为了受难吗？",
     get description() { return `在无名氏的现实内达到 ${formatPostBreak("ee50")} 反物质。` },
     checkRequirement: () => Currency.antimatter.value.gte("ee50") && Enslaved.isRunning,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -1847,7 +1847,7 @@ export const normalAchievements = [
   },
   {
     id: 225,
-    name: "299792458m/s",
+    name: "299792458米每秒",
     description: "令天界物质的数量突破无限。",
     checkRequirement: () => player.endgame.celDimExpansion.isBroken,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,

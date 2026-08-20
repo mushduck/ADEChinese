@@ -783,7 +783,7 @@ export const AutomatorBackend = {
     // and input 3000 comments in a row. If hasJustCompleted is true, then we actually broke out because the end of
     // the script has no-ops and we just looped through them, and therefore shouldn't show these messages
     if (!this.hasJustCompleted) {
-      GameUI.notify.error("Automator halted - too many consecutive no-ops detected");
+      GameUI.notify.error("自动机已停止运行——检测到连续执行了过多的空操作");
       AutomatorData.logCommandEvent("Automator halted due to excessive no-op commands", this.currentLineNumber);
     }
 

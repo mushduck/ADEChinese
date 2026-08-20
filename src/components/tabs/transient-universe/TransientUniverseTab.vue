@@ -11,7 +11,7 @@ export default {
       <br>
       <div>
       <b>
-        The Universes will reveal their contents no earlier than v2.1.
+        The Universes 不会在 v2.1 版本前实装。QAQ
       </b>
       </div>
     </div>
