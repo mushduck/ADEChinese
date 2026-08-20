@@ -182,7 +182,7 @@ export const eternityChallenges = [
       formatEffect: value => {
         const mult = formatX(value, 2, 1);
         return TimeStudy(31).canBeApplied
-          ? `${formatX(value.pow(1 / TimeStudy(31).effectValue), 2, 1)} (After TS31: ${mult})`
+          ? `${formatX(value.pow(1 / TimeStudy(31).effectValue), 2, 1)} (购买时间研究 131 后：${mult})`
           : mult;
       }
     }
@@ -202,7 +202,7 @@ export const eternityChallenges = [
       effect: completions => completions * 0.07,
       formatEffect: value => {
         const total = Math.round(Player.tickSpeedMultDecrease + Effects.sum(EternityChallenge(11).reward)) - value;
-        return `-${format(value, 2, 2)} (${formatX(total, 2, 2)} total)`;
+        return `-${format(value, 2, 2)} (总共 ${formatX(total, 2, 2)})`;
       }
     }
   },
@@ -219,7 +219,7 @@ export const eternityChallenges = [
     hasPelleGoal: () => !PelleDestructionUpgrade.disableEC12Nerf.canBeApplied,
     restriction: completions => Math.max(10 - 2 * completions, 1) / 10,
     checkRestriction: restriction => Time.thisEternity.totalSeconds.lt(restriction),
-    formatRestriction: restriction => `in ${quantify("游戏内时间: ", restriction, 0, 1)} or less.`,
+    formatRestriction: restriction => `在游戏内时间：${quantify("", restriction, 0, 1)} 或更少`,
     failedRestriction: "(你超过了挑战时限，挑战失败)",
     reward: {
       description: "降低无限维度的价格增幅",
