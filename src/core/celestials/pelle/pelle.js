@@ -599,7 +599,7 @@ export const Pelle = {
     } else if (Effarig.isRunning) {
       return "可喜 可贺 可叹 君 击破 双重 天神 现实 枷锁 佩勒 亦 为此 折服".split(" ");
     } else if (Alpha.isDestroyed) {
-      return "何故 驻足 此地 万物 皆已 覆灭 无存 唯余 丛丛 空弱 纤维 漫天 璀璨 星辰".split(" ");
+      return "何故 驻足 此地 万物 皆已 覆灭 无存 唯余 漫天 空弱 纤维 璀璨 星辰 残挂".split(" ");
     } else if (Achievement(191).isUnlocked) {
       return "毁灭 已至 新生 已临 一去 不返 你 我 终将 再次 相逢 于 终焉 之端".split(" ");
     } else {
