@@ -56,7 +56,7 @@ export default {
 <template>
   <div class="l-break-celestial-infinity-tab">
     <div v-if="!isUnlocked">
-      达到 {{ formatInt(10000) }} 天界无限天数以打破天界无限
+      达到 {{ formatInt(10000) }} 天界无限点数以打破天界无限
     </div>
     <CelestialBreakInfinityButton class="l-break-celestial-infinity-tab__break-btn" />
     <div

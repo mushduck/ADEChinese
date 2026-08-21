@@ -21,7 +21,7 @@ export default {
     text() {
       return this.isUnlocked
         ? (this.isBroken ? "已打破天界无限".split("\n") : "打破天界无限".split("\n"))
-        : `打破天界无限\n\j需要: ${formatInt(10000)} 天界无限点数`.split("\n");
+        : `打破天界无限\n需要: ${formatInt(10000)} 天界无限点数`.split("\n");
     }
   },
   methods: {
