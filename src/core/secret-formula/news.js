@@ -14,6 +14,8 @@ function newsAnimSpd(seconds) {
   return new Decimal(seconds).toNumber() / player.options.news.speed;
 }
 
+const cialloAudio = new Audio('audio/ciallo.mp3');
+cialloAudio.preload = 'auto';
 
 export const news = [
   {
@@ -8045,28 +8047,32 @@ export const news = [
     id: "ai155",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      new Audio(`audio/ciallo.mp3`).play();
+      cialloAudio.currentTime = 0;
+      cialloAudio.play();
     }
   },
   {
     id: "ai156",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      new Audio(`audio/ciallo.mp3`).play();
+      cialloAudio.currentTime = 0;
+      cialloAudio.play();
     }
   },
   {
     id: "ai157",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      new Audio(`audio/ciallo.mp3`).play();
+      cialloAudio.currentTime = 0;
+      cialloAudio.play();
     }
   },
   {
     id: "ai158",
     text: "Ciallo～ (∠・ω< )⌒★（点我点我！）",
     onClick() {
-      new Audio(`audio/ciallo.mp3`).play();
+      cialloAudio.currentTime = 0;
+      cialloAudio.play();
     }
   },/*
   {

@@ -110,7 +110,7 @@ export const endgameUpgrades = [
         : (Time.bestEndgameRealTime.totalMilliseconds.lte(33)
            ? `${TimeSpan.fromMilliseconds(new Decimal(330)).toStringShort()} (已达到上限)`
            : `${TimeSpan.fromMilliseconds(new Decimal(value)).toStringShort()}`);
-      return `每 ${timeStr} 生成${quantify("终局次数", endgames)}`;
+      return `每 ${timeStr} 生成 ${quantify("终局次数", endgames)}`;
     }
   },
   {
