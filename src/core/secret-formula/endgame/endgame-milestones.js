@@ -2,7 +2,7 @@ export const endgameMilestones = {
   riftFill: {
     endgames: 1,
     reward: () => {
-      return `裂缝填充速度每次现实加快 ${formatPercents(0.05)}，在 ${formatInt(9)} 次终局后达到 ${formatPercents(Alpha.isDestroyed ? 0.9 : 0.45)} 的上限` + 
+      return `裂缝填充速度每次终局加快 ${formatPercents(0.05)}，在 ${formatInt(9)} 次终局后达到 ${formatPercents(Alpha.isDestroyed ? 0.9 : 0.45)} 的上限` + 
         (player.disablePostReality ? "(在被毁灭的现实中生效)" : (player.endgames >= 1
          ? (player.endgames >= 9 ? "(已达到上限: " : "(当前: ") + `+${formatPercents(Math.min(0.45, player.endgames * 0.05) + (Alpha.isDestroyed ? 0.45 : 0))})`
          : "(未解锁)"));
