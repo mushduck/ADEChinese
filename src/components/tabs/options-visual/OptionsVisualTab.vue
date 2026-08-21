@@ -40,7 +40,7 @@ export default {
       return `记数法：${this.notation}`;
     },
     postNotationLabel() {
-      return `大数计数法：${this.lnotation}`;
+      return `大数记数法：${this.lnotation}`;
     },
     sidebarLabel() {
       return `侧边栏（现代 UI）: ${this.sidebarResource}`;
@@ -58,8 +58,8 @@ export default {
     update() {
       const options = player.options;
       this.theme = Theme.currentName();
-      this.notation = options.notation;
-      this.lnotation = options.lnotation;
+      this.notation = Notations.current.chineseName;
+      this.lnotation = LNotations.current.chineseName;
       this.sidebarResource = player.options.sidebarResourceID === 0
         ? "最新资源"
         : this.sidebarDB.find(e => e.id === player.options.sidebarResourceID).optionName;
