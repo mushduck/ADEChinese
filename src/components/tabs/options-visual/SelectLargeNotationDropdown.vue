@@ -16,7 +16,7 @@ export default {
         class="o-primary-btn l-select-notation__item c-select-notation__item"
         @click="notation.setAsCurrent()"
       >
-        {{ notation.name }}
+        {{ notation.chineseName }}
       </div>
     </div>
   </div>

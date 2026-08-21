@@ -693,7 +693,7 @@ export default {
         （{{ condense.thisReal.toStringShort() }} 现实时间）
       </div>
       <div>
-        你获得神性星辰的最快速度<span v-if="supernova.isUnlocked">（本次超新星）</span>
+        你获得神性之星的最快速度<span v-if="supernova.isUnlocked">（本次超新星）</span>
         为每分钟 {{ format(condense.bestRate, 2, 2) }}。
       </div>
       <br>
