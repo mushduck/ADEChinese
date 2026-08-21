@@ -36,7 +36,7 @@ export const confirmationTypes = [
     option: "dilation",
     isUnlocked: () => PlayerProgress.realityUnlocked() || !Currency.tachyonParticles.eq(0),
   }, {
-    name: "Overcharge",
+    name: "激能",
     option: "overcharge",
     isUnlocked: () => Ascensions.ocA.isUnlocked,
   }, {
