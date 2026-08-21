@@ -21,7 +21,7 @@ export default {
         [true, cloneDeep(Glyphs.copyForRecords(bestReality.RMminSet)), "在一次现实中获得现实机器的最大速度",
           `${format(bestReality.RMmin, 2, 2)} 现实机器/分`],
         [true, cloneDeep(Glyphs.copyForRecords(bestReality.glyphLevelSet)), "最高符文等级",
-          `Level ${formatHybridLarge(bestReality.glyphLevel, 3)} 级`],
+          `${formatHybridLarge(bestReality.glyphLevel, 3)} 级`],
         [true, cloneDeep(Glyphs.copyForRecords(bestReality.bestEPSet)), "最高永恒点数",
           `${format(bestReality.bestEP, 2, 2)} 永恒点数`],
         [true, cloneDeep(Glyphs.copyForRecords(bestReality.speedSet)), "最快现实用时（现实时间）",
