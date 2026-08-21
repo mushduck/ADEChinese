@@ -228,7 +228,7 @@ export default {
                     {{ nextMemoryChunkUpgradeEstimate }}
                   </span>
                   <br>
-                  价格：{{ formatX(currentChunkMult, 2, 2) }}
+                  当前：{{ formatX(currentChunkMult, 2, 2) }}
                 </div>
               </div>
               <div
