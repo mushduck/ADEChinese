@@ -126,10 +126,12 @@ export default {
       }
     },
     fixEternityBug() {
-      player.records.bestEternity.realTime = 25;
-      player.records.bestEternity.time.mag = 15;
-      player.records.bestEternity.time.layer = 1;
-      GameUI.notify.info(`已修复`);
+      if (player.records.bestEternity.time.eq(0e0)) {
+        player.records.bestEternity.time = new Decimal(25);
+        GameUI.notify.info(`已修复`);
+      }else {
+        GameUI.notify.info(`不要在没触发bug时使用我哦！`);
+      }
     }
   }
 };
