@@ -102,8 +102,6 @@ export default {
       导入符文筛选设置
     </template>
     注意：除当前选择的模式外，导入的符文筛选设置将覆盖所有模式的设置。
-    <br>
-    in all filter modes, not just the currently-selected one.
     <input
       ref="input"
       v-model="input"

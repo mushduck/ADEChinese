@@ -171,7 +171,7 @@ export default {
     },
     loadingTooltip(set) {
       return this.setLengthValid(set) && this.hasEquipped
-        ? "This set may not load properly because you already have some Glyphs equipped"
+        ? "由于已经装备了一些符文，此套符文可能无法正常加载"
         : null;
     },
     glyphSetKey(set, index) {
