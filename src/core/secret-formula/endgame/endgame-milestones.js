@@ -24,7 +24,7 @@ export const endgameMilestones = {
   galGenAnimation: {
     endgames: 10,
     reward: () => {
-      return `星系生成器动画速度每 ${formatInt(10)} 次现实加快 ${formatX(1.2, 0, 1)}，在 ${formatInt(200)} 次终局后达到上限` + 
+      return `星系生成器动画速度每 ${formatInt(10)} 次终局加快 ${formatX(1.2, 0, 1)}，在 ${formatInt(200)} 次终局后达到上限` + 
         (player.disablePostReality ? "(在被毁灭的现实中生效)" : (player.endgames >= 10
          ? (player.endgames >= 200 && !Alpha.isDestroyed ? "(已达到上限: " : "(当前: ") + (Alpha.isDestroyed ? "立刻)" : `${formatX(Math.pow(1.2, Math.floor(Math.min(Currency.endgames.value, 200) / 10)), 2, 2)})`)
          : "(未解锁)"));
