@@ -7468,7 +7468,7 @@ export const news = [
   {
     id: "ai11",
     text: "\"点击这条新闻变猫娘\"",
-    onClick() { window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ"); }
+    onClick() { window.open("https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click&vd_source=51c470b9c46e3223f885aabdbe0165c4"); }
   },
   {
     id: "ai12",
