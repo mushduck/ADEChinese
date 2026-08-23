@@ -73,7 +73,7 @@ export default {
     <PrimaryToggleButton
       v-if="isAutoUnlocked"
       v-model="isAutobuyerActive"
-      label="Autobuy CIP mult"
+      label="自动购买倍增升级"
       class="l--spoon-btn-group__little-spoon o-primary-btn--small-spoon"
     />
   </div>

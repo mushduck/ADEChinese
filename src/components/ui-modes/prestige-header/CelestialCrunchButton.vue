@@ -115,7 +115,7 @@ export default {
       <b>
         获得
         <span :style="amountStyle">{{ format(gainedCIP, 2) }}</span>
-        <span v-if="showCIPRate"> 天界点数</span>
+        <span v-if="showCIPRate"> 天界无限点数</span>
         <span v-else> 天界无限{{ pluralize("点数", gainedCIP) }}</span>
       </b>
       <template v-if="showCIPRate">

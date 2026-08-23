@@ -36,7 +36,7 @@ export const breakInfinityUpgrades = {
     effect: () => Decimal.pow(player.records.totalEndgameAntimatter.add(1).log10().add(1), 1.5),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "基于产生的总反物质和特蕾莎等级，给予反物质维度倍数加成", 
+      description: "基于产生的总反物质和特蕾莎等级，给予反物质维度指数加成", 
       effect: () => Decimal.pow(player.records.totalEndgameAntimatter.add(1).log10().add(1).log10().times(
         Ra.pets.teresa.level).add(1), 0.2).toNumber(),
       formatEffect: value => formatPow(value, 4, 4)
@@ -49,7 +49,7 @@ export const breakInfinityUpgrades = {
     effect: () => Decimal.pow(Currency.antimatter.value.add(1).log10().add(1), 1.5),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "基于当前反物质和特蕾莎等级，给予反物质维度倍数加成", 
+      description: "基于当前反物质和特蕾莎等级，给予反物质维度指数加成", 
       effect: () => Decimal.pow(Currency.antimatter.value.add(1).log10().add(1).log10().times(
         Ra.pets.teresa.level).add(1), 0.2).toNumber(),
       formatEffect: value => formatPow(value, 4, 4)
@@ -73,7 +73,7 @@ export const breakInfinityUpgrades = {
     effect: () => Currency.infinitiesTotal.value.add(1).pLog10().times(25).add(1),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "基于无限次数和特蕾莎等级，给予反物质维度倍数加成", 
+      description: "基于无限次数和特蕾莎等级，给予反物质维度指数加成", 
       effect: () => Decimal.pow(Currency.infinitiesTotal.value.add(1).log10().add(1).log10().times(
         Ra.pets.teresa.level).add(1), 0.5).toNumber(),
       formatEffect: value => formatPow(value, 4, 4)
@@ -86,7 +86,7 @@ export const breakInfinityUpgrades = {
     effect: () => Math.max(Math.pow((Achievements.effectiveCount - 30), 4) / 20, 1),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "基于已完成的成就数和特蕾莎等级，给予反物质维度倍数加成", 
+      description: "基于已完成的成就数和特蕾莎等级，给予反物质维度指数加成", 
       effect: () => Math.pow(Achievements.effectiveCount * Ra.pets.teresa.level + 1, 0.25),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -102,7 +102,7 @@ export const breakInfinityUpgrades = {
     hasCap: true,
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.D2E5,
     charged: {
-      description: "基于最慢的普通挑战时间和特蕾莎等级，给予反物质维度倍数加成", 
+      description: "基于最慢的普通挑战时间和特蕾莎等级，给予反物质维度指数加成", 
       effect: () => Decimal.pow(Laitela.hadronizes * Ra.pets.teresa.level + 1, 0.25),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -127,7 +127,7 @@ export const breakInfinityUpgrades = {
       return `${format(infinities)} 无限次数 / ${timeStr}`;
     },
     charged: {
-      description: "基于最快的无限和特蕾莎等级被动生成无限次数", 
+      description: "基于最快的无限和特蕾莎等级给予无限次数指数加成", 
       effect: () => Math.pow(Ra.pets.teresa.level + 1, 1.5),
       formatEffect: value => formatPow(value, 4, 4)
     }
