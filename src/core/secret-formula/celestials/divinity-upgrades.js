@@ -39,7 +39,7 @@ export const divinityUpgrades = {
     id: "divineL1U2",
     layer: 1,
     cost: new Decimal(1e9),
-    description: () => `阿尔法诅咒的消散速度提高 ${formatPercents(0.1)}`,
+    description: () => `阿尔法诅咒自动从 ${formatPercents(0.1)} 进度开始消散`,
     effect: 0.9
   },
   divineL1U3: {
@@ -97,7 +97,7 @@ export const divinityUpgrades = {
     id: "divineL1U9",
     layer: 1,
     cost: new Decimal(1e250),
-    description: "高维的神性维度在生产神性能量时也生产下一维的神性维度"
+    description: "高维的神性维度在生产神性能量时不再减半生产下一维的神性维度速度"
   },
   divineL1U10: {
     name: "临界遮断",
@@ -331,6 +331,6 @@ export const divinityUpgrades = {
     id: "divineL5U5",
     layer: 5,
     cost: new Decimal(1e10),
-    description: () => `每秒自动获得超新星时能获得的终结之星的 ${formatPercents(0.01)}`
+    description: () => `每秒自动获得凝聚时能获得的神性之星的 ${formatPercents(0.01)}`
   }
 };
