@@ -12,3 +12,5 @@ node_modules/
 dist/
 *.bak
 dist_electron/
+output.txt
+sdk/
