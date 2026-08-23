@@ -1541,6 +1541,7 @@ window.player = {
     themeModern: "Normal",
     updateRate: 33,
     newUI: true,
+    phoneUI: false,
     offlineProgress: true,
     loadBackupWithoutOffline: false,
     automaticTabSwitching: false,
