@@ -8,7 +8,7 @@ export const divinityMilestones = {
         毁灭现实后自动解锁所有佩勒升级。
         将天界物质软上限指数降低 ${formatPercents(0.05)}。
         将强子和暗强子效果到达上限所需的时间降低 ${formatPercents(0.2)}。
-        终局次数获取量 ${formatX(10)}；重构机器获取量 ^ ${format(1.1, 1, 1)}；熵获得等同于 ln(历史最高星系数量) 的倍率加成。`;
+        终局次数获取量 ${formatX(10)}；重构机器获取量 ^ ${format(1.1, 1, 1)}；熵获得等同于 lg(历史最高星系数量) 的倍率加成。`;
     }
   },
   divineDimensions: {

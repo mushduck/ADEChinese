@@ -92,7 +92,7 @@ export const sidebarResources = [
   {
     id: 12,
     optionName: "所有机器",
-    resourceName: "Machines",
+    resourceName: "机器",
     isAvailable: () => MachineHandler.isIMUnlocked || PlayerProgress.endgameUnlocked(),
     // This is a dummy value to prevent vue errors
     value: () => Currency.realityMachines.value,

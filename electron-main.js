@@ -27,8 +27,26 @@ function createWindow() {
     win.webContents.on('before-input-event', (event, input) => {
       if (input.type !== 'keyDown') return;
 
+      if (input.key === 'F11') {
+        event.preventDefault();
+        win.setFullScreen(!win.isFullScreen());
+        return;
+      }
+
+      if (input.key === 'F12') {
+        event.preventDefault();
+        win.webContents.openDevTools();
+        return;
+      }
+
       const isCtrlOrCmd = input.control || input.meta;
       if (!isCtrlOrCmd) return;
+
+      if (input.shift && input.key === 'I') {
+        event.preventDefault();
+        win.webContents.openDevTools();
+        return;
+      }
 
       try {
         let currentZoom = win.webContents.getZoomLevel();
