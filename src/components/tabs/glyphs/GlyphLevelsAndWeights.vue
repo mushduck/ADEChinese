@@ -483,7 +483,7 @@ function roundPreservingSum(data) {
       :style="rowStyle('info')"
       class="l-glyph-levels-and-weights__factor l-glyph-level-and-weights-note"
     >
-      注意：此处所有资源值均为实际值的 log10。
+      注意：此处所有资源值均为实际值的 lg 值。
     </div>
     <div
       :style="rowStyle('info2')"

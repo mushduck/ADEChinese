@@ -16,8 +16,8 @@ export default {
     },
     handleClick() {
       player.endgame.largeHadronCollider.void.nullified = true;
-      Modal.message.show(`WARNING: YOUR EXCESS NULL MATTER HAS CREATED A RIFT IN SPACETIME.
-        THIS RIFT HAS CAUSED YOU TO UNLOCK THE NULLIFIED VOID AND START GENERATING NULL PARTICLES.`, {}, 3);
+      Modal.message.show(`警告：过剩的虚物质已在时空中撕裂出一道裂隙。
+        这道裂隙解锁了归零虚无，虚粒子将从其中诞生。`, {}, 3);
     }
   }
 };
@@ -27,7 +27,7 @@ export default {
   <span v-if="shouldDisplay">
     <div v-if="isModern">
       <h3 class="l-spacing">
-        The Entropy has become too much... I must Nullify the Multiverse...
+        熵增正在撕裂这个宇宙...我必须将此多元宇宙彻底归零...
       </h3>
       <button
         :class="{
@@ -35,7 +35,7 @@ export default {
         }"
         @click="handleClick"
       >
-        NULLIFY
+        归零
       </button>
     </div>
     <div v-else>
@@ -47,10 +47,10 @@ export default {
         }"
         @click="handleClick"
       >
-        NULLIFY
+        归零
       </button>
       <div class="o-emptiness">
-        The Entropy has become too much... I must Nullify the Multiverse...
+        熵增正在撕裂这个宇宙...我必须将此多元宇宙彻底归零...
       </div>
     </div>
   </span>

@@ -64,13 +64,13 @@ export default {
           <div class="l-remnant-factors-row">
             <div class="l-remnant-factors-col l-remnant-factors-col--first">
               <div class="l-remnant-factors-item">
-                log10(log10(反物质){{ dilationMult[0] > 1 ? `*${dilationMult[0]}` : "" }}{{ milestoneMult[0] > 1 ? `*${milestoneMult[0]}` : "" }} + 2)
+                lg(lg(反物质){{ dilationMult[0] > 1 ? `*${dilationMult[0]}` : "" }}{{ milestoneMult[0] > 1 ? `*${milestoneMult[0]}` : "" }} + 2)
               </div>
               <div class="l-remnant-factors-item">
-                log10(log10(无限点数){{ dilationMult[1] > 1 ? `*${dilationMult[1]}` : "" }}{{ milestoneMult[1] > 1 ? `*${milestoneMult[1]}` : "" }} + 2)
+                lg(lg(无限点数){{ dilationMult[1] > 1 ? `*${dilationMult[1]}` : "" }}{{ milestoneMult[1] > 1 ? `*${milestoneMult[1]}` : "" }} + 2)
               </div>
               <div class="l-remnant-factors-item">
-                log10(log10(永恒点数){{ dilationMult[2] > 1 ? `*${dilationMult[2]}` : "" }}{{ milestoneMult[2] > 1 ? `*${milestoneMult[2]}` : "" }} + 2)
+                lg(lg(永恒点数){{ dilationMult[2] > 1 ? `*${dilationMult[2]}` : "" }}{{ milestoneMult[2] > 1 ? `*${milestoneMult[2]}` : "" }} + 2)
               </div>
               <div class="l-remnant-factors-item">
                 固定除数
