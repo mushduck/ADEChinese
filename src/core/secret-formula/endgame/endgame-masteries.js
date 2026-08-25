@@ -21,7 +21,7 @@ export const endgameMasteries = [
     cost: 2,
     requirement: [11],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `开始时解锁自动永恒，且其速度提高${formatInt(60)}倍`,
+    description: () => `开始时解锁自动永恒挑战，且其速度提高${formatInt(60)}倍`,
     effect: () => player.disablePostReality ? 1 : 60
   },
   {
@@ -352,7 +352,7 @@ export const endgameMasteries = [
     cost: 100000,
     requirement: [201],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `神性维度倍率 ^ ${formatPow(1.3, 1, 1)}`,
+    description: () => `神性维度倍率 ${formatPow(1.3, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.3
   },
   {
@@ -360,7 +360,7 @@ export const endgameMasteries = [
     cost: 100000,
     requirement: [201],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `天界点数获取量 ^ ${formatPow(1.2, 1, 1)}`,
+    description: () => `天界点数获取量 ${formatPow(1.2, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.2
   },
   {
@@ -368,7 +368,7 @@ export const endgameMasteries = [
     cost: 100000,
     requirement: [201],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `重构机器获取量 ^ ${formatPow(1.1, 1, 1)}`,
+    description: () => `重构机器获取量 ${formatPow(1.1, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.1
   },
   {

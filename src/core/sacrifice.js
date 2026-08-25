@@ -25,7 +25,7 @@ export class Sacrifice {
     const f = (name, condition) => (name in changes ? changes[name] : condition);
     let factor = 2;
     let places = 1;
-    let base = `(log₁₀(第一维度)/${formatInt(10)})`;
+    let base = `(lg(第一维度)/${formatInt(10)})`;
     if (f("Challenge8isRunning", NormalChallenge(8).isRunning)) {
       factor = 1;
       base = "x";

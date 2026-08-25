@@ -13,7 +13,7 @@ function rebuyable(config) {
       (value => {
         return (value === config.maxUpgrades
           ? `当前：${formatX(10 - value)}`
-          : `当前：${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`);
+          : `当前：${formatX(10 - value)} | 下一级：${formatX(10 - value - 1)}`);
       }),
     formatCost: value => format(value, 2, 0),
     noLabel,
@@ -85,7 +85,7 @@ export const celestialBreakInfinityUpgrades = {
       return `基于前 10 次天界无限中最快天界无限点数获取速度的 ${generation} 生成天界无限点数`;
     },
     isDisabled: effect => effect.eq(0),
-    formatEffect: value => `${format(value, 2, 1)} CIP/min`,
+    formatEffect: value => `${format(value, 2, 1)} 天界无限点数/分`,
     noLabel: false
   }),
   celDimPurchaseBuff: rebuyable({

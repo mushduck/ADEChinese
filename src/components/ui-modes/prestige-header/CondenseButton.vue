@@ -104,9 +104,9 @@ export default {
   >
     <!-- Cannot Condense -->
     <template v-if="!canCondense">
-      Reach {{ format(condenseGoal, 2, 2) }}
+      达到 {{ format(condenseGoal, 2, 2) }}
       <br>
-      Divine Matter
+      神性物质
     </template>
 
     <!-- Can Condense -->
