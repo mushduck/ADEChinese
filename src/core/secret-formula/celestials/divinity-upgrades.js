@@ -257,7 +257,7 @@ export const divinityUpgrades = {
     id: "divineL4U1",
     layer: 4,
     cost: new Decimal(1),
-    description: () => `基于总终结之星数量为神性能量和神性之星获取提供倍率加成，为神性维度提供指数加成`,
+    description: () => `基于历史总终结之星数量为神性能量和神性之星获取提供倍率加成，为神性维度提供指数加成`,
     effects: {
       energy: () => player.records.bestSupernova.totalNeb.div(DivinityUpgrade.divineL4U4.isBought ? 7 : 10).add(1).pow(777),
       matter: () => Decimal.log10(player.records.bestSupernova.totalNeb.add(1)).add(1).pow(
