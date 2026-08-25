@@ -65,7 +65,7 @@ export default {
     lastSaved() {
       const lastSave = GameStorage.lastBackupTimes[this.slotData.id]?.date ?? 0;
       return lastSave
-        ? `上次存档时间：${TimeSpan.fromMilliseconds(this.currTime - lastSave)}前`
+        ? `上次存档时间：${TimeSpan.fromMilliseconds(new Decimal(this.currTime - lastSave))}前`
         : "槽位还未使用";
     },
   },
