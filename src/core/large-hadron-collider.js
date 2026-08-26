@@ -61,6 +61,10 @@ class AcceleratorState extends GameMechanicState {
     return this.config.name;
   }
 
+  get ChineseName() {
+    return this.config.ChineseName;
+  }
+
   get accelerator() {
     return player.endgame.largeHadronCollider.accelerators[this.config.key];
   }
