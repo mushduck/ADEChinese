@@ -58,7 +58,7 @@ export default {
     <br>
     <br>
     举个例子，定义
-    <b>first ➜ 11,21,22,31,32,33</b>
+    <b>first 🠈 11,21,22,31,32,33</b>
     能让你通过
     <b>studies purchase first</b>
     来购买最前三行的所有时间研究。
