@@ -1542,7 +1542,7 @@ export const normalAchievements = [
     id: 186,
     displayId: 181,
     name: "病态的爱",
-    description: "在被毁灭的现实中，购买时间研究 181.",
+    description: "在被毁灭的现实中，购买时间研究 181。",
     progress: () => Achievement(186).isUnlocked ? DC.D1 : (!Pelle.isDoomed ? DC.DM1 : Decimal.clamp((TimeStudy(171).isBought ? new Decimal(0.5) : player.timestudy.maxTheorem.div(186).min(0.5)).add(!TimeStudy(171).isBought ? DC.D0 : player.timestudy.theorem.div(400).min(0.5)), 0, 1))
   },
   {
@@ -1552,7 +1552,7 @@ export const normalAchievements = [
     checkRequirement: () => PelleStrikes.dilation.hasStrike,
     checkEvent: GAME_EVENT.PELLE_STRIKE_UNLOCKED,
     get reward() {
-      return `可重复购买的膨胀升级购买数量的加成倍率 ${formatX(1.35, 0, 2)}.`;
+      return `可重复购买的膨胀升级的加成倍率 ${formatX(1.35, 0, 2)}。`;
     },
     effect: () => player.disablePostReality ? 1 : 1.35,
     progress: () => Achievement(187).isUnlocked ? DC.D1 : (!Pelle.isDoomed ? DC.DM1 : Decimal.clamp(new Decimal(EternityChallenge(11).completions).div(20).min(0.25).add(new Decimal(EternityChallenge(12).completions).div(20).min(0.25)).add(player.timestudy.maxTheorem.div(51600).min(0.25)).add(player.timestudy.theorem.div(20000).min(0.25)), 0, 1))
