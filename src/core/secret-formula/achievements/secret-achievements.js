@@ -43,7 +43,7 @@ export const secretAchievements = [
     id: 18,
     name: "你觉得幸运吗？你是朋克吗？",
     get description() {
-      return `You have a ${formatInt(1)}/${formatInt(1e5)} chance of getting this achievement every second.`;
+      return `你每秒获得这个成就的概率为 ${formatInt(1)}/${formatInt(1e5)}。`;
     }
   },
   {
@@ -54,7 +54,7 @@ export const secretAchievements = [
   {
     id: 22,
     name: "深度油炸",
-    get description() { return `Buy ${formatInt(1e5)} Antimatter Galaxies in total while using emoji notation.`; },
+    get description() { return `使用 Emoji 记数法时总共购买 ${formatInt(1e5)} 个反物质星系。`; },
     checkRequirement: () => player.requirementChecks.permanent.emojiGalaxies >= 1e5,
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER
   },
@@ -77,8 +77,7 @@ export const secretAchievements = [
     id: 26,
     name: "你真失败。",
     get description() {
-      return `Fail Eternity Challenges ${formatInt(10)} times without refreshing.
-      What are you doing with your life...`;
+      return `在一个永恒挑战中连续失败 ${formatInt(10)} 次，这是何等悲催的人生啊……`;
     },
     checkRequirement: (function() {
       let count = 0;
@@ -101,13 +100,13 @@ export const secretAchievements = [
   {
     id: 31,
     name: "你需要更多的运行内存。",
-    get description() { return `Set your update rate to ${formatInt(200)}ms.`; }
+    get description() { return `将游戏界面刷新速率设置为 ${formatInt(200)} 毫秒。`; }
   },
   {
     id: 32,
     name: "小于或等于 0.001",
     get description() {
-      return `Get a fastest infinity or eternity time of less than or equal to ${format(0.001, 3, 3)} seconds.`;
+      return `最快的无限或永恒时间小于等于${format(0.001, 3, 3)}秒。`;
     },
     checkRequirement: () =>
       Time.bestInfinity.totalMilliseconds.lte(1) ||
@@ -127,7 +126,7 @@ export const secretAchievements = [
   {
     id: 35,
     name: "我们应该告诉他们可以购买最大数量…",
-    get description() { return `Buy single Tickspeed upgrades ${formatInt(1e5)} times.`; },
+    get description() { return `购买单个计数频率提升 ${formatInt(1e5)} 次。`; },
     checkRequirement: () => player.requirementChecks.permanent.singleTickspeed >= 1e5,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
@@ -166,7 +165,7 @@ export const secretAchievements = [
   {
     id: 44,
     name: "您对统计数据很满意，是吧？",
-    get description() { return `Stare intently at the statistics tab for ${formatInt(15)} real-time minutes.`; },
+    get description() { return `盯着统计页面 ${formatInt(15)} 分钟。`; },
     checkRequirement: () => AchievementTimers.stats.check(Tab.statistics.isOpen, 900),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER
   },
