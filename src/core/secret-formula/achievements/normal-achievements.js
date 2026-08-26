@@ -1303,7 +1303,7 @@ export const normalAchievements = [
   {
     id: 155,
     name: "成就 #15983",
-    get description() { return `游戏内时间达到 ${formatFloat(13.7, 1)} 十亿年。`; },
+    get description() { return `游戏内时间达到 ${formatInt(137, 1)} 亿年。`; },
     checkRequirement: () => Time.totalTimePlayed.totalYears.gt(13.7e9),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `黑洞的持续时间延长 ${formatPercents(0.1)}.`; },

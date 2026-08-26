@@ -53,31 +53,31 @@ export default {
       class="l-button-margin fas fa-file-export"
       @click="exportData(script.id)"
     />
-    <b>Script name: {{ script.name }}</b>
+    <b>脚本名称：{{ script.name }}</b>
     <br>
     <span v-if="hasPresets">
       <span
         :class="iconClass(hidePresets)"
         @click="hidePresets = !hidePresets"
       />
-      References {{ quantifyInt("recognized study preset", presets.length) }}
+      引用了 {{ quantifyInt("个已识别的研究预设", presets.length) }}。
       <span v-if="!hidePresets">
         <div
           v-for="id in presets"
           :key="id"
         >
-          <span v-if="presetData[id].name">"{{ presetData[id].name }}" (slot {{ id + 1 }}):</span>
-          <span v-else>Preset slot {{ id + 1 }}:</span>
+          <span v-if="presetData[id].name">"{{ presetData[id].name }}" (槽位 {{ id + 1 }}):</span>
+          <span v-else>预设时间研究树槽位：{{ id + 1 }}:</span>
           <br>
           <div class="l-value-padding">
             <span v-if="presetData[id].studies">{{ presetData[id].studies }}</span>
-            <i v-else>Empty Study Preset</i>
+            <i v-else>空的研究预设</i>
           </div>
         </div>
       </span>
     </span>
     <span v-else>
-      Does not reference any study presets.
+      未引用任何研究预设。
     </span>
     <br>
     <span v-if="hasConstants">
@@ -85,7 +85,7 @@ export default {
         :class="iconClass(hideConstants)"
         @click="hideConstants = !hideConstants"
       />
-      References {{ quantifyInt("defined constant", constants.length) }}
+      引用了 {{ quantifyInt("个已定义的常量", constants.length) }}。
       <span v-if="!hideConstants">
         <div
           v-for="name in constants"
@@ -100,7 +100,7 @@ export default {
       </span>
     </span>
     <span v-else>
-      Does not reference any defined constants.
+      未引用任何已定义的常量。
     </span>
   </div>
 </template>
