@@ -845,7 +845,7 @@ export const normalAchievements = [
   {
     id: 106,
     name: "蜂群",
-    get description() { return `每 ${formatInt(15)} 秒获得 ${formatInt(10)} 个复制器星系。`; },
+    get description() { return `${formatInt(15)} 秒内获得 ${formatInt(10)} 个复制器星系。`; },
     checkRequirement: () => Replicanti.galaxies.total.gte(10) && Time.thisInfinity.totalSeconds.lte(15),
     checkEvent: GAME_EVENT.REPLICANTI_TICK_AFTER,
     progress: () => Achievement(106).isUnlocked ? DC.D1 : (Time.thisInfinity.totalSeconds.gt(15) ? DC.DM1 : Decimal.clamp(Replicanti.galaxies.total.div(10), 0, 1))

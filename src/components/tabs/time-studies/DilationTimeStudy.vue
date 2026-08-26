@@ -43,7 +43,7 @@ export default {
     theoremTimeEstimate() {
       if (this.study.isBought || !this.study.cost || this.ttGen.eq(0)) return null;
       const time = Decimal.sub(this.study.cost, this.currTT).dividedBy(this.ttGen);
-      return time.gt(0) ? `在${TimeSpan.fromSeconds(time).toStringShort()}后达到足够时间之理` : null;
+      return time.gt(0) ? `在 ${TimeSpan.fromSeconds(time).toStringShort()}后达到足够时间之理` : null;
     }
   },
   methods: {
