@@ -69,7 +69,7 @@ export default {
 <template>
   <div :class="classObject">
     <span class="l-milestone-title">{{ milestone.name }}</span>
-    <span :style="timeStyle(currTime)">Current run: {{ timeString(currTime) }}</span>
+    <span :style="timeStyle(currTime)">正在运行：{{ timeString(currTime) }}</span>
     <span
       v-if="refTime"
       :style="timeStyle(refTime)"

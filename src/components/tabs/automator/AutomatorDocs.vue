@@ -242,51 +242,51 @@ export default {
     <div class="c-automator__controls l-automator__controls">
       <div class="l-automator-button-row">
         <AutomatorButton
-          v-tooltip="'Automator Introduction'"
+          v-tooltip="'自动机介绍'"
           class="fa-circle-info"
           :class="activePanelClass(panelEnum.INTRO_PAGE)"
           @click="infoPaneID = panelEnum.INTRO_PAGE"
         />
         <AutomatorButton
-          v-tooltip="'Scripting Information'"
+          v-tooltip="'指令介绍'"
           class="fa-list"
           :class="activePanelClass(panelEnum.COMMANDS)"
           @click="infoPaneID = panelEnum.COMMANDS"
         />
         <AutomatorButton
-          v-tooltip="errorTooltip"
+          v-tooltip="错误提示"
           :style="errorStyle"
           class="fa-exclamation-triangle"
           :class="activePanelClass(panelEnum.ERRORS)"
           @click="infoPaneID = panelEnum.ERRORS"
         />
         <AutomatorButton
-          v-tooltip="'Extended Data Transfer'"
+          v-tooltip="'扩展数据'"
           class="fa-window-restore"
           :class="activePanelClass(panelEnum.DATA_TRANSFER)"
           @click="infoPaneID = panelEnum.DATA_TRANSFER"
         />
         <AutomatorButton
-          v-tooltip="'View recently executed commands'"
+          v-tooltip="'查看最近执行的命令'"
           class="fa-eye"
           :class="activePanelClass(panelEnum.EVENTS)"
           @click="infoPaneID = panelEnum.EVENTS"
         />
         <AutomatorButton
-          v-tooltip="'Modify defined constants'"
+          v-tooltip="'常量修改'"
           class="fa-book"
           :class="activePanelClass(panelEnum.CONSTANTS)"
           @click="infoPaneID = panelEnum.CONSTANTS"
         />
         <AutomatorButton
-          v-tooltip="'Template Creator List'"
+          v-tooltip="'模板列表'"
           class="fa-file-code"
           :class="activePanelClass(panelEnum.TEMPLATES)"
           @click="infoPaneID = panelEnum.TEMPLATES"
         />
         <AutomatorButton
           v-if="isBlock"
-          v-tooltip="'Command menu for Block editor mode'"
+          v-tooltip="'代码块模式指令'"
           class="fa-cubes"
           :class="activePanelClass(panelEnum.BLOCKS)"
           @click="infoPaneID = panelEnum.BLOCKS"
@@ -296,10 +296,10 @@ export default {
           class="c-automator__status-text c-automator__status-text--small"
           :class="{ 'c-automator__status-text--error' : totalChars > maxTotalChars }"
         >
-          Across all scripts: {{ formatInt(totalChars) }}/{{ formatInt(maxTotalChars) }}
+          所有脚本：{{ formatInt(totalChars) }}/{{ formatInt(maxTotalChars) }}
         </span>
         <AutomatorButton
-          v-tooltip="fullScreenTooltip"
+          v-tooltip="全屏提示"
           :class="fullScreenIconClass"
           class="l-automator__expand-corner"
           @click="fullScreen = !fullScreen"
@@ -307,12 +307,12 @@ export default {
       </div>
       <div class="l-automator-button-row">
         <AutomatorButton
-          v-tooltip="'Export single automator script'"
+          v-tooltip="'导出单个自动机脚本'"
           class="fa-file-export"
           @click="exportScript"
         />
         <AutomatorButton
-          v-tooltip="importTooltip"
+          v-tooltip="导出提示"
           class="fa-file-import"
           :class="{ 'c-automator__status-text--error' : !canMakeNewScript }"
           @click="importScript"
@@ -325,7 +325,7 @@ export default {
             >
               <template #header>
                 <div class="c-automator-docs-script-select">
-                  ▼ Current Script: {{ currentEditorScriptName }}
+                  ▼ 当前脚本：{{ currentEditorScriptName }}
                 </div>
               </template>
               <template #dropdown>
@@ -333,7 +333,7 @@ export default {
               </template>
             </ExpandingControlBox>
             <AutomatorButton
-              v-tooltip="'Rename script'"
+              v-tooltip="'重命名脚本'"
               class="far fa-edit"
               @click="rename"
             />
@@ -341,7 +341,7 @@ export default {
           <input
             v-else
             ref="renameInput"
-            v-tooltip="nameTooltip"
+            v-tooltip="名称提示"
             class="l-automator__rename-input c-automator__rename-input"
             :class="{ 'c-long-name-box' : isNameTooLong }"
             @blur="nameEdited"
@@ -349,7 +349,7 @@ export default {
           >
         </div>
         <AutomatorButton
-          v-tooltip="'Delete this script'"
+          v-tooltip="'删除脚本'"
           class="fas fa-trash"
           @click="deleteScript"
         />

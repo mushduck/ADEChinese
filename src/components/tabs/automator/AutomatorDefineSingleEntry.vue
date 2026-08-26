@@ -48,18 +48,18 @@ export default {
       const shadowsPrototype = ["constructor", "hasOwnProperty", "isPrototypeOf", "propertyIsEnumerable",
         "toLocaleString", "toString", "toValueOf"].some(p => this.aliasString.match(p));
 
-      if (!isValidName) return "Constant name must be alphanumeric without spaces and cannot start with a number";
-      if (alreadyExists) return "You have already defined a constant with this name";
-      if (hasCommandConflict) return "Constant name conflicts with a command key word";
-      if (shadowsPrototype) return "Constant name cannot shadow a built-in Javascript prototype prop";
+      if (!isValidName) return "常量的名称必须是字母或数字，没有空格，且不能以数字开头。";
+      if (alreadyExists) return "你已使用此名称定义了一个常量";
+      if (hasCommandConflict) return "以下常量名称与指令关键字冲突";
+      if (shadowsPrototype) return "常量的名称不能与内置JavaScript原型属性名相同";
 
-      if (!this.valueString) return "Constant value cannot be empty";
+      if (!this.valueString) return "以下常量的值不能为空";
 
       const isNumber = this.valueString.match(/^-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?$/u);
       // Note: Does not do validation for studies existing
       const isStudyString = TimeStudyTree.isValidImportString(this.valueString);
 
-      if (!isNumber && !isStudyString) return "Constant value must either be a number or Time Study string";
+      if (!isNumber && !isStudyString) return "以下常量的值必须是一个数字或时间研究字符串";
       return null;
     },
     errorTooltip() {
@@ -105,7 +105,7 @@ export default {
       v-model="aliasString"
       class="c-define-textbox c-alias"
       :class="{ 'l-limit-textbox' : aliasString.length === maxNameLength }"
-      placeholder="New constant..."
+      placeholder="新增常量…"
       :maxlength="maxNameLength"
       @focusin="handleFocus(true)"
       @focusout="handleFocus(false)"
@@ -122,14 +122,14 @@ export default {
       v-model="valueString"
       class="c-define-textbox c-value"
       :class="{ 'l-limit-textbox' : valueString && valueString.length === maxValueLength }"
-      placeholder="Value for constant..."
+      placeholder="常量的值…"
       :maxlength="maxValueLength"
       @focusin="handleFocus(true)"
       @focusout="handleFocus(false)"
     >
     <button
       v-if="aliasString"
-      v-tooltip="'Delete this constant'"
+      v-tooltip="'删除该常量'"
       class="c-delete-button fas fa-eraser"
       @click="deleteConstant"
     />

@@ -10,7 +10,7 @@ import { MultiplierTabIcons } from "./icons";
 export const DT = {
   total: {
     name: "膨胀时间获取量",
-    displayOverride: () => `${format(getDilationGainPerSecond().times(getGameSpeedupForDisplay()), 2, 2)}/sec`,
+    displayOverride: () => `${format(getDilationGainPerSecond().times(getGameSpeedupForDisplay()), 2, 2)}/秒`,
     multValue: () => getDilationGainPerSecond().times(getGameSpeedupForDisplay()),
     isActive: () => PlayerProgress.realityUnlocked() ||
       (PlayerProgress.dilationUnlocked() && getDilationGainPerSecond().gt(0)),

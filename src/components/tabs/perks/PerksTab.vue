@@ -211,7 +211,7 @@ export const PerkNetwork = {
           `<span style='text-decoration: line-through;'>${perk.config.description}</span>`
         )
         : `${perk.config.description} ${perk.config.automatorPoints && !isDisabled(perk)
-          ? `(+${formatInt(perk.config.automatorPoints)} 自动点数）)`
+          ? `（+${formatInt(perk.config.automatorPoints)} 自动点数）`
           : ""}`
       ),
       x: selectPos(perk.config).x,

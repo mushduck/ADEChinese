@@ -287,7 +287,7 @@ export const celestialNavigation = {
       },
       legend: {
         text: complete => {
-          if (complete >= 1) return "Teresa's Perk Point Shop";
+          if (complete >= 1) return "特蕾莎的复兴点商店";
           const rm = Teresa.pouredAmount;
           const cost = TeresaUnlocks.shop.price;
           return [
@@ -533,7 +533,7 @@ export const celestialNavigation = {
       },
       alwaysShowLegend: false,
       legend: {
-        text: "Nameless",
+        text: "无名氏",
         angle: -90,
         diagonal: 20,
         horizontal: 16,

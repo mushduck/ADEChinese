@@ -13,7 +13,7 @@ export const TD = {
     },
     displayOverride: dim => (dim
       ? formatX(TimeDimension(dim).multiplier, 2)
-      : `${format(TimeDimension(1).productionPerSecond, 2)}/sec`
+      : `${format(TimeDimension(1).productionPerSecond, 2)}/秒`
     ),
     multValue: dim => (dim
       ? TimeDimension(dim).multiplier

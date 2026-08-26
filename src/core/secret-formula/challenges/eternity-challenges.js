@@ -145,7 +145,7 @@ export const eternityChallenges = [
   },
   {
     id: 9,
-    description: () => `你不能购买计数频率升级。无限之力以极低的效果加成时间维度。 ${specialInfinityGlyphDisabledEffectText()}`,
+    description: () => `你不能购买计数频率升级。无限之力不加成反物质维度，而是以极低的效果加成时间维度。 ${specialInfinityGlyphDisabledEffectText()}`,
     goal: DC.E1750,
     pelleGoal: DC.E2900,
     goalIncrease: DC.E250,
@@ -209,10 +209,8 @@ export const eternityChallenges = [
   {
     id: 12,
     description: () => (PlayerProgress.realityUnlocked()
-      ? `游戏速度放慢 ${formatInt(1000)} 倍。并禁用其它影响游戏速度的机制。必须在
-      一定时间内达成目标，否则将无法通过挑战。 ${specialInfinityGlyphDisabledEffectText()}`
-      : `游戏速度放慢 ${formatInt(1000)} 倍。并禁用其它影响游戏速度的机制。必须在
-      一定时间内达成目标，否则将无法通过挑战。`),
+      ? `游戏速度放慢 ${formatInt(1000)} 倍。并禁用其它影响游戏速度的机制。必须在一定时间内达成目标，否则将无法通过挑战。 ${specialInfinityGlyphDisabledEffectText()}`
+      : `游戏速度放慢 ${formatInt(1000)} 倍。并禁用其它影响游戏速度的机制。必须在一定时间内达成目标，否则将无法通过挑战。`),
     goal: DC.E100000,
     pelleGoal: DC.E208000,
     goalIncrease: DC.E10000,

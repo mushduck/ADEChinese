@@ -92,7 +92,7 @@ export const singularityMilestones = {
     limit: 8,
     description: "暗物质维度飞升减少间隔的增加",
     effect: completions => completions.mul(50).neg().add(1200),
-    effectFormat: x => `×${formatInt(x)}`,
+    effectFormat: x => `× ${formatInt(x)}`,
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   autoCondense: {
@@ -101,7 +101,7 @@ export const singularityMilestones = {
     limit: 8,
     description: "在超过上限的阈值时自动凝聚奇点",
     effect: completions => [Infinity, 1.3, 1.22, 1.15, 1.1, 1.06, 1.03, 1.01, 1][completions.toNumber()],
-    effectFormat: x => `Cap ${formatX(x, 2, 2)}`,
+    effectFormat: x => `上限：${formatX(x, 2, 2)}`,
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   darkDimensionAutobuyers: {

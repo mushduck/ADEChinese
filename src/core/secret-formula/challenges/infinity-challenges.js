@@ -13,7 +13,7 @@ export const infinityChallenges = [
   },
   {
     id: 2,
-    description: () => `在你拥有第八反物质维度之后，每隔 ${formatInt(400)} 自动进行一次维度献祭。`,
+    description: () => `在你拥有第八反物质维度之后，每隔 ${formatInt(400)}ms 自动进行一次维度献祭。`,
     goal: DC.E10500,
     isQuickResettable: false,
     reward: {

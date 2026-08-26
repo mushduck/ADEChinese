@@ -153,7 +153,7 @@ export const normalAchievements = [
   {
     id: 31,
     name: "我忘记削弱它了",
-    get description() { return `任一反物质维度的倍增器超过 ${formatX(DC.E31)}.`; },
+    get description() { return `任一反物质维度倍率超过 ${formatX(DC.E31)}。`; },
     checkRequirement: () => AntimatterDimensions.all.some(x => x.multiplier.add(1).log10().gte(31)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `第一维度增强 ${formatPercents(0.05)} `; },

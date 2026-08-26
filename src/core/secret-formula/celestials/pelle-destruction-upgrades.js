@@ -956,7 +956,7 @@ export const pellePerkEnabling = {
   },
   perkDILR: {
     id: 13,
-    description: "重获复兴树节点DILR和所有的ACHs",
+    description: "重获复兴树节点DILR和所有的ACH系列",
     cost: 1e42,
     formatCost,
   },

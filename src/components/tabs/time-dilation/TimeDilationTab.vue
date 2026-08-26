@@ -120,8 +120,8 @@ export default {
       this.maxDT.copyFrom(player.records.thisReality.maxDT);
 
       const estimateText = getDilationTimeEstimate(this.maxDT);
-      if (this.dilatedTimeIncome.lte(0)) this.toMaxTooltip = "No DT gain";
-      else this.toMaxTooltip = estimateText.startsWith("<") ? "Currently Increasing" : estimateText;
+      if (this.dilatedTimeIncome.lte(0)) this.toMaxTooltip = "无膨胀时间获取";
+      else this.toMaxTooltip = estimateText.startsWith("<") ? "正在增长" : estimateText;
 
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
       this.scaleStart.copyFrom(DilationUpgradeScaling.PRIMARY_SCALING);

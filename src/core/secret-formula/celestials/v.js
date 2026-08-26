@@ -260,7 +260,7 @@ pelleDisabled: () => !PelleCelestialUpgrade.vMilestones3.canBeApplied
 raUnlock: {
 id: 6,
 reward() {
-return `减少时间研究的空间之理价格 ${formatInt(2)}. 解锁遗忘之神太阳神。`;
+return `时间研究的空间之理价格减少 ${formatInt(2)}。解锁遗忘之神太阳神。`;
 },
 description: () => `拥有 ${formatInt(36)} 个薇成就`,
 effect: 2,

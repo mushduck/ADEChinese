@@ -105,7 +105,7 @@ export default {
           :ach-tooltip="infoTooltip"
         >
           <i class="fas fa-question-circle l-margin-left" />
-        </span>)
+        </span>）
       </b>
       <SliderComponent
         v-if="!isDisabled"
