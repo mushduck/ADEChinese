@@ -32,7 +32,7 @@ export const tickspeed = {
         Achievement(66),
         Achievement(83)
       );
-      return `${format(val, 2, 2)}/sec`;
+      return `${format(val, 2, 2)}/秒`;
     },
     multValue: () => new Decimal.pow10(100 * MultiplierTabHelper.decomposeTickspeed().base),
     isActive: () => [36, 45, 66, 83].some(a => Achievement(a).canBeApplied),

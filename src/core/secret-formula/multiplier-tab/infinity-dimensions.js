@@ -13,7 +13,7 @@ export const ID = {
     },
     displayOverride: dim => (dim
       ? formatX(InfinityDimension(dim).multiplier, 2)
-      : `${format(InfinityDimension(1).productionPerSecond, 2)}/sec`
+      : `${format(InfinityDimension(1).productionPerSecond, 2)}/秒`
     ),
     multValue: dim => (dim
       ? InfinityDimension(dim).multiplier

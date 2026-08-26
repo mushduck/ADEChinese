@@ -108,7 +108,7 @@ export default {
       (当前增速: <span v-html="formattedFlow" />)
     </span>
     <span v-if="isBaseResource">基础资源</span>
-    <span v-else>符文炼金反应: {{ isReactionActive ? "启动" : "冷却中" }} ({{ reactionText }})</span>
+    <span v-else>符文炼金反应: {{ isReactionActive ? "启动" : "冷却中" }}（{{ reactionText }}）</span>
     <span :class="{ 'o-pelle-disabled': isDoomed }">
       <EffectDisplay
         label="效果"

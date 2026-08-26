@@ -6,62 +6,83 @@ export default {
 
 <template>
   <div>
-    Welcome to the Antimatter Dimensions Automator!
+    欢迎使用自动机！
     <br>
     <br>
-    This page is an introduction page which gives a very broad overview of everything you can do with the Automator.
-    Specific details on various functionality can be found in the How To Play or their respective tabs (when relevant).
+    这个介绍性的页面会告诉你，你可以用自动机来做什么。 各项功能的具体细节，详见“游戏帮助”或该功能对应的页面（如适用）。
     <br>
     <br>
-    <b>Scripting Language:</b> The Automator uses a custom scripting language in order to perform certain game actions
-    for you. Click <div class="fas fa-list c-automator-button-icon" /> to bring up a list of available commands. You can
-    also define constants as shorthand names for various values on the
-    <div class="fas fa-book c-automator-button-icon" /> page.
+    <b>脚本语言：</b>自动机使用独特的脚本语言，输入对应的指令，来执行某些游戏内的操作。点击
+    <div
+      class="fas fa-list c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 查看可用的指令列表。你还可以点击
+    <div
+      class="fas fa-book c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 进入常量页面，在常量页面中定义常量的名称和值，便于编写脚本。
     <br>
     <br>
-    <b>Layout:</b> This Automator itself is split up into two halves; the left half contains your script and controls
-    for starting, stopping, and repeating its execution, and the right half contains Automator information. Clicking
-    <div class="fas fa-expand-arrows-alt c-automator-button-icon" /> in the top-right corner will expand the Automator
-    to take up the whole browser page for easier editing.
+    <b>布局：</b> 自动机分为两个部分：左边包含你的脚本，和控制脚本运行的启动、停止、和重复运行脚本的按钮，右边包含与自动机相关的信息。
+    点击点击右上角
+    <div
+      class="fas fa-expand-arrows-alt c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 将展开自动机界面至全屏，占据整个浏览器页面以便更轻松地编辑。
     <br>
     <br>
-    <b>Editor Modes:</b> There are two different editors you can use to write your automator scripts - a block-based
-    editor (default) and a text-based editor. You can swap between the two editor types with the switch in the
-    top-right corner of the left half. Note that scripts with errors may not properly convert between the two modes,
-    which can cause part of your script to be deleted.
+    <b>编辑器模式：</b>编写自动机脚本可使用两种编辑器：积木块编辑器（默认）和文本编辑器。通过左侧区域右上角的切换按钮可在两种编辑器间转换。注意：存在错误的脚本可能在转换时出现异常，导致部分脚本内容丢失。
     <br>
     <br>
-    <b>Making Scripts:</b> You can switch between multiple scripts or make new scripts using the dropdown on the
-    second row of buttons. The current script can be renamed or deleted with the
-    <div class="fas fa-edit c-automator-button-icon" /> and
-    <div class="fas fa-trash c-automator-button-icon" /> buttons. The Automator will always contain at
-    least one script for you to edit; deleting your last one will automatically create a new blank one.
+    <b>切换脚本：</b>你可以在第二行按钮的“当前脚本”下拉列表中，在多个脚本之间进行切换，或新建脚本。点击
+    <div
+      class="fas fa-edit c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 和
+    <div
+      class="fas fa-trash c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 按钮可重命名或删除正在显示的脚本。自动机将保留至少一个脚本，以便编辑。删除最后一个脚本后，自动机将自动创建一个空白脚本。
     <br>
     <br>
-    <b>Writing Scripts:</b> Scripts in the block editor are made by going to the block tab
-    <div class="fas fa-cubes c-automator-button-icon" />, while scripts in the text editor are made by typing into
-    the left half as a text box. In either editor mode, you can also use some smaller premade scripts from the
-    template generator <div class="fas fa-file-code c-automator-button-icon" />. You can undo or redo a limited
-    number of edits using <div class="fas fa-arrow-rotate-left c-automator-button-icon" /> or
-    <div class="fas fa-arrow-rotate-right c-automator-button-icon" />, or by using the respective hotkeys. Edit history
-    is cleared upon switching, converting, or deleting scripts.
+    <b>编写脚本：</b>积木块编辑器中的脚本需通过访问积木块标签页
+      <div class="fas fa-cubes c-automator-button-icon" data-v-automator-docs-intro-page />
+      创建，而文本编辑器中的脚本则通过在左侧文本框输入内容创建。两种编辑模式下均可使用模板生成器
+      <div class="fas fa-file-code c-automator-button-icon" data-v-automator-docs-intro-page />  
+      提供的小型预设脚本。可使用
+      <div class="fas fa-arrow-rotate-left c-automator-button-icon" data-v-automator-docs-intro-page /> 或
+      <div class="fas fa-arrow-rotate-right c-automator-button-icon" data-v-automator-docs-intro-page />  
+      （或对应快捷键）执行有限次数的撤销/重做操作。
+      切换编辑器模式、转换脚本格式或删除脚本时，编辑历史将被清空。
     <br>
     <br>
-    <b>Debugging:</b> The two main tools you have for fixing your scripts are the Error Log
-    <div class="fas fa-exclamation-triangle c-automator-button-icon" /> for when you can't get your script to run at
-    all, and the Event Log <div class="fas fa-eye c-automator-button-icon" /> for when it runs but doesn't do what you
-    expect it to do.
+    <b>调试：</b>调试脚本的两个主要工具是错误列表
+    <div
+      class="fas fa-exclamation-triangle c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    />以修复导致脚本无法运行的错误。指令事件日志
+    <div
+      class="fas fa-eye c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    />用于确定脚本是否按你的预期运行。
     <br>
     <br>
-    <b>Importing/Exporting:</b> Automator scripts can be exported and imported in text format by using the
-    <div class="fas fa-file-export c-automator-button-icon" /> and
-    <div class="fas fa-file-import c-automator-button-icon" /> buttons respectively. You can also access additional
-    extended exporting options <div class="fas fa-window-restore c-automator-button-icon" /> if desired.
+    <b>导入/导出：</b>你可以使用
+    <div
+      class="fas fa-file-export c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 和
+    <div
+      class="fas fa-file-import c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 按钮来导出和导入自动机脚本，若有需要，你可以点击
+    <div
+      class="fas fa-window-restore c-automator-button-icon"
+      data-v-automator-docs-intro-page
+    /> 按钮来导出该脚本对应的额外数据（如常量的值和时间研究预设）。
     <br>
     <br>
-    <b>Script saving:</b> Script changes are not immediately saved to your computer under all conditions;
-    check the Automator How To Play entries for more details. Additionally there are two character limits to reduce lag,
-    shown above the automator panels.
+    <b>保存脚本：</b>每次编辑后，脚本的改动都会立即保存。此外还有两个字符限制以降低游戏卡顿，这两个字符限制在自动机页面的最上方显示。
   </div>
 </template>
 

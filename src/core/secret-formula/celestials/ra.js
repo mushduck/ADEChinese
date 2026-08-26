@@ -56,7 +56,7 @@ export const ra = {
     },
     chargedInfinityUpgrades: {
       id: 1,
-      reward: () => `解锁无限升级充能。每 ${formatInt(2)} 级你可以获得额外充能一个无限升级。`,
+      reward: () => `解锁无限升级充能。等级每提升 ${formatInt(2)} 级可充能一个无限升级。`,
       effect: () => player.disablePostReality ? 0 : Math.min(12, Math.floor(Ra.pets.teresa.level / 2)),
       pet: "teresa",
       level: 2,

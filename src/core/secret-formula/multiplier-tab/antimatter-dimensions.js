@@ -22,12 +22,12 @@ export const AD = {
         return formatX(singleMult, 2, 2);
       }
       const maxTier = EternityChallenge(7).isRunning ? 7 : MultiplierTabHelper.activeDimCount("AD");
-      if (NormalChallenge(12).isRunning) return `${format(MultiplierTabHelper.actualNC12Production(), 2)}/sec`;
+      if (NormalChallenge(12).isRunning) return `${format(MultiplierTabHelper.actualNC12Production(), 2)}/秒`;
       return `${format(AntimatterDimensions.all
         .filter(ad => ad.isProducing)
         .map(ad => ad.multiplier)
         .reduce((x, y) => x.times(y), DC.D1)
-        .times(AntimatterDimension(maxTier).totalAmount), 2)}/sec`;
+        .times(AntimatterDimension(maxTier).totalAmount), 2)}/秒`;
     },
     multValue: dim => {
       if (NormalChallenge(12).isRunning) {

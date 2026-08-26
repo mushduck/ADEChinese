@@ -152,7 +152,7 @@ export const dilationUpgrades = {
     description: "超光速粒子产生时间之理",
     effect: () => Currency.tachyonParticles.value.div(20000).times(
       Alpha.isRunning ? AlphaUnlocks.timeTheoremGeneration.effects.nerf.effectOrDefault(1) : 1),
-    formatEffect: value => `${format(value, 2, 1)}/sec`
+    formatEffect: value => `${format(value, 2, 1)}/秒`
   },
   dtGainPelle: rebuyable({
     id: 11,
