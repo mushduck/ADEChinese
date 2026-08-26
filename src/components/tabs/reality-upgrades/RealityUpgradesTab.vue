@@ -8,12 +8,9 @@ export default {
   },
   computed: {
     upgrades: () => RealityUpgrades.all,
-    costScalingTooltip: () => `Prices start increasing faster above ${format(1e30)} RM and then even faster
-      above ${format(DC.NUMMAX, 1)} RM`,
-    possibleTooltip: () => `Checkered upgrades are impossible to unlock this Reality. Striped upgrades are
-      still possible.`,
-    lockTooltip: () => `This will only function if you have not already failed the condition or
-      unlocked the upgrade.`,
+    costScalingTooltip: () => `在 ${format(1e30)} 现实机器后价格加速增长，在 ${format(DC.NUMMAX, 1)} 现实机器后更加剧烈`,
+    possibleTooltip: () => `在本次现实中无法解锁方格背景的升级，但可以解锁条纹图案的升级。`,
+    lockTooltip: () => `锁定升级要求仅会阻止手动和自动操作，不会禁用任何相关的升级，要求仍可能失败。`,
   },
   methods: {
     id(row, column) {
