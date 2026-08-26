@@ -31,7 +31,7 @@ export const alphaUnlocks = {
   infinity: {
     id: 3,
     requirement: 4,
-    nerfDescription: "无限升级的价格翻倍",
+    nerfDescription: "无限升级的价格 ^ 2",
     buffDescription: () => `无限点数获取量 ${formatPow(1 + (Tesseracts.effectiveCount / 1000), 2, 3)}（基于超立方体）`,
     effects: {
       nerf: 2,
@@ -96,7 +96,7 @@ export const alphaUnlocks = {
     id: 9,
     requirement: 10,
     nerfDescription: () => `复制器间隔 ^ 2，且只受游戏速度 ${formatPercents(0.1)} 的影响`,
-    buffDescription: "复制器间隔^ 0.5",
+    buffDescription: "复制器间隔 ^ 0.5",
     effects: {
       nerf: 2,
       buff: 0.5
@@ -202,7 +202,7 @@ export const alphaUnlocks = {
   timestudy192: {
     id: 20,
     requirement: 21,
-    nerfDescription: () => `复制器数量在达到无限后，复制间隔升级价格增长每 ${format(DC.NUMMAX, 2, 2)} 复制器 ${formatX(1.5, 1, 1)} `,
+    nerfDescription: () => `复制器数量在达到无限后，复制间隔增长每 ${format(DC.NUMMAX, 2, 2)} 复制器 ${formatX(1.5, 1, 1)} `,
     buffDescription: "复制器以衰减的倍率提高暗能量获取",
     effects: {
       nerf: 1.5,
@@ -242,7 +242,7 @@ export const alphaUnlocks = {
   dilatedEternity: {
     id: 24,
     requirement: 25,
-    nerfDescription: () => `时间膨胀的初始指数衰减提高至 ${formatPow(0.42, 2, 3)} ，且膨胀时间产量仅收游戏速度  ${formatPercents(0.01)} 的影响`,
+    nerfDescription: () => `时间膨胀的初始指数衰减提高至 ${formatPow(0.42, 2, 3)} ，且膨胀时间产量仅受游戏速度  ${formatPercents(0.01)} 的影响`,
     buffDescription: () => `超光速粒子获取量 ${formatPow(1.4, 2, 3)}`,
     effects: {
       nerf: 0.42,

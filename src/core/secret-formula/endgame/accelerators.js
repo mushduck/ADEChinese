@@ -2,7 +2,7 @@ export const accelerators = {
   potency: {
     id: 1,
     key: "potency",
-    name: "能量加速器",
+    name: "Potency Accelerator",
     drainResource: "反物质",
     baseEffect1: x => `反物质产量 ${formatPow(x, 2, 3)}`,
     baseEffect2: x => `熵获取量 ${formatX(x, 2, 2)}`,
@@ -39,7 +39,7 @@ export const accelerators = {
   emptiness: {
     id: 2,
     key: "emptiness",
-    name: "虚空加速器",
+    name: "Emptiness Accelerator",
     drainResource: "虚物质",
     baseEffect1: x => `在虚无中反物质维度强度 ${formatPow(x, 2, 3)}`,
     baseEffect2: x => `强子效果上限 +${formatPercents(x - 1, 2)}`,
@@ -77,7 +77,7 @@ export const accelerators = {
   cosmic: {
     id: 3,
     key: "cosmic",
-    name: "星河加速器",
+    name: "Cosmic Accelerator",
     drainResource: "星系",
     baseEffect1: x => `星系产量 ${formatPow(x, 2, 3)}`,
     baseEffect2: x => `在被毁灭的现实中反物质指数 ${formatPow(x, 2, 3)}`,

@@ -83,7 +83,7 @@ export const alchemyResources = {
     uiOrder: 3,
     unlockedAt: 8,
     get description() { return `减少每 ${format(Decimal.NUMBER_MAX_VALUE, 2)} 复制器的减速`; },
-    formatEffect: value => `每 ${format(Number.MAX_VALUE, 2)} 复制器，每个复制间隔升级成本增长 ${formatX(1.2, 1, 1)} ➜ ${formatX(value, 4, 4)} `,
+    formatEffect: value => `每 ${format(Number.MAX_VALUE, 2)} 复制器，每个复制间隔增长 ${formatX(1.2, 1, 1)} ➜ ${formatX(value, 4, 4)} `,
     reagents: [
       { resource: ALCHEMY_RESOURCE.TIME, amount: 8 },
       { resource: ALCHEMY_RESOURCE.REPLICATION, amount: 7 }

@@ -44,7 +44,15 @@ export default {
       return typeof value === "number" ? `${formatInt(100 * value)}%` : format(value, 2);
     },
     acceleratorName() {
-      return this.accelerator.name;
+      const chineseNames = {
+        potency: "能量加速器",
+        emptiness: "虚空加速器",
+        cosmic: "星河加速器",
+      };
+
+      const key = this.accelerator.config?.key?.trim();
+
+      return chineseNames[key] ?? this.accelerator.name;
     },
     drainResource() {
       return this.accelerator.drainResource;
