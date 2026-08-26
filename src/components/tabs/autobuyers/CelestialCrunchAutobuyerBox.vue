@@ -92,7 +92,7 @@ export default {
       >
         <template #header>
           <div class="o-primary-btn c-autobuyer-box__mode-select c-autobuyer-box__mode-select-header">
-            ▼ Current Setting: ▼
+            ▼ 当前设置 ▼
             <br>
             {{ modeName(mode) }}
           </div>
