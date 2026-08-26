@@ -194,8 +194,8 @@ export const speedrunMilestones = [
   {
     id: 25,
     key: "completeFullGame",
-    name: "游戏通关！",
-    description: "通关整个游戏",
+    name: "通关原版！",
+    description: "逃离被毁灭的现实",
     checkRequirement: () => Achievement(188).isUnlocked,
     checkEvent: GAME_EVENT.ACHIEVEMENT_UNLOCKED,
   },

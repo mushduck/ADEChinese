@@ -121,7 +121,7 @@ export default {
       <br>
       离线进度：<span v-html="offlineText" />
       <br>
-      最近的速通里程碑：{{ milestoneName(mostRecent) }} <span v-if="mostRecent">({{ timeSince }} ago)</span>
+      最近的速通里程碑：{{ milestoneName(mostRecent) }} <span v-if="mostRecent">({{ timeSince }} 前)</span>
       <br>
     </div>
     <div
