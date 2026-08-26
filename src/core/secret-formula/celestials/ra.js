@@ -16,7 +16,7 @@ export const ra = {
       key: "Effarig",
       name: "鹿颈长",
       color: "#ea8585",
-      chunkGain: "遗迹碎片总量",
+      chunkGain: "当前现实获取的遗迹碎片",
       memoryGain: "最高符文等级",
       requiredUnlock: () => Ra.unlocks.effarigUnlock,
       rawMemoryChunksPerSecond: () => Decimal.pow(Effarig.shardsGained, 0.175).times(4),
