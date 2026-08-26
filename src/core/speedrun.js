@@ -38,13 +38,13 @@ export const Speedrun = {
     const record = rec ?? player.speedrun;
     switch (record.seedSelection) {
       case SPEEDRUN_SEED_STATE.UNKNOWN:
-        return `No seed data (old save)`;
+        return `无种子数据（旧版存档）`;
       case SPEEDRUN_SEED_STATE.FIXED:
-        return `Official fixed seed (${record.initialSeed})`;
+        return `游戏预设种子（${record.initialSeed}）`;
       case SPEEDRUN_SEED_STATE.RANDOM:
-        return `Random seed (${record.initialSeed})`;
+        return `随机提供的种子（${record.initialSeed}）`;
       case SPEEDRUN_SEED_STATE.PLAYER:
-        return `Player seed (${record.initialSeed})`;
+        return `玩家自定义种子（${record.initialSeed}）`;
       default:
         throw new Error("Unrecognized speedrun seed option in seedModeText");
     }
@@ -53,7 +53,7 @@ export const Speedrun = {
   generateName(name) {
     if (name.trim() === "") {
       const id = Math.floor((1e7 - 1) * Math.random()) + 1;
-      return `AD Player #${"0".repeat(6 - Math.floor(Math.log10(id)))}${id}`;
+      return `ADE 玩家 #${"0".repeat(6 - Math.floor(Math.log10(id)))}${id}`;
     }
     if (name.length > 40) return `${name.slice(0, 37)}...`;
     return name;
