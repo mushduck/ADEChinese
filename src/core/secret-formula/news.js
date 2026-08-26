@@ -7469,12 +7469,12 @@ export const news = [
   },
   {
     id: "ai11",
-    text: "\"点击这条新闻变猫娘\"",
+    text: "点击这条新闻变猫娘",
     onClick() { window.open("https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click&vd_source=51c470b9c46e3223f885aabdbe0165c4"); }
   },
   {
     id: "ai12",
-    text: "\"点击这条新闻和汉化者进行神♂秘交流\"",
+    text: "点击这条新闻和汉化者进行神♂秘交流",
     onClick() { window.open("https://space.bilibili.com/1413730402"); }
   },
   {
@@ -7873,7 +7873,7 @@ export const news = [
   },
   {
     id: "ai112",
-    text: "Water under the bridge?"
+    text: "打卡有禁言(划掉)打开有经验(划掉)打卡"
   },
   {
     id: "ai113",
@@ -8074,31 +8074,32 @@ export const news = [
       cialloAudio.currentTime = 0;
       cialloAudio.play();
     }
-  },/*
+  },
   {
     id: "ai159",
-    text: "I was the first to notice that the 'news' ticker on my mobile notification is always 30 seconds behind the 'entertainment' ticker. This is most definitely not a bug or a feature, and will be fixed in 5 hours."
+    text: "夺走一个人拼尽一切想要活下去的意志和愿望，即使是全能的神所为，也是罪恶。"
   },
   {
     id: "ai160",
-    text: "This news ticker always appears to speedrun a ticker asking for 'world records', do you even know what speedrun this is? Is this a news ticker or something?"
+    text: "吾者虽恶事一言，虽善事一言，皆以言断之神。"
   },
   {
     id: "ai161",
-    text: "The next level is not unlocking extra replicanti; it is actually boosting replicanti."
+    text: "我想做自己想做的事，守护重要的事物，若非如此，就无法活下去。"
   },
   {
     id: "ai162",
-    text: "Why does one galaxy has 9 galaxies and the 8th dimension, and the first 10 dimensions doesn't exist? Well, we'll have to solve that question in a minute."
+    text: "吾之名号乃东方将军查拉图斯特拉！弑神者也！"
   },
   {
     id: "ai163",
-    text: "So why on EARTH DIDN'T SOMEONE JUST SAY THAT? I thought that AD has some kind of cheat that makes it so that, when you buy a dimension, it actually creates 9 galaxies instead of 10"
+    text: "自由是遗忘的左伴随。"
   },
   {
     id: "ai164",
-    text: "M'antel, antimatter, anti-talk to me"
-  },
+    text: "点击查看洛谷站长kkksc03名言",
+    onClick() { window.open("https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click&vd_source=51c470b9c46e3223f885aabdbe0165c4"); }
+  },/*
   {
     id: "ai165",
     text: "AD has anti-parts, you'll hate them"

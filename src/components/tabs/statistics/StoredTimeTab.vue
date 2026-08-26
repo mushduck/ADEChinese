@@ -129,8 +129,21 @@ export default {
       if (player.records.bestEternity.time.eq(0e0)) {
         player.records.bestEternity.time = new Decimal(25);
         GameUI.notify.info(`已修复`);
-      }else {
+      } else {
         GameUI.notify.info(`不要在没触发bug时使用我哦！`);
+      }
+    },
+    fuckAlpha(){
+      if(Alpha.isDestroyed) {
+        GameUI.notify.info(`阿尔法已经死透了...`);
+      } else {
+        if (player.options.brightAlpha) {
+          player.options.brightAlpha = false;
+          GameUI.notify.info(`天暗了...`);
+        } else {
+          player.options.brightAlpha = true;
+          GameUI.notify.info(`天亮了...`);
+        }
       }
     }
   }
@@ -152,7 +165,14 @@ export default {
           @click="fixEternityBug"
         >
           点我修复最快永恒时间为0的问题（无限维度失效）
-          不要在正常情况使用我
+        </PrimaryButton>
+      </div>
+      <div class="independent-btn-wrapper">
+        <PrimaryButton
+          class="o-primary-btn"
+          @click="fuckAlpha"
+        >
+          点我在阿尔法内重见天日
         </PrimaryButton>
       </div>
       <div class="custom-time-container">
