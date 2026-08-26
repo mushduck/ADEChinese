@@ -546,8 +546,8 @@ export const normalAchievements = [
   {
     id: 73,
     name: "一个不存在的成就",
-    get description() { return `获得 ${formatPostBreak(DC.D9_9999E999, 4)} 反物质。`; },
-    checkRequirement: () => Currency.antimatter.gte(DC.D9_9999E999),
+    get description() { return `获得 ${formatPostBreak(DC.D9_9999E9999, 4)} 反物质。`; },
+    checkRequirement: () => Currency.antimatter.gte(DC.D9_9999E9999),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "未花费的反物质越多，反物质维度的效果越强。",
     effect: () => Currency.antimatter.value.pow(0.00002).plus(1).clampMax(Decimal.pow(10, 1e30)).pow(
