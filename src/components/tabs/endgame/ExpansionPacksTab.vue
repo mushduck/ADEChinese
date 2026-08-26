@@ -53,7 +53,7 @@ export default {
 
       if (first) return `第一个天神扩展包于 ${format(next)} 反物质解锁。`;
       if (alpha && !Pelle.isDoomed) return `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
-      if (alpha && Pelle.isDoomed) return `下一个天神扩展包必须在被毁灭的现实中购买。`;
+      if (alpha && Pelle.isDoomed) return `下一个天神扩展包必须在被毁灭的现实外购买。`;
       return (next === undefined || alphaLock)
         ? "已解锁全部天神扩展包"
         : `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;

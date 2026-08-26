@@ -1560,7 +1560,7 @@ export const normalAchievements = [
   {
     id: 188,
     name: "剧终",
-    description: "通关游戏。",
+    description: "逃离被毁灭的现实。",
     checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(9e15) && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(188).isUnlocked ? DC.D1 : (!Pelle.isDoomed ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().div(9e15), 0, 1))
@@ -1576,7 +1576,7 @@ export const normalAchievements = [
   {
     id: 192,
     name: "对抗命运",
-    description: "在第二次终局中毁灭你的现实。",
+    description: "第二次毁灭你的现实。",
     checkRequirement: () => PlayerProgress.endgameUnlocked() && Pelle.isDoomed,
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
     progress: () => Achievement(192).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.endgames).div(2).min(0.5).add((ImaginaryUpgrade(25).isBought ? new Decimal(0.5) : Currency.imaginaryMachines.value.div(6.4e15).min(0.25).add((!Laitela.isRunning || Laitela.maxAllowedDimension !== 0 || Glyphs.activeWithoutCompanion.length > 1) ? DC.D0 : Currency.eternityPoints.value.add(1).log10().div(16000).min(0.25))).add(new Decimal(Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked))).div(68).min(0.25)).add(new Decimal(AlchemyResources.all.filter(x => x.amount >= 25000).length).div(84).min(0.25)).div(2)), 0, 1)
@@ -1584,11 +1584,11 @@ export const normalAchievements = [
   {
     id: 193,
     name: "永不停歇",
-    description: "在第二次终局中重塑现实。",
+    description: "第二次逃离被毁灭的现实。",
     checkRequirement: () => PlayerProgress.endgameUnlocked() && Currency.antimatter.value.add(1).log10().gte(9e15) && Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `星系增强 ${formatPercents(0.1)} 。`;
+      return `星系增强 ${formatPercents(0.1)}。`;
     },
     effect: () => player.disablePostReality ? 1 : 1.1,
     progress: () => Achievement(193).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.endgames).div(2).min(0.5).add(!Pelle.isDoomed ? DC.D0 : player.antimatter.max(1).log10().div(18e15).min(0.5)), 0, 1)
@@ -1662,7 +1662,7 @@ export const normalAchievements = [
   },
   {
     id: 204,
-    name: "艰难的重置",
+    name: "艰难的复原",
     description: "购买所有佩勒削弱升级。",
     checkRequirement: () => PelleAchievementUpgrade.all.filter(u => u.canBeApplied).length >= 33 &&
       PelleDestructionUpgrade.all.filter(u => u.canBeApplied).length >= 50 &&
@@ -1894,7 +1894,7 @@ export const normalAchievements = [
     checkRequirement: () => EndgameSkills.totalPurchased() >= 1000,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `基于终局能力数量给予反物质维度一个巨大的指数加成，在佩勒的现实内进一步增强。`;
+      return `基于终局能力数量给予反物质维度一个巨大的指数加成，在被毁灭的现实内进一步增强。`;
     },
     effect: () => player.disablePostReality ? 1 : 1 + ((Math.min(EndgameSkills.totalPurchased(), 2000) + (Math.max(Math.log2(EndgameSkills.totalPurchased() / 2000), 0) * 1000)) / (Pelle.isDoomed ? 20000 : 100000)),
     formatEffect: value => `${formatPow(value, 2, 3)}`,
@@ -1921,7 +1921,7 @@ export const normalAchievements = [
       BreakEternityUpgrade.all.filter(u => u.isBought).length === 5,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `在佩勒的现实内反物质指数 ^ ${format(1.4, 2, 1)} 。`;
+      return `在被毁灭的现实内反物质指数 ^ ${format(1.4, 2, 1)} 。`;
     },
     effect: () => player.disablePostReality || !Pelle.isDoomed ? 1 : 1.4,
     progress: () => Achievement(233).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(BreakEternityUpgrade.all.filter(u => u.isCapped).length + BreakEternityUpgrade.all.filter(u => u.isBought).length).div(15), 0, 1)
