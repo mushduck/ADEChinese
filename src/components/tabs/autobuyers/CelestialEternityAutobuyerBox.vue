@@ -48,7 +48,7 @@ export default {
     modeProps(mode) {
       switch (mode) {
         case AUTO_CELESTIAL_ETERNITY_MODE.AMOUNT: return {
-          title: "获得 X 天界永恒点数时进行天界永恒",
+          title: "获得X天界永恒点数时进行天界永恒",
           input: {
             property: "amount",
             type: "decimal"
