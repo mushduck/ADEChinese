@@ -29,12 +29,12 @@ export const dilationUpgrades = {
     capIncreaseAt: () => Decimal.floor(Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).sub(3)).toNumber(),
     description: () =>
       ((SingularityMilestone.dilatedTimeFromSingularities.canBeApplied || Achievement(187).canBeApplied)
-        ? `获得 ${formatX(2 * Effects.product(
+        ? `膨胀时间获取量 ${formatX(2 * Effects.product(
           SingularityMilestone.dilatedTimeFromSingularities,
           Achievement(187),
           BreakEternityUpgrade.dilatedTimeMultiplier
-        ), 2, 2)} 倍膨胀时间`
-        : "获得的膨胀时间加倍"),
+        ), 2, 2)}`
+        : "膨胀时间获取量翻倍"),
     effect: bought => {
       const base = 2 * Effects.product(
         SingularityMilestone.dilatedTimeFromSingularities,
@@ -60,8 +60,8 @@ export const dilationUpgrades = {
     superExponent: () => 100000,
     description: () =>
       ((Perk.bypassTGReset.isBought && !player.disablePostReality) && (!Pelle.isDoomed || PellePerkUpgrade.perkTGR.canBeApplied)
-        ? "重置超光速粒子星系的数量，降低它们的阈值"
-        : "重置膨胀时间和超光速粒子星系的数量，降低它们的阈值"),
+        ? "重置超光速粒子星系的数量并降低其阈值"
+        : "重置膨胀时间和超光速粒子星系的数量并降低其阈值"),
     // The 38th purchase is at 1e80, and is the last purchase.
     effect: bought => (bought < 38 || (BreakEternityUpgrade.tgThresholdUncap.isBought && !player.disablePostReality) ? Decimal.pow(0.8, bought) : DC.D0),
     formatEffect: effect => {
@@ -79,9 +79,9 @@ export const dilationUpgrades = {
     increment: 20,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(Math.log10(20))).sub(Math.log10(5e5) / Math.log10(20))).toNumber(),
     description: () => {
-      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return `获得 ${formatInt(1)} 倍超光速粒子`;
-      if (Enslaved.isRunning) return `获得 ${Math.pow(3, Enslaved.tachyonNerf).toFixed(2)} 倍超光速粒子`;
-      return "获得三倍的超光速粒子";
+      if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return `超光速粒子获取量 ${formatX(1)}`;
+      if (Enslaved.isRunning) return `超光速粒子获取量 ${formatX(Math.pow(3, Enslaved.tachyonNerf).toFixed(2))}`;
+      return `超光速粒子获取量 ${formatX(3)}`;
     },
     effect: bought => {
       if (Pelle.isDoomed && !PelleDestructionUpgrade.x3TPUpgrade.canBeApplied) return DC.D1.pow(bought);
@@ -95,8 +95,8 @@ export const dilationUpgrades = {
     id: 4,
     cost: 5e6,
     description: () => (Alpha.isDestroyed
-      ? `获得双倍的超光速粒子星系`
-      : `获得双倍的超光速粒子星系，最大数量为 ${formatInt(500)} 个基础星系`),
+      ? `超光速粒子星系获取量翻倍`
+      : `超光速粒子星系获取量翻倍，最大数量为 ${formatInt(500)} 个基础星系`),
     effect: 2
   },
   tdMultReplicanti: {
@@ -123,14 +123,14 @@ export const dilationUpgrades = {
   ndMultDT: {
     id: 6,
     cost: 5e7,
-    description: "基于膨胀时间的数量给予反物质维度倍数加成，此倍数不受时间膨胀的影响",
+    description: "基于膨胀时间为反物质维度提供倍率加成，此倍率不受时间膨胀的影响",
     effect: () => Currency.dilatedTime.value.pow(308).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   ipMultDT: {
     id: 7,
     cost: 2e12,
-    description: "无限点数获得基于膨胀时间的倍数加成",
+    description: "基于膨胀时间为无限点数提供倍率加成",
     effect: () => Currency.dilatedTime.value.pow(1000).clampMin(1),
     formatEffect: value => formatX(value, 2, 1),
     cap: () => Effarig.eternityCap
@@ -149,7 +149,7 @@ export const dilationUpgrades = {
   ttGenerator: {
     id: 10,
     cost: 1e15,
-    description: "超光速粒子产生时间之理",
+    description: "超光速粒子生产时间之理",
     effect: () => Currency.tachyonParticles.value.div(20000).times(
       Alpha.isRunning ? AlphaUnlocks.timeTheoremGeneration.effects.nerf.effectOrDefault(1) : 1),
     formatEffect: value => `${format(value, 2, 1)}/秒`
@@ -160,7 +160,7 @@ export const dilationUpgrades = {
     increment: 100,
     capIncreaseAt: () => Decimal.floor((Decimal.log10(DilationUpgradeScaling.PRIMARY_SCALING).div(2)).sub(6)).toNumber(),
     pelleOnly: true,
-    description: () => `获得的膨胀时间 ${formatX(5)}`,
+    description: () => `膨胀时间获取量 ${formatX(5)}`,
     effect: bought => Decimal.pow(5, bought),
     formatEffect: value => formatX(value, 2),
     formatCost: value => format(value, 2),
@@ -201,7 +201,7 @@ export const dilationUpgrades = {
     id: 15,
     cost: 1e55,
     pelleOnly: true,
-    description: () => `基于当前永恒点数获得更多膨胀时间`,
+    description: () => `基于当前永恒点数为膨胀时间获取量提供倍率加成`,
     effect: () => Decimal.pow(1e9, Decimal.min(Decimal.pow(Decimal.max(player.eternityPoints.add(1).log10().sub(1500), 0).div(2500), 1.2), 1).times(Alpha.isDestroyed ? player.eternityPoints.add(1).log10().sub(4000).max(1).log10().max(1) : 1)),
     formatEffect: value => formatX(value, 2, 2)
   },
