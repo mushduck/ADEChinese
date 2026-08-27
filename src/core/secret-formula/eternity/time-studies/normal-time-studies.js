@@ -34,7 +34,7 @@ export const normalTimeStudies = [
     // All requirements of an empty array will always evaluate to true, so this study is always purchasable
     requirement: [],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    description: "第一时间维度获得基于计数频率的加成",
+    description: "基于计数频率为第一时间维度提供倍率加成",
     effect: () => {
       const tickspeed = Tickspeed.current.dividedBy(1000);
       const firstPart = tickspeed.pow(0.008).times(0.95);
@@ -49,7 +49,7 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [11],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `复制器加成无限维度的倍数计算公式变得更好 (log2(x)${formatPow(2)})+x${formatPow(0.04, 3, 3)}`,
+    description: () => `优化复制器加成无限维度的倍率计算公式 (log2(x)${formatPow(2)})+x${formatPow(0.04, 3, 3)}`,
     effect: () => Replicanti.amount.pow(0.04),
     // This is a special case because the study itself is added to the existing formula, but it makes more sense
     // to display a multiplicative increase just like every other study. We need to do the calculation in here in order
@@ -73,7 +73,7 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [21],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `加强基于无限次数的奖励 (奖励${formatPow(100)})`,
+    description: () => `基于无限次数的奖励效力 ${formatPow(100)}`,
     effect: 100
   },
   {
@@ -81,7 +81,7 @@ export const normalTimeStudies = [
     cost: 2,
     requirement: [22],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: `基于维度提升获得更多的无限次数`,
+    description: `基于维度提升为无限次数获取量提供倍率加成`,
     effect: () => Decimal.max(DimBoost.totalBoosts.times(10), 1),
     formatEffect: value => formatX(value, 2)
   },
@@ -116,7 +116,7 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [41, 42],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `获得 ${formatX(1e15)} 无限点数`,
+    description: () => `无限点数获取量 ${formatX(1e15)}`,
     effect: 1e15
   },
   {
@@ -124,7 +124,7 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [51],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `获得 ${formatX(25)} 永恒点数`,
+    description: () => `永恒点数数获取量 ${formatX(25)}`,
     effect: 25
   },
   {
@@ -132,7 +132,7 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [42, () => (Perk.bypassEC5Lock.isBought && !player.disablePostReality) || EternityChallenge(5).completions > 0],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    description: () => `获得复制器的速度提高 ${formatInt(3)} 倍`,
+    description: () => `复制速度 ${formatX(3)}`,
     effect: 3
   },
   {
@@ -260,8 +260,8 @@ export const normalTimeStudies = [
     requirement: [101, 102, 103],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => (Achievement(103).canBeApplied
-      ? `无限点公式变得更好 log(x)/${formatFloat(307.8, 1)} ➜ log(x)/${formatInt(280)}`
-      : `无限点公式变得更好 log(x)/${formatInt(308)} ➜ log(x)/${formatInt(280)}`),
+      ? `优化无限点数公式 log(x)/${formatFloat(307.8, 1)} ➜ log(x)/${formatInt(280)}`
+      : `优化无限点数公式 log(x)/${formatInt(308)} ➜ log(x)/${formatInt(280)}`),
     effect: 280
   },
   {
@@ -272,8 +272,8 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [122, 123],
     description: () => ((Perk.studyActiveEP.isBought && !player.disablePostReality)
-      ? `获得 ${formatX(50)} 永恒点数`
-      : `前 ${formatInt(10)} 次永恒越快，永恒点数加成越多${PlayerProgress.realityUnlocked() ? "（用现实时间计算）" : ""}`),
+      ? `永恒点数获取量 ${formatX(50)}`
+      : `前 ${formatInt(10)} 次永恒越快，永恒点数加成越多${PlayerProgress.realityUnlocked() ? "（用真实时间计算）" : ""}`),
     effect: () => ((Perk.studyActiveEP.isBought && !player.disablePostReality)
       ? 50
       : Math.clamp(250 / Player.averageRealTimePerEternity, 1, 50)),
@@ -288,8 +288,8 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [121, 123],
     description: () => ((Perk.studyPassive.isBought && !player.disablePostReality)
-      ? `获得 ${formatX(50)} 永恒点数`
-      : `获得 ${formatX(35)} 永恒点数`),
+      ? `永恒点数获取量 ${formatX(50)}`
+      : `永恒点数获取量 ${formatX(35)}`),
     effect: () => ((Perk.studyPassive.isBought && !player.disablePostReality) ? 50 : 35)
   },
   {
@@ -299,7 +299,7 @@ export const normalTimeStudies = [
     requirement: [111],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [121, 122],
-    description: "基于花费在当前永恒上的时间获得更多永恒点数",
+    description: "基于花费在当前永恒上的时间为永恒点数获取量提供倍率加成",
     effect: () => {
       const perkEffect = (player.disablePostReality
         ? TimeSpan.fromMinutes(DC.D0)
@@ -317,8 +317,8 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [132, 133],
     description: () => (Achievement(138).isUnlocked
-      ? `你能多获得 ${formatPercents(0.5)} 的复制器星系`
-      : `禁用复制器星系的自动购买，但你可以多获得 ${formatPercents(0.5)}`),
+      ? `复制器星系获取量提高 ${formatPercents(0.5)}`
+      : `禁用自动购买复制器星系，但复制器星系获取量提高 ${formatPercents(0.5)}`),
     effect: () => Decimal.floor(player.replicanti.boughtGalaxyCap.div(2))
   },
   {
@@ -342,7 +342,7 @@ export const normalTimeStudies = [
     requiresST: [131, 132],
     description: () => (Achievement(138).isUnlocked
       ? `复制器星系的效果提高 ${formatPercents(0.5)}`
-      : `复制器获取速度在复制器达到 ${format(Number.MAX_VALUE, 2)} 之前减慢 ${formatX(10)} 倍，但复制器星系增强 ${formatPercents(0.5)}`),
+      : `复制速度在复制器达到 ${format(Number.MAX_VALUE, 2)} 之前 ÷ ${formatInt(10)}，但复制器星系的效果提高 ${formatPercents(0.5)}`),
     effect: 0.5
   },
   {
@@ -353,8 +353,8 @@ export const normalTimeStudies = [
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [142, 143],
     description: () => ((Perk.studyActiveEP.isBought && !player.disablePostReality)
-      ? `获得 ${formatX(DC.E45)} 无限点数`
-      : "无限点获得倍数加成，但在本次无限中逐渐衰减"),
+      ? `无限点数获取量 ${formatX(DC.E45)}`
+      : "为无限点数提供在本次无限中逐渐衰减的倍率加成"),
     effect: () => ((Perk.studyActiveEP.isBought && !player.disablePostReality)
       ? DC.E45
       : DC.E45.divide(thisInfinityMult(Alpha.isRunning
@@ -369,7 +369,7 @@ export const normalTimeStudies = [
     requirement: [132],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [141, 143],
-    description: () => `获得 ${formatX(passiveIPMult())} 无限点数`,
+    description: () => `无限点数获取量 ${formatX(passiveIPMult())}`,
     effect: passiveIPMult,
     cap: () => (Effarig.eternityCap === undefined ? undefined : Effarig.eternityCap.toNumber())
   },
@@ -380,7 +380,7 @@ export const normalTimeStudies = [
     requirement: [133],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [141, 142],
-    description: "无限点获得倍数加成，且在本次无限中逐渐增加",
+    description: "为无限点数提供在本次无限中逐渐增加的倍率加成",
     effect: () => {
       const perkEffect = (player.disablePostReality
         ? TimeSpan.fromMinutes(DC.D0)
@@ -396,7 +396,7 @@ export const normalTimeStudies = [
     cost: 8,
     requirement: [141, 142, 143],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `所有时间维度提升 ${formatX(1e6)} 倍`,
+    description: () => `所有时间维度倍率 ${formatX(1e6)}`,
     effect: 1e6
   },
   {
@@ -404,7 +404,7 @@ export const normalTimeStudies = [
     cost: 7,
     requirement: [151],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `所有反物质维度提升 ${formatX(DC.E616)} 倍`,
+    description: () => `所有反物质维度倍率 ${formatX(DC.E616)}`,
     effect: () => DC.E616
   },
   {
@@ -412,7 +412,7 @@ export const normalTimeStudies = [
     cost: 7,
     requirement: [151],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `所有无限维度提升 ${formatX(1e11)} 倍`,
+    description: () => `所有无限维度倍率 ${formatX(1e11)}`,
     effect: 1e11
   },
   {
@@ -460,7 +460,7 @@ export const normalTimeStudies = [
     cost: 300,
     requirement: [181, () => EternityChallenge(10).completions > 0],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    description: "基于永恒次数的反物质维度提升",
+    description: "基于永恒次数为反物质维度提供倍率加成",
     effect: () => DC.E2000.pow(Currency.eternities.value.div(1e5).clampMax(15)).times(
       DC.E2000.pow(Decimal.log10(Currency.eternities.value.sub(1.4e6).div(1e5).max(1)))),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E30000,
@@ -486,7 +486,7 @@ export const normalTimeStudies = [
     cost: 150,
     requirement: [191],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "基于时间碎片数量，星系变得更加强大",
+    description: "基于时间碎片数量提升星系效力",
     effect: () => Decimal.pow(Currency.timeShards.value.clampMin(2).log2(), 0.008).min(1.2).times(
       Currency.timeShards.value.clampMin(2).log2().add(1).log2().add(1).log2().sub(2.1).div(3).max(1)).toNumber(),
     cap: () => Alpha.isDestroyed ? Infinity : 1.2,
@@ -497,7 +497,7 @@ export const normalTimeStudies = [
     cost: 200,
     requirement: [193],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `获得复制器的速度提高 ${formatInt(50)} 倍`,
+    description: () => `复制速度 ${formatX(50)}`,
     effect: 50
   },
   {
@@ -523,7 +523,7 @@ export const normalTimeStudies = [
     requirement: [211],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [222],
-    description: "基于你的维度提升获得时间维度的倍率加成。",
+    description: "基于维度提升为时间维度提供倍率加成。",
     effect: () => DC.D1_0025.pow(DimBoost.totalBoosts),
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -601,7 +601,7 @@ export const normalTimeStudies = [
     requirement: [214],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [227],
-    description: () => `维度献祭的加成公式变得更好 ${Sacrifice.getSacrificeDescription({ "TimeStudy228": false })} ➜ ${Sacrifice.getSacrificeDescription({ "TimeStudy228": true })}`,
+    description: () => `优化维度献祭的加成公式 ${Sacrifice.getSacrificeDescription({ "TimeStudy228": false })} ➜ ${Sacrifice.getSacrificeDescription({ "TimeStudy228": true })}`,
     effect: 0.2
   },
   {
@@ -622,7 +622,7 @@ export const normalTimeStudies = [
     requirement: [223, 224],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [231],
-    description: "基于反物质星系数量，星系一定程度上更加强大",
+    description: "基于反物质星系数量提升星系效力",
     effect: () => Decimal.pow(player.galaxies.div(500).add(1), 0.25).toNumber(),
     formatEffect: value => `+${formatPercents(value - 1, 3)}`
   },
@@ -633,7 +633,7 @@ export const normalTimeStudies = [
     requirement: [225, 226],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [234],
-    description: "根据当前的复制器数量，使复制器星系上限升级更便宜",
+    description: "基于当前复制器数量降低复制器星系上限升级价格",
     effect: () => Replicanti.amount.pow(0.625),
     formatEffect: value => `/ ${format(value, 1, 2)}`
   },
@@ -679,7 +679,7 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 3, 225, 226, 233],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [225, 226, 233],
-    description: () => `从时间研究225、226以及鹿颈长的无限中多获得${formatPercents(0.5 * Ra.unlocks.triadBuff.effectOrDefault(1))}复制器星系`,
+    description: () => `从时间研究225、226以及鹿颈长的无限奖励中多获得${formatPercents(0.5 * Ra.unlocks.triadBuff.effectOrDefault(1))}复制器星系`,
     effect: () => 1 + 0.5 * Ra.unlocks.triadBuff.effectOrDefault(1),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 3
   },
@@ -692,7 +692,7 @@ export const normalTimeStudies = [
     requiresST: [227, 228, 234],
     description: () => (Ra.unlocks.triadBuff.canBeApplied
       ? `维度献祭的倍数 ^ ${format(2 * Ra.unlocks.triadBuff.effectOrDefault(1), 2, 2)}`
-      : `维度献祭的倍数提升为原来的平方`),
+      : `维度献祭的倍数 ^ ${formatInt(2)}`),
     effect: () => 2 * Ra.unlocks.triadBuff.effectOrDefault(1),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 4
   }

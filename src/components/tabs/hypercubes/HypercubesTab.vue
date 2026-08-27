@@ -224,7 +224,7 @@ export default {
           <p>
             {{ penteractLockString }}
           </p>
-          <p>时间维度的软上限阈值降低 {{ formatDecimalPercents(nextFreeTickspeedReduction, 2, 2) }}</p>
+          <p>时间维度的软上限阈值推迟 {{ formatDecimalPercents(nextFreeTickspeedReduction, 2, 2) }}</p>
           <p><b>价格: {{ format(penteractCost) }} 永恒点数</b></p>
           <p>总超五方体效果: 增加 {{ formatPow(totalFreeTickspeedReduction, 2, 4) }}</p>
         </button>
@@ -241,7 +241,7 @@ export default {
           <p>
             {{ hexeractLockString }}
           </p>
-          <p>暗物质维度的软上限阈值降低 {{ formatDecimalPercents(nextDarkMatterSoftcapReduction, 2, 2) }}</p>
+          <p>暗物质维度的软上限阈值推迟 {{ formatDecimalPercents(nextDarkMatterSoftcapReduction, 2, 2) }}</p>
           <p><b>价格: {{ format(hexeractCost) }} 暗物质</b></p>
           <p>总超六方体效果: 增加 {{ formatPow(totalDarkMatterSoftcapReduction, 2, 4) }}</p>
         </button>

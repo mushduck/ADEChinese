@@ -57,7 +57,7 @@ export default {
     tooltipContents() {
       if (this.showTTCost) return `${this.formattedEPCost}<br>${this.timeEstimate}`;
       if (this.isCapped) return `无名氏阻止你购买超过 ${format(1)} 个时间维度`;
-      if (this.isContinuumActive) return "Continuum produces all your Time Dimensions";
+      if (this.isContinuumActive) return "连续统已取代时间维度";
       return `已购买${quantifyHybridLarge("次", this.bought)}`;
     },
     showRow() {
