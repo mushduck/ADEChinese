@@ -138,7 +138,7 @@ export default {
       />
       <br>
       <b>
-        若脉冲启用，黑洞每个脉冲间隔（{{ formatInt(timeSlider) }} 秒）将释放一次存储游戏时间。
+        若脉冲启用，黑洞每个脉冲间隔（{{ formatInt(timeSlider) }} 帧）将释放一次存储游戏时间。
       </b>
       <SliderComponent
         v-if="areExtraSlidersUnlocked"
