@@ -95,12 +95,12 @@ export default {
       v-else
       class="pelle-unlock-requirements"
     >
-      你需要拥有前 {{ formatInt(totalRows) }} 行的所有成就，同时所有的炼金资源达到上限才能解锁反物质之神，佩勒。
+      你需要拥有前 {{ formatInt(totalRows) }} 行的所有成就，同时所有的炼金资源达到 {{ formatInt(25000) }} 才能解锁反物质之神，佩勒。
       <br>
       <br>
       已完成前{{ formatInt(completedRows) }} / {{ formatInt(totalRows) }} 行的所有成就
       <br>
-      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} 个炼金资源达到上限。 
+      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} 个炼金资源达到 {{ formatInt(25000) }}。 
     </div>
   </div>
 </template>

@@ -19,7 +19,7 @@ export const normalAchievements = [
   },
   {
     id: 13,
-    name: "《半衰期 3》确认发布",
+    name: "《半条命 3》确认发布",
     description: "购买第三维度。",
     checkEvent: GAME_EVENT.ACHIEVEMENT_EVENT_OTHER,
     get reward() { return `第三及更高维度增强 ${formatPercents(0.3)} 。`; },
@@ -290,7 +290,7 @@ export const normalAchievements = [
   },
   {
     id: 44,
-    name: "超越之 30 秒",
+    name: "30 秒完活",
     get description() {
       return `你每秒获得的反物质数量超过你拥有的反物质数量，并持续 ${formatInt(30)} 秒。`;
     },
@@ -318,7 +318,7 @@ export const normalAchievements = [
   {
     id: 46,
     name: "多维度",
-    get description() { return `除第八维度外的所有反物质维度达到 ${format(DC.E12)} 。`; },
+    get description() { return `除第八维度外的所有反物质维度达到 ${format(DC.E12)}。`; },
     checkRequirement: () => AntimatterDimension(7).amount.add(1).log10().gte(12),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(46).isUnlocked ? DC.D1 : Decimal.clamp(AntimatterDimension(7).amount.add(1).log10().div(12), 0, 1)
@@ -337,7 +337,7 @@ export const normalAchievements = [
     get description() { return `完成所有的普通挑战`; },
     checkRequirement: () => NormalChallenges.all.countWhere(c => !c.isCompleted) === 0,
     checkEvent: [GAME_EVENT.BIG_CRUNCH_AFTER, GAME_EVENT.REALITY_RESET_AFTER, GAME_EVENT.REALITY_UPGRADE_TEN_BOUGHT],
-    get reward() { return `所有反物质维度增强 ${formatPercents(0.1)}.`; },
+    get reward() { return `所有反物质维度增强 ${formatPercents(0.1)}。`; },
     effect: 1.1,
     progress: () => Achievement(48).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(NormalChallenges.all.countWhere(c => c.isCompleted)).div(12), 0, 1)
   },
@@ -487,7 +487,7 @@ export const normalAchievements = [
   },
   {
     id: 66,
-    name: "比方土豆还快。",
+    name: "比方了的土豆还快。",
     get description() { return `计数频率超过 ${format(DC.E58)} 每秒。`; },
     checkRequirement: () => Tickspeed.current.log10().lte(-55),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -1306,7 +1306,7 @@ export const normalAchievements = [
     get description() { return `游戏内时间达到 ${formatInt(137, 1)} 亿年。`; },
     checkRequirement: () => Time.totalTimePlayed.totalYears.gt(13.7e9),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    get reward() { return `黑洞的持续时间延长 ${formatPercents(0.1)}.`; },
+    get reward() { return `黑洞的持续时间延长 ${formatPercents(0.1)}。`; },
     effect: () => player.disablePostReality ? 1 : 1.1,
     progress: () => Achievement(155).isUnlocked ? DC.D1 : Decimal.clamp(Time.totalTimePlayed.totalYears.div(13.7e9), 0, 1)
   },
@@ -1413,7 +1413,7 @@ export const normalAchievements = [
   {
     id: 168,
     name: "行百里者半五十",
-    get description() { return `太阳神中的总记忆等级达到 ${formatInt(50)}.`; },
+    get description() { return `太阳神的总记忆等级达到 ${formatInt(50)}.`; },
     checkRequirement: () => Ra.totalPetLevel >= 50,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `你可以多获得 ${formatPercents(0.1)} 的记忆。`; },
@@ -1434,7 +1434,7 @@ export const normalAchievements = [
     id: 172,
     name: "现实漫游指南",
     get description() {
-      return `没有充能的无限升级、不装备符文、不购买任何三体研究时，一次现实获得${format(DC.NUMMAX, 1)}现实机器。`;
+      return `不充能无限升级、不装备符文、不购买任何三体研究时，一次现实获得至少${format(DC.NUMMAX, 1)}现实机器。`;
     },
     checkRequirement: () => MachineHandler.gainedRealityMachines.gte(DC.NUMMAX) &&
       player.celestials.ra.charged.size === 0 && Glyphs.activeWithoutCompanion.length === 0 &&
@@ -1461,7 +1461,7 @@ export const normalAchievements = [
   {
     id: 175,
     name: "第一个反历史学家",
-    get description() { return `所有的炼金资源达到 ${formatInt(25000)}.`; },
+    get description() { return `所有的炼金资源达到 ${formatInt(25000)}。`; },
     checkRequirement: () => AlchemyResources.all.every(x => x.amount >= 25000),
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
     get reward() {
@@ -1479,7 +1479,7 @@ export const normalAchievements = [
   {
     id: 177,
     name: "难如登天的一英里",
-    description: "所有的奇点里程碑，均解锁至少一次。",
+    description: "解锁原版所有的奇点里程碑至少一次。",
     checkRequirement: () => SingularityMilestone.tesseractMultFromSingularities.completions.gt(0),
     checkEvent: GAME_EVENT.SINGULARITY_RESET_AFTER,
     progress: () => Achievement(177).isUnlocked ? DC.D1 : Decimal.clamp(Currency.singularities.value.add(1).log10().div(Decimal.log10(4e44)), 0, 1)
@@ -1612,7 +1612,7 @@ export const normalAchievements = [
   {
     id: 196,
     name: "终于回来了",
-    description: "在被毁灭的现实中重获所有成就。",
+    description: "在被毁灭的现实中重获前18行成就。",
     checkRequirement: () => PelleAchievementUpgrade.all.filter(u => u.canBeApplied).length >= 33,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
@@ -1878,7 +1878,7 @@ export const normalAchievements = [
   },
   {
     id: 228,
-    name: "看看我们走了多远。",
+    name: "回望征途，至此已远",
     get description() { return `达到 ${formatPostBreak(DC.ENUMMAX, 2)} 反物质。` },
     checkRequirement: () => player.antimatter.gte(DC.ENUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -1949,7 +1949,7 @@ export const normalAchievements = [
   {
     id: 236,
     name: "超新星",
-    get description() { return `太阳神的记忆总共达到 ${formatInt(500)} 级。` },
+    get description() { return `太阳神的总记忆记忆达到 ${formatInt(500)}。` },
     checkRequirement: () => Ra.totalPetLevel >= 500,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `记忆获取速度${formatX(500)}`; },
