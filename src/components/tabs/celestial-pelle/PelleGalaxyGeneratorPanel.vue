@@ -121,7 +121,7 @@ export default {
           你总共拥有
           <span class="c-galaxies-amount">{{ galaxyText }}</span>
           个星系。 
-          <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/s</span>
+          <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/秒</span>
           <div v-if="isInstabilityShown">
           你的星系生成器不稳定性为
             <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>，将数量超过{{ format(instabilityStart, 2, 1) }}的星系产量除以
