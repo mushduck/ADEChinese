@@ -130,7 +130,7 @@ export const endgameUpgrades = [
     name: "天神纷扰",
     id: 10,
     cost: new Decimal(1e83),
-    requirement: () => "灌注特蕾莎前完成所有鹿颈长、无名氏和薇的挑战",
+    requirement: () => "灌注特蕾莎前完成所有鹿颈长、无名氏、薇和太阳神的挑战",
     hasFailed: () => player.celestials.teresa.pouredAmount.gt(0),
     checkRequirement: () => player.celestials.teresa.pouredAmount.eq(0) &&
       EffarigUnlock.reality.isUnlocked && Enslaved.isCompleted && V.spaceTheorems >= 36 && Ra.totalPetLevel >= 100,
