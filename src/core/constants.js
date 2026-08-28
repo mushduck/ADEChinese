@@ -84,6 +84,7 @@ window.DC = deepFreeze({
   D9_99999E999:         new Decimal("9.99999e999"),
   D9_9999E9999:         new Decimal("9.9999e9999"),
 
+
   // Calculations for precise numbers.
   C1D1_1245:                Decimal.div(1, 1.1245),
   D2P30D0_61:               Decimal.pow(2, 30 / 0.61),
@@ -232,6 +233,7 @@ window.DC = deepFreeze({
   E9E15:                new Decimal("1e9000000000000000"),
 
   //Hardcoded post-e9e15 values to be reformatted later
+  E1E50:                Decimal.pow(10, 1e50),
   E9E115:               Decimal.pow(10, 9e115),
   E1E300:               Decimal.pow(10, 1e300),
   ENUMMAX:              Decimal.pow(10, Number.MAX_VALUE),

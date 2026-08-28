@@ -69,7 +69,7 @@ export const accelerators = {
       {
         resource: "emptiness",
         requirement: 1,
-        description: () => `反物质硬上限 × F1E1e50`,
+        description: () => `反物质硬上限 × ${formatInt(DC.E1E50)}`,
         effect: () => player.disablePostReality ? 0 : 25
       },
     ]
