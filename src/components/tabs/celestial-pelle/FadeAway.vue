@@ -13,9 +13,9 @@ export default {
   computed: {
     classObject() {
       return {
-        "c-background-overlay": !this.forceStars && !this.forceDark,
+        "c-background-overlay": !this.forceStars && !this.forceDark && !this.isDarker,
         "c-background-overlay--force-stars": this.forceStars,
-        "c-background-overlay--force-dark": this.forceDark
+        "c-background-overlay--force-dark": this.forceDark || this.isDarker
       };
     }
   },
