@@ -47,7 +47,7 @@ export default {
 
 <template>
   <ModalWrapperChoice
-    :option="isDoomed ? 'armageddon' : undefined"
+    :option="isDoomed ? 'armageddon' : 'doom'"
     @confirm="handleYesClick"
   >
     <template #header>
