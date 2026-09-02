@@ -19,8 +19,8 @@ export default {
   },
   computed: {
     sacText() {
-      if (Ascensions.sacA.isUnlocked) return `Dimensional Sacrifice (+${formatPow(sacrificeBoost, 2, 3)})`;
-      return `Dimensional Sacrifice (${formatX(sacrificeBoost, 2, 2)})`;
+      if (Ascensions.sacA.isUnlocked) return `Dimensional Sacrifice (+${formatPow(this.sacrificeBoost, 2, 3)})`;
+      return `Dimensional Sacrifice (${formatX(this.sacrificeBoost, 2, 2)})`;
     },
     sacrificeTooltip() {
       return `Boosts 8th Antimatter Dimension by +${formatPow(this.nextPower, 2, 3)}`;
