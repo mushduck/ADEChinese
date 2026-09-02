@@ -1,13 +1,9 @@
 <script>
 import CostDisplay from "@/components/CostDisplay";
-import DescriptionDisplay from "@/components/DescriptionDisplay";
-import EffectDisplay from "@/components/EffectDisplay";
 
 export default {
   name: "ExpansionPacksContainer",
   components: {
-    DescriptionDisplay,
-    EffectDisplay,
     CostDisplay
   },
   props: {
@@ -24,6 +20,12 @@ export default {
     };
   },
   computed: {
+    descriptionLines() {
+      return this.pack.config.description.split("\n").map(x => x.trim());
+    },
+    isLarge() {
+      return this.descriptionLines.length >= 10;
+    },
     classObject() {
       return {
         "o-expansion-pack": true,
@@ -45,6 +47,12 @@ export default {
         "o-expansion-pack--alpha--bought": this.pack.config.id === "alphaPack" && this.isBought
       };
     },
+    textClassObject() {
+      return {
+        "o-expansion-pack-text": true,
+        "o-expansion-pack-text__small": this.isLarge
+      };
+    }
   },
   methods: {
     update() {
@@ -68,11 +76,13 @@ export default {
           {{ symbol }}
         </div>
         <div>
-          <DescriptionDisplay :config="pack.config" />
-          <EffectDisplay
-            br
-            :config="pack.config"
-          />
+          <div
+            v-for="(description, descriptionKey) in descriptionLines"
+            :key="descriptionKey"
+            :class="textClassObject"
+          >
+            {{ description }}
+          </div>
           <CostDisplay
             v-if="!isBought"
             br
@@ -95,7 +105,18 @@ export default {
 }
 
 .o-symbol {
+  position: absolute;
+  left: 2rem;
   font-size: 15rem;
   font-weight: bold;
+}
+
+.o-expansion-pack-text {
+  margin-left: 18rem;
+  font-size: 1.4rem;
+}
+
+.o-expansion-pack-text__small {
+  font-size: 1.1rem;
 }
 </style>
