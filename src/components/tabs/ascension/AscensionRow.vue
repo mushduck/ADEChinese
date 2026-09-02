@@ -13,6 +13,26 @@ export default {
     };
   },
   computed: {
+    gradientColors() {
+      return ["#b67f33", "#b341e0", "#2196f3", "#df5050", "#4980cc", "#00bcd4", "#8051ec", "#1256a3", "#673ab7"];
+    },
+    currGrad() {
+      const color = this.gradientColors[this.config.id]
+      return `linear-gradient(90deg, ${color}, black, ${color}, black, ${color}, black, ${color})`;
+    },
+    ascensionStyle() {
+      return {
+        position: "relative",
+        "font-size": "3rem",
+        "font-weight": "bold",
+        background: this.currGrad,
+        "background-clip": "text",
+        "background-size": "300% 100%",
+        animation: "a-ascension-shift 10s infinite",
+
+        "-webkit-text-fill-color": "transparent",
+      };
+    },
     ascension() {
       return this.getAscension();
     },
@@ -39,7 +59,9 @@ export default {
 
 <template>
   <div v-show="isUnlocked">
-    <div class="c-ascension-text">
+    <div
+      :style="ascensionStyle"
+    >
       Ascension {{ id }}:
       {{ name }}
       <br>
