@@ -36,6 +36,8 @@ export default {
       massOverflow: new Decimal(0),
       isCorrupted: false,
       isEffectActive: false,
+      collapsedInfo: false,
+      anySoftcapApplicable: false,
       alphaDecayRemnant: 0,
       hasRemnant: false,
       isExpanded: false,
@@ -50,6 +52,11 @@ export default {
     };
   },
   computed: {
+    softcapCollapseDisplay() {
+      return this.collapsedInfo
+        ? "Show softcap information"
+        : "Hide softcap information";
+    },
     timeToCapText() {
       return TimeSpan.fromHours(this.timeToCap).toStringShort();
     }
@@ -75,6 +82,8 @@ export default {
       this.massOverflow.copyFrom(CelestialDimensions.MASS_OVERFLOW);
       this.isCorrupted = this.celestialMatter.gt(this.massOverflow);
       this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
+      this.collapsedInfo = player.endgame.celDimExpansion.softcapsCollapsed;
+      this.anySoftcapApplicable = this.unstable || this.isOverflowing || this.isCorrupted;
       this.alphaDecayRemnant = CelestialDimensions.alphaDecayRemnant;
       this.hasRemnant = Alpha.isDestroyed;
       this.isExpanded = Achievement(221).isUnlocked;
@@ -98,9 +107,12 @@ export default {
     },
     instabilityClassObject() {
       return {
-        "c-celestial-dim-description__accent": !this.unstable && !this.isOverflowing,
-        "c-celestial-dim-description__accent-unstable": this.unstable || this.isOverflowing,
+        "c-celestial-dim-description__accent": !this.anySoftcapApplicable,
+        "c-celestial-dim-description__accent-unstable": this.anySoftcapApplicable,
       };
+    },
+    toggleSeenSoftcaps() {
+      player.endgame.celDimExpansion.softcapsCollapsed = !player.endgame.celDimExpansion.softcapsCollapsed;
     },
     celestialCrunch() {
       if (PlayerProgress.celestialInfinityUnlocked()) celestialCrunchResetRequest();
@@ -161,38 +173,48 @@ export default {
           </span>
           multiplier to
           <span>Game Speed.</span>
-          <div v-if="unstable">
-            You <i>would</i> have <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
-            Celestial Matter, but you don't.
-            <br>
-            This is because at <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
-            Celestial Matter was softcapped.
-            <br>
-            Currently, Celestial Matter above this amount is being raised to the power of
-            <span :class="instabilityClassObject()">{{ format(1 / softcapPow, 2, 3) }}</span>.
-            <br>
-            The softcap to Celestial Matter is solely based on your Celestial Matter Softcap Magnitude, which is currently
-            <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>.
-          </div>
-          <div v-if="isOverflowing">
-            After <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> Celestial Matter, your
-            Celestial Matter was softcapped <i>again</i>.
-            <br>
-            Currently, Celestial Matter and the Celestial Matter Softcap start above this amount is being raised to the power of
-            <span :class="instabilityClassObject()">{{ format(1 / overflowMag, 2, 3) }}</span>.
-            <br>
-            The Celestial Matter Overflow is solely based on your Celestial Matter Overflow Magnitude, which is currently
-            <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>.
-          </div>
-          <div v-if="isCorrupted">
-            After <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> Celestial Matter, your
-            Celestial Matter was softcapped <i>once again</i>.
-            <br>
-            Currently, Celestial Matter above this amount is being raised to the power of
-            <span :class="instabilityClassObject()">{{ format(1 / massOverflowMag, 2, 3) }}</span>.
-            <br>
-            The Celestial Matter Corruption is solely based on your Celestial Matter Corruption Magnitude, which is currently
-            <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>.
+          <div v-if="anySoftcapApplicable">
+            <div v-if="!collapsedInfo">
+              <div v-if="unstable">
+                You <i>would</i> have <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
+                Celestial Matter, but you don't.
+                <br>
+                This is because at <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
+                Celestial Matter was softcapped.
+                <br>
+                Currently, Celestial Matter above this amount is being raised to the power of
+                <span :class="instabilityClassObject()">{{ format(1 / softcapPow, 2, 3) }}</span>.
+                <br>
+                The softcap to Celestial Matter is solely based on your Celestial Matter Softcap Magnitude, which is currently
+                <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>.
+              </div>
+              <div v-if="isOverflowing">
+                After <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> Celestial Matter, your
+                Celestial Matter was softcapped <i>again</i>.
+                <br>
+                Currently, Celestial Matter and the Celestial Matter Softcap start above this amount is being raised to the power of
+                <span :class="instabilityClassObject()">{{ format(1 / overflowMag, 2, 3) }}</span>.
+                <br>
+                The Celestial Matter Overflow is solely based on your Celestial Matter Overflow Magnitude, which is currently
+                <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>.
+              </div>
+              <div v-if="isCorrupted">
+                After <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> Celestial Matter, your
+                Celestial Matter was softcapped <i>once again</i>.
+                <br>
+                Currently, Celestial Matter above this amount is being raised to the power of
+                <span :class="instabilityClassObject()">{{ format(1 / massOverflowMag, 2, 3) }}</span>.
+                <br>
+                The Celestial Matter Corruption is solely based on your Celestial Matter Corruption Magnitude, which is currently
+                <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>.
+              </div>
+            </div>
+            <PrimaryButton
+              class="o-primary-btn--subtab-option"
+              @click="toggleSeenSoftcaps"
+            >
+              {{ softcapCollapseDisplay }}
+            </PrimaryButton>
           </div>
         </p>
       </div>
