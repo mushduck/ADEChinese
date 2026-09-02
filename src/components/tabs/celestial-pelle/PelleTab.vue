@@ -41,7 +41,8 @@ export default {
         this.completedRows = Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked));
         this.cappedResources = AlchemyResources.all.countWhere(r => r.amount >= 25000);
         this.canEnterPelle = this.completedRows === this.totalRows &&
-          this.cappedResources === this.totalAlchemyResources && !LHC.voidRunning;
+          this.cappedResources === this.totalAlchemyResources && !Alpha.isRunning && !LHC.voidRunning && !LHC.nullifiedVoidRunning &&
+          !player.endgame.overcharge.isRunning;
       }
       this.hasStrike = PelleStrikes.all.some(s => s.hasStrike);
       this.hasGalaxyGenerator = PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0);
@@ -55,7 +56,9 @@ export default {
       Modal.pelleEffects.show();
     },
     enterDoomModal() {
-      Modal.armageddon.show();
+      const confirms = player.options.confirmations;
+      if (confirms.doom) Modal.armageddon.show();
+      else Pelle.initializeRun();
     }
   }
 };
