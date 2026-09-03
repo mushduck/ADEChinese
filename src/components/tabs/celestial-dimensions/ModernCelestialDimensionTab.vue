@@ -38,6 +38,7 @@ export default {
       isEffectActive: false,
       collapsedInfo: false,
       anySoftcapApplicable: false,
+      everSeenSoftcaps: false,
       alphaDecayRemnant: 0,
       hasRemnant: false,
       isExpanded: false,
@@ -84,6 +85,7 @@ export default {
       this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
       this.collapsedInfo = player.endgame.celDimExpansion.softcapsCollapsed;
       this.anySoftcapApplicable = this.unstable || this.isOverflowing || this.isCorrupted;
+      this.everSeenSoftcaps = player.records.totalCelMatter.gte(DC.E100);
       this.alphaDecayRemnant = CelestialDimensions.alphaDecayRemnant;
       this.hasRemnant = Alpha.isDestroyed;
       this.isExpanded = Achievement(221).isUnlocked;
@@ -173,7 +175,7 @@ export default {
           </span>
           multiplier to
           <span>Game Speed.</span>
-          <div v-if="anySoftcapApplicable">
+          <div v-if="everSeenSoftcaps">
             <div v-if="!collapsedInfo">
               <div v-if="unstable">
                 You <i>would</i> have <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
