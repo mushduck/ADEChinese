@@ -177,6 +177,22 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
   }
 }
 
+export function tryChargeAllPerkUpgrades() {
+  if (Teresa.chargesLeft < 5) return;
+  const upgrades = [
+    PerkShopUpgrade.glyphLevel,
+    PerkShopUpgrade.rmMult,
+    PerkShopUpgrade.bulkDilation,
+    PerkShopUpgrade.autoSpeed,
+    PerkShopUpgrade.musicGlyph
+  ];
+  for (const upgrade of upgrades) {
+    if (upgrade.canCharge) {
+      upgrade.charge();
+    }
+  }
+}
+
 export function disChargeAllPerkUpgrades() {
   const upgrades = [
     PerkShopUpgrade.glyphLevel,
