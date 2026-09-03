@@ -109,6 +109,7 @@ export class CelestialCrunchAutobuyerState extends IntervaledAutobuyerState {
 
   reset() {
     super.reset();
+    if (CelestialEternityUpgrade.betterCelCrunchAuto.isBought) return;
     this.mode = AUTO_CELESTIAL_CRUNCH_MODE.AMOUNT;
   }
 }
