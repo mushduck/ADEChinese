@@ -456,7 +456,7 @@ export const singularityMilestones = {
     repeat: new Decimal(0),
     limit: 1,
     description: "Extra Continuum Purchases multiply Entropy Generation at a reduced rate",
-    effect: () => Math.pow(Laitela.matterExtraPurchaseFactor, 0.2),
+    effect: () => Decimal.pow(Laitela.matterExtraPurchaseFactor, 0.2),
     effectFormat: x => formatX(x, 2, 2),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_MAIN,
   },

@@ -52,6 +52,7 @@ export function tryAscend() {
 };
 
 export function tryEnterOvercharge() {
+  if (LHC.voidRunning || LHC.nullifiedVoidRunning) return;
   if (player.options.confirmations.overcharge) {
     Modal.enterOvercharge.show();
   } else {

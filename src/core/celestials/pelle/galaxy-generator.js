@@ -36,7 +36,8 @@ export const GalaxyGenerator = {
       GalaxyGeneratorUpgrades.EPMult,
       GalaxyGeneratorUpgrades.RSMult,
       GalaxyGeneratorUpgrades.DTMult
-    ).times(extraGain).powEffectsOf(GalaxyGeneratorUpgrades.remnantPow, GalaxyGeneratorUpgrades.exponential).pow(Accelerators.cosmic.effectValue1);
+    ).times(extraGain).powEffectsOf(GalaxyGeneratorUpgrades.remnantPow, GalaxyGeneratorUpgrades.exponential).pow(Accelerators.cosmic.effectValue1).pow(
+      GalacticPowers.galaxyGenerationEmpowerment.isUnlocked ? GalacticPowers.galaxyGenerationEmpowerment.reward : 1);
     if (galaxyGen.gt(10)) {
       let logGal = galaxyGen.log10();
       galaxyGen = Decimal.pow10(logGal.powEffectOf(GalaxyGeneratorUpgrades.superExponential));
@@ -163,7 +164,6 @@ export const GalaxyGenerator = {
         Glyphs.unequipAll(player.options.respecIntoProtected && Glyphs.findFreeIndex(true) === -1);
         Glyphs.refreshActive();
       }
-
     }
     player.celestials.pelle.galaxyGenerator.generatedGalaxies = player.celestials.pelle.galaxyGenerator.generatedGalaxies.add(Decimal.max(this.gainPerSecond.times(diff).div(1000), 0));
     player.celestials.pelle.galaxyGenerator.generatedGalaxies = Decimal.min(
@@ -249,9 +249,9 @@ export class GalaxyGeneratorUpgrade extends RebuyableMechanicState {
       if (i === 6 && clicked) {
         price = Decimal.pow10(2e10 * Math.pow(1.001, Math.max(player.celestials.pelle.rebuyables[this.id] - 20000, 0)));
       }
-      upg.currency.value = upg.currency.value.sub(price);
+      upg.currency.value = upg.currency.value.sub(price).max(0);
     } else {
-      upg.currency.value = upg.currency.value.sub(upg.cost);
+      upg.currency.value = upg.currency.value.sub(upg.cost).max(0);
       player.celestials.pelle.rebuyables[this.id]++;
     }
     this.onPurchased();

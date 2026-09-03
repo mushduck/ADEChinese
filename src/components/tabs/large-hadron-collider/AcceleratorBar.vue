@@ -23,6 +23,8 @@ export default {
       effects: [],
       selectedMilestoneResourceText: "",
       selectedMilestoneDescriptionText: "",
+      selectedMilestoneEffectText: "",
+      showEffect: false
     };
   },
   computed: {
@@ -42,6 +44,8 @@ export default {
 
       this.selectedMilestoneResourceText = this.milestoneResourceText(this.selectedHoverMilestone);
       this.selectedMilestoneDescriptionText = this.milestoneDescriptionText(this.selectedHoverMilestone);
+      this.selectedMilestoneEffectText = this.milestoneEffectText(this.selectedHoverMilestone);
+      this.showEffect = Boolean(this.selectedMilestoneEffectText);
     },
     hasMilestone(ms) {
       return ms.canBeApplied;
@@ -55,6 +59,9 @@ export default {
     milestoneDescriptionText(milestone) {
       if (typeof milestone.description === "string") return milestone.description;
       return milestone.description();
+    },
+    milestoneEffectText(milestone) {
+      return milestone.formattedEffect;
     },
     // One-off formatting function; needs to format large Decimals and a small number assumed to be an integer percent
     formatAccelerator(value) {
@@ -158,6 +165,10 @@ export default {
         <br>
         <br>
         {{ selectedMilestoneDescriptionText }}
+        <div v-if="showEffect">
+          <br>
+          Currently: {{ selectedMilestoneEffectText }}
+        </div>
       </template>
     </CustomizeableTooltip>
   </div>

@@ -546,7 +546,7 @@ export const normalAchievements = [
     get description() {
       return `Get all Antimatter Dimension multipliers over ${formatX(DC.NUMMAX, 1)}.`;
     },
-    checkRequirement: () => AntimatterDimensions.all.every(x => x.multiplier.gte(DC.NUMMAX)),
+    checkRequirement: () => AntimatterDimensions.all.every(x => x.tier > 8 || x.multiplier.gte(DC.NUMMAX)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `All Antimatter Dimensions are ${formatPercents(0.1)} stronger.`; },
     effect: 1.1,
@@ -850,7 +850,9 @@ export const normalAchievements = [
     checkRequirement: () => player.totalTickGained.gte(308),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Time Dimensions gain a multiplier based on tickspeed.",
-    effect: () => Tickspeed.perSecond.pow(0.000005),
+    effect: () => Slabdrill.isCursed
+      ? Tickspeed.perSecond.pow(0.000005).min(DC.E20000)
+      : Tickspeed.perSecond.pow(0.000005),
     formatEffect: value => `${formatX(value, 2, 2)}`,
     progress: () => Achievement(105).isUnlocked ? DC.D1 : Decimal.clamp(player.totalTickGained.div(308), 0, 1)
   },
@@ -886,7 +888,7 @@ export const normalAchievements = [
       ${format(DC.NUMMAX, 1, 0)} times higher Infinity Points than the previous one.`;
     },
     checkRequirement: () => {
-      if (player.records.recentInfinities.some(i => i[0] === Number.MAX_VALUE)) return false;
+      if (player.records.recentInfinities.some(i => i[0].gte(Number.MAX_VALUE))) return false;
       const infinities = player.records.recentInfinities.map(run => run[2]);
       for (let i = 0; i < infinities.length - 1; i++) {
         if (infinities[i].lt(infinities[i + 1].times(DC.NUMMAX))) return false;
@@ -1124,7 +1126,7 @@ export const normalAchievements = [
       Currency.infinityPoints.value.add(1).log10().gte(200000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "You start Eternities with all Infinity Challenges unlocked and completed.",
-    progress: () => Achievement(133).isUnlocked ? DC.D1 : ((!Array.dimensionTiers.map(InfinityDimension).every(dim => dim.baseAmount === 0) || player.IPMultPurchases.neq(0)) ? DC.DM1 : Decimal.clamp(Currency.infinityPoints.value.add(1).log10().div(200000), 0, 1))
+    progress: () => Achievement(133).isUnlocked ? DC.D1 : ((!Array.dimensionTiers.map(InfinityDimension).every(dim => dim.baseAmount.eq(0)) || player.IPMultPurchases.neq(0)) ? DC.DM1 : Decimal.clamp(Currency.infinityPoints.value.add(1).log10().div(200000), 0, 1))
   },
   {
     id: 134,
@@ -1217,7 +1219,7 @@ export const normalAchievements = [
       ${format(DC.NUMMAX, 1, 0)} times higher Eternity Points than the previous one.`;
     },
     checkRequirement: () => {
-      if (player.records.recentEternities.some(i => i[0] === Number.MAX_VALUE)) return false;
+      if (player.records.recentEternities.some(i => i[0].gte(Number.MAX_VALUE))) return false;
       const eternities = player.records.recentEternities.map(run => run[2]);
       for (let i = 0; i < eternities.length - 1; i++) {
         if (eternities[i].lt(eternities[i + 1].times(DC.NUMMAX))) return false;
@@ -1820,6 +1822,10 @@ export const normalAchievements = [
     get description() { return `Reach ${format(1e12, 2, 2)} Endgames.` },
     checkRequirement: () => player.endgames >= 1e12,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Start Endgames with ${format(1e24, 2, 2)} filled Reality Machines`;
+    },
+    effect: () => player.disablePostReality ? DC.D0 : Decimal.pow10(24),
     progress: () => Achievement(217).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.endgames).div(1e12), 0, 1)
   },
   {
@@ -1828,6 +1834,9 @@ export const normalAchievements = [
     get description() { return `Reach ${formatPostBreak("ee50")} Antimatter inside The Nameless Ones' Reality.` },
     checkRequirement: () => Currency.antimatter.value.gte("ee50") && Enslaved.isRunning,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Keep V progression on Endgame.`;
+    },
     progress: () => Achievement(218).isUnlocked ? DC.D1 : (!Enslaved.isRunning ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().add(1).log10().div(50), 0, 1))
   },
   {
@@ -1860,7 +1869,7 @@ export const normalAchievements = [
     checkRequirement: () => InfinityDimensions.totalDimCap.gt(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Infinity Upgrades stay charged on Endgame.`;
+      return `Charged Upgrades will automatically recharge upon exiting a challenge that disabled them if you are able to charge every upgrade in their respective set.`;
     },
     progress: () => Achievement(223).isUnlocked ? DC.D1 : Decimal.clamp(InfinityDimensions.totalDimCap.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
   },
@@ -1989,18 +1998,89 @@ export const normalAchievements = [
   },
   {
     id: 237,
+    name: "Equilibrium",
+    description: "Have the first two Resurgence Upgrades bought.",
+    checkRequirement: () => ResurgenceUpgrade.ipSurge.isBought && ResurgenceUpgrade.epSurge.isBought,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(237).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineEnergy.value.div(1e6), 0, 1)
+  },
+  {
+    id: 238,
+    name: "Age of Creation",
+    description: "Unlock Hadron Continuum.",
+    checkRequirement: () => DivinityMilestone.hadronEmpowerment.isReached,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(238).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.celestials.pelle.divinities).div(3), 0, 1)
+  },
+  {
+    id: 241,
+    name: "CERN",
+    description: "Unlock the Large Hadron Collider.",
+    checkRequirement: () => ExpansionPack.alphaPack.isBought,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(241).isUnlocked ? DC.D1 : Decimal.clamp(player.antimatter.max(10).log10().log10().div(200), 0, 1)
+  },
+  {
+    id: 242,
+    name: "Infinity Mach III",
+    description: "Condense your Divine Stars.",
+    checkRequirement: () => true,
+    checkEvent: GAME_EVENT.CONDENSE_RESET_BEFORE,
+    progress: () => Achievement(242).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineMatter.value.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
+  },
+  {
+    id: 243,
+    name: "Journey's End",
+    description: "Unlock Celestial Eternity Plus.",
+    checkRequirement: () => Currency.celestialEternityPoints.gte(DC.E1000),
+    checkEvent: GAME_EVENT.CELESTIAL_ETERNITY_RESET_BEFORE,
+    progress: () => Achievement(243).isUnlocked ? DC.D1 : Decimal.clamp(Currency.celestialEternityPoints.value.max(1).log10().div(1000), 0, 1)
+  },
+  {
+    id: 244,
     name: "Hypernova",
     description: "Unlock all star types.",
     checkRequirement: () => EtherealStars.gray.isUnlocked,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    progress: () => Achievement(237).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(EtherealStars.all.filter(s => s.isUnlocked).length).div(9), 0, 1)
+    progress: () => Achievement(244).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(EtherealStars.all.filter(s => s.isUnlocked).length).div(9), 0, 1)
   },
   {
-    id: 238,
+    id: 245,
+    name: "Aleph Null",
+    description: "Nullify the Void.",
+    checkRequirement: () => player.endgame.largeHadronCollider.void.nullified,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(245).isUnlocked ? DC.D1 : Decimal.clamp(Currency.nullMatter.value.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
+  },
+  {
+    id: 246,
+    name: "Hyperthymesia",
+    get description() { return `Get ${formatInt(1000)} total Ra Celestial Memory levels.` },
+    checkRequirement: () => Ra.totalPetLevel >= 1000,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Keep Glyph Sacrifice on Endgame.`;
+    },
+    progress: () => Achievement(246).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(Ra.totalPetLevel).div(1000), 0, 1)
+  },
+  {
+    id: 247,
+    name: "Core Collapse",
+    description: "Go Supernova.",
+    checkRequirement: () => true,
+    checkEvent: GAME_EVENT.SUPERNOVA_RESET_BEFORE,
+    get reward() {
+      return `Reduce the time for Hadrons and Remnants of Alpha Decay to cap by ${formatPercents(0.5)}.`;
+    },
+    effect: () => player.disablePostReality ? 1 : 2,
+    progress: () => Achievement(247).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineStars.value.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
+  },
+  {
+    id: 248,
     name: "Limits of Reality",
     get description() { return `Reach ${formatPostBreak(DC.E4000, 2)} Celestial Points of Eternity.` },
     checkRequirement: () => player.endgame.celDimExpansion.celestialEternityPoints.gte(DC.E4000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    progress: () => Achievement(238).isUnlocked ? DC.D1 : Decimal.clamp(player.endgame.celDimExpansion.celestialEternityPoints.add(1).log10().div(4000), 0, 1)
-  },
+    progress: () => Achievement(248).isUnlocked ? DC.D1 : Decimal.clamp(player.endgame.celDimExpansion.celestialEternityPoints.add(1).log10().div(4000), 0, 1)
+  }
 ];

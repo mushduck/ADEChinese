@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     update() {
-      this.baseIMCap.copyFrom(MachineHandler.baseIMCap);
+      this.baseIMCap.copyFrom(MachineHandler.baseIMHardcap);
       this.capIM.copyFrom(MachineHandler.hardcapIM);
       this.scaleTime = MachineHandler.scaleTimeForDM;
       this.capStr = formatMachines(MachineHandler.hardcapRM, MachineHandler.currentIMCap, MachineHandler.currentDMCap);
@@ -47,7 +47,7 @@ export default {
       Dual Machines are gained passively over time up to the cap, but gain slows down exponentially
       as you approach the cap.
       <br>
-      Every {{ formatInt(scaleTime) }} seconds the difference in εM between your current amount and the cap
+      Every {{ formatInt(scaleTime) }} seconds the difference in jM between your current amount and the cap
       will be cut in half.
       <br>
       <br>

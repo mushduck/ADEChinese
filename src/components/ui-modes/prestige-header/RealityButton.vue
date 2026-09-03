@@ -43,7 +43,7 @@ export default {
         return `(iM Cap: ${formatMachines(0, this.newIMCap, 0)})`;
       }
       if (this.newDMCap.neq(0)) {
-        return `(εM Cap: ${formatMachines(0, 0, this.newDMCap)})`;
+        return `(jM Cap: ${formatMachines(0, 0, this.newDMCap)})`;
       }
       if (this.machinesGained.lt(Number.MAX_VALUE)) {
         return `(${format(this.machinesGained.divide(this.realityTime), 2, 2)} RM/min)`;

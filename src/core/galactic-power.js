@@ -33,7 +33,7 @@ export const GalacticPower = {
   },
   get nextPower() {
     const power = GalacticPowers.all.find(x => !x.isUnlocked);
-    return (power.id > 8 && !ResurgenceUpgrade.unl3.isBought) ? undefined : power;
+    return (power?.id > 8 && !ResurgenceUpgrade.unl3.isBought) ? undefined : power;
   },
   get nextPowerUnlockGP() {
     return this.nextPower?.unlockGP;

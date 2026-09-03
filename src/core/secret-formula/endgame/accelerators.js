@@ -27,7 +27,8 @@ export const accelerators = {
         resource: "potency",
         requirement: 0.4,
         description: "Total Hadrons increase the Antimatter Hardcap",
-        effect: () => player.disablePostReality ? 0 : Math.clamp(Math.floor(Math.pow(2 * Math.max(player.celestials.laitela.hadrons.total - 100, 0) + 0.25, 0.5) - 0.5), 0, 25)
+        effect: () => player.disablePostReality ? 0 : Math.clamp(Math.floor(Math.pow(2 * Math.max(player.celestials.laitela.hadrons.total - 100, 0) + 0.25, 0.5) - 0.5), 0, 25),
+        formatEffect: value => `${format(LHC.breakingPoint.root(Decimal.pow10(value)), 2)} ➜ ${format(LHC.breakingPoint, 2)}`
       },
       {
         resource: "potency",
@@ -58,13 +59,15 @@ export const accelerators = {
         resource: "emptiness",
         requirement: 0.07,
         description: "While inside The Void, Antimatter Dimensions are raised to a power based on total Antimatter produced outside Doom",
-        effect: () => Decimal.log10(Decimal.log10(player.records.totalAntimatterOutsideDoom)).div(200).add(1)
+        effect: () => Decimal.log10(Decimal.log10(player.records.totalAntimatterOutsideDoom)).div(200).add(1),
+        formatEffect: value => formatPow(value, 2, 3)
       },
       {
         resource: "emptiness",
         requirement: 0.3,
         description: "Divine Dimensions are powered based on best Antimatter inside The Void",
-        effect: () => player.disablePostReality ? DC.D1 : Decimal.log10(Decimal.log10(player.endgame.largeHadronCollider.void.highestAntimatter)).div(100).add(1)
+        effect: () => player.disablePostReality ? DC.D1 : Decimal.log10(Decimal.log10(player.endgame.largeHadronCollider.void.highestAntimatter)).div(100).add(1),
+        formatEffect: value => formatPow(value, 2, 3)
       },
       {
         resource: "emptiness",
@@ -98,7 +101,8 @@ export const accelerators = {
         resource: "cosmic",
         requirement: 0.2,
         description: "While inside The Void, Galaxies are stronger based on Cosmic Accelerator percentage",
-        effect: () => 1 + Accelerators.cosmic.percentage * 100
+        effect: () => 1 + Accelerators.cosmic.percentage * 100,
+        formatEffect: value => formatX(value, 2, 2)
       },
       {
         resource: "cosmic",

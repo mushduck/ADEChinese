@@ -58,11 +58,28 @@ export default {
 
 <style scoped>
 .c-galactic-power-text {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  background: linear-gradient(var(--color-pelle--secondary), var(--color-pelle--base));
+  background: linear-gradient(
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base)
+  );
+  background-size: 100% 300%;
   background-clip: text;
+  animation: a-galactic-power-text-cycle 5s linear infinite;
 
   -webkit-text-fill-color: transparent;
+}
+
+@keyframes a-galactic-power-text-cycle {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 50% 100%;
+  }
 }
 </style>

@@ -33,7 +33,7 @@ class AcceleratorMilestoneState extends GameMechanicState {
   }
 
   get formattedEffect() {
-    if (this.canBeApplied) return this.config.formatEffect(this.effectValue);
+    if (this.canBeApplied && this.config.formatEffect) return this.config.formatEffect(this.effectValue);
     return false;
   }
 }
@@ -278,6 +278,7 @@ class PowerCoreState extends GameMechanicState {
 LHC.powerCores = new PowerCoreState();
 
 export function enterTheVoid() {
+  if (player.endgame.overcharge.isRunning) return;
   player.disablePostReality = true;
   Endgame.resetNoReward();
   disChargeAllPerkUpgrades();
@@ -321,6 +322,7 @@ export function exitTheVoid() {
 };
 
 export function enterNullifiedVoid() {
+  if (player.endgame.overcharge.isRunning) return;
   Endgame.resetNoReward();
   player.endgame.largeHadronCollider.void.isRunning = true;
 };

@@ -97,7 +97,7 @@ function bigCrunchUpdateStatistics() {
   player.records.bestInfinity.time =
     Decimal.min(player.records.bestInfinity.time, player.records.thisInfinity.time);
   player.records.bestInfinity.realTime =
-    Math.min(player.records.bestInfinity.realTime, player.records.thisInfinity.realTime);
+    Math.clamp(player.records.bestInfinity.realTime, 1, player.records.thisInfinity.realTime);
 
   player.requirementChecks.reality.noInfinities = false;
 

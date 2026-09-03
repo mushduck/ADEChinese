@@ -230,18 +230,21 @@ export const DivineDimensions = {
   },
 
   get conversionFormula1() {
+    if (player.disablePostReality) return DC.D1;
     let logD = Decimal.log10(Decimal.log10(DivinityUpgrade.divineL2U10.isBought
       ? player.records.totalDivineMatter : Currency.divineMatter.value.max(10)));
     return Decimal.pow(Decimal.pow(logD.add(1), 1.5), Decimal.pow(logD.add(1), 1.5));
   },
 
   get conversionFormula2() {
+    if (player.disablePostReality) return 1;
     let logD = Decimal.log10(Decimal.log10(DivinityUpgrade.divineL2U10.isBought
       ? player.records.totalDivineMatter : Currency.divineMatter.value.max(10)));
     return logD.div(10).add(1).toNumber();
   },
 
   get conversionFormula3() {
+    if (player.disablePostReality) return 0;
     let logD = Decimal.log10(Decimal.log10(DivinityUpgrade.divineL2U10.isBought
       ? player.records.totalDivineMatter : Currency.divineMatter.value.max(10)));
     return DC.D1.sub(Decimal.pow(0.8, logD)).toNumber();
@@ -252,7 +255,7 @@ function giveCondenseRewards(auto) {
   player.records.bestCondense.time =
     Decimal.min(player.records.bestCondense.time, player.records.thisCondense.time);
   player.records.bestCondense.realTime =
-    Math.min(player.records.bestCondense.realTime, player.records.thisCondense.realTime);
+    Math.clamp(player.records.bestCondense.realTime, 1, player.records.thisCondense.realTime);
 
   Currency.divineStars.add(gainedDivineStars());
 
@@ -277,6 +280,7 @@ function giveCondenseRewards(auto) {
 
 export function resetForDivineStars(nova = false) {
   if (Currency.divineMatter.lt(DC.NUMMAX) && !nova) return;
+  EventHub.dispatch(GAME_EVENT.CONDENSE_RESET_BEFORE);
   if (!nova) giveCondenseRewards();
   Endgame.resetNoReward();
   if (!DivinityUpgrade.divineL2U5.isBought || nova) {
@@ -305,6 +309,7 @@ export function resetForDivineStars(nova = false) {
   player.records.thisCondense.time = DC.D0;
   player.records.thisCondense.realTime = 0;
   player.records.totalCondenseDivineMatter = DC.E1;
+  EventHub.dispatch(GAME_EVENT.CONDENSE_RESET_AFTER);
 };
 
 export function preProductionGenerateVS(diff) {
@@ -329,7 +334,7 @@ function giveSupernovaRewards(auto) {
   player.records.bestSupernova.time =
     Decimal.min(player.records.bestSupernova.time, player.records.thisSupernova.time);
   player.records.bestSupernova.realTime =
-    Math.min(player.records.bestSupernova.realTime, player.records.thisSupernova.realTime);
+    Math.clamp(player.records.bestSupernova.realTime, 1, player.records.thisSupernova.realTime);
 
   player.records.bestSupernova.bestSupernovaePerMs = player.records.bestSupernova.bestSupernovaePerMs.clampMin(
     newSupernovae.div(Math.clampMin(33, player.records.thisSupernova.realTime))

@@ -466,7 +466,7 @@ export const ReplicantiUpgrade = {
         costGain = costGain.times(Decimal.pow(this.costIncrease, Decimal.pow(this.costExponent, affordableAboveThreshold)));
       }
       this.baseCost = costGain;
-      this.value = this.decimalNearestPercent(N.times(0.01).add(this.value));
+      this.value = this.decimalNearestPercent(N.times(0.01).add(this.value)).min(this.cap);;
     }
 
     // Rounding errors suck
@@ -713,25 +713,25 @@ export const ReplicantiUpgrade = {
       const distantReplicatedGalaxyStart = (100 + GlyphSacrifice.replication.effectValue.toNumber()) * Effects.product(BreakEternityUpgrade.replicantiGalaxyPower);
       const remoteReplicatedGalaxyStart = (1000 + GlyphSacrifice.replication.effectValue.toNumber()) * Effects.product(BreakEternityUpgrade.replicantiGalaxyPower);
       const contingentReplicatedGalaxyStart = 1000000;
-      let logCost = new Decimal(logBase).add(count.times(logBaseIncrease)).add((count.times(count.sub(1)).div(2)).times(logCostScaling)).toNumber();
+      let logCost = new Decimal(logBase).add(count.times(logBaseIncrease)).add((count.times(count.sub(1)).div(2)).times(logCostScaling));
       if (count.gt(distantReplicatedGalaxyStart)) {
         const logDistantScaling = 50;
         // When distant scaling kicks in, the price increase jumps by a few extra steps.
         // So, the difference between successive scales goes 5, 5, 5, 255, 55, 55, ...
         const extraIncrements = 5;
         const numDistant = count.sub(distantReplicatedGalaxyStart);
-        logCost += new Decimal(logDistantScaling).times(numDistant).times(numDistant.add(2 * extraIncrements).sub(1)).div(2).toNumber();
+        logCost = logCost.add((logRemoteScaling).times(numRemote).times(numRemote.add(1)).times(numRemote.times(2).add(1)).div(6));
       }
       if (count.gt(remoteReplicatedGalaxyStart)) {
         const logRemoteScaling = 5;
         const numRemote = count.sub(remoteReplicatedGalaxyStart);
         // The formula x * (x + 1) * (2 * x + 1) / 6 is the sum of the first n squares.
-        logCost += new Decimal(logRemoteScaling).times(numRemote).times(numRemote.add(1)).times(numRemote.times(2).add(1)).div(6).toNumber();
+        logCost = logCost.add(new Decimal(logRemoteScaling).times(numRemote).times(numRemote.add(1)).times(numRemote.times(2).add(1)).div(6));
       }
       if (count.gt(contingentReplicatedGalaxyStart)) {
         const contingentScalingFactor = 1.0002;
         const numContingent = count.sub(contingentReplicatedGalaxyStart);
-        logCost *= Decimal.pow(contingentScalingFactor, numContingent).toNumber();
+        logCost = logCost.times(Decimal.pow(contingentScalingFactor, numContingent));
       }
       return Decimal.pow10(logCost);
     }
@@ -743,7 +743,7 @@ export const Replicanti = {
     return player.replicanti.unl;
   },
   reset(force = false) {
-    const unlocked = force ? false : EternityMilestone.unlockReplicanti.isReached || (LHC.voidRunning && NullUpgrade.repUnl.isBought);
+    const unlocked = force && !(LHC.voidRunning && NullUpgrade.repUnl.isBought) ? false : EternityMilestone.unlockReplicanti.isReached;
     player.replicanti = {
       unl: unlocked,
       amount: unlocked ? DC.D1 : DC.D0,
