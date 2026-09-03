@@ -6,6 +6,7 @@ export const expansionPacks = {
     get description() {
       return ` Uncap Teresa's Canister.
         Teresa's Canister now affects the Reality Machine cap as well as Reality Machine gain.
+        Keep Perk Shop on Endgame.
         Unlock Charged Perk Upgrades in the Teresa Tab.
         Automatically pour RM into Teresa.`
     },
