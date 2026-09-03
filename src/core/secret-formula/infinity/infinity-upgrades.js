@@ -165,10 +165,10 @@ export const infinityUpgrades = {
     checkRequirement: () => InfinityUpgrade.dimboostMult.isBought,
     description: () => `Passively generate Infinity Points ${formatInt(10)} times slower than your fastest Infinity`,
     // Cutting corners: this is not actual effect, but it is totalIPMult that is displyed on upgrade
-    effect: () => (Teresa.isRunning || V.isRunning || (Pelle.isDoomed && !PelleDestructionUpgrade.x2IPUpgrade.canBeApplied) ? DC.D0 : GameCache.totalIPMult.value),
+    effect: () => (Teresa.isRunning || V.isRunning || (Pelle.isDoomed && !PelleDestructionUpgrade.passiveIPGen.canBeApplied) ? DC.D0 : GameCache.totalIPMult.value),
     formatEffect: value => {
       if (Teresa.isRunning || V.isRunning) return "Disabled in this reality";
-      if (Pelle.isDoomed && !PelleDestructionUpgrade.x2IPUpgrade.canBeApplied) return "Disabled";
+      if (Pelle.isDoomed && !PelleDestructionUpgrade.passiveIPGen.canBeApplied) return "Disabled";
       if (Alpha.isRunning && player.records.bestInfinity.realTime >= 999999999999) return "Too slow to generate";
       if (player.records.bestInfinity.time.gte(999999999999)) return "Too slow to generate";
       if (Alpha.isRunning) return `${format(value, 2)} every ${TimeSpan.fromMilliseconds(Time.bestInfinityRealTime.totalMilliseconds.times(10)).toStringShort()}`;
