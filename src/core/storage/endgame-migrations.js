@@ -272,15 +272,6 @@ export function endgameMigration(player) {
     }
     player.celestials.alpha.quotes = alpq;
   }
-  if (player.celestials.slabdrill.quotes.length >= 100) {
-    let slaq = [];
-    for (let slaqid = 0; slaqid < 100; slaqid++) {
-      if (player.celestials.slabdrill.quotes.includes(slaqid)) {
-        slaq.push(slaqid);
-      }
-    }
-    player.celestials.slabdrill.quotes = slaq;
-  }
   if (player.expanse.elemental.quotes.length >= 100) {
     let eleq = [];
     for (let eleqid = 0; eleqid < 100; eleqid++) {
