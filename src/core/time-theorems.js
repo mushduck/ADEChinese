@@ -48,16 +48,17 @@ export class TimeTheoremPurchaseType {
     if (!this.canAfford) return false;
     let purchased = false;
     const amount = (Alpha.isRunning && Alpha.currentStage < 15) ? Decimal.min(this.bulkPossible, new Decimal(38).sub(this.amount)) : this.bulkPossible;
+    const single = (Alpha.isRunning && Alpha.currentStage < 15) ? Decimal.min(1, new Decimal(38).sub(this.amount)) : DC.D1;
     const buyFn = cost => ((Perk.ttFree.canBeApplied && !player.disablePostReality) ? this.currency.gte(cost) : this.currency.purchase(cost));
     // This will sometimes buy one too few for EP, so we just have to buy 1 after.
-    if (bulk && buyFn(this.bulkCost(amount.sub(1)))) {
-      Currency.timeTheorems.add(amount.sub(1));
-      this.add(amount.sub(1));
+    if (bulk && buyFn(this.bulkCost(amount.sub(single)))) {
+      Currency.timeTheorems.add(amount.sub(single));
+      this.add(amount.sub(single));
       purchased = true;
     }
     if (buyFn(this.cost)) {
-      Currency.timeTheorems.add(1);
-      this.add(1);
+      Currency.timeTheorems.add(single);
+      this.add(single);
       purchased = true;
     }
     if (purchased) player.requirementChecks.reality.noPurchasedTT = false;
