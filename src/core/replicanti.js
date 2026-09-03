@@ -720,7 +720,7 @@ export const ReplicantiUpgrade = {
         // So, the difference between successive scales goes 5, 5, 5, 255, 55, 55, ...
         const extraIncrements = 5;
         const numDistant = count.sub(distantReplicatedGalaxyStart);
-        logCost = logCost.add((logRemoteScaling).times(numRemote).times(numRemote.add(1)).times(numRemote.times(2).add(1)).div(6));
+        logCost = logCost.add(new Decimal(logRemoteScaling).times(numRemote).times(numRemote.add(1)).times(numRemote.times(2).add(1)).div(6));
       }
       if (count.gt(remoteReplicatedGalaxyStart)) {
         const logRemoteScaling = 5;
