@@ -83,7 +83,7 @@ export class DarkMatterDimensionState extends DimensionState {
 
   get powerDM() {
     if (!this.isUnlocked) return DC.D0;
-    return Decimal.pow(1.15, this.data.powerDMUpgrades).mul(2).add(1)
+    let multi = Decimal.pow(1.15, this.data.powerDMUpgrades).mul(2).add(1)
       .times(Laitela.realityReward)
       .times(Laitela.darkMatterMult)
       .times(this.commonDarkMult)
@@ -91,8 +91,9 @@ export class DarkMatterDimensionState extends DimensionState {
       .timesEffectsOf(SingularityMilestone.darkMatterMult, SingularityMilestone.multFromInfinitied)
       .times((ExpansionPack.laitelaPack.isBought && !player.disablePostReality) ? Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)), Decimal.log10(
         player.reality.imaginaryMachines.add(1))) : 1)
-      .dividedBy(Decimal.pow(1e4, Decimal.pow(this.tier - 1, 0.5)))
-      .powEffectsOf(SingularityMilestone.dmdSingPower, SingularityMilestones.annihilationDMDPower);
+      .dividedBy(Decimal.pow(1e4, Decimal.pow(this.tier - 1, 0.5)));
+    multi = multi.min(Decimal.pow10(1.25e11)).times(Decimal.pow10(multi.div(Decimal.pow10(1.25e11)).max(1).log10().pow(0.9)));
+    return multi.powEffectsOf(SingularityMilestone.dmdSingPower, SingularityMilestone.annihilationDMDPower);
   }
 
   get powerDE() {
@@ -100,7 +101,7 @@ export class DarkMatterDimensionState extends DimensionState {
     const supertier = [1, 1, 1, 1, 1, 5, 12, 54, 252];
     const tierFactor = Decimal.pow(15, (this.tier - 1) * supertier[this.tier]);
     const destabilizeBoost = Laitela.realityRewardDE;
-    return this.data.powerDEUpgrades.div(10).add(1)
+    let multi = this.data.powerDEUpgrades.div(10).add(1)
       .mul(Decimal.pow(1.005, this.data.powerDEUpgrades)).mul(tierFactor).div(1000)
       .times(this.commonDarkMult)
       .times(Decimal.pow(this.powerDEPerAscension, this.ascensions))
@@ -110,8 +111,9 @@ export class DarkMatterDimensionState extends DimensionState {
         SingularityMilestone.realityDEMultiplier,
         SingularityMilestone.multFromInfinitied,
         SingularityMilestone.darkEnergyBoost
-      ).mul(destabilizeBoost).times(player.disablePostReality ? 1 : AlphaUnlocks.timestudy192.effects.buff.effectOrDefault(1))
-      .pow((!player.disablePostReality && Alpha.currentStage >= 21 && ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality) ? ReplicantiMultipliers.dePow : 1)
+      ).mul(destabilizeBoost).times(player.disablePostReality ? 1 : AlphaUnlocks.timestudy192.effects.buff.effectOrDefault(1));
+    multi = multi.min(Decimal.pow10(1.25e9)).times(Decimal.pow10(multi.div(Decimal.pow10(1.25e9)).max(1).log10().pow(0.9)));
+    return multi.pow((!player.disablePostReality && Alpha.currentStage >= 21 && ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality) ? ReplicantiMultipliers.dePow : 1)
       .powEffectOf(SingularityMilestone.hadronDEPower);
   }
 
