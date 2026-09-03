@@ -71,7 +71,8 @@ export const MachineHandler = {
 
   get baseHardcapIM() {
     return this.baseIMHardcap.times(DualityUpgrade(6).effectOrDefault(1)).pow(EtherealStars.green.reward.times(
-      DivineDimensions.conversionFormula2).timesEffectsOf(ResurgenceUpgrade.imSurge, ResurgenceUpgrade.machineSurge));
+      DivineDimensions.conversionFormula2).timesEffectsOf(
+      ResurgenceUpgrade.imSurge, ResurgenceUpgrade.machineSurge));
   },
 
   get hardcapIM() {
@@ -144,15 +145,16 @@ export const MachineHandler = {
       this.uncappedRM.add(1)).add(1)).add(1)).sub(1.8).times(4).min(0.6), 0)).add(Decimal.clampMin(
       Decimal.log10(Decimal.log10(Decimal.log10(this.uncappedRM.add(1)).add(1)).add(1)).sub(1.95).times(2), 0))).times(
       DivinityMilestone.firstDivine.isReached && !player.disablePostReality ? 1.1 : 1).times(
-      DivineDimensions.conversionFormula2).timesEffectOf(ResurgenceUpgrade.machineSurge, EndgameMastery(213))).timesEffectOf(
+      DivineDimensions.conversionFormula2).timesEffectsOf(
+      ResurgenceUpgrade.machineSurge, EndgameMastery(213))).timesEffectOf(
       EndgameMastery(223));
   },
 
   get currentDMCap() {
-    return player.reality.dmCap.times(DualityUpgrade(13).effectOrDefault(1));
+    return player.reality.jMCap.times(DualityUpgrade(13).effectOrDefault(1));
   },
 
-  // This is εM cap based on in-game values at that instant, may be lower than the actual cap
+  // This is jM cap based on in-game values at that instant, may be lower than the actual cap
   get projectedDMCap() {
     return this.baseDMCap.times(DualityUpgrade(13).effectOrDefault(1));
   },
@@ -160,8 +162,8 @@ export const MachineHandler = {
   // Use DMCap to store the base cap; applying multipliers separately avoids some design issues the 3xTP upgrade has
   updateDMCap() {
     if (this.uncappedIM.gte(this.baseIMCap)) {
-      if (this.baseDMCap.gt(player.reality.dmCap)) {
-        player.reality.dmCap = this.baseDMCap;
+      if (this.baseDMCap.gt(player.reality.jMCap)) {
+        player.reality.jMCap = this.baseDMCap;
       }
     }
   },
@@ -178,13 +180,13 @@ export const MachineHandler = {
   },
 
   estimateDMTimer(cost) {
-    const dmCap = this.currentDMCap;
-    if (dmCap.lte(cost)) return Infinity;
+    const jmCap = this.currentDMCap;
+    if (jmCap.lte(cost)) return Infinity;
     const currentDM = Currency.dualMachines.value;
-    // This is doing log(a, 1/2) - log(b, 1/2) where a is % left to dmCap of cost and b is % left to dmCap of current
-    // εM. log(1 - x, 1/2) should be able to estimate the time taken for εM to increase from 0 to dmCap * x since every
-    // fixed interval the difference between current εM to max εM should decrease by a factor of 1/2.
-    return Decimal.max(0, new Decimal(Decimal.log2(dmCap.div(dmCap.sub(cost)))).sub(
-      Decimal.log2(dmCap.div(dmCap.sub(currentDM))))).times(this.scaleTimeForDM);
+    // This is doing log(a, 1/2) - log(b, 1/2) where a is % left to jmCap of cost and b is % left to jmCap of current
+    // jM. log(1 - x, 1/2) should be able to estimate the time taken for jM to increase from 0 to jmCap * x since every
+    // fixed interval the difference between current jM to max jM should decrease by a factor of 1/2.
+    return Decimal.max(0, new Decimal(Decimal.log2(jmCap.div(jmCap.sub(cost)))).sub(
+      Decimal.log2(jmCap.div(jmCap.sub(currentDM))))).times(this.scaleTimeForDM);
   }
 };
