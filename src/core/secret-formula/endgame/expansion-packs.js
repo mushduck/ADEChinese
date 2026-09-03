@@ -23,7 +23,7 @@ export const expansionPacks = {
         Increase Glyph Alchemy caps to a base of one-third of your all-time maximum Glyph Level (Currently ${formatHybridLarge(player.records.bestEndgame.glyphLevel.div(3), 3)}).
         Alchemy resources are kept on Endgame, and making a Reality Glyph no longer spends Reality resources.
         Effarig's Shop starts completed.
-        Layers of Effarig's Reality will automatically complete at one-tenth the time of your fastest Endgame (Currently ${TimeSpan.fromMilliseconds(new Decimal(player.records.bestEndgame.realTime).times(10)).toStringShort()} per layer)`
+        Layers of Effarig's Reality will automatically complete at one-tenth the time of your fastest Endgame (Currently ${TimeSpan.fromMilliseconds(new Decimal(player.records.bestEndgame.realTime).div(10)).toStringShort()} per layer)`
     },
     cost: Decimal.pow(10, 1e50),
     formatCost: value => formatPostBreak(value, 2, 0)
