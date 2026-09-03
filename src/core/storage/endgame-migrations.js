@@ -197,4 +197,101 @@ export function endgameMigration(player) {
     if (s12[g12].level) s12[g12].level = new Decimal(s12[g12].level);
   }
   player.records.bestReality.laitelaSet = s12;
+  if (player.reality.dmCap) player.reality.jMCap = new Decimal(player.reality.dmCap);
+  else player.reality.jMCap = DC.D0;
+  delete player.reality.dmCap;
+  if (player.celestials.teresa.quotes.length >= 100) {
+    let terq = [];
+    for (let terqid = 0; terqid < 100; terqid++) {
+      if (player.celestials.teresa.quotes.includes(terqid)) {
+        terq.push(terqid);
+      }
+    }
+    player.celestials.teresa.quotes = terq;
+  }
+  if (player.celestials.effarig.quotes.length >= 100) {
+    let effq = [];
+    for (let effqid = 0; effqid < 100; effqid++) {
+      if (player.celestials.effarig.quotes.includes(effqid)) {
+        effq.push(effqid);
+      }
+    }
+    player.celestials.effarig.quotes = effq;
+  }
+  if (player.celestials.enslaved.quotes.length >= 100) {
+    let ensq = [];
+    for (let ensqid = 0; ensqid < 100; ensqid++) {
+      if (player.celestials.enslaved.quotes.includes(ensqid)) {
+        ensq.push(ensqid);
+      }
+    }
+    player.celestials.enslaved.quotes = ensq;
+  }
+  if (player.celestials.v.quotes.length >= 100) {
+    let vq = [];
+    for (let vqid = 0; vqid < 100; vqid++) {
+      if (player.celestials.v.quotes.includes(vqid)) {
+        vq.push(vqid);
+      }
+    }
+    player.celestials.v.quotes = vq;
+  }
+  if (player.celestials.ra.quotes.length >= 100) {
+    let raq = [];
+    for (let raqid = 0; raqid < 100; raqid++) {
+      if (player.celestials.ra.quotes.includes(raqid)) {
+        raq.push(raqid);
+      }
+    }
+    player.celestials.ra.quotes = raq;
+  }
+  if (player.celestials.laitela.quotes.length >= 100) {
+    let laiq = [];
+    for (let laiqid = 0; laiqid < 100; laiqid++) {
+      if (player.celestials.laitela.quotes.includes(laiqid)) {
+        laiq.push(laiqid);
+      }
+    }
+    player.celestials.laitela.quotes = laiq;
+  }
+  if (player.celestials.pelle.quotes.length >= 100) {
+    let pelq = [];
+    for (let pelqid = 0; pelqid < 100; pelqid++) {
+      if (player.celestials.pelle.quotes.includes(pelqid)) {
+        pelq.push(pelqid);
+      }
+    }
+    player.celestials.pelle.quotes = pelq;
+  }
+  if (player.celestials.alpha.quotes.length >= 100) {
+    let alpq = [];
+    for (let alpqid = 0; alpqid < 100; alpqid++) {
+      if (player.celestials.alpha.quotes.includes(alpqid)) {
+        alpq.push(alpqid);
+      }
+    }
+    player.celestials.alpha.quotes = alpq;
+  }
+  if (player.celestials.slabdrill.quotes.length >= 100) {
+    let slaq = [];
+    for (let slaqid = 0; slaqid < 100; slaqid++) {
+      if (player.celestials.slabdrill.quotes.includes(slaqid)) {
+        slaq.push(slaqid);
+      }
+    }
+    player.celestials.slabdrill.quotes = slaq;
+  }
+  if (player.expanse.elemental.quotes.length >= 100) {
+    let eleq = [];
+    for (let eleqid = 0; eleqid < 100; eleqid++) {
+      if (player.expanse.elemental.quotes.includes(eleqid)) {
+        eleq.push(eleqid);
+      }
+    }
+    player.expanse.elemental.quotes = eleq;
+  }
+  //remove next update
+  if (player.endgame.celDimExpansion.celestialEternityPoints.gt(DC.E4000)) {
+    player.endgame.celDimExpansion.celestialEternityPoints = DC.E4000;
+  }
 }
