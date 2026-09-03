@@ -59,8 +59,9 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [41],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Reduce the Realities requirement for unlocking V's Reality to ${formatInt(100)}`,
-    effect: () => player.disablePostReality ? 1250 : 100
+    description: () => `Gain a multiplier to Galaxy strength based on Remnants`,
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(Decimal.log10(Currency.remnants.value.add(1)).add(1), 0.5),
+    formatEffect: value => formatX(value, 2, 2)
   },
   {
     id: 52,
@@ -75,15 +76,15 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [42],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start Endgames with all Ra Level ${formatInt(1)} Rewards`
+    description: () => `Gain a free Tesseract`,
+    effect: () => player.disablePostReality ? 0 : 1
   },
   {
     id: 61,
     cost: 4,
     requirement: [52],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Keep Achievements on Endgame and gain a free Tesseract",
-    effect: () => player.disablePostReality ? 0 : 1
+    description: "Improve the Remnant Formula (see Remnant Gain Factors in the Pelle subtab)"
   },
   {
     id: 71,
@@ -205,7 +206,9 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [111],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Keep Perk Tree on Endgame"
+    description: "Dilated Time gain is multiplied by your Reality Shard count",
+    effect: () => player.disablePostReality ? DC.D1 : Currency.realityShards.value.plus(1),
+    formatEffect: value => formatX(value, 2)
   },
   {
     id: 121,
@@ -318,6 +321,7 @@ export const endgameMasteries = [
   {
     id: 181,
     cost: 175000,
+    requirement: [171],
     reqType: EM_REQUIREMENT_TYPE.EXPANDED,
     description: () => `Decrease base Galaxy Generator Instability by ${formatInt(1)} again`,
     effect: () => player.disablePostReality ? 0 : 1
