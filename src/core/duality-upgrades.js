@@ -78,7 +78,7 @@ class DualityUpgradeState extends BitPurchasableMechanicState {
   tryUnlock() {
     if (!MachineHandler.isDMUnlocked || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.reality.dualityUpgReqs |= (1 << this.id);
-    GameUI.notify.reality(`You've unlocked an Duality Upgrade: ${this.config.name}`);
+    GameUI.notify.reality(`You've unlocked a Duality Upgrade: ${this.config.name}`);
     this.hasPlayerLock = false;
   }
 
@@ -126,7 +126,16 @@ class RebuyableDualityUpgradeState extends RebuyableMechanicState {
       1e3,
       this.config.costMult
     ).sub(player.reality.dualityRebuyables[this.id]).toNumber();
-    Currency.dualMachines.subtract(this.cost);
+    Currency.dualMachines.subtract(getHybridCostScaling(
+      player.reality.dualityRebuyables[this.id] - 1,
+      1e20,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult,
+      DC.E309,
+      1e3,
+      this.config.costMult
+    ));
     return true;
   }
 }

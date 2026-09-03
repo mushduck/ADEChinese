@@ -58,6 +58,7 @@ export const Pelle = {
 
   // This is called upon initial Dooming and after every Armageddon when using the modal
   initializeRun() {
+    if (Alpha.isRunning || LHC.voidRunning || LHC.nullifiedVoidRunning || player.endgame.overcharge.isRunning) return;
     if (this.isDoomed) {
       Pelle.armageddon(true);
       return;
@@ -486,7 +487,7 @@ export const Pelle = {
   },
 
   get remnantRequirementForDilation() {
-    return 3.8e7;
+    return PelleStrikes.dilation.isDestroyed() ? 0 : 3.8e7;
   },
 
   get canDilateInPelle() {
@@ -516,7 +517,7 @@ export const Pelle = {
       ep = ep.times(5);
     }
 
-    if (EndgameMilestone.remnantFormula.isReached && !player.disablePostReality) {
+    if (EndgameMastery(61).isBought && !player.disablePostReality) {
       am = am.times(10000);
       ip = ip.times(500);
       ep = ep.times(25);
@@ -528,7 +529,7 @@ export const Pelle = {
 
     const gainNewer = Decimal.pow((Decimal.log10(am.add(2)).add(Decimal.log10(ip.add(2))).add(Decimal.log10(ep.add(2)))).div(1.2), 8.5);
 
-    const gain = false ? gainNewer : ((EndgameMilestone.remnantFormula.isReached && !player.disablePostReality) ? gainNew : gainOld);
+    const gain = false ? gainNewer : ((EndgameMastery(61).isBought && !player.disablePostReality) ? gainNew : gainOld);
     
     return gain.lt(1) ? gain : Decimal.floor(gain.sub(this.cel.remnants));
   },

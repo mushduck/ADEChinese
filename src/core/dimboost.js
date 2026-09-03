@@ -198,7 +198,7 @@ export class DimBoost {
       newUnlock = "unlock Sacrifice";
     }
 
-    const formattedMultText = `give a ${formatX(DimBoost.power, 2, 1)} multiplier `;
+    const formattedMultText = `give a ${formatX(DimBoost.power, 2, 2)} multiplier `;
     let dimensionRange = `to the 1st Dimension`;
     if (boosts.gt(0)) dimensionRange = `to Dimensions 1-${Decimal.min(boosts.add(1), 8)}`;
     if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `to all Dimensions`;

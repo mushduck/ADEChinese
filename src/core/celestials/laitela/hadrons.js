@@ -6,7 +6,7 @@ export const Hadrons = {
     return DualityUpgrade(15).isBought ? Time.thisEndgameRealTime._ms.div(36000) : DC.D0;
   },
   get speedFactor() {
-    return DC.D1.timesEffectOf(Achievement(235)).times(
+    return DC.D1.timesEffectsOf(Achievement(235), Achievement(247)).times(
       DivinityMilestone.firstDivine.isReached && !player.disablePostReality ? 1.25 : 1).times(
       DivinityMilestone.divineDimensions.isReached && !player.disablePostReality ? 1.25 : 1).div(
       1 - DivineDimensions.conversionFormula3).times(

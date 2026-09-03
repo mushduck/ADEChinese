@@ -110,7 +110,7 @@ export default {
       this.starPowerPerSecond.copyFrom(getStarPowerGainPerSecond());
       this.starBoost.copyFrom(Ethereal.allStarBoost);
       this.nextGeneration.copyFrom(!Ethereal.nextGeneration ? new Decimal(Infinity) : Ethereal.nextGeneration);
-      this.allGenerationsUnlocked = !this.nextGeneration;
+      this.allGenerationsUnlocked = this.nextGeneration.eq(Infinity);
       this.starGen = [];
       for (let t = 0; t < 9; t++) {
         this.starGen.push(Ethereal.starGeneration(t));
@@ -272,20 +272,41 @@ export default {
 .c-normal-ethereal-text {
   font-size: 2rem;
   color: #0000ff;
+  animation: a-ethereal-text-glow 5s infinite;
 }
 
 .c-really-cool-ethereal-text {
   font-size: 3rem;
   font-weight: bold;
-  background: linear-gradient(#000000, #0000ff);
+  background: linear-gradient(90deg, cyan, blue, cyan, blue, cyan, blue, cyan);
+  background-size: 300% 100%;
   background-clip: text;
   text-shadow: 0 0 1.5rem #0000ff;
+  animation: a-ethereal-gradient-cycle 5s linear infinite;
 
   -webkit-text-fill-color: transparent;
 }
 
 .c-really-cool-ethereal-text::before{
   text-shadow: 0 0 white;
+}
+
+@keyframes a-ethereal-gradient-cycle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes a-ethereal-text-glow {
+  0% { color: #0000ff; }
+  50% { color: #00ffff; }
+  100% { color: #0000ff; }
 }
 
 .c-stellar-glow {

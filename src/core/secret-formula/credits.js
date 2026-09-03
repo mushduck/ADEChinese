@@ -5,7 +5,7 @@ export const credits = {
     2: "Creator (Endgame)",
     3: "Technical Architect",
     4: "Lead Developer",
-    5: "Android Developer",
+    5: "Mobile Developer",
     6: "Steam Developer",
     7: "Library Developer",
     8: "Developer",
@@ -20,8 +20,9 @@ export const credits = {
     17: "Web Tester",
     18: "Endgame Web Tester",
     19: "Android Tester",
-    20: "Endgame Mobile Tester",
-    21: "Other Contributor",
+    20: "iOS Tester",
+    21: "Endgame Mobile Tester",
+    22: "Other Contributor",
   },
 
   // Each person must have a name and at least one role (the index of the desired role in roles). They can also have a
@@ -34,7 +35,7 @@ export const credits = {
     }, {
       name: "Supersonic Seven",
       name2: "Benjamin Rockholz",
-      roles: 2
+      roles: [2, 20]
     }, {
       name: "Razenpok",
       name2: "Andrei Andreev",
@@ -69,10 +70,10 @@ export const credits = {
     }, {
       name: "earth",
       name2: "Jace Royer",
-      roles: [8, 15, 17, 19]
+      roles: [8, 15, 17, 19, 20]
     }, {
       name: "Hira",
-      roles: [8, 17, 19]
+      roles: [8, 17, 19, 20]
     }, {
       name: "IkerStream",
       name2: "Iker de Aguirre",
@@ -80,7 +81,7 @@ export const credits = {
     }, {
       name: "L4R5",
       name2: "Lars Wolf",
-      roles: [8, 17, 19]
+      roles: [8, 17, 19, 20]
     }, {
       name: "Pichusuperlover",
       roles: [8, 11, 17]
@@ -95,21 +96,21 @@ export const credits = {
       roles: 8
     }, {
       name: "Didgoty",
-      roles: [9, 18, 21]
+      roles: [9, 18, 22]
     }, {
       name: "Living_Person",
       name2: "Life",
-      roles: [9, 18, 21]
+      roles: [9, 18, 22]
     }, {
       name: "Qwerty",
-      roles: [9, 18, 21]
+      roles: [9, 18, 22]
     }, {
       name: "Acamaeda",
       roles: [11, 17]
     }, {
       name: "epic_ducks",
       name2: "Elys",
-      roles: [13, 18, 21]
+      roles: [13, 18, 22]
     }, {
       name: "Spoofy",
       roles: 14
@@ -196,7 +197,7 @@ export const credits = {
       roles: 17
     }, {
       name: "Saturnus",
-      roles: [17, 12]
+      roles: [12, 17]
     }, {
       name: "SereKabii",
       roles: 17
@@ -247,14 +248,18 @@ export const credits = {
       name: "AKA",
       roles: 18
     }, {
+      name: "Aka",
+      name2: "stealsyourusan",
+      roles: 18
+    }, {
       name: "ape",
       roles: 18
     }, {
       name: "AutismQueen",
-      roles: [18, 21]
+      roles: [18, 22]
     }, {
       name: "Blast2026",
-      roles: [18, 21]
+      roles: [18, 22]
     }, {
       name: "Calm Carrot",
       roles: 18
@@ -272,10 +277,10 @@ export const credits = {
       roles: 18
     }, {
       name: "Error404",
-      roles: [18, 21]
+      roles: [18, 22]
     }, {
       name: "glitchy",
-      roles: [18, 21]
+      roles: [18, 22]
     }, {
       name: "hz",
       roles: 18
@@ -284,6 +289,12 @@ export const credits = {
       roles: 18
     }, {
       name: "Josearthu",
+      roles: 18
+    }, {
+      name: "Kage",
+      roles: 18
+    }, {
+      name: "lilyorb",
       roles: 18
     }, {
       name: "M3t0s1m",
@@ -305,25 +316,31 @@ export const credits = {
       name: "Redshift_Shine",
       roles: 18
     }, {
+      name: "rigatoni_stewart",
+      roles: 18
+    }, {
       name: "Riley",
       roles: 18
     }, {
       name: "S____",
-      roles: [18, 21]
+      roles: [18, 22]
     }, {
       name: "spinfish96",
       roles: 18
     }, {
+      name: "StellarAstraea",
+      roles: [18, 20]
+    }, {
       name: "Sumi",
       name2: "Lilly",
-      roles: [18, 21]
+      roles: [18, 20, 22]
     }, {
       name: "SwordPunk",
       roles: 18
     }, {
       name: "realmatryx",
       name2: "Matthew",
-      roles: [18, 21]
+      roles: [18, 22]
     }, {
       name: "about:blank",
       roles: 19
@@ -351,7 +368,7 @@ export const credits = {
       roles: 19
     }, {
       name: "Barrin84",
-      roles: [19, 20]
+      roles: [19, 21]
     }, {
       name: "Calmcat",
       roles: 19
@@ -366,7 +383,7 @@ export const credits = {
       name2: "Aaryan Sarawgi",
       roles: 19
     }, {
-      name: "Daniella",
+      name: "Key",
       roles: 19
     }, {
       name: "DarthDie",
@@ -641,18 +658,171 @@ export const credits = {
       name: "Airakogi",
       roles: 19
     }, {
+      name: "Firat Yusuf Duran",
+      roles: 20
+    }, {
+      name: "Bennie",
+      roles: 20
+    }, {
+      name: "Vorix",
+      roles: 20
+    }, {
+      name: "Scapt0z",
+      roles: 20
+    }, {
+      name: "LokiEX",
+      roles: 20
+    }, {
+      name: "Nauviax",
+      roles: 20
+    }, {
+      name: "zach",
+      roles: 20
+    }, {
+      name: "epib",
+      name2: "Ludvik Kleven",
+      roles: 20
+    }, {
+      name: "paulstelian97",
+      roles: 20
+    }, {
+      name: "DΞXTΞRITY",
+      name2: "Alexander Goemans",
+      roles: 20
+    }, {
+      name: "Constellationary",
+      roles: 20
+    }, {
+      name: "Dabud",
+      roles: 20
+    }, {
+      name: "Nolan Lynch",
+      roles: 20
+    }, {
+      name: "JQuilliy",
+      roles: 20
+    }, {
+      name: "Jonasvq",
+      roles: 20
+    }, {
+      name: "aunique",
+      roles: 20
+    }, {
+      name: "Meiths",
+      roles: 20
+    }, {
+      name: "WaywardZeppelin",
+      roles: 20
+    }, {
+      name: "Halfwit",
+      roles: 20
+    }, {
+      name: "Brendan M",
+      roles: 20
+    }, {
+      name: "Aaronwerito",
+      roles: 20
+    }, {
+      name: "NotDisliked",
+      roles: 20
+    }, {
+      name: "TheAsteri",
+      roles: 20
+    }, {
+      name: "Megaroid",
+      roles: 20
+    }, {
+      name: "Nuhbzz",
+      roles: 20
+    }, {
+      name: "SomeSpamCan",
+      roles: 20
+    }, {
+      name: "CatNewsPaper",
+      roles: 20
+    }, {
+      name: "Cyrus “Cyrenia” Ahangarzadeh",
+      roles: 20
+    }, {
+      name: "DarkSol",
+      roles: 20
+    }, {
+      name: "SavAri0",
+      roles: 20
+    }, {
+      name: "Chnoodle",
+      roles: 20
+    }, {
+      name: "hydrazine",
+      name2: "Jaiden Haider",
+      roles: 20
+    }, {
+      name: "William Price",
+      roles: 20
+    }, {
+      name: "JJC",
+      roles: 20
+    }, {
+      name: "Jay the Crab Man",
+      roles: 20
+    }, {
+      name: "Atocil",
+      roles: 20
+    }, {
+      name: "Goober",
+      roles: 20
+    }, {
+      name: "Kyle F",
+      roles: 20
+    }, {
+      name: "Zesty",
+      roles: 20
+    }, {
+      name: "Dr. Irene",
+      roles: 20
+    }, {
+      name: "Malpercio",
+      roles: 20
+    }, {
+      name: "Poro",
+      roles: 20
+    }, {
+      name: "gamebooker",
+      roles: 20
+    }, {
+      name: "Christopher Abela",
+      roles: 20
+    }, {
+      name: "Mist Rose",
+      roles: 20
+    }, {
+      name: "Lachlan Curl",
+      roles: 20
+    }, {
+      name: "James Valdes",
+      roles: 20
+    }, {
+      name: "Isabella Echeverri",
+      roles: 20
+    }, {
+      name: "Berj Doudian",
+      roles: 20
+    }, {
+      name: "Em L.",
+      roles: 20
+    }, {
       name: "Boney_joe",
-      roles: 21
+      roles: 22
     }, {
       name: "Creepmond",
       name2: "Creep",
-      roles: 21
+      roles: 22
     }, {
       name: "Gigachad45",
-      roles: 21
+      roles: 22
     }, {
       name: "Tojo",
-      roles: 21
+      roles: 22
     }
   ]
 };

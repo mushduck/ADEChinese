@@ -125,13 +125,11 @@ export default {
     },
     increaseLevel() {
       if (this.isRunning) return;
-      if (this.currentLevel >= this.highestUnlockedLevel) return;
-      player.endgame.overcharge.level++;
+      player.endgame.overcharge.level = Math.min(player.endgame.overcharge.level + 1, this.highestUnlockedLevel);
     },
     decreaseLevel() {
       if (this.isRunning) return;
-      if (this.currentLevel <= 1) return;
-      player.endgame.overcharge.level--;
+      player.endgame.overcharge.level = Math.max(player.endgame.overcharge.level - 1, 1);
     }
   }
 };
@@ -204,7 +202,7 @@ export default {
       >
         -
       </PrimaryButton>
-      <span class="c-ascension-text">{{ currentLevel }}</span>
+      <span class="c-ascension-basic-text">{{ currentLevel }}</span>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="increaseLevel"
@@ -231,6 +229,35 @@ export default {
 <style scoped>
 .c-ascension-description-text {
   font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg,
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base)
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  animation: a-ascension-description-cycle 5s linear infinite;
+
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes a-ascension-description-cycle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.c-ascension-basic-text {
+  font-size: 2.5rem;
   font-weight: bold;
   color: var(--color-pelle--secondary);
 }

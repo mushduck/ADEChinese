@@ -131,7 +131,16 @@ class RebuyableRealityUpgradeState extends RebuyableMechanicState {
       1e3,
       this.config.initialCost * this.config.costMult
     ).sub(player.reality.rebuyables[this.id]).toNumber();
-    Currency.realityMachines.subtract(this.cost);
+    Currency.realityMachines.subtract(getHybridCostScaling(
+      player.reality.rebuyables[this.id] - 1,
+      1e30,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 10,
+      DC.E309,
+      1e3,
+      this.config.initialCost * this.config.costMult
+    ));
     return true;
   }
 }

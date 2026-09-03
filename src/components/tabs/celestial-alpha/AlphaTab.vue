@@ -11,6 +11,7 @@ export default {
       stage: 0,
       quote: "",
       isRunning: false,
+      isDestroyed: false
     };
   },
   computed: {
@@ -45,7 +46,6 @@ export default {
       ${GameDatabase.celestials.descriptions[7].description()}`;
     },
     isDoomed: () => Pelle.isDoomed,
-    isDestroyed: () => Alpha.isDestroyedForDisplay
   },
   watch: {
     isRunning() {
@@ -57,6 +57,7 @@ export default {
       this.stage = Alpha.currentStage;
       this.quote = Alpha.quote;
       this.isRunning = Alpha.isRunning;
+      this.isDestroyed = Alpha.isDestroyedForDisplay;
     },
     startRun() {
       if (this.isDoomed) return;

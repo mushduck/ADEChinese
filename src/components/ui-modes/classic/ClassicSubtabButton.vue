@@ -16,7 +16,8 @@ export default {
       isAvailable: false,
       hasNotification: false,
       isCurrentSubtab: false,
-      tabName: ""
+      tabName: "",
+      universe: 0
     };
   },
   computed: {
@@ -32,12 +33,14 @@ export default {
         "o-tab-btn--endgame": this.parentName === "Endgame",
         "o-tab-btn--cd-expansion": this.parentName === "CD Expansion",
         "o-tab-btn--divinity": this.parentName === "Divinity",
-        "o-tab-btn--universes": this.parentName === "Universes"
+        "o-tab-btn--universes": this.parentName === "Universes" && this.universe === 0,
+        "o-tab-btn--universes__transient": this.parentName === "Universes" && this.universe === 1
       };
     },
   },
   methods: {
     update() {
+      this.universe = 0;
       this.isAvailable = this.subtab.isAvailable;
       this.hasNotification = this.subtab.hasNotification;
       this.isCurrentSubtab = this.subtab.isOpen && Theme.currentName() !== "S9";

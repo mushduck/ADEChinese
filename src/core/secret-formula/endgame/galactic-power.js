@@ -76,7 +76,7 @@ export const galacticPowerRewards = {
     id: 12,
     galacticPower: new Decimal("1e25000"),
     reward: "Gain free Galaxies",
-    effect: () => player.disablePostReality ? 1 : Decimal.pow(Currency.galacticPower.value.div("1e25000"), 0.01).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1),
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(Currency.galacticPower.value.div("1e25000"), 0.001).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1),
     formatEffect: value => `${formatHybridLarge(value, 3)} free Galaxies`
   },
   galaxyScaling: {
@@ -86,16 +86,23 @@ export const galacticPowerRewards = {
     effect: () => player.disablePostReality ? 1 : Decimal.pow(0.9, Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(40000)).add(1).pow(2).sub(1)).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1).toNumber(),
     formatEffect: value => `Antimatter Galaxy cost scaling is reduced by ${formatPercents(1 - value, 2, 2)}`
   },
-  galaxyEmpowerment2: {
+  galaxyGenerationEmpowerment: {
     id: 14,
     galacticPower: new Decimal("1e66000"),
+    reward: "Empower Galaxy Generation",
+    effect: () => player.disablePostReality ? 1 : Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(66000)).add(1).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1).toNumber(),
+    formatEffect: value => `Galaxy Generation is empowered by ${formatPow(value, 2, 3)}`
+  },
+  galaxyEmpowerment2: {
+    id: 15,
+    galacticPower: new Decimal("1e100000"),
     reward: "Increase the effect of all above Galactic Powers exponentially",
-    effect: () => player.disablePostReality ? 1 : Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(66000)).toNumber(),
+    effect: () => player.disablePostReality ? 1 : Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(100000)).add(1).toNumber(),
     formatEffect: value => `The above Galactic Powers are ${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)} stronger`
   },
   stelliferousUniverse: {
-    id: 15,
-    galacticPower: new Decimal("1e100000"),
+    id: 16,
+    galacticPower: new Decimal("1e250000"),
     reward: "Unlock the Stelliferous Universe"
   }
 };

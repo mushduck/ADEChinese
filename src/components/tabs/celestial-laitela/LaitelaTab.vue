@@ -30,7 +30,7 @@ export default {
       isDMCapped: false,
       maxDarkMatter: new Decimal(0),
       darkEnergy: new Decimal(0),
-      matterExtraPurchasePercentage: 0,
+      matterExtraPurchasePercentage: new Decimal(0),
       autobuyersUnlocked: false,
       singularityPanelVisible: false,
       singularitiesUnlocked: false,
@@ -41,6 +41,7 @@ export default {
       darkMatterCap: new Decimal(0),
       softcap1: new Decimal(0),
       softcap2: new Decimal(0),
+      softcapOmega: new Decimal(0),
       hadronsUnlocked: false,
       isUncapped: false,
     };
@@ -59,9 +60,9 @@ export default {
       this.isDMCapped = this.darkMatter.eq(Laitela.darkMatterCap);
       this.maxDarkMatter.copyFrom(Currency.darkMatter.max);
       this.darkEnergy.copyFrom(player.celestials.laitela.darkEnergy);
-      this.matterExtraPurchasePercentage = Laitela.matterExtraPurchaseFactor >= 11
+      this.matterExtraPurchasePercentage.copyFrom(Laitela.matterExtraPurchaseFactor.gte(11)
         ? Laitela.matterExtraPurchaseFactor
-        : Laitela.matterExtraPurchaseFactor - 1;
+        : Laitela.matterExtraPurchaseFactor.sub(1));
       this.autobuyersUnlocked = SingularityMilestone.darkDimensionAutobuyers.canBeApplied ||
         SingularityMilestone.darkDimensionAutobuyers.canBeApplied ||
         SingularityMilestone.autoCondense.canBeApplied ||
@@ -76,6 +77,7 @@ export default {
       this.darkMatterCap.copyFrom(Laitela.darkMatterCap);
       this.softcap1.copyFrom(Laitela.darkMatterSoftcap1);
       this.softcap2.copyFrom(Laitela.darkMatterSoftcap2);
+      this.softcapOmega.copyFrom(Laitela.darkMatterOmegaSoftcap);
       this.hadronsUnlocked = DualityUpgrade(15).isBought;
       this.isUncapped = Alpha.isDestroyed;
 
@@ -90,9 +92,9 @@ export default {
       Modal.h2p.show();
     },
     formatContinuumPercentage() {
-      return Laitela.matterExtraPurchaseFactor >= 11
+      return Laitela.matterExtraPurchaseFactor.gte(11)
         ? formatX(this.matterExtraPurchasePercentage, 2, 2)
-        : formatPercents(this.matterExtraPurchasePercentage, 2);
+        : formatDecimalPercents(this.matterExtraPurchasePercentage, 2);
     }
   }
 };
@@ -147,6 +149,12 @@ export default {
     >
       Dark Matter is <span v-if="isUncapped">harshly softcapped</span><span v-if="!isUncapped">hardcapped</span> at
       {{ format(darkMatterCap, 2) }}.
+    </div>
+    <div
+      v-if="maxDarkMatter.gte(softcapOmega)"
+      class="o-laitela-matter-amount"
+    >
+      Dark Matter is further harshly softcapped past {{ format(softcapOmega, 2) }}.
     </div>
     <h2
       v-if="!singularitiesUnlocked"

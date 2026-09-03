@@ -70,7 +70,7 @@ export default {
   methods: {
     update() {
       this.runs = this.clone(this.getRuns());
-      this.hasEmptyRecord = this.runs[0][0] === Number.MAX_VALUE;
+      this.hasEmptyRecord = this.runs[0][0].gte(Number.MAX_VALUE);
       this.runs.push(this.averageRun);
       this.isRealityUnlocked = PlayerProgress.current.isRealityUnlocked;
       this.shown = player.shownRuns[this.singular];
@@ -254,7 +254,7 @@ export default {
         :key="index"
       >
         <span
-          v-if="run[0] === Number.MAX_VALUE"
+          v-if="run[0].gte(Number.MAX_VALUE)"
           class="c-empty-row"
         >
           <i v-if="index === 10">

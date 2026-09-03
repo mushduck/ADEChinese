@@ -1043,6 +1043,15 @@ button:focus {
   animation: a-universes-glow-hover 10s infinite;
 }
 
+.o-tab-btn--universes__transient {
+  background-color: var(--color-prestige--accent);
+  animation: a-universes--transient-glow-primary 10s infinite;
+}
+
+.o-tab-btn--universes__transient:hover {
+  animation: a-universes--transient-glow-hover 10s infinite;
+}
+
 @keyframes a-universes-glow-primary {
   0% { color: #2196f3; border-color: #2196f3; }
   33% { color: #673ab7; border-color: #673ab7; }
@@ -1069,6 +1078,30 @@ button:focus {
   33% { border-top-color: #673ab7; }
   66% { border-top-color: #00bcd4; }
   100% { border-top-color: #2196f3; }
+}
+
+@keyframes a-universes--transient-glow-primary {
+  0% { color: #64dd17; border-color: #64dd17; }
+  50% { color: #64ddad; border-color: #64ddad; }
+  100% { color: #64dd17; border-color: #64dd17; }
+}
+
+@keyframes a-universes--transient-glow-hover {
+  0% { background: #64dd17; }
+  50% { background: #64ddad; }
+  100% { background: #64dd17; }
+}
+
+@keyframes a-universes--transient-glow-border-left {
+  0% { border-left-color: #64dd17; }
+  50% { border-left-color: #64ddad; }
+  100% { border-left-color: #64dd17; }
+}
+
+@keyframes a-universes--transient-glow-border-top {
+  0% { border-top-color: #64dd17; }
+  50% { border-top-color: #64ddad; }
+  100% { border-top-color: #64dd17; }
 }
 
 /* #endregion tab buttons */
@@ -1141,6 +1174,10 @@ button:focus {
   animation: a-warp-glow 3s infinite;
 }
 
+.c-reality-button--escape {
+  animation: a-escape-glow 3s infinite;
+}
+
 .c-reality-reminder {
   display: flex;
   width: calc(100% - 1rem);
@@ -1170,6 +1207,12 @@ button:focus {
   100% { box-shadow: inset 0 0 4rem var(--color-slabdrill--base); }
 }
 
+@keyframes a-escape-glow {
+  0% { box-shadow: inset 0 0 4rem var(--color-pelle--base); }
+  50% { box-shadow: inset 0 0 0; }
+  100% { box-shadow: inset 0 0 4rem var(--color-pelle--base); }
+}
+
 .t-s6 .c-reality-button,
 .t-s10 .c-reality-button {
   background: black;
@@ -1187,6 +1230,19 @@ button:focus {
   border-color: var(--color-bad);
 }
 
+.c-reality-button--cursed {
+  color: var(--color-slabdrill--base);
+  background-color: black;
+  border-color: var(--color-slabdrill--base);
+  cursor: pointer;
+}
+
+.c-reality-button--escape {
+  color: var(--color-reality-dark);
+  border-color: var(--color-reality-dark);
+  cursor: pointer;
+}
+
 .t-s6 .c-reality-button--locked,
 .t-s10 .c-reality-button--locked {
   color: grey;
@@ -1201,6 +1257,19 @@ button:focus {
 .c-reality-button--locked:hover {
   color: #1d1d1d;
   background-color: var(--color-bad);
+}
+
+.c-reality-button--cursed:hover,
+.c-reality-button--cursed.force-hover {
+  color: #a00000;
+  background-color: #181818;
+  border-color: #a00000;
+}
+
+.c-reality-button--escape:hover,
+.c-reality-button--escape.force-hover {
+  color: black;
+  background: var(--color-reality);
 }
 
 .l-reset-reality-button {
@@ -2233,6 +2302,11 @@ br {
   margin-top: 0.5rem;
 }
 
+.o-primary-btn--endgame-upgrade-toggle {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
 .o-primary-btn--replicanti-galaxy {
   width: 22rem;
   height: 7rem;
@@ -2761,6 +2835,13 @@ br {
 }
 
 .l--spoon-btn-group__little-spoon-reality-btn {
+  width: 20rem;
+  align-self: center;
+  margin-top: -0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+.l--spoon-btn-group__little-spoon-endgame-btn {
   width: 20rem;
   align-self: center;
   margin-top: -0.9rem;
@@ -4388,6 +4469,7 @@ br {
 }
 
 .c-challenge-box--normal {
+  height: 18rem;
   font-size: 1.05rem;
   color: var(--color-text);
   background-color: var(--color-base);
@@ -5808,6 +5890,51 @@ properly on certain themes. */
   background: #636363;
 }
 
+.o-eternity-upgrade--chargeable {
+  color: var(--color-teresa--base);
+  background-color: var(--color-teresa--accent);
+  border-color: var(--color-teresa--base);
+  animation: a-charged-eternity-upgrade-glow 2s infinite;
+}
+
+.t-dark .o-eternity-upgrade--chargeable {
+  color: var(--color-teresa--base);
+  background-color: var(--color-teresa--accent);
+}
+
+.o-eternity-upgrade--chargeable:hover {
+  color: var(--color-teresa--base);
+  cursor: pointer;
+}
+
+@keyframes a-charged-eternity-upgrade-glow {
+  0% { box-shadow: inset 0 0 2rem 0; }
+  13% { box-shadow: inset 0 0 2rem 0.15rem; }
+  25% { box-shadow: inset 0 0 2rem 0.4rem; }
+  38% { box-shadow: inset 0 0 2rem 0.65rem; }
+  50% { box-shadow: inset 0 0 2rem 0.8rem; }
+  63% { box-shadow: inset 0 0 2rem 0.65rem; }
+  75% { box-shadow: inset 0 0 2rem 0.4rem; }
+  88% { box-shadow: inset 0 0 2rem 0.15rem; }
+  100% { box-shadow: inset 0 0 2rem 0; }
+}
+
+.o-eternity-upgrade--charged {
+  color: var(--color-teresa--accent);
+  background: linear-gradient(var(--color-teresa--base), var(--color-eternity), var(--color-teresa--base));
+}
+
+.t-dark .o-eternity-upgrade--charged,
+.t-s6 .o-eternity-upgrade--charged,
+.t-s10 .o-eternity-upgrade--charged {
+  color: var(--color-teresa--accent);
+  background: linear-gradient(var(--color-teresa--base), var(--color-eternity), var(--color-teresa--base));
+}
+
+.o-eternity-upgrade--charged:hover {
+  color: var(--color-teresa--accent);
+}
+
 /* #endregion Eternity Upgrades */
 
 /* #region Eternity Milestones */
@@ -7222,7 +7349,7 @@ properly on certain themes. */
 
 .o-divinity-milestone__reward {
   width: 98rem;
-  padding: 2rem;
+  padding: 4rem;
   font-family: Typewriter, serif;
   font-size: 1.2rem;
   font-weight: bold;
@@ -11385,13 +11512,13 @@ kbd {
 
 .c-endgame-upgrade-btn--unavailable {
   color: var(--color-endgame);
-  background-color: #404040;
+  background-color: #202020;
   cursor: default;
 }
 
 .c-endgame-upgrade-btn--unavailable:hover {
   color: var(--color-endgame);
-  background-color: #404040;
+  background-color: #202020;
 }
 
 .c-endgame-upgrade-btn--bought {
@@ -11519,13 +11646,13 @@ kbd {
 
 .c-divinity-upgrade-btn--unavailable {
   color: var(--color-pelle--base);
-  background-color: #404040;
+  background-color: #202020;
   cursor: default;
 }
 
 .c-divinity-upgrade-btn--unavailable:hover {
   color: var(--color-pelle--base);
-  background-color: #404040;
+  background-color: #202020;
 }
 
 .c-divinity-upgrade-btn--bought {
@@ -11617,13 +11744,13 @@ kbd {
 
 .c-resurgence-upgrade-btn--unavailable {
   color: var(--color-antimatter);
-  background-color: #404040;
+  background-color: #202020;
   cursor: default;
 }
 
 .c-resurgence-upgrade-btn--unavailable:hover {
   color: var(--color-antimatter);
-  background-color: #404040;
+  background-color: #202020;
 }
 
 .c-resurgence-upgrade-btn--bought {
@@ -11813,6 +11940,7 @@ kbd {
 }
 
 .o-expansion-pack {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12631,20 +12759,27 @@ kbd {
   background-color: black;
 }
 
-.c-ascension-text {
-  position: relative;
-  font-size: 3rem;
-  font-weight: bold;
-  color: black;
-  animation: a-ascension-shift 10s infinite;
-}
-
 @keyframes a-ascension-shift {
-  0% { text-shadow: 0 0 0.3rem white, 0.3rem 0.3rem 0.3rem white, -0.3rem -0.3rem 0.3rem white; }
-  25% { text-shadow: 0 0 0.3rem white, -0.3rem 0.3rem 0.3rem white, 0.3rem -0.3rem 0.3rem white; }
-  50% { text-shadow: 0 0 0.3rem white, -0.3rem -0.3rem 0.3rem white, 0.3rem 0.3rem 0.3rem white; }
-  75% { text-shadow: 0 0 0.3rem white, 0.3rem -0.3rem 0.3rem white, -0.3rem 0.3rem 0.3rem white; }
-  100% { text-shadow: 0 0 0.3rem white, 0.3rem 0.3rem 0.3rem white, -0.3rem -0.3rem 0.3rem white; }
+  0% {
+    background-position: 0% 50%;
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white);
+  }
+  25% {
+    background-position: 25% 50%;
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white);
+  }
+  50% {
+    background-position: 50% 50%;
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white);
+  }
+  75% {
+    background-position: 75% 50%;
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white);
+  }
+  100% {
+    background-position: 100% 50%;
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white);
+  }
 }
 
 .l-overcharge-run-button {

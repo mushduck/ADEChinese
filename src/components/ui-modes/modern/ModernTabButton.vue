@@ -18,7 +18,8 @@ export default {
       subtabVisibilities: [],
       showSubtabs: false,
       hasNotification: false,
-      tabName: ""
+      tabName: "",
+      uiClass: ""
     };
   },
   computed: {
@@ -41,6 +42,7 @@ export default {
       this.subtabVisibilities = this.tab.subtabs.map(x => x.isAvailable);
       this.showSubtabs = this.isAvailable && this.subtabVisibilities.length >= 1;
       this.hasNotification = this.tab.hasNotification;
+      this.uiClass = (typeof this.tab.config.UIClass === "function") ? this.tab.config.UIClass() : this.tab.config.UIClass;
       if (this.tabPosition < Pelle.endTabNames.length) {
         this.tabName = Pelle.transitionText(
           this.tab.name,
@@ -61,7 +63,7 @@ export default {
 <template>
   <div
     v-if="!isHidden && isAvailable"
-    :class="[classObject, tab.config.UIClass]"
+    :class="[classObject, uiClass]"
   >
     <div
       class="l-tab-btn-inner"
@@ -85,7 +87,7 @@ export default {
           :key="index"
           class="o-tab-btn o-tab-btn--subtab"
           :class="
-            [tab.config.UIClass,
+            [uiClass,
              {'o-subtab-btn--active': isCurrentSubtab(subtab.id)}]
           "
           @click="subtab.show(true)"
@@ -150,6 +152,10 @@ export default {
   
 .o-tab-btn--universes::before {
   animation: a-universes-glow-hover 10s infinite;
+}
+
+.o-tab-btn--universes__transient::before {
+  animation: a-universes--transient-glow-hover 10s infinite;
 }
 
 .o-subtab-btn--active {

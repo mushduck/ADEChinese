@@ -27,7 +27,8 @@ export default {
       nullified: false,
       voidMode: 0,
       nullParticles: new Decimal(),
-      nullParticlesPerSecond: new Decimal()
+      nullParticlesPerSecond: new Decimal(),
+      nullParticleEffect: new Decimal()
     };
   },
   computed: {
@@ -73,6 +74,7 @@ export default {
       this.voidMode = player.endgame.largeHadronCollider.void.mode;
       this.nullParticles.copyFrom(player.endgame.largeHadronCollider.void.nullParticles);
       this.nullParticlesPerSecond.copyFrom(!LHC.nullifiedVoidRunning ? DC.D0 : getNullParticleGainPerSecond());
+      this.nullParticleEffect.copyFrom(Currency.nullParticles.value.max(1).log10().div(5).add(1).pow(5));
     },
     formatNullAmount(amount) {
       return amount.gte(DC.NUMMAX) ? Notations.current.infinite : format(amount, 2, 2);
@@ -176,7 +178,7 @@ export default {
     <div v-if="voidMode === 1">
       Entering The Void in Nullified Mode will force an Endgame reset and Dilate your Antimatter by {{ format(0.01, 2, 2) }}.
       <br>
-      You will generate Null Particles based on your Antimatter, which empower Antimatter Dimensions while inside The Void in normal mode.
+      You will generate Null Particles based on your Antimatter, which empower Antimatter Dimensions while inside The Void in normal mode (Currently: {{ formatPow(nullParticleEffect, 2, 3) }}).
     </div>
     <NullUpgradesTabComponent />
   </div>
