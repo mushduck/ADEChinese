@@ -18,7 +18,7 @@ function updateEndgameRecords() {
     player.records.bestEndgame.bestDPmin.max(player.records.thisEndgame.bestDPmin);
   player.records.bestEndgame.time = Decimal.min(player.records.thisEndgame.time, player.records.bestEndgame.time);
   if (player.records.thisEndgame.realTime < player.records.bestEndgame.realTime) {
-    player.records.bestEndgame.realTime = player.records.thisEndgame.realTime;
+    player.records.bestEndgame.realTime = Math.max(player.records.thisEndgame.realTime, 1);
   }
   if (gainedCelestialPoints().gt(player.records.permanent.maxCP)) player.records.permanent.maxCP = gainedCelestialPoints();
   if (gainedDoomedParticles().gt(player.records.permanent.maxDP)) player.records.permanent.maxDP = gainedDoomedParticles();
@@ -214,13 +214,13 @@ export const Endgame = {
     let maxPerkCharges = 0;
     maxPerkCharges = player.celestials.teresa.perkShop[6];
     let charge1 = 0;
-    charge1 = player.celestials.teresa.perkShop[0];
+    if (PerkShopUpgrade.all[0].isCharged) charge1 = player.celestials.teresa.perkShop[0];
     let charge2 = 0;
-    charge2 = player.celestials.teresa.perkShop[1];
+    if (PerkShopUpgrade.all[1].isCharged) charge2 = player.celestials.teresa.perkShop[1];
     let charge3 = 0;
-    charge3 = player.celestials.teresa.perkShop[2];
+    if (PerkShopUpgrade.all[2].isCharged) charge3 = player.celestials.teresa.perkShop[2];
     let charge4 = 0;
-    charge4 = player.celestials.teresa.perkShop[3];
+    if (PerkShopUpgrade.all[3].isCharged) charge4 = player.celestials.teresa.perkShop[3];
     let rowProtect = 0;
     rowProtect = player.reality.glyphs.protectedRows;
     let isAutoWeighed = player.celestials.effarig.autoAdjustGlyphWeights;
@@ -228,7 +228,7 @@ export const Endgame = {
     player.isGameEnd = false;
     Tab.dimensions.antimatter.show();
     AchievementTimers.marathon2.reset();
-    if (!EndgameMastery(61).isBought) {
+    if (!EndgameMilestone.achievementKeep.isReached) {
       lockAchievementsOnEndgame();
     }
     player.tutorialState = 0;
@@ -247,13 +247,15 @@ export const Endgame = {
     player.reality.maxRM = DC.D0;
     player.reality.imaginaryMachines = DC.D0;
     player.reality.iMCap = DC.D0;
-    player.reality.glyphs.sac.power = DC.D0;
-    player.reality.glyphs.sac.infinity = DC.D0;
-    player.reality.glyphs.sac.time = DC.D0;
-    player.reality.glyphs.sac.replication = DC.D0;
-    player.reality.glyphs.sac.dilation = DC.D0;
-    player.reality.glyphs.sac.effarig = DC.D0;
-    player.reality.glyphs.sac.reality = DC.D0;
+    if (!Achievement(246).isUnlocked) {
+      player.reality.glyphs.sac.power = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.infinity = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.time = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.replication = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.dilation = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.effarig = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.reality = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+    }
     player.reality.glyphs.undo = [];
     player.reality.glyphs.protectedRows = 0;
     Glyphs.deleteAllUnprotected();
@@ -311,7 +313,7 @@ export const Endgame = {
     }
     player.reality.reqLock.reality = 0;
     player.reality.reqLock.imaginary = 0;
-    if (!EndgameMastery(112).isBought) {
+    if (!EndgameMilestone.keepPerks.isReached) {
       player.reality.perks = new Set();
     }
     player.reality.respec = false;
@@ -329,19 +331,21 @@ export const Endgame = {
     player.reality.gainedAutoAchievements = true;
     player.reality.achTimer = DC.D0;
     player.reality.hasCheckedFilter = false;
-    player.reality.glyphs.sac.power = DC.D0;
-    player.reality.glyphs.sac.infinity = DC.D0;
-    player.reality.glyphs.sac.time = DC.D0;
-    player.reality.glyphs.sac.replication = DC.D0;
-    player.reality.glyphs.sac.dilation = DC.D0;
-    player.reality.glyphs.sac.effarig = DC.D0;
-    player.reality.glyphs.sac.reality = DC.D0;
+    if (!Achievement(246).isUnlocked) {
+      player.reality.glyphs.sac.power = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.infinity = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.time = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.replication = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.dilation = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.effarig = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+      player.reality.glyphs.sac.reality = EndgameMilestone.startSac.isReached ? DC.E100 : DC.D0;
+    }
     if (ImaginaryUpgrade(22).isBought) ImaginaryUpgrade(22).onPurchased();
     player.blackHole = Array.range(0, 2).map(id => ({
       id,
-      intervalUpgrades: EndgameUpgrade(6).isBought ? 40 : 0,
+      intervalUpgrades: EndgameMilestone.bhAutos.isReached ? 40 : 0,
       powerUpgrades: 0,
-      durationUpgrades: EndgameUpgrade(6).isBought ? 40 : 0,
+      durationUpgrades: EndgameMilestone.bhAutos.isReached ? 40 : 0,
       phase: 0,
       active: false,
       unlocked: false,
@@ -355,7 +359,7 @@ export const Endgame = {
       player.blackHole[0].unlocked = true;
       player.blackHole[1].unlocked = true;
     }
-    player.celestials.teresa.pouredAmount = DC.D0;
+    player.celestials.teresa.pouredAmount = Achievement(217).effectOrDefault(DC.D0);
     if (!ExpansionPacks.areUnlocked) {
       player.celestials.teresa.quoteBits = 0;
       player.celestials.teresa.quotes = [];
@@ -389,6 +393,8 @@ export const Endgame = {
     player.celestials.effarig.glyphWeights.dt = 25;
     player.celestials.effarig.glyphWeights.eternities = 25;
     player.celestials.effarig.autoAdjustGlyphWeights = false;
+    player.celestials.effarig.effarigTime = 0;
+    player.celestials.effarig.effarigLayer = 0;
     player.celestials.enslaved.isStoring = false;
     player.celestials.enslaved.stored = DC.D0;
     player.celestials.enslaved.isStoringReal = false;
@@ -419,19 +425,24 @@ export const Endgame = {
     player.celestials.enslaved.glyphHintsGiven = 0;
     player.celestials.enslaved.zeroHintTime = 0;
     Enslaved.autoReleaseTick = 0;
-    player.celestials.v.unlockBits = ExpansionPack.vPack.isBought ? 1 : 0;
     player.celestials.v.run = false;
-    if (!ExpansionPacks.areUnlocked) {
-      player.celestials.v.quoteBits = 0;
-      player.celestials.v.quotes = [];
+    if (!Achievement(218).isUnlocked) {
+      player.celestials.v.unlockBits = ExpansionPack.vPack.isBought ? 1 : 0;
+      if (!ExpansionPacks.areUnlocked) {
+        player.celestials.v.quoteBits = 0;
+        player.celestials.v.quotes = [];
+      }
+      player.celestials.v.runUnlocks = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      player.celestials.v.goalReductionSteps = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+      player.celestials.v.runGlyphs = [[], [], [], [], [], [], [], [], []];
+      player.celestials.v.runRecords = [DC.E1.neg(), DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0];
+      player.celestials.v.wantsFlipped = true;
     }
-    player.celestials.v.runUnlocks = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    player.celestials.v.goalReductionSteps = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-    player.celestials.v.STSpent = 0;
-    player.celestials.v.runGlyphs = [[], [], [], [], [], [], [], [], []];
-    player.celestials.v.runRecords = [DC.E1.neg(), DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0, DC.D0];
-    player.celestials.v.wantsFlipped = true;
     V.spaceTheorems = 0;
+    player.celestials.v.STSpent = 0;
+    if (Achievement(218).isUnlocked) {
+      V.updateTotalRunUnlocks();
+    }
     player.celestials.v.vTime = 0;
     player.celestials.v.vAuto = 0;
     player.celestials.v.vTotal = 0;
@@ -457,6 +468,7 @@ export const Endgame = {
       player.celestials.ra.pets.v.memoryChunks = DC.D0;
       player.celestials.ra.pets.v.memoryUpgrades = 0;
       player.celestials.ra.pets.v.chunkUpgrades = 0;
+      player.celestials.ra.petWithRemembrance = "";
     }
     if (!ExpansionPack.effarigPack.isBought) {
       player.celestials.ra.alchemy = Array.repeat(0, 21)
@@ -510,7 +522,6 @@ export const Endgame = {
     }
     player.celestials.ra.disCharge = false;
     player.celestials.ra.peakGamespeed = DC.D1;
-    player.celestials.ra.petWithRemembrance = "";
     player.celestials.laitela.darkMatter = DC.D0;
     player.celestials.laitela.unnerfedDarkMatter = DC.D0;
     player.celestials.laitela.maxDarkMatter = DC.D0;
@@ -691,7 +702,7 @@ export const Endgame = {
     Currency.antimatter.reset();
     CelestialDimensions.resetAmount();
     initializeChallengeCompletions(true);
-    if (!EndgameMastery(61).isBought) {
+    if (!EndgameMilestone.achievementKeep.isReached) {
       lockAchievementsOnEndgame();
     }
     Autobuyers.reset();
@@ -762,7 +773,7 @@ export const Endgame = {
       player.requirementChecks.reality.noContinuum = false;
       player.requirementChecks.endgame.noContinuum = false;
     }
-    if (EndgameMastery(112).isBought) {
+    if (EndgameMilestone.keepPerks.isReached) {
       Achievement(146).unlock();
     }
     if (EndgameMastery(42).isBought) {
@@ -780,6 +791,9 @@ export const Endgame = {
       NormalChallenges.completeAll();
     }
     if ((RealityUpgrade(10).isBought || EndgameMastery(42).isBought) && !player.disablePostReality) applyRUPG10();
+    tryChargeAll();
+    tryChargeAllPerkUpgrades();
+    tryChargeAllBreakUpgrades();
     AutomatorBackend.restart();
   }
 };
