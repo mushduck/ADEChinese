@@ -33,7 +33,7 @@ class AcceleratorMilestoneState extends GameMechanicState {
   }
 
   get formattedEffect() {
-    if (this.canBeApplied) return this.config.formatEffect(this.effectValue);
+    if (this.canBeApplied && this.config.formatEffect) return this.config.formatEffect(this.effectValue);
     return false;
   }
 }
