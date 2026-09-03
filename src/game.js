@@ -516,9 +516,7 @@ export function gainedCelestialEternityPoints() {
   let cep = DC.D5.pow(player.records.thisCelestialEternity.maxCIP.plus(
     gainedCelestialInfinityPoints()).add(1).log10().div(308).sub(0.7)).times(totalCEPMult());
 
-  cep = cep.min(DC.E4000).times(cep.div(DC.E4000).max(1).pow(0.1));
-  cep = cep.min(DC.E5000).times(cep.div(DC.E5000).max(1).pow(0.1));
-  cep = cep.min(DC.E6000);
+  cep = cep.min(DC.E4000).times(Decimal.pow10(1000 / 3).pow(cep.max(1).log10().div(4000).max(1).log10()));
 
   return cep.floor();
 }
@@ -726,7 +724,7 @@ export function gameLoop(passedDiff, options = {}) {
   const passDiff = passedDiff === undefined
     ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7) : passedDiff;
   let diff = new Decimal(passDiff);
-  const realDiff = diff === undefined
+  let realDiff = diff === undefined
     ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7)
     : new Decimal(diff).toNumber();
 
@@ -769,6 +767,16 @@ export function gameLoop(passedDiff, options = {}) {
 
   if (player.introTick === 45000 && player.introFrozen && !ui.$viewModel.quotes.current) {
     Quote.addToQueue(Quotes.elemental.intro3);
+  }
+
+  if (player.flux.fluxTime > 0) {
+    let finaltick = 1;
+    if ((player.flux.fluxTime - realDiff * (player.flux.level - 1) / 1000) < 0) {
+      finaltick = player.flux.fluxTime / (realDiff * (player.flux.level - 1) / 1000);
+    }
+    player.flux.fluxTime = Math.max(player.flux.fluxTime - realDiff * (player.flux.level - 1) / 1000, 0);
+    realDiff = realDiff * (((player.flux.level - 1) * finaltick) + 1);
+    diff = new Decimal(diff).times(((player.flux.level - 1) * finaltick) + 1);
   }
 
   // In certain cases we want to allow the player to interact with the game's settings and tabs, but prevent any actual
@@ -1079,7 +1087,7 @@ export function gameLoop(passedDiff, options = {}) {
 
   // There are some external checks which prevent excessive resource gain with Teresa-25; it may give TP outside of
   // dilation, but the TP gain function is also coded to behave differently if it's active
-  const teresa1 = player.dilation.active && (Ra.unlocks.autoTP.canBeApplied || EndgameMastery(53).isBought);
+  const teresa1 = player.dilation.active && (Ra.unlocks.autoTP.canBeApplied || EndgameMilestone.startRa.isReached);
   const teresa25 = !isInCelestialReality() && Ra.unlocks.unlockDilationStartingTP.canBeApplied;
   if ((teresa1 || teresa25) && !Pelle.isDoomed && !player.disablePostReality) rewardTP();
 
@@ -1133,6 +1141,11 @@ export function gameLoop(passedDiff, options = {}) {
     darkMatterProd = Decimal.min(darkMatterProd, darkMatterThreshold3).times(
       Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold3), 1), new Decimal(0.1).pow(
       1 - SingularityMilestone.weakenDMSoftcaps.effectOrDefault(0))));
+  }
+  const darkMatterThreshold4 = Laitela.darkMatterOmegaSoftcap;
+  if (darkMatterProd.gt(darkMatterThreshold4)) {
+    darkMatterProd = Decimal.min(darkMatterProd, darkMatterThreshold4).times(
+      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold4), 1), new Decimal(0.375)));
   }
   player.celestials.laitela.darkMatter = Alpha.isDestroyed ? new Decimal(darkMatterProd) : Decimal.min(darkMatterProd, Laitela.darkMatterCap);
   player.celestials.laitela.maxDarkMatter = Decimal.max(player.celestials.laitela.darkMatter, player.celestials.laitela.maxDarkMatter);
@@ -1407,11 +1420,11 @@ function laitelaRealityTick(realDiff) {
       laitelaInfo.difficultyTier++;
       laitelaInfo.fastestCompletion = 300;
       completionText += laitelaBeatText(Laitela.maxAllowedDimension + 1);
-      for (const quote of Laitela.quotes.all) {
+      /*for (const quote of Laitela.quotes.all) {
         if (quote.requirement) {
           quote.show();
         }
-      }
+      }*/
     }
     if (Laitela.realityReward.gt(oldInfo.realityReward)) {
       completionText += `<br><br>Dark Matter Multiplier: ${formatX(oldInfo.realityReward, 2, 2)}
@@ -1589,51 +1602,16 @@ export function gainedDoomedParticles() {
 }
 
 export function quoteCheck() {
-  for (const quote of Teresa.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Effarig.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Enslaved.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of V.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Ra.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Laitela.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Pelle.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Alpha.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Elemental.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
+  Teresa.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Effarig.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Enslaved.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  V.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Ra.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Laitela.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Pelle.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Alpha.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Slabdrill.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Elemental.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
 }
 
 // eslint-disable-next-line no-unused-vars
