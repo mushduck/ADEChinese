@@ -143,7 +143,7 @@ export const SingularityMilestones = {
           // For never-completed repeatable milestones, this is zero and will cause NaN bugs if we don't set it to 1
           const prev = Decimal.clampMin(m.previousGoal, 1);
           const part = Decimal.clamp(new Decimal(Decimal.log10(Currency.singularities.value.div(prev))).div(Decimal.log10(m.nextGoal.div(prev))), 0, 1);
-          return (m.completions.toNumber() + part) / 20;
+          return m.completions.add(part).div(20);
         };
         break;
       case SINGULARITY_MILESTONE_SORT.PERCENT_COMPLETIONS:
@@ -286,14 +286,14 @@ export const Singularity = {
 
     EventHub.dispatch(GAME_EVENT.SINGULARITY_RESET_BEFORE);
 
-    Currency.darkEnergy.reset();
+    if (!DivinityMilestone.hadronEmpowerment.isReached) Currency.darkEnergy.reset();
     Currency.singularities.add(this.singularitiesGained);
 
-    for (const quote of Laitela.quotes.all) {
+    /*for (const quote of Laitela.quotes.all) {
       if (quote.requirement) {
         quote.show();
       }
-    }
+    }*/
 
     EventHub.dispatch(GAME_EVENT.SINGULARITY_RESET_AFTER);
   }
