@@ -761,7 +761,7 @@ export const tabs = [
       {
         key: "transient",
         name: "Transient Universe",
-        symbol: "NYI",
+        symbol: "<i class='fas fa-stopwatch-20'></i>",
         component: "TransientUniverseTab",
         id: 0,
         hidable: true,
