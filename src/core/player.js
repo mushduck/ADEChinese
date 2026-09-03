@@ -314,6 +314,12 @@ window.player = {
     musicGlyphPurge: {
       isActive: false,
     },
+    endgameUpgrades: {
+      all: Array.range(0, 5).map(() => ({
+        isActive: false,
+      })),
+      isActive: true,
+    },
     singularity: { isActive: false },
     ipMultBuyer: { isActive: false, },
     epMultBuyer: { isActive: false, },
