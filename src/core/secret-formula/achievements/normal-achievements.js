@@ -850,9 +850,7 @@ export const normalAchievements = [
     checkRequirement: () => player.totalTickGained.gte(308),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "Time Dimensions gain a multiplier based on tickspeed.",
-    effect: () => Slabdrill.isCursed
-      ? Tickspeed.perSecond.pow(0.000005).min(DC.E20000)
-      : Tickspeed.perSecond.pow(0.000005),
+    effect: () => Tickspeed.perSecond.pow(0.000005),
     formatEffect: value => `${formatX(value, 2, 2)}`,
     progress: () => Achievement(105).isUnlocked ? DC.D1 : Decimal.clamp(player.totalTickGained.div(308), 0, 1)
   },
