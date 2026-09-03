@@ -343,6 +343,12 @@ window.player = {
   lastUpdate: new Date().getTime(),
   backupTimer: 0,
   storedTime: 0,
+  flux: {
+    isUnlocked: false,
+    level: 1,
+    fluxTime: 0,
+    maxUnlockedFlux: 2
+  },
   lastExportTime: Date.now(),
   chall2Pow: 1,
   chall3Pow: DC.D0_01,
@@ -430,7 +436,7 @@ window.player = {
     recentEternities: Array.range(0, 10).map(() =>
       [DC.BEMAX, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0]),
     recentRealities: Array.range(0, 10).map(() =>
-      [DC.BEMAX, Number.MAX_VALUE, DC.D1, DC.D1, "", 0, 0]),
+      [DC.BEMAX, Number.MAX_VALUE, DC.D1, DC.D1, "", DC.D0, DC.D0, DC.D0]),
     recentEndgames: Array.range(0, 10).map(() =>
       [DC.BEMAX, Number.MAX_VALUE, DC.D1, DC.D1, 1]),
     recentCelestialInfinities: Array.range(0, 10).map(() =>
@@ -602,7 +608,7 @@ window.player = {
     previousRuns: {}
   },
   IPMultPurchases: DC.D0,
-  version: 105,
+  version: 106,
   infinityPower: DC.D1,
   postC4Tier: 0,
   eternityPoints: DC.D0,
@@ -668,7 +674,7 @@ window.player = {
     imaginaryMachines: DC.D0,
     iMCap: DC.D0,
     dualMachines: DC.D0,
-    dmCap: DC.D0,
+    jMCap: DC.D0,
     glyphs: {
       active: [],
       inventory: [],
@@ -1053,7 +1059,8 @@ window.player = {
       collapsed: {
         upgrades: false,
         rifts: false,
-        galaxies: false
+        galaxies: false,
+        destruction: [false, false, false, false, false, false, false, false]
       },
       showBought: false,
       divinities: 0,
@@ -1406,6 +1413,7 @@ window.player = {
       octeracts: 0
     },
     celDimExpansion: {
+      softcapsCollapsed: false,
       totalTickBought: DC.D0,
       dimBoosts: DC.D0,
       galaxies: DC.D0,
@@ -1472,15 +1480,14 @@ window.player = {
       chargesLeft: {
         infinite: 0,
         eternal: 0,
-        complex: 0,
         temporal: 0
       },
       discharge: {
         infinite: false,
         eternal: false,
-        complex: false,
         temporal: false
-      }
+      },
+      allowComplex: true
     }
   },
   endgameMasteries: {
@@ -1602,6 +1609,7 @@ window.player = {
       hadrons: true
     },
     confirmations: {
+      doom: true,
       armageddon: true,
       sacrifice: true,
       challenges: true,
