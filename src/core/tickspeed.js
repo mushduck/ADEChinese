@@ -59,7 +59,7 @@ export function getTickSpeedMultiplier() {
       if (player.galaxies.eq(2)) baseMultiplier = DC.D1.div(1.072);
     }
     const perGalaxy = new Decimal(0.02).times(effects);
-    if (Pelle.isDoomed) galaxies = galaxies.times(0.5);
+    if (Pelle.isDoomed && !PelleDestructionUpgrade.disableGalaxyNerf.canBeApplied) galaxies = galaxies.times(0.5);
 
     galaxies = galaxies.times(Pelle.specialGlyphEffect.power);
     return DC.D0_01.clampMin(baseMultiplier.sub(galaxies.times(perGalaxy)));
@@ -72,7 +72,7 @@ export function getTickSpeedMultiplier() {
   galaxies = galaxies.times(getAdjustedGlyphEffect("realitygalaxies"));
   galaxies = galaxies.times(1 + ImaginaryUpgrade(9).effectOrDefault(0));
   if (Pelle.isDoomed && !PelleDestructionUpgrade.disableGalaxyNerf.canBeApplied) galaxies = galaxies.times(0.5);
-  if (Pelle.isDoomed && EndgameMilestone.remnantGalaxy.isReached && !player.disablePostReality) galaxies = galaxies.times(Decimal.pow(Decimal.log10(Currency.remnants.value.add(1)).add(1), 0.5));
+  if (Pelle.isDoomed) galaxies = galaxies.timesEffectOf(EndgameMastery(51));
   if (GalacticPowers.galaxyStrength.isUnlocked) galaxies = galaxies.times(GalacticPowers.galaxyStrength.reward);
   galaxies = galaxies.timesEffectsOf(DualityUpgrade(9), DualityUpgrade(23), DualityUpgrade(24));
   if (LHC.voidRunning) galaxies = galaxies.timesEffectOf(Accelerators.cosmic._milestones[0]);
@@ -210,7 +210,7 @@ export const Tickspeed = {
 
   multiplySameCosts() {
     for (const dimension of AntimatterDimensions.all) {
-      if (dimension.cost.e === this.cost.e) dimension.costBumps = dimension.costBumps.add(1);
+      if (dimension.cost.max(1).log10().floor().eq(this.cost.max(1).log10().floor())) dimension.costBumps = dimension.costBumps.add(1);
     }
   }
 };
