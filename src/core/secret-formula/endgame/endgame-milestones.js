@@ -8,71 +8,79 @@ export const endgameMilestones = {
          : "(You have not yet reached this milestone)"));
     }
   },
-  remnantGalaxy: {
+  galGenAnimation: {
     endgames: 2,
     reward: () => {
-      return "You gain a multiplier to Galaxy strength based on Remnants " +
-        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 2 && Pelle.isDoomed
-         ? `(Currently: +${formatDecimalPercents(Decimal.pow(Decimal.log10(Currency.remnants.value.add(1)).add(1), 0.5).sub(1), 2, 2)})`
-         : (player.endgames < 2 ? "(You have not yet reached this milestone)" : "(Currently has no effect)")));
+      return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(2)} Endgames, capping after ${formatInt(40)} Endgames ` + 
+        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 2
+         ? (player.endgames >= 40 && !Alpha.isDestroyed ? "(Capped: " : "(Currently: ") + (Alpha.isDestroyed ? "Instant)" : `${formatX(Math.pow(1.2, Math.floor(Math.min(Currency.endgames.value, 40) / 2)), 2, 2)})`)
+         : "(You have not yet reached this milestone)"));
+    }
+  },
+  vReduction: {
+    endgames: 3,
+    reward: () => {
+      return `Reduce the Realities requirement for unlocking V's Reality to ${formatInt(100)}`;
     }
   },
   fasterGalaxies: {
     endgames: 5,
     reward: "Unlock a new Galaxy Generator Upgrade"
   },
-  galGenAnimation: {
+  achievementKeep: {
+    endgames: 7,
+    reward: "Keep Achievements on Endgame"
+  },
+  startRa: {
     endgames: 10,
     reward: () => {
-      return `Galaxy Generator Animations are ${formatX(1.2, 0, 1)} faster every ${formatInt(10)} Endgames, capping after ${formatInt(200)} Endgames ` + 
-        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 10
-         ? (player.endgames >= 200 && !Alpha.isDestroyed ? "(Capped: " : "(Currently: ") + (Alpha.isDestroyed ? "Instant)" : `${formatX(Math.pow(1.2, Math.floor(Math.min(Currency.endgames.value, 200) / 10)), 2, 2)})`)
-         : "(You have not yet reached this milestone)"));
+      return `Start Endgames with all Ra Level ${formatInt(1)} Rewards`;
     }
   },
-  remnantFormula: {
-    endgames: 15,
-    reward: "Improve the Remnant Formula (see Remnant Gain Factors in the Pelle subtab)"
-  },
   celestialEarlyUnlock: {
-    endgames: 25,
+    endgames: 15,
     reward: () => {
       return `Start Endgames with the first ${formatInt(6)} Celestials unlocked`;
     }
   },
+  keepPerks: {
+    endgames: 25,
+    reward: "Keep Perk Tree on Endgame"
+  },
   gameSpeedUncap: {
-    endgames: 50,
+    endgames: 35,
     reward: () => {
       return `Remove the ${format(1e300, 2, 2)} Game Speed Hardcap`;
     }
   },
-  realityShardDTBoost: {
+  bhAutos: {
+    endgames: 50,
+    reward: "Start with both Black Holes permanent"
+  },
+  startSac: {
     endgames: 100,
     reward: () => {
-      return "Dilated Time gain is multiplied by your Reality Shard count " + 
-        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 100
-         ? `(Currently: ${formatX(Currency.realityShards.value.plus(1), 2, 2)})`
-         : "(You have not yet reached this milestone)"));
+      return `Start with ${format(1e100, 2, 2)} Glyph Sacrifice of all types`;
     }
   },
   moreFasterGalaxies: {
-    endgames: 250,
+    endgames: 200,
     reward: () => {
       return "Endgames boost Galaxy Production in Pelle " + 
-        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 250
+        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 200
          ? `(Currently: ${formatX(Decimal.pow(10, Math.min(Currency.endgames.value / 200, 50)).times(Decimal.pow(10, Math.max((Math.log10(Currency.endgames.value + 1) - 4) * 50, 0))), 2, 2)})`
          : "(You have not yet reached this milestone)"));
     }
   },
   autobuyerEndgame: {
-    endgames: 1000,
+    endgames: 400,
     reward: "Unlock autobuyer for Endgames"
   },
   endgameAntimatter: {
-    endgames: 10000,
+    endgames: 1000,
     reward: () => {
       return "Gain a power to Antimatter Production based on Endgames, which is stronger in Pelle " + 
-        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 10000
+        (player.disablePostReality ? "(Destroyed)" : (player.endgames >= 1000
          ? `(Currently: ${formatPow(Pelle.isDoomed ? 1 + (Math.log10(Math.min(Currency.endgames.value, 1e6) * Math.max(Math.log2(Currency.endgames.value + 1) - Math.log2(5e5), 1) + 1) / 80) : 1 + (Math.log10(Math.min(Currency.endgames.value, 1e6) * Math.max(Math.log2(Currency.endgames.value + 1) - Math.log2(5e5), 1) + 1) / 200), 2, 3)})`
          : "(You have not yet reached this milestone)"));
     }
