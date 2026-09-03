@@ -30,9 +30,10 @@ export const divinityMilestones = {
   hadronEmpowerment: {
     divinities: 3,
     get reward() {
-      return ` Automatically destabilize Lai'tela's Reality if your Antimatter exceeds the amount required to disable it in less than ${formatInt(30)} seconds, rooted by ${formatInt(8)} divided by the number of Dimensions left intact
+      return ` Automatically destabilize Lai'tela's Reality if your Antimatter exceeds the amount required to disable it in less than ${formatInt(30)} seconds (which is boosted by Entropy generation), rooted by ${formatInt(8)} divided by the number of Dimensions left intact
         Automatically hadronize Lai'tela's Reality if all ${formatInt(8)} Dimensions are disabled
         Hadrons and Dark Hadrons are now equal, and you can instead merge them into Exotic Hadrons which reduce the time it takes for Hadron effects to cap
+        Forming Singularities no longer resets anything
         The ${formatInt(8)}th Galaxy Generator Upgrade is stronger
         Multiply all Divine Dimensions and Divine Energy production by ${formatX(77)}
         Dark Matter Annihilation no longer resets anything
@@ -85,7 +86,14 @@ export const divinityMilestones = {
         Reduce the time for Hadrons to cap by ${formatPercents(0.75)}
         Reduce the time for Remnants of Alpha Decay to cap by ${formatPercents(0.5)}
         Game Speed affects Ethereal Power generation at a severely reduced rate
-        You can now Ascend Cosmic Sectors in bulk`;
+        You can now Ascend Cosmic Sectors in bulk
+        Unlock Autobuyers for Endgame Upgrades`;
+    }
+  },
+  universes: {
+    divinities: 13,
+    get reward() {
+      return ` Unlock the Transient Universe`;
     }
   }
 };
