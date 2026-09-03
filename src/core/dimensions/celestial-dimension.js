@@ -325,7 +325,7 @@ export const CelestialDimensions = {
     if (player.disablePostReality) return DC.D1;
     return new Decimal(1 - DivineDimensions.conversionFormula3).times(DivinityMilestone.divineDimensions.isReached ? 0.8 : 1).timesEffectOf(
       DivinityUpgrade.divineL1U2).times(DivinityMilestone.pelleQoL.isReached ? 0.5 : 1).times(DivinityMilestone.finalRebirth.isReached ? 0.75 : 1).times(
-      DivinityMilestone.ascendedSurge.isReached ? 0.5 : 1);
+      DivinityMilestone.ascendedSurge.isReached ? 0.5 : 1).dividedByEffectOf(Achievement(247));
   },
 
   get alphaDecayRemnant() {
@@ -471,6 +471,7 @@ export class CelestialDimBoost {
     const targetResets = CelestialDimBoost.purchasedBoosts.add(bulk);
     let amount = DC.E30;
     amount = amount.mul(DC.E30.pow(targetResets.sub(1)).round());
+    amount = Decimal.pow10(amount.max(1).log10().times(amount.max(1).log10().div(3e13).max(1)));
 
     amount = Decimal.round(amount);
 
@@ -555,6 +556,7 @@ function maxBuyCelestialDimBoosts() {
   const cm = Currency.celestialMatter.value;
   let calcBoosts;
   calcBoosts = cm.max(1).div(amount).log(multiplierPerDB);
+  calcBoosts = calcBoosts.min(DC.E12).times(calcBoosts.div(DC.E12).max(1).pow(0.5));
   
   // Add one cause (x-b)/i is off by one otherwise
   if (calcBoosts.floor().add(1).lte(CelestialDimBoost.purchasedBoosts)) return;
@@ -821,7 +823,7 @@ function celestialCrunchUpdateStatistics() {
   player.records.bestCelestialInfinity.time =
     Decimal.min(player.records.bestCelestialInfinity.time, player.records.thisCelestialInfinity.time);
   player.records.bestCelestialInfinity.realTime =
-    Math.min(player.records.bestCelestialInfinity.realTime, player.records.thisCelestialInfinity.realTime);
+    Math.clamp(player.records.bestCelestialInfinity.realTime, 1, player.records.thisCelestialInfinity.realTime);
 }
 
 function celestialCrunchTabChange(firstCelestialInfinity) {
@@ -1031,7 +1033,7 @@ function giveCelestialEternityRewards(auto) {
   player.records.bestCelestialEternity.time =
     Decimal.min(player.records.bestCelestialEternity.time, player.records.thisCelestialEternity.time);
   player.records.bestCelestialEternity.realTime =
-    Math.min(player.records.bestCelestialEternity.realTime, player.records.thisCelestialEternity.realTime);
+    Math.clamp(player.records.bestCelestialEternity.realTime, 1, player.records.thisCelestialEternity.realTime);
 
   player.records.thisCelestialReality.bestCelestialEternitiesPerMs = player.records.thisCelestialReality.bestCelestialEternitiesPerMs.clampMin(
     newCelestialEternities.div(Math.clampMin(33, player.records.thisCelestialEternity.realTime))
