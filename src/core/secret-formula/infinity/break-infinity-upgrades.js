@@ -114,13 +114,7 @@ export const breakInfinityUpgrades = {
     effect: () => player.records.bestInfinity.time,
     formatEffect: value => {
       if (value === DC.BEMAX && !Pelle.isDoomed) return "No Infinity generation";
-      let infinities = DC.D1;
-      infinities = infinities.timesEffectsOf(
-        RealityUpgrade(5),
-        RealityUpgrade(7),
-        Ra.unlocks.continuousTTBoost.effects.infinity
-      );
-      infinities = infinities.times(getAdjustedGlyphEffect("infinityinfmult"));
+      const infinities = gainedInfinities();
       const timeStr = Time.bestInfinity.totalMilliseconds.lte(50) && !Alpha.isDestroyed
         ? `${TimeSpan.fromMilliseconds(new Decimal(100)).toStringShort()} (capped)`
         : `${Time.bestInfinity.times(new Decimal(2)).toStringShort()}`;
