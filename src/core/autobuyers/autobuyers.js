@@ -16,6 +16,7 @@ import { DimBoostAutobuyerState } from "./dimboost-autobuyer";
 import { DivineDimensionAutobuyerState } from "./divine-dimension-autobuyer";
 import { DualityUpgradeAutobuyerState } from "./duality-upgrade-autobuyer";
 import { EndgameAutobuyerState } from "./endgame-autobuyer";
+import { EndgameUpgradeAutobuyerState } from "./endgame-upgrade-autobuyer";
 import { EternityAutobuyerState } from "./eternity-autobuyer";
 import { GalaxyAutobuyerState } from "./galaxy-autobuyer";
 import { GalaxyGeneratorAutobuyerState } from "./galaxy-generator-autobuyer";
@@ -54,6 +55,7 @@ export const Autobuyer = {
   divineDimension: DivineDimensionAutobuyerState.createAccessor(),
   dualityUpgrade: DualityUpgradeAutobuyerState.createAccessor(),
   endgame: new EndgameAutobuyerState(),
+  endgameUpgrade: EndgameUpgradeAutobuyerState.createAccessor(),
   eternity: new EternityAutobuyerState(),
   galaxy: new GalaxyAutobuyerState(),
   galaxyGenerator: GalaxyGeneratorAutobuyerState.createAccessor(),
@@ -128,6 +130,7 @@ export const Autobuyers = (function() {
     Autobuyer.imaginaryUpgrade.zeroIndexed,
     Autobuyer.dualityUpgrade.zeroIndexed,
     Autobuyer.galaxyGenerator.zeroIndexed,
+    Autobuyer.endgameUpgrade.zeroIndexed,
   ];
   const all = dimensions.concat(prestige, singleComplex, arrays);
   const multiple = [
@@ -144,6 +147,7 @@ export const Autobuyers = (function() {
     Autobuyer.imaginaryUpgrade,
     Autobuyer.dualityUpgrade,
     Autobuyer.galaxyGenerator,
+    Autobuyer.endgameUpgrade,
   ];
 
   return {
