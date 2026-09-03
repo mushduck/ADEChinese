@@ -304,7 +304,7 @@ export const divinityUpgrades = {
     id: "divineL5U1",
     layer: 5,
     cost: new Decimal(700),
-    description: () => "Completion’s effect now applies through Supernova"
+    description: () => "Stellar Compound’s effect now applies through Supernova"
   },
   divineL5U2: {
     name: "Bounty",
