@@ -254,7 +254,7 @@ export const imaginaryUpgrades = [
     cost: new Decimal(3e12),
     requirement: () => `Have a Continuum increase of at least ${formatPercents(1)}`,
     hasFailed: () => false,
-    checkRequirement: () => Laitela.matterExtraPurchaseFactor >= 2,
+    checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(2),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Unlock Autobuyers for repeatable Imaginary Upgrades and generate Imaginary Machines
       ${formatInt(10)} times faster`,

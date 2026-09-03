@@ -224,7 +224,7 @@ export const dualityUpgrades = [
     cost: new Decimal(1e16),
     requirement: () => `Have a Continuum increase of at least ${formatX(4444444, 2, 2)}`,
     hasFailed: () => false,
-    checkRequirement: () => Laitela.matterExtraPurchaseFactor >= 4444444,
+    checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(4444444),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `Unlock Autobuyers for repeatable Duality Upgrades and generate Dual Machines
       ${formatInt(10)} times faster`,
