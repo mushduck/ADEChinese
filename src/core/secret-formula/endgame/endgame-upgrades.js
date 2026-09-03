@@ -10,10 +10,11 @@ const rebuyable = props => {
     props.initialCost * props.costMult
   );
   const { effect } = props;
-  if (props.isDecimal) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.endgame.rebuyables[props.id]);
+  if (props.overflowing) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.endgame.rebuyables[props.id]).min(DC.NUMMAX).times(Decimal.pow(effect, player.endgame.rebuyables[props.id]).div(DC.NUMMAX).max(2).log2());
+  else if (props.isDecimal) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.endgame.rebuyables[props.id]);
   else props.effect = () => player.disablePostReality ? 1 : Math.pow(effect, player.endgame.rebuyables[props.id]);
   props.description = () => props.textTemplate.replace("{value}", format(effect, 2, 2));
-  props.formatEffect = value => formatX(value, 2, 2);
+  props.formatEffect = value => (props.id === 2 || props.id === 3) ? formatX(value, 2, 4) : formatX(value, 2, 2);
   props.formatCost = value => format(value, 2, 0);
   return props;
 };
@@ -27,7 +28,7 @@ export const endgameUpgrades = [
     costMult: 60,
     textTemplate: "Delay the Infinity Upgrade 23 Softcap start by a factor of {value}",
     effect: 1.2,
-    isDecimal: true
+    overflowing: true
   }),
   rebuyable({
     name: "Infinity Ameliorator",
@@ -75,7 +76,7 @@ export const endgameUpgrades = [
     canLock: true,
     lockEvent: "purchase the 6th Galaxy Generator Upgrade",
     description: () =>
-      `Start with ${format(1e7)} Perk Points, ${formatInt(1000)} Realities, Permanent Black Holes,
+      `Start with ${format(1e7)} Perk Points, ${formatInt(1000)} Realities,
       ${format(1e12)} Relic Shards, and both Nameless upgrades unlocked`
   },
   {
