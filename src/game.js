@@ -1610,7 +1610,6 @@ export function quoteCheck() {
   Laitela.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
   Pelle.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
   Alpha.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
-  Slabdrill.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
   Elemental.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
 }
 
