@@ -278,6 +278,7 @@ class PowerCoreState extends GameMechanicState {
 LHC.powerCores = new PowerCoreState();
 
 export function enterTheVoid() {
+  if (player.endgame.overcharge.isRunning) return;
   player.disablePostReality = true;
   Endgame.resetNoReward();
   disChargeAllPerkUpgrades();
@@ -321,6 +322,7 @@ export function exitTheVoid() {
 };
 
 export function enterNullifiedVoid() {
+  if (player.endgame.overcharge.isRunning) return;
   Endgame.resetNoReward();
   player.endgame.largeHadronCollider.void.isRunning = true;
 };
