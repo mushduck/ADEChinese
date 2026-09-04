@@ -615,7 +615,7 @@ export function finishProcessReality(realityProps) {
   }
 
   let celestialRunState;
-  celestialRunState = clearCelestialRuns();
+  celestialRunState = clearCelestialRuns((Alpha.isRunning && Alpha.currentStage === 27 || Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME) ? true : false);
   recalculateAllGlyphs();
   Glyphs.updateMaxGlyphCount(true);
 
@@ -824,7 +824,7 @@ export function applyRUPG10() {
   applyEU1();
 }
 
-export function clearCelestialRuns() {
+export function clearCelestialRuns(noClear = false) {
   const saved = {
     teresa: player.celestials.teresa.run,
     effarig: player.celestials.effarig.run,
@@ -834,7 +834,7 @@ export function clearCelestialRuns() {
     laitela: player.celestials.laitela.run,
     alpha: player.celestials.alpha.run
   };
-  if (!(Alpha.isRunning && Alpha.currentStage === 27 || Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME)) {
+  if (!noClear) {
     player.celestials.teresa.run = false;
     player.celestials.effarig.run = false;
     // Nameless forces all tabs to be visible, but exiting via the header might leave the player on a tab which is
