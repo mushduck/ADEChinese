@@ -159,7 +159,7 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
   }
 
   get canCharge() {
-    return !this.isCharged && Teresa.chargesLeft !== 0 && this.ableToCharge;
+    return !this.isCharged && Teresa.chargesLeft !== 0 && this.ableToCharge && this.boughtAmount >= [20, 20, 14, 6, 0, Infinity, Infinity][this.id];
   }
 
   charge() {
