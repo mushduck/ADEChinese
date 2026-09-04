@@ -78,9 +78,7 @@ export const expansionPacks = {
       暗物质获取量乘以当前反物质的第二指数和当前虚幻机器数量指数的最大值（当前：${formatX(Decimal.max(player.antimatter.max(1e10).log10().log10(), player.reality.imaginaryMachines.max(10).log10()), 2, 2)}）；
       暗能量获取量乘以奇点指数的平方（当前：${formatX(player.celestials.laitela.singularities.max(10).log10().pow(2), 2, 2)}）；
       基于暗物质数量提升暗物质湮灭的指数（当前：${formatPow(Decimal.pow((Decimal.log10(Decimal.log10(Currency.darkMatter.value.add(1)).add(1)).add(1)).div(2), 2).add(1), 2, 3)}）；
-      解锁强子化莱特拉的现实；
-      使莱特拉的现实失稳后提升暗物质的上限。；
-      `
+      解锁强子化莱特拉的现实；使莱特拉的现实失稳后提升暗物质的上限。`
     },
     cost: Decimal.pow(10, 1e130),
     formatCost: value => formatPostBreak(value, 2, 0)
