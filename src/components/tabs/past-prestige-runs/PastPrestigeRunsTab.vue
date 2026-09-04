@@ -17,7 +17,7 @@ export default {
           getRuns: () => player.records.recentRealities,
           extra: ["符文等级", "遗迹碎片"],
           showExtra: [() => true, () => TeresaUnlocks.effarig.canBeApplied],
-          formatExtra: [x => formatInt(x), x => format(x, 2)],
+          formatExtra: [x => formatHybridLarge(x, 3), x => format(x, 2)],
           allowRate: [false, true],
           rateString: ["", "遗迹碎片获得率"],
         },

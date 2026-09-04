@@ -175,7 +175,7 @@ export default {
     },
     isObscured(row) {
       if (ImaginaryUpgrade(30).isBought) {
-        return row >= 23;
+        return row >= 24;
       }
       if (PlayerProgress.endgameUnlocked()) {
         return row >= 20;

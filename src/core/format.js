@@ -176,7 +176,7 @@ window.formatMachines = function formatMachines(realPart, imagPart, dualPart) {
   const parts = [];
   if (Decimal.neq(realPart, 0)) parts.push(format(realPart, 2));
   if (Decimal.neq(imagPart, 0)) parts.push(`${format(imagPart, 2, 2)}i`);
-  if (Decimal.neq(dualPart, 0)) parts.push(`${format(dualPart, 2, 2)}ε`);
+  if (Decimal.neq(dualPart, 0)) parts.push(`${format(dualPart, 2, 2)}j`);
   // This function is used for just RM and just iM in a few spots, so we have to push both parts conditionally
   // Nonetheless, we also need to special-case both zero so that it doesn't end up displaying as an empty string
   if (Decimal.eq(realPart, 0) && Decimal.eq(imagPart, 0) && Decimal.eq(dualPart, 0)) return format(0);

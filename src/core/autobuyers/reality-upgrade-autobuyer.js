@@ -10,7 +10,8 @@ export class RealityUpgradeAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality;
+    return (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMilestone.startRa.isReached)
+      && !player.disablePostReality;
   }
 
   get hasUnlimitedBulk() {

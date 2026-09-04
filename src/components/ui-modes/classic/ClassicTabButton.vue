@@ -15,7 +15,8 @@ export default {
     return {
       isAvailable: false,
       hasNotification: false,
-      tabName: ""
+      tabName: "",
+      uiClass: ""
     };
   },
   computed: {
@@ -27,6 +28,7 @@ export default {
     update() {
       this.isAvailable = this.tab.isAvailable;
       this.hasNotification = this.tab.hasNotification;
+      this.uiClass = (typeof this.tab.config.UIClass === "function") ? this.tab.config.UIClass() : this.tab.config.UIClass;
       if (this.tabPosition < Pelle.endTabNames.length) {
         this.tabName = Pelle.transitionText(
           this.tab.name,
@@ -45,7 +47,7 @@ export default {
   <button
     v-if="isAvailable"
     :class="
-      [tab.config.UIClass,
+      [uiClass,
        { 'o-tab-btn--active': isCurrentTab }]
     "
     class="o-tab-btn"

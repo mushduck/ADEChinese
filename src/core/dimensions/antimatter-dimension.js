@@ -643,11 +643,11 @@ class AntimatterDimensionState extends DimensionState {
 
   multiplySameCosts() {
     for (const dimension of AntimatterDimensions.all.filter(dim => dim.tier !== this.tier)) {
-      if (dimension.cost.e === this.cost.e) {
+      if (dimension.cost.max(1).log10().floor().eq(this.cost.max(1).log10().floor())) {
         dimension.costBumps = dimension.costBumps.add(1);
       }
     }
-    if (Tickspeed.cost.e === this.cost.e) player.chall9TickspeedCostBumps = player.chall9TickspeedCostBumps.add(1);
+    if (Tickspeed.cost.max(1).log10().floor().eq(this.cost.max(1).log10().floor())) player.chall9TickspeedCostBumps = player.chall9TickspeedCostBumps.add(1);
   }
 
   multiplyIC5Costs() {

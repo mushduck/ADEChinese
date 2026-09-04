@@ -456,7 +456,7 @@ export const singularityMilestones = {
     repeat: new Decimal(0),
     limit: 1,
     description: "连续统较低提高熵生产速度",
-    effect: () => Math.pow(Laitela.matterExtraPurchaseFactor, 0.2),
+    effect: () => Decimal.pow(Laitela.matterExtraPurchaseFactor, 0.2),
     effectFormat: x => formatX(x, 2, 2),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.BOOSTS_MAIN,
   },

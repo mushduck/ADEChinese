@@ -164,10 +164,10 @@ export const infinityUpgrades = {
     checkRequirement: () => InfinityUpgrade.dimboostMult.isBought,
     description: () => `依据你最快一次无限用时的 ${formatInt(10)} 分之一的速度自动生成无限点数`,
     // Cutting corners: this is not actual effect, but it is totalIPMult that is displyed on upgrade
-    effect: () => (Teresa.isRunning || V.isRunning || (Pelle.isDoomed && !PelleDestructionUpgrade.x2IPUpgrade.canBeApplied) ? DC.D0 : GameCache.totalIPMult.value),
+    effect: () => (Teresa.isRunning || V.isRunning || (Pelle.isDoomed && !PelleDestructionUpgrade.passiveIPGen.canBeApplied) ? DC.D0 : GameCache.totalIPMult.value),
     formatEffect: value => {
       if (Teresa.isRunning || V.isRunning) return "在本次现实中被禁用";
-      if (Pelle.isDoomed && !PelleDestructionUpgrade.x2IPUpgrade.canBeApplied) return "已禁用";
+      if (Pelle.isDoomed && !PelleDestructionUpgrade.passiveIPGen.canBeApplied) return "已禁用";
       if (Alpha.isRunning && player.records.bestInfinity.realTime >= 999999999999) return "生成太慢"; 
       if (player.records.bestInfinity.time.gte(999999999999)) return "生成太慢"; 
       if (Alpha.isRunning) return `${format(value, 2)} / ${TimeSpan.fromMilliseconds(Time.bestInfinityRealTime.totalMilliseconds.times(10)).toStringShort()}`;

@@ -10,7 +10,7 @@ export class BlackHolePowerAutobuyerState extends AutobuyerState {
   }
 
   get isUnlocked() {
-    return (Ra.unlocks.blackHolePowerAutobuyers.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality;
+    return (Ra.unlocks.blackHolePowerAutobuyers.canBeApplied || EndgameMilestone.startRa.isReached) && !player.disablePostReality;
   }
 
   get hasUnlimitedBulk() {

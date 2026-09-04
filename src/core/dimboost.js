@@ -198,7 +198,7 @@ export class DimBoost {
       newUnlock = "解锁维度献祭";
     }
 
-    const formattedMultText = `提供${formatX(DimBoost.power, 2, 1)}的加成`;
+    const formattedMultText = `提供${formatX(DimBoost.power, 2, 2)}的加成`;
     let dimensionRange = `为第一维度`;
     if (boosts.gt(0)) dimensionRange = `为第1至${Decimal.min(boosts.add(1), 8)}维度`;
     if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `为所有维度`;

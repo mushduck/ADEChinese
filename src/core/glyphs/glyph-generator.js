@@ -265,7 +265,7 @@ export const GlyphGenerator = {
     if (Ra.unlocks.maxGlyphRarityAndShardSacrificeBoost.canBeApplied && !player.disablePostReality) return rarityToStrength(Math.min(100 + Ra.unlocks.rarityBuff.effectOrDefault(0) + Effarig.rarityCapIncrease +
       GlyphSacrifice.effarig.effectValue.sub(100).max(0).toNumber(), 300));
     let result = GlyphGenerator.gaussianBellCurve(rng) * GlyphGenerator.strengthMultiplier;
-    const relicShardFactor = (Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality ? 1 : rng.uniform();
+    const relicShardFactor = (Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMilestone.startRa.isReached) && !player.disablePostReality ? 1 : rng.uniform();
     const increasedRarity = relicShardFactor * Effarig.maxRarityBoost +
       Effects.sum(Achievement(146)) + GlyphSacrifice.effarig.effectValue.toNumber();
     // Each rarity% is 0.025 strength.

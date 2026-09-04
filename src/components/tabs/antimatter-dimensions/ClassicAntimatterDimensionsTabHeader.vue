@@ -19,8 +19,8 @@ export default {
   },
   computed: {
     sacText() {
-      if (Ascensions.sacA.isUnlocked) return `献祭指数 (+${formatPow(sacrificeBoost, 2, 3)})`;
-      return `献祭倍率 (${formatX(sacrificeBoost, 2, 2)})`;
+      if (Ascensions.sacA.isUnlocked) return `献祭指数 (+${formatPow(this.sacrificeBoost, 2, 3)})`;
+      return `献祭倍率 (${formatX(this.sacrificeBoost, 2, 2)})`;
     },
     sacrificeTooltip() {
       return `第八维度指数 +${formatPow(this.nextPower, 2, 3)}`;

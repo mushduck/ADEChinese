@@ -27,7 +27,8 @@ export default {
       nullified: false,
       voidMode: 0,
       nullParticles: new Decimal(),
-      nullParticlesPerSecond: new Decimal()
+      nullParticlesPerSecond: new Decimal(),
+      nullParticleEffect: new Decimal()
     };
   },
   computed: {
@@ -73,6 +74,7 @@ export default {
       this.voidMode = player.endgame.largeHadronCollider.void.mode;
       this.nullParticles.copyFrom(player.endgame.largeHadronCollider.void.nullParticles);
       this.nullParticlesPerSecond.copyFrom(!LHC.nullifiedVoidRunning ? DC.D0 : getNullParticleGainPerSecond());
+      this.nullParticleEffect.copyFrom(Currency.nullParticles.value.max(1).log10().div(5).add(1).pow(5));
     },
     formatNullAmount(amount) {
       return amount.gte(DC.NUMMAX) ? "无限" : format(amount, 2, 2);
@@ -176,7 +178,7 @@ export default {
     <div v-if="voidMode === 1">
       进入归零虚无将强制进行一次终局，并将反物质第二指数稀释至 × {{ format(0.01, 2, 2) }}。
       <br>
-      在归零虚无中反物质将缓慢转变为虚粒子，为虚物质获取提供指数加成。
+      在归零虚无中反物质将缓慢转变为虚粒子，为稳态虚无中的反物质维度提供指数加成。（当前：{{ formatPow(nullParticleEffect, 2, 3) }}）
     </div>
     <NullUpgradesTabComponent />
   </div>

@@ -11,7 +11,7 @@ export default {
       <br>
       <div>
       <b>
-        The Universes 不会在 v2.1 版本前实装。QAQ
+        The Universes 不会在 v2.0 版本前实装。QAQ
       </b>
       </div>
     </div>

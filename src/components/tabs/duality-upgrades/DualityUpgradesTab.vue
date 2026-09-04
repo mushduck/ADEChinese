@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     update() {
-      this.baseIMCap.copyFrom(MachineHandler.baseIMCap);
+      this.baseIMCap.copyFrom(MachineHandler.baseIMHardcap);
       this.capIM.copyFrom(MachineHandler.hardcapIM);
       this.scaleTime = MachineHandler.scaleTimeForDM;
       this.capStr = formatMachines(MachineHandler.hardcapRM, MachineHandler.currentIMCap, MachineHandler.currentDMCap);

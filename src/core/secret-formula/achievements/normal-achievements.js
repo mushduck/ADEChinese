@@ -537,7 +537,7 @@ export const normalAchievements = [
     get description() {
       return `所有反物质维度的倍数超过 ${formatX(DC.NUMMAX, 1)}.`;
     },
-    checkRequirement: () => AntimatterDimensions.all.every(x => x.multiplier.gte(DC.NUMMAX)),
+    checkRequirement: () => AntimatterDimensions.all.every(x => x.tier > 8 || x.multiplier.gte(DC.NUMMAX)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `所有反物质维度增强 ${formatPercents(0.1)}.`; },
     effect: 1.1,
@@ -873,7 +873,7 @@ export const normalAchievements = [
       return `在你过去的 ${formatInt(10)} 次无限中，每次无限至少比上一次无限的无限点数高 ${format(DC.NUMMAX, 1, 0)} 倍。`;
     },
     checkRequirement: () => {
-      if (player.records.recentInfinities.some(i => i[0] === Number.MAX_VALUE)) return false;
+      if (player.records.recentInfinities.some(i => i[0].gte(Number.MAX_VALUE))) return false;
       const infinities = player.records.recentInfinities.map(run => run[2]);
       for (let i = 0; i < infinities.length - 1; i++) {
         if (infinities[i].lt(infinities[i + 1].times(DC.NUMMAX))) return false;
@@ -1104,7 +1104,7 @@ export const normalAchievements = [
       Currency.infinityPoints.value.add(1).log10().gte(200000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     reward: "开始永恒时，所有无限挑战解锁且已完成。",
-    progress: () => Achievement(133).isUnlocked ? DC.D1 : ((!Array.dimensionTiers.map(InfinityDimension).every(dim => dim.baseAmount === 0) || player.IPMultPurchases.neq(0)) ? DC.DM1 : Decimal.clamp(Currency.infinityPoints.value.add(1).log10().div(200000), 0, 1))
+    progress: () => Achievement(133).isUnlocked ? DC.D1 : ((!Array.dimensionTiers.map(InfinityDimension).every(dim => dim.baseAmount.eq(0)) || player.IPMultPurchases.neq(0)) ? DC.DM1 : Decimal.clamp(Currency.infinityPoints.value.add(1).log10().div(200000), 0, 1))
   },
   {
     id: 134,
@@ -1194,7 +1194,7 @@ export const normalAchievements = [
       return `在你过去的 ${formatInt(10)} 次永恒中，每次永恒至少比上一次永恒后获得的永恒点数高 ${format(DC.NUMMAX, 1, 0)} 倍。`;
     },
     checkRequirement: () => {
-      if (player.records.recentEternities.some(i => i[0] === Number.MAX_VALUE)) return false;
+      if (player.records.recentEternities.some(i => i[0].gte(Number.MAX_VALUE))) return false;
       const eternities = player.records.recentEternities.map(run => run[2]);
       for (let i = 0; i < eternities.length - 1; i++) {
         if (eternities[i].lt(eternities[i + 1].times(DC.NUMMAX))) return false;
@@ -1789,6 +1789,10 @@ export const normalAchievements = [
     get description() { return `达成 ${format(1e12, 2, 2)} 次终局。` },
     checkRequirement: () => player.endgames >= 1e12,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Start Endgames with ${format(1e24, 2, 2)} filled Reality Machines`;
+    },
+    effect: () => player.disablePostReality ? DC.D0 : Decimal.pow10(24),
     progress: () => Achievement(217).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.endgames).div(1e12), 0, 1)
   },
   {
@@ -1797,6 +1801,9 @@ export const normalAchievements = [
     get description() { return `在无名氏的现实内达到 ${formatPostBreak("ee50")} 反物质。` },
     checkRequirement: () => Currency.antimatter.value.gte("ee50") && Enslaved.isRunning,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `Keep V progression on Endgame.`;
+    },
     progress: () => Achievement(218).isUnlocked ? DC.D1 : (!Enslaved.isRunning ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().add(1).log10().div(50), 0, 1))
   },
   {
@@ -1825,18 +1832,18 @@ export const normalAchievements = [
   {
     id: 223,
     name: "力量！无限的力量！",
-    get description() { return `无限维度的购买上限超过 ${format(DC.NUMMAX, 1, 0)} 。` },
+    get description() { return `无限维度的购买上限超过 ${format(DC.NUMMAX, 1, 0)}。` },
     checkRequirement: () => InfinityDimensions.totalDimCap.gt(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `终局后保留无限升级充能。`;
+      return `退出禁用无限升级的挑战时，若能充能各自集合全部升级，则充能无限升级将自动恢复。`;
     },
     progress: () => Achievement(223).isUnlocked ? DC.D1 : Decimal.clamp(InfinityDimensions.totalDimCap.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
   },
   {
     id: 224,
     name: "宇宙吞噬者",
-    get description() { return `在佩勒的现实外达到 ${formatPostBreak(Decimal.pow10(1e100), 2)} 反物质。` },
+    get description() { return `在被毁灭的现实外达到 ${formatPostBreak(Decimal.pow10(1e100), 2)} 反物质。` },
     checkRequirement: () => Currency.antimatter.value.gte(Decimal.pow10(1e100)) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
@@ -1949,7 +1956,7 @@ export const normalAchievements = [
   {
     id: 236,
     name: "超新星",
-    get description() { return `太阳神的总记忆记忆达到 ${formatInt(500)}。` },
+    get description() { return `太阳神的总记忆等级达到 ${formatInt(500)}。` },
     checkRequirement: () => Ra.totalPetLevel >= 500,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() { return `记忆获取速度${formatX(500)}`; },
@@ -1958,18 +1965,89 @@ export const normalAchievements = [
   },
   {
     id: 237,
+    name: "完美均衡",
+    description: "购买前两个复兴升级。",
+    checkRequirement: () => ResurgenceUpgrade.ipSurge.isBought && ResurgenceUpgrade.epSurge.isBought,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(237).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineEnergy.value.div(1e6), 0, 1)
+  },
+  {
+    id: 238,
+    name: "创世纪",
+    description: "解锁强子连续统。",
+    checkRequirement: () => DivinityMilestone.hadronEmpowerment.isReached,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(238).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.celestials.pelle.divinities).div(3), 0, 1)
+  },
+  {
+    id: 241,
+    name: "核子研究所",
+    description: "解锁强子加速器。",
+    checkRequirement: () => ExpansionPack.alphaPack.isBought,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(241).isUnlocked ? DC.D1 : Decimal.clamp(player.antimatter.max(10).log10().log10().div(200), 0, 1)
+  },
+  {
+    id: 242,
+    name: "无限音速III",
+    description: "凝聚神性之星。",
+    checkRequirement: () => true,
+    checkEvent: GAME_EVENT.CONDENSE_RESET_BEFORE,
+    progress: () => Achievement(242).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineMatter.value.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
+  },
+  {
+    id: 243,
+    name: "旅途的终点",
+    description: "解锁天界永恒扩展。",
+    checkRequirement: () => Currency.celestialEternityPoints.gte(DC.E1000),
+    checkEvent: GAME_EVENT.CELESTIAL_ETERNITY_RESET_BEFORE,
+    progress: () => Achievement(243).isUnlocked ? DC.D1 : Decimal.clamp(Currency.celestialEternityPoints.value.max(1).log10().div(1000), 0, 1)
+  },
+  {
+    id: 244,
     name: "超超新星",
     description: "解锁所有类型的星辰。",
     checkRequirement: () => EtherealStars.gray.isUnlocked,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    progress: () => Achievement(237).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(EtherealStars.all.filter(s => s.isUnlocked).length).div(9), 0, 1)
+    progress: () => Achievement(244).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(EtherealStars.all.filter(s => s.isUnlocked).length).div(9), 0, 1)
   },
   {
-    id: 238,
+    id: 245,
+    name: "阿列夫零",
+    description: "归零虚无。",
+    checkRequirement: () => player.endgame.largeHadronCollider.void.nullified,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    progress: () => Achievement(245).isUnlocked ? DC.D1 : Decimal.clamp(Currency.nullMatter.value.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
+  },
+  {
+    id: 246,
+    name: "超忆症",
+    get description() { return `太阳神的总记忆等级达到 ${formatInt(1000)}。` },
+    checkRequirement: () => Ra.totalPetLevel >= 1000,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    get reward() {
+      return `终局后保留符文献祭。`;
+    },
+    progress: () => Achievement(246).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(Ra.totalPetLevel).div(1000), 0, 1)
+  },
+  {
+    id: 247,
+    name: "核心坍缩",
+    description: "进行超新星。",
+    checkRequirement: () => true,
+    checkEvent: GAME_EVENT.SUPERNOVA_RESET_BEFORE,
+    get reward() {
+      return `将所有类型的强子效果到达上限和阿尔法诅咒消散的速度增加 ${formatPercents(0.5)}。`;
+    },
+    effect: () => player.disablePostReality ? 1 : 2,
+    progress: () => Achievement(247).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineStars.value.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
+  },
+  {
+    id: 248,
     name: "现实的极限",
     get description() { return `达到 ${formatPostBreak(DC.E4000, 2)} 天界永恒点数。` },
     checkRequirement: () => player.endgame.celDimExpansion.celestialEternityPoints.gte(DC.E4000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    progress: () => Achievement(238).isUnlocked ? DC.D1 : Decimal.clamp(player.endgame.celDimExpansion.celestialEternityPoints.add(1).log10().div(4000), 0, 1)
+    progress: () => Achievement(248).isUnlocked ? DC.D1 : Decimal.clamp(player.endgame.celDimExpansion.celestialEternityPoints.add(1).log10().div(4000), 0, 1)
   }
 ];

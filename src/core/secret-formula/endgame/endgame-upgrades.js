@@ -10,10 +10,11 @@ const rebuyable = props => {
     props.initialCost * props.costMult
   );
   const { effect } = props;
-  if (props.isDecimal) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.endgame.rebuyables[props.id]);
+  if (props.overflowing) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.endgame.rebuyables[props.id]).min(DC.NUMMAX).times(Decimal.pow(effect, player.endgame.rebuyables[props.id]).div(DC.NUMMAX).max(2).log2());
+  else if (props.isDecimal) props.effect = () => player.disablePostReality ? DC.D1 : Decimal.pow(effect, player.endgame.rebuyables[props.id]);
   else props.effect = () => player.disablePostReality ? 1 : Math.pow(effect, player.endgame.rebuyables[props.id]);
   props.description = () => props.textTemplate.replace("{value}", format(effect, 2, 2));
-  props.formatEffect = value => formatX(value, 2, 2);
+  props.formatEffect = value => (props.id === 2 || props.id === 3) ? formatX(value, 2, 4) : formatX(value, 2, 2);
   props.formatCost = value => format(value, 2, 0);
   return props;
 };
@@ -27,7 +28,7 @@ export const endgameUpgrades = [
     costMult: 60,
     textTemplate: "将无限升级23软上限推迟{value}倍",
     effect: 1.2,
-    isDecimal: true
+    overflowing: true
   }),
   rebuyable({
     name: "无限优化器",
@@ -75,7 +76,7 @@ export const endgameUpgrades = [
     canLock: true,
     lockEvent: "purchase the 6th Galaxy Generator Upgrade",
     description: () =>
-      `开始终局时拥有 ${format(1e7)} 复兴点数，${formatInt(1000)} 现实次数，${format(1e12)} 遗迹碎片和所有无名氏升级，且两个黑洞永久启动`
+      `开始终局时拥有 ${format(1e7)} 复兴点数，${formatInt(1000)} 现实次数，${format(1e12)} 遗迹碎片和所有无名氏升级`
   },
   {
     name: "灾厄之刻",

@@ -198,6 +198,19 @@ export default {
     resetAlchemy() {
       for (const res of AlchemyResources.all) res.amount = 0;
     },
+    createRealityGlyph() {
+      if (ExpansionPack.effarigPack.isBought && !player.disablePostReality) {
+        if (GameCache.glyphInventorySpace.value === 0) {
+          Modal.message.show("No available inventory space; Sacrifice some Glyphs to free up space.",
+            { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
+          return;
+        }
+        Glyphs.addToInventory(GlyphGenerator.realityGlyph(Decimal.floor(AlchemyResource.reality.amount)));
+        if (!ExpansionPack.effarigPack.isBought || player.disablePostReality) AlchemyResource.reality.amount = 0;
+        player.reality.glyphs.createdRealityGlyph = true;
+      }
+      else Modal.realityGlyph.show();
+    },
     nodeClass(node) {
       const resource = node.resource;
       return {
@@ -239,7 +252,7 @@ export default {
       <PrimaryButton
         v-if="realityCreationVisible"
         :class="realityGlyphCreationClass"
-        onclick="Modal.realityGlyph.show()"
+        @click="createRealityGlyph"
       >
         查看你能创造的现实符文
       </PrimaryButton>

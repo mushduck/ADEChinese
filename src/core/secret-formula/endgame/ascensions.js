@@ -47,19 +47,19 @@ export const ascensions = {
   oc2A: {
     id: 6,
     name: "扬升-激能 II",
-    zeroIndex: new Decimal("1e2000000"),
+    zeroIndex: new Decimal("1e2500000"),
     description: () => `解锁二阶激能`
   },
   oc3A: {
     id: 7,
     name: "扬升-激能 III",
-    zeroIndex: new Decimal("1e12500000"),
+    zeroIndex: new Decimal("1e6250000"),
     description: () => `解锁三阶激能`
   },
   oc4A: {
     id: 8,
     name: "扬升-激能 IV",
-    zeroIndex: new Decimal("1e100000000"),
+    zeroIndex: new Decimal("1e25000000"),
     description: () => `解锁四阶激能`
   }
 };

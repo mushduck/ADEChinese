@@ -35,8 +35,8 @@ export default {
     },
     offlineText() {
       const stateText = this.offlineProgress
-        ? `<span style="color: var(--color-good)">Enabled</span>`
-        : `<span style="color: var(--color-bad)">Disabled</span>`;
+        ? `<span style="color: var(--color-good)">启用</span>`
+        : `<span style="color: var(--color-bad)">禁用</span>`;
       const fractionText = this.offlineFraction === 0
         ? "未使用离线进度"
         : `离线进度用时 (${formatPercents(this.offlineFraction, 2)}`;

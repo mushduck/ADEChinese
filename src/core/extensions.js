@@ -180,11 +180,22 @@ Array.prototype.sum = function() {
 };
 
 /**
- * @returns {number}
+ * @returns {Decimal}
  */
 Array.prototype.decimalSum = function() {
   if (this.length === 0) return new Decimal(0);
   return this.reduce(Decimal.sumReducer);
+};
+
+/**
+ * @returns {number}
+ */
+Array.prototype.decimalIndexOf = function(number) {
+  if (this.length === 0) return -1;
+  for (let arr = 0; arr < this.length; arr++) {
+    if (this[arr].eq(number)) return arr;
+  }
+  return -1;
 };
 
 /**
