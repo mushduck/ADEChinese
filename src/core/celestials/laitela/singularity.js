@@ -261,7 +261,7 @@ export const Singularity = {
   },
 
   get capIsReached() {
-    return Currency.darkEnergy.gte(this.cap);
+    return DivinityMilestone.hadronEmpowerment.isReached ? true : Currency.darkEnergy.gte(this.cap);
   },
 
   increaseCap() {
