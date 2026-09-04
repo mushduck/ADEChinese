@@ -218,7 +218,7 @@ export const normalTimeStudies = [
     requirement: [82],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "Infinity Dimension multiplier based on fastest Eternity time",
-    effect: () => DC.D2.pow(new Decimal(60).div(Time.bestEternity.totalSeconds)),
+    effect: () => DC.D2.pow(new Decimal(60).div(Time.bestEternityRealTime.totalSeconds)),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.C2P30,
     formatEffect: value => formatX(value, 2, 1)
   },
