@@ -103,6 +103,6 @@ export const galacticPowerRewards = {
   stelliferousUniverse: {
     id: 16,
     galacticPower: new Decimal("1e250000"),
-    reward: "Unlock the Stelliferous Universe"
+    reward: "解锁 Stelliferous Universe（未实装）"
   }
 };
