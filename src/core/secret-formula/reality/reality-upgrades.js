@@ -180,9 +180,9 @@ export const realityUpgrades = [
     checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
     canLock: true,
     lockEvent: "购买一个高于第四时间维度的时间维度",
-    description: () => `解锁自动购买时间维度和自动购买 ${formatX(5)} 永恒点数倍增，和更多的自动永恒选项`,
+    description: () => `解锁自动购买时间维度和自动购买永恒点数倍增升级，和多样化自动永恒`,
     automatorPoints: 10,
-    shortDescription: () => `自动购买时间维度、${formatX(5)} 永恒点数倍增、更多的自动永恒选项`,
+    shortDescription: () => `自动购买时间维度、永恒点数倍增、多样化自动永恒`,
   },
   {
     name: "永恒流转",

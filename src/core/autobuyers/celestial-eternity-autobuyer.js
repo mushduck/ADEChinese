@@ -90,11 +90,11 @@ export class CelestialEternityAutobuyerState extends IntervaledAutobuyerState {
 
   get willEternity() {
     switch (this.mode) {
-      case AUTO_CELESTIAL_CRUNCH_MODE.AMOUNT:
+      case AUTO_CELESTIAL_ETERNITY_MODE.AMOUNT:
         return gainedCelestialEternityPoints().gte(this.amount);
-      case AUTO_CELESTIAL_CRUNCH_MODE.TIME:
+      case AUTO_CELESTIAL_ETERNITY_MODE.TIME:
         return Time.thisCelestialEternityRealTime.totalSeconds.toNumber() > this.time;
-      case AUTO_CELESTIAL_CRUNCH_MODE.X_HIGHEST:
+      case AUTO_CELESTIAL_ETERNITY_MODE.X_HIGHEST:
       default:
         return gainedCelestialEternityPoints().gte(this.highestPrevPrestige.times(this.xHighest));
     }
@@ -107,6 +107,7 @@ export class CelestialEternityAutobuyerState extends IntervaledAutobuyerState {
 
   reset() {
     super.reset();
+    if (CelestialEternityUpgrade.betterCelEternityAuto.isBought) return;
     this.mode = AUTO_CELESTIAL_ETERNITY_MODE.AMOUNT;
   }
 }

@@ -87,7 +87,7 @@ export const divinityMilestones = {
   universes: {
     divinities: 13,
     get reward() {
-      return ` Unlock the Transient Universe`;
+      return ` 解锁 Transient Universe（未实装）`;
     }
   }
 };
