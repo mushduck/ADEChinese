@@ -60,8 +60,9 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [41],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `解锁薇的现实的现实次数要求降低至${formatInt(100)}`,
-    effect: () => player.disablePostReality ? 1250 : 100
+    description: () => `基于遗物数量为星系强度提供倍率加成`,
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(Decimal.log10(Currency.remnants.value.add(1)).add(1), 0.5),
+    formatEffect: value => formatX(value, 2, 2)
   },
   {
     id: 52,
@@ -76,15 +77,15 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [42],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `开始终局时自动拥有所有太阳神天神记忆${formatInt(1)}级奖励`
+    description: () => `获得一个免费超立方体`,
+    effect: () => player.disablePostReality ? 0 : 1
   },
   {
     id: 61,
     cost: 4,
     requirement: [52],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "开始终局时保留成就并获得一个免费超立方体",
-    effect: () => player.disablePostReality ? 0 : 1
+    description: "优化遗物获取公式(详情见佩勒页面)"
   },
   {
     id: 71,
@@ -206,7 +207,9 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [111],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "终局后保留复兴树"
+    description: "基于现实碎片提高膨胀时间获取量",
+    effect: () => player.disablePostReality ? DC.D1 : Currency.realityShards.value.plus(1),
+    formatEffect: value => formatX(value, 2)
   },
   {
     id: 121,
@@ -319,6 +322,7 @@ export const endgameMasteries = [
   {
     id: 181,
     cost: 175000,
+    requirement: [171],
     reqType: EM_REQUIREMENT_TYPE.EXPANDED,
     description: () => `星系生成器不稳定性再减少${formatInt(1)}`,
     effect: () => player.disablePostReality ? 0 : 1

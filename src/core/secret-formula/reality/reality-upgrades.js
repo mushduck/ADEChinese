@@ -201,7 +201,7 @@ export const realityUpgrades = [
     name: "永谜悖谬",
     id: 15,
     cost: 50,
-    requirement: () => `不购买永恒点数 5× 升级，拥有 ${format(DC.E10)} 永恒点数`,
+    requirement: () => `不购买永恒点数倍增升级，到达 ${format(DC.E10)} 永恒点数`,
     hasFailed: () => player.epmultUpgrades.neq(0),
     checkRequirement: () => Currency.eternityPoints.value.add(1).log10().gte(10) && player.epmultUpgrades.eq(0),
     checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
@@ -215,14 +215,14 @@ export const realityUpgrades = [
     name: "奇珍差异",
     id: 16,
     cost: 1500,
-    requirement: () => `装备 ${formatInt(4)} 个稀有度大于或等于"罕见"的符文，进行一次现实（已装备 ${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.strength >= 1.5))} 个）`,
+    requirement: () => `装备至少 ${formatInt(4)} 个稀有度大于或等于"罕见"的符文，进行一次现实（已装备 ${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.strength >= 1.5))} 个）`,
     hasFailed: () => {
       const availableGlyphs = Glyphs.inventory.countWhere(g => g && g.strength >= 1.5);
       const equipped = Glyphs.activeWithoutCompanion.countWhere(g => g.strength >= 1.5);
       const availableSlots = Glyphs.activeSlotCount - Glyphs.activeList.length;
       return equipped + Math.min(availableGlyphs, availableSlots) < 4;
     },
-    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.strength >= 1.5) === 4,
+    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.strength >= 1.5) >= 4,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "提高符文稀有度",
     effect: 1.3,
@@ -232,14 +232,14 @@ export const realityUpgrades = [
     name: "潜势双生",
     id: 17,
     cost: 1500,
-    requirement: () => `装备 ${formatInt(4)} 个词条数大于等于 ${formatInt(2)} 的符文，进行一次现实（已装备 ${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => countValuesFromBitmask(g.effects) >= 2))} 个）`,
+    requirement: () => `装备至少 ${formatInt(4)} 个词条数大于等于 ${formatInt(2)} 的符文，进行一次现实（已装备 ${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => countValuesFromBitmask(g.effects) >= 2))} 个）`,
     hasFailed: () => {
       const availableGlyphs = Glyphs.inventory.countWhere(g => g && countValuesFromBitmask(g.effects) >= 2);
       const equipped = Glyphs.activeWithoutCompanion.countWhere(g => countValuesFromBitmask(g.effects) >= 2);
       const availableSlots = Glyphs.activeSlotCount - Glyphs.activeList.length;
       return equipped + Math.min(availableGlyphs, availableSlots) < 4;
     },
-    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => countValuesFromBitmask(g.effects) >= 2) === 4,
+    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => countValuesFromBitmask(g.effects) >= 2) >= 4,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: () => `符文以 ${formatPercents(0.5)} 的概率，多出现一个词条`,
     effect: 0.5,
@@ -249,14 +249,14 @@ export const realityUpgrades = [
     name: "永恒测度",
     id: 18,
     cost: 1500,
-    requirement: () => `装备 ${formatInt(4)} 个等级大于等于 ${formatInt(10)} 的符文，进行一次现实（已装备 ${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.level.gte(10)))} 个）`,
+    requirement: () => `装备至少 ${formatInt(4)} 个等级大于等于 ${formatInt(10)} 的符文，进行一次现实（已装备 ${formatInt(Glyphs.activeWithoutCompanion.countWhere(g => g && g.level.gte(10)))} 个）`,
     hasFailed: () => {
       const availableGlyphs = Glyphs.inventory.countWhere(g => g && g.level.gte(10));
       const equipped = Glyphs.activeWithoutCompanion.countWhere(g => g.level.gte(10));
       const availableSlots = Glyphs.activeSlotCount - Glyphs.activeList.length;
       return equipped + Math.min(availableGlyphs, availableSlots) < 4;
     },
-    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.level.gte(10)) === 4,
+    checkRequirement: () => Glyphs.activeWithoutCompanion.countWhere(g => g.level.gte(10)) >= 4,
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "基于永恒次数加成符文等级",
     effect: () => Decimal.max(Decimal.sqrt(Currency.eternities.value.plus(1).log10()).times(0.45), 1).toNumber(),

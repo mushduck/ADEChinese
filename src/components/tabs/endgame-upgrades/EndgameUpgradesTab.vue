@@ -36,7 +36,7 @@ export default {
       <br>
       锁定的升级会显示其需求和默认描述，解锁后显示其效果、当前加成以及价格，按住Shift键可切换至该状态。
       <br>
-      你可以用Shift点击某些升级来启用锁定条件，以防止游戏在此现实中进行任何会导致你未能满足其解锁条件的操作。
+      你可以用Shift点击某些升级来启用锁定条件，以防止游戏在此终局中进行任何会导致你未能满足其解锁条件的操作。
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>

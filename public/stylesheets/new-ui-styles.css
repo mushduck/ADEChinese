@@ -198,6 +198,10 @@ body.t-s12 {
   animation: a-universes-glow-border-left 10s infinite;
 }
 
+.o-tab-btn--universes__transient::after {
+  animation: a-universes--transient-glow-border-left 10s infinite;
+}
+
 .tab-button.shop {
   background-color: #d9bb26;
 }
@@ -389,6 +393,15 @@ body.t-s12 {
 
 .o-tab-btn--universes .o-subtab__tooltip::after {
   animation: a-universes-glow-border-top 10s infinite;
+}
+
+.o-tab-btn--universes__transient .o-subtab__tooltip {
+  background: var(--color-prestige--accent);
+  animation: a-universes--transient-glow-primary 10s infinite;
+}
+
+.o-tab-btn--universes__transient .o-subtab__tooltip::after {
+  animation: a-universes--transient-glow-border-top 10s infinite;
 }
 
 .active {
@@ -956,6 +969,23 @@ body.t-s12 {
   align-self: center;
   margin-top: -0.2rem;
   margin-bottom: 0.6rem;
+}
+
+.l-endgame-upgrade-btn {
+  width: 18rem;
+  margin: 0.6rem 0.4rem;
+}
+
+.l--spoon-btn-group__little-spoon-endgame-btn {
+  width: 18rem;
+  align-self: center;
+  margin-top: -0.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.l-break-eternity-upgrade-btn {
+  width: 18rem;
+  margin: 0.6rem 0.4rem;
 }
 
 .l-hint-text--reality-upgrade {

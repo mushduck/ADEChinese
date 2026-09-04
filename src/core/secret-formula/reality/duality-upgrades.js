@@ -221,7 +221,7 @@ export const dualityUpgrades = [
     cost: new Decimal(1e16),
     requirement: () => `连续统加成达到${formatX(4444444, 2, 2)}`,
     hasFailed: () => false,
-    checkRequirement: () => Laitela.matterExtraPurchaseFactor >= 4444444,
+    checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(4444444),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `解锁可重复购买的重构机器升级自动购买器，重构机器增速提高${formatInt(10)}倍`,
     effect: () => player.disablePostReality ? 1 : 10

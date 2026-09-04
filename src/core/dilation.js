@@ -90,7 +90,7 @@ export function buyDilationUpgrade(id, bulk = 1) {
     else if (upgrade.cost.gte(DilationUpgradeScaling.PRIMARY_SCALING)) buying = canBuyOverThreshold - hasBoughtOverThreshold + 1;
     if (upgrade.cost.lt(Decimal.pow10(1e10)) && upgrade.superExponent !== Infinity) buying = Math.clampMax(buying, upgrade.superExponent - upgAmount);
     const cost = Decimal.sumGeometricSeries(buying, upgrade.config.initialCost, upgrade.config.increment, upgAmount);
-    Currency.dilatedTime.subtract(cost);
+    Currency.dilatedTime.purchase(cost);
     player.dilation.rebuyables[id] += buying;
     if (id === 2) {
       if (!Perk.bypassTGReset.isBought || (Pelle.isDoomed && !PellePerkUpgrade.perkTGR.canBeApplied) || player.disablePostReality) Currency.dilatedTime.reset();
@@ -165,7 +165,7 @@ export function getDilationGainPerSecond() {
     if (PelleDestructionUpgrade.destroyedGlyphEffects.canBeApplied) pelleExtraDT = pelleExtraDT.times(getAdjustedGlyphEffect("dilationDT"));
     if (PelleDestructionUpgrade.destroyedGlyphEffects.canBeApplied) pelleExtraDT = pelleExtraDT.times(ReplicantiMultipliers.dtMult);
     if (!PelleDestructionUpgrade.disableDTNerf.canBeApplied) pelleExtraDT = pelleExtraDT.div(1e5);
-    if (EndgameMilestone.realityShardDTBoost.isReached && !player.disablePostReality) pelleExtraDT = pelleExtraDT.times(Currency.realityShards.value.plus(1));
+    pelleExtraDT = pelleExtraDT.timesEffectOf(EndgameMastery(112));
     const tachyonEffect = Currency.tachyonParticles.value.pow(PelleRifts.paradox.milestones[1].effectOrDefault(1));
     let dtRate = new Decimal(tachyonEffect)
       .timesEffectsOf(DilationUpgrade.dtGain, DilationUpgrade.dtGainPelle, DilationUpgrade.flatDilationMult)
@@ -283,7 +283,10 @@ export function getTachyonGain(requireEternity) {
 
 // Returns the minimum antimatter needed in order to gain more TP; used only for display purposes
 export function getTachyonReq() {
-  let effectiveTP = Currency.tachyonParticles.value.dividedBy(tachyonGainMultiplier());
+  let effectiveTP = Currency.tachyonParticles.value.pow(1 / (player.disablePostReality ? 1 : AlphaUnlocks.dilatedEternity.effects.buff.effectOrDefault(1)));
+  if (ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality) effectiveTP = effectiveTP.pow(1 / Achievements.powerConv(RealityUpgrade(8).effectOrDefault(1)));
+  if (ResurgenceUpgrade.curr2Surge.isBought && !player.disablePostReality && !Pelle.isDoomed) effectiveTP = effectiveTP.pow(DC.D1.div(player.dilation.tachyonParticles.max(1e10).log10().log10()));
+  effectiveTP = effectiveTP.dividedBy(tachyonGainMultiplier());
   const reciprocalpow = DC.D1.timesEffectsOf(BreakEternityUpgrade.tachyonParticlePow).reciprocal();
   effectiveTP = effectiveTP.pow(reciprocalpow);
   if (Enslaved.isRunning) effectiveTP = effectiveTP.pow(1 / Enslaved.tachyonNerf);

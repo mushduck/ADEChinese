@@ -161,7 +161,16 @@ class RebuyableImaginaryUpgradeState extends RebuyableMechanicState {
       1e3,
       this.config.costMult
     ).sub(player.reality.imaginaryRebuyables[this.id]).toNumber();
-    Currency.imaginaryMachines.subtract(this.cost);
+    Currency.imaginaryMachines.subtract(getHybridCostScaling(
+      player.reality.imaginaryRebuyables[this.id] - 1,
+      1e15,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 2,
+      DC.E309,
+      1e3,
+      this.config.costMult
+    ));
     return true;
   }
 }

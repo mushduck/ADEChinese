@@ -80,6 +80,10 @@ export const confirmationTypes = [
     option: "glyphRefine",
     isUnlocked: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
   }, {
+    name: "毁灭现实",
+    option: "doom",
+    isUnlocked: () => PlayerProgress.endgameUnlocked(),
+  }, {
     name: "末日",
     option: "armageddon",
     isUnlocked: () => Pelle.isDoomed,

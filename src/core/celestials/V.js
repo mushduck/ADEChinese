@@ -86,12 +86,12 @@ class VRunUnlockState extends GameMechanicState {
 
       V.updateTotalRunUnlocks();
 
-      for (const quote of V.quotes.all) {
+      /*for (const quote of V.quotes.all) {
         // Quotes without requirements will be shown in other ways
         if (quote.requirement) {
           quote.show();
         }
-      }
+      }*/
     }
   }
 }
@@ -224,8 +224,8 @@ export const V = {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
       else sum += player.celestials.v.runUnlocks[i] * 2;
     }
-    this.spaceTheorems = player.disablePostReality ? 0 : sum * (ExpansionPack.vPack.isBought ? 2 : 1) *
-      Ra.unlocks.spaceTheoremBoost.effectOrDefault(1) * Effects.product(ResurgenceUpgrade.synergy3);
+    this.spaceTheorems = player.disablePostReality ? 0 : new Decimal(sum).times(ExpansionPack.vPack.isBought ? 2 : 1).times(
+      Ra.unlocks.spaceTheoremBoost.effectOrDefault(1)).times(Effects.product(ResurgenceUpgrade.synergy3)).toNumber();
   },
   reset() {
     player.celestials.v = {
@@ -267,6 +267,6 @@ EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
 });
 
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
-  if (EndgameMastery(51).isBought) GameDatabase.celestials.v.mainUnlock.realities.requirement = 100;
-  if (!EndgameMastery(51).isBought) GameDatabase.celestials.v.mainUnlock.realities.requirement = 1250;
+  if (EndgameMilestone.vReduction.isReached) GameDatabase.celestials.v.mainUnlock.realities.requirement = 100;
+  if (!EndgameMilestone.vReduction.isReached) GameDatabase.celestials.v.mainUnlock.realities.requirement = 1250;
 });

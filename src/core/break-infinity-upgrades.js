@@ -135,6 +135,26 @@ class RebuyableBreakInfinityUpgradeState extends RebuyableMechanicState {
   }
 }
 
+export function tryChargeAllBreakUpgrades() {
+  if (player.endgame.overcharge.chargesLeft.infinite < 9) return;
+  const upgrades = [
+    BreakInfinityUpgrade.totalAMMult,
+    BreakInfinityUpgrade.currentAMMult,
+    BreakInfinityUpgrade.galaxyBoost,
+    BreakInfinityUpgrade.infinitiedMult,
+    BreakInfinityUpgrade.achievementMult,
+    BreakInfinityUpgrade.slowestChallengeMult,
+    BreakInfinityUpgrade.infinitiedGen,
+    BreakInfinityUpgrade.autobuyMaxDimboosts,
+    BreakInfinityUpgrade.autobuyerSpeed
+  ];
+  for (const upgrade of upgrades) {
+    if (upgrade.canCharge) {
+      upgrade.charge();
+    }
+  }
+}
+
 export function disChargeAllBreakUpgrades() {
   const upgrades = [
     BreakInfinityUpgrade.totalAMMult,

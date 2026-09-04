@@ -111,7 +111,16 @@ class RebuyableEndgameUpgradeState extends RebuyableMechanicState {
       1e3,
       this.config.initialCost * this.config.costMult
     ).sub(player.endgame.rebuyables[this.id]).toNumber();
-    Currency.celestialPoints.subtract(this.cost);
+    Currency.celestialPoints.subtract(getHybridCostScaling(
+      player.endgame.rebuyables[this.id] - 1,
+      1e100,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 10,
+      DC.E309,
+      1e3,
+      this.config.initialCost * this.config.costMult
+    ));
     return true;
   }
 }

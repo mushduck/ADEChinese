@@ -26,8 +26,9 @@ export const accelerators = {
       {
         resource: "potency",
         requirement: 0.4,
-        description: "基于强子总数量提高反物质上限",
-        effect: () => player.disablePostReality ? 0 : Math.clamp(Math.floor(Math.pow(2 * Math.max(player.celestials.laitela.hadrons.total - 100, 0) + 0.25, 0.5) - 0.5), 0, 25)
+        description: "Total Hadrons increase the Antimatter Hardcap",
+        effect: () => player.disablePostReality ? 0 : Math.clamp(Math.floor(Math.pow(2 * Math.max(player.celestials.laitela.hadrons.total - 100, 0) + 0.25, 0.5) - 0.5), 0, 25),
+        formatEffect: value => `${format(LHC.breakingPoint.root(Decimal.pow10(value)), 2)} ➜ ${format(LHC.breakingPoint, 2)}`
       },
       {
         resource: "potency",
@@ -58,13 +59,15 @@ export const accelerators = {
         resource: "emptiness",
         requirement: 0.07,
         description: "在虚无中，基于在被毁灭的现实外产生的总反物质数量为反物质维度提供指数加成",
-        effect: () => Decimal.log10(Decimal.log10(player.records.totalAntimatterOutsideDoom)).div(200).add(1)
+        effect: () => Decimal.log10(Decimal.log10(player.records.totalAntimatterOutsideDoom)).div(200).add(1),
+        formatEffect: value => formatPow(value, 2, 3)
       },
       {
         resource: "emptiness",
         requirement: 0.3,
         description: "基于在虚无中最高反物质数量为神性维度提供指数加成",
-        effect: () => player.disablePostReality ? DC.D1 : Decimal.log10(Decimal.log10(player.endgame.largeHadronCollider.void.highestAntimatter)).div(100).add(1)
+        effect: () => player.disablePostReality ? DC.D1 : Decimal.log10(Decimal.log10(player.endgame.largeHadronCollider.void.highestAntimatter)).div(100).add(1),
+        formatEffect: value => formatPow(value, 2, 3)
       },
       {
         resource: "emptiness",
@@ -98,7 +101,8 @@ export const accelerators = {
         resource: "cosmic",
         requirement: 0.2,
         description: "在虚无中基于星河加速器的充能进度提升星系强度",
-        effect: () => 1 + Accelerators.cosmic.percentage * 100
+        effect: () => 1 + Accelerators.cosmic.percentage * 100,
+        formatEffect: value => formatX(value, 2, 2)
       },
       {
         resource: "cosmic",

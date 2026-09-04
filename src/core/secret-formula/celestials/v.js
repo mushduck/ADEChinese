@@ -33,7 +33,7 @@ name: "现实次数",
 resource: () => Currency.realities.value,
 requirement: 1250,
 format: x => formatInt(x),
-progress: () => new Decimal(Currency.realities.value).div(EndgameMastery(51).effectOrDefault(1250)).toNumber(),
+progress: () => new Decimal(Currency.realities.value).div(EndgameMilestone.vReduction.isReached ? 100 : 1250).toNumber(),
 },
 eternities: {
 id: 2,
@@ -235,7 +235,7 @@ reward: "成就倍率减少自动永恒挑战完成时间。",
 description: () => `拥有 ${formatInt(10)} 个薇成就`,
 effect: () => player.disablePostReality ? 1 : Achievements.power,
 // Base rate is 60 ECs at 20 minutes each
-format: x => ((Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality
+format: x => ((Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMilestone.startRa.isReached) && !player.disablePostReality
 ? "即时（已拥有太阳神升级）"
 : `全部完成时为 ${TimeSpan.fromMinutes(new Decimal(60).times(20).div(x)).toStringShort()}`),
 requirement: () => V.spaceTheorems >= 10,

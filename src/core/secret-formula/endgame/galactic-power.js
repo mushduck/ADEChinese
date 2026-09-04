@@ -76,7 +76,7 @@ export const galacticPowerRewards = {
     id: 12,
     galacticPower: new Decimal("1e25000"),
     reward: "自动生成免费星系",
-    effect: () => player.disablePostReality ? 1 : Decimal.pow(Currency.galacticPower.value.div("1e25000"), 0.01).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1),
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(Currency.galacticPower.value.div("1e25000"), 0.001).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1),
     formatEffect: value => `当前已生成 ${formatHybridLarge(value, 3)} 免费星系`
   },
   galaxyScaling: {
@@ -86,16 +86,23 @@ export const galacticPowerRewards = {
     effect: () => player.disablePostReality ? 1 : Decimal.pow(0.9, Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(40000)).add(1).pow(2).sub(1)).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1).toNumber(),
     formatEffect: value => `反物质星系的第八维度需求降低 ${formatPercents(1 - value, 2, 2)}`
   },
-  galaxyEmpowerment2: {
+  galaxyGenerationEmpowerment: {
     id: 14,
     galacticPower: new Decimal("1e66000"),
-    reward: "为上面的星系之力升级提供指数增益",
-    effect: () => player.disablePostReality ? 1 : Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(66000)).toNumber(),
-    formatEffect: value => `提高以上星系之力升级效力增强 ${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)}`
+    reward: "为星系产量提供指数加成",
+    effect: () => player.disablePostReality ? 1 : Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(66000)).add(1).pow(GalacticPowers.galaxyEmpowerment2.isUnlocked ? GalacticPowers.galaxyEmpowerment2.reward : 1).toNumber(),
+    formatEffect: value => `星系产量 ${formatPow(value, 2, 3)}`
   },
-  stelliferousUniverse: {
+  galaxyEmpowerment2: {
     id: 15,
     galacticPower: new Decimal("1e100000"),
+    reward: "为上面的星系之力升级提供指数增益",
+    effect: () => player.disablePostReality ? 1 : Decimal.log10(Decimal.log10(Currency.galacticPower.value.add(1)).div(100000)).add(1).toNumber(),
+    formatEffect: value => `提高以上星系之力升级效力 ${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)}`
+  },
+  stelliferousUniverse: {
+    id: 16,
+    galacticPower: new Decimal("1e250000"),
     reward: "Unlock the Stelliferous Universe"
   }
 };

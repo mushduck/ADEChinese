@@ -27,6 +27,8 @@ export default {
       isRebuyable: false,
       isBought: false,
       isPossible: false,
+      isAutoUnlocked: false,
+      isAutobuyerOn: false,
       canBeLocked: false,
       hasRequirementLock: false,
     };
@@ -52,6 +54,11 @@ export default {
       return this.config.canLock && !(this.isAvailableForPurchase || this.isBought);
     },
   },
+  watch: {
+    isAutobuyerOn(newValue) {
+      Autobuyer.endgameUpgrade(this.upgrade.id).isActive = newValue;
+    }
+  },
   methods: {
     update() {
       const upgrade = this.upgrade;
@@ -60,8 +67,10 @@ export default {
       this.isRebuyable = upgrade.isRebuyable;
       this.isBought = !upgrade.isRebuyable && upgrade.isBought;
       this.isPossible = upgrade.isPossible;
+      this.isAutoUnlocked = DivinityMilestone.ascendedSurge.isReached && !player.disablePostReality;
       this.canBeLocked = upgrade.config.canLock && !this.isAvailableForPurchase;
       this.hasRequirementLock = upgrade.hasPlayerLock;
+      if (this.isRebuyable) this.isAutobuyerOn = Autobuyer.endgameUpgrade(upgrade.id).isActive;
     },
     toggleLock(upgrade) {
       if (this.isRebuyable) return;
@@ -122,6 +131,12 @@ export default {
         class="fas fa-lock-open"
       />
     </div>
+    <PrimaryToggleButton
+      v-if="isRebuyable && isAutoUnlocked"
+      v-model="isAutobuyerOn"
+      label="自动："
+      class="l--spoon-btn-group__little-spoon-endgame-btn o-primary-btn--endgame-upgrade-toggle"
+    />
   </div>
 </template>
 

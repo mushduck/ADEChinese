@@ -162,7 +162,7 @@ export const Effarig = {
     return Decimal.pow10(Decimal.pow(base, this.tickDilation)).reciprocal();
   },
   multiplier(mult) {
-    const base = new Decimal(mult).add(1).pLog10();
+    const base = new Decimal(mult).max(1).pLog10();
     return Decimal.pow10(Decimal.pow(base, this.multDilation));
   },
   get bonusRG() {

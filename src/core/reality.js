@@ -11,7 +11,7 @@ export const GlyphSelection = {
 
   get choiceCount() {
     let mastery = 1;
-    if (EndgameMastery(53).isBought && !Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied && !player.disablePostReality) mastery *= 2;
+    if (EndgameMilestone.startRa.isReached && !Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied && !player.disablePostReality) mastery *= 2;
     return Effects.max(1, Perk.firstPerk) * mastery *
       Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.effectOrDefault(1);
   },
@@ -297,14 +297,14 @@ function updateRealityRecords(realityProps) {
   }
   player.records.bestReality.time = Decimal.min(player.records.thisReality.time, player.records.bestReality.time);
   if (player.records.thisReality.realTime < player.records.bestReality.realTime) {
-    player.records.bestReality.realTime = player.records.thisReality.realTime;
+    player.records.bestReality.realTime = Math.max(player.records.thisReality.realTime, 1);
     player.records.bestReality.speedSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
   }
 }
 
 function giveRealityRewards(realityProps) {
   const multiplier = new Decimal(realityProps.simulatedRealities).add(1).toNumber();
-  const realityAndPPMultiplier = multiplier + binomialDistribution(multiplier, Achievement(154).effectOrDefault(0));
+  const realityAndPPMultiplier = new Decimal(multiplier + binomialDistribution(multiplier, Achievement(154).effectOrDefault(0)));
   const gainedRM = Currency.realityMachines.gte(MachineHandler.hardcapRM) ? DC.D0 : realityProps.gainedRM;
   Currency.realityMachines.add(gainedRM.times(multiplier));
   updateRealityRecords(realityProps);
@@ -313,7 +313,7 @@ function giveRealityRewards(realityProps) {
     realityProps.gainedGlyphLevel.actualLevel, realityAndPPMultiplier, multiplier,
     MachineHandler.projectedIMCap);
   Currency.realities.add(realityAndPPMultiplier);
-  Currency.perkPoints.add(realityAndPPMultiplier);
+  Currency.perkPoints.add(realityAndPPMultiplier.toNumber());
   if (TeresaUnlocks.effarig.canBeApplied) {
     Currency.relicShards.add(realityProps.gainedShards.times(multiplier));
   }
@@ -613,9 +613,7 @@ export function finishProcessReality(realityProps) {
   }
 
   let celestialRunState;
-  if (!(Alpha.isRunning && Alpha.currentStage === 27 || Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME)) {
-    celestialRunState = clearCelestialRuns();
-  }
+  celestialRunState = clearCelestialRuns();
   recalculateAllGlyphs();
   Glyphs.updateMaxGlyphCount(true);
 
@@ -656,7 +654,7 @@ export function finishProcessReality(realityProps) {
   player.records.bestEternity.realTime = 999999999999;
   if (!PelleUpgrade.keepEternityUpgrades.canBeApplied) player.eternityUpgrades.clear();
   player.totalTickGained = DC.D0;
-  if (!PelleUpgrade.keepEternityChallenges.canBeApplied || (LHC.voidRunning && !NullUpgrade.limerick3.isBought)) player.eternityChalls = {};
+  if (!PelleUpgrade.keepEternityChallenges.canBeApplied && !(LHC.voidRunning && NullUpgrade.limerick3.isBought)) player.eternityChalls = {};
   player.reality.unlockedEC = 0;
   player.reality.lastAutoEC = 0;
   player.challenge.eternity.current = 0;
@@ -759,7 +757,8 @@ export function finishProcessReality(realityProps) {
 
   if (realityProps.restoreCelestialState || player.options.retryCelestial) restoreCelestialRuns(celestialRunState);
 
-  if (Pelle.isDoomed && PelleUpgrade.keepAutobuyers.canBeApplied && Autobuyer.bigCrunch.hasMaxedInterval) {
+  if ((Pelle.isDoomed && PelleUpgrade.keepAutobuyers.canBeApplied && Autobuyer.bigCrunch.hasMaxedInterval) ||
+     (LHC.voidRunning && NullUpgrade.alwaysBroken.isBought)) {
     player.break = true;
   }
 
@@ -833,23 +832,25 @@ export function clearCelestialRuns() {
     laitela: player.celestials.laitela.run,
     alpha: player.celestials.alpha.run
   };
-  player.celestials.teresa.run = false;
-  player.celestials.effarig.run = false;
-  // Nameless forces all tabs to be visible, but exiting via the header might leave the player on a tab which is
-  // otherwise normally hidden - in that case we force them to the Nameless tab. We could scan for the lowest-index tab
-  // and subtab, but all other things being equal the Nameless tab makes the most sense. The run flag is toggled
-  // *before* the check because otherwise isHidden will always evaluate to false due to still being in Nameless.
-  if (Enslaved.isRunning) {
-    player.celestials.enslaved.run = false;
-    if (Tabs.current.isHidden || Tabs.current._currentSubtab.isHidden) Tab.celestials.enslaved.show();
-    // We specifically revalidate here and nowhere else because Nameless changes the unlock state of the BLACK HOLE
-    // command, which changes the validity of existing scripts when entering/exiting
-    AutomatorData.recalculateErrors();
+  if (!(Alpha.isRunning && Alpha.currentStage === 27 || Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME)) {
+    player.celestials.teresa.run = false;
+    player.celestials.effarig.run = false;
+    // Nameless forces all tabs to be visible, but exiting via the header might leave the player on a tab which is
+    // otherwise normally hidden - in that case we force them to the Nameless tab. We could scan for the lowest-index tab
+    // and subtab, but all other things being equal the Nameless tab makes the most sense. The run flag is toggled
+    // *before* the check because otherwise isHidden will always evaluate to false due to still being in Nameless.
+    if (Enslaved.isRunning) {
+      player.celestials.enslaved.run = false;
+      if (Tabs.current.isHidden || Tabs.current._currentSubtab.isHidden) Tab.celestials.enslaved.show();
+      // We specifically revalidate here and nowhere else because Nameless changes the unlock state of the BLACK HOLE
+      // command, which changes the validity of existing scripts when entering/exiting
+      AutomatorData.recalculateErrors();
+    }
+    player.celestials.v.run = false;
+    player.celestials.ra.run = false;
+    player.celestials.laitela.run = false;
+    player.celestials.alpha.run = false;
   }
-  player.celestials.v.run = false;
-  player.celestials.ra.run = false;
-  player.celestials.laitela.run = false;
-  player.celestials.alpha.run = false;
   return saved;
 }
 

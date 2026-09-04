@@ -108,6 +108,29 @@ export function totalIPMult() {
   return ipMult;
 }
 
+export function tryChargeAll() {
+  if (Ra.chargesLeft < 12) return;
+  const upgrades = [
+    InfinityUpgrade.totalTimeMult,
+    InfinityUpgrade.dim18mult,
+    InfinityUpgrade.dim36mult,
+    InfinityUpgrade.resetBoost,
+    InfinityUpgrade.buy10Mult,
+    InfinityUpgrade.dim27mult,
+    InfinityUpgrade.dim45mult,
+    InfinityUpgrade.galaxyBoost,
+    InfinityUpgrade.thisInfinityTimeMult,
+    InfinityUpgrade.unspentIPMult,
+    InfinityUpgrade.dimboostMult,
+    InfinityUpgrade.ipGen
+  ];
+  for (const upgrade of upgrades) {
+    if (upgrade.canCharge) {
+      upgrade.charge();
+    }
+  }
+}
+
 export function disChargeAll() {
   const upgrades = [
     InfinityUpgrade.totalTimeMult,

@@ -61,18 +61,21 @@ export function toggleAllTimeDims() {
 }
 
 export function calcHighestPurchaseableTD(tier, currency) {
-  const logC = currency.max(1).log10();
-  const logBase = (TimeDimension(tier)._baseCost.max(1).log10().sub(
-    PelleRifts.paradox.milestones[0].canBeApplied && tier > 4 ? 2250 : 0)).div(
-    PelleRifts.paradox.milestones[0].canBeApplied && tier > 4 ? 2 : 1);
-  let logMult = Math.log10(TimeDimension(tier)._costMultiplier);
+  let logC = currency.max(1).log10();
+  let logBase = TimeDimension(tier)._baseCost.max(1).log10();
+  let logMult = Decimal.log10(TimeDimension(tier)._costMultiplier);
+
+  if (PelleRifts.paradox.milestones[0].canBeApplied && tier > 4) {
+    logC = logC.mul(2);
+    logBase = logBase.sub(2250);
+  }
 
   if (tier > 4 && currency.lt(DC.E6000)) {
     return Decimal.floor(Decimal.max(0, (logC.sub(logBase)).div(logMult).add(1)));
   }
 
   if (currency.gte(DC.E6000)) {
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * (tier <= 4 ? 2.2 : 1), 1));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * (tier <= 4 ? 2.2 : 1), 1));
     const preInc = Decimal.floor(Decimal.log10(DC.E6000).sub(logBase).div(logMult)).add(1);
     const postInc = Decimal.floor(Decimal.clampMin(((logC.sub(TimeDimension(tier).nextCost(preInc).log10())).div(logMult)).div(
       TimeDimensions.scalingPast1e6000), -1)).add(1);
@@ -85,17 +88,17 @@ export function calcHighestPurchaseableTD(tier, currency) {
 
   if (currency.lt(DC.E1300)) {
     const preInc = Decimal.floor((Decimal.log10(DC.NUMMAX).sub(logBase)).div(logMult)).add(1);
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
-    const decCur = logC.sub(preInc.times(logMult));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
+    const decCur = logC.sub(preInc.times(logMult).add(logBase));
     const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), -1)).add(1);
     return preInc.add(postInc);
   }
 
   if (currency.lt(DC.E6000)) {
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
     const preInc = Decimal.floor((Decimal.log10(DC.E1300).sub(logBase)).div(logMult)).add(1);
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 2.2, 1));
-    const decCur = logC.sub(preInc.times(logMult));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * 2.2, 1));
+    const decCur = logC.sub(preInc.times(logMult).add(logBase));
     const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), -1)).add(1);
     return preInc.add(postInc);
   }

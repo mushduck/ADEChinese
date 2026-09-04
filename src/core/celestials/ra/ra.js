@@ -285,6 +285,8 @@ export const Ra = {
     }
     if (Achievement(168).isUnlocked) boostList.push("成就 168");
     if (Ra.unlocks.continuousTTBoost.canBeApplied) boostList.push("当前时间之理");
+    if (ExpansionPack.raPack.isBought) boostList.push("太阳神扩展包");
+    if (Achievement(236).isUnlocked) boostList.push("成就 236");
 
     if (boostList.length === 1) return `${boostList[0]}`;
     if (boostList.length === 2) return `${boostList[0]} and ${boostList[1]}`;
@@ -330,16 +332,16 @@ export const Ra = {
       unl.unlock();
     }
 
-    Ra.checkForQuotes();
+    //Ra.checkForQuotes();
   },
-  checkForQuotes() {
+  /*checkForQuotes() {
     for (const quote of Ra.quotes.all) {
       // Quotes without requirements will be shown in other ways
       if (quote.requirement) {
         quote.show();
       }
     }
-  },
+  },*/
   initializeRun() {
     clearCelestialRuns();
     player.celestials.ra.run = true;

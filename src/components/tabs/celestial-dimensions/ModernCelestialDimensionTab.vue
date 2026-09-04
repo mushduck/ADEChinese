@@ -36,6 +36,8 @@ export default {
       massOverflow: new Decimal(0),
       isCorrupted: false,
       isEffectActive: false,
+      collapsedInfo: false,
+      anySoftcapApplicable: false,
       alphaDecayRemnant: 0,
       hasRemnant: false,
       isExpanded: false,
@@ -50,6 +52,11 @@ export default {
     };
   },
   computed: {
+    softcapCollapseDisplay() {
+      return this.collapsedInfo
+        ? "显示软上限效果"
+        : "隐藏软上限效果";
+    },
     timeToCapText() {
       return TimeSpan.fromHours(this.timeToCap).toStringShort();
     }
@@ -75,6 +82,8 @@ export default {
       this.massOverflow.copyFrom(CelestialDimensions.MASS_OVERFLOW);
       this.isCorrupted = this.celestialMatter.gt(this.massOverflow);
       this.isEffectActive = player.endgame.celestialMatterMultiplier.isActive;
+      this.collapsedInfo = player.endgame.celDimExpansion.softcapsCollapsed;
+      this.anySoftcapApplicable = this.unstable || this.isOverflowing || this.isCorrupted;
       this.alphaDecayRemnant = CelestialDimensions.alphaDecayRemnant;
       this.hasRemnant = Alpha.isDestroyed;
       this.isExpanded = Achievement(221).isUnlocked;
@@ -98,9 +107,12 @@ export default {
     },
     instabilityClassObject() {
       return {
-        "c-celestial-dim-description__accent": !this.unstable && !this.isOverflowing,
-        "c-celestial-dim-description__accent-unstable": this.unstable || this.isOverflowing,
+        "c-celestial-dim-description__accent": !this.anySoftcapApplicable,
+        "c-celestial-dim-description__accent-unstable": this.anySoftcapApplicable,
       };
+    },
+    toggleSeenSoftcaps() {
+      player.endgame.celDimExpansion.softcapsCollapsed = !player.endgame.celDimExpansion.softcapsCollapsed;
     },
     celestialCrunch() {
       if (PlayerProgress.celestialInfinityUnlocked()) celestialCrunchResetRequest();
@@ -161,34 +173,44 @@ export default {
             {{ formatX(dimMultiplier, 2, 1) }}<span v-if="!isEffectActive">(已禁用)</span>
           </span>
           的加成。
-          <div v-if="unstable">
-            你 <i>本可以</i> 拥有 <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
-            天界物质，但事与愿违。
-            <br>
-            这是因为在超过 <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> 天界物质后，你的天界物质被一重软上限限制了。
-            <br>当前，超过一重软上限的天界物质数量将
-            <span :class="instabilityClassObject()">^{{ format(1 / softcapPow, 2, 3) }}</span>。
-            <br>
-            现在天界物质的一重软上限强度完全取决于你的天界物质一重软上限指数, 当前为
-            <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>。
-          </div>
-          <div v-if="isOverflowing">
-            在超过 <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> 天界物质后，你的天界物质将溢出，受<i>二重</i>软上限限制。
-            <br>
-            当前，你的天界物质和天界物质一重软上限起始值都溢出了，溢出的天界物质数量将
-            <span :class="instabilityClassObject()">^{{ format(1 / overflowMag, 2, 3) }}</span>。
-            <br>
-            现在溢出的天界物质的二重软上限强度完全取决于你的天界物质二重软上限指数, 当前为
-            <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>。
-          </div>
-          <div v-if="isCorrupted">
-            在超过 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> 天界物质后，你的天界物质将被腐化，受<i>三重</i>软上限限制。
-            <br>
-            当前，超过三重软上限的天界物质数量将
-            <span :class="instabilityClassObject()">^{{ format(1 / massOverflowMag, 2, 3) }}</span>。
-            <br>
-            现在腐化天界物质的三重软上限强度完全取决于你的天界物质三重软上限指数, 当前为
-            <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>。
+          <div v-if="anySoftcapApplicable">
+            <div v-if="!collapsedInfo">
+              <div v-if="unstable">
+                你 <i>本可以</i> 拥有 <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
+                天界物质，但事与愿违。
+                <br>
+                这是因为在超过 <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> 天界物质后，你的天界物质被一重软上限限制了。
+                <br>当前，超过一重软上限的天界物质数量将
+                <span :class="instabilityClassObject()">^{{ format(1 / softcapPow, 2, 3) }}</span>。
+                <br>
+                现在天界物质的一重软上限强度完全取决于你的天界物质一重软上限指数, 当前为
+                <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>。
+              </div>
+              <div v-if="isOverflowing">
+                在超过 <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> 天界物质后，你的天界物质将溢出，受<i>二重</i>软上限限制。
+                <br>
+                当前，你的天界物质和天界物质一重软上限起始值都溢出了，溢出的天界物质数量将
+                <span :class="instabilityClassObject()">^{{ format(1 / overflowMag, 2, 3) }}</span>。
+                <br>
+                现在溢出的天界物质的二重软上限强度完全取决于你的天界物质二重软上限指数, 当前为
+                <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>。
+              </div>
+              <div v-if="isCorrupted">
+                在超过 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> 天界物质后，你的天界物质将被腐化，受<i>三重</i>软上限限制。
+                <br>
+                当前，超过三重软上限的天界物质数量将
+                <span :class="instabilityClassObject()">^{{ format(1 / massOverflowMag, 2, 3) }}</span>。
+                <br>
+                现在腐化天界物质的三重软上限强度完全取决于你的天界物质三重软上限指数, 当前为
+                <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>。
+              </div>
+            </div>
+            <PrimaryButton
+              class="o-primary-btn--subtab-option"
+              @click="toggleSeenSoftcaps"
+            >
+              {{ softcapCollapseDisplay }}
+            </PrimaryButton>
           </div>
         </p>
       </div>

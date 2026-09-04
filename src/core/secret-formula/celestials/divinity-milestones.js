@@ -27,10 +27,11 @@ export const divinityMilestones = {
     divinities: 3,
     get reward() {
       return ` 解锁批量完成莱特拉的现实；解锁在莱特拉的现实完全不稳定时自动强子化。
+        基于熵产量提高自动强子化所需令莱特拉的现实失稳的时间。
         强子和暗强子现在完全相同，可以将其合并为奇迹强子，奇迹强子会缩短强子效果到达上限所需的时间。
         增强第 ${formatInt(8)} 个星系生成器升级。
         神性维度和神性能量产量 ${formatX(77)}。
-        暗物质湮灭不再重置任何东西。
+        暗物质湮灭和凝聚奇点不再重置任何东西。
         缥缈之力产量 × ${formatInt(10)}。
         解锁阿尔法扩展包。`;
     }
@@ -79,7 +80,14 @@ export const divinityMilestones = {
         将所有类型的强子效果到达上限所需的时间降低 ${formatPercents(0.75)}。
         将阿尔法诅咒到达上限所需的时间降低 ${formatPercents(0.5)}。
         游戏速度以快速衰减的倍率提高缥缈之力产量。
-        解锁批量获得宇宙扇区。`;
+        解锁批量获得宇宙扇区。
+        解锁自动购买终局升级`;
+    }
+  },
+  universes: {
+    divinities: 13,
+    get reward() {
+      return ` Unlock the Transient Universe`;
     }
   }
 };

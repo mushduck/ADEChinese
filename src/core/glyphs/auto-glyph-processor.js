@@ -92,7 +92,7 @@ export const AutoGlyphProcessor = {
       case AUTO_GLYPH_SCORE.ALCHEMY_VALUE:
         return AlchemyResource[glyph.type].isUnlocked
           ? new Decimal(GlyphSacrificeHandler.glyphRefinementGain(glyph))
-          : new Decimal(Number.NEGATIVE_INFINITY);
+          : new Decimal(-Infinity);
       default:
         throw new Error("Unknown glyph score mode in score assignment");
     }

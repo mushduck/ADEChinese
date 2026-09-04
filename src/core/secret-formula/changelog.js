@@ -20,8 +20,56 @@ export const changelog = [
 </ul>`
   },
   {
+    date: [2026, 9, 3],
+    name: "v1.2.0: The Update that no one asked for",
+    info: `
+Nobody asked for this update.
+<br>
+<br>
+<b><i>The big update is the next one.</i></b>
+<br>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>Switched some milestones and masteries around</li>
+<li>Added Endgame Upgrade autos to Divinity Milestone 10</li>
+<li>Went ahead and added Achievement row 24</li>
+<li>Put Bright Alpha into the options tab</li>
+<li>Overhauled all the visuals so they don't look like dogshit anymore</li>
+<li>Added Pelle Destruction container collapsing</li>
+<li>Removed the coffee softcap</li>
+<li>Added an option to hide Celestial Matter softcaps</li>
+<li>Decimalized extra Continuum purchases from Lai'tela</li>
+<li>Added the Astley Paradox</li>
+<li>A bunch of other QoL of which I find it hard to put into words</li>
+<li>Oh right, Dual Machines say jM now</li>
+<li>And I also added a new Galactic power bc why tf not</li>
+<li>Oh yeah and there's a seperate Doom confirmation now, anything else I forgot?</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Fixed that one Break Infinity Upgrade always saying Challenge 1</li>
+<li>Fixed max Replicanti Galaxy cost overflow</li>
+<li>Fixed record prestige time becoming zero and breaking the game</li>
+<li>You lost the game</li>
+<li>Fixed Glyph filter not working properly</li>
+<li>Fixed Dilated Time going negative</li>
+<li>You still lost the game</li>
+<li>Fixed being able to enter certain Endgame challenges while inside other Endgame challenges</li>
+<li>Fixed Time Dimension bulk</li>
+<li>Fixed the bee movie</li>
+<li>Fixed the reenable passive IP gen Pelle Destruction Upgrade</li>
+<li>Fixed the Tetris link leading to youareanidiot.org</li>
+<li>Fixed the Divinity Upgrade "Security" displaying the wrong effect</li>
+<li>TPYOS MY BELVELOD</li>
+</ul>
+<br>
+`
+  },
+  {
     date: [2026, 7, 28],
-    name: "v1.1: The Great Ascent",
+    name: "v1.1.0: The Great Ascent",
     info: `
 I was not expecting a content release on my birthday but ¯|_(ツ)_|¯
 <br>
@@ -73,6 +121,28 @@ I was not expecting a content release on my birthday but ¯|_(ツ)_|¯
 <li>Fixed Time Study 123 NaNing</li>
 <li>Fixed the game randomly going hdsfjgajfgyursgawvh</li>
 <li>Ocne unpbo a tiem tehthe werwe tioo mayn tpyos, nrwo tehyre gnoe</li>
+</ul>
+<br>
+`
+  },
+  {
+    date: [2026, 7, 17],
+    name: "Celebrate iOS Version Release",
+    info: `
+Celebrating the official iOS launch! It's finally time to perform a Big Crunch right in your pocket.
+A massive thank you to all the contributors who helped expand our dimensions to iOS! 
+<br>
+<br>
+<b>Added things:</b><br>
+<ul>
+<li>Added iOS Testers in the Credits</li>
+<li>Added a link to the iOS Version</li>
+<li>Added all AD Autobuyers' buy max/singles toggle button</li>
+</ul>
+<br>
+<b>Text change:</b><br>
+<ul>
+<li>Changed Android Developer to Mobile Developer in the Credits</li>
 </ul>
 <br>
 `

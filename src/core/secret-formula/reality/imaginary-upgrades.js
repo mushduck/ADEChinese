@@ -247,7 +247,7 @@ export const imaginaryUpgrades = [
     cost: new Decimal(3e12),
     requirement: () => `连续统至少达到 ${formatPercents(1)}`,
     hasFailed: () => false,
-    checkRequirement: () => Laitela.matterExtraPurchaseFactor >= 2,
+    checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(2),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => `你可以自动购买可重复购买的虚幻升级，虚幻机器数量的增速是原来的 ${formatInt(10)} 倍`,
     effect: () => player.disablePostReality ? 1 : 10,
