@@ -18,7 +18,8 @@ export class SingularityAutobuyerState extends AutobuyerState {
   }
 
   tick() {
-    if (Currency.darkEnergy.value.gte(Singularity.cap.times(SingularityMilestone.autoCondense.effectValue))) {
+    if (DivinityMilestone.hadronEmpowerment.isReached ||
+        Currency.darkEnergy.value.gte(Singularity.cap.times(SingularityMilestone.autoCondense.effectValue))) {
       Singularity.perform();
     }
   }
