@@ -56,7 +56,7 @@ export default {
       return `花费 ${TimeSpan.fromHours(5).toStringShort()} 存储时间以解锁时间通量`;
     },
     fluxIncrementDisp() {
-      return `花费 ${TimeSpan.fromHours(5).toStringShort()} 存储时间将时间通量 最大等级提升至 ${format(Math.ceil(this.maxFlux * 1.1))}`;
+      return `花费 ${TimeSpan.fromHours(5).toStringShort()} 存储时间将时间通量最大等级提升至 ${format(Math.ceil(this.maxFlux * 1.1))}`;
     },
     oneMinuteFlux() {
       return `将 ${TimeSpan.fromMinutes(1).toStringShort()} 存储时间注入时间通量`;
@@ -291,7 +291,6 @@ export default {
 
 <template>
   <div>
-    <!-- 旧版魔改：基础文本与特殊功能按钮 -->
     <div class="normal-text">
       <br>
       <span>你可以跳跃 </span><span class="special-text">{{ timeDisplay }}</span><span> 的时间。</span>
@@ -317,7 +316,6 @@ export default {
         </PrimaryButton>
       </div>
       
-      <!-- 旧版魔改：自定义时间 -->
       <div class="custom-time-container">
         <input 
           type="number" 
@@ -340,7 +338,6 @@ export default {
         </PrimaryButton>
       </div>
 
-      <!-- 基础时间消费按钮（包含白嫖按钮） -->
       <PrimaryButton
         :class="classObj1"
         @click="spendOneMin"
@@ -373,7 +370,6 @@ export default {
       </PrimaryButton>
     </div>
 
-    <!-- 上游更新：Flux 系统 -->
     <br>
     <br>
     <div v-if="!fluxUnlocked">
