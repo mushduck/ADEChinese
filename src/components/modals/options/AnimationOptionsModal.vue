@@ -191,7 +191,7 @@ export default {
       <ModalOptionsToggleButton
         v-if="alphaUnlocked"
         v-model="alpha"
-        text="Brighter Alpha:"
+        text="更亮的阿尔法"
       />
       <ModalOptionsToggleButton
         v-if="etherealExtended"

@@ -25,12 +25,12 @@ export const celestialBreakInfinityUpgrades = {
   autoCD1: {
     id: "autoCD1",
     cost: 5e4,
-    description: "解锁第1-4天界维度自动购买器"
+    description: "解锁第 1-4 天界维度自动购买器"
   },
   autoCD2: {
     id: "autoCD2",
     cost: 1e5,
-    description: "解锁第5-8天界维度自动购买器"
+    description: "解锁第 5-8 天界维度自动购买器"
   },
   autoCDPlus: {
     id: "autoCDPlus",
@@ -40,7 +40,7 @@ export const celestialBreakInfinityUpgrades = {
   betterAuto: {
     id: "betterAuto",
     cost: 1e9,
-    description: () => `天界自动购买器速度提升 ${formatX(3)} 倍`,
+    description: () => `天界自动购买器速度${formatX(3)}`,
     effect: 3
   },
   bulkCelDimBoosts: {

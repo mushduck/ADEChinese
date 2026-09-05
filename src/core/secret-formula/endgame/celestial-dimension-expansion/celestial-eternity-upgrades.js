@@ -61,7 +61,7 @@ export const celestialEternityUpgrades = {
   instaAutos: {
     id: "instaAutos",
     cost: 1e6,
-    description: "天界自动购买器间隔降低为立刻"
+    description: "天界自动购买器可立刻购买"
   },
   x2CIPAuto: {
     id: "x2CIPAuto",
