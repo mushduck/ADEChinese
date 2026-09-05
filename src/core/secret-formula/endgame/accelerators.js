@@ -26,7 +26,7 @@ export const accelerators = {
       {
         resource: "potency",
         requirement: 0.4,
-        description: "Total Hadrons increase the Antimatter Hardcap",
+        description: "基于强子数量提高反物质硬上限",
         effect: () => player.disablePostReality ? 0 : Math.clamp(Math.floor(Math.pow(2 * Math.max(player.celestials.laitela.hadrons.total - 100, 0) + 0.25, 0.5) - 0.5), 0, 25),
         formatEffect: value => `${format(LHC.breakingPoint.root(Decimal.pow10(value)), 2)} ➜ ${format(LHC.breakingPoint, 2)}`
       },
