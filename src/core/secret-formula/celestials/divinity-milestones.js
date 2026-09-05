@@ -81,13 +81,13 @@ export const divinityMilestones = {
         将阿尔法诅咒到达上限所需的时间降低 ${formatPercents(0.5)}。
         游戏速度以快速衰减的倍率提高缥缈之力产量。
         解锁批量获得宇宙扇区。
-        解锁自动购买终局升级`;
+        解锁自动购买终局升级。`;
     }
   },
   universes: {
     divinities: 13,
     get reward() {
-      return ` 解锁 Transient Universe（未实装）`;
+      return ` 解锁 Transient Universe（未实装）。`;
     }
   }
 };

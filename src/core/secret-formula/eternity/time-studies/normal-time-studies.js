@@ -90,7 +90,7 @@ export const normalTimeStudies = [
     cost: 2,
     requirement: [22],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "在无限时保留一半的复制器星系"
+    description: "无限后保留一半的复制器星系"
   },
   {
     id: 41,
@@ -108,7 +108,7 @@ export const normalTimeStudies = [
     cost: 6,
     requirement: [32],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `反物质星系增长需求的第八维度数量从 ${formatInt(60)} 个降至 ${formatInt(52)} 个`,
+    description: () => `反物质星系价格增长的第八维度数量需求从 ${formatInt(60)} 个降至 ${formatInt(52)} 个`,
     effect: 52
   },
   {
@@ -124,7 +124,7 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [51],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `永恒点数数获取量 ${formatX(25)}`,
+    description: () => `永恒点数获取量 ${formatX(25)}`,
     effect: 25
   },
   {
@@ -191,7 +191,7 @@ export const normalTimeStudies = [
     cost: 5,
     requirement: [73],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "基于时间维度获得的计数频率升级，加成维度提升倍数",
+    description: "基于时间维度获得的计数频率升级，加成维度提升倍率",
     effect: () => DC.D1_0004.pow(player.totalTickGained).min(1e30).times(
       Decimal.pow(Decimal.max(player.totalTickGained.sub(172728), 1), 1000)),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E30,
@@ -202,7 +202,7 @@ export const normalTimeStudies = [
     cost: 4,
     requirement: [81],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "基于本次永恒中花费的时间，加成所有反物质维度",
+    description: "基于本次永恒中花费的时间为反物质维度提供倍率加成",
     effect: () => Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15).toNumber()).times(
       Time.thisEternity.totalMinutes.sub(20).times(15).max(1)),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E300,
@@ -213,7 +213,7 @@ export const normalTimeStudies = [
     cost: 5,
     requirement: [82],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Infinity Dimension multiplier based on fastest Eternity time",
+    description: "基于最快的永恒用时为反物质维度提供倍率加成",
     effect: () => DC.D2.pow(new Decimal(60).div(Time.bestEternityRealTime.totalSeconds)),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.C2P30,
     formatEffect: value => formatX(value, 2, 1)
@@ -223,7 +223,7 @@ export const normalTimeStudies = [
     cost: 7,
     requirement: [83],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "基于计数频率升级数量，给予所有时间维度倍数加成",
+    description: "基于计数频率升级数量为时间维度提供倍率加成",
     effect: () => Decimal.pow(player.totalTickGained, 0.25).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -232,7 +232,7 @@ export const normalTimeStudies = [
     cost: 4,
     requirement: [91],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "所有反物质维度获得等于复制器数量的倍数加成",
+    description: "反物质维度获得等于复制器数量的倍数加成",
     effect: () => Decimal.max(Replicanti.amount, 1),
     formatEffect: value => formatX(value, 2, 1)
   },
