@@ -162,7 +162,7 @@ export default {
           <br>
           你拥有
           <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
-          <span v-if="isCorrupted"> 腐化的</span> <span v-if="unstable"> 不稳定</span>天界物质<span v-if="isOverflowing">（已溢出）</span>,
+          <span v-if="isCorrupted"> 腐化的</span> <span v-if="unstable"> 不稳定</span>天界物质<span v-if="isOverflowing">（已溢出）</span><span v-if="!isEffectActive">(已停止激发)</span>,
           <br>
           <span>
             增加
@@ -172,10 +172,9 @@ export default {
           <span>游戏速度</span>
           提供
           <span :class="instabilityClassObject()">
-            {{ formatX(dimMultiplier, 2, 1) }}<span v-if="!isEffectActive">(已禁用)</span>
+            {{ formatX(dimMultiplier, 2, 1) }}
           </span>
-          multiplier to
-          <span>Game Speed.</span>
+          的加成。
           <div v-if="everSeenSoftcaps">
             <div v-if="!collapsedInfo">
               <div v-if="unstable">
