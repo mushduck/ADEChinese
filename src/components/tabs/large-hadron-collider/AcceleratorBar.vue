@@ -167,7 +167,7 @@ export default {
         {{ selectedMilestoneDescriptionText }}
         <div v-if="showEffect">
           <br>
-          Currently: {{ selectedMilestoneEffectText }}
+          当前：{{ selectedMilestoneEffectText }}
         </div>
       </template>
     </CustomizeableTooltip>
