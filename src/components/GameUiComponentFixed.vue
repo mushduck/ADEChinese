@@ -8,6 +8,7 @@ import HowToPlay from "@/components/HowToPlay";
 import ModalProgressBar from "@/components/modals/ModalProgressBar";
 import ModernSidebar from "@/components/ui-modes/modern/ModernSidebar";
 import NewGame from "@/components/tabs/celestial-pelle/NewGame";
+import PhoneTabBar from "@/components/ui-modes/phone/PhoneTabBar";
 import PopupModal from "@/components/modals/PopupModal";
 import Prologue from "@/components/ui-modes/Prologue";
 import SaveTimer from "@/components/SaveTimer";
@@ -23,6 +24,7 @@ export default {
     TimeTheoremShop,
     EndgameSkillShop,
     ModernSidebar,
+    PhoneTabBar,
     SaveTimer,
     SpeedrunStatus,
     PopupModal,
@@ -84,7 +86,11 @@ export default {
       class="l-endgame-masteries-tab__es-shop"
     />
     <ModernSidebar
-      v-if="view.newUI && view.theme !== 'S12'"
+      v-if="view.newUI && !view.phoneUI && view.theme !== 'S12'"
+      :style="hideIfMatoFullscreen"
+    />
+    <PhoneTabBar
+      v-else-if="view.phoneUI && view.theme !== 'S12'"
       :style="hideIfMatoFullscreen"
     />
     <SaveTimer :style="hideIfMatoFullscreen" />

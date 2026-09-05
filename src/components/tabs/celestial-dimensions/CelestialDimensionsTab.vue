@@ -10,7 +10,8 @@ export default {
   },
   computed: {
     activeComponent() {
-      return this.$viewModel.newUI
+      // Phone UI reuses the modern (newUI) tab components.
+      return (this.$viewModel.newUI || this.$viewModel.phoneUI)
         ? "ModernCelestialDimensionTab"
         : "ClassicCelestialDimensionTab";
     }

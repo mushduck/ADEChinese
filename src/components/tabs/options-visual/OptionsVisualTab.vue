@@ -46,7 +46,7 @@ export default {
       return `侧边栏（现代 UI）: ${this.sidebarResource}`;
     },
     UILabel() {
-      return `UI: ${this.$viewModel.newUI ? "现代" : "经典"}`;
+      return `UI: ${player.options.phoneUI ? "手机" : player.options.newUI ? "现代" : "经典"}`;
     }
   },
   watch: {

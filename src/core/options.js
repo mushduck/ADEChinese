@@ -15,8 +15,23 @@ export class GameOptions {
   }
 
   static toggleUI() {
-    player.options.newUI = !player.options.newUI;
+    if(player.options.newUI) 
+    {
+      player.options.newUI = false;
+      player.options.phoneUI = true;
+    }
+    else if(player.options.phoneUI)
+    {
+    player.options.newUI = false;
+    player.options.phoneUI = false;
+    }
+    else
+    { 
+    player.options.newUI = true;
+    player.options.phoneUI = false;
+    }
     ui.view.newUI = player.options.newUI;
+    ui.view.phoneUI = player.options.phoneUI;
     // This is needed because .s-base--dark is on newUI/normal but not on oldUI/normal
     // So the classes on body need to be updated
     Themes.find(Theme.currentName()).set();
