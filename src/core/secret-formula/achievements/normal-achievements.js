@@ -1790,7 +1790,7 @@ export const normalAchievements = [
     checkRequirement: () => player.endgames >= 1e12,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Start Endgames with ${format(1e24, 2, 2)} filled Reality Machines`;
+      return `终局后自动将 ${format(1e24, 2, 2)} 现实机器进贡给特蕾莎`;
     },
     effect: () => player.disablePostReality ? DC.D0 : Decimal.pow10(24),
     progress: () => Achievement(217).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.endgames).div(1e12), 0, 1)
@@ -1802,7 +1802,7 @@ export const normalAchievements = [
     checkRequirement: () => Currency.antimatter.value.gte("ee50") && Enslaved.isRunning,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Keep V progression on Endgame.`;
+      return `终局后保留薇成就`;
     },
     progress: () => Achievement(218).isUnlocked ? DC.D1 : (!Enslaved.isRunning ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().add(1).log10().div(50), 0, 1))
   },
@@ -1914,7 +1914,7 @@ export const normalAchievements = [
     checkRequirement: () => new Decimal(Tesseracts.extra * Tesseracts.totalMult).gte(1000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `基于超五方体数量给予永恒点数一个小的指数加成`;
+      return `基于超五方体数量给予永恒点数一个小的指数加成。`;
     },
     effect: () => player.disablePostReality ? 1 : Decimal.log10(Penteracts.effectiveCount + 1).div(10).add(1).toNumber(),
     formatEffect: value => `${formatPow(value, 2, 3)}`,
