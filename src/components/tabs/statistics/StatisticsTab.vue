@@ -503,8 +503,7 @@ export default {
         永恒
       </div>
       <div>
-        你的永恒次数为 {{ eternityCountString }}<span v-if="reality.isUnlocked">（本次
-        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>）</span>。
+        你的永恒次数为 {{ eternityCountString }}<span v-if="reality.isUnlocked">（本次<span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>）</span>。
       </div>
       <div v-if="infinity.projectedBanked.gt(0)">
         永恒后你将增加 {{ formatDecimalAmount(infinity.projectedBanked.floor()) }}
@@ -518,8 +517,7 @@ export default {
         你最快的永恒用时为 {{ eternity.best.toStringShort() }}。
       </div>
       <div v-else>
-        你<span v-if="reality.isUnlocked">在本次
-        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>中</span>没有最快的永恒用时。
+        你<span v-if="reality.isUnlocked">在本次<span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{isDoomed ? "末日" : "现实" }}</span>中</span>没有最快的永恒用时。
       </div>
       <div>
         你在本次永恒中已花费 {{ eternity.this.toStringShort() }}。
@@ -529,8 +527,7 @@ export default {
       </div>
       <div>
         你获得永恒点数的最快速度
-        <span v-if="reality.isUnlocked">（本次
-        <span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>）
+        <span v-if="reality.isUnlocked">（本次<span :class="{ 'c-stats-tab-doomed' : isDoomed }">{{ isDoomed ? "末日" : "现实" }}</span>）
         </span>
         为每分钟 {{ format(eternity.bestRate, 2, 2) }}。
       </div>
