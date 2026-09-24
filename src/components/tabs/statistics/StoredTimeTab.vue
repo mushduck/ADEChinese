@@ -139,6 +139,12 @@ export default {
         "o-primary-btn--disabled": this.fluxLevel >= this.maxFlux - 99
       };
     },
+    classObj12() {
+      return {
+        "o-primary-btn": this.storedTime > 0,
+        "o-primary-btn--disabled": this.storedTime <= 0,
+      };
+    }
   },
   methods: {
     update() {
@@ -297,7 +303,7 @@ export default {
       <br>
       <span>建议善用赠送的离线时长！或许在特定的情况下可以大大加快永恒！</span>
     </div>
-    
+
     <div class="c-subtab-option-container">
       <div class="independent-btn-wrapper">
         <PrimaryButton
@@ -315,14 +321,14 @@ export default {
           点我在阿尔法内重见天日
         </PrimaryButton>
       </div>
-      
+
       <div class="custom-time-container">
-        <input 
-          type="number" 
-          v-model.number="customTimeValue" 
-          min="0" 
+        <input
+          type="number"
+          v-model.number="customTimeValue"
+          min="0"
           step="any"
-          class="custom-time-input" 
+          class="custom-time-input"
           placeholder="数值"
         />
         <select v-model="customTimeUnit" class="custom-time-select">
@@ -390,7 +396,7 @@ export default {
     </div>
     <br>
     <br>
-    
+
     <div
       v-if="fluxUnlocked"
       class="normal-text"
@@ -411,7 +417,7 @@ export default {
       </span>
       <br>
       <br>
-      
+
       <div class="c-subtab-option-container">
         <PrimaryButton
           :class="classObj6"
@@ -468,7 +474,7 @@ export default {
       </div>
       <br>
       <br>
-      
+
       <div class="c-subtab-option-container">
         <PrimaryButton
           :class="classObj1"
@@ -495,7 +501,7 @@ export default {
           {{ fiveHoursFlux }}
         </PrimaryButton>
         <PrimaryButton
-          :class="classObj5"
+          :class="classObj12"
           @click="fluxAll"
         >
           {{ allFlux }}
@@ -524,7 +530,7 @@ export default {
   justify-content: center;
 }
 
-.custom-time-input, 
+.custom-time-input,
 .custom-time-select {
   background-color: rgba(0, 0, 0, 0.6);
   border: 1px solid var(--color-primary, #555);
@@ -545,11 +551,11 @@ export default {
   cursor: pointer;
 }
 
-.custom-time-input::-webkit-inner-spin-button, 
-.custom-time-input::-webkit-outer-spin-button { 
+.custom-time-input::-webkit-inner-spin-button,
+.custom-time-input::-webkit-outer-spin-button {
   -webkit-appearance: none;
-  appearance: none; 
-  margin: 0; 
+  appearance: none;
+  margin: 0;
 }
 
 .custom-time-input {
