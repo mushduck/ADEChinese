@@ -109,7 +109,7 @@ export const resurgenceUpgrades = {
     name: "时轴曲变 II",
     id: "synergy2",
     cost: new Decimal("1e2400"),
-    description: "基于在被毁灭的现实外生产的总反物质薇天界维度提供指数加成",
+    description: "基于在被毁灭的现实外生产的总反物质为天界维度提供指数加成",
     effect: () => Decimal.log10(Decimal.log10(Decimal.log10(player.records.totalAntimatterOutsideDoom).add(1)).add(1)).div(15).add(1),
     formatEffect: value => formatPow(value, 2, 3)
   },
