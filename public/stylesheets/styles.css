@@ -7451,11 +7451,21 @@ properly on certain themes. */
   font-family: Typewriter, serif;
   font-size: 1.4rem;
   color: var(--color-text);
-  background-color: var(--color-base);
   border: var(--var-border-width, 0.3rem) solid black;
   border-radius: var(--var-border-radius, 0.6rem);
   padding: 1rem;
   transition: all 0.2s, left 0s, top 0s, transform 0s;
+}
+
+.c-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--color-base) 50%, transparent);
+  backdrop-filter: blur(10px);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .t-amoled .c-modal,
