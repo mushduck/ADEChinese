@@ -235,6 +235,7 @@ export const Endgame = {
     player.tutorialActive = true;
     if (player.endgames <= 50) player.options.confirmations.glyphSelection = true;
     ui.view.newUI = player.options.newUI;
+    ui.view.phoneUI = player.options.phoneUI;
     ui.view.news = player.options.news.enabled;
     Themes.find(Theme.currentName()).set();
     Notations.all.find(n => n.name === player.options.notation).setAsCurrent();

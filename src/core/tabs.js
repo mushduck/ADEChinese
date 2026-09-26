@@ -231,8 +231,25 @@ export const Tabs = (function() {
       Tab.options,
       Tab.shop
     ],
+    phoneUI: [
+      Tab.dimensions,
+      Tab.automation,
+      Tab.challenges,
+      Tab.infinity,
+      Tab.eternity,
+      Tab.reality,
+      Tab.celestials,
+      Tab.endgame,
+      Tab.cdexpansion,
+      Tab.divinity,
+      Tab.universes,
+      Tab.achievements,
+      Tab.statistics,
+      Tab.options,
+      Tab.shop
+    ],
     get currentUIFormat() {
-      return ui.view.newUI ? this.newUI : this.oldUI;
+      return player.options.phoneUI ? this.phoneUI : (player.options.newUI ? this.newUI : this.oldUI);
     },
   };
 }());
