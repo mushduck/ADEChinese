@@ -8932,16 +8932,6 @@ properly on certain themes. */
   border: 0.1rem solid color-mix(in srgb, var(--color-ra--base, #f2a654) 50%, transparent) !important;
 }
 
-.t-normal .c-ra-memory-header {
-  background: color-mix(in srgb, #2a1f10 60%, transparent) !important;
-  backdrop-filter: blur(10px) saturate(150%) !important;
-  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
-  border: 0.1rem solid color-mix(in srgb, var(--color-ra--base, #f2a654) 30%, transparent) !important;
-  border-radius: 0.5rem !important;
-  padding: 1rem !important;
-  margin-bottom: 1rem !important;
-}
-
 .t-normal .l-ra-pet-container {
   background: color-mix(in srgb, #2a1f10 65%, transparent) !important;
   backdrop-filter: blur(12px) saturate(150%) !important;
