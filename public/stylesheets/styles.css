@@ -7457,6 +7457,31 @@ properly on certain themes. */
   transition: all 0.2s, left 0s, top 0s, transform 0s;
 }
 
+/* acrylic parts */
+
+.t-normal .c-background-overlay,
+.t-s9 .c-background-overlay,
+.t-s12 .c-background-overlay {
+  background: transparent !important;
+}
+
+#page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  
+  background-image: url("../images/hatsune_miku_background.webp"); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  
+  z-index: -100;
+  opacity: 0.4;
+}
+
 .c-modal::before {
   content: "";
   position: absolute;
@@ -7467,6 +7492,1802 @@ properly on certain themes. */
   z-index: -1;
   pointer-events: none;
 }
+
+.t-normal .c-modal {
+  background-color: color-mix(in srgb, #1d1b22 60%, transparent);
+  
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.t-normal .c-modern-sidebar {
+  background-color: color-mix(in srgb, #1d1b22 70%, transparent);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.t-normal .c-subtab-option-container,
+.t-normal .c-autobuyer-box-row__modal {
+  background-color: color-mix(in srgb, #1d1b22 60%, transparent);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+}
+
+/* Button Base */
+.t-normal .o-primary-btn {
+  background-color: color-mix(in srgb, var(--color-base) 55%, transparent);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* AD */
+.t-normal .c-dimension-row {
+  background-color: color-mix(in srgb, var(--color-base) 45%, transparent);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+
+/* Tickspeed */
+.t-normal .tickspeed-buttons {
+  background-color: color-mix(in srgb, var(--color-base) 50%, transparent);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+
+/* Dimboosts & Galaxies */
+.t-normal .reset-container {
+  background-color: color-mix(in srgb, var(--color-base) 50%, transparent);
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* Progress Bar */
+.t-normal .c-progress-bar {
+  background-color: color-mix(in srgb, var(--color-base) 40%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Buttons */
+
+.t-normal .o-prestige-button {
+  backdrop-filter: blur(12px) saturate(160%);
+  -webkit-backdrop-filter: blur(12px) saturate(160%);
+}
+
+.t-normal .o-infinity-button,
+.t-normal .o-celestial-infinity-button,
+.t-normal .o-eternity-button,
+.t-normal .o-celestial-eternity-button,
+.t-normal .o-condense-button,
+.t-normal .o-supernova-button {
+  background-color: color-mix(in srgb, var(--color-prestige--accent) 40%, transparent);
+}
+
+.t-normal .o-prestige-button:hover,
+.t-normal .o-prestige-button.force-hover {
+  backdrop-filter: blur(20px) saturate(240%);
+  -webkit-backdrop-filter: blur(20px) saturate(240%);
+}
+
+.t-normal .o-infinity-button:hover {
+  background: color-mix(in srgb, var(--color-infinity) 40%, transparent);
+}
+.t-normal .o-eternity-button:hover {
+  background: color-mix(in srgb, var(--color-eternity) 40%, transparent);
+}
+.t-normal .o-celestial-infinity-button:hover {
+  background: linear-gradient(
+    color-mix(in srgb, var(--color-infinity) 40%, transparent),
+    color-mix(in srgb, var(--color-celestials) 40%, transparent));
+}
+.t-normal .o-celestial-eternity-button:hover {
+  background: linear-gradient(
+    color-mix(in srgb, var(--color-eternity) 40%, transparent),
+    color-mix(in srgb, var(--color-celestials) 40%, transparent));
+}
+.t-normal .o-condense-button:hover {
+  background: linear-gradient(
+    color-mix(in srgb, red 40%, transparent),
+    color-mix(in srgb, yellow 40%, transparent),
+    color-mix(in srgb, cyan 40%, transparent));
+}
+.t-normal .o-supernova-button:hover {
+  background: linear-gradient(
+    color-mix(in srgb, cyan 40%, transparent),
+    color-mix(in srgb, blue 40%, transparent),
+    color-mix(in srgb, indigo 40%, transparent),
+    color-mix(in srgb, purple 40%, transparent));
+}
+
+.t-normal .c-reality-button--unlocked {
+  color: black;
+  background: color-mix(in srgb, var(--color-reality) 40%, transparent);
+  backdrop-filter: blur(12px) saturate(220%);
+  -webkit-backdrop-filter: blur(12px) saturate(220%);
+  border-color: var(--color-reality-dark);
+}
+
+.t-normal .c-reality-button--unlocked:hover,
+.t-normal .c-reality-button--unlocked.force-hover {
+  color: #aaaaaa;
+  background: color-mix(in srgb, #168333 100%, transparent);
+  backdrop-filter: blur(14px) saturate(240%);
+  -webkit-backdrop-filter: blur(14px) saturate(240%);
+  text-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.45);
+}
+
+/* Continuum */
+.t-normal .tickspeed-btn.o-continuum,
+.t-normal button.o-continuum,
+.tickspeed-btn.o-continuum {
+  color: #c9c9d4 !important;
+  background: linear-gradient(155deg, #0b0b12 0%, #191922 55%, #0b0b12 100%) !important;
+  border: 0.1rem solid #43435a !important;
+}
+
+
+/* Tabs */
+.c-modern-sidebar {
+  background: rgba(29, 27, 34, 0.35) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.c-modern-sidebar .o-tab-btn {
+  background-color: transparent !important;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+}
+
+.c-modern-sidebar .o-tab-btn {
+  background-color: transparent !important;
+}
+
+.c-modern-sidebar .o-tab-btn.o-tab-btn--infinity    { border-color: color-mix(in srgb, var(--color-infinity) 55%, transparent) !important; }
+.c-modern-sidebar .o-tab-btn.o-tab-btn--eternity    { border-color: color-mix(in srgb, var(--color-eternity) 55%, transparent) !important; }
+.c-modern-sidebar .o-tab-btn.o-tab-btn--reality     { border-color: color-mix(in srgb, var(--color-reality) 55%, transparent) !important; }
+.c-modern-sidebar .o-tab-btn.o-tab-btn--celestial   { border-color: color-mix(in srgb, var(--color-celestials) 55%, transparent) !important; }
+.c-modern-sidebar .o-tab-btn.o-tab-btn--endgame     { border-color: color-mix(in srgb, var(--color-endgame) 55%, transparent) !important; }
+.c-modern-sidebar .o-tab-btn.o-tab-btn--cd-expansion{ border-color: color-mix(in srgb, var(--color-alpha--base) 55%, transparent) !important; }
+.c-modern-sidebar .o-tab-btn.o-tab-btn--divinity    { border-color: color-mix(in srgb, var(--color-pelle--base) 55%, transparent) !important; }
+
+.c-modern-sidebar .o-tab-btn--infinity:hover {
+  background: color-mix(in srgb, var(--color-infinity) 70%, transparent) !important;
+}
+.c-modern-sidebar .o-tab-btn--eternity:hover {
+  background: color-mix(in srgb, var(--color-eternity) 70%, transparent) !important;
+}
+.c-modern-sidebar .o-tab-btn--reality:hover {
+  background: color-mix(in srgb, var(--color-reality) 70%, transparent) !important;
+}
+.c-modern-sidebar .o-tab-btn--celestial:hover {
+  background: color-mix(in srgb, var(--color-celestials) 70%, transparent) !important;
+}
+.c-modern-sidebar .o-tab-btn--endgame:hover {
+  background: color-mix(in srgb, var(--color-endgame) 70%, transparent) !important;
+}
+.c-modern-sidebar .o-tab-btn--divinity:hover {
+  background: color-mix(in srgb, var(--color-pelle--base) 70%, transparent) !important;
+}
+
+.c-modern-sidebar .o-tab-btn--cd-expansion:hover {
+  background: linear-gradient(
+    color-mix(in srgb, var(--color-infinity) 70%, transparent),
+    color-mix(in srgb, var(--color-eternity) 70%, transparent),
+    color-mix(in srgb, var(--color-reality) 70%, transparent),
+    color-mix(in srgb, var(--color-celestials) 70%, transparent)
+  ) !important;
+}
+
+.c-modern-sidebar .o-tab-btn:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.c-modern-sidebar .o-tab-btn.o-tab-btn--active,
+.c-modern-sidebar .o-tab-btn.o-subtab-btn--active {
+  background-color: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: inset 3px 0 0 currentColor !important;
+}
+
+.c-modern-sidebar .subtabs {
+  background: rgba(29, 27, 34, 0.5) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
+}
+
+/* Autobuyers */
+
+.t-normal .c-autobuyer-box-row {
+  background: color-mix(in srgb, var(--color-base) 45%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent) !important;
+}
+
+.t-normal .c-autobuyer-box-slot {
+  background: color-mix(in srgb, var(--color-base) 35%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 30%, transparent) !important;
+}
+
+.t-normal .o-autobuyer-input {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 60%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent) !important;
+}
+
+.t-normal .c-autobuyer-box__mode-select {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 50%, transparent) !important;
+}
+.t-normal .c-autobuyer-box__mode-select:hover {
+  background: color-mix(in srgb, var(--color-accent) 55%, transparent) !important;
+}
+
+.t-normal .o-autobuyer-toggle-checkbox__label {
+  background: color-mix(in srgb, var(--color-gh-purple) 60%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-gh-purple) 40%, transparent) !important;
+}
+
+.t-normal .o-autobuyer-toggle-checkbox__label.o-autobuyer-toggle-checkbox__label--active {
+  background: color-mix(in srgb, var(--color-good) 65%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-good-dark) 55%, transparent) !important;
+}
+
+.t-normal .o-autobuyer-btn {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 45%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-infinity) 40%, transparent) !important;
+}
+.t-normal .o-autobuyer-btn:hover {
+  background: color-mix(in srgb, var(--color-infinity) 60%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-infinity) 60%, transparent) !important;
+}
+
+.t-normal .c-subtab-option-container .o-primary-btn.o-primary-btn--subtab-option {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 30%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent) !important;
+}
+.t-normal .c-subtab-option-container .o-primary-btn.o-primary-btn--subtab-option:hover {
+  color: var(--color-text-inverted) !important;
+  background: color-mix(in srgb, var(--color-accent) 60%, transparent) !important;
+}
+
+.t-normal .l-autobuyer-singlet-group .c-autobuyer-box-row {
+  background: color-mix(in srgb, var(--color-base) 40%, transparent) !important;
+}
+
+/* Challenges */
+
+.t-normal .c-challenge-box--normal {
+  background: color-mix(in srgb, var(--color-base) 45%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent) !important;
+}
+
+.t-normal .o-challenge-btn--completed {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-good) 55%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-good-dark) 60%, transparent) !important;
+}
+
+.t-normal .o-challenge-btn--unlocked {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 50%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-good-dark) 50%, transparent) !important;
+}
+.t-normal .o-challenge-btn--unlocked:hover {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-good) 65%, transparent) !important;
+}
+
+.t-normal .o-challenge-btn--running {
+  color: white !important;
+  background: color-mix(in srgb, #1f1f1f 60%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 50%, transparent) !important;
+}
+
+.t-normal .o-challenge-btn--locked {
+  color: #999 !important;
+  background: color-mix(in srgb, #3a3a3a 50%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-bad) 40%, transparent) !important;
+}
+
+.t-normal .c-challenge-box--infinity {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-infinity) 45%, black) 55%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-infinity) 60%, black) 50%, transparent) !important;
+}
+
+.t-normal .c-challenge-box--eternity {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 45%, black) 55%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 60%, black) 50%, transparent) !important;
+}
+
+.t-normal .c-subtab-option-container .o-primary-btn--subtab-option {
+  background: color-mix(in srgb, var(--color-base) 45%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent) !important;
+}
+
+.t-normal .c-subtab-option-container .o-primary-btn--subtab-option:hover {
+  background: color-mix(in srgb, var(--color-accent) 60%, transparent) !important;
+}
+
+.t-normal .c-perk-network {
+  background: color-mix(in srgb, var(--color-base) 70%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(140%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(140%) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent) !important;
+}
+
+/* Infinity & Break Infinity Upgrades */
+
+.t-normal .o-infinity-upgrade-btn--bought {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-infinity) 50%, black) 70%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-infinity) 60%, black) 55%, transparent) !important;
+}
+
+.t-normal .o-infinity-upgrade-btn--bought.o-infinity-upgrade-btn--charged,
+.t-normal .o-infinity-upgrade-btn--charged {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-teresa--base) 50%, black) 70%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-teresa--base) 60%, black) 55%, transparent) !important;
+}
+
+.t-normal .o-infinity-upgrade-btn--available {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 60%, black) 70%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent) !important;
+}
+
+.t-normal .o-infinity-upgrade-btn--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #3a3a3a 70%, black) 65%, transparent) !important;
+  border-color: color-mix(in srgb, #555 30%, transparent) !important;
+}
+
+.t-normal .l-break-infinity-tab__break-btn,
+.t-normal .l-break-infinity-tab__break-btn.o-infinity-upgrade-btn--available {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-infinity) 50%, black) 70%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-infinity) 60%, black) 55%, transparent) !important;
+}
+
+.t-normal .o-infinity-upgrade-btn--multiplier.o-infinity-upgrade-btn--available {
+  color: #e05555 !important;
+  background: color-mix(in srgb, var(--color-base) 80%, transparent) !important;
+  border-color: color-mix(in srgb, #17b3b5 60%, transparent) !important;
+}
+
+.t-normal .o-infinity-upgrade-btn--available:hover {
+  color: white !important;
+  background: color-mix(in srgb, #a53b98 75%, transparent) !important;
+}
+.t-normal .o-infinity-upgrade-btn--color-2.o-infinity-upgrade-btn--available:hover {
+  background: color-mix(in srgb, #ff3300 75%, transparent) !important;
+}
+.t-normal .o-infinity-upgrade-btn--color-3.o-infinity-upgrade-btn--available:hover {
+  background: color-mix(in srgb, #c6d50d 75%, transparent) !important;
+}
+.t-normal .o-infinity-upgrade-btn--color-4.o-infinity-upgrade-btn--available:hover {
+  background: color-mix(in srgb, #0cfec5 75%, transparent) !important;
+}
+.t-normal .o-infinity-upgrade-btn--multiplier.o-infinity-upgrade-btn--available:hover {
+  color: black !important;
+  background: color-mix(in srgb, #e0d8e0 85%, transparent) !important;
+}
+
+.t-normal .c-infinity-upgrade-grid__column--background {
+  opacity: 0.25 !important;
+}
+
+/* Eternity Upgrades */
+.t-normal .o-eternity-upgrade {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-eternity-upgrade--bought {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 50%, black) 55%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 65%, black) 35%, transparent) !important;
+}
+
+.t-normal .o-eternity-upgrade--available {
+  color: var(--color-eternity) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 60%, black) 55%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-eternity) 45%, transparent) !important;
+}
+.t-normal .o-eternity-upgrade--available:hover {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 55%, black) 50%, transparent) !important;
+}
+
+.t-normal .o-eternity-upgrade--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #3a3a4a 65%, black) 55%, transparent) !important;
+  border-color: color-mix(in srgb, #555 30%, transparent) !important;
+}
+
+/* Endgame Upgrades */
+.t-normal .c-endgame-upgrade-btn {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .c-endgame-upgrade-btn--bought {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-endgame) 45%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-endgame) 60%, black) 55%, transparent) !important;
+}
+
+.t-normal .c-endgame-upgrade-btn:not(.c-endgame-upgrade-btn--bought):not(.c-endgame-upgrade-btn--unavailable):not(.c-endgame-upgrade-btn--possible):not(.c-endgame-upgrade-btn--locked) {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 60%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-endgame) 45%, transparent) !important;
+}
+.t-normal .c-endgame-upgrade-btn--available:hover {
+  color: black !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-endgame) 60%, black) 70%, transparent) !important;
+}
+
+.t-normal .c-endgame-upgrade-btn--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #3a3a4a 65%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, #555 30%, transparent) !important;
+}
+
+.t-normal .c-endgame-upgrade-btn--possible {
+  color: #ccc !important;
+  background: color-mix(in srgb, color-mix(in srgb, #4a4a2a 55%, black) 70%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-endgame) 35%, transparent) !important;
+}
+
+.t-normal .c-endgame-upgrade-btn--locked {
+  color: #aaa !important;
+  background: color-mix(in srgb, color-mix(in srgb, #4a2020 60%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-bad) 35%, transparent) !important;
+}
+
+/* Replicanti */
+.t-normal .o-primary-btn--replicanti-upgrade {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 70%, #1a1a2e) 85%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 50%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-primary-btn--replicanti-upgrade.o-primary-btn--disabled {
+  color: #999 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #2a2a3a 70%, black) 85%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-bad) 35%, transparent) !important;
+}
+
+.t-normal .o-primary-btn--replicanti-upgrade-toggle {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 65%, #1a1a2e) 80%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-good-dark) 45%, transparent) !important;
+}
+
+.t-normal .o-primary-btn--replicanti-galaxy {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 70%, #1a1a2e) 85%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 50%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-primary-btn--replicanti-galaxy.o-primary-btn--disabled {
+  color: #999 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #2a2a3a 70%, black) 85%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-bad) 35%, transparent) !important;
+}
+
+.t-normal .o-primary-btn--replicanti-galaxy-toggle {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 65%, #1a1a2e) 80%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-good-dark) 45%, transparent) !important;
+}
+
+/* Eternity Milestones */
+.t-normal .o-eternity-milestone__reward {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-eternity-milestone__reward--reached {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 50%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 65%, black) 55%, transparent) !important;
+}
+
+.t-normal .o-eternity-milestone__reward--locked {
+  color: #aaa !important;
+  background: color-mix(in srgb, color-mix(in srgb, dimgrey 60%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-eternity) 30%, transparent) !important;
+}
+
+/* Dilation Upgrades */
+.t-normal .o-dilation-upgrade {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-dilation-upgrade--bought {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-dilation) 45%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-dilation) 60%, black) 55%, transparent) !important;
+}
+
+.t-normal .o-dilation-upgrade--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #3a3a4a 65%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, #555 30%, transparent) !important;
+}
+
+.t-normal .o-dilation-upgrade--rebuyable:not(.o-dilation-upgrade--unavailable) {
+  color: var(--color-dilation) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 60%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-dilation) 45%, transparent) !important;
+}
+
+/* Reality & Imaginary & Dual & Black Hole Upgrades */
+.t-normal .c-reality-upgrade-btn {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .c-reality-upgrade-btn--bought {
+  color: var(--color-reality-light) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-reality) 50%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-reality-dark) 60%, black) 55%, transparent) !important;
+}
+
+.t-normal .c-reality-upgrade-btn--unavailable {
+  color: #aaa !important;
+  background: color-mix(in srgb, color-mix(in srgb, #3a3a4a 65%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-reality-dark) 30%, transparent) !important;
+}
+
+.t-normal .c-reality-upgrade-btn--possible {
+  color: black !important;
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, #A2A229 70%, transparent),
+    color-mix(in srgb, #A2A229 70%, transparent) 3rem,
+    color-mix(in srgb, #919122 70%, transparent) 3rem,
+    color-mix(in srgb, #919122 70%, transparent) 6rem
+  ) !important;
+}
+
+.t-normal .c-reality-upgrade-btn--locked {
+  color: white !important;
+  background-color: color-mix(in srgb, #952020 70%, transparent) !important;
+  background-image:
+    linear-gradient(45deg, color-mix(in srgb, #802222 70%, transparent) 25%, transparent 25%),
+    linear-gradient(135deg, color-mix(in srgb, #802222 70%, transparent) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, color-mix(in srgb, #802222 70%, transparent) 75%),
+    linear-gradient(135deg, transparent 75%, color-mix(in srgb, #802222 70%, transparent) 75%) !important;
+  background-size: 4rem 4rem !important;
+}
+
+.t-normal .o-primary-btn--dilation-upgrade-toggle,
+.t-normal .o-primary-btn--reality-upgrade-toggle {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 65%, black) 80%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-good-dark) 40%, transparent) !important;
+}
+
+/* Time Sdudies */
+.t-normal .ttshop-background {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 60%, black) 75%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border-color: color-mix(in srgb, #691fa5 40%, transparent) !important;
+}
+
+.t-normal .c-tt-buy-button--unlocked {
+  color: #3aacd6 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #232028 70%, black) 80%, transparent) !important;
+  border-color: color-mix(in srgb, #691fa5 50%, transparent) !important;
+}
+.t-normal .c-tt-buy-button--unlocked:hover {
+  color: #232028 !important;
+  background: color-mix(in srgb, #3aacd6 70%, transparent) !important;
+}
+
+.t-normal .c-tt-buy-button--locked {
+  color: #999 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #4a4a4a 65%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, #555 30%, transparent) !important;
+}
+.t-normal .c-tt-buy-button--locked:hover {
+  background: color-mix(in srgb, color-mix(in srgb, #652f2f 65%, black) 75%, transparent) !important;
+}
+
+.t-normal .o-tt-top-row-button,
+.t-normal .o-tt-autobuyer-button {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 60%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, #691fa5 40%, transparent) !important;
+}
+
+.t-normal .c-tt-save-load-btn__menu {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 70%, black) 85%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-time-study {
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+}
+
+.t-normal .o-time-study--bought {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 50%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 65%, black) 55%, transparent) !important;
+}
+
+.t-normal .o-time-study--available {
+  color: var(--color-eternity) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 55%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-eternity) 50%, transparent) !important;
+}
+.t-normal .o-time-study--available:hover {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-eternity) 55%, black) 70%, transparent) !important;
+}
+
+.t-normal .o-time-study--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, color-mix(in srgb, #3a3a4a 60%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, #555 30%, transparent) !important;
+}
+
+.t-normal .o-time-study--chargeable {
+  color: var(--color-teresa--base) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-teresa--base) 30%, black) 70%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-teresa--base) 50%, transparent) !important;
+}
+.t-normal .o-time-study--charged {
+  color: white !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-teresa--base) 55%, black) 75%, transparent) !important;
+  border-color: color-mix(in srgb, color-mix(in srgb, var(--color-teresa--base) 65%, black) 55%, transparent) !important;
+}
+
+.t-normal .o-time-study-selection-btn {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 55%, black) 75%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+}
+
+.t-normal .o-time-study--dilated {
+  color: var(--color-dilation) !important;
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-dilation) 30%, black) 70%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-dilation) 50%, transparent) !important;
+}
+
+/* Pelle Nerfs */
+.t-normal .l-pelle-panel-container {
+  background: color-mix(in srgb, color-mix(in srgb, var(--color-base) 60%, black) 75%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border-color: color-mix(in srgb, var(--color-pelle--base) 45%, transparent) !important;
+}
+
+.t-normal .c-pelle-panel-title {
+  text-shadow: 0 0 0.5rem var(--color-pelle--base) !important;
+}
+
+/* Endgame Masteries */
+
+.t-normal .l-endgame-masteries-tab .c-subtab-option-container .o-primary-btn--subtab-option {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 45%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent) !important;
+}
+.t-normal .l-endgame-masteries-tab .c-subtab-option-container .o-primary-btn--subtab-option:hover {
+  color: var(--color-text-inverted) !important;
+  background: color-mix(in srgb, var(--color-accent) 60%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 55%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border-color: color-mix(in srgb, var(--color-endgame) 40%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery--bought {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-endgame) 65%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-endgame) 55%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 65%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-endgame) 30%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery--bought,
+.t-normal .o-endgame-mastery-normal--bought {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-endgame) 30%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-endgame) 65%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery-antimatter-dim-compression--bought {
+  background: color-mix(in srgb, var(--color-antimatter) 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-antimatter) 65%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery-infinity-dim-compression--bought,
+.t-normal .o-endgame-mastery-infinity-points--bought {
+  background: color-mix(in srgb, var(--color-infinity) 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-infinity) 65%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery-time-dim-compression--bought,
+.t-normal .o-endgame-mastery-eternity-points--bought,
+.t-normal .o-endgame-mastery-imaginary-machines--bought {
+  background: color-mix(in srgb, var(--color-eternity) 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-eternity) 65%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery-celestial-dim-compression--bought {
+  background: color-mix(in srgb, var(--color-celestials) 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-celestials) 65%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery-reality-machines--bought {
+  background: color-mix(in srgb, var(--color-reality) 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-reality) 65%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery-permanent--bought {
+  background: color-mix(in srgb, var(--color-endgame) 40%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-endgame) 75%, transparent) !important;
+}
+
+.t-normal .o-endgame-mastery-connection {
+  stroke: color-mix(in srgb, var(--color-endgame) 40%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--bought {
+  stroke: color-mix(in srgb, var(--color-endgame) 60%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--antimatter-dim-compression {
+  stroke: color-mix(in srgb, var(--color-antimatter) 55%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--infinity-dim-compression {
+  stroke: color-mix(in srgb, var(--color-infinity) 55%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--time-dim-compression {
+  stroke: color-mix(in srgb, var(--color-eternity) 55%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--celestial-dim-compression {
+  stroke: color-mix(in srgb, var(--color-celestials) 55%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--infinity-points {
+  stroke: color-mix(in srgb, var(--color-infinity) 55%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--eternity-points {
+  stroke: color-mix(in srgb, var(--color-eternity) 55%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--reality-machines {
+  stroke: color-mix(in srgb, var(--color-reality) 55%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--imaginary-machines {
+  stroke: color-mix(in srgb, var(--color-eternity) 50%, transparent) !important;
+}
+.t-normal .o-endgame-mastery-connection--permanent {
+  stroke: color-mix(in srgb, var(--color-endgame) 65%, transparent) !important;
+}
+
+.t-normal .esshop-background {
+  background: color-mix(in srgb, var(--color-base) 50%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+  border-color: color-mix(in srgb, var(--color-endgame) 40%, transparent) !important;
+}
+
+.t-normal .c-es-buy-button--unlocked {
+  color: var(--color-endgame) !important;
+  background: color-mix(in srgb, #232028 60%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-endgame) 50%, transparent) !important;
+}
+.t-normal .c-es-buy-button--unlocked:hover {
+  color: black !important;
+  background: color-mix(in srgb, var(--color-endgame) 70%, transparent) !important;
+}
+
+.t-normal .c-es-buy-button--locked {
+  color: #999 !important;
+  background: color-mix(in srgb, #3a3a3a 55%, transparent) !important;
+  border-color: color-mix(in srgb, #666 40%, transparent) !important;
+}
+.t-normal .c-es-buy-button--locked:hover {
+  background: color-mix(in srgb, #553333 60%, transparent) !important;
+}
+
+.t-normal .esshop-minimize-btn {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 50%, transparent) !important;
+}
+
+.t-normal .l-es-save-load-btn.c-es-buy-button--unlocked {
+  background: color-mix(in srgb, #232028 55%, transparent) !important;
+}
+
+/* Endgame Milestones */
+
+.t-normal .o-endgame-milestone__reward--reached {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-endgame) 35%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-endgame) 55%, transparent) !important;
+}
+
+.t-normal .o-endgame-milestone__reward--locked {
+  color: #999 !important;
+  background: color-mix(in srgb, #3a3a3a 50%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, #666 40%, transparent) !important;
+}
+
+/* Stars */
+.t-normal .o-star__container {
+  background: color-mix(in srgb, #0a0a20 60%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+}
+
+.t-normal .o-star__container--red {
+  color: #ff5555 !important;
+  border: 0.1rem solid color-mix(in srgb, red 60%, transparent) !important;
+}
+.t-normal .o-star__container--orange {
+  color: #ffaa55 !important;
+  border: 0.1rem solid color-mix(in srgb, orange 60%, transparent) !important;
+}
+.t-normal .o-star__container--yellow {
+  color: #ffff55 !important;
+  border: 0.1rem solid color-mix(in srgb, yellow 60%, transparent) !important;
+}
+.t-normal .o-star__container--green {
+  color: #55ff55 !important;
+  border: 0.1rem solid color-mix(in srgb, green 60%, transparent) !important;
+}
+.t-normal .o-star__container--blue {
+  color: #55ffff !important;
+  border: 0.1rem solid color-mix(in srgb, cyan 60%, transparent) !important;
+}
+.t-normal .o-star__container--purple {
+  color: #aa55ff !important;
+  border: 0.1rem solid color-mix(in srgb, purple 60%, transparent) !important;
+}
+.t-normal .o-star__container--white {
+  color: white !important;
+  border: 0.1rem solid color-mix(in srgb, white 60%, transparent) !important;
+}
+.t-normal .o-star__container--black {
+  color: #aaa !important;
+  border: 0.1rem solid color-mix(in srgb, #888 50%, transparent) !important;
+  text-shadow: 0 0 0.5rem rgba(255, 255, 255, 0.3) !important;
+}
+
+.t-normal .o-star__container .o-primary-btn.o-reset-btn {
+  color: var(--color-text) !important;
+  background: color-mix(in srgb, var(--color-base) 55%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-accent) 45%, transparent) !important;
+}
+.t-normal .o-star__container .o-primary-btn.o-reset-btn:hover {
+  color: var(--color-text-inverted) !important;
+  background: color-mix(in srgb, var(--color-good) 60%, transparent) !important;
+}
+
+/* Reset Endgame */
+
+.t-normal .c-reset-endgame-button,
+.t-normal .c-reset-endgame-button:hover,
+.t-normal .c-reset-endgame-button.force-hover {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+.t-normal .c-reset-endgame-button {
+  color: var(--color-bad) !important;
+  background: color-mix(in srgb, var(--color-base) 55%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-bad) 50%, transparent) !important;
+}
+.t-normal .c-reset-endgame-button:hover,
+.t-normal .c-reset-endgame-button.force-hover {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-bad) 60%, transparent) !important;
+}
+
+/* Celestial Infinity Upgrades */
+
+.t-normal .o-celestial-infinity-upgrade {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-celestial-infinity-upgrade--bought {
+  color: white !important;
+  background: linear-gradient(
+    color-mix(in srgb, var(--color-infinity) 40%, transparent),
+    color-mix(in srgb, var(--color-celestials) 40%, transparent)
+  ) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-celestials) 50%, transparent) !important;
+}
+
+.t-normal .o-celestial-infinity-upgrade--available {
+  color: var(--color-infinity) !important;
+  background: color-mix(in srgb, var(--color-base) 60%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-celestials) 40%, transparent) !important;
+}
+.t-normal .o-celestial-infinity-upgrade--available:hover {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-infinity) 55%, transparent) !important;
+}
+
+.t-normal .o-celestial-infinity-upgrade--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, #3a3a3a 50%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #555 35%, transparent) !important;
+}
+
+/* Celestial Eternity Upgrades */
+.t-normal .o-celestial-eternity-upgrade {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-celestial-eternity-upgrade--bought {
+  color: white !important;
+  background: linear-gradient(
+    color-mix(in srgb, var(--color-eternity) 40%, transparent),
+    color-mix(in srgb, var(--color-celestials) 40%, transparent)
+  ) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-celestials) 50%, transparent) !important;
+}
+
+.t-normal .o-celestial-eternity-upgrade--available {
+  color: var(--color-eternity) !important;
+  background: color-mix(in srgb, var(--color-base) 60%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-celestials) 40%, transparent) !important;
+}
+.t-normal .o-celestial-eternity-upgrade--available:hover {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-eternity) 55%, transparent) !important;
+}
+
+.t-normal .o-celestial-eternity-upgrade--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, #3a3a3a 50%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #555 35%, transparent) !important;
+}
+
+/* Break Celestial Infinity Upgrades  */
+.t-normal .o-break-celestial-infinity-upgrade-btn {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+.t-normal .o-break-celestial-infinity-upgrade-btn--available {
+  color: var(--color-infinity) !important;
+  background: color-mix(in srgb, var(--color-base) 60%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-celestials) 50%, transparent) !important;
+}
+.t-normal .o-break-celestial-infinity-upgrade-btn--color-2.o-break-celestial-infinity-upgrade-btn--available {
+  color: white !important;
+  background: linear-gradient(
+    color-mix(in srgb, var(--color-infinity) 45%, transparent),
+    color-mix(in srgb, var(--color-celestials) 45%, transparent)
+  ) !important;
+}
+
+.t-normal .o-break-celestial-infinity-upgrade-btn--multiplier {
+  border-color: color-mix(in srgb, var(--color-celestials) 45%, transparent) !important;
+}
+
+/* Brak Eternity Upgrades */
+
+.t-normal .l-break-eternity-tab__break-btn.o-break-eternity-upgrade-btn--available {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-eternity) 45%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-eternity) 55%, transparent) !important;
+}
+
+.t-normal .o-break-eternity-upgrade--bought {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-eternity) 40%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-eternity) 50%, transparent) !important;
+}
+
+.t-normal .o-break-eternity-upgrade--available {
+  color: var(--color-eternity) !important;
+  background: color-mix(in srgb, var(--color-base) 60%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-eternity) 40%, transparent) !important;
+}
+.t-normal .o-break-eternity-upgrade--available:hover {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-eternity) 55%, transparent) !important;
+}
+
+.t-normal .o-break-eternity-upgrade--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, #3a3a3a 50%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #555 35%, transparent) !important;
+}
+
+.t-normal .o-break-eternity-upgrade-btn {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+/* Divinity Upgrades */
+
+.t-normal .c-divinity-upgrade-btn {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .c-divinity-upgrade-btn--bought {
+  color: var(--color-pelle--secondary) !important;
+  text-shadow: 
+      -0.1rem -0.1rem 0 black,
+      0.1rem -0.1rem 0 black,
+      -0.1rem  0.1rem 0 black,
+      0.1rem  0.1rem 0 black,
+      0 0 0.3rem black !important;
+  border-color: var(--color-antimatter) !important;
+  background: color-mix(in srgb, var(--color-pelle--base) 45%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-pelle--base) 50%, transparent) !important;
+}
+.t-normal .c-divinity-upgrade-btn--bought:hover {
+  background: color-mix(in srgb, var(--color-pelle--base) 75%, black) !important;
+}
+
+.t-normal .c-divinity-upgrade-btn:not(.c-divinity-upgrade-btn--bought):not(.c-divinity-upgrade-btn--unavailable) {
+  color: var(--color-pelle--base) !important;
+  background: color-mix(in srgb, #2a1010 65%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-pelle--base) 45%, transparent) !important;
+}
+.t-normal .c-divinity-upgrade-btn:not(.c-divinity-upgrade-btn--bought):not(.c-divinity-upgrade-btn--unavailable):hover {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-pelle--base) 60%, black) !important;
+}
+
+.t-normal .c-divinity-upgrade-btn--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, #3a3a3a 50%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #555 35%, transparent) !important;
+}
+
+.t-normal .c-divinity-header {
+  color: var(--color-pelle--base) !important;
+}
+
+/* Resurgence Upgrades */
+
+.t-normal .c-resurgence-upgrade-btn {
+  backdrop-filter: blur(15px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(15px) saturate(200%) !important;
+}
+
+.t-normal .c-resurgence-upgrade-btn--bought {
+  color: white !important;
+  text-shadow: 
+      -0.1rem -0.1rem 0 black,
+      0.1rem -0.1rem 0 black,
+      -0.1rem  0.1rem 0 black,
+      0.1rem  0.1rem 0 black,
+      0 0 0.2rem black !important;
+  background-color: transparent !important;
+  border-color: var(--color-antimatter) !important;
+  animation: a-resurgence__antimatter--glow 5s infinite !important;
+}
+
+.t-normal .c-resurgence-upgrade-btn--bought:hover {
+  color: white !important;
+  animation: a-resurgence__antimatter--glow 5s infinite !important;
+}
+
+.t-normal .c-resurgence-upgrade-btn:not(.c-resurgence-upgrade-btn--bought):not(.c-resurgence-upgrade-btn--unavailable) {
+  color: var(--color-antimatter) !important;
+  background: color-mix(in srgb, var(--color-base) 60%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-antimatter) 40%, transparent) !important;
+}
+.t-normal .c-resurgence-upgrade-btn:not(.c-resurgence-upgrade-btn--bought):not(.c-resurgence-upgrade-btn--unavailable):hover {
+  color: white !important;
+  background: color-mix(in srgb, var(--color-antimatter) 55%, transparent) !important;
+}
+
+.t-normal .c-resurgence-upgrade-btn--unavailable {
+  color: #888 !important;
+  background: color-mix(in srgb, #3a3a3a 50%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #555 35%, transparent) !important;
+}
+
+.t-normal .c-break-eternity-upgrade-btn--unavailable,
+.t-normal .o-break-eternity-upgrade--unavailable,
+.t-normal .c-divinity-upgrade-btn--unavailable,
+.t-normal .c-resurgence-upgrade-btn--unavailable,
+.t-normal .o-celestial-infinity-upgrade--unavailable,
+.t-normal .o-celestial-eternity-upgrade--unavailable,
+.t-normal .o-infinity-upgrade-btn--unavailable {
+  color: #cccccc !important;
+  text-shadow: 0 0 0.2rem black, 0 0 0.2rem black !important;
+}
+
+/* Resource Tab */
+.t-normal .c-sidebar-resource {
+  background: color-mix(in srgb, var(--color-base) 45%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent) !important;
+}
+
+/* Tesesa */
+
+.t-normal .c-teresa-unlock-description {
+  background: color-mix(in srgb, var(--color-teresa--accent) 75%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+}
+.t-normal .c-teresa-unlock-description--unlocked {
+  background: color-mix(in srgb, var(--color-teresa--base) 75%, transparent) !important;
+}
+
+.t-normal .c-teresa-run-button {
+  background: color-mix(in srgb, var(--color-teresa--accent) 60%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-teresa-shop-button {
+  background-color: transparent !important;
+  background: color-mix(in srgb, var(--color-disabled) 50%, transparent) !important;
+  backdrop-filter: blur(15px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(15px) saturate(200%) !important;
+}
+.t-normal .o-teresa-shop-button--available {
+  background: color-mix(in srgb, var(--color-teresa--accent) 65%, transparent) !important;
+}
+.t-normal .o-teresa-shop-button--capped {
+  background: color-mix(in srgb, var(--color-teresa--base) 65%, transparent) !important;
+}
+
+.t-normal .c-teresa-pour {
+  background: color-mix(in srgb, var(--color-base) 40%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid var(--color-teresa--base) !important;
+}
+
+.t-normal .c-rm-store {
+  background: color-mix(in srgb, var(--color-base) 30%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+/* Effarig */
+
+.t-normal .l-effarig-shop,
+.t-normal .l-effarig-run {
+  background: color-mix(in srgb, var(--color-base) 40%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-effarig--base) 40%, transparent) !important;
+  border-radius: 0.5rem !important;
+}
+
+.t-normal .c-effarig-shop-button {
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+  color: white !important;
+  text-shadow: 0 0 0.3rem black, 0 0 0.3rem black !important;
+}
+.t-normal .c-effarig-shop-button--bought {
+  background: color-mix(in srgb, var(--color-effarig--base) 55%, black) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-effarig--base) 70%, transparent) !important;
+  box-shadow: 0.1rem 0.1rem 0.3rem rgba(0, 0, 0, 50%) !important;
+}
+.t-normal .c-effarig-shop-button--available {
+  background: color-mix(in srgb, var(--color-effarig--base) 35%, black) !important;
+  box-shadow: 0 0 0.5rem color-mix(in srgb, var(--color-effarig--base) 60%, transparent), 
+              0 0 0.5rem color-mix(in srgb, var(--color-effarig--base) 60%, transparent) inset !important;
+}
+.t-normal .c-effarig-shop-button--available:hover {
+  background: color-mix(in srgb, var(--color-effarig--base) 50%, black) !important;
+}
+
+/* Enslaved */
+
+.t-normal .o-enslaved-mechanic-button {
+  color: black !important;
+  text-shadow: none !important;
+  background: color-mix(in srgb, var(--color-enslaved--base) 35%, white) !important;
+  backdrop-filter: blur(18px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-enslaved--base) 40%, black) !important;
+  box-shadow: none !important;
+}
+.t-normal .o-enslaved-mechanic-button--storing-time {
+  background: color-mix(in srgb, var(--color-enslaved--base) 35%, white) !important;
+}
+.t-normal .o-enslaved-mechanic-button:hover {
+  background: color-mix(in srgb, var(--color-enslaved--base) 40%, white) !important;
+}
+
+.t-normal .o-enslaved-shop-button {
+  backdrop-filter: blur(18px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(200%) !important;
+  box-shadow: none !important; 
+  border: 0.1rem solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.t-normal .o-enslaved-shop-button--available {
+  background: color-mix(in srgb, var(--color-enslaved--base) 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-enslaved--base) 60%, white) !important;
+}
+
+.t-normal .o-enslaved-shop-button--available:hover {
+  background: color-mix(in srgb, var(--color-enslaved--base) 45%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-enslaved--base) 80%, white) !important;
+}
+
+.t-normal .o-enslaved-shop-button--bought {
+  background: color-mix(in srgb, var(--color-enslaved--base) 45%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-enslaved--base) 40%, transparent) !important;
+}
+
+.t-normal .c-enslaved-run-button {
+  background: color-mix(in srgb, var(--color-base) 30%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-enslaved--base) 50%, transparent) !important;
+}
+
+/* V */
+
+.t-normal .c-v-info-text {
+  background: color-mix(in srgb, var(--color-v--base) 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-v--base) 50%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  color: #fff9e6 !important;
+  text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.8) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+  box-shadow: none !important;
+}
+
+.t-normal .c-v-unlock,
+.t-normal .o-v-upgrade {
+  background: color-mix(in srgb, var(--color-v--base) 25%, transparent) !important;
+  border: 0.15rem solid color-mix(in srgb, var(--color-v--base) 55%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  box-shadow: none !important;
+}
+
+.t-normal .c-v-unlock,
+.t-normal .o-v-upgrade,
+.t-normal .c-v-unlock p,
+.t-normal .o-v-upgrade span {
+  color: #fff9e6 !important;
+  text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.8) !important;
+}
+
+.t-normal .o-v-upgrade--available {
+  background: color-mix(in srgb, var(--color-v--base) 40%, transparent) !important;
+  border-color: color-mix(in srgb, var(--color-v--base) 80%, transparent) !important;
+}
+.t-normal .o-v-upgrade--available:hover {
+  background: color-mix(in srgb, var(--color-v--base) 55%, transparent) !important;
+}
+
+.t-normal .o-v-upgrade--capped {
+  background: color-mix(in srgb, var(--color-v--base) 85%, white) !important;
+  border-color: #fff5cc !important;
+  box-shadow: none !important;
+}
+.t-normal .o-v-upgrade--capped,
+.t-normal .o-v-upgrade--capped span {
+  color: black !important;
+  text-shadow: none !important;
+}
+
+.t-normal .o-v-milestone {
+  background: color-mix(in srgb, var(--color-v--base) 25%, transparent) !important;
+  border: 0.15rem solid color-mix(in srgb, var(--color-v--base) 50%, transparent) !important;
+  color: #fff9e6 !important;
+  text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  box-shadow: none !important;
+}
+.t-normal .o-v-milestone--unlocked {
+  background: color-mix(in srgb, var(--color-v--base) 85%, white) !important;
+  border-color: #fff5cc !important;
+  color: black !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.t-normal .c-v-run-button {
+  background: color-mix(in srgb, var(--color-v--base) 60%, transparent) !important;
+  border: 0.2rem solid #fff5cc !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  box-shadow: 0 0 1.5rem rgba(234, 213, 132, 0.4) !important;
+  color: black !important;
+  text-shadow: none !important;
+  animation: none !important; 
+}
+.t-normal .c-v-run-button:hover,
+.t-normal .c-v-run-button--running {
+  background: color-mix(in srgb, #bb3a3a 60%, transparent) !important;
+  border-color: #ff8888 !important;
+  box-shadow: 0 0 1.5rem rgba(187, 58, 58, 0.5) !important;
+  color: white !important;
+  text-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.8) !important;
+}
+
+.t-normal .c-v-unlock-bar {
+  background: color-mix(in srgb, var(--color-v--base) 20%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-v--base) 40%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+}
+
+.t-normal .c-v-info-text {
+  background: color-mix(in srgb, #ffea00 30%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #ffea00 60%, transparent) !important;
+}
+
+.t-normal .c-v-unlock,
+.t-normal .o-v-upgrade,
+.t-normal .c-v-run-button {
+  background: color-mix(in srgb, #ffea00 35%, transparent) !important;
+  border: 0.15rem solid color-mix(in srgb, #ffea00 65%, transparent) !important;
+}
+
+.t-normal .o-v-upgrade--available {
+  background: color-mix(in srgb, #ffea00 50%, transparent) !important;
+  border-color: color-mix(in srgb, #ffea00 90%, transparent) !important;
+}
+.t-normal .o-v-upgrade--available:hover {
+  background: color-mix(in srgb, #ffea00 65%, transparent) !important;
+}
+
+.t-normal .o-v-milestone {
+  background: color-mix(in srgb, #ffea00 30%, transparent) !important;
+  border: 0.15rem solid color-mix(in srgb, #ffea00 60%, transparent) !important;
+}
+
+.t-normal .c-v-unlock-bar {
+  background: color-mix(in srgb, #ffea00 25%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #ffea00 50%, transparent) !important;
+}
+
+.t-normal .c-v-unlock,
+.t-normal .o-v-upgrade,
+.t-normal .c-v-unlock p,
+.t-normal .o-v-upgrade span,
+.t-normal .c-v-info-text,
+.t-normal .o-v-milestone,
+.t-normal .c-v-run-button {
+  color: #ffffff !important;
+  text-shadow: 
+    0 0.1rem 0.2rem rgba(0, 0, 0, 0.9),
+    0 0 0.4rem rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Ra */
+
+.t-normal .c-celestial-quote-history--button {
+  background: color-mix(in srgb, var(--color-ra--base, #f2a654) 25%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-ra--base, #f2a654) 50%, transparent) !important;
+}
+
+.t-normal .c-ra-memory-header {
+  background: color-mix(in srgb, #2a1f10 60%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-ra--base, #f2a654) 30%, transparent) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.t-normal .l-ra-pet-container {
+  background: color-mix(in srgb, #2a1f10 65%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-ra--base, #f2a654) 30%, transparent) !important;
+  border-radius: 0.5rem !important;
+}
+
+.t-normal .c-ra-pet-upgrade {
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+}
+.t-normal .c-ra-pet-btn--teresa {
+  background: color-mix(in srgb, #8596ea 30%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #8596ea 50%, transparent) !important;
+}
+.t-normal .c-ra-pet-btn--effarig {
+  background: color-mix(in srgb, #ea8585 30%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #ea8585 50%, transparent) !important;
+}
+.t-normal .c-ra-pet-btn--enslaved {
+  background: color-mix(in srgb, #f1aa7f 30%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #f1aa7f 50%, transparent) !important;
+}
+.t-normal .c-ra-pet-btn--v {
+  background: color-mix(in srgb, #ead584 30%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, #ead584 50%, transparent) !important;
+}
+.t-normal .c-ra-pet-btn--available:hover { filter: brightness(1.2) !important; }
+
+.t-normal .c-ra-exp-bar {
+  background: color-mix(in srgb, #1a1505 60%, transparent) !important;
+  border: 0.1rem solid rgba(255, 255, 255, 0.1) !important;
+}
+.t-normal .c-ra-level-up-btn {
+  background: color-mix(in srgb, var(--color-ra--base, #f2a654) 30%, transparent) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-ra--base, #f2a654) 60%, transparent) !important;
+}
+
+.t-normal .c-ra-upgrade-icon {
+  background: color-mix(in srgb, #2a1f10 60%, transparent) !important;
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+  border: 0.1rem solid rgba(255, 255, 255, 0.15) !important;
+}
+.t-normal .c-ra-upgrade-icon--teresa { border-color: color-mix(in srgb, #8596ea 50%, transparent) !important; }
+.t-normal .c-ra-upgrade-icon--effarig { border-color: color-mix(in srgb, #ea8585 50%, transparent) !important; }
+.t-normal .c-ra-upgrade-icon--enslaved { border-color: color-mix(in srgb, #f1aa7f 50%, transparent) !important; }
+.t-normal .c-ra-upgrade-icon--v { border-color: color-mix(in srgb, #ead584 50%, transparent) !important; }
+
+.t-normal .c-ra-run-button {
+  background: color-mix(in srgb, var(--color-ra--base, #f2a654) 35%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(160%) !important;
+  border: 0.15rem solid color-mix(in srgb, var(--color-ra--base, #f2a654) 70%, transparent) !important;
+  box-shadow: 0 0 1.5rem color-mix(in srgb, var(--color-ra--base, #f2a654) 30%, transparent) !important;
+}
+.t-normal .c-ra-run-button:hover {
+  background: color-mix(in srgb, var(--color-ra--base, #f2a654) 50%, transparent) !important;
+}
+
+.t-normal .c-ra-remembrance-unlock {
+  background: color-mix(in srgb, #2a1f10 60%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0.5rem !important;
+}
+.t-normal .c-ra-pet-remembrance-button {
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+  border: 0.1rem solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.t-normal .c-ra-upgrade-bar,
+.t-normal .c-ra-exp-bar {
+  background: transparent !important; 
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 3px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+}
+
+.t-normal .c-ra-pet-btn--teresa ~ .c-ra-upgrade-bar .c-ra-upgrade-bar__inner,
+.t-normal .l-ra-pet-container:nth-child(1) .c-ra-exp-bar-inner {
+  background: rgba(133, 150, 234, 0.6) !important; 
+}
+
+.t-normal .c-ra-pet-btn--effarig ~ .c-ra-upgrade-bar .c-ra-upgrade-bar__inner,
+.t-normal .l-ra-pet-container:nth-child(2) .c-ra-exp-bar-inner {
+  background: rgba(234, 133, 133, 0.6) !important; 
+}
+
+.t-normal .c-ra-pet-btn--enslaved ~ .c-ra-upgrade-bar .c-ra-upgrade-bar__inner,
+.t-normal .l-ra-pet-container:nth-child(3) .c-ra-exp-bar-inner {
+  background: rgba(241, 170, 127, 0.6) !important; 
+}
+
+.t-normal .c-ra-pet-btn--v ~ .c-ra-upgrade-bar .c-ra-upgrade-bar__inner,
+.t-normal .l-ra-pet-container:nth-child(4) .c-ra-exp-bar-inner {
+  background: rgba(234, 213, 132, 0.6) !important; 
+}
+
+/* Lai'tela */
+
+.t-normal .c-laitela-singularity-container,
+.t-normal .c-laitela-hadrons-container,
+.t-normal .l-laitela-mechanics-container,
+.t-normal .c-dark-matter-dimension-container,
+.t-normal .c-laitela-milestone {
+  background: linear-gradient(155deg, #0b0b12 0%, #191922 55%, #0b0b12 100%) !important;
+  border: 0.1rem solid #43435a !important;
+  color: #c9c9d4 !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-radius: 0.5rem !important;
+}
+
+.t-normal .c-laitela-singularity,
+.t-normal .c-laitela-singularity__cap-control,
+.t-normal .c-laitela-hadrons-assign,
+.t-normal .c-laitela-automation-toggle,
+.t-normal .o-dark-matter-dimension-button,
+.t-normal .o-laitela-singularity-modal-button {
+  background: linear-gradient(155deg, #12121a 0%, #252535 55%, #12121a 100%) !important;
+  border: 0.1rem solid #5a5a78 !important;
+  color: #d4d4e0 !important;
+}
+
+.t-normal .c-laitela-singularity:hover,
+.t-normal .c-laitela-singularity__cap-control--available:hover,
+.t-normal .c-laitela-hadrons-assign--available:hover,
+.t-normal .o-dark-matter-dimension-button:hover {
+  background: linear-gradient(155deg, #1a1a25 0%, #303045 55%, #1a1a25 100%) !important;
+  border-color: #787896 !important;
+}
+
+.t-normal .c-laitela-singularity__cap-control--available,
+.t-normal .c-laitela-hadrons-assign--available {
+  border-color: #6b6b8a !important;
+  box-shadow: 0 0 8px rgba(100, 100, 150, 0.3) !important;
+}
+
+.t-normal .o-laitela-run-button,
+.t-normal .l-laitela-hadronize-button {
+  background: linear-gradient(155deg, #151520 0%, #2a2a3a 55%, #151520 100%) !important;
+  border: 0.15rem solid #6b6b8a !important;
+  color: #e0e0f0 !important;
+  box-shadow: 0 0 15px rgba(80, 80, 120, 0.2) !important;
+}
+.t-normal .o-laitela-run-button:hover,
+.t-normal .l-laitela-hadronize-button:hover {
+  background: linear-gradient(155deg, #1f1f2e 0%, #3a3a50 55%, #1f1f2e 100%) !important;
+}
+
+.t-normal .l-laitela-annihilation-container {
+  background: linear-gradient(155deg, #120b0b 0%, #221515 55%, #120b0b 100%) !important;
+  border: 0.1rem solid #5a4343 !important;
+}
+.t-normal .l-laitela-annihilation-button {
+  background: linear-gradient(155deg, #1a1212 0%, #352525 55%, #1a1212 100%) !important;
+  border: 0.1rem solid #785a5a !important;
+  color: #e0d4d4 !important;
+}
+.t-normal .l-laitela-annihilation-button:hover {
+  background: linear-gradient(155deg, #251a1a 0%, #453030 55%, #251a1a 100%) !important;
+  border-color: #966b6b !important;
+}
+
+.t-normal .c-laitela-warning {
+  background: linear-gradient(155deg, #120b0b 0%, #221515 55%, #120b0b 100%) !important;
+  border: 0.1rem solid #5a4343 !important;
+  color: #d4c9c9 !important;
+  border-radius: 0.3rem !important;
+}
+
+.t-normal .c-laitela-hadrons-row {
+  background: rgba(11, 11, 18, 0.6) !important;
+  border: 0.1rem solid #333344 !important;
+  border-radius: 0.3rem !important;
+}
+
+/* Alpha */
+
+.t-normal .l-alpha-unlocks {
+  background: linear-gradient(155deg, rgba(10, 20, 25, 0.85) 0%, rgba(15, 30, 40, 0.85) 55%, rgba(10, 20, 25, 0.85) 100%) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-alpha--base, #00bcd4) 30%, transparent) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  color: #c9d4d4 !important;
+}
+
+.t-normal .l-alpha-header {
+  color: color-mix(in srgb, var(--color-alpha--base, #00bcd4) 80%, white) !important;
+  font-weight: bold !important;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-alpha--base, #00bcd4) 20%, transparent) !important;
+  margin-bottom: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  display: block !important;
+}
+
+.t-normal .l-alpha-run {
+  background: linear-gradient(155deg, rgba(10, 25, 30, 0.85) 0%, rgba(20, 40, 50, 0.85) 55%, rgba(10, 25, 30, 0.85) 100%) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 0.1rem solid color-mix(in srgb, var(--color-alpha--base, #00bcd4) 40%, transparent) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+}
+
+
+.t-normal .c-alpha-run-button {
+  outline: 2px solid color-mix(in srgb, var(--color-alpha--base, #00bcd4) 60%, transparent) !important;
+  outline-offset: -2px !important;
+  backdrop-filter: blur(4px) saturate(120%) !important;
+  -webkit-backdrop-filter: blur(4px) saturate(120%) !important;
+}
+
+.t-normal .c-alpha-run-button:hover {
+  outline-color: color-mix(in srgb, var(--color-alpha--base, #00bcd4) 90%, transparent) !important;
+}
+
+.t-normal .c-alpha-run-button__inner {
+  background: transparent !important;
+}
+
+
+/* Alchemy */
+
+.t-normal .c-alchemy-resource-info {
+  background: linear-gradient(155deg, rgba(11, 11, 18, 0.85) 0%, rgba(25, 25, 34, 0.85) 55%, rgba(11, 11, 18, 0.85) 100%) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 0.1rem solid rgba(90, 90, 120, 0.4) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+  color: #c9c9d4 !important;
+  box-shadow: none !important;
+}
+
+.t-normal .c-alchemy-resource-info__title {
+  color: #e0e0f0 !important;
+  font-weight: bold !important;
+}
+
+/* Accelerator & The Void */
+
+.t-normal .c-large-hadron-collider-description,
+.t-normal .c-accelerator-panel-description,
+.t-normal .c-large-hadron-collider-entropy {
+  background: color-mix(in srgb, #15151e 80%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid rgba(120, 120, 150, 0.3) !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important;
+  margin-bottom: 1rem !important;
+  color: #d0d0e0 !important;
+}
+
+.t-normal .c-accelerator-single-bar {
+  background: color-mix(in srgb, #1a1a24 75%, transparent) !important;
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  border: 0.1rem solid rgba(100, 100, 130, 0.4) !important;
+  border-radius: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.t-normal .c-accelerator-bar {
+  background: transparent !important;
+  border: 1px solid rgba(200, 200, 255, 0.2) !important;
+  box-shadow: none !important;
+}
+
+.t-normal .o-power-core-upgrade {
+  backdrop-filter: blur(8px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(8px) saturate(150%) !important;
+}
+.t-normal .o-power-core-upgrade--available {
+  background: color-mix(in srgb, #2a2a3a 80%, transparent) !important;
+  border: 0.1rem solid rgba(150, 200, 255, 0.6) !important;
+  color: #e0f0ff !important;
+}
+.t-normal .o-power-core-upgrade--available:hover {
+  background: color-mix(in srgb, #3a3a50 85%, transparent) !important;
+}
+
+.t-normal .c-void-antimatter-amount,
+.t-normal .c-null {
+  background: color-mix(in srgb, #101015 85%, transparent) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 0.1rem solid rgba(80, 80, 100, 0.4) !important;
+  border-radius: 0.3rem !important;
+  padding: 0.5rem 1rem !important;
+  display: inline-block !important;
+  margin: 0.2rem 0 !important;
+  color: #b0b0c0 !important;
+}
+
+.t-normal .l-void-run-button {
+  background: color-mix(in srgb, #0a0a10 80%, transparent) !important;
+  backdrop-filter: blur(12px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(150%) !important;
+  border: 0.15rem solid rgba(255, 50, 50, 0.3) !important;
+  box-shadow: 0 0 2rem rgba(255, 0, 0, 0.05), 0 0 2rem rgba(0, 0, 255, 0.05) !important;
+}
+.t-normal .l-void-run-button:hover {
+  background: color-mix(in srgb, #1a0a0a 85%, transparent) !important;
+  border-color: rgba(255, 100, 100, 0.5) !important;
+}
+
+.t-normal .o-null-upgrade {
+  backdrop-filter: blur(10px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+}
+
+.t-normal .o-null-upgrade--available {
+  background: color-mix(in srgb, #252535 80%, transparent) !important;
+  border: 0.1rem solid rgba(150, 150, 200, 0.6) !important;
+  color: #e0e0f0 !important;
+}
+.t-normal .o-null-upgrade--available:hover {
+  background: color-mix(in srgb, #35354a 85%, transparent) !important;
+}
+
+.t-normal .o-null-upgrade--unavailable {
+  background: color-mix(in srgb, #121218 85%, transparent) !important;
+  border: 0.1rem solid rgba(80, 80, 100, 0.3) !important;
+  color: #808090 !important;
+}
+
+.t-normal .o-null-upgrade--bought {
+  background: color-mix(in srgb, #20202a 85%, transparent) !important;
+  border: 0.1rem solid rgba(120, 120, 150, 0.5) !important;
+  color: #c0c0d0 !important;
+}
+
+.t-normal .o-null-upgrade-btn--multiplier {
+  border-color: rgba(180, 150, 220, 0.5) !important;
+}
+/* acrylic parts end */
 
 .t-amoled .c-modal,
 .t-amoled-metro .c-modal {
