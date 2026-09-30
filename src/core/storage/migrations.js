@@ -377,7 +377,7 @@ export const migrations = {
 
       // This seems to have slipped through in some edge cases due to an old botched migration
       if (player.options.themeClassic === undefined) player.options.themeClassic = "Normal";
-      if (player.options.themeModern === undefined) player.options.themeModern = "Normal";
+      if (player.options.themeModern === undefined) player.options.themeModern = "Acrylic";
 
       // The glyph uniformity change did a few things to migrate old seeds as best it could, but it also had the
       // side-effect of relying on player initialization and deepmerge for randomization in many cases. This made

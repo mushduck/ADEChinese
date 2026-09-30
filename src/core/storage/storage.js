@@ -596,7 +596,7 @@ export const GameStorage = {
     // actively hidden by Modal.hideAll(), so delaying it asynchronously gets past whatever is causing it to not appear.
     // Delay time is relatively long to make it more likely to work on much slower computers.
     if (rawDiff > 1000 * 86400 * 14) {
-      if (["S4", "S9"].includes(Theme.current().name)) Theme.set("Acrylic");
+      if (["S4", "S9"].includes(Theme.current().name)) Theme.set("Normal");
       // Looks like the game takes too long to load so we need to setTimeout else it doesn't check for the notation.
       setTimeout(() => {
         if (Notations.current.isPainful) Notation.mixedScientific.setAsCurrent();
