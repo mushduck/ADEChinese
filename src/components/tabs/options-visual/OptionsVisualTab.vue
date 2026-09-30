@@ -7,6 +7,7 @@ import SelectLargeNotationDropdown from "./SelectLargeNotationDropdown";
 import SelectNotationDropdown from "@/components/tabs/options-visual/SelectNotationDropdown";
 import SelectThemeDropdown from "@/components/tabs/options-visual/SelectThemeDropdown";
 import SelectSidebarDropdown from "@/components/tabs/options-visual/SelectSidebarDropdown";
+import BackgroundUploader from "@/components/tabs/options-visual/BackgroundUploader";
 import UpdateRateSlider from "./UpdateRateSlider";
 
 export default {
@@ -21,6 +22,7 @@ export default {
     SelectNotationDropdown,
     SelectSidebarDropdown,
     SelectLargeNotationDropdown,
+    BackgroundUploader,
   },
   data() {
     return {
@@ -157,6 +159,7 @@ export default {
         </ExpandingControlBox>
       </div>
       <div class="l-options-grid__row">
+        <BackgroundUploader class="l-options-grid__button" />
         <ExpandingControlBox
           class="l-options-grid__button c-options-grid__notations l-low-z-index"
           button-class="o-primary-btn o-primary-btn--option l-options-grid__notations-header"

@@ -36,7 +36,6 @@ export default {
         "font-weight": "bold",
         animation: "a-galactic-power-amount-cycle 12s infinite",
         color: "white",
-        background: "black",
       };
     }
   },
