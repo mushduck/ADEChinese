@@ -9,7 +9,7 @@ export const celestialInfinityUpgrades = {
   celDimPurchaseBoost: {
     id: "celDimPurchaseBoost",
     cost: 2,
-    description: () => `提高天界维度每次购买倍率至 ${formatX(3)}`,
+    description: () => `天界维度每次购买倍率 ${formatX(3)}`,
     effect: 3
   },
   alphaDecayStartBoost: {

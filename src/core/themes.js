@@ -3,17 +3,19 @@ import { sha512_256 } from "js-sha512";
 export const Theme = function Theme(name, config) {
   this.name = name;
 
+  this.base = config.base;
+  this.extraCss = config.extraCss || [];
+
   this.isDark = function() {
-    return (this.isDefault() || name === "S12")
+    return (this.isDefault() || this.base === "Normal" || name === "S12")
       ? player.options.newUI
       : config.isDark;
   };
 
   this.isMetro = config.isMetro;
-
   this.isAnimated = config.isAnimated;
-
   this.isSecret = config.isSecret;
+
 
   this.isDefault = function() {
     return name === "Normal";
@@ -32,12 +34,19 @@ export const Theme = function Theme(name, config) {
   };
 
   this.set = function() {
-    // Remove all entries in the class list from the class list
     document.body.classList.remove(...document.body.classList);
 
     document.body.classList.add(this.cssClass());
+
+    if (this.base) {
+      const baseClass = `t-${this.base.replace(/\s+/gu, "-").toLowerCase()}`;
+      document.body.classList.add(baseClass);
+    }
+
     if (this.isMetro) document.body.classList.add("s-base--metro");
     if (this.isDark()) document.body.classList.add("s-base--dark");
+
+    applyExtraCss(this.extraCss);
 
     if (this.isAnimated && player.options.animations.background) {
       document.getElementById("background-animations").style.display = "block";
@@ -58,6 +67,23 @@ export const Theme = function Theme(name, config) {
     return `t-${this.name.replace(/\s+/gu, "-").toLowerCase()}`;
   };
 };
+
+function applyExtraCss(wantedList) {
+  const wanted = new Set(wantedList);
+
+  document.querySelectorAll("link[data-theme-css]").forEach(link => {
+    link.disabled = !wanted.has(link.dataset.themeCss);
+  });
+
+  wanted.forEach(key => {
+    if (document.querySelector(`link[data-theme-css="${key}"]`)) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = `stylesheets/${key}.css`;
+    link.dataset.themeCss = key;
+    document.head.appendChild(link);
+  });
+}
 
 Theme.currentName = function() {
   return player.options.newUI
@@ -130,6 +156,8 @@ Theme.create = function(name, settings) {
     isMetro: false || settings.metro,
     isAnimated: false || settings.animated,
     isSecret: false || settings.secret,
+    base: settings.base,
+    extraCss: settings.extraCss,
   };
   return new Theme(name, config);
 };
@@ -146,6 +174,7 @@ export const Themes = {
     Theme.create("Inverted Metro",  {              metro: true,                               }),
     Theme.create("AMOLED",          { dark: true,                                             }),
     Theme.create("AMOLED Metro",    { dark: true,  metro: true,                               }),
+    Theme.create("Acrylic",         { base: "Normal", extraCss: ["acrylic"]                   }),
     Theme.create("S1",              {                           animated: true, secret: true, }),
     Theme.create("S2",              {                                           secret: true, }),
     Theme.create("S3",              {                                           secret: true, }),
