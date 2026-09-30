@@ -107,7 +107,7 @@ body.t-s12 {
 }
 
 .t-normal .c-modal {
-  background-color: #1d1b22;
+  background-color: color-mix(in srgb, #1d1b22 50%, transparent); /* 这样默认的主题也能有亚克力效果 */
   box-shadow: 0 0 1.5rem 0 black;
 }
 
