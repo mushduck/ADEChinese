@@ -1551,7 +1551,7 @@ window.player = {
     syncSaveIntervals: true,
     hotkeys: true,
     themeClassic: "Normal",
-    themeModern: "Normal",
+    themeModern: "Acrylic",
     updateRate: 33,
     newUI: true,
     offlineProgress: true,

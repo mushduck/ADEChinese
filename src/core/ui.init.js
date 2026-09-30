@@ -37,7 +37,7 @@ export const state = {
       },
     },
     shiftDown: false,
-    theme: "Normal",
+    theme: "Acrylic",
     bigCrunch: false,
     scrollWindow: 0,
     draggingUIID: -1,
