@@ -4453,6 +4453,7 @@ export const news = [
         wasClicked = true;
         player.options.newUI = false;
         ui.view.newUI = player.options.newUI;
+        ui.view.phoneUI = player.options.phoneUI;
         Themes.find("Metro").set();
         let notation = Notations.all.filter(n => n.isPainful);
         let select = Math.floor(Math.random() * notation.length);

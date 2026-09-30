@@ -11,5 +11,8 @@ module.exports = {
   outputDir: STEAM ? "../AppFiles" : "dist",
   configureWebpack: {
     devtool: DEV ? "eval-source-map" : "source-map",
+  },
+  devServer: {
+    hot: true,
   }
 };

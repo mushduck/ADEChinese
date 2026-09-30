@@ -3,6 +3,7 @@ import BackgroundAnimations from "@/components/BackgroundAnimations";
 import ClassicUi from "@/components/ui-modes/classic/ClassicUi";
 import GameUiComponentFixed from "@/components/GameUiComponentFixed";
 import ModernUi from "@/components/ui-modes/modern/ModernUi";
+import PhoneUi from "@/components/ui-modes/phone/PhoneUi";
 import TabComponents from "@/components/tabs";
 
 import S12DesktopIcons from "@/components/ui-modes/s12/DesktopIcons";
@@ -15,6 +16,7 @@ export default {
     ...TabComponents,
     ClassicUi,
     ModernUi,
+    PhoneUi,
     GameUiComponentFixed,
     BackgroundAnimations,
     S12Ui,
@@ -30,9 +32,12 @@ export default {
     },
     uiLayout() {
       if (this.isThemeS12) return "S12Ui";
+      // phoneUI takes priority over newUI and classic UI.
+      if (this.view.phoneUI) return "PhoneUi";
       return this.view.newUI ? "ModernUi" : "ClassicUi";
     },
     containerClass() {
+      if (this.view.phoneUI) return "phone-ui";
       return this.view.newUI ? "new-ui" : "old-ui";
     },
     page() {

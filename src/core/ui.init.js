@@ -45,6 +45,7 @@ export const state = {
     tab: "dimensions",
     subtab: "antimatter",
     newUI: false,
+    phoneUI: false,
     news: false,
     initialized: false,
     tutorialState: 0,
