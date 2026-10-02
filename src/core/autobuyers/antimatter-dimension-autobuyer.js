@@ -10,7 +10,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
   }
 
   get fullName() {
-    return `第${this.name}反物质维度`;
+    return `第${this.name} ${player.universes.current === 2 ? "正物质" : "反物质"}反物质维度`;
   }
 
   get data() {
@@ -151,7 +151,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
   }
 
   static get entryCount() { return 8; }
-  static get autobuyerGroupName() { return "反物质维度"; }
+  static get autobuyerGroupName() { return `${player.universes.current === 2 ? "正物质" : "反物质"}维度`; }
 
   // These are toggled on and off from the group autobuyer checkbox
   static get isActive() { return player.auto.antimatterDims.isActive; }
