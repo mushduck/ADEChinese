@@ -14,8 +14,9 @@ export default {
       required: true
     },
     name: {
-      type: String,
-      required: true
+      type: [Function, String],
+      required: true,
+      default: ""
     },
     showInterval: {
       type: Boolean,
@@ -41,6 +42,7 @@ export default {
       currMode: 0,
       nextValue: 0,
       nextTime: 0,
+      isFlipped: false
     };
   },
   computed: {
@@ -126,6 +128,7 @@ export default {
         this.nextValue = new Decimal(autobuyer.highestPrevPrestige).times(autobuyer.xHighest);
         this.nextTime = autobuyer.timeToNextTick;
       }
+      this.isFlipped = player.universes.current === 2;
     },
     toggle() {
       this.isActive = !this.isActive;
@@ -188,7 +191,7 @@ export default {
   >
     {{ name }}
     <br>
-    要求: 总反物质达到 {{ format(antimatterCost) }} {{ showEternity }}
+    要求: 总${this.isFlipped ? "正物质" : "反物质"}达到 {{ format(antimatterCost) }} {{ showEternity }}
   </div>
 </template>
 

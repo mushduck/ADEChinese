@@ -26,6 +26,7 @@ export default {
       anyUnlocked: false,
       displayLabelAsGroup: false,
       parentActive: false,
+      isFlipped: false
     };
   },
   computed: {
@@ -72,6 +73,7 @@ export default {
       this.anyUnlocked = type.anyUnlocked;
       this.displayLabelAsGroup = (type.allMaxedInterval ?? true) && (type.allUnlimitedBulk ?? true);
       this.parentActive = type.isActive;
+      this.isFlipped = player.universes.current === 2;
     },
     toggleGroup() {
       this.type.toggle();
@@ -121,7 +123,7 @@ export default {
     v-else-if="isADBox && continuumActive"
     class="c-autobuyer-box-row"
   >
-    连续统将取代自动购买反物质维度和计数频率的功能，你将基于你的购买次数，自动获得连续的生产倍率加成。
+    连续统将取代自动购买${this.isFlipped ? "正物质" : "反物质"}维度和计数频率的功能，你将基于你的购买次数，自动获得连续的生产倍率加成。
   </span>
   <span
     v-else-if="isIDBox && continuumActive && infinityContinuumUnlocked"

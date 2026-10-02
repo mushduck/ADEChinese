@@ -9,12 +9,14 @@ export default {
   data() {
     return {
       recordGlyphInfo: [],
+      isFlipped: false
     };
   },
   methods: {
     update() {
       const bestReality = player.records.bestReality;
       const laitelaDim = 8 - Laitela.difficultyTier;
+      this.isFlipped = player.universes.current === 2;
       this.recordGlyphInfo = [
         [true, cloneDeep(Glyphs.copyForRecords(bestReality.RMSet)), "在一次现实中获得现实机器的最大数量",
           `${format(bestReality.RM, 2, 2)} 现实机器`],
@@ -27,8 +29,8 @@ export default {
         [true, cloneDeep(Glyphs.copyForRecords(bestReality.speedSet)), "最快现实用时（现实时间）",
           `${TimeSpan.fromMilliseconds(new Decimal(bestReality.realTime)).toStringShort()}`],
         [player.celestials.teresa.bestRunAM.gt(1), cloneDeep(Glyphs.copyForRecords(player.celestials.teresa.bestAMSet)),
-          `在${Teresa.possessiveName}的现实中，反物质数量的最大值`,
-          `${format(player.celestials.teresa.bestRunAM, 2, 2)} 反物质`],
+          `在${Teresa.possessiveName}的现实中，${this.isFlipped ? "正物质" : "反物质"}数量的最大值`,
+          `${format(player.celestials.teresa.bestRunAM, 2, 2)} ${this.isFlipped ? "正物质" : "反物质"}`],
         [Currency.imaginaryMachines.gt(0), cloneDeep(Glyphs.copyForRecords(bestReality.iMCapSet)),
           "虚幻机器数量上限的最大值",
           `${format(MachineHandler.currentIMCap, 2, 2)} 虚幻机器`],

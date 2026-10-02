@@ -22,7 +22,8 @@ export default {
       hasMaxedInterval: false,
       limitGalaxies: false,
       isBuyMaxUnlocked: false,
-      buyMax: false
+      buyMax: false,
+      isFlipped: false
     };
   },
   computed: {
@@ -41,6 +42,7 @@ export default {
       this.hasMaxedInterval = this.autobuyer.hasMaxedInterval;
       this.isBuyMaxUnlocked = this.autobuyer.isBuyMaxUnlocked;
       this.limitGalaxies = this.autobuyer.limitGalaxies;
+      this.isFlipped = player.universes.current === 2;
     }
   }
 };
@@ -50,7 +52,7 @@ export default {
   <AutobuyerBox
     :autobuyer="autobuyer"
     :is-modal="isModal"
-    name="自动购买反物质星系"
+    :name="isFlipped ? '自动购买物质星系' : '自动购买反物质星系'"
     :show-interval="!isBuyMaxUnlocked"
   >
     <template
@@ -81,7 +83,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        反物质星系限制：
+        ${this.isFlipped ? "正物质" : "反物质"}星系限制：
       </label>
       <AutobuyerInput
         :autobuyer="autobuyer"

@@ -8,9 +8,14 @@ export default {
   components: {
     ModalWrapperChoice
   },
+  data() {
+    return {
+      isFlipped: false
+    };
+  },
   computed: {
     message() {
-      return `时间膨胀将开启新的永恒，所有维度倍数的指数和计数频率倍数的指数将降至 ${formatPow(0.75, 2, 2)}。若能在膨胀期间完成永恒，你的超光速粒子将根据最高反物质数值及拥有的超光速粒子倍数进行提升。`;
+      return `时间膨胀将开启新的永恒，所有维度倍数的指数和计数频率倍数的指数将降至 ${formatPow(0.75, 2, 2)}。若能在膨胀期间完成永恒，你的超光速粒子将基于最高${this.isFlipped ? "正物质" : "反物质"}数量及升级倍率提升。`;
     },
     entranceLabel() {
       return `你确定要进行时间膨胀吗？`;
@@ -26,6 +31,9 @@ export default {
     }
   },
   methods: {
+    update() {
+      this.isFlipped = player.universes.current === 2;
+    },
     handleYesClick() {
       if (player.dilation.active) return;
       if (player.options.animations.dilation && !FullScreenAnimationHandler.isDisplaying) {

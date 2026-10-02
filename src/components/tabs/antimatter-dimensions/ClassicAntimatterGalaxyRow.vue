@@ -30,6 +30,7 @@ export default {
         remote: null,
       },
       hasTutorial: false,
+      isFlipped: false
     };
   },
   computed: {
@@ -42,7 +43,8 @@ export default {
       const reset = [];
       if (!Achievement(111).isUnlocked ||
         (player.disablePostReality && !(Alpha.isRunning && Alpha.currentStage >= 12) &&
-        !(LHC.voidRunning && NullUpgrade.limerick1.isBought))) reset.push("维度");
+        !(LHC.voidRunning && NullUpgrade.limerick1.isBought) &&
+        !SlabdrillUnlocks.eternityChallengeTen.isUnlocked)) reset.push("维度");
       if (!Achievement(143).isUnlocked ||
         (player.disablePostReality && !(Alpha.isRunning && Alpha.currentStage >= 20) &&
         !(LHC.voidRunning && NullUpgrade.limerick2.isBought))) reset.push("维度提升");
@@ -66,9 +68,9 @@ export default {
     },
     typeName() {
       switch (this.type) {
-        case GALAXY_TYPE.NORMAL: return "反物质星系";
-        case GALAXY_TYPE.DISTANT: return "遥远星系";
-        case GALAXY_TYPE.REMOTE: return "极远星系";
+        case GALAXY_TYPE.NORMAL: return `${this.isFlipped ? "正物质" : "反物质"}星系`;
+        case GALAXY_TYPE.DISTANT: return `遥远${this.isFlipped ? "正物质" : ""}星系`;
+        case GALAXY_TYPE.REMOTE: return `极远${this.isFlipped ? "正物质" : ""}星系`;
       }
       return undefined;
     },
@@ -116,6 +118,7 @@ export default {
       this.canBulkBuy = EternityMilestone.autobuyMaxGalaxies.isReached;
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.hasTutorial = Tutorial.isActive(TUTORIAL_STATE.GALAXY);
+      this.isFlipped = player.universes.current === 2;
     },
     buyGalaxy(bulk) {
       if (!this.canBeBought) return;

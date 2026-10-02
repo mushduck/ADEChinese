@@ -11,6 +11,7 @@ export default {
       replicanti: new Decimal(),
       divideReplicanti: false,
       canBeBought: new Decimal(),
+      isFlipped: false
     };
   },
   computed: {
@@ -19,9 +20,13 @@ export default {
     },
         message() {
       const reductionString = this.divideReplicanti
-        ? `每购买一个复制器星系，需将复制器除以 ${format(Number.MAX_VALUE, 2, 2)}（${format(this.replicanti, 2, 2)} → ${format(this.replicanti.divide(DC.NUMMAX.pow(this.canBeBought)), 2, 2)}）`
+      ? `购买复制器星系将令复制器数量除以 ${format(Number.MAX_VALUE, 2, 2)}
+          （${format(this.replicanti, 2, 2)} →
+          ${format(this.replicanti.divide(DC.NUMMAX.pow(this.canBeBought)), 2, 2)}）`
         : `将复制器重置为 ${formatInt(1)}`;
-      return `复制器星系对计数频率的提升效果与反物质星系相同，但不会增加反物质星系价格，也不受反物质星系专属倍率影响。其代价是：${reductionString}。`;
+      return `复制器星系对计数频率的提升效果与${this.isFlipped ? "正物质" : "反物质"}星系相同。
+        但它不会增加${this.isFlipped ? "正物质" : "反物质"}星系的价格，也不受${this.isFlipped ? "正物质" : "反物质"}星系专属倍率影响。
+        它将会${reductionString}。`;
     }
   },
   methods: {
@@ -29,6 +34,7 @@ export default {
       this.replicanti.copyFrom(player.replicanti.amount);
       this.divideReplicanti = Achievement(126).isUnlocked;
       this.canBeBought.copyFrom(Replicanti.galaxies.gain);
+      this.isFlipped = player.universes.current === 2;
       if (this.replicanti.lt(Number.MAX_VALUE)) this.emitClose();
     },
     handleYesClick() {

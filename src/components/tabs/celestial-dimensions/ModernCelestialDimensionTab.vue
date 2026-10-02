@@ -162,7 +162,7 @@ export default {
           <br>
           你拥有
           <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
-          <span v-if="isCorrupted"> 腐化的</span> <span v-if="unstable"> 不稳定</span>天界物质<span v-if="isOverflowing">（已溢出）</span><span v-if="!isEffectActive">(已停止激发)</span>,
+          <span v-if="isCorrupted"> 腐化的</span><span v-if="unstable"> 不稳定</span>天界物质<span v-if="isOverflowing"> （已溢出）</span><span v-if="!isEffectActive">(已停止激发)</span>,
           <br>
           <span>
             增加
