@@ -26,7 +26,6 @@ export default {
   data() {
     return {
       isSmall: 0,
-      isCursedCore: false
     };
   },
   computed: {
@@ -45,19 +44,11 @@ export default {
       // Needs to be reactive or else rows that don't have changing values (eg. the highest dimension and any higher
       // locked ones) won't change layout when the window size changes
       this.isSmall = window.innerWidth < 1573;
-      this.isCursedCore = player.celestials.slabdrill.core.isActive;
     },
     adjustableTextClass() {
       return {
-        "l-narrow-box": this.isSmall && !this.isCursedCore,
-        "l-wide-box": !this.isSmall && !this.isCursedCore,
-        "l-cursed-box": this.isCursedCore
-      };
-    },
-    dimensionClass() {
-      return {
-        "l-dimension-text-container": !this.isCursedCore,
-        "l-cursed-dimension-text-container": this.isCursedCore
+        "l-narrow-box": this.isSmall,
+        "l-wide-box": !this.isSmall,
       };
     }
   }
@@ -65,22 +56,11 @@ export default {
 </script>
 
 <template>
-  <div :class="dimensionClass()">
+  <div class="l-dimension-text-container">
     <div :class="adjustableTextClass()">
       <span class="c-dim-row__large">
         {{ name }}
       </span>
-      <span
-        v-if="!isCursedCore"
-        class="c-dim-row__small"
-      >
-        {{ multiplierText }}
-      </span>
-    </div>
-    <div
-      v-if="isCursedCore"
-      :class="adjustableTextClass()"
-    >
       <span class="c-dim-row__small">
         {{ multiplierText }}
       </span>
@@ -107,12 +87,6 @@ export default {
   grid-column: 1 / 5;
 }
 
-.l-cursed-dimension-text-container {
-  display: flex;
-  height: 3.5rem;
-  width: 100%;
-}
-
 .l-narrow-box {
   display: flex;
   text-align: left;
@@ -128,15 +102,6 @@ export default {
   width: 100%;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
-}
-
-.l-cursed-box {
-  display: flex;
-  text-align: center;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
   align-items: center;
 }
 

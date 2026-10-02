@@ -20,8 +20,7 @@ export default {
     return {
       isUnlocked: false,
       isRunning: false,
-      isCompleted: false,
-      isFlipped: false
+      isCompleted: false
     };
   },
   computed: {
@@ -38,7 +37,6 @@ export default {
       this.isUnlocked = challenge.isUnlocked;
       this.isRunning = challenge.isRunning;
       this.isCompleted = challenge.isCompleted;
-      this.isFlipped = player.universes.current === 2;
     }
   }
 };
@@ -62,7 +60,7 @@ export default {
     </template>
     <template #bottom>
       <div class="l-challenge-box__bottom--infinity">
-        <span>目标：{{ format(config.goal()) }} {{ isFlipped ? "正物质" : "反物质" }}</span>
+        <span>目标：{{ format(config.goal) }} 反物质</span>
         <DescriptionDisplay
           :config="config.reward"
           title="奖励："

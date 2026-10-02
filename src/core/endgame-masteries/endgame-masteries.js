@@ -74,21 +74,8 @@ export function buyMasteriesUntil(id) {
     return masteryArray;
   }
 
-  // Buy most of the other masteries
-  masteryArray.push(...range(161, Math.min(id, 280)));
-  if (id < 281) return masteryArray;
-
   // Finish buying the masteries
-  if (currTree.currEntanglePathCount === currTree.allowedEntanglePathCount || currTree.allowedEntanglePathCount === 3) {
-    masteryArray.push(...EndgameMastery.preferredPaths.entanglement.masteries);
-    masteryArray.push(...range(281, 303));
-  } else if (EndgameMastery.preferredPaths.entanglement.path.length > 0) {
-    masteryArray.push(...EndgameMastery.preferredPaths.entanglement.masteries);
-  } else if (currTree.currEntanglePathCount < currTree.allowedEntanglePathCount) {
-    GameUI.notify.error("You haven't selected enough preferred Entanglement paths.");
-    return masteryArray;
-  }
-
+  masteryArray.push(...range(161, Math.min(id, 280)));
   return masteryArray;
 }
 
@@ -96,7 +83,6 @@ export function respecEndgameMasteries() {
   for (const mastery of EndgameMastery.boughtEM()) {
     mastery.refund();
   }
-  Currency.endgameSkills.add(masteryIncrease.entanglementCost());
   player.endgameMasteries.masteries = [];
   GameCache.endgameMasteries.invalidate();
   Tab.endgame.masteries.show();
@@ -111,11 +97,11 @@ export class EndgameMasteriesState extends GameMechanicState {
   }
 
   get cost() {
-    return typeof this.config.cost === "function" ? this.config.cost() : this.config.cost;
+    return this.config.cost;
   }
 
   refund() {
-    if ((!EndgameMastery.permaMasteries.isBought || this.id >= 180) && this.id < 280) Currency.endgameSkills.add(this.cost);
+    if (!EndgameMastery.permaMasteries.isBought || this.id >= 180) Currency.endgameSkills.add(this.cost);
   }
 
   get isAffordable() {

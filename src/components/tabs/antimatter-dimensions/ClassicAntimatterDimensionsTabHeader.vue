@@ -15,7 +15,6 @@ export default {
       sacrificeBoost: new Decimal(0),
       nextPower: new Decimal(0),
       disabledCondition: "",
-      isFlipped: false
     };
   },
   computed: {
@@ -24,8 +23,8 @@ export default {
       return `献祭倍率 (${formatX(this.sacrificeBoost, 2, 2)})`;
     },
     sacrificeTooltip() {
-      return `第八${this.isFlipped ? "正物质" : "反物质"}维度指数 +${formatPow(this.nextPower, 2, 3)}`;
-      return `第八${this.isFlipped ? "正物质" : "反物质"}维度强度 ${formatX(this.sacrificeBoost, 2, 2)}`;
+      return `第八维度指数 +${formatPow(this.nextPower, 2, 3)}`;
+      return `第八维度强度 ${formatX(this.sacrificeBoost, 2, 2)}`;
     },
   },
   methods: {
@@ -39,7 +38,6 @@ export default {
       this.sacrificeBoost.copyFrom(Sacrifice.nextBoost);
       this.nextPower.copyFrom(Sacrifice.nextPower);
       this.disabledCondition = Sacrifice.disabledCondition;
-      this.isFlipped = player.universes.current === 2;
     },
     sacrifice() {
       sacrificeBtnClick();

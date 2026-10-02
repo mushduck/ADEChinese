@@ -1,6 +1,4 @@
 <script>
-import wordShift from "@/core/word-shift";
-
 import AcceleratorsPanel from "./AcceleratorsPanel";
 import NullUpgradesTabComponent from "./NullUpgradesTabComponent";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -17,8 +15,6 @@ export default {
       hasAccelerator: false,
       canSeeEntropy1: false,
       canSeeEntropy2: false,
-      entropyCorrupted: false,
-      textShift: [],
       hadronSpeed: 0,
       accelPower: 1,
       amSoftcap: new Decimal(),
@@ -32,24 +28,12 @@ export default {
       voidMode: 0,
       nullParticles: new Decimal(),
       nullParticlesPerSecond: new Decimal(),
-      nullParticleEffect: new Decimal(),
-      hasC: false,
-      c: 0,
-      milestonesReached: 0,
-      nextAt: 0,
-      tessEqual: 0,
-      antiEqual: new Decimal(),
-      tickEqual: new Decimal(),
-      bh1Improve: new Decimal(),
-      bh2Improve: new Decimal(),
-      potencyImprove: new Decimal(),
-      isFlipped: false
+      nullParticleEffect: new Decimal()
     };
   },
   computed: {
     hadronSpeedText() {
       if (this.hadronSpeed === 0) return `你的强子处于静止状态`;
-      if (this.hadronSpeed >= 149896229) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒 (${format(this.c, 5, 5)}C)`;
       if (this.hadronSpeed >= 1000) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒`;
       return `你的强子被加速到了 ${format(this.hadronSpeed, 3, 3)} 米每秒`;
     },
@@ -69,18 +53,12 @@ export default {
         "c-void-run-button--not-running": !this.isRunning,
       };
     },
-    nextDisplay() {
-      return this.milestonesReached >= 5 ? "There are no more milestones to be reached!" :
-        `Next C Milestone at ${format(this.nextAt, 2, 2)}C.`;
-    }
   },
   methods: {
     update() {
       this.hasAccelerator = Accelerators.all.some(a => a.isUnlocked);
-      this.canSeeEntropy1 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e200)) && !Slabdrill.isCursed;
-      this.canSeeEntropy2 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e260)) && !Pelle.isDoomed && !Slabdrill.isCursed;
-      this.entropyCorrupted = Slabdrill.isCursed;
-      this.textShift = ["Glitched", "Corrupted", "Disrupted"];
+      this.canSeeEntropy1 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e200));
+      this.canSeeEntropy2 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e260)) && !Pelle.isDoomed;
       this.hadronSpeed = LHC.hadronSpeed;
       this.accelPower = LHC.acceleratorSpeed * 100000;
       this.amSoftcap.copyFrom(Pelle.isDoomed ? DC.E9E15 : Decimal.pow10(1e200));
@@ -97,23 +75,9 @@ export default {
       this.nullParticles.copyFrom(player.endgame.largeHadronCollider.void.nullParticles);
       this.nullParticlesPerSecond.copyFrom(!LHC.nullifiedVoidRunning ? DC.D0 : getNullParticleGainPerSecond());
       this.nullParticleEffect.copyFrom(Currency.nullParticles.value.max(1).log10().div(5).add(1).pow(5));
-      this.hasC = LHC.hadronC >= 0.5;
-      this.c = LHC.hadronC;
-      this.milestonesReached = CMilestones.reachedMilestones;
-      this.nextAt = CMilestones.nextMilestoneAt;
-      this.tessEqual = CMilestones.tesseractEqualizer(Tesseracts.bought, Tesseracts.extra);
-      this.antiEqual.copyFrom(CMilestones.antimatterEqualizer(
-        (Laitela.continuumActive ? AntimatterDimension(1).continuumAmount : AntimatterDimension(1).amount).times(
-        AntimatterDimension(1).multiplier), Tickspeed.perSecond));
-      this.tickEqual.copyFrom(CMilestones.tickspeedEqualizer(
-        Laitela.continuumActive ? Tickspeed.continuumValue : player.totalTickBought, player.totalTickGained));
-      this.bh1Improve.copyFrom(CMilestones.bhImprovement(BlackHole(1).power));
-      this.bh2Improve.copyFrom(CMilestones.bhImprovement(BlackHole(2).power));
-      this.potencyImprove.copyFrom(CMilestones.potencyImprovement(Accelerators.potency.effectValue3));
-      this.isFlipped = player.universes.current === 2;
     },
     formatNullAmount(amount) {
-      return amount.gte(DC.NUMMAX) && !DualityUpgrade(26).isBought ? "无限" : format(amount, 2, 2);
+      return amount.gte(DC.NUMMAX) ? "无限" : format(amount, 2, 2);
     },
     glitchAnim() {
       let flux = Math.random() / (this.voidMode === 1 ? 2 : 4);
@@ -121,9 +85,6 @@ export default {
       return {
         "text-shadow": `${negFlux}rem 0 red, ${flux}rem 0 blue`,
       };
-    },
-    corruptionText() {
-      return `WARNING: The ${player.universes.current === 2 ? "Matter" : "Antimatter"} Hardcap has become ${wordShift.wordCycle(this.textShift)}.`;
     },
     startRun() {
       if (this.voidMode === 1) {
@@ -153,80 +114,32 @@ export default {
         {{ hadronSpeedText }}
         <br>
         当前强子加速器功率为 {{ formatInt(accelPower) }} GWh
-        <div
-          v-if="hasC"
-          class="c-large-hadron-collider-text"
-        >
-          <br>
-          <div v-if="milestonesReached >= 1">
-            C Milestone {{ formatInt(1) }}: Tesseract Equalizer.
-            Effective Tesseracts are slowly shifting from (bought + free) into (bought * free).
-            This shift is {{ formatPercents(Math.clamp((c - 0.5) * 2, 0, 1), 3, 3) }} complete, making the current
-            number of Effective Tesseracts equal to {{ format(tessEqual, 2, 2) }}.
-          </div>
-          <div v-if="milestonesReached >= 2">
-            <br>
-            C Milestone {{ formatInt(2) }}: {{ isFlipped ? "Matter" : "Antimatter" }} Equalizer.
-            {{ isFlipped ? "Matter" : "Antimatter" }} production is slowly shifting from
-            ({{ isFlipped ? "MDMults" : "ADMults" }} * Tickspeed) into
-            ({{ isFlipped ? "MDMults" : "ADMults" }}^log10(max(Tickspeed, 1))).
-            This shift is {{ formatPercents(Math.clamp((c - 0.7) * 10/3, 0, 1), 3, 3) }} complete, making current
-            {{ isFlipped ? "Matter" : "Antimatter" }} production equal to {{ format(antiEqual, 2, 2) }}.
-          </div>
-          <div v-if="milestonesReached >= 3">
-            <br>
-            C Milestone {{ formatInt(3) }}: Tickspeed Equalizer.
-            Effective Tickspeed Upgrades are slowly shifting from (bought + free) into (bought * free).
-            This shift is {{ formatPercents(Math.clamp((c - 0.85) * 20/3, 0, 1), 3, 3) }} complete, making the current
-            number of Effective Tickspeed Upgrades equal to {{ format(tickEqual, 2, 2) }}.
-          </div>
-          <div v-if="milestonesReached >= 4">
-            <br>
-            C Milestone {{ formatInt(4) }}: Black Hole and Potency Improvement.
-            Black Holes now also apply a power effect which is increasing from 1 to log10(log10(max(BHMult, 10))) + 1.
-            Furthermore, the Divine Matter/Energy multiplier from the Potency Accelerator now also applies a power effect
-            which is increasing from 1 to (max(log10(max(PotencyMult, 1)) - 18.5, 0) / 3) + 1.
-            These shifts are {{ formatPercents(Math.clamp((c - 0.95) * 20, 0, 1), 3, 3) }} complete, making the current
-            Black Hole {{ formatInt(1) }} boost equal to {{ formatPow(bh1Improve, 2, 3) }}, the current
-            Black Hole {{ formatInt(2) }} boost equal to {{ formatPow(bh2Improve, 2, 3) }}, and the current
-            Divine Matter/Energy boost from the Potency Accelerator equal to {{ formatPow(potencyImprove, 2, 3) }}.
-          </div>
-          <div v-if="milestonesReached >= 5">
-            <br>
-            C Milestone {{ formatInt(5) }}: Light unlock.
-            You have reached {{ formatInt(1) }}C and can now generate Light (coming soon).
-          </div>
-          <br>
-          <div>
-            {{ nextDisplay }}
-          </div>
-        </div>
       </div>
       <AcceleratorsPanel v-if="hasAccelerator" />
       <div
         v-if="!hasAccelerator"
         class="c-large-hadron-collider-description"
       >
-        达到 {{ format(Decimal.pow10(1e200), 2, 2) }} {{ isFlipped ? "正物质" : "反物质" }}
+        达到 {{ format(Decimal.pow10(1e200), 2, 2) }} 反物质
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy1"
       >
-        宇宙中的过剩熵增令你的反物质产生了衰变。${this.isFlipped ? "正物质" : "反物质"}数量在 {{ format(amSoftcap, 2, 2) }} 后达到软上限，
+        宇宙中的过剩熵增令你的反物质产生了衰变。反物质数量在 {{ format(amSoftcap, 2, 2) }} 后达到软上限，
         在 {{ format(amHardcap, 2, 2) }} 时达到硬上限。
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy2"
       >
-        ${this.isFlipped ? "正物质" : "反物质"}衰变在达到 {{ format(amSoftcap2, 2, 2) }} ${this.isFlipped ? "正物质" : "反物质"}后进一步增强。
+        反物质衰变在达到 {{ format(amSoftcap2, 2, 2) }} 反物质后进一步增强。
       </div>
     </div>
     <br>
     <br>
     <div v-if="highestAntimatter.gt(10)">
-      <span class="c-void-antimatter-amount">[你在虚无中达到的最高${this.isFlipped ? "正物质" : "反物质"}数量为 {{ format(highestAntimatter, 2, 1) }}。]</span>
+      <span class="c-void-antimatter-amount">[你在虚无中达到的最高反物质数量为 {{ format(highestAntimatter, 2, 1) }}。]</span>
       <br>
       <span class="c-null">[你拥有 {{ formatNullAmount(nullMatter) }} 虚物质，+{{ formatNullAmount(nullPerSecond) }}/秒]</span>
     </div>
@@ -256,16 +169,16 @@ export default {
     <div v-if="voidMode === 0">
       进入稳态虚无将强制进行一次终局，并禁用现实及所有上层机制。
       <br>
-      在稳态虚无中${this.isFlipped ? "正物质" : "反物质"}将缓慢衰变为虚物质。
+      在稳态虚无中反物质将缓慢衰变为虚物质。
       <span v-if="nullified">
         <br>
         <!-- Since you Nullified the Multiverse, !-->在虚无中重获复兴树 ANR 节点和每秒自动获得永恒时所能获得永恒点数的 1%。
       </span>
     </div>
     <div v-if="voidMode === 1">
-      进入归零虚无将强制进行一次终局，并将${this.isFlipped ? "正物质" : "反物质"}第二指数稀释至 × {{ format(0.01, 2, 2) }}。
+      进入归零虚无将强制进行一次终局，并将反物质第二指数稀释至 × {{ format(0.01, 2, 2) }}。
       <br>
-      在归零虚无中${this.isFlipped ? "正物质" : "反物质"}将缓慢转变为虚粒子，为稳态虚无中的${this.isFlipped ? "正物质" : "反物质"}维度提供指数加成。（当前：{{ formatPow(nullParticleEffect, 2, 3) }}）
+      在归零虚无中反物质将缓慢转变为虚粒子，为稳态虚无中的反物质维度提供指数加成。（当前：{{ formatPow(nullParticleEffect, 2, 3) }}）
     </div>
     <NullUpgradesTabComponent />
   </div>
@@ -288,15 +201,6 @@ export default {
 .c-large-hadron-collider-description {
   position: relative;
   font-size: 2rem;
-  font-weight: bold;
-  color: var(--color-alpha--base);
-}
-
-.c-large-hadron-collider-text {
-  margin-left: 5rem;
-  margin-right: 5rem;
-  position: relative;
-  font-size: 1.2rem;
   font-weight: bold;
   color: var(--color-alpha--base);
 }

@@ -34,10 +34,6 @@ export default {
     update() {
       this.isCompleted = this.row.every(a => a.isUnlocked);
       this.isHidden = this.isCompleted && player.options.hideCompletedAchievementRows;
-    },
-    specialObscured(ach) {
-      if (!Achievement(258).isUnlocked) return ach.id === 258;
-      return false;
     }
   }
 };
@@ -52,7 +48,7 @@ export default {
       v-for="(achievement, i) in row"
       :key="i"
       :achievement="achievement"
-      :is-obscured="isObscured || specialObscured(achievement)"
+      :is-obscured="isObscured"
       class="l-achievement-grid__cell"
     />
   </div>

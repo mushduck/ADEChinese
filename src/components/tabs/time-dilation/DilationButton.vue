@@ -12,8 +12,7 @@ export default {
       tachyonGain: new Decimal(),
       remnantRequirement: 0,
       showRequirement: false,
-      creditsClosed: false,
-      isFlipped: false
+      creditsClosed: false
     };
   },
   computed: {
@@ -40,7 +39,6 @@ export default {
         this.requiredForGain.copyFrom(getTachyonReq());
       }
       this.creditsClosed = GameEnd.creditsEverClosed;
-      this.isFlipped = player.universes.current === 2;
     },
     dilate() {
       if (this.creditsClosed) return;
@@ -76,7 +74,7 @@ export default {
     <span v-else>
       {{ disableText }}
       <br>
-      达到 {{ format(requiredForGain, 2, 1) }} {{ isFlipped ? "正物质" : "反物质" }}以获得更多超光速粒子。
+      达到 {{ format(requiredForGain, 2, 1) }} 反物质以获得更多超光速粒子。
     </span>
   </button>
 </template>

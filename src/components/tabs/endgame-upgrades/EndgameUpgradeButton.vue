@@ -92,7 +92,7 @@ export default {
         type="endgameUpgrades"
         class="l-hint-text--endgame-upgrade c-hint-text--endgame-upgrade"
       >
-        {{ upgrade.name }}
+        {{ config.name }}
       </HintText>
       <span>
         <DescriptionDisplay :config="config" />

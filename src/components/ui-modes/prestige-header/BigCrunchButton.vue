@@ -17,7 +17,6 @@ export default {
       headerTextColored: true,
       creditsClosed: false,
       showIPRate: false,
-      isFlipped: false
     };
   },
   computed: {
@@ -89,7 +88,6 @@ export default {
       this.peakIPRate.copyFrom(player.records.thisInfinity.bestIPmin);
       this.peakIPRateVal.copyFrom(player.records.thisInfinity.bestIPminVal);
       this.showIPRate = this.peakIPRate.lte(this.rateThreshold);
-      this.isFlipped = player.universes.current === 2;
     },
     switchToInfinity() {
       Tab.dimensions.infinity.show(true);
@@ -113,9 +111,7 @@ export default {
   >
     <!-- Cannot Crunch -->
     <template v-if="!canCrunch">
-      Reach {{ format(infinityGoal, 2, 2) }}
-      <br>
-      {{ isFlipped ? "物质" : "反物质" }}
+      达到 {{ format(infinityGoal, 2, 2) }} 反物质
     </template>
 
     <!-- Can Crunch in challenge -->

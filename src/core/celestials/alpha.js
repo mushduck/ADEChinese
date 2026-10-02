@@ -21,8 +21,6 @@ export const Alpha = {
     disChargeAllPerkUpgrades();
     disChargeAll();
     disChargeAllBreakUpgrades();
-    disChargeAllEternityUpgrades();
-    player.endgame.overcharge.allowComplex = false;
     AutomatorBackend.stop();
     clearCelestialRuns();
     player.celestials.alpha.run = true;
@@ -1050,7 +1048,6 @@ export const Alpha = {
     clearCelestialRuns();
     player.disablePostReality = false;
     Endgame.resetNoReward();
-    player.endgame.overcharge.allowComplex = true;
     recalculateAllGlyphs();
     Tab.dimensions.antimatter.show(false);
   },

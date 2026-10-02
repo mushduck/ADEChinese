@@ -7,10 +7,6 @@ export default {
       lightHadrons: 0,
       darkHadrons: 0,
       exoticHadrons: 0,
-      totalLightHadrons: 0,
-      totalDarkHadrons: 0,
-      totalExoticHadrons: 0,
-      basePercentageCap: 0,
       percentageCap: 0,
       hadronTimer: new Decimal(0),
       effect1: new Decimal(1),
@@ -24,8 +20,7 @@ export default {
       hasEffect4: false,
       hasDark: false,
       hasExotic: false,
-      showWarning: false,
-      isFlipped: false
+      showWarning: false
     };
   },
   computed: {
@@ -47,27 +42,27 @@ export default {
     effect1Percent() {
       let fac = this.hadronTimer.times(100).times(4).times(Hadrons.speedFactor);
       let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
-      return per.div(100).min(this.basePercentageCap / 100);
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
     },
     effect2Percent() {
       let fac = this.hadronTimer.times(100).times(2).times(Hadrons.speedFactor);
       let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
-      return per.div(100).min(this.basePercentageCap / 100);
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
     },
     effect3Percent() {
       let fac = this.hadronTimer.times(100).times(Hadrons.speedFactor);
       let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
-      return per.div(100).min(this.basePercentageCap / 100);
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
     },
     effect4Percent() {
       let fac = this.hadronTimer.times(100).div(2).times(Hadrons.speedFactor);
       let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
-      return per.div(100).min(this.basePercentageCap / 100);
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
     },
     effect5Percent() {
       let fac = this.hadronTimer.times(100).div(5).times(Hadrons.speedFactor);
       let per = fac.gte(100) ? fac.sub(100).sqrt().add(100) : fac;
-      return per.div(100).min(this.basePercentageCap / 100);
+      return per.div(100).min((100 + (Accelerators.emptiness.effectValue2 - 1) * 100 + EndgameMastery(251).effectOrDefault(0)) / 100);
     },
     effect1Text() {
       if (this.effect1Time.lte(0)) return `效果已达到上限`;
@@ -118,16 +113,12 @@ export default {
   methods: {
     update() {
       const hadrons = player.celestials.laitela.hadrons;
-      this.totalHadrons = hadrons.trueTotal;
+      this.totalHadrons = hadrons.total;
       this.lightHadrons = hadrons.light;
       this.darkHadrons = hadrons.dark;
       this.exoticHadrons = hadrons.exotic;
-      this.totalLightHadrons = hadrons.totalLight;
-      this.totalDarkHadrons = hadrons.totalDark;
-      this.totalExoticHadrons = hadrons.totalExotic;
-      this.basePercentageCap = (100 * Accelerators.emptiness.effectValue2 + EndgameMastery(251).effectOrDefault(0)) *
-        (DivinityMilestone.serpentPower.isReached ? 2 : 1);
-      this.percentageCap = (Math.pow(this.basePercentageCap - 100, 2) + 100) / 100;
+      this.percentageCap = (100 + Math.pow((Accelerators.emptiness.effectValue2 - 1) * 100 +
+        EndgameMastery(251).effectOrDefault(0), 2)) / 100;
       this.hadronTimer.copyFrom(Hadrons.timeFactor.div(100));
       this.effect1.copyFrom(Hadrons.singularityMultiplier);
       this.effect2.copyFrom(Hadrons.darkMatterCapMultiplier);
@@ -141,11 +132,9 @@ export default {
       this.hasDark = DualityUpgrade(19).isBought;
       this.hasExotic = DivinityMilestone.hadronEmpowerment.isReached;
       this.showWarning = Accelerators.emptiness.effectValue2 > 1;
-      this.isFlipped = player.universes.current === 2;
     },
     assignOne() {
       if (this.hasExotic) {
-        if (Slabdrill.isCursed) return;
         if (this.lightHadrons <= 0) return;
         Laitela.reset();
         Endgame.resetNoReward();
@@ -162,7 +151,6 @@ export default {
     },
     unassignOne() {
       if (this.hasExotic) {
-        if (Slabdrill.isCursed) return;
         if (this.exoticHadrons <= 0) return;
         Laitela.reset();
         Endgame.resetNoReward();
@@ -179,7 +167,6 @@ export default {
     },
     assignAll() {
       if (this.hasExotic) {
-        if (Slabdrill.isCursed) return;
         if (this.lightHadrons <= 0) return;
         Laitela.reset();
         Endgame.resetNoReward();
@@ -196,7 +183,6 @@ export default {
     },
     unassignAll() {
       if (this.hasExotic) {
-        if (Slabdrill.isCursed) return;
         if (this.exoticHadrons <= 0) return;
         Laitela.reset();
         Endgame.resetNoReward();
@@ -219,19 +205,13 @@ export default {
   <div class="c-laitela-hadrons-container">
     <div class="c-laitela-hadrons-row">
       <h2>
-        You have
-        {{ formatHybridSmall(lightHadrons, 3) }}<span v-if="totalLightHadrons > lightHadrons">(+{{ formatHybridSmall(totalLightHadrons - lightHadrons, 3) }})</span>
-        {{ pluralize("强子", totalLightHadrons) }}
+        你拥有 {{ quantify("个强子", lightHadrons, 2) }}
       </h2>
       <h2 v-if="hasDark">
-        你拥有
-        {{ formatHybridSmall(darkHadrons, 3) }}<span v-if="totalDarkHadrons > darkHadrons">(+{{ formatHybridSmall(totalDarkHadrons - darkHadrons, 3) }})</span>
-        {{ pluralize("个暗强子", totalDarkHadrons) }}
+        你拥有 {{ quantify("个暗强子", darkHadrons, 2) }}
       </h2>
       <h2 v-if="hasExotic">
-        你拥有
-        {{ formatHybridSmall(exoticHadrons, 3) }}<span v-if="totalExoticHadrons > exoticHadrons">(+{{ formatHybridSmall(totalExoticHadrons - exoticHadrons, 3) }})</span>
-        {{ pluralize("个奇迹强子", totalExoticHadrons) }}
+        你拥有 {{ quantify("个奇迹强子", exoticHadrons, 2) }}
       </h2>
       <br>
       <h2>
@@ -297,7 +277,7 @@ export default {
         强子效果 4:
       </div>
       <div>
-        ${this.isFlipped ? "正物质" : "反物质"}生产熵的速率 {{ formatX(effect4, 2, 2) }}
+        反物质生产熵的速率 {{ formatX(effect4, 2, 2) }}
       </div>
       <div>
         {{ effect4Text }}

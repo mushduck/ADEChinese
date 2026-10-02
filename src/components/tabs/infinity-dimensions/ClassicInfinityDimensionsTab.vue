@@ -29,7 +29,6 @@ export default {
       extraTesseracts: 0,
       creditsClosed: false,
       showLockedDimCostNote: true,
-      isFlipped: false
     };
   },
   computed: {
@@ -65,7 +64,6 @@ export default {
       this.boughtTesseracts = Tesseracts.bought;
       this.extraTesseracts = Tesseracts.extra;
       this.creditsClosed = GameEnd.creditsEverClosed;
-      this.isFlipped = player.universes.current === 2;
     },
     maxAll() {
       InfinityDimensions.buyMax();
@@ -112,11 +110,11 @@ export default {
           转化
         </span>
         为
-        <span v-if="!isEC9Running">{{ isFlipped ? "正物质" : "反物质" }}维度</span>
+        <span v-if="!isEC9Running">反物质维度</span>
         <span v-else>时间维度(永恒挑战 9)</span>
         提供
         <span class="c-infinity-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
-        的加成，
+        的加成。
       </p>
     </div>
     <div

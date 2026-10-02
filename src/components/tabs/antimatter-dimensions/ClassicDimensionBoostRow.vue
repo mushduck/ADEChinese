@@ -48,7 +48,7 @@ export default {
       };
     },
     dimBoostName() {
-      if (this.hasSurge) return "维度擢升";
+      if (Ascensions.dbA.isUnlocked) return "维度擢升";
       return "维度提升";
     },
     imaginaryText() {

@@ -34,7 +34,6 @@ export default {
       hasTTGen: false,
       showTTGen: false,
       invertTTgenDisplay: false,
-      isFlipped: false
     };
   },
   computed: {
@@ -92,7 +91,7 @@ export default {
       player.timestudy.shopMinimized = !player.timestudy.shopMinimized;
     },
     formatAM(am) {
-      return `${format(am)} {{ isFlipped ? "正物质" : "反物质" }}`;
+      return `${format(am)} 反物质`;
     },
     buyWithAM() {
       TimeTheorems.buyOne(false, "am");
@@ -133,7 +132,6 @@ export default {
       this.hasTTGen = this.theoremGeneration.gt(0);
       this.showTTGen = this.hasTTGen && (ui.view.shiftDown === this.invertTTgenDisplay);
       this.invertTTgenDisplay = player.options.invertTTgenDisplay;
-      this.isFlipped = player.universes.current === 2;
     },
     toggleTTgen() {
       this.invertTTgenDisplay = !this.invertTTgenDisplay;

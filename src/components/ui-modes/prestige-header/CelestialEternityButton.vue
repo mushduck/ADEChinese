@@ -91,8 +91,7 @@ export default {
       const gainedCEP = gainedCelestialEternityPoints();
       this.currentCEP.copyFrom(Currency.celestialEternityPoints);
       this.gainedCEP.copyFrom(gainedCEP);
-      const hasNewContent = Currency.celestialEternityPoints.value.add(1).log10().gte(4000)
-        && !Slabdrill.isCursed && !Slabdrill.isDestroyed;
+      const hasNewContent = Currency.celestialEternityPoints.value.add(1).log10().gte(4000);
 
       this.type = hasNewContent
         ? CEP_BUTTON_DISPLAY_TYPE.NORMAL_EXPLORE_NEW_CONTENT

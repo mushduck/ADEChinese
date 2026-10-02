@@ -7,7 +7,6 @@ export default {
       showPelleGlow: false,
       gainedCP: 0,
       gainedDP: 0,
-      isFlipped: false
     };
   },
   computed: {
@@ -36,7 +35,6 @@ export default {
       }
       this.gainedCP = gainedCelestialPoints();
       this.gainedDP = gainedDoomedParticles();
-      this.isFlipped = player.universes.current === 2;
     },
     handleClick() {
       if (this.canEndgame) {
@@ -63,9 +61,7 @@ export default {
           <div>{{ formatDPGain }}</div>
         </template>
         <template v-else>
-          <div>
-            达到 {{ format("e9e15", 2, 2) }} {{ isFlipped ? "物质" : "反物质" }}以进行终局
-          </div>
+          <div>达到 {{ format("1e9000000000000000") }} 反物质以进行终局</div>
         </template>
         <div
           v-if="canEndgame"

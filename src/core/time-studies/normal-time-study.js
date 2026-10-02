@@ -1,23 +1,17 @@
 import { TimeStudyState } from "./time-studies";
 
-export const NormalTimeStudies = {
-  get pathList() {
-    let pathArr = [];
-    if (player.universes.current === 2) {
-      pathArr.push({ path: TIME_STUDY_PATH.ANTIMATTER_DIM, studies: [71, 81, 91, 101], name: "正物质维度" });
-    } else {
-      pathArr.push({ path: TIME_STUDY_PATH.ANTIMATTER_DIM, studies: [71, 81, 91, 101], name: "反物质维度" });
-    }
-    pathArr.push({ path: TIME_STUDY_PATH.INFINITY_DIM, studies: [72, 82, 92, 102], name: "无限维度" });
-    pathArr.push({ path: TIME_STUDY_PATH.TIME_DIM, studies: [73, 83, 93, 103], name: "时间维度" });
-    pathArr.push({ path: TIME_STUDY_PATH.ACTIVE, studies: [121, 131, 141], name: "活跃" });
-    pathArr.push({ path: TIME_STUDY_PATH.PASSIVE, studies: [122, 132, 142], name: "被动" });
-    pathArr.push({ path: TIME_STUDY_PATH.IDLE, studies: [123, 133, 143], name: "挂机" });
-    pathArr.push({ path: TIME_STUDY_PATH.LIGHT, studies: [221, 223, 225, 227, 231, 233], name: "光明" });
-    pathArr.push({ path: TIME_STUDY_PATH.DARK, studies: [222, 224, 226, 228, 232, 234], name: "黑暗" });
-    return pathArr;
-  }
-};
+export const NormalTimeStudies = {};
+
+NormalTimeStudies.pathList = [
+  { path: TIME_STUDY_PATH.ANTIMATTER_DIM, studies: [71, 81, 91, 101], name: "反物质维度" },
+  { path: TIME_STUDY_PATH.INFINITY_DIM, studies: [72, 82, 92, 102], name: "无限维度" },
+  { path: TIME_STUDY_PATH.TIME_DIM, studies: [73, 83, 93, 103], name: "时间维度" },
+  { path: TIME_STUDY_PATH.ACTIVE, studies: [121, 131, 141], name: "活跃" },
+  { path: TIME_STUDY_PATH.PASSIVE, studies: [122, 132, 142], name: "被动" },
+  { path: TIME_STUDY_PATH.IDLE, studies: [123, 133, 143], name: "挂机" },
+  { path: TIME_STUDY_PATH.LIGHT, studies: [221, 223, 225, 227, 231, 233], name: "光明" },
+  { path: TIME_STUDY_PATH.DARK, studies: [222, 224, 226, 228, 232, 234], name: "黑暗" }
+];
 
 NormalTimeStudies.paths = NormalTimeStudies.pathList.mapToObject(e => e.path, e => e.studies);
 
@@ -115,11 +109,6 @@ export class NormalTimeStudyState extends TimeStudyState {
     if (this.id === 192 && Alpha.isRunning && Alpha.currentStage === 20) {
       Alpha.advanceLayer();
       Alpha.quotes.uncapReplicanti.show();
-    }
-    if (this.id === 181 && Slabdrill.isCursed && Slabdrill.currentStage === 7) {
-      Slabdrill.advanceLayer();
-      Glyphs.refreshActive();
-      Slabdrill.quotes.timeStudy181.show();
     }
     return true;
   }

@@ -32,7 +32,7 @@ export default {
     runDescription() {
       return GameDatabase.celestials.descriptions[5].description();
     },
-    isDoomed: () => Pelle.isDoomed || Slabdrill.isCursed,
+    isDoomed: () => Pelle.isDoomed,
   },
   methods: {
     update() {

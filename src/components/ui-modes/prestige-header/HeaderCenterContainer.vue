@@ -36,8 +36,6 @@ export default {
       doomedParticles: new Decimal(0),
       showEndgame: false,
       showDivine: false,
-      inCursedCore: false,
-      isFlipped: false
     };
   },
   methods: {
@@ -54,10 +52,8 @@ export default {
       this.celestialPoints.copyFrom(Currency.celestialPoints);
       this.doomedParticles.copyFrom(Currency.doomedParticles);
       this.showEndgame = PlayerProgress.endgameUnlocked();
-      this.showDivine = DivinityMilestone.divineDimensions.isReached && !Slabdrill.isCursed;
-      this.inCursedCore = player.celestials.slabdrill.core.isActive;
-      this.isFlipped = player.universes.current === 2;
-    }
+      this.showDivine = DivinityMilestone.divineDimensions.isReached;
+    },
   },
 };
 </script>
@@ -68,15 +64,15 @@ export default {
     class="c-prestige-button-container"
   >
     <div
-      v-if="showEndgame && !inCursedCore"
+      v-if="showEndgame"
     >
       你拥有 <span class="cp-text">{{ format(celestialPoints, 2) }}</span> {{ pluralize("天界点数", celestialPoints) }}。
       你拥有 <span class="dp-text">{{ format(doomedParticles, 2) }}</span> {{ pluralize("毁灭粒子", doomedParticles) }}。
     <br>
     </div>
-    <span>你拥有 <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span>{{ isFlipped ? "物质" : "反物质" }}。</span>
+    <span>你拥有 <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span> 反物质。</span>
     <div
-      v-if="hasRealityButton && !inCursedCore"
+      v-if="hasRealityButton"
       class="c-reality-container"
     >
       <RealityCurrencyHeader />
@@ -93,12 +89,12 @@ export default {
         :is-header="true"
       />
     </div>
-    <div v-else-if="!inCursedCore">
-      你每秒获得 {{ format(antimatterPerSec, 2) }} {{ isFlipped ? "物质" : "反物质" }}。
+    <div v-else>
+      你每秒获得 {{ format(antimatterPerSec, 2) }} 反物质。
       <br>
       <HeaderTickspeedInfo />
     </div>
-    <div v-if="showDivine && !inCursedCore">
+    <div v-if="showDivine">
       <DivinityContainer />
     </div>
   </div>

@@ -34,8 +34,6 @@ export default {
       isContinuumActive: false,
       multiplierText: "",
       isFullyAutomated: false,
-      inCursedCore: false,
-      isFlipped: false
     };
   },
   computed: {
@@ -43,8 +41,8 @@ export default {
       if (this.isFullyAutomated) {
         return "自动献祭已开启且拥有成就 118，因此献祭将完全自动化";
       }
-      if (Ascensions.sacA.isUnlocked) return `为第八${this.isFlipped ? "正物质" : "反物质"}维度提供 ${formatPow(this.sacrificePower, 2, 3)} 的指数加成`;
-      return `为第八${this.isFlipped ? "正物质" : "反物质"}维度提供 ${formatX(this.sacrificeBoost, 2, 2)} 的倍率加成`;
+      if (Ascensions.sacA.isUnlocked) return `为第八维度提供 ${formatPow(this.sacrificePower, 2, 3)} 的指数加成`;
+      return `为第八维度提供 ${formatX(this.sacrificeBoost, 2, 2)} 的倍率加成`;
     },
     sacText() {
       if (Ascensions.sacA.isUnlocked) return `献祭效力 (${formatPow(this.sacrificePower, 2, 3)})`;
@@ -105,7 +103,7 @@ export default {
       if (!isSacrificeUnlocked) return;
       this.isFullyAutomated = Autobuyer.sacrifice.isActive && Achievement(118).canBeApplied &&
         (!player.disablePostReality || (Alpha.isRunning && Alpha.currentStage >= 12) ||
-        (LHC.voidRunning && NullUpgrade.limerick1.isBought) || SlabdrillUnlocks.eternityChallengeTen.isUnlocked);
+        (LHC.voidRunning && NullUpgrade.limerick1.isBought));
       this.isSacrificeAffordable = Sacrifice.canSacrifice && !this.isFullyAutomated;
       this.currentSacrifice.copyFrom(Sacrifice.totalBoost);
       this.currentPower.copyFrom(Sacrifice.totalPower);
@@ -118,8 +116,6 @@ export default {
           : ` | 献祭倍率: ${formatX(this.currentSacrifice, 2, 2)}`)
         : "";
       this.multiplierText += sacText;
-      this.inCursedCore = player.celestials.slabdrill.core.isActive;
-      this.isFlipped = player.universes.current === 2;
     }
   }
 };
@@ -127,10 +123,7 @@ export default {
 
 <template>
   <div class="l-antimatter-dim-tab">
-    <div
-      v-if="!inCursedCore"
-      class="modes-container"
-    >
+    <div class="modes-container">
       <button
         class="o-primary-btn l-button-container"
         @click="changeBuyMode"
@@ -157,19 +150,16 @@ export default {
         购买最大数量（M）
       </button>
     </div>
-    <span v-if="!inCursedCore">{{ multiplierText }}</span>
-    <TickspeedRow v-if="!inCursedCore" />
+    <span>{{ multiplierText }}</span>
+    <TickspeedRow />
     <div class="l-dimensions-container">
       <AntimatterDimensionRow
-        v-for="tier in 9"
+        v-for="tier in 8"
         :key="tier"
         :tier="tier"
       />
     </div>
-    <div
-      v-if="!inCursedCore"
-      class="resets-container"
-    >
+    <div class="resets-container">
       <DimensionBoostRow />
       <PrimaryButton
         v-if="isQuickResetAvailable"
@@ -182,7 +172,7 @@ export default {
       </PrimaryButton>
       <AntimatterGalaxyRow />
     </div>
-    <AntimatterDimensionProgressBar v-if="!inCursedCore" />
+    <AntimatterDimensionProgressBar />
   </div>
 </template>
 

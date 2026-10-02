@@ -22,8 +22,6 @@ export const Effarig = {
       disChargeAllPerkUpgrades();
       disChargeAll();
       disChargeAllBreakUpgrades();
-      disChargeAllEternityUpgrades();
-      player.endgame.overcharge.allowComplex = false;
       AutomatorBackend.stop();
     }
     clearCelestialRuns();

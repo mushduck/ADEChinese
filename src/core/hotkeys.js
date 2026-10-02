@@ -62,13 +62,13 @@ export const shortcuts = [
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialDimensionBoost(false) : manualRequestDimensionBoost(false),
     visible: false
   }, {
-    name: `${player.universes.current === 2 ? "物质" : "反物质"} 星系`,
+    name: "反物质星系",
     keys: ["g"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(true) : manualRequestGalaxyReset(true),
     visible: true
   }, {
-    name: `单个${player.universes.current === 2 ? "物质" : "反物质"} 星系`,
+    name: "单个反物质星系",
     keys: ["shift", "g"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(false) : manualRequestGalaxyReset(false),
@@ -113,10 +113,7 @@ export const shortcuts = [
     name: "现实",
     keys: ["y"],
     type: "bindRepeatableHotkey",
-    function: () => {
-      if (Slabdrill.isCursed) return;
-      requestManualReality();
-    },
+    function: () => requestManualReality(),
     visible: () => PlayerProgress.realityUnlocked() || isRealityAvailable() || PlayerProgress.endgameUnlocked()
   }, {
     name: "切换符文卸下选项",
@@ -243,16 +240,6 @@ export const shortcuts = [
       supernovaResetRequest();
     },
     visible: () => PlayerProgress.supernovaUnlocked()
-  }, {
-    name: "Toggle Glyph unequip (Slabdrill)",
-    keys: ["shift", "r"],
-    type: "bindHotkey",
-    function: () => {
-      if (!Slabdrill.isCursed) return;
-      player.reality.respec = !player.reality.respec;
-      GameUI.notify.info(`Glyph respec is now ${player.reality.respec ? "active" : "inactive"}`);
-    },
-    visible: () => Slabdrill.isCursed || Slabdrill.isDestroyed
   }, {
     name: "保存游戏",
     keys: ["mod", "s"],

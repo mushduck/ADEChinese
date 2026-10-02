@@ -2,9 +2,9 @@ export class DimensionState {
   constructor(getData, tier) {
     this._tier = tier;
     this._getData = getData;
-    const DISPLAY_NAMES = [null, "第一", "第二", "第三", "第四", "第五", "第六", "第七", "第八", "第九"];
+    const DISPLAY_NAMES = [null, "第一", "第二", "第三", "第四", "第五", "第六", "第七", "第八"];
     this._displayName = DISPLAY_NAMES[tier];
-    const SHORT_DISPLAY_NAMES = [null, "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th"];
+    const SHORT_DISPLAY_NAMES = [null, "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
     this._shortDisplayName = DISPLAY_NAMES[tier];
   }
 
@@ -44,7 +44,7 @@ export class DimensionState {
     dimension.amount = dimension.amount.plus(this.productionForDiff(diff));
   }
 
-  static get dimensionCount() { return 9; }
+  static get dimensionCount() { return 8; }
 
   static createAccessor() {
     const index = Array.range(1, this.dimensionCount).map(tier => new this(tier));

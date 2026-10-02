@@ -18,37 +18,17 @@ export default {
   },
   data() {
     return {
-      chargePossible: false,
-      canBeCharged: false,
       isBought: false,
-      isAffordable: false,
-      isCharged: false,
-      showingCharged: false,
+      isAffordable: false
     };
   },
   computed: {
-    shiftDown() {
-      return ui.view.shiftDown;
-    },
-    showChargedEffect() {
-      return this.chargePossible && (this.isCharged || this.showingCharged || this.shiftDown);
-    },
-    config() {
-      const config = this.upgrade.config;
-      return this.showChargedEffect
-        ? config.charged
-        : config;
-    },
     classObject() {
       return {
         "o-eternity-upgrade": true,
-        "o-eternity-upgrade--bought": this.isBought && !this.charged &&
-          !(this.chargePossible && (this.showingCharged || this.shiftDown)),
+        "o-eternity-upgrade--bought": this.isBought,
         "o-eternity-upgrade--available": !this.isBought && this.isAffordable,
-        "o-eternity-upgrade--unavailable": !this.isBought && !this.isAffordable,
-        "o-eternity-upgrade--chargeable": !this.isCharged && this.chargePossible &&
-          (this.showingCharged || this.shiftDown),
-        "o-eternity-upgrade--charged": this.isCharged
+        "o-eternity-upgrade--unavailable": !this.isBought && !this.isAffordable
       };
     },
     hasEU2() {
@@ -59,10 +39,7 @@ export default {
     update() {
       const upgrade = this.upgrade;
       this.isBought = upgrade.isBought;
-      this.chargePossible = Ascensions.oc2A.isUnlocked && upgrade.hasChargeEffect;
       this.isAffordable = upgrade.isAffordable;
-      this.canBeCharged = upgrade.canCharge;
-      this.isCharged = upgrade.isCharged;
     }
   }
 };
@@ -71,22 +48,20 @@ export default {
 <template>
   <button
     :class="classObject"
-    @mouseenter="showingCharged = canBeCharged"
-    @mouseleave="showingCharged = false"
     @click="upgrade.purchase()"
   >
-    <DescriptionDisplay :config="config" />
+    <DescriptionDisplay :config="upgrade.config" />
     <EffectDisplay
       br
-      :config="config"
+      :config="upgrade.config"
     />
     <div v-if="!isBought && hasEU2">
-      自动：{{ format(config.cost / 1e10) }} 永恒点数
+      自动：{{ format(upgrade.config.cost / 1e10) }} 永恒点数
     </div>
     <CostDisplay
       v-else-if="!isBought"
       br
-      :config="config"
+      :config="upgrade.config"
       name="永恒点数"
     />
   </button>

@@ -1,6 +1,5 @@
 <script>
 import BigCrunchButton from "../BigCrunchButton";
-import CursedHeader from "../CursedHeader";
 import DivinityButton from "../DivinityButton";
 import HeaderBlackHole from "../HeaderBlackHole";
 import HeaderChallengeDisplay from "../HeaderChallengeDisplay";
@@ -10,14 +9,12 @@ import NewsTicker from "../NewsTicker";
 import NullifyButton from "../NullifyButton";
 
 import GameSpeedDisplay from "@/components/GameSpeedDisplay";
-import CursedBackground from "@/components/ui-modes/CursedBackground";
 
 
 export default {
   name: "ModernUi",
   components: {
     BigCrunchButton,
-    CursedHeader,
     DivinityButton,
     NullifyButton,
     HeaderChallengeDisplay,
@@ -26,7 +23,6 @@ export default {
     HeaderBlackHole,
     HeaderPrestigeGroup,
     GameSpeedDisplay,
-    CursedBackground
   },
   data() {
     return {
@@ -35,18 +31,14 @@ export default {
       nullified: false,
       hasReality: false,
       newGameKey: "",
-      inCursedCore: false
     };
   },
   computed: {
     news() {
-      return this.$viewModel.news && !this.inCursedCore;
+      return this.$viewModel.news;
     },
     topMargin() {
-      return this.$viewModel.news || this.inCursedCore ? "" : "margin-top: 3.9rem";
-    },
-    bottomBorder() {
-      return this.inCursedCore ? "" : "border-bottom: 0.1rem solid var(--color-good)";
+      return this.$viewModel.news ? "" : "margin-top: 3.9rem";
     }
   },
   methods: {
@@ -62,7 +54,6 @@ export default {
       // This only exists to force a key-swap after pressing the button to start a new game; the news ticker can break
       // if it isn't redrawn
       this.newGameKey = Pelle.isDoomed;
-      this.inCursedCore = player.celestials.slabdrill.core.isActive;
     },
     handleClick() {
       if (PlayerProgress.infinityUnlocked()) manualBigCrunchResetRequest();
@@ -87,25 +78,20 @@ export default {
       <NewsTicker
         v-if="news"
       />
-      <BigCrunchButton v-if="!inCursedCore" />
-      <DivinityButton v-if="!inCursedCore" />
-      <NullifyButton v-if="!inCursedCore" />
-      <CursedBackground v-if="inCursedCore" />
+      <BigCrunchButton />
+      <DivinityButton />
+      <NullifyButton />
       <div
         v-if="!bigCrunch && !divine && !nullified"
         class="tab-container"
       >
         <HeaderPrestigeGroup />
-        <div
-          class="information-header"
-          :style="bottomBorder"
-        >
-          <HeaderChallengeDisplay v-if="!inCursedCore" />
-          <HeaderChallengeEffects v-if="!inCursedCore" />
-          <GameSpeedDisplay v-if="hasReality && !inCursedCore" />
-          <br v-if="hasReality && !inCursedCore">
-          <HeaderBlackHole v-if="!inCursedCore" />
-          <CursedHeader v-if="inCursedCore" />
+        <div class="information-header">
+          <HeaderChallengeDisplay />
+          <HeaderChallengeEffects />
+          <GameSpeedDisplay v-if="hasReality" />
+          <br v-if="hasReality">
+          <HeaderBlackHole />
         </div>
         <slot />
       </div>

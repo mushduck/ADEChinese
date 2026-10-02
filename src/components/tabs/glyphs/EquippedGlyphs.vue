@@ -16,7 +16,6 @@ export default {
       undoAvailable: false,
       undoVisible: false,
       cosmeticGlow: false,
-      hasCursedGlyphs: false
     };
   },
   computed: {
@@ -30,7 +29,7 @@ export default {
       return this.slotCount + 1;
     },
     respecTooltip() {
-      const reset = this.hasCursedGlyphs ? "Entering Core" : (Pelle.isDoomed ? "末日" : "现实");
+      const reset = Pelle.isDoomed ? "末日" : "现实";
       return this.respec  
         ? `卸下后，${reset}后将把当前装备的符文移回仓库。`  
         : `当前装备的符文将在${reset}后保持生效状态！`;
@@ -43,7 +42,6 @@ export default {
         : "仅可撤销本轮现实中装备的符文操作。";
     },
     unequipText() {
-      if (this.hasCursedGlyphs) return "Unequip Glyphs on Entering Core";
       if (Pelle.isDoomed) return "在末日时卸下符文";
       return "在现实时卸下符文";
     },
@@ -67,8 +65,8 @@ export default {
     // cause container overflow due to another button being removed entirely when doomed
     unequipClass() {
       return {
-        "l-glyph-equip-button": this.isDoomed || this.hasCursedGlyphs,
-        "l-glyph-equip-button-short": !this.isDoomed && !this.hasCursedGlyphs,
+        "l-glyph-equip-button": this.isDoomed,
+        "l-glyph-equip-button-short": !this.isDoomed,
       };
     }
   },
@@ -86,7 +84,6 @@ export default {
       this.undoVisible = TeresaUnlocks.undo.canBeApplied;
       this.undoAvailable = this.undoVisible && this.undoSlotsAvailable && player.reality.glyphs.undo.length > 0;
       this.cosmeticGlow = player.reality.glyphs.cosmetics.glowNotification;
-      this.hasCursedGlyphs = SlabdrillUnlocks.breakInfinity.isUnlocked;
     },
     glyphPositionStyle(idx) {
       const angle = 2 * Math.PI * idx / this.slotCount;
@@ -125,7 +122,7 @@ export default {
       this.$recompute("slotCount");
     },
     undo() {
-      if (!this.undoAvailable || Pelle.isDoomed || Slabdrill.isCursed) return;
+      if (!this.undoAvailable || Pelle.isDoomed) return;
       if (player.options.confirmations.glyphUndo) Modal.glyphUndo.show();
       else Glyphs.undo();
     },

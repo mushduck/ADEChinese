@@ -57,13 +57,10 @@ import ReplicantiTab from "./replicanti/ReplicantiTab";
 import ResurgenceUpgradesTab from "./resurgence-upgrades/ResurgenceUpgradesTab";
 import SecretAchievementTab from "./secret-achievements/SecretAchievementTab";
 import ShopTab from "./shop/ShopTab";
-import SlabdrillTab from "./celestial-slabdrill/SlabdrillTab";
 import SpeedrunMilestonesTab from "./speedrun-milestones/SpeedrunMilestonesTab";
 import StatisticsTab from "./statistics/StatisticsTab";
 import StoredTimeTab from "./statistics/StoredTimeTab";
-import TangibleUniverseTab from "./tangible-universe/TangibleUniverseTab";
 import TeresaTab from "./celestial-teresa/TeresaTab";
-import TimeCompressionTab from "./time-compression/TimeCompressionTab";
 import TimeDilationTab from "./time-dilation/TimeDilationTab";
 import TimeDimensionsTab from "./time-dimensions/TimeDimensionsTab";
 import TimeStudiesTab from "./time-studies/TimeStudiesTab";
@@ -96,7 +93,6 @@ const TabComponents = {
   LaitelaTab,
   PelleTab,
   AlphaTab,
-  SlabdrillTab,
   AutobuyersTab,
   AutomatorTab,
   NormalChallengesTab,
@@ -129,7 +125,6 @@ const TabComponents = {
   HypercubesTab,
   LargeHadronColliderTab,
   AscensionTab,
-  TimeCompressionTab,
   CelestialInfinityUpgradesTab,
   CelestialBreakInfinityTab,
   CelestialEternityUpgradesTab,
@@ -138,7 +133,6 @@ const TabComponents = {
   DivinityUpgradesTab,
   ResurgenceUpgradesTab,
   TransientUniverseTab,
-  TangibleUniverseTab,
   ShopTab,
   MultiplierBreakdownTab
 };

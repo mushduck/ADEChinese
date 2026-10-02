@@ -8,7 +8,6 @@ export default {
       hasIPUnlock: true,
       amRequirement: new Decimal(0),
       ipRequirement: 0,
-      isFlipped: false
     };
   },
   computed: {
@@ -20,9 +19,9 @@ export default {
       const amDisplay = format(this.amRequirement);
       const ipDisplay = format(this.ipRequirement);
       if (this.hasIPUnlock) {
-        return `达到 ${ipDisplay} 无限点数和 ${amDisplay} ${this.isFlipped ? "物质" : "反物质"}以解锁 ${dimensionText}`;
+        return `达到 ${ipDisplay} 无限点数和 ${amDisplay} 反物质以解锁 ${dimensionText}`;
       }
-      return `达到 ${amDisplay} ${this.isFlipped ? "物质" : "反物质"}以解锁 ${dimensionText}`;
+      return `达到 ${amDisplay} 反物质以解锁 ${dimensionText}`;
     },
     buttonClassObject() {
       return {
@@ -42,7 +41,6 @@ export default {
       this.hasIPUnlock = nextDimension.hasIPUnlock;
       this.amRequirement = nextDimension.amRequirement;
       this.ipRequirement = nextDimension.ipRequirement;
-      this.isFlipped = player.universes.current === 2;
     },
     tryUnlockNextInfinityDimension() {
       InfinityDimensions.unlockNext();

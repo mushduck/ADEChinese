@@ -39,8 +39,7 @@ export default {
       this.pulsedSpeed.copyFrom(getGameSpeedupForDisplay());
       this.hasSeenAlteredSpeed = PlayerProgress.seenAlteredSpeed();
       this.isStopped = Enslaved.isStoringRealTime;
-      this.isEC12 = EternityChallenge(12).isRunning || player.endgame.overcharge.isRunning || player.compression.active ||
-        (player.universes.current >= 1 && (player.universes.current === 1 || player.universes.current % 2 === 0));
+      this.isEC12 = EternityChallenge(12).isRunning || player.endgame.overcharge.isRunning;
       this.isPulsing = (this.baseSpeed.neq(this.pulsedSpeed)) && Enslaved.canRelease(true);
     },
     formatNumber(num) {

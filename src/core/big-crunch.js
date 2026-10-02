@@ -62,11 +62,6 @@ export function bigCrunchReset(
     Alpha.advanceLayer();
     Alpha.quotes.infinity.show();
   }
-  if (Slabdrill.isCursed && Slabdrill.currentStage === 2) {
-    player.breakEternityRebuyables = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    Slabdrill.advanceLayer();
-    Slabdrill.quotes.infinity.show();
-  }
   EventHub.dispatch(GAME_EVENT.BIG_CRUNCH_AFTER);
 }
 
@@ -134,8 +129,7 @@ export function bigCrunchResetValues(enteringAntimatterChallenge) {
   secondSoftReset(enteringAntimatterChallenge);
 
   let remainingGalaxies = DC.D0;
-  if (Achievement(95).isUnlocked && (!Pelle.isDoomed || PelleAchievementUpgrade.achievement95.canBeApplied) &&
-      (!player.disablePostReality || SlabdrillUnlocks.eternityChallengeTen.isUnlocked)) {
+  if (Achievement(95).isUnlocked && (!Pelle.isDoomed || PelleAchievementUpgrade.achievement95.canBeApplied) && !player.disablePostReality) {
     Replicanti.amount = currentReplicanti;
     remainingGalaxies = remainingGalaxies.add(Decimal.min(currentReplicantiGalaxies, 1));
   }

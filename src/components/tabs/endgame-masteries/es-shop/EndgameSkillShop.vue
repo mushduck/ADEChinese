@@ -27,9 +27,6 @@ export default {
         cp: new Decimal(0),
         dp: new Decimal(0)
       },
-      hasESGen: false,
-      showESGen: false,
-      invertESgenDisplay: false,
     };
   },
   computed: {
@@ -41,15 +38,6 @@ export default {
         return format;
       }
       return formatInt;
-    },
-    ESgenRateText() {
-      if (this.skillGeneration.lt(1 / 3600)) {
-        return `每 ${TimeSpan.fromSeconds(this.skillGeneration.reciprocal()).toStringShort(false)} 生成 1 终局能力`;
-      }
-      if (this.skillGeneration.lt(0.1)) {
-        return `每小时生成 ${format(this.skillGeneration.times(3600), 2, 2)} 终局能力`;
-      }
-      return `每秒生成 ${format(this.skillGeneration, 2, 2)} 终局能力`;
     },
     totalEndgameSkillText() {
       return `${quantify("终局能力", this.totalEndgameSkills, 2, 2, this.formatEndgameSkillType)}`;
@@ -68,11 +56,6 @@ export default {
         height: this.hasTTAutobuyer ? "6.7rem" : "4.4rem",
       };
     }
-  },
-  watch: {
-    invertESgenDisplay(newValue) {
-      player.options.invertESgenDisplay = newValue;
-    },
   },
   methods: {
     minimize() {
@@ -101,7 +84,6 @@ export default {
     },
     update() {
       this.skillAmount.copyFrom(Currency.endgameSkills);
-      this.skillGeneration.copyFrom(getESPerSecond());
       this.totalEndgameSkills.copyFrom(Currency.endgameSkills.max);
       this.shopMinimized = player.endgameMasteries.shopMinimized;
       this.minimizeAvailable = Currency.doomedParticles.gte(1e100);
@@ -113,13 +95,7 @@ export default {
       costs.gg.copyFrom(EndgameSkillPurchaseType.gg.cost);
       costs.cp.copyFrom(EndgameSkillPurchaseType.cp.cost);
       costs.dp.copyFrom(EndgameSkillPurchaseType.dp.cost);
-      this.hasESGen = this.skillGeneration.gt(0);
-      this.showESGen = this.hasESGen && (ui.view.shiftDown === this.invertESgenDisplay);
-      this.invertESgenDisplay = player.options.invertESgenDisplay;
     },
-    toggleESgen() {
-      this.invertESgenDisplay = !this.invertESgenDisplay;
-    }
   },
 };
 </script>
@@ -152,24 +128,7 @@ export default {
             />
           </div>
           <div class="es-gen-container">
-            <span
-              v-if="hasESGen"
-              class="checkbox-margin"
-              ach-tooltip="默认显示终局能力生成量，按住Shift键时显示总终局能力。
-                勾选此选项以切换。"
-            >
-              <input
-                v-model="invertESgenDisplay"
-                type="checkbox"
-                :value="invertESgenDisplay"
-                class="o-clickable"
-                @input="toggleESgen()"
-              >
-            </span>
-            <span v-if="showESGen">
-              你{{ ESgenRateText }}。
-            </span>
-            <span v-else>
+            <span>
               你拥有 {{ totalEndgameSkillText }}。
             </span>
           </div>

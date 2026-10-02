@@ -2,13 +2,11 @@
 import CelestialQuoteHistoryDisplay from "@/components/modals/celestial-quotes/CelestialQuoteHistoryDisplay";
 import CelestialQuoteModal from "@/components/modals/celestial-quotes/CelestialQuoteModal";
 import CreditsContainer from "@/components/tabs/celestial-pelle/CreditsContainer";
-import EndgameCreditsDisplay from "@/components/EndgameCreditsDisplay";
 import FadeAway from "@/components/tabs/celestial-pelle/FadeAway";
 import ModalProgressBar from "@/components/modals/ModalProgressBar";
 import NewGame from "@/components/tabs/celestial-pelle/NewGame";
 import PopupModal from "@/components/modals/PopupModal";
 import Prologue from "@/components/ui-modes/Prologue";
-import RestartEndgameUpdateDisplay from "@/components/RestartEndgameUpdateDisplay";
 import ScreenOverlay from "@/components/ui-modes/ScreenOverlay";
 import SpectateGame from "@/components/SpectateGame";
 
@@ -25,20 +23,15 @@ export default {
     ScreenOverlay,
     Prologue,
     CreditsContainer,
-    EndgameCreditsDisplay,
     SpectateGame,
     NewGame,
-    RestartEndgameUpdateDisplay,
     S12Taskbar,
   },
   data() {
     return {
       ending: false,
       dark: false,
-      intro: false,
-      warping: false,
-      goodbye: false,
-      newCredits: false
+      intro: false
     };
   },
   computed: {
@@ -51,9 +44,6 @@ export default {
       this.ending = GameEnd.endState >= END_STATE_MARKERS.FADE_AWAY && !GameEnd.creditsClosed;
       this.dark = Alpha.isRunning;
       this.intro = !player.hasSeenIntro;
-      this.warping = player.celestials.slabdrill.isWarping;
-      this.goodbye = player.celestials.slabdrill.isGoodbye;
-      this.newCredits = player.endgame.credits;
     }
   }
 };
@@ -76,14 +66,12 @@ export default {
         v-else-if="view.modal.current"
         :modal="view.modal.current"
       />
-      <FadeAway v-if="ending || dark || intro || warping || goodbye || newCredits" />
+      <FadeAway v-if="ending || dark || intro" />
       <ScreenOverlay />
       <Prologue />
       <CreditsContainer v-if="ending" />
-      <EndgameCreditsDisplay v-if="newCredits" />
       <NewGame v-if="ending" />
       <SpectateGame />
-      <RestartEndgameUpdateDisplay v-if="newCredits" />
     </div>
     <S12Taskbar />
   </span>

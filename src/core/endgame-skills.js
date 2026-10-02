@@ -75,7 +75,7 @@ EndgameSkillPurchaseType.gg = new class extends EndgameSkillPurchaseType {
 
   get currency() { return Currency.galaxyGeneratorGalaxies; }
   get costBase() { return DC.E10; }
-  get costIncrement() { return DualityUpgrade(27).isBought ? new Decimal(1.1) : DC.E2; }
+  get costIncrement() { return DC.E2; }
 
   bulkCost(amount) {
     return this.costIncrement.pow(amount + this.amount).subtract(this.cost);
@@ -111,7 +111,7 @@ EndgameSkillPurchaseType.dp = new class extends EndgameSkillPurchaseType {
 export const EndgameSkills = {
   checkForBuying(auto) {
     if (CelestialDimension(1).baseAmount.gt(0)) return true;
-    if (!auto) Modal.message.show(`你需要至少购买${formatInt(1)}次天界维度才可购买终局能力；同时终局专精必须在被毁灭的现实外购买以防止${player.universes.current === 2 ? "物质" : "反物质"}溢出。`, { closeEvent: GAME_EVENT.ENDGAME_RESET_AFTER });
+    if (!auto) Modal.message.show(`你需要至少购买${formatInt(1)}次天界维度才可购买终局能力；同时终局专精必须在被毁灭的现实外购买以防止反物质溢出。`, { closeEvent: GAME_EVENT.ENDGAME_RESET_AFTER });
     return false;
   },
 
@@ -145,11 +145,8 @@ export const EndgameSkills = {
   },
 
   calculateEndgameMasteriesCost() {
-    let list = EndgameMastery.permaMasteries.isBought
-      ? EndgameMastery.boughtEM().filter(m => m.id >= 180 && m.id < 280)
-      : EndgameMastery.boughtEM().filter(m => m.id < 280);
+    let list = EndgameMastery.permaMasteries.isBought ? EndgameMastery.boughtEM().filter(m => m.id >= 180) : EndgameMastery.boughtEM();
     let totalCost = list.map(em => em.cost).reduce(Number.sumReducer, 0);
-    totalCost += masteryIncrease.entanglementCost();
     return totalCost;
   }
 };

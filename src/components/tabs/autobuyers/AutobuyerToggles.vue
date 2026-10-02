@@ -16,7 +16,6 @@ export default {
       disableContinuum: false,
       allAutobuyersDisabled: false,
       antimatterAutobuyersBuyMax: false,
-      isFlipped: false
     };
   },
   watch: {
@@ -45,7 +44,6 @@ export default {
       this.antimatterAutobuyersBuyMax = Autobuyer.antimatterDimension.zeroIndexed.every(
         autobuyer => autobuyer.mode === AUTOBUYER_MODE.BUY_10
       );
-      this.isFlipped = player.universes.current === 2;
     },
     toggleAllAutobuyers() {
       for (const autobuyer of Autobuyers.unlocked) {
@@ -85,7 +83,7 @@ export default {
       class="o-primary-btn--subtab-option"
       @click="toggleAntimatterSingles()"
     >
-      设置${this.isFlipped ? "正物质" : "反物质"}维度自动购买器购买 {{ antimatterAutobuyersBuyMax ? "单个" : "最大" }}
+      设置反物质维度自动购买器购买 {{ antimatterAutobuyersBuyMax ? "单个" : "最大" }}
     </PrimaryButton>
     <span v-if="false">
       <PrimaryButton

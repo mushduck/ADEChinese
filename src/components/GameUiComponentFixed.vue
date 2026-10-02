@@ -2,7 +2,6 @@
 import CelestialQuoteHistoryDisplay from "@/components/modals/celestial-quotes/CelestialQuoteHistoryDisplay";
 import CelestialQuoteModal from "@/components/modals/celestial-quotes/CelestialQuoteModal";
 import CreditsContainer from "@/components/tabs/celestial-pelle/CreditsContainer";
-import EndgameCreditsDisplay from "@/components/EndgameCreditsDisplay";
 import EndgameSkillShop from "@/components/tabs/endgame-masteries/es-shop/EndgameSkillShop";
 import FadeAway from "@/components/tabs/celestial-pelle/FadeAway";
 import HowToPlay from "@/components/HowToPlay";
@@ -11,7 +10,6 @@ import ModernSidebar from "@/components/ui-modes/modern/ModernSidebar";
 import NewGame from "@/components/tabs/celestial-pelle/NewGame";
 import PopupModal from "@/components/modals/PopupModal";
 import Prologue from "@/components/ui-modes/Prologue";
-import RestartEndgameUpdateDisplay from "@/components/RestartEndgameUpdateDisplay";
 import SaveTimer from "@/components/SaveTimer";
 import ScreenOverlay from "@/components/ui-modes/ScreenOverlay";
 import SpectateGame from "@/components/SpectateGame";
@@ -35,20 +33,14 @@ export default {
     ScreenOverlay,
     Prologue,
     CreditsContainer,
-    EndgameCreditsDisplay,
     SpectateGame,
-    NewGame,
-    RestartEndgameUpdateDisplay
+    NewGame
   },
   data() {
     return {
       ending: false,
       dark: false,
-      intro: false,
-      warping: false,
-      goodbye: false,
-      newCredits: false,
-      isCursedCore: false
+      intro: false
     };
   },
   computed: {
@@ -57,7 +49,7 @@ export default {
     },
     hideIfMatoFullscreen() {
       return {
-        visibility: this.isCursedCore || ui.view.tabs.reality.automator.fullScreen ? "hidden" : "visible"
+        visibility: ui.view.tabs.reality.automator.fullScreen ? "hidden" : "visible"
       };
     }
   },
@@ -66,10 +58,6 @@ export default {
       this.ending = GameEnd.endState >= END_STATE_MARKERS.FADE_AWAY && !GameEnd.creditsClosed;
       this.dark = Alpha.isRunning;
       this.intro = !player.hasSeenIntro;
-      this.warping = player.celestials.slabdrill.isWarping;
-      this.goodbye = player.celestials.slabdrill.isGoodbye;
-      this.newCredits = player.endgame.credits;
-      this.isCursedCore = player.celestials.slabdrill.core.isActive;
     }
   }
 };
@@ -118,12 +106,10 @@ export default {
       <ModalProgressBar v-if="view.modal.progressBar" />
       <ScreenOverlay />
       <Prologue />
-      <FadeAway v-if="ending || dark || intro || warping || goodbye || newCredits" />
-      <EndgameCreditsDisplay v-if="newCredits" />
+      <FadeAway v-if="ending || dark || intro" />
       <CreditsContainer v-if="ending" />
       <NewGame v-if="ending" />
       <SpectateGame />
-      <RestartEndgameUpdateDisplay v-if="newCredits" />
     </template>
   </div>
 </template>

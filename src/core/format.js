@@ -253,9 +253,7 @@ const pluralDatabase = new Map([
   ["Divine Energy", "Divine Energy"],
   ["Supernova", "Supernovae"],
   ["Nebula", "Nebulae"],
-  ["Null Matter", "Null Matter"],
-  ["Hawking Radiation", "Hawking Radiation"],
-  ["Thermal Radiation", "Thermal Radiation"]
+  ["Null Matter", "Null Matter"]
 ]);
 
 /**

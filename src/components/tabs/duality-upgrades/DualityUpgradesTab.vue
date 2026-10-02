@@ -12,7 +12,6 @@ export default {
       capIM: new Decimal(),
       scaleTime: 0,
       capStr: "",
-      showingRows: 5
     };
   },
   computed: {
@@ -25,7 +24,6 @@ export default {
       this.capIM.copyFrom(MachineHandler.hardcapIM);
       this.scaleTime = MachineHandler.scaleTimeForDM;
       this.capStr = formatMachines(MachineHandler.hardcapRM, MachineHandler.currentIMCap, MachineHandler.currentDMCap);
-      this.showingRows = Slabdrill.isDestroyed ? 6 : 5;
     },
     id(row, column) {
       return (row - 1) * 5 + column - 1;
@@ -57,7 +55,7 @@ export default {
       </span>
     </div>
     <div
-      v-for="row in showingRows"
+      v-for="row in 5"
       :key="row"
       class="l-reality-upgrade-grid__row"
     >

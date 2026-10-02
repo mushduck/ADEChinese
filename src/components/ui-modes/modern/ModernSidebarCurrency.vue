@@ -221,8 +221,4 @@ export default {
 
   -webkit-text-fill-color: transparent;
 }
-
-.o-sidebar-currency--slabdrill {
-  color: var(--color-slabdrill--base);
-}
 </style>

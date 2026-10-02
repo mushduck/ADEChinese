@@ -5,8 +5,7 @@ export default {
     return {
       isModern: false,
       smallCrunch: false,
-      shouldDisplay: false,
-      isFlipped: false
+      shouldDisplay: false
     };
   },
   methods: {
@@ -15,7 +14,6 @@ export default {
       if (!this.shouldDisplay) return;
       this.isModern = player.options.newUI;
       this.smallCrunch = Time.bestInfinityRealTime.totalMinutes.toNumber() <= 1;
-      this.isFlipped = player.universes.current === 2;
     },
     handleClick() {
       if (PlayerProgress.infinityUnlocked()) bigCrunchResetRequest();
@@ -32,7 +30,7 @@ export default {
         v-if="!smallCrunch"
         class="l-spacing"
       >
-        这个宇宙已因{{ isFlipped ? "正物质" : "反物质" }}过多而坍缩
+        这个宇宙已因反物质过多而坍缩
       </h3>
       <button
         :class="{
@@ -60,7 +58,7 @@ export default {
         v-if="!smallCrunch"
         class="o-emptiness"
       >
-        这个宇宙已因{{ isFlipped ? "正物质" : "反物质" }}过多而坍缩
+        这个宇宙已因反物质过多而坍缩
       </div>
     </div>
   </span>

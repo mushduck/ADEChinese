@@ -125,17 +125,15 @@ export class Galaxy {
 
   static get costMult() {
     return Effects.min(NormalChallenge(10).isRunning ? 90 : 60, TimeStudy(42)) *
-      (GalacticPowers.galaxyScaling.isUnlocked ? GalacticPowers.galaxyScaling.reward : 1) * (Slabdrill.isCursed ? 7.5 : 1);
+      (GalacticPowers.galaxyScaling.isUnlocked ? GalacticPowers.galaxyScaling.reward : 1);
   }
 
   static get baseCost() {
-    return Slabdrill.isCursed ? new Decimal(650) : (NormalChallenge(10).isRunning ? new Decimal(99) : new Decimal(80));
+    return NormalChallenge(10).isRunning ? new Decimal(99) : new Decimal(80);
   }
 
   static get requiredTier() {
-    return Slabdrill.isCursed
-      ? Math.max(Math.min(Math.floor((player.celestials.slabdrill.goodbyeTick - 30000) / 1000), 8), 1)
-      : (NormalChallenge(10).isRunning ? 6 : 8);
+    return NormalChallenge(10).isRunning ? 6 : 8;
   }
 
   static get canBeBought() {
@@ -156,8 +154,6 @@ export class Galaxy {
   }
 
   static get costScalingStart() {
-    if (SlabdrillUnlocks.galaxy.isUnlocked) return GlyphSacrifice.power.effectValue.toNumber() +
-      BreakEternityUpgrade.galaxyScaleDelay.effectOrDefault(0);
     const extraDelay = Alpha.isRunning ? 0 : BreakEternityUpgrade.galaxyScaleDelay.effectOrDefault(0);
     return ((Alpha.isRunning ? AlphaUnlocks.powerGalaxies.effects.nerf.effectOrDefault(100) : 100) +
       TimeStudy(302).effectOrDefault(0) + GlyphSacrifice.power.effectValue.toNumber() + Effects.sum(
@@ -223,17 +219,6 @@ export function requestGalaxyReset(bulk, limit = DC.BEMAX) {
   if (Alpha.isRunning && player.galaxies.gte(1) && Alpha.currentStage === 2) {
     Alpha.advanceLayer();
     Alpha.quotes.galaxy.show();
-  }
-  if (Slabdrill.isCursed && player.celestials.slabdrill.stage === 1) {
-    player.reality.glyphs.sac.power = DC.D0;
-    player.reality.glyphs.sac.infinity = DC.D0;
-    player.reality.glyphs.sac.replication = DC.D0;
-    player.reality.glyphs.sac.time = DC.D0;
-    player.reality.glyphs.sac.dilation = DC.D0;
-    player.reality.glyphs.sac.effarig = DC.D0;
-    player.reality.glyphs.sac.reality = DC.D0;
-    Slabdrill.advanceLayer();
-    Slabdrill.quotes.galaxy.show();
   }
   return true;
 }
