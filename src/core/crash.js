@@ -1,5 +1,4 @@
 import { DEV } from "@/env";
-
 window.NotImplementedError = class NotImplementedError extends Error {
   constructor() {
     super("The method is not implemented.");
@@ -11,6 +10,7 @@ window.GlobalErrorHandler = {
   handled: false,
   cleanStart: false,
   onerror(event) {
+    console.error("CRASH:", event);
     if (this.handled) return;
     this.handled = true;
     if (!this.cleanStart) {
@@ -45,7 +45,16 @@ window.GlobalErrorHandler = {
   }
 };
 
+/*
 window.onerror = (event, source) => {
+  if (!source.endsWith(".js")) return;
+  GlobalErrorHandler.onerror(event);
+};
+*/
+window.onerror = (event, source, lineno, colno, error) => {
+  console.error("GLOBAL ERROR:", event);
+  console.error("  at", source, lineno + ":" + colno);
+  console.error("  stack:", error && error.stack);
   if (!source.endsWith(".js")) return;
   GlobalErrorHandler.onerror(event);
 };
