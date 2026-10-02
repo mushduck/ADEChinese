@@ -56,7 +56,7 @@ export const divinityUpgrades = {
     id: "divineL1U4",
     layer: 1,
     cost: new Decimal(1e50),
-    description: () => `在被毁灭的现实内${player.universes.current === 2 ? "正物质" : "反物质"}第二指数 ^ ${format(DivinityUpgrade.divineL5U2.isBought ? 1.02 : 1.01, 2, 2)}`,
+    description: () => `在被毁灭的现实内反物质第二指数 ^ ${format(DivinityUpgrade.divineL5U2.isBought ? 1.02 : 1.01, 2, 2)}`,
     effect: () => DivinityUpgrade.divineL5U2.isBought ? 1.02 : 1.01
   },
   divineL1U5: {

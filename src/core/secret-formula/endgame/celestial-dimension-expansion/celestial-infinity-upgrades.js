@@ -41,7 +41,7 @@ export const celestialInfinityUpgrades = {
   antimatterCelestialDimBuff: {
     id: "antimatterCelestialDimBuff",
     cost: 100,
-    description: `在阿尔法诅咒消散后为所有天界维度提供等同于${player.universes.current === 2 ? "正物质" : "反物质"}第二指数的倍率`,
+    description: "在阿尔法诅咒消散后为所有天界维度提供等同于反物质指数的指数的倍率",
     effect: () => Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)).max(1)
   },
   cipGen: {

@@ -26,7 +26,7 @@ export const nullUpgrades = {
     costIncrease: 10,
     maxUpgrades: Number.MAX_VALUE,
     effect: value => Decimal.pow10(Math.pow(value, 2)),
-    description: () => `为所有${player.universes.current === 2 ? "正物质" : "反物质"}维度提供倍率加成`,
+    description: () => "为所有反物质维度提供倍率加成",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false

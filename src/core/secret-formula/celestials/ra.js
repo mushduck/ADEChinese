@@ -95,7 +95,7 @@ export const ra = {
     },
     unlockDilationStartingTP: {
       id: 6,
-      reward: () => `在天神的现实外基于时间膨胀中达到的总${player.universes.current === 2 ? "物质" : "反物质"}数量的平方根给予超光速粒子。所有超光速粒子倍率加成均为追溯生效，无论是否在时间膨胀中。`,
+      reward: "如果你不在天神的现实之中，你将基于当前反物质的数量，获得超光速粒子。所有超光速粒子倍率加成立刻生效，与是否在时间膨胀之中无关。",
       effect: () => player.records.totalEndgameAntimatter.pow(0.5),
       pet: "teresa",
       level: 25,
@@ -149,8 +149,7 @@ export const ra = {
     maxGlyphRarityAndShardSacrificeBoost: {
       id: 13,
       reward: () => `获得符文的稀有度固定为 ${formatPercents(1)}，符文献祭增益基于遗迹碎片获得指数加成。`,
-      effect: () => SlabdrillUnlocks.timeStudy181.isUnlocked ?
-        Math.pow(Currency.relicShards.value.max(1).log10().div(10).add(1).toNumber(), 0.2) : 1 + Effarig.maxRarityBoost / 100,
+      effect: () => 1 + Effarig.maxRarityBoost / 100,
       pet: "effarig",
       level: 25,
       displayIcon: `<i class="fas fa-ankh"></i>`

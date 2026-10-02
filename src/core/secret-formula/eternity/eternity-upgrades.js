@@ -5,12 +5,7 @@ export const eternityUpgrades = {
     description: () => `基于未使用永恒点数 (x+${formatInt(1)}) 的无限维度倍数加成`,
     effect: () => Currency.eternityPoints.value.plus(1),
     cap: () => (!player.disablePostReality && Alpha.currentStage >= 16 ? DC.BEMAX : DC.E1E15),
-    formatEffect: value => formatX(value, 2, 1),
-    charged: {
-      description: "Empower Infinity Dimensions based on Eternity Points and Teresa Level",
-      effect: () => Decimal.pow(player.eternityPoints.max(10).log10().log10().times(Ra.pets.teresa.level).add(1), 0.4),
-      formatEffect: value => formatPow(value, 4, 4)
-    }
+    formatEffect: value => formatX(value, 2, 1)
   },
   idMultEternities: {
     id: 2,
@@ -29,12 +24,7 @@ export const eternityUpgrades = {
       const multPostCap = mult1.times(mult2).clampMin(1);
       return multPostCap.times(multPreCap);
     },
-    formatEffect: value => formatX(value, 2, 1),
-    charged: {
-      description: "Empower Infinity Dimensions based on Eternities and Teresa Level",
-      effect: () => Decimal.pow(player.eternities.max(10).log10().log10().times(Ra.pets.teresa.level).add(1), 0.5),
-      formatEffect: value => formatPow(value, 4, 4)
-    }
+    formatEffect: value => formatX(value, 2, 1)
   },
   idMultICRecords: {
     id: 3,
@@ -45,36 +35,21 @@ export const eternityUpgrades = {
     effect: () => DC.D2.pow(new Decimal(30).div(Time.infinityChallengeSum.totalSeconds.max(1e-6))).pow(
       DC.D1.div(Time.infinityChallengeSum.totalSeconds.times(1e6).min(1)).log10().pow(10).add(1)),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.D2P30D0_61,
-    formatEffect: value => formatX(value, 2, 1),
-    charged: {
-      description: "Empower Infinity Dimensions based on Hadronizes and Teresa Level",
-      effect: () => Decimal.pow(Laitela.hadronizes * Ra.pets.teresa.level + 1, 0.5),
-      formatEffect: value => formatPow(value, 4, 4)
-    }
+    formatEffect: value => formatX(value, 2, 1)
   },
   tdMultAchs: {
     id: 4,
     cost: 1e16,
     description: "你的成就提供的倍数加成作用于时间维度",
     effect: () => Achievements.power,
-    formatEffect: value => formatX(value, 2, 1),
-    charged: {
-      description: "Empower Time Dimensions based on Achievement Multiplier and Teresa Level",
-      effect: () => Decimal.pow(Achievements.power.max(10).log10().log10().times(Ra.pets.teresa.level).add(1), 0.6),
-      formatEffect: value => formatPow(value, 4, 4)
-    }
+    formatEffect: value => formatX(value, 2, 1)
   },
   tdMultTheorems: {
     id: 5,
     cost: 1e40,
     description: "时间维度获得等同于你未使用的时间之理的数目的倍数加成",
     effect: () => Decimal.max(Currency.timeTheorems.value, 1),
-    formatEffect: value => formatX(value, 2, 1),
-    charged: {
-      description: "Empower Time Dimensions based on Time Theorems and Teresa Level",
-      effect: () => Decimal.pow(player.timestudy.theorem.max(10).log10().log10().times(Ra.pets.teresa.level).add(1), 0.6),
-      formatEffect: value => formatPow(value, 4, 4)
-    }
+    formatEffect: value => formatX(value, 2, 1)
   },
   tdMultRealTime: {
     id: 6,
@@ -86,11 +61,6 @@ export const eternityUpgrades = {
     ),
     effect: () => (Pelle.isDoomed ? Time.thisReality.totalDays.add(1) : (Alpha.isRunning
       ? Decimal.max(Time.thisRealityRealTime.totalDays, 1) : Decimal.max(Time.totalTimePlayed.totalDays, 1))),
-    formatEffect: value => formatX(value, 2, 1),
-    charged: {
-      description: "Empower Time Dimensions based on Days Played and Teresa Level",
-      effect: () => Decimal.pow(Time.totalTimePlayed.totalDays.max(10).log10().log10().times(Ra.pets.teresa.level).add(1), 0.7),
-      formatEffect: value => formatPow(value, 4, 4)
-    }
+    formatEffect: value => formatX(value, 2, 1)
   }
 };

@@ -104,7 +104,7 @@ export const dilationUpgrades = {
     cost: 1e9,
     description: () => {
       const rep10 = replicantiMult().pLog10();
-      let multiplier = Slabdrill.isCursed ? "0.01" : "0.1";
+      let multiplier = "0.1";
       if (rep10.gt(9000)) {
         const ratio = DilationUpgrade.tdMultReplicanti.effectValue.pLog10().div(rep10);
         if (ratio.lt(0.095)) {
@@ -114,7 +114,7 @@ export const dilationUpgrades = {
       return `时间维度获得复制器倍率 ${formatPow(multiplier, 1, 3)} 的加成，这个加成超过 ${formatX(DC.E9000)} 后减弱`;
     },
     effect: () => {
-      let rep10 = replicantiMult().pLog10().times(Slabdrill.isCursed ? 0.01 : 0.1);
+      let rep10 = replicantiMult().pLog10().times(0.1);
       rep10 = rep10.gt(9000) ? (rep10.sub(9000)).times(0.5).add(9000) : rep10;
       return Decimal.pow10(rep10);
     },
@@ -123,15 +123,15 @@ export const dilationUpgrades = {
   ndMultDT: {
     id: 6,
     cost: 5e7,
-    description: () => `基于膨胀时间为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供倍率加成，此倍率不受时间膨胀的影响`,
-    effect: () => Currency.dilatedTime.value.pow(308 * (Slabdrill.isCursed ? 8 : 1)).clampMin(1),
+    description: "基于膨胀时间为反物质维度提供倍率加成，此倍率不受时间膨胀的影响",
+    effect: () => Currency.dilatedTime.value.pow(308).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   ipMultDT: {
     id: 7,
     cost: 2e12,
     description: "基于膨胀时间为无限点数提供倍率加成",
-    effect: () => Currency.dilatedTime.value.pow(1000 * (Slabdrill.isCursed ? 32 : 1)).clampMin(1),
+    effect: () => Currency.dilatedTime.value.pow(1000).clampMin(1),
     formatEffect: value => formatX(value, 2, 1),
     cap: () => Effarig.eternityCap
   },
@@ -150,8 +150,7 @@ export const dilationUpgrades = {
     id: 10,
     cost: 1e15,
     description: "超光速粒子生产时间之理",
-    effect: () => Slabdrill.isCursed ? Currency.tachyonParticles.value.pow(2).div(1000) :
-      Currency.tachyonParticles.value.div(20000).times(
+    effect: () => Currency.tachyonParticles.value.div(20000).times(
       Alpha.isRunning ? AlphaUnlocks.timeTheoremGeneration.effects.nerf.effectOrDefault(1) : 1),
     formatEffect: value => `${format(value, 2, 1)}/秒`
   },

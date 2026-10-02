@@ -22,7 +22,7 @@ const rebuyable = props => {
 
 export const endgameUpgrades = [
   rebuyable({
-    name: `${player.universes.current === 2 ? "正物质" : "反物质"}优化器`,
+    name: "反物质优化器",
     id: 1,
     initialCost: 1e40,
     costMult: 60,
@@ -186,14 +186,14 @@ export const endgameUpgrades = [
     effect: () => player.disablePostReality ? 1 : 0.9
   },
   {
-    name: () => `${player.universes.current === 2 ? "正质汇集" : "逆质汇集"}`,
+    name: "逆质汇集",
     id: 15,
     cost: new Decimal(1e150),
-    requirement: () => `在被毁灭的现实外达到 ${format(Decimal.pow(10, 1e33))} ${player.universes.current === 2 ? "正物质" : "反物质"}`,
+    requirement: () => `在被毁灭的现实外达到 ${format(Decimal.pow(10, 1e33))} 反物质`,
     hasFailed: () => Pelle.isDoomed,
     checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(1e33) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `基于虚幻机器数量为${player.universes.current === 2 ? "正物质" : "反物质"}指数提供指数加成`,
+    description: () => `基于虚幻机器数量为反物质指数提供指数加成`,
     effect: () => player.disablePostReality ? 1 : 1 + (Decimal.pow(Decimal.log10(Decimal.log10(
       player.reality.imaginaryMachines.add(1)).add(1)), 2).min(10).add(Decimal.log10(Decimal.log10(
       player.reality.imaginaryMachines.add(1)).add(1)).sub(Math.sqrt(10)).max(0)).div(200)).toNumber(),
@@ -306,7 +306,7 @@ export const endgameUpgrades = [
     hasFailed: () => !BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkRequirement: () => BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: `基于${player.universes.current === 2 ? "正物质" : "反物质"}数量提高符文等级，该效果在符文不稳定性削弱后结算`,
+    description: "基于反物质数量提高符文等级，该效果在符文不稳定性削弱后结算",
     effect: () => player.disablePostReality ? 1 : Decimal.min(Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)).div(100), 1), 0.05), 1.2).toNumber(),
     formatEffect: value => formatX(value, 2, 4)
   },

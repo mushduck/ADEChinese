@@ -43,7 +43,7 @@ export const perkShop = {
     id: 1,
     initialCost: 1,
     increment: 2,
-    description: () => PerkShopUpgrade.rmMult.viewCharge ? `基于${player.universes.current === 2 ? "正物质" : "反物质"}数量提高现实机器获取` : `获得双倍的现实机器`,
+    description: () => PerkShopUpgrade.rmMult.viewCharge ? `基于反物质数量提高现实机器获取` : `获得双倍的现实机器`,
     effect: () => player.disablePostReality ? DC.D1 : (PerkShopUpgrade.rmMult.isCharged
       ? PerkShopUpgrade.rmMult.chargedEffect()
       : PerkShopUpgrade.rmMult.preChargedEffect()),

@@ -36,10 +36,6 @@ export const confirmationTypes = [
     option: "dilation",
     isUnlocked: () => PlayerProgress.realityUnlocked() || !Currency.tachyonParticles.eq(0),
   }, {
-    name: "Compression",
-    option: "compression",
-    isUnlocked: () => !Currency.hawkingRadiation.eq(0),
-  }, {
     name: "激能",
     option: "overcharge",
     isUnlocked: () => Ascensions.ocA.isUnlocked,
@@ -95,14 +91,6 @@ export const confirmationTypes = [
     name: "重置终局",
     option: "resetEndgame",
     isUnlocked: () => PlayerProgress.endgameUnlocked(),
-  }, {
-    name: "Cursed Core",
-    option: "cursedCore",
-    isUnlocked: () => Slabdrill.isUnlocked || Slabdrill.isDestroyed,
-  }, {
-    name: "Universes",
-    option: "universes",
-    isUnlocked: () => Universes.areUnlocked,
   }, {
     name: "重置内购",
     option: "respecIAP",

@@ -66,7 +66,7 @@ export const eternityMilestones = {
   },
   autobuyMaxGalaxies: {
     eternities: 9,
-    reward: () => `解锁自动购买最大数量的${player.universes.current === 2 ? "正物质" : "反物质"}星系`
+    reward: "解锁自动购买最大数量的反物质星系"
   },
   unlockReplicanti: {
     eternities: 10,
@@ -128,11 +128,11 @@ export const eternityMilestones = {
   },
   unlockAllND: {
     eternities: 30,
-    reward: () => `永恒开始时解锁全部${player.universes.current === 2 ? "正物质" : "反物质"}维度`
+    reward: "永恒开始时就解锁了全部反物质维度"
   },
   replicantiNoReset: {
     eternities: 40,
-    reward: () => `复制器星系不会重置${player.universes.current === 2 ? "正物质" : "反物质"}数量、${player.universes.current === 2 ? "正物质" : "反物质"}维度、计数频率、维度献祭和维度提升`,
+    reward: `复制器星系不会重置反物质数量、反物质维度、计数频率、维度献祭和维度提升`,
     pelleUseless: true
   },
   autobuyerReplicantiChance: {

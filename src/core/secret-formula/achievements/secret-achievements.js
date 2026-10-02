@@ -54,7 +54,7 @@ export const secretAchievements = [
   {
     id: 22,
     name: "深度油炸",
-    get description() { return `使用 Emoji 记数法时总共购买 ${formatInt(1e5)} 个${player.universes.current === 2 ? "物质" : "反物质"}星系。`; },
+    get description() { return `使用 Emoji 记数法时总共购买 ${formatInt(1e5)} 个反物质星系。`; },
     checkRequirement: () => player.requirementChecks.permanent.emojiGalaxies >= 1e5,
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER
   },

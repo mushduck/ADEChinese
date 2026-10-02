@@ -401,7 +401,7 @@ export const celestialNavigation = {
           return [
             "鹿颈长的无限",
             "在鹿颈长的现实中",
-            `达到 ${format(am, 2)} / ${format(Number.MAX_VALUE, 2)} ${player.universes.current === 2 ? "正物质" : "反物质"}`,
+            `达到 ${format(am, 2)} / ${format(Number.MAX_VALUE, 2)} 反物质`,
           ];
         },
         angle: 0,
@@ -701,8 +701,8 @@ export const celestialNavigation = {
           const galaxies = player.requirementChecks.infinity.noAD8 ? player.galaxies : 0;
           return [
             "薇的解锁成就",
-            `在当前的现实中不购买第八${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
-            `达到 ${formatInt(galaxies)} / ${formatInt(goal)} ${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
+            "在当前的现实中不购买第八维",
+            `达到 ${formatInt(galaxies)} / ${formatInt(goal)} 反物质星系`,
           ];
         },
         angle: 135,
@@ -1451,7 +1451,10 @@ export const celestialNavigation = {
       const upgrade = DarkMatterDimension(4).unlockUpgrade;
       if (upgrade.canBeBought || upgrade.isBought) return 1;
       if (upgrade.isAvailableForPurchase) return upgrade.currency.value / upgrade.cost;
-      return actualBaseGalaxiesWithoutGeneration().div(80000).toNumber();
+      return (GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
+        player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) :
+        Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(
+        GalacticPower.freeGalaxies)).div(80000).toNumber();
     },
     node: {
       clickAction: () => Tab.celestials.laitela.show(true),
@@ -1476,7 +1479,9 @@ export const celestialNavigation = {
             ${format(Math.min(upgrade.currency.value, upgrade.cost), upgrade.canBeBought ? 1 : 2)}
             / ${format(upgrade.cost, 1)}`
           ];
-          const allGalaxies = actualBaseGalaxiesWithoutGeneration();
+          const allGalaxies = GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(
+            player.galaxies.max(1)).times(player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) :
+            Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies);
           return [
             dmdText,
             `共拥有 ${format(80000)} 星系`,
@@ -1695,7 +1700,7 @@ export const celestialNavigation = {
               PellePerkUpgrade.all.length + PelleAlchemyUpgrade.all.length) - (PelleAchievementUpgrade.all.filter(u => u.canBeApplied).length +
               PelleDestructionUpgrade.all.filter(u => u.canBeApplied).length + PelleRealityUpgrade.all.filter(u => u.canBeApplied).length +
               PelleImaginaryUpgrade.all.filter(u => u.canBeApplied).length + PelleCelestialUpgrade.all.filter(u => u.canBeApplied).length +
-              PellePerkUpgrade.all.filter(u => u.canBeApplied).length + PelleAlchemyUpgrade.all.filter(u => u.canBeApplied).length);
+              PellePerkUpgrade.all.filter(u => u.canBeApplied).length + PelleAchievementUpgrade.all.filter(u => u.canBeApplied).length);
             pelleString = "被毁灭的现实仍在被佩勒削弱"; 
             progressString = `仍存在${formatInt(remainingNerfs)}项削弱`; 
           } else if (Achievement(204).isUnlocked && !ImaginaryUpgrade(30).isAvailableForPurchase) {
@@ -1839,12 +1844,12 @@ export const celestialNavigation = {
   "slab-unlock": {
     visible: () => PlayerProgress.celestialEternityUnlocked(),
     complete: () => {
-      if (Slabdrill.isCursed) return 1;
+      if (false) return 1;
       if (CelestialEternityPlusUpgrade.oldStoneSlabAndSteelDrill.isBought) return 0.999;
       return Decimal.clampMax(0.998, Currency.celestialEternityPoints.value.add(1).pLog10().div(4000)).toNumber();
     },
     node: {
-      clickAction: () => Slabdrill.isCursed ? Tab.celestials.slabdrill.show(true) : Tab.cdexpansion.subtabs[3].show(true),
+      clickAction: () => false ? Tab.celestials.slabdrill.show(true) : Tab.cdexpansion.subtabs[3].show(true),
       incompleteClass: "c-celestial-nav__test-incomplete",
       symbol: "⁹δ",
       symbolOffset: "1.6",
@@ -1859,7 +1864,7 @@ export const celestialNavigation = {
               "被诅咒的现实" 
             ];
           }
-          if (player.celestials.slabdrill.isWarping && complete === 0.999) {
+          if (false && complete === 0.999) {
             return [
               "被诅咒的现实" 
             ];
