@@ -2,7 +2,7 @@ export const divinityMilestones = {
   firstDivine: {
     divinities: 1,
     get reward() {
-      return ` 移除 ${format(Decimal.pow10(1e150))} 和 ${format(Decimal.pow10(1e225))} 的反物质软上限。新增一个于 ${format(DC.E9E15)} 反物质开始的新软上限，该软上限强度会基于神性次数而提高。
+      return ` 移除 ${format(Decimal.pow10(1e150))} 和 ${format(Decimal.pow10(1e225))} 的${player.universes.current === 2 ? "正物质" : "反物质"}软上限。新增一个于 ${format(DC.E9E15)} ${player.universes.current === 2 ? "正物质" : "反物质"}开始的新软上限，该软上限强度会基于神性次数而提高。
         解锁一个新的星系生成器升级；所有星系生成器升级效力 ^ 2。
         基于神性次数优化成就 207的奖励公式；每进行一次神性，天界点数和毁灭粒子获取量 ^ 2。
         毁灭现实后自动解锁所有佩勒升级。
@@ -52,7 +52,7 @@ export const divinityMilestones = {
     divinities: 5,
     get reward() {
       return ` 超七方体现在同时作用于天界物质三重软上限。
-        虚无时反物质维度倍率 ^ 2。
+        虚无中的${player.universes.current === 2 ? "正物质" : "反物质"}维度倍率 ^ 2。
         献祭所有裂痕后，裂痕填充速度 ${formatX(10)}。
         解锁一个新的星系生成器升级。
         将所有类型的强子效果到达上限所需的时间降低 ${formatPercents(0.75)}。
@@ -64,7 +64,7 @@ export const divinityMilestones = {
     divinities: 7,
     get reward() {
       return ` 推迟符文不稳定性第六软上限出现。
-        虚无时基于本次终局中经过的真实时间增强反物质维度；神性维度产量 ${formatPow(1.05, 2, 2)}。
+        虚无时基于本次终局中经过的真实时间增强${player.universes.current === 2 ? "正物质" : "反物质"}维度；神性维度产量 ${formatPow(1.05, 2, 2)}。
         献祭所有裂痕后，裂痕填充速度 ${formatX(100)}。
         将所有类型的强子效果到达上限所需的时间降低 ${formatPercents(0.5)}。
         将阿尔法诅咒到达上限所需的时间降低 ${formatPercents(0.25)}。
@@ -87,7 +87,27 @@ export const divinityMilestones = {
   universes: {
     divinities: 13,
     get reward() {
-      return ` 解锁 Transient Universe（未实装）。`;
+      return ` 解锁 Transient Universe。`;
+    }
+  },
+  powerBurst: {
+    divinities: 17,
+    get reward() {
+      return ` Empower Singularities based on highest Galaxies
+        While inside the Overcharge, ${player.universes.current === 2 ? "Matter" : "Antimatter"} production gains a power effect applying after the tetration nerf based on real time spent inside the Overcharge
+        Gain ${formatX(10)} more Hawking Radiation
+        Gain ${formatX(1000)} more Stars of all types`;
+    }
+  },
+  serpentPower: {
+    divinities: 22,
+    get reward() {
+      return ` Square Singularity Gain
+        Double the maximum Hadron effectiveness
+        Gain ${formatX(10)} more Hawking Radiation
+        Gain ${formatX(10)} more Thermal Radiation
+        Gain ${formatX(10)} more generated Endgame Skills
+        Unlock Slabdrill’s Expansion Pack`;
     }
   }
 };

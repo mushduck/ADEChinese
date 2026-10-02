@@ -20,12 +20,20 @@ export default {
   mounted() {
     //我改的
     document.addEventListener("visibilitychange", () => this.restart());
+    window.showMessage = this.showMessage;
     this.restart();
   },
   beforeDestroy() {
     this.clearTimeouts();
+    if (window.showMessage === this.showMessage) delete window.showMessage;
   },
   methods: {
+    showMessage(id) {
+      if (!GameDatabase.news.some(message => message.id === id)) return false;
+      nextNewsMessageId = id;
+      this.restart();
+      return true;
+    },
     update() {
       if (this.currentNews?.dynamic) {
         this.$refs.line.innerHTML = this.currentNews.text;

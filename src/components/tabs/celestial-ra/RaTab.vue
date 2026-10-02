@@ -93,7 +93,7 @@ export default {
     memoryDescription() {
       return `在太阳神的现实中，一些资源将基于它们的数量，生成记忆块，进而获得天神记忆。`;
     },
-    isDoomed: () => Pelle.isDoomed,
+    isDoomed: () => Pelle.isDoomed || Slabdrill.isCursed,
   },
   methods: {
     update() {

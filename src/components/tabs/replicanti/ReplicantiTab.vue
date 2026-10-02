@@ -30,6 +30,8 @@ export default {
       multIP: new Decimal(),
       hasDEMult: false,
       multDE: new Decimal(),
+      hasSTMult: false,
+      multST: new Decimal(),
       hasPow: false,
       pow: 0,
       hasTDPow: false,
@@ -40,6 +42,8 @@ export default {
       powIP: 0,
       hasDEPow: false,
       powDE: 0,
+      hasSTPow: false,
+      powST: 0,
       hasRaisedCap: false,
       replicantiCap: new Decimal(),
       capMultText: "",
@@ -60,10 +64,11 @@ export default {
   computed: {
     isDoomed: () => Pelle.isDoomed,
     replicantiChanceSetup() {
+      const isCursed = SlabdrillUnlocks.replicanti.isUnlocked;
       return new ReplicantiUpgradeButtonSetup(
         ReplicantiUpgrade.chance,
-        value => `复制概率：${formatDecimalPercents(value)}`,
-        cost => `+${formatPercents(0.01)} 价格：${format(cost)} 无限点数`
+        value => `复制概率：${isCursed ? formatDecimalPercents(value, 1, 1) : formatDecimalPercents(value)}`,
+        cost => `+${isCursed ? formatPercents(0.001, 1, 1) : formatPercents(0.01)} 价格：${format(cost)} 无限点数`
       );
     },
     replicantiIntervalSetup() {
@@ -125,6 +130,10 @@ export default {
       if (this.hasDEMult) {
         boostList.push(`从阿尔法奖励中获得 <span class="c-replicanti-description__accent">${formatX(this.multDE, 2, 2)}</span> 的暗能量倍率${this.hasDEPow ? `，<span class="c-replicanti-description__accent">${formatPow(this.powDE, 2, 3)}</span> 的暗能量倍率指数` : ""}`);
       }
+      if (this.hasSTMult) {
+        boostList.push(`从Compression Upgrade中获得 <span class="c-replicanti-description__accent">${formatX(this.multST, 2, 2)}</span> 倍
+        ${this.hasSTPow ? ` 和 <span class="c-replicanti-description__accent">${formatPow(this.powST, 2, 3)}</span> ` : ""}的三体研究`);
+      }
       if (boostList.length === 1) return `${boostList[0]}。`;
       if (boostList.length === 2) return `${boostList[0]}<br>以及${boostList[1]}。`;
       return `${boostList.slice(0, -1).join("，<br>")}，<br>以及${boostList[boostList.length - 1]}。`;
@@ -160,6 +169,8 @@ export default {
       this.multIP.copyFrom(ReplicantiMultipliers.ipMult);
       this.hasDEMult = !player.disablePostReality && Alpha.currentStage >= 21;
       this.multDE.copyFrom(ReplicantiMultipliers.deMult);
+      this.hasSTMult = CompressionUpgrade.stMultReplicanti.isBought;
+      this.multST.copyFrom(ReplicantiMultipliers.stMult);
       this.hasPow = ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality;
       this.pow = ReplicantiMultipliers.idPow;
       this.hasTDPow = ResurgenceUpgrade.repSurge.isBought && DilationUpgrade.tdMultReplicanti.isBought && !player.disablePostReality;
@@ -170,6 +181,8 @@ export default {
       this.powIP = ReplicantiMultipliers.ipPow;
       this.hasDEPow = ResurgenceUpgrade.repSurge.isBought && !player.disablePostReality && Alpha.currentStage >= 21;
       this.powDE = ReplicantiMultipliers.dePow;
+      this.hasSTPow = ResurgenceUpgrade.repSurge.isBought & !player.disablePostReality && CompressionUpgrade.stMultReplicanti.isBought;
+      this.powST = ReplicantiMultipliers.stPow;
       this.isUncapped = PelleRifts.vacuum.milestones[1].canBeApplied;
       this.hasRaisedCap = (EffarigUnlock.infinity.isUnlocked && !this.isUncapped) || (Pelle.isDoomed && PelleCelestialUpgrade.replicantiCapIncrease.canBeApplied);
       this.replicantiCap.copyFrom(replicantiCap());

@@ -17,6 +17,8 @@ export default {
       hasTutorial: false,
       hasRealityButton: false,
       isEC9: false,
+      isTransient: false,
+      isFlipped: false
     };
   },
   computed: {
@@ -27,7 +29,7 @@ export default {
       };
     },
     multiplierDisplay() {
-      if (InfinityChallenge(3).isRunning) return `所有反物质维度获得 ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)} 加成`;
+      if (InfinityChallenge(3).isRunning) return `所有有${this.isFlipped ? "物质" : "反物质"}维度获得 ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)} 加成`;
       const tickmult = this.mult;
       return `${formatX(tickmult.reciprocal(), 2, 3)} 加成 / 升级。`;
     },
@@ -50,7 +52,8 @@ export default {
       this.purchasedTickspeed.copyFrom(player.totalTickBought);
       this.freeTickspeed.copyFrom(FreeTickspeed.amount);
       this.isEC9 = EternityChallenge(9).isRunning;
-      this.isVisible = Tickspeed.isUnlocked || this.isEC9;
+      this.isTransient = player.universes.current === 1;
+      this.isVisible = Tickspeed.isUnlocked || this.isEC9 || this.isTransient;
       if (!this.isVisible) return;
       this.mult.copyFrom(Tickspeed.multiplier);
       this.cost.copyFrom(Tickspeed.cost);
@@ -61,6 +64,7 @@ export default {
       this.isContinuumActive = Laitela.continuumActive;
       if (this.isContinuumActive) this.continuumValue.copyFrom(Tickspeed.continuumValue);
       this.hasTutorial = Tutorial.isActive(TUTORIAL_STATE.TICKSPEED);
+      this.isFlipped = player.universes.current === 2;
     },
     buttonClass() {
       return {
@@ -88,6 +92,9 @@ export default {
         </span>
         <span v-else-if="isEC9">
           不可购买计数频率（永恒挑战 9）
+        </span>
+        <span v-else-if="isTransient">
+          Tickspeed Does Not Exist (Transient Universe)
         </span>
         <span v-else>
           计数频率价格: {{ format(cost) }}

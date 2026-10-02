@@ -36,7 +36,7 @@ export default {
       this.celestialMatter.copyFrom(Currency.celestialMatter);
       this.conversionExponent = CelestialDimensions.conversionExponent;
       this.dimMultiplier.copyFrom(this.celestialMatter.pow(this.conversionExponent).max(1));
-      this.matterPerSecond.copyFrom(CelestialDimension(1).productionPerRealSecond);
+      this.matterPerSecond.copyFrom(CelestialDimension(1).productionPerSecond);
       this.incomeType = "天界物质";
       this.totalDimCap.copyFrom(CelestialDimensions.totalDimCap);
       this.creditsClosed = GameEnd.creditsEverClosed;

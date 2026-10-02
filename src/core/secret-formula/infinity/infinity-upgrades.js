@@ -9,14 +9,15 @@ export const infinityUpgrades = {
   totalTimeMult: {
     id: "timeMult",
     cost: () => Math.pow(1, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
-    description: "反物质维度获得基于游玩时间的倍数加成",
+    description: () => Slabdrill.isCursed ? "你的反物质维度获得基于游玩时间的倍数加成" :
+      `${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于游玩时间的倍数加成`,
     effect: () => Decimal.pow(Time.totalTimePlayed.totalMinutes.div(2), 0.15),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "反物质维度获得基于总游戏时间和特蕾莎等级的指数加成",
+      description: () => `${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于游玩时间和特蕾莎等级的指数加成`,
       effect: () => 1 +
         Decimal.log10(Decimal.log10(Time.totalTimePlayed.totalMilliseconds)).times(
-          Math.pow(Ra.pets.teresa.level * Ra.unlocks.chargeBoost.effectOrDefault(1) * (player.disablePostReality ? 1 : AlphaUnlocks.autoCrunchChallenge.effects.buff.effectOrDefault(1)), 0.5)).div(150).toNumber(),
+        Math.pow(Ra.pets.teresa.level * Ra.unlocks.chargeBoost.effectOrDefault(1) * (player.disablePostReality ? 1 : AlphaUnlocks.autoCrunchChallenge.effects.buff.effectOrDefault(1)), 0.5)).div(150).toNumber(),
       formatEffect: value => formatPow(value, 4, 4)
     }
   },
@@ -24,11 +25,12 @@ export const infinityUpgrades = {
     id: "18Mult",
     cost: () => Math.pow(1, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.totalTimeMult.isBought,
-    description: "第一和第八反物质维度获得基于无限次数的倍数加成",
+    description: () => Slabdrill.isCursed ? "你的反物质维度获得基于无限次数的倍数加成" :
+      `第一和第八${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数的倍数加成`,
     effect: () => dimInfinityMult(),
     formatEffect: value => formatX(value, 1, 1),
     charged: {
-      description: "第一和第八反物质维度获得基于无限次数和特蕾莎等级的指数加成",
+      description: () => `第一和第八${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数和特蕾莎等级的指数加成`,
       effect: () => chargedDimInfinityMult(),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -37,11 +39,12 @@ export const infinityUpgrades = {
     id: "27Mult",
     cost: () => Math.pow(1, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.buy10Mult.isBought,
-    description: "第二和第七反物质维度获得基于无限次数的倍数加成",
+    description: () => Slabdrill.isCursed ? "你的反物质维度获得基于无限次数的倍数加成" :
+      `第二和第七${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数的倍数加成`,
     effect: () => dimInfinityMult(),
     formatEffect: value => formatX(value, 1, 1),
     charged: {
-      description: "第二和第七反物质维度获得基于无限次数和特蕾莎等级的指数加成",
+      description: () => `第二和第七${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数和特蕾莎等级的指数加成`,
       effect: () => chargedDimInfinityMult(),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -50,11 +53,12 @@ export const infinityUpgrades = {
     id: "36Mult",
     cost: () => Math.pow(1, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.dim18mult.isBought,
-    description: "第三和第六反物质维度获得基于无限次数的倍数加成",
+    description: () => Slabdrill.isCursed ? "你的反物质维度获得基于无限次数的倍数加成" :
+      `第三和第六${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数的倍数加成`,
     effect: () => dimInfinityMult(),
     formatEffect: value => formatX(value, 1, 1),
     charged: {
-      description: "第三和第六反物质维度获得基于无限次数和特蕾莎等级的指数加成",
+      description: () => `第三和第六${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数和特蕾莎等级的指数加成`,
       effect: () => chargedDimInfinityMult(),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -63,11 +67,12 @@ export const infinityUpgrades = {
     id: "45Mult",
     cost: () => Math.pow(1, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.dim27mult.isBought,
-    description: "第四和第五反物质维度获得基于无限次数的倍数加成",
+    description: () => Slabdrill.isCursed ? "你的反物质维度获得基于无限次数的倍数加成" :
+      `第四和第五${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数的倍数加成`,
     effect: () => dimInfinityMult(),
     formatEffect: value => formatX(value, 1, 1),
     charged: {
-      description: "第四和第五反物质维度获得基于无限次数和特蕾莎等级的指数加成",
+      description: () => `第四和第五${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于无限次数和特蕾莎等级的指数加成`,
       effect: () => chargedDimInfinityMult(),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -77,7 +82,7 @@ export const infinityUpgrades = {
     cost: () => Math.pow(1, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.dim36mult.isBought,
     description: () =>
-      `维度提升和反物质星系对维度的需求减少 ${formatInt(9)}`,
+      `维度提升和${player.universes.current === 2 ? "正物质" : "反物质"}星系对维度的需求减少 ${formatInt(9)}`,
     effect: 9,
     charged: {
       description: () => "基于特蕾莎等级降低维度提升的需求",
@@ -88,11 +93,11 @@ export const infinityUpgrades = {
   buy10Mult: {
     id: "dimMult",
     cost: () => Math.pow(1, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
-    description: () => `增加购买${formatInt(10)}个反物质维度的倍数加成。`,
+    description: () => `增加购买${formatInt(10)}个${player.universes.current === 2 ? "正物质" : "反物质"}维度的倍数加成。`,
     effect: () => 1.1,
     formatEffect: () => `${formatX(2, 0, 1)} ➜ ${formatX(2.2, 0, 1)}`,
     charged: {
-      description: () => `每买${formatInt(10)}个反物质维度的倍数基于特蕾莎等级获得指数加成`,
+      description: () => `每买${formatInt(10)}个${player.universes.current === 2 ? "正物质" : "反物质"}维度的倍数基于特蕾莎等级获得指数加成`,
       effect: () => 1 + (Ra.pets.teresa.level * Ra.unlocks.chargeBoost.effectOrDefault(1) * (player.disablePostReality ? 1 : AlphaUnlocks.autoCrunchChallenge.effects.buff.effectOrDefault(1))) / 200,
       formatEffect: value => formatPow(value, 3, 3)
     }
@@ -101,7 +106,7 @@ export const infinityUpgrades = {
     id: "galaxyBoost",
     cost: () => Math.pow(2, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.dim45mult.isBought,
-    description: "反物质星系的效果加倍",
+    description: "所有星系的效果加倍",
     effect: 2,
     charged: {
       description: "所有星系基于特蕾莎等级获得加成",
@@ -112,12 +117,13 @@ export const infinityUpgrades = {
   thisInfinityTimeMult: {
     id: "timeMult2",
     cost: () => Math.pow(3, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
-    description: "反物质维度获得基于当前无限所花费的时间的倍数加成",
+    description: () => Slabdrill.isCursed ? "你的反物质维度获得基于当前无限所花费的时间的倍数加成" :
+      `${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于当前无限所花费的时间的倍数加成`,
     effect: () => Decimal.max(Decimal.pow(Time.thisInfinity.totalMinutes.div(4), 0.25), 1),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description:
-        "反物质维度获得基于当前无限所花费的时间和特蕾莎等级的指数加成",
+      description: () =>
+        `${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于当前无限所花费的时间和特蕾莎等级的指数加成`,
       effect: () => 1 +
         Decimal.log10(Decimal.log10(Time.thisInfinity.totalMilliseconds.plus(100))).times(
           Math.sqrt(Ra.pets.teresa.level * Ra.unlocks.chargeBoost.effectOrDefault(1) * (player.disablePostReality ? 1 : AlphaUnlocks.autoCrunchChallenge.effects.buff.effectOrDefault(1)))).div(150).toNumber(),
@@ -128,7 +134,8 @@ export const infinityUpgrades = {
     id: "unspentBonus",
     cost: () => Math.pow(5, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.thisInfinityTimeMult.isBought,
-    description: "第一反物质维度获得基于未花费的无限点数的倍数加成",
+    description: () => Slabdrill.isCursed ? "基于未花费的无限点数获得反物质维度倍数加成" :
+      `第一${player.universes.current === 2 ? "正物质" : "反物质"}维度获得基于未花费的无限点数的倍数加成`,
     effect: () => {
       const divisor = (EndgameMastery(81).isBought && !player.disablePostReality) ? 5 : 10;
       const subtrahend = (EndgameMastery(81).isBought && !player.disablePostReality) ? 1.5 : 0;
@@ -136,7 +143,7 @@ export const infinityUpgrades = {
     },
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "基于未使用的无限点数获得第一个反物质维度倍数，然后由特蕾莎等级提供指数加成",
+      description: () => `基于未使用的无限点数获得第一${player.universes.current === 2 ? "正物质" : "反物质"}维度倍数，然后由特蕾莎等级提供指数加成`,
       effect: () => {
         const divisor = (EndgameMastery(81).isBought && !player.disablePostReality) ? 5 : 10;
         const subtrahend = (EndgameMastery(81).isBought && !player.disablePostReality) ? 1.5 : 0;
@@ -168,8 +175,8 @@ export const infinityUpgrades = {
     formatEffect: value => {
       if (Teresa.isRunning || V.isRunning) return "在本次现实中被禁用";
       if (Pelle.isDoomed && !PelleDestructionUpgrade.passiveIPGen.canBeApplied) return "已禁用";
-      if (Alpha.isRunning && player.records.bestInfinity.realTime >= 999999999999) return "生成太慢"; 
-      if (player.records.bestInfinity.time.gte(999999999999)) return "生成太慢"; 
+      if (Alpha.isRunning && player.records.bestInfinity.realTime >= 999999999999) return "生成太慢";
+      if (player.records.bestInfinity.time.gte(999999999999)) return "生成太慢";
       if (Alpha.isRunning) return `${format(value, 2)} / ${TimeSpan.fromMilliseconds(Time.bestInfinityRealTime.totalMilliseconds.times(10)).toStringShort()}`;
       return `${format(value, 2)} / ${TimeSpan.fromMilliseconds(Time.bestInfinity.totalMilliseconds.times(10)).toStringShort()}`;
     },
@@ -185,28 +192,33 @@ export const infinityUpgrades = {
     id: "skipReset1",
     cost: () => Math.pow(20, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     description: () =>
-      `每次重置后开始于 ${formatInt(1)} 个维度提升，并自动解锁第五反物质维度`,
+      Slabdrill.isCursed ? `每次重置后开始于 ${formatInt(1)} 个维度提升` :
+      `每次重置后开始于 ${formatInt(1)} 个维度提升，并自动解锁第五${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
   },
   skipReset2: {
     id: "skipReset2",
     cost: () => Math.pow(40, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.skipReset1.isBought,
     description: () =>
-      `每次重置后开始于 ${formatInt(2)} 个维度提升，并自动解锁第六反物质维度`,
+      Slabdrill.isCursed ? `每次重置后开始于 ${formatInt(2)} 个维度提升` :
+      `每次重置后开始于 ${formatInt(2)} 个维度提升，并自动解锁第六${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
   },
   skipReset3: {
     id: "skipReset3",
     cost: () => Math.pow(80, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.skipReset2.isBought,
     description: () =>
-      `每次重置后开始于 ${formatInt(3)} 个维度提升，并自动解锁第七反物质维度`,
+      Slabdrill.isCursed ? `每次重置后开始于 ${formatInt(3)} 个维度提升` :
+      `每次重置后开始于 ${formatInt(3)} 个维度提升，并自动解锁第七${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
   },
   skipResetGalaxy: {
     id: "skipResetGalaxy",
     cost: () => Math.pow(300, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.skipReset3.isBought,
     description: () =>
-      `每次重置后开始于 ${formatInt(4)} 个维度提升和一个反物质星系，并自动解锁第八反物质维度`,
+      Slabdrill.isCursed ? `每次重置后开始于 ${formatInt(4)} 个维度提升和一个${player.universes.current === 2 ? "正物质" : "反物质"}星系` :
+      `每次重置后开始于 ${formatInt(4)} 个维度提升，并自动解锁第八${player.universes.current === 2 ? "正物质" : "反物质"}维度；
+      以及一个${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
   },
   ipOffline: {
     id: "ipOffline",
@@ -227,9 +239,7 @@ export const infinityUpgrades = {
     checkRequirement: () => Achievement(41).isUnlocked || Ascensions.ipA.isUnlocked,
     costCap: () => Ascensions.ipA.isUnlocked ? DC.BEMAX : (Alpha.isRunning ? Decimal.pow10(AlphaUnlocks.infinityChallenges.effects.nerf.effectOrDefault(Decimal.log10((BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality) ? DC.BEMAX : DC.E6E6).sub(1))).times(10) : ((BreakEternityUpgrade.doubleIPUncap.isBought && !player.disablePostReality) ? DC.BEMAX : DC.E6E6)),
     costIncreaseThreshold: () => Ascensions.ipA.isUnlocked ? DC.BEMAX : ((EndgameUpgrade(21).isBought && !player.disablePostReality) ? Decimal.pow10(1e125) : DC.E3E6),
-    description: () => Ascensions.ipA.isUnlocked ? `无限点数的指数 +${formatPow(0.01, 2, 2)}`  : `将所有来源的无限点乘以 ${formatX(2)}`,
-    // Normally the multiplier caps at e993k or so with 3300000 purchases, but if the cost is capped then we just give
-    // an extra e7k to make the multiplier look nice
+    description: () => Ascensions.ipA.isUnlocked ? `无限点数的指数 +${formatPow(0.01, 2, 2)}` : `将所有来源的无限点乘以 ${formatX(2)}`,
     effect: () => Ascensions.ipA.isUnlocked ? player.IPMultPurchases.div(100).add(1) : ((player.IPMultPurchases.gte(3300000) && (!BreakEternityUpgrade.doubleIPUncap.isBought || player.disablePostReality) ? DC.E1E6 : Decimal.round(DC.D2.pow(player.IPMultPurchases)))),
     cap: () => {
       if (Ascensions.ipA.isUnlocked) return DC.BEMAX;

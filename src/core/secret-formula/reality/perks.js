@@ -43,7 +43,7 @@ export const perks = {
     label: "SAM",
     family: PERK_FAMILY.ANTIMATTER,
     get description() {
-      return `每次重置均从 ${format(5e130)} 反物质开始`;
+      return `每次重置均从 ${format(5e130)} ${player.universes.current === 2 ? "正物质" : "反物质"}开始`;
     },
     bumpCurrency: () => Currency.antimatter.bumpTo(5e130),
     effect: 5e130,
@@ -124,7 +124,7 @@ export const perks = {
     id: 30,
     label: "ANR",
     family: PERK_FAMILY.ANTIMATTER,
-    description: `维度提升和反物质星系不再重置反物质、反物质维度、计数频率的数量和维度献祭的效果`,
+    description: `维度提升和${player.universes.current === 2 ? "正物质" : "反物质"}星系不再重置${player.universes.current === 2 ? "正物质" : "反物质"}、${player.universes.current === 2 ? "正物质" : "反物质"}维度、计数频率的数量和维度献祭的效果`,
     layoutPosList: [85343, 81000, 79799, 80199, 82194, 92553],
   },
   studyPassive: {
@@ -199,7 +199,7 @@ export const perks = {
     id: 51,
     label: "IDR",
     family: PERK_FAMILY.INFINITY,
-    description: "解锁无限维度时，无需满足反物质数量的要求",
+    description: `解锁无限维度时，无需满足${player.universes.current === 2 ? "正物质" : "反物质"}数量的要求`,
     layoutPosList: [51317, 80998, 79397, 80997, 82600, 104489],
   },
   bypassTGReset: {
@@ -417,7 +417,7 @@ export const perks = {
     label: "TTF",
     family: PERK_FAMILY.AUTOMATION,
     get description() {
-      return `购买时间之理不再消耗反物质、无限点数和永恒点数`;
+      return `购买时间之理不再消耗${player.universes.current === 2 ? "正物质" : "反物质"}、无限点数和永恒点数`;
     },
     layoutPosList: [33840, 78998, 80597, 81002, 77800, 67309],
   },

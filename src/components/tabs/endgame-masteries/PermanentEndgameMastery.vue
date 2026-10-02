@@ -38,6 +38,9 @@ export default {
       if (this.id === 3) {
         return `${formatInt(this.maxES)}/${formatInt(EndgameMastery.timeCompression.totalEndgameSkillRequirement)} 总终局能力`;
       }
+      if (this.id === 4) {
+        return "已购买所有终局专精";
+      }
       return "";
     },
   },
@@ -45,8 +48,8 @@ export default {
     update() {
       if (this.id <= 3) {
         this.maxES.copyFrom(Currency.endgameSkills.max);
-        this.showRequirement = !this.mastery.isBought;
       }
+      this.showRequirement = !this.mastery.isBought;
       this.currES.copyFrom(Currency.endgameSkills.value);
     },
     clickHandler() {
@@ -56,7 +59,9 @@ export default {
         case 2:
           return () => Tab.endgame.masteries.show();
         case 3:
-          return () => Tab.endgame.masteries.show();
+          return () => Tab.endgame.compression.show();
+        case 4:
+          return () => Tab.dimensions.celestial.show();
         default:
           throw new Error("Unrecognized Permanent Mastery was clicked");
       }

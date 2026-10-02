@@ -82,13 +82,13 @@ export const realityUpgrades = [
     name: "无尽造物",
     id: 7,
     cost: 15,
-    requirement: "至多1个反物质星系完成第一次无限",
+    requirement: () => `至多拥有 1 个${player.universes.current === 2 ? "正物质" : "反物质"}星系完成第一次无限`,
     hasFailed: () => !(player.galaxies.lte(1) && player.requirementChecks.reality.noInfinities),
     checkRequirement: () => player.galaxies.lte(1) && player.requirementChecks.reality.noInfinities,
     checkEvent: GAME_EVENT.BIG_CRUNCH_BEFORE,
     canLock: true,
-    lockEvent: "获得一个反物质星系",
-    description: "基于反物质星系的数量加成无限次数",
+    lockEvent: () => `获得一个${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
+    description: () => `基于${player.universes.current === 2 ? "正物质" : "反物质"}星系的数量加成无限次数`,
     effect: () => player.disablePostReality ? DC.D1 : player.galaxies.div(20).add(1),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -290,15 +290,10 @@ export const realityUpgrades = [
     name: "宇宙合璧",
     id: 21,
     cost: 100000,
-    requirement: () => `${formatInt(GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
-      player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) : Replicanti.galaxies.total.add(player.galaxies).add(
-      player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies))}/${formatInt(2800)} 所有种类的星系总数达到`,
-    checkRequirement: () =>
-      GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
-      player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)).gte(2800) : Replicanti.galaxies.total.add(player.galaxies).add(
-      player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).gte(2800),
+    requirement: () => `${formatInt(actualBaseGalaxiesWithoutGeneration())}/${formatInt(2800)} 所有种类的星系总数达到`,
+    checkRequirement: () => actualBaseGalaxiesWithoutGeneration().gte(2800),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `极远星系的价格增长，推迟到 ${formatInt(1e5)} 星系生效`,
+    description: () => `极远${player.universes.current === 2 ? "正物质" : ""}星系的价格增长，推迟到 ${formatInt(1e5)} 星系生效`,
     effect: () => player.disablePostReality ? 800 : 1e5
   },
   {
@@ -321,7 +316,7 @@ export const realityUpgrades = [
     checkRequirement: () => Time.thisReality.totalMinutes.lt(15),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
     description: "基于最快达成现实的时间加成复制器速度",
-    effect: () => player.disablePostReality ? 1 : DC.D15.div(Decimal.min(Time.bestReality.totalMinutes, DC.D15)).toNumber(),
+    effect: () => player.disablePostReality ? 1 : DC.D15.div(Decimal.clamp(Time.bestReality.totalMinutes, 1e-300, DC.D15)).toNumber(),
     cap: () => Alpha.isDestroyed ? Infinity : 180,
     formatEffect: value => formatX(value, 2, 2)
   },

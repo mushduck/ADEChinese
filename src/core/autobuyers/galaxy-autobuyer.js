@@ -6,7 +6,7 @@ export class GalaxyAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get name() {
-    return `反物质星系`;
+    return `${player.universes.current === 2 ? "正物质" : "反物质"}星系`;
   }
 
   get isUnlocked() {

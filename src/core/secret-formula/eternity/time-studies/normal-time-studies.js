@@ -98,9 +98,8 @@ export const normalTimeStudies = [
     requirement: [31],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: () => `每个星系提供 ${formatX(DC.D1_2, 1, 1)} 倍无限点数加成`,
-    effect: () => DC.D1_2.pow(GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(
-      player.galaxies.max(1)).times(player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)) :
-      Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies)),
+    effect: () => DC.D1_2.pow(actualBaseGalaxiesWithoutGeneration()).min(Decimal.pow10(1e250)).pow(
+      actualBaseGalaxiesWithoutGeneration().div(1e250).max(10).log10()),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -108,7 +107,7 @@ export const normalTimeStudies = [
     cost: 6,
     requirement: [32],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `反物质星系价格增长的第八维度数量需求从 ${formatInt(60)} 个降至 ${formatInt(52)} 个`,
+    description: () => `${player.universes.current === 2 ? "正物质" : "反物质"}星系价格增长的${Slabdrill.isCursed ? "第一" : "第八"}维度数量需求从 ${formatInt(Slabdrill.isCursed ? 450 : 60)} 个降至 ${formatInt(Slabdrill.isCursed ? 390 : 52)} 个`,
     effect: 52
   },
   {
@@ -140,7 +139,7 @@ export const normalTimeStudies = [
     cost: 4,
     requirement: [61, () => Perk.studyECRequirement.isBought || !EternityChallenge(12).isUnlocked],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
-    description: "维度献祭以较低的效果为其他所有反物质维度提供加成",
+    description: () => Slabdrill.isCursed ? "维度献祭更强" : `维度献祭以较低的效果为其他所有${player.universes.current === 2 ? "正物质" : "反物质"}维度提供加成`,
     effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(4).add(1) : Sacrifice.totalBoost.pow(0.25).clampMin(1),
     cap: () => Ascensions.sacA.isUnlocked ? DC.BEMAX : (Alpha.isDestroyed ? DC.BEMAX : DC.E210000),
     formatEffect: value => Ascensions.sacA.isUnlocked ? formatPow(value, 2, 3) : formatX(value, 2, 1)
@@ -153,7 +152,8 @@ export const normalTimeStudies = [
         (!EternityChallenge(11).isUnlocked && !EternityChallenge(12).isUnlocked)],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "维度献祭以极低的效果加成第四无限维度",
-    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(25).add(1) : Sacrifice.totalBoost.pow(0.04).clampMin(1),
+    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(25).add(1) :
+      (Slabdrill.isCursed ? Sacrifice.totalBoost.pow(0.005).clampMin(1) : Sacrifice.totalBoost.pow(0.04).clampMin(1)),
     cap: () => Ascensions.sacA.isUnlocked ? DC.BEMAX : (Alpha.isDestroyed ? DC.BEMAX : DC.E30000),
     formatEffect: value => Ascensions.sacA.isUnlocked ? formatPow(value, 2, 3) : formatX(value, 2, 1)
   },
@@ -163,7 +163,8 @@ export const normalTimeStudies = [
     requirement: [61, () => Perk.studyECRequirement.isBought || !EternityChallenge(11).isUnlocked],
     reqType: TS_REQUIREMENT_TYPE.DIMENSION_PATH,
     description: "维度献祭以极低的效果加成第三时间维度",
-    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(200).add(1) : Sacrifice.totalBoost.pow(0.005).clampMin(1),
+    effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower.sub(1).div(200).add(1) :
+      (Slabdrill.isCursed ? Sacrifice.totalBoost.pow(0.001).clampMin(1) : Sacrifice.totalBoost.pow(0.005).clampMin(1)),
     cap: () => Ascensions.sacA.isUnlocked ? DC.BEMAX : (Alpha.isDestroyed ? DC.BEMAX : DC.E1300),
     formatEffect: value => Ascensions.sacA.isUnlocked ? formatPow(value, 2, 3) : formatX(value, 2, 1)
   },
@@ -172,8 +173,8 @@ export const normalTimeStudies = [
     cost: 4,
     requirement: [71],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `维度提升的效果更改为 ${formatX(10)}`,
-    effect: 10
+    description: () => `维度提升的效果更改为 ${formatX(Slabdrill.isCursed ? 66 : 10)}`,
+    effect: () => Slabdrill.isCursed ? 66 : 10
   },
   {
     id: 82,
@@ -194,7 +195,7 @@ export const normalTimeStudies = [
     description: "基于时间维度获得的计数频率升级，加成维度提升倍率",
     effect: () => DC.D1_0004.pow(player.totalTickGained).min(1e30).times(
       Decimal.pow(Decimal.max(player.totalTickGained.sub(172728), 1), 1000)),
-    cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E30,
+    cap: () => Alpha.isDestroyed ? DC.BEMAX : (Slabdrill.isCursed ? DC.E5 : DC.E30),
     formatEffect: value => formatX(value, 2, 1)
   },
   {
@@ -202,7 +203,7 @@ export const normalTimeStudies = [
     cost: 4,
     requirement: [81],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "基于本次永恒中花费的时间为反物质维度提供倍率加成",
+    description: () => `基于本次永恒中花费的时间为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供倍率加成`,
     effect: () => Decimal.pow10(Decimal.min(Time.thisEternity.totalMinutes, 20).times(15).toNumber()).times(
       Time.thisEternity.totalMinutes.sub(20).times(15).max(1)),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E300,
@@ -232,7 +233,7 @@ export const normalTimeStudies = [
     cost: 4,
     requirement: [91],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "反物质维度获得等于复制器数量的倍数加成",
+    description: () => `${player.universes.current === 2 ? "正物质" : "反物质"}维度获得等于复制器数量的倍数加成`,
     effect: () => Decimal.max(Replicanti.amount, 1),
     formatEffect: value => formatX(value, 2, 1)
   },
@@ -304,7 +305,9 @@ export const normalTimeStudies = [
       const perkEffect = (player.disablePostReality
         ? TimeSpan.fromMinutes(DC.D0)
         : TimeSpan.fromMinutes(new Decimal(Perk.studyIdleEP.effectOrDefault(0))));
-      const totalSeconds = Alpha.isRunning ? Time.thisEternityRealTime.totalSeconds : Time.thisEternity.plus(perkEffect).totalSeconds;
+      let totalSeconds = Alpha.isRunning ? Time.thisEternityRealTime.totalSeconds : Time.thisEternity.plus(perkEffect).totalSeconds;
+      if (Slabdrill.isCursed) totalSeconds = Time.thisEternityRealTime.totalSeconds.times(
+        Time.thisEternity.totalSeconds.div(Time.thisEternityRealTime.totalSeconds).max(1).pow(0.1));
       return Decimal.pow(new Decimal(1.39).times(totalSeconds), 0.5);
     },
     formatEffect: value => formatX(value, 1, 1)
@@ -385,7 +388,9 @@ export const normalTimeStudies = [
       const perkEffect = (player.disablePostReality
         ? TimeSpan.fromMinutes(DC.D0)
         : TimeSpan.fromMinutes(new Decimal(Perk.studyIdleEP.effectOrDefault(0))));
-      const totalSeconds = Alpha.isRunning ? Time.thisInfinityRealTime.totalSeconds : Time.thisInfinity.plus(perkEffect).totalSeconds;
+      let totalSeconds = Alpha.isRunning ? Time.thisInfinityRealTime.totalSeconds : Time.thisInfinity.plus(perkEffect).totalSeconds;
+      if (Slabdrill.isCursed) totalSeconds = Time.thisInfinityRealTime.totalSeconds.times(
+        Time.thisInfinity.totalSeconds.div(Time.thisInfinityRealTime.totalSeconds).max(1).pow(0.1));
       return thisInfinityMult(totalSeconds);
     },
     formatEffect: value => formatX(value, 2, 1),
@@ -404,8 +409,8 @@ export const normalTimeStudies = [
     cost: 7,
     requirement: [151],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `所有反物质维度倍率 ${formatX(DC.E616)}`,
-    effect: () => DC.E616
+    description: () => `${Slabdrill.isCursed ? "反物质维度" : `所有${player.universes.current === 2 ? "正物质" : "反物质"}维度`}倍率 ${formatX(Slabdrill.isCursed ? Decimal.pow10(4928) : DC.E616)}`,
+    effect: () => Slabdrill.isCursed ? Decimal.pow10(4928) : DC.E616
   },
   {
     id: 162,
@@ -460,7 +465,7 @@ export const normalTimeStudies = [
     cost: 300,
     requirement: [181, () => EternityChallenge(10).completions > 0],
     reqType: TS_REQUIREMENT_TYPE.ALL,
-    description: "基于永恒次数为反物质维度提供倍率加成",
+    description: () => `基于永恒次数为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供倍率加成`,
     effect: () => DC.E2000.pow(Currency.eternities.value.div(1e5).clampMax(15)).times(
       DC.E2000.pow(Decimal.log10(Currency.eternities.value.sub(1.4e6).div(1e5).max(1)))),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.E30000,
@@ -505,7 +510,7 @@ export const normalTimeStudies = [
     cost: 120,
     requirement: [193],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "维度献祭进一步增强第八维度",
+    description: () => Slabdrill.isCursed ? "维度献祭进一步增强你的反物质维度" : `维度献祭进一步增强第八${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
     effect: () => {
       if (Ascensions.sacA.isUnlocked) return Sacrifice.totalPower.sub(1).times(21.5).add(1);
       const totalBoost = Sacrifice.totalBoost;
@@ -544,8 +549,8 @@ export const normalTimeStudies = [
     requirement: [212],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [224],
-    description: () => `遥远星系的价格增长推迟 ${formatInt(7)} 星系`,
-    effect: 7
+    description: () => Slabdrill.isCursed ? `星系效力提升 ${formatPercents(0.07)}` : `遥远星系的价格增长推迟 ${formatInt(7)} 星系`,
+    effect: () => Slabdrill.isCursed ? 1.07 : 7
   },
   {
     id: 224,
@@ -556,9 +561,11 @@ export const normalTimeStudies = [
     requiresST: [223],
     description() {
       const effect = TimeStudy(224).effectValue;
-      return `遥远星系的价格增长推迟 ${formatInt(effect)} 星系（每 ${formatInt(2000)} 次维度提升后多推迟 ${formatInt(1)} 星系）`;
+      return Slabdrill.isCursed ? `每 ${formatInt(2000)} 次维度提升，星系效力提升 ${formatPercents(0.01)}` :
+        `遥远星系的价格增长推迟 ${formatInt(effect)} 星系（每 ${formatInt(2000)} 次维度提升后多推迟 ${formatInt(1)} 星系）`;
     },
-    effect: () => Decimal.floor(DimBoost.totalBoosts.div(2000)).toNumber()
+    effect: () => Slabdrill.isCursed ? DimBoost.totalBoosts.div(200000).add(1) :
+      Decimal.floor(DimBoost.totalBoosts.div(2000)).toNumber()
   },
   {
     id: 225,
@@ -622,7 +629,7 @@ export const normalTimeStudies = [
     requirement: [223, 224],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [231],
-    description: "基于反物质星系数量提升星系效力",
+    description: () => `基于${player.universes.current === 2 ? "正物质" : "反物质"}星系数量提升星系效力`,
     effect: () => Decimal.pow(player.galaxies.div(500).add(1), 0.25).toNumber(),
     formatEffect: value => `+${formatPercents(value - 1, 3)}`
   },
@@ -644,7 +651,7 @@ export const normalTimeStudies = [
     requirement: [227, 228],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     requiresST: [233],
-    description: "维度献祭提速第一维度",
+    description: () => Slabdrill.isCursed ? "维度献祭 ^ 2" : `维度献祭提速第一${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
     effect: () => Ascensions.sacA.isUnlocked ? Sacrifice.totalPower : Sacrifice.totalBoost,
   },
   // Note: These last 4 entries are the triad studies
@@ -668,7 +675,7 @@ export const normalTimeStudies = [
     requirement: [() => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 2, 223, 224, 232],
     reqType: TS_REQUIREMENT_TYPE.ALL,
     requiresST: [223, 224, 232],
-    description: () => `遥远星系的价格增长再推迟 ${formatInt(Math.pow(3000, Ra.unlocks.triadBuff.effectOrDefault(1)))} 星系`,
+    description: () => `遥远星系的价格增长再推迟 ${formatInt(Math.pow(3000, Ra.unlocks.triadBuff.effectOrDefault(1)))} ${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
     effect: () => Math.pow(3000, Ra.unlocks.triadBuff.effectOrDefault(1)),
     unlocked: () => Ra.unlocks.unlockHardV.effectOrDefault(0) >= 2
   },
