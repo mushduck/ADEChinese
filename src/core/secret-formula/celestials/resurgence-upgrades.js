@@ -3,13 +3,13 @@ export const resurgenceUpgrades = {
     name: "无界潮涌",
     id: "ipSurge",
     cost: new Decimal(10000),
-    description: `无限点数和${player.universes.current === 2 ? "物质" : "反物质"}从此刻起等价，基于大坍缩后获得的无限点数为${player.universes.current === 2 ? "物质" : "反物质"}获取量提供倍率加成`
+    description: "无限点数和反物质从此刻起等价，基于大坍缩后获得的无限点数为反物质获取量提供倍率加成"
   },
   epSurge: {
     name: "永恒潮涌",
     id: "epSurge",
     cost: new Decimal(1e6),
-    description: `永恒点数和${player.universes.current === 2 ? "物质" : "反物质"}从此刻起等价，基于永恒后获得的永恒点数为${player.universes.current === 2 ? "物质" : "反物质"}获取量提供倍率加成`
+    description: "永恒点数和反物质从此刻起等价，基于永恒后获得的永恒点数为反物质获取量提供倍率加成"
   },
   realSurge: {
     name: "星流漩溢",
@@ -109,7 +109,7 @@ export const resurgenceUpgrades = {
     name: "时轴曲变 II",
     id: "synergy2",
     cost: new Decimal("1e2400"),
-    description: `基于在被毁灭的现实外生产的总${player.universes.current === 2 ? "物质" : "反物质"}为天界维度提供指数加成`,
+    description: "基于在被毁灭的现实外生产的总反物质为天界维度提供指数加成",
     effect: () => Decimal.log10(Decimal.log10(Decimal.log10(player.records.totalAntimatterOutsideDoom).add(1)).add(1)).div(15).add(1),
     formatEffect: value => formatPow(value, 2, 3)
   },
@@ -133,7 +133,7 @@ export const resurgenceUpgrades = {
     name: "时轴曲变 V",
     id: "synergy5",
     cost: new Decimal("1e2850"),
-    description: `基于计数频率为${player.universes.current === 2 ? "物质" : "反物质"}产量提供指数加成`,
+    description: "基于计数频率为反物质产量提供指数加成",
     effect: () => Decimal.log10(Decimal.log10(Tickspeed.perSecond).add(1)).add(1),
     formatEffect: value => formatPow(value, 2, 3)
   },
