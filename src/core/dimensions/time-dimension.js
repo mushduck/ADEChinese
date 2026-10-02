@@ -208,8 +208,6 @@ export function timeDimensionCommonMultiplier() {
   }
 
   if (LHC.voidRunning) mult = mult.timesEffectOf(NullUpgrade.timeDimensionMult);
-
-  if (SlabdrillUnlocks.eternity.isUnlocked) mult = mult.times(Slabdrill.slabPowers.tdMult());
   
   return mult;
 }
@@ -224,11 +222,11 @@ export function updateTimeDimensionCosts() {
 class TimeDimensionState extends DimensionState {
   constructor(tier) {
     super(() => player.dimensions.time, tier);
-    const BASE_COSTS = [null, DC.D1, DC.D5, DC.E2, DC.E3, DC.E2350, DC.E2650, DC.E3000, DC.E3350, DC.BEMAX];
+    const BASE_COSTS = [null, DC.D1, DC.D5, DC.E2, DC.E3, DC.E2350, DC.E2650, DC.E3000, DC.E3350];
     this._baseCost = BASE_COSTS[tier];
-    const COST_MULTS = [null, 3, 9, 27, 81, 24300, 72900, 218700, 656100, 196830000];
+    const COST_MULTS = [null, 3, 9, 27, 81, 24300, 72900, 218700, 656100];
     this._costMultiplier = COST_MULTS[tier];
-    const E6000_SCALING_AMOUNTS = [null, 7322, 4627, 3382, 2665, 833, 689, 562, 456, 375];
+    const E6000_SCALING_AMOUNTS = [null, 7322, 4627, 3382, 2665, 833, 689, 562, 456];
     this._e6000ScalingAmount = E6000_SCALING_AMOUNTS[tier];
     const COST_THRESHOLDS = [DC.NUMMAX, DC.E1300, DC.E6000];
     this._costIncreaseThresholds = COST_THRESHOLDS;
@@ -324,8 +322,6 @@ class TimeDimensionState extends DimensionState {
       mult = mult.pow(0.5);
     }
 
-    if (SlabdrillUnlocks.timeStudy181.isUnlocked) mult = mult.pow(0.75);
-
     if (tier === 3 && Ascensions.sacA.isUnlocked) mult = mult.powEffectOf(TimeStudy(73));
 
     mult = mult.powEffectsOf(
@@ -342,22 +338,10 @@ class TimeDimensionState extends DimensionState {
 
     if (ResurgenceUpgrade.achSurge.isBought && !player.disablePostReality) mult = mult.pow(Achievements.powerConv(EternityUpgrade.tdMultAchs.effectOrDefault(1)));
 
-    mult = mult.powEffectsOf(
-      EternityUpgrade.tdMultAchs.chargedEffect,
-      EternityUpgrade.tdMultTheorems.chargedEffect,
-      EternityUpgrade.tdMultRealTime.chargedEffect
-    );
-
-    mult = mult.pow(NormalChallenge(2).chargedEffect);
-
     mult = dilateMultiplier(mult, EtherealStars.purple.reward);
 
     if (player.endgame.overcharge.isRunning) {
-      mult = dilateMultiplier(mult, Ascension.overchargePenalty);
-    }
-
-    if (player.compression.active) {
-      mult = compressedMultiplier(mult);
+      mult = dilateMultiplier(mult, Math.pow(0.72, player.endgame.overcharge.level));
     }
 
     if (mult.gte(TimeDimensions.OVERFLOW)) mult = Decimal.pow(10, Decimal.pow(mult.log10().div(Decimal.log10(TimeDimensions.OVERFLOW)), 1 / TimeDimensions.compressionMagnitude).times(Decimal.log10(TimeDimensions.OVERFLOW)));
@@ -368,7 +352,7 @@ class TimeDimensionState extends DimensionState {
   }
 
   get productionPerSecond() {
-    if (player.universes.current === 1 || player.universes.current === 2 || EternityChallenge(1).isRunning || EternityChallenge(10).isRunning ||
+    if (EternityChallenge(1).isRunning || EternityChallenge(10).isRunning ||
     (Laitela.isRunning && this.tier > Laitela.maxAllowedDimension)) {
       return DC.D0;
     }
@@ -400,9 +384,7 @@ class TimeDimensionState extends DimensionState {
 
   get isProducing() {
     const tier = this.tier;
-    if (player.universes.current === 1 ||
-      EternityChallenge(1).isRunning ||
-      player.universes.current === 2 ||
+    if (EternityChallenge(1).isRunning ||
       EternityChallenge(10).isRunning ||
       (Laitela.isRunning && tier > Laitela.maxAllowedDimension)) {
       return false;
@@ -535,7 +517,7 @@ export const TimeDimensions = {
       TimeDimension(1).produceCurrency(Currency.timeShards, diff);
     }
 
-    if (!TimeDimensions.all.every(d => d.tier > 8 || d.amount.eq(0)) || !TimeDimensions.all.every(d => d.tier > 8 || d.continuumAmount.eq(0))) {
+    if (!TimeDimensions.all.every(d => d.amount.eq(0)) || !TimeDimensions.all.every(d => d.continuumAmount.eq(0))) {
       player.requirementChecks.endgame.onlyLowDims = false;
     }
 

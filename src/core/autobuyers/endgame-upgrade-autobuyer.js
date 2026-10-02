@@ -2,7 +2,7 @@ import { AutobuyerState } from "./autobuyer";
 
 export class EndgameUpgradeAutobuyerState extends AutobuyerState {
   get name() {
-    return EndgameUpgrade(this.id).name;
+    return EndgameUpgrade(this.id).config.name;
   }
 
   get data() {
