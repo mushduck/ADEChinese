@@ -92,7 +92,7 @@ export default {
       player.timestudy.shopMinimized = !player.timestudy.shopMinimized;
     },
     formatAM(am) {
-      return `${format(am)} {{ isFlipped ? "物质" : "反物质" }}`;
+      return `${format(am)} {{ isFlipped ? "正物质" : "反物质" }}`;
     },
     buyWithAM() {
       TimeTheorems.buyOne(false, "am");

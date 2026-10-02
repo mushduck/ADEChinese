@@ -29,7 +29,7 @@ export default {
       };
     },
     multiplierDisplay() {
-      if (InfinityChallenge(3).isRunning) return `所有有${this.isFlipped ? "物质" : "反物质"}维度获得 ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)} 加成`;
+      if (InfinityChallenge(3).isRunning) return `所有有${this.isFlipped ? "正物质" : "反物质"}维度获得 ${formatX(this.galaxyCount.times(0.005).add(1.05), 3, 3)} 加成`;
       const tickmult = this.mult;
       return `${formatX(tickmult.reciprocal(), 2, 3)} 加成 / 升级。`;
     },

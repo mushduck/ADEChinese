@@ -167,7 +167,7 @@ export default {
           转化
         </span>
         为
-        <span v-if="!isEC9Running">${this.isFlipped ? "物质" : "反物质"}维度</span>
+        <span v-if="!isEC9Running">${this.isFlipped ? "正物质" : "反物质"}维度</span>
         <span v-else>时间维度(永恒挑战 9)</span>
         提供
         <span class="c-infinity-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>

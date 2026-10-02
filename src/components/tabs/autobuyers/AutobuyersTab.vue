@@ -98,7 +98,7 @@ export default {
     </div>
     <b>未显示数量限制的自动购买器默认拥有无限数量处理能力。</b>
     <b>
-      ${this.isFlipped ? "物质" : "反物质"}维度自动购买器的批量操作升级需在触发间隔低于 {{ formatInt(100) }} 毫秒时解锁。
+      ${this.isFlipped ? "正物质" : "反物质"}维度自动购买器的批量操作升级需在触发间隔低于 {{ formatInt(100) }} 毫秒时解锁。
     </b>
     <b v-if="hasInstant">间隔为“立即”的自动购买器将在每个游戏时刻（{{ gameTickLength }}）触发。</b>
     <EndgameAutobuyerBox class="c-endgame-pos" />

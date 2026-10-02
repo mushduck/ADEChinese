@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     message() {
-      return `打破永恒将使你能够获得超过 ${format(DC.E9E15, 2, 2)} 的${this.isFlipped ? "物质" : "反物质"}。在被毁灭的现实中，基于超过 1e9e15 的${this.isFlipped ? "物质" : "反物质"}产量，在终局后给予额外的天界点数和毁灭粒子。此外，还将解锁打破永恒升级及其他特性。`.split("\n");
+      return `打破永恒将使你能够获得超过 ${format(DC.E9E15, 2, 2)} 的${this.isFlipped ? "正物质" : "反物质"}。在被毁灭的现实中，基于超过 1e9e15 的${this.isFlipped ? "正物质" : "反物质"}产量，在终局后给予额外的天界点数和毁灭粒子。此外，还将解锁打破永恒升级及其他特性。`.split("\n");
     },
   },
   methods: {

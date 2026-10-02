@@ -383,24 +383,24 @@ export default {
         概况
       </div>
       <div class="c-stats-tab-general">
-        <div>你总共制造了 {{ format(totalAntimatter, 2, 1) }} 个{{ isFlipped ? "物质" : "反物质" }}。</div>
+        <div>你总共制造了 {{ format(totalAntimatter, 2, 1) }} 个{{ isFlipped ? "正物质" : "反物质" }}。</div>
         <div v-if="divinity.isUnlocked">
-          在本次神性中，你在被毁灭的现实内总共制造了 {{ format(bestDoomedAntimatterThisDivinity, 2, 1) }} 个{{ isFlipped ? "物质" : "反物质" }}。
+          在本次神性中，你在被毁灭的现实内总共制造了 {{ format(bestDoomedAntimatterThisDivinity, 2, 1) }} 个{{ isFlipped ? "正物质" : "反物质" }}。
         </div>
         <div v-if="endgame.isUnlocked">
-          你在被毁灭的现实外总共制造了 {{ format(totalAntimatterOutsideDoom, 2, 1) }} 个{{ isFlipped ? "物质" : "反物质" }}。
+          你在被毁灭的现实外总共制造了 {{ format(totalAntimatterOutsideDoom, 2, 1) }} 个{{ isFlipped ? "正物质" : "反物质" }}。
         </div>
         <div v-if="endgame.isUnlocked">
-          在本次终局中，你总共制造了 {{ format(endgame.totalEndgameAntimatter, 2, 1) }} 个{{ isFlipped ? "物质" : "反物质" }}。
+          在本次终局中，你总共制造了 {{ format(endgame.totalEndgameAntimatter, 2, 1) }} 个{{ isFlipped ? "正物质" : "反物质" }}。
         </div>
         <div v-if="reality.isUnlocked" :class="{ 'c-stats-tab-doomed' : isDoomed }">
-          在本次{{ isDoomed ? "末日" : "现实" }}中，你总共制造了 {{ format(reality.totalRealityAntimatter, 2, 1) }} 个{{ isFlipped ? "物质" : "反物质" }}。
+          在本次{{ isDoomed ? "末日" : "现实" }}中，你总共制造了 {{ format(reality.totalRealityAntimatter, 2, 1) }} 个{{ isFlipped ? "正物质" : "反物质" }}。
         </div>
         <div v-if="eternity.isUnlocked">
-          在本次永恒中，你总共制造了 {{ format(eternity.totalEternityAntimatter, 2, 1) }} 个{{ isFlipped ? "物质" : "反物质" }}。
+          在本次永恒中，你总共制造了 {{ format(eternity.totalEternityAntimatter, 2, 1) }} 个{{ isFlipped ? "正物质" : "反物质" }}。
         </div>
         <div v-if="infinity.isUnlocked">
-          在本次无限中，你总共制造了 {{ format(infinity.totalInfinityAntimatter, 2, 1) }} 个{{ isFlipped ? "物质" : "反物质" }}。
+          在本次无限中，你总共制造了 {{ format(infinity.totalInfinityAntimatter, 2, 1) }} 个{{ isFlipped ? "正物质" : "反物质" }}。
         </div>
         <div v-if="endgame.isUnlocked" class="c-stats-tab-celestials">
           你总共制造了 {{ format(totalCelMatter, 2, 1) }} 天界物质。

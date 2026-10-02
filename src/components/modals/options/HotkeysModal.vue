@@ -131,7 +131,7 @@ export default {
         <span class="c-modal-hotkeys__shift-description">
           Alt 作为修饰键，配合自动购买器对应按键可切换其开关状态。
           <br>
-          同时按下 Alt 和 Shift 可切换{{ isFlipped ? "物质" : "反物质" }}维度和计数频率自动购买器的购买模式（单个/最大）。
+          同时按下 Alt 和 Shift 可切换{{ isFlipped ? "正物质" : "反物质" }}维度和计数频率自动购买器的购买模式（单个/最大）。
         </span>
         <br>
         <div class="l-modal-hotkeys-row">

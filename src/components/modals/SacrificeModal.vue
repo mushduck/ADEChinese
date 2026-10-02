@@ -19,9 +19,9 @@ export default {
     message() {
       if (Achievement(118).isUnlocked && !Pelle.isDoomed && (!player.disablePostReality || (Alpha.isRunning && Alpha.currentStage >= 12) ||
         (LHC.voidRunning && NullUpgrade.limerick1.isBought) || SlabdrillUnlocks.eternityChallengeTen.isUnlocked)) {
-        return `维度献祭会给予第八${this.isFlipped ? "物质" : "反物质"}维度一个加成，基于献祭时第一${this.isFlipped ? "物质" : "反物质"}维度的数量。`;
+        return `维度献祭会给予第八${this.isFlipped ? "正物质" : "反物质"}维度一个加成，基于献祭时第一${this.isFlipped ? "正物质" : "反物质"}维度的数量。`;
       }
-      return `维度献祭将会清空第一至第七${this.isFlipped ? "物质" : "反物质"}维度（不改变价格和倍率），以给予第八${this.isFlipped ? "物质" : "反物质"}维度一个加成，这一加成基于已献祭第一${this.isFlipped ? "物质" : "反物质"}维度的数量。恢复生产需要时间。`;
+      return `维度献祭将会清空第一至第七${this.isFlipped ? "正物质" : "反物质"}维度（不改变价格和倍率），以给予第八${this.isFlipped ? "正物质" : "反物质"}维度一个加成，这一加成基于已献祭第一${this.isFlipped ? "正物质" : "反物质"}维度的数量。恢复生产需要时间。`;
     },
     multiplierText() {
       if (Ascensions.sacA.isUnlocked) return `当前献祭指数为 ${formatPow(this.currentPower, 2, 3)}，下次献祭后将提高至 ${formatPow(this.nextPower, 2, 3)}。`;

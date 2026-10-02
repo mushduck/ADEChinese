@@ -41,7 +41,7 @@ export default {
   computed: {
     isDoomed: () => Pelle.isDoomed,
     name() {
-      return `${AntimatterDimension(this.tier).shortDisplayName}${this.isFlipped ? "物质" : "反物质"}维度`;
+      return `${AntimatterDimension(this.tier).shortDisplayName}${this.isFlipped ? "正物质" : "反物质"}维度`;
     },
     amountText() {
       if (this.formattedAmount) return this.formattedAmount;
@@ -52,7 +52,7 @@ export default {
     singleText() {
       if (this.isCapped) return "已达到上限";
       const prefix = this.showCostTitle(this.singleCost) ? "价格：" : "";
-      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "物质" : "反物质");
+      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "正物质" : "反物质");
       return `${prefix} ${format(this.singleCost)} ${suffix}`;
     },
     until10Text() {
@@ -61,7 +61,7 @@ export default {
       if (this.isContinuumActive && this.tier !== 9) return `连续统：${this.continuumString}`;
 
       const prefix = `买到 ${formatInt(10)} 个，${this.showCostTitle(this.until10Cost) ? "价格" : ""}`;
-      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "物质" : "反物质");
+      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "正物质" : "反物质");
       return `${prefix} ${format(this.until10Cost)} ${suffix}`;
     },
     continuumString() {
@@ -72,11 +72,11 @@ export default {
     },
     boughtTooltip() {
       if (this.tier === 9 && this.isCapped) return `你当前无法持有超过 ${format(1)} 个第九
-        ${this.isFlipped ? "物质" : "反物质"}维度`;
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
       if (this.isCapped) return `无名氏阻止你购买超过 ${format(1)} 个第八
-        ${this.isFlipped ? "物质" : "反物质"}维度`;
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
       if (this.isContinuumActive && this.tier !== 9) return `连续统生产你所有的
-        ${this.isFlipped ? "物质" : "反物质"}维度`;
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
       return `已购买 ${quantifyHybridLarge("次", this.bought)}`;
     },
     costUnit() {

@@ -60,7 +60,7 @@ export default {
 
       const dimMultList = [];
       if (!this.isFlipped) dimMultList.push("反物质");
-      if (this.isFlipped) dimMultList.push("物质");
+      if (this.isFlipped) dimMultList.push("正物质");
       if (this.achMultToIDS) dimMultList.push("无限");
       if (this.achMultToTDS) dimMultList.push("时间");
       boostList.push(`${makeEnumeration(dimMultList)}维度：${achievementPower}`);
@@ -84,7 +84,7 @@ export default {
 
       const dimPowList = [];
       if (!this.isFlipped) dimPowList.push("反物质");
-      if (this.isFlipped) dimPowList.push("物质");
+      if (this.isFlipped) dimPowList.push("正物质");
       if (this.achMultToIDS) dimPowList.push("无限");
       if (this.achMultToTDS) dimPowList.push("时间");
       powersList.push(`${makeEnumeration(dimPowList)}维度：${achievementPowers}`);

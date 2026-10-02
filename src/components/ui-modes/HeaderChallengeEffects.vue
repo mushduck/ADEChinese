@@ -91,7 +91,7 @@ export default {
         const powerArray = [];
         if (isC2Running) powerArray.push(`产量：${formatPercents(player.chall2Pow, 2, 2)}`);
         if (isC3Running) powerArray.push(`第一维度：${formatX(player.chall3Pow, 3, 4)}`);
-        if (isIC6Running) powerArray.push(`${this.isFlipped ? "反物质" : "物质"}：${this.isFlipped ? "物质" : "反物质"}
+        if (isIC6Running) powerArray.push(`${this.isFlipped ? "反物质" : "正物质"}：${this.isFlipped ? "正物质" : "反物质"}
           维度 / ${format(new Decimal(1).timesEffectOf(InfinityChallenge(6)), 2, 2)}`);
         if (isIC8Running) powerArray.push(`产量：/
           ${format(new Decimal(1).timesEffectOf(InfinityChallenge(8)).reciprocal(), 2, 2)}`);
@@ -123,7 +123,7 @@ export default {
       熵：{{ laitelaEntropy }} ({{ laitelaTimer }})
     </div>
     <div v-if="isInMatterChallenge">
-      你有 {{ format(matter, 2, 1) }} {{ isFlipped ? "反物质" : "物质" }}。
+      你有 {{ format(matter, 2, 1) }} {{ isFlipped ? "反物质" : "正物质" }}。
     </div>
     <div v-if="isChallengePowerVisible">
       {{ challengePower }}

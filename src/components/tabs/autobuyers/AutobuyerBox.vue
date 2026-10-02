@@ -191,7 +191,7 @@ export default {
   >
     {{ name }}
     <br>
-    要求: 总${this.isFlipped ? "物质" : "反物质"}达到 {{ format(antimatterCost) }} {{ showEternity }}
+    要求: 总${this.isFlipped ? "正物质" : "反物质"}达到 {{ format(antimatterCost) }} {{ showEternity }}
   </div>
 </template>
 

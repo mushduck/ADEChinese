@@ -297,7 +297,7 @@ export default {
         强子效果 4:
       </div>
       <div>
-        ${this.isFlipped ? "物质" : "反物质"}生产熵的速率 {{ formatX(effect4, 2, 2) }}
+        ${this.isFlipped ? "正物质" : "反物质"}生产熵的速率 {{ formatX(effect4, 2, 2) }}
       </div>
       <div>
         {{ effect4Text }}

@@ -24,8 +24,8 @@ export default {
           （${format(this.replicanti, 2, 2)} →
           ${format(this.replicanti.divide(DC.NUMMAX.pow(this.canBeBought)), 2, 2)}）`
         : `将复制器重置为 ${formatInt(1)}`;
-      return `复制器星系对计数频率的提升效果与${this.isFlipped ? "物质" : "反物质"}星系相同。
-        但它不会增加${this.isFlipped ? "物质" : "反物质"}星系的价格，也不受${this.isFlipped ? "物质" : "反物质"}星系专属倍率影响。
+      return `复制器星系对计数频率的提升效果与${this.isFlipped ? "正物质" : "反物质"}星系相同。
+        但它不会增加${this.isFlipped ? "正物质" : "反物质"}星系的价格，也不受${this.isFlipped ? "正物质" : "反物质"}星系专属倍率影响。
         它将会${reductionString}。`;
     }
   },

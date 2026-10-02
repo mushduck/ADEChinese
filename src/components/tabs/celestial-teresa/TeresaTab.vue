@@ -236,10 +236,10 @@ export default {
           {{ runDescription }}
           <br><br>
           <div>
-            该现实可以重复完成，并基于在现实中达到的${this.isFlipped ? "物质" : "反物质"}给予更强大的奖励。
+            该现实可以重复完成，并基于在现实中达到的${this.isFlipped ? "正物质" : "反物质"}给予更强大的奖励。
             <br><br>
             <span v-if="showRunReward">
-              在特蕾莎的现实中，${this.isFlipped ? "物质" : "反物质"}数量的最大值：{{ format(bestAM, 2) }}，
+              在特蕾莎的现实中，${this.isFlipped ? "正物质" : "反物质"}数量的最大值：{{ format(bestAM, 2) }}，
               并获取了 {{ lastMachinesString }}。
               <br><br>
               使用的符文：
