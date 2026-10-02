@@ -42,6 +42,9 @@ export default {
         ],
         [
           ExpansionPack.alphaPack
+        ],
+        [
+          ExpansionPack.slabPack
         ]
       ];
     },
@@ -50,11 +53,15 @@ export default {
       const next = ExpansionPacks.nextPackUnlockAM;
       const alpha = DivinityMilestone.hadronEmpowerment.isReached && this.nextPack?.id === "alphaPack";
       const alphaLock = !DivinityMilestone.hadronEmpowerment.isReached && this.nextPack?.id === "alphaPack";
+      const slab = DivinityMilestone.serpentPower.isReached && this.nextPack?.id === "slabPack";
+      const slabLock = !DivinityMilestone.serpentPower.isReached && this.nextPack?.id === "slabPack";
 
       if (first) return `第一个天神扩展包于 ${format(next)} 反物质解锁。`;
+      if (slab && !Pelle.isDoomed && !Slabdrill.isCursed) return `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
+      if (slab && (Pelle.isDoomed || Slabdrill.isCursed)) return `下一个天神扩展包必须在被毁灭或被诅咒的现实外购买。`;
       if (alpha && !Pelle.isDoomed) return `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
       if (alpha && Pelle.isDoomed) return `下一个天神扩展包必须在被毁灭的现实外购买。`;
-      return (next === undefined || alphaLock)
+      return (next === undefined || alphaLock || slabLock)
         ? "已解锁全部天神扩展包"
         : `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
     },

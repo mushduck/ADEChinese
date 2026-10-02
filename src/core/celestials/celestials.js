@@ -4,6 +4,7 @@ import { Enslaved } from "./enslaved";
 import { Laitela } from "./laitela/laitela";
 import { Pelle } from "./pelle/pelle";
 import { Ra } from "./ra/ra";
+import { Slabdrill } from "./slabdrill";
 import { Teresa } from "./teresa";
 import { V } from "./V";
 
@@ -15,7 +16,8 @@ export const Celestials = {
   ra: Ra,
   laitela: Laitela,
   pelle: Pelle,
-  alpha: Alpha
+  alpha: Alpha,
+  slabdrill: Slabdrill
 };
 
 GameDatabase.celestials.descriptions = [
@@ -41,8 +43,8 @@ GameDatabase.celestials.descriptions = [
     name: "无名氏",
     effects() {
       return `符文等级提升到至少 ${formatInt(5000)}。
-      无限、时间和第八反物质维度都只能购买 ${formatInt(1)} 个。
-      反物质的倍数受到类似时间膨胀的削弱，膨胀符文的“提升时间膨胀中的反物质指数”效果依然在时间膨胀中生效。
+      无限、时间和第八${player.universes.current === 2 ? "正物质" : "反物质"}维度都只能购买 ${formatInt(1)} 个。
+      反物质的倍数受到类似时间膨胀的削弱，膨胀符文的“提升时间膨胀中的${player.universes.current === 2 ? "正物质" : "反物质"}指数”效果依然在时间膨胀中生效。
       无法购买时间研究 192 （复制器的项目存在上限）
       禁用黑洞。
       大幅减少超光速粒子和膨胀时间的产量。
@@ -103,7 +105,7 @@ GameDatabase.celestials.descriptions = [
       ${disabledText}`;
     },
     description() {
-      return `在这个现实中，反物质产生熵。熵达到 ${formatPercents(1)} 时，该现实将出现不稳定。你将基于达到 ${formatPercents(1)} 的用时，获得暗物质维度加成。如果你能在 ${formatInt(30)} 秒内令该现实出现不稳定，该现实的难度将大幅提升，不过你能获得更强大的加成。该现实出现不稳定 ${formatInt(8)} 次后，暗能量的产量 ${formatX(Math.pow(8, Laitela.hadronizes + 1))}。`;
+      return `在这个现实中，${player.universes.current === 2 ? "正物质" : "反物质"}产生熵。熵达到 ${formatPercents(1)} 时，该现实将出现不稳定。你将基于达到 ${formatPercents(1)} 的用时，获得暗物质维度加成。如果你能在 ${formatInt(30)} 秒内令该现实出现不稳定，该现实的难度将大幅提升，不过你能获得更强大的加成。该现实出现不稳定 ${formatInt(8)} 次后，暗能量的产量 ${formatX(Math.pow(8, Laitela.hadronizes + 1))}。`;
     }
   },
   {
@@ -115,10 +117,16 @@ GameDatabase.celestials.descriptions = [
   {
     name: "Alpha",
     effects() {
-      return `ㅤㅤ极大削弱天界维度和宇宙扇区，除此之外禁用所有在首次达到现实后解锁或获得的所有奖励、效果、升级、增强、增益、削弱和特性。在阿尔法的现实中降低天界物质激发指数至 ${formatInt(0)}，每小时（真实时间）恢复 ${formatPercents(Alpha.alphaDecayByHour, 2)}，称之为阿尔法衰变。ㅤㅤㅤㅤㅤㅤㅤ阿尔法衰变的上限为 ${formatInt(24)} 小时，并基于阿尔法的现实层级降低。在外部获得例如宇宙扇区的资源将加速阿尔法衰变，等效于在阿尔法的现实中投入更多时间。你当前的阿尔法衰变速度因子为 ${formatX(Alpha.totalSpeedBoost, 2, 2)}。你开始阿尔法的现实层级时，已花费的总最大时间比例为 ${formatPercents(Alpha.cosmicSectorMinBoost, 2, 2)}。宇宙扇区将阿尔法衰变的起始值和上限值提高 ${format(Alpha.cosmicSectorExtraBoost, 2, 2)} 小时。这不会缩短阿尔法衰变达到上限所需的时间，而是使阿尔法衰变在前期速度更快、后期速度变慢。ㅤㅤㅤㅤㅤ基于当前的宇宙扇区数量指数削弱宇宙扇区奖励效力，这是一个半永久削弱，在摧毁阿尔法的现实前无法恢复。大多数基于游戏时间的加成更改为基于真实时间。禁用成就倍率和大部分成就奖励。基于反物质数量略微削弱反物质维度。`;
+      return `ㅤㅤ极大削弱天界维度和宇宙扇区，除此之外禁用所有在首次达到现实后解锁或获得的所有奖励、效果、升级、增强、增益、削弱和特性。在阿尔法的现实中降低天界物质激发指数至 ${formatInt(0)}，每小时（真实时间）恢复 ${formatPercents(Alpha.alphaDecayByHour, 2)}，称之为阿尔法衰变。ㅤㅤㅤㅤㅤㅤㅤ阿尔法衰变的上限为 ${formatInt(24)} 小时，并基于阿尔法的现实层级降低。在外部获得例如宇宙扇区的资源将加速阿尔法衰变，等效于在阿尔法的现实中投入更多时间。你当前的阿尔法衰变速度因子为 ${formatX(Alpha.totalSpeedBoost, 2, 2)}。你开始阿尔法的现实层级时，已花费的总最大时间比例为 ${formatPercents(Alpha.cosmicSectorMinBoost, 2, 2)}。宇宙扇区将阿尔法衰变的起始值和上限值提高 ${format(Alpha.cosmicSectorExtraBoost, 2, 2)} 小时。这不会缩短阿尔法衰变达到上限所需的时间，而是使阿尔法衰变在前期速度更快、后期速度变慢。ㅤㅤㅤㅤㅤ基于当前的宇宙扇区数量指数削弱宇宙扇区奖励效力，这是一个半永久削弱，在摧毁阿尔法的现实前无法恢复。大多数基于游戏时间的加成更改为基于真实时间。禁用成就倍率和大部分成就奖励。基于${player.universes.current === 2 ? "正物质" : "反物质"}数量略微削弱${player.universes.current === 2 ? "正物质" : "反物质"}维度。`;
     },
     description() {
       return `ㅤㅤㅤㅤㅤㅤㅤㅤ每个阿尔法的现实层级被击穿时，你将自动退出阿尔法的现实。每完成一层阿尔法的现实，你将获得一个在阿尔法的现实外部生效的增益，以及一个在阿尔法的现实内部生效的削弱。`;
+    }
+  },
+  {
+    name: "斯拉德里尔",
+    effects() {
+      return `你的现实将被诅咒，并对玩法产生多种影响。`;
     }
   }
 ];

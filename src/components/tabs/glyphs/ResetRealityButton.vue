@@ -7,10 +7,12 @@ export default {
       resetCelestial: false,
       isInCelestialReality: false,
       isDoomed: false,
+      isCursed: false
     };
   },
   computed: {
     resetText() {
+      if (this.isCursed) return "Perform a Core Jump";
       if (this.isDoomed) return "重启本次末日";
       if (this.isInCelestialReality && !this.resetCelestial) return "退出天神挑战";
       if (this.isInCelestialReality && this.resetCelestial) return "重启本次天神挑战";
@@ -23,10 +25,16 @@ export default {
       this.resetCelestial = player.options.retryCelestial;
       this.isInCelestialReality = isInCelestialReality();
       this.isDoomed = Pelle.isDoomed;
+      this.isCursed = Slabdrill.isCursed;
     },
     resetReality() {
       const confirms = player.options.confirmations;
       if (GameEnd.creditsClosed) return;
+      if (this.isCursed) {
+        Slabdrill.enterCore();
+        Slabdrill.exitCore();
+        return;
+      }
       if (this.isInCelestialReality) {
         if (confirms.exitChallenge) Modal.exitChallenge.show({
           challengeName: "天神的现实",

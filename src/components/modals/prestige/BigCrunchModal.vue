@@ -12,7 +12,8 @@ export default {
       gainedInfinityPoints: new Decimal(),
       startingBoosts: new Decimal(0),
       startingAM: 10,
-      willStartWithGalaxy: false
+      willStartWithGalaxy: false,
+      isFlipped: false
     };
   },
   computed: {
@@ -21,7 +22,7 @@ export default {
     },
     message() {
       const info = this.isFirstInfinity ? this.firstInfinityInfo : ``;
-      return `达到无限后，一切维度、维度提升和反物质星系都将被重置 ${info}`;
+      return `达到无限后，一切维度、维度提升和${this.isFlipped ? "物质" : "反物质"}星系都将被重置 ${info}`;
     },
     firstInfinityInfo() {
       return `作为回报，你将获得一个无限点数（缩写：IP）。它可用于购买多个升级，你可以
@@ -32,7 +33,8 @@ export default {
     },
     startingResources() {
       const gainedResources = [];
-      if (this.startingAM.gte(10)) gainedResources.push(`${quantify("反物质", this.startingAM, 2, 1)}`);
+      if (this.startingAM.gte(10) && !this.isFlipped) gainedResources.push(`${quantify("反物质", this.startingAM, 2, 1)}`);
+      if (this.startingAM.gte(10) && this.isFlipped) gainedResources.push(`${quantify("物质", this.startingAM, 2, 1)}`);
       if (this.startingBoosts.gt(0)) gainedResources.push(`${quantify("个维度提升", this.startingBoosts)}`);
       if (this.willStartWithGalaxy) gainedResources.push(`${quantify("星系", 1)}`);
 
@@ -46,6 +48,7 @@ export default {
       this.startingBoosts.copyFrom(DimBoost.startingDimensionBoosts);
       this.startingAM = Currency.antimatter.startingValue;
       this.willStartWithGalaxy = InfinityUpgrade.skipResetGalaxy.isBought;
+      this.isFlipped = player.universes.current === 2;
     },
     handleYesClick() {
       bigCrunchResetRequest();

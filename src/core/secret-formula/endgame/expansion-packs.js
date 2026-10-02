@@ -17,7 +17,7 @@ export const expansionPacks = {
     id: "effarigPack",
     symbol: "Ϙ",
     get description() {
-      return ` 遗迹碎片获取量乘以当前反物质指数（当前：${formatX(player.antimatter.max(10).log10(), 2)}）；
+      return ` 遗迹碎片获取量乘以当前${player.universes.current === 2 ? "正物质" : "反物质"}指数（当前：${formatX(player.antimatter.max(10).log10(), 2)}）；
       太阳神中鹿颈长的记忆达到 ${formatInt(10)} 级时，鹿颈长符文总是拥有 ${formatInt(7)} 个词条；
       提升符文炼金资源的上限至历史最高符文等级的三分之一（当前等级：${formatHybridLarge(player.records.bestEndgame.glyphLevel.div(3), 3)}）；
       终局后保留炼金资源，且创造现实符文不再消耗炼金资源；
@@ -59,7 +59,7 @@ export const expansionPacks = {
     symbol: "\uf185",
     get description() {
       return ` 终局后保留太阳神记忆；
-      基于反物质第二指数的最高值提升所有天神的记忆等级上限（当前：${formatHybridLarge(Decimal.max(Decimal.floor(player.records.bestAntimatterExponentOutsideDoom.max(1).log10()), 25), 3)}）；
+      基于${player.universes.current === 2 ? "正物质" : "反物质"}第二指数的最高值提升所有天神的记忆等级上限（当前：${formatHybridLarge(Decimal.max(Decimal.floor(player.records.bestAntimatterExponentOutsideDoom.max(1).log10()), 25), 3)}）；
       每位天神解锁另外 ${formatInt(7)} 个记忆等级奖励；
       记忆和记忆块的获取量 ${formatX(10)}。`
     },
@@ -75,7 +75,7 @@ export const expansionPacks = {
       莱特拉的现实中游戏时间恢复速度翻倍；熵的最大获取速度 × ${formatInt(10)}；
       湮灭乘数对第八暗物质维度的效果 ^ 2（若湮灭乘数影响第八暗物质维度）；终局后自动获得 ${formatInt(10)} 奇点；
       暗物质维度飞升时增长的生产时间间隔除以 ${formatInt(200)}；
-      暗物质获取量乘以当前反物质的第二指数和当前虚幻机器数量指数的最大值（当前：${formatX(Decimal.max(player.antimatter.max(1e10).log10().log10(), player.reality.imaginaryMachines.max(10).log10()), 2, 2)}）；
+      暗物质获取量乘以当前${player.universes.current === 2 ? "正物质" : "反物质"}的第二指数和当前虚幻机器数量指数的最大值（当前：${formatX(Decimal.max(player.antimatter.max(1e10).log10().log10(), player.reality.imaginaryMachines.max(10).log10()), 2, 2)}）；
       暗能量获取量乘以奇点指数的平方（当前：${formatX(player.celestials.laitela.singularities.max(10).log10().pow(2), 2, 2)}）；
       基于暗物质数量提升暗物质湮灭的指数（当前：${formatPow(Decimal.pow((Decimal.log10(Decimal.log10(Currency.darkMatter.value.add(1)).add(1)).add(1)).div(2), 2).add(1), 2, 3)}）；
       解锁强子化莱特拉的现实；使莱特拉的现实失稳后提升暗物质的上限。`
@@ -100,9 +100,21 @@ export const expansionPacks = {
     id: "alphaPack",
     symbol: "α",
     get description() {
-      return ` 解锁强子加速器，可以加速你的强子以提高反物质指数；同时解锁虚无，类似时间膨胀但可以提升加速器的产量。`
+      return ` 解锁强子加速器，可以加速你的强子以提高${player.universes.current === 2 ? "正物质" : "反物质"}指数；同时解锁虚无，类似时间膨胀但可以提升加速器的产量。`
     },
     cost: Decimal.pow(10, 1e200),
+    formatCost: value => formatPostBreak(value, 2, 0)
+  },
+  slabPack: {
+    name: "斯拉德里尔扩展包",
+    id: "slabPack",
+    symbol: "⁹δ",
+    get description() {
+      return ` Allow Serpentine Power to be collected outside the Cursed Reality.
+        Reunlock the Cursed Core, and boost Chaos Core find chance and interval by Celestial Points, Celestial Reality Machines and Celestial Runes rather than Slabdrill Strikes.
+        Refactor all Serpentine Power effects.`
+    },
+    cost: Decimal.pow(10, 1e275),
     formatCost: value => formatPostBreak(value, 2, 0)
   }
 };

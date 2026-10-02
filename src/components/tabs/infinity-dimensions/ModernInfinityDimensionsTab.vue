@@ -1,4 +1,6 @@
 <script>
+import wordShift from "@/core/word-shift";
+
 import InfinityDimensionRow from "./ModernInfinityDimensionRow";
 import PrimaryButton from "@/components/PrimaryButton";
 import PrimaryToggleButton from "@/components/PrimaryToggleButton";
@@ -29,6 +31,7 @@ export default {
       enslavedCompleted: false,
       boughtTesseracts: 0,
       extraTesseracts: 0,
+      tesseractMult: 0,
       creditsClosed: false,
       showLockedDimCostNote: true,
       isEndgameUnlocked: false,
@@ -44,12 +47,18 @@ export default {
       isAutoUnlocked: false,
       isAutoActive: false,
       isAlphaDestroyed: false,
+      tesseractMultText: "",
+      additiveTesseractString: "",
+      multiplicativeTesseractString: "",
+      tesseractStringArray: [],
+      isFlipped: false
     };
   },
   computed: {
     tesseractCountString() {
-      const extra = this.extraTesseracts > 0 ? ` + ${format(this.extraTesseracts, 2, 2)}` : "";
-      return `${formatHybridSmall(this.boughtTesseracts, 3)}${extra}`;
+      if (LHC.hadronC >= 1) return this.multiplicativeTesseractString;
+      if (LHC.hadronC >= 0.5) return `${wordShift.wordCycle(this.tesseractStringArray, true)}`;
+      return this.additiveTesseractString;
     },
     autobuyer() {
       return Autobuyer.tesseract;
@@ -83,8 +92,9 @@ export default {
       this.totalDimCap.copyFrom(InfinityDimensions.totalDimCap);
       this.canBuyTesseract = Tesseracts.canBuyTesseract;
       this.enslavedCompleted = Enslaved.isCompleted && !player.disablePostReality;
-      this.boughtTesseracts = Tesseracts.bought * Tesseracts.totalMult;
-      this.extraTesseracts = Tesseracts.extra * Tesseracts.totalMult;
+      this.boughtTesseracts = Tesseracts.bought;
+      this.extraTesseracts = Tesseracts.extra;
+      this.tesseractMult = Tesseracts.totalMult;
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
       this.infinityDimCompressionMagnitude = InfinityDimensions.compressionMagnitude;
@@ -100,6 +110,13 @@ export default {
       this.isAutoUnlocked = auto.isUnlocked;
       this.isAutoActive = auto.isActive;
       this.isAlphaDestroyed = Alpha.isDestroyed;
+      this.tesseractMultText = this.tesseractMult !== 1 ? ` × ${format(this.tesseractMult, 2, 2)}` : "";
+      this.additiveTesseractString = `${formatHybridSmall(this.boughtTesseracts, 3)}${this.tesseractMultText}${this.extraTesseracts > 0
+        ? ` + ${format(this.extraTesseracts, 2, 2)}${this.tesseractMultText}` : ""}`;
+      this.multiplicativeTesseractString = `${formatHybridSmall(this.boughtTesseracts, 3)}${this.extraTesseracts > 0
+        ? ` × ${format(this.extraTesseracts, 2, 2)}${this.tesseractMultText}` : ""}`;
+      this.tesseractStringArray = [this.multiplicativeTesseractString, this.additiveTesseractString];
+      this.isFlipped = player.universes.current === 2;
     },
     maxAll() {
       InfinityDimensions.buyMax();
@@ -150,7 +167,7 @@ export default {
           转化
         </span>
         为
-        <span v-if="!isEC9Running">反物质维度</span>
+        <span v-if="!isEC9Running">${this.isFlipped ? "物质" : "反物质"}维度</span>
         <span v-else>时间维度(永恒挑战 9)</span>
         提供
         <span class="c-infinity-dim-description__accent">{{ formatX(dimMultiplier, 2, 1) }}</span>
@@ -162,7 +179,10 @@ export default {
         <span v-if="isEndgameUnlocked">
           你的无限维度压缩因子为
           <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude, 2, 3) }}</span>，
-          在无限维度倍率高于<span>{{ formatPostBreak(infinityDimStart, 2, 1) }}</span>时，将倍率<span class="c-infinity-dim-compression-description__accent">^{{ format(infinityDimOverflow, 2, 3) }}</span>。
+          在无限维度倍率高于
+          <span>{{ formatPostBreak(infinityDimStart, 2, 1) }}</span> 时，
+          将所有无限维度倍率的指数提升至
+          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow, 2, 3) }}</span> 次方。
         </span>
       </p>
     </div>
@@ -171,7 +191,10 @@ export default {
         <span v-if="hasSecond">
           你的无限维度二重压缩因子为
           <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimCompressionMagnitude2, 2, 3) }}</span>，
-          在无限维度倍率高于<span>{{ formatPostBreak(infinityDimStart2, 2, 1) }}</span>时，将倍率<span class="c-infinity-dim-compression-description__accent">^{{ format(infinityDimOverflow2, 2, 3) }}</span>。
+          在无限维度倍率高于
+          <span>{{ formatPostBreak(infinityDimStart2, 2, 1) }}</span> 时，
+          将所有无限维度倍率的指数提升至
+          <span class="c-infinity-dim-compression-description__accent">{{ format(infinityDimOverflow2, 2, 3) }}</span> 次方。
         </span>
       </p>
     </div>

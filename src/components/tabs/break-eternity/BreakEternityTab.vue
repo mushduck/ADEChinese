@@ -11,7 +11,8 @@ export default {
   data() {
     return {
       isUnlocked: false,
-      antimatterReq: new Decimal(0)
+      antimatterReq: new Decimal(0),
+      isFlipped: false
     };
   },
   computed: {
@@ -45,6 +46,7 @@ export default {
     update() {
       this.isUnlocked = (PlayerProgress.endgameUnlocked() && player.antimatter.gte(DC.E9E15)) || player.break2;
       this.antimatterReq = DC.E9E15;
+      this.isFlipped = player.universes.current === 2;
     },
     btnClassObject(column) {
       return {
@@ -62,7 +64,7 @@ export default {
 <template>
   <div class="l-break-eternity-tab">
     <div v-if="!isUnlocked">
-      达到 {{ format(antimatterReq, 2, 1) }} 反物质且至少进行一次终局以打破永恒
+      达到 {{ format(antimatterReq, 2, 1) }} ${this.isFlipped ? "物质" : "反物质"}且至少进行一次终局以打破永恒
     </div>
     <BreakEternityButton class="l-break-eternity-tab__break-btn" />
     <div

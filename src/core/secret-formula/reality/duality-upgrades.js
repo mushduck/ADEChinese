@@ -160,7 +160,7 @@ export const dualityUpgrades = [
     name: "创生之构",
     id: 15,
     cost: new Decimal(1e12),
-    requirement: () => `本次终局全程不拥有无限、时间和第八反物质维度且不毁灭现实，在时间膨胀中达到${format("e5e55")}反物质`,
+    requirement: () => `本次终局全程不拥有无限、时间和第八反物质维度且不毁灭现实，在时间膨胀中达到${format("e5e55")}${player.universes.current === 2 ? "正物质" : "反物质"}`,
     hasFailed: () => !player.requirementChecks.endgame.onlyLowDims || Pelle.isDoomed,
     checkRequirement: () => player.requirementChecks.endgame.onlyLowDims && player.dilation.active &&
       player.antimatter.add(1).log10().gte(5e55) && !Pelle.isDoomed,
@@ -193,11 +193,9 @@ export const dualityUpgrades = [
     id: 18,
     cost: new Decimal(1.6e13),
     formatCost: x => format(x, 1),
-    requirement: () => `在被毁灭的现实外星系总数达到${format(2.4e9, 1)}`,
+    requirement: () => `在被毁灭的现实外星系总数达到${format(2.6e9, 1)}`,
     hasFailed: () => Pelle.isDoomed,
-    checkRequirement: () => GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
-    player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)).gte(2.4e9) : Replicanti.galaxies.total.add(player.galaxies).add(
-      player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).gte(2.4e9) && !Pelle.isDoomed,
+    checkRequirement: () => actualBaseGalaxiesWithoutGeneration().gte(2.6e9) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "解锁强子第四效果",
   },
@@ -230,7 +228,7 @@ export const dualityUpgrades = [
     name: "消解天穹",
     id: 21,
     cost: new Decimal(3e17),
-    requirement: () => `禁用连续统，在被毁灭的现实外达到${format("e1e88")}反物质`,
+    requirement: () => `禁用连续统，在被毁灭的现实外达到${format("e1e88")}${player.universes.current === 2 ? "正物质" : "反物质"}`,
     hasFailed: () => !player.requirementChecks.endgame.noContinuum || Pelle.isDoomed,
     checkRequirement: () => player.requirementChecks.endgame.noContinuum &&
       Currency.antimatter.value.add(1).log10().gte(1e88) && !Pelle.isDoomed,
@@ -245,7 +243,7 @@ export const dualityUpgrades = [
     name: "表象归墟",
     id: 22,
     cost: new Decimal(2e18),
-    requirement: () => `本次终局中，全程不装备符文且不毁灭现实，达到${format("e1e85")}反物质`,
+    requirement: () => `本次终局中，全程不装备符文且不毁灭现实，达到${format("e1e85")}${player.universes.current === 2 ? "正物质" : "反物质"}`,
     hasFailed: () => !player.requirementChecks.endgame.noGlyphs || Pelle.isDoomed,
     checkRequirement: () => player.requirementChecks.endgame.noGlyphs &&
       Currency.antimatter.value.add(1).log10().gte(1e85) && !Pelle.isDoomed,
@@ -274,10 +272,10 @@ export const dualityUpgrades = [
     id: 24,
     cost: new Decimal(1.5e19),
     formatCost: x => format(x, 1),
-    requirement: () => `不激发天界物质，在太阳神的现实中获得${format(106e6, 2, 2)}反物质星系`,
+    requirement: () => `不激发天界物质，在太阳神的现实中获得${format(106e6, 2, 2)}${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
     hasFailed: () => !Ra.isRunning || !player.requirementChecks.reality.noCelMatter,
     checkRequirement: () => Ra.isRunning && player.requirementChecks.reality.noCelMatter &&
-      player.galaxies.gte(106e6),
+      player.galaxies.gte(105.5e6),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     lockEvent: "turn on Celestial Matter",
@@ -294,5 +292,63 @@ export const dualityUpgrades = [
     checkRequirement: () => player.celestials.laitela.hadrons.dark >= 32 && Hadrons.timeFactor.div(5).gte(100),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: "解锁超多方体",
+  },
+  {
+    name: "Deepened Desolation",
+    id: 26,
+    cost: new Decimal("1e500"),
+    requirement: () => `Acquire ${format(1e95, 2, 2)} Null Particles`,
+    hasFailed: () => false,
+    checkRequirement: () => Currency.nullParticles.gte(1e95),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "Uncap Null Matter and have it boost Divine Dimensions at a severely reduced rate",
+    effect: () => player.disablePostReality ? 1 : Currency.nullMatter.value.max(1).log10().pow(0.04),
+    formatEffect: value => `${formatPow(value, 2, 3)}`
+  },
+  {
+    name: "Compressed Collections",
+    id: 27,
+    cost: new Decimal("1e600"),
+    requirement: () => `Reach ${formatInt(20000)} Hawking Radiation`,
+    hasFailed: () => false,
+    checkRequirement: () => Currency.hawkingRadiation.gte(20000),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "The Galaxy-based Endgame Skill cost scaling is severely reduced"
+  },
+  {
+    name: "Cubic Collapse",
+    id: 28,
+    cost: new Decimal("1e700"),
+    requirement: () => `Obtain ${formatInt(47)} Hexeracts`,
+    hasFailed: () => false,
+    checkRequirement: () => Hexeracts.effectiveCount >= 47,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "The reward for destablizing Lai'tela's Reality is stronger based on Hexeracts",
+    effect: () => player.disablePostReality ? 1 : Math.pow(Hexeracts.effectiveCount, 3),
+    formatEffect: value => `${formatPow(value, 2)}`
+  },
+  {
+    name: "Aethereal Augmentations",
+    id: 29,
+    cost: new Decimal("1e800"),
+    requirement: () => `Reach ${format(1e42, 2, 2)} Star Power`,
+    hasFailed: () => false,
+    checkRequirement: () => Currency.starPower.gte(1e42),
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: "Star Power boosts Galactic Power generation at a severely reduced rate",
+    effect: () => player.disablePostReality ? 1 : Currency.starPower.value.max(1).log10().pow(0.05),
+    formatEffect: value => `${formatPow(value, 2, 3)}`
+  },
+  {
+    name: "Timeless Transcension",
+    id: 30,
+    cost: new Decimal("1e900"),
+    requirement: () => `Reach ${format(Decimal.pow10(1e272), 2, 2)} ${player.universes.current === 2 ? "Matter" : "Antimatter"} outside Doomed/Cursed Realities`,
+    hasFailed: () => Pelle.isDoomed || Slabdrill.isCursed,
+    checkRequirement: () => player.antimatter.gte(Decimal.pow10(Decimal.pow10(Math.E * 100))) && !Pelle.isDoomed && !Slabdrill.isCursed,
+    checkEvent: GAME_EVENT.GAME_TICK_AFTER,
+    description: () => `The 9th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension is stronger based on Tickspeed`,
+    effect: () => player.disablePostReality ? 1 : Tickspeed.perSecond.max(1).log10(),
+    formatEffect: value => `${formatX(value, 2, 2)}`
   },
 ];

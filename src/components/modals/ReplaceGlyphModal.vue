@@ -21,10 +21,14 @@ export default {
       target: 0,
       idx: 0,
       isDoomed: false,
+      isCursed: false
     };
   },
   computed: {
-    resetTerm() { return this.isDoomed ? "末日" : "现实"; },
+    resetTerm() {
+      if (this.isCursed) return "perform a Core Jump";
+      return this.isDoomed ? "重启本次末日" : "重启本次现实";
+    },
   },
   methods: {
     update() {
@@ -32,6 +36,7 @@ export default {
       this.idx = this.inventoryIndex;
       this.glyph = Glyphs.findByInventoryIndex(this.idx);
       this.isDoomed = Pelle.isDoomed;
+      this.isCursed = Slabdrill.isCursed;
     },
     handleYesClick() {
       Glyphs.swapIntoActive(this.glyph, this.targetSlot);
@@ -48,6 +53,6 @@ export default {
     <template #header>
       你将要替换符文
     </template>
-    替换符文后将重启本次{{ resetTerm }}。是否替换？
+    替换符文后将{{ resetTerm }}。是否替换？
   </ModalWrapperChoice>
 </template>

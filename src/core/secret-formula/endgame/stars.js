@@ -10,7 +10,7 @@ export const stars = {
       if (player.disablePostReality) return DC.D1;
       return Decimal.pow(Decimal.pow(Decimal.log10(amount.add(1)), 0.4).div(200).add(1), boost.div(100).add(1));
     },
-    description: amount => `将所有反物质维度倍率的指数提升至 ${formatPow(amount, 2, 4)}`
+    description: amount => `将所有${player.universes.current === 2 ? "正物质" : "反物质"}维度倍率的指数提升至 ${formatPow(amount, 2, 4)}`
   },
   orange: {
     id: 1,
@@ -102,7 +102,7 @@ export const stars = {
       if (player.disablePostReality) return DC.D1;
       return Decimal.pow(Decimal.pow(Decimal.log10(amount.add(1)), 1.3).div(200).add(1), boost.div(100).add(1));
     },
-    description: amount => `将反物质指数提升至 ${formatPow(amount, 2, 4)}`
+    description: amount => `将${player.universes.current === 2 ? "正物质" : "反物质"}指数提升至 ${formatPow(amount, 2, 4)}`
   },
   gray: {
     id: 8,
@@ -112,7 +112,7 @@ export const stars = {
     resetReq: 1e125,
     effect: (amount = player.endgame.ethereal.stars.gray) => {
       if (player.disablePostReality) return DC.D0;
-      return Decimal.log10(Decimal.log10(amount.add(1)).add(1)).times(20);
+      return Decimal.log10(Decimal.log10(amount.add(1)).add(1)).times(20).times(Universes.stellarAugmentersToGrayStarEffectiveness);
     },
     description: amount => `所有星辰的效果 + ${formatPercents(amount.div(100).toNumber(), 2)}`
   },

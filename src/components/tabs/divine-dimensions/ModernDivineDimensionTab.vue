@@ -23,7 +23,8 @@ export default {
       creditsClosed: false,
       canProduceEnergy: false,
       isProducingEnergy: false,
-      isAnyAutobuyerUnlocked: false
+      isAnyAutobuyerUnlocked: false,
+      isFlipped: false
     };
   },
   computed: {
@@ -54,6 +55,7 @@ export default {
       this.canProduceEnergy = DivinityUpgrade.divineL1U5.isBought;
       this.isProducingEnergy = player.celestials.pelle.divinity.isProducingEnergy;
       this.isAnyAutobuyerUnlocked = Autobuyer.divineDimension(1).isUnlocked;
+      this.isFlipped = player.universes.current === 2;
     },
     maxAll() {
       DivineDimensions.buyMax();
@@ -98,7 +100,7 @@ export default {
           为终局次数和缥缈之力提供
           <span class="c-divine-dim-description__accent">{{ formatX(conversionFormula1, 2, 2) }}</span>
           的加成；
-          为所有机器获取和被毁灭的现实中的反物质指数提供
+          为所有机器获取和被毁灭的现实中的${this.isFlipped ? "物质" : "反物质"}指数提供
           <span class="c-divine-dim-description__accent">{{ formatPow(conversionFormula2, 2, 3) }}</span>
           的加成；
           将所有类型的强子效果到达上限和阿尔法诅咒消散的速度增加

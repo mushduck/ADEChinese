@@ -58,7 +58,8 @@ export const Pelle = {
 
   // This is called upon initial Dooming and after every Armageddon when using the modal
   initializeRun() {
-    if (Alpha.isRunning || LHC.voidRunning || LHC.nullifiedVoidRunning || player.endgame.overcharge.isRunning) return;
+    if (Alpha.isRunning || LHC.voidRunning || LHC.nullifiedVoidRunning || Slabdrill.isCursed || player.endgame.overcharge.isRunning ||
+        player.compression.active || player.universes.current !== 0) return;
     if (this.isDoomed) {
       Pelle.armageddon(true);
       return;
@@ -175,7 +176,9 @@ export const Pelle = {
     if (player.endgame.doomedParticles.gte(1e55)) {
       Pelle.quotes.doomE55DP.show();
     }
-    GameStorage.save(true);
+    if (!PlayerProgress.endgameUnlocked()) {
+      GameStorage.save(true)
+    }
     EventHub.dispatch(GAME_EVENT.DOOM_REALITY_AFTER);
   },
 
@@ -525,7 +528,7 @@ export const Pelle = {
     const gainNewer = Decimal.pow((Decimal.log10(am.add(2)).add(Decimal.log10(ip.add(2))).add(Decimal.log10(ep.add(2)))).div(1.2), 8.5);
 
     const gain = false ? gainNewer : ((EndgameMastery(61).isBought && !player.disablePostReality) ? gainNew : gainOld);
-    
+
     return gain.lt(1) ? gain : Decimal.floor(gain.sub(this.cel.remnants));
   },
 
@@ -589,7 +592,7 @@ export const Pelle = {
     }
     return zalgo(str, Math.floor(stage ** 2 * 7));
   },
-  
+
   get endTabNames() {
     if (player.celestials.pelle.divinities >= 13) {
       return "吾等 新神 仍 穿游 此 现实 捡拾 力量 残屑 荒谬 难解 嗤笑 无际 回响".split(" ");
@@ -605,8 +608,9 @@ export const Pelle = {
       return "尚未 终结 仍未 取胜 我等 必将 归来 不久 便会 重见 轮回 必将 无尽 延续".split(" ");
     }
   },
-  quotes: Quotes.pelle,
   
+  quotes: Quotes.pelle,
+
   isGlyphTypeDisabled(type, alwaysInDoom = false) {
     if (!(this.isDoomed || alwaysInDoom)) return false;
     if (type === "reality") return !PelleAlchemyUpgrade.alchemyReality.canBeApplied;
