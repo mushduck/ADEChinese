@@ -76,7 +76,7 @@ export default {
     <span v-else>
       {{ disableText }}
       <br>
-      达到 {{ format(requiredForGain, 2, 1) }} {{ isFlipped ? "物质" : "反物质" }}以获得更多超光速粒子。
+      达到 {{ format(requiredForGain, 2, 1) }} {{ isFlipped ? "正物质" : "反物质" }}以获得更多超光速粒子。
     </span>
   </button>
 </template>

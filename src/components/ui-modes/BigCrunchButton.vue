@@ -32,7 +32,7 @@ export default {
         v-if="!smallCrunch"
         class="l-spacing"
       >
-        这个宇宙已因{{ isFlipped ? "物质" : "反物质" }}过多而坍缩
+        这个宇宙已因{{ isFlipped ? "正物质" : "反物质" }}过多而坍缩
       </h3>
       <button
         :class="{
@@ -60,7 +60,7 @@ export default {
         v-if="!smallCrunch"
         class="o-emptiness"
       >
-        这个宇宙已因{{ isFlipped ? "物质" : "反物质" }}过多而坍缩
+        这个宇宙已因{{ isFlipped ? "正物质" : "反物质" }}过多而坍缩
       </div>
     </div>
   </span>

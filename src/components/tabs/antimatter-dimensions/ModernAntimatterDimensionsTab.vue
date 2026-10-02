@@ -43,8 +43,8 @@ export default {
       if (this.isFullyAutomated) {
         return "自动献祭已开启且拥有成就 118，因此献祭将完全自动化";
       }
-      if (Ascensions.sacA.isUnlocked) return `为第八${this.isFlipped ? "物质" : "反物质"}维度提供 ${formatPow(this.sacrificePower, 2, 3)} 的指数加成`;
-      return `为第八${this.isFlipped ? "物质" : "反物质"}维度提供 ${formatX(this.sacrificeBoost, 2, 2)} 的倍率加成`;
+      if (Ascensions.sacA.isUnlocked) return `为第八${this.isFlipped ? "正物质" : "反物质"}维度提供 ${formatPow(this.sacrificePower, 2, 3)} 的指数加成`;
+      return `为第八${this.isFlipped ? "正物质" : "反物质"}维度提供 ${formatX(this.sacrificeBoost, 2, 2)} 的倍率加成`;
     },
     sacText() {
       if (Ascensions.sacA.isUnlocked) return `献祭效力 (${formatPow(this.sacrificePower, 2, 3)})`;

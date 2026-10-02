@@ -69,9 +69,9 @@ export default {
     },
     typeName() {
       switch (this.type) {
-        case GALAXY_TYPE.NORMAL: return `${this.isFlipped ? "物质" : "反物质"}星系`;
-        case GALAXY_TYPE.DISTANT: return `遥远${this.isFlipped ? "物质" : ""}星系`;
-        case GALAXY_TYPE.REMOTE: return `极远${this.isFlipped ? "物质" : ""}星系`;
+        case GALAXY_TYPE.NORMAL: return `${this.isFlipped ? "正物质" : "反物质"}星系`;
+        case GALAXY_TYPE.DISTANT: return `遥远${this.isFlipped ? "正物质" : ""}星系`;
+        case GALAXY_TYPE.REMOTE: return `极远${this.isFlipped ? "正物质" : ""}星系`;
       }
       return undefined;
     },
@@ -143,7 +143,7 @@ export default {
 <template>
   <div class="reset-container galaxy">
     <h4>{{ typeName }} (<span v-html="sumText" />)</h4>
-    <span>需要：{{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }} {{ isFlipped ? "物质" : "反物质" }}维度</span>
+    <span>需要：{{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }} {{ isFlipped ? "正物质" : "反物质" }}维度</span>
     <span v-if="hasIncreasedScaling">{{ costScalingText }}</span>
     <button
       :class="classObject"

@@ -79,7 +79,7 @@ export default {
 <template>
   <div class="reset-container dimboost">
     <h4>{{ dimBoostName }} ({{ boostCountText }})</h4>
-    <span>需要: {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }}${this.isFlipped ? "物质" : "反物质"}维度</span>
+    <span>需要: {{ formatHybridLarge(requirement.amount, 3) }} {{ dimName }}${this.isFlipped ? "正物质" : "反物质"}维度</span>
     <span v-if="hasSurge">{{ imaginaryText }}</span>
     <button
       :class="classObject"

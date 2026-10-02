@@ -62,7 +62,7 @@ export default {
     </template>
     <template #bottom>
       <div class="l-challenge-box__bottom--infinity">
-        <span>目标：{{ format(config.goal()) }} {{ isFlipped ? "物质" : "反物质" }}</span>
+        <span>目标：{{ format(config.goal()) }} {{ isFlipped ? "正物质" : "反物质" }}</span>
         <DescriptionDisplay
           :config="config.reward"
           title="奖励："

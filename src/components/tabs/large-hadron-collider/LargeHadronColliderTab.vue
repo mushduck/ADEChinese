@@ -207,26 +207,26 @@ export default {
         v-if="!hasAccelerator"
         class="c-large-hadron-collider-description"
       >
-        达到 {{ format(Decimal.pow10(1e200), 2, 2) }} {{ isFlipped ? "物质" : "反物质" }}
+        达到 {{ format(Decimal.pow10(1e200), 2, 2) }} {{ isFlipped ? "正物质" : "反物质" }}
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy1"
       >
-        宇宙中的过剩熵增令你的反物质产生了衰变。${this.isFlipped ? "物质" : "反物质"}数量在 {{ format(amSoftcap, 2, 2) }} 后达到软上限，
+        宇宙中的过剩熵增令你的反物质产生了衰变。${this.isFlipped ? "正物质" : "反物质"}数量在 {{ format(amSoftcap, 2, 2) }} 后达到软上限，
         在 {{ format(amHardcap, 2, 2) }} 时达到硬上限。
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy2"
       >
-        ${this.isFlipped ? "物质" : "反物质"}衰变在达到 {{ format(amSoftcap2, 2, 2) }} ${this.isFlipped ? "物质" : "反物质"}后进一步增强。
+        ${this.isFlipped ? "正物质" : "反物质"}衰变在达到 {{ format(amSoftcap2, 2, 2) }} ${this.isFlipped ? "正物质" : "反物质"}后进一步增强。
       </div>
     </div>
     <br>
     <br>
     <div v-if="highestAntimatter.gt(10)">
-      <span class="c-void-antimatter-amount">[你在虚无中达到的最高${this.isFlipped ? "物质" : "反物质"}数量为 {{ format(highestAntimatter, 2, 1) }}。]</span>
+      <span class="c-void-antimatter-amount">[你在虚无中达到的最高${this.isFlipped ? "正物质" : "反物质"}数量为 {{ format(highestAntimatter, 2, 1) }}。]</span>
       <br>
       <span class="c-null">[你拥有 {{ formatNullAmount(nullMatter) }} 虚物质，+{{ formatNullAmount(nullPerSecond) }}/秒]</span>
     </div>
@@ -256,16 +256,16 @@ export default {
     <div v-if="voidMode === 0">
       进入稳态虚无将强制进行一次终局，并禁用现实及所有上层机制。
       <br>
-      在稳态虚无中${this.isFlipped ? "物质" : "反物质"}将缓慢衰变为虚物质。
+      在稳态虚无中${this.isFlipped ? "正物质" : "反物质"}将缓慢衰变为虚物质。
       <span v-if="nullified">
         <br>
         <!-- Since you Nullified the Multiverse, !-->在虚无中重获复兴树 ANR 节点和每秒自动获得永恒时所能获得永恒点数的 1%。
       </span>
     </div>
     <div v-if="voidMode === 1">
-      进入归零虚无将强制进行一次终局，并将${this.isFlipped ? "物质" : "反物质"}第二指数稀释至 × {{ format(0.01, 2, 2) }}。
+      进入归零虚无将强制进行一次终局，并将${this.isFlipped ? "正物质" : "反物质"}第二指数稀释至 × {{ format(0.01, 2, 2) }}。
       <br>
-      在归零虚无中${this.isFlipped ? "物质" : "反物质"}将缓慢转变为虚粒子，为稳态虚无中的${this.isFlipped ? "物质" : "反物质"}维度提供指数加成。（当前：{{ formatPow(nullParticleEffect, 2, 3) }}）
+      在归零虚无中${this.isFlipped ? "正物质" : "反物质"}将缓慢转变为虚粒子，为稳态虚无中的${this.isFlipped ? "正物质" : "反物质"}维度提供指数加成。（当前：{{ formatPow(nullParticleEffect, 2, 3) }}）
     </div>
     <NullUpgradesTabComponent />
   </div>

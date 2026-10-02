@@ -2,7 +2,7 @@ export const MatterScale = {
   proton: new Decimal("2.82e-45"),
 
   estimate(matter) {
-    if (!matter) return [`没有 ${player.universes.current === 2 ? "物质" : "反物质"}.`];
+    if (!matter) return [`没有 ${player.universes.current === 2 ? "正物质" : "反物质"}.`];
     const logMatter = matter.add(1).log10();
     const planck = new Decimal("4.22419e-105");
     const planckedLogMatter = logMatter.times(planck);
@@ -10,13 +10,13 @@ export const MatterScale = {
     if (planckedLogMatter.gt(this.proton)) {
       const logScale = this.macroScale(planckedLogMatter);
       const logAmount = format(planckedLogMatter.dividedBy(logScale.amount), 2, 1);
-      return [`如果你${player.universes.current === 2 ? "物质" : "反物质"}数量中的每一位数字都换算成1普朗克体积，
-        你拥有的${player.universes.current === 2 ? "物质" : "反物质"}足以${logScale.verb} ${logAmount} ${logScale.name}`];
+      return [`如果你${player.universes.current === 2 ? "正物质" : "反物质"}数量中的每一位数字都换算成1普朗克体积，
+        你拥有的${player.universes.current === 2 ? "正物质" : "反物质"}足以${logScale.verb} ${logAmount} ${logScale.name}`];
     }
     const logScale = this.microScale(logMatter);
-    return [`如果你${player.universes.current === 2 ? "物质" : "反物质"}数量中的每一位数字都是
+    return [`如果你${player.universes.current === 2 ? "正物质" : "反物质"}数量中的每一位数字都是
       ${format(this.proton.div(logScale.amount).div(logMatter), 2, 1)} ${logScale.name}，
-      那么你就有足够的${player.universes.current === 2 ? "物质" : "反物质"}制作一个质子。`];
+      那么你就有足够的${player.universes.current === 2 ? "正物质" : "反物质"}制作一个质子。`];
     }
     if (matter.gt(DC.E100000)) {
       return [
@@ -29,10 +29,10 @@ export const MatterScale = {
     if (planckedMatter.gt(this.proton)) {
       const scale = this.macroScale(planckedMatter);
       const amount = format(planckedMatter.dividedBy(scale.amount), 2, 1);
-      return [`如果每个${player.universes.current === 2 ? "物质" : "反物质"}占据 1 普朗克体积，你拥有的${player.universes.current === 2 ? "物质" : "反物质"}足以${scale.verb} ${amount} ${scale.name}`];
+      return [`如果每个${player.universes.current === 2 ? "正物质" : "反物质"}占据 1 普朗克体积，你拥有的${player.universes.current === 2 ? "正物质" : "反物质"}足以${scale.verb} ${amount} ${scale.name}`];
     }
     const scale = this.microScale(matter);
-    return [`如果每个${player.universes.current === 2 ? "物质" : "反物质"}是 ${format(this.proton.div(scale.amount).div(matter), 2, 1)} ${scale.name}，那么你就有足够的${player.universes.current === 2 ? "物质" : "反物质"}制作一个质子。`];
+    return [`如果每个${player.universes.current === 2 ? "正物质" : "反物质"}是 ${format(this.proton.div(scale.amount).div(matter), 2, 1)} ${scale.name}，那么你就有足够的${player.universes.current === 2 ? "正物质" : "反物质"}制作一个质子。`];
   },
 
   microScale(matter) {

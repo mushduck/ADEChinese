@@ -68,9 +68,9 @@ export default {
     },
     typeName() {
       switch (this.type) {
-        case GALAXY_TYPE.NORMAL: return `${this.isFlipped ? "物质" : "反物质"}星系`;
-        case GALAXY_TYPE.DISTANT: return `遥远${this.isFlipped ? "物质" : ""}星系`;
-        case GALAXY_TYPE.REMOTE: return `极远${this.isFlipped ? "物质" : ""}星系`;
+        case GALAXY_TYPE.NORMAL: return `${this.isFlipped ? "正物质" : "反物质"}星系`;
+        case GALAXY_TYPE.DISTANT: return `遥远${this.isFlipped ? "正物质" : ""}星系`;
+        case GALAXY_TYPE.REMOTE: return `极远${this.isFlipped ? "正物质" : ""}星系`;
       }
       return undefined;
     },

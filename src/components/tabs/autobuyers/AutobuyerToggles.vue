@@ -85,7 +85,7 @@ export default {
       class="o-primary-btn--subtab-option"
       @click="toggleAntimatterSingles()"
     >
-      设置${this.isFlipped ? "物质" : "反物质"}维度自动购买器购买 {{ antimatterAutobuyersBuyMax ? "单个" : "最大" }}
+      设置${this.isFlipped ? "正物质" : "反物质"}维度自动购买器购买 {{ antimatterAutobuyersBuyMax ? "单个" : "最大" }}
     </PrimaryButton>
     <span v-if="false">
       <PrimaryButton

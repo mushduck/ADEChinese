@@ -27,7 +27,7 @@ export default {
     message() {
       return `你将执行大坍缩（如果可能）并在挑战中开启新的无限，同时所有挑战特殊限制与修正效果生效。
         为完成该挑战${this.challengeIsCompleted ? "" : "并获得奖励"}，你必须达到挑战目标：
-        ${format(InfinityChallenge(this.id).goal)} ${this.isFlipped ? "物质" : "反物质"}。
+        ${format(InfinityChallenge(this.id).goal)} ${this.isFlipped ? "正物质" : "反物质"}。
         无论是否购买无限升级，开始时都不会拥有任何维度提升或星系。`;
     },
     entranceLabel() {

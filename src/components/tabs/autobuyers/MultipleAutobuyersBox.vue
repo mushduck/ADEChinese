@@ -123,7 +123,7 @@ export default {
     v-else-if="isADBox && continuumActive"
     class="c-autobuyer-box-row"
   >
-    连续统将取代自动购买${this.isFlipped ? "物质" : "反物质"}维度和计数频率的功能，你将基于你的购买次数，自动获得连续的生产倍率加成。
+    连续统将取代自动购买${this.isFlipped ? "正物质" : "反物质"}维度和计数频率的功能，你将基于你的购买次数，自动获得连续的生产倍率加成。
   </span>
   <span
     v-else-if="isIDBox && continuumActive && infinityContinuumUnlocked"
