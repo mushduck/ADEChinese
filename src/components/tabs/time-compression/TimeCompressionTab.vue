@@ -124,7 +124,7 @@ export default {
       {{ pluralize("电磁波场", totalWaves) }}。
     </span>
     <span>
-      电磁波场等效于所有类型的强子。
+      电磁波场等效于任意类型的强子。
     </span>
     <div class="l-compression-upgrades-grid">
       <div

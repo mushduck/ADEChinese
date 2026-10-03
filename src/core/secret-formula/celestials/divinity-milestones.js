@@ -87,27 +87,25 @@ export const divinityMilestones = {
   universes: {
     divinities: 13,
     get reward() {
-      return ` 解锁 Transient Universe。`;
+      return ` 解锁流幻宇宙。`;
     }
   },
   powerBurst: {
     divinities: 17,
     get reward() {
-      return ` Empower Singularities based on highest Galaxies
-        While inside the Overcharge, ${player.universes.current === 2 ? "Matter" : "Antimatter"} production gains a power effect applying after the tetration nerf based on real time spent inside the Overcharge
-        Gain ${formatX(10)} more Hawking Radiation
-        Gain ${formatX(1000)} more Stars of all types`;
+      return ` 基于最高星系数量提高奇点获取量。
+        在激能内，基于经过的真实时间为${player.universes.current === 2 ? "正物质" : "反物质"}产量提供指数加成，该加成不受激能削弱的影响。
+        霍金辐射获取量 ${formatX(10)}。
+        所有类型的星辰获取量 ${formatX(1000)}。`;
     }
   },
   serpentPower: {
     divinities: 22,
     get reward() {
-      return ` Square Singularity Gain
-        Double the maximum Hadron effectiveness
-        Gain ${formatX(10)} more Hawking Radiation
-        Gain ${formatX(10)} more Thermal Radiation
-        Gain ${formatX(10)} more generated Endgame Skills
-        Unlock Slabdrill’s Expansion Pack`;
+      return ` 奇点获取量${formatPow(2)}；终局能力产量 ${formatX(10)}。
+        强子效果的上限翻倍。
+        霍金辐射获取量 ${formatX(10)}；热能辐射获取量 ${formatX(10)}。
+        解锁渊蛇扩展包。`;
     }
   }
 };
