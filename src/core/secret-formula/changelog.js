@@ -9,16 +9,80 @@ export const changelog = [
    * }
    */
   {
-    date: [2026, 8, 11],
-    name: "《反物质维度：终局》汉化版发布",
-    info: `
+      date: [2026, 10, 4],
+      name: "《反物质维度：终局》v2.0 汉化版发布",
+      info: `
+<ul>
+<li>本模组由松茸不吃柯尔鸭（QQ:3151643233）全程汉化，吸收了AD群友们的经验，并由ADChinese作者aquamarine309（QQ:2854608474）提供原版的大部分汉化。</li>
+<li>若需要得到帮助，请加反物质维度交流群611146621了解更多！一天几百个群友在线，氛围非常好。</li>
+<li>本模组全部使用硬编码汉化，汉化约300小时完工。</li>
+<li>我没想过v2.0会这么难翻译...三天的时间都在对着冲突抓狂。（</li>
+</ul>`
+    },
+  {
+      date: [2026, 8, 11],
+      name: "《反物质维度：终局》v1.1 汉化版发布",
+      info: `
 <ul>
 <li>本模组由松茸不吃柯尔鸭（QQ:3151643233）全程汉化，吸收了AD群友们的经验，并由ADChinese作者aquamarine309（QQ:2854608474）提供原版的大部分汉化。</li>
 <li>若需要得到帮助，请加反物质维度交流群611146621了解更多！一天几百个群友在线，氛围非常好。</li>
 <li>本模组全部使用硬编码汉化，汉化约200小时完工。</li>
 <li>游玩愉快！底下的更新我不想动了（</li>
 </ul>`
-  },
+    },
+    {
+      date: [2026, 9, 30],
+      name: "v2.0.0: The Serpent Ariseth",
+      info: `
+Thus concludeth the Endgame Update.
+<br>
+<br>
+<b><i>Thank you all so much for this incredible journey!</i></b>
+<br>
+<br>
+<b>Things added:</b><br>
+<ul>
+<li>Slabdrill</li>
+<li>The Cursed Core</li>
+<li>Hell (I'm dead serious)</li>
+<li>Time Compression</li>
+<li>C Milestones</li>
+<li>D Milestones (what the heck is D)</li>
+<li>Galactic Instability (no one asked for this ik)</li>
+<li>A bunch of tab notifications</li>
+<li>The first two Universes</li>
+<li>Multiversal Conquest and Light and Dark Battles</li>
+<li>Entanglement Masteries</li>
+<li>Three new Achievement rows</li>
+<li>The Endgame Credits Screen</li>
+<li>An Endgame Update reset screen</li>
+</ul>
+<br>
+<b>Things changed:</b><br>
+<ul>
+<li>The requirements for Duality Upgrades 18 and 24</li>
+<li>Perk Points now use a Decimal prop</li>
+<li>Made Cursed Glyphs work in Glyph Knight</li>
+<li>Ra told me that was it so that's it ig</li>
+</ul>
+<br>
+<b>Bugs fixed:</b><br>
+<ul>
+<li>Fixed Endgame Milestone 2 displaying the wrong effect</li>
+<li>Fixed Celestial prestige autobuyers</li>
+<li>Fixed cookie production, it should tick properly again</li>
+<li>Fixed the last Alpha layer from getting stuck in a Reality loop</li>
+<li>Fixed Reality Upgrade 23 NaNing</li>
+<li>Fixed having -7 True Shard when you Obliterate your Thermal Energy</li>
+<li>Endgame Upgrade 10 lock not working properly</li>
+<li>Fixed a few small bugs in Cel Navigation</li>
+<li>Fixed Sisyphus randomly taking breaks</li>
+<li>Fixed Replicanti being weird in Alpha</li>
+<li>Star Wars: The Tpyos Strike Back but I fixed the tpyos before the film released</li>
+</ul>
+<br>
+`
+    },
   {
     date: [2026, 9, 3],
     name: "v1.2.0: The Update that no one asked for",

@@ -15,6 +15,7 @@ export default {
   data() {
     return {
       hasAccelerator: false,
+      unlockReq: new Decimal(),
       canSeeEntropy1: false,
       canSeeEntropy2: false,
       entropyCorrupted: false,
@@ -77,6 +78,7 @@ export default {
   methods: {
     update() {
       this.hasAccelerator = Accelerators.all.some(a => a.isUnlocked);
+      this.unlockReq.copyFrom(Decimal.pow10(1e200));
       this.canSeeEntropy1 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e200)) && !Slabdrill.isCursed;
       this.canSeeEntropy2 = player.records.totalAntimatterOutsideDoom.gte(Decimal.pow10(1e260)) && !Pelle.isDoomed && !Slabdrill.isCursed;
       this.entropyCorrupted = Slabdrill.isCursed;
@@ -207,7 +209,7 @@ export default {
         v-if="!hasAccelerator"
         class="c-large-hadron-collider-description"
       >
-        达到 {{ format(Decimal.pow10(1e200), 2, 2) }} {{ isFlipped ? "正物质" : "反物质" }}
+        达到 {{ format(unlockReq, 2, 2) }} {{ isFlipped ? "正物质" : "反物质" }}
       </div>
       <div
         class="c-large-hadron-collider-entropy"

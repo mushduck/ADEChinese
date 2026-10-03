@@ -220,9 +220,9 @@ export class DimBoost {
 
     let boostEffects;
     if (NormalChallenge(8).isRunning) boostEffects = newUnlock;
+    else if (Ascensions.dbA.isUnlocked && boosts.gte(DimBoost.maxDimensionsUnlockable - 1) && newUnlock === "") boostEffects = `${formattedMultText} ${formattedPowText}`;
     else if (newUnlock === "") boostEffects = ` ${dimensionRange}${formattedMultText}${formattedPowText}`;
     else boostEffects = `${newUnlock}且${dimensionRange}${formattedMultText}${formattedPowText} `;
-
     if (boostEffects === "") return "维度提升目前无效";
     const areDimensionsKept = (Perk.antimatterNoReset.isBought || Achievement(111).canBeApplied) &&
       (!player.disablePostReality || (LHC.voidRunning && player.endgame.largeHadronCollider.void.nullified) || (Alpha.isRunning && Alpha.currentStage >= 12)

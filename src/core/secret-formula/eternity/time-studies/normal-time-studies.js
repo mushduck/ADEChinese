@@ -360,7 +360,7 @@ export const normalTimeStudies = [
       : "为无限点数提供在本次无限中逐渐衰减的倍率加成"),
     effect: () => ((Perk.studyActiveEP.isBought && !player.disablePostReality)
       ? DC.E45
-      : DC.E45.divide(thisInfinityMult(Alpha.isRunning
+      : DC.E45.divide(thisInfinityMult(Alpha.isRunning || Slabdrill.isCursed
         ? Time.thisInfinityRealTime.totalSeconds
         : Time.thisInfinity.totalSeconds)).clampMin(1)),
     formatEffect: value => ((Perk.studyActiveEP.isBought && !player.disablePostReality) ? undefined : formatX(value, 2, 1))
