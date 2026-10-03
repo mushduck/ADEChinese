@@ -15,9 +15,9 @@ export const EndgameMasteries = {
     pathArr.push({ path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "永恒点数" });
     pathArr.push({ path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "现实机器" });
     pathArr.push({ path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "虚幻机器" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.ENDGAME_ENTANGLEMENT, masteries: [281, 291, 301], name: "Endgame Entanglement" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.CELESTIAL_ENTANGLEMENT, masteries: [282, 292, 302], name: "Celestial Entanglement" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.DIVINE_ENTANGLEMENT, masteries: [283, 293, 303], name: "Divine Entanglement" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.ENDGAME_ENTANGLEMENT, masteries: [281, 291, 301], name: "终局" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.CELESTIAL_ENTANGLEMENT, masteries: [282, 292, 302], name: "天界" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.DIVINE_ENTANGLEMENT, masteries: [283, 293, 303], name: "神性" });
     return pathArr;
   }
 };
