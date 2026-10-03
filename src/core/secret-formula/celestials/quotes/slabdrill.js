@@ -199,7 +199,7 @@ export const slabdrillQuotes = {
         celestialName: "Pelle"
       },
       {
-        text: "*(佩勒掐住了斯拉德里尔的喉咙，将其拖向物质深渊)*",
+        text: "*(佩勒掐住了渊蛇的喉咙，将其拖向物质深渊)*",
         background: "pelle",
         showCelestialName: false
       },
@@ -209,7 +209,7 @@ export const slabdrillQuotes = {
       "我还没完呢！",
       "我们还会再见面的！",
       {
-        text: "*(佩勒将斯拉德里尔抛入了物质深渊)*",
+        text: "*(佩勒将渊蛇抛入了物质深渊)*",
         background: "pelle",
         showCelestialName: false
       },
@@ -245,7 +245,7 @@ export const slabdrillQuotes = {
         showCelestialName: false
       },
       {
-        text: "你击败了斯拉德里尔。",
+        text: "你击败了渊蛇。",
         background: flashCelestial,
         showCelestialName: false
       },

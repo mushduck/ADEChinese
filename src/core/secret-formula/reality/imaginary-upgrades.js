@@ -171,11 +171,11 @@ export const imaginaryUpgrades = [
     id: 14,
     cost: new Decimal(3.5e8),
     formatCost: x => format(x, 1),
-    requirement: () => `在永恒挑战5 中，计数频率达到 ${format("1e75000000000")} /秒`,
+    requirement: () => `在永恒挑战5 中，计数频率达到${format("1e75000000000")} /秒`,
     hasFailed: () => false,
     checkRequirement: () => EternityChallenge(5).isRunning && Tickspeed.perSecond.log10().gte(7.5e10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `将所有维度每次购买的倍数提高到 ${formatPow(1.5, 0, 1)}`,
+    description: () => `将所有维度每次购买的倍数提高到${formatPow(1.5, 0, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.5,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.recollectionOfIntrusion.canBeApplied
   },

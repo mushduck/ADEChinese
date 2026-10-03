@@ -111,7 +111,7 @@ export const dilationUpgrades = {
           multiplier = ratio.toFixed(2);
         }
       }
-      return `时间维度获得复制器倍率 ${formatPow(multiplier, 1, 3)} 的加成，这个加成超过 ${formatX(DC.E9000)} 后减弱`;
+      return `时间维度获得复制器倍率${formatPow(multiplier, 1, 3)} 的加成，这个加成超过 ${formatX(DC.E9000)} 后减弱`;
     },
     effect: () => {
       let rep10 = replicantiMult().pLog10().times(Slabdrill.isCursed ? 0.01 : 0.1);

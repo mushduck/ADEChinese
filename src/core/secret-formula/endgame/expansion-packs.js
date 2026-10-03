@@ -106,7 +106,7 @@ export const expansionPacks = {
     formatCost: value => formatPostBreak(value, 2, 0)
   },
   slabPack: {
-    name: "斯拉德里尔扩展包",
+    name: "渊蛇扩展包",
     id: "slabPack",
     symbol: "⁹δ",
     get description() {

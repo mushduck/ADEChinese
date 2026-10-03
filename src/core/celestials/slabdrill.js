@@ -6,8 +6,8 @@ import { Quotes } from "./quotes";
 import { matchOnlyDeepmerge } from "@/utility/deepmerge";
 
 export const Slabdrill = {
-  displayName: "Slabdrill",
-  possessiveName: "Slabdrill's",
+  displayName: "渊蛇",
+  possessiveName: "渊蛇",
   get isCursed() {
     return player.celestials.slabdrill.isCursed;
   },
@@ -126,9 +126,9 @@ export const Slabdrill = {
     }
   },
   get layerReqs() {
-    return ["Perform a Dimension Boost", "Create a Galaxy", "Reach Infinity", "Break Infinity", "Complete Infinity Challenge 4",
-            "Unlock Replicanti", "Reach Eternity", "Purchase Time Study 181", "Complete Eternity Challenge 10", "Dilate Time",
-            "Reach Reality"];
+    return ["进行维度提升", "创造一个星系", "达到无限", "打破无限", "完成无限挑战 4",
+            "解锁复制器", "达到永恒", "购买时间研究 181", "完成永恒挑战 10", "膨胀时间",
+            "达到现实"];
   },
   get nextLayer() {
     return this.layerReqs[this.currentStage];

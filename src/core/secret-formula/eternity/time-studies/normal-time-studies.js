@@ -73,7 +73,7 @@ export const normalTimeStudies = [
     cost: 3,
     requirement: [21],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `基于无限次数的奖励效力 ${formatPow(100)}`,
+    description: () => `基于无限次数的奖励效力${formatPow(100)}`,
     effect: 100
   },
   {

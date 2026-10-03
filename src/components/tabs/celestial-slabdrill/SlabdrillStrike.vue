@@ -25,13 +25,13 @@ export default {
         <span class="l-slabdrill-header__large">𓆗</span>
       </span>
       <span class="o-slabdrill-milestone__text">
-        <span class="l-slabdrill-header">Strike {{ unlock.requirement }}: {{ unlock.name }}.</span>
+        <span class="l-slabdrill-header">冲击 {{ unlock.requirement }}：{{ unlock.name }}。</span>
         <br>
         <br>
-        <span class="l-slabdrill-header">Penalty: {{ unlock.nerfDescription() }}.</span>
+        <span class="l-slabdrill-header">削弱：{{ unlock.nerfDescription() }}。</span>
         <br>
         <br>
-        <span class="l-slabdrill-header">Reward: {{ unlock.buffDescription() }}.</span>
+        <span class="l-slabdrill-header">奖励：{{ unlock.buffDescription() }}。</span>
       </span>
     </button>
   </div>

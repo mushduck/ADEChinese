@@ -124,7 +124,7 @@ GameDatabase.celestials.descriptions = [
     }
   },
   {
-    name: "斯拉德里尔",
+    name: "Slabdrill",
     effects() {
       return `你的现实将被诅咒，并对玩法产生多种影响。`;
     }
