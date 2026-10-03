@@ -46,7 +46,7 @@ export default {
     :class="isUnlocked ? 'o-compression-btn--unlocked' : 'o-compression-btn--locked'"
     @click="compress()"
   >
-    <span v-if="!isUnlocked">Purchase the Compression Study to unlock.</span>
+    <span v-if="!isUnlocked">购买对应终局专精以解锁时间压缩</span>
     <span v-else-if="!isRunning">
       压缩时间。
     </span>

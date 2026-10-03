@@ -109,7 +109,7 @@ export default {
         v-if="!isBought && !isCapped"
         br
         :config="upgrade.config"
-        name="Thermal Radiation"
+        name="热能辐射"
       />
     </button>
   </div>

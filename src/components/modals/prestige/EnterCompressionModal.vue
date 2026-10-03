@@ -8,13 +8,10 @@ export default {
   },
   computed: {
     message() {
-      return `Compressing time will start a new Endgame, in which the first three Dimension types' multiplier's exponents and
-        tickspeed multiplier's exponent will be reduced to a power based on Antimatter and time spent in Compression. If you
-        can reach Infinity while Compressed, your Hawking Radiation will be increased to a value based on your highest
-        antimatter and any Hawking Radiation multipliers you have.`;
+      return `时间压缩将开启新的终局。前三种维度和计数频率的指数，将基于反物质和在压缩中经过的时间获得指数削弱。若能在压缩期间完成无限，你的霍金辐射将基于最高反物质及升级倍率提升。`;
     },
     entranceLabel() {
-      return `You are about to enter Compression`;
+      return `你将要进入时间压缩`;
     }
   },
   methods: {
@@ -42,7 +39,7 @@ export default {
       {{ message }}
     </div>
     <template #confirm-text>
-      Enter
+      进入
     </template>
   </ModalWrapperChoice>
 </template>
