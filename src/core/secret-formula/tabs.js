@@ -674,7 +674,7 @@ export const tabs = [
       },
       {
         key: "compression",
-        name: "Time Compression",
+        name: "时间压缩",
         symbol: "<i class='fas fa-down-left-and-up-right-to-center'></i>",
         component: "TimeCompressionTab",
         condition: () => PlayerProgress.compressionUnlocked(),
@@ -769,7 +769,7 @@ export const tabs = [
   },
   {
     key: "universes",
-    name: "Universes",
+    name: "宇宙",
     hideAt: 2.4,
     UIClass: () => universesUI(player.universes.current),
     id: 14,
@@ -778,7 +778,7 @@ export const tabs = [
     subtabs: [
       {
         key: "transient",
-        name: "Transient Universe",
+        name: "流幻宇宙",
         symbol: "<i class='fas fa-stopwatch-20'></i>",
         component: "TransientUniverseTab",
         condition: () => Universes.isUnlocked(1),

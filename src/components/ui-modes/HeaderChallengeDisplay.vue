@@ -79,17 +79,7 @@ export default {
           activityToken: () => player.endgame.overcharge.isRunning
         },
         {
-          name: () => "Time Compression",
-          isActive: token => token,
-          activityToken: () => player.compression.active
-        },
-        {
-          name: () => `The Overcharge (Level ${formatInt(player.endgame.overcharge.level)})`,
-          isActive: token => token,
-          activityToken: () => player.endgame.overcharge.isRunning
-        },
-        {
-          name: () => "Time Compression",
+          name: () => "时间压缩",
           isActive: token => token,
           activityToken: () => player.compression.active
         },
