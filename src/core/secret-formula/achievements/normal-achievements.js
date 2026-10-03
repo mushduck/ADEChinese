@@ -2082,217 +2082,217 @@ export const normalAchievements = [
   },
   {
     id: 251,
-    name: "Eternal Bondage",
-    description: "Curse your Reality.",
+    name: "永恒樊笼",
+    description: "诅咒你的现实。",
     checkRequirement: () => Slabdrill.isCursed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(251).isUnlocked ? DC.D1 : Decimal.clamp(player.endgame.celDimExpansion.celestialEternityPoints.add(1).log10().div(4000), 0, 1)
   },
   {
     id: 252,
-    name: "Broken Simulation",
-    description: "Perform your first Dimboost in Slabdrill's Reality.",
+    name: "破碎模拟",
+    description: "在渊蛇的现实中进行一次维度提升。",
     checkRequirement: () => Slabdrill.isCursed && player.dimensionBoosts.gte(1),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(252).isUnlocked ? DC.D1 : (!Slabdrill.isCursed ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().div(12), 0, 1))
   },
   {
     id: 253,
-    name: "Cosmic Chains",
-    description: "Create your first Galaxy in Slabdrill's Reality.",
+    name: "宇宙枷锁",
+    description: "在渊蛇的现实中创造一个星系。",
     checkRequirement: () => Slabdrill.isCursed && player.galaxies.gte(1),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(253).isUnlocked ? DC.D1 : (!Slabdrill.isCursed ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().div(130), 0, 1))
   },
   {
     id: 254,
-    name: "Altered Overload",
-    description: "Reach Infinity in Slabdrill's Reality.",
+    name: "扭曲过载",
+    description: "在渊蛇的现实中达到无限。",
     checkRequirement: () => Slabdrill.isCursed && player.infinities.gte(1),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(254).isUnlocked ? DC.D1 : (!Slabdrill.isCursed ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1))
   },
   {
     id: 255,
-    name: "Breaking Destruction",
-    description: "Break Infinity in Slabdrill's Reality.",
+    name: "破灭之始",
+    description: "在渊蛇的现实中打破无限。",
     checkRequirement: () => Slabdrill.isCursed && player.break && !Slabdrill.coreActive,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(255).isUnlocked ? DC.D1 : (!Slabdrill.isCursed || Slabdrill.coreActive ? DC.DM1 : Decimal.clamp(Decimal.log2(1500).sub(new Decimal(player.auto.bigCrunch.interval).div(100).log2()).div(Decimal.log2(1500)), 0, 1))
   },
   {
     id: 256,
-    name: "Eternal Slavery",
-    description: "Reach Eternity in Slabdrill's Reality.",
+    name: "永恒傀儡",
+    description: "在渊蛇的现实中达到永恒。",
     checkRequirement: () => Slabdrill.isCursed && player.eternities.gte(1),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(256).isUnlocked ? DC.D1 : (!Slabdrill.isCursed ? DC.DM1 : Decimal.clamp(player.infinityPoints.add(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1))
   },
   {
     id: 257,
-    name: "Amplified Suffering",
-    description: "Dilate Time in Slabdrill's Reality.",
+    name: "扩大之创",
+    description: "在渊蛇的现实中膨胀时间。",
     checkRequirement: () => Slabdrill.isCursed && player.dilation.active,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(257).isUnlocked ? DC.D1 : (!Slabdrill.isCursed ? DC.DM1 : Decimal.clamp(new Decimal(EternityChallenge(11).completions).div(20).min(0.25).add(new Decimal(EternityChallenge(12).completions).div(20).min(0.25)).add(player.timestudy.maxTheorem.div(51600).min(0.25)).add(player.timestudy.theorem.div(20000).min(0.25)), 0, 1))
   },
   {
     id: 258,
-    name: "Hevipelle Counted to Nine",
-    description: "Destroy Slabdrill.",
+    name: "Hevipelle数到了九",
+    description: "毁灭渊蛇。",
     checkRequirement: () => Slabdrill.isCursed && player.antimatter.gte(DC.ENUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Unlock the Ninth Dimension.`;
+      return `解锁第九维度。`;
     },
     progress: () => Achievement(258).isUnlocked ? DC.D1 : (!Slabdrill.isCursed ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().add(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1))
   },
   {
     id: 261,
-    name: ["False", "Deity", "Monarch"],
-    description: "Become a Celestial.",
+    name: ["使徒", "神祇", "帝王"],
+    description: "扬升为神。",
     checkRequirement: () => player.celestials.slabdrill.hasBoughtNinthDimension && player.endgame.creditsTick > 0 && !player.endgame.credits,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Gain ${formatX(10)} more Condenses.`;
+      return `凝聚次数获取量 ${formatX(10)}。`;
     },
     effect: () => player.disablePostReality ? 1 : 10,
     progress: () => Achievement(261).isUnlocked ? DC.D1 : (!Slabdrill.isCursed ? DC.DM1 : Decimal.clamp(player.antimatter.add(1).log10().add(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1))
   },
   {
     id: 262,
-    name: "The End is where we Begin",
-    description: "Uncap Divine Matter.",
+    name: "终末即吾等之始",
+    description: "灵神性物质的数量突破无限。",
     checkRequirement: () => DivinityUpgrade.divineL4U5.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(262).isUnlocked ? DC.D1 : Decimal.clamp(player.celestials.pelle.divinity.nebulae.div(100), 0, 1)
   },
   {
     id: 263,
-    name: "Our Prestige Layer is in another castle!",
-    get description() { return `Reach ${format(DC.NUMMAX, 1, 0)} Dual Machines.` },
+    name: "我们的位面在另一个城堡！",
+    get description() { return `达到 ${format(DC.NUMMAX, 1, 0)} 重构机器。` },
     checkRequirement: () => Currency.dualMachines.gte(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(263).isUnlocked ? DC.D1 : Decimal.clamp(Currency.dualMachines.value.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
   },
   {
     id: 264,
-    name: "Dominion begins here",
+    name: "统御由此开始",
     get description() { return `Collect ${formatInt(10)} Celestial Runes.` },
     checkRequirement: () => false,//Currency.celestialRunes.gte(10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Unlock Your Reality.`;
+      return `解锁你的现实。`;
     },
     progress: () => Achievement(264).isUnlocked ? DC.D1 : Decimal.clamp(DC.D0.div(10), 0, 1)
   },
   {
     id: 265,
-    name: "Blank Space",
-    get description() { return `Obtain ${format(1e20, 2, 2)} Null Particles.` },
+    name: "纯虚空间",
+    get description() { return `获得 ${format(1e20, 2, 2)} 虚粒子。` },
     checkRequirement: () => Currency.nullParticles.gte(1e20),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(265).isUnlocked ? DC.D1 : Decimal.clamp(Currency.nullParticles.value.max(1).log10().div(20), 0, 1)
   },
   {
     id: 266,
-    name: "Postmortal",
-    description: "Ascend.",
+    name: "涅槃重生",
+    description: "扬升。",
     checkRequirement: () => player.endgame.ascension >= 1,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(266).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineEnergy.value.max(1).log10().div(66000).min(0.5).add(new Decimal(86400000).sub(Ascensions.ipA.timeRemaining).div(172800000).min(0.5)), 0, 1)
   },
   {
     id: 267,
-    name: "Supreme Deity",
-    get description() { return `Reach ${formatInt(10)} Divinities.` },
+    name: "至高神性",
+    get description() { return `达到 ${formatInt(10)} 神性` },
     checkRequirement: () => player.celestials.pelle.divinities >= 10,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(267).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.celestials.pelle.divinities).div(10), 0, 1)
   },
   {
     id: 268,
-    name: "True Power",
-    description: "Unlock the Overcharge.",
+    name: "真正的力量",
+    description: "解锁激能",
     checkRequirement: () => player.endgame.ascension >= 6,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Automatically update record Teresa ${player.universes.current === 2 ? "Matter" : "Antimatter"} to your current ${player.universes.current === 2 ? "Matter" : "Antimatter"} amount.`;
+      return `自动设定特蕾莎挑战记录为当前的${player.universes.current === 2 ? "正物质" : "反物质"}数量。`;
     },
     progress: () => Achievement(267).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.endgame.ascension).div(6), 0, 1)
   },
   {
     id: 271,
-    name: "Multiversal Breach",
-    description: "Unlock Universes.",
+    name: "多元宇宙裂隙",
+    description: "解锁宇宙。",
     checkRequirement: () => player.celestials.pelle.divinities >= 13,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(271).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.celestials.pelle.divinities).div(13), 0, 1)
   },
   {
     id: 272,
-    name: "Don't make me tell you again... TIME IS RELATIVE",
-    description: "Compress Time.",
+    name: "别让我再说一遍...时间是相对的",
+    description: "压缩时间。",
     checkRequirement: () => player.compression.active,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(272).isUnlocked ? DC.D1 : Decimal.clamp(EndgameMastery.timeCompression.isBought ? 0.9999 : player.endgameMasteries.maxSkills.div(2e7).min(0.9998), 0, 1)
   },
   {
     id: 273,
-    name: "Payoff",
-    get description() { return `Complete ${formatInt(15)} Celestial Tasks.` },
+    name: "回报",
+    get description() { return `完成 ${formatInt(15)} 个天界任务。` },
     checkRequirement: () => false,//player.celestialPlus.completedTasks >= 15,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Double Celestial Rune gain from all sources.`;
+      return `从所有资源中获得双倍的天界铭文。`;
     },
     effect: 2,
     progress: () => Achievement(273).isUnlocked ? DC.D1 : Decimal.clamp(DC.D0.div(15), 0, 1)
   },
   {
     id: 274,
-    name: "Covalent Bonding",
-    get description() { return `Obtain ${formatInt(200)} Hadrons.` },
+    name: "共价键合",
+    get description() { return `获得 ${formatInt(200)} 强子。` },
     checkRequirement: () => player.celestials.laitela.hadrons.trueTotal >= 200,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(274).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.celestials.laitela.hadrons.trueTotal).div(200), 0, 1)
   },
   {
     id: 275,
-    name: "Quantum Mechanics",
-    description: "Purchase all the Entanglement Masteries.",
+    name: "量子力学",
+    description: "购买所有终局专精的纠缠路径。",
     checkRequirement: () => EndgameMastery.boughtEM().countWhere(e => e.id > 280 && e.id < 310) >= 9,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(275).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(EndgameMastery.boughtEM().countWhere(e => e.id > 280 && e.id < 310)).div(9), 0, 1)
   },
   {
     id: 276,
-    name: "Claustrophilic",
-    get description() { return `Reach ${formatPostBreak("1e100000000")} ${player.universes.current === 2 ? "matter" : "antimatter"} while Compressed.` },
+    name: "幽闭爱好者",
+    get description() { return `时间压缩时达到 ${formatPostBreak("1e100000000")} ${player.universes.current === 2 ? "正物质" : "反物质"}。` },
     checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(1e8) && player.compression.active,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Gain ${formatX(2)} Thermal Radiation and Endgame Skills while Compressed.`;
+      return `时间压缩时热能辐射和终局能力产量 ${formatX(2)}。`;
     },
     effect: () => player.disablePostReality ? 1 : (player.compression.active ? 2 : 1),
     progress: () => Achievement(276).isUnlocked ? DC.D1 : (!player.compression.active ? DC.DM1 : Decimal.clamp(player.antimatter.max(1).log10().div(1e8), 0, 1))
   },
   {
     id: 277,
-    name: "Diese Errungenschaft existiert nicht V",
+    name: "已经有 V 不存在的成就了",
     get description() { return `Reach ${formatPostBreak(DC.D9_99999E999, 5, 0)} Dual Machines.` },
     checkRequirement: () => player.reality.dualMachines.gte(DC.D9_99999E999),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `Gain ${formatPow(1.5, 1, 1)} more Singularities.`;
+      return `奇点获取量 ${formatPow(1.5, 1, 1)}。`;
     },
     effect: () => player.disablePostReality ? 1 : 1.5,
     progress: () => Achievement(277).isUnlocked ? DC.D1 : Decimal.clamp(player.reality.dualMachines.max(1).log10().div(1000), 0, 1)
   },
   {
     id: 278,
-    name: "You shouldn't have done that",
-    get description() { return `Obtain ${format(1e15, 2, 2)} Endgame Skills.` },
+    name: "你不该那么做的",
+    get description() { return `获得 ${format(1e15, 2, 2)} 终局能力。` },
     checkRequirement: () => player.endgameMasteries.skills.gte(1e15),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(278).isUnlocked ? DC.D1 : Decimal.clamp(player.endgameMasteries.skills.div(1e15), 0, 1)

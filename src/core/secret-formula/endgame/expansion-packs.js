@@ -110,9 +110,9 @@ export const expansionPacks = {
     id: "slabPack",
     symbol: "⁹δ",
     get description() {
-      return ` Allow Serpentine Power to be collected outside the Cursed Reality.
-        Reunlock the Cursed Core, and boost Chaos Core find chance and interval by Celestial Points, Celestial Reality Machines and Celestial Runes rather than Slabdrill Strikes.
-        Refactor all Serpentine Power effects.`
+      return ` 允许在被诅咒的现实外生产幽蛇之力。
+        重新解锁诅咒核心。混沌核心的猎取概率与间隔改由天界点数、天界现实机器和天界铭文提升而非渊蛇冲击。
+        重构所有幽蛇之力效果。`
     },
     cost: Decimal.pow(10, 1e275),
     formatCost: value => formatPostBreak(value, 2, 0)

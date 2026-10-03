@@ -85,7 +85,7 @@ export default {
     },
     showEternity() {
       return PlayerProgress.eternityUnlocked()
-        ? "在本次永恒"
+        ? "本次永恒中"
         : "";
     },
     isShowingStateInfo() {
@@ -191,7 +191,7 @@ export default {
   >
     {{ name }}
     <br>
-    要求: 总${this.isFlipped ? "正物质" : "反物质"}达到 {{ format(antimatterCost) }} {{ showEternity }}
+    要求: {{ showEternity }}总{{this.isFlipped ? "正物质" : "反物质"}}达到 {{ format(antimatterCost) }}
   </div>
 </template>
 
