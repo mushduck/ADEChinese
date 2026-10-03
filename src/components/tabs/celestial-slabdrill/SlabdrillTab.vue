@@ -152,7 +152,7 @@ export default {
       v-if="isCursed"
       class="l-slabdrill-header"
     >
-      在你 {{ nextLayer }} 将引发下一次冲击。
+      在你 {{ nextLayer }} 时将引发下一次冲击。
     </span>
     <br>
     <br>
