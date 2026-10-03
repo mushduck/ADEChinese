@@ -21,7 +21,7 @@ export const permanentEndgameMasteries = [
   },
   {
     id: 3,
-    description: "Unlock Time Compression",
+    description: "解锁时间压缩",
     cost: 12000000,
     requirement: () => {
       const esRequirement = Currency.endgameSkills.max.gte(EndgameMastery.timeCompression.totalEndgameSkillRequirement);

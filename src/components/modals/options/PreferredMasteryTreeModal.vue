@@ -119,6 +119,12 @@
             return "现实机器";
           case "iM":
             return "虚幻机器";
+          case "Endgame Entanglement":
+            return "终局";
+          case "Celestial Entanglement":
+            return "天界";
+          case "Divine Entanglement":
+            return "神性";
           default:
             throw new Error("Unknown path in preferred mastery tree modal");
         }
@@ -169,7 +175,7 @@
         </button>
       </div>
     <br>
-    <h2>Entanglement Split Preference</h2>
+    <h2>层级纠缠路径</h2>
     <div class="l-modal-split-preferences">
       <button
         v-for="(id, name) in entanglementOptions"
@@ -184,7 +190,7 @@
           {{ isPreferred(name) }}
         </div>
         <div>
-          {{ name }}
+          {{ getChineseName(name) }}
         </div>
       </button>
     </div>

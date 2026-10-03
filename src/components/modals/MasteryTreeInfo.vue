@@ -36,7 +36,7 @@ export default {
       v-if="treeStatus.thirdPaths"
       class="l-modal-import-tree__tree-info-line"
     >
-      Entanglement Split: {{ treeStatus.thirdPaths }}
+      纠缠路径：{{ treeStatus.thirdPaths }}
     </div>
   </div>
 </template>
