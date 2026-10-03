@@ -17,12 +17,12 @@ export default {
   computed: {
     transientUniverseButtonText() {
       if (this.isRunning && this.pendingLight.lte(0)) {
-        return `Exit the Transient Universe. Reach ${format(this.highestAntimatter, 2, 1)} Antimatter to gain more Ephemeral Light.`;
+        return `退出流幻宇宙。达到 ${format(this.highestAntimatter, 2, 1)} 反物质以获得耀界浮光。`;
       }
       if (this.isRunning) {
-        return `Exit the Transient Universe. Gain ${format(this.pendingLight, 2, 2)} Ephemeral Light.`;
+        return `退出流幻宇宙。获得 ${format(this.pendingLight, 2, 2)} 耀界浮光。`;
       }
-      return "Enter the Transient Universe.";
+      return "进入流幻宇宙。";
     }
   },
   methods: {
@@ -51,31 +51,30 @@ export default {
     <div>
       <br>
       <div class="c-ephemeral-text">
-        You have <span class="c-universes-text--header">{{ format(ephemeralLight, 2, 2) }}</span> Ephemeral Light.
+        你拥有 <span class="c-universes-text--header">{{ format(ephemeralLight, 2, 2) }}</span> 耀界浮光。
         <br>
-        Ephemeral Light is currently providing a
+        耀界浮光当前为星系生成器产量提供
         <span class="c-universes-text--header">{{ formatPow(formula1, 2, 3) }}</span>
-        to Galaxy Generator production, and a
+        的加成。并在被毁灭的现实外为超光速粒子、膨胀时间和游戏速度提供
         <span class="c-universes-text--header">{{ formatPow(formula2, 2, 3) }}</span>
-        to Tachyon Particles, Dilated Time, and Game Speed while outside Doom.
+        的加成。
       </div>
       <br>
       <div class="c-transient-universe-text">
-        Your highest Antimatter reached in the Transient Universe is
-        <span class="c-universes-text--header">{{ format(highestAntimatter, 2, 1) }}</span>.
+        你在流幻宇宙中达到的最高反物质为
+        <span class="c-universes-text--header">{{ format(highestAntimatter, 2, 1) }}</span>。
       </div>
       <br>
       <div class="c-transient-universe-text">
-        You have
+        你拥有
         <span class="c-universes-text--header">{{ format(relativisticParticles, 2, 2) }}</span>
-        Relativistic Particles.
-        <span class="c-universes-text--header">+{{ format(particlesPerSecond, 2, 2) }}/s</span>
+        相对粒子。
+        <span class="c-universes-text--header">+{{ format(particlesPerSecond, 2, 2) }}/秒</span>
         <br>
-        Relativistic Particles are currently weaking the negative Dilation effects of Antimatter and Infinity Dimensions by
-        <span class="c-universes-text--header">{{ formatDecimalPercents(particleBoost, 2, 2) }}</span>
-        while inside the Transient Universe.
+        在流幻宇宙内，相对粒子将反物质维度和无限维度的减益削弱至
+        <span class="c-universes-text--header">{{ formatDecimalPercents(particleBoost, 2, 2) }}</span>。
         <br>
-        Relativistic Particles reset on exiting the Transient Universe.
+        相对粒子在退出流幻宇宙时重置。
       </div>
     </div>
     <br>

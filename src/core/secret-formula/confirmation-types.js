@@ -36,7 +36,7 @@ export const confirmationTypes = [
     option: "dilation",
     isUnlocked: () => PlayerProgress.realityUnlocked() || !Currency.tachyonParticles.eq(0),
   }, {
-    name: "Compression",
+    name: "时间压缩",
     option: "compression",
     isUnlocked: () => !Currency.hawkingRadiation.eq(0),
   }, {
@@ -100,7 +100,7 @@ export const confirmationTypes = [
     option: "cursedCore",
     isUnlocked: () => Slabdrill.isUnlocked || Slabdrill.isDestroyed,
   }, {
-    name: "Universes",
+    name: "进入宇宙",
     option: "universes",
     isUnlocked: () => Universes.areUnlocked,
   }, {
