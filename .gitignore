@@ -11,4 +11,4 @@ node_modules/
 node_modules/
 dist/
 *.bak
-dist_electron/
+dist_electron/.aider*
