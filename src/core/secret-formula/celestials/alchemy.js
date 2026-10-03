@@ -269,7 +269,7 @@ export const alchemyResources = {
     tier: 4,
     uiOrder: 2,
     unlockedAt: 17,
-    description: `基于现实机器加成${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
+    description: () => `基于现实机器加成${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
     formatEffect: value => `${player.universes.current === 2 ? "正物质" : "反物质"}维度获得等同于现实机器数量${formatPow(value, 2, 2)}的倍率`,
     reagents: [
       { resource: ALCHEMY_RESOURCE.DIMENSIONALITY, amount: 7 },

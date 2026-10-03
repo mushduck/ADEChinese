@@ -653,7 +653,7 @@ export const normalAchievements = [
   },
   {
     id: 83,
-    name: `您可以获得50个${player.universes.current === 2 ? "正物质" : "反物质"}星系？！？！`,
+    name: "您可以获得 50 个星系？！？！",
     get description() { return `获得 ${formatInt(50)} 个${player.universes.current === 2 ? "正物质" : "反物质"}星系。`; },
     checkRequirement: () => player.galaxies.gte(50),
     checkEvent: GAME_EVENT.GALAXY_RESET_AFTER,
@@ -1534,7 +1534,9 @@ export const normalAchievements = [
   {
     id: 182,
     name: "再来一遍",
-    description: `重获自动购买所有${player.universes.current === 2 ? "正物质" : "反物质"}维度的能力。`,
+    get description() {
+      return `重获自动购买所有${player.universes.current === 2 ? "正物质" : "反物质"}维度的能力。`;
+    },
     checkRequirement: () => PelleUpgrade.antimatterDimAutobuyers1.canBeApplied &&
       PelleUpgrade.antimatterDimAutobuyers2.canBeApplied,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,

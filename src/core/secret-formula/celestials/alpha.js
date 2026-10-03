@@ -65,7 +65,7 @@ export const alphaUnlocks = {
     id: 6,
     requirement: 7,
     nerfDescription: () => `遥远${player.universes.current === 2 ? "正物质" : ""}星系的价格增长从 ${formatInt(1)} 星系开始`,
-    buffDescription: `遥远${player.universes.current === 2 ? "正物质" : ""}星系和极远${player.universes.current === 2 ? "正物质" : ""}星系的出现阈值翻倍`,
+    buffDescription: () => `遥远${player.universes.current === 2 ? "正物质" : ""}星系和极远${player.universes.current === 2 ? "正物质" : ""}星系的出现阈值翻倍`,
     effects: {
       nerf: 1,
       buff: 2

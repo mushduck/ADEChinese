@@ -113,7 +113,7 @@ export const eternityChallenges = [
     slabGoalIncrease: DC.E900,
     hasPelleGoal: () => !PelleDestructionUpgrade.disableEC6Nerf.canBeApplied,
     reward: {
-      description: `进一步降低${player.universes.current === 2 ? "正物质" : "反物质"}维度的价格增速`,
+      description: () => `进一步降低${player.universes.current === 2 ? "正物质" : "反物质"}维度的价格增速`,
       effect: completions => completions * 0.2,
       formatEffect: value => {
         const total = Math.round(Player.dimensionMultDecrease + Effects.sum(EternityChallenge(6).reward)) - value;
@@ -124,7 +124,7 @@ export const eternityChallenges = [
   },
   {
     id: 7,
-    description:
+    description: () =>
       `第一时间维度生产第八无限维度，不生产时间碎片。 第一无限维度生产第七${player.universes.current === 2 ? "正物质" : "反物质"}维度，而不是无限之力。` +
       "同时，计数频率也直接影响无限维度和时间维度。",
     goal: DC.E2000,

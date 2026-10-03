@@ -22,7 +22,7 @@ const rebuyable = props => {
 
 export const endgameUpgrades = [
   rebuyable({
-    name: `${player.universes.current === 2 ? "正物质" : "反物质"}优化器`,
+    name: () => `${player.universes.current === 2 ? "正物质" : "反物质"}优化器`,
     id: 1,
     initialCost: 1e40,
     costMult: 60,
@@ -306,7 +306,7 @@ export const endgameUpgrades = [
     hasFailed: () => !BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkRequirement: () => BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: `基于${player.universes.current === 2 ? "正物质" : "反物质"}数量提高符文等级，该效果在符文不稳定性削弱后结算`,
+    description: () => `基于${player.universes.current === 2 ? "正物质" : "反物质"}数量提高符文等级，该效果在符文不稳定性削弱后结算`,
     effect: () => player.disablePostReality ? 1 : Decimal.min(Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)).div(100), 1), 0.05), 1.2).toNumber(),
     formatEffect: value => formatX(value, 2, 4)
   },
