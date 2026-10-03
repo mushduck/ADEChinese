@@ -20,9 +20,9 @@ export default {
       const amDisplay = format(this.amRequirement);
       const ipDisplay = format(this.ipRequirement);
       if (this.hasIPUnlock) {
-        return `达到 ${ipDisplay} 无限点数和 ${amDisplay} ${this.isFlipped ? "物质" : "反物质"}以解锁 ${dimensionText}`;
+        return `达到 ${ipDisplay} 无限点数和 ${amDisplay} ${this.isFlipped ? "正物质" : "反物质"}以解锁 ${dimensionText}`;
       }
-      return `达到 ${amDisplay} ${this.isFlipped ? "物质" : "反物质"}以解锁 ${dimensionText}`;
+      return `达到 ${amDisplay} ${this.isFlipped ? "正物质" : "反物质"}以解锁 ${dimensionText}`;
     },
     buttonClassObject() {
       return {

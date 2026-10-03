@@ -48,7 +48,7 @@ export default {
   <div class="l-challenges-tab">
     <ChallengeTabHeader />
     <div>
-      如果启用自动大坍缩，不论采用何种设置，当${this.isFlipped ? "正物质" : "反物质"}数量接近挑战目标时，它会尽全力强制进行一次大坍缩。
+      如果启用自动大坍缩，不论采用何种设置，当{{this.isFlipped ? "正物质" : "反物质"}}数量接近挑战目标时，它会尽全力强制进行一次大坍缩。
     </div>
     <div>{{ nextAtDisplay }}</div>
     <ChallengeGrid

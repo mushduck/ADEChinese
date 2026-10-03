@@ -64,7 +64,7 @@ export default {
         </template>
         <template v-else>
           <div>
-            达到 {{ format("e9e15", 2, 2) }} {{ isFlipped ? "物质" : "反物质" }}以进行终局
+            达到 {{ format("e9e15", 2, 2) }} {{ isFlipped ? "正物质" : "反物质" }}以进行终局
           </div>
         </template>
         <div

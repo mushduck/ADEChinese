@@ -123,7 +123,7 @@ export const v = {
     {
       id: 3,
       name: "少年郎",
-      description: value => `不解锁时间膨胀的前提下，在永恒挑战 12 中获得 ${format(Decimal.pow10(value))} ${player.universes.current === 2 ? "物质" : "反物质"}。`,
+      description: value => `不解锁时间膨胀的前提下，在永恒挑战 12 中获得 ${format(Decimal.pow10(value))} ${player.universes.current === 2 ? "正物质" : "反物质"}。`,
       values: [400e6, 450e6, 500e6, 600e6, 700e6, 800e6],
       condition: () => V.isRunning && EternityChallenge(12).isRunning && !PlayerProgress.dilationUnlocked(),
       currentValue: () => Currency.antimatter.value.add(1).log10(),
@@ -224,7 +224,7 @@ export const v = {
     },
     adPow: {
       id: 2,
-      reward: () => `${player.universes.current === 2 ? "物质" : "反物质"}维度指数基于总空间之理。`,
+      reward: () => `${player.universes.current === 2 ? "正物质" : "反物质"}维度指数基于总空间之理。`,
       description: () => `拥有 ${formatInt(5)} 个薇成就`,
       effect: () => player.disablePostReality ? 1 : 1 + Math.sqrt(V.spaceTheorems) / 80,
       format: x => formatPow(x, 3, 3),

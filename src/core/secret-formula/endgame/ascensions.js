@@ -21,7 +21,7 @@ export const ascensions = {
     id: 2,
     name: "扬升-维度提升",
     zeroIndex: new Decimal("1e60000"),
-    description: () => `将维度提升重构为维度擢升，为${player.universes.current === 2 ? "物质" : "反物质"}维度提供指数加成`,
+    description: () => `将维度提升重构为维度擢升，为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供指数加成`,
     onUnlock: () => {
       player.dimensionBoosts = DC.D0;
     }
@@ -30,7 +30,7 @@ export const ascensions = {
     id: 3,
     name: "扬升-购买维度倍率",
     zeroIndex: new Decimal("1e100000"),
-    description: () => `将购买 10 个${player.universes.current === 2 ? "物质" : "反物质"}维度的倍率重构为购买 1 个数量级${player.universes.current === 2 ? "物质" : "反物质"}维度的指数`
+    description: () => `将购买 10 个${player.universes.current === 2 ? "正物质" : "反物质"}维度的倍率重构为购买 1 个数量级${player.universes.current === 2 ? "正物质" : "反物质"}维度的指数`
   },
   sacA: {
     id: 4,

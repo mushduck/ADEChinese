@@ -20,15 +20,15 @@ function rebuyable(config) {
 
 export const breakEternityUpgrades = {
   antimatterDimensionPow: rebuyable({
-    name: () => `${player.universes.current === 2 ? "物质" : "反物质"}指数`,
+    name: () => `${player.universes.current === 2 ? "正物质" : "反物质"}指数`,
     id: 0,
     initialCost: () => SlabdrillUnlocks.infinity.isUnlocked ? 100 : 1e15,
     costIncrease: () => SlabdrillUnlocks.infinity.isUnlocked ? 5 : 1e10,
     maxUpgrades: 10,
     effect: value => SlabdrillUnlocks.infinity.isUnlocked ? Math.pow(1.01, value) : Math.pow(2, value),
     description: () => SlabdrillUnlocks.infinity.isUnlocked
-      ? `将你的${player.universes.current === 2 ? "物质" : "反物质"}维度的倍率提升至 ${formatPow(1.01, 2, 2)}`
-      : `所有${player.universes.current === 2 ? "物质" : "反物质"}维度的倍率 ^ 2`,
+      ? `将你的${player.universes.current === 2 ? "正物质" : "反物质"}维度的倍率提升至 ${formatPow(1.01, 2, 2)}`
+      : `所有${player.universes.current === 2 ? "正物质" : "反物质"}维度的倍率 ^ 2`,
     isDisabled: effect => effect.eq(0),
     formatEffect: value => SlabdrillUnlocks.infinity.isUnlocked ? formatPow(value, 2, 3) : `^${formatHybridSmall(value, 3)}`,
     noLabel: false

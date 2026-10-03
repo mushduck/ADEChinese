@@ -74,7 +74,7 @@ export default {
       你拥有 <span class="dp-text">{{ format(doomedParticles, 2) }}</span> {{ pluralize("毁灭粒子", doomedParticles) }}。
     <br>
     </div>
-    <span>你拥有 <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span>{{ isFlipped ? "物质" : "反物质" }}。</span>
+    <span>你拥有 <span class="c-game-header__antimatter">{{ format(antimatter, 2, 1) }}</span>{{ isFlipped ? "正物质" : "反物质" }}。</span>
     <div
       v-if="hasRealityButton && !inCursedCore"
       class="c-reality-container"
@@ -94,7 +94,7 @@ export default {
       />
     </div>
     <div v-else-if="!inCursedCore">
-      你每秒获得 {{ format(antimatterPerSec, 2) }} {{ isFlipped ? "物质" : "反物质" }}。
+      你每秒获得 {{ format(antimatterPerSec, 2) }} {{ isFlipped ? "正物质" : "反物质" }}。
       <br>
       <HeaderTickspeedInfo />
     </div>

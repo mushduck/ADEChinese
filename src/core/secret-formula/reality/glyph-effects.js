@@ -450,7 +450,7 @@ export const glyphEffects = {
     isGenerated: true,
     glyphTypes: ["power"],
     singleDesc: () => `${player.universes.current === 2 ? "正物质" : "反物质"}维度倍率 ×{value}`,
-    genericDesc: () => `Multiplier to ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension multipliers`,
+    genericDesc: () => `为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供倍率加成`,
     shortDesc: () => `${player.universes.current === 2 ? "正物质" : "反物质"}维度倍率 ×{value}`,
     effect: (level, strength) => Slabdrill.isCursed ? Decimal.pow10(Decimal.pow(level, 1.25).times(Decimal.pow(strength, 5)))
       : (EffarigUnlock.endgame.canBeApplied

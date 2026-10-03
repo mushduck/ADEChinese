@@ -115,7 +115,7 @@ export default {
     <template v-if="!canCrunch">
       Reach {{ format(infinityGoal, 2, 2) }}
       <br>
-      {{ isFlipped ? "物质" : "反物质" }}
+      {{ isFlipped ? "正物质" : "反物质" }}
     </template>
 
     <!-- Can Crunch in challenge -->

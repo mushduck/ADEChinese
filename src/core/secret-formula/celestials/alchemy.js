@@ -11,7 +11,7 @@ export const alchemyResources = {
     uiOrder: 1,
     unlockedAt: 2,
     description: () => `为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供加成`,
-    formatEffect: value => `${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension multipliers ${formatPow(value, 4, 4)}`,
+    formatEffect: value => `${player.universes.current === 2 ? "正物质" : "反物质"}维度的加成 ${formatPow(value, 4, 4)}`,
     destroyed: () => !PelleAlchemyUpgrade.alchemyPower.isBought
   },
   "infinity": {

@@ -29,7 +29,7 @@ export const ecTimeStudies = [
     requirement: [171],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: () => `第八${player.universes.current === 2 ? "物质" : "反物质"}维度`,
+      resource: () => `第八${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
       current: () => AntimatterDimension(8).totalAmount,
       required: completions => new Decimal(17300 + Math.min(completions, 4) * 1250),
       formatValue: value => formatInt(Math.floor(value.toNumber()))
@@ -53,7 +53,7 @@ export const ecTimeStudies = [
     requirement: [42],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: () => `${player.universes.current === 2 ? "物质" : "反物质"}星系`,
+      resource: () => `${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
       current: () => player.galaxies,
       required: completions => new Decimal(160 + Math.min(completions, 4) * 14),
       formatValue: formatInt
@@ -77,7 +77,7 @@ export const ecTimeStudies = [
     requirement: [111],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      resource: () => player.universes.current === 2 ? "物质" : "反物质",
+      resource: () => player.universes.current === 2 ? "正物质" : "反物质",
       current: () => Currency.antimatter.value,
       required: completions => DC.E300000.pow(Math.min(completions, 4)).times(DC.E500000),
       formatValue: value => format(value)
@@ -125,7 +125,7 @@ export const ecTimeStudies = [
     requirement: [231, 232],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     secondary: {
-      path: () => `${player.universes.current === 2 ? "物质" : "反物质"}维度`,
+      path: () => `${player.universes.current === 2 ? "正物质" : "反物质"}维度`,
       forbiddenStudies: [72, 73],
     }
   },

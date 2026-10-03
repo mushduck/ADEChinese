@@ -95,7 +95,7 @@ export const ra = {
     },
     unlockDilationStartingTP: {
       id: 6,
-      reward: () => `在天神的现实外基于时间膨胀中达到的总${player.universes.current === 2 ? "物质" : "反物质"}数量的平方根给予超光速粒子。所有超光速粒子倍率加成均为追溯生效，无论是否在时间膨胀中。`,
+      reward: () => `在天神的现实外基于时间膨胀中达到的总${player.universes.current === 2 ? "正物质" : "反物质"}数量的平方根给予超光速粒子。所有超光速粒子倍率加成均为追溯生效，无论是否在时间膨胀中。`,
       effect: () => player.records.totalEndgameAntimatter.pow(0.5),
       pet: "teresa",
       level: 25,

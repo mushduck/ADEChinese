@@ -168,7 +168,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [91],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `${player.universes.current === 2 ? "物质" : "反物质"}指数 ^ ${format(1.01, 2, 2)}`,
+    description: () => `${player.universes.current === 2 ? "正物质" : "反物质"}指数 ^ ${format(1.01, 2, 2)}`,
     effect: () => player.disablePostReality && !SlabdrillUnlocks.eternity.isUnlocked ? 1 : 1.01
   },
   {
@@ -388,7 +388,7 @@ export const endgameMasteries = [
     cost: 150000,
     requirement: [212],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `在被毁灭的现实中${player.universes.current === 2 ? "物质" : "反物质"}指数提高 ${formatPow(1.2, 1, 1)}`,
+    description: () => `在被毁灭的现实中${player.universes.current === 2 ? "正物质" : "反物质"}指数提高 ${formatPow(1.2, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.2
   },
   {

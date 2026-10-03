@@ -62,13 +62,13 @@ export const shortcuts = [
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialDimensionBoost(false) : manualRequestDimensionBoost(false),
     visible: false
   }, {
-    name: `${player.universes.current === 2 ? "物质" : "反物质"} 星系`,
+    name: `${player.universes.current === 2 ? "正物质" : "反物质"} 星系`,
     keys: ["g"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(true) : manualRequestGalaxyReset(true),
     visible: true
   }, {
-    name: `单个${player.universes.current === 2 ? "物质" : "反物质"} 星系`,
+    name: `单个${player.universes.current === 2 ? "正物质" : "反物质"} 星系`,
     keys: ["shift", "g"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(false) : manualRequestGalaxyReset(false),
