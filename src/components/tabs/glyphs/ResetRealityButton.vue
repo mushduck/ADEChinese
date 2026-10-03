@@ -12,7 +12,7 @@ export default {
   },
   computed: {
     resetText() {
-      if (this.isCursed) return "Perform a Core Jump";
+      if (this.isCursed) return "退出重进核心";
       if (this.isDoomed) return "重启本次末日";
       if (this.isInCelestialReality && !this.resetCelestial) return "退出天神挑战";
       if (this.isInCelestialReality && this.resetCelestial) return "重启本次天神挑战";

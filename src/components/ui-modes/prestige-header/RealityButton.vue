@@ -182,13 +182,13 @@ export default {
     >
       <div class="l-reality-button__contents">
         <template v-if="cursed && canReality && overridden">
-          <div>ESCAPE</div>
+          <div>逃离</div>
         </template>
         <template v-else-if="cursed && (!canReality || trapped) && !overridden">
-          <div>You cannot escape a Cursed Reality</div>
+          <div>你不能逃离被诅咒的现实！</div>
         </template>
         <template v-else-if="cursed && canReality && !trapped">
-          <div>Escape the Cursed Reality...</div>
+          <div>逃离被诅咒的现实...</div>
         </template>
         <template v-else-if="readyToWarp && !cursed && !destroyed">
           <div>{{ warpMessage }}</div>

@@ -25,7 +25,7 @@ export default {
     },
     sacrificeTooltip() {
       return `第八${this.isFlipped ? "正物质" : "反物质"}维度指数 +${formatPow(this.nextPower, 2, 3)}`;
-      return `第八${this.isFlipped ? "正物质" : "反物质"}维度强度 ${formatX(this.sacrificeBoost, 2, 2)}`;
+      return `第八${this.isFlipped ? "正物质" : "反物质"}维度倍率 ${formatX(this.sacrificeBoost, 2, 2)}`;
     },
   },
   methods: {

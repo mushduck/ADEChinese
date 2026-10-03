@@ -150,7 +150,7 @@ export default {
         return `${this.activeChallengeNames.join(" + ")}。祝你好运`;
       }
       if (this.inSlab) {
-        return `${this.activeChallengeNames.join(" + ")}。并非每个故事都有好结局。`;
+        return `${this.activeChallengeNames.join(" + ")}。并非每个故事都有好结局`;
       }
       if (this.activeChallengeNames.length === 0) {
         return "反物质宇宙中 (没有正在进行的挑战)";
