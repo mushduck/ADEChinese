@@ -19,7 +19,7 @@ export default {
   computed: {
     disableText() {
       // Doesn't need to be reactive or check strike status; it's always permanent once entered in Doomed
-      return Pelle.isDoomed && !PelleStrikes.dilation.isDestroyed() ? "时间膨胀永久生效。" : "禁用时间膨胀";
+      return Pelle.isDoomed && !PelleStrikes.dilation.isDestroyed() ? "时间膨胀永久生效。" : "退出时间膨胀";
     }
   },
   methods: {

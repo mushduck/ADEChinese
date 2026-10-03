@@ -8,12 +8,10 @@ export default {
   },
   computed: {
     message() {
-      return `Entering Hell will destroy everything except Antimatter.
-        You will maintain your Antimatter Dimension and can generate Antimatter
-        for an improved chance at collecting Chaos Cores.`;
+      return `进入炼狱将重置除反物质和反物质维度以外的一切。在炼狱中，反物质可以提高猎得混沌核心的概率。`;
     },
     entranceLabel() {
-      return `You are about to enter Hell`;
+      return `你将要进入炼狱`;
     }
   },
   methods: {
@@ -37,7 +35,7 @@ export default {
       {{ message }}
     </div>
     <template #confirm-text>
-      I concede
+      我不认输
     </template>
   </ModalWrapperChoice>
 </template>

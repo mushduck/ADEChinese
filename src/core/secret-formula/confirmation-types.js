@@ -96,7 +96,7 @@ export const confirmationTypes = [
     option: "resetEndgame",
     isUnlocked: () => PlayerProgress.endgameUnlocked(),
   }, {
-    name: "Cursed Core",
+    name: "诅咒核心",
     option: "cursedCore",
     isUnlocked: () => Slabdrill.isUnlocked || Slabdrill.isDestroyed,
   }, {
