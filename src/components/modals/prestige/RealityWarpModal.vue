@@ -13,13 +13,12 @@ export default {
   },
   computed: {
     topLabel() {
-      if (!this.isWarping) return `You are about to Enter Pelle's Domain`;
-      return `You are about to Curse your Reality`;
+      if (!this.isWarping) return `你将要进入佩勒的领域`;
+      return `你将要诅咒你的现实`;
     },
     message() {
-      if (!this.isWarping) return `Entering Pelle's Domain will force an Endgame reset and unlock a new layer of game content.`;
-      return `Cursing your Reality will force an Endgame reset and disable almost everything in the game to this point.
-      You will not be able to leave the Cursed Reality.`;
+      if (!this.isWarping) return `进入佩勒的领域将强制进行一次终局重置，并解锁一层新的游戏内容。`;
+      return `诅咒你的现实将强制进行一次终局重置，并禁用迄今为止几乎的游戏内容。你无法离开被诅咒的现实。`;
     }
   },
   methods: {

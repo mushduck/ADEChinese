@@ -1,7 +1,7 @@
 {
   "name": "ADEChinese",
-  "version": "1.0.0",
-  "description": "《反物质维度：终局》的桌面端",
+  "version": "2.0",
+  "description": "《反物质维度：终局》",
   "author": "松茸不吃柯尔鸭",
   "private": true,
   "main": "electron-main.js",
