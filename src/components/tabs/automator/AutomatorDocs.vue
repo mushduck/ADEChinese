@@ -66,14 +66,14 @@ export default {
       return this.fullScreen ? "fa-compress-arrows-alt" : "fa-expand-arrows-alt";
     },
     fullScreenTooltip() {
-      return this.fullScreen ? "Exit full screen" : "Expand to full screen";
+      return this.fullScreen ? "退出全屏" : "全屏显示";
     },
     errorTooltip() {
-      return `Your script has ${quantify("error", this.errorCount)}`;
+      return this.errorCount === 0 ? "脚本没有错误" : `你的脚本存在 ${formatInt(this.errorCount)} 处错误`;
     },
     nameTooltip() {
       return this.isNameTooLong
-        ? `Names cannot be longer than ${formatInt(AutomatorData.MAX_ALLOWED_SCRIPT_NAME_LENGTH)} characters!`
+        ? `脚本名称长度不能超过 ${formatInt(AutomatorData.MAX_ALLOWED_SCRIPT_NAME_LENGTH)} 个字符！`
         : "";
     },
     currentScriptID: {
@@ -107,8 +107,8 @@ export default {
     },
     importTooltip() {
       return this.canMakeNewScript
-        ? "Import single automator script or data"
-        : "You have too many scripts to import another!";
+        ? "导入单个自动机脚本或数据"
+        : "脚本数量已达上限，无法再导入新脚本！";
     },
     currentEditorScriptName() {
       return this.scripts.find(s => s.id === this.currentScriptID).name;
@@ -254,7 +254,7 @@ export default {
           @click="infoPaneID = panelEnum.COMMANDS"
         />
         <AutomatorButton
-          v-tooltip="错误提示"
+          v-tooltip="errorTooltip"
           :style="errorStyle"
           class="fa-exclamation-triangle"
           :class="activePanelClass(panelEnum.ERRORS)"
@@ -299,7 +299,7 @@ export default {
           所有脚本：{{ formatInt(totalChars) }}/{{ formatInt(maxTotalChars) }}
         </span>
         <AutomatorButton
-          v-tooltip="全屏提示"
+          v-tooltip="fullScreenTooltip"
           :class="fullScreenIconClass"
           class="l-automator__expand-corner"
           @click="fullScreen = !fullScreen"
@@ -312,7 +312,7 @@ export default {
           @click="exportScript"
         />
         <AutomatorButton
-          v-tooltip="导出提示"
+          v-tooltip="importTooltip"
           class="fa-file-import"
           :class="{ 'c-automator__status-text--error' : !canMakeNewScript }"
           @click="importScript"
@@ -341,7 +341,7 @@ export default {
           <input
             v-else
             ref="renameInput"
-            v-tooltip="名称提示"
+            v-tooltip="nameTooltip"
             class="l-automator__rename-input c-automator__rename-input"
             :class="{ 'c-long-name-box' : isNameTooLong }"
             @blur="nameEdited"
