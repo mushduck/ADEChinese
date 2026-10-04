@@ -65,7 +65,7 @@ export default {
     },
     buttonPrefix() {
       if (!this.isUnlocked) return "已锁定";
-      if (this.tier === 9 && this.isCapped) return "Universal Limitations Reached";
+      if (this.tier === 9 && this.isCapped) return "达到当前宇宙极限";
       if (this.isCapped) return "已被无名氏粉碎";
       if (this.isContinuumActive && this.tier !== 9) return "连续统：";
       return `购买 ${formatInt(this.howManyCanBuy)} 个`;

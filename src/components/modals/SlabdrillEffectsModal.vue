@@ -42,7 +42,7 @@ export default {
         `永恒点数获取在 ${format(DC.E2000)} 处受到软上限，且在 ${format(DC.E2500)} 和 ${format(DC.E3000)} 永恒点数处软上限进一步增强`,
         `成就 ${formatInt(105)} 的效果上限为 ${formatX(DC.E20000)}`,
         `存储时间被毁灭`,
-        `Universal Entropy is corrupted`
+        `宇宙熵被腐化`
       ];
     }
   }

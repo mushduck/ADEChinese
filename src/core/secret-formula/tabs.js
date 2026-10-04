@@ -787,7 +787,7 @@ export const tabs = [
       },
       {
         key: "tangible",
-        name: "Tangible Universe",
+        name: "真际宇宙",
         symbol: "℧",
         component: "TangibleUniverseTab",
         condition: () => Universes.isUnlocked(2),

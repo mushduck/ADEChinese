@@ -56,7 +56,7 @@ export default {
       return `${prefix} ${format(this.singleCost)} ${suffix}`;
     },
     until10Text() {
-      if (this.tier === 9 && this.isCapped) return "Universal Limitations Reached";
+      if (this.tier === 9 && this.isCapped) return "达到当前宇宙极限";
       if (this.isCapped) return "已被无名氏粉碎";
       if (this.isContinuumActive && this.tier !== 9) return `连续统：${this.continuumString}`;
 

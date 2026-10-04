@@ -16,7 +16,7 @@ export const normalChallenges = [
     name: () => `第一${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第一${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "无限以极低的速率自我强化",
+      reward: () => "无限次数以衰减的效果给予自身指数加成",
       effect: () => player.infinities.max(4).log2().log2(),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -33,7 +33,7 @@ export const normalChallenges = [
     name: () => `第二${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第二${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => `获得前三种维度类型的一个指数，在本终局中随 ${formatInt(5)} 小时增长`,
+      reward: () => `基于本次终局经过的时间给予前三种维度指数加成，上限为 ${formatInt(5)} 个小时`,
       effect: () => Time.thisEndgameRealTime.totalSeconds.max(1).min(18000).pow(0.75),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -49,7 +49,7 @@ export const normalChallenges = [
     name: () => `第三${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第三${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => `使第一${player.universes.current === 2 ? "正物质" : "反物质"}维度获得一个膨胀效果，在本终局中随 ${formatInt(5)} 小时增长`,
+      reward: () => `基于本次终局经过的时间给予第一${player.universes.current === 2 ? "正物质" : "反物质"}维度指数加成，上限为 ${formatInt(5)} 个小时`,
       effect: () => Time.thisEndgameRealTime.totalHours.min(5).div(100).add(1),
       formatEffect: value => formatPow(value, 2, 4)
     },
@@ -66,7 +66,7 @@ export const normalChallenges = [
     name: () => `第四${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第四${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "维度涌流根据其数量变得更便宜",
+      reward: () => "基于维度擢升数量降低其成本",
       effect: () => Decimal.pow(0.9, player.dimensionBoosts.max(1).log10()),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -82,7 +82,7 @@ export const normalChallenges = [
     name: () => `第五${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第五${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "星系根据总星系数量变得更强",
+      reward: () => "基于总星系数量降低星系成本",
       effect: () => Decimal.log10(GalacticPowers.galacticAscension.isUnlocked ?
         Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(player.dilation.totalTachyonGalaxies.max(1)).times(
         GalacticPower.freeGalaxies.max(1)).times(GalaxyGenerator.galaxies.max(1)).max(10) :
@@ -102,7 +102,7 @@ export const normalChallenges = [
     name: () => `第六${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第六${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => `基于第八${player.universes.current === 2 ? "正物质" : "反物质"}维度获得更多连续统购买次数`,
+      reward: () => `基于第八${player.universes.current === 2 ? "正物质" : "反物质"}维度数量提高连续统加成`,
       effect: () => Decimal.log10(AntimatterDimension(8).amount.max(10)).pow(2),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -121,7 +121,7 @@ export const normalChallenges = [
     name: () => `第七${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第七${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "购买数量级指数基于维度涌流变得更强",
+      reward: () => "维度擢升提高购买数量级指数",
       effect: () => Decimal.log10(player.dimensionBoosts.max(1)).add(1),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -138,7 +138,7 @@ export const normalChallenges = [
     name: () => `第八${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第八${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "维度献祭根据自身变得更强",
+      reward: () => "维度献祭增强自身",
       effect: () => Decimal.log10(Sacrifice.totalBoost.max(10).log10().log10().add(1)).add(1),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -154,7 +154,7 @@ export const normalChallenges = [
     name: () => "计数频率自动购买器",
     reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : "可升级的计数频率自动购买器",
     charged: {
-      reward: () => `基于${player.universes.current === 2 ? "正物质" : "反物质"}获得更多连续统购买次数`,
+      reward: () => `基于${player.universes.current === 2 ? "正物质" : "反物质"}数量提高连续统加成`,
       effect: () => Decimal.log10(Decimal.log10(player.antimatter.max(1e10))).pow(2),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -171,7 +171,7 @@ export const normalChallenges = [
     name: () => "自动维度提升",
     reward: () => "维度提升自动购买器",
     charged: {
-      reward: () => "基于维度涌流获得更多银河之力",
+      reward: () => "维度擢升提高星系之力产量",
       effect: () => player.dimensionBoosts.max(1).log10().div(20).add(1),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -186,7 +186,7 @@ export const normalChallenges = [
     name: () => `自动${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
     reward: () => `${player.universes.current === 2 ? "正物质" : "反物质"}星系自动购买器`,
     charged: {
-      reward: () => "解锁实体宇宙"
+      reward: () => "解锁真际宇宙"
     },
     lockedAt: DC.D16,
     alphaLockedAt: DC.D16
@@ -201,7 +201,7 @@ export const normalChallenges = [
     name: () => "自动大坍缩",
     reward: () => "大坍缩自动购买器",
     charged: {
-      reward: () => `偶数${player.universes.current === 2 ? "正物质维度" : "反物质维度"}基于第八维度变得更强，且${player.universes.current === 2 ? "正物质维度" : "反物质维度"}数量不再受熵上限影响`,
+      reward: () => `基于第八维度提高偶数维的${player.universes.current === 2 ? "正物质" : "反物质"}维度产量，且${player.universes.current === 2 ? "正物质" : "反物质"}维度数量不再受熵衰变影响`,
       effect: () => Decimal.log10(AntimatterDimension(8).amount.max(10)),
       formatEffect: value => formatPow(value, 2, 3)
     },

@@ -42,7 +42,7 @@ export default {
       }
       return [
         universe(1, "流幻", "transient"),
-        universe(2, "Tangible", "tangible"),
+        universe(2, "真际", "tangible"),
         celestialReality(Teresa, "特蕾莎", "teresa"),
         celestialReality(Effarig, "鹿颈长", "effarig"),
         celestialReality(Enslaved, "无名氏", "enslaved"),

@@ -56,7 +56,7 @@ export function tryEnterUniverse(id) {
       name = "流幻";
       break;
     case 2:
-      name = "Tangible";
+      name = "真际";
       break;
     case 3:
       name = "Dark";

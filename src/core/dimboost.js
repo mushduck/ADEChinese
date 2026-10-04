@@ -216,7 +216,7 @@ export class DimBoost {
     if (boosts.gt(0)) dimensionRange = `为第1至${Decimal.min(boosts.add(1), 8)}维度`;
     if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `为所有维度`;
     if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1) && Slabdrill.isCursed) dimensionRange = `为你的维度`;
-    const formattedPowText = Ascensions.dbA.isUnlocked ? `且增加${formatPow(DimBoost.exponentialPower, 2, 3)}反物质维度指数` : "";
+    const formattedPowText = Ascensions.dbA.isUnlocked ? `，反物质维度指数增加${formatPow(DimBoost.exponentialPower, 2, 3)}` : "";
 
     let boostEffects;
     if (NormalChallenge(8).isRunning) boostEffects = newUnlock;
