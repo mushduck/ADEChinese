@@ -64,12 +64,6 @@ export default {
           符文等级的上限为 ${formatInt(Decimal.floor(Decimal.pow(Slabdrill.power, 0.2)))}`
         : "";
     },
-    slabbyGlyphText() {
-      return Slabdrill.isCursed
-        ? `Glyph Rarity is set to ${formatPercents(Math.clamp((Slabdrill.currentStage - 4) * 20, 0, 100) / 100)} and
-          Level is capped at ${formatInt(Decimal.floor(Decimal.pow(Slabdrill.power, 0.2)))}`
-        : "";
-    },
     showChaosText() {
       return this.pelleChaosEffect.isUnlocked && !this.noEffects;
     },
