@@ -71,8 +71,8 @@ export default {
       };
     },
     nextDisplay() {
-      return this.milestonesReached >= 5 ? "There are no more milestones to be reached!" :
-        `Next C Milestone at ${format(this.nextAt, 2, 2)}C.`;
+      return this.milestonesReached >= 5 ? "已解锁所有光速里程碑" :
+        `下一个光速里程碑在 ${format(this.nextAt, 2, 2)} 倍光速时解锁`;
     }
   },
   methods: {
@@ -161,30 +161,25 @@ export default {
         >
           <br>
           <div v-if="milestonesReached >= 1">
-            C Milestone {{ formatInt(1) }}: Tesseract Equalizer.
-            Effective Tesseracts are slowly shifting from (bought + free) into (bought * free).
-            This shift is {{ formatPercents(Math.clamp((c - 0.5) * 2, 0, 1), 3, 3) }} complete, making the current
-            number of Effective Tesseracts equal to {{ format(tessEqual, 2, 2) }}.
+            光速里程碑 {{ formatInt(1) }}：超立方体均衡器
+            使有效超立方体数量（已购买 + 免费）缓慢转变为（已购买 × 免费）。
+            此转变已完成 {{ formatPercents(Math.clamp((c - 0.5) * 2, 0, 1), 3, 3) }} 使当前有效超立方体数量等于 {{ format(tessEqual, 2, 2) }}。
           </div>
           <div v-if="milestonesReached >= 2">
             <br>
-            C Milestone {{ formatInt(2) }}: {{ isFlipped ? "Matter" : "Antimatter" }} Equalizer.
-            {{ isFlipped ? "Matter" : "Antimatter" }} production is slowly shifting from
-            ({{ isFlipped ? "MDMults" : "ADMults" }} * Tickspeed) into
-            ({{ isFlipped ? "MDMults" : "ADMults" }}^log10(max(Tickspeed, 1))).
-            This shift is {{ formatPercents(Math.clamp((c - 0.7) * 10/3, 0, 1), 3, 3) }} complete, making current
-            {{ isFlipped ? "Matter" : "Antimatter" }} production equal to {{ format(antiEqual, 2, 2) }}.
+            光速里程碑 {{ formatInt(2) }}：{{ isFlipped ? "正物质" : "反物质" }}均衡器
+            使{{ isFlipped ? "正物质" : "反物质" }}产量缓慢从（{{ isFlipped ? "正物质" : "反物质" }}维度倍率 × 计数频率）转变为（{{ isFlipped ? "正物质维度倍率" : "反物质维度倍率" }} ^ log₁₀(max(计数频率, 1))）。
+            此转变已完成 {{ formatPercents(Math.clamp((c - 0.7) * 10/3, 0, 1), 3, 3) }}，使当前{{ isFlipped ? "正物质" : "反物质" }}产量等于 {{ format(antiEqual, 2, 2) }}。
           </div>
           <div v-if="milestonesReached >= 3">
             <br>
-            C Milestone {{ formatInt(3) }}: Tickspeed Equalizer.
-            Effective Tickspeed Upgrades are slowly shifting from (bought + free) into (bought * free).
-            This shift is {{ formatPercents(Math.clamp((c - 0.85) * 20/3, 0, 1), 3, 3) }} complete, making the current
-            number of Effective Tickspeed Upgrades equal to {{ format(tickEqual, 2, 2) }}.
+            光速里程碑 {{ formatInt(3) }}：计数频率均衡器
+            使有效计数频率升级数量缓慢从（已购买 + 免费）转变为（已购买 × 免费）。
+            此转变已完成 {{ formatPercents(Math.clamp((c - 0.85) * 20/3, 0, 1), 3, 3) }}，使当前有效计数频率升级数量等于 {{ format(tickEqual, 2, 2) }}。
           </div>
           <div v-if="milestonesReached >= 4">
             <br>
-            C Milestone {{ formatInt(4) }}: Black Hole and Potency Improvement.
+            光速里程碑 {{ formatInt(4) }}: 黑洞和能量加速器增强
             Black Holes now also apply a power effect which is increasing from 1 to log10(log10(max(BHMult, 10))) + 1.
             Furthermore, the Divine Matter/Energy multiplier from the Potency Accelerator now also applies a power effect
             which is increasing from 1 to (max(log10(max(PotencyMult, 1)) - 18.5, 0) / 3) + 1.
