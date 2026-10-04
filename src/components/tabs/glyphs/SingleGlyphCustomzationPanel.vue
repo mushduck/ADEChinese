@@ -14,7 +14,7 @@ export default {
       isVisible: true,
     };
   },
-  computed: {
+    computed: {
     glyph() {
       if (this.glyphID === -1) return null;
       const g = Glyphs.findById(this.glyphID);
@@ -42,6 +42,21 @@ export default {
       if (this.glyph.color) changes.push("颜色");
       if (changes.length === 0) return "无";
       return changes.join("/");
+    },
+    //好丑陋啊
+    glyphTypeName() {
+      const typeMap = {
+        power: "力量",
+        infinity: "无限",
+        time: "时间",
+        replication: "复制",
+        dilation: "膨胀",
+        effarig: "鹿颈长",
+        reality: "现实",
+        cursed: "诅咒",
+        companion: "同伴"
+      };
+      return typeMap[this.glyph.type] || this.glyph.type.capitalize();
     }
   },
   created() {
@@ -97,7 +112,7 @@ export default {
       </div>
       <div class="c-glyph-info-section c-cosmetic-text">
         <u>皮肤属性：</u>
-        类型：{{ glyph.type.capitalize() }}
+        类型：{{ glyphTypeName }}
         <br>
         全部：{{ typeCosmetic }}
         <br>
