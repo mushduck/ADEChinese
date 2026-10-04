@@ -1,125 +1,37 @@
-<script>
-import EPMultiplierButton from "./EPMultiplierButton";
-import EternityUpgradeButton from "./EternityUpgradeButton";
-import PrimaryButton from "@/components/PrimaryButton";
+## 效果翻译
 
-export default {
-  name: "EternityUpgradesTab",
-  components: {
-    PrimaryButton,
-    EternityUpgradeButton,
-    EPMultiplierButton
-  },
-  data() {
-    return {
-      areSoftcapsApplicable: false,
-      hasSeenFinalSoftcap: false,
-      chargeUnlocked: false,
-      totalCharges: 0,
-      chargesUsed: 0,
-      disCharge: false
-    };
-  },
-  computed: {
-    grid() {
-      return [
-        [
-          EternityUpgrade.idMultEP,
-          EternityUpgrade.idMultEternities,
-          EternityUpgrade.idMultICRecords
-        ],
-        [
-          EternityUpgrade.tdMultAchs,
-          EternityUpgrade.tdMultTheorems,
-          EternityUpgrade.tdMultRealTime,
-        ]
-      ];
-    },
-    disChargeClassObject() {
-      return {
-        "o-primary-btn--subtab-option": true,
-        "o-primary-btn--charged-respec-active": this.disCharge
-      };
-    },
-    costIncreases: () => EternityUpgrade.epMult.costIncreaseThresholds.map(x => new Decimal(x))
-  },
-  watch: {
-    disCharge(newValue) {
-      player.endgame.overcharge.discharge.eternal = newValue;
-    }
-  },
-  methods: {
-    update() {
-      this.areSoftcapsApplicable = !Ascensions.epA.isUnlocked;
-      this.hasSeenFinalSoftcap = player.eternityPoints.gte("e1e125") && !Ascensions.epA.isUnlocked;
-      this.chargeUnlocked = Ascensions.oc2A.isUnlocked;
-      this.totalCharges = player.endgame.overcharge.completions.eter;
-      this.chargesUsed = player.endgame.overcharge.completions.eter - player.endgame.overcharge.chargesLeft.eternal;
-      this.disCharge = player.endgame.overcharge.discharge.eternal;
-    },
-    formatPostBreak
-  }
-};
-</script>
+**Deepened Desolation（深化荒芜）**
+> 解除虚物质上限，并使其以大幅降低的比率增强神性维度。
+> 效果：基于虚物质提供神性维度幂次加成。
 
-<template>
-  <div class="l-eternity-upgrades-grid">
-    <div
-      v-if="chargeUnlocked"
-      class="c-subtab-option-container"
-    >
-      <PrimaryButton
-        :class="disChargeClassObject"
-        @click="disCharge = !disCharge"
-      >
-        在下一次终局时重置已充能的永恒升级
-      </PrimaryButton>
-    </div>
-    <div v-if="chargeUnlocked">
-      你已充能 {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} 永恒升级，已充能的永恒升级会更改其效果。
-      <br>
-      按住 Shift 键显示充能永恒升级，
-      <span> 你可以自由地在终局时重置充能的升级。</span>
-    </div>
-    <div
-      v-for="(row, i) in grid"
-      :key="i"
-      class="l-eternity-upgrades-grid__row"
-    >
-      <EternityUpgradeButton
-        v-for="upgrade in row"
-        :key="upgrade.id"
-        :upgrade="upgrade"
-        class="l-eternity-upgrades-grid__cell"
-      />
-    </div>
-    <EPMultiplierButton />
-    <div v-if="areSoftcapsApplicable">
-      {{ formatX(5) }} 永恒点数升级的价格在 {{ format(costIncreases[0]) }}，{{ formatPostBreak(costIncreases[1], 2) }}，和{{ formatPostBreak(costIncreases[2]) }} 永恒点数时加速增长。
-      <br>
-      永恒点数超过 {{ formatPostBreak(costIncreases[3]) }} 后，价格呈超指数增长。
-    </div>
-    <div v-if="hasSeenFinalSoftcap">
-      <br>
-      永恒点数超过 {{ formatPostBreak(costIncreases[4]) }} 后，价格将再次加速增长。
-    </div>
-  </div>
-</template>
+**Compressed Collections（压缩聚藏）**
+> 基于星系的终局技能成本缩放大幅降低。
 
-<style scoped>
-.l-eternity-upgrades-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
-}
+**Cubic Collapse（立方坍缩）**
+> 瓦解莱特拉现实的奖励基于六方体增强。
+> 效果：基于六方体数量提供幂次加成。
 
-.l-eternity-upgrades-grid__row {
-  display: flex;
-  flex-direction: row;
-}
+**Aethereal Augmentations（缥缈增幅）**
+> 星力以大幅降低的比率增强星系之力生成。
+> 效果：基于星力提供星系之力生成的幂次加成。
 
-.l-eternity-upgrades-grid__cell {
-  margin: 0.5rem 0.8rem;
-}
-</style>
+**Timeless Transcension（无时超升）**
+> 第九${player.universes.current === 2 ? "正物质" : "反物质"}维度基于时钟速度增强。
+> 效果：基于时钟速度提供倍率加成。
+
+---
+
+### 术语确认
+| 英文 | 译名 |
+| :--- | :--- |
+| Null Matter | 虚物质 |
+| Divine Dimensions | 神性维度 |
+| Hawking Radiation | 霍金辐射 |
+| Hexeracts | 六方体 |
+| Star Power | 星力 |
+| Galactic Power | 星系之力 |
+| Lai'tela's Reality | 莱特拉的现实 |
+| Tickspeed | 时钟速度 |
+| 9th Dimension | 第九维度 |
+
+需要我调整某条的措辞或补充数值显示部分吗？

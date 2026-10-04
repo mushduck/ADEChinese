@@ -1866,7 +1866,7 @@ export const normalAchievements = [
     checkRequirement: () => InfinityDimensions.totalDimCap.gt(DC.NUMMAX),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
-      return `退出禁用无限升级的挑战时，若能充能各自集合全部升级，则充能无限升级将自动恢复。`;
+      return `退出禁用无限升级的挑战时，若每列的无限升级均可被充能则自动充能。`;
     },
     progress: () => Achievement(223).isUnlocked ? DC.D1 : Decimal.clamp(InfinityDimensions.totalDimCap.max(1).log10().div(Decimal.log10(DC.NUMMAX)), 0, 1)
   },
@@ -2019,7 +2019,7 @@ export const normalAchievements = [
   },
   {
     id: 242,
-    name: "无限音速III",
+    name: "超级音速索尼克III",
     description: "凝聚神性之星。",
     checkRequirement: () => true,
     checkEvent: GAME_EVENT.CONDENSE_RESET_BEFORE,
@@ -2162,7 +2162,7 @@ export const normalAchievements = [
   {
     id: 262,
     name: "终末即吾等之始",
-    description: "灵神性物质的数量突破无限。",
+    description: "令神性物质的数量突破无限。",
     checkRequirement: () => DivinityUpgrade.divineL4U5.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(262).isUnlocked ? DC.D1 : Decimal.clamp(player.celestials.pelle.divinity.nebulae.div(100), 0, 1)
@@ -2178,7 +2178,7 @@ export const normalAchievements = [
   {
     id: 264,
     name: "统御由此开始",
-    get description() { return `Collect ${formatInt(10)} Celestial Runes.` },
+    get description() { return `获得 ${formatInt(10)} 天界铭文。` },
     checkRequirement: () => false,//Currency.celestialRunes.gte(10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
@@ -2205,7 +2205,7 @@ export const normalAchievements = [
   {
     id: 267,
     name: "至高神性",
-    get description() { return `达到 ${formatInt(10)} 神性` },
+    get description() { return `进行 ${formatInt(10)} 次神性。` },
     checkRequirement: () => player.celestials.pelle.divinities >= 10,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(267).isUnlocked ? DC.D1 : Decimal.clamp(new Decimal(player.celestials.pelle.divinities).div(10), 0, 1)
@@ -2213,7 +2213,7 @@ export const normalAchievements = [
   {
     id: 268,
     name: "真正的力量",
-    description: "解锁激能",
+    description: "解锁激能。",
     checkRequirement: () => player.endgame.ascension >= 6,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
@@ -2239,7 +2239,7 @@ export const normalAchievements = [
   },
   {
     id: 273,
-    name: "回报",
+    name: "报酬",
     get description() { return `完成 ${formatInt(15)} 个天界任务。` },
     checkRequirement: () => false,//player.celestialPlus.completedTasks >= 15,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -2280,7 +2280,7 @@ export const normalAchievements = [
   {
     id: 277,
     name: "已经有 V 不存在的成就了",
-    get description() { return `Reach ${formatPostBreak(DC.D9_99999E999, 5, 0)} Dual Machines.` },
+    get description() { return `达到 ${formatPostBreak(DC.D9_99999E999, 5, 0)} 重构机器。` },
     checkRequirement: () => player.reality.dualMachines.gte(DC.D9_99999E999),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     get reward() {
