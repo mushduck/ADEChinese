@@ -131,7 +131,7 @@ export default {
         boostList.push(`从阿尔法奖励中获得 <span class="c-replicanti-description__accent">${formatX(this.multDE, 2, 2)}</span> 的暗能量倍率${this.hasDEPow ? `，<span class="c-replicanti-description__accent">${formatPow(this.powDE, 2, 3)}</span> 的暗能量倍率指数` : ""}`);
       }
       if (this.hasSTMult) {
-        boostList.push(`从Compression Upgrade中获得 <span class="c-replicanti-description__accent">${formatX(this.multST, 2, 2)}</span> 倍
+        boostList.push(`从压缩升级中获得 <span class="c-replicanti-description__accent">${formatX(this.multST, 2, 2)}</span> 倍
         ${this.hasSTPow ? ` 和 <span class="c-replicanti-description__accent">${formatPow(this.powST, 2, 3)}</span> ` : ""}的三体研究`);
       }
       if (boostList.length === 1) return `${boostList[0]}。`;

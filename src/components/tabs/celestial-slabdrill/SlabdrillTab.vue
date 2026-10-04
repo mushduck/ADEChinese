@@ -52,7 +52,7 @@ export default {
       const effects = ["反物质维度倍率", "维度提升效果倍率", "星系强度倍率",
         "反物质维度指数", "无限点数倍率", "无限维度倍率", "复制速度倍率",
         "时间维度倍率", "永恒点数倍率", "无限次数倍率", "膨胀时间倍率",
-        "Chaos Core概率倍率"];
+        "混沌核心概率倍率"];
       text.push("幽蛇之力现提供以下效果：");
       for (let t = 0; t < Slabdrill.currentStage + 1; t++) {
         text.push(

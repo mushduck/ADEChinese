@@ -26,7 +26,7 @@ export default {
       // won't trigger display update if we, say, switch from one challenge to another
       function universe(id, name, tab) {
         return {
-          name: () => `the ${name} Universe`,
+          name: () => `${name}宇宙中`,
           isActive: token => token,
           activityToken: () => player.universes.current === id,
           uniName: () => tab,
@@ -41,7 +41,7 @@ export default {
         };
       }
       return [
-        universe(1, "Transient", "transient"),
+        universe(1, "流幻", "transient"),
         universe(2, "Tangible", "tangible"),
         celestialReality(Teresa, "特蕾莎", "teresa"),
         celestialReality(Effarig, "鹿颈长", "effarig"),
@@ -79,7 +79,7 @@ export default {
           activityToken: () => player.endgame.overcharge.isRunning
         },
         {
-          name: () => "时间压缩",
+          name: () => "时间压缩中",
           isActive: token => token,
           activityToken: () => player.compression.active
         },
@@ -244,10 +244,10 @@ export default {
     exitDisplay() {
       if (Player.isInAnyChallenge) return player.options.retryChallenge ? "重试挑战" : "放弃挑战";
       if (player.dilation.active) return "退出膨胀";
-      if (player.compression.active) return "Exit Compression";
+      if (player.compression.active) return "退出压缩";
       if (LHC.voidRunning || LHC.nullifiedVoidRunning) return "离开虚无";
       if (player.endgame.overcharge.isRunning) return "退出激能";
-      if (player.universes.current !== 0) return "Exit Universe";
+      if (player.universes.current !== 0) return "离开宇宙";
       if (this.resetCelestial && this.inEndgame) return "重启终局";
       if (this.inEndgame) return "退出终局";
       if (this.resetCelestial) return "重启现实";

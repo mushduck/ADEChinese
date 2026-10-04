@@ -33,8 +33,7 @@ export default {
       return `阿尔法衰变将在 ${this.alphaDecayTimeToMax} 内到达上限`;
     },
     compressionText() {
-      return `Time Compression is currently raising the exponents of the multipliers of
-        the first three Dimension types and Tickspeed by ${formatPow(this.compressionNerf, 2, 4)}`;
+      return `时间压缩当前将前三种维度和计数频率的指数 ${formatPow(this.compressionNerf, 2, 4)}`;
     }
   },
   methods: {

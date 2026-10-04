@@ -198,7 +198,7 @@ export default {
 
 <template>
   <div class="l-hypercubes-tab">
-    Penteracts cannot be purchased while Doomed.
+    在被毁灭的现实中无法购买超五方体。
     <div class="l-hypercubes-container">
       <div class="l-hypercubes-btn">
         <button
