@@ -83,7 +83,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        {{this.isFlipped ? "正物质" : "反物质"}}星系限制：
+        {{isFlipped ? "正物质" : "反物质"}}星系限制：
       </label>
       <AutobuyerInput
         :autobuyer="autobuyer"
