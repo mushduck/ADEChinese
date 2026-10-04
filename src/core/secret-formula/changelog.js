@@ -10,7 +10,7 @@ export const changelog = [
    */
   {
       date: [2026, 10, 4],
-      name: "《反物质维度：终局》v2.0 汉化版发布",
+      name: "《反物质维度：终局》v2.0.7 汉化版发布",
       info: `
 <ul>
 <li>本模组由松茸不吃柯尔鸭（QQ:3151643233）全程汉化，吸收了AD群友们的经验，并由ADChinese作者aquamarine309（QQ:2854608474）提供原版的大部分汉化。</li>
