@@ -430,7 +430,7 @@ export const singularityMilestones = {
     limit: 1,
     description: "第二至第八暗物质维度为基础暗能量生产提供倍数，而不是简单叠加",
     effect: completions => completions.toNumber(),
-    effectFormat: x => (x === 1 ? "Unlocked" : "Locked"),
+    effectFormat: x => (x === 1 ? "已解锁" : "未解锁"),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   },
   singEthPowerBoost: {
@@ -520,7 +520,7 @@ export const singularityMilestones = {
     limit: 1,
     description: "Unlock Nihility",
     effect: completions => completions.toNumber(),
-    effectFormat: x => (x === 1 ? "Unlocked" : "Locked"),
+    effectFormat: x => (x === 1 ? "已解锁" : "未解锁"),
     upgradeDirection: LAITELA_UPGRADE_DIRECTION.SELF_BOOST,
   }
 };

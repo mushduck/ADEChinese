@@ -533,7 +533,7 @@ export const tabs = [
       },
       {
         key: "slabdrill",
-        name: "Slabdrill",
+        name: "渊蛇",
         symbol: "⁹δ",
         component: "SlabdrillTab",
         condition: () => Slabdrill.isUnlocked,

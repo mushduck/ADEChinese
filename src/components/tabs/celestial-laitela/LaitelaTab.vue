@@ -153,13 +153,13 @@ export default {
       v-if="maxDarkMatter.gte(softcapOmega)"
       class="o-laitela-matter-amount"
     >
-      Dark Matter is further harshly softcapped past {{ format(softcapOmega, 2) }}.
+      暗物质数量在 {{ format(softcapOmega, 2) }} 后达到四重软上限。
     </div>
     <div
       v-if="maxDarkMatter.gte(softcapOmega)"
       class="o-laitela-matter-amount"
     >
-      Dark Matter is further harshly softcapped past {{ format(softcapOmega, 2) }}.
+      暗物质数量在 {{ format(softcapOmega, 2) }} 后达到五重软上限。
     </div>
     <h2
       v-if="!singularitiesUnlocked"

@@ -72,7 +72,7 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        在下一次现实时重置已充能的永恒升级
+        在下一次终局时重置已充能的永恒升级
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">

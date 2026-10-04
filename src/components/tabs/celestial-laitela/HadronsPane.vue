@@ -219,7 +219,7 @@ export default {
   <div class="c-laitela-hadrons-container">
     <div class="c-laitela-hadrons-row">
       <h2>
-        You have
+        你拥有
         {{ formatHybridSmall(lightHadrons, 3) }}<span v-if="totalLightHadrons > lightHadrons">(+{{ formatHybridSmall(totalLightHadrons - lightHadrons, 3) }})</span>
         {{ pluralize("强子", totalLightHadrons) }}
       </h2>
