@@ -72,15 +72,14 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        Respec Charged Eternity Upgrades on next Endgame
+        在下一次现实时重置已充能的永恒升级
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
-      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Eternity Upgrades.
-      Charged Eternity Upgrades have their effect altered.
+      你已充能 {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} 永恒升级，已充能的永恒升级会更改其效果。
       <br>
-      Hold shift to show Charged Eternity Upgrades.
-      <span> You can freely respec your choices on Endgame.</span>
+      按住 Shift 键显示充能永恒升级，
+      <span> 你可以自由地在终局时重置充能的升级。</span>
     </div>
     <div
       v-for="(row, i) in grid"
