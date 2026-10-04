@@ -27,7 +27,7 @@ export default {
       if (this.isCoreActive) {
         return "离开诅咒核心";
       }
-      return "离开诅咒核心";
+      return "进入诅咒核心";
     },
     cursedCoreClassObject() {
       return {
