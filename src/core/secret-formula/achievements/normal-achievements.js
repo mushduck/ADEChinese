@@ -1996,7 +1996,7 @@ export const normalAchievements = [
   {
     id: 237,
     name: "完美均衡",
-    description: "购买前两个复兴升级。",
+    description: "购买前两个复苏升级。",
     checkRequirement: () => ResurgenceUpgrade.ipSurge.isBought && ResurgenceUpgrade.epSurge.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     progress: () => Achievement(237).isUnlocked ? DC.D1 : Decimal.clamp(Currency.divineEnergy.value.div(1e6), 0, 1)

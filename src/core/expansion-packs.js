@@ -25,7 +25,7 @@ class ExpansionPackState extends SetPurchasableMechanicState {
   }
 
   onPurchased() {
-    if (this.config.id === "slabPack") Modal.message.show(`This feature is not yet implemented. Please wait for updates.`, {}, 3);
+    if (this.config.id === "slabPack") Modal.message.show(`这部分内容还没更新喵QAQ`, {}, 3);
   }
 }
 
