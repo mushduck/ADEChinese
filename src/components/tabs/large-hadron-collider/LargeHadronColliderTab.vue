@@ -50,7 +50,7 @@ export default {
   computed: {
     hadronSpeedText() {
       if (this.hadronSpeed === 0) return `你的强子处于静止状态`;
-      if (this.hadronSpeed >= 149896229) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒 (${format(this.c, 5, 5)}C)`;
+      if (this.hadronSpeed >= 149896229) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒（${format(this.c, 5, 5)} 倍光速）`;
       if (this.hadronSpeed >= 1000) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒`;
       return `你的强子被加速到了 ${format(this.hadronSpeed, 3, 3)} 米每秒`;
     },
@@ -163,7 +163,7 @@ export default {
           <div v-if="milestonesReached >= 1">
             光速里程碑 {{ formatInt(1) }}：超立方体均衡器
             使有效超立方体数量（已购买 + 免费）缓慢转变为（已购买 × 免费）。
-            此转变已完成 {{ formatPercents(Math.clamp((c - 0.5) * 2, 0, 1), 3, 3) }} 使当前有效超立方体数量等于 {{ format(tessEqual, 2, 2) }}。
+            此转变已完成 {{ formatPercents(Math.clamp((c - 0.5) * 2, 0, 1), 3, 3) }}，使当前有效超立方体数量等于 {{ format(tessEqual, 2, 2) }}。
           </div>
           <div v-if="milestonesReached >= 2">
             <br>
@@ -180,18 +180,18 @@ export default {
           <div v-if="milestonesReached >= 4">
             <br>
             光速里程碑 {{ formatInt(4) }}: 黑洞和能量加速器增强
-            Black Holes now also apply a power effect which is increasing from 1 to log10(log10(max(BHMult, 10))) + 1.
-            Furthermore, the Divine Matter/Energy multiplier from the Potency Accelerator now also applies a power effect
-            which is increasing from 1 to (max(log10(max(PotencyMult, 1)) - 18.5, 0) / 3) + 1.
-            These shifts are {{ formatPercents(Math.clamp((c - 0.95) * 20, 0, 1), 3, 3) }} complete, making the current
-            Black Hole {{ formatInt(1) }} boost equal to {{ formatPow(bh1Improve, 2, 3) }}, the current
-            Black Hole {{ formatInt(2) }} boost equal to {{ formatPow(bh2Improve, 2, 3) }}, and the current
-            Divine Matter/Energy boost from the Potency Accelerator equal to {{ formatPow(potencyImprove, 2, 3) }}.
+            黑洞现在同时为游戏速度提供指数加成，该效果将从 1 逐渐增加至 log₁₀(log₁₀(max(黑洞倍率, 10))) + 1。
+            此外，能量加速器也为神性物质和神性能量提供指数加成
+            该效果将从 1 逐渐增加至 max(log₁₀(max(威能倍率, 1)) - 18.5, 0) ÷ 3 + 1。
+            此效果已完成 {{ formatPercents(Math.clamp((c - 0.95) * 20, 0, 1), 3, 3) }}，使当前
+            黑洞 {{ formatInt(1) }} 为游戏速度提供 {{ formatPow(bh1Improve, 2, 3) }} 的加成；
+            黑洞 {{ formatInt(2) }} 为游戏速度提供 {{ formatPow(bh2Improve, 2, 3) }} 的加成；
+            能量加速器为神性物质和神性能量提供 {{ formatPow(potencyImprove, 2, 3) }}的加成。
           </div>
           <div v-if="milestonesReached >= 5">
             <br>
-            C Milestone {{ formatInt(5) }}: Light unlock.
-            You have reached {{ formatInt(1) }}C and can now generate Light (coming soon).
+            光速里程碑 {{ formatInt(5) }}：Light unlock.
+            你已达到 {{ formatInt(1) }} 倍光速，and can now generate Light (coming soon).
           </div>
           <br>
           <div>
