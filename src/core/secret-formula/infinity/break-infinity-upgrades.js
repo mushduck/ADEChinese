@@ -67,7 +67,7 @@ export const breakInfinityUpgrades = {
     id: "postGalaxy",
     cost: () => 5e11 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1) *
       (SlabdrillUnlocks.breakInfinity.isUnlocked ? 1000 : 1),
-    description: () => Slabdrill.isCursed ? `所有星系增强 ${formatX(6.66, 2, 2)}，并使购买 10 维度倍率翻倍` :
+    description: () => Slabdrill.isCursed ? `所有星系增强 ${formatX(6.66, 2, 2)};；购买 10 个维度的倍率翻倍` :
       `所有星系增强 ${formatPercents(0.5)}`,
     effect: () => Slabdrill.isCursed ? 6.66 : 1.5,
     charged: {
@@ -150,7 +150,7 @@ export const breakInfinityUpgrades = {
     id: "autobuyMaxDimboosts",
     cost: () => 2e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1) *
       (SlabdrillUnlocks.breakInfinity.isUnlocked ? 1000 : 1),
-    description: "解锁自动购买最大维度擢升",
+    description: "解锁自动进行最大维度擢升",
     charged: {
       description: "维度擢升基于特蕾莎等级增强",
       effect: () => Math.pow(Ra.pets.teresa.level + 1, 0.5),

@@ -39,7 +39,7 @@ export const compressionUpgrades = {
       if (effect.eq(Decimal.pow(0.99, 250))) return `${formatX(getElectroWaveMult(effect), 4, 4)}`;
       const nextEffect = effect.times(0.99);
       return `${formatX(getElectroWaveMult(effect), 4, 4)} ➜
-        Next: ${formatX(getElectroWaveMult(nextEffect), 4, 4)}`;
+        下一级：${formatX(getElectroWaveMult(nextEffect), 4, 4)}`;
     },
     formatCost: value => format(value, 2),
     purchaseCap: () => 250
