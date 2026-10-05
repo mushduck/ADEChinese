@@ -134,16 +134,8 @@ export default {
   methods: {
     update() {
       const now = new Date().getTime();
-      if (this.pour) {
-        if (EndgameUpgrade(10).isLockingMechanics) EndgameUpgrade(10).tryShowWarningModal();
-        else {
-          const diff = (now - this.time) / 1000;
-          Teresa.pourRM(diff);
-        }
-      } else {
-        Teresa.timePoured = new Decimal(0);
-      }
       this.time = now;
+      this.pour = Teresa.isPouring;
       this.pouredAmount.copyFrom(player.celestials.teresa.pouredAmount);
       this.isPouredAmountCapped = this.pouredAmount.eq(new Decimal(this.pouredAmountCap));
       this.percentage = `${(Teresa.fill * 100).toFixed(2)}%`;
@@ -190,7 +182,14 @@ export default {
     },
     toggleAuto() {
       return player.celestials.teresa.autoPour = !player.celestials.teresa.autoPour;
-    }
+    },
+    setPour(on) {
+      if (on && EndgameUpgrade(10).isLockingMechanics) {
+        EndgameUpgrade(10).tryShowWarningModal();
+        return;
+      }
+      Teresa.setPour(on);
+    },
   }
 };
 </script>
@@ -280,11 +279,11 @@ export default {
         </button>
         <button
           :class="pourButtonClassObject"
-          @mousedown="pour = true"
-          @touchstart="pour = true"
-          @mouseup="pour = false"
-          @touchend="pour = false"
-          @mouseleave="pour = false"
+          @mousedown="setPour(true)"
+          @touchstart="setPour(true)"
+          @mouseup="setPour(false)"
+          @touchend="setPour(false)"
+          @mouseleave="setPour(false)"
         >
           {{ pourText }}
         </button>

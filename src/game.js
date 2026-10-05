@@ -1072,9 +1072,9 @@ export function gameLoop(passedDiff, options = {}) {
     player.celestials.slabdrill.warpTick += realDiff;
   }
 
-  if (player.celestials.slabdrill.isWarping && player.celestials.slabdrill.warpTick >= 2000 && player.celestials.slabdrill.warpTick < 3000
-      && !ui.$viewModel.quotes.current) {
-    Quote.addToQueue(Quotes.slabdrill.curse);
+  if (player.celestials.slabdrill.isWarping && !Slabdrill.isCursed && player.celestials.slabdrill.warpTick >= 2000) {
+    Slabdrill.realityWarp();
+    player.celestials.slabdrill.warpTick = 5000;
   }
 
   updateNormalAndInfinityChallenges(diff);
