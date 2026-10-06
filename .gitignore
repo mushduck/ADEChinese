@@ -14,3 +14,7 @@ dist/
 dist_electron/.aider*
 .aider*
 AIDER_CHAT.md
+dist_electron/
+js/
+*.exe
+*.asar
