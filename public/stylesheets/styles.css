@@ -7753,6 +7753,7 @@ properly on certain themes. */
   font-family: Typewriter, serif;
   font-size: 1.4rem;
   color: var(--color-text);
+  background-color: var(--color-base);
   border: var(--var-border-width, 0.3rem) solid black;
   border-radius: var(--var-border-radius, 0.6rem);
   padding: 1rem;

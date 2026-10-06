@@ -54,7 +54,7 @@ export const slabdrillUnlocks = {
     id: 7,
     requirement: 8,
     name: "时间研究 181",
-    nerfDescription: () => `所有来源的无限点数和永恒点数获取量 ${format(0.9, 1, 1)}；时间维度倍率${formatPow(0.75, 2, 2)}；无限维度购买上限降低至 ${formatInt(5000)}；任何类型星系数量超过 ${formatInt(100)} 的部分强度除以 ${formatInt(10)}`,
+    nerfDescription: () => `所有来源的无限点数和永恒点数获取量 ${formatPow(0.9, 2, 2)}；时间维度倍率${formatPow(0.75, 2, 2)}；无限维度购买上限降低至 ${formatInt(5000)}；任何类型星系数量超过 ${formatInt(100)} 的部分强度除以 ${formatInt(10)}`,
     buffDescription: () => `幽蛇之力现在以衰减的效果影响永恒点数；重获第三个符文槽；并重获遗迹碎片，但只提供符文献祭指数，且获取量和效果被削弱`
   },
   eternityChallengeTen: {
@@ -68,7 +68,7 @@ export const slabdrillUnlocks = {
     id: 9,
     requirement: 10,
     name: "时间膨胀",
-    nerfDescription: () => `膨胀时间和超光速粒子获取量 ${format(0.25, 2, 2)}；且膨胀时禁用幽蛇之力`,
+    nerfDescription: () => `膨胀时间和超光速粒子获取量 ${formatPow(0.25, 2, 2)}；且膨胀时禁用幽蛇之力`,
     buffDescription: () => `幽蛇之力现在以大幅衰减的效果影响膨胀时间产量；混沌核心的获取概率 ${formatX(16)}；重获第五个符文槽；并重获前六种炼金资源，但降低炼金资源上限`
   },
   reality: {
