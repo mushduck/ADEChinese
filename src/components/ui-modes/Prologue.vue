@@ -129,6 +129,12 @@ export default {
 }
 
 .l-prologue-container {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black !important;
+  z-index: 500 !important;
   display: flex;
   flex-direction: column;
   align-items: center;

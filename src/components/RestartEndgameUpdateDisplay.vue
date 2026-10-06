@@ -52,13 +52,13 @@ export default {
     :style="style"
   >
     <h2>
-      Congratulations! You have completed the entire game! You have two options going forward.
+      恭喜！整个已平衡的游戏部分已经完成！接下来你有两个选择。
     </h2>
     <h3>
-      Option 1: Restart the game from the beginning. This is your {{ formattedCompletion }} completion of the game,
-      so currently you will gain a permanent {{ formatX(currentCompletions) }} multiplier to the primary currency
-      of the next update. You can improve this by getting more game completions. Before the game restarts, your savefile
-      will be exported to your clipboard. It is recommended that you hold on to this savefile in case something happens.
+      选项 1：从头开始游戏。你已通关游戏 {{ formattedCompletion }} 次，
+      因此你将获得对下次更新主要资源的永久倍率： {{ formatX(currentCompletions) }}。
+      你可以多通关几次来提升该倍率。在重置整个游戏之前，你的存档文件
+      将被导出到剪贴板。建议保留此存档，以防发生意外。
     </h3>
     <div class="c-new-game-button-container">
       <button
@@ -66,15 +66,15 @@ export default {
         :class="{ 'c-new-game-button--unclickable': performingAction }"
         @click="restartGame"
       >
-        Restart the Game
+        重置游戏
       </button>
     </div>
     <br>
     <h3>
-      Option 2: Continue playing the game. Currently, there is not a lot of playable content beyond this point. You may keep
-      going if you wish, but the options for how to progress beyond this point are limited. You also will not gain any
-      additional boosts to the next update if you keep going from this point. Your savefile will also be exported if you
-      choose this option so that you may go back if you change your mind.
+      选项 2：继续游戏。目前，游戏没有太多可玩的新内容。如果你愿意，可以继续，
+      但之后可推进的选项有限。此外，如果你从此刻继续，将不会获得对下次更新的
+      任何额外加成。如果你选择此选项，你的存档文件同样会被导出，以便你在改变主意时
+      可以回退。
     </h3>
     <div class="c-new-game-button-container">
       <button
@@ -82,7 +82,7 @@ export default {
         :class="{ 'c-new-game-button--unclickable': performingAction }"
         @click="keepGoing"
       >
-        Keep Going
+        继续游戏
       </button>
     </div>
   </div>
