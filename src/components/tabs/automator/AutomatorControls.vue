@@ -16,6 +16,8 @@ export default {
       justCompleted: false,
       forceRestartOn: false,
       followExecution: false,
+      forceRestartEndgameOn: false,
+      hasEndgame: false,
       hasErrors: false,
       currentLine: 0,
       statusName: "",
@@ -70,6 +72,8 @@ export default {
       this.justCompleted = AutomatorBackend.hasJustCompleted;
       this.forceRestartOn = AutomatorBackend.state.forceRestart;
       this.followExecution = AutomatorBackend.state.followExecution;
+      this.forceRestartEndgameOn = Boolean(AutomatorBackend.state.forceRestartEndgame ?? true);
+      this.hasEndgame = PlayerProgress.endgameUnlocked();
       this.hasErrors = AutomatorData.currentErrors().length !== 0;
       this.currentLine = AutomatorBackend.currentLineNumber;
 
@@ -109,6 +113,7 @@ export default {
     },
     repeat: () => AutomatorBackend.toggleRepeat(),
     restart: () => AutomatorBackend.toggleForceRestart(),
+    restartEndgame: () => AutomatorBackend.toggleForceRestartEndgame(),
     follow: () => AutomatorBackend.toggleFollowExecution(),
     undo: () => AutomatorData.undoScriptEdit(),
     redo: () => AutomatorData.redoScriptEdit(),
@@ -154,6 +159,13 @@ export default {
           class="fa-reply"
           :class="{ 'c-automator__button--active' : forceRestartOn }"
           @click="restart"
+        />
+        <AutomatorButton
+          v-if="hasEndgame"
+          v-tooltip="'在完成或重启终局时自动重新启动当前活动脚本'"
+          class="fa-reply-all"
+          :class="{ 'c-automator__button--active' : forceRestartEndgameOn }"
+          @click="restartEndgame"
         />
         <AutomatorButton
           v-tooltip="'滚动自动机以跟随当前行'"
