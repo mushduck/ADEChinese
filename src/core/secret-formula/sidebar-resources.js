@@ -285,7 +285,7 @@ export const sidebarResources = [
   },
   {
     id: 36,
-    optionName: "Serpentine Power",
+    optionName: "幽蛇之力",
     isAvailable: () => Slabdrill.isCursed,
     value: () => Currency.serpentinePower.value,
     formatValue: x => format(x, 2, 2),
