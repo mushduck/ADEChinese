@@ -128,6 +128,11 @@ createInCategory(AutomatorCurrency, "remnants", /remnants/i, {
   $autocomplete: "remnants",
   $getter: () => new Decimal(Currency.remnants.value)
 });
+createInCategory(AutomatorCurrency, "RealityResources", /reality[ \t]*resources?/i, {
+  $autocomplete: "reality resources",
+  $getter: () => new Decimal(AlchemyResource.reality.amount),
+  $unlocked: () => Ra.pets.effarig.level >= 25 || AlchemyResource.reality.amount > 0,
+});
 
 createInCategory(AutomatorCurrency, "PendingIP", /pending[ \t]+ip/i, {
   $autocomplete: "pending IP",
@@ -225,6 +230,47 @@ for (let i = 1; i <= 12; ++i) {
     $getter: () => EternityChallenge(id).completions
   });
 }
+
+for (let i = 1; i <= 5; ++i) {
+  const id = i;
+  createInCategory(AutomatorCurrency, `Rift${i}`, new RegExp(`rifts?${i}\\b|rifts?[ \\t]+${i}[ \\t]+(percentage|fill|percent)`, "i"), {
+    $autocomplete: `rift${i}`,
+    // eslint-disable-next-line no-loop-func
+    $getter: () => new Decimal(PelleRifts.all[id - 1]?.percentage ?? 0).times(100),
+    $unlocked: () => Pelle.isUnlocked,
+  });
+}
+
+createInCategory(AutomatorCurrency, "RiftMilestones", /(total[ \t]+)?rifts?[ \t]+milestones?/i, {
+  $autocomplete: "rift milestones",
+  $getter: () => new Decimal(PelleRifts.totalMilestones?.() ?? 0),
+  $unlocked: () => Pelle.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "PouredRM", /poured[ \t]*rm/i, {
+  $autocomplete: "poured RM",
+  $getter: () => new Decimal(player.celestials.teresa.pouredAmount),
+  $unlocked: () => Teresa.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "StoredGameTime", /stored[ \t]+(game[ \t]+)?time/i, {
+  $autocomplete: "stored time",
+  $getter: () => new Decimal(player.celestials.enslaved.stored),
+  $unlocked: () => Enslaved.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "StoredRealTimeCurrency", /stored[ \t]+real[ \t]+time/i, {
+  $autocomplete: "stored real time",
+  $getter: () => new Decimal(player.celestials.enslaved.storedReal),
+  $unlocked: () => Enslaved.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "LaitelaTier", /laitela[ \t]*tier/i, {
+  $autocomplete: "laitela tier",
+  $getter: () => new Decimal(8 - (Laitela.maxAllowedDimension ?? 8)),
+  $unlocked: () => Laitela.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "Entropy", /(laitela[ \t]+)?entropy/i, {
+  $autocomplete: "entropy",
+  $getter: () => new Decimal((Laitela.entropy ?? player.celestials.laitela.entropy ?? 0) * 100),
+  $unlocked: () => Laitela.isUnlocked,
+});
 
 // $prestigeLevel is used by things that wait for a prestige event. Something waiting for
 // eternity will be triggered by something waiting for reality, for example.
@@ -351,7 +397,7 @@ createKeyword("Pause", /pause/i);
 // So, we consume the label at the same time as we consume the preset. In order to report
 // errors, we also match just the word name. And, we have to not match comments.
 createKeyword("Name", /name([ \t]+(\/(?!\/)|[^\n#/])*)?/i);
-createKeyword("Id", /id\b([ \t]+\d)?/i);
+createKeyword("Id", /id\b([ \t]+\d+)?/i);
 createKeyword("Purchase", /purchase/i);
 createKeyword("Respec", /respec/i);
 createKeyword("Restart", /restart/i);
@@ -377,6 +423,34 @@ createKeyword("EC", /ec/i);
 createKeyword("XHighest", /x[ \t]+highest/i, {
   $autocomplete: "x highest",
 });
+
+createKeyword("Celestial", /celestial/i);
+createKeyword("Teresa", /teresa/i);
+createKeyword("Effarig", /effarig/i);
+createKeyword("Enslaved", /enslaved/i);
+createKeyword("V", /v/i); 
+createKeyword("Ra", /ra/i); 
+createKeyword("Laitela", /laitela/i); 
+createKeyword("Pelle", /pelle/i); 
+createKeyword("Glyph", /glyphs?/i);
+createKeyword("Unequip", /unequip/i);
+createKeyword("Main", /main/i);
+createKeyword("Protected", /protected/i);
+createKeyword("Over", /over/i);
+createKeyword("Create", /create/i);
+createKeyword("Equip", /equip/i);
+createKeyword("Cursed", /cursed/i);
+createKeyword("Alchemy", /alchemy/i);
+createKeyword("Reset", /reset/i);
+createKeyword("Rift", /rifts?/i);
+createKeyword("Pour", /pour/i);
+createKeyword("Generator", /(galaxy[ \t]+)?generator/i);
+createKeyword("StoreRealTime", /store[ \t]+real[ \t]+time/i, {
+  $autocomplete: "store real time",
+  $unlocked: () => Enslaved.isUnlocked,
+});
+createKeyword("Tab", /tabs?/i);
+createKeyword("Sacrifice", /sacrifice/i);
 
 // We allow ECLiteral to consume lots of digits because that makes error reporting more
 // clear (it's nice to say ec123 is an invalid ec)

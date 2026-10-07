@@ -54,7 +54,7 @@ export default {
       return text;
     },
     sacrificeText() {
-      return this.capRift.galaxyGeneratorText.replace("$value", this.capRiftName);
+      return this.capRift ? this.capRift.galaxyGeneratorText.replace("$value", this.capRiftName) : "";
     },
     emphasisedStart() {
       return Decimal.pow(this.generatedGalaxies.div(this.cap), 0.45).toNumber();
@@ -74,7 +74,7 @@ export default {
       this.cap = GalaxyGenerator.generationCap;
       this.capRift = GalaxyGenerator.capRift;
       this.sacrificeActive = GalaxyGenerator.sacrificeActive;
-      this.barWidth = (this.isCapped ? this.capRift.reducedTo : this.emphasisedStart);
+      this.barWidth = (this.isCapped && this.capRift ? this.capRift.reducedTo : this.emphasisedStart);
       if (this.capRift) this.capRiftName = wordShift.wordCycle(this.capRift.name);
       this.galGenInstability = GalaxyGenerator.galGenInstability;
       this.harshGalGenInstability = GalaxyGenerator.harshGalGenInstability;
@@ -87,15 +87,13 @@ export default {
       this.isSecondInstabilityShown = this.galaxies.gte(this.harshInstabilityStart);
     },
     increaseCap() {
-      if (GalaxyGenerator.isCapped) GalaxyGenerator.startSacrifice();
+      GalaxyGenerator.startSacrifice();
     },
     toggleCollapse() {
       player.celestials.pelle.collapsed.galaxies = !this.isCollapsed;
     },
     unlock() {
-      player.celestials.pelle.galaxyGenerator.unlocked = true;
-      Pelle.quotes.galaxyGeneratorUnlock.show();
-      if (player.endgames >= 1) Pelle.quotes.galgen2.show();
+      GalaxyGenerator.unlock();
     }
   },
 };
@@ -120,10 +118,10 @@ export default {
         <div>
           你总共拥有
           <span class="c-galaxies-amount">{{ galaxyText }}</span>
-          个星系。 
+          个星系。
           <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/秒</span>
           <div v-if="isInstabilityShown">
-          你的星系生成器不稳定性为
+            你的星系生成器不稳定性为
             <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>，将数量超过{{ format(instabilityStart, 2, 1) }}的星系产量除以
             <span class="c-galaxies-amount">{{ format(generationReduction, 2, 1) }}</span>。
           </div>
@@ -278,7 +276,6 @@ export default {
   background-color: #c1eaf0;
   border: var(--var-border-width, 0.1rem) solid var(--color-pelle--base);
   border-radius: var(--var-border-radius, 0.5rem);
-  /* box-shadow is here to prevent a weird grey border forming around the background */
   box-shadow: inset 0 0 0.1rem 0.1rem var(--color-pelle--base);
   margin: 1rem;
   padding: 2rem;

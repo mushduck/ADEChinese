@@ -28,15 +28,13 @@ export default {
         .map(cfg => [realityGlyphEffectLevelThresholds[cfg.bitmaskIndex - minRealityEffectIndex], cfg.id]);
     },
     createRealityGlyph() {
-      if (GameCache.glyphInventorySpace.value === 0) {
+const result = AlchemyResources.createRealityGlyph();
+      if (result.success) {
+        this.emitClose();
+      } else if (GameCache.glyphInventorySpace.value === 0) {
         Modal.message.show("仓库空间不足；请献祭一些符文以释放空间。",
           { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
-        return;
       }
-      Glyphs.addToInventory(GlyphGenerator.realityGlyph(Decimal.floor(AlchemyResource.reality.amount)));
-      if (!ExpansionPack.effarigPack.isBought || player.disablePostReality) AlchemyResource.reality.amount = 0;
-      player.reality.glyphs.createdRealityGlyph = true;
-      this.emitClose();
     },
     formatGlyphEffect(effect) {
       if (this.realityGlyphLevel.lt(effect[0])) return `（符文等级需要达到 ${formatInt(effect[0])}）`;
