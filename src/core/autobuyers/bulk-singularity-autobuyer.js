@@ -4,9 +4,9 @@ export class BulkSingularityAutobuyerState extends AutobuyerState {
   get data() {
     return player.auto.bulkSingularity;
   }
-
+//这里改了是没用的，神人S7写到vue里面去了
   get name() {
-    return `Bulk Singularity`;
+    return `自动凝聚奇点`;
   }
 
   get isUnlocked() {

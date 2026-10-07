@@ -30,7 +30,7 @@ export default {
         // Why is confirmedDelete here: refer to SacrificeGlyphModal.vue
 
         this.emitClose();
-        Modal.message.show("The selected Glyph changed position or was otherwise changed!");
+        Modal.message.show("选中的符文改变了位置或发生了其他变化");
       }
     },
     handleYesClick() {
@@ -44,12 +44,12 @@ export default {
 <template>
   <ModalWrapperChoice @confirm="handleYesClick">
     <template #header>
-      You are about to delete a Glyph
+      你将要移除符文
     </template>
     <div class="c-modal-message__text">
-      Deleting a Glyph will remove the Glyph from your inventory!
+      删除符文将使其从你的仓库中永久移除！
       <div class="c-modal-hard-reset-danger">
-        There is no benefit in deleting a Glyph before you have unlocked Glyph Sacrifice!
+        在解锁符文献祭功能前，删除符文没有任何益处！
       </div>
     </div>
   </ModalWrapperChoice>

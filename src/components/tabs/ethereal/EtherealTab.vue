@@ -37,7 +37,7 @@ export default {
       return `${formatHybridLarge(this.etherealPower, 3)}`;
     },
     extraPowerDisplay() {
-      return `It is also based on Galactic Power amounts above ${format(DC.NUMMAX, 2, 2)}.`;
+      return `和超出 ${format(DC.NUMMAX, 2, 2)} 的星系之力而提高。`;
     },
     etherealClassObject() {
       return {
@@ -62,30 +62,30 @@ export default {
       return Math.ceil(this.stars.length / 3);
     },
     nextStarText() {
-      if (this.allStarsUnlocked) return `All stars have been unlocked`;
-      return `The next star unlocks at ${format(this.nextStarReq, 2, 2)} Dual Machines`;
+      if (this.allStarsUnlocked) return `已解锁所有类型的星辰`;
+      return `下一种星辰需要达到 ${format(this.nextStarReq, 2, 2)} 重构机器`;
     },
     etherealPowerTimeEstimate() {
       return TimeSpan.fromSeconds(Decimal.sub(this.nextSectorAt, this.etherealPower)
         .div(this.etherealPowerPerSecond)).toTimeEstimate();
     },
     starPowerReqText() {
-      return `Reach a Stellar Product of ${format(DC.NUMMAX, 2, 2)} to unlock Star Power.`;
+      return `所有星辰数量的乘积达到 ${format(DC.NUMMAX, 2, 2)} 以解锁星流之力`;
     },
     starPowerDisplay() {
       if (this.starPower.lt(1000)) return `${format(this.starPower, 2, 2)}`;
       return `${formatHybridLarge(this.starPower, 3)}`;
     },
     nextGenerationText() {
-      if (this.allGenerationsUnlocked) return `All Star Power rewards have been unlocked`;
-      return `You will get a new Star Power reward at ${format(this.nextGeneration, 2, 2)} Star Power`;
+      if (this.allGenerationsUnlocked) return `已解锁所有星流之力效果`;
+      return `达到 ${format(this.nextGeneration, 2, 2)} 星流之力以解锁下一个效果`;
     },
     starTexts() {
       let arr = [];
-      let starName = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray"];
+      let starName = ["绯红", "橘焰", "缃黄", "苍绿", "蔚蓝", "绛紫", "皎白", "漆黑", "湮灰"];
       for (let t = 0; t < 9; t++) {
         if (Ethereal.starGeneration(t).neq(0)) {
-          arr.push(`Star Power is currently generating ${formatDecimalPercents(this.starGen[t], 2)} of pending ${starName[t]} Stars per second`);
+          arr.push(`星流之力现每秒生成凝聚时所能得到的${starName[t]}之星的 ${formatDecimalPercents(this.starGen[t], 2)}。`);
         }
       }
       return arr;
@@ -133,14 +133,14 @@ export default {
   <div class="l-ethereal-tab">
     <div>
       <div>
-        <span class="c-normal-ethereal-text">You have </span>
+        <span class="c-normal-ethereal-text">你拥有 </span>
         <span class="c-really-cool-ethereal-text">{{ etherealPowerDisplay }}</span>
-        <span class="c-normal-ethereal-text"> Ethereal Power. </span>
-        <span class="c-really-cool-ethereal-text">+{{ format(etherealPowerPerSecond, 3, 3) }}/s</span>
+        <span class="c-normal-ethereal-text"> 缥缈之力。</span>
+        <span class="c-really-cool-ethereal-text">+{{ format(etherealPowerPerSecond, 3, 3) }}/秒</span>
       </div>
       <div>
         <span class="c-normal-ethereal-text">
-          Ethereal Power income is based on Celestial Points, Singularities, and Reality Machine amounts.
+          缥缈之力的获取量基于天界点数、奇点和现实机器的数量
         </span>
         <span
           v-if="isBetter"
@@ -150,19 +150,18 @@ export default {
         </span>
       </div>
       <div>
-        <span class="c-normal-ethereal-text">Your Cosmic Sector is </span>
+        <span class="c-normal-ethereal-text">你拥有 </span>
         <span class="c-really-cool-ethereal-text">{{ formatInt(cosmicSector) }}</span>
-        <span class="c-normal-ethereal-text">, which is currently multiplying all Celestial Dimensions and delaying
-        the Celestial Matter Softcap by </span>
-        <span class="c-really-cool-ethereal-text">{{ formatX(sectorBoost, 3) }}</span><span class="c-normal-ethereal-text">.</span>
+        <span class="c-normal-ethereal-text"> 个宇宙扇区，为天界维度和天界物质软上限阈值提供</span>
+        <span class="c-really-cool-ethereal-text">{{ formatX(sectorBoost, 3) }}</span><span class="c-normal-ethereal-text">的倍率。</span>
       </div>
       <div>
-        <span class="c-normal-ethereal-text">You will ascend into the next Cosmic Sector at </span>
+        <span class="c-normal-ethereal-text">下一个宇宙扇区需要 </span>
         <span
           class="c-really-cool-ethereal-text"
           :ach-tooltip="etherealPowerTimeEstimate"
         >{{ formatHybridLarge(nextSectorAt, 3) }}</span>
-        <span class="c-normal-ethereal-text"> Ethereal Power.</span>
+        <span class="c-normal-ethereal-text"> 缥缈之力。</span>
       </div>
     </div>
     <br>
@@ -171,14 +170,14 @@ export default {
       class="l-ethereal-extension-unlock"
     >
       <div v-if="!canExtend">
-        <span class="c-normal-ethereal-text">Reach {{ format(1e25, 2, 2) }} Ethereal Power to Extend the Ethereal.</span>
+        <span class="c-normal-ethereal-text">达到 {{ format(1e25, 2, 2) }} 缥缈之力以超越缥缈。</span>
       </div>
       <div v-if="canExtend">
         <button
           :class="etherealClassObject"
           @click="extendEthereal"
         >
-          Extend the Ethereal
+          超越缥缈
         </button>
       </div>
     </div>
@@ -187,8 +186,8 @@ export default {
       class="l-star-grid"
     >
       <div>
-        <span class="c-stellar-glow">Your Stellar Product is </span>
-        <span class="c-cooler-stellar-glow">{{ format(stellarProd, 2, 2) }}</span><span class="c-stellar-glow">.</span>
+        <span class="c-stellar-glow">你所有星辰数量的乘积为 </span>
+        <span class="c-cooler-stellar-glow">{{ format(stellarProd, 2, 2) }}</span><span class="c-stellar-glow">。</span>
       </div>
       <br>
       <div
@@ -221,7 +220,7 @@ export default {
           :class="etherealCoolClassObject"
           @click="unlockStarPower"
         >
-          Unlock Star Power
+          解锁星流之力
         </button>
       </div>
     </div>
@@ -230,14 +229,14 @@ export default {
       class="l-star-grid"
     >
       <div>
-        <span class="c-stellar-glow">You have </span>
+        <span class="c-stellar-glow">你拥有 </span>
         <span class="c-cooler-stellar-glow">{{ starPowerDisplay }}</span>
-        <span class="c-stellar-glow"> Star Power. </span>
-        <span class="c-cooler-stellar-glow">+{{ format(starPowerPerSecond, 3, 3) }}/s</span>
+        <span class="c-stellar-glow"> 星流之力。 </span>
+        <span class="c-cooler-stellar-glow">+{{ format(starPowerPerSecond, 3, 3) }}/秒</span>
       </div>
       <div>
-        <span class="c-stellar-glow">Your Star Power is currently multiplying the gain of all Star types by </span>
-        <span class="c-cooler-stellar-glow">{{ formatX(starBoost, 3, 3) }}</span><span class="c-stellar-glow">.</span>
+        <span class="c-stellar-glow">为所有类型的星辰产量提供 </span>
+        <span class="c-cooler-stellar-glow">{{ formatX(starBoost, 3, 3) }}</span><span class="c-stellar-glow"> 的倍率。</span>
       </div>
       <br>
       <span

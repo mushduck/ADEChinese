@@ -81,13 +81,13 @@ export default {
       :config="config"
     />
     <div v-if="!isBought && hasEU2">
-      Auto: {{ format(config.cost / 1e10) }} Eternity Points
+      自动：{{ format(config.cost / 1e10) }} 永恒点数
     </div>
     <CostDisplay
       v-else-if="!isBought"
       br
       :config="config"
-      name="Eternity Point"
+      name="永恒点数"
     />
   </button>
 </template>

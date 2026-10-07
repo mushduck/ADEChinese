@@ -29,7 +29,7 @@ export default {
       return this.challenge.config;
     },
     name() {
-      return `IC${this.challenge.id}`;
+      return `无限挑战${this.challenge.id}`;
     }
   },
   methods: {
@@ -62,10 +62,10 @@ export default {
     </template>
     <template #bottom>
       <div class="l-challenge-box__bottom--infinity">
-        <span>Goal: {{ format(config.goal()) }} {{ isFlipped ? "matter" : "antimatter" }}</span>
+        <span>目标：{{ format(config.goal()) }} {{ isFlipped ? "正物质" : "反物质" }}</span>
         <DescriptionDisplay
           :config="config.reward"
-          title="Reward:"
+          title="奖励："
         />
         <EffectDisplay
           :config="config.reward"

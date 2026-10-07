@@ -6,3 +6,15 @@ dist
 node_modules
 .eslintrc.js
 .DS_Store
+*.bak
+node_modules/
+node_modules/
+dist/
+*.bak
+dist_electron/.aider*
+.aider*
+AIDER_CHAT.md
+dist_electron/
+js/
+*.exe
+*.asar

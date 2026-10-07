@@ -8,7 +8,7 @@ export const ENSLAVED_UNLOCKS = {
     id: 0,
     price: TimeSpan.fromYears(new Decimal(1e35)).totalMilliseconds,
     secondaryRequirement: () => true,
-    description: () => `Increase the softcap to Tickspeed upgrades from Time Dimensions by ${formatInt(1e5)}`,
+    description: () => `时间维度中获得计数频率升级数量的软上限延迟 ${formatInt(1e5)}`,
   },
   RUN: {
     id: 1,
@@ -21,15 +21,14 @@ export const ENSLAVED_UNLOCKS = {
     description() {
       const hasLevelRequirement = player.records.bestReality.glyphLevel.gte(5000);
       const hasRarityRequirement = strengthToRarity(player.records.bestReality.glyphStrength) >= 100;
-      return `Unlock The Nameless Ones' Reality (requires ${hasLevelRequirement ? "[✓]" : "[✗]"} a level
-      ${formatInt(5000)} Glyph and ${hasRarityRequirement ? "[✓]" : "[✗]"} a ${formatRarity(100)} rarity Glyph)`;
+      return `解锁无名氏的现实（要求：一个等级为 ${formatInt(5000)} 的符文 ${hasLevelRequirement ? "[✓]" : "[✗]"} 和一个稀有度为 ${formatRarity(100)} 的符文 ${hasRarityRequirement ? "[✓]" : "[✗]"} ）`;
     }
   }
 };
 
 export const Enslaved = {
-  displayName: "The Nameless Ones",
-  possessiveName: "The Nameless Ones'",
+  displayName: "无名氏",
+  possessiveName: "无名氏的",
   boostReality: false,
   BROKEN_CHALLENGES: [2, 3, 4, 5, 7, 8, 10, 11, 12],
   nextTickDiff: new Decimal(50),
@@ -165,7 +164,7 @@ export const Enslaved = {
     AutomatorData.recalculateErrors();
     if (AutomatorBackend.state.mode === AUTOMATOR_MODE.RUN && AutomatorData.currentErrors().length) {
       AutomatorBackend.stop();
-      GameUI.notify.error("This Reality forbids Black Holes! (Automator stopped)");
+      GameUI.notify.error("这个现实禁止使用黑洞（自动机已停止）");
     }
 
     this.quotes.startRun.show();
@@ -199,14 +198,12 @@ export const Enslaved = {
   },
   feelEternity() {
     if (this.feltEternity) {
-      Modal.message.show(`You have already exposed this crack in the Reality. Time in this Eternity is being multiplied
-        by your Eternity count, up to a maximum of ${formatX(1e66)}.`,
+      Modal.message.show(`你已经发现了现实中的这个裂缝。此永恒中的时间正乘以你的永恒次数，最高可达 ${formatX(1e66)} 。`,
       { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
     } else {
       EnslavedProgress.feelEternity.giveProgress();
       this.feltEternity = true;
-      Modal.message.show(`Time in this Eternity will be multiplied by your Eternity count,
-        up to a maximum of ${formatX(1e66)}.`, { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
+      Modal.message.show(`此永恒中的时间正乘以你的永恒次数，最高可达 ${formatX(1e66)} 。`, { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
     }
   },
   get feltEternity() {

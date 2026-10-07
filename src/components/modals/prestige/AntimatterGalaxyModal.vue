@@ -23,37 +23,35 @@ export default {
   },
   computed: {
     topLabel() {
-      if (this.bulk && this.isFlipped) return `You are about to purchase ${quantifyInt("Matter Galaxy", this.newGalaxies)}`;
-      if (this.bulk) return `You are about to purchase ${quantifyInt("Antimatter Galaxy", this.newGalaxies)}`;
-      return `You are about to purchase ${this.isFlipped ? "a Matter" : "an Antimatter"} Galaxy`;
+      if (this.bulk && this.isFlipped) return `你即将购买 ${quantifyInt("正物质星系", this.newGalaxies)}`;
+      if (this.bulk) return `你即将购买 ${quantifyInt("反物质星系", this.newGalaxies)}`;
+      return `你即将购买一个${this.isFlipped ? "正物质" : "反物质"}星系`;
     },
     message() {
       const resetResouces = [];
-      if (Pelle.isDoomed) resetResouces.push("Antimatter", "Antimatter Dimensions", "Tickspeed");
-      if (!this.perkANRBought && this.isFlipped) resetResouces.push("Antimatter Dimensions", "Tickspeed");
-      if (!this.perkANRBought && !this.isFlipped) resetResouces.push("Matter Dimensions", "Tickspeed");
-      if (!this.keepDimBoost) resetResouces.push("Dimension Boosts");
-      if (!this.keepAntimatter && !this.perkANRBought && this.isFlipped) resetResouces.push("Matter");
-      if (!this.keepAntimatter && !this.perkANRBought && !this.isFlipped) resetResouces.push("Antimatter");
+      if (Pelle.isDoomed) resetResouces.push("反物质", "反物质维度", "计数频率");
+      if (!this.perkANRBought && this.isFlipped) resetResouces.push("反物质维度", "计数频率");
+      if (!this.perkANRBought && !this.isFlipped) resetResouces.push("正物质维度", "计数频率");
+      if (!this.keepDimBoost) resetResouces.push("维度提升");
+      if (!this.keepAntimatter && !this.perkANRBought && this.isFlipped) resetResouces.push("正物质");
+      if (!this.keepAntimatter && !this.perkANRBought && !this.isFlipped) resetResouces.push("反物质");
       const resetList = makeEnumeration(resetResouces);
       let tickspeedFixed = "";
       if (InfinityChallenge(3).isRunning) {
-        tickspeedFixed = `Infinity Challenge ${InfinityChallenge(3).id}`;
+        tickspeedFixed = `无限挑战 ${InfinityChallenge(3).id}`;
       } else if (Ra.isRunning) {
-        tickspeedFixed = `${Ra.displayName}'s Reality`;
+        tickspeedFixed = `${Ra.displayName}的现实`;
       }
       const tickspeedInfo = (tickspeedFixed === "")
-        ? "you will receive a small boost to Tickspeed Upgrades."
-        : `you will not receive a boost to Tickspeed Upgrades, because you are in ${tickspeedFixed}.`;
+        ? "计数频率升级将获得小幅提升。"
+        : `计数频率升级不会获得加成，因为你当前处于${tickspeedFixed}中。`;
       const message = (resetList === "")
-        ? `This will reset nothing, and ${tickspeedInfo}`
-        : `This will reset your ${resetList}. However, ${tickspeedInfo}`;
+        ? `这将不会重置任何东西，并且${tickspeedInfo}`
+        : `这将重置${resetList}，然而${tickspeedInfo}`;
 
-      if (this.bulk && this.isFlipped) return `Are you sure you want to purchase
-        ${quantifyInt("Matter Galaxy", this.newGalaxies)}? ${message}`;
-      if (this.bulk) return `Are you sure you want to purchase
-        ${quantifyInt("Antimatter Galaxy", this.newGalaxies)}? ${message}`;
-      return `Are you sure you want to purchase ${this.isFlipped ? "a Matter" : "an Antimatter"} Galaxy? ${message}`;
+      if (this.bulk && this.isFlipped) return `你确定要购买${quantifyInt("正物质星系", this.newGalaxies)}吗？${message}`;
+      if (this.bulk) return `你确定要购买${quantifyInt("反物质星系", this.newGalaxies)}吗？${message}`;
+      return `你确定要购买一个${this.isFlipped ? "正物质" : "反物质"}星系吗？${message}`;
     }
   },
   created() {

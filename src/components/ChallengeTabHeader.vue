@@ -61,33 +61,33 @@ export default {
       <PrimaryToggleButton
         v-model="retryChallenge"
         class="o-primary-btn--subtab-option"
-        label="Automatically retry challenges:"
+        label="自动重试挑战："
       />
       <PrimaryToggleButton
         v-if="isShowAllVisible"
         v-model="showAllChallenges"
         class="o-primary-btn--subtab-option"
-        label="Show all known challenges:"
+        label="显示所有已知挑战："
       />
       <PrimaryToggleButton
         v-if="isAutoECVisible"
         v-model="autoEC"
         class="o-primary-btn--subtab-option"
-        label="Auto Eternity Challenges:"
+        label="自动完成："
       />
       <PrimaryButton
         v-if="isInChallenge"
         class="o-primary-btn--subtab-option"
         @click="restartChallenge"
       >
-        Restart Challenge
+        重试挑战
       </PrimaryButton>
       <PrimaryButton
         v-if="isInChallenge"
         class="o-primary-btn--subtab-option"
         @click="exitChallenge"
       >
-        Exit Challenge
+        放弃挑战
       </PrimaryButton>
     </div>
   </div>

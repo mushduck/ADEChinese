@@ -61,7 +61,7 @@ export default {
     },
     startRun() {
       if (this.isDoomed) return;
-      Modal.celestials.show({ name: "Alpha's", number: 7 });
+      Modal.celestials.show({ name: "阿尔法", number: 7 });
     }
   }
 };
@@ -73,14 +73,14 @@ export default {
     <br>
     <div>
       <span class="l-alpha-text">
-        Each Alpha layer beaten also increases Endgame and Ethereal Power gain by {{ formatPercents(0.33) }}
+        每击穿一层阿尔法现实额外为终局次数和缥缈之力提供{{ formatPercents(0.33) }}的加成。
       </span>
     </div>
     <div class="l-alpha-unlocks-and-run">
       <div class="l-alpha-unlocks">
         <div>
           <span class="l-alpha-header">
-            Layer
+            层级
           </span>
           <p
             v-for="(layer, idx) in layers"
@@ -91,7 +91,7 @@ export default {
         </div>
         <div>
           <span class="l-alpha-header">
-            Nerf
+            削弱
           </span>
           <p
             v-for="(nerf, idy) in nerfs"
@@ -102,7 +102,7 @@ export default {
         </div>
         <div>
           <span class="l-alpha-header">
-            Buff
+            增益
           </span>
           <p
             v-for="(buff, idz) in buffs"
@@ -115,7 +115,7 @@ export default {
       <div class="l-alpha-run">
         <div class="c-alpha-run-description">
           <span :class="{ 'o-pelle-disabled': isDoomed || isDestroyed }">
-            Access Alpha's Reality.
+            进入阿尔法的现实
           </span>
         </div>
         <div

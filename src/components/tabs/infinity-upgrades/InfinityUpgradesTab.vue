@@ -138,24 +138,24 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        Respec Charged Infinity Upgrades on next {{ isDoomed ? "Armageddon" : "Reality" }}
+        在下一次{{ isDoomed ? "末日" : "现实" }}时重置已充能的无限升级 
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
-      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Infinity Upgrades.
-      Charged Infinity Upgrades have their effect altered.
+      你已充能 {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} 无限升级，已充能的无限升级会更改其效果。
       <br>
-      Hold shift to show Charged Infinity Upgrades.
-      <span v-if="!isDoomed || !alwaysRecpec"> You can freely respec your choices on Reality.</span>
+      按住 Shift 键显示充能无限升级，
+      <span v-if="!isDoomed || !alwaysRecpec"> 你可以自由地在现实时重置充能的升级。</span>
     </div>
     <div v-if="isUseless">
-      You cannot Charge Infinity Upgrades while Doomed.
+      你不能在被毁灭的现实中充能无限升级。
     </div>
     <div v-if="isDoomed && !isUseless && alwaysRecpec">
-      Charged Infinity Upgrades always reset on Armageddon, until you can keep your Break Infinity Upgrades on Armageddon.
+      在购买末日后不重置打破无限升级的佩勒升级前，充能无限升级将在末日后重置。
+
     </div>
     <br>
-    Within each column, the upgrades must be purchased from top to bottom.
+    在升级列表的每一列中，升级必须按从上到下的顺序依次购买。
     <br>
     <div class="l-infinity-upgrade-grid l-infinity-upgrades-tab__grid">
       <div
@@ -186,10 +186,7 @@ export default {
       />
     </div>
     <div v-if="eternityUnlocked && bottomRowUnlocked && isSoftcapApplicable">
-      The Infinity Point multiplier becomes more expensive
-      <br>
-      above {{ formatPostBreak(ipMultSoftCap, 2, 1) }} Infinity
-      Points<span v-if="!isUncapped">, and cannot be purchased past {{ formatPostBreak(ipMultHardCap, 2, 1) }} Infinity Points</span>.
+      无限点数超过 {{ formatPostBreak(ipMultSoftCap, 2, 1) }} 后，进一步提高无限点数倍增的价格。<span v-if="!isUncapped">无限点数大于 {{ formatPostBreak(ipMultHardCap, 2, 1) }} 时无法购买无限点数倍增。</span>
     </div>
   </div>
 </template>

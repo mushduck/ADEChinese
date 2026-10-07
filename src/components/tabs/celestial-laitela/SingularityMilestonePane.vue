@@ -37,7 +37,7 @@ export default {
       onclick="Modal.singularityMilestones.show()"
       :class="classObject"
     >
-      Show all milestones
+      显示所有里程碑
     </div>
     <SingularityMilestoneComponent
       v-for="milestone in milestones"

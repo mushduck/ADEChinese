@@ -12,7 +12,9 @@ export default {
       fluxUnlocked: false,
       fluxLevel: 1,
       fluxTime: 0,
-      maxFlux: 2
+      maxFlux: 2,
+      customTimeValue: 1,
+      customTimeUnit: 'min'
     };
   },
   computed: {
@@ -22,42 +24,54 @@ export default {
     fluxTimeDisplay() {
       return TimeSpan.fromSeconds(new Decimal(this.fluxTime)).toStringShort();
     },
+    customTimeInSeconds() {
+      const val = Number(this.customTimeValue) || 0;
+      if (this.customTimeUnit === 'sec') return val;
+      if (this.customTimeUnit === 'min') return val * 60;
+      if (this.customTimeUnit === 'hour') return val * 3600;
+      return 0;
+    },
+    customClassObj() {
+      return {
+        "o-primary-btn": true,
+        "o-primary-btn--disabled": this.storedTime < this.customTimeInSeconds || this.customTimeInSeconds <= 0
+      };
+    },
     oneMinuteDisp() {
-      return `Spend ${TimeSpan.fromMinutes(1).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromMinutes(1).toStringShort()}`;
     },
     tenMinutesDisp() {
-      return `Spend ${TimeSpan.fromMinutes(10).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromMinutes(10).toStringShort()}`;
     },
     oneHourDisp() {
-      return `Spend ${TimeSpan.fromHours(1).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromHours(1).toStringShort()}`;
     },
     fiveHoursDisp() {
-      return `Spend ${TimeSpan.fromHours(5).toStringShort()} of Stored Time`;
+      return `跳跃 ${TimeSpan.fromHours(5).toStringShort()}`;
     },
     allDisp() {
-      return `Spend all Stored Time`;
+      return `114514 秒存储时间点击即送`;
     },
     fluxUnlockDisp() {
-      return `Spend ${TimeSpan.fromHours(5).toStringShort()} of Stored Time to unlock Flux`;
+      return `花费 ${TimeSpan.fromHours(5).toStringShort()} 存储时间以解锁时间通量`;
     },
     fluxIncrementDisp() {
-      return `Spend ${TimeSpan.fromHours(5).toStringShort()} of Stored Time to increase
-        the maximum Flux Level to ${format(Math.ceil(this.maxFlux * 1.1))}.`;
+      return `花费 ${TimeSpan.fromHours(5).toStringShort()} 存储时间将时间通量最大等级提升至 ${format(Math.ceil(this.maxFlux * 1.1))}`;
     },
     oneMinuteFlux() {
-      return `Pour ${TimeSpan.fromMinutes(1).toStringShort()} of Stored Time into Flux`;
+      return `将 ${TimeSpan.fromMinutes(1).toStringShort()} 存储时间注入时间通量`;
     },
     tenMinutesFlux() {
-      return `Pour ${TimeSpan.fromMinutes(10).toStringShort()} of Stored Time into Flux`;
+      return `将 ${TimeSpan.fromMinutes(10).toStringShort()} 存储时间注入时间通量`;
     },
     oneHourFlux() {
-      return `Pour ${TimeSpan.fromHours(1).toStringShort()} of Stored Time into Flux`;
+      return `将 ${TimeSpan.fromHours(1).toStringShort()} 存储时间注入时间通量`;
     },
     fiveHoursFlux() {
-      return `Pour ${TimeSpan.fromHours(5).toStringShort()} of Stored Time into Flux`;
+      return `将 ${TimeSpan.fromHours(5).toStringShort()} 存储时间注入时间通量`;
     },
     allFlux() {
-      return `Pour all Stored Time into Flux`;
+      return `将所有存储时间注入时间通量`;
     },
     classObj1() {
       return {
@@ -86,7 +100,7 @@ export default {
     classObj5() {
       return {
         "o-primary-btn": true,
-        "o-primary-btn--disabled": this.storedTime <= 0
+        "o-primary-btn--disabled": this.storedTime > 3600
       };
     },
     classObj6() {
@@ -125,6 +139,12 @@ export default {
         "o-primary-btn--disabled": this.fluxLevel >= this.maxFlux - 99
       };
     },
+    classObj12() {
+      return {
+        "o-primary-btn": this.storedTime > 0,
+        "o-primary-btn--disabled": this.storedTime <= 0,
+      };
+    }
   },
   methods: {
     update() {
@@ -133,6 +153,19 @@ export default {
       this.fluxLevel = player.flux.level;
       this.fluxTime = Slabdrill.isCursed ? 0 : player.flux.fluxTime;
       this.maxFlux = player.flux.maxUnlockedFlux;
+    },
+    spendCustomTime() {
+      const seconds = this.customTimeInSeconds;
+      if (seconds <= 0) {
+        GameUI.notify.error("请输入大于 0 的时间！");
+        return;
+      }
+      if (this.storedTime >= seconds) {
+        player.storedTime -= seconds;
+        simulateTime(seconds);
+      } else {
+        GameUI.notify.error("存储时间不足！");
+      }
     },
     spendOneMin() {
       if (this.storedTime >= 60) {
@@ -158,10 +191,33 @@ export default {
         simulateTime(18000);
       }
     },
-    spendAll() {
-      if (this.storedTime >= 0) {
-        simulateTime(player.storedTime);
-        player.storedTime = 0;
+    getFreeTime() {
+      if (this.storedTime <= 3600) {
+        player.storedTime += 114514;
+        GameUI.notify.info("获得了 114514 秒存储时间DA☆ZE！");
+      } else {
+        GameUI.notify.info(`先把存储时间用得差不多了再续杯哦！`);
+      }
+    },
+    fixEternityBug() {
+      if (player.records.bestEternity.time.eq(0e0)) {
+        player.records.bestEternity.time = new Decimal(25);
+        GameUI.notify.info(`已修复`);
+      } else {
+        GameUI.notify.info(`不要在没触发bug时使用我哦！`);
+      }
+    },
+    fuckAlpha(){
+      if(Alpha.isDestroyed) {
+        GameUI.notify.info(`阿尔法已经死透了...`);
+      } else {
+        if (player.options.brightAlpha) {
+          player.options.brightAlpha = false;
+          GameUI.notify.info(`天暗了...`);
+        } else {
+          player.options.brightAlpha = true;
+          GameUI.notify.info(`天亮了...`);
+        }
       }
     },
     unlockFlux() {
@@ -243,9 +299,51 @@ export default {
   <div>
     <div class="normal-text">
       <br>
-      <span>You have </span><span class="special-text">{{ timeDisplay }}</span><span> of Stored Time.</span>
+      <span>你可以跳跃 </span><span class="special-text">{{ timeDisplay }}</span><span> 的时间。</span>
+      <br>
+      <span>建议善用赠送的离线时长！或许在特定的情况下可以大大加快永恒！</span>
     </div>
+
     <div class="c-subtab-option-container">
+      <div class="independent-btn-wrapper">
+        <PrimaryButton
+          class="o-primary-btn"
+          @click="fixEternityBug"
+        >
+          点我修复最快永恒时间为0的问题（无限维度失效）
+        </PrimaryButton>
+      </div>
+      <div class="independent-btn-wrapper">
+        <PrimaryButton
+          class="o-primary-btn"
+          @click="fuckAlpha"
+        >
+          点我在阿尔法内重见天日
+        </PrimaryButton>
+      </div>
+
+      <div class="custom-time-container">
+        <input
+          type="number"
+          v-model.number="customTimeValue"
+          min="0"
+          step="any"
+          class="custom-time-input"
+          placeholder="数值"
+        />
+        <select v-model="customTimeUnit" class="custom-time-select">
+          <option value="sec">秒</option>
+          <option value="min">分钟</option>
+          <option value="hour">小时</option>
+        </select>
+        <PrimaryButton
+          :class="customClassObj"
+          @click="spendCustomTime"
+        >
+          自定义跳跃
+        </PrimaryButton>
+      </div>
+
       <PrimaryButton
         :class="classObj1"
         @click="spendOneMin"
@@ -272,11 +370,12 @@ export default {
       </PrimaryButton>
       <PrimaryButton
         :class="classObj5"
-        @click="spendAll"
+        @click="getFreeTime"
       >
         {{ allDisp }}
       </PrimaryButton>
     </div>
+
     <br>
     <br>
     <div v-if="!fluxUnlocked">
@@ -297,82 +396,85 @@ export default {
     </div>
     <br>
     <br>
+
     <div
       v-if="fluxUnlocked"
       class="normal-text"
     >
-      <span>Your current Flux level is </span><span class="special-text">{{ fluxLevel }}</span><span>.</span>
+      <span>你当前的时间通量等级为 </span><span class="special-text">{{ fluxLevel }}</span><span>。</span>
       <br>
-      <span>You have </span><span class="special-text">{{ fluxTimeDisplay }}</span><span> of Flux Time.</span>
+      <span>你拥有 </span><span class="special-text">{{ fluxTimeDisplay }}</span><span> 的时间通量。</span>
       <br>
       <span v-if="fluxLevel === 1">
-        You cannot spend Flux Time at Flux level {{ formatInt(1) }}.
+        在时间通量等级为 {{ formatInt(1) }} 时，你无法消耗时间通量。
       </span>
       <span v-if="fluxLevel !== 1">
-        Flux will consume
+        激发时间通量每秒将消耗
         <span class="special-text">{{ format(fluxLevel - 1) }}</span>
-        {{ pluralize("second", fluxLevel - 1) }} of Flux Time per real second to provide a
+        秒的时间通量，为你提供
         <span class="special-text">{{ formatX(fluxLevel) }}</span>
-        multiplier to real time.
+        的现实时间倍率。
       </span>
       <br>
       <br>
+
       <div class="c-subtab-option-container">
         <PrimaryButton
           :class="classObj6"
           @click="minimizeFlux"
         >
-          Minimize Flux Level
+          最小化时间通量等级
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 200"
           :class="classObj10"
           @click="decreaseFlux100"
         >
-          Decrease Flux Level by {{ formatInt(100) }}
+          降低 {{ formatInt(100) }} 级时间通量
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 20"
           :class="classObj8"
           @click="decreaseFlux10"
         >
-          Decrease Flux Level by {{ formatInt(10) }}
+          降低 {{ formatInt(10) }} 级时间通量
         </PrimaryButton>
         <PrimaryButton
           :class="classObj6"
           @click="decreaseFlux"
         >
-          Decrease Flux Level
+          降低时间通量等级
         </PrimaryButton>
         <PrimaryButton
           :class="classObj7"
           @click="increaseFlux"
         >
-          Increase Flux Level
+          提高时间通量等级
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 20"
           :class="classObj9"
           @click="increaseFlux10"
         >
-          Increase Flux Level by {{ formatInt(10) }}
+          提高 {{ formatInt(10) }} 级时间通量等级
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 200"
           :class="classObj11"
           @click="increaseFlux100"
         >
-          Increase Flux Level by {{ formatInt(100) }}
+          提高 {{ formatInt(100) }} 级时间通量等级
         </PrimaryButton>
         <PrimaryButton
           :class="classObj7"
           @click="maximizeFlux"
         >
-          Maximize Flux Level
+          最大化时间通量等级
         </PrimaryButton>
       </div>
       <br>
       <br>
+
       <div class="c-subtab-option-container">
         <PrimaryButton
           :class="classObj1"
@@ -399,7 +501,7 @@ export default {
           {{ fiveHoursFlux }}
         </PrimaryButton>
         <PrimaryButton
-          :class="classObj5"
+          :class="classObj12"
           @click="fluxAll"
         >
           {{ allFlux }}
@@ -418,5 +520,54 @@ export default {
 .special-text {
   font-size: 2.5rem;
   color: var(--color-dilation);
+}
+
+.custom-time-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  justify-content: center;
+}
+
+.custom-time-input,
+.custom-time-select {
+  background-color: rgba(0, 0, 0, 0.6);
+  border: 1px solid var(--color-primary, #555);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+}
+
+.custom-time-input {
+  width: 80px;
+}
+
+.custom-time-select {
+  width: 80px;
+  cursor: pointer;
+}
+
+.custom-time-input::-webkit-inner-spin-button,
+.custom-time-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.custom-time-input {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.independent-btn-wrapper {
+  width: 100%;
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 </style>

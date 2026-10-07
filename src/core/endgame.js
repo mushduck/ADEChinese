@@ -814,7 +814,9 @@ export const Endgame = {
     tryChargeAllPerkUpgrades();
     tryChargeAllBreakUpgrades();
     tryChargeAllEternityUpgrades();
-    AutomatorBackend.restart();
+    if (Player.automatorUnlocked && (AutomatorBackend.state.forceRestartEndgame ?? true)) {
+      AutomatorBackend.restart();
+    }
   }
 };
 function lockAchievementsOnEndgame() {
@@ -849,8 +851,7 @@ export function divinityReset() {
   if (player.celestials.pelle.divinities === 1) Pelle.quotes.divinity.show();
   // Remove next update
   if (player.celestials.pelle.divinities === 22) {
-    Modal.message.show(`You have reached the end of balanced content. You may go beyond this point,
-      but content may be unbalanced and/or unimplemented.`, {}, 3);
+    Modal.message.show(`从此以后，游戏内容平衡还没做喵。出现任何平衡和非预期内的东西都是正常的喵（`, {}, 3);
   }
 }
 

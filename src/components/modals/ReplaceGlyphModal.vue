@@ -27,7 +27,7 @@ export default {
   computed: {
     resetTerm() {
       if (this.isCursed) return "perform a Core Jump";
-      return this.isDoomed ? "restart this Armageddon" : "restart this Reality";
+      return this.isDoomed ? "重启本次末日" : "重启本次现实";
     },
   },
   methods: {
@@ -51,8 +51,8 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are about to replace a Glyph
+      你将要替换符文
     </template>
-    Replacing a Glyph will {{ resetTerm }}.
+    替换符文后将{{ resetTerm }}。是否替换？
   </ModalWrapperChoice>
 </template>

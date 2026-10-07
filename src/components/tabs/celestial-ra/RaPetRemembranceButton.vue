@@ -36,7 +36,7 @@ export default {
       this.hasRemembrance = pet.hasRemembrance;
     },
     toggleRemembrance() {
-      Ra.petWithRemembrance = Ra.petWithRemembrance === this.pet.name ? "" : this.pet.name;
+      Ra.petWithRemembrance = Ra.petWithRemembrance === this.pet.key ? "" : this.pet.key;
     }
   },
 };
@@ -50,10 +50,10 @@ export default {
     @click="toggleRemembrance"
   >
     <span v-if="hasRemembrance">
-      Remembrance given to {{ name }}
+      正在追忆{{ name }}
     </span>
     <span v-else>
-      Give Remembrance to {{ name }}
+      追忆{{ name }}
     </span>
   </button>
 </template>

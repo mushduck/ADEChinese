@@ -211,7 +211,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse1"
           />
-          Pelle Achievement Enabling
+          恢复被佩勒禁用的成就
         </div>
         <div
           v-if="!isCollapsed1"
@@ -231,7 +231,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse2"
           />
-          Pelle Destruction Upgrades
+          消除佩勒削弱
         </div>
         <div
           v-if="!isCollapsed2"
@@ -251,7 +251,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse3"
           />
-          Pelle Reality Upgrade Enabling
+          恢复被佩勒禁用的现实升级
         </div>
         <div
           v-if="!isCollapsed3"
@@ -271,7 +271,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse4"
           />
-          Pelle Imaginary Upgrade Enabling
+          恢复被佩勒禁用的虚幻升级
         </div>
         <div
           v-if="!isCollapsed4"
@@ -291,7 +291,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse5"
           />
-          Pelle Celestial Reward Enabling
+          恢复被佩勒禁用的天神奖励
         </div>
         <div
           v-if="!isCollapsed5"
@@ -311,7 +311,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse6"
           />
-          Pelle Perk Enabling
+          恢复被佩勒禁用的复兴树
         </div>
         <div
           v-if="!isCollapsed6"
@@ -331,7 +331,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse7"
           />
-          Pelle Alchemy Enabling
+          恢复被佩勒禁用的炼金资源
         </div>
         <div
           v-if="!isCollapsed7"
@@ -351,7 +351,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse8"
           />
-          Pelle Strike Disabling
+          消除佩勒冲击
         </div>
         <div
           v-if="!isCollapsed8"

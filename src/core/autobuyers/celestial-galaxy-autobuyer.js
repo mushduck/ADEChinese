@@ -6,7 +6,7 @@ export class CelestialGalaxyAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get name() {
-    return `Celestial Galaxy`;
+    return `天界星系`;
   }
 
   get isUnlocked() {

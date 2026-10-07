@@ -1,7 +1,7 @@
 export const dilationTimeStudies = [
   {
     id: 1,
-    description: "Unlock Time Dilation",
+    description: "解锁时间膨胀",
     cost: () => Alpha.isRunning ? AlphaUnlocks.ec11Bulk.effects.nerfA.effectOrDefault(5000) : 5000,
     requirement: () => {
       const ttRequirement = Currency.timeTheorems.max.gte(TimeStudy.dilation.totalTimeTheoremRequirement);
@@ -19,25 +19,25 @@ export const dilationTimeStudies = [
   },
   {
     id: 2,
-    description: "Unlock the 5th Time Dimension",
+    description: "解锁第五时间维度",
     cost: 1e6,
     requirement: () => PlayerProgress.dilationUnlocked()
   },
   {
     id: 3,
-    description: "Unlock the 6th Time Dimension",
+    description: "解锁第六时间维度",
     cost: 1e7,
     requirement: () => TimeStudy.timeDimension(5).isBought
   },
   {
     id: 4,
-    description: "Unlock the 7th Time Dimension",
+    description: "解锁第七时间维度",
     cost: 1e8,
     requirement: () => TimeStudy.timeDimension(6).isBought
   },
   {
     id: 5,
-    description: "Unlock the 8th Time Dimension",
+    description: "解锁第八时间维度",
     cost: 1e9,
     requirement: () => TimeStudy.timeDimension(7).isBought
   },
@@ -46,11 +46,11 @@ export const dilationTimeStudies = [
     description: () => {
       if (Pelle.isDoomed) {
         if (player.celestials.pelle.galaxyGenerator.unlocked) return "*";
-        return "You cannot escape a Doomed Reality";
+        return "你无法逃离已被毁灭的现实！";
       }
-      if (!Pelle.isDoomed) return "Unlock Reality";
+      if (!Pelle.isDoomed) return "解锁现实";
     },
-    scrambleText: ["You cannot escape a Doomed Reality", "Escape the Doomed Reality (Requires e9e15 Antimatter)"],
+    scrambleText: ["你无法逃离已被毁灭的现实！", "逃离已被毁灭的现实(需要e9e15反物质）"],
     cost: 1,
     requirement: () => TimeStudy.timeDimension(8).isBought &&
       player.records.thisReality.maxEP.log10().gte(4000) &&

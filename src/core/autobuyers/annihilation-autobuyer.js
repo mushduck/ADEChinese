@@ -6,7 +6,7 @@ export class AnnihilationAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Annihilation`;
+    return `湮灭`;
   }
 
   get isUnlocked() {

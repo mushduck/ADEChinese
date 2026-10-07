@@ -14,11 +14,10 @@ export default {
   computed: {
     message() {
       switch (this.messageIndex) {
-        case 0: return "Are you sure you want to get rid of your Companion Glyph?";
-        case 1: return "You will not receive any cake.";
-        case 2: return "This is permanent! You will not get another Companion Glyph!";
-        case 3: return `You deleted your faithful Companion Glyph more quickly than any
-                        other test subject on record. Congratulations.`;
+        case 0: return "你想移除你的同伴符文，确定吗？";
+        case 1: return "这里可没有什么蛋糕。";
+        case 2: return "你将永久移除你的同伴符文！这可没有第二个同伴符文！";
+        case 3: return `恭喜，你移除同伴符文的速度超过了此前所有的测试者。`;
         default: return "Invalid message index";
       }
     }
@@ -66,13 +65,13 @@ export default {
         class="o-primary-btn--width-medium c-modal-message__okay-btn"
         @click="handleLeftButtonClick"
       >
-        {{ messageIndex < 2 ? "Delete" : "Cancel" }}
+        {{ messageIndex < 2 ? "移除" : "关闭" }}
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--width-medium c-modal-message__okay-btn"
         @click="handleRightButtonClick"
       >
-        {{ messageIndex >= 2 ? "Delete" : "Cancel" }}
+        {{ messageIndex >= 2 ? "移除" : "关闭" }}
       </PrimaryButton>
     </div>
     <div v-else>
@@ -80,7 +79,7 @@ export default {
         class="o-primary-btn--width-medium c-modal-message__okay-btn"
         @click="handleNoClick"
       >
-        Thank you
+        谢谢
       </PrimaryButton>
     </div>
   </div>

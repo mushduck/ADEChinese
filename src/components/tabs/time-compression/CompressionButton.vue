@@ -46,24 +46,24 @@ export default {
     :class="isUnlocked ? 'o-compression-btn--unlocked' : 'o-compression-btn--locked'"
     @click="compress()"
   >
-    <span v-if="!isUnlocked">Purchase the Compression Study to unlock.</span>
+    <span v-if="!isUnlocked">购买对应终局专精以解锁时间压缩</span>
     <span v-else-if="!isRunning">
-      Compress time.
+      压缩时间。
     </span>
     <span v-else-if="canInfinity && hasGain">
-      Disable Compression.
+      退出时间压缩
       <br>
-      Gain {{ quantify("Hawking Radiation", hawkingRadiationGain, 2, gainSpaces) }}.
+      获得 {{ quantify("霍金辐射", hawkingRadiationGain, 2, gainSpaces) }}。
     </span>
     <span v-else-if="canInfinity">
-      Disable Compression.
+      退出时间压缩
       <br>
-      Reach {{ format(requiredForGain, 2, 1) }} antimatter to gain more Hawking Radiation.
+      达到 {{ format(requiredForGain, 2, 1) }} 反物质以获得更多霍金辐射。
     </span>
     <span v-else>
-      Disable Compression.
+      退出时间压缩
       <br>
-      Reach {{ quantify("Antimatter", infinityGoal, 1, 0) }} to gain Hawking Radiation.
+      达到 {{ quantify("反物质", infinityGoal, 1, 0) }} 以获得更多霍金辐射。
     </span>
   </button>
 </template>

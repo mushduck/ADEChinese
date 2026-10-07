@@ -26,13 +26,13 @@ export default {
 
 <template>
   <div class="o-primary-btn o-primary-btn--option o-primary-btn--input l-options-grid__button">
-    <b>Save file name:</b>
-    <span ach-tooltip="Set a custom name (up to 16 alphanumeric characters, including space and hyphen)">
+    <b>存档名称：</b>
+    <span ach-tooltip="设置自定义名称（最多16个字母数字字符，可含空格及连字符）">
       <input
         class="c-custom-save-name__input"
         type="text"
         maxlength="16"
-        placeholder="Custom save name"
+        placeholder="自定义名称"
         :value="saveFileName"
         @change="handleChange"
       >

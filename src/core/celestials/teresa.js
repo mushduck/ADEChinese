@@ -46,8 +46,8 @@ export const Teresa = {
   get pouredAmountCap() {
     return (ExpansionPack.teresaPack.isBought && !player.disablePostReality) ? DC.BEMAX : new Decimal(1e24);
   },
-  displayName: "Teresa",
-  possessiveName: "Teresa's",
+  displayName: "特蕾莎",
+  possessiveName: "特蕾莎的",
   get isUnlocked() {
     if (EndgameMilestone.celestialEarlyUnlock.isReached) return true;
     return Achievement(147).isUnlocked;
@@ -166,20 +166,22 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
     }
     // Give a single music glyph
     if (this.id === 4 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.canBeApplied)) {
+      if (Slabdrill.isCursed) return;
       if (GameCache.glyphInventorySpace.value === 0) {
         // Refund the perk point if they didn't actually get a glyph
         Currency.perkPoints.add(1);
-        GameUI.notify.error("You have no empty inventory space!");
+        GameUI.notify.error("你没有空余的仓库空间！");
       } else {
         Glyphs.addToInventory(GlyphGenerator.musicGlyph());
-        GameUI.notify.success("Created a Music Glyph");
+        GameUI.notify.success("创造了一个音乐符文");
       }
     }
     // Fill the inventory with music glyphs
     if (this.id === 5 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.canBeApplied)) {
+      if (Slabdrill.isCursed) return;
       const toCreate = GameCache.glyphInventorySpace.value;
       for (let count = 0; count < toCreate; count++) Glyphs.addToInventory(GlyphGenerator.musicGlyph());
-      if (!PerkShopUpgrade.musicGlyph.isCharged) GameUI.notify.success(`Created ${quantifyInt("Music Glyph", toCreate)}`);
+      if (!PerkShopUpgrade.musicGlyph.isCharged) GameUI.notify.success(`创造了 ${quantifyInt("个音乐符文", toCreate)}`);
     }
   }
 

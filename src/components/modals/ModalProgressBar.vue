@@ -44,7 +44,7 @@ export default {
             {{ progress.progressName }}: {{ formatInt(progress.current) }}/{{ formatInt(progress.max) }}
           </div>
           <div>
-            Remaining: {{ remainingTime }}
+            剩余：{{ remainingTime }}
           </div>
           <div class="modal-progress-bar__hbox">
             <div class="modal-progress-bar__bg">

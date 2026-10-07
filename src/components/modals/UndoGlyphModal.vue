@@ -17,7 +17,7 @@ export default {
     },
     realityInvalidate() {
       this.emitClose();
-      Modal.message.show("Glyph Undo can only undo with a Reality!",
+      Modal.message.show("必须进行现实才能卸下符文！",
         { closeEvent: GAME_EVENT.REALITY_RESET_AFTER });
     },
     handleYesClick() {
@@ -34,26 +34,22 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are about to undo equipping a Glyph
+      你将要卸下一个已装备的符文
     </template>
     <div
       class="c-modal-message__text c-text-wrapper"
     >
-      The last equipped Glyph will be removed.
-      Reality will be reset, but some things will be restored to what they were when it was equipped:
-      <br>
+      你将卸下在当前现实中安装的最后一个符文。本次现实将重新开始，不过部分游戏内资源的数量将回滚到安装最后一个符文时的数值：
       <div class="c-text-wrapper">
-        <br>- Antimatter, Infinity Points, and Eternity Points
-        <br>- Dilation Upgrades, Tachyon Particles, and Dilated Time
-        <br>- Time Theorems and Eternity Challenge completions
-        <br>- Time Dimension and Reality unlocks
-        <br>- Time in current Infinity/Eternity/Reality
-        <span v-if="showStoredGameTime"><br>- Stored game time</span>
+        <br>- 反物质、无限点数、永恒点数
+        <br>- 膨胀升级、超光速粒子、膨胀时间
+        <br>- 时间之理、永恒挑战完成次数
+        <br>- 时间维度和现实的解锁状态
+        <br>- 无限/永恒/现实后经历的时间
+        <span v-if="showStoredGameTime"><br>- 储存的游戏时间</span>
       </div>
       <br>
-      Note that if you invalidate special requirements for certain things (such as the achievement for completing
-      a Reality without producing antimatter), they will remain invalid even after undoing. In those cases, you will
-      need to complete the conditions in a single Reality without using undo.
+      请注意，如果你使某些成就或升级的特殊要求无效（例如完成一个不产生反物质的现实成就），即使撤销之后，它们仍将保持无效。在这些情况下，你需要在单次现实中完成条件而不使用撤销符文。
     </div>
   </ModalWrapperChoice>
 </template>

@@ -6,7 +6,7 @@ export class TimeTheoremAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Time Theorem`;
+    return `时间之理`;
   }
 
   get isUnlocked() {

@@ -21,11 +21,10 @@ export default {
   },
   computed: {
     questionmarkTooltip() {
-      return `Glyph Presets work like Time Study Loadouts, allowing you to equip a
-        full set of previously-saved Glyphs`;
+      return `符文预设类似于时间研究预设，能让你一键装备一套完整保存的符文`;
     },
     noSet() {
-      return `No Glyph Preset saved in this slot`;
+      return `该槽位中无符文预设`;
     },
     pageCount() {
       return 10;
@@ -76,7 +75,7 @@ export default {
     },
     setName(id) {
       const name = this.names[id] === "" ? "" : `: ${this.names[id]}`;
-      return `Glyph Preset #${id + 1}${name}`;
+      return `符文配置 #${id + 1}${name}`;
     },
     saveGlyphSet(id) {
       if (!this.hasEquipped || player.reality.glyphs.sets[id].glyphs.length) return;
@@ -106,7 +105,7 @@ export default {
     },
     loadingTooltip(set) {
       return this.setLengthValid(set) && this.hasEquipped
-        ? "This set may not load properly because you already have some Glyphs equipped"
+        ? "由于已经装备了一些符文，此套符文可能无法正常加载"
         : null;
     },
     glyphSetKey(set, index) {
@@ -134,31 +133,29 @@ export default {
       ?
     </span>
     <div class="l-glyph-set-save__header">
-      When loading a preset, try to match the following attributes. "Exact" will only equip Glyphs
-      identical to the ones in the preset. The other settings will, loosely speaking, allow "better" Glyphs to be
-      equipped in their place.
+      加载符文预设时，将尝试匹配以下属性。“匹配”模式只会装备与预设完全相同的符文。 使用其他的设置，能在对应的位置上装备“更好的”符文。
     </div>
     <div class="c-glyph-set-save-container">
       <ToggleButton
         v-model="effects"
         class="c-glyph-set-save-setting-button"
-        label="Effects:"
-        on="Including"
-        off="Exact"
+        label="词条："
+        on="包含"
+        off="匹配"
       />
       <ToggleButton
         v-model="level"
         class="c-glyph-set-save-setting-button"
-        label="Level:"
-        on="Increased"
-        off="Exact"
+        label="等级："
+        on="增加"
+        off="匹配"
       />
       <ToggleButton
         v-model="rarity"
         class="c-glyph-set-save-setting-button"
-        label="Rarity:"
-        on="Increased"
-        off="Exact"
+        label="稀有度："
+        on="增加"
+        off="匹配"
       />
     </div>
     <div class="l-glyph-set-save__page-bar">
@@ -167,17 +164,17 @@ export default {
         :class="{ 'c-glyph-set-save-button--unavailable': page === 0 }"
         @click="prevPage"
       >
-        Prev
+        上一页
       </button>
       <span class="c-glyph-set-save-page-text">
-        Page {{ pad(page + 1) }} / {{ pad(pageCount) }} (Preset {{ pageRangeText }})
+        第 {{ pad(page + 1) }} / {{ pad(pageCount) }} 页 (预设 {{ pageRangeText }})
       </span>
       <button
         class="c-glyph-set-save-button"
         :class="{ 'c-glyph-set-save-button--unavailable': page >= pageCount - 1 }"
         @click="nextPage"
       >
-        Next
+        下一页
       </button>
     </div>
     <div
@@ -196,13 +193,13 @@ export default {
         />
       </div>
       <div class="c-glyph-single-set-save-flexbox">
-        <div ach-tooltip="Set a custom name (up to 20 characters)">
+        <div ach-tooltip="设置自定义名称（最多 20 个字符）">
           <input
             :id="id"
             type="text"
             size="20"
             maxlength="20"
-            placeholder="Custom set name"
+            placeholder="自定义预设名称"
             class="c-glyph-sets-save-name__input"
             :value="names[id]"
             @blur="nicknameBlur"
@@ -214,7 +211,7 @@ export default {
             :class="{'c-glyph-set-save-button--unavailable': !hasEquipped || set.length}"
             @click="saveGlyphSet(id)"
           >
-            Save
+            保存
           </button>
           <button
             v-tooltip="loadingTooltip(set)"
@@ -222,14 +219,14 @@ export default {
             :class="{'c-glyph-set-save-button--unavailable': !setLengthValid(set)}"
             @click="loadGlyphSet(set, id)"
           >
-            Load
+            加载
           </button>
           <button
             class="c-glyph-set-save-button"
             :class="{'c-glyph-set-save-button--unavailable': !set.length}"
             @click="deleteGlyphSet(id)"
           >
-            Delete
+            删除
           </button>
         </div>
       </div>

@@ -16,8 +16,8 @@ export default {
     autobuyer: () => Autobuyer.celestialTickspeed,
     modeDisplay() {
       switch (this.mode) {
-        case AUTOBUYER_MODE.BUY_SINGLE: return "Buys singles";
-        case AUTOBUYER_MODE.BUY_MAX: return "Buys max";
+        case AUTOBUYER_MODE.BUY_SINGLE: return "购买单个";
+        case AUTOBUYER_MODE.BUY_MAX: return "购买最大数量";
       }
       throw "Unknown Celestial Tickspeed autobuyer mode";
     }
@@ -38,7 +38,7 @@ export default {
 <template>
   <AutobuyerBox
     :autobuyer="autobuyer"
-    name="Celestial Tickspeed Autobuyer"
+    name="天界计数频率自动提升"
     show-interval
   >
     <template #toggleSlot>

@@ -25,18 +25,18 @@ export default {
   >
     <template #header>
       <span>
-        You are about to exit Hell
+        你将要离开炼狱
       </span>
     </template>
     <div class="c-modal-message__text">
       <span>
-        If you exit Hell you will not be able to gain any more Chaos Cores.
+        离开炼狱将不会获得任何混沌核心。
       </span>
       <br>
-      Are you sure you want to proceed?
+      你真的要这么做吗？
     </div>
     <template #confirm-text>
-      Get me out
+      放我出去
     </template>
   </ModalWrapperChoice>
 </template>

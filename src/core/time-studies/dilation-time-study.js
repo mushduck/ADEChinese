@@ -52,10 +52,7 @@ export class DilationTimeStudyState extends TimeStudyState {
     if (this.id === 6) {
       // ID 6 is the reality unlock study
       if (!PlayerProgress.realityUnlocked()) {
-        Modal.message.show(`Reality Machine gain for your first Reality is reduced above ${format("1e6000")} Eternity
-          Points and capped at ${format("1e8000")} Eternity Points. This is due to balance changes made in the Reality
-          update which affect the difficulty of reaching those amounts, such as the increased Time Dimension cost
-          scaling above ${format("1e6000")}.`, {}, 3);
+        Modal.message.show(`你第一次现实中获得的现实机器数量，在超过 ${format("1e6000")} 永恒点数后达到软上限（增速降低），并在 ${format("1e8000")} 永恒点数时达到硬上限（不再增长）。这是现实更新中平衡性变化所致，这些变化影响了达到这些数值的难度，例如超过 ${format("1e6000")} 时时间维度价格大幅增加。`, {}, 3);
         EventHub.dispatch(GAME_EVENT.REALITY_FIRST_UNLOCKED);
       }
       if (!Perk.autounlockReality.isBought || player.disablePostReality) Tab.reality.glyphs.show();

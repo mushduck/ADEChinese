@@ -62,10 +62,10 @@ export default {
     <div
       :style="ascensionStyle"
     >
-      Ascension {{ id }}:
+      扬升 {{ id }}:
       {{ name }}
       <br>
-      Effect: {{ description }}.
+      效果：{{ description }}。
     </div>
   </div>
 </template>

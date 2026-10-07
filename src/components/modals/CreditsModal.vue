@@ -15,7 +15,7 @@ export default {
   <ModalWrapper class="l-credits-modal c-credits-modal">
     <template #header>
       <h1 class="c-game-header__antimatter">
-        Antimatter Dimensions
+        反物质维度
       </h1>
     </template>
     <div class="c-credits-modal__body">

@@ -27,8 +27,8 @@ export default {
       return this.automatorType === AUTOMATOR_TYPE.TEXT;
     },
     automatorModeTooltip() {
-      if (this.automatorType === AUTOMATOR_TYPE.BLOCK) return "Switch to the text editor";
-      return "Switch to the block editor";
+      if (this.automatorType === AUTOMATOR_TYPE.BLOCK) return "切换至文本编辑器";
+      return "切换至积木块编辑器";
     },
     tutorialClass() {
       return {

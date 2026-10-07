@@ -10,7 +10,7 @@ export default {
   },
   computed: {
     resetText() {
-      return "Start this Endgame over";
+      return "重启本次终局";
     },
   },
   methods: {
@@ -24,14 +24,14 @@ export default {
       if (GameEnd.creditsClosed) return;
       if (this.isCursed) {
         if (confirms.resetEndgame) Modal.resetEndgame.show({
-          endgameState: "in a Cursed Reality",
-          suggestion: "don't even try, it won't work"
+          endgameState: "在被诅咒的现实中",
+          suggestion: "别再试了，没用的"
         });
         else Endgame.resetNoReward();
       } else if (this.canEndgame) {
         if (confirms.resetEndgame) Modal.resetEndgame.show({
-          endgameState: "able to Endgame",
-          suggestion: "just Endgame with rewards rather than with nothing"
+          endgameState: "可以进行一次终局",
+          suggestion: "进行终局以获得收益，好过啥也没拿到"
         });
         else Endgame.resetNoReward();
       } else if (this.isDoomed) {
@@ -41,8 +41,8 @@ export default {
         });
         else Endgame.resetNoReward();
       } else if (confirms.resetEndgame) Modal.resetEndgame.show({
-        endgameState: "outside Doom",
-        suggestion: "reset if you really want to"
+        endgameState: "在被毁灭的现实外",
+        suggestion: "做你想做的事"
       });
       else Endgame.resetNoReward();
     },

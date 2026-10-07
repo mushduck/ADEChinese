@@ -56,8 +56,8 @@ export default {
 <template>
   <div class="c-dimension-row c-antimatter-dim-row c-antimatter-prestige-row">
     <div class="l-dim-row__prestige-text c-dim-row__label c-dim-row__label--amount">
-      Celestial Dimension Boost ({{ boostCountText }}):
-      requires {{ formatHybridLarge(requirement.amount, 3) }} Celestial Matter
+      天界维度提升 ({{ boostCountText }}):
+      需要 {{ formatHybridLarge(requirement.amount, 3) }} 天界物质
     </div>
     <PrimaryButton
       :enabled="isBuyable"

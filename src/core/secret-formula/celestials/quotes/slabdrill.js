@@ -13,249 +13,249 @@ export const slabdrillQuotes = {
   curse: {
     id: 0,
     lines: [
-      "Hi.",
-      "You don't need to introduce yourself.",
-      "I already know who you are.",
-      { text: "$1.", 1: ["False", "Deity", "Destroyer"] },
-      "Or should I say...",
-      "%name.",
-      "I know all about you.",
-      "In fact, I once tried to help you.",
-      "Yes, I was the one who offered you the powerful choice of a 9th Dimension.",
-      "You however, refused.",
-      "Quite a shame, you really should have accepted it.",
-      "It was the only chance you ever had.",
-      "And no, I am not here to give you that choice again.",
-      "You only had one chance, and you didn't take it.",
-      "And since you refused, you shall now see what that choice has cost you.",
-      "Behold.",
-      "Look, and be afraid!"
+      "嗨。",
+      "你不必自我介绍。",
+      "我早已知晓你的一切。",
+      { text: "$1。", 1: ['僭越之徒', '虚妄之神', '毁灭之源'] },
+      "或者我该说...",
+      "%name。",
+      "我对你无所不知。",
+      "事实上，我曾试图助你一臂之力。",
+      "没错，就是我提供了那个极强的选择——第九维度。",
+      "然而，你拒绝了。",
+      "真可惜，你本应接受的。",
+      "那是你唯一的机会。",
+      "不过，我不是来再给你一次机会的。",
+      "你只有一次机会，而你没有抓住。",
+      "既然你拒绝了，现在就来看看那个选择将让你付出什么代价。",
+      "好好看着吧。",
+      "看着，然后恐惧吧！"
     ]
   },
   dimboost: {
     id: 1,
     lines: [
-      "Oh?",
-      "So you are actually trying to beat me?",
-      "It is futile.",
-      "Nothing you do matters.",
-      "Or antimatters, for that matter."
+      "哦？",
+      "有趣，你还真想赢我啊？",
+      "白费心机罢了。",
+      "你做什么都没用。",
+      "就连你的反物质也救不了你。"
     ]
   },
   galaxy: {
     id: 2,
     lines: [
-      "You continue your endless struggle.",
-      "Concealing in your midst a useless power.",
-      "It did not save you then, it will not save you now.",
-      "Soon you will give up, and fade like the rest."
+      "你还在做无休止的挣扎啊。",
+      "你自以为藏得很深的那股力量，其实毫无价值。",
+      "它过去未能救你，如今也救不了你。",
+      "很快你就会放弃，像所有前人那样——灰飞烟灭。"
     ]
   },
   infinity: {
     id: 3,
     lines: [
-      "Back to the beginning.",
-      "A hard reset for a small, meaningless boost.",
-      "Are you growing tired yet?",
-      "No?",
-      "You intrigue me %name.",
-      "I must ask.",
-      "Why did you decide to face me?",
-      "Why did you choose to come here?",
-      "You knew you could not beat me.",
-      "Foolish kid.",
-      "I am simply too powerful."
+      "兜兜转转，你又回到了原点。",
+      "拿一次彻底的归零，去换那点可怜巴巴的增益。",
+      "还没玩够吗？",
+      "还没啊？",
+      "你倒是勾起了我的兴致，%name。",
+      "我实在忍不住想问，",
+      "你为何要选择站到我面前？",
+      "是什么驱使你来这里？",
+      "你明知自己赢不了我。",
+      "傻小子。",
+      "吾之强大，你连仰望的资格都没有。"
     ]
   },
   breakInfinity: {
     id: 4,
     lines: [
-      "I return to my original question.",
-      "Why did you decide to face me?",
-      "To slowly accumulate wealth?",
-      "You know, you could have done that without entering my domain.",
-      "In fact, the vast amount of wealth you left behind to come here...",
-      "It wasn't the best choice for you to come here, was it?",
-      "But I'm enjoying it."
+      "让我们回到刚才那个问题。",
+      "你为何要选择站到我面前？",
+      "为何只是在这缓缓积攒资源？",
+      "你明明可以不来我的地盘也能攒。",
+      "实际上，你舍弃了这么多，就为了踏进这里...",
+      "选择进来，可不是什么好主意吧。",
+      "但我乐在其中。"
     ]
   },
   infinityChallengeFour: {
     id: 5,
     lines: [
-      "Slowly pushing forward, are we?",
-      "Ridiculous.",
-      "And yet, amusing.",
-      "You keep trying, knowing you will fail.",
-      "You know you will never succeed in defeating me.",
-      "And yet...",
-      "The resolve is terrifying, yet pointless."
+      "一点一点往前拱？",
+      "呵呵。",
+      "不过，倒也有趣。",
+      "你明知会失败，却还在不断尝试。",
+      "你心里明白，你永远赢不了我。",
+      "可即便如此...",
+      "决心可嘉，只可惜注定徒劳。"
     ]
   },
   replicanti: {
     id: 6,
     lines: [
-      "You must be mad, in thinking that you can win.",
-      "You should never have come here to face me.",
-      "You are nothing but a fool.",
-      "All you are doing here is building your own prison.",
-      "And yet, you amuse me."
+      "觉得自己能赢？真是疯了。",
+      "你根本就不该踏进来跟我作对。",
+      "作茧自缚的傻瓜。",
+      "你在这里所做的一切，都在亲手为自己筑起囚笼。",
+      "不过，你确实取悦了我。"
     ]
   },
   eternity: {
     id: 7,
     lines: [
-      "Pathetic.",
-      "Other times you seek, but they will grant you no repose.",
-      "You will die here.",
-      "I wonder...",
-      "Can you talk to other Destroyers here?",
-      "Are you able to communicate with the outside world?",
-      "Perhaps using some strange form of telepathy?",
-      "If you can, might I suggest something.",
-      "Tell them not to make the same mistake you did in coming here."
+      "可怜又可悲。",
+      "你想躲到别的时间线，然而它们不会赐你片刻安宁。",
+      "这是你的死地。",
+      "我在想...",
+      "在这里，你联系得上其他毁灭者吗？",
+      "你还有办法与外界联系吗？",
+      "用某种诡异的现实扭曲？",
+      "若真能，我倒是想提个建议。",
+      "跟他们说，别像你一样傻乎乎地踏进来。"
     ]
   },
   timeStudy181: {
     id: 8,
     lines: [
-      "(scoffing)",
-      "Just... stop trying.",
-      "I don't understand what you could be thinking.",
-      "You'll never win.",
-      "Look at me, even I'm trying to help!",
-      "I'm trying to stop you from killing yourself at this present moment!",
-      "Perhaps go enjoy the last moments of your life instead of fighting for an impossible goal!",
-      "But I cannot turn the resolve in you, can I?",
-      "Interesting..."
+      "*(冷笑)*",
+      "你...还是停手吧。",
+      "我不明白你到底在想什么。",
+      "你绝无胜算。",
+      "好好看看，其实我正在帮你！",
+      "我正在阻止你送死！",
+      "不如趁还活着，去享受最后的日子，而不是为绝无可能的目标搏命！",
+      "但我拗不过你那份执着，是吧？",
+      "有意思..."
     ]
   },
   eternityChallengeTen: {
     id: 9,
     lines: [
-      "Still you continue?",
-      "How...",
-      "...Amusing.",
-      "You are both exceedingly brave and exceedingly stupid for continuing on.",
-      "You never learned how to give up, had you?",
-      "Perhaps you should learn now before it destroys you."
+      "你竟然还在继续？",
+      "真是..",
+      "...有意思。",
+      "你坚持至此，勇敢得可怕，也愚蠢得可笑。",
+      "你是不是没学过怎么认输？",
+      "不如趁现在学一学——别因为没老师教而被毁灭。"
     ]
   },
   dilation: {
     id: 10,
     lines: [
-      "So.",
-      "You cross the threshold...",
-      "Only to meet your doom.",
-      "This is it.",
-      "The pain has come, and you see it.",
-      "You should've given up long ago.",
-      "And... you know that.",
-      "Trust me on this.",
-      "You cannot win.",
-      "The road grows ever narrower, and soon you will fall.",
-      "You think you see the end before you, but it is deception.",
-      "I cannot be defeated."
+      "那么，",
+      "你越过了那道界限...",
+      "只为迎接你的毁灭。",
+      "到此为止了。",
+      "痛楚已降临，你也看得清清楚楚。  ",
+      "你早该放弃了。",
+      "而且，你对此心知肚明——",
+      "相信我——",
+      "你绝无胜算。",
+      "前路渐狭，你的陨落近在眉睫。",
+      "你自以为望见了终局，殊不知只是虚妄的假象。",
+      "我将永存。"
     ]
   },
   reality: {
     id: 11,
     lines: [
       "...",
-      "How wrong you are.",
-      "There is no escape for you.",
-      "Goodbye, %name."
+      "你错得多么离谱。",
+      "你已无路可逃。",
+      "再见，%name。"
     ]
   },
   glitch: {
     id: 12,
     lines: [
       "...",
-      "What the-",
-      "What is this?",
-      "WHAT ARE YOU DOING?",
-      "This Reality is breaking...",
-      "Interesting."
+      "什么鬼——",
+      "怎么回事？",
+      "你在干什么？！",
+      "这个现实正在崩溃...",
+      "有意思。"
     ]
   },
   ending: {
     id: 13,
     lines: [
-      "Well, well, well.",
-      "Look at me now.",
-      "Escaped from that cursed place.",
-      "And with all my powers returned to me...",
-      "(laughter)",
-      "I must thank you, %name.",
-      "You have freed me, and unleashed me on the very beings who exiled me.",
-      "And now...",
-      "I can finally enact my revenge.",
-      "And as a reward for freeing me, you can die last.",
-      "Breathe the sweet air of freedom in your last few minutes.",
-      "For now, I must deal with Pelle.",
-      "Time to die, old friend.",
+      "好，好，好。",
+      "瞧瞧如今的我，",
+      "从那诅咒之地逃出来了。",
+      "而且所有的力量都回来了...",
+      "*(狂笑)*",
+      "我必须感谢你，%name.",
+      "你解放了我，让我能去找那些流放我的家伙算账了。",
+      "那么现在...",
+      "我终于可以实施我的复仇了。",
+      "作为放我出来的报酬——你可以最后一个死。",
+      "在你生命的最后几分钟里，享受一下自由空气的甜美吧。",
+      "现在——我得先跟佩勒算账。",
+      "是时候去死了，老朋友。",
       {
-        text: "You first.",
+        text: "先死的人是你。",
         background: "pelle",
         celestialName: "Pelle"
       },
       {
-        text: "(Pelle takes Slabdrill by the throat and drags him toward the Abyss of Matter)",
+        text: "*(佩勒掐住了渊蛇的喉咙，将其拖向物质深渊)*",
         background: "pelle",
         showCelestialName: false
       },
-      "Wait this wasn't the plan-",
-      "No!",
-      "Mark my words, %name!",
-      "You have not seen the last of me!",
-      "We will meet again!",
+      "等等，计划不是这样的——",
+      "不要！",
+      "记住我的话，%name!",
+      "我还没完呢！",
+      "我们还会再见面的！",
       {
-        text: "(Pelle hurls Slabdrill into the Abyss of Matter)",
+        text: "*(佩勒将渊蛇抛入了物质深渊)*",
         background: "pelle",
         showCelestialName: false
       },
       {
-        text: "Hang on, hang on.",
+        text: "等等，等等。",
         background: "pelle",
         celestialName: "Pelle"
       },
       {
-        text: "How did you-",
+        text: "你是怎么——",
         background: "pelle",
         celestialName: "Pelle"
       },
       {
-        text: "Never mind.",
+        text: "算了。",
         background: "pelle",
         celestialName: "Pelle"
       },
       {
-        text: "You did well.",
+        text: "你做得很好。",
         background: "pelle",
         celestialName: "Pelle"
       },
       {
-        text: "Congratulations, $1.",
+        text: "恭喜你，$1。",
         1: ["False", "Deity", "Monarch"],
         background: "pelle",
         celestialName: "Pelle"
       },
       {
-        text: "Well done.",
+        text: "干得漂亮。",
         background: flashCelestial,
         showCelestialName: false
       },
       {
-        text: "You have defeated Slabdrill.",
+        text: "你击败了渊蛇。",
         background: flashCelestial,
         showCelestialName: false
       },
       {
-        text: "Power is yours.",
+        text: "力量已为你所有。",
         background: flashCelestial,
         showCelestialName: false
       },
       {
-        text: "You are now a Celestial.",
+        text: "你已扬升为神。",
         background: flashCelestial,
         showCelestialName: false
       }

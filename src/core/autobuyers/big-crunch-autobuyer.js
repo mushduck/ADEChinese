@@ -6,7 +6,7 @@ export class BigCrunchAutobuyerState extends UpgradeableAutobuyerState {
   }
 
   get name() {
-    return `Infinity`;
+    return `大坍缩`;
   }
 
   get isUnlocked() {

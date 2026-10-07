@@ -58,10 +58,10 @@ export default {
         v-if="showEP"
         class="c-eternity-points"
       >
-        You have
+        你拥有
         <span class="c-game-header__ep-amount">{{ format(eternityPoints, 2) }}</span>
-        {{ pluralize("Eternity Point", eternityPoints) }}.
-        <span v-if="showNextEP">(Next EP at {{ format(nextEP, 1) }} IP)</span>
+        {{ pluralize("永恒点数", eternityPoints) }}。
+        <span v-if="showNextEP">（下一个永恒点数需要 {{ format(nextEP, 1) }} 无限点数）</span>
         <span
           v-if="isPenteractUnlocked"
           v-html="penteractText"
@@ -75,9 +75,9 @@ export default {
       class="c-prestige-button-container"
     >
       <div class="c-eternity-points">
-        You have
+        你拥有
         <span class="c-game-header__cep-amount">{{ format(celEternityPoints, 2) }}</span>
-        {{ pluralize("Celestial Eternity Point", celEternityPoints) }}.
+        {{ pluralize("天界永恒点数", celEternityPoints) }}。
       </div>
       <CelestialEternityButton />
     </div>

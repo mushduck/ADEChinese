@@ -14,7 +14,7 @@ export class CelestialDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get fullName() {
-    return `${this.name} Celestial Dimension`;
+    return `第 ${this.name} 天界维度`;
   }
 
   get data() {
@@ -47,7 +47,7 @@ export class CelestialDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   static get entryCount() { return 8; }
-  static get autobuyerGroupName() { return "Celestial Dimension"; }
+  static get autobuyerGroupName() { return "天界维度"; }
   static get isActive() { return player.auto.celestialDims.isActive; }
   static set isActive(value) { player.auto.celestialDims.isActive = value; }
 }

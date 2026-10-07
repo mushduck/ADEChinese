@@ -109,14 +109,14 @@ export default {
 <template>
   <div class="l-divinity-upgrade-grid">
     <div v-if="hasBonus">
-      Power Grab is currently providing
-      a <span class="c-divinity-effects">{{ formatX(bonus1, 2) }}</span> to Divine Energy,
-      a <span class="c-divinity-effects">{{ formatPow(bonus2, 2, 3) }}</span> to all Divine Dimensions,
-      and a <span class="c-divinity-effects">{{ formatX(bonus3, 2) }}</span> to Divine Stars.
+      神性升级“权能攫取”效果：
+      神性能量获取量<span class="c-divinity-effects">{{ formatX(bonus1, 2) }}</span>，
+      神性维度产量<span class="c-divinity-effects">{{ formatPow(bonus2, 2, 3) }}</span>，
+      神性之星获取量<span class="c-divinity-effects">{{ formatX(bonus3, 2) }}</span>。
     </div>
     <div v-if="has1">
       <div class="c-divinity-header">
-        Layer One Upgrades
+        一阶升级
       </div>
       <div
         v-for="(column, columnId) in grid1"
@@ -132,7 +132,7 @@ export default {
     </div>
     <div v-if="has2">
       <div class="c-divinity-header">
-        Layer Two Upgrades
+        二阶升级
       </div>
       <div
         v-for="(column, columnId) in grid2"
@@ -148,7 +148,7 @@ export default {
     </div>
     <div v-if="has3">
       <div class="c-divinity-header">
-        Layer Three Upgrades
+        三阶升级
       </div>
       <div
         v-for="(column, columnId) in grid3"
@@ -164,7 +164,7 @@ export default {
     </div>
     <div v-if="has4">
       <div class="c-divinity-header">
-        Layer Four Upgrades
+        四阶升级
       </div>
       <div
         v-for="(column, columnId) in grid4"
@@ -180,7 +180,7 @@ export default {
     </div>
     <div v-if="has5">
       <div class="c-divinity-header">
-        Layer Five Upgrades
+        五阶升级
       </div>
       <div
         v-for="(column, columnId) in grid5"

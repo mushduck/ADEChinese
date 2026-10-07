@@ -1,4 +1,4 @@
-name: Deploy master
+name: Deploy main
 
 env:
   FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
@@ -6,10 +6,10 @@ env:
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
     branches:
-      - master
+      - main
 
 jobs:
   build:

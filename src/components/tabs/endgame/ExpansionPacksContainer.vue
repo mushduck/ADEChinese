@@ -89,7 +89,7 @@ export default {
             v-if="!isBought"
             br
             :config="pack.config"
-            name="Antimatter"
+            name="反物质"
           />
         </div>
       </div>

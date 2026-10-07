@@ -8,12 +8,9 @@ export default {
   },
   computed: {
     upgrades: () => EndgameUpgrades.all,
-    costScalingTooltip: () => `Prices start increasing faster above ${format(1e100)} CP and then even faster
-      above ${format(DC.NUMMAX, 1)} CP`,
-    possibleTooltip: () => `Checkered upgrades are impossible to unlock this Endgame. Striped upgrades are
-      still possible.`,
-    lockTooltip: () => `This will only function if you have not already failed the condition or
-      unlocked the upgrade.`,
+    costScalingTooltip: () => `在 ${format(1e100)} 天界点数后价格加速增长，在 ${format(DC.NUMMAX, 1)} 天界点数后更加剧烈`,
+    possibleTooltip: () => `在本次终局中无法解锁方格背景的升级，但可以解锁条纹图案的升级。`,
+    lockTooltip: () => `锁定升级要求仅会阻止手动和自动操作，不会禁用任何相关的升级，要求仍可能失败。`,
   },
   methods: {
     id(row, column) {
@@ -26,25 +23,20 @@ export default {
 <template>
   <div class="l-endgame-upgrade-grid">
     <div class="c-endgame-upgrade-infotext">
-      Mouseover <i class="fas fa-question-circle" /> icons for additional information.
+      将鼠标悬停在 <i class="fas fa-question-circle" /> 图标上以查看更多信息。
       <br>
-      The first row of upgrades can be purchased endlessly for increasing costs
+      第一组升级可以以递增的成本无限购买，
       <span :ach-tooltip="costScalingTooltip">
         <i class="fas fa-question-circle" />
       </span>
-      and the rest are single-purchase.
-      <br>
-      Single-purchase upgrades also have requirements which, once completed, permanently unlock the ability
-      to purchase the upgrades at any point.
+      其余的升级是一次性升级，需要解锁条件。但一旦满足解锁条件，便可随时购买。
       <span :ach-tooltip="possibleTooltip">
         <i class="fas fa-question-circle" />
       </span>
       <br>
-      Locked upgrades show their requirement and effect by default; unlocked ones show
-      their effect, current bonus, and cost. Hold shift to swap this behavior.
+      锁定的升级会显示其需求和默认描述，解锁后显示其效果、当前加成以及价格，按住Shift键可切换至该状态。
       <br>
-      You can shift-click upgrades with <i class="fas fa-lock-open" /> to make the game prevent you
-      from doing anything this Endgame which would cause you to fail their unlock condition.
+      你可以用Shift点击某些升级来启用锁定条件，以防止游戏在此终局中进行任何会导致你未能满足其解锁条件的操作。
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>

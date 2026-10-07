@@ -3,18 +3,18 @@ import { createEntryInfo } from "./breakdown-entry-info";
 import MultiplierBreakdownEntry from "./MultiplierBreakdownEntry";
 
 const MULT_TAB_OPTIONS = [
-  { id: 0, key: "AM", text: "Antimatter Production" },
-  { id: 1, key: "tickspeed", text: "Tickspeed" },
-  { id: 2, key: "AD", text: "Antimatter Dimensions" },
-  { id: 3, key: "IP", text: "Infinity Points" },
-  { id: 4, key: "ID", text: "Infinity Dimensions" },
-  { id: 5, key: "infinities", text: "Infinities" },
-  { id: 6, key: "replicanti", text: "Replicanti Speed" },
-  { id: 7, key: "EP", text: "Eternity Points" },
-  { id: 8, key: "TD", text: "Time Dimensions" },
-  { id: 9, key: "eternities", text: "Eternities" },
-  { id: 10, key: "DT", text: "Dilated Time" },
-  { id: 11, key: "gamespeed", text: "Game Speed" },
+  { id: 0, key: "AM", text: "反物质生产" },
+  { id: 1, key: "tickspeed", text: "计数频率" },
+  { id: 2, key: "AD", text: "反物质维度" },
+  { id: 3, key: "IP", text: "无限点数" },
+  { id: 4, key: "ID", text: "无限维度" },
+  { id: 5, key: "infinities", text: "无限次数" },
+  { id: 6, key: "replicanti", text: "复制速度" },
+  { id: 7, key: "EP", text: "永恒点数" },
+  { id: 8, key: "TD", text: "时间维度" },
+  { id: 9, key: "eternities", text: "永恒次数" },
+  { id: 10, key: "DT", text: "膨胀时间" },
+  { id: 11, key: "gamespeed", text: "游戏速度" },
 ];
 
 export default {
@@ -95,14 +95,11 @@ export default {
         :is-root="true"
       />
       <div class="c-multiplier-tab-text-line">
-        Note: Entries are only expandable if they contain multiple sources which can be different values.
-        For example, any effects which affect all Dimensions of any type equally will not expand into a
-        list of eight identical numbers.
+        注：仅当条目包含多个可能数值不同的来源项时才可展开。例如：任何对所有维度全局生效的效果，不会展开为八个相同数值的列表。
         <br>
         <b>
-          Some entries may cause lag if expanded out fully. Resizing happens over 200 ms (instead of instantly)
-          in order to reduce possible adverse effects due to photosensitivity. This may cause some visual weirdness
-          after prestige events.
+          部分条目完全展开可能导致卡顿。为降低光敏性不良反应风险，缩放操作耗时设为200毫秒（非瞬间完成）。  
+          这可能在重置事件后引发轻微视觉异常。
         </b>
       </div>
     </div>

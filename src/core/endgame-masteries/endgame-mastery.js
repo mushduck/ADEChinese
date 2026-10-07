@@ -4,20 +4,20 @@ export const EndgameMasteries = {
   get pathList() {
     let pathArr = [];
     if (player.universes.current === 2) {
-      pathArr.push({ path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "MD Compression" });
+      pathArr.push({ path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "正物质维度" });
     } else {
-      pathArr.push({ path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "AD Compression" });
+      pathArr.push({ path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "反物质维度" });
     }
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "ID Compression" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "TD Compression" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "CD Compression" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "IP" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "EP" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "RM" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "iM" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.ENDGAME_ENTANGLEMENT, masteries: [281, 291, 301], name: "Endgame Entanglement" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.CELESTIAL_ENTANGLEMENT, masteries: [282, 292, 302], name: "Celestial Entanglement" });
-    pathArr.push({ path: ENDGAME_MASTERY_PATH.DIVINE_ENTANGLEMENT, masteries: [283, 293, 303], name: "Divine Entanglement" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "无限维度" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "时间维度" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "天界维度" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "无限点数" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "永恒点数" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "现实机器" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "虚幻机器" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.ENDGAME_ENTANGLEMENT, masteries: [281, 291, 301], name: "终局" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.CELESTIAL_ENTANGLEMENT, masteries: [282, 292, 302], name: "天界" });
+    pathArr.push({ path: ENDGAME_MASTERY_PATH.DIVINE_ENTANGLEMENT, masteries: [283, 293, 303], name: "神性" });
     return pathArr;
   }
 };

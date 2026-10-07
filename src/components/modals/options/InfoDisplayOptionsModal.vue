@@ -120,82 +120,82 @@ export default {
 <template>
   <ModalWrapperOptions class="c-modal-options__large">
     <template #header>
-      Info Display Options
+      信息显示选项
     </template>
     <div class="c-modal-options__button-container">
       <ModalOptionsToggleButton
         v-model="showPercentage"
-        text="Show % gain:"
+        text="显示百分比增益："
       />
       <ModalOptionsToggleButton
         v-model="achievements"
-        text="Achievement IDs:"
+        text="成就序号："
       />
       <ModalOptionsToggleButton
         v-model="achievementUnlockStates"
-        text="Achievement unlock state indicators:"
+        text="成就解锁状态指示："
       />
       <ModalOptionsToggleButton
         v-if="infinityUnlocked"
         v-model="challenges"
-        text="Challenge IDs:"
+        text="挑战序号："
       />
       <ModalOptionsToggleButton
         v-if="eternityUnlocked"
         v-model="studies"
-        text="Time Study IDs:"
+        text="时间研究序号："
       />
       <ModalOptionsToggleButton
         v-if="realityUnlocked"
         v-model="glyphEffectDots"
-        text="Glyph effect dots:"
+        text="符文效果圆点："
       />
       <ModalOptionsToggleButton
         v-if="realityUnlocked"
         v-model="realityUpgrades"
-        text="Reality Upgrade names:"
+        text="现实升级名称："
       />
       <ModalOptionsToggleButton
         v-if="realityUnlocked"
         v-model="perks"
-        text="Perk IDs:"
+        text="复兴节点名称："
       />
       <ModalOptionsToggleButton
         v-if="alchemyUnlocked"
         v-model="alchemy"
-        text="Alchemy resource amounts:"
+        text="炼金资源数量："
       />
       <ModalOptionsToggleButton
         v-if="endgameUnlocked"
         v-model="masteries"
-        text="Endgame Mastery IDs:"
+        text="终局专精序号："
       />
       <ModalOptionsToggleButton
         v-if="endgameUnlocked"
         v-model="breakEternityUpgrades"
-        text="Break Eternity Upgrade names:"
+        text="打破永恒升级名称："
       />
       <ModalOptionsToggleButton
         v-if="endgameUnlocked"
         v-model="endgameUpgrades"
-        text="Endgame Upgrade names:"
+        text="终局升级名称："
       />
       <ModalOptionsToggleButton
         v-if="divinityUnlocked"
         v-model="divinityUpgrades"
-        text="Divinity Upgrade names:"
+        text="神性升级名称："
       />
       <ModalOptionsToggleButton
         v-if="divinityUnlocked"
         v-model="resurgenceUpgrades"
-        text="Resurgence Upgrade names:"
+        text="复苏升级名称："
       />
       <ModalOptionsToggleButton
         v-if="lhcUnlocked"
         v-model="nullUpgrades"
-        text="Null Upgrade names:"
+        text="虚无升级名称："
       />
     </div>
-    Note: All types of additional info above will always display when holding shift.
+    注：按住Shift键时将始终显示以上所有附加信息。
   </ModalWrapperOptions>
 </template>

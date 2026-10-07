@@ -23,7 +23,7 @@ export class EndgameUpgradeAutobuyerState extends AutobuyerState {
   }
 
   static get entryCount() { return 5; }
-  static get autobuyerGroupName() { return "Endgame Upgrade"; }
+  static get autobuyerGroupName() { return "终局升级"; }
   static get isActive() { return player.auto.endgameUpgrades.isActive; }
   static set isActive(value) { player.auto.endgameUpgrades.isActive = value; }
 }

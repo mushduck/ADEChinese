@@ -4,23 +4,24 @@ export const endgameMasteries = [
     cost: 1,
     requirement: [],
     reqType: EM_REQUIREMENT_TYPE.ALL,
-    description: () => `Generate ${formatInt(1)} Perk Point per minute per Endgame`,
+    description: () => `每分钟生成等同于终局次数的复兴点数`,
     effect: () => player.disablePostReality ? 0 : player.endgames,
-    formatEffect: value => `${formatHybridSmall(value, 3)}/min`
+    formatEffect: value => `${formatHybridSmall(value, 3)}/分钟`
   },
   {
     id: 21,
     cost: 2,
     requirement: [11],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Automator Speed goes up by ${formatPercents(0.06)} rather than ${formatPercents(0.006, 1, 1)}`
+    description: () => `自动机速度
+                        从每次现实提高${formatPercents(0.006, 1, 1)}加速至${formatPercents(0.06)}`
   },
   {
     id: 22,
     cost: 2,
     requirement: [11],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start with Auto-EC Unlocked, and divide the time by ${formatInt(60)}`,
+    description: () => `开始时解锁自动永恒挑战，且其速度提高${formatInt(60)}倍`,
     effect: () => player.disablePostReality ? 1 : 60
   },
   {
@@ -28,7 +29,7 @@ export const endgameMasteries = [
     cost: 2,
     requirement: [21],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start Endgames with ${formatInt(100)} Realities`,
+    description: () => `开始终局时拥有 ${formatInt(100)} 现实次数`,
     effect: () => player.disablePostReality ? 0 : 100
   },
   {
@@ -36,7 +37,7 @@ export const endgameMasteries = [
     cost: 2,
     requirement: [22],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start Endgames with ${formatInt(1000000)} Reality Machines`,
+    description: () => `开始终局时拥有 ${formatInt(1000000)} 现实机器`,
     effect: () => player.disablePostReality ? 0 : 1000000
   },
   {
@@ -44,7 +45,7 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [31],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Buff the reward of the Achievement "I Am Speed" to a ${formatPercents(1)} Chance`,
+    description: () => `成就154“多快才叫快”的触发概率提升至${formatPercents(1)}`,
     effect: () => player.disablePostReality ? 0.1 : 1
   },
   {
@@ -52,14 +53,14 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [32],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Start Endgames with all Reality Upgrades unlocked"
+    description: "开始终局时自动拥有所有现实升级"
   },
   {
     id: 51,
     cost: 4,
     requirement: [41],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Gain a multiplier to Galaxy strength based on Remnants`,
+    description: () => `基于遗物数量为星系强度提供倍率加成`,
     effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(Decimal.log10(Currency.remnants.value.add(1)).add(1), 0.5),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -68,7 +69,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [41, 42],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Galaxies are ${formatPercents(0.1)} stronger`,
+    description: () => `星系增强${formatPercents(0.1)}`,
     effect: () => player.disablePostReality ? 1 : 1.1
   },
   {
@@ -76,7 +77,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [42],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Gain a free Tesseract`,
+    description: () => `获得一个免费超立方体`,
     effect: () => player.disablePostReality ? 0 : 1
   },
   {
@@ -84,14 +85,14 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [52],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Improve the Remnant Formula (see Remnant Gain Factors in the Pelle subtab)"
+    description: "优化遗物获取公式(详情见佩勒页面)"
   },
   {
     id: 71,
     cost: 7,
     requirement: [61],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Start with ${formatInt(5)} of each basic Glyph on Endgame at ${formatInt(4)} effects, ${formatPercents(1)} rarity, and level based on Endgames and peak GL`,
+    description: () => `开始终局时获得${formatInt(5)}种拥有${formatInt(4)}个词条、${formatPercents(1)}稀有度的基础符文，其等级基于终局次数和历史最高等级符文而提高`,
     effect: () => player.disablePostReality ? DC.D1 : (EffarigUnlock.endgame.canBeApplied ? player.records.bestEndgame.glyphLevel : new Decimal(1 - ((1 / Math.max(player.endgames, 1)) ** 0.1)).times(player.records.bestEndgame.glyphLevel)),
     formatEffect: value => formatHybridSmall(value, 3)
   },
@@ -100,14 +101,14 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `Weaken the Infinity Upgrade ${formatInt(23)} Softcap by ${formatPercents(0.5)}`
+    description: () => `无限升级${formatInt(23)}的软上限效果降低${formatPercents(0.5)}`
   },
   {
     id: 82,
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `Reduce the Infinity Dimension Compression Magnitude by ${formatPercents(0.05)}`,
+    description: () => `无限维度压缩因子降低${formatPercents(0.05)}`,
     effect: () => player.disablePostReality ? 1 : 0.95
   },
   {
@@ -115,7 +116,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `Reduce the Time Dimension Compression Magnitude by ${formatPercents(0.05)}`,
+    description: () => `时间维度压缩因子降低${formatPercents(0.05)}`,
     effect: () => player.disablePostReality? 1 : 0.95
   },
   {
@@ -123,7 +124,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [71],
     reqType: EM_REQUIREMENT_TYPE.COMPRESSION_PATH,
-    description: () => `Reduce the Celestial Matter Softcap by ${formatPercents(0.1)}`,
+    description: () => `天界物质压缩因子降低${formatPercents(0.1)}`,
     effect: () => player.disablePostReality ? 1 : 0.9
   },
   {
@@ -131,7 +132,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [81],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Delay the Infinity Challenge ${formatInt(8)} Reward Hardcap based on Endgames`,
+    description: () => `基于终局次数提高无限挑战${formatInt(8)}奖励上限`,
     effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
@@ -140,7 +141,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [82],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Delay the Infinity Dimension Compression Start based on Endgames",
+    description: "基于终局次数推迟无限维度压缩因子出现",
     effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
@@ -149,7 +150,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [83],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Delay the Time Dimension Compression Start based on Endgames",
+    description: "基于终局次数推迟时间维度压缩因子出现",
     effect: () => player.disablePostReality ? 1 : player.endgames,
     formatEffect: value => formatPow(value, 2)
   },
@@ -158,7 +159,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [84],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Delay the Celestial Matter Softcap Start based on Endgames",
+    description: "基于终局次数推迟天界物质软上限",
     effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(10, Decimal.pow(player.endgames, 0.25)),
     formatEffect: value => formatX(value, 2)
   },
@@ -167,7 +168,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [91],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise the ${player.universes.current === 2 ? "Matter" : "Antimatter"} Exponent to the power of ${format(1.01, 2, 2)}`,
+    description: () => `${player.universes.current === 2 ? "正物质" : "反物质"}指数 ^ ${format(1.01, 2, 2)}`,
     effect: () => player.disablePostReality && !SlabdrillUnlocks.eternity.isUnlocked ? 1 : 1.01
   },
   {
@@ -175,7 +176,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [92],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise the Infinity Power Conversion Rate to the power of ${format(1.01, 2, 2)}`,
+    description: () => `无限之力转换指数 ^ ${format(1.01, 2, 2)}`,
     effect: () => player.disablePostReality && !SlabdrillUnlocks.eternity.isUnlocked ? 1 : 1.01
   },
   {
@@ -183,7 +184,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [93],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Apply a square-root to the Free Tickspeed Threshold Multiplier",
+    description: "下一个免费计数频率升级成本增长倍率 ^ 0.5",
     effect: () => player.disablePostReality && !SlabdrillUnlocks.eternity.isUnlocked ? 1 : 0.5
   },
   {
@@ -191,7 +192,7 @@ export const endgameMasteries = [
     cost: 6,
     requirement: [94],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Increase the CM conversion exponent by ${formatPercents(0.1)}`,
+    description: () => `天界物质激发指数提高 ${formatPercents(0.1)}`,
     effect: () => player.disablePostReality && !SlabdrillUnlocks.eternity.isUnlocked ? 1 : 1.1
   },
   {
@@ -199,14 +200,14 @@ export const endgameMasteries = [
     cost: 5,
     requirement: [101, 102, 103, 104],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Imaginary Machines are always their maximum value"
+    description: "当前虚幻机器数量永远填充至上限"
   },
   {
     id: 112,
     cost: 4,
     requirement: [111],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Dilated Time gain is multiplied by your Reality Shard count",
+    description: "基于现实碎片提高膨胀时间获取量",
     effect: () => player.disablePostReality ? DC.D1 : Currency.realityShards.value.plus(1),
     formatEffect: value => formatX(value, 2)
   },
@@ -215,7 +216,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [111],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Gain another Glyph Slot in Pelle",
+    description: "在被毁灭的现实中增加 1 个符文槽",
     effect: 1
   },
   {
@@ -223,7 +224,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [111],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Decrease Galaxy Generator Instability by ${formatInt(1)}`,
+    description: () => `星系生成器不稳定性减少${formatInt(1)}`,
     effect: () => player.disablePostReality ? 0 : 1
   },
   {
@@ -231,14 +232,14 @@ export const endgameMasteries = [
     cost: 8,
     requirement: [121, 122],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `The effect of the Imaginary Upgrade "Entropic Condensing" is improved`,
+    description: () => `提升虚幻升级“凝聚之熵”效力`,
   },
   {
     id: 141,
     cost: 4,
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
-    description: () => `IP Gain is raised to the power of ${format(1.2, 2, 1)}`,
+    description: () => `无限点数获取量 ^ ${format(1.2, 2, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.2
   },
   {
@@ -246,7 +247,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
-    description: () => `EP Gain is raised to the power of ${format(1.3, 2, 1)}`,
+    description: () => `永恒点数获取量 ^ ${format(1.3, 2, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.3
   },
   {
@@ -254,7 +255,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
-    description: () => `RM Gain is raised to the power of ${format(1.4, 2, 1)}`,
+    description: () => `现实机器获取量 ^ ${format(1.4, 2, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.4
   },
   {
@@ -262,7 +263,7 @@ export const endgameMasteries = [
     cost: 4,
     requirement: [131],
     reqType: EM_REQUIREMENT_TYPE.CURRENCY_PATH,
-    description: () => `iM Gain is raised to the power of ${format(1.1, 2, 1)}`,
+    description: () => `虚幻机器获取量 ^ ${format(1.1, 2, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.1
   },
   {
@@ -270,7 +271,7 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [141],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Make the Infinity Point formula better`,
+    description: () => `优化无限点数获取公式`,
     effect: () => player.disablePostReality ? Effects.min(308, Achievement(103), TimeStudy(111)) : Effects.min(308, Achievement(103), TimeStudy(111)) / ((Decimal.log10(Decimal.log10(Currency.celestialPoints.value.plus(1)).add(1)).div(20)).add(1)).toNumber(),
     formatEffect: value => `log(x)/${format(Effects.min(308, Achievement(103), TimeStudy(111)), 2, 2)} ➜ log(x)/${format(value, 2, 2)}`
   },
@@ -279,14 +280,14 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [142],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Remove the exponential scaling of the ${formatX(5)} EP Multiplier`
+    description: () => `移除永恒点数倍增升级的指数级成本增长`
   },
   {
     id: 153,
     cost: 3,
     requirement: [143],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Increase the effectiveness of the Imaginary Upgrade "Elliptic Materiality" by ${formatPercents(0.5)}`,
+    description: () => `虚幻升级“椭圆物质”效果额外提升${formatPercents(0.5)}`,
     effect: () => player.disablePostReality ? 1 : 1.5
   },
   {
@@ -294,7 +295,7 @@ export const endgameMasteries = [
     cost: 3,
     requirement: [144],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise the effect of the Imaginary Upgrade "Transience of Information" to the power of ${formatInt(10)}`,
+    description: () => `虚幻升级“信息之瞬”效果提升至 ^ ${formatInt(10)}`,
     effect: () => player.disablePostReality ? 1 : 10
   },
   {
@@ -302,7 +303,7 @@ export const endgameMasteries = [
     cost: 5,
     requirement: [151, 152, 153, 154],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Improve Singularity Gain per bulk increase based on Singularities owned",
+    description: "基于当前奇点提高批量凝聚奇点的增长倍率",
     effect: () => player.disablePostReality ? DC.D0 : Decimal.floor((new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(1e50), 1, 1e120))).div(5)).add(
       new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(1e170), 1, 1e250))).div(10)).add(
       new Decimal(Decimal.log10(Decimal.clamp(Currency.singularities.value.div(new Decimal("1e420")), 1, new Decimal("1e2500")))).div(100)).add(
@@ -315,7 +316,7 @@ export const endgameMasteries = [
     cost: 7,
     requirement: [161],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Momentum increases ${formatInt(10)} times faster`,
+    description: () => `炼金资源“动量”增速加快${formatInt(10)}倍`,
     effect: () => player.disablePostReality ? 1 : 10
   },
   {
@@ -323,7 +324,7 @@ export const endgameMasteries = [
     cost: 175000,
     requirement: [171],
     reqType: EM_REQUIREMENT_TYPE.EXPANDED,
-    description: () => `Decrease base Galaxy Generator Instability by ${formatInt(1)} again`,
+    description: () => `星系生成器不稳定性再减少${formatInt(1)}`,
     effect: () => player.disablePostReality ? 0 : 1
   },
   {
@@ -331,7 +332,7 @@ export const endgameMasteries = [
     cost: 50000,
     requirement: [181],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Your Achievement Multiplier now affects Celestial Dimensions",
+    description: "成就倍率现在也作用于天界维度",
     effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(Decimal.pow(Achievements.power.max(1).log10(), 0.5))
   },
   {
@@ -339,7 +340,7 @@ export const endgameMasteries = [
     cost: 50000,
     requirement: [181],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Your Achievement Multiplier now affects Divine Dimensions at a reduced rate",
+    description: "成就倍率现在以快速衰减的倍率作用于神性维度",
     effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(Decimal.pow(Achievements.power.max(1).log10(), 0.25))
   },
   {
@@ -347,7 +348,7 @@ export const endgameMasteries = [
     cost: 75000,
     requirement: [191, 192],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Achievement Multiplier now affects Entropy gain at an extremely reduced rate",
+    description: "成就倍率现在以极小的倍率作用于熵",
     effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(Achievements.power.max(1).log10(), 2)
   },
   {
@@ -355,7 +356,7 @@ export const endgameMasteries = [
     cost: 100000,
     requirement: [201],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise Divine Dimensions to ${formatPow(1.3, 1, 1)}`,
+    description: () => `神性维度倍率 ${formatPow(1.3, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.3
   },
   {
@@ -363,7 +364,7 @@ export const endgameMasteries = [
     cost: 100000,
     requirement: [201],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise Celestial Points to ${formatPow(1.2, 1, 1)}`,
+    description: () => `天界点数获取量 ${formatPow(1.2, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.2
   },
   {
@@ -371,7 +372,7 @@ export const endgameMasteries = [
     cost: 100000,
     requirement: [201],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise Dual Machines to ${formatPow(1.1, 1, 1)}`,
+    description: () => `重构机器获取量 ${formatPow(1.1, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.1
   },
   {
@@ -379,15 +380,15 @@ export const endgameMasteries = [
     cost: 150000,
     requirement: [211],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Multiply Divine Energy gain based on Hadrons",
-    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(new Decimal(player.celestials.laitela.hadrons.trueTotal).pow(1.25))
+    description: "基于强子数量提高神性能量获取量",
+    effect: () => player.disablePostReality ? DC.D1 : Decimal.pow10(new Decimal(player.celestials.laitela.hadrons.total).pow(1.25))
   },
   {
     id: 222,
     cost: 150000,
     requirement: [212],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise the ${player.universes.current === 2 ? "Matter" : "Antimatter"} Exponent in Pelle to ${formatPow(1.2, 1, 1)}`,
+    description: () => `在被毁灭的现实中${player.universes.current === 2 ? "正物质" : "反物质"}指数提高 ${formatPow(1.2, 1, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.2
   },
   {
@@ -395,7 +396,7 @@ export const endgameMasteries = [
     cost: 150000,
     requirement: [213],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Multiply Dual Machine gain based on Star Power",
+    description: "基于星辰之力提高重构机器获取量",
     effect: () => player.disablePostReality ? 1 : Ethereal.starPower.add(1).log10().pow(10)
   },
   {
@@ -403,7 +404,7 @@ export const endgameMasteries = [
     cost: 200000,
     requirement: [221],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Improve the Divine Star formula slightly",
+    description: "略微优化神性之星公式",
     effect: () => player.disablePostReality ? 308 : 280
   },
   {
@@ -411,7 +412,7 @@ export const endgameMasteries = [
     cost: 200000,
     requirement: [222],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Slightly improve the effect of Achievement 207",
+    description: "略微提升成就207奖励效力",
     effect: () => player.disablePostReality ? 1 : 1.05
   },
   {
@@ -419,7 +420,7 @@ export const endgameMasteries = [
     cost: 200000,
     requirement: [223],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Reduce the time it takes for Dual Machines to approach their cap by ${formatX(5)}`,
+    description: () => `重构机器增速${formatX(5)}`,
     effect: () => player.disablePostReality ? 1 : 5
   },
   {
@@ -427,7 +428,7 @@ export const endgameMasteries = [
     cost: 300000,
     requirement: [231, 232, 233],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Ethereal Power gain is multiplied based on total Endgame Skills",
+    description: "基于终局能力总数提高缥缈之力获取量",
     effect: () => player.disablePostReality ? 1 : player.endgameMasteries.maxSkills.pow(2)
   },
   {
@@ -435,7 +436,7 @@ export const endgameMasteries = [
     cost: 500000,
     requirement: [241],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Increase the Hadron effectiveness cap by ${formatPercents(1)}`,
+    description: () => `强子效果上限提高${formatPercents(1)}`,
     effect: () => player.disablePostReality ? 0 : 100
   },
   {
@@ -443,7 +444,7 @@ export const endgameMasteries = [
     cost: 750000,
     requirement: [251],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Raise the Celestial Matter Conversion Exponent to ${formatPow(1.25, 2, 2)}`,
+    description: () => `天界物质激发指数 ${formatPow(1.25, 2, 2)}`,
     effect: () => player.disablePostReality ? 1 : 1.25
   },
   {
@@ -451,7 +452,7 @@ export const endgameMasteries = [
     cost: 750000,
     requirement: [251],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Delay the start of all Dark Matter caps by ${formatPow(2)}`,
+    description: () => `所有暗物质上限推迟 ${formatPow(2)}`,
     effect: () => player.disablePostReality ? 1 : 2
   },
   {
@@ -459,14 +460,14 @@ export const endgameMasteries = [
     cost: 1000000,
     requirement: [261],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Remove the Dilated Time Softcap"
+    description: "移除膨胀时间软上限"
   },
   {
     id: 272,
     cost: 1000000,
     requirement: [261],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Weaken the harsh Replicanti softcap`,
+    description: () => `降低复制器的软上限强度`,
     effect: () => player.disablePostReality ? 10 : 2
   },
   {
@@ -474,7 +475,7 @@ export const endgameMasteries = [
     cost: 1000000,
     requirement: [262],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Eternity Challenge 12's reward is ${formatX(10)} stronger`,
+    description: () => `永恒挑战12奖励增强${formatX(10)}`,
     effect: () => player.disablePostReality ? 1 : 10
   },
   {
@@ -482,7 +483,7 @@ export const endgameMasteries = [
     cost: 1000000,
     requirement: [262],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `All Glyph Instability thresholds are ${formatX(2)} weaker`,
+    description: () => `所有符文等级软上限推迟${formatX(2)}`,
     effect: () => player.disablePostReality ? 1 : 2
   },
   {
@@ -490,7 +491,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [271, 272, 273, 274],
     reqType: EM_REQUIREMENT_TYPE.ENTANGLEMENT,
-    description: "Multiply Thermal Radiation based on Celestial Points",
+    description: "基于天界点数为热能辐射提供倍率加成",
     effect: () => player.disablePostReality ? DC.D1 : player.endgame.celestialPoints.max(10).log10().log10().pow(0.75),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -499,7 +500,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [271, 272, 273, 274],
     reqType: EM_REQUIREMENT_TYPE.ENTANGLEMENT,
-    description: "Multiply Thermal Radiation based on Celestial Points of Eternity",
+    description: "基于天界永恒点数为热能辐射提供倍率加成",
     effect: () => player.disablePostReality ? DC.D1 : player.endgame.celDimExpansion.celestialEternityPoints.max(1).log10().div(4000).pow(8),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -508,7 +509,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [271, 272, 273, 274],
     reqType: EM_REQUIREMENT_TYPE.ENTANGLEMENT,
-    description: "Multiply Thermal Radiation based on Nebulae",
+    description: "基于终结之星为热能辐射提供倍率加成",
     effect: () => player.disablePostReality ? DC.D1 : player.celestials.pelle.divinity.nebulae.log10().pow(0.3),
     formatEffect: value => formatX(value, 2, 2)
   },
@@ -517,7 +518,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [281],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Empower Galactic Power based on Celestial Points",
+    description: "基于天界点数为星系之力提供指数加成",
     effect: () => player.disablePostReality ? DC.D1 : player.endgame.celestialPoints.max(10).log10().log10().pow(0.15),
     formatEffect: value => formatPow(value, 2, 3)
   },
@@ -526,7 +527,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [282],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Empower Galactic Power based on Celestial Points of Eternity",
+    description: "基于天界永恒点数为星系之力提供指数加成",
     effect: () => player.disablePostReality ? DC.D1 : player.endgame.celDimExpansion.celestialEternityPoints.max(1).log10().div(4000).pow(1.5),
     formatEffect: value => formatPow(value, 2, 3)
   },
@@ -535,7 +536,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [283],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Empower Galactic Power based on Nebulae",
+    description: "基于终结之星为星系之力提供指数加成",
     effect: () => player.disablePostReality ? DC.D1 : player.celestials.pelle.divinity.nebulae.log10().pow(0.05),
     formatEffect: value => formatPow(value, 2, 3)
   },
@@ -544,7 +545,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [291],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: () => `Empower the ${player.universes.current === 2 ? "Matter" : "Antimatter"} Exponent in Pelle based on Hawking Radiation`,
+    description: () => `在被毁灭的现实中基于霍金辐射为${player.universes.current === 2 ? "正物质" : "反物质"}指数提供指数加成`,
     effect: () => player.disablePostReality ? DC.D1 : player.compression.hawkingRadiation.max(1).pow(0.04).min(DC.E20.pow(0.04)).times(player.compression.hawkingRadiation.max(1).log10().div(20).max(1).log2().add(1)),
     formatEffect: value => formatPow(value, 2, 3)
   },
@@ -553,7 +554,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [292],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Empower Celestial Dimensions based on Hawking Radiation",
+    description: "基于霍金辐射为天界维度提供指数加成",
     effect: () => player.disablePostReality ? DC.D1 : player.compression.hawkingRadiation.max(1).pow(0.08).min(DC.E20.pow(0.08)).times(player.compression.hawkingRadiation.max(1).log10().div(20).pow(2).max(1).log2().add(1)),
     formatEffect: value => formatPow(value, 2, 3)
   },
@@ -562,7 +563,7 @@ export const endgameMasteries = [
     cost: () => 1e6 * masteryIncrease.entanglement(),
     requirement: [293],
     reqType: EM_REQUIREMENT_TYPE.AT_LEAST_ONE,
-    description: "Empower Divine Dimensions based on Hawking Radiation",
+    description: "基于霍金辐射为神性维度提供指数加成",
     effect: () => player.disablePostReality ? DC.D1 : player.compression.hawkingRadiation.max(1).pow(0.02).min(DC.E20.pow(0.02)).times(player.compression.hawkingRadiation.max(1).log10().div(20).pow(0.5).max(1).log2().add(1)),
     formatEffect: value => formatPow(value, 2, 3)
   }

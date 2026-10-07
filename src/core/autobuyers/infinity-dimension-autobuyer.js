@@ -14,7 +14,7 @@ export class InfinityDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get fullName() {
-    return `${this.name} Infinity Dimension`;
+    return `第 ${this.name} 无限维度`;
   }
 
   get data() {
@@ -54,7 +54,7 @@ export class InfinityDimensionAutobuyerState extends IntervaledAutobuyerState {
   }
 
   static get entryCount() { return 8; }
-  static get autobuyerGroupName() { return "Infinity Dimension"; }
+  static get autobuyerGroupName() { return "无限维度"; }
   static get isActive() { return player.auto.infinityDims.isActive; }
   static set isActive(value) { player.auto.infinityDims.isActive = value; }
 }

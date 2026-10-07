@@ -3,10 +3,10 @@ export const accelerators = {
     id: 1,
     key: "potency",
     name: "Potency Accelerator",
-    drainResource: () => player.universes.current === 2 ? "Matter" : "Antimatter",
-    baseEffect1: x => `${player.universes.current === 2 ? "Matter" : "Antimatter"} Generation ${formatPow(x, 2, 3)}`,
-    baseEffect2: x => `Entropy Gain ${formatX(x, 2, 2)}`,
-    baseEffect3: x => `Divine Matter/Energy Production ${formatX(x, 2, 2)}`,
+    drainResource: () => player.universes.current === 2 ? "正物质" : "反物质",
+    baseEffect1: x => `${player.universes.current === 2 ? "正物质" : "反物质"}产量 ${formatPow(x, 2, 3)}`,
+    baseEffect2: x => `熵获取量 ${formatX(x, 2, 2)}`,
+    baseEffect3: x => `神性物质/神性能量产量 ${formatX(x, 2, 2)}`,
     percentage: totalFill => Decimal.log10(totalFill.plus(1).log10().div(1e200)).div(100).toNumber(),
     percentageToFill: percentage => Decimal.pow10(Decimal.pow10(percentage * 100).times(1e200)).sub(1),
     effects: {
@@ -20,20 +20,20 @@ export const accelerators = {
       {
         resource: "potency",
         requirement: 0.15,
-        description: () => `${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions are squared while inside The Void`,
+        description: () => `在虚无中${player.universes.current === 2 ? "正物质" : "反物质"}维度强度 ^ 2`,
         effect: () => 2
       },
       {
         resource: "potency",
         requirement: 0.4,
-        description: () => `Total Hadrons increase the ${player.universes.current === 2 ? "Matter" : "Antimatter"} Hardcap`,
+        description: () => `基于强子总数提高${player.universes.current === 2 ? "正物质" : "反物质"}硬上限`,
         effect: () => player.disablePostReality ? 0 : Math.clamp(Math.floor(Math.pow(2 * Math.max(player.celestials.laitela.hadrons.trueTotal - 100, 0) + 0.25, 0.5) - 0.5), 0, 25),
         formatEffect: value => `${format(LHC.breakingPoint.root(Decimal.pow10(value)), 2)} ➜ ${format(LHC.breakingPoint, 2)}`
       },
       {
         resource: "potency",
         requirement: 0.75,
-        description: () => `Convert Celestial Dimensions to Continuum and boost them by Continuum Purchases at a ${formatPow(0.1, 1, 1)} rate`
+        description: () => `将天界维度转化为连续统，受连续统倍率 ${formatPow(0.1, 1, 1)} 的加成`
       },
     ]
   },
@@ -41,10 +41,10 @@ export const accelerators = {
     id: 2,
     key: "emptiness",
     name: "Emptiness Accelerator",
-    drainResource: "Null Matter",
-    baseEffect1: x => `${player.universes.current === 2 ? "MDs" : "ADs"} ${formatPow(x, 2, 3)} while inside The Void`,
-    baseEffect2: x => `Hadron Effectiveness cap +${formatPercents(x - 1, 2)}`,
-    baseEffect3: x => `${player.universes.current === 2 ? "Matter" : "Antimatter"} Overflow Magnitude ${formatInt(10)} ➜ ${format(x, 2, 2)}`,
+    drainResource: "虚物质",
+    baseEffect1: x => `在虚无中${player.universes.current === 2 ? "正物质维度" : "反物质维度"} ${formatPow(x, 2, 3)}`,
+    baseEffect2: x => `强子效果上限 +${formatPercents(x - 1, 2)}`,
+    baseEffect3: x => `${player.universes.current === 2 ? "正物质" : "反物质"}溢出因子 ${formatInt(10)} ➜ ${format(x, 2, 2)}`,
     percentage: totalFill => Decimal.min(totalFill.div(20000), totalFill.max(1).log10()).div(100).toNumber(),
     percentageToFill: percentage => Decimal.max(new Decimal(percentage * 100).times(20000), Decimal.pow10(percentage * 100)),
     effects: {
@@ -58,21 +58,21 @@ export const accelerators = {
       {
         resource: "emptiness",
         requirement: 0.07,
-        description: () => `While inside The Void, ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions are raised to a power based on total ${player.universes.current === 2 ? "Matter" : "Antimatter"} produced outside Doom`,
+        description: () => `在虚无中，基于在被毁灭的现实外产生的总${player.universes.current === 2 ? "正物质" : "反物质"}数量为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供指数加成`,
         effect: () => Decimal.log10(Decimal.log10(player.records.totalAntimatterOutsideDoom)).div(200).add(1),
         formatEffect: value => formatPow(value, 2, 3)
       },
       {
         resource: "emptiness",
         requirement: 0.3,
-        description: () => `Divine Dimensions are powered based on best ${player.universes.current === 2 ? "Matter" : "Antimatter"} inside The Void`,
+        description: () => `基于在虚无中最高${player.universes.current === 2 ? "正物质" : "反物质"}数量为神性维度提供指数加成`,
         effect: () => player.disablePostReality ? DC.D1 : Decimal.log10(Decimal.log10(player.endgame.largeHadronCollider.void.highestAntimatter)).div(100).add(1),
         formatEffect: value => formatPow(value, 2, 3)
       },
       {
         resource: "emptiness",
         requirement: 1,
-        description: () => `The ${player.universes.current === 2 ? "Matter" : "Antimatter"} Hardcap is increased by ${formatInt(25)} OoM^2s`,
+        description: () => `${player.universes.current === 2 ? "正物质" : "反物质"}硬上限 × ${formatInt(DC.E1E50)}`,
         effect: () => player.disablePostReality ? 0 : 25
       },
     ]
@@ -81,10 +81,10 @@ export const accelerators = {
     id: 3,
     key: "cosmic",
     name: "Cosmic Accelerator",
-    drainResource: "Galaxies",
-    baseEffect1: x => `Galaxy Generation ${formatPow(x, 2, 3)}`,
-    baseEffect2: x => `${player.universes.current === 2 ? "M" : "AM"} Exponent ${formatPow(x, 2, 3)} while Doomed`,
-    baseEffect3: x => `${player.universes.current === 2 ? "M" : "AM"} Exponent^2 ${formatPow(x, 2, 4)} while Doomed`,
+    drainResource: "星系",
+    baseEffect1: x => `星系产量 ${formatPow(x, 2, 3)}`,
+    baseEffect2: x => `在被毁灭的现实中${player.universes.current === 2 ? "正物质" : "反物质"}指数 ${formatPow(x, 2, 3)}`,
+    baseEffect3: x => `在被毁灭的现实中${player.universes.current === 2 ? "正物质" : "反物质"}第二指数 ${formatPow(x, 2, 4)}`,
     percentage: totalFill => Math.min(Decimal.log10(totalFill.max("1e3000")).sub(3000).div(5000).sqrt().times(20).div(100).toNumber(),
       Decimal.log10(totalFill.max(1)).sub(3000).div(5000).times(20).div(100).toNumber()),
     percentageToFill: percentage => Decimal.max(Decimal.pow10(Decimal.sqr(percentage * 100 / 20).times(5000).add(3000)),
@@ -100,19 +100,19 @@ export const accelerators = {
       {
         resource: "cosmic",
         requirement: 0.2,
-        description: "While inside The Void, Galaxies are stronger based on Cosmic Accelerator percentage",
+        description: "在虚无中基于星河加速器的充能进度提升星系强度",
         effect: () => 1 + Accelerators.cosmic.percentage * 100,
         formatEffect: value => formatX(value, 2, 2)
       },
       {
         resource: "cosmic",
         requirement: 0.4,
-        description: "Unlock a new Galaxy Generator Upgrade"
+        description: "解锁一个新的星系生成器升级"
       },
       {
         resource: "cosmic",
         requirement: 1,
-        description: () => `The ${player.universes.current === 2 ? "Matter" : "Antimatter"} Hardcap is increased by ${format(Decimal.log10(DC.NUMMAX).sub(275), 4, 4)} OoM^2s`,
+        description: () => `${player.universes.current === 2 ? "正物质" : "反物质"}硬上限 × F1E1e${format(Decimal.log10(DC.NUMMAX).sub(275).times(2), 4, 4)}`,
         effect: () => player.disablePostReality ? 0 : Decimal.log10(DC.NUMMAX).sub(275).toNumber()
       },
     ]

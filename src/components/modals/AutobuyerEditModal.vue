@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     header() {
-      return `Edit Autobuyers`;
+      return `编辑自动购买器`;
     },
     message() {
       // We have to have this edge-case due to a weird happening where you could open this modal

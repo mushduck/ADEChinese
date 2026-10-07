@@ -12,10 +12,10 @@ export default {
   },
   computed: {
     formatCPGain() {
-      return `Celestial Points gained: ${format(this.gainedCP, 2)}`;
+      return `获得天界点数：${format(this.gainedCP, 2)}`;
     },
     formatDPGain() {
-      return `Doomed Particles gained: ${format(this.gainedDP, 2)}`;
+      return `获得毁灭粒子：${format(this.gainedDP, 2)}`;
     },
     classObject() {
       return {
@@ -57,21 +57,21 @@ export default {
       <div class="l-endgame-button__contents">
         <template v-if="canEndgame">
           <div class="c-endgame-button__header">
-            Enter the Endgame
+            进行一次终局
           </div>
           <div>{{ formatCPGain }}</div>
           <div>{{ formatDPGain }}</div>
         </template>
         <template v-else>
           <div>
-            Reach {{ format("e9e15", 2, 2) }} {{ isFlipped ? "Matter" : "Antimatter" }} to unlock the ability to Enter the Endgame
+            达到 {{ format("e9e15", 2, 2) }} {{ isFlipped ? "正物质" : "反物质" }}以进行终局
           </div>
         </template>
         <div
           v-if="canEndgame"
           class="infotooltiptext"
         >
-          <div>Another End, and a New Beginning...</div>
+          <div>终焉之末，新生之始……</div>
         </div>
       </div>
     </button>

@@ -12,9 +12,8 @@ export function updateNormalAndInfinityChallenges(diff) {
     if (Currency.matter.gt(Currency.antimatter.value) && NormalChallenge(11).isRunning && !Player.canCrunch) {
       const values = [Currency.antimatter.value, Currency.matter.value];
       softReset(0, true, true);
-      Modal.message.show(`Your ${format(values[0], 2, 2)} ${player.universes.current === 2 ? "matter" : "antimatter"}
-        was annihilated by ${format(values[1], 2, 2)}
-        ${player.universes.current === 2 ? "antimatter" : "matter"}.`, { closeEvent: GAME_EVENT.BIG_CRUNCH_AFTER }, 1);
+      Modal.message.show(`你的 ${format(values[0], 2, 2)} ${player.universes.current === 2 ? "正物质" : "反物质"}已被 ${format(values[1], 2, 2)}
+        ${player.universes.current === 2 ? "反物质" : "正物质"}.`, { closeEvent: GAME_EVENT.BIG_CRUNCH_AFTER }, 1);
     }
   }
 

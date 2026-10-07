@@ -4,9 +4,9 @@ export class CelestialCrunchAutobuyerState extends IntervaledAutobuyerState {
   get data() {
     return player.auto.celestialCrunch;
   }
-
+//这里改了是没用的，神人S7写到vue里面去了
   get name() {
-    return `Celestial Infinity`;
+    return `天界大坍缩`;
   }
 
   get isUnlocked() {

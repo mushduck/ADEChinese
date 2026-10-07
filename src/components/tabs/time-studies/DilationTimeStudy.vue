@@ -31,23 +31,19 @@ export default {
     },
     requirement() {
       if (this.id === 1) {
-        if (this.maxTT.gte(1e9)) return `Requirement: ${formatInt(5)} EC11 and EC12 completions
-          and ${format(this.maxTT, 2, 2)}/${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)}
-          total Time Theorems`;
-        return `Requirement: ${formatInt(5)} EC11 and EC12 completions
-          and ${formatHybridSmall(this.maxTT, 3)}/${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)}
-          total Time Theorems`;
+        if (this.maxTT.gte(1e9)) return `解锁条件：完成永恒挑战 11 和永恒挑战 12 各 ${formatInt(5)} 次，且时间之理总数达到 ${format(this.maxTT, 2, 2)}/${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)}`;
+        return `解锁条件：完成永恒挑战 11 和永恒挑战 12 各 ${formatInt(5)} 次，且时间之理总数达到 ${formatHybridSmall(this.maxTT, 3)}/${formatInt(TimeStudy.dilation.totalTimeTheoremRequirement)}`;
       }
       if (this.id === 6) {
-        const achRows = Perk.firstPerk.isBought ? "" : ` and ${formatInt(13)} rows of Achievements`;
-        return `Requirement: ${format("1e4000")} Eternity Points${achRows}`;
+        const achRows = Perk.firstPerk.isBought ? "" : `和前 ${formatInt(13)} 行成就`;
+        return `解锁条件：${format("1e4000")} 永恒点数${achRows}`;
       }
       return "";
     },
     theoremTimeEstimate() {
       if (this.study.isBought || !this.study.cost || this.ttGen.eq(0)) return null;
       const time = Decimal.sub(this.study.cost, this.currTT).dividedBy(this.ttGen);
-      return time.gt(0) ? `Enough TT in ${TimeSpan.fromSeconds(time).toStringShort()}` : null;
+      return time.gt(0) ? `在 ${TimeSpan.fromSeconds(time).toStringShort()}后达到足够时间之理` : null;
     }
   },
   methods: {

@@ -1,7 +1,5 @@
 import Mousetrap from "mousetrap";
-
 import { ElectronRuntime } from "@/steam";
-
 import { GameKeyboard } from "./keyboard";
 
 // Add your hotkeys and combinations here
@@ -12,82 +10,77 @@ import { GameKeyboard } from "./keyboard";
 // GameKeyboard.bindRepeatableHotkey for repeatable hotkeys
 // GameKeyboard class uses Mousetrap under the hood, so for more details visit
 // https://craig.is/killing/mice
-
 // Note: mod is a function key helper by Mousetap for both ctrl and command,
 // and should be used to provide support for both Windows and Max
-
 // Note: DON'T add repeatables with modifier keys other than shift
 // because Mousetrap is crap, and we needed to plug it up to work
 // properly with shift, so you will need to plug it up additionally
 // for the other modifier keys (#3093).
-
 // Free keys:
 // i, j, k, l, p, q, w, x
-
-
 export const shortcuts = [
   {
-    name: "Toggle Autobuyers",
+    name: "切换自动购买器",
     keys: ["a"],
     type: "bindHotkey",
     function: () => keyboardToggleAutobuyers(),
     visible: true
   }, {
-    name: "Buy one Tickspeed",
+    name: "就买一个计数频率",
     keys: ["shift", "t"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? buyCelestialTickSpeed() : buyTickSpeed(),
     visible: true
   }, {
-    name: "Buy max Tickspeed",
+    name: "最大化计数频率",
     keys: ["t"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? buyMaxCelestialTickSpeed() : buyMaxTickSpeed(),
     visible: true
   }, {
-    name: "Max all",
+    name: "最大化",
     keys: ["m"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? CelestialDimensions.buyMax() : maxAll(),
     visible: true
   }, {
-    name: "Dimensional Sacrifice",
+    name: "维度献祭",
     keys: ["s"],
     type: "bindRepeatableHotkey",
     function: () => sacrificeBtnClick(),
     visible: true
   }, {
-    name: "Dimension Boost",
+    name: "维度提升",
     keys: ["d"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialDimensionBoost(true) : manualRequestDimensionBoost(true),
     visible: true
   }, {
-    name: "Single Dimension Boost",
+    name: "单个维度提升",
     keys: ["shift", "d"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialDimensionBoost(false) : manualRequestDimensionBoost(false),
     visible: false
   }, {
-    name: `${player.universes.current === 2 ? "Matter" : "Antimatter"} Galaxy`,
+    name: `${player.universes.current === 2 ? "正物质" : "反物质"} 星系`,
     keys: ["g"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(true) : manualRequestGalaxyReset(true),
     visible: true
   }, {
-    name: `Single ${player.universes.current === 2 ? "Matter" : "Antimatter"} Galaxy`,
+    name: `单个${player.universes.current === 2 ? "正物质" : "反物质"} 星系`,
     keys: ["shift", "g"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualRequestCelestialGalaxyReset(false) : manualRequestGalaxyReset(false),
     visible: false
   }, {
-    name: "Big Crunch",
+    name: "大坍缩",
     keys: ["c"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? manualCelestialCrunchResetRequest() : manualBigCrunchResetRequest(),
     visible: true
   }, {
-    name: "Replicanti Galaxy",
+    name: "复制器星系",
     keys: ["r"],
     type: "bindHotkey",
     function: () => {
@@ -96,28 +89,28 @@ export const shortcuts = [
     },
     visible: () => Replicanti.areUnlocked || PlayerProgress.eternityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Eternity",
+    name: "永恒",
     keys: ["e"],
     type: "bindRepeatableHotkey",
     function: () => player.options.simpleHotkeysCelestialMode ? celestialEternityResetRequest() : eternityResetRequest(),
     visible: () => PlayerProgress.eternityUnlocked() || Player.canEternity || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Toggle Time Study respec",
+    name: "切换时间研究重置状态",
     keys: ["shift", "e"],
     type: "bindHotkey",
     function: () => {
       player.respec = !player.respec;
-      GameUI.notify.info(`Time Study respec is now ${player.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`重置时间研究已${player.respec ? "启用" : "禁用"}`);
     },
     visible: () => PlayerProgress.eternityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Enter/Exit Dilation",
+    name: "进入/退出 时间膨胀",
     keys: ["l"],
     type: "bindRepeatableHotkey",
     function: () => startDilatedEternityRequest(),
     visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.dilationUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Reality",
+    name: "现实",
     keys: ["y"],
     type: "bindRepeatableHotkey",
     function: () => {
@@ -126,68 +119,68 @@ export const shortcuts = [
     },
     visible: () => PlayerProgress.realityUnlocked() || isRealityAvailable() || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Toggle Glyph unequip",
+    name: "切换符文卸下选项",
     keys: ["shift", "y"],
     type: "bindHotkey",
     function: () => {
       player.reality.respec = !player.reality.respec;
-      GameUI.notify.info(`Glyph respec is now ${player.reality.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`卸下符文已${player.reality.respec ? "启用" : "禁用"}`);
     },
     visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Start/Pause Automator",
+    name: "启动/暂停自动机",
     keys: ["u"],
     type: "bindHotkey",
     function: () => keyboardAutomatorToggle(),
     visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Restart Automator",
+    name: "重启自动机",
     keys: ["shift", "u"],
     type: "bindHotkey",
     function: () => keyboardAutomatorRestart(),
     visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Undo Edit (Automator)",
+    name: "撤销编辑（自动机）",
     keys: ["mod", "z"],
     type: "bind",
     function: () => AutomatorData.undoScriptEdit(),
     visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Redo Edit (Automator)",
+    name: "重做编辑（自动机）",
     keys: ["mod", "y"],
     type: "bind",
     function: () => AutomatorData.redoScriptEdit(),
     visible: () => Player.automatorUnlocked || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Toggle Black Hole",
+    name: "切换黑洞",
     keys: ["b"],
     type: "bindHotkey",
     function: () => BlackHoles.togglePause(),
     visible: () => PlayerProgress.realityUnlocked() || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Toggle Continuum",
+    name: "切换连续统",
     keys: ["alt", "a"],
     type: "bindHotkey",
     function: () => keyboardToggleContinuum(),
     visible: () => Laitela.continuumUnlocked || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Armageddon",
+    name: "末日",
     keys: ["z"],
     type: "bindRepeatableHotkey",
     function: () => armageddonRequest(),
     visible: () => Pelle.isDoomed || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Toggle Glyph unequip (Pelle)",
+    name: "切换符文卸下状态（佩勒）",
     keys: ["shift", "z"],
     type: "bindHotkey",
     function: () => {
       if (!Pelle.isDoomed) return;
       player.reality.respec = !player.reality.respec;
-      GameUI.notify.info(`Glyph respec is now ${player.reality.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`卸下符文已${player.reality.respec ? "启用" : "禁用"}`);
     },
     visible: () => Pelle.isDoomed || PlayerProgress.endgameUnlocked()
   }, {
-    name: "Doom Reality",
+    name: "毁灭现实",
     keys: ["alt", "z"],
     type: "bindHotkey",
     function: () => {
@@ -196,7 +189,7 @@ export const shortcuts = [
     },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
-    name: "Endgame",
+    name: "终局",
     keys: ["n"],
     type: "bindRepeatableHotkey",
     function: () => {
@@ -205,7 +198,7 @@ export const shortcuts = [
     },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
-    name: "Reset Endgame",
+    name: "重置终局",
     keys: ["alt", "n"],
     type: "bindHotkey",
     function: () => {
@@ -214,26 +207,26 @@ export const shortcuts = [
     },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
-    name: "Toggle Endgame Mastery respec",
+    name: "切换终局专精重置状态",
     keys: ["shift", "n"],
     type: "bindHotkey",
     function: () => {
       player.endgame.respec = !player.endgame.respec;
-      GameUI.notify.info(`Endgame Mastery respec is now ${player.endgame.respec ? "active" : "inactive"}`);
+      GameUI.notify.info(`重置终局专精已${player.endgame.respec ? "启动" : "禁用"}`);
     },
     visible: () => PlayerProgress.endgameUnlocked()
   }, {
-    name: "Toggle Celestial Hotkeys",
+    name: "切换天界快捷键",
     keys: ["shift", "c"],
     type: "bindHotkey",
     function: () => {
       if (!Alpha.isDestroyedForDisplay) return;
       player.options.simpleHotkeysCelestialMode = !player.options.simpleHotkeysCelestialMode;
-      GameUI.notify.info(`Simple Hotkey Celestial commands are now ${player.options.simpleHotkeysCelestialMode ? "active" : "inactive"}`);
+      GameUI.notify.info(`天界维度快捷键已${player.options.simpleHotkeysCelestialMode ? "启用" : "禁用"}`);
     },
     visible: () => Alpha.isDestroyedForDisplay
   }, {
-    name: "Condense",
+    name: "凝聚",
     keys: ["o"],
     type: "bindRepeatableHotkey",
     function: () => {
@@ -242,7 +235,7 @@ export const shortcuts = [
     },
     visible: () => PlayerProgress.condenseUnlocked()
   }, {
-    name: "Supernova",
+    name: "超新星",
     keys: ["v"],
     type: "bindRepeatableHotkey",
     function: () => {
@@ -261,7 +254,7 @@ export const shortcuts = [
     },
     visible: () => Slabdrill.isCursed || Slabdrill.isDestroyed
   }, {
-    name: "Save game",
+    name: "保存游戏",
     keys: ["mod", "s"],
     type: "bind",
     function: () => {
@@ -270,7 +263,7 @@ export const shortcuts = [
     },
     visible: true
   }, {
-    name: "Export game",
+    name: "导出存档",
     keys: ["mod", "e"],
     type: "bind",
     function: () => {
@@ -279,7 +272,7 @@ export const shortcuts = [
     },
     visible: true
   }, {
-    name: "Open Hotkey List Modal",
+    name: "打开快捷键列表",
     keys: ["?"],
     type: "bind",
     function: () => {
@@ -288,7 +281,7 @@ export const shortcuts = [
     },
     visible: true
   }, {
-    name: "Open How To Play Modal",
+    name: "打开游戏帮助",
     keys: ["h"],
     type: "bind",
     function: () => {
@@ -297,7 +290,7 @@ export const shortcuts = [
     },
     visible: true
   }, {
-    name: "Modify visible tabs",
+    name: "修改可见标签页",
     keys: ["tab"],
     type: "bind",
     function: () => {
@@ -306,7 +299,7 @@ export const shortcuts = [
     },
     visible: true
   }, {
-    name: "Confirm Modal",
+    name: "确认弹窗",
     keys: ["enter"],
     type: "bind",
     function: () => {
@@ -315,7 +308,7 @@ export const shortcuts = [
     },
     visible: true
   }, {
-    name: "Close Modal or open Options",
+    name: "关闭弹窗或打开设置",
     keys: ["esc"],
     type: "bind",
     function: () => {
@@ -324,16 +317,16 @@ export const shortcuts = [
     },
     visible: true
   }, {
-    name: "Paying respects",
+    name: "敬礼",
     keys: ["f"],
     type: "bindRepeatable",
     function: () => {
-      GameUI.notify.info("Paying respects");
+      GameUI.notify.info("敬礼");
       SecretAchievement(13).unlock();
     },
     visible: false
   }, {
-    name: "Change Tab",
+    name: "切换标签页",
     keys: ["up"],
     type: "bind",
     function: () => {
@@ -342,7 +335,7 @@ export const shortcuts = [
     },
     visible: false
   }, {
-    name: "Change Tab",
+    name: "切换标签页",
     keys: ["down"],
     type: "bind",
     function: () => {
@@ -351,7 +344,7 @@ export const shortcuts = [
     },
     visible: false
   }, {
-    name: "Change Subtab",
+    name: "切换子标签页",
     keys: ["left"],
     type: "bind",
     function: () => {
@@ -360,7 +353,7 @@ export const shortcuts = [
     },
     visible: false
   }, {
-    name: "Change Subtab",
+    name: "切换子标签页",
     keys: ["right"],
     type: "bind",
     function: () => {
@@ -369,49 +362,49 @@ export const shortcuts = [
     },
     visible: false
   }, {
-    name: "Doesn't exist",
+    name: "不存在",
     keys: ["9"],
     type: "bind",
     function: () => SecretAchievement(41).unlock(),
     visible: false
   },
   {
-    name: "Adjust Autobuyers",
+    name: "调整自动购买器",
     keys: ["mod", "alt", "a"],
     type: "bind",
     function: () => keyboardEditAutobuyers(),
     visible: () => Autobuyers.hasAutobuyersForEditModal
   },
   {
-    name: "Fullscreen",
+    name: "全屏",
     keys: ["F10"],
     type: "bind",
     function: () => {},
     visible: () => false
   },
   {
-    name: "Zoom In",
+    name: "放大",
     keys: ["ctrl", "="],
     type: "bind",
     function: () => ElectronRuntime.increaseZoom(),
     visible: () => false
   },
   {
-    name: "Zoom In",
+    name: "放大",
     keys: ["ctrl", "+"],
     type: "bind",
     function: () => ElectronRuntime.increaseZoom(),
     visible: () => false
   },
   {
-    name: "Zoom Out",
+    name: "缩小",
     keys: ["ctrl", "-"],
     type: "bind",
     function: () => ElectronRuntime.decreaseZoom(),
     visible: () => false
   },
   {
-    name: "Reset Zoom",
+    name: "重置缩放",
     keys: ["ctrl", "0"],
     type: "bind",
     function: () => ElectronRuntime.resetZoom(),
@@ -435,14 +428,12 @@ GameKeyboard.bind("ctrl+shift", () => setShiftKey(false), "keyup");
 GameKeyboard.bind("alt+shift", () => setShiftKey(true), "keydown");
 GameKeyboard.bind("alt+shift", () => setShiftKey(false), "keyup");
 
-
 GameKeyboard.bindHotkey("alt+t", () => toggleAutobuyer(Autobuyer.tickspeed));
 GameKeyboard.bindHotkey("shift+alt+t", () => toggleBuySingles(Autobuyer.tickspeed));
 GameKeyboard.bindHotkey("alt+s", () => toggleAutobuyer(Autobuyer.sacrifice));
 GameKeyboard.bindHotkey("alt+d", () => toggleAutobuyer(Autobuyer.dimboost));
 GameKeyboard.bindHotkey("alt+g", () => toggleAutobuyer(Autobuyer.galaxy));
 GameKeyboard.bindHotkey("alt+r", () => toggleAutobuyer(Autobuyer.replicantiGalaxy));
-
 GameKeyboard.bindHotkey("alt+c", () => toggleAutobuyer(Autobuyer.bigCrunch));
 GameKeyboard.bindHotkey("alt+e", () => toggleAutobuyer(Autobuyer.eternity));
 GameKeyboard.bindHotkey("alt+y", () => toggleAutobuyer(Autobuyer.reality));
@@ -472,21 +463,21 @@ function toggleAutobuyer(buyer) {
   // Autobuyer.tickspeed.isUnlocked is false without NC9, but we still want the simpler one to be togglable via hotkey
   const isSimpleTickspeed = buyer === Autobuyer.tickspeed && buyer.isBought;
   if (buyer.disabledByContinuum) {
-    GameUI.notify.info("Continuum is enabled, you cannot alter this autobuyer");
+    GameUI.notify.info("连续统已启用，你无法修改此自动购买器");
   } else if (buyer.isUnlocked || isSimpleTickspeed) {
     buyer.toggle();
-    GameUI.notify.info(`${buyer.name} Autobuyer toggled ${(buyer.isActive) ? "on" : "off"}`);
+    GameUI.notify.info(`${buyer.name}自动购买器已${(buyer.isActive) ? "启用" : "禁用"}`);
   }
   return false;
 }
 
 function toggleBuySingles(buyer) {
   if (buyer.disabledByContinuum) {
-    GameUI.notify.info("Continuum is enabled, you cannot alter this autobuyer");
+    GameUI.notify.info("连续统已启用，你无法修改此自动购买器");
   } else if (buyer.isUnlocked && buyer.toggleMode !== null) {
     buyer.toggleMode();
-    const bulkName = (buyer.name === "Tickspeed" || buyer.hasUnlimitedBulk) ? "max" : "10";
-    GameUI.notify.info(`${buyer.name} Autobuyer set to buy ${(buyer.mode === 1) ? "singles" : bulkName}`);
+    const bulkName = (buyer.name === "Tickspeed" || buyer.hasUnlimitedBulk) ? "最大" : "10个";
+    GameUI.notify.info(`${buyer.name}自动购买器调整为购买${(buyer.mode === 1) ? "单个" : bulkName}`);
   }
   return false;
 }
@@ -494,7 +485,7 @@ function toggleBuySingles(buyer) {
 function keyboardToggleAutobuyers() {
   if (Tab.automation.isUnlocked) {
     Autobuyers.toggle();
-    GameUI.notify.info(`Autobuyers ${player.auto.autobuyersOn ? "resumed" : "paused"}`);
+    GameUI.notify.info(`自动购买器已${player.auto.autobuyersOn ? "重启" : "暂停"}`);
   }
 }
 
@@ -511,7 +502,7 @@ function keyboardToggleContinuum() {
   // This is a toggle despite the lack of !, because player.auto.disableContinuum
   // is negated compared to whether continuum is on.
   Laitela.setContinuum(player.auto.disableContinuum);
-  GameUI.notify.info(`${(player.auto.disableContinuum) ? "Disabled" : "Enabled"} Continuum`);
+  GameUI.notify.info(`已${(player.auto.disableContinuum) ? "禁用" : "启用"}连续统`);
 }
 
 function keyboardAutomatorToggle() {
@@ -527,23 +518,22 @@ function keyboardAutomatorToggle() {
       AutomatorBackend.restart();
       AutomatorBackend.start(visibleIndex);
       if (AutomatorData.currentErrors().length === 0) {
-        GameUI.notify.automator(`Starting script "${AutomatorBackend.scriptName}"`);
+        GameUI.notify.automator(`开始运行脚本"${AutomatorBackend.scriptName}"`);
       } else {
-        GameUI.notify.error(`Cannot start script "${AutomatorBackend.scriptName}" (has errors)`);
+        GameUI.notify.error(`无法运行脚本"${AutomatorBackend.scriptName}" (有异常)`);
       }
       return;
     }
-    const action = AutomatorBackend.isRunning ? "Resuming" : "Pausing";
+    const action = AutomatorBackend.isRunning ? "重启" : "暂停";
     const linenum = AutomatorBackend.currentLineNumber;
-    GameUI.notify.automator(`${action} script "${AutomatorBackend.scriptName}" at line ${linenum}`);
+    GameUI.notify.automator(`${action}脚本"${AutomatorBackend.scriptName}"于第${linenum}行`);
   }
 }
 
 function keyboardAutomatorRestart() {
   if (Player.automatorUnlocked) {
-    const action = AutomatorBackend.isOn ? "Restarting" : "Starting";
-    GameUI.notify.automator(`${action} script "${AutomatorBackend.scriptName}"`);
-
+    const action = AutomatorBackend.isOn ? "重新运行" : "开始";
+    GameUI.notify.automator(`${action}脚本"${AutomatorBackend.scriptName}"`);
     AutomatorBackend.restart();
     AutomatorBackend.start();
   }
@@ -642,6 +632,7 @@ function testKonami(character) {
   else if (konamiStep === 2 && character === "up") konamiStep = 2;
   else if (character === konamiCode[0]) konamiStep = 1;
   else konamiStep = 0;
+
   if (konamiCode.length <= konamiStep) {
     SecretAchievement(17).unlock();
     Currency.antimatter.bumpTo(30);

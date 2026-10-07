@@ -12,11 +12,11 @@ export default {
   },
   computed: {
     resetText() {
-      if (this.isCursed) return "Perform a Core Jump";
-      if (this.isDoomed) return "Start this Armageddon over";
-      if (this.isInCelestialReality && !this.resetCelestial) return "Exit this Celestial early";
-      if (this.isInCelestialReality && this.resetCelestial) return "Restart this Celestial";
-      return "Start this Reality over";
+      if (this.isCursed) return "退出重进核心";
+      if (this.isDoomed) return "重启本次末日";
+      if (this.isInCelestialReality && !this.resetCelestial) return "退出天神挑战";
+      if (this.isInCelestialReality && this.resetCelestial) return "重启本次天神挑战";
+      return "重启本次现实";
     },
   },
   methods: {
@@ -37,8 +37,8 @@ export default {
       }
       if (this.isInCelestialReality) {
         if (confirms.exitChallenge) Modal.exitChallenge.show({
-          challengeName: "a Celestial Reality",
-          normalName: "Reality",
+          challengeName: "天神的现实",
+          normalName: "现实",
           hasHigherLayers: false,
           exitFn: () => Alpha.isRunning ? Alpha.escapeTheMatrix() : beginProcessReality(getRealityProps(true))
         });

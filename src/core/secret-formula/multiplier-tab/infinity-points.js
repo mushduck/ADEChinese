@@ -5,10 +5,10 @@ import { MultiplierTabIcons } from "./icons";
 // See index.js for documentation
 export const IP = {
   total: {
-    name: "Total IP Gained on Infinity",
+    name: "无限后获得的无限点数总量",
     displayOverride: () => (Player.canCrunch
       ? format(gainedInfinityPoints(), 2, 2)
-      : "Cannot Crunch"),
+      : "无法坍缩"),
     // This effectively hides everything if the player can't actually gain any
     multValue: () => (Player.canCrunch ? gainedInfinityPoints() : 1),
     isActive: () => PlayerProgress.infinityUnlocked() || Player.canCrunch,
@@ -17,7 +17,7 @@ export const IP = {
     overlay: ["∞", "<i class='fa-solid fa-layer-group' />"],
   },
   base: {
-    name: "Base Infinity Points",
+    name: "基础无限点数",
     isBase: true,
     fakeValue: DC.D5,
     multValue: () => {
@@ -28,15 +28,15 @@ export const IP = {
     icon: MultiplierTabIcons.CONVERT_FROM("AM"),
   },
   antimatter: {
-    name: "Infinity Points from Antimatter",
-    displayOverride: () => `${format(player.records.thisInfinity.maxAM, 2, 2)} AM`,
+    name: "来自反物质的无限点数",
+    displayOverride: () => `${format(player.records.thisInfinity.maxAM, 2, 2)} 反物质`,
     // Just needs to match the value in base and be larger than 1
     multValue: DC.D5,
     isActive: () => player.break,
     icon: MultiplierTabIcons.ANTIMATTER,
   },
   divisor: {
-    name: "Formula Improvement",
+    name: "公式改善",
     displayOverride: () => {
       const div = Effects.min(308, Achievement(103), TimeStudy(111));
       return `log(AM)/${formatInt(308)} ➜ log(AM)/${format(div, 2, 1)}`;
@@ -46,13 +46,13 @@ export const IP = {
     icon: MultiplierTabIcons.DIVISOR("IP"),
   },
   infinityUpgrade: {
-    name: () => `Infinity Upgrade - Repeatable ${formatX(2)} IP`,
+    name: () => `无限升级——可重复购买的 ${formatX(2)} 无限点数倍增`,
     multValue: () => InfinityUpgrade.ipMult.effectOrDefault(1),
     isActive: () => player.break && !Pelle.isDoomed,
     icon: MultiplierTabIcons.UPGRADE("infinity"),
   },
   achievement: {
-    name: "Achievements",
+    name: "成就",
     multValue: () => DC.D1.timesEffectsOf(
       Achievement(85),
       Achievement(93),
@@ -64,7 +64,7 @@ export const IP = {
     icon: MultiplierTabIcons.ACHIEVEMENT,
   },
   timeStudy: {
-    name: "Time Studies",
+    name: "时间研究",
     multValue: () => DC.D1.timesEffectsOf(
       TimeStudy(41),
       TimeStudy(51),
@@ -76,45 +76,45 @@ export const IP = {
     icon: MultiplierTabIcons.TIME_STUDY,
   },
   dilationUpgrade: {
-    name: "Dilation Upgrade - IP multiplier based on DT",
+    name: "膨胀升级——基于膨胀时间的加成",
     multValue: () => DilationUpgrade.ipMultDT.effectOrDefault(1),
     isActive: () => DilationUpgrade.ipMultDT.canBeApplied,
     icon: MultiplierTabIcons.UPGRADE("dilation"),
   },
   glyph: {
-    name: "Equipped Glyphs",
+    name: "已装备的符文",
     multValue: () => Pelle.specialGlyphEffect.infinity.times(Pelle.isDoomed ? 1 : getAdjustedGlyphEffect("infinityIP")),
     powValue: () => (GlyphAlteration.isAdded("infinity") ? getSecondaryGlyphEffect("infinityIP") : 1),
     isActive: () => PlayerProgress.realityUnlocked(),
     icon: MultiplierTabIcons.GENERIC_GLYPH,
   },
   alchemy: {
-    name: "Glyph Alchemy",
+    name: "符文炼金",
     multValue: () => Replicanti.amount.powEffectOf(AlchemyResource.exponential),
     isActive: () => Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
     icon: MultiplierTabIcons.ALCHEMY,
   },
   pelle: {
-    name: "Pelle Strike - Vacuum Rift",
+    name: "佩勒冲击——空洞裂痕",
     multValue: () => DC.D1.timesEffectsOf(PelleRifts.vacuum),
     isActive: () => Pelle.isDoomed,
     icon: MultiplierTabIcons.PELLE,
   },
   iap: {
-    name: "Shop Tab Purchases",
+    name: "内购",
     multValue: () => ShopPurchase.IPPurchases.currentMult,
     isActive: () => ShopPurchaseData.totalSTD > 0,
     icon: MultiplierTabIcons.IAP,
   },
 
   nerfTeresa: {
-    name: "Teresa's Reality",
+    name: "特蕾莎的现实",
     powValue: () => 0.55,
     isActive: () => Teresa.isRunning,
     icon: MultiplierTabIcons.GENERIC_TERESA,
   },
   nerfV: {
-    name: "V's Reality",
+    name: "薇的现实",
     powValue: () => 0.5,
     isActive: () => V.isRunning,
     icon: MultiplierTabIcons.GENERIC_V,

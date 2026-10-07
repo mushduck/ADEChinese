@@ -26,8 +26,8 @@ export default {
   },
   computed: {
     alterText() {
-      if (!this.hasSeenAlterations) return "before";
-      return `before any ${this.isFlipped ? "matter" : "antimatter"} production alterations and`;
+      if (!this.hasSeenAlterations) return "在任何";
+      return `在任何${this.isFlipped ? "正物质" : "反物质"}产量修改和`;
     }
   },
   methods: {
@@ -81,19 +81,15 @@ export default {
       class="c-production-text"
     >
       <br>
-      You are getting {{ format(antimatterPerSec, 2) }} {{ isFlipped ? "matter" : "antimatter" }} per second.
+      你每秒获得 {{ format(antimatterPerSec, 2) }} {{ isFlipped ? "正物质" : "反物质" }}。
       <br>
-      You are getting {{ format(antimatterPerSecBeforeAlter, 2) }} {{ isFlipped ? "matter" : "antimatter" }}
-      per second {{ alterText }} Game Speed effects.
+      {{ alterText }}游戏速度作用生效前，你每秒获得 {{ format(antimatterPerSecBeforeAlter, 2) }} {{ isFlipped ? "正物质" : "反物质" }}。
     </div>
     <div
       v-if="hasRealityButton && hasSeenAlterations && !inCursedCore"
       class="c-prevent-overflow"
     >
-      You are getting {{ format(antimatterPerSecAfterAlter, 2) }} {{ isFlipped ? "matter" : "antimatter" }} per second
-      after positive {{ isFlipped ? "matter" : "antimatter" }} production alterations, and before negative
-      {{ isFlipped ? "matter" : "antimatter" }} production alterations, any positive {{ isFlipped ? "matter" : "antimatter" }}
-      production alterations that apply after certain negative ones, and Game Speed effects.
+      你的基础{{ isFlipped ? "正物质" : "反物质" }}产量为 {{ format(antimatterPerSecAfterAlter, 2) }}。除了某些特定修改外，{{ isFlipped ? "正物质" : "反物质" }}产量最终值先计算增益，再计算减益，最后乘以游戏速度。
     </div>
   </div>
 </template>

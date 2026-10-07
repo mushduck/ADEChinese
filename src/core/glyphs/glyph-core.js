@@ -343,7 +343,17 @@ export const Glyphs = {
     }
 
     if (specialGlyphEquippedAfterChange > maxSpecialGlyph) {
-      Modal.message.show(`You may only have ${formatInt(maxSpecialGlyph)} ${glyph.type.capitalize()} Glyph equipped!`,
+      //我知道这非常丑陋，但是就这样吧
+      let ChineseName = "";
+      switch (glyph.type) {
+        case "reality":
+          ChineseName = "现实";
+          break;
+        case "effarig":
+          ChineseName = "鹿颈长";
+          break;
+      }
+      Modal.message.show(`你只能同时装备 ${formatInt(maxSpecialGlyph)} 个${ChineseName}符文`,
         { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
       return;
     }
@@ -392,11 +402,9 @@ export const Glyphs = {
     const stillEquipped = player.reality.glyphs.active.length;
     const fastReality = player.records.recentRealities[0][1] < 3000;
     if (stillEquipped && !fastReality) {
-      const target = player.options.respecIntoProtected ? "Protected slots" : "Main Inventory";
+      const target = player.options.respecIntoProtected ? "保护格" : "主仓库";
       const hasOther = this.findFreeIndex(!player.options.respecIntoProtected) !== -1;
-      setTimeout(() => Modal.message.show(`${quantifyInt("Glyph", stillEquipped)} could not be unequipped due to lack
-        of space. Free up some space in your ${target}${hasOther ? " or switch where you are unequipping to" : ""}
-        in order to unequip ${stillEquipped === 1 ? "it" : "them"}.`, { closeEvent: GAME_EVENT.GLYPHS_CHANGED }),
+            setTimeout(() => Modal.message.show(`${formatInt(stillEquipped)} 个符文因仓库空间不足而无法卸下。清理${target}的空间${hasOther ? "或选择保留的地方" : ""}以卸下${stillEquipped === 1 ? "它" : "它们"}。`, { closeEvent: GAME_EVENT.GLYPHS_CHANGED }),
       50);
     }
 
@@ -855,17 +863,17 @@ export const Glyphs = {
   },
   giveCursedGlyph() {
     if (GameCache.glyphInventorySpace.value === 0) {
-      Modal.message.show("No available inventory space; Sacrifice some Glyphs to free up space.",
+      Modal.message.show("符文仓库无可用空间，请先献祭一些符文以释放空间",
         { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
       return;
     }
     const cursedCount = this.allGlyphs.filter(g => g !== null && g.type === "cursed").length;
     const maxCount = Math.max(this.activeSlotCount, 5);
     if (cursedCount >= maxCount) {
-      GameUI.notify.error(`You don't need more than ${format(maxCount)} Cursed Glyphs!`);
+      GameUI.notify.error(`你无需持有多于 ${format(maxCount)} 个诅咒符文！`);
     } else {
       this.addToInventory(GlyphGenerator.cursedGlyph());
-      GameUI.notify.error("Created a Cursed Glyph");
+      GameUI.notify.error("创造了一个诅咒符文");
     }
   },
   // A proper full solution to this turns out to contain an NP-hard problem as a subproblem, so instead we do
@@ -1034,7 +1042,7 @@ export function getAdjustedGlyphLevel(glyph, realityGlyphBoost = Glyphs.levelBoo
 
 export function respecGlyphs() {
   if (!Glyphs.unequipAll()) {
-    Modal.message.show("Some of your Glyphs could not be unequipped due to lack of inventory space.",
+    Modal.message.show("因仓库空间不足，无法卸下部分符文。",
       { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
   }
   player.reality.respec = false;

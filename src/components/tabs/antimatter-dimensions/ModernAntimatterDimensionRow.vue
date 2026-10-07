@@ -40,7 +40,7 @@ export default {
   computed: {
     isDoomed: () => Pelle.isDoomed,
     name() {
-      return `${AntimatterDimension(this.tier).shortDisplayName} ${this.isFlipped ? "Matter" : "Antimatter"} Dimension`;
+      return `${AntimatterDimension(this.tier).shortDisplayName}${this.isFlipped ? "正物质" : "反物质"}维度`;
     },
     costDisplay() {
       return this.buyUntil10 ? format(this.until10Cost) : format(this.singleCost);
@@ -52,29 +52,29 @@ export default {
       return this.isShown || this.isUnlocked || this.amount.gt(0);
     },
     boughtTooltip() {
-      if (this.tier === 9 && this.isCapped) return `You cannot hold more than ${format(1)} 9th
-        ${this.isFlipped ? "Matter" : "Antimatter"} Dimension at this time`;
-      if (this.isCapped) return `Nameless prevents the purchase of more than ${format(1)} 8th
-        ${this.isFlipped ? "Matter" : "Antimatter"} Dimension`;
-      if (this.isContinuumActive && this.tier !== 9) return `Continuum produces all your
-        ${this.isFlipped ? "Matter" : "Antimatter"} Dimensions`;
-      return `Purchased ${quantifyHybridLarge("time", this.bought)}`;
+      if (this.tier === 9 && this.isCapped) return `你当前无法持有超过 ${format(1)} 个第九
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
+      if (this.isCapped) return `无名氏阻止你购买超过 ${format(1)} 个第八
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
+      if (this.isContinuumActive && this.tier !== 9) return `连续统生产你所有的
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
+      return `已购买 ${quantifyHybridLarge("次", this.bought)}`;
     },
     costUnit() {
-      return `${AntimatterDimension(this.tier - 2).shortDisplayName} ${this.isFlipped ? "MD" : "AD"}`;
+      return `${AntimatterDimension(this.tier - 2).shortDisplayName} ${this.isFlipped ? "正物质维度" : "反物质维度"}`;
     },
     buttonPrefix() {
-      if (!this.isUnlocked) return "Locked";
-      if (this.tier === 9 && this.isCapped) return "Universal Limitations Reached";
-      if (this.isCapped) return "Shattered by Nameless";
-      if (this.isContinuumActive && this.tier !== 9) return "Continuum: ";
-      return `Buy ${formatInt(this.howManyCanBuy)}`;
+      if (!this.isUnlocked) return "已锁定";
+      if (this.tier === 9 && this.isCapped) return "达到当前宇宙极限";
+      if (this.isCapped) return "已被无名氏粉碎";
+      if (this.isContinuumActive && this.tier !== 9) return "连续统：";
+      return `购买 ${formatInt(this.howManyCanBuy)} 个`;
     },
     buttonValue() {
       if (this.isCapped) return "";
       if (this.isContinuumActive && this.tier !== 9) return this.continuumString;
-      const prefix = this.showCostTitle(this.buyUntil10 ? this.until10Cost : this.singleCost) ? "Cost: " : "";
-      const suffix = this.isCostsAD ? this.costUnit : (this.isFlipped ? "M" : "AM");
+      const prefix = this.showCostTitle(this.buyUntil10 ? this.until10Cost : this.singleCost) ? "价格：" : "";
+      const suffix = this.isCostsAD ? this.costUnit : (this.isFlipped ? "" : "反物质");
       return `${prefix}${this.costDisplay} ${suffix}`;
     },
     hasLongText() {
@@ -98,9 +98,12 @@ export default {
       this.boughtBefore10 = dimension.boughtBefore10;
       this.howManyCanBuy = (this.tier === 9 && true && Slabdrill.isDestroyed) ? Math.min(dimension.howManyCanBuy, 1) :
         (buyUntil10 ? dimension.howManyCanBuy : Math.min(dimension.howManyCanBuy, 1));
-      this.singleCost.copyFrom(dimension.cost);
-      this.until10Cost.copyFrom(this.tier === 9 ? dimension.cost.pow(Math.max(dimension.howManyCanBuy, 1)) :
-        dimension.cost.times(Math.max(dimension.howManyCanBuy, 1)));
+      this.singleCost.copyFrom(this.tier === 9 ? dimension.cost.pow(dimension.boughtBefore10 + 1) : dimension.cost);
+      this.until10Cost.copyFrom(
+        this.tier === 9
+          ? dimension.cost.pow(dimension.boughtBefore10 + Math.max(dimension.howManyCanBuy, 1))
+          : dimension.cost.times(Math.max(dimension.howManyCanBuy, 1))
+      );
       if (tier < ((player.celestials.slabdrill.goodbyeTick >= 40000 || Slabdrill.isDestroyed) ? 9 : 8)) {
         this.rateOfChange.copyFrom(dimension.rateOfChange);
       }

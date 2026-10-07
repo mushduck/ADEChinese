@@ -12,8 +12,8 @@ export const EFFARIG_STAGES = {
 };
 
 export const Effarig = {
-  displayName: "Effarig",
-  possessiveName: "Effarig's",
+  displayName: "鹿颈长",
+  possessiveName: "鹿颈长的",
   initializeRun() {
     if (!EffarigUnlock.endgame.isUnlocked && EffarigUnlock.extendRun.isUnlocked) {
       player.disablePostReality = true;

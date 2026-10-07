@@ -102,7 +102,7 @@ export default {
         @click="doCancel"
       >
         <slot name="cancel-text">
-          Cancel
+          取消
         </slot>
       </PrimaryButton>
 
@@ -114,7 +114,7 @@ export default {
         @click="doConfirm"
       >
         <slot name="confirm-text">
-          Confirm
+          确定
         </slot>
       </PrimaryButton>
     </div>

@@ -25,16 +25,15 @@ export default {
   },
   computed: {
     enslavedText() {
-      return `${Enslaved.displayName} are helping you look for cracks in their Reality -
-        they can give you some advice in ${this.enslavedTimer}`;
+      return `${Enslaved.displayName}正在祂们的现实中寻找裂缝来帮助你
+      祂们将在 ${this.enslavedTimer} 后进行提示。`;
     },
     alphaText() {
-      if (this.alphaDecayTimer.lte(0)) return `Alpha Decay is capped`;
-      return `Alpha Decay will cap in ${this.alphaDecayTimeToMax}`;
+      if (this.alphaDecayTimer.lte(0)) return `阿尔法衰变已到达上限`;
+      return `阿尔法衰变将在 ${this.alphaDecayTimeToMax} 内到达上限`;
     },
     compressionText() {
-      return `Time Compression is currently raising the exponents of the multipliers of
-        the first three Dimension types and Tickspeed by ${formatPow(this.compressionNerf, 2, 4)}`;
+      return `时间压缩当前将前三种维度和计数频率的指数 ${formatPow(this.compressionNerf, 2, 4)}`;
     }
   },
   methods: {
@@ -89,13 +88,13 @@ export default {
       this.isChallengePowerVisible = isChallengePowerVisible;
       if (isChallengePowerVisible) {
         const powerArray = [];
-        if (isC2Running) powerArray.push(`Production: ${formatPercents(player.chall2Pow, 2, 2)}`);
-        if (isC3Running) powerArray.push(`First dimension: ${formatX(player.chall3Pow, 3, 4)}`);
-        if (isIC6Running) powerArray.push(`${this.isFlipped ? "Antimatter" : "Matter"}: ${this.isFlipped ? "Matter" : "Antimatter"}
-          Dimensions / ${format(new Decimal(1).timesEffectOf(InfinityChallenge(6)), 2, 2)}`);
-        if (isIC8Running) powerArray.push(`Production: /
+        if (isC2Running) powerArray.push(`产量：${formatPercents(player.chall2Pow, 2, 2)}`);
+        if (isC3Running) powerArray.push(`第一维度：${formatX(player.chall3Pow, 3, 4)}`);
+        if (isIC6Running) powerArray.push(`${this.isFlipped ? "反物质" : "正物质"}：${this.isFlipped ? "正物质" : "反物质"}
+          维度 / ${format(new Decimal(1).timesEffectOf(InfinityChallenge(6)), 2, 2)}`);
+        if (isIC8Running) powerArray.push(`产量：/
           ${format(new Decimal(1).timesEffectOf(InfinityChallenge(8)).reciprocal(), 2, 2)}`);
-        if (isC12SlabdrillRunning) powerArray.push(`Production: ${formatPow(0.5 + player.chall2Pow / 2, 2, 3)}`);
+        if (isC12SlabdrillRunning) powerArray.push(`产量：${formatPow(0.5 + player.chall2Pow / 2, 2, 3)}`);
         this.challengePower = powerArray.join(", ");
       }
     },
@@ -115,15 +114,15 @@ export default {
       {{ enslavedText }}
     </div>
     <div v-if="isInEffarig">
-      Game speed and multipliers are Dilated {{ effarigMultNerfText }}
+      游戏速度和倍率加成是原来的{{ effarigMultNerfText }}
       <br>
-      Tickspeed is Dilated {{ effarigTickNerfText }}
+      计数频率是原来的{{ effarigTickNerfText }}
     </div>
     <div v-if="isInLaitela">
-      Entropy: {{ laitelaEntropy }} ({{ laitelaTimer }})
+      熵：{{ laitelaEntropy }} ({{ laitelaTimer }})
     </div>
     <div v-if="isInMatterChallenge">
-      There is {{ format(matter, 2, 1) }} {{ isFlipped ? "antimatter" : "matter" }}.
+      你有 {{ format(matter, 2, 1) }} {{ isFlipped ? "反物质" : "正物质" }}。
     </div>
     <div v-if="isChallengePowerVisible">
       {{ challengePower }}

@@ -52,7 +52,7 @@ export default {
   <AutobuyerBox
     :autobuyer="autobuyer"
     :is-modal="isModal"
-    :name="isFlipped ? 'Automatic Matter Galaxies' : 'Automatic Antimatter Galaxies'"
+    :name="isFlipped ? '自动购买物质星系' : '自动购买反物质星系'"
     :show-interval="!isBuyMaxUnlocked"
   >
     <template
@@ -66,7 +66,7 @@ export default {
       #intervalSlot
     >
       <div class="c-autobuyer-box__small-text">
-        Activates every X seconds:
+        X 秒后进行：
       </div>
       <AutobuyerInput
         :autobuyer="autobuyer"
@@ -83,7 +83,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Limit {{ isFlipped ? "Matter" : "Antimatter" }} Galaxies to:
+        {{isFlipped ? "正物质" : "反物质"}}星系限制：
       </label>
       <AutobuyerInput
         :autobuyer="autobuyer"

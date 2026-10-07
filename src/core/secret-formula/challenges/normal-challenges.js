@@ -10,13 +10,13 @@ export const normalChallenges = [
     isQuickResettable: false,
     description() {
       return PlayerProgress.eternityUnlocked()
-        ? "reach Infinity for the first time outside of a challenge."
-        : "reach Infinity for the first time.";
+        ? "首次在挑战之外达到无限。"
+        : "首次达到无限。";
     },
-    name: () => `1st ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 1st ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+    name: () => `第一${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第一${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "Infinities power themselves at a severely reduced rate",
+      reward: () => "无限次数以衰减的效果给予自身指数加成",
       effect: () => player.infinities.max(4).log2().log2(),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -28,13 +28,12 @@ export const normalChallenges = [
     legacyId: 2,
     isQuickResettable: false,
     description:
-      () => `buying ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions or Tickspeed upgrades halts production of
-      ${Slabdrill.isCursed ? "your Antimatter Dimension." : `all ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions.`} Production gradually returns to normal
-      over ${formatInt(3)} minutes.`,
-    name: () => `2nd ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 2nd ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+      () => `购买${player.universes.current === 2 ? "正物质" : "反物质"}维度或计数频率升级会停止
+      ${Slabdrill.isCursed ? "你的反物质维度" : `所有${player.universes.current === 2 ? "正物质" : "反物质"}维度`}的生产。生产会在 ${formatInt(3)} 分钟内逐渐恢复正常。`,
+    name: () => `第二${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第二${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => `Gain a power to the first three Dimension types that increases over ${formatInt(5)} hours this Endgame`,
+      reward: () => `基于本次终局经过的时间给予前三种维度指数加成，上限为 ${formatInt(5)} 个小时`,
       effect: () => Time.thisEndgameRealTime.totalSeconds.max(1).min(18000).pow(0.75),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -46,12 +45,11 @@ export const normalChallenges = [
     legacyId: 3,
     isQuickResettable: false,
     description:
-      () => `${Slabdrill.isCursed ? "your" : "the 1st"} ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension is heavily weakened, but gets an uncapped exponentially
-      increasing multiplier. This multiplier resets after Dimension Boosts and ${player.universes.current === 2 ? "Matter" : "Antimatter"} Galaxies.`,
-    name: () => `3rd ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 3rd ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+      () => `${Slabdrill.isCursed ? "你的" : "第一"}${player.universes.current === 2 ? "正物质" : "反物质"}维度被大幅削弱，但获得一个无上限的指数增长倍率。该倍率在维度提升和${player.universes.current === 2 ? "正物质" : "反物质"}星系后重置。`,
+    name: () => `第三${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第三${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => `Gain a Dilation to the 1st ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension that increases over ${formatInt(5)} hours this Endgame`,
+      reward: () => `基于本次终局经过的时间给予第一${player.universes.current === 2 ? "正物质" : "反物质"}维度指数加成，上限为 ${formatInt(5)} 个小时`,
       effect: () => Time.thisEndgameRealTime.totalHours.min(5).div(100).add(1),
       formatEffect: value => formatPow(value, 2, 4)
     },
@@ -62,13 +60,13 @@ export const normalChallenges = [
     id: 4,
     legacyId: 8,
     isQuickResettable: false,
-    description: () => Slabdrill.isCursed ? "buying your Antimatter Dimension resets Antimatter." :
-      `buying ${player.universes.current === 2 ? "a Matter" : "an Antimatter"} Dimension automatically erases all lower tier ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions, ` +
-      "like a sacrifice without the boost.",
-    name: () => `4th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 4th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+    description: () => Slabdrill.isCursed ? "购买你的反物质维度会重置反物质。" :
+      `购买${player.universes.current === 2 ? "一个物质" : "一个反物质"}维度会自动清除所有更低层级的${player.universes.current === 2 ? "正物质" : "反物质"}维度，` +
+      "就像一次不提供加成的献祭。",
+    name: () => `第四${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第四${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "Dimension Surges are cheaper based on their amount",
+      reward: () => "基于维度擢升数量降低其成本",
       effect: () => Decimal.pow(0.9, player.dimensionBoosts.max(1).log10()),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -80,11 +78,11 @@ export const normalChallenges = [
     legacyId: 6,
     isQuickResettable: false,
     description:
-      () => `the Tickspeed purchase multiplier starts at ${formatX(1.080, 0, 3)} instead of ${formatX(1.1245, 0, 3)}.`,
-    name: () => `5th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 5th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+      () => `计数频率购买倍率从 ${formatX(1.080, 0, 3)} 开始，而不是 ${formatX(1.1245, 0, 3)}。`,
+    name: () => `第五${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第五${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "Galaxies are stronger based on total Galaxies",
+      reward: () => "基于总星系数量降低星系成本",
       effect: () => Decimal.log10(GalacticPowers.galacticAscension.isUnlocked ?
         Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(player.dilation.totalTachyonGalaxies.max(1)).times(
         GalacticPower.freeGalaxies.max(1)).times(GalaxyGenerator.galaxies.max(1)).max(10) :
@@ -99,13 +97,12 @@ export const normalChallenges = [
     id: 6,
     legacyId: 10,
     isQuickResettable: false,
-    description: () => Slabdrill.isCursed ? "Your Antimatter Dimension is more expensive." :
-      `upgrading each ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension costs the ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension ${formatInt(2)} tiers ` +
-      `below it instead of ${player.universes.current === 2 ? "matter" : "antimatter"}. ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension prices are modified.`,
-    name: () => `6th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 6th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+    description: () => Slabdrill.isCursed ? "你的反物质维度更贵。" :
+      `升级每个${player.universes.current === 2 ? "正物质" : "反物质"}维度消耗其下方 ${formatInt(2)} 层的${player.universes.current === 2 ? "正物质" : "反物质"}维度，而不是${player.universes.current === 2 ? "正物质" : "反物质"}。${player.universes.current === 2 ? "正物质" : "反物质"}维度价格被修改。`,
+    name: () => `第六${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第六${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => `Gain more Continuum purchases based on 8th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions`,
+      reward: () => `基于第八${player.universes.current === 2 ? "正物质" : "反物质"}维度数量提高连续统加成`,
       effect: () => Decimal.log10(AntimatterDimension(8).amount.max(10)).pow(2),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -117,14 +114,14 @@ export const normalChallenges = [
     legacyId: 9,
     isQuickResettable: false,
     description: () =>
-      Slabdrill.isCursed ? `the multiplier from buying ${formatInt(10)} ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions is reduced to ${formatX(5)}.
-        This increases by ${formatX(5)} per Dimension Boost, to a maximum of ${formatX(30)}, and is unaffected by any upgrades.` :
-      `the multiplier from buying ${formatInt(10)} ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions is reduced to ${formatX(1)}. This increases by
-        ${formatX(0.2, 1, 1)} per Dimension Boost, to a maximum of ${formatX(2)}, and is unaffected by any upgrades.`,
-    name: () => `7th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 7th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+      Slabdrill.isCursed ? `购买 ${formatInt(10)} 个${player.universes.current === 2 ? "正物质" : "反物质"}维度获得的倍率减少至 ${formatX(5)}。
+        每次维度提升增加 ${formatX(5)}，上限为 ${formatX(30)}，且不受任何升级影响。` :
+      `购买 ${formatInt(10)} 个${player.universes.current === 2 ? "正物质" : "反物质"}维度获得的倍率减少至 ${formatX(1)}。每次维度提升增加
+        ${formatX(0.2, 1, 1)}，上限为 ${formatX(2)}，且不受任何升级影响。`,
+    name: () => `第七${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第七${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "Buy OoM Power is stronger based on Dimension Surges",
+      reward: () => "维度擢升提高购买数量级指数",
       effect: () => Decimal.log10(player.dimensionBoosts.max(1)).add(1),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -135,13 +132,13 @@ export const normalChallenges = [
     id: 8,
     legacyId: 11,
     isQuickResettable: false,
-    description: () => `Dimension Boosts provide no multiplier and ${player.universes.current === 2 ? "Matter" : "Antimatter"} Galaxies cannot be bought.
-      ${Slabdrill.isCursed ? "" : `Dimensional Sacrifice resets ${player.universes.current === 2 ? "matter" : "antimatter"} and all ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions,
-      but also gives a significantly stronger multiplier.`}`,
-    name: () => `8th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : `Upgradeable 8th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension Autobuyer`,
+    description: () => `维度提升不提供倍率，且无法购买${player.universes.current === 2 ? "正物质" : "反物质"}星系。
+      ${Slabdrill.isCursed ? "" : `维度献祭重置${player.universes.current === 2 ? "正物质" : "反物质"}和所有${player.universes.current === 2 ? "正物质" : "反物质"}维度，
+      但也会给予显著更强的倍率。`}`,
+    name: () => `第八${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : `可升级的第八${player.universes.current === 2 ? "正物质" : "反物质"}维度自动购买器`,
     charged: {
-      reward: () => "Dimensional Sacrifice is stronger based on itself",
+      reward: () => "维度献祭增强自身",
       effect: () => Decimal.log10(Sacrifice.totalBoost.max(10).log10().log10().add(1)).add(1),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -152,12 +149,12 @@ export const normalChallenges = [
     id: 9,
     legacyId: 5,
     isQuickResettable: true,
-    description: () => `whenever you buy Tickspeed upgrades or ${formatInt(10)} of ${player.universes.current === 2 ? "a Matter" : "an Antimatter"} Dimension, ` +
-      "everything else of equal cost will increase to its next cost step.",
-    name: () => "Tickspeed Autobuyer",
-    reward: () => Slabdrill.isCursed ? `Antimatter Dimension ${formatX(6.66, 2, 2)}` : "Upgradeable Tickspeed Autobuyer",
+    description: () => `每当你购买计数频率升级或 ${formatInt(10)} 个${player.universes.current === 2 ? "正物质" : "反物质"}维度时，` +
+      "其他等价的物品将涨价到下一个档位。",
+    name: () => "计数频率自动购买器",
+    reward: () => Slabdrill.isCursed ? `反物质维度 ${formatX(6.66, 2, 2)}` : "可升级的计数频率自动购买器",
     charged: {
-      reward: () => `Gain more Continuum purchases based on ${player.universes.current === 2 ? "Matter" : "Antimatter"}`,
+      reward: () => `基于${player.universes.current === 2 ? "正物质" : "反物质"}数量提高连续统加成`,
       effect: () => Decimal.log10(Decimal.log10(player.antimatter.max(1e10))).pow(2),
       formatEffect: value => formatX(value, 2, 2)
     },
@@ -168,13 +165,13 @@ export const normalChallenges = [
     id: 10,
     legacyId: 4,
     isQuickResettable: false,
-    description: () => Slabdrill.isCursed ? `your Antimatter Dimension is raised ${formatPow(0.75, 2, 2)}.` :
-      `there are only ${formatInt(6)} ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions. Dimension Boost ` +
-      `and ${player.universes.current === 2 ? "Matter" : "Antimatter"} Galaxy costs are modified.`,
-    name: () => "Automated Dimension Boosts",
-    reward: () => "Dimension Boosts Autobuyer",
+    description: () => Slabdrill.isCursed ? `你的反物质维度被提升 ${formatPow(0.75, 2, 2)}。` :
+      `只有 ${formatInt(6)} 个${player.universes.current === 2 ? "正物质" : "反物质"}维度。维度提升 ` +
+      `和${player.universes.current === 2 ? "正物质" : "反物质"}星系价格被修改。`,
+    name: () => "自动维度提升",
+    reward: () => "维度提升自动购买器",
     charged: {
-      reward: () => "Gain more Galactic Power based on Dimension Surges",
+      reward: () => "维度擢升提高星系之力产量",
       effect: () => player.dimensionBoosts.max(1).log10().div(20).add(1),
       formatEffect: value => formatPow(value, 2, 3)
     },
@@ -185,13 +182,11 @@ export const normalChallenges = [
     id: 11,
     legacyId: 12,
     isQuickResettable: true,
-    description: () => `there is ${player.universes.current === 2 ? "antimatter" : "normal matter"} which rises${Slabdrill.isCursed ? "" : ` once you have at
-      least ${formatInt(1)} 2nd ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension`}. If it exceeds your ${player.universes.current === 2 ? "matter" : "antimatter"}, it will Dimension Boost
-      without giving the bonus.`,
-    name: () => `Automated ${player.universes.current === 2 ? "Matter" : "Antimatter"} Galaxies`,
-    reward: () => `${player.universes.current === 2 ? "Matter" : "Antimatter"} Galaxies Autobuyer`,
+    description: () => `存在${player.universes.current === 2 ? "反物质" : "正常物质"}，它会在${Slabdrill.isCursed ? "" : `你拥有至少 ${formatInt(1)} 个第二${player.universes.current === 2 ? "正物质" : "反物质"}维度后`}上升。如果它超过你的${player.universes.current === 2 ? "正物质" : "反物质"}，将触发一次不提供加成的维度提升。`,
+    name: () => `自动${player.universes.current === 2 ? "正物质" : "反物质"}星系`,
+    reward: () => `${player.universes.current === 2 ? "正物质" : "反物质"}星系自动购买器`,
     charged: {
-      reward: () => "Unlock the Tangible Universe"
+      reward: () => "解锁真际宇宙"
     },
     lockedAt: DC.D16,
     alphaLockedAt: DC.D16
@@ -200,15 +195,13 @@ export const normalChallenges = [
     id: 12,
     legacyId: 7,
     isQuickResettable: false,
-    description: () => Slabdrill.isCursed ? `your Antimatter Dimension is raised ${formatPow(0.5, 1, 1)} and returns
-      over the span of ${formatInt(3)} minutes, resetting on Dimension Boosts and Antimatter Galaxies.` :
-      `each ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension produces the Dimension ${formatInt(2)} tiers below it
-      instead of ${formatInt(1)}. Both 1st and 2nd Dimensions produce ${player.universes.current === 2 ? "matter" : "antimatter"}.
-      The 2nd, 4th, and 6th Dimensions are made stronger to compensate.`,
-    name: () => "Automated Big Crunches",
-    reward: () => "Big Crunches Autobuyer",
+    description: () => Slabdrill.isCursed ? `你的反物质维度被提升 ${formatPow(0.5, 1, 1)}，并在 ${formatInt(3)} 分钟内恢复，在维度提升和反物质星系时重置。` :
+      `每个${player.universes.current === 2 ? "正物质" : "反物质"}维度生产其下方 ${formatInt(2)} 层的维度，而不是 ${formatInt(1)} 层。第一和第二维度都生产${player.universes.current === 2 ? "正物质" : "反物质"}。
+      第二、第四和第六维度被加强以作补偿。`,
+    name: () => "自动大坍缩",
+    reward: () => "大坍缩自动购买器",
     charged: {
-      reward: () => `Even-numbered ${player.universes.current === 2 ? "MDs" : "ADs"} are stronger based on 8th Dimensions and ${player.universes.current === 2 ? "MD" : "AD"} amounts are no longer affected by Entropy caps`,
+      reward: () => `基于第八维度提高偶数维的${player.universes.current === 2 ? "正物质" : "反物质"}维度产量，且${player.universes.current === 2 ? "正物质" : "反物质"}维度数量不再受熵衰变影响`,
       effect: () => Decimal.log10(AntimatterDimension(8).amount.max(10)),
       formatEffect: value => formatPow(value, 2, 3)
     },

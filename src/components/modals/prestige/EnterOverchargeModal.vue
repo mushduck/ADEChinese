@@ -13,13 +13,13 @@ export default {
   },
   computed: {
     message() {
-      return `Entering the Overcharge will start a new Endgame. While inside the Overcharge, you will be trapped in
-        Eternity Challenge 12, and the tetration of Antimatter Production will be multiplied by ${formatX(0.75, 2, 2)}.
-        Furthermore, Tickspeed and all Dimension Multipliers' exponents will be raised to ${formatPow(this.penalty, 2, 4)}, like
-        Time Dilation. Higher levels of Overcharge will have a more severe penalty in exchange for unlocking new, better rewards.`;
+      return `进入激能将开始一个新的终局。在激能期间永恒挑战 12永久生效，
+        且反物质产量的幂塔高度将乘以 ${formatX(0.75, 2, 2)}。
+        此外，计数频率和所有维度倍率的指数将提升至 ${formatPow(this.penalty, 2, 4)}，类似于时间膨胀。
+        更高阶的激能将提高难度，并解锁更新更好的奖励。`;
     },
     entranceLabel() {
-      return `You are about to enter the Overcharge`;
+      return `你即将进入激能`;
     }
   },
   methods: {
@@ -35,18 +35,18 @@ export default {
 </script>
 
 <template>
-  <ModalWrapperChoice
-    option="overcharge"
-    @confirm="handleYesClick"
-  >
-    <template #header>
-      {{ entranceLabel }}
-    </template>
-    <div class="c-modal-message__text">
-      {{ message }}
-    </div>
-    <template #confirm-text>
-      Bring it on
-    </template>
-  </ModalWrapperChoice>
+	<ModalWrapperChoice
+		option="overcharge"
+		@confirm="handleYesClick"
+	>
+		<template #header>
+			{{ entranceLabel }}
+		</template>
+		<div class="c-modal-message__text">
+			{{ message }}
+		</div>
+		<template #confirm-text>
+			进入激能
+		</template>
+	</ModalWrapperChoice>
 </template>

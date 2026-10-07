@@ -24,7 +24,7 @@ export default {
       };
     },
     huntText() {
-      if (this.canHunt) return "Hunt for Chaos Cores";
+      if (this.canHunt) return "搜寻混沌核心";
       return `Wait ${TimeSpan.fromMilliseconds(new Decimal(this.findInterval).sub(this.now - this.lastFound)).toStringShort()}`;
     },
     intervalText() {
@@ -56,9 +56,9 @@ export default {
 <template>
   <span class="c-cursed-header">
     <span>
-      You currently have {{ quantifyInt("Chaos Core", cores) }}.
-      You have a {{ formatPercents(findChance, 2, 2) }} chance of finding one every time you hunt.
-      You can currently hunt every {{ intervalText }}.
+      你拥有 {{ quantifyInt("混沌核心", cores) }}。
+      你每次搜寻时有 {{ formatPercents(findChance, 2, 2) }} 的概率猎得一个混沌核心。
+      你已经搜寻了 {{ intervalText }} 次。
     </span>
     <br>
     <br>
@@ -74,7 +74,7 @@ export default {
         class="o-primary-btn o-cursed-btn"
         @click="changeTabs"
       >
-        Change Tabs
+        切换界面
       </PrimaryButton>
     </span>
   </span>

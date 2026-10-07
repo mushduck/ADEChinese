@@ -72,15 +72,14 @@ export default {
         :class="disChargeClassObject"
         @click="disCharge = !disCharge"
       >
-        Respec Charged Eternity Upgrades on next Endgame
+        在下一次终局时重置已充能的永恒升级
       </PrimaryButton>
     </div>
     <div v-if="chargeUnlocked">
-      You have charged {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} Eternity Upgrades.
-      Charged Eternity Upgrades have their effect altered.
+      你已充能 {{ formatInt(chargesUsed) }}/{{ formatInt(totalCharges) }} 永恒升级，已充能的永恒升级会更改其效果。
       <br>
-      Hold shift to show Charged Eternity Upgrades.
-      <span> You can freely respec your choices on Endgame.</span>
+      按住 Shift 键显示充能永恒升级，
+      <span> 你可以自由地在终局时重置充能的升级。</span>
     </div>
     <div
       v-for="(row, i) in grid"
@@ -96,14 +95,13 @@ export default {
     </div>
     <EPMultiplierButton />
     <div v-if="areSoftcapsApplicable">
-      The cost for the {{ formatX(5) }} multiplier jumps at {{ format(costIncreases[0]) }},
-      {{ formatPostBreak(costIncreases[1], 2) }}, and {{ formatPostBreak(costIncreases[2]) }} Eternity Points.
+      {{ formatX(5) }} 永恒点数升级的价格在 {{ format(costIncreases[0]) }}，{{ formatPostBreak(costIncreases[1], 2) }}，和{{ formatPostBreak(costIncreases[2]) }} 永恒点数时加速增长。
       <br>
-      The cost increases super-exponentially after {{ formatPostBreak(costIncreases[3]) }} Eternity Points.
+      永恒点数超过 {{ formatPostBreak(costIncreases[3]) }} 后，价格呈超指数增长。
     </div>
     <div v-if="hasSeenFinalSoftcap">
       <br>
-      The cost increases greatly beyond {{ formatPostBreak(costIncreases[4]) }} Eternity Points.
+      永恒点数超过 {{ formatPostBreak(costIncreases[4]) }} 后，价格将再次加速增长。
     </div>
   </div>
 </template>

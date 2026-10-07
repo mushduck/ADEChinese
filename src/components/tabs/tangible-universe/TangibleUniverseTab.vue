@@ -16,12 +16,12 @@ export default {
   computed: {
     tangibleUniverseButtonText() {
       if (this.isRunning && this.pendingAugmenters.lte(0)) {
-        return `Exit the Tangible Universe. Reach ${format(this.highestMatter, 2, 1)} Matter to gain more Stellar Augmenters.`;
+        return `离开真际宇宙。达到 ${format(this.highestMatter, 2, 1)} 正物质以获得星流增幅体。`;
       }
       if (this.isRunning) {
-        return `Exit the Tangible Universe. Gain ${format(this.pendingAugmenters, 2, 2)} Stellar Augmenters.`;
+        return `离开真际宇宙。获得 ${format(this.pendingAugmenters, 2, 2)} 星流增幅体。`;
       }
-      return "Enter the Tangible Universe.";
+      return "进入真际宇宙。";
     }
   },
   methods: {
@@ -49,29 +49,26 @@ export default {
     <div>
       <br>
       <div class="c-stellar-text">
-        You have <span class="c-universes-text--header">{{ format(stellarAugmenters, 2, 2) }}</span> Stellar Augmenters.
+        你拥有 <span class="c-universes-text--header">{{ format(stellarAugmenters, 2, 2) }}</span> 星流增幅体。
         <br>
-        Stellar Augmenters are currently providing a
-        <span class="c-universes-text--header">+{{ formatDecimalPercents(formula, 2, 2) }}</span>
-        to Gray Star Effectiveness.
+        星流增幅体当前为湮灰之星效力提供 <span class="c-universes-text--header">+{{ formatDecimalPercents(formula, 2, 2) }}</span>
+        的加成。
       </div>
       <br>
       <div class="c-tangible-universe-text">
-        Your highest Matter reached in the Tangible Universe is
-        <span class="c-universes-text--header">{{ format(highestMatter, 2, 1) }}</span>.
+        你在真际宇宙中达到的最高正物质为
+        <span class="c-universes-text--header">{{ format(highestMatter, 2, 1) }}</span>。
       </div>
       <br>
       <div class="c-tangible-universe-text">
-        You have
-        <span class="c-universes-text--header">{{ format(molecularMass, 2, 2) }}</span>
-        Molecular Mass.
-        <span class="c-universes-text--header">+{{ format(massPerSecond, 2, 2) }}/s</span>
+        你拥有 <span class="c-universes-text--header">{{ format(molecularMass, 2, 2) }}</span>
+        超质量体。
+        <span class="c-universes-text--header">+{{ format(massPerSecond, 2, 2) }}/秒</span>
         <br>
-        Molecular Mass is currently adding to the final tetration of Matter generation by
-        <span class="c-universes-text--header">+{{ format(massBoost, 2, 4) }}</span>
-        while inside the Tangible Universe.
+        在真际宇宙内，超质量体当前为正物质产量的指数塔高度增加
+        <span class="c-universes-text--header">+{{ format(massBoost, 2, 4) }}</span>。
         <br>
-        Molecular Mass resets on exiting the Tangible Universe.
+        超质量体在退出真际宇宙时重置。
       </div>
     </div>
     <br>

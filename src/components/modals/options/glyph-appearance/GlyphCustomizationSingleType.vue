@@ -38,10 +38,10 @@ export default {
       v-if="glyphId === -1"
       class="c-name"
     >
-      Appearance Options for {{ name }} Glyphs
+      符文的外观选项
     </span>
     <div v-if="type === 'companion'">
-      Companion Glyphs cannot have their symbol modified.
+      同伴符文不能修改外观。
     </div>
     <GlyphCustomizationSlidingWindow
       v-else

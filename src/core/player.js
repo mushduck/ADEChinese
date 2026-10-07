@@ -795,6 +795,7 @@ window.player = {
         repeat: true,
         forceRestart: true,
         followExecution: true,
+        forceRestartEndgame: true,
         stack: [],
       },
       scripts: {
@@ -1842,8 +1843,8 @@ window.player = {
     news: {
       enabled: true,
       repeatBuffer: 40,
-      AIChance: 0,
-      ENDChance: 0.5,
+      AIChance: 1,
+      ENDChance: 0,
       StoryChance: 0,
       MatureChance: 0,
       speed: 1,
@@ -1866,7 +1867,7 @@ window.player = {
     syncSaveIntervals: true,
     hotkeys: true,
     themeClassic: "Normal",
-    themeModern: "Normal",
+    themeModern: "Acrylic",
     updateRate: 33,
     newUI: true,
     offlineProgress: true,

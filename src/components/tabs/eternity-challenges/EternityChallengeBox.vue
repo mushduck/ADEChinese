@@ -35,7 +35,7 @@ export default {
     },
     goalDisplay() {
       const config = this.config;
-      let goal = `Goal: ${this.goalAtCompletions(this.completions)} IP`;
+      let goal = `目标：${this.goalAtCompletions(this.completions)} 无限点数`;
       if (config.restriction) {
         goal += ` ${config.formatRestriction(config.restriction(this.completions))}`;
       }
@@ -63,7 +63,7 @@ export default {
       };
     },
     name() {
-      return `EC${this.challenge.id}`;
+      return `永恒挑战${this.challenge.id}`;
     }
   },
   methods: {
@@ -108,15 +108,15 @@ export default {
     <template #bottom>
       <div :style="{ visiblity: completions < 5 ? 'visible' : 'hidden' }">
         <div>
-          Completed {{ quantifyInt("time", completions) }}
+          已完成 {{ quantifyInt("次", completions) }}
         </div>
         {{ goalDisplay }}
       </div>
       <span v-if="showGoalSpan">
-        Goal Span: {{ firstGoal }} IP - {{ lastGoal }} IP
+        目标范围：{{ firstGoal }} 无限点数 - {{ lastGoal }} 无限点数
       </span>
       <span>
-        Reward:
+        奖励：
         <DescriptionDisplay
           :config="config.reward"
           :length="55"
@@ -132,7 +132,7 @@ export default {
         <EffectDisplay
           v-if="completions < 5"
           :config="nextRewardConfig"
-          label="Next"
+          label="下一级"
           :ignore-capped="true"
         />
       </span>

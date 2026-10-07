@@ -21,7 +21,7 @@ export default {
     milestones: () => GameDatabase.speedrunMilestones,
     spectateText() {
       return this.isSpectating
-        ? "Times here are unaffected by END so that you can see your final records"
+        ? "此处时间不受终局影响，以便你能查看最终记录。"
         : null;
     }
   },
@@ -35,8 +35,8 @@ export default {
       this.milestoneTimes = [...player.speedrun.records];
       this.maxMilestone = this.milestoneTimes.map(i => Boolean(i)).lastIndexOf(true) + 1;
       this.startTimeStr = player.speedrun.startDate === 0
-        ? "Speedrun not started yet."
-        : `Speedrun started at ${Time.toDateTimeString(player.speedrun.startDate)}`;
+        ? "未开始速通"
+        : `速通开始于 ${Time.toDateTimeString(player.speedrun.startDate)}`;
       this.displayAll = player.speedrun.displayAllMilestones;
       this.isSpectating = GameEnd.endState > END_STATE_MARKERS.SPECTATE_GAME;
     },
@@ -49,7 +49,7 @@ export default {
     <PrimaryToggleButton
       v-model="displayAll"
       class="o-primary-btn--subtab-option"
-      label="Describe all milestones:"
+      label="里程碑说明："
     />
     <br>
     <b>{{ startTimeStr }}</b>

@@ -41,7 +41,7 @@ export default {
   computed: {
     isDoomed: () => Pelle.isDoomed,
     name() {
-      return `${AntimatterDimension(this.tier).shortDisplayName} ${this.isFlipped ? "Matter" : "Antimatter"} Dimension`;
+      return `${AntimatterDimension(this.tier).shortDisplayName}${this.isFlipped ? "正物质" : "反物质"}维度`;
     },
     amountText() {
       if (this.formattedAmount) return this.formattedAmount;
@@ -50,18 +50,18 @@ export default {
       return `${amount} (${formatInt(this.boughtBefore10)})`;
     },
     singleText() {
-      if (this.isCapped) return "Capped";
-      const prefix = this.showCostTitle(this.singleCost) ? "Cost: " : "";
-      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "M" : "AM");
+      if (this.isCapped) return "已达到上限";
+      const prefix = this.showCostTitle(this.singleCost) ? "价格：" : "";
+      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "正物质" : "反物质");
       return `${prefix} ${format(this.singleCost)} ${suffix}`;
     },
     until10Text() {
-      if (this.tier === 9 && this.isCapped) return "Universal Limitations Reached";
-      if (this.isCapped) return "Shattered by Nameless";
-      if (this.isContinuumActive && this.tier !== 9) return `Continuum: ${this.continuumString}`;
+      if (this.tier === 9 && this.isCapped) return "达到当前宇宙极限";
+      if (this.isCapped) return "已被无名氏粉碎";
+      if (this.isContinuumActive && this.tier !== 9) return `连续统：${this.continuumString}`;
 
-      const prefix = `Until ${formatInt(10)},${this.showCostTitle(this.until10Cost) ? " Cost" : ""}`;
-      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "M" : "AM");
+      const prefix = `买到 ${formatInt(10)} 个，${this.showCostTitle(this.until10Cost) ? "价格" : ""}`;
+      const suffix = this.isCostsAD ? `${this.costUnit}` : (this.isFlipped ? "正物质" : "反物质");
       return `${prefix} ${format(this.until10Cost)} ${suffix}`;
     },
     continuumString() {
@@ -71,13 +71,13 @@ export default {
       return this.isShown || this.isUnlocked || this.amount.gt(0);
     },
     boughtTooltip() {
-      if (this.tier === 9 && this.isCapped) return `You cannot hold more than ${format(1)} 9th
-        ${this.isFlipped ? "Matter" : "Antimatter"} Dimension at this time`;
-      if (this.isCapped) return `Nameless prevents the purchase of more than ${format(1)} 8th
-        ${this.isFlipped ? "Matter" : "Antimatter"} Dimension`;
-      if (this.isContinuumActive && this.tier !== 9) return `Continuum produces all your
-        ${this.isFlipped ? "Matter" : "Antimatter"} Dimensions`;
-      return `Purchased ${quantifyHybridLarge("time", this.bought)}`;
+      if (this.tier === 9 && this.isCapped) return `你当前无法持有超过 ${format(1)} 个第九
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
+      if (this.isCapped) return `无名氏阻止你购买超过 ${format(1)} 个第八
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
+      if (this.isContinuumActive && this.tier !== 9) return `连续统生产你所有的
+        ${this.isFlipped ? "正物质" : "反物质"}维度`;
+      return `已购买 ${quantifyHybridLarge("次", this.bought)}`;
     },
     costUnit() {
       return `${AntimatterDimension(this.tier - 2).shortDisplayName} ${this.isFlipped ? "MD" : "AD"}`;
@@ -112,8 +112,12 @@ export default {
       this.totalAmount = dimension.totalAmount;
       this.bought.copyFrom(dimension.bought);
       this.boughtBefore10 = dimension.boughtBefore10;
-      this.singleCost.copyFrom(dimension.cost);
-      this.until10Cost.copyFrom(dimension.costUntil10);
+      this.singleCost.copyFrom(this.tier === 9 ? dimension.cost.pow(dimension.boughtBefore10 + 1) : dimension.cost);
+      this.until10Cost.copyFrom(
+        this.tier === 9
+          ? dimension.cost.pow(dimension.boughtBefore10 + Math.max(dimension.howManyCanBuy, 1))
+          : dimension.cost.times(Math.max(dimension.howManyCanBuy, 1))
+      );
       if (tier < ((player.celestials.slabdrill.goodbyeTick >= 40000 || Slabdrill.isDestroyed) ? 9 : 8)) {
         this.rateOfChange.copyFrom(dimension.rateOfChange);
       }

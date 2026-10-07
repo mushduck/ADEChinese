@@ -2,11 +2,11 @@ import { automatorTemplates } from "../script-templates";
 
 export const automator = {
   categoryNames: [
-    "Time Studies",
-    "Event Triggers",
-    "Alter Settings",
-    "Information",
-    "Script Flow",
+    "时间研究",
+    "事件触发",
+    "修改设置",
+    "信息",
+    "脚本流",
   ],
   commands: [
     {
@@ -15,9 +15,7 @@ export const automator = {
       keyword: "STUDIES RESPEC",
       category: 0,
       syntax: `<b>studies respec</b>`,
-      description: `This command turns on the respec option, which will respec your Time Studies on the next manual or
-        automatic Eternity. Note that this does not actually perform an Eternity on its own; make sure your Autobuyer
-        is on or you manually run the ETERNITY command (although ETERNITY has its own built-in respec option).`,
+      description: `这条指令会打开重置时间研究的选项，从而在下次永恒的时候重置时间研究。注意它不会进行一次永恒，请确保你的自动购买器开启或者你手动运行永恒指令（尽管永恒之理支持带上重置研究的选项）。`,
       examples: [
         `studies respec`,
       ]
@@ -29,7 +27,7 @@ export const automator = {
       category: 0,
       syntax: `<b>studies</b> [nowait] <b>load id</b> <u>selector</u><br>
         <b>studies</b> [nowait] <b>load name</b> <u>name</u>`,
-      description: `Loads a Time Study preset, as if you had clicked on the button in the Time Study tab.`,
+      description: `加载时间研究预设，就像你点击了时间研究页面的时间研究预设按钮一样。`,
       sections: [
         {
           name: "INPUTS",
@@ -162,8 +160,9 @@ export const automator = {
       isUnlocked: () => true,
       keyword: "UNLOCK",
       category: 1,
-      syntax: "<b>unlock</b> [nowait] <u>feature</u>",
-      description: "Unlocks the specified Eternity Challenge or Time Dilation.",
+      syntax: `<b>unlock</b> [nowait] <u>feature</u><br>
+        <b>unlock</b> [nowait] <b>generator</b>`,
+      description: `Unlocks the specified Eternity Challenge, Time Dilation, or Pelle's Galaxy Generator.`,
       sections: [
         {
           name: "MODIFIERS",
@@ -175,12 +174,21 @@ export const automator = {
                 default, the Automator will keep running this command until the unlock succeeds.
               `
             },
+            {
+              header: "<i>generator</i>",
+              description: `
+                Unlocks the Galaxy Generator inside Pelle's Reality once the prerequisite milestone (Recursion rift milestone 3)
+                is met and you are inside Dilation or have finalized it.
+              `
+            },
           ]
         }
       ],
       examples: [
         "unlock dilation",
-        "unlock ec7"
+        "unlock ec7",
+        "unlock generator",
+        "unlock nowait generator"
       ]
     },
     {
@@ -207,10 +215,10 @@ export const automator = {
       category: 2,
       syntax: `<b>auto infinity</b> [setting]<br>
         <b>auto eternity</b> [setting]<br>
-        <b>auto reality</b> [setting]`,
-      description: `Turns prestige Autobuyers on or off and allows you to change their settings. If the setting option
-        is not present, this command will toggle the Autobuyer state, turning it off if it is on and turning it on if
-        it is off. <b>This command will not work if you try to modify an Autobuyer or setting you do not have.</b>`,
+        <b>auto reality</b> [setting]<br>
+        <b>auto</b> [nowait] <b>pour on</b>|<b>off</b>`,
+      description: `Turns prestige Autobuyers on or off and configures their settings, or toggles automatic pouring into Teresa's container.
+        <b>This command will not work if you try to modify an Autobuyer or setting you do not have unlocked.</b>`,
       sections: [
         {
           name: "SETTINGS",
@@ -218,6 +226,10 @@ export const automator = {
             {
               header: "<i>on</i> | <i>off</i>",
               description: "Turns specified Autobuyer on or off.",
+            },
+            {
+              header: "<i>pour on</i> | <i>pour off</i>",
+              description: "Toggles automatic RM pouring into Teresa's container on or off (requires Teresa Expansion Pack).",
             },
             {
               header: "<u><i>number</i></u> <u><i>time units</i></u>",
@@ -243,7 +255,9 @@ export const automator = {
         "auto eternity off",
         "auto infinity 30s",
         "auto eternity 10 seconds",
-        "auto eternity 1e100 x highest"
+        "auto eternity 1e100 x highest",
+        "auto pour on",
+        "auto pour off"
       ]
     },
     {
@@ -263,25 +277,26 @@ export const automator = {
     {
       id: 8,
       isUnlocked: () => Enslaved.isUnlocked,
-      keyword: "STORE GAME TIME",
+      keyword: "STORE TIME",
       category: 2,
-      syntax: "<b>store game time</b> <u>action</u>",
-      description: `Changes whether or not the Black Hole is storing time. Also allows usage of stored time.`,
+      syntax: `<b>store game time</b> <u>action</u> [nowait]<br>
+        <b>store real time</b> <u>action</u> [nowait]`,
+      description: `Controls storing Black Hole/Game Time or Real Time in The Nameless Ones (Enslaved).`,
       sections: [
         {
           name: "ACTIONS",
           items: [
             {
-              header: "<i>on</i> | <i>off</i>",
-              description: `
-                Turns storing game time on or off.
-              `
+              header: "<i>game time</i>",
+              description: "Diverts Black Hole speedup into Stored Game Time without pausing the game. Supports 'on', 'off', and 'use'."
             },
             {
-              header: "<i>use</i>",
-              description: `
-                Uses all stored game time. Does not alter the on/off state of time storage.
-              `
+              header: "<i>real time</i>",
+              description: "Pauses game progression to store real time into the offline capacitor. Supports 'on' and 'off'. While active, the Automator continues to run."
+            },
+            {
+              header: "<i>nowait</i>",
+              description: "If present, immediately advances to the next line even if Enslaved is not yet unlocked."
             }
           ]
         }
@@ -290,6 +305,8 @@ export const automator = {
         "store game time on",
         "store game time off",
         "store game time use",
+        "store real time on nowait",
+        "store real time off",
       ]
     },
     {
@@ -557,6 +574,12 @@ export const automator = {
           <b>rift1</b> - <b>rift5</b> - Current fill percentage of Rift 1 to 5 (0 to 100)<br>
           <b>rift milestones</b> - Total Pelle Rift milestones unlocked<br>
           <b>poured rm</b> (or <b>pouredrm</b>) - Current Reality Machines poured into Teresa<br>
+          <b>stored time</b> (or <b>stored game time</b>) - Current Stored Game Time in Enslaved (Decimal)<br>
+          <b>stored real time</b> - Current Stored Real Time in Enslaved (ms)<br>
+          <b>laitela tier</b> (or <b>laitelatier</b>) - Current Lai'tela reality difficulty tier (0 to 8)<br>
+          <b>entropy</b> (or <b>laitela entropy</b>) - Current Lai'tela reality entropy percentage (0 to 100)<br>
+          <b>generated</b> (or <b>gg</b>) - Current Galaxies generated by Pelle's Galaxy Generator<br>
+          <b>memory <u>X</u></b> (or <b>memory <u>name</u></b>) - Memory level of a Celestial in Ra (1: Teresa, 2: Effarig, 3: Enslaved, 4: V)<br>
           <b>dt</b> - Current Dilated Time amount <br>
           <b>tp</b> - Current Tachyon Particle amount<br>
           <b>rg</b> - Current Replicanti Galaxy amount (does not use scientific)<br>
@@ -835,24 +858,30 @@ export const automator = {
       isUnlocked: () => Pelle.isUnlocked,
       keyword: "RIFT",
       category: 2,
-      syntax: "<b>rift</b> [nowait] <u>id</u> <b>on</b>|<b>off</b>",
-      description: `Toggles a Pelle Rift on or off to fill it with its respective resource.`,
+      syntax: `<b>rift</b> [nowait] <u>id</u> <b>on</b>|<b>off</b><br>
+        <b>rift</b> [nowait] [<u>id</u>] <b>sacrifice</b>`,
+      description: `Toggles a Pelle Rift on or off to fill it with its respective resource, or triggers a Rift sacrifice to raise the Galaxy Generator cap.`,
       sections: [
         {
           name: "INPUTS",
           items: [
             {
               header: "<i>nowait</i>",
-              description: `If present, moves to the next command immediately even if the Rift cannot be activated
-                (e.g. if it is not unlocked yet, already maxed, or 2 other Rifts are already active).`
+              description: `If present, moves to the next command immediately even if the Rift cannot be toggled or sacrificed
+                (e.g. if conditions are not met). By default, the Automator waits on this line until conditions are fulfilled.`
             },
             {
               header: "<i>id</i>",
-              description: "The Rift number (1 through 5) to toggle."
+              description: "The Rift number (1 through 5) to toggle or sacrifice. Optional for sacrifice commands."
             },
             {
               header: "<i>on</i> | <i>off</i>",
               description: "Turns filling the specified Rift on or off."
+            },
+            {
+              header: "<i>sacrifice</i>",
+              description: `Sacrifices the specified (or currently targeted) Rift once the Galaxy Generator hits its current galaxy generation cap.
+                If the specified Rift has already been sacrificed, the command immediately completes to prevent script deadlocks.`
             },
           ]
         }
@@ -861,6 +890,8 @@ export const automator = {
         "rift 1 on",
         "rift nowait 5 on",
         "rift 2 off",
+        "rift 1 sacrifice",
+        "rift sacrifice nowait",
       ]
     },
     {
@@ -890,14 +921,61 @@ export const automator = {
     },
     {
       id: 28,
-      isUnlocked: () => ExpansionPack.teresaPack.isBought && !player.disablePostReality,
-      keyword: "AUTO POUR",
+      isUnlocked: () => true,
+      keyword: "TAB",
       category: 2,
-      syntax: "<b>auto</b> [nowait] <b>pour</b> <b>on</b>|<b>off</b>",
-      description: `Toggles automatic pouring of Reality Machines into Teresa's container.`,
+      syntax: `<b>tab</b> [nowait] <u>tab</u> [<u>subtab</u>]<br>
+        <b>tab</b> [nowait] <b>celestials</b> <u>1-9</u>`,
+      description: `Switches the game's current screen view to the specified Tab and Subtab without requiring manual mouse clicks.
+        Useful for inspecting mechanics, triggering tab-based automations, or monitoring progress throughout your script.`,
+      sections: [
+        {
+          name: "INPUTS",
+          items: [
+            {
+              header: "<i>nowait</i>",
+              description: `If present, immediately advances to the next script line even if the target tab/subtab
+                is not unlocked or unavailable. By default, the Automator waits until the page is unlocked.`
+            },
+            {
+              header: "<i>tab</i>",
+              description: `The main Tab name. Supported tabs: <b>dimensions, options, statistics, achievements,
+                automation, challenges, infinity, eternity, reality, celestials, shop, endgame, cdexpansion,
+                divinity, universes</b>.`
+            },
+            {
+              header: "<i>subtab</i>",
+              description: `Optional subtab name within the chosen tab (e.g. <u>glyphs</u>, <u>studies</u>, <u>antimatter</u>).`
+            }
+          ]
+        },
+        {
+          name: "CELESTIAL TABS (1 - 9)",
+          items: [
+            {
+              header: "<b>1 - 9 Shortcuts</b>",
+              description: `When switching to Celestials, subtabs can be addressed directly by slot number 1 through 9:<br>
+                <b>1</b>: Teresa<br>
+                <b>2</b>: Effarig<br>
+                <b>3</b>: The Nameless Ones (Enslaved)<br>
+                <b>4</b>: V<br>
+                <b>5</b>: Ra<br>
+                <b>6</b>: Lai'tela<br>
+                <b>7</b>: Pelle<br>
+                <b>8</b>: Alpha<br>
+                <b>9</b>: Slabdrill`
+            }
+          ]
+        }
+      ],
       examples: [
-        "auto pour on",
-        "auto pour off",
+        "tab celestials 1",
+        "tab celestials 7",
+        "tab celestials 9 nowait",
+        "tab reality glyphs",
+        "tab reality alchemy",
+        "tab eternity studies",
+        "tab dimensions antimatter",
       ]
     },
   ],

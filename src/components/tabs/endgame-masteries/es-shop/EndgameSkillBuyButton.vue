@@ -42,6 +42,6 @@ export default {
     :class="enabledClass"
     @click="action"
   >
-    {{ isLocked ? "Requires an Endgame to unlock" : formatCost(cost) }}
+    {{ isLocked ? "需进行一次终局后解锁" : formatCost(cost) }}
   </button>
 </template>

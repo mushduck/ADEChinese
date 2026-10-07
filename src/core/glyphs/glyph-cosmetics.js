@@ -242,7 +242,7 @@ export const GlyphAppearanceHandler = {
 
     player.reality.glyphs.cosmetics.unlockedFromNG.push(unlocked);
     const entry = GameDatabase.reality.glyphCosmeticSets[unlocked];
-    GameUI.notify.info(`You have unlocked the "${entry.name}" Set for Glyph cosmetics!`, 10000);
+    GameUI.notify.info(`已解锁“${entry.name}”符文皮肤！`, 10000);
     GlyphAppearanceHandler.chosenFromModal = null;
     this.applyNotification();
   },

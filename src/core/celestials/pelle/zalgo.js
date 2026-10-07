@@ -136,9 +136,27 @@ const Zalgo = {
     let seed = str_arr.reduce((curr, acc) => curr + acc.charCodeAt(0), 0);
     return str_arr.map(a => {
       if (a == " ") return a;
+
+      const isChinese = /[\u4e00-\u9fa5]/.test(a);
+
+      if (isChinese) {
+        // 中文：组合字符挂在零宽空格载体上，不碰汉字本体，避免渲染引擎丢字
+        let carrier = "\u200B";
+        for (let i = 0; i < level; i++) {
+          const rand = Zalgo.random(3, seed++);
+          if (Zalgo.random(10, seed++) / 10 >= 0.5) {
+            carrier += Zalgo.chars[rand][Zalgo.random(Zalgo.chars[rand].length, seed++)];
+          }
+        }
+        return a + carrier;
+      }
+
+      // 英文：原逻辑，直接叠在字母上
       for (let i = 0; i < level; i++) {
         const rand = Zalgo.random(3, seed++);
-        if (Zalgo.random(10, seed++) / 10 >= 0.5) a += Zalgo.chars[rand][Zalgo.random(Zalgo.chars[rand].length, seed++)];
+        if (Zalgo.random(10, seed++) / 10 >= 0.5) {
+          a += Zalgo.chars[rand][Zalgo.random(Zalgo.chars[rand].length, seed++)];
+        }
       }
       return a;
     }).join("");

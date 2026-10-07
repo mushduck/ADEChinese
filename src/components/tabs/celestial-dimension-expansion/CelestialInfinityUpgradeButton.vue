@@ -56,7 +56,7 @@ export default {
       v-if="!isBought"
       br
       :config="upgrade.config"
-      name="Celestial Infinity Point"
+      name="天界无限点数"
     />
   </button>
 </template>

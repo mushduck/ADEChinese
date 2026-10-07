@@ -262,25 +262,18 @@ export class EternityChallengeState extends GameMechanicState {
     let reason;
     if (auto) {
       if (this.id === 4) {
-        reason = restriction => `Auto Eternity Challenge completion completed ` +
-        `Eternity Challenge ${this.id} and made the next tier ` +
-        `require having less Infinities (${quantifyInt("Infinity", restriction)} ` +
-        `or less) than you had`;
+        reason = restriction => `已经自动完成了永恒挑战 ${this.id} ，并且让下一级挑战还可以进行小于 ${quantifyInt("次无限", restriction)}`;
       } else if (this.id === 12) {
-        reason = restriction => `Auto Eternity Challenge completion completed ` +
-        `Eternity Challenge ${this.id} and made the next tier ` +
-        `require spending less time in it (${quantify("in-game second", restriction, 0, 1)} ` +
-        `or less) than you had spent`;
+        reason = restriction => `已经自动完成了永恒挑战 ${this.id} ，并且让下一级挑战还可以进行小于 ${quantify("的游戏时间", restriction, 0, 1)}`;
       }
     } else if (this.id === 4) {
-      reason = restriction => `You failed Eternity Challenge ${this.id} due to ` +
-      `having more than ${quantifyInt("Infinity", restriction)}`;
+      reason = restriction => `由于你的无限次数超过了 ${quantifyInt("Infinity", restriction)}，` +
+      `永恒挑战 ${this.id} 失败，你已退出永恒挑战 ${this.id} 。`;
     } else if (this.id === 12) {
-      reason = restriction => `You failed Eternity Challenge ${this.id} due to ` +
-      `spending more than ${quantify("in-game second", restriction, 0, 1)} in it`;
+      reason = restriction => `由于你的游戏内挑战用时超过了 ${quantify("in-game second", restriction, 0, 1)}，` +
+      `永恒挑战 ${this.id} 失败`;
     }
-    Modal.message.show(`${reason(this.config.restriction(this.completions))}, ` +
-    `which has caused you to exit it.`,
+    Modal.message.show(`${reason(this.config.restriction(this.completions))}`,
     { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
     EventHub.dispatch(GAME_EVENT.CHALLENGE_FAILED);
   }

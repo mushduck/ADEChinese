@@ -6,7 +6,7 @@ export class ReplicantiGalaxyAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Replicanti Galaxy`;
+    return `复制器星系`;
   }
 
   get isUnlocked() {

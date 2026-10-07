@@ -41,6 +41,28 @@ export default {
     type() {
       return this.glyph.type;
     },
+    ChineseName(){
+      switch (this.type) {
+        case "companion":
+          return "同伴";
+        case "cursed":
+          return "诅咒";
+        case "reality":
+          return `现实`;
+        case "power":
+          return `力量`;
+        case "infinity":
+          return `无限`;
+        case "replication":
+          return `复制`;
+        case "time":
+          return `时间`;
+        case "dilation":
+          return `膨胀`;
+        case "effarig":
+          return `鹿颈长`;
+      }
+    },
     typeCapitalized() {
       return this.type.capitalize();
     },
@@ -150,7 +172,7 @@ export default {
 <template>
   <div>
     <div class="c-glyph-choice-icon">
-      <span :style="typeStyle">{{ typeCapitalized }}</span>
+      <span :style="typeStyle">{{ ChineseName }}</span>
       <div
         v-if="showLevel"
         v-html="levelText"

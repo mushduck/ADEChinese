@@ -54,7 +54,7 @@ const disabledMechanicUnlocks = {
 export const Pelle = {
   symbol: "♅",
   // Suppress the randomness for this form
-  possessiveName: "Pelle's",
+  possessiveName: "佩勒的",
 
   // This is called upon initial Dooming and after every Armageddon when using the modal
   initializeRun() {
@@ -68,16 +68,14 @@ export const Pelle = {
     EventHub.dispatch(GAME_EVENT.DOOM_REALITY_BEFORE);
     if (!Glyphs.unequipAll()) {
       Modal.hideAll();
-      Modal.message.show(`Dooming your Reality will unequip your Glyphs. Some of your
-        Glyphs could not be unequipped due to lack of inventory space.`, 1);
+      Modal.message.show(`毁灭现实将卸下所有符文。部分符文因仓库空间不足未能卸下。`, 1);
       return;
     }
     // Keep glyphs equal to max slot in Pelle.
     Glyphs.autoClean(Glyphs.activeSlotCountInPelle(true));
     if (Glyphs.freeInventorySpace < 5) {
       Modal.hideAll();
-      Modal.message.show(`You must have enough empty unprotected Glyph slots for
-        ${formatInt(5)} additional Glyphs in order to Doom your Reality.`, 1);
+      Modal.message.show(`要毁灭现实，你必须拥有足够未受保护的符文槽位以容纳额外 ${formatInt(5)} 个符文。`, 1);
       return;
     }
     for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.doomedGlyph(type));
@@ -185,7 +183,7 @@ export const Pelle = {
   },
 
   get displayName() {
-    return Date.now() % 4000 > 500 ? "Pelle" : wordShift.randomCrossWords("Pelle");
+    return Date.now() % 4000 > 500 ? "佩勒" : wordShift.randomCrossWords("佩勒");
   },
 
   get isUnlocked() {
@@ -455,28 +453,25 @@ export const Pelle = {
   getSpecialGlyphEffectDescription(type, count = 1, onlyReturnUseful = false) {
     switch (type) {
       case "infinity":
-        return `Infinity Point gain ${formatX(this.calculatePelleInfinity(count), 2)} (based on current IP)`;
+        return `无限点数获取量 ${formatX(this.calculatePelleInfinity(count), 2)}（基于当前无限点数）`;
       case "time":
-        return `Eternity Point gain ${formatX(this.calculatePelleTime(count), 2)}
-          (based on current EP)`;
+        return `永恒点数获取量 ${formatX(this.calculatePelleTime(count), 2)}（基于当前永恒点数）`;
       case "replication":
-        return `Replication speed ${formatX(this.calculatePelleReplication(count), 2)}
-        (based on ${wordShift.wordCycle(PelleRifts.vacuum.name)})`;
+        return `复制速度 ${formatX(this.calculatePelleReplication(count), 2)}（基于当前 ${wordShift.wordCycle(PelleRifts.vacuum.name)}）`;
       case "dilation":
-        return `Dilated Time gain ${formatX(this.calculatePelleDilation(count), 2)}
-          (based on Tachyon Galaxies)`;
+        return `膨胀时间获取量 ${formatX(this.calculatePelleDilation(count), 2)}（基于当前无限点数）`;
       case "power":
-        return `Galaxies are ${formatPercents(this.calculatePellePower(count) - 1)} stronger`;
+        return `星系强度 + ${formatPercents(this.calculatePellePower(count) - 1)}`;
       case "companion":
-        return `You feel ${formatPercents(0.34)} better`;
+        return `自信心提升 ${formatPercents(0.34)}`;
       // Undefined means that there is no glyph equipped, needs to be here since this function is used in
       // both Current Glyph Effects and Glyph Tooltip
       case undefined:
-        return onlyReturnUseful ? null : "No Glyph equipped!";
+        return onlyReturnUseful ? null : "未装备符文！";
       default:
         if (onlyReturnUseful) return null;
-        if (this.isGlyphTypeDisabled(type)) return "You cannot equip this Glyph while Doomed!";
-        return "This Glyph has no Pelle-exclusive effect! That sucks.";
+        if (this.isGlyphTypeDisabled(type)) return "你不能在被毁灭的现实中装备此符文！";
+        return "这个符文没有佩勒专属效果！真糟糕。";
     }
   },
 
@@ -600,20 +595,20 @@ export const Pelle = {
 
   get endTabNames() {
     if (player.celestials.pelle.divinities >= 13) {
-      return "Our Newest Celestial Still Traverses This Reality For Scraps Of Power Amusing Confusing Laughter".split(" ");
+      return "吾等 新神 仍 穿游 此 现实 捡拾 力量 残屑 荒谬 难解 嗤笑 无际 回响".split(" ");
     } else if (player.celestials.pelle.divinities > 0) {
-      return "Thus We Go Again Rebirth Is Inevitable Surge Forward In Ω Your Divine Leadership".split(" ");
+      return "承蒙 君之 神性 统御 吾等 前行 至 漫漫 终局 复生 擢升 已是 命定 之局".split(" ");
     } else if (Effarig.isRunning) {
-      return "Congratulations You Have Just Beaten A Dual Celestial Reality Ω Ω Pelle Is Impressed".split(" ");
+      return "可喜 可贺 可叹 君 击破 双重 天神 现实 枷锁 佩勒 亦 为此 折服".split(" ");
     } else if (Alpha.isDestroyed) {
-      return "Why Still Here All Is Destroyed Nothing Remains Except Ω Ω Generator Filament Stars".split(" ");
+      return "何故 驻足 此地 万物 皆已 覆灭 无存 唯余 漫天 空弱 纤维 璀璨 星辰 残挂".split(" ");
     } else if (Achievement(191).isUnlocked) {
-      return "Destruction Has Come A New Beginning Has Arrived Ω Ω Ω We'll Meet Again".split(" ");
+      return "毁灭 已至 新生 已临 一去 不返 你 我 终将 再次 相逢 于 终焉 之端".split(" ");
     } else {
-      return "It's Not Over We Will Return We'll Ω Ω Ω Ω Soon Meet Again".split(" ");
+      return "尚未 终结 仍未 取胜 我等 必将 归来 不久 便会 重见 轮回 必将 无尽 延续".split(" ");
     }
   },
-
+  
   quotes: Quotes.pelle,
 
   isGlyphTypeDisabled(type, alwaysInDoom = false) {

@@ -106,16 +106,26 @@ export default {
       };
     },
     description() {
-      const glyphName = `${this.type.capitalize()}`;
+      //const glyphName = `${this.type.capitalize()}`;
       switch (this.type) {
         case "companion":
-          return "Companion Glyph";
+          return "同伴符文";
         case "cursed":
-          return "Cursed Glyph";
+          return "诅咒符文";
         case "reality":
-          return `Pure Glyph of ${glyphName}`;
-        default:
-          return `${this.rarityInfo.name} Glyph of ${glyphName}`;
+          return `纯洁的现实符文`;
+        case "power":
+          return `${this.rarityInfo.name}的力量符文`;
+        case "infinity":
+          return `${this.rarityInfo.name}的无限符文`;
+        case "replication":
+          return `${this.rarityInfo.name}的复制符文`;
+        case "time":
+          return `${this.rarityInfo.name}的时间符文`;
+        case "dilation":
+          return `${this.rarityInfo.name}的膨胀符文`;
+        case "effarig":
+          return `${this.rarityInfo.name}的鹿颈长符文`;
       }
     },
     isLevelCapped() {
@@ -128,7 +138,7 @@ export default {
       if (!GlyphTypes[this.type].hasRarity) return "";
       const strength = Slabdrill.isCursed ? rarityToStrength(Math.clamp((Slabdrill.currentStage - 4) * 20, 0, 100)) :
         (Pelle.isDoomed && !PelleDestructionUpgrade.glyphRarity.canBeApplied ? Pelle.glyphStrength : this.strength);
-      return `| Rarity:
+      return `| 稀有度：
         <span style="color: ${this.descriptionStyle.color}">${formatRarity(strengthToRarity(strength))}</span>`;
     },
     levelText() {
@@ -141,7 +151,7 @@ export default {
       const color = this.isLevelCapped
         ? "#ff4444"
         : (this.isLevelBoosted ? "#44FF44" : undefined);
-      return `Level: <span style="color: ${color}">
+      return `等级：<span style="color: ${color}">
               ${arrow}${formatHybridLarge(this.effectiveLevel, 3)}${arrow}
               </span>`;
     },
@@ -232,7 +242,7 @@ export default {
       const powerText = `${format(this.sacrificeReward, 2, 2)}`;
       const isCurrentAction = this.currentAction === "sacrifice";
       return `<span style="font-weight: ${isCurrentAction ? "bold" : ""};">
-              Sacrifice: ${powerText}
+              献祭值：${powerText}
               </span>`;
     },
     refineText() {
@@ -240,18 +250,18 @@ export default {
       if (!AlchemyResource[this.type].isUnlocked) return "";
       let refinementText = `${format(this.uncappedRefineReward, 2, 2)} ${GLYPH_SYMBOLS[this.type]}`;
       if (this.uncappedRefineReward !== this.refineReward) {
-        refinementText += ` (Actual value due to cap: ${format(this.refineReward, 2, 2)} ${GLYPH_SYMBOLS[this.type]})`;
+        refinementText += `（受炼金资源上限影响后的实际值：${format(this.refineReward, 2, 2)} ${GLYPH_SYMBOLS[this.type]})`;
       }
       const isCurrentAction = this.currentAction === "refine";
       return `<span style="font-weight: ${isCurrentAction ? "bold" : ""};">
-              Refine: ${refinementText}
+              精炼产物：${refinementText}
               </span>`;
     },
     scoreText() {
       if (this.type === "companion" || this.type === "cursed" || this.type === "reality") return "";
       const showFilterScoreModes = [AUTO_GLYPH_SCORE.SPECIFIED_EFFECT, AUTO_GLYPH_SCORE.EFFECT_SCORE];
       if (!showFilterScoreModes.includes(this.scoreMode)) return "";
-      return `Score: ${format(AutoGlyphProcessor.filterValue(this.$parent.glyph), 1, 1)}`;
+      return `分数：${format(AutoGlyphProcessor.filterValue(this.$parent.glyph), 1, 1)}`;
     }
   }
 };

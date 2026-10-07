@@ -800,7 +800,7 @@ export default {
       let borderAttrs;
       if (this.isCursedGlyph) borderAttrs = rarityBorderStyles.cursed;
       else if (this.isCompanionGlyph) borderAttrs = rarityBorderStyles.companion;
-      else borderAttrs = rarityBorderStyles[getRarity(this.glyph.strength).name.toLowerCase()];
+      else borderAttrs = rarityBorderStyles[getRarity(this.glyph.strength).key.toLowerCase()];
       const lines = borderAttrs.map(attr => generateGradient(attr, this.borderColor, this.glyph, this.circular));
 
       return {
@@ -864,7 +864,7 @@ export default {
       v-if="isNew"
       class="l-corner-icon l-new-glyph"
     >
-      New!
+      最新！
     </div>
     <div
       v-else-if="isUnequipped"

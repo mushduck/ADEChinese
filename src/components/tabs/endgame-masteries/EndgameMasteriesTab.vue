@@ -94,10 +94,10 @@ export default {
     },
     exportMasteryTree() {
       if (player.endgameMasteries.masteries.length === 0) {
-        GameUI.notify.error("You cannot export an empty Endgame Mastery Tree!");
+        GameUI.notify.error("你不能导出空的终局专精树。");
       } else {
         copyToClipboard(GameCache.currentMasteryTree.value.exportString);
-        GameUI.notify.info("Exported current Endgame Masteries to your clipboard");
+        GameUI.notify.info("当前终局专精树已导出到剪贴板");
       }
     }
   }
@@ -111,19 +111,19 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="exportMasteryTree"
       >
-        Export tree
+        导出终局专精树
       </PrimaryButton>
       <PrimaryButton
         :class="respecClassObject"
         @click="respec = !respec"
       >
-        Respec Endgame Masteries on next Endgame
+        下次终局时重置终局专精树
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         onclick="Modal.masteryString.show({ id: -1 })"
       >
-        Import tree
+        导入终局专精树
       </PrimaryButton>
     </div>
     <div

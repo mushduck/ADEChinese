@@ -24,7 +24,7 @@ export default {
   <span v-if="shouldDisplay">
     <div v-if="isModern">
       <h3 class="l-spacing">
-        My power is too much for the universe to be stable... I need to become Divine...
+        此身之力已超出宇宙所能承载之极限...我将登神...
       </h3>
       <button
         :class="{
@@ -32,7 +32,7 @@ export default {
         }"
         @click="handleClick"
       >
-        Become Divine
+        神性
       </button>
     </div>
     <div v-else>
@@ -44,10 +44,10 @@ export default {
         }"
         @click="handleClick"
       >
-        Become Divine
+        神性
       </button>
       <div class="o-emptiness">
-        My power is too much for the universe to be stable... I need to become Divine...
+        此身之力已超出宇宙所能承载之极限...我将登神...
       </div>
     </div>
   </span>

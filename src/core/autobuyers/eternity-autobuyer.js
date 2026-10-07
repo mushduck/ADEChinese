@@ -6,7 +6,7 @@ export class EternityAutobuyerState extends AutobuyerState {
   }
 
   get name() {
-    return `Eternity`;
+    return `永恒`;
   }
 
   get isUnlocked() {

@@ -49,19 +49,18 @@ export default {
   },
   computed: {
     hadronSpeedText() {
-      if (this.hadronSpeed === 0) return `Your Hadrons are stationary`;
-      if (this.hadronSpeed >= 149896229) return `Your Hadrons are moving
-        at ${formatHybridLarge(this.hadronSpeed, 3)} m/s (${format(this.c, 5, 5)}C)`;
-      if (this.hadronSpeed >= 1000) return `Your Hadrons are moving at ${formatHybridLarge(this.hadronSpeed, 3)} m/s`;
-      return `Your Hadrons are moving at ${format(this.hadronSpeed, 3, 3)} m/s`;
+      if (this.hadronSpeed === 0) return `你的强子处于静止状态`;
+      if (this.hadronSpeed >= 149896229) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒（${format(this.c, 5, 5)} 倍光速）`;
+      if (this.hadronSpeed >= 1000) return `你的强子被加速到了 ${formatHybridLarge(this.hadronSpeed, 3)} 米每秒`;
+      return `你的强子被加速到了 ${format(this.hadronSpeed, 3, 3)} 米每秒`;
     },
     modeDisplay() {
       return this.voidMode === 0
-        ? "Void Mode: Normal"
-        : "Void Mode: Nullified";
+        ? "[虚无状态：稳态]"
+        : "[虚无状态：归零]";
     },
     voidText() {
-      return this.isRunning ? "[Exit the Void.]" : "[Enter the Void.]";
+      return this.isRunning ? "离开虚无" : "进入虚无";
     },
     runButtonOuterClass() {
       return {
@@ -72,8 +71,8 @@ export default {
       };
     },
     nextDisplay() {
-      return this.milestonesReached >= 5 ? "There are no more milestones to be reached!" :
-        `Next C Milestone at ${format(this.nextAt, 2, 2)}C.`;
+      return this.milestonesReached >= 5 ? "已解锁所有光速里程碑" :
+        `下一个光速里程碑在 ${format(this.nextAt, 2, 2)} 倍光速时解锁`;
     }
   },
   methods: {
@@ -116,7 +115,7 @@ export default {
       this.isFlipped = player.universes.current === 2;
     },
     formatNullAmount(amount) {
-      return amount.gte(DC.NUMMAX) && !DualityUpgrade(26).isBought ? Notations.current.infinite : format(amount, 2, 2);
+      return amount.gte(DC.NUMMAX) && !DualityUpgrade(26).isBought ? "无限" : format(amount, 2, 2);
     },
     glitchAnim() {
       let flux = Math.random() / (this.voidMode === 1 ? 2 : 4);
@@ -155,49 +154,44 @@ export default {
       >
         {{ hadronSpeedText }}
         <br>
-        The Large Hadron Collider is currently consuming {{ formatInt(accelPower) }} GWh of power
+        当前强子加速器功率为 {{ formatInt(accelPower) }} GWh
         <div
           v-if="hasC"
           class="c-large-hadron-collider-text"
         >
           <br>
           <div v-if="milestonesReached >= 1">
-            C Milestone {{ formatInt(1) }}: Tesseract Equalizer.
-            Effective Tesseracts are slowly shifting from (bought + free) into (bought * free).
-            This shift is {{ formatPercents(Math.clamp((c - 0.5) * 2, 0, 1), 3, 3) }} complete, making the current
-            number of Effective Tesseracts equal to {{ format(tessEqual, 2, 2) }}.
+            光速里程碑 {{ formatInt(1) }}：超立方体均衡器
+            使有效超立方体数量（已购买 + 免费）缓慢转变为（已购买 × 免费）。
+            此转变已完成 {{ formatPercents(Math.clamp((c - 0.5) * 2, 0, 1), 3, 3) }}，使当前有效超立方体数量等于 {{ format(tessEqual, 2, 2) }}。
           </div>
           <div v-if="milestonesReached >= 2">
             <br>
-            C Milestone {{ formatInt(2) }}: {{ isFlipped ? "Matter" : "Antimatter" }} Equalizer.
-            {{ isFlipped ? "Matter" : "Antimatter" }} production is slowly shifting from
-            ({{ isFlipped ? "MDMults" : "ADMults" }} * Tickspeed) into
-            ({{ isFlipped ? "MDMults" : "ADMults" }}^log10(max(Tickspeed, 1))).
-            This shift is {{ formatPercents(Math.clamp((c - 0.7) * 10/3, 0, 1), 3, 3) }} complete, making current
-            {{ isFlipped ? "Matter" : "Antimatter" }} production equal to {{ format(antiEqual, 2, 2) }}.
+            光速里程碑 {{ formatInt(2) }}：{{ isFlipped ? "正物质" : "反物质" }}均衡器
+            使{{ isFlipped ? "正物质" : "反物质" }}产量缓慢从（{{ isFlipped ? "正物质" : "反物质" }}维度倍率 × 计数频率）转变为（{{ isFlipped ? "正物质维度倍率" : "反物质维度倍率" }} ^ log₁₀(max(计数频率, 1))）。
+            此转变已完成 {{ formatPercents(Math.clamp((c - 0.7) * 10/3, 0, 1), 3, 3) }}，使当前{{ isFlipped ? "正物质" : "反物质" }}产量等于 {{ format(antiEqual, 2, 2) }}。
           </div>
           <div v-if="milestonesReached >= 3">
             <br>
-            C Milestone {{ formatInt(3) }}: Tickspeed Equalizer.
-            Effective Tickspeed Upgrades are slowly shifting from (bought + free) into (bought * free).
-            This shift is {{ formatPercents(Math.clamp((c - 0.85) * 20/3, 0, 1), 3, 3) }} complete, making the current
-            number of Effective Tickspeed Upgrades equal to {{ format(tickEqual, 2, 2) }}.
+            光速里程碑 {{ formatInt(3) }}：计数频率均衡器
+            使有效计数频率升级数量缓慢从（已购买 + 免费）转变为（已购买 × 免费）。
+            此转变已完成 {{ formatPercents(Math.clamp((c - 0.85) * 20/3, 0, 1), 3, 3) }}，使当前有效计数频率升级数量等于 {{ format(tickEqual, 2, 2) }}。
           </div>
           <div v-if="milestonesReached >= 4">
             <br>
-            C Milestone {{ formatInt(4) }}: Black Hole and Potency Improvement.
-            Black Holes now also apply a power effect which is increasing from 1 to log10(log10(max(BHMult, 10))) + 1.
-            Furthermore, the Divine Matter/Energy multiplier from the Potency Accelerator now also applies a power effect
-            which is increasing from 1 to (max(log10(max(PotencyMult, 1)) - 18.5, 0) / 3) + 1.
-            These shifts are {{ formatPercents(Math.clamp((c - 0.95) * 20, 0, 1), 3, 3) }} complete, making the current
-            Black Hole {{ formatInt(1) }} boost equal to {{ formatPow(bh1Improve, 2, 3) }}, the current
-            Black Hole {{ formatInt(2) }} boost equal to {{ formatPow(bh2Improve, 2, 3) }}, and the current
-            Divine Matter/Energy boost from the Potency Accelerator equal to {{ formatPow(potencyImprove, 2, 3) }}.
+            光速里程碑 {{ formatInt(4) }}: 黑洞和能量加速器增强
+            黑洞现在同时为游戏速度提供指数加成，该效果将从 1 逐渐增加至 log₁₀(log₁₀(max(黑洞倍率, 10))) + 1。
+            此外，能量加速器也为神性物质和神性能量提供指数加成
+            该效果将从 1 逐渐增加至 max(log₁₀(max(威能倍率, 1)) - 18.5, 0) ÷ 3 + 1。
+            此效果已完成 {{ formatPercents(Math.clamp((c - 0.95) * 20, 0, 1), 3, 3) }}，使当前
+            黑洞 {{ formatInt(1) }} 为游戏速度提供 {{ formatPow(bh1Improve, 2, 3) }} 的加成；
+            黑洞 {{ formatInt(2) }} 为游戏速度提供 {{ formatPow(bh2Improve, 2, 3) }} 的加成；
+            能量加速器为神性物质和神性能量提供 {{ formatPow(potencyImprove, 2, 3) }}的加成。
           </div>
           <div v-if="milestonesReached >= 5">
             <br>
-            C Milestone {{ formatInt(5) }}: Light unlock.
-            You have reached {{ formatInt(1) }}C and can now generate Light (coming soon).
+            光速里程碑 {{ formatInt(5) }}：Light unlock.
+            你已达到 {{ formatInt(1) }} 倍光速，and can now generate Light (coming soon).
           </div>
           <br>
           <div>
@@ -210,39 +204,31 @@ export default {
         v-if="!hasAccelerator"
         class="c-large-hadron-collider-description"
       >
-        Reach {{ format(unlockReq, 2, 2) }} {{ isFlipped ? "Matter" : "Antimatter" }}
+        达到 {{ format(unlockReq, 2, 2) }} {{ isFlipped ? "正物质" : "反物质" }}
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy1"
       >
-        Excess Entropy in the universe has caused your {{ isFlipped ? "Matter" : "Antimatter" }} to
-        decay past {{ format(amSoftcap, 2, 2) }}, and has restricted it from exceeding {{ format(amHardcap, 2, 2) }}.
+        宇宙中的过剩熵增令你的反物质产生了衰变。{{this.isFlipped ? "正物质" : "反物质"}}数量在 {{ format(amSoftcap, 2, 2) }} 后达到软上限，
+        在 {{ format(amHardcap, 2, 2) }} 时达到硬上限。
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy2"
       >
-        The {{ isFlipped ? "Matter" : "Antimatter" }} decay is significantly stronger past {{ format(amSoftcap2, 2, 2) }}.
-      </div>
-      <div
-        class="c-large-hadron-collider-entropy"
-        v-if="entropyCorrupted"
-      >
-        {{ corruptionText() }}
+        {{this.isFlipped ? "正物质" : "反物质"}}衰变在达到 {{ format(amSoftcap2, 2, 2) }} {{this.isFlipped ? "正物质" : "反物质"}}后进一步增强。
       </div>
     </div>
     <br>
     <br>
     <div v-if="highestAntimatter.gt(10)">
-      <span class="c-void-antimatter-amount">
-        [Your highest {{ isFlipped ? "Matter" : "Antimatter" }} inside The Void is {{ format(highestAntimatter, 2, 1) }}.]
-      </span>
+      <span class="c-void-antimatter-amount">[你在虚无中达到的最高{{this.isFlipped ? "正物质" : "反物质"}}数量为 {{ format(highestAntimatter, 2, 1) }}。]</span>
       <br>
-      <span class="c-null">[You have {{ formatNullAmount(nullMatter) }} Null Matter. +{{ formatNullAmount(nullPerSecond) }}/s]</span>
+      <span class="c-null">[你拥有 {{ formatNullAmount(nullMatter) }} 虚物质，+{{ formatNullAmount(nullPerSecond) }}/秒]</span>
     </div>
     <div v-if="nullified">
-      <span class="c-null">[You have {{ format(nullParticles, 2, 2) }} Null Particles. +{{ format(nullParticlesPerSecond, 2, 2) }}/s]</span>
+      <span class="c-null">[你拥有 {{ format(nullParticles, 2, 2) }} 虚粒子。+{{ format(nullParticlesPerSecond, 2, 2) }}/秒]</span>
     </div>
     <div class="l-void-run">
       <div
@@ -265,19 +251,18 @@ export default {
       {{ modeDisplay }}
     </PrimaryButton>
     <div v-if="voidMode === 0">
-      Entering The Void will force an Endgame reset and disable all Reality and beyond mechanics.
+      进入稳态虚无将强制进行一次终局，并禁用现实及所有上层机制。
       <br>
-      Your {{ isFlipped ? "Matter" : "Antimatter" }} will slowly decay and you will gain Null Matter from the decayed {{ isFlipped ? "Matter" : "Antimatter" }}.
+      在稳态虚无中{{this.isFlipped ? "正物质" : "反物质"}}将缓慢衰变为虚物质。
       <span v-if="nullified">
         <br>
-        Since you Nullified the Multiverse, the ANR Perk and Passive EP Generation are reenabled inside The Void.
+        <!-- Since you Nullified the Multiverse, !-->在虚无中重获复兴树 ANR 节点和每秒自动获得永恒时所能获得永恒点数的 1%。
       </span>
     </div>
     <div v-if="voidMode === 1">
-      Entering The Void in Nullified Mode will force an Endgame reset and Dilate your {{ isFlipped ? "Matter" : "Antimatter" }} by {{ format(0.01, 2, 2) }}.
+      进入归零虚无将强制进行一次终局，并将{{this.isFlipped ? "正物质" : "反物质"}}第二指数稀释至 × {{ format(0.01, 2, 2) }}。
       <br>
-      You will generate Null Particles based on your {{ isFlipped ? "Matter" : "Antimatter" }}, which empower
-      {{ isFlipped ? "Matter" : "Antimatter" }} Dimensions while inside The Void in normal mode (Currently: {{ formatPow(nullParticleEffect, 2, 3) }}).
+      在归零虚无中{{this.isFlipped ? "正物质" : "反物质"}}将缓慢转变为虚粒子，为稳态虚无中的{{this.isFlipped ? "正物质" : "反物质"}}维度提供指数加成。（当前：{{ formatPow(nullParticleEffect, 2, 3) }}）
     </div>
     <NullUpgradesTabComponent />
   </div>

@@ -94,9 +94,9 @@ export default {
 <template>
   <div class="l-compression-tab">
     <span>
-      You have
+      你拥有
       <span class="c-compression-tab__hawking-radiation">{{ format(hawkingRadiation, 2, numSpaces(hawkingRadiation)) }}</span>
-      {{ pluralize("Hawking Radiation", hawkingRadiation) }}.
+      {{ pluralize("霍金辐射", hawkingRadiation) }}。
     </span>
     <div
       @mouseover="isHovering = true"
@@ -105,28 +105,26 @@ export default {
       <CompressionButton />
     </div>
     <span>
-      You have
+      你拥有
       <span class="c-compression-tab__thermal-radiation">{{ format(thermalRadiation, 2, numSpaces(thermalRadiation)) }}</span>
-      Thermal Radiation.
-      <span class="c-compression-tab__thermal-radiation-income">{{ thermalRadiationGainText }}/s</span>
+      热能辐射。
+      <span class="c-compression-tab__thermal-radiation-income">{{ thermalRadiationGainText }}/秒</span>
     </span>
     <span>
-      Next
-      <span v-if="electromagneticWaveGain > 1">{{ formatHybridLarge(electromagneticWaveGain, 3) }}</span>
-      {{ pluralize("Electromagntic Wave", electromagneticWaveGain) }} at
+      下<span v-if="electromagneticWaveGain > 1">{{ formatHybridLarge(electromagneticWaveGain, 3) }}</span>个{{ pluralize("电磁波场", electromagneticWaveGain) }}将于
       <span
         class="c-compression-tab__wave-threshold"
         :ach-tooltip="waveTimeEstimate"
       >{{ format(waveThreshold, 2, numSpaces(waveThreshold)) }}</span>
-      Thermal Radiation, gained total of
+      热能辐射时获得，你已获得
       <span
         class="c-compression-tab__waves"
         :ach-tooltip="baseWaveText"
       >{{ formatHybridLarge(totalWaves, 3) }}</span>
-      {{ pluralize("Electromagnetic Wave", totalWaves) }}
+      {{ pluralize("电磁波场", totalWaves) }}。
     </span>
     <span>
-      Electromagnetic Waves act as free Hadrons of all types.
+      电磁波场等效于任意类型的强子。
     </span>
     <div class="l-compression-upgrades-grid">
       <div

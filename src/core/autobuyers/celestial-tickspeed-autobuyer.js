@@ -6,7 +6,7 @@ export class CelestialTickspeedAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get name() {
-    return `Celestial Tickspeed`;
+    return `天界计数频率提升`;
   }
 
   get isUnlocked() {

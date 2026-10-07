@@ -20,8 +20,8 @@ export function watchLatestCommit() {
         }
 
         Modal.message.show(
-          "Refresh the page (game will be saved), we've got new stuff: " +
-          `"${json.message}" by ${json.author}`,
+          "游戏更新咯，你的存档已经存好了，刷新界面以应用更新！" +
+          `更新描述："${json.message}"，由松茸不吃柯尔鸭提交`,
           {
             callback: updateRefresh,
             closeButton: true

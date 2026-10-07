@@ -6,7 +6,7 @@ export class CelestialDimBoostAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get name() {
-    return `Celestial Dimension Boost`;
+    return `天界维度提升`;
   }
 
   get isUnlocked() {

@@ -36,22 +36,22 @@ export default {
     },
     sickVisualStrikeText() {
       if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 0) {
-        return `Pelle Strike penalties are permanent and remain active even after Armageddon!`;
+        return `佩勒冲击的削弱永久存在，不受末日重置影响！`;
       }
       if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 1) {
-        return this.time % 2500 > 500 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+        return this.time % 2500 > 500 ? `佩勒冲击的削弱永久存在，不受末日重置影响！` : wordShift.randomCrossWords("佩勒冲击的削弱永久存在，不受末日重置影响！");
       }
       if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 2) {
-        return this.time % 2500 > 1000 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+        return this.time % 2500 > 1000 ? `佩勒冲击的削弱永久存在，不受末日重置影响！` : wordShift.randomCrossWords("佩勒冲击的削弱永久存在，不受末日重置影响！");
       }
       if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 3) {
-        return this.time % 2500 > 1500 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+        return this.time % 2500 > 1500 ? `佩勒冲击的削弱永久存在，不受末日重置影响！` : wordShift.randomCrossWords("佩勒冲击的削弱永久存在，不受末日重置影响！");
       }
       if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 4) {
-        return this.time % 2500 > 2000 ? `Pelle Strike penalties are permanent and remain active even after Armageddon!` : wordShift.randomCrossWords("Pelle Strike penalties are permanent and remain active even after Armageddon!");
+        return this.time % 2500 > 2000 ? `佩勒冲击的削弱永久存在，不受末日重置影响！` : wordShift.randomCrossWords("佩勒冲击的削弱永久存在，不受末日重置影响！");
       }
       if (PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length === 5) {
-        return this.time % 2500 > 2400 ? `We will meet again...` : wordShift.randomCrossWords("We will meet again...");
+        return this.time % 2500 > 2400 ? `我们还会再见面的...` : wordShift.randomCrossWords("我们还会再见面的...");
       }
     }
   }
@@ -66,18 +66,17 @@ export default {
         class="c-collapse-icon-clickable"
         @click="toggleCollapse"
       />
-      Pelle Strikes and Rifts
+      佩勒冲击和裂痕
     </div>
     <div
       v-if="!isCollapsed"
       class="l-pelle-content-container"
     >
-      Rifts can be activated by clicking on their bars.
-      <span v-if="strikes.length > 1">You cannot activate more than two Rifts at once.</span>
+      点击裂痕的填充条，可以填充裂痕
+      <span v-if="strikes.length > 1">你不能同时填充超过两个裂痕。</span>
       <br v-else>
-      When active, Rifts consume {{ formatPercents(decayRate) }} of another resource per second.
+      填充裂痕时，每秒消耗对应资源的 {{ formatPercents(decayRate) }}。未填充裂痕时，裂痕的效果仍然生效，效果的强度基于已填充的资源总量。
       <br>
-      Rift effects apply even when not activated, and are based on the total amount drained.
       <b class="o-strike-warning">{{ sickVisualStrikeText() }}</b>
       <div class="c-pelle-bar-container">
         <PelleRift

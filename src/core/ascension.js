@@ -72,7 +72,7 @@ export function enterOvercharge() {
   recalculateAllGlyphs();
   Tab.dimensions.antimatter.show(false);
   if (player.endgame.overcharge.level >= 4) {
-    Modal.message.show(`The rewards for this feature are not yet implemented. Please wait for updates.`, {}, 3);
+    Modal.message.show(`这部分内容还没更新喵QAQ`, {}, 3);
   }
 };
 

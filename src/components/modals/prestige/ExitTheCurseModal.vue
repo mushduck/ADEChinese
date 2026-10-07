@@ -8,11 +8,10 @@ export default {
   },
   computed: {
     message() {
-      return `You really thought you could escape from me? Think again. This was all part of my plan, after all. You cannot
-      escape. You will remain here as my eternal prisoner. Accept your fate.`;
+      return `真以为你能逃离我的掌心？再想想吧。一切都在我的计划之中，你永远别想逃脱。你将永远留在此地，长囚于此万世不出！接受你的命运吧。`;
     },
     entranceLabel() {
-      return `The Illusion of Free Will`;
+      return `自由是一场幻梦`;
     }
   },
   methods: {
@@ -34,7 +33,7 @@ export default {
       {{ message }}
     </div>
     <template #confirm-text>
-      I am stronger than you
+      我已比你强大
     </template>
   </ModalWrapperChoice>
 </template>

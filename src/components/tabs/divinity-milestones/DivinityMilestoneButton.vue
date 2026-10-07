@@ -54,7 +54,7 @@ export default {
     class="l-divinity-milestone"
   >
     <span class="o-divinity-milestone__goal">
-      {{ quantifyInt("Divinity", divinities) }}:
+      {{ quantifyInt("神性", divinities) }}:
     </span>
     <button
       v-tooltip="activeCondition"

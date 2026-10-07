@@ -44,15 +44,15 @@ export default {
     :class="classObject"
     @click="upgradeInterval"
   >
-    {{ formatPercents(0.4) }} smaller interval
+    时间间隔减少 {{ formatPercents(0.4) }}
     <br>
-    Cost: {{ format(cost, 2) }} IP
+    价格：{{ format(cost, 2) }} 无限点数
   </button>
   <button
     v-else-if="!isMaxed"
     class="o-autobuyer-btn l-autobuyer-box__button o-autobuyer-btn--unavailable"
   >
-    Complete the challenge to upgrade interval
+    完成挑战以升级自动购买间隔
   </button>
 </template>
 

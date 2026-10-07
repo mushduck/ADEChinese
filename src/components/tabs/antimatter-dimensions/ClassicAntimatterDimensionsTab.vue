@@ -43,12 +43,12 @@ export default {
       this.hasRealityButton = PlayerProgress.realityUnlocked() || TimeStudy.reality.isBought;
       const sacText = this.isSacrificeUnlocked
         ? (Ascensions.sacA.isUnlocked
-          ? ` | Dimensional Sacrifice power: ${formatPow(this.currentPower, 2, 3)}`
-          : ` | Dimensional Sacrifice multiplier: ${formatX(this.currentSacrifice, 2, 2)}`)
+          ? ` | 献祭指数：${formatPow(this.currentPower, 2, 3)}`
+          : ` | 献祭倍率：${formatX(this.currentSacrifice, 2, 2)}`)
         : "";
       const multText = Ascensions.b10mA.isUnlocked
-        ? `Buy OoM purchase power: +${formatPow(this.buyOoMPow, 2, 3)}`
-        : `Buy 10 Dimension purchase multiplier: ${formatX(this.buy10Mult, 2, 2)}`;
+        ? `购买10个维度的加成指数: +${formatPow(this.buyOoMPow, 2, 3)}`
+        : `购买10个维度的加成倍数: ${formatX(this.buy10Mult, 2, 2)}`;
       this.multiplierText = `${multText}${sacText}`;
     },
     quickReset() {
@@ -77,9 +77,9 @@ export default {
       class="o-primary-btn--quick-reset"
       @click="quickReset"
     >
-      Perform a Dimension Boost reset
-      <span v-if="hasDimensionBoosts"> but lose a Dimension Boost</span>
-      <span v-else> for no gain</span>
+      进行一次维度提升重置,
+      <span v-if="hasDimensionBoosts">但失去一个维度提升</span>
+      <span v-else>但无任何加成</span>
     </PrimaryButton>
     <div class="l-flex" />
     <AntimatterDimensionProgressBar class="l-antimatter-dim-tab__progress_bar" />

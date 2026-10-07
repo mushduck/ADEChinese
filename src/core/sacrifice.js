@@ -12,30 +12,30 @@ export class Sacrifice {
   }
 
   static get disabledCondition() {
-    if (Slabdrill.isCursed && !InfinityChallenge(2).isCompleted) return "8th Dimensions do not exist";
-    if (NormalChallenge(10).isRunning) return "8th Dimensions are disabled";
-    if (EternityChallenge(3).isRunning) return "Eternity Challenge 3";
+    if (Slabdrill.isCursed && !InfinityChallenge(2).isCompleted) return "第八维度不存在";
+    if (NormalChallenge(10).isRunning) return "第八维度已禁用";
+    if (EternityChallenge(3).isRunning) return "永恒挑战3";
     if (DimBoost.purchasedBoosts.lt(5) &&
-      !(Slabdrill.isCursed && InfinityChallenge(2).isCompleted)) return `Requires ${formatInt(5)} Dimension Boosts`;
+      !(Slabdrill.isCursed && InfinityChallenge(2).isCompleted)) return `需要${formatInt(5)}个维度提升`;
     if (AntimatterDimension(8).totalAmount.eq(0) &&
-      !(Slabdrill.isCursed && InfinityChallenge(2).isCompleted)) return `No 8th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimensions`;
-    if (this.nextBoost.lte(1)) return `${formatX(1)} multiplier`;
-    if (Player.isInAntimatterChallenge) return "Challenge goal reached";
-    return "Need to Crunch";
+      !(Slabdrill.isCursed && InfinityChallenge(2).isCompleted)) return `没有第八 ${player.universes.current === 2 ? "正物质" : "反物质"} 维度`;
+    if (this.nextBoost.lte(1)) return `${formatX(1)}倍`;
+    if (Player.isInAntimatterChallenge) return "挑战目标已达成";
+    return "需要大坍缩";
   }
 
   static getSacrificeDescription(changes) {
     const f = (name, condition) => (name in changes ? changes[name] : condition);
     let factor = 2;
     let places = 1;
-    let base = `(log₁₀(AD1)/${formatInt(10)})`;
+    let base = `(lg(第一维度)/${formatInt(10)})`;
     if (f("Challenge8isRunning", NormalChallenge(8).isRunning)) {
       factor = 1;
       base = "x";
     } else if (f("InfinityChallenge2isCompleted", InfinityChallenge(2).isCompleted)) {
       factor = 1 / 120;
       places = 3;
-      base = "AD1";
+      base = "第一维度";
     }
 
     const exponent = (1 +

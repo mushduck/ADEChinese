@@ -56,15 +56,14 @@ export default {
       const slab = DivinityMilestone.serpentPower.isReached && this.nextPack?.id === "slabPack";
       const slabLock = !DivinityMilestone.serpentPower.isReached && this.nextPack?.id === "slabPack";
 
-      if (first) return `The first Expansion Pack unlocks at ${format(next)} Antimatter.`;
-      if (slab && !Pelle.isDoomed && !Slabdrill.isCursed) return `Reach ${format(next)} Antimatter to unlock a new Expansion Pack.`;
-      if (slab && (Pelle.isDoomed || Slabdrill.isCursed)) return `The next Expansion Pack restricts you from buying it
-        while Doomed or Cursed!`;
-      if (alpha && !Pelle.isDoomed) return `Reach ${format(next)} Antimatter to unlock a new Expansion Pack.`;
-      if (alpha && Pelle.isDoomed) return `The next Expansion Pack restricts you from buying it while Doomed!`;
+      if (first) return `第一个天神扩展包于 ${format(next)} 反物质解锁。`;
+      if (slab && !Pelle.isDoomed && !Slabdrill.isCursed) return `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
+      if (slab && (Pelle.isDoomed || Slabdrill.isCursed)) return `下一个天神扩展包必须在被毁灭或被诅咒的现实外购买。`;
+      if (alpha && !Pelle.isDoomed) return `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
+      if (alpha && Pelle.isDoomed) return `下一个天神扩展包必须在被毁灭的现实外购买。`;
       return (next === undefined || alphaLock || slabLock)
-        ? "All Expansion Packs unlocked"
-        : `Next Expansion Pack unlocks at ${format(next)} Antimatter.`;
+        ? "已解锁全部天神扩展包"
+        : `达到 ${format(next)} 反物质以解锁下一个天神扩展包。`;
     },
     classObject() {
       return {
@@ -98,9 +97,9 @@ export default {
       :class="classObject"
       onclick="ExpansionPacks.unlock();"
     >
-      Unlock Expansion Packs
+      解锁天神扩展包
       <br>
-      Cost: {{ format(unlockCost, 2, 3) }} Galaxies
+      价格: {{ format(unlockCost, 2, 3) }} 星系
     </PrimaryButton>
     <div v-if="isUnlocked">
       <div

@@ -66,13 +66,13 @@ export default {
 <template>
   <ModalWrapperOptions class="c-modal-options__large">
     <template #header>
-      Modifying Single Glyph Appearance
+      修改单个符文外观
     </template>
     <PrimaryButton
       class="o-primary-btn--subtab-option"
       @click="setType(undefined)"
     >
-      Reset this Glyph's appearance
+      重置符文外观
     </PrimaryButton>
     <GlyphCustomizationSingleType
       :key="defaultKeySwap"
@@ -80,13 +80,13 @@ export default {
       :glyph-id="glyphId"
     />
     <div v-if="cosmeticTypes && glyph.fixedCosmetic">
-      This Glyph's Cosmetic Type cannot be changed!
+      不能修改这个符文的外观！
     </div>
     <div
       v-else-if="cosmeticTypes"
       class="c-special-type"
     >
-      Apply Special Cosmetic Type:
+      使用特定的自定义类型：
       <PrimaryButton
         v-for="type in cosmeticTypes"
         :key="type"

@@ -25,9 +25,9 @@ export default {
   computed: {
     cursedCoreButtonText() {
       if (this.isCoreActive) {
-        return "Exit the Cursed Core.";
+        return "离开诅咒核心";
       }
-      return "Enter the Cursed Core.";
+      return "进入诅咒核心";
     },
     cursedCoreClassObject() {
       return {
@@ -49,11 +49,11 @@ export default {
     },
     serpentinePowerRewardText() {
       let text = [];
-      const effects = ["Antimatter Dimension multiplier", "Dimension Boost strength multiplier", "Galaxy strength multiplier",
-        "Antimatter Dimension power", "Infinity Point multiplier", "Infinity Dimension multiplier", "Replicanti Speed multiplier",
-        "Time Dimension multiplier", "Eternity Point multiplier", "Infinity multiplier", "Dilated Time multiplier",
-        "Chaos Core find chance multiplier"];
-      text.push("Serpentine Power currently provides the following effects:");
+      const effects = ["反物质维度倍率", "维度提升效果倍率", "星系强度倍率",
+        "反物质维度指数", "无限点数倍率", "无限维度倍率", "复制速度倍率",
+        "时间维度倍率", "永恒点数倍率", "无限次数倍率", "膨胀时间倍率",
+        "混沌核心概率倍率"];
+      text.push("幽蛇之力现提供以下效果：");
       for (let t = 0; t < Slabdrill.currentStage + 1; t++) {
         text.push(
           `${effects[t]}: ${t === 3
@@ -110,22 +110,22 @@ export default {
         class="o-slabdrill-button"
         @click="showModal"
       >
-        Show effects in Cursed Reality
+        显示被诅咒的现实中的效果
       </button>
     </div>
     <br>
-    <span class="l-cursed-header">You have {{ quantifyInt("Chaos Core", cores) }}.</span>
+    <span class="l-cursed-header">你拥有 {{ quantifyInt("混沌核心", cores) }}。</span>
     <br>
     <div v-if="isDestroyed">
-      <span class="l-slabdrill-header">Since Slabdrill has been defeated, the following Strikes have no effect except for the last.</span>
+      <span class="l-slabdrill-header">由于渊蛇已被击败，除了最后一次以外的冲击以失效。</span>
       <br>
     </div>
-    <span class="l-slabdrill-header">You have {{ format(power, 2, 3) }} Serpentine Power. +{{ format(powerPerSecond, 2, 3) }}/s</span>
+    <span class="l-slabdrill-header">你拥有 {{ format(power, 2, 3) }} 幽蛇之力。 +{{ format(powerPerSecond, 2, 3) }}/秒</span>
     <span class="l-slabdrill-header">
-      Your Chaos Cores are currently giving Serpentine Power a cap of {{ format(powerCap, 2, 2) }}.
+      你的混沌核心将幽蛇之力的上限提升至{{ format(powerCap, 2, 2) }}。
     </span>
     <span class="l-slabdrill-header">
-      The distance between your current Serpentine Power and the Serpentine Power cap decreases by half every {{ halveText }}.
+      每经过{{ halveText }}，你的当前数量与上限之间的幽蛇之力差额将减半。
     </span>
     <br>
     <div
@@ -152,7 +152,7 @@ export default {
       v-if="isCursed"
       class="l-slabdrill-header"
     >
-      The next Strike will be encountered when you {{ nextLayer }}.
+      在你{{ nextLayer }}时将引发下一次冲击。
     </span>
     <br>
     <br>

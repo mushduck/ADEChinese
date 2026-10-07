@@ -37,8 +37,8 @@ window.GlobalErrorHandler = {
   },
   crash(message) {
     if (window.GameUI !== undefined && GameUI.initialized) {
-      Modal.message.show(`Huh. Looks like whatever you just did crashed the game. All good, just send this message to me, Supersonic Seven, in the Discord, along with whatever you did to trigger it:
-      "${message}".<br>Thanks for playing AD: Endgame! We'll fix your issue as soon as we can!`, {}, 3);
+      Modal.message.show(`阿巴阿巴，看来你刚才的操作导致游戏崩溃了。没关系，只要在Discord上把这条消息发给我——Supersonic Seven——并附上你当时触发这个问题的具体操作就行：
+      "${message}".<br>感谢您游玩《反物质维度：终局》！我们会尽快为您解决这个问题！如果不会发Discord，也可以加QQ群611146621反物质维度交流群，有很多群友在线回答！——汉化者松茸不吃柯尔鸭`, {}, 3);
     }
     // eslint-disable-next-line no-debugger
     debugger;

@@ -251,6 +251,51 @@ createInCategory(AutomatorCurrency, "PouredRM", /poured[ \t]*rm/i, {
   $getter: () => new Decimal(player.celestials.teresa.pouredAmount),
   $unlocked: () => Teresa.isUnlocked,
 });
+createInCategory(AutomatorCurrency, "StoredGameTime", /stored[ \t]+(game[ \t]+)?time/i, {
+  $autocomplete: "stored time",
+  $getter: () => new Decimal(player.celestials.enslaved.stored),
+  $unlocked: () => Enslaved.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "StoredRealTimeCurrency", /stored[ \t]+real[ \t]+time/i, {
+  $autocomplete: "stored real time",
+  $getter: () => new Decimal(player.celestials.enslaved.storedReal),
+  $unlocked: () => Enslaved.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "LaitelaTier", /laitela[ \t]*tier/i, {
+  $autocomplete: "laitela tier",
+  $getter: () => new Decimal(8 - (Laitela.maxAllowedDimension ?? 8)),
+  $unlocked: () => Laitela.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "Entropy", /(laitela[ \t]+)?entropy/i, {
+  $autocomplete: "entropy",
+  $getter: () => new Decimal((Laitela.entropy ?? player.celestials.laitela.entropy ?? 0) * 100),
+  $unlocked: () => Laitela.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "GeneratedGalaxies", /(generated([ \t]+galaxies)?|gg)/i, {
+  $autocomplete: "generated",
+  $getter: () => (Pelle.hasGalaxyGenerator ? GalaxyGenerator.generatedGalaxies : DC.D0),
+  $unlocked: () => Pelle.hasGalaxyGenerator,
+});
+createInCategory(AutomatorCurrency, "MemoryTeresa", /(memory[ \t]*(1|teresa)|teresa[ \t]*memory)/i, {
+  $autocomplete: "memory teresa",
+  $getter: () => new Decimal(Ra.pets.teresa.level),
+  $unlocked: () => Ra.isUnlocked && Ra.pets.teresa.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "MemoryEffarig", /(memory[ \t]*(2|effarig)|effarig[ \t]*memory)/i, {
+  $autocomplete: "memory effarig",
+  $getter: () => new Decimal(Ra.pets.effarig.level),
+  $unlocked: () => Ra.isUnlocked && Ra.pets.effarig.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "MemoryEnslaved", /(memory[ \t]*(3|enslaved)|enslaved[ \t]*memory)/i, {
+  $autocomplete: "memory enslaved",
+  $getter: () => new Decimal(Ra.pets.enslaved.level),
+  $unlocked: () => Ra.isUnlocked && Ra.pets.enslaved.isUnlocked,
+});
+createInCategory(AutomatorCurrency, "MemoryV", /(memory[ \t]*(4|v)|v[ \t]*memory)/i, {
+  $autocomplete: "memory v",
+  $getter: () => new Decimal(Ra.pets.v.level),
+  $unlocked: () => Ra.isUnlocked && Ra.pets.v.isUnlocked,
+});
 
 // $prestigeLevel is used by things that wait for a prestige event. Something waiting for
 // eternity will be triggered by something waiting for reality, for example.
@@ -424,6 +469,13 @@ createKeyword("Alchemy", /alchemy/i);
 createKeyword("Reset", /reset/i);
 createKeyword("Rift", /rifts?/i);
 createKeyword("Pour", /pour/i);
+createKeyword("Generator", /(galaxy[ \t]+)?generator/i);
+createKeyword("StoreRealTime", /store[ \t]+real[ \t]+time/i, {
+  $autocomplete: "store real time",
+  $unlocked: () => Enslaved.isUnlocked,
+});
+createKeyword("Tab", /tabs?/i);
+createKeyword("Sacrifice", /sacrifice/i);
 
 // We allow ECLiteral to consume lots of digits because that makes error reporting more
 // clear (it's nice to say ec123 is an invalid ec)

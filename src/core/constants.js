@@ -84,6 +84,7 @@ window.DC = deepFreeze({
   D9_99999E999:         new Decimal("9.99999e999"),
   D9_9999E9999:         new Decimal("9.9999e9999"),
 
+
   // Calculations for precise numbers.
   C1D1_1245:                Decimal.div(1, 1.1245),
   D2P30D0_61:               Decimal.pow(2, 30 / 0.61),
@@ -276,6 +277,7 @@ window.DC = deepFreeze({
   E9E15:                new Decimal("1e9000000000000000"),
 
   //Hardcoded post-e9e15 values to be reformatted later
+  E1E50:                Decimal.pow(10, 1e50),
   E9E115:               Decimal.pow(10, 9e115),
   E1E300:               Decimal.pow(10, 1e300),
   ENUMMAX:              Decimal.pow(10, Number.MAX_VALUE),
@@ -352,91 +354,104 @@ window.GLYPH_MIME_TYPE = "text/x-ivark-glyph";
 window.GlyphRarities = [
   {
     minStrength: 8.5,
-    name: "Perfect",
+    key: "Perfect",
+    name: "纯元",
     darkColor: "#800000",
     lightColor: "#800000",
     darkHighContrast: "#900000",
     lightHighContrast: "#a00000"
   }, {
     minStrength: 6,
-    name: "Superlunary",
+    key: "Superlunary",
+    name: "超越",
     darkColor: "#c0c040",
     lightColor: "#c0c040",
     darkHighContrast: "#e0e060",
     lightHighContrast: "#ffff80"
   }, {
     minStrength: 5.375,
-    name: "Sublime",
+    key: "Sublime",
+    name: "不朽",
     darkColor: "#20c0a0",
     lightColor: "#20c0a0",
     darkHighContrast: "#00e0a0",
     lightHighContrast: "#00ffc0"
   }, {
     minStrength: 4.75,
-    name: "Empyrean",
+    key: "Elysian",
+    name: "至高",
     darkColor: "#c03000",
     lightColor: "#c03000",
     darkHighContrast: "#e03800",
     lightHighContrast: "#ff4000"
   }, {
     minStrength: 4.125,
-    name: "Elysian",
+    key: "Empyrean",
+    name: "极乐",
     darkColor: "#8020a0",
     lightColor: "#8020a0",
     darkHighContrast: "#a000a0",
     lightHighContrast: "#800080"
   }, {
     minStrength: 3.5,
-    name: "Celestial",
+    key: "Celestial",
+    name: "超神",
     darkColor: "#3d3dec",
     lightColor: "#9696ff",
     darkHighContrast: "#ffff00",
     lightHighContrast: "#c0c000"
   }, {
     minStrength: 3.25,
-    name: "Transcendent",
+    key: "Transcendent",
+    name: "卓越",
     darkColor: "#03ffec",
     lightColor: "#00c3c3",
     darkHighContrast: "#00ffff",
     lightHighContrast: "#00c0c0"
   }, {
     minStrength: 3,
-    name: "Mythical",
+    key: "Mythical",
+    name: "传说",
     darkColor: "#d50000",
     lightColor: "#d50000",
     darkHighContrast: "#c00000",
     lightHighContrast: "#ff0000"
   }, {
     minStrength: 2.75,
-    name: "Legendary",
+    key: "Legendary",
+    name: "传奇",
     darkColor: "#ff9800",
     lightColor: "#d68100",
     darkHighContrast: "#ff8000",
     lightHighContrast: "#ff8000"
   }, {
     minStrength: 2.5,
-    name: "Epic",
+    key: "Epic",
+    name: "史诗",
     darkColor: "#9c27b0",
     lightColor: "#9c27b0",
     darkHighContrast: "#ff00ff",
     lightHighContrast: "#ff00ff"
   }, {
     minStrength: 2,
-    name: "Rare",
+    key: "Rare",
+    name: "稀有",
     darkColor: "#5096f3",
     lightColor: "#0d40ff",
     darkHighContrast: "#6060ff",
     lightHighContrast: "#0000ff"
   }, {
     minStrength: 1.5,
-    name: "Uncommon",
+    key: "Uncommon",
+    name: "罕见",
     darkColor: "#43a047",
     lightColor: "#1e8622",
     darkHighContrast: "#00ff00",
     lightHighContrast: "#00b000"
   }, {
     minStrength: 1,
-    name: "Common",
+    key: "Common",
+    name: "普通",
     darkColor: "#ffffff",
     lightColor: "#000000",
     darkHighContrast: "#ffffff",

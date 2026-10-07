@@ -39,13 +39,13 @@ export default {
       const effarigSettings = this.effarigSettings;
       if (effarigSettings.RM && effarigSettings.glyph &&
         (this.effect.id === "effarigrm" || this.effect.id === "effarigglyph")) {
-        return "RM multiplier and Glyph instability cannot occur together on the same Glyph!";
+        return "现实机器倍增和符文不稳定性推迟不能同时出现在同一个符文上！";
       }
       if (this.effect.id === "effarigrm" && effarigSettings.glyph) {
-        return "This effect is mutually exclusive with Glyph instability!";
+        return "这个效果和符文不稳定性推迟互斥！";
       }
       if (this.effect.id === "effarigglyph" && effarigSettings.RM) {
-        return "This effect is mutually exclusive with RM multiplier!";
+        return "这个效果和现实机器倍增互斥！";
       }
       return "";
     },

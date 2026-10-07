@@ -46,7 +46,7 @@ export default {
   <AutobuyerBox
     :autobuyer="autobuyer"
     :is-modal="isModal"
-    name="Automatic Bulk Singularity"
+    name="自动凝聚奇点"
   >
     <template #intervalSlot>
       <label
@@ -57,7 +57,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Bulk Singularity Time Lower Bound:
+        凝聚奇点用时下界:
       </label>
       <AutobuyerInput
         :autobuyer="autobuyer"
@@ -74,7 +74,7 @@ export default {
           type="checkbox"
           class="o-clickable"
         >
-        Bulk Singularity Time Upper Bound:
+        凝聚奇点用时上界:
       </label>
       <AutobuyerInput
         :autobuyer="autobuyer"

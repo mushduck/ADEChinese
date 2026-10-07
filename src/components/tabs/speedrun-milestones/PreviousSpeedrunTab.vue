@@ -82,9 +82,9 @@ export default {
 
 <template>
   <div class="c-previous-runs">
-    <b>You have completed {{ quantify("speedrun", numRuns, 0, 0, x => x) }} prior to this playthrough.</b>
-    <b>Statistics of previous runs are below, mouseover icons for more details.</b>
-    <b>Click the magnifying glass to compare the milestones on a particular run to this run.</b>
+    <b>到目前为止，你已完成了 {{ format(numRuns, 0, 0, x => x) }} 次速通。</b>
+    <b>历次速通的统计数据如下，将鼠标悬停在图标上查看更多详情。</b>
+    <b>点击放大镜，可对比某次速通与本次速通的里程碑。</b>
     <b>{{ spectateText }}</b>
     <br>
     <div
@@ -96,7 +96,7 @@ export default {
         :class="{ 'o-primary-btn--disabled' : runPage === 0 }"
         @click="changePage(-1)"
       />
-      Showing runs {{ 10 * runPage + 1 }} to {{ 10 * (runPage + 1) }} ({{ highestIndex }} total runs)
+      显示速通记录第 {{ 10 * runPage + 1 }} 至 {{ 10 * (runPage + 1) }} 条（共 {{ highestIndex }} 条）
       <PrimaryButton
         class="o-primary-btn--subtab-option fas fa-arrow-right"
         :class="{ 'o-primary-btn--disabled' : runPage + 1 > highestIndex / 10 }"
@@ -128,16 +128,16 @@ export default {
     <br>
     <div class="c-legend">
       <div class="c-legend-cell">
-        <span class="o-box l-milestone-none" /> Not reached this run
+        <span class="o-box l-milestone-none" /> 本轮未达到
       </div>
       <div class="c-legend-cell">
-        <span class="o-box l-milestone-slow" /> Slower than comparison
+        <span class="o-box l-milestone-slow" /> 慢于对比
       </div>
       <div class="c-legend-cell">
-        <span class="o-box l-milestone-fast" /> Faster than comparison
+        <span class="o-box l-milestone-fast" /> 快于对比
       </div>
       <div class="c-legend-cell">
-        <span class="o-box l-milestone-fastest" /> Faster than best
+        <span class="o-box l-milestone-fastest" /> 快于最佳
       </div>
     </div>
     <div class="l-speedrun-milestone-tab">

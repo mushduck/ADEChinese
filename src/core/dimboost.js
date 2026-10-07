@@ -95,10 +95,9 @@ export class DimBoost {
 
   static get lockText() {
     if (DimBoost.purchasedBoosts.gte(this.maxBoosts)) {
-      if (Ra.isRunning) return "Locked (Ra's Reality)";
-      if (InfinityChallenge(1).isRunning) return "Locked (Infinity Challenge 1)";
-      if (NormalChallenge(8).isRunning) return `Locked (8th ${player.universes.current === 2 ? "Matter" : "Antimatter"} Dimension
-        Autobuyer Challenge)`;
+      if (Ra.isRunning) return "已锁定（太阳神的现实）";
+      if (InfinityChallenge(1).isRunning) return "已锁定（无限挑战1）";
+      if (NormalChallenge(8).isRunning) return "已锁定（挑战8）";
     }
     return null;
   }
@@ -207,31 +206,30 @@ export class DimBoost {
 
     let newUnlock = "";
     if (!allNDUnlocked && boosts.lt(DimBoost.maxDimensionsUnlockable - 4)) {
-      newUnlock = `unlock the ${formatInt(boosts.add(5))}th Dimension`;
+      newUnlock = `解锁第${formatInt(boosts.add(5))}维度`;
     } else if (boosts.eq(4) && !NormalChallenge(10).isRunning && !EternityChallenge(3).isRunning && !Slabdrill.isCursed) {
-      newUnlock = "unlock Sacrifice";
+      newUnlock = "解锁维度献祭";
     }
 
-    const formattedMultText = `give a ${formatX(DimBoost.power, 2, 2)} multiplier `;
-    let dimensionRange = `to the 1st Dimension`;
-    if (boosts.gt(0)) dimensionRange = `to Dimensions 1-${Decimal.min(boosts.add(1), 8)}`;
-    if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `to all Dimensions`;
-    if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1) && Slabdrill.isCursed) dimensionRange = `to your Dimension`;
-    const formattedPowText = Ascensions.dbA.isUnlocked ? `and a +${formatPow(DimBoost.exponentialPower, 2, 3)} power to all Dimensions` : "";
+    const formattedMultText = `提供${formatX(DimBoost.power, 2, 2)}的加成`;
+    let dimensionRange = `为第一维度`;
+    if (boosts.gt(0)) dimensionRange = `为第1至${Decimal.min(boosts.add(1), 8)}维度`;
+    if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `为所有维度`;
+    if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1) && Slabdrill.isCursed) dimensionRange = `为你的维度`;
+    const formattedPowText = Ascensions.dbA.isUnlocked ? `，反物质维度指数增加${formatPow(DimBoost.exponentialPower, 2, 3)}` : "";
 
     let boostEffects;
     if (NormalChallenge(8).isRunning) boostEffects = newUnlock;
-    else if (Ascensions.dbA.isUnlocked && boosts.gte(DimBoost.maxDimensionsUnlockable - 1) && newUnlock === "") boostEffects = boostEffects = `${formattedMultText} ${formattedPowText}`;
-    else if (newUnlock === "") boostEffects = `${formattedMultText} ${dimensionRange} ${formattedPowText}`;
-    else boostEffects = `${newUnlock} and ${formattedMultText} ${dimensionRange} ${formattedPowText}`;
-
-    if (boostEffects === "") return "Dimension Boosts are currently useless";
+    else if (Ascensions.dbA.isUnlocked && boosts.gte(DimBoost.maxDimensionsUnlockable - 1) && newUnlock === "") boostEffects = `${formattedMultText} ${formattedPowText}`;
+    else if (newUnlock === "") boostEffects = ` ${dimensionRange}${formattedMultText}${formattedPowText}`;
+    else boostEffects = `${newUnlock}且${dimensionRange}${formattedMultText}${formattedPowText} `;
+    if (boostEffects === "") return "维度提升目前无效";
     const areDimensionsKept = (Perk.antimatterNoReset.isBought || Achievement(111).canBeApplied) &&
       (!player.disablePostReality || (LHC.voidRunning && player.endgame.largeHadronCollider.void.nullified) || (Alpha.isRunning && Alpha.currentStage >= 12)
       || (LHC.voidRunning && NullUpgrade.limerick1.isBought) || SlabdrillUnlocks.eternityChallengeTen.isUnlocked) &&
       ((!Pelle.isDoomed || PelleAchievementUpgrade.achievement111.canBeApplied) || PelleUpgrade.dimBoostResetsNothing.isBought);
     if (areDimensionsKept) return boostEffects[0].toUpperCase() + boostEffects.substring(1);
-    return `Reset your ${Slabdrill.isCursed ? "Dimension" : "Dimensions"} to ${boostEffects}`;
+    return `重置维度，${boostEffects}`;
   }
 
   static get purchasedBoosts() {

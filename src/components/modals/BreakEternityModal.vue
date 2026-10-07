@@ -13,7 +13,7 @@ export default {
   },
   computed: {
     message() {
-      return `Breaking Eternity will allow you to gain ${this.isFlipped ? "matter" : "antimatter"} past ${format(DC.E9E15, 2, 2)}. You will gain additional Celestial Points and Doomed Particles on Endgame based on ${this.isFlipped ? "matter" : "antimatter"} produced over 1e9e15 while inside the Doomed Reality. It will also unlock Break Eternity Upgrades and other features.`.split("\n");
+      return `打破永恒将使你能够获得超过 ${format(DC.E9E15, 2, 2)} 的${this.isFlipped ? "正物质" : "反物质"}。在被毁灭的现实中，基于超过 1e9e15 的${this.isFlipped ? "正物质" : "反物质"}产量，在终局后给予额外的天界点数和毁灭粒子。此外，还将解锁打破永恒升级及其他特性。`.split("\n");
     },
   },
   methods: {
@@ -33,7 +33,7 @@ export default {
     @confirm="handleYesClick"
   >
     <template #header>
-      You are Breaking Eternity
+      你正在打破永恒
     </template>
     <div class="c-modal-message__text">
       <span
@@ -44,7 +44,7 @@ export default {
       </span>
     </div>
     <template #confirm-text>
-      Break
+      打破
     </template>
   </ModalWrapperChoice>
 </template>

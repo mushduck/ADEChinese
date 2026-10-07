@@ -8,7 +8,7 @@ export class PelleDilationUpgradeAutobuyerState extends IntervaledAutobuyerState
   }
 
   get name() {
-    return [`Pelle Dilated Time Multiplier`, `Tachyon Galaxy Multiplier`, "Tickspeed Power"][this.id - 1];
+    return [`佩勒膨胀时间升级`, `佩勒超光速粒子星系升级`, "计数频率指数升级"][this.id - 1];
   }
 
   get interval() {
@@ -38,7 +38,7 @@ export class PelleDilationUpgradeAutobuyerState extends IntervaledAutobuyerState
   }
 
   static get entryCount() { return 3; }
-  static get autobuyerGroupName() { return "Pelle Dilation Upgrade"; }
+  static get autobuyerGroupName() { return "佩勒膨胀升级"; }
   static get isActive() { return player.auto.pelleDilationUpgrades.isActive; }
   static set isActive(value) { player.auto.pelleDilationUpgrades.isActive = value; }
 }

@@ -16,7 +16,7 @@ export default {
     },
     label: {
       type: String,
-      default: "Currently",
+      default: "当前",
       required: false
     },
     ignoreCapped: {
@@ -43,7 +43,7 @@ export default {
       if (this.config.noLabel) {
         return "";
       }
-      return `${this.reachedCap && !this.ignoreCapped ? "Capped" : this.label}: `;
+      return `${this.reachedCap && !this.ignoreCapped ? "已达到上限" : this.label}: `;
     },
     effectDisplay() {
       return this.formatEffect(this.reachedCap ? this.cap : this.effectValue);

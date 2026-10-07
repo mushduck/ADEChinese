@@ -38,8 +38,7 @@ export default {
   },
   computed: {
     modalTooltip() {
-      return `The game will detect certain situations where you might not want to overwrite your cloud save, and show
-        you a modal with more information if this is ON.`;
+      return `当检测到你可能不希望覆盖云存档的情况时，若此选项开启，游戏将显示包含详细信息的弹窗。`;
     },
     overwriteTooltip() {
       if (this.showCloudModal) return "This setting does nothing since the modal is being shown.";
@@ -121,12 +120,12 @@ export default {
       if (!this.hasExportedToday) {
         GameStorage.export();
         player.lastExportTime = Date.now();
-        player.storedTime += 3600;
-        GameUI.notify.info("Daily Export rewards have been granted!");
+        player.storedTime += 10800;
+        GameUI.notify.info("每日导出奖励已发放！");
       }
       if (this.hasExportedToday) {
         GameStorage.export();
-        GameUI.notify.info("You have already exported your save today!");
+        GameUI.notify.info("你今日已经导出过存档了");
       }
     }
   }
@@ -136,7 +135,7 @@ export default {
 <template>
   <div class="l-options-tab">
     <div>
-      You can export your save once per day to get free rewards!
+      你每天可以导出一次存档，以领取免费奖励！本作汉化者考虑到时间墙过高，赠送了大家离线时长！
     </div>
     <div class="l-options-grid">
       <div class="l-options-grid__row">
@@ -145,21 +144,21 @@ export default {
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           @click="exportSave()"
         >
-          Export save
+          导出存档
         </OptionsButton>
         <OptionsButton
           class="o-primary-btn--option_font-x-large"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           onclick="Modal.import.show()"
         >
-          Import save
+          导入存档
         </OptionsButton>
         <OptionsButton
           class="o-primary-btn--option_font-x-large"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           onclick="Modal.hardReset.show()"
         >
-          RESET THE GAME
+          重置游戏
         </OptionsButton>
       </div>
       <div class="l-options-grid__row">
@@ -168,14 +167,14 @@ export default {
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           onclick="GameStorage.save(false, true)"
         >
-          Save game
+          保存游戏
         </OptionsButton>
         <OptionsButton
           class="o-primary-btn--option_font-x-large"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           onclick="Modal.loadGame.show()"
         >
-          Choose save
+          选择存档
         </OptionsButton>
         <AutosaveIntervalSlider
           :min="10"
@@ -188,7 +187,7 @@ export default {
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           onclick="GameStorage.exportAsFile()"
         >
-          Export save as file
+          导出存档文件
         </OptionsButton>
         <OptionsButton
           class="c-file-import-button"
@@ -200,13 +199,13 @@ export default {
             accept=".txt"
             @change="importAsFile"
           >
-          <label for="file">Import save from file</label>
+          <label for="file">导入存档文件</label>
         </OptionsButton>
         <PrimaryToggleButton
           v-model="showTimeSinceSave"
           class="o-primary-btn--option l-options-grid__button"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
-          label="Display time since save:"
+          label="显示距上次存档的时间："
         />
       </div>
       <div class="l-options-grid__row">
@@ -214,7 +213,7 @@ export default {
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           onclick="Modal.backupWindows.show()"
         >
-          Open Automatic Save Backup Menu
+          打开自动备份存档菜单
         </OptionsButton>
         <SaveFileName />
       </div>
@@ -225,7 +224,7 @@ export default {
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
           onclick="Modal.enterSpeedrun.show()"
         >
-          Start Speedrun
+          开始速通
         </OptionsButton>
         <OptionsButton
           v-if="inSpeedrun"
@@ -235,7 +234,7 @@ export default {
           }"
           @click="openSeedModal()"
         >
-          Change Glyph RNG Seed
+          修改符文随机种子
         </OptionsButton>
       </div>
       <OpenModalHotkeysButton />
@@ -291,13 +290,13 @@ export default {
           onclick="GameOptions.cloudSave()"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
         >
-          Cloud save
+          保存到云端
         </OptionsButton>
         <OptionsButton
           onclick="GameOptions.cloudLoad()"
           :class="{ 'o-pelle-disabled-pointer': creditsClosed }"
         >
-          Cloud load
+          从云端加载
         </OptionsButton>
         <PrimaryToggleButton
           v-model="syncSaveIntervals"

@@ -16,6 +16,8 @@ export default {
       justCompleted: false,
       forceRestartOn: false,
       followExecution: false,
+      forceRestartEndgameOn: false,
+      hasEndgame: false,
       hasErrors: false,
       currentLine: 0,
       statusName: "",
@@ -34,9 +36,9 @@ export default {
       return this.$viewModel.tabs.reality.automator.editorScriptID;
     },
     playTooltip() {
-      if (this.isPaused) return "Resume Automator execution";
-      if (!this.isRunning) return "Start Automator";
-      return "Pause Automator execution";
+      if (this.isPaused) return "恢复自动机执行";
+      if (!this.isRunning) return "运行自动机";
+      return "暂停自动机执行";
     },
     playButtonClass() {
       return {
@@ -53,10 +55,10 @@ export default {
       let lineNum = `0000${this.currentLine}`;
       lineNum = lineNum.slice(lineNum.length - digits);
 
-      if (this.isPaused) return `Paused: "${this.statusName}" (Resumes on Line ${lineNum})`;
-      if (this.isRunning) return `Running: "${this.statusName}" (Line ${lineNum})`;
-      if (this.hasErrors) return `Stopped: "${this.statusName}" has errors (Cannot run)`;
-      return `Stopped: Will start running "${this.statusName}"`;
+      if (this.isPaused) return `已暂停：${this.statusName} （于第 ${lineNum} 行恢复）`;
+      if (this.isRunning) return `运行中：${this.statusName}（第 ${lineNum} 行）`;
+      if (this.hasErrors) return `已停止：${this.statusName} 有错误（无法运行）`;
+      return `已停止：将开始运行 ${this.statusName}`;
     },
     maxScriptChars() {
       return AutomatorData.MAX_ALLOWED_SCRIPT_CHARACTERS;
@@ -70,6 +72,8 @@ export default {
       this.justCompleted = AutomatorBackend.hasJustCompleted;
       this.forceRestartOn = AutomatorBackend.state.forceRestart;
       this.followExecution = AutomatorBackend.state.followExecution;
+      this.forceRestartEndgameOn = Boolean(AutomatorBackend.state.forceRestartEndgame ?? true);
+      this.hasEndgame = PlayerProgress.endgameUnlocked();
       this.hasErrors = AutomatorData.currentErrors().length !== 0;
       this.currentLine = AutomatorBackend.currentLineNumber;
 
@@ -109,6 +113,7 @@ export default {
     },
     repeat: () => AutomatorBackend.toggleRepeat(),
     restart: () => AutomatorBackend.toggleForceRestart(),
+    restartEndgame: () => AutomatorBackend.toggleForceRestartEndgame(),
     follow: () => AutomatorBackend.toggleFollowExecution(),
     undo: () => AutomatorData.undoScriptEdit(),
     redo: () => AutomatorData.redoScriptEdit(),
@@ -121,7 +126,7 @@ export default {
     <div class="c-automator-control-row l-automator-button-row">
       <div class="c-button-group">
         <AutomatorButton
-          v-tooltip="'Rewind Automator to the first command'"
+          v-tooltip="'将自动机回退至第一条命令'"
           class="fa-fast-backward"
           @click="rewind"
         />
@@ -134,29 +139,36 @@ export default {
           @click="play"
         />
         <AutomatorButton
-          v-tooltip="'Stop Automator and reset position'"
+          v-tooltip="'停止自动机并重置位置'"
           class="fa-stop"
           @click="stop"
         />
         <AutomatorButton
-          v-tooltip="'Step forward one line'"
+          v-tooltip="'向前执行一行'"
           class="fa-step-forward"
           @click="step"
         />
         <AutomatorButton
-          v-tooltip="'Restart script automatically when it reaches the end'"
+          v-tooltip="'脚本运行至末尾时自动重新启动'"
           class="fa-sync-alt"
           :class="{ 'c-automator__button--active' : repeatOn }"
           @click="repeat"
         />
         <AutomatorButton
-          v-tooltip="'Automatically restart the active script when finishing or restarting a Reality'"
+          v-tooltip="'在完成或重启现实时自动重新启动当前活动脚本'"
           class="fa-reply"
           :class="{ 'c-automator__button--active' : forceRestartOn }"
           @click="restart"
         />
         <AutomatorButton
-          v-tooltip="'Scroll Automator to follow current line'"
+          v-if="hasEndgame"
+          v-tooltip="'在完成或重启终局时自动重新启动当前活动脚本'"
+          class="fa-reply-all"
+          :class="{ 'c-automator__button--active' : forceRestartEndgameOn }"
+          @click="restartEndgame"
+        />
+        <AutomatorButton
+          v-tooltip="'滚动自动机以跟随当前行'"
           class="fa-indent"
           :class="{ 'c-automator__button--active' : followExecution }"
           @click="follow"
@@ -166,18 +178,18 @@ export default {
           class="c-automator__status-text c-automator__status-text--small"
           :class="{ 'c-automator__status-text--error' : currentChars > maxScriptChars }"
         >
-          This script: {{ formatInt(currentChars) }}/{{ formatInt(maxScriptChars) }}
+          此脚本：{{ formatInt(currentChars) }}/{{ formatInt(maxScriptChars) }}
         </span>
       </div>
       <div class="c-button-group">
         <AutomatorButton
-          v-tooltip="'Undo'"
+          v-tooltip="'撤销'"
           class="fa-arrow-rotate-left"
           :class="{ 'c-automator__button--inactive' : !hasUndo }"
           @click="undo"
         />
         <AutomatorButton
-          v-tooltip="'Redo'"
+          v-tooltip="'重做'"
           class="fa-arrow-rotate-right"
           :class="{ 'c-automator__button--inactive' : !hasRedo }"
           @click="redo"

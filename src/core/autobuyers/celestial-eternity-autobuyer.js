@@ -6,7 +6,7 @@ export class CelestialEternityAutobuyerState extends IntervaledAutobuyerState {
   }
 
   get name() {
-    return `Celestial Eternity`;
+    return `天界永恒`;
   }
 
   get isUnlocked() {

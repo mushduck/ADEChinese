@@ -177,4 +177,12 @@ export default {
   border-bottom-right-radius: var(--var-border-radius, 0.5rem);
   transition: border-radius 0s;
 }
+
+@keyframes zalgo-jitter {
+  0%, 100% { transform: translate(0, 0) skewX(0deg); }
+  20% { transform: translate(0.5px, -0.5px) skewX(1deg); }
+  40% { transform: translate(-0.5px, 0.5px) skewX(-1deg); }
+  60% { transform: translate(0.5px, 0.5px) skewX(0.5deg); }
+  80% { transform: translate(-0.5px, -0.5px) skewX(-0.5deg); }
+}
 </style>

@@ -13,8 +13,8 @@ export default {
   },
   computed: {
     gainText() {
-      if (this.hawkingRadiationGain.lte(0)) return `not gain anything`;
-      return `gain ${quantify("Hawking Radiation", this.hawkingRadiationGain, 2, 1)}`;
+      if (this.hawkingRadiationGain.lte(0)) return `获得不到任何东西`;
+      return `获得 ${quantify("霍金辐射", this.hawkingRadiationGain, 2, 1)}`;
     }
   },
   methods: {
@@ -39,18 +39,18 @@ export default {
   >
     <template #header>
       <span>
-        You are about to exit Compression
+        你将退出时间压缩
       </span>
     </template>
     <div class="c-modal-message__text">
       <span>
-        If you exit Compression now, you will {{ gainText }}.
+        如果你现在就退出压缩，那么你将{{ gainText }}。
       </span>
       <br>
-      Are you sure you want to proceed?
+      你确定要这么做了吗？
     </div>
     <template #confirm-text>
-      Exit
+      退出
     </template>
   </ModalWrapperChoice>
 </template>

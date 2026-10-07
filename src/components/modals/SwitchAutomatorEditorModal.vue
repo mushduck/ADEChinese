@@ -34,7 +34,7 @@ export default {
       }
     },
     otherMode() {
-      return this.isCurrentlyBlocks ? "Text" : "Block";
+      return this.isCurrentlyBlocks ? "文本" : "积木";
     }
   },
   methods: {
@@ -73,21 +73,19 @@ export default {
         lines will end up being deleted since there is no block they can be converted into.
         If an error occurs at the start of a loop or IF, this may end up deleting large portions of your script!
         <span class="l-lost-text">
-          Changing editor modes right now will cause {{ quantifyInt("line", lostBlocks) }} of code to be irreversibly
-          lost!
+          切换编辑器模式将会导致不可逆地失去 {{ quantifyInt("line", lostBlocks) }} 行代码！
         </span>
       </b>
       <br>
       <span class="l-lost-text">
-        Hiding this confirmation is not recommended, as it may cause parts of scripts to be immediately and irreversibly
-        lost if your script has errors when attempting to switch modes.
+        不建议隐藏此提示，因为如果你的脚本在尝试切换模式时出现错误，可能会导致部分脚本立即不可逆地丢失。
       </span>
       <br>
       <br>
-      Are you sure you want to change to the {{ otherMode }} editor?
+      你确定你要切换到 {{ otherMode }} 编辑器吗？
     </div>
     <template #confirm-text>
-      Change Modes
+      切换模式
     </template>
   </ModalWrapperChoice>
 </template>

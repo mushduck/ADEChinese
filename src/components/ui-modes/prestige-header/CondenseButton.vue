@@ -104,27 +104,27 @@ export default {
   >
     <!-- Cannot Condense -->
     <template v-if="!canCondense">
-      Reach {{ format(condenseGoal, 2, 2) }}
+      达到 {{ format(condenseGoal, 2, 2) }}
       <br>
-      Divine Matter
+      神性物质
     </template>
 
     <!-- Can Condense -->
     <template v-else>
       <div v-if="!showVSRate" />
       <b>
-        Condense for
+        凝聚以获得
         <span :style="amountStyle">{{ format(gainedVS, 2) }}</span>
-        <span v-if="showVSRate"> VS</span>
-        <span v-else> Divine {{ pluralize("Star", gainedVS) }}</span>
+        <span v-if="showVSRate"> 神性之星</span>
+        <span v-else> 神性{{ pluralize("之星", gainedVS) }}</span>
       </b>
       <template v-if="showVSRate">
         <br>
-        Current: {{ format(currentVSRate, 2) }} VS/min
+        当前：{{ format(currentVSRate, 2) }} 神性之星/分
         <br>
-        Peak: {{ format(peakVSRate, 2) }} VS/min
+        峰值：{{ format(peakVSRate, 2) }} 神性之星/分
         <br>
-        at {{ format(peakVSRateVal, 2) }} VS
+        峰值时获得 {{ format(peakVSRateVal, 2) }} 神性之星
       </template>
       <div v-else />
     </template>

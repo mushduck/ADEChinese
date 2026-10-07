@@ -26,7 +26,7 @@ export default {
       // won't trigger display update if we, say, switch from one challenge to another
       function universe(id, name, tab) {
         return {
-          name: () => `the ${name} Universe`,
+          name: () => `${name}宇宙中`,
           isActive: token => token,
           activityToken: () => player.universes.current === id,
           uniName: () => tab,
@@ -34,72 +34,72 @@ export default {
       }
       function celestialReality(celestial, name, tab) {
         return {
-          name: () => `${name} Reality`,
+          name: () => `${name}的现实`,
           isActive: token => token,
           activityToken: () => celestial.isRunning && (!Effarig.isRunning || Effarig.currentStage !== EFFARIG_STAGES.ENDGAME),
           tabName: () => tab,
         };
       }
       return [
-        universe(1, "Transient", "transient"),
-        universe(2, "Tangible", "tangible"),
-        celestialReality(Teresa, "Teresa's", "teresa"),
-        celestialReality(Effarig, "Effarig's", "effarig"),
-        celestialReality(Enslaved, "The Nameless Ones'", "enslaved"),
-        celestialReality(V, "V's", "v"),
-        celestialReality(Ra, "Ra's", "ra"),
-        celestialReality(Laitela, "Lai'tela's", "laitela"),
+        universe(1, "流幻", "transient"),
+        universe(2, "真际", "tangible"),
+        celestialReality(Teresa, "特蕾莎", "teresa"),
+        celestialReality(Effarig, "鹿颈长", "effarig"),
+        celestialReality(Enslaved, "无名氏", "enslaved"),
+        celestialReality(V, "薇", "v"),
+        celestialReality(Ra, "太阳神", "ra"),
+        celestialReality(Laitela, "莱特拉", "laitela"),
         {
-          name: () => "a Doomed Reality",
+          name: () => "被毁灭的现实中",
           isActive: token => token,
           activityToken: () => Pelle.isDoomed,
           tabName: () => "pelle",
         },
-        celestialReality(Alpha, "Alpha's", "alpha"),
+        celestialReality(Alpha, "阿尔法", "alpha"),
         {
-          name: () => "a Cursed Reality",
+          name: () => "被诅咒的现实中",
           isActive: token => token,
           activityToken: () => Slabdrill.isCursed,
           tabName: () => "slabdrill",
         },
         {
-          name: () => "Effarig's Endgame",
+          name: () => "鹿颈长的终局中",
           isActive: token => token,
           activityToken: () => Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME,
           tabName: () => "effarig",
         },
         {
-          name: () => `The Void${LHC.nullifiedVoidRunning ? " (Nullified)" : ""}`,
+          name: () => `${LHC.nullifiedVoidRunning ? "归零" : "稳态"}虚无中`,
           isActive: token => token,
           activityToken: () => LHC.voidRunning || LHC.nullifiedVoidRunning
         },
         {
-          name: () => `The Overcharge (Level ${formatInt(player.endgame.overcharge.level)})`,
+          name: () => `${formatInt(player.endgame.overcharge.level)} 阶激能中`,
           isActive: token => token,
           activityToken: () => player.endgame.overcharge.isRunning
         },
         {
-          name: () => "Time Compression",
+          name: () => "时间压缩中",
           isActive: token => token,
           activityToken: () => player.compression.active
         },
         {
-          name: () => "Time Dilation",
+          name: () => "时间膨胀中",
           isActive: token => token,
           activityToken: () => player.dilation.active
         },
         {
-          name: token => `Eternity Challenge ${token}`,
+          name: token => `永恒挑战 ${token}中`,
           isActive: token => token > 0,
           activityToken: () => player.challenge.eternity.current
         },
         {
-          name: token => `Infinity Challenge ${token}`,
+          name: token => `无限挑战 ${token}中`,
           isActive: token => token > 0,
           activityToken: () => player.challenge.infinity.current
         },
         {
-          name: token => `${NormalChallenge(token).config.name()} Challenge`,
+          name: token => `${NormalChallenge(token).config.name()}普通挑战中`,
           isActive: token => token > 0,
           activityToken: () => player.challenge.normal.current
         },
@@ -111,14 +111,14 @@ export default {
         const token = this.activityTokens[i];
         const part = this.parts[i];
         if (!part.isActive(token)) continue;
-        if (part.name(token).includes("Eternity Challenge")) {
+        if (part.name(token).includes("永恒挑战")) {
           const currEC = player.challenge.eternity.current;
           const nextCompletion = EternityChallenge(currEC).completions + 1;
           let completionText = "";
           if (Enslaved.isRunning && currEC === 1) {
             completionText = `(${formatInt(nextCompletion)}/???)`;
           } else if (nextCompletion === 6) {
-            completionText = `(already completed)`;
+            completionText = `（已完成）`;
           } else {
             completionText = `(${formatInt(nextCompletion)}/${formatInt(5)})`;
           }
@@ -133,17 +133,17 @@ export default {
       return this.infinityUnlocked || this.activeChallengeNames.length > 0;
     },
     isInFailableEC() {
-      return this.activeChallengeNames.some(str => str.match(/Eternity Challenge (4|12)/gu));
+      return this.activeChallengeNames.some(str => str.match(/永恒挑战 (4|12)/gu));
     },
     challengeDisplay() {
       if (this.inPelle) {
-        return `${this.activeChallengeNames.join(" + ")}. Good luck.`;
+        return `${this.activeChallengeNames.join(" + ")}。祝你好运`;
       }
       if (this.inSlab) {
-        return `${this.activeChallengeNames.join(" + ")}. Not every story has a good ending.`;
+        return `${this.activeChallengeNames.join(" + ")}。并非每个故事都有好结局`;
       }
       if (this.activeChallengeNames.length === 0) {
-        return "the Antimatter Universe (no active challenges)";
+        return "反物质宇宙中 (没有正在进行的挑战)";
       }
       return this.activeChallengeNames.join(" + ");
     },
@@ -186,14 +186,14 @@ export default {
         // Regex replacement is used to remove the "(X/Y)" which appears after ECs. The ternary statement is there
         // because this path gets called for NCs, ICs, and ECs
         const toExit = this.activeChallengeNames[this.activeChallengeNames.length - 1].replace(/\W+\(.*\)/u, "");
-        names = { chall: toExit, normal: isEC ? "Eternity" : "Infinity" };
+        names = { chall: toExit, normal: isEC ? "永恒" : "无限" };
         clickFn = () => {
           const oldChall = Player.anyChallenge;
           Player.anyChallenge.exit(false);
           if (player.options.retryChallenge) oldChall.requestStart();
         };
       } else {
-        names = { chall: this.activeChallengeNames[0], normal: this.inEndgame ? "Endgame" : "Reality" };
+        names = { chall: this.activeChallengeNames[0], normal: this.inEndgame ? "终局" : "现实" };
         clickFn = () => player.universes.current !== 0 ? exitUniverse(player.universes.current) :
           (player.endgame.overcharge.isRunning ? exitOvercharge() : (LHC.nullifiedVoidRunning ? exitNullifiedVoid() :
           (LHC.voidRunning ? exitTheVoid() : (Alpha.isRunning ? Alpha.escapeTheMatrix() :
@@ -231,9 +231,9 @@ export default {
       }
 
       // Normal challenges are matched with an end-of-string metacharacter
-      if (fullName.match(" Challenge$")) Tab.challenges.normal.show(true);
-      else if (fullName.match("Infinity Challenge")) Tab.challenges.infinity.show(true);
-      else if (fullName.match("Eternity Challenge")) Tab.challenges.eternity.show(true);
+      if (fullName.match("普通挑战")) Tab.challenges.normal.show(true);
+      else if (fullName.match("无限挑战")) Tab.challenges.infinity.show(true);
+      else if (fullName.match("永恒挑战")) Tab.challenges.eternity.show(true);
       else if (player.dilation.active) Tab.eternity.dilation.show(true);
       else if (player.compression.active) Tab.endgame.compression.show(true);
       else if (LHC.voidRunning || LHC.nullifiedVoidRunning) Tab.endgame.collider.show(true);
@@ -242,16 +242,16 @@ export default {
       else Tab.celestials[celestial].show(true);
     },
     exitDisplay() {
-      if (Player.isInAnyChallenge) return player.options.retryChallenge ? "Retry Challenge" : "Exit Challenge";
-      if (player.dilation.active) return "Exit Dilation";
-      if (player.compression.active) return "Exit Compression";
-      if (LHC.voidRunning || LHC.nullifiedVoidRunning) return "Exit The Void";
-      if (player.endgame.overcharge.isRunning) return "Exit The Overcharge";
-      if (player.universes.current !== 0) return "Exit Universe";
-      if (this.resetCelestial && this.inEndgame) return "Restart Endgame";
-      if (this.inEndgame) return "Exit Endgame";
-      if (this.resetCelestial) return "Restart Reality";
-      return "Exit Reality";
+      if (Player.isInAnyChallenge) return player.options.retryChallenge ? "重试挑战" : "放弃挑战";
+      if (player.dilation.active) return "退出膨胀";
+      if (player.compression.active) return "退出压缩";
+      if (LHC.voidRunning || LHC.nullifiedVoidRunning) return "离开虚无";
+      if (player.endgame.overcharge.isRunning) return "退出激能";
+      if (player.universes.current !== 0) return "离开宇宙";
+      if (this.resetCelestial && this.inEndgame) return "重启终局";
+      if (this.inEndgame) return "退出终局";
+      if (this.resetCelestial) return "重启现实";
+      return "退出天神现实";
     },
     textClassObject() {
       return {
@@ -272,7 +272,7 @@ export default {
       :class="textClassObject()"
       @click="textClicked"
     >
-      You are currently in {{ challengeDisplay }}
+      你现在在{{ challengeDisplay }}。
     </span>
     <FailableEcText v-if="isInFailableEC" />
     <span class="l-padding-line" />

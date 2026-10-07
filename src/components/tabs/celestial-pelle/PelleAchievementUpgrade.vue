@@ -52,7 +52,7 @@ export default {
     <CostDisplay
       v-if="!isBought"
       :config="config"
-      :name="'Doomed Particle'"
+      :name="'毁灭粒子'"
     />
   </button>
 </template>

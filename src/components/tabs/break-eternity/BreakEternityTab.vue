@@ -64,8 +64,7 @@ export default {
 <template>
   <div class="l-break-eternity-tab">
     <div v-if="!isUnlocked">
-      Reach {{ format(antimatterReq, 2, 1) }} {{ isFlipped ? "matter" : "antimatter" }} with at least one Endgamed stat
-      to unlock Break Eternity
+      达到 {{ format(antimatterReq, 2, 1) }} ${this.isFlipped ? "正物质" : "反物质"}且至少进行一次终局以打破永恒
     </div>
     <BreakEternityButton class="l-break-eternity-tab__break-btn" />
     <div
@@ -86,11 +85,17 @@ export default {
       </div>
     </div>
     <div>
-      All Break Eternity Upgrades can only be purchased with {{ isFlipped ? "Matter" : "Antimatter" }} gained outside Pelle.
+      所有打破永恒升级只能在被毁灭的现实之外购买。
+    </div>
+    <div class="break-eternity-hint">
+      （这一页升级名字就是那么直接）
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.break-eternity-hint {
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
 </style>

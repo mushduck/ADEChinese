@@ -99,8 +99,8 @@ export default {
       return combinedTree;
     },
     modalTitle() {
-      if (this.deleting) return `Deleting Study Preset "${this.name}"`;
-      return this.isImporting ? "Input your tree" : `Editing Study Preset "${this.name}"`;
+      if (this.deleting) return `删除时间研究预设“${this.name}”`;
+      return this.isImporting ? "导入时间研究树" : `编辑时间研究预设“${this.name}”`;
     },
     invalidMessage() {
       if (!this.inputIsValidTree || this.importedTree.invalidStudies.length === 0) return null;
@@ -123,7 +123,7 @@ export default {
             break;
         }
       }
-      return `Your import string has invalid study IDs: ${coloredString.replaceAll("#", "").replaceAll(",", ", ")}
+      return `无效的时间研究 ID：${coloredString.replaceAll("#", "").replaceAll(",", ", ")}
         <br><br>`;
     },
     truncatedInput() {
@@ -148,8 +148,8 @@ export default {
       return secretStrings.includes(sha512_256(this.input.toLowerCase()));
     },
     confirmText() {
-      if (this.deleting) return "Delete";
-      return this.isImporting ? "Import" : "Save";
+      if (this.deleting) return "删除";
+      return this.isImporting ? "导入" : "保存";
     }
   },
   watch: {
@@ -200,16 +200,16 @@ export default {
     savePreset() {
       if (this.inputIsValid) {
         player.timestudy.presets[this.id].studies = this.input;
-        GameUI.notify.eternity(`Study Tree ${this.name} successfully edited.`);
+        GameUI.notify.eternity(`研究树 ${this.name} 已成功编辑`);
         this.emitClose();
       }
     },
     deletePreset() {
       const name = player.timestudy.presets[this.id].name;
-      const presetName = name ? `Study preset "${name}"` : "Study preset";
+      const presetName = name ? `时间研究预设“${name}”` : "时间研究预设";
       player.timestudy.presets[this.id].studies = "";
       player.timestudy.presets[this.id].name = "";
-      GameUI.notify.eternity(`${presetName} deleted from slot ${this.id + 1}`);
+      GameUI.notify.eternity(`${presetName} 已从槽位 ${this.id + 1} 中删除`);
     },
     studyString(study) {
       return study instanceof ECTimeStudyState ? `EC${study.id}` : `${study.id}`;
@@ -261,22 +261,22 @@ export default {
           />
           <StudyTreeInfo
             v-if="deleting && importedTree.hasInfo"
-            header-text="Study Preset contains:"
+            header-text="时间研究预设包含："
             :tree-status="importedTree"
           />
           <StudyTreeInfo
             v-if="!deleting && !isImporting && importedTree.hasInfo"
-            header-text="Status after loading with <b>no studies</b>:"
+            header-text="加载后状态（<b>无时间研究</b>）："
             :tree-status="importedTree"
           />
           <StudyTreeInfo
             v-if="!deleting && combinedTree.hasInfo"
-            header-text="Status after loading with <b>current tree</b>:"
+            header-text="加载后状态（<b>当前时间研究</b>）："
             :tree-status="combinedTree"
           />
         </template>
         <div v-if="!deleting && !inputIsValidTree && hasInput">
-          Not a valid tree
+          无效的时间研究树
         </div>
       </div>
       <div class="c-study-preview">
@@ -292,16 +292,16 @@ export default {
       <br>
       <PrimaryButton
         v-if="!deleting"
-        v-tooltip="'This will format the study preset text, for example, changing \'a,b,c|d\' to \'a, b, c | d\'.'"
+        v-tooltip="'此操作将格式化研究预设文本，例如：将 \'a,b,c|d\' 转换为 \'a, b, c | d\'。'" 
         @click="convertInputShorthands"
       >
-        Format Preset Text
+        格式化预设文本
       </PrimaryButton>
     </div>
     <span v-if="isImporting">
       <br>
       <div
-        v-tooltip="canEternity ? '' : 'You are currently unable to eternity, so this will only do a normal load.'"
+        v-tooltip="canEternity ? '' : '你当前无法进行永恒，因此将仅执行常规加载。'"
         class="c-modal__confirmation-toggle"
         @click="respecAndLoad = !respecAndLoad"
       >
@@ -317,7 +317,7 @@ export default {
           />
         </div>
         <span class="c-modal__confirmation-toggle__text">
-          Also respec tree and eternity
+          同时重置时间研究树并永恒
           <span
             v-if="!canEternity"
             class="c-modal__confirmation-toggle__warning"

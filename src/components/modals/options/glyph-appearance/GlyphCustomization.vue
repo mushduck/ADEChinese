@@ -105,35 +105,35 @@ export default {
 
 <template>
   <div class="c-glyph-customization-group">
-    <b>Custom Glyph Appearance</b>
+    <b>自定义符文外观</b>
     <PrimaryToggleButton
       v-model="enabled"
       class="o-primary-btn--subtab-option"
-      on="Enabled"
-      off="Disabled"
+      on="已启用"
+      off="已禁用"
     />
     <br>
     <div v-if="hasCustomSets">
-      Reset Appearances to Default:
+      重置外观为默认值：
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         :class="{ 'o-primary-btn--disabled' : !enabled }"
         @click="resetAll"
       >
-        All Types
+        所有种类
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         :class="{ 'o-primary-btn--disabled' : !enabled }"
         @click="resetSingle"
       >
-        This Type
+        仅限这种
       </PrimaryButton>
       <br>
-      <i>This will not reset any individually-modified Glyphs.</i>
+      <i>这将不会重置任何个人修改的符文皮肤。</i>
       <br>
       <br>
-      Glyph Type:
+      符文类型：
       <br>
       <div class="c-type-selection">
         <div
@@ -153,25 +153,24 @@ export default {
         :key="selectedIndex + enabled + defaultKeySwap"
         :type="cosmeticTypes[selectedIndex]"
       />
-      Note: Some options may cause very poor color contrast or readability on certain themes with certain Glyph types.
+      注意：启用某些选项之后，可能会在某些主题中降低符文的颜色对比度或可读性。
     </div>
     <div v-else>
-      You currently have no available options for changing the default appearance of your Glyphs. To unlock some, visit
-      the Shop Tab or beat the game.
+      你目前没有用于更改符文外观的符文皮肤。你可以通过商店标签页或通关游戏来解锁它们。
       <br>
       <br>
       <span v-if="hasSpecialTypes">
-        Enabling this setting will allow you to change individual Glyphs to special cosmetic types you have unlocked.
+        启用该设置后，你可以使用已解锁的符文皮肤，来更改单个符文的外观。
       </span>
       <span v-else>
-        Enabling or disabling this option will currently do nothing.
+        目前，启用或禁用此选项之后，什么都不会发生。
       </span>
     </div>
     <PrimaryButton
       class="o-primary-btn--subtab-option"
       @click="resetIndividual"
     >
-      Reset all individual Glyph cosmetics
+      重置所有个人修改的符文皮肤
     </PrimaryButton>
   </div>
 </template>

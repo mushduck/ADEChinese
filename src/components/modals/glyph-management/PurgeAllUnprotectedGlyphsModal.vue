@@ -14,24 +14,23 @@ export default {
   },
   computed: {
     refiningSacrificingOrDeleting() {
-      if (this.isRefining) return `Refine`;
-      if (this.isSacrificing) return `Sacrifice`;
-      return `delete`;
+      if (this.isRefining) return `精炼`;
+      if (this.isSacrificing) return `献祭`;
+      return `移除`;
     },
     topLabel() {
-      return `You are about to ${this.refiningSacrificingOrDeleting} all unprotected Glyphs`;
+      return `你将要${this.refiningSacrificingOrDeleting}所有未受保护的符文`;
     },
     message() {
-      return `Are you sure you want to ${this.refiningSacrificingOrDeleting} all unprotected Glyphs
-        in your inventory?`;
+      return `你确定要${this.refiningSacrificingOrDeleting}仓库中所有未受保护的符文吗？`;
     },
     extraMessage() {
-      if (this.glyphsDeleted === 0) return `This will ${this.refiningSacrificingOrDeleting} no Glyphs.`;
+      if (this.glyphsDeleted === 0) return `这将不会${this.refiningSacrificingOrDeleting}任何符文。`;
       if (this.glyphsDeleted === this.glyphsTotal) {
-        return `This will ${this.refiningSacrificingOrDeleting} all your Glyphs.`;
+        return `这将${this.refiningSacrificingOrDeleting}全部符文。`;
       }
-      return `This will ${this.refiningSacrificingOrDeleting} 
-        ${formatInt(this.glyphsDeleted)}/${formatInt(this.glyphsTotal)} of your Glyphs.`;
+      return `这将${this.refiningSacrificingOrDeleting} 
+        ${formatInt(this.glyphsDeleted)}/${formatInt(this.glyphsTotal)} 个符文。`;
     },
 
     // These two don't need to be reactive since the modal force-closes itself whenever glyphs change

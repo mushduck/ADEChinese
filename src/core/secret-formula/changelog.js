@@ -9,9 +9,31 @@ export const changelog = [
    * }
    */
   {
-    date: [2026, 9, 30],
-    name: "v2.0.0: The Serpent Ariseth",
-    info: `
+      date: [2026, 10, 4],
+      name: "《反物质维度：终局》v2.0.7 汉化版发布",
+      info: `
+<ul>
+<li>本模组由松茸不吃柯尔鸭（QQ:3151643233）全程汉化，吸收了AD群友们的经验，并由ADChinese作者aquamarine309（QQ:2854608474）提供原版的大部分汉化。</li>
+<li>若需要得到帮助，请加反物质维度交流群611146621了解更多！一天几百个群友在线，氛围非常好。</li>
+<li>本模组全部使用硬编码汉化，汉化约300小时完工。</li>
+<li>我没想过v2.0会这么难翻译...三天的时间都在对着冲突抓狂。（</li>
+</ul>`
+    },
+  {
+      date: [2026, 8, 11],
+      name: "《反物质维度：终局》v1.1 汉化版发布",
+      info: `
+<ul>
+<li>本模组由松茸不吃柯尔鸭（QQ:3151643233）全程汉化，吸收了AD群友们的经验，并由ADChinese作者aquamarine309（QQ:2854608474）提供原版的大部分汉化。</li>
+<li>若需要得到帮助，请加反物质维度交流群611146621了解更多！一天几百个群友在线，氛围非常好。</li>
+<li>本模组全部使用硬编码汉化，汉化约200小时完工。</li>
+<li>游玩愉快！底下的更新我不想动了（</li>
+</ul>`
+    },
+    {
+      date: [2026, 9, 30],
+      name: "v2.0.0: The Serpent Ariseth",
+      info: `
 Thus concludeth the Endgame Update.
 <br>
 <br>
@@ -60,7 +82,7 @@ Thus concludeth the Endgame Update.
 </ul>
 <br>
 `
-  },
+    },
   {
     date: [2026, 9, 3],
     name: "v1.2.0: The Update that no one asked for",

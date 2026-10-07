@@ -54,7 +54,7 @@ export default {
       return text;
     },
     sacrificeText() {
-      return this.capRift.galaxyGeneratorText.replace("$value", this.capRiftName);
+      return this.capRift ? this.capRift.galaxyGeneratorText.replace("$value", this.capRiftName) : "";
     },
     emphasisedStart() {
       return Decimal.pow(this.generatedGalaxies.div(this.cap), 0.45).toNumber();
@@ -74,7 +74,7 @@ export default {
       this.cap = GalaxyGenerator.generationCap;
       this.capRift = GalaxyGenerator.capRift;
       this.sacrificeActive = GalaxyGenerator.sacrificeActive;
-      this.barWidth = (this.isCapped ? this.capRift.reducedTo : this.emphasisedStart);
+      this.barWidth = (this.isCapped && this.capRift ? this.capRift.reducedTo : this.emphasisedStart);
       if (this.capRift) this.capRiftName = wordShift.wordCycle(this.capRift.name);
       this.galGenInstability = GalaxyGenerator.galGenInstability;
       this.harshGalGenInstability = GalaxyGenerator.harshGalGenInstability;
@@ -87,15 +87,13 @@ export default {
       this.isSecondInstabilityShown = this.galaxies.gte(this.harshInstabilityStart);
     },
     increaseCap() {
-      if (GalaxyGenerator.isCapped) GalaxyGenerator.startSacrifice();
+      GalaxyGenerator.startSacrifice();
     },
     toggleCollapse() {
       player.celestials.pelle.collapsed.galaxies = !this.isCollapsed;
     },
     unlock() {
-      player.celestials.pelle.galaxyGenerator.unlocked = true;
-      Pelle.quotes.galaxyGeneratorUnlock.show();
-      if (player.endgames >= 1) Pelle.quotes.galgen2.show();
+      GalaxyGenerator.unlock();
     }
   },
 };
@@ -110,7 +108,7 @@ export default {
         class="c-collapse-icon-clickable"
         @click="toggleCollapse"
       />
-      Galaxy Generator
+      星系生成器
     </div>
     <div
       v-if="!isCollapsed"
@@ -118,30 +116,28 @@ export default {
     >
       <div v-if="isUnlocked">
         <div>
-          You have a total of
+          你总共拥有
           <span class="c-galaxies-amount">{{ galaxyText }}</span>
-          Galaxies.
-          <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/s</span>
+          个星系。
+          <span class="c-galaxies-amount">+{{ format(galaxiesPerSecond, 2, 1) }}/秒</span>
           <div v-if="isInstabilityShown">
-            Your Galaxy Generator Instability Magnitude is
-            <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>,
-            which is dividing Galaxies above {{ format(instabilityStart, 2, 1) }} by
-            <span class="c-galaxies-amount">{{ format(generationReduction, 2, 1) }}</span>.
+            你的星系生成器不稳定性为
+            <span class="c-galaxies-amount">{{ format(galGenInstability, 2, 1) }}</span>，将数量超过{{ format(instabilityStart, 2, 1) }}的星系产量除以
+            <span class="c-galaxies-amount">{{ format(generationReduction, 2, 1) }}</span>。
           </div>
           <br>
           <div v-if="isSecondInstabilityShown">
             <span class="c-danger-text">
-              Your Galaxy Generator has produced too many Galaxies, and is starting to break down.
-              This started at {{ format(harshInstabilityStart, 2, 1) }} Galaxies.
+              你的星系生成器生成了太多的星系，现已开始损坏。
+              损坏开始于 {{ format(harshInstabilityStart, 2, 1) }} 星系。
               <br>
-              This effect is currently raising your Galaxy Generator Instability Magnitude by
-              <span class="c-galaxies-amount">{{ formatPow(harshGalGenInstability, 2, 3) }}</span>,
-              making it effectively equal to
-              <span class="c-galaxies-amount">{{ format(effectiveInstability, 2, 1) }}</span>.
+              损坏效果将星系生成器不稳定性
+              <span class="c-galaxies-amount">{{ formatPow(harshGalGenInstability, 2, 3) }}</span>，
+              让其实际值增加到
+              <span class="c-galaxies-amount">{{ format(effectiveInstability, 2, 1) }}</span>。
               <br>
-              Therefore, whereas your Galaxy production would normally be divided by the number above,
-              it is instead being divided by
-              <span class="c-galaxies-amount">{{ format(trueGenerationReduction, 2, 1) }}</span>.
+              因此，星系产量实际被除以了
+              <span class="c-galaxies-amount">{{ format(trueGenerationReduction, 2, 1) }}</span>。
             </span>
           </div>
         </div>
@@ -167,20 +163,20 @@ export default {
                 v-if="!sacrificeActive"
                 class="c-big-text"
               >
-                Sacrifice your {{ capRiftName }}
+                献祭你的{{ capRiftName }}
               </span>
               <span
                 v-else
                 class="c-big-text"
               >
-                Getting rid of all that {{ capRiftName }}...
+                除去所有的{{ capRiftName }}...
               </span>
             </div>
             <div
               v-else
               class="c-increase-cap-text c-medium-text"
             >
-              {{ format(generatedGalaxies, 2) }} / {{ format(cap, 2) }} Galaxies generated
+              已生成 {{ format(generatedGalaxies, 2) }} / {{ format(cap, 2) }} 星系
             </div>
           </button>
         </div>
@@ -198,13 +194,13 @@ export default {
         class="c-generator-unlock-button"
         @click="unlock"
       >
-        Unlock the Galaxy Generator
+        解锁星系生成器
       </button>
       <button
         v-if="!isDilated && !isFinalized"
         class="c-generator-locked-button"
       >
-        You must be inside Dilation to unlock the Galaxy Generator
+        进入时间膨胀以解锁星系生成器
       </button>
     </div>
   </div>
@@ -280,7 +276,6 @@ export default {
   background-color: #c1eaf0;
   border: var(--var-border-width, 0.1rem) solid var(--color-pelle--base);
   border-radius: var(--var-border-radius, 0.5rem);
-  /* box-shadow is here to prevent a weird grey border forming around the background */
   box-shadow: inset 0 0 0.1rem 0.1rem var(--color-pelle--base);
   margin: 1rem;
   padding: 2rem;

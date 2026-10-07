@@ -65,36 +65,36 @@ export default {
   <div class="c-subtab-option-container">
     <PrimaryToggleButton
       v-model="autobuyersOn"
-      on="Pause autobuyers"
-      off="Resume autobuyers"
+      on="暂停自动购买器"
+      off="恢复自动购买器"
       class="o-primary-btn--subtab-option"
     />
     <PrimaryButton
       class="o-primary-btn--subtab-option"
       @click="toggleAllAutobuyers()"
     >
-      {{ allAutobuyersDisabled ? "Enable" : "Disable" }} all autobuyers
+      {{ allAutobuyersDisabled ? "启用" : "禁用" }}所有自动购买器
     </PrimaryButton>
     <PrimaryButton
       class="o-primary-btn--subtab-option"
       @click="toggleAntimatterSingles()"
     >
-      Set {{ isFlipped ? "MD" : "AD" }} autobuyers to buy {{ antimatterAutobuyersBuyMax ? "singles" : "max" }}
+      设置{{this.isFlipped ? "正物质" : "反物质"}}维度自动购买器购买 {{ antimatterAutobuyersBuyMax ? "单个" : "最大" }}
     </PrimaryButton>
     <span v-if="false">
       <PrimaryButton
         v-if="showContinuum"
         class="o-primary-btn--subtab-option"
       >
-        Continuum is disabled
+        已禁用连续统
       </PrimaryButton>
     </span>
     <span v-else>
       <PrimaryToggleButton
         v-if="showContinuum"
         v-model="disableContinuum"
-        on="Enable Continuum"
-        off="Disable Continuum"
+        on="启用连续统"
+        off="禁用连续统"
         class="o-primary-btn--subtab-option"
       />
     </span>

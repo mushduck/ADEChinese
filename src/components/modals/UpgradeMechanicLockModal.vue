@@ -31,9 +31,9 @@ export default {
   },
   computed: {
     upgradeStr() {
-      if (this.isEndgame) return "Endgame Upgrade";
-      if (this.isDual) return "Duality Upgrade";
-      return this.isImaginary ? "Imaginary Upgrade" : "Reality Upgrade";
+      if (this.isEndgame) return "终局升级";
+      if (this.isDual) return "重构升级";
+      return this.isImaginary ? "虚幻升级" : "现实升级";
     },
     lockEvent() {
       return this.specialLockText ?? this.upgrade.lockEvent;
@@ -55,23 +55,22 @@ export default {
       {{ upgradeStr }} Condition Lock
     </template>
     <div class="c-modal-message__text">
-      Are you sure you wish to {{ lockEvent }}? Doing this right now will cause you to
+      你确定要{{ lockEvent }}吗？现在这么做会导致你
       <span class="l-emphasis">
-        fail the requirement for the {{ upgradeStr }} "{{ upgrade.name }}"
+        未能满足 {{ upgradeStr }} "{{ upgrade.name }}" 的要求。
       </span>
       <span :ach-tooltip="upgrade.requirement">
         <i class="fas fa-question-circle" />
       </span>
       <br>
       <br>
-      Selecting "Cancel" will close this modal with no effect, while selecting "Disable Lock" will disable the
-      requirement check for this upgrade and prevent this message from reappearing unless you turn it back on.
+      选择“取消”将关闭此对话框而不产生任何效果，而选择“禁用锁定”将禁用此升级的要求检查，并防止此消息再次出现，除非你重新开启。
       <br>
       <br>
-      Neither of these options will perform the action you just attempted, so you will need to try again.
+      这两个选项都不会执行你刚刚尝试的操作，因此你需要重新尝试。
     </div>
     <template #confirm-text>
-      Disable Lock
+      禁用锁定
     </template>
   </ModalWrapperChoice>
 </template>

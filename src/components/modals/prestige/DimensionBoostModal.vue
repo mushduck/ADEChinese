@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     topLabel() {
-      return `You are about to do a Dimension Boost Reset`;
+      return `你将要进行一次维度提升`;
     },
     message() {
       const keepDimensions = (Perk.antimatterNoReset.canBeApplied || Achievement(111).canBeApplied ||
@@ -27,13 +27,11 @@ export default {
         && (!player.disablePostReality || (LHC.voidRunning && player.endgame.largeHadronCollider.void.nullified)
         || (Alpha.isRunning && Alpha.currentStage >= 12) || (LHC.voidRunning && NullUpgrade.limerick1.isBought)
         || SlabdrillUnlocks.eternityChallengeTen.isUnlocked)
-        ? `not actually reset anything due to an upgrade you have which prevents
-          ${this.isFlipped ? "Matter" : "Antimatter"} and ${this.isFlipped ? "Matter" : "Antimatter"} Dimensions
-          from being reset in this situation. You will still gain the multiplier from the Boost, as usual.`
-        : `reset your ${this.isFlipped ? "Matter" : "Antimatter"} and ${this.isFlipped ? "Matter" : "Antimatter"} Dimensions.
-          Are you sure you want to do this?`;
-
-      return `This will ${keepDimensions}`;
+        ? `由于你拥有的某项升级阻止了${this.isFlipped ? "正物质" : "反物质"}及${this.isFlipped ? "正物质" : "反物质"}维度重置，
+          本次操作实际上不会重置任何内容。但你仍将照常获得维度提升的倍数加成。`
+        : `这将重置你的${this.isFlipped ? "正物质" : "反物质"}和${this.isFlipped ? "正物质" : "反物质"}维度。
+          你确定要这么做吗？`;
+      return `${keepDimensions}`;
     },
   },
   methods: {

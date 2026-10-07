@@ -52,7 +52,7 @@ export default {
     const x = str.split("");
     for (let i = 0; i < x.length * frac; i++) {
       const randomIndex = Math.floor(predictableRandom(Math.floor(Date.now() / 500) % 964372 + 1.618 * i) * x.length);
-      x[randomIndex] = randomSymbol();
+      x[randomIndex] = randomSymbol(x[randomIndex].charCodeAt(0));
     }
     return x.join("");
   },

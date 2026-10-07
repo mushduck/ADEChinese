@@ -53,10 +53,10 @@ export function tryEnterUniverse(id) {
   let name;
   switch (id) {
     case 1:
-      name = "Transient";
+      name = "流幻";
       break;
     case 2:
-      name = "Tangible";
+      name = "真际";
       break;
     case 3:
       name = "Dark";

@@ -44,16 +44,15 @@ export default {
     },
     ESgenRateText() {
       if (this.skillGeneration.lt(1 / 3600)) {
-        return `one ES every ${TimeSpan.fromSeconds(
-          this.skillGeneration.reciprocal()).toStringShort(false)}`;
+        return `每 ${TimeSpan.fromSeconds(this.skillGeneration.reciprocal()).toStringShort(false)} 生成 1 终局能力`;
       }
       if (this.skillGeneration.lt(0.1)) {
-        return `${format(this.skillGeneration.times(3600), 2, 2)} ES/hour`;
+        return `每小时生成 ${format(this.skillGeneration.times(3600), 2, 2)} 终局能力`;
       }
-      return `${format(this.skillGeneration, 2, 2)} ES/sec`;
+      return `每秒生成 ${format(this.skillGeneration, 2, 2)} 终局能力`;
     },
     totalEndgameSkillText() {
-      return `${quantify("total Endgame Skill", this.totalEndgameSkills, 2, 2, this.formatEndgameSkillType)}`;
+      return `${quantify("终局能力", this.totalEndgameSkills, 2, 2, this.formatEndgameSkillType)}`;
     },
     minimizeArrowStyle() {
       return {
@@ -62,7 +61,7 @@ export default {
       };
     },
     saveLoadText() {
-      return this.$viewModel.shiftDown ? "Save:" : "Load:";
+      return this.$viewModel.shiftDown ? "保存：" : "加载：";
     },
     shopBottomRowHeightStyle() {
       return {
@@ -80,19 +79,19 @@ export default {
       player.endgameMasteries.shopMinimized = !player.endgameMasteries.shopMinimized;
     },
     formatGG(gg) {
-      return `${format(gg, 2, 0)} Galaxies`;
+      return `${format(gg, 2, 0)} 星系`;
     },
     buyWithGG() {
       EndgameSkills.buyOne(false, "gg");
     },
     formatCP(cp) {
-      return `${format(cp, 2, 0)} CP`;
+      return `${format(cp, 2, 0)} 天界点数`;
     },
     buyWithCP() {
       EndgameSkills.buyOne(false, "cp");
     },
     formatDP(dp) {
-      return `${format(dp, 2, 0)} DP`;
+      return `${format(dp, 2, 0)} 毁灭粒子`;
     },
     buyWithDP() {
       EndgameSkills.buyOne(false, "dp");
@@ -140,7 +139,7 @@ export default {
         </button>
         <p class="endgameskills">
           <span class="c-es-amount">
-            {{ quantify("Endgame Skill", skillAmount, 2, 0, formatEndgameSkillType) }}
+            {{ quantify("终局能力", skillAmount, 2, 0, formatEndgameSkillType) }}
           </span>
         </p>
         <div class="l-load-tree-area">
@@ -156,8 +155,8 @@ export default {
             <span
               v-if="hasESGen"
               class="checkbox-margin"
-              ach-tooltip="This shows ES generation by default and total ES if you hold shift.
-                Check this box to swap this behavior."
+              ach-tooltip="默认显示终局能力生成量，按住Shift键时显示总终局能力。
+                勾选此选项以切换。"
             >
               <input
                 v-model="invertESgenDisplay"
@@ -168,10 +167,10 @@ export default {
               >
             </span>
             <span v-if="showESGen">
-              You are gaining {{ ESgenRateText }}.
+              你{{ ESgenRateText }}。
             </span>
             <span v-else>
-              You have {{ totalEndgameSkillText }}.
+              你拥有 {{ totalEndgameSkillText }}。
             </span>
           </div>
         </div>
@@ -205,7 +204,7 @@ export default {
             class="o-es-top-row-button c-es-buy-button c-es-buy-button--unlocked"
             @click="buyMaxSkills"
           >
-            Buy max
+            购买最大数量
           </button>
         </div>
       </div>

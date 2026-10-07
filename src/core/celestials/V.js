@@ -82,8 +82,7 @@ class VRunUnlockState extends GameMechanicState {
     Decimal.gte(playerData.runRecords[this.id], this.conditionValue)) {
       if (!V.isFlipped && this.config.isHard) break;
       this.completions++;
-      GameUI.notify.success(`You have unlocked V-Achievement
-        '${this.config.name}' tier ${formatInt(this.completions)}`);
+      GameUI.notify.success(`你已完成第 ${formatInt(this.completions)} 层级的 “${this.config.name}”`);
 
       V.updateTotalRunUnlocks();
 
@@ -186,8 +185,8 @@ export const VUpgrade = mapGameDataToObject(
 );
 
 export const V = {
-  displayName: "V",
-  possessiveName: "V's",
+  displayName: "薇",
+  possessiveName: "薇的",
   spaceTheorems: 0,
   checkForUnlocks() {
     for (const unl of VUnlocks.all) {
@@ -211,7 +210,7 @@ export const V = {
   },
   unlockCelestial() {
     player.celestials.v.unlockBits |= (1 << VUnlocks.vAchievementUnlock.id);
-    GameUI.notify.success("You have unlocked V, The Celestial Of Achievements!", 10000);
+    GameUI.notify.success("你已解锁成就之神薇！", 10000);
     V.quotes.unlock.show();
   },
   initializeRun() {

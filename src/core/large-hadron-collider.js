@@ -61,6 +61,10 @@ class AcceleratorState extends GameMechanicState {
     return this.config.name;
   }
 
+  get ChineseName() {
+    return this.config.ChineseName;
+  }
+
   get accelerator() {
     return player.endgame.largeHadronCollider.accelerators[this.config.key];
   }
@@ -132,7 +136,7 @@ class AcceleratorState extends GameMechanicState {
 
   toggle() {
     const active = Accelerators.all.filter(a => a.isActive).length;
-    if (!this.isActive && active === 1) GameUI.notify.error(`You can only have 1 Accelerator active at the same time!`);
+    if (!this.isActive && active === 1) GameUI.notify.error(`你同时只能激活一个强子加速器`);
     else this.accelerator.active = !this.accelerator.active;
   }
 
@@ -224,7 +228,7 @@ export const CMilestones = {
 
   tesseractEqualizer(bought, free) {
     const effectiveC = Math.clamp((this.c - 0.5) * 2, 0, 1);
-    return Math.pow((Math.max(bought, 1) * Math.max(free, 1)) / (bought + free), effectiveC) * (bought + free);
+    return Math.pow((Math.max(bought, 1) * Math.max(free, 1)) / Math.max(bought + free, 1), effectiveC) * (bought + free);
   },
 
   antimatterEqualizer(mults, tick) {
@@ -237,7 +241,7 @@ export const CMilestones = {
 
   tickspeedEqualizer(bought, free) {
     const effectiveC = Math.clamp((this.c - 0.85) * 20/3, 0, 1);
-    return Decimal.pow(bought.max(1).times(free.max(1)).div(bought.add(free)), effectiveC).times(bought.add(free));
+    return Decimal.pow(bought.max(1).times(free.max(1)).div(bought.add(free).max(1)), effectiveC).times(bought.add(free));
   },
 
   bhImprovement(mult) {

@@ -13,12 +13,12 @@ export default {
   },
   computed: {
     importDestString() {
-      return this.intoEmpty ? "into an empty Tree" : "with your current Tree";
+      return this.intoEmpty ? "空的终局专精树" : "当前终局专精树";
     }
   },
   methods: {
     formatSkillCost(es) {
-      const strES = `${formatWithCommas(es)} ES`;
+      const strES = `${formatWithCommas(es)} 终局能力`;
       return strES;
     }
   },
@@ -28,13 +28,13 @@ export default {
 <template>
   <div class="l-modal-import-tree__tree-info-line">
     <div v-if="tree.endgameSkills === 0">
-      <i>Importing this {{ importDestString }} will not purchase any new Endgame Masteries.</i>
+      <i>导入{{ importDestString }}将不会购买新的终局专精。</i>
     </div>
     <div v-else>
-      Importing {{ importDestString }} will purchase:
+      导入后购买如下终局专精以覆盖{{ importDestString }}：
       <br>
       {{ tree.newMasteries }}
-      (Cost: {{ formatSkillCost(tree.endgameMasteries) }})
+      （价格：{{ formatSkillCost(tree.endgameMasteries) }}）
     </div>
     <br>
   </div>
