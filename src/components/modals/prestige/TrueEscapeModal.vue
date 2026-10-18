@@ -8,10 +8,10 @@ export default {
   },
   computed: {
     message() {
-      return `In the midst of the chaos, you broke free of Slabdrill's grip. You can now truly escape.`;
+      return `在混沌中，你挣脱了渊蛇的束缚。现在，你终于可以真正从这诅咒之地脱身了。`;
     },
     entranceLabel() {
-      return `SLABDRILL'S REALITY IS COLLAPSING`;
+      return `渊蛇的现实正在崩溃`;
     }
   },
   methods: {
@@ -36,7 +36,7 @@ export default {
       {{ message }}
     </div>
     <template #confirm-text>
-      ESCAPE
+      逃离
     </template>
   </ModalWrapperChoice>
 </template>
