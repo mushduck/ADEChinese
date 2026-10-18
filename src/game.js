@@ -1073,7 +1073,7 @@ export function gameLoop(passedDiff, options = {}) {
     player.celestials.slabdrill.warpTick += realDiff;
   }
 
-  if (player.celestials.slabdrill.isWarping && !Slabdrill.isCursed && player.celestials.slabdrill.warpTick >= 2000) {
+  if (player.celestials.slabdrill.isWarping && !Slabdrill.isCursed && !Slabdrill.isDestroyed && player.celestials.slabdrill.warpTick >= 2000) {
     Slabdrill.realityWarp();
     player.celestials.slabdrill.warpTick = 5000;
   }

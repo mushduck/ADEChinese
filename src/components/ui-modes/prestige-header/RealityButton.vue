@@ -150,8 +150,9 @@ export default {
       else if (this.readyToWarp && !this.isWarping && !this.cursed && !this.destroyed) {
         requestRealityWarp();
       }
-      else if (this.readyToWarp && !this.isWarping && !this.cursed && !this.destroyed) {
-        requestRealityWarp();
+      else if (this.readyToWarp && this.isWarping && !this.cursed && !this.destroyed) {
+        Slabdrill.realityWarp();
+        player.celestials.slabdrill.warpTick = 5000;
       }
       else if (this.readyToWarp && this.isWarping && !this.cursed && !this.destroyed) {
         Slabdrill.realityWarp();

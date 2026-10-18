@@ -11,11 +11,14 @@ export default {
   },
   computed: {
     formattedCompletion() {
+      /* 这些，不需要了 
       if (Math.floor((this.currentCompletions % 100) / 10) === 1) return `${this.currentCompletions}th`;
       else if ((this.currentCompletions % 10) === 1) return `${this.currentCompletions}st`;
       else if ((this.currentCompletions % 10) === 2) return `${this.currentCompletions}nd`;
       else if ((this.currentCompletions % 10) === 3) return `${this.currentCompletions}rd`;
       else return `${this.currentCompletions}th`;
+      */
+      return `${this.currentCompletions}`;
     },
     style() {
       return {

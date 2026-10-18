@@ -133,6 +133,10 @@ export const GalaxyGenerator = {
     return PelleRifts[this.capObj?.rift];
   },
 
+  get isCapped() {
+    return new Decimal(this.generationCap).lte(this.generatedGalaxies);
+  },
+
   get sacrificeActive() {
     return player.celestials.pelle.galaxyGenerator.sacrificeActive;
   },

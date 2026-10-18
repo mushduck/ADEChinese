@@ -26,7 +26,7 @@ export default {
   },
   computed: {
     resetTerm() {
-      if (this.isCursed) return "perform a Core Jump";
+      if (this.isCursed) return "退出重进核心";
       return this.isDoomed ? "重启本次末日" : "重启本次现实";
     },
   },
