@@ -53,6 +53,6 @@ export default {
 }
 
 .l-high-index {
-  z-index: 9;
+  z-index: 10000 !important;
 }
 </style>
