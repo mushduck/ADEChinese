@@ -26,7 +26,7 @@ export default {
       return `你将要进入挑战 ${this.id}`;
     },
     reward() {
-      return `完成该挑战的奖励为: ${this.challenge._config.reward}`;
+      return `完成该挑战的奖励为: ${this.challenge._config.reward()}`;
     },
     condition() {
       let conditionOfChallenge = this.challenge._config.description;

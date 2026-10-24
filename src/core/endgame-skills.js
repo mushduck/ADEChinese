@@ -151,5 +151,14 @@ export const EndgameSkills = {
     let totalCost = list.map(em => em.cost).reduce(Number.sumReducer, 0);
     totalCost += masteryIncrease.entanglementCost();
     return totalCost;
+  },
+
+  getTotalMasteryCost() {
+    let perma = 0;
+    if (EndgameMastery.endgameUpgrades.isBought) perma += EndgameMastery.endgameUpgrades.cost;
+    if (EndgameMastery.permaMasteries.isBought) perma += EndgameMastery.permaMasteries.cost;
+    if (EndgameMastery.timeCompression.isBought) perma += EndgameMastery.timeCompression.cost;
+    if (EndgameMastery.celestialReality.isBought) perma += EndgameMastery.celestialReality.cost;
+    return perma + EndgameSkills.calculateEndgameMasteriesCost();
   }
 };

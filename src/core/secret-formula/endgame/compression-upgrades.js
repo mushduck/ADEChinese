@@ -73,21 +73,21 @@ export const compressionUpgrades = {
     id: 6,
     cost: 5e7,
     description: () => `在压缩中基于热能辐射和本次终局的真实用时为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供倍率加成`,
-    effect: () => Currency.thermalRadiation.value.pow(Time.thisEndgameRealTime.totalMinutes.pow(0.75)).clampMin(1),
+    effect: () => player.disablePostReality ? DC.D1 : Currency.thermalRadiation.value.pow(Time.thisEndgameRealTime.totalMinutes.pow(0.75)).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   adBigMultTR: {
     id: 7,
     cost: 2e12,
     description: () => `基于热能辐射为${player.universes.current === 2 ? "正物质" : "反物质"}维度提供倍率加成，此倍率不受时间压缩的影响`,
-    effect: () => Currency.thermalRadiation.value.pow(1000).clampMin(1),
+    effect: () => player.disablePostReality ? DC.D1 : Currency.thermalRadiation.value.pow(1000).clampMin(1),
     formatEffect: value => formatX(value, 2, 1)
   },
   entanglementSplit: {
     id: 8,
     cost: 1e10,
     description: "你可以在终局专精树的纠缠分叉上选择所有路径，基于热能辐射为所有机器获取量提供指数加成",
-    effect: () => Currency.thermalRadiation.value.max(1).log10().div(308).add(1).pow(2),
+    effect: () => player.disablePostReality ? DC.D1 : Currency.thermalRadiation.value.max(1).log10().div(308).add(1).pow(2),
     formatEffect: value => formatPow(value, 2, 3)
   },
   compressionPenalty: {
@@ -99,7 +99,7 @@ export const compressionUpgrades = {
     id: 10,
     cost: 1e15,
     description: "霍金辐射生产终局能力",
-    effect: () => Currency.hawkingRadiation.value.pow(0.5),
+    effect: () => player.disablePostReality ? DC.D0 : Currency.hawkingRadiation.value.pow(0.5),
     formatEffect: value => `${format(value, 2, 1)}/秒`
   }
 };

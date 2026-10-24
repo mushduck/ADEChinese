@@ -342,6 +342,7 @@ export const ra = {
           player.reality.glyphs.sac.effarig).add(player.reality.glyphs.sac.reality);
         return player.disablePostReality ? 1 : 1 + Decimal.log10(Decimal.log10(sacrificeSum.add(1)).add(1)).div(20).toNumber();
       },
+      formatEffect: value => formatPow(value, 2, 3),
       pet: "teresa",
       level: 100,
       displayIcon: `<span class="fas fa-gear"></span>`,

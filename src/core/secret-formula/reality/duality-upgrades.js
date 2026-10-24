@@ -343,7 +343,7 @@ export const dualityUpgrades = [
     name: "无时超升",
     id: 30,
     cost: new Decimal("1e900"),
-    requirement: () => `在被毁灭或被诅咒的现实外达到 ${format(Decimal.pow10(1e272), 2, 2)} ${player.universes.current === 2 ? "正物质" : "反物质"}`,
+    requirement: () => `在被毁灭或被诅咒的现实外达到 ${format(Decimal.pow10(Decimal.pow10(Math.E * 100)), 2, 2)} ${player.universes.current === 2 ? "正物质" : "反物质"}`,
     hasFailed: () => Pelle.isDoomed || Slabdrill.isCursed,
     checkRequirement: () => player.antimatter.gte(Decimal.pow10(Decimal.pow10(Math.E * 100))) && !Pelle.isDoomed && !Slabdrill.isCursed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,

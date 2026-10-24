@@ -286,9 +286,42 @@ export const sidebarResources = [
   {
     id: 36,
     optionName: "幽蛇之力",
-    isAvailable: () => Slabdrill.isCursed,
+    isAvailable: () => Slabdrill.isCursed || Slabdrill.isDestroyed,
     value: () => Currency.serpentinePower.value,
     formatValue: x => format(x, 2, 2),
     formatClass: "o-sidebar-currency--slabdrill",
+  },
+
+  {
+    id: 37,
+    optionName: "流幻之光",
+    isAvailable: () => Universes.isUnlocked(1),
+    value: () => Currency.ephemeralLight.value,
+    formatValue: x => format(x, 2, 2),
+    formatClass: "o-sidebar-currency--ephemeral",
+  },
+  {
+    id: 38,
+    optionName: "霍金辐射",
+    isAvailable: () => PlayerProgress.compressionUnlocked(),
+    value: () => Currency.hawkingRadiation.value,
+    formatValue: x => format(x, 2, 2),
+    formatClass: "o-sidebar-currency--compression",
+  },
+  {
+    id: 39,
+    optionName: "热能辐射",
+    isAvailable: () => PlayerProgress.compressionUnlocked(),
+    value: () => Currency.thermalRadiation.value,
+    formatValue: x => format(x, 2),
+    formatClass: "o-sidebar-currency--compression",
+  },
+  {
+    id: 40,
+    optionName: "恒星增强器",
+    isAvailable: () => Universes.isUnlocked(2),
+    value: () => Currency.stellarAugmenters.value,
+    formatValue: x => format(x, 2, 2),
+    formatClass: "o-sidebar-currency--power",
   },
 ];

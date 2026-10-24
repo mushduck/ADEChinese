@@ -329,7 +329,7 @@ class PowerCoreState extends GameMechanicState {
 LHC.powerCores = new PowerCoreState();
 
 export function enterTheVoid() {
-  if (Slabdrill.isCursed || player.endgame.overcharge.isRunning || player.compression.active || player.universes.current !== 0) return;
+  if (Slabdrill.isCursed || player.endgame.overcharge.isRunning || player.compression.active || player.universes.current !== 0 || LHC.nullifiedVoidRunning) return;
   if (GameEnd.creditsEverClosed) return;
   player.disablePostReality = true;
   Endgame.resetNoReward();
@@ -370,7 +370,7 @@ export function enterTheVoid() {
 };
 
 export function exitTheVoid() {
-  if (Slabdrill.isCursed || player.endgame.overcharge.isRunning || player.compression.active || player.universes.current !== 0) return;
+  if (Slabdrill.isCursed) return;
   if (GameEnd.creditsEverClosed) return;
   player.disablePostReality = false;
   Endgame.resetNoReward();
@@ -379,7 +379,7 @@ export function exitTheVoid() {
 };
 
 export function enterNullifiedVoid() {
-  if (Slabdrill.isCursed) return;
+  if (Slabdrill.isCursed || player.endgame.overcharge.isRunning || player.compression.active || player.universes.current !== 0 || LHC.voidRunning) return;
   if (GameEnd.creditsEverClosed) return;
   Endgame.resetNoReward();
   player.endgame.largeHadronCollider.void.isRunning = true;

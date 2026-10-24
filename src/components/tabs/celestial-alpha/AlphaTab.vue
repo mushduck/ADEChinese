@@ -60,7 +60,7 @@ export default {
       this.isDestroyed = Alpha.isDestroyedForDisplay;
     },
     startRun() {
-      if (this.isDoomed) return;
+      if (this.isDoomed || this.isRunning) return;
       Modal.celestials.show({ name: "阿尔法", number: 7 });
     }
   }

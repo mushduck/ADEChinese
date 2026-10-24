@@ -33,7 +33,7 @@ export const accelerators = {
       {
         resource: "potency",
         requirement: 0.75,
-        description: () => `将天界维度转化为连续统，受连续统倍率 ${formatPow(0.1, 1, 1)} 的加成`
+        description: () => `将天界维度转化为连续统，受连续统倍率 ${formatPow(0.001, 2, 3)} 的加成`
       },
     ]
   },

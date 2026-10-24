@@ -1775,7 +1775,7 @@ export const celestialNavigation = {
   "cd-break": {
     visible: () => Alpha.isDestroyedForDisplay,
     complete: () => {
-      if (player.endgame.celDimExpansion.isBroken) return 1;
+      if (player.endgame.celDimExpansion.isBroken || PlayerProgress.celestialEternityUnlocked()) return 1;
       if (player.endgame.celDimExpansion.isBreakUnlocked) return 0.999;
       return Decimal.clampMax(0.5, Currency.celestialInfinityPoints.value.div(20000)).add(
         Decimal.clampMax(0.499, CelestialInfinityUpgrade.all.countWhere(u => u.isBought) / 18)).toNumber();
@@ -1806,7 +1806,7 @@ export const celestialNavigation = {
     }
   },
   "cd-eternity": {
-    visible: () => player.endgame.celDimExpansion.isBroken,
+    visible: () => player.endgame.celDimExpansion.isBroken || PlayerProgress.celestialEternityUnlocked(),
     complete: () => {
       if (PlayerProgress.celestialEternityUnlocked()) return 1;
       return Decimal.clampMax(0.999, Currency.celestialInfinityPoints.value.add(1).log10().div(Decimal.log10(DC.NUMMAX))).toNumber();
@@ -1839,12 +1839,13 @@ export const celestialNavigation = {
   "slab-unlock": {
     visible: () => PlayerProgress.celestialEternityUnlocked(),
     complete: () => {
-      if (Slabdrill.isCursed) return 1;
+      if (Slabdrill.isCursed || Slabdrill.isDestroyed) return 1;
       if (CelestialEternityPlusUpgrade.oldStoneSlabAndSteelDrill.isBought) return 0.999;
       return Decimal.clampMax(0.998, Currency.celestialEternityPoints.value.add(1).pLog10().div(4000)).toNumber();
     },
     node: {
-      clickAction: () => Slabdrill.isCursed ? Tab.celestials.slabdrill.show(true) : Tab.cdexpansion.subtabs[3].show(true),
+      clickAction: () => (Slabdrill.isCursed || Slabdrill.isDestroyed)
+        ? Tab.celestials.slabdrill.show(true) : Tab.cdexpansion.subtabs[3].show(true),
       incompleteClass: "c-celestial-nav__test-incomplete",
       symbol: "⁹δ",
       symbolOffset: "1.6",
