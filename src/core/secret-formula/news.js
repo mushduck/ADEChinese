@@ -8089,12 +8089,12 @@ export const news = [
   },
   {
     id: "ai98",
-    text: "Sorry, your reality has disconnected from the 9th dimension. You will now remain in the 8th dimension until further notice."
+    text: "为什么我逃离不了被诅咒的现实？"
   },
   (function() {
     let wasClicked = false;
-    const normal = "Now holding Infinity!";
-    const clicked = "<#351477791457542144>";
+    const normal = "点我摸摸头";
+    const clicked = "摸摸捏";
     return {
       id: "ai99",
       get text() {
@@ -8386,91 +8386,91 @@ export const news = [
     id: "ai164",
     text: "点击查看洛谷站长kkksc03名言",
     onClick() { window.open("https://www.bilibili.com/video/BV1GJ411x7h7/?spm_id_from=333.337.search-card.all.click&vd_source=51c470b9c46e3223f885aabdbe0165c4"); }
-  },/*
+  },
   {
     id: "ai165",
-    text: "AD has anti-parts, you'll hate them"
+    text: "像我这样头脑不好的人，活着不就是为了被人一直利用的吗？"
   },
   {
     id: "ai166",
-    text: "AD is basically a badly disguised dystopia at this point"
+    text: "这是，为了所爱之人的故事。"
   },
   {
     id: "ai167",
-    text: "Hold M. You forgot to take all the anti-matter out!"
+    text: "幸福就是小小的死神把爱带到我这里哦。"
   },
   {
     id: "ai168",
-    text: "AD will be implemented in 5 hours"
+    text: "终日纠结于不幸和痛苦之人，幸福是不会来眷顾的。"
   },
   {
     id: "ai169",
-    text: "Click this to unlock the 10th Dimension"
+    text: "An apple a day makes doctor away. 每天玩苹果手机的人，取得不了博士学位。"
   },
   {
     id: "ai170",
-    text: "Click here to complete a secret against HEVI"
+    text: "爱让记忆变得更加珍贵。AI has made RAM more expensive."
   },
   {
     id: "ai171",
-    text: "You are doing a good job there"
+    text: "无论时光荏苒，无论荆棘几度，无论你的颜姿，将化作何形，我都将于你相迎......"
   },
   {
     id: "ai172",
-    text: "Hevi? Are you sure you want to buy that?"
+    text: "向神明起誓，我赌上这一生来爱你。"
   },
   {
     id: "ai173",
-    text: "Buy premium antimatter to help the world's least developed get ahead!"
+    text: "珍爱如此当然的事，热爱如此普通的你，喜爱如此帅气的琉璃，心中爱意不止。"
   },
   {
     id: "ai174",
-    text: "One of the most influential people in neuroscience believes that our perception of reality comes from 10 dimensions instead of 8"
+    text: `我向Claude发送了 "I'm fine, thank you, and you?"，过了一会Claude给我发过来了我小学英语老师的姓名。`
   },
   {
     id: "ai175",
-    text: "Why is there so many zeroes in 'nowhere'?"
+    text: "这个夏天的故事，永远不会结束。"
   },
   {
     id: "ai176",
-    text: "There are no bugs in this game, they're just features"
+    text: "人能能够凭自己的力量实现进化, 为此首先必须了解真正的自己."
   },
   {
     id: "ai177",
-    text: "\"Click to advance 5 hours in time.\" (Now only show up after you advance more than an hour ago)"
+    text: "记忆并不只是过去的事情, 它还连接着现在和未来."
   },
   {
     id: "ai178",
-    text: "Oh god my phone is being watched"
+    text: "只有肉体和肉体的相遇才能迸发真正的火花."
   },
   {
     id: "ai179",
-    text: "Welcome to the newest version of Antimatter Dimensions. Now with less features!"
+    text: "正如要有林林总总部分才能组成一个完整的人, 而其中每一部分又要有千差万别, 才得以构成迥然不同之人."
   },
   {
     id: "ai180",
-    text: "\"That's gonna get in trouble\" (less likely to get in trouble)"
+    text: "正是因为想在过于短暂的人生里留下自己活过的证据, 人类才会把记忆寄托在东西上."
   },
   {
     id: "ai181",
-    text: "\"please don't disable the news ticker\" (Instead of having a black screen just a white one with a long, long, long, long, long, long, long, long, long, long, long, long, long, long, long, long)"
+    text: "人们大抵上既没有自己想象中那么幸福, 也没有那么不幸. 重要的是, 是否对于有期望而活着感到厌倦."
   },
   {
     id: "ai182",
-    text: "\"You have 7 biological minutes.\" (Instead of giving a boost to any strains)"
+    text: "鸟血惹人怜, 鱼伤无人问. 能发声者是幸福的."
   },
   {
     id: "ai183",
-    text: "\"According to quantum string theory, there is a fundamental connective that binds the 3rd and 8th dimensions.  This means that any pill or injection that tries to bind the 9th dimension will be thwarted and rendered useless.\" (bound to get in 10 minutes)"
+    text: "至少在终结时也要笑着死去啊，我一定会让你笑的，所以......"
   },
   {
     id: "ai184",
-    text: "\"Click this to gain a secret achievement.\" (Now only show up after you gain at least 1 antimatter, screenshot proves)"
+    text: "生命存续的过程就是不断的注定的失去, 但现在这个时刻仍有我珍惜之物的存在."
   },
   {
     id: "ai185",
-    text: "\"The secret to winning Antimatter Dimensions is to unbind the 9th dimension and unlock the 10th dimension\" (can be done only after unlocking the secret achievement: \"Eternity\" http://imgur.com/E4261C7h)"
-  },
+    text: "故事讲述的是从逃避中接受现实, 然后走出, 向着新的未来前进."
+  },/*
   {
     id: "ai186",
     text: "\"Click here to gain 1 matter.\" (only shows up after you beat IC5)",
