@@ -117,6 +117,7 @@ CodeMirror.defineSimpleMode("automato", {
     { regex: /alchemy\s+/ui, token: "keyword", next: "alchemyArgs" },
     { regex: /rifts?\s+/ui, token: "keyword", next: "riftArgs" },
     { regex: /tabs?\s+/ui, token: "keyword", next: "tabArgs" },
+    { regex: /upgrades?\s+/ui, token: "keyword", next: "upgradeArgs" },
     { regex: /blob\s\s/ui, token: "blob" },
     {
       // eslint-disable-next-line max-len
@@ -219,6 +220,31 @@ CodeMirror.defineSimpleMode("automato", {
     { regex: /\S+/ui, token: "error" },
   ],
   tabModifiers: [
+    commentRule,
+    { sol: true, next: "start" },
+    { regex: /nowait(\s+|$)/ui, token: "property", next: "commandDone" },
+    { regex: /\S+/ui, token: "error" },
+  ],
+  upgradeArgs: [
+    commentRule,
+    { sol: true, next: "start" },
+    { regex: /nowait(\s+|$)/ui, token: "property" },
+    { regex: /(reality|imaginary)(\s+|$)/ui, token: "variable-2", next: "upgradeAction" },
+    { regex: /\S+/ui, token: "error" },
+  ],
+  upgradeAction: [
+    commentRule,
+    { sol: true, next: "start" },
+    { regex: /(buy|lock|unlock)(\s+|$)/ui, token: "keyword", next: "upgradeTarget" },
+    { regex: /\S+/ui, token: "error" },
+  ],
+  upgradeTarget: [
+    commentRule,
+    { sol: true, next: "start" },
+    { regex: /\d+(-\d+)?(\s+|$)/ui, token: "number", next: "upgradeModifiers" },
+    { regex: /\S+/ui, token: "error" },
+  ],
+  upgradeModifiers: [
     commentRule,
     { sol: true, next: "start" },
     { regex: /nowait(\s+|$)/ui, token: "property", next: "commandDone" },
@@ -333,7 +359,7 @@ CodeMirror.defineSimpleMode("automato", {
     { regex: /nowait(\s|$)/ui, token: "property" },
     { regex: /".*"/ui, token: "string", next: "commandDone" },
     { regex: /'.*'/ui, token: "string", next: "commandDone" },
-    { regex: /(on|off|pour|bh1|bh2|dilation|load|respec)(\s|$)/ui, token: "variable-2" },
+    { regex: /(on|off|invert|pour|bh1|bh2|dilation|load|respec)(\s|$)/ui, token: "variable-2" },
     { regex: /(eternity|reality|use)(\s|$)/ui, token: "variable-2" },
     { regex: /(antimatter|infinity|time)(\s|$|(?=,))/ui, token: "variable-2" },
     { regex: /(active|passive|idle)(\s|$|(?=,))/ui, token: "variable-2" },
@@ -354,6 +380,8 @@ CodeMirror.defineSimpleMode("automato", {
     { regex: /(total[ \t]+)?rifts?[ \t]+milestones?(\s|$)/ui, token: "variable-2" },
     { regex: /poured[ \t]*rm(\s|$)/ui, token: "variable-2" },
     { regex: /stored[ \t]+(game[ \t]+|real[ \t]+)?time(\s|$)/ui, token: "variable-2" },
+    { regex: /ru[ \t]*\d+(\s|$)/ui, token: "variable-2" },
+    { regex: /iu[ \t]*\d+(\s|$)/ui, token: "variable-2" },
     { regex: /laitela[ \t]*tier(\s|$)/ui, token: "variable-2" },
     { regex: /(laitela[ \t]+)?entropy(\s|$)/ui, token: "variable-2" },
     { regex: /(generated([ \t]+galaxies)?|gg)(\s|$)/ui, token: "variable-2" },

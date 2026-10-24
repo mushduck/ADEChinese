@@ -297,6 +297,46 @@ createInCategory(AutomatorCurrency, "MemoryV", /(memory[ \t]*(4|v)|v[ \t]*memory
   $unlocked: () => Ra.isUnlocked && Ra.pets.v.isUnlocked,
 });
 
+const REALITY_UPGRADE_GRID_NUMBERS = [
+  21, 22, 23, 24, 25,
+  31, 32, 33, 34, 35,
+  41, 42, 43, 44, 45,
+  51, 52, 53, 54, 55
+];
+for (const gridNum of REALITY_UPGRADE_GRID_NUMBERS) {
+  const row = Math.floor(gridNum / 10);
+  const col = gridNum % 10;
+  const actualId = (row - 1) * 5 + col;
+  createInCategory(AutomatorCurrency, `RU${gridNum}`, new RegExp(`ru[ \\t]*${gridNum}\\b`, "i"), {
+    $autocomplete: `ru ${gridNum}`,
+    $getter: () => {
+      const upg = RealityUpgrade(actualId);
+      return new Decimal(upg && upg.isBought ? 1 : 0);
+    },
+    $unlocked: () => PlayerProgress.realityUnlocked(),
+  });
+}
+
+const IMAGINARY_UPGRADE_GRID_NUMBERS = [
+  31, 32, 33, 34, 35,
+  41, 42, 43, 44, 45,
+  51, 52, 53, 54, 55,
+  61, 62, 63, 64, 65
+];
+for (const gridNum of IMAGINARY_UPGRADE_GRID_NUMBERS) {
+  const row = Math.floor(gridNum / 10);
+  const col = gridNum % 10;
+  const actualId = (row - 1) * 5 + col;
+  createInCategory(AutomatorCurrency, `IU${gridNum}`, new RegExp(`iu[ \\t]*${gridNum}\\b`, "i"), {
+    $autocomplete: `iu ${gridNum}`,
+    $getter: () => {
+      const upg = ImaginaryUpgrade(actualId);
+      return new Decimal(upg && upg.isBought ? 1 : 0);
+    },
+    $unlocked: () => MachineHandler.isIMUnlocked,
+  });
+}
+
 // $prestigeLevel is used by things that wait for a prestige event. Something waiting for
 // eternity will be triggered by something waiting for reality, for example.
 createInCategory(PrestigeEvent, "Infinity", /infinity/i, {
@@ -476,6 +516,10 @@ createKeyword("StoreRealTime", /store[ \t]+real[ \t]+time/i, {
 });
 createKeyword("Tab", /tabs?/i);
 createKeyword("Sacrifice", /sacrifice/i);
+createKeyword("Upgrade", /upgrades?/i);
+createKeyword("Lock", /lock/i);
+createKeyword("Imaginary", /imaginary/i);
+createKeyword("Invert", /invert/i);
 
 // We allow ECLiteral to consume lots of digits because that makes error reporting more
 // clear (it's nice to say ec123 is an invalid ec)

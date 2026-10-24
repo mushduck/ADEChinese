@@ -311,16 +311,110 @@ export const AutomatorCommands = [
     id: "blackHole",
     rule: $ => () => {
       $.CONSUME(T.BlackHole);
+      $.OPTION(() => $.CONSUME(T.Nowait));
       $.OR([
         { ALT: () => $.CONSUME(T.On) },
         { ALT: () => $.CONSUME(T.Off) },
+        {
+          ALT: () => {
+            $.CONSUME(T.Invert);
+            $.OPTION1(() => $.OR1([
+              { ALT: () => $.CONSUME(T.NumberLiteral) },
+              { ALT: () => $.CONSUME1(T.On) },
+              { ALT: () => $.CONSUME1(T.Off) },
+            ]));
+          }
+        }
       ]);
+      $.OPTION2(() => $.CONSUME2(T.Nowait));
     },
-    validate: ctx => {
+    validate: (ctx, V) => {
       ctx.startLine = ctx.BlackHole[0].startLine;
+      if (ctx.Invert && ctx.NumberLiteral) {
+        const val = parseFloat(ctx.NumberLiteral[0].image);
+        if (isNaN(val) || val < 0 || val > 300) {
+          V.addError(ctx.NumberLiteral[0], `Invalid invert value "${ctx.NumberLiteral[0].image}"`,
+            "Invert value must be between 1 and 300");
+          return false;
+        }
+      }
       return true;
     },
     compile: ctx => {
+      const isInvert = ctx.Invert !== undefined;
+      const nowait = ctx.Nowait !== undefined;
+
+      if (isInvert) {
+        const hasNumber = ctx.NumberLiteral !== undefined;
+        const val = hasNumber ? parseFloat(ctx.NumberLiteral[0].image) : null;
+        const explicitOn = ctx.On !== undefined;
+        const explicitOff = ctx.Off !== undefined;
+
+        return () => {
+          const isUnlocked = V.isFlipped && BlackHoles.arePermanent;
+          if (!isUnlocked) {
+            if (nowait) {
+              AutomatorData.logCommandEvent(`Black Hole invert skipped: not unlocked yet (NOWAIT)`, ctx.startLine);
+              return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+            }
+            return AUTOMATOR_COMMAND_STATUS.NEXT_TICK_SAME_INSTRUCTION;
+          }
+
+          // 1. 如果带有具体数值，执行调值逻辑
+          if (hasNumber && val !== null) {
+            const maxInversion = player.requirementChecks.reality.slowestBH <= 1e-300;
+            const isDisabled = ImaginaryUpgrade(24).isLockingMechanics && Ra.isRunning && maxInversion;
+            if (isDisabled) {
+              AutomatorData.logCommandEvent(`Black Hole invert skipped: locked by Imaginary Upgrade 24`, ctx.startLine);
+              return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+            }
+
+            player.blackHoleNegative = Math.pow(10, -val);
+            player.requirementChecks.reality.slowestBH = Math.max(
+              player.requirementChecks.reality.slowestBH,
+              player.blackHoleNegative
+            );
+            AutomatorData.logCommandEvent(`Black Hole invert power set to 1e-${val}`, ctx.startLine);
+            return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+          }
+
+          // 2. 如果不带数值，执行“反转黑洞 / 恢复黑洞”的动作切换逻辑
+          const currentlyInverted = Boolean(BlackHoles.areNegative);
+
+          if (explicitOff) {
+            // 明确指定 off：如果当前处于反转，恢复黑洞
+            if (currentlyInverted || BlackHoles.arePaused) {
+              BlackHoles.togglePause();
+              AutomatorData.logCommandEvent(`Black Hole inversion turned OFF (resumed)`, ctx.startLine);
+            }
+            return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+          }
+
+          if (explicitOn) {
+            // 明确指定 on：如果当前未反转，启动反转
+            if (!currentlyInverted) {
+              if (player.blackHoleNegative >= 1) {
+                player.blackHoleNegative = Math.pow(10, -300);
+              }
+              if (!BlackHoles.arePaused) {
+                BlackHoles.togglePause();
+              }
+              AutomatorData.logCommandEvent(`Black Hole inversion turned ON`, ctx.startLine);
+            }
+            return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+          }
+
+          // 纯粹的 black hole invert：直接触发按钮动作切换
+          if (player.blackHoleNegative >= 1) {
+            player.blackHoleNegative = Math.pow(10, -300);
+          }
+          BlackHoles.togglePause();
+          const newState = BlackHoles.areNegative ? "ACTIVATED" : "DEACTIVATED";
+          AutomatorData.logCommandEvent(`Black Hole inversion toggled (${newState})`, ctx.startLine);
+          return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+        };
+      }
+
       const on = Boolean(ctx.On);
       return () => {
         if (on === BlackHoles.arePaused) BlackHoles.togglePause();
@@ -337,7 +431,9 @@ export const AutomatorCommands = [
       };
     },
     blockify: ctx => ({
-      singleSelectionInput: ctx.On ? "ON" : "OFF",
+      singleSelectionInput: ctx.Invert ? "INVERT" : (ctx.On ? "ON" : "OFF"),
+      singleTextInput: ctx.NumberLiteral ? ctx.NumberLiteral[0].image : (ctx.On ? "ON" : (ctx.Off ? "OFF" : "")),
+      nowait: ctx.Nowait !== undefined,
       ...automatorBlocksMap["BLACK HOLE"]
     })
   },
@@ -1969,5 +2065,143 @@ export const AutomatorCommands = [
         ...(automatorBlocksMap?.TAB || {})
       };
     }
+  },
+  {
+    id: "upgrade",
+    rule: $ => () => {
+      $.CONSUME(T.Upgrade);
+      $.OPTION(() => $.CONSUME(T.Nowait));
+      $.OR([
+        { ALT: () => $.CONSUME(T.Reality) },
+        { ALT: () => $.CONSUME(T.Imaginary) },
+      ]);
+      $.OR1([
+        { ALT: () => $.CONSUME(T.Buy) },
+        { ALT: () => $.CONSUME(T.Lock) },
+        { ALT: () => $.CONSUME(T.Unlock) },
+      ]);
+      $.CONSUME(T.NumberLiteral);
+      $.OPTION1(() => {
+        $.CONSUME(T.Dash);
+        $.CONSUME1(T.NumberLiteral);
+      });
+      $.OPTION2(() => $.CONSUME1(T.Nowait));
+    },
+    validate: (ctx, V) => {
+      ctx.startLine = ctx.Upgrade[0].startLine;
+      const isImaginary = ctx.Imaginary !== undefined;
+      const targetType = isImaginary ? "Imaginary" : "Reality";
+      const minRow = isImaginary ? 3 : 2;
+      const maxRow = isImaginary ? 6 : 5;
+      const minId = minRow * 10 + 1;
+      const maxId = maxRow * 10 + 5;
+
+      if (!ctx.NumberLiteral || ctx.NumberLiteral[0].isInsertedInRecovery) {
+        V.addError(ctx.Upgrade[0], `Missing ${targetType} Upgrade ID`, `Provide an upgrade ID or range (e.g. ${minId} or ${minId}-${maxId})`);
+        return false;
+      }
+
+      const startNum = parseInt(ctx.NumberLiteral[0].image, 10);
+      const endNum = ctx.Dash ? parseInt(ctx.NumberLiteral[1]?.image, 10) : startNum;
+
+      if (isNaN(startNum) || startNum < minId || startNum > maxId) {
+        V.addError(ctx.NumberLiteral[0], `Invalid ${targetType} Upgrade ID ${ctx.NumberLiteral[0].image}`,
+          `Upgrade ID must be between ${minId} and ${maxId} (Row ${minRow}-${maxRow}, Col 1-5)`);
+        return false;
+      }
+
+      if (ctx.Dash) {
+        if (!ctx.NumberLiteral[1] || ctx.NumberLiteral[1].isInsertedInRecovery) {
+          V.addError(ctx.Dash[0], "Missing end of upgrade range", `Provide the ending upgrade ID (e.g. ${minId}-${maxId})`);
+          return false;
+        }
+        if (isNaN(endNum) || endNum < startNum || endNum > maxId) {
+          V.addError(ctx.NumberLiteral[1], `Invalid end ID ${ctx.NumberLiteral[1].image}`, `End ID must be an integer between ${startNum} and ${maxId}`);
+          return false;
+        }
+      }
+      return true;
+    },
+    compile: ctx => {
+      const isImaginary = ctx.Imaginary !== undefined;
+      const startNum = parseInt(ctx.NumberLiteral[0].image, 10);
+      const endNum = ctx.Dash ? parseInt(ctx.NumberLiteral[1].image, 10) : startNum;
+      const isBuy = ctx.Buy !== undefined;
+      const isLock = ctx.Lock !== undefined;
+      const isUnlock = ctx.Unlock !== undefined;
+      const nowait = ctx.Nowait !== undefined;
+
+      const minRow = isImaginary ? 3 : 2;
+      const maxRow = isImaginary ? 6 : 5;
+      const targetIds = [];
+
+      for (let n = startNum; n <= endNum; n++) {
+        const row = Math.floor(n / 10);
+        const col = n % 10;
+        if (row >= minRow && row <= maxRow && col >= 1 && col <= 5) {
+          const actualId = (row - 1) * 5 + col;
+          targetIds.push(actualId);
+        }
+      }
+
+      return () => {
+        if (isImaginary) {
+          if (!MachineHandler.isIMUnlocked) {
+            if (nowait) return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+            return AUTOMATOR_COMMAND_STATUS.NEXT_TICK_SAME_INSTRUCTION;
+          }
+        } else if (!PlayerProgress.realityUnlocked()) {
+          if (nowait) return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+          return AUTOMATOR_COMMAND_STATUS.NEXT_TICK_SAME_INSTRUCTION;
+        }
+
+        const getUpgrade = isImaginary ? (id => ImaginaryUpgrade(id)) : (id => RealityUpgrade(id));
+        const typeLabel = isImaginary ? "Imaginary" : "Reality";
+
+        if (isLock || isUnlock) {
+          const lockState = isLock;
+          for (const id of targetIds) {
+            const upg = getUpgrade(id);
+            if (upg && typeof upg.setMechanicLock === "function") {
+              upg.setMechanicLock(lockState);
+            }
+          }
+          const rangeStr = startNum === endNum ? `${startNum}` : `${startNum}-${endNum}`;
+          AutomatorData.logCommandEvent(`${typeLabel} Upgrade ${rangeStr} lock set to ${lockState ? "ON" : "OFF"}`, ctx.startLine);
+          return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+        }
+
+        if (isBuy) {
+          let allSatisfied = true;
+          for (const id of targetIds) {
+            const upg = getUpgrade(id);
+            if (!upg || upg.isBought) continue;
+            if (upg.canBeBought) {
+              upg.purchase();
+            }
+            if (!upg.isBought) {
+              allSatisfied = false;
+            }
+          }
+
+          if (allSatisfied || nowait) {
+            const rangeStr = startNum === endNum ? `${startNum}` : `${startNum}-${endNum}`;
+            AutomatorData.logCommandEvent(`${typeLabel} Upgrade buy executed for ${rangeStr}`, ctx.startLine);
+            return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+          }
+
+          return AUTOMATOR_COMMAND_STATUS.NEXT_TICK_SAME_INSTRUCTION;
+        }
+
+        return AUTOMATOR_COMMAND_STATUS.NEXT_INSTRUCTION;
+      };
+    },
+    blockify: ctx => ({
+      target: ctx.Imaginary ? "IMAGINARY" : "REALITY",
+      singleSelectionInput: ctx.Buy ? "BUY" : (ctx.Lock ? "LOCK" : "UNLOCK"),
+      singleTextInput: ctx.Dash ? `${ctx.NumberLiteral[0].image}-${ctx.NumberLiteral[1].image}` : ctx.NumberLiteral[0].image,
+      nowait: ctx.Nowait !== undefined,
+      ...(automatorBlocksMap?.UPGRADE || {})
+    })
   },
 ];
